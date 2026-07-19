@@ -1,7 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { usePlayerStore } from '@/stores/playerStore';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const neonColors = ['#00F0FF', '#FF003C', '#B000FF', '#39FF14'];
 
@@ -137,6 +138,12 @@ const orbs: OrbConfig[] = [
 
 export function AmbientOrbs() {
   const { isPlaying, currentStation } = usePlayerStore();
+  const isMobile = useIsMobile();
+  const reduced = useReducedMotion();
+  // On phones (or when the user asked for less motion) render the orbs
+  // statically. Animating `filter: blur()` on 300–1000px layers re-rasterizes
+  // the blur every frame and is what makes the whole page stutter on mobile.
+  const lite = isMobile || reduced;
 
   const stationColor = currentStation?.color || '#00F0FF';
 
@@ -146,6 +153,28 @@ export function AmbientOrbs() {
         // When playing, shift center orb color toward station color
         const effectiveColor = isPlaying && orb.id === 0 ? stationColor : orb.color;
         const effectivePlayingOpacity = isPlaying && orb.id === 0 ? 0.45 : orb.playingOpacity;
+
+        // Mobile / reduced-motion: ONE static blurred orb — same look, but the
+        // gradient rasterizes once instead of every frame (no compositor thrash,
+        // no giant blur(120px) companion layer).
+        if (lite) {
+          return (
+            <div
+              key={orb.id}
+              className="absolute rounded-full"
+              style={{
+                left: orb.x,
+                top: orb.y,
+                width: orb.size,
+                height: orb.size,
+                transform: 'translate(-50%, -50%)',
+                background: `radial-gradient(circle, ${effectiveColor}12 0%, transparent 70%)`,
+                filter: 'blur(60px)',
+                opacity: isPlaying ? effectivePlayingOpacity : orb.opacity,
+              }}
+            />
+          );
+        }
 
         return (
           <div key={orb.id} className="absolute" style={{ left: orb.x, top: orb.y, transform: 'translate(-50%, -50%)' }}>
