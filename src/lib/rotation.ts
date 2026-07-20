@@ -12,7 +12,7 @@
 // native type-stripping for the autotest without any framework dependency.
 import type { Track, Station } from './stations';
 
-export const ROTATION_VERSION = 1;
+export const ROTATION_VERSION = 2;
 
 /** Normalise a track URL/filename to its composition id (strip index prefix + version suffix). */
 export function compositionIdFromPath(path: string): string {
@@ -107,27 +107,44 @@ export class StationRotation {
   }
 
   next(): Track {
-    // Replaying forward through recorded history (after a "prev").
+    // Shuffle = a real randomiser: every press draws a fresh random track (no retrace).
+    if (this.shuffled) {
+      const t = this.generateNext();
+      this.pushHistory(t);
+      return t;
+    }
+    // Sequential: replay forward through recorded history (after a "prev"), else generate.
     if (this.pointer < this.history.length - 1) {
       this.pointer++;
       this.persist();
       return this.history[this.pointer];
     }
     const t = this.generateNext();
-    this.history.push(t);
-    this.pointer = this.history.length - 1;
-    this.trim();
-    this.persist();
+    this.pushHistory(t);
     return t;
   }
 
   prev(): Track | null {
+    // Shuffle: "back" also gives a fresh random track (the Architect wants real random
+    // on both buttons), never a predictable retrace of the list.
+    if (this.shuffled) {
+      const t = this.generateNext();
+      this.pushHistory(t);
+      return t;
+    }
     if (this.pointer > 0) {
       this.pointer--;
       this.persist();
       return this.history[this.pointer];
     }
     return this.history[this.pointer] ?? null;
+  }
+
+  private pushHistory(t: Track): void {
+    this.history.push(t);
+    this.pointer = this.history.length - 1;
+    this.trim();
+    this.persist();
   }
 
   /** User explicitly jumped to a specific track — register it as the new "now". */
@@ -167,7 +184,26 @@ export class StationRotation {
       this.lastEpochTail = this.recentComps(this.H);
       this.buildEpoch();
     }
-    const comp = this.queue.shift()!;
+    let comp: string;
+    if (this.shuffled) {
+      // Draw a fresh random composition from the remaining epoch bag (random without
+      // replacement → no composition repeats until the whole station has played once).
+      const H = this.H;
+      const picked = this.compositions.length - this.queue.length; // picks so far this epoch
+      let candidates = this.queue;
+      // For the first H picks of a new epoch, avoid the previous epoch's tail so a track
+      // never reappears with fewer than ~N/2 others between plays.
+      if (picked < H && this.lastEpochTail.length) {
+        const tail = new Set(this.lastEpochTail);
+        const filtered = this.queue.filter((c) => !tail.has(c));
+        if (filtered.length) candidates = filtered;
+      }
+      comp = candidates[Math.floor(this.rng() * candidates.length)];
+      this.queue.splice(this.queue.indexOf(comp), 1);
+    } else {
+      // Sequential: fixed composition order (English-first).
+      comp = this.queue.shift()!;
+    }
     const variants = this.byComposition.get(comp)!;
     const cur = this.variantCursor.get(comp) ?? 0;
     const track = variants[cur % variants.length];
@@ -176,30 +212,9 @@ export class StationRotation {
   }
 
   private buildEpoch(): void {
-    let order = [...this.compositions];
-    if (this.shuffled) {
-      shuffleInPlace(order, this.rng);
-      order = this.enforceBoundary(order);
-    }
-    this.queue = order;
-  }
-
-  /** No composition from the previous epoch's tail (H) may sit in the new epoch's first H slots. */
-  private enforceBoundary(order: string[]): string[] {
-    const H = this.H;
-    if (H <= 0 || this.lastEpochTail.length === 0 || this.compositions.length <= 2) return order;
-    const tail = new Set(this.lastEpochTail);
-    for (let i = 0; i < H && i < order.length; i++) {
-      if (tail.has(order[i])) {
-        for (let j = Math.max(i + 1, H); j < order.length; j++) {
-          if (!tail.has(order[j])) {
-            [order[i], order[j]] = [order[j], order[i]];
-            break;
-          }
-        }
-      }
-    }
-    return order;
+    // A fresh epoch = the full bag of compositions. In shuffle mode generateNext draws
+    // randomly from it; in sequential mode it is consumed in order.
+    this.queue = [...this.compositions];
   }
 
   private recentComps(h: number): string[] {

@@ -215,10 +215,12 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   },
 
   prevTrack: () => {
-    const { currentStation, currentTime } = get();
+    const { currentStation, currentTime, isShuffled } = get();
     if (!currentStation) return;
     const eng = getEngine();
-    if (currentTime > 3) { eng.seek(0); set({ currentTime: 0 }); return; }
+    // In shuffle, "back" is a fresh random track (no restart). In sequential, an early
+    // press (>3s) restarts the current track.
+    if (currentTime > 3 && !isShuffled) { eng.seek(0); set({ currentTime: 0 }); return; }
     const rot = getRotation(currentStation);
     const track = rot.prev();
     if (!track) { eng.seek(0); set({ currentTime: 0 }); return; }
