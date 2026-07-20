@@ -18,6 +18,7 @@ export interface Track {
   artist: string;
   url: string;
   duration?: number;
+  gain?: number; // loudness-normalisation factor (0..1), attenuation-only
 }
 
 export interface EngineCallbacks {
@@ -44,6 +45,7 @@ class RadioAudioEngine {
   private userVolume = 0.75;
   private muted = false;
   private masterFactor = 1; // used by the sleep-timer fade
+  private currentGain = 1;  // loudness-normalisation factor of the current track (0..1)
   private cb: EngineCallbacks = {};
   private currentTrackId = '';
   private wantPlaying = false;
@@ -77,7 +79,7 @@ class RadioAudioEngine {
   isWebAudio() { return false; }
 
   private deckVolume(deck: Deck, factor = 1) {
-    const v = this.muted ? 0 : clamp(this.userVolume * this.masterFactor * factor, 0, 1);
+    const v = this.muted ? 0 : clamp(this.userVolume * this.masterFactor * this.currentGain * factor, 0, 1);
     try { deck.el.volume = v; } catch { /* noop */ }
   }
 
@@ -170,6 +172,7 @@ class RadioAudioEngine {
     if (!deck) return;
     this.clearRamp(deck);
     this.currentTrackId = track.id;
+    this.currentGain = clamp(track.gain ?? 1, 0.1, 1);
     this.retries = 0;
     this.recoverTries = 0;
     this.needNextFired = false;
@@ -200,6 +203,7 @@ class RadioAudioEngine {
     this.clearRamp(to);
     this.crossing = true;
     this.currentTrackId = track.id;
+    this.currentGain = clamp(track.gain ?? 1, 0.1, 1);
     this.retries = 0;
     this.recoverTries = 0;
     this.needNextFired = false;
@@ -211,7 +215,7 @@ class RadioAudioEngine {
     const dur = Math.max(200, ms);
     const steps = Math.max(1, Math.round(dur / RAMP_STEP_MS));
     let i = 0;
-    const target = this.muted ? 0 : clamp(this.userVolume * this.masterFactor, 0, 1);
+    const target = this.muted ? 0 : clamp(this.userVolume * this.masterFactor * this.currentGain, 0, 1);
     to.ramp = setInterval(() => {
       i++;
       const k = i / steps;
@@ -265,6 +269,10 @@ class RadioAudioEngine {
   // No real analyser in direct mode — the React layer supplies synthetic motion.
   getFrequencyData(_arr: Uint8Array) { return false; }
   isActuallyPlaying() { const el = this.decks[this.active]?.el; return !!el && !el.paused && !el.ended; }
+  debug() {
+    const el = this.decks[this.active]?.el;
+    return { id: this.currentTrackId, gain: this.currentGain, vol: el ? +el.volume.toFixed(3) : null, userVol: this.userVolume, playing: this.isActuallyPlaying() };
+  }
 }
 
 let engine: RadioAudioEngine | null = null;
