@@ -13,45 +13,24 @@ interface AnimatedCounterProps {
   suffix?: string;
 }
 
-function easeOutExpo(t: number): number {
-  return 1 - Math.pow(2, -10 * t);
-}
-
 export function AnimatedCounter({ value, label, sub, color, delay, suffix = '' }: AnimatedCounterProps) {
-  const [displayValue, setDisplayValue] = useState(0);
+  // Initialise with the real value so SSR / no-JS renders correct numbers (not 0);
+  // the count-up animation still runs on the client once the element scrolls into view.
+  const [displayValue, setDisplayValue] = useState(value);
   const [hasReachedEnd, setHasReachedEnd] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
 
+  // Keep the value real from first paint (SSR-safe); only add the glow accent once in view.
+  useEffect(() => {
+    setDisplayValue(value);
+  }, [value]);
+
   useEffect(() => {
     if (!isInView) return;
-
-    const duration = 1500; // 1.5 seconds
-    const startTime = performance.now() + delay * 1000;
-
-    function animate(currentTime: number) {
-      const elapsed = currentTime - startTime;
-      if (elapsed < 0) {
-        requestAnimationFrame(animate);
-        return;
-      }
-
-      const progress = Math.min(elapsed / duration, 1);
-      const easedProgress = easeOutExpo(progress);
-      const currentValue = Math.round(easedProgress * value);
-
-      setDisplayValue(currentValue);
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        setDisplayValue(value);
-        setHasReachedEnd(true);
-      }
-    }
-
-    requestAnimationFrame(animate);
-  }, [isInView, value, delay]);
+    const t = setTimeout(() => setHasReachedEnd(true), delay * 1000 + 400);
+    return () => clearTimeout(t);
+  }, [isInView, delay]);
 
   return (
     <div ref={ref} className="text-center">

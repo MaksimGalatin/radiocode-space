@@ -25,3 +25,20 @@
 ### Фаза 1.2 — Приведение битрейта к фактическому (P0)
 - Замер всех 596 файлов через `mutagen` → `reports/bitrate.csv` (kbps, длительность, sample rate, каналы, размер).
 - Замер (mutagen, 596/596, 0 ошибок): CODE Music avg 185, CODE Space 183, Vol.1 181, RADIO 182 kbps VBR; глобально ~182 kbps, все 48 kHz stereo. Заявления 320/256 заменены на фактические: бейджи станций (`stations.ts`), бегущая строка и счётчик Bitrate (`page.tsx`), HQ-бейдж шапки (`RadioHeader.tsx`).
+
+### Фаза 2 — Соцкарточки, MediaSession, PWA, Аналитика (P1)
+- **2.1 OG/Twitter:** сгенерированы `public/og-image.png` и `twitter-image.png` (1200×630, киберпанк, бренд CODE). `layout.tsx`: og:image(+width/height/alt), twitter:image.
+- **2.2 MediaSession API** (`useAudioEngine.ts`): metadata (title/artist/album=станция/artwork), обработчики play/pause/next/prev/stop/seekto, setPositionState на timeupdate, playbackState.
+- **2.3 PWA:** `app/manifest.ts` (standalone, theme/bg, иконки 192/512+maskable), `apple-touch-icon.png`, theme-color через `viewport`, service worker `public/sw.js` (только оболочка; аудио НЕ кэшируется) + `ServiceWorkerRegister.tsx`.
+- **2.4 Аналитика:** `@vercel/analytics` (`<Analytics/>`) + кастомные события `station_selected`/`play_started`/`listen_minute` (минуты прослушивания — ключевая метрика). ⚠️ Web Analytics включить в дашборде Vercel; Search Console verification — нужен код от Архитектора.
+
+### Фаза 3 — SEO-инфраструктура, доступность, SSR (P2)
+- **3.1** `app/sitemap.ts` (/sitemap.xml) + строка `Sitemap:` в `public/robots.txt`; JSON-LD в `layout.tsx` (WebSite + MusicGroup «AIfa & DJ Galatin» + 4× RadioBroadcastService).
+- **3.2** aria-label на кнопки плеера (shuffle/prev/play/next/repeat/mute/playlist) + role=slider на громкость; aria-live+aria-label на «сейчас играет» (иначе скринридер читает скремблированный ScrambleText).
+- **3.3** SSR-счётчики: `AnimatedCounter` инициализируется реальным значением (было 0 в разметке).
+- **1.3 (код готов):** `src/lib/audioCdn.ts` — `audioUrl()` подменяет r2.dev на `NEXT_PUBLIC_AUDIO_CDN` (не задан → без изменений). Инфра Cloudflare (cdn.radiocode.space) — отдельно.
+- Проверено вживую: sitemap/manifest/sw/og/apple-touch/icon → 200; og:image, JSON-LD, theme-color, manifest-link присутствуют.
+
+### НЕ сделано (осознанно)
+- **3.4 вынос плейлиста из бандла** — рискованный рефактор (ротация зависит от синхронного импорта `stations`); отложено как оптимизация.
+- **3.5 i18n** — по решению Архитектора отдельно (SEO-эффект на радио ниже).

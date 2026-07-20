@@ -2,7 +2,9 @@
 
 import { useEffect, useRef } from 'react';
 import { usePlayerStore } from '@/stores/playerStore';
-import { getAudioElement } from '@/lib/audioSingleton';
+import { getAudioElement, seekAudio } from '@/lib/audioSingleton';
+import { audioUrl } from '@/lib/audioCdn';
+import { track } from '@vercel/analytics';
 
 export function useAudioEngine() {
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -12,6 +14,7 @@ export function useAudioEngine() {
 
   const {
     currentTrack,
+    currentStation,
     isPlaying,
     volume,
     isMuted,
@@ -49,6 +52,17 @@ export function useAudioEngine() {
 
     const handleTimeUpdate = () => {
       setCurrentTime(audio.currentTime);
+      if (typeof navigator !== 'undefined' && 'mediaSession' in navigator && audio.duration && isFinite(audio.duration)) {
+        try {
+          navigator.mediaSession.setPositionState({
+            duration: audio.duration,
+            position: Math.min(audio.currentTime, audio.duration),
+            playbackRate: audio.playbackRate || 1,
+          });
+        } catch {
+          /* setPositionState unsupported */
+        }
+      }
     };
 
     const handleDurationChange = () => {
@@ -103,10 +117,74 @@ export function useAudioEngine() {
 
     if (prevTrackUrlRef.current !== currentTrack.url) {
       prevTrackUrlRef.current = currentTrack.url;
-      audio.src = currentTrack.url;
+      audio.src = audioUrl(currentTrack.url);
       setLoading(true);
     }
   }, [currentTrack, setLoading]);
+
+  // MediaSession — action handlers (lock screen / headset / car)
+  useEffect(() => {
+    if (typeof navigator === 'undefined' || !('mediaSession' in navigator)) return;
+    const store = () => usePlayerStore.getState();
+    const ms = navigator.mediaSession;
+    const set = (action: MediaSessionAction, handler: MediaSessionActionHandler | null) => {
+      try { ms.setActionHandler(action, handler); } catch { /* unsupported action */ }
+    };
+    set('play', () => store().play());
+    set('pause', () => store().pause());
+    set('nexttrack', () => store().nextTrack());
+    set('previoustrack', () => store().prevTrack());
+    set('stop', () => store().pause());
+    set('seekto', (d) => {
+      if (d && typeof d.seekTime === 'number') { seekAudio(d.seekTime); store().setCurrentTime(d.seekTime); }
+    });
+    return () => {
+      (['play', 'pause', 'nexttrack', 'previoustrack', 'stop', 'seekto'] as MediaSessionAction[]).forEach((a) => set(a, null));
+    };
+  }, []);
+
+  // MediaSession — now-playing metadata
+  useEffect(() => {
+    if (typeof navigator === 'undefined' || !('mediaSession' in navigator) || !currentTrack) return;
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: currentTrack.title,
+        artist: currentTrack.artist,
+        album: currentStation?.name || 'RadioCode.Space',
+        artwork: [
+          { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+          { src: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+        ],
+      });
+    } catch {
+      /* MediaMetadata unsupported */
+    }
+  }, [currentTrack, currentStation]);
+
+  // MediaSession — playback state
+  useEffect(() => {
+    if (typeof navigator === 'undefined' || !('mediaSession' in navigator)) return;
+    try { navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused'; } catch { /* noop */ }
+  }, [isPlaying]);
+
+  // Analytics — station selection
+  useEffect(() => {
+    if (currentStation) track('station_selected', { station: currentStation.name });
+  }, [currentStation]);
+
+  // Analytics — play start + listening minutes (key radio metric)
+  const wasPlayingRef = useRef(false);
+  useEffect(() => {
+    if (isPlaying && !wasPlayingRef.current) {
+      track('play_started', { station: currentStation?.name || 'unknown' });
+    }
+    wasPlayingRef.current = isPlaying;
+    if (!isPlaying) return;
+    const id = setInterval(() => {
+      track('listen_minute', { station: usePlayerStore.getState().currentStation?.name || 'unknown' });
+    }, 60_000);
+    return () => clearInterval(id);
+  }, [isPlaying, currentStation]);
 
   // Handle play/pause
   useEffect(() => {

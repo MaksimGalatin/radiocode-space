@@ -223,6 +223,8 @@ export function PlayerBar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={toggleShuffle}
+              aria-label={isShuffled ? 'Shuffle on (tap to turn off)' : 'Shuffle off (tap to turn on)'}
+              aria-pressed={isShuffled}
               className="flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all duration-200 hover:bg-white/[0.04]"
               title={isShuffled ? 'Shuffle on' : 'Shuffle off'}
             >
@@ -236,6 +238,7 @@ export function PlayerBar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={prevTrack}
+              aria-label="Previous track"
               className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/[0.04]"
             >
               <SkipBack className="w-4 h-4 sm:w-5 sm:h-5 text-[#E8E8ED]" fill="#E8E8ED" />
@@ -245,6 +248,7 @@ export function PlayerBar() {
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
               onClick={togglePlay}
+              aria-label={isPlaying ? 'Pause' : 'Play'}
               className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-300 relative shrink-0"
               style={{
                 background: isPlaying
@@ -274,6 +278,7 @@ export function PlayerBar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={nextTrack}
+              aria-label="Next track"
               className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/[0.04]"
             >
               <SkipForward className="w-4 h-4 sm:w-5 sm:h-5 text-[#E8E8ED]" fill="#E8E8ED" />
@@ -284,6 +289,7 @@ export function PlayerBar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={cycleRepeat}
+              aria-label={`Repeat mode: ${repeatMode}`}
               className="hidden lg:flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all duration-200 hover:bg-white/[0.04] relative"
               title={`Repeat: ${repeatMode}`}
             >
@@ -324,11 +330,17 @@ export function PlayerBar() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={toggleMute}
+                aria-label={isMuted ? 'Unmute' : 'Mute'}
                 className="text-[#6B6B80] hover:text-[#E8E8ED] transition-colors"
               >
                 <VolumeIcon className="w-4 h-4" />
               </motion.button>
               <div className="relative w-20 h-1.5 rounded-full overflow-hidden cursor-pointer group"
+                role="slider"
+                aria-label="Volume"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={Math.round((isMuted ? 0 : volume) * 100)}
                 onClick={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
                   const x = e.clientX - rect.left;
@@ -358,6 +370,8 @@ export function PlayerBar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={toggleShowPlaylist}
+              aria-label="Toggle playlist"
+              aria-pressed={showPlaylist}
               className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-200 shrink-0"
               style={{
                 background: showPlaylist ? `${color}15` : 'transparent',

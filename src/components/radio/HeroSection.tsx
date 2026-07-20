@@ -207,6 +207,9 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
+              aria-live="polite"
+              aria-atomic="true"
+              aria-label={`${isPlaying ? 'Now playing' : 'Paused'}: ${currentTrack.title} by ${currentTrack.artist}`}
               className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-3"
               style={{
                 color: '#E8E8ED',
@@ -234,7 +237,7 @@ export function HeroSection() {
           <>
             {/* ENORMOUS RADIOCODE title */}
             <motion.h1
-              className="text-7xl sm:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.85] mb-6"
+              className="text-5xl sm:text-7xl lg:text-9xl font-bold tracking-tighter leading-[0.85] mb-6 break-words"
               style={{
                 background: 'linear-gradient(135deg, #00F0FF 0%, #B000FF 35%, #FF003C 65%, #39FF14 100%)',
                 WebkitBackgroundClip: 'text',
