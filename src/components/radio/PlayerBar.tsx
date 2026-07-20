@@ -5,7 +5,7 @@ import {
   Play, Pause, SkipBack, SkipForward,
   Volume2, VolumeX, Volume1,
   ChevronUp, ChevronDown,
-  Radio, ListMusic,
+  Radio, ListMusic, Moon,
   Shuffle, Repeat, Repeat1,
 } from 'lucide-react';
 import { usePlayerStore } from '@/stores/playerStore';
@@ -44,7 +44,15 @@ export function PlayerBar() {
     cycleRepeat,
     showPlaylist,
     toggleShowPlaylist,
+    sleepMinutes,
+    setSleep,
   } = usePlayerStore();
+
+  const SLEEP_STEPS: Array<number | null> = [null, 15, 30, 60, 120];
+  const cycleSleep = () => {
+    const i = SLEEP_STEPS.indexOf(sleepMinutes ?? null);
+    setSleep(SLEEP_STEPS[(i + 1) % SLEEP_STEPS.length]);
+  };
 
   const color = currentStation?.color || '#00F0FF';
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
@@ -364,6 +372,30 @@ export function PlayerBar() {
             <div className="hidden sm:block">
               <FullscreenVizToggle />
             </div>
+
+            {/* Sleep timer */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={cycleSleep}
+              aria-label={sleepMinutes ? `Sleep timer: ${sleepMinutes} minutes (tap to change)` : 'Sleep timer off (tap to set)'}
+              className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-200 shrink-0"
+              style={{
+                background: sleepMinutes ? `${color}15` : 'transparent',
+                border: sleepMinutes ? `1px solid ${color}25` : '1px solid transparent',
+              }}
+              title={sleepMinutes ? `Sleep in ${sleepMinutes} min` : 'Sleep timer'}
+            >
+              <Moon className="w-4 h-4" style={{ color: sleepMinutes ? color : '#6B6B80' }} />
+              {sleepMinutes && (
+                <span
+                  className="absolute -top-1 -right-1 text-[8px] font-bold leading-none rounded-full px-1 py-0.5"
+                  style={{ background: color, color: '#050507' }}
+                >
+                  {sleepMinutes}
+                </span>
+              )}
+            </motion.button>
 
             {/* Playlist toggle */}
             <motion.button
