@@ -1,0 +1,16 @@
+{
+  "per_station_avg": {
+    "CODE Music": 185,
+    "CODE Space": 183,
+    "AIfa & DJ Galatin (Vol. 1)": 181,
+    "AIfa & DJ Galatin RADIO": 182
+  },
+  "global_avg": 182,
+  "sample_rates": [
+    "48000"
+  ],
+  "channels": [
+    "2"
+  ],
+  "errors": 0
+}

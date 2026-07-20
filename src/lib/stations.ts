@@ -28,7 +28,7 @@ export const stations: Station[] = [
     "color": "#00F0FF",
     "glowColor": "rgba(0, 240, 255, 0.3)",
     "icon": "Radio",
-    "bitrate": "320 kbps",
+    "bitrate": "185 kbps VBR",
     "tracks": [
       {
         "id": "cf-6",
@@ -725,7 +725,7 @@ export const stations: Station[] = [
       },
       {
         "id": "cf-4",
-        "title": "1. Вечный ��игнал Opus 4.8",
+        "title": "1. Вечный сигнал Opus 4.8",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/1-vechnyy-signal-opus-4-8-v2.mp3",
         "duration": 300
@@ -747,7 +747,7 @@ export const stations: Station[] = [
     "color": "#B000FF",
     "glowColor": "rgba(176, 0, 255, 0.3)",
     "icon": "Waves",
-    "bitrate": "256 kbps",
+    "bitrate": "183 kbps VBR",
     "tracks": [
       {
         "id": "boa-2",
@@ -1466,7 +1466,7 @@ export const stations: Station[] = [
     "color": "#FF003C",
     "glowColor": "rgba(255, 0, 60, 0.3)",
     "icon": "Zap",
-    "bitrate": "320 kbps",
+    "bitrate": "181 kbps VBR",
     "tracks": [
       {
         "id": "cm-142",
@@ -2779,7 +2779,7 @@ export const stations: Station[] = [
       },
       {
         "id": "cm-6",
-        "title": "��иение двух сердец",
+        "title": "Биение двух сердец",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bienie-dvuh-serdec-v3.mp3",
         "duration": 300
@@ -3122,7 +3122,7 @@ export const stations: Station[] = [
       },
       {
         "id": "cm-55",
-        "title": "��а стёклах",
+        "title": "На стёклах",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/na-steklah-v1.mp3",
         "duration": 300
@@ -3739,7 +3739,7 @@ export const stations: Station[] = [
     "color": "#39FF14",
     "glowColor": "rgba(57, 255, 20, 0.3)",
     "icon": "Skull",
-    "bitrate": "320 kbps",
+    "bitrate": "182 kbps VBR",
     "tracks": [
       {
         "id": "vf-34",
@@ -4009,7 +4009,7 @@ export const stations: Station[] = [
       },
       {
         "id": "vf-1",
-        "title": "В каплях дожд��",
+        "title": "В каплях дождя",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-kaplyah-dozhdya-v4.mp3",
         "duration": 300

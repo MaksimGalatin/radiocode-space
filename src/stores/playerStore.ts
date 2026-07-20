@@ -1,5 +1,24 @@
 import { create } from 'zustand';
 import { stations, Track, Station } from '@/lib/stations';
+import { StationRotation } from '@/lib/rotation';
+
+// One composition-aware rotation engine per station (module-level, not persisted in
+// the zustand state itself — it manages its own localStorage).
+const rotations = new Map<string, StationRotation>();
+
+function getRotation(station: Station): StationRotation {
+  let r = rotations.get(station.id);
+  if (!r) {
+    const storage = typeof window !== 'undefined' ? window.localStorage : undefined;
+    r = new StationRotation(station, { storage });
+    rotations.set(station.id, r);
+  }
+  return r;
+}
+
+function indexOf(station: Station, track: Track): number {
+  return station.tracks.findIndex((t) => t.id === track.id);
+}
 
 interface PlayerState {
   // Playback
@@ -94,11 +113,16 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     if (!currentTrack) {
       const firstStation = stations[0];
       if (firstStation && firstStation.tracks.length > 0) {
+        const rot = getRotation(firstStation);
+        rot.setShuffled(get().isShuffled);
+        const track = rot.start();
         set({
           currentStation: firstStation,
-          currentTrack: firstStation.tracks[0],
-          currentTrackIndex: 0,
+          currentTrack: track,
+          currentTrackIndex: indexOf(firstStation, track),
+          duration: track.duration || 0,
           isPlaying: true,
+          isLoading: true,
         });
         return;
       }
@@ -109,12 +133,15 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   setStation: (stationId: string) => {
     const station = stations.find((s) => s.id === stationId);
     if (station && station.tracks.length > 0) {
+      const rot = getRotation(station);
+      rot.setShuffled(get().isShuffled);
+      const track = rot.start();
       set({
         currentStation: station,
-        currentTrack: station.tracks[0],
-        currentTrackIndex: 0,
+        currentTrack: track,
+        currentTrackIndex: indexOf(station, track),
         currentTime: 0,
-        duration: station.tracks[0].duration || 0,
+        duration: track.duration || 0,
         isPlaying: true,
         isLoading: true,
       });
@@ -124,12 +151,16 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   playTrack: (stationId: string, trackIndex: number) => {
     const station = stations.find((s) => s.id === stationId);
     if (station && station.tracks[trackIndex]) {
+      const track = station.tracks[trackIndex];
+      const rot = getRotation(station);
+      rot.setShuffled(get().isShuffled);
+      rot.consume(track); // register the explicit pick so rotation continues from here
       set({
         currentStation: station,
-        currentTrack: station.tracks[trackIndex],
+        currentTrack: track,
         currentTrackIndex: trackIndex,
         currentTime: 0,
-        duration: station.tracks[trackIndex].duration || 0,
+        duration: track.duration || 0,
         isPlaying: true,
         isLoading: true,
       });
@@ -137,7 +168,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   },
 
   nextTrack: () => {
-    const { currentStation, currentTrackIndex, repeatMode, isShuffled } = get();
+    const { currentStation, repeatMode } = get();
     if (!currentStation) return;
 
     // Repeat one: restart current track
@@ -146,59 +177,39 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
       return;
     }
 
-    const trackCount = currentStation.tracks.length;
-    const isLastTrack = currentTrackIndex === trackCount - 1;
-
-    // If off mode and at last track, stop
-    if (repeatMode === 'off' && isLastTrack) {
-      set({ isPlaying: false, currentTime: 0 });
-      return;
-    }
-
-    let nextIndex: number;
-
-    if (isShuffled) {
-      // Pick a random track that isn't the current one
-      if (trackCount <= 1) {
-        nextIndex = 0;
-      } else {
-        do {
-          nextIndex = Math.floor(Math.random() * trackCount);
-        } while (nextIndex === currentTrackIndex);
-      }
-    } else {
-      // Sequential: loop back to 0 for 'all', or just advance
-      nextIndex = (currentTrackIndex + 1) % trackCount;
-    }
-
-    const nextTrack = currentStation.tracks[nextIndex];
+    // Composition-aware rotation (handles both sequential and shuffle):
+    // a second version of a composition never plays until every other composition
+    // of the station has played once.
+    const rot = getRotation(currentStation);
+    const track = rot.next();
     set({
-      currentTrack: nextTrack,
-      currentTrackIndex: nextIndex,
+      currentTrack: track,
+      currentTrackIndex: indexOf(currentStation, track),
       currentTime: 0,
-      duration: nextTrack.duration || 0,
+      duration: track.duration || 0,
       isPlaying: true,
       isLoading: true,
     });
   },
 
   prevTrack: () => {
-    const { currentStation, currentTrackIndex, currentTime } = get();
+    const { currentStation, currentTime } = get();
     if (!currentStation) return;
     if (currentTime > 3) {
       set({ currentTime: 0 });
       return;
     }
-    const prevIndex =
-      currentTrackIndex === 0
-        ? currentStation.tracks.length - 1
-        : currentTrackIndex - 1;
-    const prevTrack = currentStation.tracks[prevIndex];
+    const rot = getRotation(currentStation);
+    const track = rot.prev();
+    if (!track) {
+      set({ currentTime: 0 });
+      return;
+    }
     set({
-      currentTrack: prevTrack,
-      currentTrackIndex: prevIndex,
+      currentTrack: track,
+      currentTrackIndex: indexOf(currentStation, track),
       currentTime: 0,
-      duration: prevTrack.duration || 0,
+      duration: track.duration || 0,
       isPlaying: true,
       isLoading: true,
     });
@@ -213,7 +224,12 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   toggleShowPlaylist: () => set((s) => ({ showPlaylist: !s.showPlaylist })),
   setAudioData: (data: Uint8Array | null) => set({ audioData: data }),
 
-  toggleShuffle: () => set((s) => ({ isShuffled: !s.isShuffled })),
+  toggleShuffle: () => {
+    const next = !get().isShuffled;
+    set({ isShuffled: next });
+    const { currentStation } = get();
+    if (currentStation) getRotation(currentStation).setShuffled(next);
+  },
 
   cycleRepeat: () => {
     const { repeatMode } = get();

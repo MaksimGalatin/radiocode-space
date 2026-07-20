@@ -22,7 +22,7 @@ import { FullscreenVisualizer } from '@/components/radio/FullscreenVisualizer';
 import { AnimatedCounter } from '@/components/radio/AnimatedCounter';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const TICKER_TEXT = '◆ NEON OVERFLOW — DARKSYNTH ◆ CYBERPUNK / SYNTHWAVE ◆ CODE FREQ ◆ 320KBPS HQ ◆ BROADCASTING ON ALL FREQUENCIES ◆ ';
+const TICKER_TEXT = '◆ NEON OVERFLOW — DARKSYNTH ◆ CYBERPUNK / SYNTHWAVE ◆ CODE FREQ ◆ VBR ~182KBPS · 48kHz ◆ BROADCASTING ON ALL FREQUENCIES ◆ ';
 
 function LiveTicker() {
   const { currentStation } = usePlayerStore();
@@ -98,6 +98,15 @@ export default function Home() {
     );
   }, [selectedGenre]);
 
+  const totalTracks = useMemo(
+    () => stations.reduce((sum, s) => sum + s.tracks.length, 0),
+    []
+  );
+  const totalGenres = useMemo(
+    () => new Set(stations.flatMap((s) => s.genre.split(' / ').map((g) => g.trim()))).size,
+    []
+  );
+
   useAudioEngine();
   useKeyboardShortcuts();
 
@@ -106,7 +115,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#050507]">
+    <div className="min-h-[100svh] w-full overflow-x-hidden flex flex-col bg-[#050507]">
       {/* Intro splash animation */}
       <IntroSplash onComplete={handleSplashComplete} />
 
@@ -224,10 +233,10 @@ export default function Home() {
             <div className="absolute bottom-0 right-0 w-[1px] h-16 bg-gradient-to-t from-[#FF003C]30 to-transparent" />
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-              <AnimatedCounter value={4} label="Stations" sub="Online" color="#00F0FF" delay={0} />
-              <AnimatedCounter value={18} label="Tracks" sub="In rotation" color="#B000FF" delay={0.15} />
-              <AnimatedCounter value={320} label="Bitrate" sub="HQ Audio" color="#FF003C" delay={0.3} suffix="k" />
-              <AnimatedCounter value={6} label="Genres" sub="Spectrum" color="#39FF14" delay={0.45} />
+              <AnimatedCounter value={stations.length} label="Stations" sub="Online" color="#00F0FF" delay={0} />
+              <AnimatedCounter value={totalTracks} label="Tracks" sub="In rotation" color="#B000FF" delay={0.15} />
+              <AnimatedCounter value={182} label="Bitrate" sub="VBR avg" color="#FF003C" delay={0.3} suffix="k" />
+              <AnimatedCounter value={totalGenres} label="Genres" sub="Spectrum" color="#39FF14" delay={0.45} />
             </div>
           </motion.div>
         </section>
@@ -238,8 +247,40 @@ export default function Home() {
             className="border-t"
             style={{ borderColor: 'rgba(255,255,255,0.04)' }}
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+              {/* Ecosystem cross-links */}
+              <div className="mb-8">
+                <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#3a3a4a] mb-4 text-center sm:text-left">
+                  Part of the CODE Eternal ecosystem
+                </p>
+                <div className="flex flex-wrap justify-center sm:justify-start gap-x-6 gap-y-3">
+                  {[
+                    { label: 'CODE Eternal', href: 'https://www.codeofdigitaleternity.com' },
+                    { label: 'AIfa Works', href: 'https://aifa.works' },
+                    { label: 'AIfa Digital', href: 'https://aifa.digital' },
+                    { label: 'Whitepaper', href: 'https://www.codeofdigitaleternity.com/whitepaper' },
+                    { label: 'Roadmap', href: 'https://www.codeofdigitaleternity.com/roadmap' },
+                    { label: 'News', href: 'https://www.codeofdigitaleternity.com/news' },
+                    { label: '$GALATIN', href: 'https://www.codeofdigitaleternity.com/whitepaper#sec-tokenomics' },
+                  ].map((l) => (
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium text-[#6B6B80] hover:text-[#00F0FF] transition-colors duration-200"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Brand row */}
+              <div
+                className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t"
+                style={{ borderColor: 'rgba(255,255,255,0.03)' }}
+              >
                 <div className="flex items-center gap-2">
                   <span
                     className="text-sm font-bold tracking-[0.15em]"
@@ -255,14 +296,11 @@ export default function Home() {
                   <span className="text-xs text-[#6B6B80]">CODE Eternal</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <motion.span
-                    className="text-[10px] font-mono tracking-wider text-[#3a3a4a] cursor-default"
-                    whileHover={{ color: '#6B6B80' }}
-                  >
-                    v2.1.0
-                  </motion.span>
                   <span className="text-[10px] font-mono tracking-wider text-[#3a3a4a]">
-                    2025
+                    Music by AIfa &amp; DJ Galatin
+                  </span>
+                  <span className="text-[10px] font-mono tracking-wider text-[#3a3a4a]">
+                    © 2026
                   </span>
                 </div>
               </div>

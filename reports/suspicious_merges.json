@@ -1,0 +1,43 @@
+[
+  {
+    "station": "CODE Music",
+    "compositionId": "vechnyy-signal",
+    "distinct_cores": [
+      "вечныйигнал",
+      "вечныйсигнал"
+    ],
+    "titles": [
+      "1. Вечный сигнал Opus 4.8 v.1",
+      "1. Вечный сигнал Opus 4.8 v.2",
+      "1. Вечный сигнал v.1",
+      "1. Вечный сигнал v.2",
+      "1. Вечный сигнал v.3",
+      "1. Вечный ��игнал Opus 4.8"
+    ]
+  },
+  {
+    "station": "AIfa & DJ Galatin (Vol. 1)",
+    "compositionId": "bienie-dvuh-serdec",
+    "distinct_cores": [
+      "биениедвухсердец",
+      "иениедвухсердец"
+    ],
+    "titles": [
+      "Биение двух сердец v.1",
+      "Биение двух сердец v.2",
+      "��иение двух сердец"
+    ]
+  },
+  {
+    "station": "AIfa & DJ Galatin (Vol. 1)",
+    "compositionId": "na-steklah",
+    "distinct_cores": [
+      "астёклах",
+      "настёклах"
+    ],
+    "titles": [
+      "На стёклах",
+      "��а стёклах"
+    ]
+  }
+]

@@ -69,6 +69,26 @@ export function RadioHeader() {
 
           {/* Right side: Status + Signal + Clock */}
           <div className="flex items-center gap-3 sm:gap-4">
+            {/* Ecosystem link */}
+            <motion.a
+              href="https://www.codeofdigitaleternity.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              whileHover={{ scale: 1.04 }}
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              style={{
+                background: 'rgba(176, 0, 255, 0.06)',
+                border: '1px solid rgba(176, 0, 255, 0.15)',
+              }}
+            >
+              <span className="text-[10px] font-mono font-medium tracking-wider text-[#B000FF]/80">
+                CODE ETERNAL ↗
+              </span>
+            </motion.a>
+
             {/* ON AIR indicator */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -104,7 +124,7 @@ export function RadioHeader() {
             >
               <div className="w-1.5 h-1.5 rounded-full bg-[#00F0FF]" />
               <span className="text-[10px] font-mono font-medium tracking-wider text-[#00F0FF]/70">
-                320 KBPS
+                VBR ~182K
               </span>
             </motion.div>
 
