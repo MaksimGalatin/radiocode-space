@@ -34,10 +34,29 @@ export function useAudioEngine() {
     // Restore last session (station / track / position / volume) — paused.
     store().restoreState();
 
-    // Visualizer feed.
+    // Visualizer feed — synthetic motion while playing (direct-playback engine has
+    // no real-time analyser). Throttled to ~20fps to limit re-renders.
     const data = new Uint8Array(128);
+    let phase = 0;
+    let frame = 0;
+    let wasActive = false;
     const loop = () => {
-      if (eng.getFrequencyData(data)) store().setAudioData(new Uint8Array(data));
+      frame++;
+      if (frame % 3 === 0) {
+        const active = eng.isActuallyPlaying();
+        if (active) {
+          phase += 0.22;
+          for (let i = 0; i < data.length; i++) {
+            const base = 55 + 95 * Math.abs(Math.sin(phase * 0.5 + i * 0.19));
+            data[i] = Math.min(255, base + Math.random() * 45);
+          }
+          store().setAudioData(new Uint8Array(data));
+          wasActive = true;
+        } else if (wasActive) {
+          store().setAudioData(null);
+          wasActive = false;
+        }
+      }
       animFrameRef.current = requestAnimationFrame(loop);
     };
     animFrameRef.current = requestAnimationFrame(loop);

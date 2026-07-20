@@ -1,6 +1,6 @@
 // RadioCode.Space service worker — app shell only.
 // IMPORTANT: never cache audio (596 files × ~6 MB would blow the device quota).
-const CACHE = 'radiocode-shell-v1';
+const CACHE = 'radiocode-shell-v2';
 const SHELL = ['/', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {
