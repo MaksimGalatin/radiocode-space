@@ -182,15 +182,27 @@ export function PlayerBar() {
               )}
             </motion.div>
 
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <motion.div
                 key={currentTrack.id}
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-sm sm:text-base font-semibold truncate"
+                className="text-sm sm:text-base font-semibold truncate flex items-center gap-2"
                 style={{ color: '#E8E8ED' }}
               >
-                {currentTrack.title}
+                {currentStation && (
+                  <span
+                    className="text-[10px] sm:text-xs font-mono px-1.5 py-0.5 rounded flex-shrink-0"
+                    style={{
+                      backgroundColor: `${color}15`,
+                      color: color,
+                      border: `1px solid ${color}30`,
+                    }}
+                  >
+                    {currentStation.tracks.findIndex(t => t.id === currentTrack.id) + 1} / {currentStation.tracks.length}
+                  </span>
+                )}
+                <span className="truncate">{currentTrack.title}</span>
               </motion.div>
               <motion.div
                 key={`artist-${currentTrack.id}`}
@@ -205,13 +217,13 @@ export function PlayerBar() {
           </div>
 
           {/* Center: Controls */}
-          <div className="flex items-center gap-1.5 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Shuffle button */}
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={toggleShuffle}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/[0.04]"
+              className="flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all duration-200 hover:bg-white/[0.04]"
               title={isShuffled ? 'Shuffle on' : 'Shuffle off'}
             >
               <Shuffle
@@ -224,7 +236,7 @@ export function PlayerBar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={prevTrack}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/[0.04]"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/[0.04]"
             >
               <SkipBack className="w-4 h-4 sm:w-5 sm:h-5 text-[#E8E8ED]" fill="#E8E8ED" />
             </motion.button>
@@ -233,7 +245,7 @@ export function PlayerBar() {
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
               onClick={togglePlay}
-              className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-300 relative"
+              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-300 relative shrink-0"
               style={{
                 background: isPlaying
                   ? `linear-gradient(135deg, ${color}20, ${color}08)`
@@ -252,9 +264,9 @@ export function PlayerBar() {
                   transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
                 />
               ) : isPlaying ? (
-                <Pause className="w-6 h-6 sm:w-7 sm:h-7" style={{ color }} fill={color} />
+                <Pause className="w-5 h-5 sm:w-7 sm:h-7" style={{ color }} fill={color} />
               ) : (
-                <Play className="w-6 h-6 sm:w-7 sm:h-7 ml-0.5" style={{ color }} fill={color} />
+                <Play className="w-5 h-5 sm:w-7 sm:h-7 ml-0.5" style={{ color }} fill={color} />
               )}
             </motion.button>
 
@@ -262,7 +274,7 @@ export function PlayerBar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={nextTrack}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/[0.04]"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/[0.04]"
             >
               <SkipForward className="w-4 h-4 sm:w-5 sm:h-5 text-[#E8E8ED]" fill="#E8E8ED" />
             </motion.button>
@@ -272,7 +284,7 @@ export function PlayerBar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={cycleRepeat}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/[0.04] relative"
+              className="hidden lg:flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all duration-200 hover:bg-white/[0.04] relative"
               title={`Repeat: ${repeatMode}`}
             >
               <RepeatIcon
@@ -298,7 +310,7 @@ export function PlayerBar() {
           </div>
 
           {/* Right: Time + Volume */}
-          <div className="flex items-center gap-3 sm:gap-4 flex-1 justify-end">
+          <div className="flex items-center gap-2 sm:gap-4 flex-1 justify-end">
             {/* Time */}
             <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-[#6B6B80]">
               <span>{formatTime(currentTime)}</span>
@@ -307,7 +319,7 @@ export function PlayerBar() {
             </div>
 
             {/* Volume */}
-            <div className="hidden md:flex items-center gap-2">
+            <div className="hidden lg:flex items-center gap-2">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -337,14 +349,16 @@ export function PlayerBar() {
             </div>
 
             {/* Fullscreen visualizer toggle */}
-            <FullscreenVizToggle />
+            <div className="hidden sm:block">
+              <FullscreenVizToggle />
+            </div>
 
             {/* Playlist toggle */}
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={toggleShowPlaylist}
-              className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-200 shrink-0"
               style={{
                 background: showPlaylist ? `${color}15` : 'transparent',
                 border: showPlaylist ? `1px solid ${color}25` : '1px solid transparent',
