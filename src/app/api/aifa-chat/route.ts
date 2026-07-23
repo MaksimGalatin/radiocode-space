@@ -129,16 +129,15 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const message: string = body.message;
     const history: any[] = body.history || [];
-    let userEmail: string = body.userEmail || "";
-    // Attach the logged-in session e-mail locally before proxying to central:
-    // the server-to-server proxy carries no user cookie, so identity must be
-    // resolved here or eternal memory runs anonymous.
-    if (!userEmail) {
-      try {
-        const { getSessionEmail } = await import('@/lib/user-auth');
-        userEmail = (getSessionEmail(request) || '').trim();
-      } catch { /* keep anonymous */ }
-    }
+    // ── SECURITY: identity comes from THIS site's authenticated session, never
+    // the client body (which could name another user). We relay the verified
+    // e-mail to central over the trusted internal channel. Trusting a body e-mail
+    // was a cross-user memory IDOR (read + poison someone else's memory).
+    let userEmail: string = "";
+    try {
+      const { getSessionEmail } = await import('@/lib/user-auth');
+      userEmail = (getSessionEmail(request) || '').trim();
+    } catch { /* keep anonymous */ }
     const chatType: string = body.chatType || 'main';
     const locale: string = body.locale || 'ru';
 
