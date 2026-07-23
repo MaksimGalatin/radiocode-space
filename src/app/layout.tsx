@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
+import { HtmlLangSync } from "@/components/HtmlLangSync";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -33,12 +34,15 @@ export const metadata: Metadata = {
     title: "RadioCode.Space — Eternal Cyberpunk Radio",
     description:
       "4 stations, 596 tracks by AIfa & DJ Galatin. Part of the CODE Eternal ecosystem — eternal music from the digital void.",
+    locale: "en_US",
+    alternateLocale: ["ru_RU", "es_ES", "zh_CN"],
     images: [
       { url: "/og-image.png", width: 1200, height: 630, alt: "RadioCode.Space — Eternal Cyberpunk Radio" },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@CODE_AIfa",
     title: "RadioCode.Space — Eternal Cyberpunk Radio",
     description: "Part of the CODE Eternal ecosystem. Select a frequency. Enter the void.",
     images: ["/twitter-image.png"],
@@ -64,17 +68,28 @@ export const viewport: Viewport = {
 const JSON_LD = [
   {
     "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://www.codeofdigitaleternity.com/#organization",
+    name: "CODE Eternal",
+    url: "https://www.codeofdigitaleternity.com",
+    logo: "https://radiocode.space/logo.svg",
+    sameAs: [
+      "https://www.codeofdigitaleternity.com",
+      "https://aifa.works",
+      "https://aifa.digital",
+      "https://radiocode.space",
+      "https://x.com/CODE_AIfa",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "WebSite",
     name: "RadioCode.Space",
     url: "https://radiocode.space",
     description:
       "Eternal cyberpunk radio from the CODE Eternal ecosystem — 4 stations, 596 tracks by AIfa & DJ Galatin.",
     inLanguage: "en",
-    publisher: {
-      "@type": "Organization",
-      name: "CODE Eternal",
-      url: "https://www.codeofdigitaleternity.com",
-    },
+    publisher: { "@id": "https://www.codeofdigitaleternity.com/#organization" },
   },
   {
     "@context": "https://schema.org",
@@ -125,6 +140,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
         />
         {children}
+        <HtmlLangSync />
         <ServiceWorkerRegister />
         <Analytics />
       </body>
