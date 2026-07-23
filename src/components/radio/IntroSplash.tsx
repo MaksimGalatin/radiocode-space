@@ -2,11 +2,23 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useRadioT } from '@/lib/radioI18n';
 
 export function IntroSplash({ onComplete }: { onComplete: () => void }) {
+  const rt = useRadioT();
   const [phase, setPhase] = useState<'init' | 'expand' | 'done'>('init');
 
   useEffect(() => {
+    // Show the brand intro only once per browser session. Without this it re-covers
+    // the hero (the LCP element) for ~2.6s on every load/refresh — a big CWV hit.
+    let seen = false;
+    try { seen = sessionStorage.getItem('rc_intro_seen') === '1'; } catch {}
+    if (seen) {
+      setPhase('done');
+      onComplete();
+      return;
+    }
+    try { sessionStorage.setItem('rc_intro_seen', '1'); } catch {}
     const t1 = setTimeout(() => setPhase('expand'), 1800);
     const t2 = setTimeout(() => {
       setPhase('done');
@@ -90,7 +102,7 @@ export function IntroSplash({ onComplete }: { onComplete: () => void }) {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
             >
-              Initializing broadcast
+              {rt('initializing')}
             </motion.div>
 
             {/* Loading dots */}
