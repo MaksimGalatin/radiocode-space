@@ -470,7 +470,7 @@ export default function CabinetPage() {
               </div>
             </Card>
             <Card style={{ overflow: "hidden", padding: 0 }}>
-              <ChatSection />
+              <ChatSection embedded />
             </Card>
           </div>
         )}

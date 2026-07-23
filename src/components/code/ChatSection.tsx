@@ -54,7 +54,7 @@ function getCharDelay(char: string): number {
   return 18 + Math.random() * 14;
 }
 
-export default function ChatSection() {
+export default function ChatSection({ embedded = false }: { embedded?: boolean }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -305,9 +305,10 @@ export default function ChatSection() {
   // ── Render ──
 
   return (
-    <section id="terminal" className="relative py-24 md:py-32" ref={ref}>
-      <div className="section-divider mb-24" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="terminal" className={embedded ? "w-full" : "relative py-24 md:py-32"} ref={ref}>
+      {!embedded && <div className="section-divider mb-24" />}
+      <div className={embedded ? "w-full" : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}>
+        {!embedded && (
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}
           className="text-center mb-12">
           <span className="text-xs md:text-sm font-mono text-cyan-400 tracking-[0.3em] mb-4 block">{t("chat.label", lang)}</span>
@@ -317,6 +318,7 @@ export default function ChatSection() {
           </h2>
           <p className="max-w-2xl mx-auto text-muted-foreground text-base md:text-lg">{t("chat.subtitle", lang)}</p>
         </motion.div>
+        )}
 
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }}
           className="rounded-2xl border border-border overflow-hidden glass-strong">
