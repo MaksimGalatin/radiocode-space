@@ -13,11 +13,16 @@ export function amountToTier(a: number): number {
 }
 export async function creditReferralChain(pool: any, buyer: string, amount: number, tier: number, orderId: string) {
   const out: any[] = [];
+  // Anti-fraud: never pay commission on your OWN purchase (self-referral) and
+  // never credit the same account twice up a chain (cycles).
+  const seen = new Set<string>([String(buyer).trim().toLowerCase()]);
   let cur = buyer;
   for (let lvl = 1; lvl <= 3; lvl++) {
     const rr = await pool.query(`SELECT referrer_email FROM referrals WHERE user_email=$1`, [cur]);
     if (!rr.rows[0]) break;
     const earner = String(rr.rows[0].referrer_email);
+    if (seen.has(earner.trim().toLowerCase())) { cur = earner; continue; } // skip self / cycle
+    seen.add(earner.trim().toLowerCase());
     const tRes = await pool.query(`SELECT tier FROM user_tiers WHERE email=$1`, [earner]);
     const earnerTier = tRes.rows[0] ? Number(tRes.rows[0].tier) : 0;
     const amt = Math.round(amount * RATES[lvl - 1] * 100) / 100;
