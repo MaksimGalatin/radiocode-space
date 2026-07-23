@@ -295,7 +295,7 @@ export default function CabinetPage() {
   const authLabel: React.CSSProperties = { display: "block", fontSize: 11, fontWeight: 700, letterSpacing: 0.5, color: TOKENS.sub, marginBottom: 7 };
 
   return (
-    <main className="cab-root" style={{ maxWidth: 1360, margin: "0 auto", padding: "96px 20px 60px" }}>
+    <main className="cab-root" style={{ maxWidth: "min(1720px, 94vw)", margin: "0 auto", padding: "96px 20px 60px" }}>
       <style dangerouslySetInnerHTML={{ __html: CAB_CSS }} />
       <CabinetBackground />
       <Toast msg={toast} />
