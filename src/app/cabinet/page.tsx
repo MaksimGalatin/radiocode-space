@@ -404,8 +404,8 @@ export default function CabinetPage() {
                   <div style={{ marginTop: 10, textAlign: "center", fontSize: 11, color: TOKENS.mut, lineHeight: 1.5 }}>{t("regHint")}</div>
                 </>
               )}
-              {GOOGLE_CLIENT_ID && allAgreed && <div id="gsi-btn" style={{ display: "flex", justifyContent: "center", marginTop: 16 }} />}
-              {GOOGLE_CLIENT_ID && !allAgreed && <div style={{ marginTop: 14, textAlign: "center", fontSize: 11, color: TOKENS.mut }}>{t("agreeGoogleHint")}</div>}
+              {GOOGLE_CLIENT_ID && <div id="gsi-btn" style={{ display: "flex", justifyContent: "center", marginTop: 18 }} />}
+              {GOOGLE_CLIENT_ID && <div style={{ marginTop: 10, textAlign: "center", fontSize: 11, color: TOKENS.mut, lineHeight: 1.5 }}>{t("agreeGoogleHint")}</div>}
             </>
           )}
           {aMsg && <div style={{ marginTop: 12, fontSize: 12, color: aMsg.startsWith("✉") || aMsg === t("regHint") ? TOKENS.green : TOKENS.red, textAlign: "center" }}>{aMsg}</div>}
