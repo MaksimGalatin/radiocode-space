@@ -216,6 +216,11 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
   // Keep the input textarea sized to its content (grows down; resets after send).
   useEffect(() => { autoResize(); }, [input, autoResize]);
 
+  // Signal the AIfa avatar when she's thinking/streaming so it can react (colour/speed).
+  useEffect(() => {
+    (window as unknown as { __aifaMood?: string }).__aifaMood = (isLoading || isStreamActive) ? 'thinking' : undefined;
+  }, [isLoading, isStreamActive]);
+
   // Auto-focus input when AIfa finishes typing
   useEffect(() => {
     if (!isLoading && !isStreamActive && messages.length > 1) {

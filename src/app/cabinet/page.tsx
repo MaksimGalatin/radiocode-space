@@ -9,6 +9,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import GamesArena from "@/components/code/GamesArena";
 import ChatSection from "@/components/code/ChatSection";
+import AifaAvatar from "@/components/code/AifaAvatar";
 import { CAB_CSS, Card, SectionTitle, Skeleton, EmptyState, Toast, ProgressBar, TOKENS, TIERS } from "./ui";
 import { useCabT } from "./i18n";
 import { useLang } from "@/lib/i18n";
@@ -469,9 +470,12 @@ export default function CabinetPage() {
                 <ProgressBar value={me.level >= 50 ? 1 : xpInLevel} max={me.level >= 50 ? 1 : xpNeed} />
               </div>
             </Card>
-            <Card style={{ overflow: "hidden", padding: 0 }}>
-              <ChatSection embedded />
-            </Card>
+            <div className="cab-aifa-stage">
+              <AifaAvatar />
+              <Card className="cab-aifa-chat" style={{ overflow: "hidden", padding: 0 }}>
+                <ChatSection embedded />
+              </Card>
+            </div>
           </div>
         )}
 
