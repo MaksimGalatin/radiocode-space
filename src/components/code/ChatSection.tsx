@@ -326,7 +326,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
         )}
 
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }}
-          className="dark rounded-2xl border border-border overflow-hidden glass-strong">
+          className="rounded-2xl border border-border overflow-hidden bg-card text-card-foreground backdrop-blur-xl">
           {/* Header */}
           <div className="flex items-center justify-between px-4 md:px-6 py-4 border-b border-border">
             <div className="flex items-center gap-3">
@@ -374,7 +374,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
                         ? "bg-cyan-400/10 border border-cyan-400/20 rounded-tr-md"
                         : `bg-card border rounded-tl-md ${isStreaming ? "border-cyan-400/30 streaming-fog" : "border-border"}`
                     }`}>
-                      <p className={`text-sm whitespace-pre-wrap leading-relaxed ${msg.role === "assistant" && isStreaming ? "text-cyan-50/90" : ""}`}>
+                      <p className={`text-sm whitespace-pre-wrap leading-relaxed ${msg.role === "assistant" && isStreaming ? "text-cyan-700 dark:text-cyan-50/90" : ""}`}>
                         {msg.role === "assistant" ? visibleText : msg.content}
                         {msg.role === "assistant" && isStreaming && (
                           <span className="inline-block w-[2px] h-[14px] bg-cyan-400 animate-pulse ml-[1px] align-middle rounded-full" />
