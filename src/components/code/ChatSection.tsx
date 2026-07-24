@@ -326,7 +326,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
         )}
 
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }}
-          className="rounded-2xl border border-border overflow-hidden glass-strong">
+          className="dark rounded-2xl border border-border overflow-hidden glass-strong">
           {/* Header */}
           <div className="flex items-center justify-between px-4 md:px-6 py-4 border-b border-border">
             <div className="flex items-center gap-3">
