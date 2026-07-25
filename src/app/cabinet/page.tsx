@@ -56,6 +56,7 @@ export default function CabinetPage() {
   const [agreeNap, setAgreeNap] = useState(false);
   const [agreePriv, setAgreePriv] = useState(false);
   const allAgreed = agreeTos && agreeNap && agreePriv;
+  const agreeFirstMsg = lang === "ru" ? "⚠️ Сначала отметьте все три галочки согласия с документами выше." : lang === "es" ? "⚠️ Primero marque las tres casillas de consentimiento de los documentos de arriba." : lang === "zh" ? "⚠️ 请先勾选上方全部三个文件同意复选框。" : "⚠️ Please check all three document-consent boxes above first.";
   const [codeSent, setCodeSent] = useState(false);
   const [resendIn, setResendIn] = useState(0);
   const [regToken, setRegToken] = useState<string | null>(null);
@@ -195,6 +196,8 @@ export default function CabinetPage() {
     if (!authChecked || me || !GOOGLE_CLIENT_ID) return;
     const cb = async (resp: any) => {
       const credential = resp && resp.credential; if (!credential) return;
+      // Consent gate: Google sign-in/registration требует отметить 3 галочки согласия (как и вход по почте).
+      if (!allAgreed) { setAMsg(agreeFirstMsg); return; }
       setABusy(true); setAMsg("");
       try {
         const { r, d } = await post("/api/auth/google", { credential });
@@ -404,7 +407,13 @@ export default function CabinetPage() {
                   <div style={{ marginTop: 10, textAlign: "center", fontSize: 11, color: TOKENS.mut, lineHeight: 1.5 }}>{t("regHint")}</div>
                 </>
               )}
-              {GOOGLE_CLIENT_ID && <div id="gsi-btn" style={{ display: "flex", justifyContent: "center", marginTop: 18 }} />}
+              {GOOGLE_CLIENT_ID && (
+                <div style={{ position: "relative", marginTop: 18 }}>
+                  <div id="gsi-btn" style={{ display: "flex", justifyContent: "center", opacity: allAgreed ? 1 : 0.45, pointerEvents: allAgreed ? "auto" : "none" }} />
+                  {/* Пока не отмечены 3 галочки — перехватываем клик по Google-кнопке и просим согласиться. */}
+                  {!allAgreed && <div onClick={() => setAMsg(agreeFirstMsg)} aria-hidden="true" title="" style={{ position: "absolute", inset: 0, cursor: "not-allowed", zIndex: 5 }} />}
+                </div>
+              )}
               {GOOGLE_CLIENT_ID && <div style={{ marginTop: 10, textAlign: "center", fontSize: 11, color: TOKENS.mut, lineHeight: 1.5 }}>{t("agreeGoogleHint")}</div>}
             </>
           )}
