@@ -3,7 +3,7 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { usePlayerStore } from '@/stores/playerStore';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useLiteMode } from '@/hooks/use-mobile';
 
 interface Particle {
   x: number;
@@ -26,7 +26,7 @@ export function ParticleBackground({ isPlaying = false }: ParticleBackgroundProp
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const animRef = useRef<number>(0);
   const stationColorRef = useRef('#00F0FF');
-  const isMobile = useIsMobile();
+  const lite = useLiteMode();
   const reduced = useReducedMotion();
 
   const getStationColor = useCallback(() => {
@@ -35,8 +35,10 @@ export function ParticleBackground({ isPlaying = false }: ParticleBackgroundProp
   }, []);
 
   useEffect(() => {
-    // Respect the user's reduced-motion preference: no canvas animation at all.
-    if (reduced) return;
+    // No canvas animation at all on lite devices (phones, Android TVs, low-end)
+    // or reduced-motion: the per-frame full-screen fillRect clear + rAF is a
+    // main-thread cost weak TV GPUs cannot absorb (stutter + laggy cursor).
+    if (reduced || lite) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -48,7 +50,7 @@ export function ParticleBackground({ isPlaying = false }: ParticleBackgroundProp
     // and the O(n²) connection-line loop (140² ≈ 19 600 checks/frame) are what
     // choke the mobile GPU and make the whole page stutter. Drop them and keep
     // only a small, cheap particle field.
-    const low = isMobile;
+    const low = lite;
 
     let lastWidth = window.innerWidth;
     const resize = () => {
@@ -228,10 +230,12 @@ export function ParticleBackground({ isPlaying = false }: ParticleBackgroundProp
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouse);
     };
-  }, [isPlaying, getStationColor, isMobile, reduced]);
+  }, [isPlaying, getStationColor, lite, reduced]);
 
-  // Reduced-motion: render nothing (static dark background from the page itself).
-  if (reduced) return null;
+  // Lite (phone / Android TV / low-end) or reduced-motion: render nothing — the
+  // page's own dark background + (static) ambient orbs carry the look, and the
+  // GPU/main-thread stays free so playback + the TV remote pointer stay smooth.
+  if (reduced || lite) return null;
 
   return (
     <canvas

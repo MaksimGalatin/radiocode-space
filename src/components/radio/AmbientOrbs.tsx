@@ -1,8 +1,8 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { usePlayerStore } from '@/stores/playerStore';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useLiteMode } from '@/hooks/use-mobile';
 
 const neonColors = ['#00F0FF', '#FF003C', '#B000FF', '#39FF14'];
 
@@ -138,12 +138,11 @@ const orbs: OrbConfig[] = [
 
 export function AmbientOrbs() {
   const { isPlaying, currentStation } = usePlayerStore();
-  const isMobile = useIsMobile();
-  const reduced = useReducedMotion();
-  // On phones (or when the user asked for less motion) render the orbs
+  // On phones, Android TVs, low-end devices, or reduced-motion: render the orbs
   // statically. Animating `filter: blur()` on 300–1000px layers re-rasterizes
-  // the blur every frame and is what makes the whole page stutter on mobile.
-  const lite = isMobile || reduced;
+  // the blur every frame and is what makes the whole page stutter (esp. on TVs,
+  // whose GPUs are weaker than phones despite the big screen).
+  const lite = useLiteMode();
 
   const stationColor = currentStation?.color || '#00F0FF';
 

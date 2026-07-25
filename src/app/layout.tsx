@@ -135,6 +135,17 @@ export default function RootLayout({
           fontFamily: 'var(--font-space-grotesk), system-ui, sans-serif',
         }}
       >
+        {/* Device performance tier — runs synchronously before the body renders so
+            heavy GPU layers (canvas rAF, animated blur, backdrop-filter) are gated
+            off on weak devices BEFORE first paint. Android TVs have big screens but
+            weak GPUs → width-based mobile detection misses them; this catches them by
+            UA + capabilities and adds `perf-lite`/`perf-tv` to <html>. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var d=document.documentElement,ua=navigator.userAgent||'',lite=false,tv=false,big=Math.max(screen.width||0,screen.height||0),noHover=matchMedia('(hover: none)').matches,coarse=matchMedia('(pointer: coarse)').matches;if(/\\b(SMART[- ]?TV|SmartTV|GoogleTV|Google TV|AndroidTV|Android TV|AppleTV|HbbTV|NetCast|Web0S|webOS|Tizen|BRAVIA|AFT[A-Z]{1,3}|CrKey|VIDAA|DTV|PlayStation|Nintendo|Xbox)\\b/i.test(ua)){lite=true;tv=true;}if(/Android/i.test(ua)&&!/Mobile/i.test(ua)&&big>=1280&&noHover){lite=true;tv=true;}var c=navigator.hardwareConcurrency||8,m=navigator.deviceMemory||8;if(c<=2||m<=2)lite=true;if(matchMedia('(prefers-reduced-motion: reduce)').matches)lite=true;if(window.innerWidth<768)lite=true;if(noHover&&coarse&&window.innerWidth>=1024){lite=true;tv=true;}if(lite)d.classList.add('perf-lite');if(tv)d.classList.add('perf-tv');}catch(e){}})();",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}

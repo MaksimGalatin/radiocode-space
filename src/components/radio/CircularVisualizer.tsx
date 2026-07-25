@@ -1,14 +1,17 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { usePlayerStore } from '@/stores/playerStore';
+import { useLiteMode } from '@/hooks/use-mobile';
 
 export function CircularVisualizer() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef<number>(0);
-  const { audioData, isPlaying, currentStation } = usePlayerStore();
+  const { isPlaying, currentStation } = usePlayerStore();
   const color = currentStation?.color || '#00F0FF';
+  const reduced = useReducedMotion();
+  const lite = useLiteMode();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -26,16 +29,21 @@ export function CircularVisualizer() {
     const centerY = size / 2;
     const baseRadius = 80;
 
-    const animate = () => {
+    let lastFrame = 0;
+    const minDelta = lite ? 55 : 0; // ~18fps on lite/TV while playing (uncapped on desktop)
+    const animate = (now = 0) => {
+      if (isPlaying && !reduced) animRef.current = requestAnimationFrame(animate);
+      if (lite && isPlaying && now - lastFrame < minDelta) return;
+      lastFrame = now;
       ctx.clearRect(0, 0, size, size);
 
-      const data = audioData;
+      const { audioData: data } = usePlayerStore.getState();
       const bars = data ? data.length / 2 : 64;
 
       // Draw outer frequency ring
       for (let i = 0; i < bars; i++) {
         const angle = (i / bars) * Math.PI * 2 - Math.PI / 2;
-        const value = data ? data[i] / 255 : (isPlaying ? Math.sin(Date.now() / 300 + i * 0.3) * 0.3 + 0.3 : 0.05);
+        const value = data && data.length > 0 ? data[i] / 255 : (isPlaying ? Math.sin(Date.now() / 300 + i * 0.3) * 0.3 + 0.3 : 0.05);
         const barHeight = value * 50 + 3;
 
         const x1 = centerX + Math.cos(angle) * (baseRadius + 20);
@@ -56,7 +64,7 @@ export function CircularVisualizer() {
       // Draw inner mirror ring (shorter)
       for (let i = 0; i < bars; i++) {
         const angle = (i / bars) * Math.PI * 2 - Math.PI / 2;
-        const value = data ? data[i] / 255 : (isPlaying ? Math.sin(Date.now() / 400 + i * 0.2) * 0.2 + 0.2 : 0.03);
+        const value = data && data.length > 0 ? data[i] / 255 : (isPlaying ? Math.sin(Date.now() / 400 + i * 0.2) * 0.2 + 0.2 : 0.03);
         const barHeight = value * 20 + 2;
 
         const x1 = centerX + Math.cos(angle) * (baseRadius + 8);
@@ -130,7 +138,8 @@ export function CircularVisualizer() {
       ctx.stroke();
 
       ctx.globalAlpha = 1;
-      animRef.current = requestAnimationFrame(animate);
+      // rAF is scheduled at the top of the loop (only while playing); the paused
+      // frame draws once and stops. On lite/TV the draw is throttled to ~18fps.
     };
 
     animate();
@@ -138,7 +147,7 @@ export function CircularVisualizer() {
     return () => {
       cancelAnimationFrame(animRef.current);
     };
-  }, [audioData, isPlaying, color]);
+  }, [isPlaying, color, reduced, lite]);
 
   return (
     <motion.div

@@ -5,6 +5,8 @@ import { usePlayerStore } from '@/stores/playerStore';
 import { CircularVisualizer } from './CircularVisualizer';
 import { MiniEqualizer } from './MiniEqualizer';
 import { ScrambleText, GlitchText } from './GlitchText';
+import { useRadioT } from '@/lib/radioI18n';
+import { useLiteMode } from '@/hooks/use-mobile';
 
 const neonPalette = ['#00F0FF', '#FF003C', '#B000FF', '#39FF14'];
 
@@ -68,16 +70,21 @@ function ShapeSVG({ shape }: { shape: FloatingShape }) {
 
 export function HeroSection() {
   const { isPlaying, currentTrack, currentStation, togglePlay, setStation } = usePlayerStore();
+  const rt = useRadioT();
 
   const color = currentStation?.color || '#00F0FF';
+  const lite = useLiteMode();
 
   return (
     <section className="relative z-10 flex flex-col items-center justify-center pt-28 sm:pt-36 pb-8 sm:pb-12 px-4 overflow-hidden">
-      {/* Animated background mesh — morphing radial gradient */}
+      {/* Animated background mesh — morphing radial gradient. Animating the
+          `background` paint property repaints the full-screen layer every frame;
+          on lite/TV we render ONE static gradient instead (no loop). */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
+        style={lite ? { background: `radial-gradient(ellipse 70% 55% at 50% 45%, ${color}0C 0%, transparent 70%)` } : undefined}
         animate={
-          isPlaying
+          lite ? undefined : isPlaying
             ? {
                 background: [
                   `radial-gradient(ellipse 60% 50% at 50% 45%, ${color}12 0%, transparent 70%)`,
@@ -95,7 +102,7 @@ export function HeroSection() {
                 ],
               }
         }
-        transition={{ duration: isPlaying ? 4 : 8, repeat: Infinity, ease: 'easeInOut' }}
+        transition={lite ? undefined : { duration: isPlaying ? 4 : 8, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       {/* Screen-edge vignette glow when playing */}
@@ -114,8 +121,9 @@ export function HeroSection() {
         )}
       </AnimatePresence>
 
-      {/* Floating geometric shapes */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* Floating geometric shapes (desktop only — 8 infinite transform loops
+          add up on weak TV/mobile GPUs; the hero reads clean without them). */}
+      {!lite && <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {floatingShapes.map((shape) => (
           <motion.div
             key={shape.id}
@@ -147,7 +155,7 @@ export function HeroSection() {
             <ShapeSVG shape={shape} />
           </motion.div>
         ))}
-      </div>
+      </div>}
 
       {/* Visualizer */}
       <motion.div
@@ -198,7 +206,7 @@ export function HeroSection() {
                 animate={isPlaying ? { opacity: [0.6, 1, 0.6] } : {}}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                {isPlaying ? 'NOW PLAYING' : 'PAUSED'}
+                {isPlaying ? rt('nowPlaying') : rt('paused')}
               </motion.span>
             </motion.div>
 
@@ -209,7 +217,7 @@ export function HeroSection() {
               transition={{ delay: 0.1 }}
               aria-live="polite"
               aria-atomic="true"
-              aria-label={`${isPlaying ? 'Now playing' : 'Paused'}: ${currentTrack.title} by ${currentTrack.artist}`}
+              aria-label={`${isPlaying ? rt('nowPlaying') : rt('paused')}: ${currentTrack.title} — ${currentTrack.artist}`}
               className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-3"
               style={{
                 color: '#E8E8ED',
@@ -271,8 +279,8 @@ export function HeroSection() {
               transition={{ delay: 0.4 }}
               className="text-base sm:text-xl text-[#6B6B80] mb-10 tracking-wide"
             >
-              Select a frequency.{' '}
-              <span className="text-[#E8E8ED]">Enter the void.</span>
+              {rt('selectFrequency')}{' '}
+              <span className="text-[#E8E8ED]">{rt('enterVoid')}</span>
               <span className="typing-cursor" />
             </motion.p>
 
@@ -339,7 +347,7 @@ export function HeroSection() {
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
                 </svg>
-                TUNE IN
+                {rt('tuneIn')}
               </span>
             </motion.button>
           </>

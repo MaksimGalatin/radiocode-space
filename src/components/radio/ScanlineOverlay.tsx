@@ -1,13 +1,12 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useLiteMode } from '@/hooks/use-mobile';
 
 export function ScanlineOverlay() {
   const [visible, setVisible] = useState(false);
-  const isMobile = useIsMobile();
-  const reduced = useReducedMotion();
+  const lite = useLiteMode();
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 200);
@@ -18,7 +17,7 @@ export function ScanlineOverlay() {
 
   // The static scanlines + vignette are cheap (rasterized once). Only the
   // full-width moving beam animates every frame — keep it desktop-only.
-  const showBeam = !isMobile && !reduced;
+  const showBeam = !lite;
 
   return (
     <div className="fixed inset-0 z-[9998] pointer-events-none">
@@ -60,11 +59,10 @@ export function ScanlineOverlay() {
 }
 
 export function MatrixGrid() {
-  const isMobile = useIsMobile();
-  const reduced = useReducedMotion();
+  const lite = useLiteMode();
   // Animating `background-position` repaints the whole full-screen layer every
   // frame — skip that layer on phones / reduced-motion, keep the static grid.
-  const animateGrid = !isMobile && !reduced;
+  const animateGrid = !lite;
 
   return (
     <div className="fixed inset-0 z-[1] pointer-events-none overflow-hidden">

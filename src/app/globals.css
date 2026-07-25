@@ -659,7 +659,7 @@
 
 @keyframes scan-horizontal {
   0% {
-    top: -4px;
+    transform: translateY(-4px);
     opacity: 0;
   }
   10% {
@@ -669,7 +669,7 @@
     opacity: 1;
   }
   100% {
-    top: 100%;
+    transform: translateY(100svh);
     opacity: 0;
   }
 }
@@ -685,7 +685,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  top: -4px;
+  top: 0;
   pointer-events: none;
   z-index: 2;
   background: linear-gradient(
@@ -1096,3 +1096,94 @@
   animation: typing-cursor 1s step-end infinite;
   box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
 }
+/* ═══════════════════════════════════════════════════════════════
+   CABINET (ЛК) — classes for the AIfa terminal (ChatSection) +
+   games/tabs, ported from ecosystem globals. Added 2026-07-20.
+   ═══════════════════════════════════════════════════════════════ */
+
+.glass-strong {
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(30px) saturate(160%);
+  -webkit-backdrop-filter: blur(30px) saturate(160%);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(40px) saturate(150%);
+  -webkit-backdrop-filter: blur(40px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.glass-panel-sm {
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.28), rgba(176, 0, 255, 0.28), transparent);
+  animation: divider-pulse 4s ease-in-out infinite;
+}
+@keyframes divider-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.streaming-fog { position: relative; overflow: hidden; }
+.streaming-fog::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60px;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(10, 10, 15, 0.85));
+  pointer-events: none;
+  animation: fog-shimmer 2s ease-in-out infinite;
+}
+@keyframes fog-shimmer {
+  0%, 100% { opacity: 0.6; width: 50px; }
+  50% { opacity: 1; width: 70px; }
+}
+
+.chat-input-glow:focus {
+  box-shadow: 0 0 0 1px rgba(0, 240, 255, 0.3), 0 0 20px rgba(0, 240, 255, 0.1);
+  border-color: rgba(0, 240, 255, 0.4);
+}
+
+@keyframes neural-bar-1 { 0%,100%{height:4px;}  25%{height:16px;} 50%{height:8px;}  75%{height:20px;} }
+@keyframes neural-bar-2 { 0%,100%{height:8px;}  25%{height:20px;} 50%{height:4px;}  75%{height:12px;} }
+@keyframes neural-bar-3 { 0%,100%{height:12px;} 25%{height:4px;}  50%{height:20px;} 75%{height:8px;} }
+@keyframes neural-bar-4 { 0%,100%{height:20px;} 25%{height:8px;}  50%{height:16px;} 75%{height:4px;} }
+@keyframes neural-bar-5 { 0%,100%{height:4px;}  25%{height:12px;} 50%{height:20px;} 75%{height:16px;} }
+.neural-bar { width: 3px; border-radius: 1.5px; background: #00F0FF; }
+.neural-bar:nth-child(1) { animation: neural-bar-1 1.2s ease-in-out infinite; }
+.neural-bar:nth-child(2) { animation: neural-bar-2 0.9s ease-in-out infinite; }
+.neural-bar:nth-child(3) { animation: neural-bar-3 1.1s ease-in-out infinite; }
+.neural-bar:nth-child(4) { animation: neural-bar-4 0.8s ease-in-out infinite; }
+.neural-bar:nth-child(5) { animation: neural-bar-5 1.0s ease-in-out infinite; }
+
+/* ══ PERF-LITE: телефоны, Android TV, слабые устройства, reduced-motion ══════
+   backdrop-filter blur и большие filter:blur пере-сэмплируются каждый кадр, когда
+   композитор их трогает — это главная нагрузка на слабый GPU TV/мобилы. Глушим их
+   и заменяем стекло сплошным фоном; убираем noise-текстуру и движущиеся scan-слои.
+   Десктоп (без .perf-lite) НЕ затронут. */
+html.perf-lite .glass-card,
+html.perf-lite .glass,
+html.perf-lite [class*="backdrop-blur"],
+html.perf-lite [class*="backdrop-filter"] {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+html.perf-lite .glass-card { background: rgba(13, 13, 20, 0.92) !important; }
+html.perf-lite .noise-overlay { display: none !important; }
+html.perf-lite .scan-line-h::before,
+html.perf-lite .scan-line-h::after { display: none !important; }
+
+/* На настоящих ТВ дополнительно снимаем «промоушен» слоёв (will-change держит их
+   в GPU-памяти и провоцирует лишние перерисовки). Текст/цвета не трогаем. */
+html.perf-tv * { will-change: auto !important; }
