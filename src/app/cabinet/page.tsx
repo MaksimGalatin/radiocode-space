@@ -333,7 +333,7 @@ export default function CabinetPage() {
           </div>
           {regToken ? (
             <>
-              <div style={{ fontSize: 22, fontWeight: 800, color: "#f1f1f7", textAlign: "center", marginBottom: 8 }}>{t("createPassTitle")}</div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: TOKENS.text, textAlign: "center", marginBottom: 8 }}>{t("createPassTitle")}</div>
               <div style={{ fontSize: 13, color: TOKENS.sub, textAlign: "center", lineHeight: 1.5, marginBottom: 22 }}>{t("createPassDesc")}</div>
               <label style={authLabel}>{t("nick")}</label>
               <input className="cab-input" value={aNick} onChange={e => setANick(e.target.value)} placeholder="your_nick" style={{ marginBottom: 16 }} />
@@ -345,7 +345,7 @@ export default function CabinetPage() {
             </>
           ) : (
             <>
-              <div style={{ fontSize: 24, fontWeight: 800, color: "#f1f1f7", textAlign: "center", marginBottom: 8 }}>{t("loginTitle")}</div>
+              <div style={{ fontSize: 24, fontWeight: 800, color: TOKENS.text, textAlign: "center", marginBottom: 8 }}>{t("loginTitle")}</div>
               <div style={{ fontSize: 13, color: TOKENS.sub, textAlign: "center", lineHeight: 1.5, marginBottom: 22 }}>{t("loginDesc")}</div>
               <div style={{ display: "flex", marginBottom: 22, borderBottom: "1px solid rgba(42,42,58,0.8)" }} role="tablist">
                 {(["login", "register"] as const).map(m => (
