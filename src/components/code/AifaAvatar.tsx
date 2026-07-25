@@ -31,7 +31,8 @@ export default function AifaAvatar() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+      || document.documentElement.classList.contains('perf-lite'); // TV/lite → static figure, no rAF
     const CYAN = '#00F0FF';
     const fs = 12;
     const CH = 'アイウエオカキクケサシスセ0123456789<>/{}[]=+*ﾉﾊﾋ';
