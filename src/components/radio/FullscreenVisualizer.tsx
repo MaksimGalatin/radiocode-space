@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Maximize2 } from 'lucide-react';
 import { usePlayerStore } from '@/stores/playerStore';
 import { create } from 'zustand';
+import { useRadioT } from '@/lib/radioI18n';
+import { useLiteMode } from '@/hooks/use-mobile';
 
 // Shared state between visualizer and toggle button
 const useVizOpenStore = create<{ isOpen: boolean; toggle: () => void; close: () => void }>((set) => ({
@@ -30,32 +32,39 @@ function hexToRgb(hex: string): [number, number, number] {
 }
 
 export function FullscreenVisualizer() {
-  const { isPlaying, currentTrack, currentStation, audioData } = usePlayerStore();
+  const { isPlaying, currentTrack, currentStation } = usePlayerStore();
   const { isOpen, close } = useVizOpenStore();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animFrameRef = useRef<number>(0);
+  const lite = useLiteMode();
   // Store latest reactive values in refs for the animation loop
-  const stateRef = useRef({ isPlaying, audioData, r: 0, g: 0, b: 0 });
+  const stateRef = useRef({ isPlaying, r: 0, g: 0, b: 0 });
 
   const color = currentStation?.color || '#00F0FF';
   const [r, g, b] = hexToRgb(color);
 
   // Sync reactive state to refs so the animation loop always reads fresh values
   useEffect(() => {
-    stateRef.current = { isPlaying, audioData, r, g, b };
-  }, [isPlaying, audioData, r, g, b]);
+    stateRef.current = { isPlaying, r, g, b };
+  }, [isPlaying, r, g, b]);
 
   useEffect(() => {
     if (!isOpen) return;
 
-    function drawFrame() {
+    let lastFrame = 0;
+    const minDelta = lite ? 55 : 0; // ~18fps on lite/TV in fullscreen (uncapped on desktop)
+    function drawFrame(now = 0) {
+      animFrameRef.current = requestAnimationFrame(drawFrame);
+      if (lite && now - lastFrame < minDelta) return;
+      lastFrame = now;
       const canvas = canvasRef.current;
       if (!canvas) return;
 
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      const { isPlaying: playing, audioData: data, r: cr, g: cg, b: cb } = stateRef.current;
+      const { isPlaying: playing, r: cr, g: cg, b: cb } = stateRef.current;
+      const { audioData: data } = usePlayerStore.getState();
 
       const dpr = window.devicePixelRatio || 1;
       const displaySize = Math.max(100, Math.min(CANVAS_SIZE, window.innerWidth - 40, window.innerHeight - 200));
@@ -112,8 +121,7 @@ export function FullscreenVisualizer() {
       ctx.strokeStyle = `rgba(${cr}, ${cg}, ${cb}, ${playing ? 0.12 : 0.04})`;
       ctx.lineWidth = 1;
       ctx.stroke();
-
-      animFrameRef.current = requestAnimationFrame(drawFrame);
+      // rAF scheduled at the top of the loop (throttled on lite/TV).
     }
 
     animFrameRef.current = requestAnimationFrame(drawFrame);
@@ -123,7 +131,7 @@ export function FullscreenVisualizer() {
         cancelAnimationFrame(animFrameRef.current);
       }
     };
-  }, [isOpen]);
+  }, [isOpen, lite]);
 
   return (
     <AnimatePresence>
@@ -220,6 +228,7 @@ export function FullscreenVisualizer() {
 }
 
 export function FullscreenVizToggle() {
+  const rt = useRadioT();
   const { isPlaying, currentStation } = usePlayerStore();
   const toggle = useVizOpenStore((s) => s.toggle);
   const color = currentStation?.color || '#00F0FF';
@@ -235,7 +244,7 @@ export function FullscreenVizToggle() {
       style={{
         boxShadow: `0 0 15px ${color}20`,
       }}
-      title="Fullscreen visualizer"
+      title={rt('fullscreen')}
     >
       <Maximize2 className="w-4 h-4 text-[#6B6B80] hover:text-[#E8E8ED] transition-colors" />
     </motion.button>
