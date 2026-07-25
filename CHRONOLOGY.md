@@ -36,3 +36,7 @@ CSP-заголовок (`next.config.ts`, добавлен в security-прох�
 
 ## 2026-07-24 (вечер-2) — Google-кнопка видна всегда
 - Google Sign-In виден ВСЕГДА на форме кабинета (cabinet/page.tsx + i18n.ts, коммит ef857a1 + CLI deploy); согласие-нотис под кнопкой. Проверено вживую (чекбоксы сняты → кнопка Google отрисована). Юр-ссылки формы ведут на central (усиленные документы).
+
+## 2026-07-24 — perf(tv): оптимизация под Android TV / слабые устройства
+- ParticleBackground→null; AmbientOrbs/Matrix/Scanline→статичные; Circular/Waveform/Volume→~18fps без shadowBlur; HeroSection фон-меш→статичный+фигуры скрыты; globals backdrop/noise off. Commit 0ea12bc, деплой CLI.
+- Механизм: inline-детектор ставит perf-lite/perf-tv на <html> ДО гидрации (UA TV + hardwareConcurrency/deviceMemory/hover/pointer/reduced/ширина); гейт тяжёлых GPU/CPU-слоёв; десктоп не тронут. Проверено вживую (десктоп + узкая ширина + обе темы).
