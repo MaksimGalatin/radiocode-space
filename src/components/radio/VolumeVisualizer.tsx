@@ -44,8 +44,10 @@ export function VolumeVisualizer() {
     let lastFrame = 0;
     const minDelta = lite ? 55 : 0; // ~18fps on lite/TV, uncapped on desktop
     const animate = (now = 0) => {
-      animRef.current = requestAnimationFrame(animate);
-      if (now - lastFrame < minDelta) return;
+      // Same rule as SignalStrength/WaveformBar: while paused the bars are a
+      // flat low line, so draw one frame and let the rAF chain end.
+      if (isPlaying) animRef.current = requestAnimationFrame(animate);
+      if (isPlaying && now - lastFrame < minDelta) return;
       lastFrame = now;
       if (w > 0 && h > 0) {
         ctx.clearRect(0, 0, w, h);

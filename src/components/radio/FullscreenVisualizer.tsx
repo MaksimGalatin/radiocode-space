@@ -51,28 +51,41 @@ export function FullscreenVisualizer() {
   useEffect(() => {
     if (!isOpen) return;
 
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Size the backing store only when it actually changes. This used to run
+    // inside the frame loop: every frame re-allocated the whole canvas surface
+    // and read window.innerWidth/innerHeight (forced layout) — the single
+    // heaviest thing on a TV GPU.
+    let displaySize = 0;
+    const applySize = () => {
+      const dpr = window.devicePixelRatio || 1;
+      const next = Math.max(100, Math.min(CANVAS_SIZE, window.innerWidth - 40, window.innerHeight - 200));
+      if (next === displaySize) return;
+      displaySize = next;
+      canvas.style.width = `${next}px`;
+      canvas.style.height = `${next}px`;
+      canvas.width = Math.max(1, next * dpr);
+      canvas.height = Math.max(1, next * dpr);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+    };
+    applySize();
+
     let lastFrame = 0;
     const minDelta = lite ? 55 : 0; // ~18fps on lite/TV in fullscreen (uncapped on desktop)
     function drawFrame(now = 0) {
-      animFrameRef.current = requestAnimationFrame(drawFrame);
-      if (lite && now - lastFrame < minDelta) return;
+      // Loop only while playing: a paused fullscreen view is a static ring.
+      if (isPlaying) animFrameRef.current = requestAnimationFrame(drawFrame);
+      if (isPlaying && lite && now - lastFrame < minDelta) return;
       lastFrame = now;
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-
-      const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
       const { isPlaying: playing, r: cr, g: cg, b: cb } = stateRef.current;
       const { audioData: data } = usePlayerStore.getState();
-
-      const dpr = window.devicePixelRatio || 1;
-      const displaySize = Math.max(100, Math.min(CANVAS_SIZE, window.innerWidth - 40, window.innerHeight - 200));
-      canvas.style.width = `${displaySize}px`;
-      canvas.style.height = `${displaySize}px`;
-      canvas.width = Math.max(1, displaySize * dpr);
-      canvas.height = Math.max(1, displaySize * dpr);
-      ctx.scale(dpr, dpr);
 
       const cx = displaySize / 2;
       const cy = displaySize / 2;
@@ -124,14 +137,21 @@ export function FullscreenVisualizer() {
       // rAF scheduled at the top of the loop (throttled on lite/TV).
     }
 
-    animFrameRef.current = requestAnimationFrame(drawFrame);
+    drawFrame();
+    // Resizing wipes the backing store, so a paused view is repainted once.
+    const onResize = () => {
+      applySize();
+      if (!isPlaying) drawFrame();
+    };
+    window.addEventListener('resize', onResize);
 
     return () => {
+      window.removeEventListener('resize', onResize);
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
       }
     };
-  }, [isOpen, lite]);
+  }, [isOpen, lite, isPlaying]);
 
   return (
     <AnimatePresence>

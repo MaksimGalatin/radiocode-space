@@ -42,8 +42,11 @@ export function WaveformBar() {
     let lastFrame = 0;
     const minDelta = lite ? 55 : 0; // ~18fps on lite/TV, uncapped on desktop
     const animate = (now = 0) => {
-      animRef.current = requestAnimationFrame(animate);
-      if (now - lastFrame < minDelta) return;
+      // Keep the loop alive only while something is playing: when paused the
+      // bars are a fixed low pattern, so one frame is drawn and the rAF chain
+      // ends (it used to spin forever on TVs and idle tabs).
+      if (isPlaying) animRef.current = requestAnimationFrame(animate);
+      if (isPlaying && now - lastFrame < minDelta) return;
       lastFrame = now;
       if (w > 0 && h > 0) {
         ctx.clearRect(0, 0, w, h);

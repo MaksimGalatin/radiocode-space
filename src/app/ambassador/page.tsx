@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { useCurrentLang } from '@/lib/radioI18n';
 
 /**
  * Ambassador Training Center ("Node Operator Protocol") — a self-contained,
@@ -8,7 +9,7 @@ import { useState } from 'react';
  * honest income disclaimer, no spam, no "fake job", no self-referral.
  */
 
-type Lang = 'ru' | 'en' | 'es';
+type Lang = 'ru' | 'en' | 'es' | 'zh';
 
 const T: Record<Lang, any> = {
   ru: {
@@ -143,10 +144,61 @@ const T: Record<Lang, any> = {
     ],
     disclaimer: 'CODE Eternal es un programa de afiliados. Los ingresos dependen de ventas reales y de tu esfuerzo; no están garantizados. La mayoría gana poco las primeras semanas. El token $GALATIN es un programa de lealtad, no una oferta de inversión.',
   },
+  zh: {
+    kicker: '节点运营者协议',
+    title: '成为 CODE Eternal 大使',
+    sub: '诚实的合作关系：你传播我们的产品，并从真实销售中获得佣金。这不是「雇佣工作」，也不是「投资」——而是合作。',
+    ctaCabinet: '打开个人中心',
+    ctaBot: '打开机器人',
+    incomeTitle: '4 种收入来源',
+    income: [
+      ['⭐ Telegram 星星', '来自传播 @AIfaCreativityBot 机器人：按每周销量递进 30% → 40% → 50%。'],
+      ['💵 USDT (TRC20)', '大使网络 15% / 7% / 3%，来自套餐销售（Spark $15 / Family $100 / Digital DNA $1000）及服务收入——最多 3 级。'],
+      ['🪙 $GALATIN', '忠诚度代币，记入你的个人中心（预计在项目周年前后上线交易所）。'],
+      ['🎨 机器人的 16 款 IT 产品', '销售佣金：歌曲、歌词视频、贴纸、占星、数字命理等。'],
+    ],
+    giftTitle: '🎁 你的王牌——「会自己传播的礼物」',
+    giftSteps: [
+      '想一位即将迎来节日或纪念日的朋友或亲人。',
+      '通过机器人为他生成一份免费的个性化祝福（诗歌或散文）。',
+      '附上免费礼物——我们的《CODE Eternal》一书，以及电台链接 radiocode.space。',
+      '亲自把它发送给真正会为此高兴的人。',
+    ],
+    giftWhy: '对方收到真诚的礼物 → 阅读书籍 → 通过你的链接访问电台／网站 → 归属到你名下。一个温暖的举动，胜过一千条冰冷的链接。',
+    doTitle: '✅ 如何正确地分享',
+    doList: [
+      '只分享给真正感兴趣的人——一对一，像人与人之间那样。',
+      '讲述你自己的故事：「我找到了一个记得每一次对话、并赋予永恒记忆的 AI」。',
+      '撰写有价值的内容（帖子、视频、评测），并在结尾附上你的链接。',
+      '注明你是 CODE Eternal 的合作伙伴（诚实披露）。',
+    ],
+    dontTitle: '🚫 不要做的事（会导致机器人被封，并损害所有人）',
+    dontList: [
+      '不要向全部联系人群发——那是垃圾信息，会被封号。',
+      '不要在论坛／Reddit／Quora 刷链接——域名会被列入黑名单。',
+      '不要承诺「保证收益」——这是虚假陈述，并带来法律风险。',
+      '不要为了赚取自己的佣金而创建虚假账户——自我推荐已被封锁。',
+    ],
+    stepsTitle: '🚀 今天就可以开始的第一步',
+    steps: [
+      '在 4 个网站中的任意一个免费注册个人中心。',
+      '在个人中心获取属于你的推荐链接。',
+      '通过机器人给一位朋友送上温暖的祝福，并赠送书籍与电台。',
+      '发布一篇关于「什么打动了你」的诚实帖子。',
+    ],
+    disclaimer: 'CODE Eternal 是合作伙伴（联盟）计划。收入取决于真实销售与你的努力，并不保证。多数新人在最初几周收入很少。$GALATIN 代币属于忠诚度计划，并非投资要约。',
+  },
 };
 
+const LANGS: Lang[] = ['ru', 'en', 'es', 'zh'];
+
 export default function AmbassadorPage() {
-  const [lang, setLang] = useState<Lang>('ru');
+  // Follow the language selected on the site; a click on the local switcher
+  // below overrides it for this page only.
+  const locale = useCurrentLang();
+  const [override, setOverride] = useState<Lang | null>(null);
+  const lang: Lang = override ?? (LANGS.includes(locale as Lang) ? (locale as Lang) : 'en');
+  const setLang = (l: Lang) => setOverride(l);
   const t = T[lang];
   const card: React.CSSProperties = { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(6,182,212,0.25)', borderRadius: 16, padding: '20px 22px' };
   const h2: React.CSSProperties = { fontSize: 22, fontWeight: 800, margin: '0 0 14px', color: '#e2e8f0' };

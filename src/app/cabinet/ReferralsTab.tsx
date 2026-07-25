@@ -12,6 +12,10 @@ export default function ReferralsTab(props: { email: string; toast: (m: string) 
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
   const [copied, setCopied] = useState(false);
+  // The invite must land on the SAME site the ambassador works on (all four
+  // sites share one cabinet), so the origin is read at runtime, not hardcoded.
+  const [origin, setOrigin] = useState("https://radiocode.space");
+  useEffect(() => { if (typeof window !== "undefined") setOrigin(window.location.origin); }, []);
 
   const load = useCallback(async (pg = 0) => {
     setErr(false);
@@ -23,7 +27,7 @@ export default function ReferralsTab(props: { email: string; toast: (m: string) 
   }, []);
   useEffect(() => { load(0); }, [load]);
 
-  const refLink = d ? "https://radiocode.space/cabinet?ref=" + encodeURIComponent(d.refCode || props.email) : "";
+  const refLink = d ? origin + "/cabinet?ref=" + encodeURIComponent(d.refCode || props.email) : "";
 
   async function copy() {
     try { await navigator.clipboard.writeText(refLink); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch {}

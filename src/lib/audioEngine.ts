@@ -241,13 +241,23 @@ class RadioAudioEngine {
   }
   pause() {
     this.wantPlaying = false;
-    this.decks[this.active]?.el.pause();
+    // Pause BOTH decks and kill any running ramp: during the ~4s auto-crossfade
+    // the outgoing deck kept playing, so Pause left audible sound behind.
+    this.decks.forEach((d) => {
+      if (!d) return;
+      this.clearRamp(d);
+      try { d.el.pause(); } catch { /* noop */ }
+    });
+    this.crossing = false;
     this.cb.onPlayState?.(false);
   }
   seek(t: number) {
     const el = this.decks[this.active]?.el;
     if (el && isFinite(t)) { try { el.currentTime = t; } catch { /* noop */ } }
   }
+  // NB: this mirrors the store (setVolume sets isMuted = vol === 0), so moving
+  // the slider above zero also unmutes. Callers that restore a saved session
+  // must therefore apply setMuted() AFTER setVolume() — see restoreState.
   setVolume(v: number) { this.userVolume = clamp(v, 0, 1); this.muted = v === 0; this.applyVolume(); }
   setMuted(m: boolean) { this.muted = m; this.applyVolume(); }
   private applyVolume() { const d = this.decks[this.active]; if (d && !d.ramp) this.deckVolume(d); }

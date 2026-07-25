@@ -84,6 +84,7 @@ interface PlayerState {
   togglePlay: () => void;
   setStation: (stationId: string) => void;
   playTrack: (stationId: string, trackIndex: number) => void;
+  cueTrack: (stationId: string, trackIndex: number) => void;
   nextTrack: () => void;
   prevTrack: () => void;
   setVolume: (vol: number) => void;
@@ -202,12 +203,33 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     eng.playNow(track);
   },
 
+  // Select a track (e.g. from a ?track= deep link) WITHOUT auto-playing — browser
+  // autoplay policy blocks sound without a user gesture, so we cue it and let the
+  // big Play button start it on the first tap.
+  cueTrack: (stationId: string, trackIndex: number) => {
+    const station = stations.find((s) => s.id === stationId);
+    if (!station || !station.tracks[trackIndex]) return;
+    const track = station.tracks[trackIndex];
+    set({
+      currentStation: station, currentTrack: track, currentTrackIndex: trackIndex,
+      currentTime: 0, duration: track.duration || 0,
+      isPlaying: false, isLoading: false, pendingSeek: 0,
+    });
+  },
+
   // manual next — quick blend
   nextTrack: () => {
     const { currentStation, repeatMode } = get();
     if (!currentStation) return;
     const eng = getEngine();
-    if (repeatMode === 'one') { eng.seek(0); set({ currentTime: 0, isPlaying: true }); return; }
+    if (repeatMode === 'one') {
+      // Restart the track AND actually start the audio: setting isPlaying:true
+      // without resuming showed the pause icon state as "playing" in silence.
+      set({ currentTime: 0, pendingSeek: 0 });
+      eng.seek(0);
+      get().play();
+      return;
+    }
     const rot = getRotation(currentStation);
     const track = rot.next();
     set({ currentTrack: track, currentTrackIndex: indexOf(currentStation, track), currentTime: 0, duration: track.duration || 0, isPlaying: true, isLoading: true });
@@ -316,6 +338,9 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
       const s = JSON.parse(raw);
       const eng = getEngine();
       if (typeof s.volume === 'number') { eng.setVolume(s.volume); set({ volume: s.volume, isMuted: !!s.isMuted }); }
+      // The engine must be told about mute separately: restoring only the
+      // volume left it unmuted while the UI still showed the muted icon.
+      eng.setMuted(!!s.isMuted);
       const station = stations.find((st) => st.id === s.stationId);
       if (station) {
         const track = station.tracks.find((t) => t.id === s.trackId) || station.tracks[0];
