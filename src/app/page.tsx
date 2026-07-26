@@ -460,6 +460,17 @@ export default function Home() {
                   <span className="text-xs text-[#6B6B80]">CODE Eternal</span>
                 </div>
                 <div className="flex items-center gap-4">
+                  {/* Ссылка на политику обязана быть на каждой странице: этого
+                      требуют и GDPR, и здравый смысл. Наш же Оракул поймал её
+                      отсутствие здесь — сайт собирает аналитику и данные
+                      кабинета, а сказать, что мы с ними делаем, было негде. */}
+                  <a
+                    href="https://www.codeofdigitaleternity.com/legal"
+                    className="text-[10px] font-mono tracking-wider text-[#6B6B80] hover:text-[#00F0FF] transition-colors"
+                    rel="noopener"
+                  >
+                    Privacy&nbsp;·&nbsp;Конфиденциальность
+                  </a>
                   <span className="text-[10px] font-mono tracking-wider text-[#3a3a4a]">
                     {rt('musicBy')} AIfa &amp; DJ Galatin
                   </span>

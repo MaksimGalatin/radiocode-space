@@ -1,0 +1,14 @@
+# Куда сообщить об уязвимости на наших сайтах.
+# Формат описан в RFC 9116. Без этого файла исследователю,
+# нашедшему проблему, буквально некуда написать — и он либо
+# промолчит, либо расскажет публично.
+
+Contact: mailto:contact@codeofdigitaleternity.com
+Contact: https://codeofdigitaleternity.com/contact
+Expires: 2027-07-26T00:00:00.000Z
+Preferred-Languages: ru, en, es
+Canonical: https://www.codeofdigitaleternity.com/.well-known/security.txt
+Policy: https://www.codeofdigitaleternity.com/legal
+
+# Мы отвечаем на сообщения о безопасности в течение 48 часов.
+# Пожалуйста, дайте нам разумное время на исправление до публикации.
