@@ -21,6 +21,8 @@
  * и передеплоить — код плеера уже умеет подменять адрес (lib/audioCdn.ts).
  */
 
+const CACHE_VERSION = 'v2';
+
 const ALLOWED_ORIGINS = new Set([
   'https://radiocode.space',
   'https://www.radiocode.space',
@@ -61,12 +63,20 @@ export default {
       return new Response('Not Found', { status: 404, headers: corsHeaders(origin) });
     }
 
-    // Кэш края сети: одинаковый ключ на все Range-запросы одного файла не годится,
-    // поэтому кэшируем только полные ответы, а Range отдаём напрямую из R2.
+    // Кэш края сети: Range-запросы кэшировать нельзя (ответ 206 непригоден для
+    // cache.put), поэтому кэшируем только полные GET. На адресе *.workers.dev
+    // кэш края может не работать — тогда выигрыш даёт браузерный кэш из
+    // Cache-Control ниже, а при переезде на свой домен кэш включится сам.
     const range = request.headers.get('Range');
+    const cacheable = !range && request.method === 'GET';
     const cache = caches.default;
-    if (!range) {
-      const hit = await cache.match(request);
+    // Версия в ключе кэша: если поведение воркера меняется, достаточно поднять
+    // CACHE_VERSION — старые записи осиротеют, чистить руками ничего не нужно.
+    const cacheKey = new Request(`${url.origin}/__cache/${CACHE_VERSION}${url.pathname}${url.search}`, {
+      method: 'GET',
+    });
+    if (cacheable) {
+      const hit = await cache.match(cacheKey);
       if (hit) {
         const h = new Headers(hit.headers);
         corsHeaders(origin).forEach((v, k) => h.set(k, v));
@@ -80,24 +90,39 @@ export default {
       return new Response('Not Found', { status: 404, headers: corsHeaders(origin) });
     }
 
-    const headers = corsHeaders(origin);
-    object.writeHttpMetadata(headers);
-    headers.set('etag', object.httpEtag);
-    headers.set('Accept-Ranges', 'bytes');
+    // Базовые заголовки — без CORS: именно они кладутся в кэш, чтобы запись
+    // не привязывалась к Origin (иначе Vary: Origin режет кэш на куски).
+    const base = new Headers();
+    object.writeHttpMetadata(base);
+    base.set('etag', object.httpEtag);
+    base.set('Accept-Ranges', 'bytes');
     // Файлы неизменяемы (имя = версия трека), поэтому кэшируем надолго.
-    headers.set('Cache-Control', 'public, max-age=31536000, immutable');
-    if (!headers.get('content-type')) headers.set('content-type', 'audio/mpeg');
+    base.set('Cache-Control', 'public, max-age=31536000, immutable');
+    if (!base.get('content-type')) base.set('content-type', 'audio/mpeg');
 
-    if (object.range) {
+    const withCors = () => {
+      const h = new Headers(base);
+      corsHeaders(origin).forEach((v, k) => h.set(k, v));
+      return h;
+    };
+
+    // 206 отдаём только если клиент действительно просил диапазон: R2 заполняет
+    // object.range и для обычного get(), а 206 на полный запрос ломает кэш.
+    if (range && object.range) {
       const { offset = 0, length = object.size } = object.range;
-      headers.set('Content-Range', `bytes ${offset}-${offset + length - 1}/${object.size}`);
-      return new Response(request.method === 'HEAD' ? null : object.body, { status: 206, headers });
+      const h = withCors();
+      h.set('Content-Range', `bytes ${offset}-${offset + length - 1}/${object.size}`);
+      return new Response(request.method === 'HEAD' ? null : object.body, { status: 206, headers: h });
     }
 
-    const response = new Response(request.method === 'HEAD' ? null : object.body, { status: 200, headers });
-    if (!range && request.method === 'GET') {
-      ctx.waitUntil(cache.put(request, response.clone()));
+    if (request.method === 'HEAD') {
+      const h = withCors();
+      h.set('Content-Length', String(object.size));
+      return new Response(null, { status: 200, headers: h });
     }
-    return response;
+
+    const stored = new Response(object.body, { status: 200, headers: base });
+    if (cacheable) ctx.waitUntil(cache.put(cacheKey, stored.clone()));
+    return new Response(stored.body, { status: 200, headers: withCors() });
   },
 };
