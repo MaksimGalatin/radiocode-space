@@ -45,3 +45,14 @@ CSP-заголовок (`next.config.ts`, добавлен в security-прох�
 - #gsi-btn приглушён+pointer-events off+оверлей-перехватчик+гвард в GSI-callback; без 3 галочек Google заблокирован. Проверено вживую. Commit 6a556de.
 
 ## 2026-07-25 — perf(tv) догейт: FullscreenVisualizer/SignalStrength (radiocode 5fea0d7) + HomeContent CursorGlow (digital 1caaff3) на perf-lite.
+
+
+## 2026-07-26 (ночь-3) — доступы Google, KMS, честная аналитика
+- **Включены три Google API** (Analytics Data, Analytics Admin, Search Console) в проекте `gen-lang-client-0910189597`; сервис-аккаунту `aifa-kms` выдана роль «Читатель» в GA4 и доступ ко всем 5 ресурсам Search Console. Выгружена реальная посещаемость (30 дней): 90 пользователей, 322 сессии, 806 просмотров; central 43/149/466, works 22/90/198, digital 24/82/140.
+- **radiocode вообще не имел тега GA4** (стояла только неподключённая платная Vercel-аналитика) — добавлен gtag + `googletagmanager.com` в CSP, иначе тег молча резался.
+- **Админская аналитика central больше не выдумывает цифры**: вместо `generateMockMetrics()` — реальный Google Analytics Data API через сервис-аккаунт из переменной окружения, при ошибке нули и причина.
+- **Cloud KMS подключён**: ключ и переменные существовали 18 дней, но `lib/kms.ts` ниоткуда не импортировался. Выдана роль `cryptoKeyEncrypterDecrypter`, пройден круговой тест encrypt→decrypt, обёртка включена в `keys-store` обратносовместимо (новые ключи с префиксом `kms1:`, старые читаются как раньше).
+- **Карты сайта поданы** в Search Console по всем ресурсам: 232 / 220 / 188 / 2 URL.
+- **Arweave-крон подтверждён здоровым**: 00:00 UTC — 200 (в 23:00 ещё падал), письма прекратились; внутри остаётся только 402 (нужны Turbo-кредиты).
+- **A3 снят как ложная тревога**: почта к GitHub привязана, коммиты привязаны к профилю; `unverified` в Vercel — это отсутствие криптоподписи, а не почты.
+- **CDN аудио**: замером доказано, что треки уже раздаёт сеть Cloudflare; написан бесплатный Worker (`radiocode-space/infra/cdn-worker`) для кэша и CORS, ждёт токен с правом Workers Scripts:Edit.
