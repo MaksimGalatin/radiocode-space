@@ -131,7 +131,7 @@ export default function AifaAvatar() {
       const hr = { x: 0.089, y: 0.070, z: 0.082 };
       const headTop = 0.048;
       headCy = headTop + hr.y;
-      const NHEAD = Math.round(2400 * S);
+      const NHEAD = Math.round(5200 * S);   // лицу нужна плотность даже в полный рост
       for (let i = 0; i < NHEAD; i++) {
         const v = Math.acos(1 - 2 * Math.random());
         // две трети точек уводим на переднюю полусферу: на экране лицо занимает
@@ -142,24 +142,24 @@ export default function AifaAvatar() {
         const nose = Math.exp(-(((sy + 0.02) / 0.16) ** 2)) * face * 0.020;
         const chin = Math.exp(-(((sy + 0.55) / 0.22) ** 2)) * face * 0.010;
         const fx = sx, fy = -sy;                 // карта лица: сверху вниз
-        let gl = 0.26 + face * 0.22;
+        let gl = 0.34 + face * 0.26;
         let part = 'skin';
         if (face > 0.25) {
           // Глаза миндалевидные, с мягким веком и живым бликом зрачка — без
           // чёрных провалов, иначе лицо читается черепом, а не девушкой.
           for (const ex of [-0.30, 0.30]) {
-            const d = Math.hypot((fx - ex) / 0.155, (fy + 0.02) / 0.075);
-            if (d < 1) { gl *= 0.38 + d * 0.42; part = 'eye'; }
-            if (d < 0.34) { gl = 1.5; part = 'pupil'; }
+            const d = Math.hypot((fx - ex) / 0.170, (fy + 0.02) / 0.088);
+            if (d < 1) { gl *= 0.30 + d * 0.45; part = 'eye'; }
+            if (d < 0.30) { gl = 2.6; part = 'pupil'; }
           }
           for (const ex of [-0.31, 0.31]) {       // брови — тонкие дуги
             const dx = Math.abs(fx - ex), dy = Math.abs(fy + 0.22 - dx * dx * 0.5);
-            if (dx < 0.22 && dy < 0.040) { gl *= 1.7; part = 'brow'; }
+            if (dx < 0.22 && dy < 0.045) { gl *= 2.2; part = 'brow'; }
           }
           if (Math.abs(fx) < 0.055 && fy > -0.04 && fy < 0.22) gl *= 1.12 + (fy + 0.04) * 0.5; // нос
           const ld = Math.hypot(fx / 0.215, (fy - 0.40) / 0.070);                              // губы
-          if (ld < 1) { gl *= 1.45; part = 'lips'; }
-          if (Math.abs(fy - 0.40) < 0.012 && Math.abs(fx) < 0.17) gl *= 0.55;
+          if (ld < 1) { gl *= 1.75; part = 'lips'; }
+          if (Math.abs(fy - 0.40) < 0.014 && Math.abs(fx) < 0.17) gl *= 0.40;
           for (const ex of [-0.50, 0.50]) if (Math.hypot(fx - ex, fy - 0.13) < 0.20) gl *= 1.10; // скулы
           if (fy < -0.34) gl *= 1.06;                                                            // лоб
         }
@@ -182,7 +182,7 @@ export default function AifaAvatar() {
         return grid[lo].y + Math.random() * step;
       };
 
-      const NBODY = Math.round(3400 * S);
+      const NBODY = Math.round(4600 * S);
       for (let i = 0; i < NBODY; i++) {
         const y = pickY(); const p = prof(y); if (!p) continue;
         const th = Math.random() * Math.PI * 2;
@@ -190,7 +190,7 @@ export default function AifaAvatar() {
         add(Math.cos(th) * p.rx * rough + (p.c - cxN), y, Math.sin(th) * p.rz * rough,
             Math.cos(th) / p.rx, Math.sin(th) / p.rz, 'body');
       }
-      const NIN = Math.round(1000 * S);
+      const NIN = Math.round(1400 * S);
       for (let i = 0; i < NIN; i++) {
         const y = pickY(); const p = prof(y); if (!p) continue;
         const th = Math.random() * Math.PI * 2, rr = Math.sqrt(Math.random()) * 0.85;
@@ -212,7 +212,7 @@ export default function AifaAvatar() {
       }
 
       // ── волосы: пряди в трёхмерии, от затылка вниз вдоль спины
-      const NS = Math.round(40 * S);
+      const NS = Math.max(16, Math.round(W / 9));
       for (let i = 0; i < NS; i++) {
         const side = i % 2 ? 1 : -1;
         const k = i / NS;
@@ -232,7 +232,7 @@ export default function AifaAvatar() {
           const x = b0 * p0.x + b1 * (p0.x + side * hr.x * 0.10) + b2 * (side * out * 0.85) + b3 * (side * out);
           const y = b0 * p0.y + b1 * (p0.y + drop * 0.34) + b2 * (p0.y + drop * 0.74) + b3 * (p0.y + drop);
           const z = b0 * p0.z + b1 * (p0.z - back * 0.5) + b2 * (p0.z - back) + b3 * (p0.z - back * 0.8);
-          add(x, y, z, x, z, 'hair', 1.05 + (1 - u) * 0.5, u, side * (0.4 + Math.random() * 0.8));
+          add(x, y, z, x, z, 'hair', 1.30 + (1 - u) * 0.55, u, side * (0.4 + Math.random() * 0.8));
         }
       }
     }
@@ -295,9 +295,9 @@ export default function AifaAvatar() {
         const rx = x * ca2 + z * sa2;
         const rz = -x * sa2 + z * ca2;
         const s = F / (F + rz + 0.55);
-        const ZOOM = 1.34, ANCH = 0.118;                    // ближе к зрителю, голова выше
+        const ZOOM = 1.46, ANCH = 0.118;                    // ближе к зрителю, голова выше
         const sx = cx + rx * W * s * ZOOM;
-        const sy = (y * H * s + (1 - s) * H * 0.42 - H * ANCH) * ZOOM + H * 0.085;
+        const sy = (y * H * s + (1 - s) * H * 0.42 - H * ANCH) * ZOOM + H * 0.075;
 
         if (p.y > 0.995) continue;
         if (sx < -20 || sx > W + 20 || sy < -20 || sy > H + 20) continue;
@@ -313,8 +313,8 @@ export default function AifaAvatar() {
         const twinkle = 0.82 + 0.18 * Math.sin(t * 0.09 + p.ph);
         const front = Math.max(0, facing);
         const base = p.kind === 'inner' ? 0.26
-          : p.kind === 'head' ? (0.10 + rim * 0.40 + front * 0.80)
-          : (0.24 + rim * 0.95);
+          : p.kind === 'head' ? (0.09 + rim * 0.36 + front * 1.00)
+          : (0.32 + rim * 1.05);
         let a = base * depth * p.glow * twinkle + scan;
         if (facing < -0.35 && p.kind !== 'hair') a *= p.kind === 'head' ? 0.30 : 0.45;
         if (p.y > 0.88) a *= Math.max(0, 1 - (p.y - 0.88) / 0.11);
@@ -322,10 +322,10 @@ export default function AifaAvatar() {
         if (a > 1) a = 1;
 
         const near = Math.max(0, s - 0.72);
-        const size = (1.15 + near * 3.4) * (p.kind === 'hair' ? 0.95 : p.kind === 'head' ? 0.84 : 1);
+        const size = (1.15 + near * 3.4) * (p.kind === 'hair' ? 0.75 : p.kind === 'head' ? 0.70 : 1);
 
-        ctx!.fillStyle = `rgba(${COL[0]},${COL[1]},${COL[2]},${(a * 0.30).toFixed(3)})`;
-        ctx!.fillRect(sx - size, sy - size, size * 2.6, size * 2.6);
+        ctx!.fillStyle = `rgba(${COL[0]},${COL[1]},${COL[2]},${(a * 0.24).toFixed(3)})`;
+        ctx!.fillRect(sx - size, sy - size, size * 2.2, size * 2.2);
         ctx!.fillStyle = a > 0.86
           ? `rgba(235,255,255,${a.toFixed(3)})`
           : `rgba(${COL[0]},${COL[1]},${COL[2]},${a.toFixed(3)})`;
