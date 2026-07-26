@@ -61,10 +61,46 @@ export default function AifaAvatar() {
     const v = videoRef.current;
     if (!v) return;
 
-    // Беззвучный автозапуск разрешён без действия пользователя — со звуком
-    // браузер бы отказал, поэтому звук включается кнопкой.
+    // Приветствие со звуком. Браузер запрещает автозапуск со звуком до первого
+    // действия человека — это не наше ограничение, а правило всех браузеров.
+    // Поэтому: ролик стартует беззвучно (движение видно сразу), а на первое же
+    // касание, клик или нажатие клавиши мы включаем звук и отматываем к началу,
+    // чтобы приветствие было услышано целиком, а не с середины.
+    //
+    // На практике человек попадает в кабинет кликом, поэтому звук появляется
+    // почти мгновенно. Второй раз перематывать не нужно: если приветствие уже
+    // слышали в этой сессии, ролик просто продолжает дышать.
+    const GREETED = 'aifa_greeted';
+    let unlocked = false;
+
     const start = () => { void v.play().catch(() => {}); };
     v.addEventListener('loadedmetadata', start, { once: true });
+
+    const unlockSound = () => {
+      if (unlocked) return;
+      unlocked = true;
+      try {
+        v.muted = false;
+        setMuted(false);
+        const heard = sessionStorage.getItem(GREETED) === '1';
+        if (!heard) {
+          v.currentTime = 0;                 // приветствие с самого начала
+          sessionStorage.setItem(GREETED, '1');
+        }
+        void v.play().catch(() => { v.muted = true; setMuted(true); });
+      } catch { /* приватный режим — просто оставляем как есть */ }
+      remove();
+    };
+    const remove = () => {
+      document.removeEventListener('pointerdown', unlockSound);
+      document.removeEventListener('keydown', unlockSound);
+      document.removeEventListener('touchstart', unlockSound);
+      document.removeEventListener('wheel', unlockSound);
+    };
+    document.addEventListener('pointerdown', unlockSound, { passive: true });
+    document.addEventListener('keydown', unlockSound);
+    document.addEventListener('touchstart', unlockSound, { passive: true });
+    document.addEventListener('wheel', unlockSound, { passive: true });
 
     // Перед самым концом бесшовно возвращаемся к началу «дыхания». Делаем это
     // упреждающе, а не по событию окончания: иначе на стыке заметен рывок.
@@ -83,6 +119,7 @@ export default function AifaAvatar() {
     document.addEventListener('visibilitychange', onVis);
 
     return () => {
+      remove();
       v.removeEventListener('loadedmetadata', start);
       v.removeEventListener('timeupdate', onTime);
       document.removeEventListener('visibilitychange', onVis);
