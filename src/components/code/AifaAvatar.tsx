@@ -18,8 +18,18 @@ import { useEffect, useRef, useState } from 'react';
 // (ТВ и слабые устройства), без prefers-reduced-motion и без сенсорного
 // указателя. На телефоне ролик не грузится вовсе — это забота о трафике.
 
-const CDN = (process.env.NEXT_PUBLIC_AUDIO_CDN || '').replace(/\/$/, '');
-const VIDEO_SRC = `${CDN}/aifa-video/intro-v1.mp4`;
+// Ролик лежит НА НАШЕМ ЖЕ ДОМЕНЕ, а не на стороннем хосте.
+//
+// Так было не сразу: сначала он раздавался с того же воркера, что и музыка.
+// Файл при этом отдавался безупречно (проверено: 2.7 МБ, H.264, moov в начале,
+// заголовки CORS и Range на месте), но у видео с чужого домена слишком много
+// молчаливых способов не заработать: политика безопасности страницы,
+// service worker, экономия трафика, блокировщики. Ни один из них не выдаёт
+// внятной ошибки — элемент просто вечно висит в состоянии «загружаю».
+//
+// Три мегабайта не стоят такой ненадёжности: со своего домена ролик приходит
+// всегда, потому что для браузера это тот же самый источник, что и страница.
+const VIDEO_SRC = '/aifa-intro.mp4';
 
 /** Сколько секунд с конца зацикливается как «дыхание». */
 const LOOP_TAIL_SEC = 6;
@@ -56,7 +66,7 @@ export default function AifaAvatar() {
         || document.documentElement.classList.contains('perf-tv');
       const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const coarse = window.matchMedia('(pointer: coarse)').matches;
-      setShow(Boolean(CDN) && wide && !lite && !calm && !coarse);
+      setShow(wide && !lite && !calm && !coarse);
     };
     decide();
     window.addEventListener('resize', decide);
