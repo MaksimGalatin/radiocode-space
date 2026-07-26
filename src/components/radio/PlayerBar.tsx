@@ -13,6 +13,10 @@ import { seekAudio } from '@/lib/audioSingleton';
 import { MiniEqualizer } from './MiniEqualizer';
 import { VolumeVisualizer } from './VolumeVisualizer';
 import { FullscreenVizToggle } from './FullscreenVisualizer';
+import { LikeButton } from './LikeButton';
+import { ShareButton } from './ShareButton';
+import { SaveButton } from './SaveButton';
+import { useRadioT } from '@/lib/radioI18n';
 
 function formatTime(seconds: number): string {
   if (!isFinite(seconds) || seconds < 0) return '0:00';
@@ -22,6 +26,7 @@ function formatTime(seconds: number): string {
 }
 
 export function PlayerBar() {
+  const rt = useRadioT();
   const {
     isPlaying,
     currentTrack,
@@ -60,6 +65,7 @@ export function PlayerBar() {
   const VolumeIcon = isMuted || volume === 0 ? VolumeX : volume < 0.5 ? Volume1 : Volume2;
 
   const RepeatIcon = repeatMode === 'one' ? Repeat1 : Repeat;
+  const repeatModeLabel = rt(repeatMode === 'one' ? 'repeatOne' : repeatMode === 'all' ? 'repeatAll' : 'repeatOff');
 
   if (!currentTrack) {
     return (
@@ -75,6 +81,7 @@ export function PlayerBar() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={togglePlay}
+              aria-label={rt('play')}
               className="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300"
               style={{
                 background: 'rgba(0, 240, 255, 0.08)',
@@ -84,7 +91,7 @@ export function PlayerBar() {
             >
               <Play className="w-6 h-6 text-[#00F0FF] ml-1" fill="#00F0FF" />
             </motion.button>
-            <span className="text-sm text-[#6B6B80]">Select a station to begin</span>
+            <span className="text-sm text-[#6B6B80]">{rt('selectStation')}</span>
           </div>
         </div>
       </motion.div>
@@ -160,9 +167,9 @@ export function PlayerBar() {
 
       {/* Main player content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        <div className="flex items-center justify-between h-20 sm:h-24">
+        <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-y-1 py-2 sm:py-0 h-auto sm:h-24">
           {/* Left: Track info */}
-          <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0 w-full sm:w-auto sm:flex-1 sm:basis-0">
             {/* Album art / Visual indicator */}
             <motion.div
               className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex-shrink-0 overflow-hidden"
@@ -200,7 +207,7 @@ export function PlayerBar() {
               >
                 {currentStation && (
                   <span
-                    className="text-[10px] sm:text-xs font-mono px-1.5 py-0.5 rounded flex-shrink-0"
+                    className="hidden sm:inline-block text-[10px] sm:text-xs font-mono px-1.5 py-0.5 rounded flex-shrink-0"
                     style={{
                       backgroundColor: `${color}15`,
                       color: color,
@@ -225,19 +232,19 @@ export function PlayerBar() {
           </div>
 
           {/* Center: Controls */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             {/* Shuffle button */}
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={toggleShuffle}
-              aria-label={isShuffled ? 'Shuffle on (tap to turn off)' : 'Shuffle off (tap to turn on)'}
+              aria-label={isShuffled ? rt('shuffleOn') : rt('shuffleOff')}
               aria-pressed={isShuffled}
-              className="flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all duration-200 hover:bg-white/[0.04]"
-              title={isShuffled ? 'Shuffle on' : 'Shuffle off'}
+              className="flex w-7 h-7 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all duration-200 hover:bg-white/[0.04] shrink-0"
+              title={isShuffled ? rt('shuffleOn') : rt('shuffleOff')}
             >
               <Shuffle
-                className="w-4 h-4 sm:w-[18px] sm:h-[18px] transition-colors duration-200"
+                className="w-[15px] h-[15px] sm:w-[18px] sm:h-[18px] transition-colors duration-200"
                 style={{ color: isShuffled ? color : '#6B6B80' }}
               />
             </motion.button>
@@ -246,8 +253,8 @@ export function PlayerBar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={prevTrack}
-              aria-label="Previous track"
-              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/[0.04]"
+              aria-label={rt('prev')}
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/[0.04] shrink-0"
             >
               <SkipBack className="w-4 h-4 sm:w-5 sm:h-5 text-[#E8E8ED]" fill="#E8E8ED" />
             </motion.button>
@@ -256,8 +263,8 @@ export function PlayerBar() {
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
               onClick={togglePlay}
-              aria-label={isPlaying ? 'Pause' : 'Play'}
-              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-300 relative shrink-0"
+              aria-label={isPlaying ? rt('pause') : rt('play')}
+              className="w-11 h-11 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-300 relative shrink-0"
               style={{
                 background: isPlaying
                   ? `linear-gradient(135deg, ${color}20, ${color}08)`
@@ -286,8 +293,8 @@ export function PlayerBar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={nextTrack}
-              aria-label="Next track"
-              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/[0.04]"
+              aria-label={rt('next')}
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/[0.04] shrink-0"
             >
               <SkipForward className="w-4 h-4 sm:w-5 sm:h-5 text-[#E8E8ED]" fill="#E8E8ED" />
             </motion.button>
@@ -297,9 +304,9 @@ export function PlayerBar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={cycleRepeat}
-              aria-label={`Repeat mode: ${repeatMode}`}
+              aria-label={`${rt('repeat')}: ${repeatModeLabel}`}
               className="hidden lg:flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all duration-200 hover:bg-white/[0.04] relative"
-              title={`Repeat: ${repeatMode}`}
+              title={`${rt('repeat')}: ${repeatModeLabel}`}
             >
               <RepeatIcon
                 className="w-4 h-4 sm:w-[18px] sm:h-[18px] transition-colors duration-200"
@@ -338,14 +345,14 @@ export function PlayerBar() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={toggleMute}
-                aria-label={isMuted ? 'Unmute' : 'Mute'}
+                aria-label={isMuted ? rt('unmute') : rt('mute')}
                 className="text-[#6B6B80] hover:text-[#E8E8ED] transition-colors"
               >
                 <VolumeIcon className="w-4 h-4" />
               </motion.button>
               <div className="relative w-20 h-1.5 rounded-full overflow-hidden cursor-pointer group"
                 role="slider"
-                aria-label="Volume"
+                aria-label={rt('volume')}
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-valuenow={Math.round((isMuted ? 0 : volume) * 100)}
@@ -373,18 +380,25 @@ export function PlayerBar() {
               <FullscreenVizToggle />
             </div>
 
+            {/* Current-track actions — grouped on the right, always visible, no overlap */}
+            <div className="flex items-center gap-0.5 shrink-0">
+              <LikeButton trackId={currentTrack.id} color={color} size={16} />
+              <ShareButton trackId={currentTrack.id} title={currentTrack.title} color={color} size={16} />
+              <SaveButton trackId={currentTrack.id} title={currentTrack.title} color={color} size={16} />
+            </div>
+
             {/* Sleep timer */}
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={cycleSleep}
-              aria-label={sleepMinutes ? `Sleep timer: ${sleepMinutes} minutes (tap to change)` : 'Sleep timer off (tap to set)'}
-              className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-200 shrink-0"
+              aria-label={sleepMinutes ? `${rt('sleepTimer')}: ${sleepMinutes} ${rt('minutes')}` : rt('sleepTimerOff')}
+              className="relative hidden sm:flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all duration-200 shrink-0"
               style={{
                 background: sleepMinutes ? `${color}15` : 'transparent',
                 border: sleepMinutes ? `1px solid ${color}25` : '1px solid transparent',
               }}
-              title={sleepMinutes ? `Sleep in ${sleepMinutes} min` : 'Sleep timer'}
+              title={sleepMinutes ? `${rt('sleepIn')} ${sleepMinutes} ${rt('minShort')}` : rt('sleepTimer')}
             >
               <Moon className="w-4 h-4" style={{ color: sleepMinutes ? color : '#6B6B80' }} />
               {sleepMinutes && (
@@ -402,14 +416,14 @@ export function PlayerBar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={toggleShowPlaylist}
-              aria-label="Toggle playlist"
+              aria-label={rt('playlist')}
               aria-pressed={showPlaylist}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-200 shrink-0"
+              className="hidden sm:flex w-8 h-8 sm:w-9 sm:h-9 rounded-full items-center justify-center transition-all duration-200 shrink-0"
               style={{
                 background: showPlaylist ? `${color}15` : 'transparent',
                 border: showPlaylist ? `1px solid ${color}25` : '1px solid transparent',
               }}
-              title="Toggle playlist"
+              title={rt('playlist')}
             >
               <ListMusic className="w-4 h-4" style={{ color: showPlaylist ? color : '#6B6B80' }} />
             </motion.button>
