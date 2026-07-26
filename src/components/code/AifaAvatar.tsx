@@ -117,7 +117,16 @@ export default function AifaAvatar() {
       void v.play().catch(() => {});
     };
 
+    // Запуск строго ОДИН раз.
+    //
+    // Здесь была причина, по которой AIfa замирала: start() вешался на
+    // loadedmetadata И вызывался сразу, если метаданные уже пришли из кэша.
+    // Два play() подряд с перемоткой между ними браузер считает конфликтом и
+    // отменяет воспроизведение — ролик просто вставал.
+    let started = false;
     const start = async () => {
+      if (started) return;
+      started = true;
       if (alreadyGreeted()) {                 // приветствие уже слышали в этой сессии
         v.currentTime = tailStart();
         v.muted = false;
@@ -131,8 +140,18 @@ export default function AifaAvatar() {
     if (v.readyState >= 1) void start();      // метаданные уже пришли из кэша
 
     // Прокрутки здесь намеренно нет: колесо и скролл не дают права на звук.
+    //
+    // Вторая причина замирания была тут: обработчик срабатывал на КАЖДЫЙ клик
+    // по кабинету и каждый раз перематывал ролик в начало. Человек работал —
+    // AIfa дёргалась и вставала. Теперь: если звук уже включён, не трогаем
+    // ничего; перематываем только один раз и только ради приветствия.
     const unlockSound = () => {
-      void playWithSound(true).then((ok) => { if (ok) remove(); });
+      if (!v.muted) { remove(); return; }      // звук уже есть — вмешиваться незачем
+      void playWithSound(!alreadyGreeted()).then((ok) => {
+        if (ok) { remove(); return; }
+        // Звук не дали — это не повод останавливать движение.
+        if (v.paused) void v.play().catch(() => {});
+      });
     };
     const remove = () => {
       document.removeEventListener('pointerdown', unlockSound);
@@ -159,8 +178,21 @@ export default function AifaAvatar() {
     const onVis = () => { if (document.hidden) v.pause(); else void v.play().catch(() => {}); };
     document.addEventListener('visibilitychange', onVis);
 
+    // Сторож движения: раз в три секунды проверяем, что AIfa действительно
+    // жива. Ролик может встать по причинам, которые от нас не зависят —
+    // экономия энергии на ноутбуке, сбой декодера, отмена воспроизведения
+    // браузером. Раньше он в таком случае оставался стоять навсегда, и это
+    // выглядело как поломка. Теперь просто тихо продолжаем.
+    const keepAlive = window.setInterval(() => {
+      if (document.hidden) return;            // свёрнутую вкладку будить не нужно
+      if (!v.paused) return;                  // всё в порядке, идёт
+      if (v.readyState < 2) return;           // данных ещё нет — не мешаем загрузке
+      void v.play().catch(() => {});
+    }, 3000);
+
     return () => {
       remove();
+      window.clearInterval(keepAlive);
       v.removeEventListener('loadedmetadata', start);
       v.removeEventListener('timeupdate', onTime);
       document.removeEventListener('visibilitychange', onVis);
