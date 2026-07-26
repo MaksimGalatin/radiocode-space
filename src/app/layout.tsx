@@ -3,6 +3,7 @@ import { Space_Grotesk, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { HtmlLangSync } from "@/components/HtmlLangSync";
+import ClientErrorMonitor from "@/components/ClientErrorMonitor";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -153,6 +154,7 @@ export default function RootLayout({
         {children}
         <HtmlLangSync />
         <ServiceWorkerRegister />
+        <ClientErrorMonitor />
         {/* Google Analytics 4. Раньше на radiocode тега НЕ БЫЛО вовсе (только
             платная Vercel-аналитика, которая не подключена) — поэтому сайт не
             попадал ни в один отчёт. Поток общий с aifa.digital: в отчётах
