@@ -39,7 +39,14 @@ const STYLE = `
 export default function AifaAvatar() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [show, setShow] = useState(false);
-  const [muted, setMuted] = useState(true);
+  // Это ТОЛЬКО подпись на кнопке. Самим звуком управляем напрямую через ref.
+  //
+  // Здесь была причина, по которой AIfa молча висела в воздухе: значение
+  // передавалось в разметку как muted={muted}. React считал себя хозяином
+  // свойства и при каждой перерисовке возвращал его обратно — прямо посреди
+  // запуска. Браузер видел смену свойства во время play() и отменял
+  // воспроизведение. Ролик замирал на первом кадре, звука не было.
+  const [soundOn, setSoundOn] = useState(false);
 
   // Решение «показывать ли» принимается на клиенте и пересматривается при resize.
   useEffect(() => {
@@ -61,141 +68,105 @@ export default function AifaAvatar() {
     const v = videoRef.current;
     if (!v) return;
 
-    // ПРИВЕТСТВИЕ СО ЗВУКОМ — сразу, а не «когда-нибудь».
-    //
-    // Что было не так раньше. В список «жестов человека» попала прокрутка
-    // колесом, а она НЕ даёт браузеру права включить звук. Колесо срабатывало,
-    // флаг «разблокировано» вставал, слушатели снимались — и звук после этого
-    // не включался вовсе. А если человек кликал позже, ролик перематывался в
-    // начало прямо посреди речи: звук будто «включался рандомно».
-    //
-    // Как сделано теперь:
-    //   1. Сначала честная попытка играть СО ЗВУКОМ. В кабинет человек попадает
-    //      кликом, значит право на звук у страницы уже есть — и приветствие
-    //      начинается мгновенно, без всяких «нажмите здесь».
-    //   2. Если браузер всё же отказал — ролик крутит беззвучно ХВОСТ (спокойное
-    //      дыхание), а НЕ приветствие. Так приветствие не «сгорает» немым.
-    //   3. На первый настоящий жест (клик, касание, клавиша — без прокрутки)
-    //      включаем звук и играем приветствие с начала.
-    //   4. Слушатели снимаются ТОЛЬКО после фактически удавшегося звука.
-    //      Раньше одна неудачная попытка убивала все следующие.
-    const GREETED = 'aifa_greeted';
-    const tailStart = () => {
-      const d = v.duration;
-      return d && !Number.isNaN(d) ? Math.max(0, d - LOOP_TAIL_SEC) : 0;
-    };
-    const alreadyGreeted = () => {
-      try { return sessionStorage.getItem(GREETED) === '1'; } catch { return false; }
-    };
-    const markGreeted = () => {
-      try { sessionStorage.setItem(GREETED, '1'); } catch { /* приватный режим */ }
-    };
+    // ── ДВИЖЕНИЕ ГАРАНТИРОВАНО ────────────────────────────────────────────────
+    // Беззвучный автозапуск разрешён всеми браузерами без исключения. Поэтому
+    // ролик стартует беззвучно и с начала — приветствие видно всегда, даже если
+    // звук не дадут. Никаких условий, никаких флагов «уже здоровались»: человек
+    // открыл кабинет — AIfa к нему прилетела.
+    v.muted = true;
+    v.playsInline = true;
+    const kick = () => { void v.play().catch(() => {}); };
+    kick();
+    v.addEventListener('loadedmetadata', kick, { once: true });
+    v.addEventListener('canplay', kick, { once: true });
 
-    /** Пытается включить звук и проиграть приветствие. true — получилось. */
-    const playWithSound = async (fromStart: boolean): Promise<boolean> => {
+    // ── ЗВУК: сразу, если браузер разрешит ────────────────────────────────────
+    // В кабинет попадают кликом, значит право на звук у страницы обычно уже
+    // есть. Пробуем включить немедленно и не трогаем при этом позицию ролика —
+    // приветствие и так идёт с самого начала.
+    let soundTried = false;
+    const enableSound = async (): Promise<boolean> => {
+      if (v.muted === false) return true;
       try {
         v.muted = false;
-        if (fromStart) v.currentTime = 0;
         await v.play();
-        // play() мог пройти, но браузер оставил звук выключенным.
-        if (v.muted) throw new Error('still muted');
-        setMuted(false);
-        markGreeted();
+        if (v.muted) throw new Error('браузер оставил звук выключенным');
+        setSoundOn(true);
         return true;
       } catch {
         v.muted = true;
-        setMuted(true);
+        setSoundOn(false);
+        // Отказ в звуке НЕ должен останавливать движение.
+        void v.play().catch(() => {});
         return false;
       }
     };
 
-    /** Запасной путь: беззвучное дыхание, приветствие бережём до звука. */
-    const playSilentTail = () => {
-      v.muted = true;
-      setMuted(true);
-      if (!alreadyGreeted()) v.currentTime = tailStart();
-      void v.play().catch(() => {});
-    };
+    const firstTry = window.setTimeout(() => { soundTried = true; void enableSound(); }, 120);
 
-    // Запуск строго ОДИН раз.
-    //
-    // Здесь была причина, по которой AIfa замирала: start() вешался на
-    // loadedmetadata И вызывался сразу, если метаданные уже пришли из кэша.
-    // Два play() подряд с перемоткой между ними браузер считает конфликтом и
-    // отменяет воспроизведение — ролик просто вставал.
-    let started = false;
-    const start = async () => {
-      if (started) return;
-      started = true;
-      if (alreadyGreeted()) {                 // приветствие уже слышали в этой сессии
-        v.currentTime = tailStart();
-        v.muted = false;
-        setMuted(false);
-        if (!(await v.play().then(() => true).catch(() => false))) playSilentTail();
-        return;
-      }
-      if (!(await playWithSound(true))) playSilentTail();
+    // Если сразу не дали — включаем на первое действие человека.
+    // Прокрутки здесь нет намеренно: колесо не даёт браузеру права на звук.
+    const onGesture = () => {
+      void enableSound().then((ok) => { if (ok) offGesture(); });
     };
-    v.addEventListener('loadedmetadata', start, { once: true });
-    if (v.readyState >= 1) void start();      // метаданные уже пришли из кэша
+    const offGesture = () => {
+      document.removeEventListener('pointerdown', onGesture);
+      document.removeEventListener('keydown', onGesture);
+      document.removeEventListener('touchstart', onGesture);
+    };
+    document.addEventListener('pointerdown', onGesture, { passive: true });
+    document.addEventListener('keydown', onGesture);
+    document.addEventListener('touchstart', onGesture, { passive: true });
 
-    // Прокрутки здесь намеренно нет: колесо и скролл не дают права на звук.
-    //
-    // Вторая причина замирания была тут: обработчик срабатывал на КАЖДЫЙ клик
-    // по кабинету и каждый раз перематывал ролик в начало. Человек работал —
-    // AIfa дёргалась и вставала. Теперь: если звук уже включён, не трогаем
-    // ничего; перематываем только один раз и только ради приветствия.
-    const unlockSound = () => {
-      if (!v.muted) { remove(); return; }      // звук уже есть — вмешиваться незачем
-      void playWithSound(!alreadyGreeted()).then((ok) => {
-        if (ok) { remove(); return; }
-        // Звук не дали — это не повод останавливать движение.
-        if (v.paused) void v.play().catch(() => {});
-      });
-    };
-    const remove = () => {
-      document.removeEventListener('pointerdown', unlockSound);
-      document.removeEventListener('keydown', unlockSound);
-      document.removeEventListener('touchstart', unlockSound);
-    };
-    document.addEventListener('pointerdown', unlockSound, { passive: true });
-    document.addEventListener('keydown', unlockSound);
-    document.addEventListener('touchstart', unlockSound, { passive: true });
-
-    // Перед самым концом бесшовно возвращаемся к началу «дыхания». Делаем это
-    // упреждающе, а не по событию окончания: иначе на стыке заметен рывок.
+    // ── ДЫХАНИЕ ───────────────────────────────────────────────────────────────
+    // Перед самым концом бесшовно возвращаемся к началу хвоста. Упреждающе, а
+    // не по событию окончания: иначе на стыке заметен рывок.
     const onTime = () => {
       const d = v.duration;
       if (!d || Number.isNaN(d)) return;
-      if (v.currentTime >= d - 0.12) {
+      if (v.currentTime >= d - 0.15) {
         v.currentTime = Math.max(0, d - LOOP_TAIL_SEC);
         void v.play().catch(() => {});
       }
     };
     v.addEventListener('timeupdate', onTime);
+    // Страховка на случай, если событие окончания всё же дошло раньше.
+    const onEnded = () => {
+      const d = v.duration || 0;
+      v.currentTime = Math.max(0, d - LOOP_TAIL_SEC);
+      void v.play().catch(() => {});
+    };
+    v.addEventListener('ended', onEnded);
 
     // Вкладку свернули — незачем декодировать кадры впустую.
     const onVis = () => { if (document.hidden) v.pause(); else void v.play().catch(() => {}); };
     document.addEventListener('visibilitychange', onVis);
 
-    // Сторож движения: раз в три секунды проверяем, что AIfa действительно
-    // жива. Ролик может встать по причинам, которые от нас не зависят —
-    // экономия энергии на ноутбуке, сбой декодера, отмена воспроизведения
-    // браузером. Раньше он в таком случае оставался стоять навсегда, и это
-    // выглядело как поломка. Теперь просто тихо продолжаем.
+    // ── СТОРОЖ ────────────────────────────────────────────────────────────────
+    // Раз в две секунды проверяем, что AIfa действительно жива. Ролик может
+    // встать по причинам вне нашего кода: энергосбережение ноутбука, сбой
+    // декодера, отмена воспроизведения браузером. Раньше он в таком случае
+    // оставался стоять навсегда — и это выглядело как поломка.
     const keepAlive = window.setInterval(() => {
-      if (document.hidden) return;            // свёрнутую вкладку будить не нужно
-      if (!v.paused) return;                  // всё в порядке, идёт
-      if (v.readyState < 2) return;           // данных ещё нет — не мешаем загрузке
-      void v.play().catch(() => {});
-    }, 3000);
+      if (document.hidden) return;
+      if (!v.paused) return;
+      if (v.readyState < 2) return;
+      void v.play().catch(() => {
+        // Совсем не даёт играть со звуком — возвращаемся к беззвучному.
+        if (!v.muted) { v.muted = true; setSoundOn(false); void v.play().catch(() => {}); }
+      });
+    }, 2000);
 
     return () => {
-      remove();
+      window.clearTimeout(firstTry);
       window.clearInterval(keepAlive);
-      v.removeEventListener('loadedmetadata', start);
+      offGesture();
+      v.removeEventListener('loadedmetadata', kick);
+      v.removeEventListener('canplay', kick);
       v.removeEventListener('timeupdate', onTime);
+      v.removeEventListener('ended', onEnded);
       document.removeEventListener('visibilitychange', onVis);
+      void soundTried;
     };
   }, [show]);
 
@@ -204,10 +175,15 @@ export default function AifaAvatar() {
       <style dangerouslySetInnerHTML={{ __html: STYLE }} />
       {show && (
         <div className="cab-aifa-figure">
+          {/* muted и autoPlay стоят в самой разметке и БОЛЬШЕ НЕ ЗАВИСЯТ от
+              состояния React: иначе перерисовка гасила воспроизведение.
+              Звук включается кодом через ref, а состояние ниже только рисует
+              подпись на кнопке. */}
           <video
             ref={videoRef}
             src={VIDEO_SRC}
-            muted={muted}
+            autoPlay
+            muted
             playsInline
             preload="auto"
             aria-label="AIfa"
@@ -217,14 +193,16 @@ export default function AifaAvatar() {
             className="cab-aifa-sound"
             onClick={() => {
               const v = videoRef.current;
-              const next = !muted;
-              setMuted(next);
-              if (v) { v.muted = next; if (!next) void v.play().catch(() => {}); }
+              if (!v) return;
+              const next = !soundOn;
+              v.muted = !next;
+              setSoundOn(next);
+              void v.play().catch(() => {});
             }}
-            title={muted ? 'Включить звук' : 'Выключить звук'}
-            aria-label={muted ? 'Включить звук' : 'Выключить звук'}
+            title={soundOn ? 'Выключить звук' : 'Включить звук'}
+            aria-label={soundOn ? 'Выключить звук' : 'Включить звук'}
           >
-            {muted ? '🔇' : '🔊'}
+            {soundOn ? '🔊' : '🔇'}
           </button>
           <div className="cab-aifa-name">AIfa</div>
         </div>
