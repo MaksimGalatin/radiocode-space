@@ -30,6 +30,22 @@ export interface EngineCallbacks {
   onSkip?: () => void;
 }
 
+
+/**
+ * Наш аудио-CDN отдаёт CORS-заголовки, поэтому с него поток можно пометить как
+ * «чистый» и снимать спектр. Для любых других адресов атрибут НЕ ставим: без
+ * CORS он молча блокирует воспроизведение — ровно тот баг, из-за которого
+ * когда-то пропадал звук.
+ */
+const CDN_ORIGIN = (process.env.NEXT_PUBLIC_AUDIO_CDN || '').replace(/\/$/, '');
+function applyCors(el: HTMLAudioElement, url: string) {
+  if (CDN_ORIGIN && url.startsWith(CDN_ORIGIN)) {
+    if (el.crossOrigin !== 'anonymous') el.crossOrigin = 'anonymous';
+  } else if (el.crossOrigin) {
+    el.removeAttribute('crossorigin');
+  }
+}
+
 export const CROSSFADE_SEC = 4;
 const MAX_RETRIES = 3;
 const STALL_SECONDS = 12;
@@ -57,6 +73,13 @@ class RadioAudioEngine {
   private lastTime = 0;
   private watchTimer: ReturnType<typeof setInterval> | null = null;
   private started = false;
+  // Анализатор спектра. Он НЕ участвует в воспроизведении: звук по-прежнему идёт
+  // напрямую из <audio>, а спектр снимается с копии потока (captureStream).
+  // Поэтому даже если контекст не запустится — музыка всё равно играет.
+  private actx: AudioContext | null = null;
+  private analyser: AnalyserNode | null = null;
+  private tap: MediaStreamAudioSourceNode | null = null;
+  private tappedEl: HTMLAudioElement | null = null;
 
   init(cb: EngineCallbacks) {
     this.cb = cb;
@@ -104,8 +127,28 @@ class RadioAudioEngine {
       el.addEventListener('ended', () => { if (idx === this.active && !this.crossing) this.cb.onEnded?.(); });
       el.addEventListener('waiting', () => { if (idx === this.active) this.cb.onLoading?.(true); });
       el.addEventListener('canplay', () => { if (idx === this.active) this.cb.onLoading?.(false); });
-      el.addEventListener('playing', () => { if (idx === this.active) { this.cb.onLoading?.(false); this.cb.onPlayState?.(true); } });
-      el.addEventListener('error', () => { if (idx === this.active) this.handleFailure(); });
+      el.addEventListener('playing', () => {
+        if (idx !== this.active) return;
+        this.cb.onLoading?.(false);
+        this.cb.onPlayState?.(true);
+        // Спектр подключаем ТОЛЬКО когда звук уже реально пошёл — так мы
+        // не можем помешать воспроизведению, даже если контекст не поднимется.
+        this.attachAnalyser();
+      });
+      el.addEventListener('error', () => {
+        if (idx !== this.active) return;
+        // Страховка: если файл не пошёл, а на элементе стоит crossOrigin, снимаем
+        // атрибут и пробуем ещё раз. Так даже пропажа CORS на стороне CDN не
+        // оставит слушателя без звука — потеряется только спектр.
+        if (el.crossOrigin) {
+          const src = el.src;
+          el.removeAttribute('crossorigin');
+          this.analyser = null;
+          this.tappedEl = null;
+          try { el.src = src; el.load(); if (this.wantPlaying) void el.play().catch(() => {}); return; } catch { /* дальше обычная обработка */ }
+        }
+        this.handleFailure();
+      });
       el.addEventListener('stalled', () => { if (idx === this.active) this.cb.onLoading?.(true); });
     });
   }
@@ -126,6 +169,9 @@ class RadioAudioEngine {
     const deck = this.decks[this.active];
     const el = deck?.el;
     if (!el) return;
+    // Копия потока появляется не сразу после старта (сначала буферизация), поэтому
+    // повторяем попытку снять спектр, пока звук действительно идёт.
+    if (!this.analyser && !el.paused && el.currentTime > 0) this.attachAnalyser();
     if (this.wantPlaying && el.paused) {
       this.recoverTries++;
       this.safePlay(deck!);
@@ -181,7 +227,11 @@ class RadioAudioEngine {
     this.lastTime = startAt || 0;
     this.wantPlaying = true;
     this.cb.onLoading?.(true);
-    deck.el.src = audioUrl(track.url);
+    {
+      const u = audioUrl(track.url);
+      applyCors(deck.el, u);
+      deck.el.src = u;
+    }
     try { deck.el.load(); } catch { /* noop */ }
     this.deckVolume(deck);
     if (startAt > 0) {
@@ -208,7 +258,11 @@ class RadioAudioEngine {
     this.recoverTries = 0;
     this.needNextFired = false;
     this.wantPlaying = true;
-    to.el.src = audioUrl(track.url);
+    {
+      const u = audioUrl(track.url);
+      applyCors(to.el, u);
+      to.el.src = u;
+    }
     try { to.el.volume = 0; } catch { /* noop */ }
     this.safePlay(to);
 
@@ -276,8 +330,56 @@ class RadioAudioEngine {
   }
   restoreMaster() { this.masterFactor = 1; this.applyVolume(); }
 
-  // No real analyser in direct mode — the React layer supplies synthetic motion.
-  getFrequencyData(_arr: Uint8Array) { return false; }
+  /**
+   * Пробует снять спектр с активной деки. Забираем КОПИЮ звукового потока
+   * (captureStream) и заводим её в анализатор, ничего не подключая к выходу —
+   * вывод остаётся за самим элементом. Если браузер этого не умеет (Safari)
+   * или что-то пошло не так, тихо остаёмся на синтетической анимации.
+   */
+  private attachAnalyser() {
+    const el = this.decks[this.active]?.el;
+    if (!el || this.tappedEl === el) return;
+    const cap = (el as HTMLAudioElement & { captureStream?: () => MediaStream }).captureStream;
+    if (typeof cap !== 'function') return;
+    try {
+      const AC = (window as unknown as { AudioContext?: typeof AudioContext; webkitAudioContext?: typeof AudioContext });
+      const Ctor = AC.AudioContext || AC.webkitAudioContext;
+      if (!Ctor) return;
+      if (!this.actx) this.actx = new Ctor();
+      if (this.actx.state === 'suspended') void this.actx.resume().catch(() => {});
+      const stream = cap.call(el);
+      if (!stream || stream.getAudioTracks().length === 0) return;
+      try { this.tap?.disconnect(); } catch { /* noop */ }
+      this.tap = this.actx.createMediaStreamSource(stream);
+      if (!this.analyser) {
+        this.analyser = this.actx.createAnalyser();
+        this.analyser.fftSize = 256;
+        this.analyser.smoothingTimeConstant = 0.8;
+      }
+      this.tap.connect(this.analyser);   // к destination НЕ подключаем — звук уже идёт
+      this.tappedEl = el;
+    } catch {
+      this.analyser = null;
+      this.tappedEl = null;
+    }
+  }
+
+  /** Реальный спектр, если анализатор удалось подключить. Иначе false. */
+  getFrequencyData(arr: Uint8Array) {
+    if (!this.analyser) return false;
+    try {
+      const buf = new Uint8Array(this.analyser.frequencyBinCount);
+      this.analyser.getByteFrequencyData(buf);
+      let sum = 0;
+      for (let i = 0; i < buf.length; i++) sum += buf[i];
+      if (sum === 0) return false;                 // тишина в кране — пусть рисуется синтетика
+      const n = Math.min(arr.length, buf.length);
+      for (let i = 0; i < arr.length; i++) arr[i] = buf[Math.floor((i / arr.length) * n)];
+      return true;
+    } catch {
+      return false;
+    }
+  }
   isActuallyPlaying() { const el = this.decks[this.active]?.el; return !!el && !el.paused && !el.ended; }
   debug() {
     const el = this.decks[this.active]?.el;

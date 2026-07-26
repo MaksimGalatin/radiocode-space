@@ -45,10 +45,14 @@ export function useAudioEngine() {
       if (frame % 3 === 0) {
         const active = eng.isActuallyPlaying();
         if (active) {
-          phase += 0.22;
-          for (let i = 0; i < data.length; i++) {
-            const base = 55 + 95 * Math.abs(Math.sin(phase * 0.5 + i * 0.19));
-            data[i] = Math.min(255, base + Math.random() * 45);
+          // Сначала пробуем НАСТОЯЩИЙ спектр (движок снимает его с копии потока).
+          // Если браузер этого не умеет — рисуем прежнюю синтетическую волну.
+          if (!eng.getFrequencyData(data)) {
+            phase += 0.22;
+            for (let i = 0; i < data.length; i++) {
+              const base = 55 + 95 * Math.abs(Math.sin(phase * 0.5 + i * 0.19));
+              data[i] = Math.min(255, base + Math.random() * 45);
+            }
           }
           store().setAudioData(new Uint8Array(data));
           wasActive = true;
