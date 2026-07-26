@@ -153,6 +153,21 @@ export default function RootLayout({
         {children}
         <HtmlLangSync />
         <ServiceWorkerRegister />
+        {/* Google Analytics 4. Раньше на radiocode тега НЕ БЫЛО вовсе (только
+            платная Vercel-аналитика, которая не подключена) — поэтому сайт не
+            попадал ни в один отчёт. Поток общий с aifa.digital: в отчётах
+            разрезается по hostName. Consent Mode v2: по умолчанию запрещено. */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCP8MD0NQ9" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+try{if(localStorage.getItem('aifa_cookie_consent')==='all'){gtag('consent','update',{ad_storage:'granted',analytics_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});}}catch(e){}
+gtag('config','G-PCP8MD0NQ9');`,
+          }}
+        />
         <Analytics />
       </body>
     </html>

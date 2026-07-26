@@ -49,7 +49,10 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value:
               "default-src 'self'; " +
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://apis.google.com https://va.vercel-scripts.com https://vercel.live; " +
+              // GA4 грузится с googletagmanager.com — без него в script-src CSP
+              // молча режет тег и сайт исчезает из аналитики (та же грабля, что
+              // была с кнопкой Google).
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://apis.google.com https://www.googletagmanager.com https://va.vercel-scripts.com https://vercel.live; " +
               "style-src 'self' 'unsafe-inline' https://accounts.google.com; " +
               "img-src 'self' data: blob: https:; " +
               "media-src 'self' blob: https:; " +
