@@ -1,0 +1,10 @@
+name = "radiocode-audio"
+main = "worker.js"
+compatibility_date = "2026-07-01"
+workers_dev = true
+
+# Бакет с треками (596 файлов). Привязка даёт воркеру прямой доступ к R2 —
+# без публичного адреса и без исходящих расходов.
+[[r2_buckets]]
+binding = "AUDIO"
+bucket_name = "radiocode-music"
