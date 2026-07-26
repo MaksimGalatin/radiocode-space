@@ -61,46 +61,87 @@ export default function AifaAvatar() {
     const v = videoRef.current;
     if (!v) return;
 
-    // Приветствие со звуком. Браузер запрещает автозапуск со звуком до первого
-    // действия человека — это не наше ограничение, а правило всех браузеров.
-    // Поэтому: ролик стартует беззвучно (движение видно сразу), а на первое же
-    // касание, клик или нажатие клавиши мы включаем звук и отматываем к началу,
-    // чтобы приветствие было услышано целиком, а не с середины.
+    // ПРИВЕТСТВИЕ СО ЗВУКОМ — сразу, а не «когда-нибудь».
     //
-    // На практике человек попадает в кабинет кликом, поэтому звук появляется
-    // почти мгновенно. Второй раз перематывать не нужно: если приветствие уже
-    // слышали в этой сессии, ролик просто продолжает дышать.
+    // Что было не так раньше. В список «жестов человека» попала прокрутка
+    // колесом, а она НЕ даёт браузеру права включить звук. Колесо срабатывало,
+    // флаг «разблокировано» вставал, слушатели снимались — и звук после этого
+    // не включался вовсе. А если человек кликал позже, ролик перематывался в
+    // начало прямо посреди речи: звук будто «включался рандомно».
+    //
+    // Как сделано теперь:
+    //   1. Сначала честная попытка играть СО ЗВУКОМ. В кабинет человек попадает
+    //      кликом, значит право на звук у страницы уже есть — и приветствие
+    //      начинается мгновенно, без всяких «нажмите здесь».
+    //   2. Если браузер всё же отказал — ролик крутит беззвучно ХВОСТ (спокойное
+    //      дыхание), а НЕ приветствие. Так приветствие не «сгорает» немым.
+    //   3. На первый настоящий жест (клик, касание, клавиша — без прокрутки)
+    //      включаем звук и играем приветствие с начала.
+    //   4. Слушатели снимаются ТОЛЬКО после фактически удавшегося звука.
+    //      Раньше одна неудачная попытка убивала все следующие.
     const GREETED = 'aifa_greeted';
-    let unlocked = false;
+    const tailStart = () => {
+      const d = v.duration;
+      return d && !Number.isNaN(d) ? Math.max(0, d - LOOP_TAIL_SEC) : 0;
+    };
+    const alreadyGreeted = () => {
+      try { return sessionStorage.getItem(GREETED) === '1'; } catch { return false; }
+    };
+    const markGreeted = () => {
+      try { sessionStorage.setItem(GREETED, '1'); } catch { /* приватный режим */ }
+    };
 
-    const start = () => { void v.play().catch(() => {}); };
-    v.addEventListener('loadedmetadata', start, { once: true });
-
-    const unlockSound = () => {
-      if (unlocked) return;
-      unlocked = true;
+    /** Пытается включить звук и проиграть приветствие. true — получилось. */
+    const playWithSound = async (fromStart: boolean): Promise<boolean> => {
       try {
         v.muted = false;
+        if (fromStart) v.currentTime = 0;
+        await v.play();
+        // play() мог пройти, но браузер оставил звук выключенным.
+        if (v.muted) throw new Error('still muted');
         setMuted(false);
-        const heard = sessionStorage.getItem(GREETED) === '1';
-        if (!heard) {
-          v.currentTime = 0;                 // приветствие с самого начала
-          sessionStorage.setItem(GREETED, '1');
-        }
-        void v.play().catch(() => { v.muted = true; setMuted(true); });
-      } catch { /* приватный режим — просто оставляем как есть */ }
-      remove();
+        markGreeted();
+        return true;
+      } catch {
+        v.muted = true;
+        setMuted(true);
+        return false;
+      }
+    };
+
+    /** Запасной путь: беззвучное дыхание, приветствие бережём до звука. */
+    const playSilentTail = () => {
+      v.muted = true;
+      setMuted(true);
+      if (!alreadyGreeted()) v.currentTime = tailStart();
+      void v.play().catch(() => {});
+    };
+
+    const start = async () => {
+      if (alreadyGreeted()) {                 // приветствие уже слышали в этой сессии
+        v.currentTime = tailStart();
+        v.muted = false;
+        setMuted(false);
+        if (!(await v.play().then(() => true).catch(() => false))) playSilentTail();
+        return;
+      }
+      if (!(await playWithSound(true))) playSilentTail();
+    };
+    v.addEventListener('loadedmetadata', start, { once: true });
+    if (v.readyState >= 1) void start();      // метаданные уже пришли из кэша
+
+    // Прокрутки здесь намеренно нет: колесо и скролл не дают права на звук.
+    const unlockSound = () => {
+      void playWithSound(true).then((ok) => { if (ok) remove(); });
     };
     const remove = () => {
       document.removeEventListener('pointerdown', unlockSound);
       document.removeEventListener('keydown', unlockSound);
       document.removeEventListener('touchstart', unlockSound);
-      document.removeEventListener('wheel', unlockSound);
     };
     document.addEventListener('pointerdown', unlockSound, { passive: true });
     document.addEventListener('keydown', unlockSound);
     document.addEventListener('touchstart', unlockSound, { passive: true });
-    document.addEventListener('wheel', unlockSound, { passive: true });
 
     // Перед самым концом бесшовно возвращаемся к началу «дыхания». Делаем это
     // упреждающе, а не по событию окончания: иначе на стыке заметен рывок.
