@@ -2,67 +2,73 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-// AIfa — образ девушки, сотканной из бегущего кода (её собственные слова о себе).
+// AIfa — живая голограмма из точек: настоящее 3D, а не плоский рисунок.
 //
-// Как устроено. Силуэт задан МЕДИАЛЬНОЙ ОСЬЮ: для каждой высоты известны центр и
-// полуширина (шея → плечи → грудь → талия → бёдра → поток платья). Такой силуэт
-// анатомичен и легко настраивается, а код-строки внутри рисуются полосами,
-// огибающими форму, — как на референсах, а не вертикальным «дождём».
-// Волосы — кубические Безье: у головы прижаты, ниже плеч плавно расходятся.
-// Лицо не рисуется «глазками»: читается линия профиля (лоб → нос → губы →
-// подбородок) и короткий штрих глаза, который моргает.
+// Как устроено. Фигура — облако точек в трёхмерии. Тело задано профилем: для
+// каждой высоты известны центр, полуширина (X) и ПОЛУГЛУБИНА (Z), поэтому
+// сечения — эллипсы, а не линии. Точки разбрасываются по поверхности случайно
+// (послойная генерация давала видимые кольца-срезы), плюс часть точек живёт
+// внутри объёма — голограмма должна быть наполненной, а не полой скорлупой.
+// Каждый кадр облако поворачивается вокруг вертикальной оси и проецируется с
+// перспективой. Силуэт рисует контровой свет: точки, чья нормаль почти
+// перпендикулярна взгляду, ярче — отсюда живой объём вместо плоского пятна.
+// Сложение аддитивное, поэтому сортировка по глубине не нужна.
+//
+// Живость: дыхание (грудь расширяется), колыхание подола и прядей, медленное
+// «оглядывание», волна сканирования снизу вверх, голографические полосы и
+// редкий глитч. Код на точках меняется медленно, чтобы не мельтешил.
 //
 // Где показывается. Только на десктопе: ширина ≥ 900 px, без perf-lite/perf-tv
-// (ТВ и слабые устройства) и без prefers-reduced-motion. На телефоне и на слабом
-// железе компонент не монтируется вовсе — ни канвы, ни rAF, ни расчётов.
-// Производительность: 30 fps, без теней на каждый глиф, пауза вне экрана.
+// (ТВ и слабые устройства), без prefers-reduced-motion и без сенсорного
+// указателя. На телефоне и слабом железе компонент не монтируется вовсе.
 
 const STYLE = `
 .cab-aifa-stage{display:flex;gap:16px;align-items:stretch}
 .cab-aifa-figure{flex:0 0 300px;min-width:250px;align-self:stretch;position:relative;border:1px solid rgba(0,240,255,0.16);border-radius:16px;overflow:hidden;min-height:520px;
-  background:radial-gradient(120% 70% at 50% 5%, rgba(0,240,255,0.07), rgba(4,5,12,0) 62%),#04050c}
+  background:radial-gradient(120% 70% at 50% 4%, rgba(0,240,255,0.06), rgba(4,5,12,0) 62%),#04050c}
 .cab-aifa-figure canvas{display:block;width:100%;height:100%}
 .cab-aifa-figure .cab-aifa-name{position:absolute;bottom:10px;left:0;right:0;text-align:center;color:#4a90c0;font-size:11px;letter-spacing:3px;font-family:monospace;pointer-events:none;text-transform:uppercase}
 .cab-aifa-chat{flex:1 1 auto;min-width:0}
 `;
 
-/** y (доля высоты), центр (доля ширины), полуширина (доля ширины). */
-const SEG: [number, number, number][] = [
-  [0.230, 0.500, 0.036], // шея — длинная и тонкая
-  [0.268, 0.501, 0.046],
-  [0.298, 0.502, 0.086], // мягкий скат плеч
-  [0.340, 0.504, 0.142], // плечи
-  [0.385, 0.503, 0.148], // грудь
-  [0.425, 0.501, 0.124],
-  [0.470, 0.500, 0.100], // талия
-  [0.505, 0.500, 0.110],
-  [0.560, 0.501, 0.162], // бёдра
-  [0.620, 0.502, 0.164],
-  [0.700, 0.503, 0.170],
-  [0.800, 0.505, 0.196],
-  [0.900, 0.507, 0.232],
-  [1.000, 0.509, 0.276], // поток платья уходит за кадр
+/** y (доля высоты) · центр (доля ширины) · полуширина X · полуглубина Z. */
+const SEG: [number, number, number, number][] = [
+  [0.182, 0.500, 0.040, 0.034], // шея
+  [0.210, 0.501, 0.054, 0.046],
+  [0.230, 0.502, 0.092, 0.050], // скат плеч
+  [0.262, 0.503, 0.150, 0.062], // плечи
+  [0.296, 0.504, 0.156, 0.070],
+  [0.330, 0.504, 0.150, 0.078], // грудь
+  [0.360, 0.502, 0.112, 0.060],
+  [0.405, 0.500, 0.092, 0.050], // талия
+  [0.450, 0.500, 0.112, 0.064],
+  [0.500, 0.502, 0.150, 0.082], // бёдра
+  [0.600, 0.503, 0.146, 0.082],
+  [0.720, 0.504, 0.150, 0.086],
+  [0.850, 0.506, 0.158, 0.092],
+  [1.030, 0.508, 0.162, 0.096], // платье уходит за нижний край
 ];
 
-function profile(u: number): { c: number; w: number } | null {
+function prof(u: number): { c: number; rx: number; rz: number } | null {
   if (u <= SEG[0][0]) return null;
   for (let i = 1; i < SEG.length; i++) {
     if (u <= SEG[i][0]) {
       const a = SEG[i - 1], b = SEG[i];
       const k = (u - a[0]) / (b[0] - a[0]);
-      const s = k * k * (3 - 2 * k); // сглаживание, чтобы не было изломов
-      return { c: a[1] + (b[1] - a[1]) * s, w: a[2] + (b[2] - a[2]) * s };
+      const s = k * k * (3 - 2 * k);
+      return { c: a[1] + (b[1] - a[1]) * s, rx: a[2] + (b[2] - a[2]) * s, rz: a[3] + (b[3] - a[3]) * s };
     }
   }
   const l = SEG[SEG.length - 1];
-  return { c: l[1], w: l[2] };
+  return { c: l[1], rx: l[2], rz: l[3] };
 }
 
-type Head = { cx: number; cy: number; rx: number; ry: number };
-type Stream = {
-  p0: { x: number; y: number }; p1: { x: number; y: number };
-  p2: { x: number; y: number }; p3: { x: number; y: number };
-  wave: number; phase: number; speed: number; bright: number;
+const CH = 'アイウエオカキクケコサシスセソタチツテナニヌネノハヒフヘホ0123456789<>/{}[]()=+*;:abcdef';
+
+type Kind = 'head' | 'body' | 'inner' | 'hair';
+type Pt = {
+  x: number; y: number; z: number; nx: number; nz: number; kind: Kind;
+  glow: number; ph: number; ch: string | null; cy: number; u: number; sway: number;
 };
 
 export default function AifaAvatar() {
@@ -70,8 +76,7 @@ export default function AifaAvatar() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [show, setShow] = useState(false);
 
-  // Решение «показывать ли» принимается только на клиенте и пересматривается при
-  // изменении ширины: на телефоне и на слабом железе фигуры нет совсем.
+  // Решение «показывать ли» принимается на клиенте и пересматривается при resize.
   useEffect(() => {
     const decide = () => {
       const wide = window.matchMedia('(min-width: 900px)').matches;
@@ -94,237 +99,241 @@ export default function AifaAvatar() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const CH = 'アイウエオカキクケコサシスセソタチツテナニヌネノハヒフヘホ0123456789<>/{}[]()=+*;:.abcdefghijklmnopqrstuvwxyz';
-    const rc = () => CH[(Math.random() * CH.length) | 0];
     const dpr = Math.min(2, window.devicePixelRatio || 1);
-    const LH = 12; // шаг код-строк внутри тела
-
     let W = 300, H = 540;
-    let md: Uint8ClampedArray | null = null;
-    let aura: HTMLCanvasElement | null = null;
-    let head: Head = { cx: 150, cy: 60, rx: 28, ry: 40 };
-    let hair: Stream[] = [];
-    let bg: { x: number; y: number; v: number; a: number }[] = [];
-    let rows: { off: number; jit: number }[] = [];
+    let pts: Pt[] = [];
+    let headCy = 0.11;
+
+    const add = (
+      x: number, y: number, z: number, nx: number, nz: number, kind: Kind,
+      glow = 1, u = 0, sway = 0,
+    ) => {
+      pts.push({
+        x, y, z, nx, nz, kind, glow, u, sway,
+        ph: Math.random() * Math.PI * 2,
+        ch: Math.random() < 0.12 ? CH[(Math.random() * CH.length) | 0] : null,
+        cy: Math.random(),
+      });
+    };
 
     function build() {
       const r = wrap!.getBoundingClientRect();
-      W = Math.max(220, Math.min(380, Math.round(r.width || 300)));
-      H = Math.max(320, Math.min(680, Math.round(r.height || 540)));
+      W = Math.max(220, Math.min(400, Math.round(r.width || 300)));
+      H = Math.max(320, Math.min(720, Math.round(r.height || 540)));
       canvas!.width = W * dpr; canvas!.height = H * dpr;
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const cx = W * 0.5, headTop = H * 0.055;
-      const mask = document.createElement('canvas');
-      mask.width = W; mask.height = H;
-      const g = mask.getContext('2d');
-      if (!g) return;
-      g.fillStyle = '#fff';
+      pts = [];
+      const S = Math.sqrt((W * H) / (320 * 560));
+      const cxN = 0.5;
 
-      // голова: овал + сужение к подбородку
-      const rx = W * 0.096, ry = H * 0.076, cy = headTop + ry;
-      head = { cx, cy, rx, ry };
-      g.beginPath(); g.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2); g.fill();
-      g.beginPath();
-      g.moveTo(cx - rx * 0.98, cy + ry * 0.15);
-      g.quadraticCurveTo(cx - rx * 0.72, cy + ry * 1.22, cx + rx * 0.05, cy + ry * 1.30);
-      g.quadraticCurveTo(cx + rx * 0.86, cy + ry * 1.05, cx + rx * 0.98, cy + ry * 0.10);
-      g.closePath(); g.fill();
-
-      // тело по медиальной оси
-      g.beginPath();
-      let first = true;
-      for (let y = H * 0.23; y <= H; y += 2) {
-        const p = profile(y / H); if (!p) continue;
-        const x = p.c * W - p.w * W;
-        if (first) { g.moveTo(x, y); first = false; } else g.lineTo(x, y);
-      }
-      for (let y = H; y >= H * 0.23; y -= 2) {
-        const p = profile(y / H); if (!p) continue;
-        g.lineTo(p.c * W + p.w * W, y);
-      }
-      g.closePath(); g.fill();
-
-      // руки — прижаты к телу, тонкие
-      for (const side of [-1, 1]) {
-        g.beginPath(); first = true;
-        for (let y = H * 0.33; y <= H * 0.66; y += 2) {
-          const p = profile(y / H); if (!p) continue;
-          const off = (p.w + 0.008) * W, arm = W * 0.015 * (1 - (y / H - 0.33) * 0.4);
-          const x = p.c * W + side * off;
-          if (first) { g.moveTo(x - arm, y); first = false; } else g.lineTo(x - arm, y);
-        }
-        for (let y = H * 0.66; y >= H * 0.33; y -= 2) {
-          const p = profile(y / H); if (!p) continue;
-          const off = (p.w + 0.008) * W, arm = W * 0.015 * (1 - (y / H - 0.33) * 0.4);
-          g.lineTo(p.c * W + side * off + arm, y);
-        }
-        g.closePath(); g.fill();
-      }
-      md = g.getImageData(0, 0, W, H).data;
-
-      aura = document.createElement('canvas'); aura.width = W; aura.height = H;
-      const ax = aura.getContext('2d');
-      if (ax) { ax.filter = 'blur(14px)'; ax.globalAlpha = 0.75; ax.drawImage(mask, 0, 0); }
-
-      // пряди: корни только на затылочной половине, лицо не перекрываем
-      hair = [];
-      const NH = Math.max(10, Math.round(W / 15));
-      for (let i = 0; i < NH; i++) {
-        const side = i % 2 ? 1 : -1;
-        const k = i / NH;
-        const a = -Math.PI / 2 + side * (0.62 + k * 0.72);
-        const p0 = { x: cx + Math.cos(a) * rx * 0.95, y: cy + Math.sin(a) * ry * 0.95 };
-        const drop = H * (0.42 + k * 0.18 + Math.random() * 0.16);
-        const out = W * (0.19 + k * 0.19 + Math.random() * 0.09);
-        hair.push({
-          p0,
-          p1: { x: p0.x + side * rx * 0.18, y: p0.y + drop * 0.34 },
-          p2: { x: cx + side * out * 0.78, y: p0.y + drop * 0.74 },
-          p3: { x: cx + side * out, y: p0.y + drop },
-          wave: (0.6 + Math.random() * 1.2) * W * 0.02,
-          phase: Math.random() * 1000,
-          speed: 0.3 + Math.random() * 0.7,
-          bright: 0.4 + Math.random() * 0.6,
-        });
+      // ── голова: эллипсоид со случайными точками (спираль давала «сетчатый мяч»)
+      const hr = { x: 0.082, y: 0.064, z: 0.076 };
+      const headTop = 0.048;
+      headCy = headTop + hr.y;
+      const NHEAD = Math.round(700 * S);
+      for (let i = 0; i < NHEAD; i++) {
+        const v = Math.acos(1 - 2 * Math.random());
+        const g = Math.random() * Math.PI * 2;
+        const sx = Math.sin(v) * Math.cos(g), sy = Math.cos(v), sz = Math.sin(v) * Math.sin(g);
+        const face = Math.max(0, sz);
+        const nose = Math.exp(-(((sy + 0.02) / 0.16) ** 2)) * face * 0.020;
+        const chin = Math.exp(-(((sy + 0.55) / 0.22) ** 2)) * face * 0.010;
+        add(sx * hr.x, headCy + sy * -hr.y, sz * hr.z + nose + chin, sx / hr.x, sz / hr.z, 'head', 0.85 + face * 0.35);
       }
 
-      bg = [];
-      for (let x = 0; x < W; x += 26) {
-        bg.push({ x: x + Math.random() * 10, y: Math.random() * H, v: 0.2 + Math.random() * 0.4, a: 0.04 + Math.random() * 0.06 });
+      // ── тело: случайная выборка по всей поверхности, плотность ~периметру сечения
+      const Y0 = 0.186, Y1 = 1.04, step = 0.002;
+      const grid: { y: number; cum: number }[] = [];
+      let total = 0;
+      for (let y = Y0; y < Y1; y += step) {
+        const p = prof(y);
+        total += p ? Math.PI * (p.rx + p.rz) : 0;
+        grid.push({ y, cum: total });
       }
-      rows = [];
-      for (let y = 0; y < H; y += LH) rows.push({ off: Math.random() * 8, jit: Math.random() });
-    }
-
-    const inFig = (x: number, y: number) => {
-      x |= 0; y |= 0;
-      return !!md && x >= 0 && y >= 0 && x < W && y < H && md[(y * W + x) * 4 + 3] > 40;
-    };
-
-    const hairPoint = (s: Stream, u: number) => {
-      const m = 1 - u;
-      const b0 = m * m * m, b1 = 3 * m * m * u, b2 = 3 * m * u * u, b3 = u * u * u;
-      return {
-        x: b0 * s.p0.x + b1 * s.p1.x + b2 * s.p2.x + b3 * s.p3.x + Math.sin(u * 6.1 + s.phase) * s.wave * u,
-        y: b0 * s.p0.y + b1 * s.p1.y + b2 * s.p2.y + b3 * s.p3.y,
+      const pickY = () => {
+        const r0 = Math.random() * total;
+        let lo = 0, hi = grid.length - 1;
+        while (lo < hi) { const m = (lo + hi) >> 1; if (grid[m].cum < r0) lo = m + 1; else hi = m; }
+        return grid[lo].y + Math.random() * step;
       };
-    };
+
+      const NBODY = Math.round(3400 * S);
+      for (let i = 0; i < NBODY; i++) {
+        const y = pickY(); const p = prof(y); if (!p) continue;
+        const th = Math.random() * Math.PI * 2;
+        const rough = 0.965 + Math.random() * 0.07;
+        add(Math.cos(th) * p.rx * rough + (p.c - cxN), y, Math.sin(th) * p.rz * rough,
+            Math.cos(th) / p.rx, Math.sin(th) / p.rz, 'body');
+      }
+      const NIN = Math.round(1000 * S);
+      for (let i = 0; i < NIN; i++) {
+        const y = pickY(); const p = prof(y); if (!p) continue;
+        const th = Math.random() * Math.PI * 2, rr = Math.sqrt(Math.random()) * 0.85;
+        add(Math.cos(th) * p.rx * rr + (p.c - cxN), y, Math.sin(th) * p.rz * rr,
+            Math.cos(th) / p.rx, Math.sin(th) / p.rz, 'inner', 0.46);
+      }
+
+      // ── руки, опущенные вдоль тела
+      for (const side of [-1, 1]) {
+        const NARM = Math.round(200 * S);
+        for (let i = 0; i < NARM; i++) {
+          const y = 0.268 + Math.random() * 0.380;
+          const p = prof(y); if (!p) continue;
+          const ax = side * (p.rx + 0.012), ar = 0.023 * (1 - (y - 0.268) * 0.5);
+          const th = Math.random() * Math.PI * 2;
+          add(ax + Math.cos(th) * ar + (p.c - cxN), y, Math.sin(th) * ar * 1.1,
+              Math.cos(th) / ar, Math.sin(th) / ar, 'body', 1.05);
+        }
+      }
+
+      // ── волосы: пряди в трёхмерии, от затылка вниз вдоль спины
+      const NS = Math.round(40 * S);
+      for (let i = 0; i < NS; i++) {
+        const side = i % 2 ? 1 : -1;
+        const k = i / NS;
+        const a = -Math.PI / 2 + side * (0.42 + k * 0.80);
+        const p0 = {
+          x: Math.cos(a) * hr.x * 0.95,
+          y: headCy + Math.sin(a) * hr.y * 0.95,
+          z: (-0.35 - k * 0.75) * hr.z,
+        };
+        const drop = 0.40 + k * 0.13 + Math.random() * 0.10;
+        const out = 0.048 + k * 0.048 + Math.random() * 0.026;
+        const back = (0.09 + Math.random() * 0.12) * (0.6 + k);
+        const steps = 34;
+        for (let s = 0; s <= steps; s++) {
+          const u = s / steps, m = 1 - u;
+          const b0 = m * m * m, b1 = 3 * m * m * u, b2 = 3 * m * u * u, b3 = u * u * u;
+          const x = b0 * p0.x + b1 * (p0.x + side * hr.x * 0.10) + b2 * (side * out * 0.85) + b3 * (side * out);
+          const y = b0 * p0.y + b1 * (p0.y + drop * 0.34) + b2 * (p0.y + drop * 0.74) + b3 * (p0.y + drop);
+          const z = b0 * p0.z + b1 * (p0.z - back * 0.5) + b2 * (p0.z - back) + b3 * (p0.z - back * 0.8);
+          add(x, y, z, x, z, 'hair', 0.92 + (1 - u) * 0.45, u, side * (0.4 + Math.random() * 0.8));
+        }
+      }
+    }
 
     let t = 0, last = 0, raf = 0, visible = true;
 
-    function draw(now: number) {
-      raf = requestAnimationFrame(draw);
+    function frame(now: number) {
+      raf = requestAnimationFrame(frame);
       if (!visible || now - last < 33) return;
       last = now; t++;
 
-      const breathe = Math.sin(t * 0.028) * 1.6;
-      const sway = Math.sin(t * 0.013) * 2.2;
       const mood = (window as unknown as { __aifaMood?: string }).__aifaMood;
       const thinking = mood === 'thinking';
       const speaking = !!(window.speechSynthesis && window.speechSynthesis.speaking);
-      const HOT = thinking ? [176, 148, 255] : [168, 246, 255];
-      const hot = (a: number) => `rgba(${HOT[0]},${HOT[1]},${HOT[2]},${a.toFixed(2)})`;
+      const COL = thinking ? [178, 150, 255] : [150, 236, 255];
+
+      const yaw = Math.sin(t * 0.0042) * 0.42 + Math.sin(t * 0.0017) * 0.10;
+      const ca = Math.cos(yaw), sa = Math.sin(yaw);
+      const breathe = Math.sin(t * 0.022);
+      const bob = breathe * 0.0022;
+      const wave = ((t * 0.0026) % 1.35) - 0.2;
 
       ctx!.globalCompositeOperation = 'source-over';
       ctx!.fillStyle = '#04050c'; ctx!.fillRect(0, 0, W, H);
+      ctx!.globalCompositeOperation = 'lighter';
 
-      // 1. еле заметные фоновые потоки
-      ctx!.font = '10px monospace'; ctx!.textBaseline = 'top';
-      for (const b of bg) {
-        ctx!.fillStyle = `rgba(70,130,190,${b.a})`;
-        ctx!.fillText(rc(), b.x, b.y);
-        b.y += b.v; if (b.y > H) b.y = -12;
+      const F = 2.3, cx = W * 0.5;
+      ctx!.textBaseline = 'top';
+      const fontPx = Math.max(7, Math.round(W * 0.030));
+      ctx!.font = fontPx + 'px monospace';
+
+      for (let i = 0; i < pts.length; i++) {
+        const p = pts[i];
+        let x = p.x, y = p.y + bob, z = p.z;
+
+        if (p.kind === 'body' || p.kind === 'inner') {
+          const chest = Math.exp(-(((p.y - 0.33) / 0.13) ** 2));
+          const k = 1 + breathe * 0.030 * chest;
+          x *= k; z *= k;
+          if (p.y > 0.60) {
+            const s = Math.sin(t * 0.019 + p.y * 7 + p.ph) * 0.010 * (p.y - 0.60);
+            x += s; z += s * 0.6;
+          }
+        } else if (p.kind === 'hair') {
+          x += Math.sin(t * 0.017 + p.ph) * 0.020 * p.u * p.sway;
+          z += Math.cos(t * 0.013 + p.ph) * 0.014 * p.u;
+        }
+
+        const rx = x * ca + z * sa;
+        const rz = -x * sa + z * ca;
+        const s = F / (F + rz + 0.55);
+        const sx = cx + rx * W * s;
+        const sy = y * H * s + (1 - s) * H * 0.42;
+
+        if (p.y > 0.995) continue;
+        if (sx < -20 || sx > W + 20 || sy < -20 || sy > H + 20) continue;
+
+        const nrx = p.nx * ca + p.nz * sa;
+        const nrz = -p.nx * sa + p.nz * ca;
+        const nl = Math.hypot(nrx, nrz) || 1;
+        const facing = nrz / nl;
+        const rim = Math.pow(1 - Math.min(1, Math.abs(facing)), 2.0);
+
+        const depth = 0.55 + s * 0.75;
+        const scan = Math.exp(-(((p.y - wave) / 0.045) ** 2)) * 0.9;
+        const twinkle = 0.82 + 0.18 * Math.sin(t * 0.09 + p.ph);
+        let a = (p.kind === 'inner' ? 0.26 : (0.24 + rim * 0.95)) * depth * p.glow * twinkle + scan;
+        if (facing < -0.35 && p.kind !== 'hair') a *= 0.45;
+        if (p.y > 0.88) a *= Math.max(0, 1 - (p.y - 0.88) / 0.11);
+        if (a < 0.035) continue;
+        if (a > 1) a = 1;
+
+        const near = Math.max(0, s - 0.72);
+        const size = (1.15 + near * 3.4) * (p.kind === 'hair' ? 0.9 : 1);
+
+        ctx!.fillStyle = `rgba(${COL[0]},${COL[1]},${COL[2]},${(a * 0.30).toFixed(3)})`;
+        ctx!.fillRect(sx - size, sy - size, size * 2.6, size * 2.6);
+        ctx!.fillStyle = a > 0.86
+          ? `rgba(235,255,255,${a.toFixed(3)})`
+          : `rgba(${COL[0]},${COL[1]},${COL[2]},${a.toFixed(3)})`;
+        ctx!.fillRect(sx - size * 0.45, sy - size * 0.45, size * 0.95, size * 0.95);
+
+        if (p.ch && a > 0.30 && s > 0.85) {
+          if (((t * 0.012 + p.cy) % 1) < 0.02) p.ch = CH[(Math.random() * CH.length) | 0];
+          ctx!.fillStyle = `rgba(${COL[0]},${COL[1]},${COL[2]},${(a * 0.55).toFixed(3)})`;
+          ctx!.fillText(p.ch, sx + 1.5, sy - fontPx * 0.5);
+        }
       }
 
-      // 2. аура — фигура читается как свет
-      ctx!.globalCompositeOperation = 'lighter';
-      ctx!.globalAlpha = thinking ? 0.14 : 0.17;
-      if (aura) ctx!.drawImage(aura, sway, -breathe);
-      ctx!.globalAlpha = 1;
+      // глаза — два блика, поворачиваются вместе с головой
+      for (const ex of [-0.030, 0.030]) {
+        const rx2 = ex * ca + 0.070 * sa, rz2 = -ex * sa + 0.070 * ca;
+        if (rz2 < -0.02) continue;
+        const s2 = F / (F + rz2 + 0.55);
+        const exx = cx + rx2 * W * s2;
+        const eyy = (headCy + bob - 0.004) * H * s2 + (1 - s2) * H * 0.42;
+        ctx!.fillStyle = 'rgba(225,252,255,.85)';
+        ctx!.fillRect(exx - 1.6, eyy - 0.8, 3.2, 1.7);
+        ctx!.fillStyle = `rgba(${COL[0]},${COL[1]},${COL[2]},.35)`;
+        ctx!.fillRect(exx - 3, eyy - 2.4, 6, 5);
+      }
+
+      if (speaking) {
+        const o = Math.abs(Math.sin(t * 0.35)) * H * 0.004;
+        ctx!.fillStyle = 'rgba(235,255,255,.75)';
+        ctx!.fillRect(cx - W * 0.022, (headCy + bob) * H + H * 0.028 + o, W * 0.044, 1.4);
+      }
+
       ctx!.globalCompositeOperation = 'source-over';
 
-      // 3. волосы — рисуются ДО тела, чтобы силуэт и лицо оставались поверх
-      for (const s of hair) {
-        for (let i = 0; i < 52; i++) {
-          const u = i / 52;
-          const pt = hairPoint(s, u);
-          const flow = ((t * s.speed * 0.6 + i * 3 + s.phase) % 100) / 100;
-          const a = (1 - u * 0.72) * s.bright * (0.3 + flow * 0.52);
-          if (a < 0.04) continue;
-          ctx!.fillStyle = Math.random() > 0.99 ? 'rgba(255,255,255,.85)' : hot(a);
-          ctx!.fillText(rc(), pt.x + sway, pt.y - breathe);
-        }
+      // голографические полосы, медленно ползущие вверх
+      ctx!.fillStyle = 'rgba(4,10,18,.30)';
+      const off = (t * 0.55) % 4;
+      for (let y = -off; y < H; y += 4) ctx!.fillRect(0, y, W, 1.3);
+
+      // редкий короткий глитч — строка изображения на миг съезжает вбок
+      if ((t % 370) === 0) {
+        const gy = (t * 37) % Math.max(1, H - 60);
+        const band = ctx!.getImageData(0, gy * dpr, W * dpr, 7 * dpr);
+        ctx!.putImageData(band, 3 * dpr, gy * dpr);
       }
 
-      // 4. тело — код-строки вдоль формы, ярче у краёв (эффект плетения нитей)
-      ctx!.font = '9px monospace';
-      for (let ri = 0; ri < rows.length; ri++) {
-        const y = ri * LH - breathe;
-        const u = (y + breathe) / H;
-        const p = profile(u);
-        let x0: number, x1: number;
-        if (p) { x0 = p.c * W - p.w * W + sway; x1 = p.c * W + p.w * W + sway; }
-        else if (y > H * 0.04 && y < H * 0.23) { x0 = head.cx - head.rx + sway; x1 = head.cx + head.rx + sway; }
-        else continue;
-        const drift = (t * 0.55 * (0.6 + rows[ri].jit)) % 9;
-        const onHead = (y + breathe) < H * 0.235;
-        for (let x = x0 - 3; x < x1 + 3; x += 6) {
-          const px = x + rows[ri].off + drift;
-          if (!inFig(px - sway, y + breathe)) continue;
-          // на голове код реже — иначе он забивает линию профиля и лицо пропадает
-          if (onHead && Math.random() > 0.42) continue;
-          const edge = Math.min(px - x0, x1 - px) / Math.max(6, (x1 - x0) * 0.5);
-          const a = 0.3 + (1 - Math.min(1, edge)) * 0.62;
-          ctx!.fillStyle = Math.random() > 0.985 ? 'rgba(255,255,255,.95)' : hot(a);
-          ctx!.fillText(rc(), px, y);
-        }
-      }
-
-      // 5. контур силуэта и лицо — тонкие светящиеся линии
-      ctx!.save();
-      ctx!.globalCompositeOperation = 'lighter';
-      ctx!.strokeStyle = 'rgba(200,248,255,.62)'; ctx!.lineWidth = 1.1;
-      ctx!.shadowColor = 'rgba(0,240,255,.95)'; ctx!.shadowBlur = 8;
-      for (const side of [-1, 1]) {
-        ctx!.beginPath();
-        let started = false;
-        for (let y = H * 0.23; y <= H; y += 3) {
-          const p = profile(y / H); if (!p) continue;
-          const x = p.c * W + side * p.w * W + sway;
-          if (!started) { ctx!.moveTo(x, y - breathe); started = true; } else ctx!.lineTo(x, y - breathe);
-        }
-        ctx!.stroke();
-      }
-      const fx = head.cx + sway, fy = head.cy - breathe;
-      ctx!.beginPath();
-      ctx!.ellipse(fx, fy, head.rx, head.ry, 0, 0, Math.PI * 2);
-      ctx!.stroke();
-      ctx!.strokeStyle = 'rgba(215,250,255,.80)'; ctx!.lineWidth = 1.25;
-      ctx!.beginPath();
-      ctx!.moveTo(fx - head.rx * 0.62, fy - head.ry * 0.42);                                                  // лоб
-      ctx!.quadraticCurveTo(fx - head.rx * 0.95, fy - head.ry * 0.05, fx - head.rx * 0.74, fy + head.ry * 0.12); // нос
-      ctx!.quadraticCurveTo(fx - head.rx * 0.92, fy + head.ry * 0.20, fx - head.rx * 0.66, fy + head.ry * 0.34); // губы
-      ctx!.quadraticCurveTo(fx - head.rx * 0.50, fy + head.ry * 0.95, fx + head.rx * 0.10, fy + head.ry * 1.18); // подбородок
-      ctx!.stroke();
-      const blink = (t % 190) < 5;
-      ctx!.beginPath();
-      ctx!.moveTo(fx - head.rx * 0.42, fy - head.ry * 0.10);
-      ctx!.lineTo(fx - head.rx * (blink ? 0.10 : 0.14), fy - head.ry * (blink ? 0.10 : 0.06));
-      ctx!.stroke();
-      if (speaking) {
-        const o = Math.abs(Math.sin(t * 0.45)) * head.ry * 0.1;
-        ctx!.beginPath();
-        ctx!.moveTo(fx - head.rx * 0.70, fy + head.ry * 0.30 + o);
-        ctx!.lineTo(fx - head.rx * 0.46, fy + head.ry * 0.32 + o);
-        ctx!.stroke();
-      }
-      ctx!.restore();
-
-      // 6. виньетка — фигура «живёт» в темноте
-      const vg = ctx!.createRadialGradient(W / 2, H * 0.42, H * 0.18, W / 2, H * 0.5, H * 0.72);
+      const vg = ctx!.createRadialGradient(cx, H * 0.42, H * 0.20, cx, H * 0.5, H * 0.74);
       vg.addColorStop(0, 'rgba(4,5,12,0)');
-      vg.addColorStop(1, 'rgba(4,5,12,.72)');
+      vg.addColorStop(1, 'rgba(4,5,12,.70)');
       ctx!.fillStyle = vg; ctx!.fillRect(0, 0, W, H);
     }
 
@@ -335,7 +344,7 @@ export default function AifaAvatar() {
       ? new IntersectionObserver((e) => { visible = e[0]?.isIntersecting ?? true; }, { threshold: 0.01 })
       : null;
     io?.observe(wrap);
-    raf = requestAnimationFrame(draw);
+    raf = requestAnimationFrame(frame);
 
     return () => { cancelAnimationFrame(raf); ro?.disconnect(); io?.disconnect(); };
   }, [show]);
