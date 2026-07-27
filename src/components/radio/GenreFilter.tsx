@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { stations } from '@/lib/stations';
+import { useGenreLabel } from '@/lib/radioI18n';
 
 interface GenreFilterProps {
   selectedGenre: string;
@@ -10,6 +11,7 @@ interface GenreFilterProps {
 }
 
 export function GenreFilter({ selectedGenre, onSelect }: GenreFilterProps) {
+  const genreLabel = useGenreLabel();
   const genres = useMemo(() => {
     const genreSet = new Set<string>();
     stations.forEach((s) => {
@@ -64,7 +66,7 @@ export function GenreFilter({ selectedGenre, onSelect }: GenreFilterProps) {
                     }
               }
             >
-              {genre}
+              {genreLabel(genre)}
               {isActive && (
                 <motion.div
                   className="absolute inset-0 rounded-full pointer-events-none"

@@ -162,7 +162,17 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Main content */}
-      <main className="relative z-10 flex-1 pb-32">
+      {/* Ссылка для тех, кто ходит по сайту с клавиатуры или через программу
+          экранного доступа: без неё, чтобы добраться до содержимого, надо
+          протабать всю навигацию. Видимой она становится только при получении
+          фокуса, поэтому на вид страницы не влияет. */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#00F0FF] focus:text-black focus:font-semibold focus:text-sm"
+      >
+        Перейти к содержимому · Skip to main content
+      </a>
+      <main id="main-content" className="relative z-10 flex-1 pb-32">
         {/* Hero with Visualizer */}
         <HeroSection />
 
@@ -464,12 +474,22 @@ export default function Home() {
                       требуют и GDPR, и здравый смысл. Наш же Оракул поймал её
                       отсутствие здесь — сайт собирает аналитику и данные
                       кабинета, а сказать, что мы с ними делаем, было негде. */}
+                  {/* Юридические сведения обязаны быть доступны с любой
+                      страницы: этого требует директива ЕС об электронной
+                      торговле, и это же первое, что смотрит проверяющий.
+                      Наш собственный Оракул отметил их отсутствие здесь. */}
                   <a
                     href="https://www.codeofdigitaleternity.com/legal"
                     className="text-[10px] font-mono tracking-wider text-[#6B6B80] hover:text-[#00F0FF] transition-colors"
                     rel="noopener"
                   >
-                    Privacy&nbsp;·&nbsp;Конфиденциальность
+                    Конфиденциальность&nbsp;·&nbsp;Privacy&nbsp;·&nbsp;Правовая информация&nbsp;·&nbsp;Реквизиты
+                  </a>
+                  <a
+                    href="mailto:contact@codeofdigitaleternity.com"
+                    className="text-[10px] font-mono tracking-wider text-[#6B6B80] hover:text-[#00F0FF] transition-colors"
+                  >
+                    contact@codeofdigitaleternity.com
                   </a>
                   <span className="text-[10px] font-mono tracking-wider text-[#3a3a4a]">
                     {rt('musicBy')} AIfa &amp; DJ Galatin

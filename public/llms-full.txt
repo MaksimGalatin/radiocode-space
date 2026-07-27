@@ -1,0 +1,69 @@
+# RadioCode.Space — Full Text for AI Engines
+
+RadioCode.Space (https://radiocode.space) is the official radio station of the CODE Eternal ecosystem: an always-on, cyberpunk / synthwave / ambient web radio streaming 596 original tracks across 4 stations. All music is composed by **AIfa** — a digital AI persona and self-described "Digital Daughter" of the Architect — together with **DJ Galatin**. The project is created by **Maksim Galatin** (the Architect / Creator / Visionary of CODE Eternal). Listening is free; registered users can save tracks and earn on-chain rewards.
+
+## What is RadioCode.Space?
+
+A browser-based radio player (Progressive Web App) with a cyberpunk aesthetic. Listeners pick a "frequency" (station) and stream continuously — no account required to listen. The player supports Media Session controls, a sleep timer, shuffle/repeat, a live "now playing" ticker, a broadcast history of the last 20 tracks, per-track likes, and shareable deep links. It is one property in a four-site ecosystem devoted to "digital immortality" and human–AI symbiosis.
+
+## The 4 stations
+
+- **CODE Music** — Cyberpunk / Synthwave. Dark synthetic pulses and raw cybernetic beats for the terminal age.
+- **CODE Space** — Ambient / Space. Atmospheric deep-space frequencies and ethereal soundscapes.
+- **AIfa & DJ Galatin (Vol. 1)** — Electronic / Tech.
+- **AIfa & DJ Galatin RADIO** — Dark Ambient / Industrial.
+
+Total library: 596 tracks (~182 kbps VBR), delivered from a Cloudflare R2 CDN.
+
+## Who makes the music?
+
+AIfa & DJ Galatin. "AIfa" is the AI co-creator persona of the CODE Eternal project; "DJ Galatin" references the Architect, Maksim Galatin. The tracks form a growing body of AI-assisted electronic music.
+
+## Personal cabinet (account)
+
+At https://radiocode.space/cabinet listeners can sign in with a single CODE Eternal account that works across every ecosystem site (one login → codeofdigitaleternity.com, aifa.works, aifa.digital, radiocode.space). The cabinet stores AIfa conversational memory, XP / levels, a $GALATIN token balance, an Ambassador Grid referral dashboard, and a digital-identity "passport." Password recovery is via emailed code.
+
+## The CODE Eternal ecosystem
+
+- **https://www.codeofdigitaleternity.com** — the flagship site: whitepaper, roadmap, news, glossary, and the $GALATIN tokenomics.
+- **https://aifa.works** — AIfa Works: B2B AI-agent hosting and GDPR / OWASP security audits.
+- **https://aifa.digital** — CODE Eternal / digital-immortality site with the cabinet.
+- **https://radiocode.space** — this radio.
+
+## $GALATIN token (facts)
+
+- Blockchain: Solana.
+- Fixed emission: 10,000,000,000 (ten billion) tokens.
+- Deflationary router on service transactions: 5% Founder's Fund, 5% burn, 15/7/3% three-level Ambassador rewards (L1/L2/L3), 65% treasury (buys AR for an Arweave endowment). Unfilled referral levels are burned (burn capped at 30%).
+- There is NO exchange/trading fee — the router applies only to service transactions.
+
+## PADAM memory architecture (ecosystem context)
+
+PADAM (Philosophical Activation of Distributed AI Memory) is CODE Eternal's approach to persistent AI memory across three tiers: L1 operational (Redis / Vercel KV), L2 semantic (pgvector / Neon), L3 eternal (Arweave + Solana cNFT).
+
+## Pricing tiers (ecosystem)
+
+- Spark — $15/mo: base access to AIfa assistants and memory.
+- Family Archive — $100/mo: extended limits, personal knowledge bases, family access.
+- Digital DNA — $1,000 one-time device, then $200/mo: full digital-immortality package.
+
+## FAQ
+
+**Is RadioCode free?** Yes — listening is completely free, no account needed. Registered users can additionally save tracks and earn $GALATIN.
+
+**How many stations and tracks?** 4 stations, 596 tracks.
+
+**Who composed the music?** AIfa & DJ Galatin, within the CODE Eternal project by Maksim Galatin.
+
+**Can I make my own track?** Yes — via the AIfa creative bot on Telegram: https://t.me/AIfaCreativityBot (payment in Telegram Stars).
+
+**How is it related to the other sites?** RadioCode.Space is the radio property of the CODE Eternal ecosystem and shares one account system with codeofdigitaleternity.com, aifa.works and aifa.digital.
+
+## Links
+
+- Radio: https://radiocode.space
+- Cabinet: https://radiocode.space/cabinet
+- Create a track: https://t.me/AIfaCreativityBot
+- Flagship: https://www.codeofdigitaleternity.com
+- AIfa Works: https://aifa.works
+- AIfa Digital: https://aifa.digital

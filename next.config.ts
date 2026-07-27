@@ -46,36 +46,10 @@ const nextConfig: NextConfig = {
             key: "Strict-Transport-Security",
             value: "max-age=63072000; includeSubDomains; preload",
           },
-          {
-            // Defense-in-depth CSP. Deliberately permissive (unsafe-inline for Next's
-            // inline hydration scripts; broad https: for the R2 audio CDN + Vercel
-            // analytics) so it cannot break the SPA/audio, while still blocking plugins,
-            // base-tag injection and framing, and forcing HTTPS subresources.
-            // NOTE: Google Identity Services (Sign in with Google) needs
-            // accounts.google.com in script-src (the gsi/client loader),
-            // frame-src (the button iframe + one-tap) and style-src (its
-            // injected styles). Without these the CSP silently blocks GSI and
-            // the Google button never renders — matches the CSP on works/digital.
-            key: "Content-Security-Policy",
-            value:
-              "default-src 'self'; " +
-              // GA4 грузится с googletagmanager.com — без него в script-src CSP
-              // молча режет тег и сайт исчезает из аналитики (та же грабля, что
-              // была с кнопкой Google).
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://apis.google.com https://www.googletagmanager.com https://va.vercel-scripts.com https://vercel.live; " +
-              "style-src 'self' 'unsafe-inline' https://accounts.google.com; " +
-              "img-src 'self' data: blob: https:; " +
-              "media-src 'self' blob: https:; " +
-              "connect-src 'self' https: wss:; " +
-              "font-src 'self' data:; " +
-              "worker-src 'self' blob:; " +
-              "manifest-src 'self'; " +
-              "frame-src 'self' https://accounts.google.com; " +
-              "object-src 'none'; " +
-              "base-uri 'self'; " +
-              "frame-ancestors 'self'; " +
-              "upgrade-insecure-requests",
-          },
+          // Политика содержимого (Content-Security-Policy) переехала в
+          // src/middleware.ts: в неё входит одноразовая метка, новая на каждый
+          // ответ, а статический заголовок такого не умеет. Держать её в двух
+          // местах нельзя — браузер применял бы обе сразу, строгую и слабую.
         ],
       },
     ];

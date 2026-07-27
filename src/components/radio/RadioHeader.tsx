@@ -3,8 +3,12 @@
 import { motion } from 'framer-motion';
 import { LiveClock } from '@/components/radio/LiveClock';
 import { SignalStrength } from '@/components/radio/SignalStrength';
+import { RADIO_LANGS, useCurrentLang, useSetLang, useRadioT } from '@/lib/radioI18n';
 
 export function RadioHeader() {
+  const rt = useRadioT();
+  const lang = useCurrentLang();
+  const setLang = useSetLang();
   return (
     <motion.header
       initial={{ y: -20, opacity: 0 }}
@@ -15,7 +19,15 @@ export function RadioHeader() {
         borderBottom: '1px solid rgba(255,255,255,0.04)',
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* role="navigation" + подпись: программа экранного доступа объявляет
+          этот блок как «главная навигация» и позволяет перепрыгнуть к нему
+          одной командой. Без разметки шапка для неё — безымянная россыпь
+          ссылок. Отсутствие ориентира отметил наш собственный Оракул. */}
+      <nav
+        role="navigation"
+        aria-label="Главная навигация"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
           <motion.div
@@ -69,6 +81,52 @@ export function RadioHeader() {
 
           {/* Right side: Status + Signal + Clock */}
           <div className="flex items-center gap-3 sm:gap-4">
+            {/* Personal cabinet (unified account across the ecosystem) */}
+            <motion.a
+              href="/cabinet"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.35, duration: 0.6 }}
+              whileHover={{ scale: 1.04 }}
+              aria-label={rt('cabinetAria')}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              style={{
+                background: 'rgba(0, 240, 255, 0.06)',
+                border: '1px solid rgba(0, 240, 255, 0.18)',
+              }}
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="8" r="3.2" />
+                <path d="M5.5 20a6.5 6.5 0 0 1 13 0" />
+              </svg>
+              <span className="text-[10px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
+                {rt('cabinet')}
+              </span>
+            </motion.a>
+
+            {/* Language switcher (shared with the cabinet) */}
+            <div
+              className="flex items-center gap-0.5 px-1 py-1 rounded-full"
+              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
+            >
+              {RADIO_LANGS.map((l) => (
+                <button
+                  key={l.code}
+                  onClick={() => setLang(l.code)}
+                  aria-label={`Language: ${l.label}`}
+                  aria-pressed={lang === l.code}
+                  className="text-[10px] font-mono font-medium tracking-wider px-1.5 py-0.5 rounded-full transition-colors cursor-pointer"
+                  style={
+                    lang === l.code
+                      ? { color: '#050507', background: '#00F0FF' }
+                      : { color: '#8a8a9a', background: 'transparent' }
+                  }
+                >
+                  {l.label}
+                </button>
+              ))}
+            </div>
+
             {/* Ecosystem link */}
             <motion.a
               href="https://www.codeofdigitaleternity.com"
@@ -107,7 +165,7 @@ export function RadioHeader() {
                 />
               </div>
               <span className="text-[11px] font-semibold tracking-[0.15em] text-[#FF003C]">
-                ON AIR
+                {rt('onAir')}
               </span>
             </motion.div>
 
@@ -139,7 +197,7 @@ export function RadioHeader() {
             </div>
           </div>
         </div>
-      </div>
+      </nav>
     </motion.header>
   );
 }

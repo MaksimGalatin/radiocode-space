@@ -4,8 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { usePlayerStore } from '@/stores/playerStore';
 import { TrackItem } from './TrackItem';
+import { useRadioT, useStationI18n } from '@/lib/radioI18n';
 
 export function PlaylistPanel() {
+  const rt = useRadioT();
+  const st = useStationI18n();
   const {
     currentStation,
     showPlaylist,
@@ -50,10 +53,10 @@ export function PlaylistPanel() {
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-[#E8E8ED]">
-                    {currentStation.name} — Queue
+                    {currentStation.name} — {rt('queue')}
                   </div>
                   <div className="text-[10px] tracking-[0.15em] uppercase" style={{ color: `${color}70` }}>
-                    {currentStation.genre}
+                    {st.genre(currentStation.id, currentStation.genre)}
                   </div>
                 </div>
               </div>

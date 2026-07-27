@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
 import { usePlayerStore } from '@/stores/playerStore';
 import { TrackMiniEqualizer } from './MiniEqualizer';
+import { useRadioT } from '@/lib/radioI18n';
 
 interface TrackItemProps {
   stationId: string;
@@ -28,6 +29,7 @@ export function TrackItem({
   duration,
   color,
 }: TrackItemProps) {
+  const rt = useRadioT();
   const {
     currentTrack,
     currentStation,
@@ -120,7 +122,7 @@ export function TrackItem({
         className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-opacity duration-200 ${
           favorited ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
         }`}
-        title={favorited ? 'Remove from favorites' : 'Add to favorites'}
+        title={favorited ? rt('removeFavorite') : rt('addFavorite')}
       >
         <motion.div
           key={favorited ? 'filled' : 'outline'}

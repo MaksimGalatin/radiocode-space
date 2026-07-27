@@ -5,6 +5,7 @@ import { Radio, Waves, Zap, Skull } from 'lucide-react';
 import { Station } from '@/lib/stations';
 import { usePlayerStore } from '@/stores/playerStore';
 import { TiltCard } from './TiltCard';
+import { useRadioT, useStationI18n } from '@/lib/radioI18n';
 
 const iconMap: Record<string, React.ReactNode> = {
   Radio: <Radio className="w-5 h-5 sm:w-6 sm:h-6" />,
@@ -81,6 +82,8 @@ function CornerBracket({ position, color }: { position: 'tl' | 'br'; color: stri
 }
 
 export function StationCard({ station, index }: StationCardProps) {
+  const rt = useRadioT();
+  const st = useStationI18n();
   const {
     currentStation,
     isPlaying,
@@ -107,10 +110,10 @@ export function StationCard({ station, index }: StationCardProps) {
           setStation(station.id);
         }
       }}
-      className="group relative cursor-pointer"
+      className="group relative cursor-pointer h-full"
       style={{ perspective: '800px' }}
     >
-      <TiltCard glowColor={station.color} intensity={8} className="relative">
+      <TiltCard glowColor={station.color} intensity={8} className="relative h-full">
         {/* Animated gradient border on hover/active with breathing */}
         <motion.div
           className="absolute -inset-[1px] rounded-2xl"
@@ -142,7 +145,7 @@ export function StationCard({ station, index }: StationCardProps) {
         />
 
         {/* Card body — holo shimmer on hover */}
-        <div className="relative glass-card holo-shimmer-surface rounded-2xl p-5 sm:p-6 overflow-hidden transition-all duration-300 group-hover:scale-[1.03] group-hover:-translate-y-1 active:scale-[0.98]"
+        <div className="relative glass-card holo-shimmer-surface rounded-2xl p-5 sm:p-6 overflow-hidden transition-all duration-300 group-hover:scale-[1.03] group-hover:-translate-y-1 active:scale-[0.98] h-full flex flex-col"
           style={{
             boxShadow: isActive
               ? `0 0 30px ${station.color}15, 0 8px 32px rgba(0,0,0,0.4), 0 0 60px ${station.color}08`
@@ -188,7 +191,7 @@ export function StationCard({ station, index }: StationCardProps) {
           />
 
           {/* Content */}
-          <div className="relative z-10">
+          <div className="relative z-10 flex flex-col flex-1">
             {/* Top row: Icon + Bitrate */}
             <div className="flex items-start justify-between mb-4">
               {/* Station icon with GLOW and PULSE when active */}
@@ -252,23 +255,25 @@ export function StationCard({ station, index }: StationCardProps) {
             </h3>
 
             {/* Genre tag with gradient background */}
-            <div
-              className="inline-block text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] mb-3 uppercase px-2 py-0.5 rounded-sm"
-              style={{
-                background: `linear-gradient(135deg, ${station.color}12, ${station.color}06)`,
-                color: `${station.color}80`,
-              }}
-            >
-              {station.genre}
+            <div>
+              <div
+                className="inline-block text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] mb-3 uppercase px-2 py-0.5 rounded-sm"
+                style={{
+                  background: `linear-gradient(135deg, ${station.color}12, ${station.color}06)`,
+                  color: `${station.color}80`,
+                }}
+              >
+                {st.genre(station.id, station.genre)}
+              </div>
             </div>
 
             {/* Description */}
             <p className="text-xs sm:text-sm text-[#6B6B80] leading-relaxed line-clamp-2 mb-4">
-              {station.description}
+              {st.desc(station.id, station.description)}
             </p>
 
             {/* Bottom row */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mt-auto">
               {/* Track count */}
               <div className="flex items-center gap-2">
                 <motion.span
@@ -277,7 +282,7 @@ export function StationCard({ station, index }: StationCardProps) {
                 >
                   {station.tracks.length}
                 </motion.span>
-                <span className="text-xs text-[#3a3a4a]">tracks</span>
+                <span className="text-xs text-[#3a3a4a]">{rt('tracksLower')}</span>
               </div>
 
               {isCurrentlyPlaying ? (
@@ -298,7 +303,7 @@ export function StationCard({ station, index }: StationCardProps) {
                     <div className="w-[2px] rounded-full eq-bar-4" style={{ backgroundColor: station.color, minHeight: '2px' }} />
                   </div>
                   <span className="text-[10px] font-medium tracking-wider" style={{ color: station.color }}>
-                    LIVE
+                    {rt('live')}
                   </span>
                 </motion.div>
               ) : (

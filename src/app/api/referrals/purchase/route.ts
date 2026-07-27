@@ -1,0 +1,31 @@
+import { NextResponse } from 'next/server';
+import crypto from 'crypto';
+import { creditReferralChain, setUserTier, amountToTier } from '@/lib/referral';
+export const dynamic = 'force-dynamic';
+
+// INTERNAL-ONLY commission trigger (tests / manual ops). Requires the shared
+// internal secret header — otherwise anyone could grant themselves a tier.
+export async function POST(req: Request) {
+  const secret = process.env.AIFA_INTERNAL_SECRET || '';
+  const got = req.headers.get('x-aifa-internal') || '';
+  const ok = !!secret && got.length === secret.length &&
+    crypto.timingSafeEqual(Buffer.from(got), Buffer.from(secret));
+  if (!ok) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
+
+  let b: any = {}; try { b = await req.json(); } catch {}
+  const email = String(b?.email || '').trim().toLowerCase();
+  const amount = Number(b?.amount || 0);
+  const orderId = String(b?.orderId || '').trim();
+  const tier = b?.tier ? Number(b.tier) : amountToTier(amount);
+  if (!email || !(amount > 0) || !orderId || !(tier >= 1 && tier <= 3)) return NextResponse.json({ error: 'bad_request' }, { status: 400 });
+  const url = process.env.SUBMISSIONS_DB_URL;
+  if (!url) return NextResponse.json({ error: 'no_db' }, { status: 500 });
+  try {
+    const { Pool } = await import('@neondatabase/serverless');
+    const pool = new Pool({ connectionString: url });
+    await setUserTier(pool, email, tier);
+    const credited = await creditReferralChain(pool, email, amount, tier, orderId);
+    await pool.end();
+    return NextResponse.json({ ok: true, credited });
+  } catch (e) { console.error('[ref/purchase]', e); return NextResponse.json({ error: 'db_error' }, { status: 500 }); }
+}

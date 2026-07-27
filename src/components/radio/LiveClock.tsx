@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useRadioT } from '@/lib/radioI18n';
 
 export function LiveClock() {
+  const rt = useRadioT();
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -28,18 +30,24 @@ export function LiveClock() {
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-      className="flex flex-col items-end select-none"
+      className="flex flex-col items-end select-none p-3 rounded-lg"
+      style={{
+        border: '1px solid rgba(0, 240, 255, 0.3)',
+        boxShadow: '0 0 15px rgba(0, 240, 255, 0.2), inset 0 0 10px rgba(0, 240, 255, 0.1)',
+        background: 'rgba(0, 20, 30, 0.3)',
+        backdropFilter: 'blur(8px)',
+      }}
     >
       {/* Label */}
       <span
-        className="text-[8px] tracking-[0.2em] uppercase mb-1"
+        className="text-[10px] tracking-[0.2em] uppercase mb-1"
         style={{ color: '#3a3a4a' }}
       >
-        LOCAL TIME
+        {rt('localTime')}
       </span>
 
       {/* Time display */}
-      <div className="font-mono text-sm sm:text-base leading-none flex items-baseline">
+      <div className="font-mono text-xl sm:text-2xl leading-none flex items-baseline">
         <span
           className="tabular-nums"
           style={{
@@ -72,7 +80,7 @@ export function LiveClock() {
 
       {/* Date */}
       <span
-        className="font-mono text-[10px] mt-0.5 tabular-nums"
+        className="font-mono text-xs mt-1 tabular-nums"
         style={{ color: '#4a4a5a' }}
       >
         {day} {monthShort} {year}

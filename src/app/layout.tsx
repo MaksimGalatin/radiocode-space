@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Space_Grotesk, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
@@ -121,11 +122,16 @@ const JSON_LD = [
   })),
 ];
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Одноразовая метка политики содержимого: её выдаёт src/middleware.ts на
+  // каждый ответ. Любой встроенный скрипт ниже обязан её нести, иначе браузер
+  // откажется его выполнять.
+  const nonce = (await headers()).get('x-nonce') || undefined;
+
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body
@@ -142,6 +148,7 @@ export default function RootLayout({
             weak GPUs → width-based mobile detection misses them; this catches them by
             UA + capabilities and adds `perf-lite`/`perf-tv` to <html>. */}
         <script
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html:
               "(function(){try{var d=document.documentElement,ua=navigator.userAgent||'',lite=false,tv=false,big=Math.max(screen.width||0,screen.height||0),noHover=matchMedia('(hover: none)').matches,coarse=matchMedia('(pointer: coarse)').matches;if(/\\b(SMART[- ]?TV|SmartTV|GoogleTV|Google TV|AndroidTV|Android TV|AppleTV|HbbTV|NetCast|Web0S|webOS|Tizen|BRAVIA|AFT[A-Z]{1,3}|CrKey|VIDAA|DTV|PlayStation|Nintendo|Xbox)\\b/i.test(ua)){lite=true;tv=true;}if(/Android/i.test(ua)&&!/Mobile/i.test(ua)&&big>=1280&&noHover){lite=true;tv=true;}var c=navigator.hardwareConcurrency||8,m=navigator.deviceMemory||8;if(c<=2||m<=2)lite=true;if(matchMedia('(prefers-reduced-motion: reduce)').matches)lite=true;if(noHover&&coarse&&window.innerWidth>=1024){lite=true;tv=true;}var hard=lite;if(window.innerWidth<768)lite=true;if(lite)d.classList.add('perf-lite');if(tv)d.classList.add('perf-tv');if(!hard){var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(window.innerWidth<768)d.classList.add('perf-lite');else d.classList.remove('perf-lite');},200);});}}catch(e){}})();",
@@ -159,8 +166,9 @@ export default function RootLayout({
             платная Vercel-аналитика, которая не подключена) — поэтому сайт не
             попадал ни в один отчёт. Поток общий с aifa.digital: в отчётах
             разрезается по hostName. Consent Mode v2: по умолчанию запрещено. */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCP8MD0NQ9" />
+        <script async nonce={nonce} src="https://www.googletagmanager.com/gtag/js?id=G-PCP8MD0NQ9" />
         <script
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
