@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
 import { getPool, getBalances } from '@/lib/economy';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 // One round-trip summary for the cabinet header: xp, level, balances, tier, passport.
 export async function GET(req: NextRequest) {
+  // Ограничение частоты: частый опрос профиля.
+  if (!allowRequest(req as NextRequest, 'me', 120, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ authenticated: false }, { status: 401 });
   try {

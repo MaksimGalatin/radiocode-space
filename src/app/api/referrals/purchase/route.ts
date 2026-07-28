@@ -1,11 +1,17 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { creditReferralChain, setUserTier, amountToTier } from '@/lib/referral';
+import { allowRequest } from '@/lib/rate-limit';
 export const dynamic = 'force-dynamic';
 
 // INTERNAL-ONLY commission trigger (tests / manual ops). Requires the shared
 // internal secret header — otherwise anyone could grant themselves a tier.
 export async function POST(req: Request) {
+  // Ограничение частоты: покупка.
+  if (!allowRequest(req as NextRequest, 'referrals_purchase', 20, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const secret = process.env.AIFA_INTERNAL_SECRET || '';
   const got = req.headers.get('x-aifa-internal') || '';
   const ok = !!secret && got.length === secret.length &&

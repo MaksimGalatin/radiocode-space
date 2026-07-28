@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { allowRequest } from '@/lib/rate-limit';
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
+  // Ограничение частоты: частый опрос таблицы.
+  if (!allowRequest(req as NextRequest, 'games_leaderboard', 60, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const game = (req.nextUrl.searchParams.get('game') || '').trim().toLowerCase();
   const url = process.env.SUBMISSIONS_DB_URL;
   if (!url) return NextResponse.json({ top: [] });

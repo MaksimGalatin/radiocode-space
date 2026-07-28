@@ -2,12 +2,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
 import { requestDeletion } from '@/lib/account-security';
 import { clientIp } from '@/lib/rate-limit-db';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 // GDPR erasure with a 72h grace period + optional PIN + email confirmation.
 // Does NOT delete immediately — schedules deletion so the owner can cancel.
 export async function POST(req: NextRequest) {
+  // Ограничение частоты: удаление аккаунта — необратимо.
+  if (!allowRequest(req as NextRequest, 'account_delete', 5, 3600000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   let b: any = {}; try { b = await req.json(); } catch {}

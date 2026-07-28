@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
+import { allowRequest } from '@/lib/rate-limit';
 export const dynamic = 'force-dynamic';
 const RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Record that the LOGGED-IN user was referred by `ref` (email or passport
 // username). First referrer wins forever (ON CONFLICT DO NOTHING).
 export async function POST(req: NextRequest) {
+  // Ограничение частоты: сбор ссылок.
+  if (!allowRequest(req as NextRequest, 'referrals_link', 30, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   let b: any = {}; try { b = await req.json(); } catch {}

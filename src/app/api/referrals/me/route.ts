@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
+import { allowRequest } from '@/lib/rate-limit';
 export const dynamic = 'force-dynamic';
 function mask(e: string): string { const [u, d] = e.split('@'); return (u.slice(0, 2) + '***') + '@' + (d || ''); }
 
 // Referral dashboard (session-scoped): downline per level, earnings, balance,
 // missed earnings (tier gate) + paginated downline list.
 export async function GET(req: NextRequest) {
+  // Ограничение частоты: опрос своей сетки.
+  if (!allowRequest(req as NextRequest, 'referrals_me', 60, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   const page = Math.max(0, parseInt(req.nextUrl.searchParams.get('page') || '0', 10) || 0);

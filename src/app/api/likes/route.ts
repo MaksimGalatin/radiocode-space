@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
@@ -33,6 +34,11 @@ function likerOf(req: NextRequest, deviceId?: string | null): string | null {
 
 // POST { trackId, deviceId? } → toggle like. Returns { liked, count }.
 export async function POST(req: NextRequest) {
+  // Ограничение частоты: накрутка лайков.
+  if (!allowRequest(req as NextRequest, 'likes', 60, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const p = await pool();
   if (!p) return NextResponse.json({ error: 'no_db' }, { status: 500 });
   let b: any = {};
@@ -58,6 +64,11 @@ export async function POST(req: NextRequest) {
 // GET → counts for all tracks + this user's liked ids.
 //   ?top=1 → the leaderboard (album shortlist): [{ track_id, count }] desc.
 export async function GET(req: NextRequest) {
+  // Ограничение частоты: накрутка лайков.
+  if (!allowRequest(req as NextRequest, 'likes', 60, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const p = await pool();
   if (!p) return NextResponse.json({ counts: {}, mine: [] });
   const url = new URL(req.url);

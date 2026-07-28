@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { USER_COOKIE, signUserToken, userCookieOptions } from '@/lib/user-auth';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,6 +17,11 @@ const CLIENT_ID =
  * same cookie the email/password flow issues, valid across all three sites.
  */
 export async function POST(req: NextRequest) {
+  // Ограничение частоты: наплыв входов.
+  if (!allowRequest(req as NextRequest, 'auth_google', 20, 600000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   let credential = '';
   try { const b = await req.json(); credential = (b && b.credential) || ''; } catch { /* noop */ }
   if (!credential) return NextResponse.json({ error: 'No credential' }, { status: 400 });

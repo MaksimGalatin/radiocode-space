@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cancelDeletion } from '@/lib/account-security';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
+  // Ограничение частоты: отмена удаления.
+  if (!allowRequest(req as NextRequest, 'account_delete_cancel', 10, 3600000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const url = new URL(req.url);
   const token = url.searchParams.get('token') || '';
   const email = url.searchParams.get('email') || '';

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
@@ -7,6 +8,11 @@ export const dynamic = 'force-dynamic';
 // by the central cron (arweave-sync). Shared Neon table memory_arweave_log.
 // Returns only the caller's own rows — session-gated.
 export async function GET(req: NextRequest) {
+  // Ограничение частоты: выгрузка архивов.
+  if (!allowRequest(req as NextRequest, 'memory_archives', 30, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   const url = process.env.SUBMISSIONS_DB_URL;

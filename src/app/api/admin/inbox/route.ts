@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifySession, isAdminEmail, ADMIN_COOKIE } from '@/lib/admin-session';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
+  // Ограничение частоты: админский раздел.
+  if (!allowRequest(req as NextRequest, 'admin_inbox', 30, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const email = verifySession(req.cookies.get(ADMIN_COOKIE)?.value);
   if (!isAdminEmail(email)) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 

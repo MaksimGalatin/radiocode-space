@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin, adminDenied, auditLog } from '@/lib/admin-guard';
 import { getPool } from '@/lib/economy';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 // Admin: referral payout queue.
 export async function GET(req: NextRequest) {
+  // Ограничение частоты: выплаты.
+  if (!allowRequest(req as NextRequest, 'admin_payouts', 20, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const admin = requireAdmin(req);
   if (!admin) return adminDenied();
   try {
@@ -18,6 +24,11 @@ export async function GET(req: NextRequest) {
 
 // Mark a payout paid / rejected (audited).
 export async function POST(req: NextRequest) {
+  // Ограничение частоты: выплаты.
+  if (!allowRequest(req as NextRequest, 'admin_payouts', 20, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const admin = requireAdmin(req);
   if (!admin) return adminDenied();
   let b: any = {}; try { b = await req.json(); } catch {}

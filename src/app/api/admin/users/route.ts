@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin, adminDenied } from '@/lib/admin-guard';
 import { getPool } from '@/lib/economy';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 // Admin: unified user list (progress + tier + balances + passport), paginated.
 export async function GET(req: NextRequest) {
+  // Ограничение частоты: список людей.
+  if (!allowRequest(req as NextRequest, 'admin_users', 30, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const admin = requireAdmin(req);
   if (!admin) return adminDenied();
   const page = Math.max(0, parseInt(req.nextUrl.searchParams.get('page') || '0', 10) || 0);

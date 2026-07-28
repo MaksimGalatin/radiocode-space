@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
 import { getPool } from '@/lib/economy';
 import { validateNickname, nicknameErrorMessage } from '@/lib/nickname';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,6 +11,11 @@ export const dynamic = 'force-dynamic';
 // Нужен прежде всего для Google-входа, который обходит шаг set-password.
 // Уникальность глобальная: уникальный индекс + SELECT-проверка занятости.
 export async function POST(req: NextRequest) {
+  // Ограничение частоты: перебор занятых имён.
+  if (!allowRequest(req as NextRequest, 'account_nickname', 10, 600000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const email = (getSessionEmail(req) || '').trim().toLowerCase();
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
 import { readFullTranscript, ensureChunkTable } from '@/lib/memory-archive';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
@@ -8,6 +9,11 @@ export const dynamic = 'force-dynamic';
 // FULL decrypted transcript per chat_type — sealed chunks + the live blob — for
 // the owner only. No key entry, works on any device.
 export async function GET(req: NextRequest) {
+  // Ограничение частоты: чтение и запись памяти.
+  if (!allowRequest(req as NextRequest, 'memory', 60, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   const url = process.env.SUBMISSIONS_DB_URL;

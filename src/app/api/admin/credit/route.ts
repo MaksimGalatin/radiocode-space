@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin, adminDenied, auditLog } from '@/lib/admin-guard';
 import { getPool, creditGalatin } from '@/lib/economy';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 // Admin: manual GALATIN credit/debit (audited, idempotent per unique note).
 export async function POST(req: NextRequest) {
+  // Ограничение частоты: начисление средств.
+  if (!allowRequest(req as NextRequest, 'admin_credit', 20, 60000)) {
+    return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
   const admin = requireAdmin(req);
   if (!admin) return adminDenied();
   let b: any = {}; try { b = await req.json(); } catch {}
