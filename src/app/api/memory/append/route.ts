@@ -27,7 +27,30 @@ export async function POST(req: NextRequest) {
     const em = email.trim().toLowerCase();
     const r = await pool.query(`SELECT ciphertext FROM chat_memory WHERE email=$1 AND chat_type=$2`, [em, chatType]);
     let prev = '';
-    if (r.rows[0]) { try { prev = await decryptForUser(email, r.rows[0].ciphertext); } catch { prev = ''; } }
+    // ЕСЛИ прежняя запись есть, но не читается — НИЧЕГО НЕ ПИШЕМ.
+    //
+    // Здесь была тихая потеря всей переписки. Раньше при неудачной расшифровке
+    // prev просто обнулялся, а ниже строка целиком перезаписывается новым
+    // значением (DO UPDATE SET ciphertext=...). То есть одна неудачная
+    // расшифровка стирала всю историю человека и заменяла её одной последней
+    // репликой — молча, с ответом «ok».
+    //
+    // Так и вышло на radiocode: там ключ MEMORY_MASTER_KEY был заведён пустым,
+    // расшифровка падала на каждом обращении. Спасло только то, что следом
+    // падала и зашифровка, и запись не доходила до базы. Полагаться на такую
+    // случайность нельзя.
+    //
+    // Теперь: не прочитали прежнее — честно отвечаем ошибкой и оставляем
+    // сохранённое нетронутым. Лучше потерять одну реплику, чем всю память.
+    if (r.rows[0]?.ciphertext) {
+      try {
+        prev = await decryptForUser(email, r.rows[0].ciphertext);
+      } catch (e) {
+        await pool.end();
+        console.error('[memory/append] прежняя запись не расшифровалась — запись прервана, история сохранена', em, chatType, e);
+        return NextResponse.json({ error: 'prev_unreadable' }, { status: 500 });
+      }
+    }
     // ensure key exists (idempotent)
     await getOrCreateUserKey(email);
     let combined = prev + entry;

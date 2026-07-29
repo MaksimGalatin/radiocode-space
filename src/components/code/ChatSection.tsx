@@ -268,7 +268,12 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
         // Persist this exchange into the server-managed memory (owner reads it
         // later in the cabinet with no key). Fire-and-forget; 401 if not logged in.
         try {
-          fetch("/api/memory/append", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chatType: "terminal", userMessage: text.trim(), assistantMessage: data.response }) }).catch(() => {});
+          fetch("/api/memory/append", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chatType: "terminal", userMessage: text.trim(), assistantMessage: data.response }) })
+            // Молчаливое .catch(()=>{}) прятало потерю переписки: человек видел
+            // ответ AIfa и был уверен, что диалог сохранён. Теперь неудача
+            // хотя бы кричит в консоль — её видно и в журнале ошибок.
+            .then((r) => { if (!r.ok) console.error("[память] диалог НЕ сохранён, ответ", r.status); })
+            .catch((e) => console.error("[память] диалог НЕ сохранён:", e));
         } catch {}
         setTimeout(() => animateStreaming(respId, data.response), 150);
       } else {
