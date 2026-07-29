@@ -78,5 +78,15 @@ export async function POST(req: NextRequest) {
       [em, chatType, cipher]);
     await pool.end();
     return NextResponse.json({ ok: true });
-  } catch (e) { console.error('[memory/append]', e); return NextResponse.json({ error: 'db_error' }, { status: 500 }); }
+  } catch (e) {
+    console.error('[memory/append]', e);
+    // Называем причину. «db_error» на всё подряд однажды стоил целого разбора:
+    // база была исправна, а не работал ключ шифрования — и по ответу этого было
+    // не видно. Сам ключ наружу, разумеется, не уходит: только класс причины.
+    const msg = String((e as any)?.message || e);
+    const kind = /MEMORY_MASTER_KEY|KMS|kms|Unsupported state|bad decrypt|unable to authenticate/.test(msg)
+      ? 'key_error'
+      : 'db_error';
+    return NextResponse.json({ error: kind }, { status: 500 });
+  }
 }
