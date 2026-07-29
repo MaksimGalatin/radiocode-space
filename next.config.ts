@@ -3,7 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Приветственные ролики AIfa раздаются с нашего же адреса.
   //
-  // Файлы физически лежат в облачном хранилище (63 штуки, ~2,8 МБ каждый —
+  // Файлы лежат в нашем R2 и раздаются тем же бесплатным воркером, что и
+  // музыка (63 штуки, ~2,8 МБ каждая —
   // в репозиторий такое класть нельзя). Но браузеру они приходят как
   // /aifa-welcome/..., то есть с того же домена, что и страница. Это важно:
   // ролик с чужого домена уже однажды молча не запускался из-за политики
@@ -13,7 +14,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/aifa-welcome/:file*',
-        destination: 'https://storage.googleapis.com/aifa-welcome-video/welcome/:file*',
+        destination: 'https://radiocode-audio.codeeternal.workers.dev/aifa/welcome/:file*',
       },
     ];
   },
