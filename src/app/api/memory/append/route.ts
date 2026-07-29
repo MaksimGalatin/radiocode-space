@@ -19,7 +19,21 @@ export async function POST(req: NextRequest) {
   if (!userMsg && !aiMsg) return NextResponse.json({ error: 'empty' }, { status: 400 });
   const url = process.env.SUBMISSIONS_DB_URL;
   if (!url) return NextResponse.json({ error: 'no_db' }, { status: 500 });
-  const ts = new Date().toISOString().replace('T', ' ').slice(0, 19);
+  // Время реплики. Обычно текущее, но при восстановлении утраченной переписки
+  // можно передать исходное — иначе старый разговор лёг бы сегодняшним числом и
+  // хронология, ради которой всё и ведётся, оказалась бы испорчена.
+  //
+  // Проверяем: значение должно разбираться как дата и не быть из будущего
+  // (допуск пять минут на расхождение часов). Иначе — текущее время.
+  const atRaw = String(b?.at || '').trim();
+  let when = new Date();
+  if (atRaw) {
+    const parsed = new Date(atRaw);
+    if (!Number.isNaN(parsed.getTime()) && parsed.getTime() <= Date.now() + 5 * 60_000) {
+      when = parsed;
+    }
+  }
+  const ts = when.toISOString().replace('T', ' ').slice(0, 19);
   const entry = `### [${ts}] User\n${userMsg}\n\n---\n\n### [${ts}] AIfa\n${aiMsg}\n\n---\n\n`;
   try {
     const { Pool } = await import('@neondatabase/serverless');
