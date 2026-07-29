@@ -71,11 +71,20 @@ function pickFromBag(lang: string): number {
   return pick;
 }
 
-/** Адрес ролика. Раздача идёт через НАШ домен (см. пояснение выше). */
+// Раздача роликов — тот же бесплатный воркер, что отдаёт музыку радио.
+//
+// Через переадресацию Vercel (/aifa-welcome/...) не заработало: её пограничный
+// кеш не различает запросы с заголовком Range, и после одного запроса куска
+// всем начинал отдаваться «полный» файл в 1024 байта. Видео при этом не
+// ругается — просто вечно грузится. Прямой адрес разрешён политикой media-src
+// на всех четырёх сайтах, так что чужим доменом он здесь не считается.
+const WELCOME_CDN = 'https://radiocode-audio.codeeternal.workers.dev/aifa/welcome';
+
+/** Адрес ролика: язык страницы + номер из перемешанного мешка. */
 function videoSrc(): string {
   const lang = currentLang();
   const n = String(pickFromBag(lang)).padStart(2, '0');
-  return `/aifa-welcome/aifa-welcome-${lang}-${n}.mp4`;
+  return `${WELCOME_CDN}/aifa-welcome-${lang}-${n}.mp4`;
 }
 
 /** Сколько секунд с конца зацикливается как «дыхание». */
