@@ -4,9 +4,9 @@ import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
-export async function POST(_req: NextRequest) {
+export async function POST(req: NextRequest) {
   // Ограничение частоты: наплыв.
-  if (!allowRequest(req as NextRequest, 'auth_logout', 30, 60000)) {
+  if (!allowRequest(req, 'auth_logout', 30, 60000)) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

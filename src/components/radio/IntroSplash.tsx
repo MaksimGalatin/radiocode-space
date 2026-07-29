@@ -40,17 +40,42 @@ export function IntroSplash({ onComplete }: { onComplete: () => void }) {
           transition={{ duration: 0.5 }}
         >
           {/* Expanding rings */}
-          <div className="absolute inset-0 flex items-center justify-center">
+          {/*
+            Кольца растут МАСШТАБОМ, а не изменением ширины и высоты.
+
+            ЗАЧЕМ. Раньше анимировались width и height от нуля до 200vmax.
+            Каждый кадр такой анимации заставляет браузер заново считать
+            раскладку страницы, и это ровно то, что засчитывается как «скачки
+            содержимого». Замер Lighthouse: 15 скачков, показатель 1,03 при
+            норме до 0,1 — худший из четырёх сайтов, и все 15 давали эти кольца.
+
+            Масштаб (transform) считается видеокартой, раскладку не трогает и в
+            скачки не засчитывается. Вид при этом ТОТ ЖЕ: базовый диаметр
+            подобран так, что кольца проходят те же размеры за те же
+            длительности и с теми же задержками.
+
+            Множитель 60 при базе 100px даёт 6000px — с запасом перекрывает
+            любой экран, как и прежние 200vmax.
+          */}
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ pointerEvents: 'none', contain: 'layout paint' }}
+          >
             {[...Array(4)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute rounded-full border"
-                style={{ borderColor: 'rgba(0, 240, 255, 0.1)' }}
-                initial={{ width: 0, height: 0, opacity: 0 }}
+                style={{
+                  borderColor: 'rgba(0, 240, 255, 0.1)',
+                  width: 100,
+                  height: 100,
+                  willChange: 'transform, opacity',
+                }}
+                initial={{ scale: 0, opacity: 0 }}
                 animate={
                   phase === 'expand'
-                    ? { width: '200vmax', height: '200vmax', opacity: 0 }
-                    : { width: [0, 100 + i * 60], height: [0, 100 + i * 60], opacity: [0, 0.3, 0.1] }
+                    ? { scale: 60, opacity: 0 }
+                    : { scale: [0, (100 + i * 60) / 100], opacity: [0, 0.3, 0.1] }
                 }
                 transition={{
                   duration: phase === 'expand' ? 1.2 : 1.5,

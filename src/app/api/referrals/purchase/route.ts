@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 import crypto from 'crypto';
 import { creditReferralChain, setUserTier, amountToTier } from '@/lib/referral';
 import { allowRequest } from '@/lib/rate-limit';

@@ -125,6 +125,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Too many requests. Please slow down.' }, { status: 429 });
   }
 
+  // Язык объявлен ДО блока попытки намеренно.
+  //
+  // Он был объявлен внутри try, а используется ещё и в catch — там этой
+  // переменной уже нет. Из-за этого вежливый ответ «я временно недоступна» не
+  // срабатывал НИКОГДА: сам перехватчик падал, и человек получал пустую
+  // ошибку ровно тогда, когда сервис его подвёл. Тот же баг был в чате
+  // aifa.digital и там уже исправлен.
+  let locale: string = 'ru';
   try {
     const body = await request.json();
     const message: string = body.message;
@@ -139,7 +147,7 @@ export async function POST(request: NextRequest) {
       userEmail = (getSessionEmail(request) || '').trim();
     } catch { /* keep anonymous */ }
     const chatType: string = body.chatType || 'main';
-    const locale: string = body.locale || 'ru';
+    locale = body.locale || 'ru';
 
     if (!message || typeof message !== "string") {
       return NextResponse.json(
