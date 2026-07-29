@@ -29,7 +29,54 @@ import { useEffect, useRef, useState } from 'react';
 //
 // Три мегабайта не стоят такой ненадёжности: со своего домена ролик приходит
 // всегда, потому что для браузера это тот же самый источник, что и страница.
-const VIDEO_SRC = '/aifa-intro.mp4';
+// Сколько приветствий реально лежит на раздаче по каждому языку.
+//
+// Цифры честные: испанских и китайских пока меньше двадцати — недельный лимит
+// генератора закончился на середине. Мешок берёт ровно столько, сколько есть,
+// поэтому «дырок» (запрос несуществующего файла) не будет никогда. Когда
+// остальные догенерируются — правится только эта таблица.
+const HAVE: Record<string, number> = { ru: 20, en: 20, es: 19, zh: 4 };
+
+/** Язык страницы: кука, затем атрибут lang, затем английский. */
+function currentLang(): string {
+  if (typeof document === 'undefined') return 'en';
+  const c = document.cookie.match(/(?:^|;\s*)locale=([a-z]{2})/);
+  const raw = (c && c[1]) || document.documentElement.lang || 'en';
+  const l = raw.slice(0, 2).toLowerCase();
+  return HAVE[l] ? l : 'en';
+}
+
+// «Перемешанный мешок»: показываем все ролики по одному разу в случайном
+// порядке и только потом тасуем заново. Обычный Math.random() этого не даёт —
+// он спокойно выдаёт один и тот же ролик три раза подряд, и человеку кажется,
+// что он всего один. Остаток мешка живёт в localStorage, поэтому порядок не
+// сбрасывается при перезагрузке страницы.
+function pickFromBag(lang: string): number {
+  const n = HAVE[lang] || 1;
+  const key = 'aifa-welcome-bag-' + lang;
+  let bag: number[] = [];
+  try {
+    const raw = localStorage.getItem(key);
+    if (raw) bag = JSON.parse(raw).filter((x: unknown) => typeof x === 'number' && x >= 1 && x <= n);
+  } catch { /* приватный режим или испорченное значение — просто начнём заново */ }
+  if (!bag.length) {
+    bag = Array.from({ length: n }, (_, i) => i + 1);
+    for (let i = bag.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [bag[i], bag[j]] = [bag[j], bag[i]];
+    }
+  }
+  const pick = bag.pop() as number;
+  try { localStorage.setItem(key, JSON.stringify(bag)); } catch { /* не критично */ }
+  return pick;
+}
+
+/** Адрес ролика. Раздача идёт через НАШ домен (см. пояснение выше). */
+function videoSrc(): string {
+  const lang = currentLang();
+  const n = String(pickFromBag(lang)).padStart(2, '0');
+  return `/aifa-welcome/aifa-welcome-${lang}-${n}.mp4`;
+}
 
 /** Сколько секунд с конца зацикливается как «дыхание». */
 const LOOP_TAIL_SEC = 6;
@@ -49,6 +96,10 @@ const STYLE = `
 
 export default function AifaAvatar() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  // Ролик выбирается ОДИН раз за открытие кабинета: если считать его при каждой
+  // перерисовке, видео дёргалось бы на середине фразы.
+  const srcRef = useRef<string>('');
+  if (!srcRef.current && typeof window !== 'undefined') srcRef.current = videoSrc();
   const [show, setShow] = useState(false);
   // Это ТОЛЬКО подпись на кнопке. Самим звуком управляем напрямую через ref.
   //
@@ -206,7 +257,7 @@ export default function AifaAvatar() {
               подпись на кнопке. */}
           <video
             ref={videoRef}
-            src={VIDEO_SRC}
+            src={srcRef.current || undefined}
             autoPlay
             muted
             playsInline

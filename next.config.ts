@@ -1,6 +1,23 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Приветственные ролики AIfa раздаются с нашего же адреса.
+  //
+  // Файлы физически лежат в облачном хранилище (63 штуки, ~2,8 МБ каждый —
+  // в репозиторий такое класть нельзя). Но браузеру они приходят как
+  // /aifa-welcome/..., то есть с того же домена, что и страница. Это важно:
+  // ролик с чужого домена уже однажды молча не запускался из-за политики
+  // безопасности, service worker и экономии трафика — ни одна из этих причин
+  // не даёт внятной ошибки, видео просто вечно «загружается».
+  async rewrites() {
+    return [
+      {
+        source: '/aifa-welcome/:file*',
+        destination: 'https://storage.googleapis.com/aifa-welcome-video/welcome/:file*',
+      },
+    ];
+  },
+
   // Не сообщаем миру, на чём мы работаем: X-Powered-By — подсказка нападающему.
   poweredByHeader: false,
   // NOTE: `output: "standalone"` was removed — on Vercel it broke Set-Cookie
