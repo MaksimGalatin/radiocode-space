@@ -1,6 +1,7 @@
 'use client';
 import React, { memo, useState, useEffect } from "react";
 import { useLang } from "@/lib/i18n";
+import "./GamesArena.css";
 
 // Self-contained game labels (ported from the CODE app) so this component
 // does not depend on the site-wide translation keys.
@@ -1046,7 +1047,7 @@ function Backgammon({ lang }: { lang: Lang }) {
 
   return (
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"10px"}}>
-      <style>{`.bgm-pt{transition:filter .15s;} .bgm-pt:hover{filter:brightness(1.3);}`}</style>
+      {/* Оформление переехало в GamesArena.css */}
       <div className="glass-panel-sm" style={{padding:"8px 24px",textAlign:"center",fontSize:"14px",fontWeight:600,color:"rgb(232,232,240)"}}>
         {st.msg}
       </div>

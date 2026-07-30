@@ -10,7 +10,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import GamesArena from "@/components/code/GamesArena";
 import ChatSection from "@/components/code/ChatSection";
 import AifaAvatar from "@/components/code/AifaAvatar";
-import { CAB_CSS, Card, SectionTitle, Skeleton, EmptyState, Toast, ProgressBar, TOKENS, TIERS } from "./ui";
+import { Card, SectionTitle, Skeleton, EmptyState, Toast, ProgressBar, TOKENS, TIERS } from "./ui";
 import { useCabT } from "./i18n";
 import { useLang } from "@/lib/i18n";
 import { GalatinCoin } from "./GalatinCoin";
@@ -300,7 +300,7 @@ export default function CabinetPage() {
 
   return (
     <main className="cab-root" style={{ maxWidth: "min(1720px, 94vw)", margin: "0 auto", padding: "96px 20px 60px" }}>
-      <style dangerouslySetInnerHTML={{ __html: CAB_CSS }} />
+      {/* Оформление кабинета переехало в cabinet.css */}
       <CabinetBackground />
       <Toast msg={toast} />
 

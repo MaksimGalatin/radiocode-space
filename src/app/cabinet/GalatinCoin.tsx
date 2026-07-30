@@ -2,6 +2,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import { useCabT } from "./i18n";
+import "./GalatinCoin.css";
 
 // White CODE symbiosis figures (from the official brand logo), transparent PNG.
 const LOGO =
@@ -103,25 +104,7 @@ export function GalatinCoin({ size = 22, title = "$GALATIN", interactive = true 
       <div style={{ position: "fixed", left: 0, right: 0, bottom: "7%", textAlign: "center", color: "#E9C066", fontSize: 13, letterSpacing: 0.6, opacity: 0.72, fontFamily: "Arial, sans-serif", pointerEvents: "none" }}>
         $GALATIN · CODE Eternal
       </div>
-      <style>{`
-        @keyframes galatinFade { from { opacity: 0 } to { opacity: 1 } }
-        .galatin-toss { animation: galatinToss 0.95s cubic-bezier(0.22,1,0.36,1) both; transform-style: preserve-3d; }
-        @keyframes galatinToss {
-          0%   { transform: translateY(40vh) scale(0.82) rotateY(0deg);   opacity: 0; }
-          25%  { opacity: 1; }
-          100% { transform: translateY(0)    scale(1)    rotateY(360deg); opacity: 1; }
-        }
-        /* idle: the coin drifts a little in DEPTH (recedes/approaches) and tilts — never squashes (no scale). */
-        .galatin-float { animation: galatinFloat 4.6s ease-in-out 0.95s infinite; transform-style: preserve-3d; }
-        @keyframes galatinFloat {
-          0%, 100% { transform: translateZ(0) rotateY(-4deg); }
-          50%      { transform: translateZ(-60px) rotateY(8deg); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .galatin-toss { animation: galatinFade .2s ease both; }
-          .galatin-float { animation: none; }
-        }
-      `}</style>
+      {/* Оформление переехало в GalatinCoin.css */}
     </div>,
     document.body
   ) : null;

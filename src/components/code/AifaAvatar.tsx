@@ -90,18 +90,7 @@ function videoSrc(): string {
 /** Сколько секунд с конца зацикливается как «дыхание». */
 const LOOP_TAIL_SEC = 6;
 
-const STYLE = `
-.cab-aifa-stage{display:flex;gap:18px;align-items:stretch}
-.cab-aifa-figure{flex:0 0 380px;min-width:300px;align-self:stretch;position:relative;border:1px solid rgba(0,240,255,0.16);border-radius:16px;overflow:hidden;min-height:560px;
-  background:radial-gradient(120% 70% at 50% 4%, rgba(0,240,255,0.06), rgba(4,5,12,0) 62%),#04050c}
-.cab-aifa-figure video{display:block;width:100%;height:100%;object-fit:cover}
-.cab-aifa-figure .cab-aifa-stalled{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#5f8fb0;font-size:13px;line-height:1.6;font-family:monospace;pointer-events:none}
-.cab-aifa-figure .cab-aifa-name{position:absolute;bottom:10px;left:0;right:0;text-align:center;color:#4a90c0;font-size:11px;letter-spacing:3px;font-family:monospace;pointer-events:none;text-transform:uppercase;text-shadow:0 2px 12px rgba(0,0,0,.85)}
-.cab-aifa-figure .cab-aifa-sound{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,240,255,.22);background:rgba(4,5,12,.55);color:#8fe9ff;font-size:14px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.cab-aifa-figure .cab-aifa-sound:hover{background:rgba(0,240,255,.12)}
-.cab-aifa-chat{flex:1 1 auto;min-width:0}
-@media (max-width:1180px){.cab-aifa-figure{flex:0 0 320px;min-height:480px}}
-`;
+import "./AifaAvatar.css";
 
 export default function AifaAvatar() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -257,7 +246,8 @@ export default function AifaAvatar() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: STYLE }} />
+      {/* Оформление переехало в AifaAvatar.css: встроенный блок <style>
+          требовал разрешать любые встроенные стили. */}
       {show && (
         <div className="cab-aifa-figure">
           {/* muted и autoPlay стоят в самой разметке и БОЛЬШЕ НЕ ЗАВИСЯТ от

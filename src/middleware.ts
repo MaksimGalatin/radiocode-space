@@ -32,13 +32,40 @@ import { NextRequest, NextResponse } from 'next/server';
  * (внедряемые им стили). Без этого политика молча ломает кнопку Google —
  * на этом сайте так уже случалось.
  */
-function buildCsp(nonce: string): string {
+/**
+ * 🔴 ИСКЛЮЧЕНИЕ ДЛЯ КАБИНЕТА. Библиотека входа через Google (GSI) вставляет в
+ * страницу свой блок <style> примерно на десять тысяч знаков и метку на него не
+ * ставит. Со строгой директивой браузер его не применяет, и кнопка входа
+ * превращается в гигантский логотип с задвоенной подписью — проверено вживую на
+ * предпросмотре (`style.sheet === null`). Поэтому на путях кабинета встроенные
+ * блоки остаются разрешёнными, а на всех остальных страницах — запрещены.
+ */
+function isCabinetPath(pathname: string): boolean {
+  return /^(\/(ru|en|es|zh))?\/cabinet(\/|$)/.test(pathname);
+}
+
+function buildCsp(nonce: string, inlineStyleEls: boolean): string {
   return [
     "default-src 'self'",
     // GA4 грузится с googletagmanager.com — без него политика молча режет тег
     // и сайт исчезает из аналитики.
     `script-src 'self' 'nonce-${nonce}' 'unsafe-inline' https://accounts.google.com https://apis.google.com https://www.googletagmanager.com https://va.vercel-scripts.com https://vercel.live`,
+    // Оформление (было F3). Раздельно и намеренно:
+    //   • style-src-attr — атрибут style="…" на элементе; их сотни (так работают
+    //     инлайновые стили React), поэтому 'unsafe-inline' здесь остаётся;
+    //   • style-src-elem — блоки <style> и таблицы стилей; 'unsafe-inline' убран.
+    //     Все наши блоки <style> вынесены в обычные .css-файлы, поэтому подставить
+    //     в страницу чужое оформление больше нельзя. Через такой блок воруют
+    //     данные: селектор по атрибуту плюс фоновая картинка отдают введённое
+    //     значение на чужой сервер, без единой строчки скрипта.
+    // ⚠️ Добавишь новый <style> в разметке — он молча не применится. Заводи .css.
+    //    Это же касается components/ui/chart.tsx: он сейчас НИГДЕ не используется,
+    //    но строит стили на лету — при первом же применении его надо переделать.
+    // style-src оставлен как раньше: браузеры без раздельных директив получают
+    // прежний уровень вместо сломанной страницы.
     "style-src 'self' 'unsafe-inline' https://accounts.google.com",
+    `style-src-elem 'self'${inlineStyleEls ? " 'unsafe-inline'" : ''} https://accounts.google.com`,
+    "style-src-attr 'unsafe-inline'",
     "img-src 'self' data: blob: https:",
     "media-src 'self' blob: https:",
     "connect-src 'self' https: wss:",
@@ -56,7 +83,7 @@ function buildCsp(nonce: string): string {
 export function middleware(req: NextRequest) {
   // Метка обязана быть непредсказуемой: угаданная метка обесценивает защиту.
   const nonce = btoa(crypto.randomUUID() + crypto.randomUUID()).replace(/=+$/, '');
-  const csp = buildCsp(nonce);
+  const csp = buildCsp(nonce, isCabinetPath(req.nextUrl.pathname));
 
   const headers = new Headers(req.headers);
   headers.set('x-nonce', nonce);

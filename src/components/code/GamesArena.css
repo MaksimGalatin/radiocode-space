@@ -1,0 +1,4 @@
+/* Подсветка точек нардовой доски.
+   Раньше — встроенный блок <style> в разметке. */
+.bgm-pt{transition:filter .15s;}
+.bgm-pt:hover{filter:brightness(1.3);}
