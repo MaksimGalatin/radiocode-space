@@ -16,7 +16,7 @@ export const dynamic = 'force-dynamic';
  * бодрым «готово»: подписка, о которой человек думает, что она есть, хуже
  * отсутствия подписки.
  */
-const TARGET = 'https://aifa.works/api/legal-shield';
+const TARGET = 'https://aifa.works/api/oracle/watch';
 
 async function forward(req: NextRequest, method: 'GET' | 'POST' | 'DELETE') {
   const email = getSessionEmail(req);
