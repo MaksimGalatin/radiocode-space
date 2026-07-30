@@ -35,7 +35,7 @@ import { useEffect, useRef, useState } from 'react';
 // генератора закончился на середине. Мешок берёт ровно столько, сколько есть,
 // поэтому «дырок» (запрос несуществующего файла) не будет никогда. Когда
 // остальные догенерируются — правится только эта таблица.
-const HAVE: Record<string, number> = { ru: 20, en: 20, es: 19, zh: 20 };
+const HAVE: Record<string, number> = { ru: 20, en: 20, es: 20, zh: 20 };
 
 /** Язык страницы: кука, затем атрибут lang, затем английский. */
 function currentLang(): string {
