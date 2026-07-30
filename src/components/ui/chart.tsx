@@ -1,15 +1,19 @@
 /**
- * ⚠️ ВНИМАНИЕ, ПРЕЖДЕ ЧЕМ ПРИМЕНЯТЬ ЭТОТ КОМПОНЕНТ.
+ * Цвета графика задаются АТРИБУТОМ style, а не блоком <style>.
  *
- * Он строит оформление НА ЛЕТУ и вставляет его блоком <style> прямо в
- * страницу. С 30.07.2026 политика содержимого запрещает встроенные блоки
- * оформления (директива style-src-elem без 'unsafe-inline') — везде, кроме
- * путей кабинета. Значит, при первом же применении график отрисуется БЕЗ
- * цветов, и в консоли не будет ничего похожего на ошибку вёрстки.
+ * Почему это важно. Исходный компонент собирал оформление на лету и
+ * вставлял его в страницу отдельным блоком. С 30.07.2026 политика содержимого
+ * запрещает такие блоки (style-src-elem без 'unsafe-inline') — график отрисовался
+ * бы БЕЗ цветов, причём молча: в консоли нет ничего похожего на ошибку вёрстки.
  *
- * Сейчас компонент НИГДЕ не используется, поэтому вреда нет. Если понадобится
- * график — сначала перевести цвета на переменные CSS в обычном файле стилей,
- * и только потом ставить на страницу.
+ * Атрибут style= политикой разрешён (style-src-attr) — через него переменные
+ * цветов и ставятся прямо на контейнер графика. Сами имена переменных
+ * (--color-<ключ>) и их смысл не изменились, поэтому все готовые графики
+ * recharts работают как раньше.
+ *
+ * Тёмная тема. Раньше её выбирал селектор `.dark` внутри блока. В атрибуте
+ * селекторов нет, поэтому текущая тема читается с корневого элемента и
+ * отслеживается наблюдателем: переключение темы меняет цвета сразу.
  */
 "use client"
 
@@ -61,19 +65,21 @@ function ChartContainer({
 }) {
   const uniqueId = React.useId()
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`
+  const theme = useCurrentTheme()
+  const colorVars = chartColorVars(config, theme)
 
   return (
     <ChartContext.Provider value={{ config }}>
       <div
         data-slot="chart"
         data-chart={chartId}
+        style={{ ...colorVars, ...(props.style || {}) }}
         className={cn(
           "[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border flex aspect-video justify-center text-xs [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
           className
         )}
         {...props}
       >
-        <ChartStyle id={chartId} config={config} />
         <RechartsPrimitive.ResponsiveContainer>
           {children}
         </RechartsPrimitive.ResponsiveContainer>
@@ -82,37 +88,39 @@ function ChartContainer({
   )
 }
 
-const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
-  const colorConfig = Object.entries(config).filter(
-    ([, config]) => config.theme || config.color
-  )
+/**
+ * Текущая тема страницы: читаем класс на корневом элементе.
+ *
+ * На сервере темы знать неоткуда, поэтому первый проход всегда светлый, а сразу
+ * после отрисовки значение уточняется. Для цветов графика это незаметно, зато
+ * не требуется ни одного блока оформления.
+ */
+function useCurrentTheme(): keyof typeof THEMES {
+  const [theme, setTheme] = React.useState<keyof typeof THEMES>("light")
 
-  if (!colorConfig.length) {
-    return null
-  }
+  React.useEffect(() => {
+    const root = document.documentElement
+    const read = () => setTheme(root.classList.contains("dark") ? "dark" : "light")
+    read()
+    const observer = new MutationObserver(read)
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] })
+    return () => observer.disconnect()
+  }, [])
 
-  return (
-    <style
-      dangerouslySetInnerHTML={{
-        __html: Object.entries(THEMES)
-          .map(
-            ([theme, prefix]) => `
-${prefix} [data-chart=${id}] {
-${colorConfig
-  .map(([key, itemConfig]) => {
-    const color =
-      itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
-      itemConfig.color
-    return color ? `  --color-${key}: ${color};` : null
-  })
-  .join("\n")}
+  return theme
 }
-`
-          )
-          .join("\n"),
-      }}
-    />
-  )
+
+/** Переменные цветов для атрибута style — те же имена, что были в блоке. */
+function chartColorVars(
+  config: ChartConfig,
+  theme: keyof typeof THEMES
+): React.CSSProperties {
+  const vars: Record<string, string> = {}
+  for (const [key, item] of Object.entries(config)) {
+    const color = item.theme?.[theme] || item.color
+    if (color) vars[`--color-${key}`] = color
+  }
+  return vars as React.CSSProperties
 }
 
 const ChartTooltip = RechartsPrimitive.Tooltip
@@ -362,5 +370,4 @@ export {
   ChartTooltipContent,
   ChartLegend,
   ChartLegendContent,
-  ChartStyle,
 }

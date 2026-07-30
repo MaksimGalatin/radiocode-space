@@ -44,6 +44,22 @@ function isCabinetPath(pathname: string): boolean {
   return /^(\/(ru|en|es|zh))?\/cabinet(\/|$)/.test(pathname);
 }
 
+/**
+ * Послабление нужно только на экране входа, то есть пока сессии нет.
+ *
+ * Кнопка Google рисуется ТОЛЬКО тем, кто ещё не вошёл. Значит и послабление
+ * должно действовать ровно до входа. Ценное лежит у ВОШЕДШЕГО — переписка,
+ * платежи, данные кабинета; кража через подставленный блок оформления
+ * опасна именно после входа. До входа красть нечего.
+ *
+ * Достоверность куки здесь не проверяется намеренно: это не право доступа,
+ * а лишь признак «человек уже вошёл». Подделав куку, злоумышленник сделает
+ * политику СТРОЖЕ для самого себя — вреда в этом нет.
+ */
+function needsGoogleButton(req: NextRequest, pathname: string): boolean {
+  return isCabinetPath(pathname) && !req.cookies.get('user_session');
+}
+
 function buildCsp(nonce: string, inlineStyleEls: boolean): string {
   return [
     "default-src 'self'",
@@ -83,7 +99,7 @@ function buildCsp(nonce: string, inlineStyleEls: boolean): string {
 export function middleware(req: NextRequest) {
   // Метка обязана быть непредсказуемой: угаданная метка обесценивает защиту.
   const nonce = btoa(crypto.randomUUID() + crypto.randomUUID()).replace(/=+$/, '');
-  const csp = buildCsp(nonce, isCabinetPath(req.nextUrl.pathname));
+  const csp = buildCsp(nonce, needsGoogleButton(req, req.nextUrl.pathname));
 
   const headers = new Headers(req.headers);
   headers.set('x-nonce', nonce);
