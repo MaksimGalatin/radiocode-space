@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
+import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,6 +22,17 @@ const TARGET = 'https://aifa.works/api/oracle/watch';
 async function forward(req: NextRequest, method: 'GET' | 'POST' | 'DELETE') {
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
+
+  // Ограничение частоты нужно ЗДЕСЬ, а не только на приёмной стороне.
+  //
+  // Пересыл ходит на aifa.works с нашим внутренним секретом, то есть от имени
+  // доверенного своего. Без ограничения на входе любой вошедший человек мог бы
+  // через наш сайт долбить Оракул сколько угодно, и там это выглядело бы как
+  // поток от одного доверенного источника. Страж (scripts/guard.mjs) правильно
+  // отметил это как публичный маршрут без ограничения.
+  if (!allowRequest(req, 'owatch-proxy', 30, 60_000)) {
+    return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  }
 
   const secret = process.env.AIFA_INTERNAL_SECRET;
   if (!secret) {

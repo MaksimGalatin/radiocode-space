@@ -130,7 +130,30 @@ export default async function RootLayout({
   // Одноразовая метка политики содержимого: её выдаёт src/middleware.ts на
   // каждый ответ. Любой встроенный скрипт ниже обязан её нести, иначе браузер
   // откажется его выполнять.
-  const nonce = (await headers()).get('x-nonce') || undefined;
+  const h = await headers();
+  const nonce = h.get('x-nonce') || undefined;
+
+  /**
+   * Сигнал об отказе от продажи данных (Global Privacy Control).
+   *
+   * Браузер с включённым отказом присылает заголовок `Sec-GPC: 1`. С 1 января
+   * 2026 года правила Калифорнии (§ 7025(c)(6), § 7026(g)) требуют не просто
+   * молча учесть его, а ПОКАЗАТЬ человеку, что отказ принят. Наш собственный
+   * Оракул выставил за это замечание GPC-002 — продавать аудит и не проходить
+   * свою же проверку нельзя.
+   *
+   * Делаем две вещи сразу: не подключаем счётчик вовсе и показываем ПАССИВНОЕ
+   * подтверждение — просто надпись. Экран, который ТРЕБУЕТ нажатия или
+   * подтверждения почты, сам является нарушением: 5 марта 2026 года Ford
+   * получил штраф 375 703 доллара именно за такой лишний шаг.
+   *
+   * Язык здесь берём из заголовка браузера, а не из состояния приложения:
+   * язык страницы на radiocode выставляется уже в браузере (HtmlLangSync), а
+   * надпись обязана быть в разметке СРАЗУ — иначе проверяющий её не увидит.
+   */
+  const gpc = h.get('sec-gpc') === '1';
+  const accept = (h.get('accept-language') || '').toLowerCase();
+  const gpcLang = accept.startsWith('ru') ? 'ru' : accept.startsWith('es') ? 'es' : accept.startsWith('zh') ? 'zh' : 'en';
 
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
@@ -158,6 +181,29 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
         />
+        {/* Подтверждение отказа от продажи данных. Видно только тем, чей браузер
+            прислал сигнал; всем остальным строки нет. Пассивная надпись, без
+            единой кнопки — требовать действие в ответ на отказ запрещено. */}
+        {gpc && (
+          <div
+            role="status"
+            aria-live="polite"
+            data-gpc="1"
+            style={{
+              width: '100%', textAlign: 'center', fontSize: 12, lineHeight: 1.6,
+              padding: '8px 16px', background: 'rgba(16,185,129,0.10)',
+              borderBottom: '1px solid rgba(16,185,129,0.25)', color: '#6ee7b7',
+            }}
+          >
+            {gpcLang === 'ru'
+              ? 'Ваш отказ принят. Сигнал Global Privacy Control получен: персональные данные не продаются и не передаются, аналитика на этой странице отключена.'
+              : gpcLang === 'es'
+              ? 'Solicitud de exclusión recibida. Señal Global Privacy Control detectada: no vendemos ni compartimos sus datos personales y la analítica está desactivada en esta página.'
+              : gpcLang === 'zh'
+              ? '已接受您的选择退出。已检测到 Global Privacy Control 信号：我们不会出售或共享您的个人数据，本页面的分析统计已关闭。'
+              : 'Your opt-out has been honored. Global Privacy Control signal detected — we do not sell or share your personal data, and analytics is disabled on this page.'}
+          </div>
+        )}
         {children}
         <HtmlLangSync />
         <ServiceWorkerRegister />
@@ -165,7 +211,10 @@ export default async function RootLayout({
         {/* Google Analytics 4. Раньше на radiocode тега НЕ БЫЛО вовсе (только
             платная Vercel-аналитика, которая не подключена) — поэтому сайт не
             попадал ни в один отчёт. Поток общий с aifa.digital: в отчётах
-            разрезается по hostName. Consent Mode v2: по умолчанию запрещено. */}
+            разрезается по hostName. Consent Mode v2: по умолчанию запрещено.
+            При сигнале отказа (Sec-GPC: 1) счётчик НЕ подключается вовсе. */}
+        {!gpc && (
+        <>
         <script async nonce={nonce} src="https://www.googletagmanager.com/gtag/js?id=G-PCP8MD0NQ9" />
         <script
           nonce={nonce}
@@ -178,6 +227,8 @@ try{if(localStorage.getItem('aifa_cookie_consent')==='all'){gtag('consent','upda
 gtag('config','G-PCP8MD0NQ9');`,
           }}
         />
+        </>
+        )}
         <Analytics />
       </body>
     </html>
