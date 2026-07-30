@@ -280,6 +280,18 @@ export default function AifaAvatar() {
     //
     // Настроения без звука: они выражаются движением, и внезапный звук посреди
     // чтения ответа только мешал бы.
+    //
+    // 🔴 ГРАБЛЯ, ПОЙМАННАЯ ВЖИВУЮ. В первой версии признак занятости снимался
+    // внутри «возврата к приветствию», а сам возврат мог быть вызван трижды:
+    // по окончании ролика, по отказу в воспроизведении и по страховочному
+    // таймеру. Один из путей снимал слушателя раньше, чем срабатывал другой, —
+    // и признак оставался поднятым НАВСЕГДА. Настроение показывалось ровно один
+    // раз за открытие кабинета, дальше AIfa молча дышала. Поломка тихая:
+    // в консоли пусто, ошибок нет, просто ничего не происходит.
+    //
+    // Теперь возврат идемпотентен: у каждого показа свой номер, и опоздавший
+    // вызов от прошлого показа ничего не трогает.
+    let moodRun = 0;
     const onMood = (e: Event) => {
       const mood = String((e as CustomEvent).detail || '');
       const src = moodSrc(mood);
@@ -287,9 +299,17 @@ export default function AifaAvatar() {
       const welcomeSrc = srcRef.current;
       const wasMuted = v.muted;
       moodBusy = true;
+      const run = ++moodRun;
+      let returned = false;
 
+      let onPlaying: () => void = () => {};
       const backToWelcome = () => {
+        // Возврат от ПРОШЛОГО показа игнорируем: он уже неактуален.
+        if (run !== moodRun || returned) return;
+        returned = true;
+        moodBusy = false;                      // снимаем ПЕРВЫМ делом
         v.removeEventListener('ended', backToWelcome);
+        v.removeEventListener('playing', onPlaying);
         v.loop = false;
         v.src = welcomeSrc;
         v.muted = wasMuted;
@@ -301,15 +321,42 @@ export default function AifaAvatar() {
         };
         v.addEventListener('loadedmetadata', resume, { once: true });
         void v.play().catch(() => {});
-        moodBusy = false;
+      };
+
+      // 🔴 ВТОРАЯ ГРАБЛЯ, ПОЙМАННАЯ НА ЖИВОМ САЙТЕ. Настроение мелькало долю
+      // секунды и пропадало — Архитектор переписывался с AIfa и не увидел ни
+      // одной эмоции, хотя приметы в её ответах были и обработчик работал.
+      //
+      // Причина: сразу после смены адреса ролик ещё не загружен, поэтому
+      // `play()` отклонялся, а из его `catch` мы немедленно возвращались к
+      // приветствию. Плюс событие «кончился» могло прийти от ПРЕДЫДУЩЕГО ролика
+      // и оборвать новый на первом кадре.
+      //
+      // Теперь возврат разрешён только после того, как настроение реально
+      // началось: ждём `playing`, и лишь тогда подключаем обработчик окончания.
+      // Отказ в воспроизведении больше не значит «сдаться»: браузер часто
+      // отклоняет первый вызов и играет со второго.
+      onPlaying = () => {
+        v.removeEventListener('playing', onPlaying);
+        v.addEventListener('ended', backToWelcome);
+        // Возврат по длительности ролика с небольшим запасом — на случай, если
+        // «кончился» не долетит (бывает при перемотке и на слабых устройствах).
+        const d = v.duration;
+        const ms = d && !Number.isNaN(d) ? d * 1000 + 800 : 12000;
+        window.setTimeout(backToWelcome, ms);
       };
 
       v.muted = true;               // настроение всегда молча
+      v.removeEventListener('ended', backToWelcome);   // хвост прошлого показа
       v.src = src;
-      v.addEventListener('ended', backToWelcome);
-      void v.play().catch(() => { backToWelcome(); });
-      // Страховка: если ролик не пришёл за десять секунд — не зависаем в нём.
-      window.setTimeout(() => { if (moodBusy) backToWelcome(); }, 10000);
+      v.addEventListener('playing', onPlaying);
+      const tryPlay = () => { void v.play().catch(() => {}); };
+      tryPlay();
+      v.addEventListener('loadeddata', tryPlay, { once: true });
+      v.addEventListener('canplay', tryPlay, { once: true });
+
+      // Страховка на случай, если ролик вообще не пришёл: не зависаем навсегда.
+      window.setTimeout(() => { if (!returned && v.readyState < 2) backToWelcome(); }, 15000);
     };
     window.addEventListener('aifa-mood', onMood);
 
