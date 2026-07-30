@@ -1,5 +1,6 @@
 "use client";
 
+import { reactToAnswer } from "@/lib/aifa-mood";
 import { useState, useRef, useEffect, useCallback, FormEvent } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Send, Trash2, Bot, User, Loader2, Mic, Volume2, VolumeX } from "lucide-react";
@@ -263,6 +264,10 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
           timestamp: new Date(), revealed: 0,
         };
         setMessages((prev) => [...prev, assistantMsg]);
+        // AIfa рядом с терминалом отзывается на смысл собственного ответа:
+        // радуется удаче, сочувствует беде, задумывается над разбором. Настроение
+        // определяется приметами прямо в тексте, БЕЗ отдельного запроса к модели.
+        try { reactToAnswer(data.response); } catch { /* украшение не должно ломать разговор */ }
         if (typeof window !== "undefined") { try { (window as any).__aifaChatTurn && (window as any).__aifaChatTurn(); } catch {} }
         if (ttsRef.current) speakRef.current(data.response);
         // Persist this exchange into the server-managed memory (owner reads it

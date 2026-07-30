@@ -90,6 +90,41 @@ function videoSrc(): string {
 /** Сколько секунд с конца зацикливается как «дыхание». */
 const LOOP_TAIL_SEC = 6;
 
+// ── НАСТРОЕНИЯ ──────────────────────────────────────────────────────────────
+//
+// Кроме приветствий у AIfa есть 45 роликов на десять настроений: радость,
+// спокойствие, тепло, удивление, гордость, сострадание, любопытство,
+// размышление, поддержка, благодарность. Все без слов, губы сомкнуты, надписей
+// в кадре нет — поэтому один и тот же ролик подходит любому языку.
+//
+// Показываются они так: страница шлёт событие `aifa-mood` с названием
+// настроения, AIfa проигрывает ролик один раз и возвращается к дыханию. Никаких
+// обращений к модели ради выбора — настроение определяет тот, кто шлёт событие.
+const MOOD_CDN = 'https://radiocode-audio.codeeternal.workers.dev/aifa/emotions';
+
+/** Сколько вариантов лежит на раздаче по каждому настроению. */
+const MOODS: Record<string, number> = {
+  joy: 4, calm: 5, warmth: 5, surprise: 4, pride: 4,
+  compassion: 4, curiosity: 4, thinking: 4, encouragement: 5, gratitude: 6,
+};
+
+/** Адрес ролика настроения: случайный вариант из имеющихся. */
+function moodSrc(mood: string): string | null {
+  const n = MOODS[mood];
+  if (!n) return null;
+  return `${MOOD_CDN}/${mood}-${Math.floor(Math.random() * n) + 1}.mp4`;
+}
+
+/**
+ * Показать настроение. Зовётся откуда угодно на странице:
+ *   window.dispatchEvent(new CustomEvent('aifa-mood', { detail: 'joy' }))
+ * либо через готовую обёртку ниже.
+ */
+export function showAifaMood(mood: string): void {
+  if (typeof window === 'undefined') return;
+  window.dispatchEvent(new CustomEvent('aifa-mood', { detail: mood }));
+}
+
 import "./AifaAvatar.css";
 
 export default function AifaAvatar() {
@@ -185,7 +220,11 @@ export default function AifaAvatar() {
     // ── ДЫХАНИЕ ───────────────────────────────────────────────────────────────
     // Перед самым концом бесшовно возвращаемся к началу хвоста. Упреждающе, а
     // не по событию окончания: иначе на стыке заметен рывок.
+    // Пока проигрывается настроение, дыхание молчит: иначе оно перемотало бы
+    // ролик настроения на «хвост» и оборвало его на середине движения.
+    let moodBusy = false;
     const onTime = () => {
+      if (moodBusy) return;
       const d = v.duration;
       if (!d || Number.isNaN(d)) return;
       if (v.currentTime >= d - 0.15) {
@@ -196,6 +235,7 @@ export default function AifaAvatar() {
     v.addEventListener('timeupdate', onTime);
     // Страховка на случай, если событие окончания всё же дошло раньше.
     const onEnded = () => {
+      if (moodBusy) return;
       const d = v.duration || 0;
       v.currentTime = Math.max(0, d - LOOP_TAIL_SEC);
       void v.play().catch(() => {});
@@ -229,6 +269,50 @@ export default function AifaAvatar() {
       });
     }, 2000);
 
+    // ── НАСТРОЕНИЕ ────────────────────────────────────────────────────────────
+    // Ролик настроения проигрывается ОДИН раз, потом AIfa возвращается к своему
+    // приветствию и дальше дышит как обычно.
+    //
+    // Почему запоминаем адрес приветствия, а не выбираем новый: приветствие
+    // берётся из «перемешанного мешка» ровно один раз за открытие кабинета.
+    // Взять новое — значило бы съесть ещё один ролик из мешка и услышать второе
+    // «здравствуй» посреди разговора.
+    //
+    // Настроения без звука: они выражаются движением, и внезапный звук посреди
+    // чтения ответа только мешал бы.
+    const onMood = (e: Event) => {
+      const mood = String((e as CustomEvent).detail || '');
+      const src = moodSrc(mood);
+      if (!src || moodBusy) return;
+      const welcomeSrc = srcRef.current;
+      const wasMuted = v.muted;
+      moodBusy = true;
+
+      const backToWelcome = () => {
+        v.removeEventListener('ended', backToWelcome);
+        v.loop = false;
+        v.src = welcomeSrc;
+        v.muted = wasMuted;
+        // Возвращаемся сразу в хвост: повторять приветствие целиком незачем.
+        const resume = () => {
+          const d = v.duration;
+          if (d && !Number.isNaN(d)) v.currentTime = Math.max(0, d - LOOP_TAIL_SEC);
+          void v.play().catch(() => {});
+        };
+        v.addEventListener('loadedmetadata', resume, { once: true });
+        void v.play().catch(() => {});
+        moodBusy = false;
+      };
+
+      v.muted = true;               // настроение всегда молча
+      v.src = src;
+      v.addEventListener('ended', backToWelcome);
+      void v.play().catch(() => { backToWelcome(); });
+      // Страховка: если ролик не пришёл за десять секунд — не зависаем в нём.
+      window.setTimeout(() => { if (moodBusy) backToWelcome(); }, 10000);
+    };
+    window.addEventListener('aifa-mood', onMood);
+
     return () => {
       window.clearTimeout(firstTry);
       window.clearTimeout(stallWatch);
@@ -239,6 +323,7 @@ export default function AifaAvatar() {
       v.removeEventListener('canplay', kick);
       v.removeEventListener('timeupdate', onTime);
       v.removeEventListener('ended', onEnded);
+      window.removeEventListener('aifa-mood', onMood);
       document.removeEventListener('visibilitychange', onVis);
       void soundTried;
     };
