@@ -132,6 +132,9 @@ export default function AifaAvatar() {
   // Ролик выбирается ОДИН раз за открытие кабинета: если считать его при каждой
   // перерисовке, видео дёргалось бы на середине фразы.
   const srcRef = useRef<string>('');
+  // Кнопка звука пользуется той же логикой, что и восстановление выбора,
+  // поэтому функция включения живёт в ссылке, а не дублируется в разметке.
+  const enableSoundRef = useRef<() => Promise<boolean>>(async () => false);
   if (!srcRef.current && typeof window !== 'undefined') srcRef.current = videoSrc();
   const [show, setShow] = useState(false);
   // Это ТОЛЬКО подпись на кнопке. Самим звуком управляем напрямую через ref.
@@ -179,11 +182,19 @@ export default function AifaAvatar() {
     v.addEventListener('loadedmetadata', kick, { once: true });
     v.addEventListener('canplay', kick, { once: true });
 
-    // ── ЗВУК: сразу, если браузер разрешит ────────────────────────────────────
-    // В кабинет попадают кликом, значит право на звук у страницы обычно уже
-    // есть. Пробуем включить немедленно и не трогаем при этом позицию ролика —
-    // приветствие и так идёт с самого начала.
-    let soundTried = false;
+    // ── ЗВУК: ПО УМОЛЧАНИЮ ВЫКЛЮЧЕН ──────────────────────────────────────────
+    //
+    // 🔴 БЫЛО: звук включался сам через 120 мс после открытия кабинета, а если
+    // браузер не давал — при первом же щелчке или нажатии клавиши. Задумка была
+    // тёплой: AIfa здоровается голосом. На деле это мешает — человек пришёл
+    // работать в кабинет, а ему в лицо говорят, и он ищет, где выключить.
+    // Особенно неприятно, когда рядом кто-то есть или играет своя музыка.
+    //
+    // ТЕПЕРЬ: ролик всегда стартует беззвучно. Кнопка звука на месте — кто хочет
+    // услышать AIfa, включит одним нажатием, и выбор запоминается: при следующем
+    // открытии кабинета звук сразу будет таким, каким его оставили.
+    const SOUND_KEY = 'aifa-avatar-sound';
+
     const enableSound = async (): Promise<boolean> => {
       if (v.muted === false) return true;
       try {
@@ -191,6 +202,7 @@ export default function AifaAvatar() {
         await v.play();
         if (v.muted) throw new Error('браузер оставил звук выключенным');
         setSoundOn(true);
+        try { localStorage.setItem(SOUND_KEY, 'on'); } catch { /* приватный режим */ }
         return true;
       } catch {
         v.muted = true;
@@ -200,22 +212,16 @@ export default function AifaAvatar() {
         return false;
       }
     };
+    // Отдаём наружу, чтобы кнопка звука пользовалась той же логикой.
+    enableSoundRef.current = enableSound;
 
-    const firstTry = window.setTimeout(() => { soundTried = true; void enableSound(); }, 120);
-
-    // Если сразу не дали — включаем на первое действие человека.
-    // Прокрутки здесь нет намеренно: колесо не даёт браузеру права на звук.
-    const onGesture = () => {
-      void enableSound().then((ok) => { if (ok) offGesture(); });
-    };
-    const offGesture = () => {
-      document.removeEventListener('pointerdown', onGesture);
-      document.removeEventListener('keydown', onGesture);
-      document.removeEventListener('touchstart', onGesture);
-    };
-    document.addEventListener('pointerdown', onGesture, { passive: true });
-    document.addEventListener('keydown', onGesture);
-    document.addEventListener('touchstart', onGesture, { passive: true });
+    // Возвращаем звук только тем, кто САМ его когда-то включил.
+    let firstTry = 0;
+    try {
+      if (localStorage.getItem(SOUND_KEY) === 'on') {
+        firstTry = window.setTimeout(() => { void enableSound(); }, 200);
+      }
+    } catch { /* приватный режим — остаёмся беззвучными */ }
 
     // ── ДЫХАНИЕ ───────────────────────────────────────────────────────────────
     // Перед самым концом бесшовно возвращаемся к началу хвоста. Упреждающе, а
@@ -365,14 +371,12 @@ export default function AifaAvatar() {
       window.clearTimeout(stallWatch);
       window.clearInterval(keepAlive);
       v.removeEventListener('loadeddata', onLoaded);
-      offGesture();
       v.removeEventListener('loadedmetadata', kick);
       v.removeEventListener('canplay', kick);
       v.removeEventListener('timeupdate', onTime);
       v.removeEventListener('ended', onEnded);
       window.removeEventListener('aifa-mood', onMood);
       document.removeEventListener('visibilitychange', onVis);
-      void soundTried;
     };
   }, [show]);
 
@@ -401,10 +405,15 @@ export default function AifaAvatar() {
             onClick={() => {
               const v = videoRef.current;
               if (!v) return;
-              const next = !soundOn;
-              v.muted = !next;
-              setSoundOn(next);
-              void v.play().catch(() => {});
+              if (soundOn) {
+                // Выключаем — и ЗАПОМИНАЕМ: больше сама не заговорит.
+                v.muted = true;
+                setSoundOn(false);
+                try { localStorage.setItem('aifa-avatar-sound', 'off'); } catch { /* приватный режим */ }
+                void v.play().catch(() => {});
+              } else {
+                void enableSoundRef.current();
+              }
             }}
             title={soundOn ? 'Выключить звук' : 'Включить звук'}
             aria-label={soundOn ? 'Выключить звук' : 'Включить звук'}
