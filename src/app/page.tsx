@@ -333,7 +333,14 @@ export default function Home() {
             <dl className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-8 text-sm">
               {stations.map((s) => (
                 <div key={s.id} className="flex justify-between gap-3 border-b border-white/[0.05] py-1.5">
-                  <dt className="text-[#E8E8ED] font-medium">{s.name}</dt>
+                  {/* Ссылка на страницу станции: там полный список треков.
+                      Без этой ссылки страницы станций остались бы сиротами
+                      и поисковые системы их бы не обошли. */}
+                  <dt className="text-[#E8E8ED] font-medium">
+                    <a href={`/station/${s.id}`} className="hover:text-[#00F0FF] transition-colors">
+                      {s.name}
+                    </a>
+                  </dt>
                   <dd className="text-[#6B6B80]">{st.genre(s.id, s.genre)}</dd>
                 </div>
               ))}

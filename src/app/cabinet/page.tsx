@@ -220,6 +220,13 @@ export default function CabinetPage() {
     if (!document.getElementById("gsi-script")) {
       const sc = document.createElement("script");
       sc.id = "gsi-script"; sc.src = "https://accounts.google.com/gsi/client"; sc.async = true; sc.defer = true;
+      // Метку с наших скриптов передаём загрузчику Google намеренно.
+      // Библиотека входа вставляет во время работы собственный блок <style> и
+      // переносит на него метку СВОЕГО тега. Без метки этот блок оказывается
+      // неподписанным, и его пропускает только послабление в политике. С меткой
+      // послабление не нужно — политика оформления остаётся строгой.
+      const nonce = (document.querySelector("script[nonce]") as HTMLScriptElement | null)?.nonce;
+      if (nonce) sc.setAttribute("nonce", nonce);
       document.head.appendChild(sc);
     }
     const iv = setInterval(() => { if (render()) clearInterval(iv); }, 300);

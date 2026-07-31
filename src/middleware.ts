@@ -60,7 +60,7 @@ function needsGoogleButton(req: NextRequest, pathname: string): boolean {
   return isCabinetPath(pathname) && !req.cookies.get('user_session');
 }
 
-function buildCsp(nonce: string, inlineStyleEls: boolean): string {
+function buildCsp(nonce: string): string {
   return [
     "default-src 'self'",
     // GA4 грузится с googletagmanager.com — без него политика молча режет тег
@@ -80,7 +80,7 @@ function buildCsp(nonce: string, inlineStyleEls: boolean): string {
     // style-src оставлен как раньше: браузеры без раздельных директив получают
     // прежний уровень вместо сломанной страницы.
     "style-src 'self' 'unsafe-inline' https://accounts.google.com",
-    `style-src-elem 'self'${inlineStyleEls ? " 'unsafe-inline'" : ''} https://accounts.google.com`,
+    `style-src-elem 'self' 'nonce-${nonce}' https://accounts.google.com`,
     "style-src-attr 'unsafe-inline'",
     "img-src 'self' data: blob: https:",
     "media-src 'self' blob: https:",
@@ -99,7 +99,7 @@ function buildCsp(nonce: string, inlineStyleEls: boolean): string {
 export function middleware(req: NextRequest) {
   // Метка обязана быть непредсказуемой: угаданная метка обесценивает защиту.
   const nonce = btoa(crypto.randomUUID() + crypto.randomUUID()).replace(/=+$/, '');
-  const csp = buildCsp(nonce, needsGoogleButton(req, req.nextUrl.pathname));
+  const csp = buildCsp(nonce);
 
   const headers = new Headers(req.headers);
   headers.set('x-nonce', nonce);
