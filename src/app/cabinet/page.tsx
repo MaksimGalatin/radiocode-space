@@ -56,7 +56,11 @@ export default function CabinetPage() {
   const [agreeNap, setAgreeNap] = useState(false);
   const [agreePriv, setAgreePriv] = useState(false);
   const allAgreed = agreeTos && agreeNap && agreePriv;
-  const agreeFirstMsg = lang === "ru" ? "⚠️ Сначала отметьте все три галочки согласия с документами выше." : lang === "es" ? "⚠️ Primero marque las tres casillas de consentimiento de los documentos de arriba." : lang === "zh" ? "⚠️ 请先勾选上方全部三个文件同意复选框。" : "⚠️ Please check all three document-consent boxes above first.";
+  // Формулировка намеренно просит СНАЧАЛА ПРОЧЕСТЬ, а не просто отметить.
+  // Согласие считается информированным, когда человеку прямо предложено
+  // ознакомиться с документом. Текст «просто отметьте галочки» подталкивает
+  // к обратному и ослабляет само согласие.
+  const agreeFirstMsg = lang === "ru" ? "⚠️ Прочитайте документы выше — ссылки открываются в новой вкладке, — и отметьте три галочки согласия." : lang === "es" ? "⚠️ Lea los documentos de arriba — los enlaces se abren en una pestaña nueva — y marque las tres casillas de consentimiento." : lang === "zh" ? "⚠️ 请先阅读上方文件（链接在新标签页打开），再勾选三个同意复选框。" : "⚠️ Please read the documents above — links open in a new tab — then check the three consent boxes.";
   const [codeSent, setCodeSent] = useState(false);
   const [resendIn, setResendIn] = useState(0);
   const [regToken, setRegToken] = useState<string | null>(null);

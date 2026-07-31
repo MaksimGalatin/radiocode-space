@@ -158,7 +158,7 @@ const D: Record<string, L4> = {
   voiceNoSpeech: ["Не расслышала — попробуй ещё раз.", "Didn't catch that — try again.", "No te oí — inténtalo de nuevo.", "没听清——请再试一次。"],
   voiceUnsupported: ["Браузер не поддерживает голосовой ввод.", "Voice input is not supported in this browser.", "Navegador sin entrada de voz.", "浏览器不支持语音输入。"],
   voiceErr: ["Ошибка голосового ввода.", "Voice input error.", "Error de entrada de voz.", "语音输入错误。"],
-  agreeGoogleHint: ["Нажимая «Войти через Google», вы принимаете все три документа, указанные выше.", "By continuing with Google, you accept all three documents listed above.", "Al continuar con Google, aceptas los tres documentos indicados arriba.", "点击「使用 Google 登录」即表示您接受上述全部三份文件。"],
+  agreeGoogleHint: ["Прочитайте три документа выше. Нажимая «Войти через Google», вы подтверждаете, что ознакомились с ними и принимаете их условия.", "Please read the three documents above. By continuing with Google, you confirm that you have read them and accept their terms.", "Lea los tres documentos indicados arriba. Al continuar con Google, confirma que los ha leído y acepta sus condiciones.", "请先阅读上方三份文件。点击「使用 Google 登录」即表示您确认已阅读并接受其条款。"],
   qClaim: ["Забрать +{n}", "Claim +{n}", "Reclamar +{n}", "领取 +{n}"],
   qDone: ["Получено ✓", "Claimed ✓", "Recibido ✓", "已领取 ✓"],
   terminalTitle: ["Синаптический Терминал", "Synaptic Terminal", "Terminal Sináptica", "突触终端"],
