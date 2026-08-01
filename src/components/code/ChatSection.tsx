@@ -191,9 +191,22 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
     try {
       const saved = deserializeMessages(localStorage.getItem(CHAT_STORAGE_KEY));
       if (saved && saved.length > 1) return; // локальная история есть — не трогаем
+      // Адрес почты берём, если он уже сохранён, но НЕ выходим, когда его нет.
+      //
+      // Здесь стоял выход `if (!em) return;`, и он тихо ломал главное. У
+      // localStorage хранилище своё на каждый домен: на сайте, где человек ещё
+      // не был, оно пусто. Почта попадает туда только после ответа /api/me —
+      // то есть позже этого места. А эффект выполняется один раз при появлении
+      // и не повторяется. Значит запрос за историей не уходил НИКОГДА, и
+      // человек видел пустой чат, хотя на сервере лежала вся переписка.
+      //
+      // Теперь адрес — лишь подсказка: если его нет, личность определит сервер
+      // по сессии, которая у него и так есть.
       const em = localStorage.getItem("aifa_user_email") || "";
-      if (!em) return;
-      fetch(`/api/aifa-chat?userEmail=${encodeURIComponent(em)}&chatType=main`, { cache: "no-store" })
+      const query = em
+        ? `?userEmail=${encodeURIComponent(em)}&chatType=main`
+        : `?chatType=main`;
+      fetch(`/api/aifa-chat${query}`, { cache: "no-store" })
         .then(r => r.ok ? r.json() : null)
         .then(d => {
           const hist = (d && Array.isArray(d.history)) ? d.history : [];
