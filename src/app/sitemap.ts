@@ -23,6 +23,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     })),
     {
+      // Каталог всей музыки. До него музыка в карту сайта не попадала вовсе:
+      // у треков нет собственных адресов, все 596 живут внутри страниц
+      // станций. Одна плотная страница с разметкой MusicPlaylist делает их
+      // машиночитаемыми — в отличие от шестисот «тонких» страниц, которые
+      // размыли бы вес самих станций.
+      url: `${SITE}/music`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
       url: `${SITE}/ambassador`,
       lastModified: now,
       changeFrequency: 'weekly',

@@ -280,15 +280,47 @@ export function useVoiceChat(locale: string): UseVoiceChat {
         const bcp = localeToBcp47(locale);
         utter.lang = bcp;
 
-        // Prefer a voice that matches the locale, if the engine exposes one.
-        // AIfa prefers a female-sounding voice for her locale when available.
+        // ГОЛОС AIfa — ЖЕНСКИЙ НА ВСЕХ ЧЕТЫРЁХ ЯЗЫКАХ, БЕЗ ИСКЛЮЧЕНИЙ.
+        //
+        // Раньше здесь стоял шаблон /female|woman|Milena|Google/, и слово
+        // «Google» в нём всё ломало: системный голос «Google español» —
+        // мужской, но подходил под шаблон первым и выигрывал. На испанском
+        // AIfa говорила мужским голосом. Хуже того, при полном промахе брался
+        // просто первый голос нужного языка — а он тоже часто мужской.
+        //
+        // Теперь порядок обратный: сначала имена известных женских голосов по
+        // языку, затем общий признак женского, и только потом — любой голос
+        // языка, но с явным отсевом заведомо мужских имён. Пол голоса — часть
+        // личности, а не деталь настройки: он не должен зависеть от того, какие
+        // голоса оказались установлены в системе посетителя.
         const voices = window.speechSynthesis.getVoices?.() || [];
         const base = bcp.split("-")[0];
+
+        // Женские голоса, встречающиеся в системах, по языкам.
+        const ЖЕНСКИЕ: Record<string, RegExp> = {
+          ru: /Milena|Katya|Yulia|Irina|Alena|Svetlana|Tatyana|Elena/i,
+          en: /Samantha|Karen|Moira|Tessa|Fiona|Serena|Victoria|Zira|Ava|Allison|Susan|Joanna|Salli|Kimberly|Amy|Emma/i,
+          es: /Mónica|Monica|Paulina|Marisol|Penélope|Penelope|Lupe|Conchita|Helena|Sabina|Esperanza|Laura|Elvira/i,
+          zh: /Ting-?Ting|Tingting|Sin-?ji|Mei-?Jia|Meijia|Huihui|Yaoyao|Xiaoxiao|Xiaoyi|Zhiyu|Li-?mu/i,
+        };
+        // Заведомо мужские — чтобы не попались в последнем, самом широком шаге.
+        const МУЖСКИЕ = /male\b|man\b|Google (español|Español|US English|UK English Male)|Jorge|Diego|Juan|Carlos|Enrique|Miguel|Daniel|Alex|Fred|Thomas|Oliver|Aaron|Rishi|Yunyang|Kangkang|Liang|Dmitri|Pavel|Yuri|Maxim/i;
+
+        const поЯзыку = voices.filter((v) => v.lang?.startsWith(base));
         const match =
-          voices.find((v) => v.lang?.startsWith(base) && /female|woman|Milena|Google/i.test(v.name)) ||
-          voices.find((v) => v.lang === bcp) ||
-          voices.find((v) => v.lang?.startsWith(base));
+          // 1. Знакомое женское имя для этого языка.
+          поЯзыку.find((v) => ЖЕНСКИЕ[base]?.test(v.name)) ||
+          // 2. Голос, прямо помеченный как женский.
+          поЯзыку.find((v) => /female|woman|feminine|女/i.test(v.name)) ||
+          // 3. Точное совпадение языка и региона, если он не мужской.
+          poNotMale(voices.filter((v) => v.lang === bcp)) ||
+          // 4. Любой голос языка, кроме заведомо мужских.
+          poNotMale(поЯзыку);
         if (match) utter.voice = match;
+
+        function poNotMale(список: SpeechSynthesisVoice[]) {
+          return список.find((v) => !МУЖСКИЕ.test(v.name));
+        }
 
         utter.rate = 1.03;
         utter.pitch = 1.08;
