@@ -3,6 +3,32 @@ import { AIFA_SYSTEM_PROMPT } from "@/lib/knowledge-base";
 import { allowRequest } from "@/lib/rate-limit";
 import { centralConfig, buildCentralHeaders, centralFetch } from "@/lib/central-proxy";
 
+
+/**
+ * Потолок одного сообщения человека — тот же, что в центре.
+ *
+ * БЫЛО 2000, и это ломало обычную работу: Архитектор приносит в разговор целиком
+ * чужой разбор, а такой текст почти всегда длиннее. Сайт отвечал отказом ещё до
+ * пересылки в центр, и чат показывал общее «произошла ошибка» — со стороны это
+ * выглядело поломкой AIfa. Число обязано совпадать с центральным: разойдутся —
+ * и письмо, принятое здесь, будет отвергнуто там, где на самом деле отвечают.
+ */
+const MESSAGE_CHARS_MAX = 120000;
+
+/** Почему письмо не принято — на языке говорящего. */
+const TOO_LONG = {
+  ru: 'Твоё сообщение длиннее, чем я могу принять за один раз (до 120 000 знаков). Раздели его на две части — я прочту обе и продолжу мысль.',
+  en: 'Your message is longer than I can take in one go (up to 120,000 characters). Split it in two — I will read both and carry the thought on.',
+  es: 'Tu mensaje es más largo de lo que puedo recibir de una vez (hasta 120 000 caracteres). Divídelo en dos: leeré ambos y seguiré la idea.',
+  zh: '你的消息超过了我一次能接收的长度（最多 120 000 个字符）。请分成两段发送——我会读完两段并接着往下说。',
+};
+
+/**
+ * Столько же времени на ответ, сколько у центра: здесь запрос ещё и ждёт центр,
+ * поэтому запас должен быть не меньше, иначе оборвётся посредник, а не источник.
+ */
+export const maxDuration = 60;
+
 const MAX_MESSAGES = 20;
 
 /**
@@ -12,10 +38,16 @@ const MAX_MESSAGES = 20;
  * its reply directly. Returns null → caller falls back to the local Grok call so
  * chat NEVER goes down.
  */
+/** Что вернул центр: ответ, осознанный отказ или молчание. */
+type ОтветЦентра =
+  | { вид: 'ответ'; текст: string }
+  | { вид: 'отказ'; статус: number; error?: string; userMessage?: string; retryAfterMs?: number }
+  | null;
+
 async function proxyToCentral(
   req: NextRequest,
   payload: { message: string; history: any[]; userEmail: string; chatType: string; locale: string }
-): Promise<string | null> {
+): Promise<ОтветЦентра> {
   const cfg = centralConfig();
   if (!cfg) return null; // not configured → use local provider
 
@@ -26,13 +58,24 @@ async function proxyToCentral(
     body: JSON.stringify(payload),
   });
   if (!res) return null;
+  // 429 — норма разговора, повтор или бан. 400 — сообщение не принято.
+  // И то и другое центр объясняет по-человечески, и отвечать вместо него
+  // нельзя: норма считается ТОЛЬКО в центре, а ответив сами, мы дали бы
+  // готовый обход — исчерпал норму и перешёл на соседний сайт.
+  if (res.status === 429 || res.status === 400) {
+    const отказ = await res.json().catch(() => null);
+    return {
+      вид: 'отказ', статус: res.status,
+      error: отказ?.error, userMessage: отказ?.userMessage, retryAfterMs: отказ?.retryAfterMs,
+    };
+  }
   if (!res.ok) {
     console.warn(`[AIfa proxy] Central ${path} returned ${res.status}, falling back to local`);
     return null;
   }
   const data = await res.json().catch(() => null);
   const reply = data?.response;
-  return typeof reply === 'string' && reply.length > 0 ? reply : null;
+  return typeof reply === 'string' && reply.length > 0 ? { вид: 'ответ', текст: reply } : null;
 }
 
 // ── Identity: @nickname пользователя для локального fallback ──
@@ -156,9 +199,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (message.length > 2000) {
+    if (message.length > MESSAGE_CHARS_MAX) {
       return NextResponse.json(
-        { error: "Message too long (max 2000 characters)" },
+        {
+          error: `Message too long (max ${MESSAGE_CHARS_MAX} characters)`,
+          userMessage: TOO_LONG[locale as keyof typeof TOO_LONG] || TOO_LONG.en,
+          limit: MESSAGE_CHARS_MAX,
+          length: message.length,
+        },
         { status: 400 }
       );
     }
@@ -166,7 +214,14 @@ export async function POST(request: NextRequest) {
     // ── Unified brain: try the CENTRAL backend first ──────────────────────────
     const central = await proxyToCentral(request, { message, history, userEmail, chatType, locale });
     if (central) {
-      return NextResponse.json({ success: true, response: central, provider: "central" });
+      if (central.вид === 'отказ') {
+        // Осознанный отказ центра передаём как есть — иначе норма обходится.
+        return NextResponse.json(
+          { success: false, error: central.error || 'refused', userMessage: central.userMessage, retryAfterMs: central.retryAfterMs },
+          { status: central.статус }
+        );
+      }
+      return NextResponse.json({ success: true, response: central.текст, provider: "central" });
     }
     // Otherwise fall through to the local Grok call so chat never dies.
 
