@@ -51,6 +51,44 @@ import { NextRequest, NextResponse } from 'next/server';
  * Google НЕ НУЖНА. Она задумывалась ровно затем, чтобы снять исключение с
  * кабинета — исключения больше нет.
  */
+/**
+ * ОТКУДА БЕРЁТСЯ ЗВУК — точный список вместо схемы `https:`.
+ *
+ * ЗАЧЕМ. Раньше в политике стояли `img-src … https:`, `media-src … https:` и
+ * `connect-src 'self' https: wss:`. Схема без адреса — это «любой сайт в
+ * интернете». Для connect-src это дыра ровно того рода, ради которой политику и
+ * пишут: код, попавший в страницу, мог бы отправить содержимое кабинета на
+ * произвольный чужой сервер, и политика бы не возразила. Теперь перечислены
+ * ровно те адреса, которые страница действительно просит.
+ *
+ * ОТКУДА СПИСОК (проверено по коду, а не по памяти):
+ *   • `pub-93eb…r2.dev` — все 597 ссылок на дорожки в src/lib/stations.ts;
+ *     он же качается напрямую при сохранении трека (components/radio/
+ *     SaveButton.tsx: fetch(audioUrl(track.url)));
+ *   • `radiocode-audio.codeeternal.workers.dev` — ролики аватара AIfa
+ *     (components/code/AifaAvatar.tsx: WELCOME_CDN и MOOD_CDN);
+ *   • адрес из NEXT_PUBLIC_AUDIO_CDN — если задан, src/lib/audioCdn.ts
+ *     подменяет им начало ссылки на дорожку. Берём его ИЗ ТОЙ ЖЕ настройки,
+ *     что и плеер: тогда список не может разойтись с тем, что плеер просит,
+ *     какое бы значение ни стояло в окружении, и радио не замолчит;
+ *   • `cdn.radiocode.space` — наш же адрес, названный в audioCdn.ts как
+ *     пример. Оставлен на случай, если настройка задана не во всех окружениях.
+ *
+ * `*.r2.dev` целиком НЕ разрешаем: это общее пространство имён Cloudflare, под
+ * ним лежат корзины всех пользователей сервиса. Чужую заводят за минуту, и она
+ * стала бы законной приёмной для украденного.
+ */
+const R2_PUBLIC = 'https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev';
+const AUDIO_CDN = (process.env.NEXT_PUBLIC_AUDIO_CDN || '').replace(/\/$/, '');
+const AUDIO_HOSTS = [
+  R2_PUBLIC,
+  'https://radiocode-audio.codeeternal.workers.dev',
+  'https://cdn.radiocode.space',
+]
+  .concat(AUDIO_CDN && /^https?:\/\//.test(AUDIO_CDN) ? [AUDIO_CDN] : [])
+  .filter((v, i, a) => a.indexOf(v) === i)
+  .join(' ');
+
 function buildCsp(nonce: string): string {
   return [
     "default-src 'self'",
@@ -73,9 +111,24 @@ function buildCsp(nonce: string): string {
     "style-src 'self' 'unsafe-inline' https://accounts.google.com",
     `style-src-elem 'self' 'nonce-${nonce}' https://accounts.google.com`,
     "style-src-attr 'unsafe-inline'",
-    "img-src 'self' data: blob: https:",
-    "media-src 'self' blob: https:",
-    "connect-src 'self' https: wss:",
+    // Картинки. Единственный <img> во всём приложении — аватар паспорта, и он
+    // приходит строкой data: (src/app/api/passport/route.ts прямо проверяет,
+    // что значение начинается с `data:image/`). Всё остальное лежит в /public,
+    // то есть подпадает под 'self'. Адреса Google оставлены с запасом: кнопка
+    // входа рисуется их библиотекой, и если она когда-нибудь снова начнёт
+    // подтягивать значок с gstatic, кнопка не превратится в пустое место.
+    `img-src 'self' data: blob: https://lh3.googleusercontent.com https://*.googleusercontent.com https://ssl.gstatic.com https://www.gstatic.com ${AUDIO_HOSTS}`,
+    `media-src 'self' blob: ${AUDIO_HOSTS}`,
+    // Куда странице разрешено СТУЧАТЬСЯ. Здесь схема `https:` была опаснее
+    // всего: она разрешала выгрузку данных на любой сервер. Перечислено
+    // поимённо:
+    //   • 'self' — все наши /api/*;
+    //   • accounts.google.com — вход через Google;
+    //   • google-analytics/googletagmanager — счётчик GA4 из src/app/layout.tsx;
+    //   • va.vercel-scripts.com и vitals.vercel-insights.com — @vercel/analytics;
+    //   • vercel.live — панель отзывов, она появляется только на предпросмотрах;
+    //   • адреса звука — см. AUDIO_HOSTS выше (SaveButton качает трек сам).
+    `connect-src 'self' https://accounts.google.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://va.vercel-scripts.com https://vitals.vercel-insights.com https://vercel.live wss://vercel.live ${AUDIO_HOSTS}`,
     "font-src 'self' data:",
     "worker-src 'self' blob:",
     "manifest-src 'self'",

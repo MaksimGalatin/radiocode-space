@@ -64,6 +64,21 @@ const nextConfig: NextConfig = {
             key: "Strict-Transport-Security",
             value: "max-age=63072000; includeSubDomains; preload",
           },
+          {
+            // Cross-Origin-Opener-Policy: отвязывает наше окно от чужих.
+            //
+            // Без него страница, открывшая нашу (или открытая нашей), остаётся
+            // с ней в одной группе окон и может дёргать её через window.opener.
+            //
+            // Значение именно 'same-origin-allow-popups', а НЕ 'same-origin':
+            // вход через Google здесь работает всплывающим окном — в
+            // src/app/cabinet/page.tsx стоит ux_mode: "popup". Строгое
+            // 'same-origin' обрывает связь с этим окном, и вход молча
+            // перестаёт завершаться. Выбранное значение защищает от чужих
+            // окон, но не рвёт те, что открыли мы сами.
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin-allow-popups",
+          },
           // Политика содержимого (Content-Security-Policy) переехала в
           // src/middleware.ts: в неё входит одноразовая метка, новая на каждый
           // ответ, а статический заголовок такого не умеет. Держать её в двух
