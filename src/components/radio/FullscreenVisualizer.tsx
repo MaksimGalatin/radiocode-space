@@ -161,11 +161,20 @@ export function FullscreenVisualizer() {
           style={{ background: '#020204' }}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.1 }}
-          transition={{
-            initial: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-            exit: { duration: 0.3, ease: 'easeIn' },
-          }}
+          // 🔴 ЗДЕСЬ АНИМАЦИЯ МОЛЧА НЕ РАБОТАЛА (найдено 05.08.2026).
+          //
+          // Стояло `transition={{ initial: {...}, exit: {...} }}`. Ключи внутри
+          // `transition` framer-motion понимает как ИМЕНА анимируемых значений
+          // (`opacity`, `scale` и подобные), а не как названия состояний.
+          // Значений с именами `initial` и `exit` не существует, поэтому вся
+          // настройка отбрасывалась целиком — и окно открывалось и закрывалось
+          // со стандартными таймингами вместо задуманных. Ошибку было видно
+          // только проверкой типов, а её на этом проекте выключили в сборке.
+          //
+          // Правильно так: общий тайминг — в `transition`, а особый тайминг
+          // ухода — внутри самого `exit`.
+          exit={{ opacity: 0, scale: 1.1, transition: { duration: 0.3, ease: 'easeIn' } }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => {
             if (e.target === e.currentTarget) close();
           }}

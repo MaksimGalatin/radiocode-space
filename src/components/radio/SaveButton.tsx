@@ -69,7 +69,16 @@ async function clientTag(trackId: string, lang: string, refCode: string | null):
       cover,
     });
     const body = stripExistingTags(mp3);
-    return new Blob([tag, body], { type: 'audio/mpeg' });
+    // Начиная с TypeScript 5.7 `Uint8Array` обобщён по типу буфера, а `Blob`
+    // принимает только тот его вид, что лежит в обычном `ArrayBuffer` —
+    // разделяемый между потоками не годится. Наши байты обычные всегда: `mp3`
+    // получен из `fetch(...).arrayBuffer()`, а `tag` и `body` построены из
+    // него же. Разделяемому буферу тут взяться неоткуда, поэтому сужаем тип —
+    // во время работы не меняется ничего.
+    return new Blob(
+      [tag as Uint8Array<ArrayBuffer>, body as Uint8Array<ArrayBuffer>],
+      { type: 'audio/mpeg' },
+    );
   } catch {
     return null;
   }
