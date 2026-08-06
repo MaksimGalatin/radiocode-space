@@ -4,10 +4,26 @@ import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
+/**
+ * Идентификатор нашего приложения в Google.
+ *
+ * 🔴 ЗАЧЕМ ЗДЕСЬ ЗАПАСНОЕ ЗНАЧЕНИЕ, ХОТЯ ОБЫЧНО ОНИ ВРЕДНЫ. Раньше цепочка
+ * заканчивалась пустой строкой, а проверка адресата стояла под условием
+ * `if (CLIENT_ID && ...)`. То есть при незаданной переменной проверка НЕ
+ * ВЫПОЛНЯЛАСЬ ВОВСЕ — и вход принимал токен, выписанный ЛЮБЫМ приложением
+ * Google. Любой человек, заведя собственное приложение, входил бы под чужим
+ * адресом почты. Пустая строка тут была не «нет значения», а «пускать всех».
+ *
+ * Обычное возражение против запасных значений — что они молча подставляют
+ * секрет из исходников. Здесь наоборот: это ПУБЛИЧНЫЙ идентификатор
+ * приложения, он и так лежит открытым в разметке кабинета (иначе кнопка входа
+ * не работала бы), секретом никогда не был. И подставляется он не вместо
+ * защиты, а чтобы защита ВСЕГДА была включена.
+ */
 const CLIENT_ID =
   process.env.GOOGLE_CLIENT_ID ||
   process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ||
-  '';
+  '43000852909-cc46aci3anos9hebq9dob75lii886r7s.apps.googleusercontent.com';
 
 /**
  * Real "Sign in with Google". The client sends the Google ID token (JWT
@@ -39,7 +55,9 @@ export async function POST(req: NextRequest) {
   }
 
   if (!info || !info.email) return NextResponse.json({ error: 'No email in token' }, { status: 401 });
-  if (CLIENT_ID && info.aud !== CLIENT_ID) return NextResponse.json({ error: 'Wrong audience' }, { status: 401 });
+  // Проверка адресата БЕЗУСЛОВНА. Прежнее `if (CLIENT_ID && ...)` пропускало
+  // её при пустом значении — то есть ровно тогда, когда она нужнее всего.
+  if (info.aud !== CLIENT_ID) return NextResponse.json({ error: 'Wrong audience' }, { status: 401 });
   const verified = info.email_verified === true || info.email_verified === 'true';
   if (!verified) return NextResponse.json({ error: 'Email not verified' }, { status: 401 });
   if (info.exp && Date.now() / 1000 > Number(info.exp)) return NextResponse.json({ error: 'Token expired' }, { status: 401 });
