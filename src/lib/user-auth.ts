@@ -10,10 +10,18 @@
 import crypto from 'crypto';
 import type { NextRequest } from 'next/server';
 
-const SECRET_KEY =
-  process.env.AIFA_SESSION_SECRET ||
-  process.env.NOWPAYMENTS_IPN_SECRET ||
-  '';
+// Ключ подписи сессий — ТОЛЬКО AIFA_SESSION_SECRET. Запасной ветки нет.
+//
+// Здесь стояло `|| process.env.NOWPAYMENTS_IPN_SECRET`. Этот секрет некогда
+// лежал зашитым прямо в исходнике и навсегда остался в истории репозитория —
+// то есть известен всякому, кто её прочитал. Куки сессий действительны сразу на
+// трёх сайтах, поэтому подпись известным значением означает вход под ЛЮБЫМ
+// адресом на всех трёх.
+//
+// Убрана 06.08.2026 после замера `vercel env ls production`:
+// `AIFA_SESSION_SECRET` задан во всех четырёх проектах. Отказ теперь закрытый —
+// без ключа нельзя ни подписать, ни проверить.
+const SECRET_KEY = process.env.AIFA_SESSION_SECRET || '';
 
 export const USER_COOKIE = 'user_session';
 

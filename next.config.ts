@@ -51,6 +51,15 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          // Отвязывает наше окно от чужих: без этого заголовка страница,
+          // открывшая нашу, может дёргать её через `window.opener` — подменять
+          // адрес в нашей вкладке и мерить чужое содержимое.
+          //
+          // Значение с `allow-popups`, а не строгое `same-origin`: вход через
+          // Google работает всплывающим окном, и строгое значение обрывает связь
+          // с ним — вход молча перестаёт завершаться. Одинаково со всеми
+          // остальными нашими сайтами.
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           {
             // Наш же Оракул нашёл это на нас: без Permissions-Policy браузер
