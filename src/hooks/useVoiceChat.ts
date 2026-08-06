@@ -185,7 +185,21 @@ export interface UseVoiceChat {
   supportsTTS: boolean;
   /** Черновая расшифровка по ходу речи — для показа на экране. */
   interim: string;
-  /** Код последней ошибки: '' | 'denied' | 'no-mic' | 'unsupported' | 'no-speech' | 'generic'. */
+  /**
+   * Код последней ошибки. Коды намеренно разделены по ПРИЧИНЕ, а не по
+   * симптому: раньше всё сваливалось в «не расслышала», и по такому сообщению
+   * нельзя было понять, человек молчал или микрофон не отдавал сигнала.
+   *
+   *   ''           — всё в порядке
+   *   'denied'     — доступ к микрофону запрещён
+   *   'no-mic'     — микрофона нет вовсе
+   *   'no-audio'   — захват не начался: устройство занято или не открылось
+   *   'silent'     — захват идёт, но звука ноль: выбран не тот вход или он выключен
+   *   'no-speech'  — звук был, речи не разобрано
+   *   'network'    — служба распознавания недоступна
+   *   'unsupported'— браузер не умеет распознавать речь
+   *   'generic'    — прочее
+   */
   error: string;
   /** Начать слушать; `onFinal` сработает один раз с готовой фразой. */
   startListening: (onFinal: (text: string) => void) => void;
@@ -214,6 +228,12 @@ export function useVoiceChat(locale: string): UseVoiceChat {
   const recognitionRef = useRef<any>(null);
   const onFinalRef = useRef<((text: string) => void) | null>(null);
   const finalSentRef = useRef(false);
+  /** Захват микрофона начался (событие `audiostart`). */
+  const захватНачалсяRef = useRef(false);
+  /** С микрофона пришёл хоть какой-то звук (`soundstart` / `speechstart`). */
+  const звукБылRef = useRef(false);
+  /** Свой предел тишины — мягче браузерного. */
+  const тишинаRef = useRef<number | null>(null);
 
   /** Список голосов браузера. Заполняется асинхронно — держим наготове. */
   const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
@@ -259,6 +279,10 @@ export function useVoiceChat(locale: string): UseVoiceChat {
   }, []);
 
   const stopListening = useCallback(() => {
+    if (тишинаRef.current) {
+      window.clearTimeout(тишинаRef.current);
+      тишинаRef.current = null;
+    }
     const rec = recognitionRef.current;
     if (rec) {
       try {
@@ -304,26 +328,60 @@ export function useVoiceChat(locale: string): UseVoiceChat {
       cancelSpeak();
       setError("");
 
-      const begin = () => {
+      const begin = (этоПовтор: boolean) => {
         // Свернуть прежний сеанс, если он завис.
         if (recognitionRef.current) {
           try {
             recognitionRef.current.onend = null;
+            recognitionRef.current.onerror = null;
             recognitionRef.current.stop();
           } catch {
             /* ignore */
           }
         }
+        if (тишинаRef.current) {
+          window.clearTimeout(тишинаRef.current);
+          тишинаRef.current = null;
+        }
 
         const rec = new SR();
         rec.lang = localeToBcp47(locale);
         rec.interimResults = true;
-        rec.continuous = false;
+        // 🔴 БЫЛО `false`, И ИМЕННО ЭТО НЕ ДАВАЛО СЕБЯ УСЛЫШАТЬ. При `false`
+        // Chrome ждёт начала речи всего несколько секунд и, не дождавшись,
+        // обрывает всё ошибкой «no-speech» — той самой «Не расслышала». А
+        // несколько секунд уходит на то, чтобы просто собраться с мыслью: у
+        // человека между нажатием кнопки и первым словом всегда есть пауза.
+        // При `true` распознавание слушает, пока мы сами не остановим, — и
+        // останавливаем мы его по первой законченной фразе, так что для
+        // пользователя ничего не меняется, кроме того, что его наконец слышно.
+        rec.continuous = true;
         rec.maxAlternatives = 1;
 
         onFinalRef.current = onFinal;
         finalSentRef.current = false;
+        // Признаки того, что микрофон реально отдаёт звук. По ним потом
+        // отличаем «человек молчал» от «микрофон не даёт сигнала» — это разные
+        // беды, и лечатся они по-разному.
+        захватНачалсяRef.current = false;
+        звукБылRef.current = false;
         setInterim("");
+
+        const завершить = () => {
+          if (тишинаRef.current) {
+            window.clearTimeout(тишинаRef.current);
+            тишинаRef.current = null;
+          }
+          try {
+            rec.stop();
+          } catch {
+            /* уже остановлено */
+          }
+        };
+
+        rec.onaudiostart = () => { захватНачалсяRef.current = true; };
+        rec.onsoundstart = () => { звукБылRef.current = true; };
+        rec.onspeechstart = () => { звукБылRef.current = true; };
 
         rec.onresult = (event: any) => {
           let finalText = "";
@@ -333,25 +391,47 @@ export function useVoiceChat(locale: string): UseVoiceChat {
             if (res.isFinal) finalText += res[0].transcript;
             else interimText += res[0].transcript;
           }
-          if (interimText) setInterim(interimText);
+          if (interimText) {
+            звукБылRef.current = true;
+            setInterim(interimText);
+          }
           if (finalText && !finalSentRef.current) {
             finalSentRef.current = true;
             setInterim("");
+            завершить();                       // фраза закончена — микрофон закрываем
             onFinalRef.current?.(finalText.trim());
           }
         };
 
         rec.onerror = (event: any) => {
-          // Показываем отказ, чтобы кнопка не выглядела молча мёртвой.
           const code = event?.error;
-          if (code === "not-allowed" || code === "service-not-allowed") {
+          if (code === "aborted") {
+            setListening(false);
+            setInterim("");
+            return;                            // остановлено нами или человеком
+          }
+
+          if (code === "no-speech") {
+            // Один автоматический повтор: чаще всего человек просто не успел
+            // начать говорить, и второй заход проходит нормально.
+            if (!этоПовтор && !finalSentRef.current) {
+              window.setTimeout(() => begin(true), 250);
+              return;
+            }
+            // Повтор тоже пуст — говорим по существу, а не «не расслышала».
+            // Если захват вообще не начинался или звук не приходил ни разу,
+            // дело не в человеке: микрофон не отдаёт сигнал.
+            setError(
+              !захватНачалсяRef.current ? "no-audio"
+                : !звукБылRef.current ? "silent"
+                : "no-speech"
+            );
+          } else if (code === "not-allowed" || code === "service-not-allowed") {
             setError("denied");
-          } else if (code === "no-speech") {
-            setError("no-speech");
           } else if (code === "audio-capture") {
             setError("no-mic");
-          } else if (code === "aborted") {
-            // остановлено пользователем — не ошибка
+          } else if (code === "network") {
+            setError("network");
           } else {
             setError("generic");
           }
@@ -360,6 +440,10 @@ export function useVoiceChat(locale: string): UseVoiceChat {
         };
 
         rec.onend = () => {
+          if (тишинаRef.current) {
+            window.clearTimeout(тишинаRef.current);
+            тишинаRef.current = null;
+          }
           setListening(false);
           setInterim("");
         };
@@ -368,22 +452,52 @@ export function useVoiceChat(locale: string): UseVoiceChat {
         try {
           rec.start();
           setListening(true);
+          // Свой предел тишины — мягче того, что даёт браузер: если за это время
+          // не прозвучало ни слова, закрываем сами и говорим, что случилось.
+          тишинаRef.current = window.setTimeout(() => {
+            if (!finalSentRef.current) {
+              setError(
+                !захватНачалсяRef.current ? "no-audio"
+                  : !звукБылRef.current ? "silent"
+                  : "no-speech"
+              );
+            }
+            завершить();
+          }, 15_000);
         } catch {
           setListening(false);
           setError("generic");
         }
       };
 
-      // Спрашиваем доступ к микрофону явно. getUserMedia надёжно поднимает
-      // запрос браузера и даёт внятную ошибку при отказе — в отличие от
-      // молчаливого пути внутри SpeechRecognition.
+      /**
+       * Разрешение на микрофон.
+       *
+       * 🔴 ВТОРАЯ ПРИЧИНА, ПОЧЕМУ НЕ СЛЫШАЛА. Прежде мы КАЖДЫЙ раз звали
+       * `getUserMedia`, тут же ГЛУШИЛИ полученную дорожку и только потом
+       * запускали распознавание. То есть на ровном месте устраивали
+       * захват-освобождение-захват устройства, а распознавание стартовало в
+       * момент, когда микрофон ещё не отпущен до конца, — и получало тишину.
+       *
+       * Теперь спрашиваем состояние разрешения. Уже разрешено — запускаем
+       * распознавание НАПРЯМУЮ, без лишнего захвата. Заодно это оставляет
+       * запуск внутри пользовательского жеста, а не в отложенном обработчике.
+       */
+      const запустить = () => begin(false);
+      const разрешения = (navigator as any)?.permissions;
       const md = (navigator as any)?.mediaDevices;
-      if (md?.getUserMedia) {
+
+      const черезЗапрос = () => {
+        if (!md?.getUserMedia) {
+          запустить();
+          return;
+        }
         md.getUserMedia({ audio: true })
           .then((stream: MediaStream) => {
-            // Нужно было только разрешение — отпускаем микрофон сразу.
             stream.getTracks().forEach((track) => track.stop());
-            begin();
+            // Даём устройству освободиться, прежде чем его займёт
+            // распознавание: без этой паузы оно ловит хвост чужого захвата.
+            window.setTimeout(запустить, 300);
           })
           .catch((err: any) => {
             const name = err?.name || "";
@@ -392,12 +506,22 @@ export function useVoiceChat(locale: string): UseVoiceChat {
             } else if (name === "NotFoundError" || name === "OverconstrainedError") {
               setError("no-mic");
             } else {
-              // getUserMedia почему-то недоступен — пробуем распознавание напрямую.
-              begin();
+              запустить();      // причина неясна — пробуем распознавание само
             }
           });
+      };
+
+      if (разрешения?.query) {
+        разрешения
+          .query({ name: "microphone" as PermissionName })
+          .then((с: PermissionStatus) => {
+            if (с.state === "granted") запустить();
+            else if (с.state === "denied") setError("denied");
+            else черезЗапрос();
+          })
+          .catch(() => черезЗапрос());   // Firefox не знает такого имени
       } else {
-        begin();
+        черезЗапрос();
       }
     },
     [locale, cancelSpeak]
