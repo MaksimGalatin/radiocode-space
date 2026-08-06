@@ -14,8 +14,10 @@ export async function POST(req: Request) {
 
   const secret = process.env.AIFA_INTERNAL_SECRET || '';
   const got = req.headers.get('x-aifa-internal') || '';
-  const ok = !!secret && got.length === secret.length &&
-    crypto.timingSafeEqual(Buffer.from(got), Buffer.from(secret));
+  const ok = !!secret && (() => { const a = Buffer.from(got, "utf8"), b = Buffer.from(secret, "utf8");
+        // Длины сравниваем В БАЙТАХ: у строки и у буфера они разные для
+        // всего, что вне латиницы, и timingSafeEqual бросил бы исключение.
+        return a.length === b.length && crypto.timingSafeEqual(a, b); })();
   if (!ok) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   let b: any = {}; try { b = await req.json(); } catch {}
