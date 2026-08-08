@@ -39,8 +39,10 @@ export async function POST(req: NextRequest) {
     if ((r.rowCount || 0) > 0) {
       // недельный квест реферера «Пригласи друга»
       try {
-        const { bumpQuest, weekKeyUTC } = await import('@/lib/economy');
-        await bumpQuest(pool as any, ref, 'invite_weekly', weekKeyUTC(), 1);
+        const { bumpQuest, weekKeyUTC, todayUTC } = await import('@/lib/economy');
+        await bumpQuest(pool as any, ref, 'invite_weekly', weekKeyUTC(), 5);
+        // Ежедневное задание на приглашение — продвигается тем же событием.
+        await bumpQuest(pool as any, ref, 'invite_daily', todayUTC(), 1);
       } catch {}
     }
     await pool.end();

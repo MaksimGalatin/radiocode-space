@@ -13,12 +13,16 @@ const QUESTS: Record<string, { period: 'daily' | 'weekly'; target: number; rewar
   wins_daily:          { period: 'daily',  target: 1,   reward: 5 },   // win 1 game
   variety_daily:       { period: 'daily',  target: 2,   reward: 15 },  // win in 2 DIFFERENT games
   tetris_lines_daily:  { period: 'daily',  target: 40,  reward: 10 },  // clear 40 tetris lines
+  // Приглашение друга — ежедневное задание, 50 GALATIN. Продвигается там же,
+  // где и недельное: /api/referrals/link. Награда крупнее прочих дневных
+  // намеренно: привести живого человека дороже, чем сыграть партию.
+  invite_daily:        { period: 'daily',  target: 1,   reward: 50 },  // пригласить друга
   // ── еженедельные ──
   chat_weekly:         { period: 'weekly', target: 30,  reward: 40 },  // 30 chat turns
   wins_weekly:         { period: 'weekly', target: 15,  reward: 50 },  // 15 wins
   tetris_lines_weekly: { period: 'weekly', target: 200, reward: 60 },  // 200 tetris lines
   streak_weekly:       { period: 'weekly', target: 5,   reward: 30 },  // claim 5 daily rewards
-  invite_weekly:       { period: 'weekly', target: 1,   reward: 100 }, // invite a friend (referral linked)
+  invite_weekly:       { period: 'weekly', target: 5,   reward: 200 }, // пригласить ПЯТЕРЫХ за неделю
 };
 
 function periodKey(p: 'daily' | 'weekly') { return p === 'daily' ? todayUTC() : weekKeyUTC(); }
