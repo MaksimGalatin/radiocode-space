@@ -97,6 +97,101 @@ function ArchivesCard() {
   );
 }
 
+// Ключ вечной памяти: тот самый личный ключ, которым зашифрованы записи
+// человека в Arweave.
+//
+// ЗАЧЕМ ЭТО В КАБИНЕТЕ. Записи в Arweave вечные и публичные, а читаются только
+// этим ключом. Пока ключ есть лишь у нас, «вечная память» на деле живёт ровно
+// столько, сколько живём мы. Отдать копию владельцу — единственное, что делает
+// её действительно вечной.
+//
+// ПОЧЕМУ КЛЮЧ НЕ ТЯНЕТСЯ ПРИ ОТКРЫТИИ ВКЛАДКИ. Человек может открыть кабинет
+// при демонстрации экрана, рядом с камерой или на чужом компьютере. Секрет
+// появляется на странице только после осознанного нажатия — до этого его нет
+// даже в памяти вкладки.
+type ДанныеКлюча = { key: string; algorithm?: string; kdf?: string; envelope?: string };
+
+function MemoryKeyCard({ email }: { email: string }) {
+  const { t } = useCabT();
+  const [data, setData] = React.useState<ДанныеКлюча | null>(null);
+  const [shown, setShown] = React.useState(false);
+  const [busy, setBusy] = React.useState(false);
+  const [err, setErr] = React.useState("");
+
+  // Возвращает ключ вызвавшему, а не только кладёт в состояние: состояние React
+  // обновится лишь к следующей отрисовке, а скачивание файла происходит прямо
+  // сейчас — иначе первое нажатие «Скачать» сохранило бы файл без ключа.
+  async function получитьКлюч(): Promise<ДанныеКлюча | null> {
+    if (data) return data;
+    setBusy(true); setErr("");
+    try {
+      const r = await fetch("/api/account/memory-key", { cache: "no-store" });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok || !d?.ok || !d?.key) { setErr(t("mkErr")); return null; }
+      const свежие: ДанныеКлюча = { key: String(d.key), algorithm: d.algorithm, kdf: d.kdf, envelope: d.envelope };
+      setData(свежие);
+      return свежие;
+    } catch { setErr(t("netErr")); return null; }
+    finally { setBusy(false); }
+  }
+
+  async function переключить() {
+    if (shown) { setShown(false); return; }
+    if (await получитьКлюч()) setShown(true);
+  }
+
+  async function скачать() {
+    const k = await получитьКлюч();
+    if (!k) return;
+    // Файл собирается на стороне браузера: так ключ не проходит второй раз через
+    // сеть и не попадает ни в какое хранилище по дороге.
+    const строки = [
+      "CODE Eternal — " + t("mkTitle"),
+      email,
+      new Date().toISOString(),
+      "",
+      "KEY (base64): " + k.key,
+      "",
+      [k.algorithm, k.kdf, k.envelope].filter(Boolean).join("\n"),
+      "",
+      t("mkP1"),
+      t("mkP2"),
+      t("mkP3"),
+      "",
+    ];
+    const url = URL.createObjectURL(new Blob([строки.join("\n")], { type: "text/plain;charset=utf-8" }));
+    const a = document.createElement("a");
+    a.href = url; a.download = "code-memory-key.txt";
+    document.body.appendChild(a); a.click(); a.remove();
+    // Отпускаем ссылку не сразу: часть браузеров начинает читать Blob уже после
+    // возврата из click(), и мгновенный revoke обрывает скачивание пустым файлом.
+    setTimeout(() => URL.revokeObjectURL(url), 30_000);
+  }
+
+  return (
+    <Card>
+      <SectionTitle icon="🔑" title={t("mkTitle")} sub={t("mkSub")} />
+      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center", marginBottom: 12 }}>
+        <button className="cab-btn cab-btn-ghost" disabled={busy} onClick={переключить}>
+          {busy ? t("mkBusy") : shown ? t("mkHide") : t("mkShow")}
+        </button>
+        <button className="cab-btn cab-btn-ghost" disabled={busy} onClick={скачать}>⬇️ {t("mkDownload")}</button>
+      </div>
+      {shown && data && (
+        <div style={{ background: "#0B0F1A", border: "1px solid rgba(42,42,58,0.6)", borderRadius: 10, padding: "10px 14px", marginBottom: 12 }}>
+          <code style={{ fontSize: 14, color: TOKENS.cyan, wordBreak: "break-all", userSelect: "all" }}>{data.key}</code>
+        </div>
+      )}
+      {err && <div style={{ marginBottom: 12, fontSize: 15, color: TOKENS.red }}>{err}</div>}
+      <div style={{ display: "grid", gap: 8, fontSize: 15, color: TOKENS.mut, lineHeight: 1.5 }}>
+        <p style={{ margin: 0 }}>{t("mkP1")}</p>
+        <p style={{ margin: 0 }}>{t("mkP2")}</p>
+        <p style={{ margin: 0 }}>{t("mkP3")}</p>
+      </div>
+    </Card>
+  );
+}
+
 function DangerZone({ email }: { email: string }) {
   const { t } = useCabT();
   const [pinSet, setPinSet] = React.useState<boolean | null>(null);
@@ -214,6 +309,8 @@ export default function MemoryTab({ email }: { email: string }) {
       </Card>
 
       <ArchivesCard />
+
+      <MemoryKeyCard email={email} />
 
       <DangerZone email={email} />
     </div>

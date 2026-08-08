@@ -262,6 +262,16 @@ const D: Record<string, L4> = {
   dzDeleteScheduled: ["Запрос принят. Удаление через 72 ч. Письмо с отменой — на твою почту.", "Request accepted. Deletion in 72 h. A cancellation email has been sent to you.", "Solicitud aceptada. Eliminación en 72 h. Te hemos enviado un correo para cancelarla.", "请求已受理。将在 72 小时后删除，取消链接已发送到你的邮箱。"],
   dzDeleteFailed: ["Не удалось.", "Failed.", "No se pudo.", "操作失败。"],
   coinInspect: ["Рассмотреть монету $GALATIN", "Inspect the $GALATIN coin", "Examinar la moneda $GALATIN", "查看 $GALATIN 代币"],
+  mkTitle: ["Ключ вечной памяти", "Eternal memory key", "Clave de la memoria eterna", "永恒记忆密钥"],
+  mkSub: ["Личный ключ шифрования твоей памяти. Ключ у каждого свой.", "Your personal memory encryption key. Every person has their own.", "Tu clave personal de cifrado de la memoria. Cada persona tiene la suya.", "你的个人记忆加密密钥。每个人的密钥都不同。"],
+  mkShow: ["Показать мой ключ", "Show my key", "Mostrar mi clave", "显示我的密钥"],
+  mkHide: ["Скрыть ключ", "Hide key", "Ocultar la clave", "隐藏密钥"],
+  mkDownload: ["Скачать файл", "Download file", "Descargar archivo", "下载文件"],
+  mkBusy: ["Получаю…", "Loading…", "Obteniendo…", "获取中…"],
+  mkErr: ["Не удалось получить ключ. Попробуй позже.", "Could not get the key. Try again later.", "No se pudo obtener la clave. Inténtalo más tarde.", "无法获取密钥，请稍后再试。"],
+  mkP1: ["Этим ключом зашифрована твоя память в блокчейне Arweave.", "This key encrypts your memory in the Arweave blockchain.", "Esta clave cifra tu memoria en la cadena de bloques Arweave.", "此密钥用于加密你在 Arweave 区块链中的记忆。"],
+  mkP2: ["Записи в Arweave вечные: переписать или удалить их нельзя.", "Records on Arweave are permanent: they cannot be rewritten or deleted.", "Los registros en Arweave son permanentes: no se pueden reescribir ni borrar.", "Arweave 上的记录是永久的：无法改写，也无法删除。"],
+  mkP3: ["Если ключ утрачен и сервис исчез, расшифровать записи будет нельзя. Копию стоит хранить у себя.", "If the key is lost and the service is gone, the records cannot be decrypted. Keep your own copy.", "Si pierdes la clave y el servicio desaparece, los registros no podrán descifrarse. Guarda tu propia copia.", "如果密钥丢失且服务不复存在，这些记录将无法解密。请自行保存一份副本。"],
 };
 
 export function useCabT() {

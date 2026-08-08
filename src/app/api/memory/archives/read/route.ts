@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { decryptForUser } from '@/lib/user-key';
+import { decryptForUserTagged } from '@/lib/user-key';
 import { allowRequest } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
@@ -32,8 +32,15 @@ export async function GET(req: NextRequest) {
     }
     if (!cipher) return NextResponse.json({ error: 'gateway_unavailable' }, { status: 502 });
 
-    const text = await decryptForUser(email, cipher);
-    return NextResponse.json({ ok: true, text: text.slice(0, 200000) });
+    // Метку `AIFA-SRV1:` (конверт личного ключа) снимаем сами — с 08.08.2026
+    // центральный сайт ставит её на то, что заливает в Arweave.
+    //
+    // 🔴 ЧЕГО ЗДЕСЬ НЕТ: разбора СТАРОЙ схемы, где всё закрывалось одним общим
+    // ключом проекта. На этом сайте нет модуля `encryption.ts`, а значит и
+    // общего ключа — открыть такие сделки отсюда нечем, и так было всегда.
+    // Читаются они на центральном сайте, где разбор обеих схем есть.
+    const text = await decryptForUserTagged(email, cipher);
+    return NextResponse.json({ ok: true, scheme: 'user-key', text: text.slice(0, 200000) });
   } catch (e) {
     console.error('[archives/read]', e);
     return NextResponse.json({ error: 'decrypt_failed' }, { status: 500 });
