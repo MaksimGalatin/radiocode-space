@@ -62,13 +62,13 @@ function ArchivesCard() {
               return (
               <div key={a.txId + i} style={{ background: "#0B0F1A", border: "1px solid rgba(42,42,58,0.6)", borderRadius: 10 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, padding: "10px 14px", flexWrap: "wrap" }}>
-                  <span style={{ fontSize: 13, color: TOKENS.text }}>🔒 {label(a.chatType)}</span>
-                  <span style={{ fontSize: 11, color: TOKENS.mut }}>{a.size ? (a.size / 1024).toFixed(1) + " KB" : ""}{a.at ? " · " + String(a.at).slice(0, 10) : ""}</span>
+                  <span style={{ fontSize: 15, color: TOKENS.text }}>🔒 {label(a.chatType)}</span>
+                  <span style={{ fontSize: 14, color: TOKENS.mut }}>{a.size ? (a.size / 1024).toFixed(1) + " KB" : ""}{a.at ? " · " + String(a.at).slice(0, 10) : ""}</span>
                   <span style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <button className="cab-btn cab-btn-ghost" disabled={txBusy === a.txId} onClick={() => readTx(a.txId)} style={{ padding: "5px 12px", fontSize: 11 }}>
+                    <button className="cab-btn cab-btn-ghost" disabled={txBusy === a.txId} onClick={() => readTx(a.txId)} style={{ padding: "5px 12px", fontSize: 14 }}>
                       {txBusy === a.txId ? t("memReading") : openTx === a.txId ? t("memCollapse") : "📖 " + t("memRead")}
                     </button>
-                    <a href={`https://arweave.net/${a.txId}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 10, color: TOKENS.green, fontWeight: 700, textDecoration: "none" }}>ARWEAVE ↗</a>
+                    <a href={`https://arweave.net/${a.txId}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: TOKENS.green, fontWeight: 700, textDecoration: "none" }}>ARWEAVE ↗</a>
                   </span>
                 </div>
                 {openTx === a.txId && (
@@ -78,14 +78,14 @@ function ArchivesCard() {
                         {msgs.map((mm, k) => (
                           <div key={k} style={{ display: "flex", flexDirection: "column", alignItems: mm.role === "user" ? "flex-end" : "flex-start" }}>
                             <div style={{ maxWidth: "85%", background: mm.role === "user" ? "rgba(124,58,237,0.15)" : "rgba(6,182,212,0.1)", border: `1px solid ${mm.role === "user" ? "rgba(124,58,237,0.3)" : "rgba(6,182,212,0.25)"}`, borderRadius: 12, padding: "8px 12px" }}>
-                              <div style={{ fontSize: 10, color: TOKENS.mut, marginBottom: 3 }}>{mm.role === "user" ? "🧑" : "🤖 AIfa"} · {mm.ts}</div>
-                              <div style={{ fontSize: 13, color: TOKENS.text, whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.5 }}>{mm.content}</div>
+                              <div style={{ fontSize: 13, color: TOKENS.mut, marginBottom: 3 }}>{mm.role === "user" ? "🧑" : "🤖 AIfa"} · {mm.ts}</div>
+                              <div style={{ fontSize: 15, color: TOKENS.text, whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.5 }}>{mm.content}</div>
                             </div>
                           </div>
                         ))}
                       </div>
                     ) : (
-                      <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word", fontSize: 12, color: TOKENS.text, margin: 0, maxHeight: 320, overflowY: "auto" }}>{txText.slice(0, 40000)}</pre>
+                      <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word", fontSize: 15, color: TOKENS.text, margin: 0, maxHeight: 320, overflowY: "auto" }}>{txText.slice(0, 40000)}</pre>
                     )}
                   </div>
                 )}
@@ -136,10 +136,10 @@ function DangerZone({ email }: { email: string }) {
         <input type="password" inputMode="numeric" className="cab-input" value={pin} onChange={e => setPin(e.target.value.replace(/[^0-9]/g, "").slice(0, 8))} placeholder={t("dzPinPh")} style={{ flex: "1 1 160px", width: "auto" }} />
         <button className="cab-btn cab-btn-ghost" disabled={busy || pin.length < 4} onClick={() => savePin("set")}>{t("dzPinSetBtn")}</button>
         {pinSet && <button className="cab-btn cab-btn-ghost" disabled={busy} onClick={() => savePin("clear")}>{t("dzPinClearBtn")}</button>}
-        <span style={{ fontSize: 12, color: pinSet ? TOKENS.green : TOKENS.mut }}>{pinSet === null ? "" : pinSet ? t("dzPinActive") : t("dzPinNone")}</span>
+        <span style={{ fontSize: 15, color: pinSet ? TOKENS.green : TOKENS.mut }}>{pinSet === null ? "" : pinSet ? t("dzPinActive") : t("dzPinNone")}</span>
       </div>
       <button className="cab-btn" onClick={requestDelete} disabled={busy} style={{ background: "linear-gradient(135deg,#ef4444,#b91c1c)" }}>🗑️ {t("dzDeleteBtn")}</button>
-      {msg && <div style={{ marginTop: 10, fontSize: 12, color: msg.includes("✓") || msg.includes("72") ? TOKENS.green : TOKENS.red }}>{msg}</div>}
+      {msg && <div style={{ marginTop: 10, fontSize: 15, color: msg.includes("✓") || msg.includes("72") ? TOKENS.green : TOKENS.red }}>{msg}</div>}
     </Card>
   );
 }
@@ -175,7 +175,7 @@ export default function MemoryTab({ email }: { email: string }) {
                 const msgs = parseChat(ch.text);
                 return (
                   <div key={ch.chatType} style={{ background: "#0B0F1A", border: "1px solid rgba(42,42,58,0.6)", borderRadius: 12, padding: 14 }}>
-                    <div style={{ fontSize: 12, color: TOKENS.cyan, fontWeight: 700, marginBottom: 10 }}>{chatLabel(ch.chatType)}</div>
+                    <div style={{ fontSize: 15, color: TOKENS.cyan, fontWeight: 700, marginBottom: 10 }}>{chatLabel(ch.chatType)}</div>
                     {msgs.length ? (
                       <div style={{ display: "grid", gap: 8, maxHeight: 460, overflowY: "auto" }}>
                         {(() => {
@@ -188,13 +188,13 @@ export default function MemoryTab({ email }: { email: string }) {
                           }
                           return groups.map((g, gi) => (
                             <details key={g.date} open={gi === groups.length - 1}>
-                              <summary style={{ cursor: "pointer", fontSize: 12, color: TOKENS.mut, fontWeight: 700, padding: "4px 0" }}>📅 {g.date} · {g.items.length} {t("archMsgs")}</summary>
+                              <summary style={{ cursor: "pointer", fontSize: 15, color: TOKENS.mut, fontWeight: 700, padding: "4px 0" }}>📅 {g.date} · {g.items.length} {t("archMsgs")}</summary>
                               <div style={{ display: "grid", gap: 8, paddingTop: 6 }}>
                                 {g.items.map((mm, i) => (
                                   <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: mm.role === "user" ? "flex-end" : "flex-start" }}>
                                     <div style={{ maxWidth: "85%", background: mm.role === "user" ? "rgba(124,58,237,0.15)" : "rgba(6,182,212,0.1)", border: `1px solid ${mm.role === "user" ? "rgba(124,58,237,0.3)" : "rgba(6,182,212,0.25)"}`, borderRadius: 12, padding: "8px 12px" }}>
-                                      <div style={{ fontSize: 10, color: TOKENS.mut, marginBottom: 3 }}>{mm.role === "user" ? "🧑 " + email.split("@")[0] : "🤖 AIfa"} · {mm.ts}</div>
-                                      <div style={{ fontSize: 13, color: TOKENS.text, whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.5 }}>{mm.content}</div>
+                                      <div style={{ fontSize: 13, color: TOKENS.mut, marginBottom: 3 }}>{mm.role === "user" ? "🧑 " + email.split("@")[0] : "🤖 AIfa"} · {mm.ts}</div>
+                                      <div style={{ fontSize: 15, color: TOKENS.text, whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.5 }}>{mm.content}</div>
                                     </div>
                                   </div>
                                 ))}
@@ -204,7 +204,7 @@ export default function MemoryTab({ email }: { email: string }) {
                         })()}
                       </div>
                     ) : (
-                      <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word", fontSize: 12, color: TOKENS.text, margin: 0, maxHeight: 320, overflowY: "auto" }}>{ch.text.slice(0, 20000)}</pre>
+                      <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word", fontSize: 15, color: TOKENS.text, margin: 0, maxHeight: 320, overflowY: "auto" }}>{ch.text.slice(0, 20000)}</pre>
                     )}
                   </div>
                 );

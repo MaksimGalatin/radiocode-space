@@ -58,8 +58,8 @@ export default function TiersTab(props: { tier: number; toast: (m: string) => vo
     <div style={{ display: "grid", gap: 16 }} className="cab-fade">
       {paidBanner === 1 && (
         <Card style={{ borderColor: "rgba(16,185,129,0.5)", padding: 16 }}>
-          <div style={{ fontSize: 14, color: TOKENS.green, fontWeight: 700 }}>{t("paySuccess")}</div>
-          <div style={{ fontSize: 12, color: TOKENS.mut, marginTop: 4 }}>{t("payPendingBanner")}</div>
+          <div style={{ fontSize: 16, color: TOKENS.green, fontWeight: 700 }}>{t("paySuccess")}</div>
+          <div style={{ fontSize: 15, color: TOKENS.mut, marginTop: 4 }}>{t("payPendingBanner")}</div>
         </Card>
       )}
       <div className="cab-cols3">
@@ -68,15 +68,15 @@ export default function TiersTab(props: { tier: number; toast: (m: string) => vo
           const below = props.tier > tr.id;
           return (
             <div key={tr.id} className="cab-card cab-card-hover" style={{ padding: "26px 20px", textAlign: "center", borderColor: active ? tr.color : undefined, position: "relative", overflow: "hidden" }}>
-              {tr.id === 2 && <div style={{ position: "absolute", top: 0, right: 0, background: "rgba(212,162,76,0.15)", color: TOKENS.gold, fontSize: 9, fontWeight: 800, padding: "3px 10px", borderBottomLeftRadius: 10, letterSpacing: 1 }}>POPULAR</div>}
+              {tr.id === 2 && <div style={{ position: "absolute", top: 0, right: 0, background: "rgba(212,162,76,0.15)", color: TOKENS.gold, fontSize: 13, fontWeight: 800, padding: "3px 10px", borderBottomLeftRadius: 10, letterSpacing: 1 }}>POPULAR</div>}
               <div style={{ fontSize: 34 }}>{tr.icon}</div>
               <div style={{ fontSize: 17, fontWeight: 800, color: TOKENS.text, marginTop: 4 }}>{tr.name}</div>
               <div style={{ fontSize: 28, fontWeight: 800, color: tr.color, margin: "8px 0 2px" }}>${tr.price}</div>
-              {tr.id === 3 && <div style={{ fontSize: 11, color: TOKENS.mut, marginBottom: 10 }}>{lang === "ru" ? "разово, далее $200/мес" : lang === "es" ? "pago único, luego $200/mes" : lang === "zh" ? "一次性，之后每月 $200" : "one-time, then $200/mo"}</div>}
+              {tr.id === 3 && <div style={{ fontSize: 14, color: TOKENS.mut, marginBottom: 10 }}>{lang === "ru" ? "разово, далее $200/мес" : lang === "es" ? "pago único, luego $200/mes" : lang === "zh" ? "一次性，之后每月 $200" : "one-time, then $200/mo"}</div>}
               {tr.id !== 3 && <div style={{ height: 12 }} />}
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 18px", textAlign: "left", display: "grid", gap: 8 }}>
                 {(BENEFITS[tr.id] || []).map((b, i) => (
-                  <li key={i} style={{ fontSize: 12, color: TOKENS.sub, lineHeight: 1.45, display: "flex", gap: 7 }}>
+                  <li key={i} style={{ fontSize: 15, color: TOKENS.sub, lineHeight: 1.45, display: "flex", gap: 7 }}>
                     <span style={{ color: tr.color }}>✓</span>{b[li]}
                   </li>
                 ))}
@@ -95,7 +95,7 @@ export default function TiersTab(props: { tier: number; toast: (m: string) => vo
           );
         })}
       </div>
-      <div style={{ fontSize: 12, color: TOKENS.mut, textAlign: "center" }}>{t("tiersPayNote")}</div>
+      <div style={{ fontSize: 15, color: TOKENS.mut, textAlign: "center" }}>{t("tiersPayNote")}</div>
 
       <Card>
         <SectionTitle icon="🧾" title={t("payHistory")} />
@@ -106,7 +106,7 @@ export default function TiersTab(props: { tier: number; toast: (m: string) => vo
               <tbody>
                 {orders.map(o => (
                   <tr key={o.order_id}>
-                    <td style={{ fontFamily: "monospace", fontSize: 11 }}>{String(o.order_id).slice(0, 18)}…</td>
+                    <td style={{ fontFamily: "monospace", fontSize: 14 }}>{String(o.order_id).slice(0, 18)}…</td>
                     <td>{TIERS.find(x => x.id === Number(o.tier))?.name || o.tier}</td>
                     <td>${Number(o.amount)}</td>
                     <td style={{ color: o.status === "paid" ? TOKENS.green : TOKENS.amber, fontWeight: 700 }}>{o.status}</td>

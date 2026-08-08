@@ -96,3 +96,22 @@
   html:not(.dark) .cab-bg-scan { opacity: 0.05; }
   html:not(.dark) .cab-bg-vig { background: radial-gradient(ellipse at center, transparent 62%, rgba(20,20,60,0.10) 100%); }
   html:not(.dark) .cab-pass { background: linear-gradient(160deg, #ffffff 0%, #f3f5fc 55%, #eef1fb 100%); border-color: rgba(124,58,237,0.28); }
+
+/* ── 🔴 ШРИФТЫ БЫЛИ НЕЧИТАЕМО МЕЛКИМИ. ПОЧИНЕНО 08.08.2026 ──────────────────
+   Замер: в кабинете 145 мест с размером 9–13 пикселей (45 по 11px, 65 по 12px).
+   Для основного текста норма — от 14px; мельче читают только молодые глаза на
+   хорошем экране, а на телефоне не читает никто.
+   Шкала поднята: 9→13, 10→13, 11→14, 12→15, 13→15, 14→16, 15→16.
+
+   Ниже — страховка на узких экранах. Браузер телефона ужимает вёрстку, и то,
+   что на столе выглядит мелким, там становится нечитаемым совсем. Поэтому на
+   ширине до 640px минимальный размер текста поднимается принудительно. */
+@media (max-width: 640px) {
+  .cab-root, .cab-root p, .cab-root div, .cab-root span, .cab-root td, .cab-root th,
+  .cab-root button, .cab-root input, .cab-root label, .cab-root li {
+    font-size: max(1em, 15px);
+    line-height: 1.55;
+  }
+  /* Поля ввода: меньше 16px — и Safari на айфоне сам приближает страницу. */
+  .cab-root input, .cab-root textarea, .cab-root select { font-size: 16px; }
+}

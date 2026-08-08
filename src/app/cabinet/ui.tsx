@@ -27,7 +27,7 @@ export function SectionTitle(props: { icon?: string; title: string; sub?: string
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10, flexWrap: "wrap", marginBottom: 16 }}>
       <div>
         <div style={{ fontSize: 16, fontWeight: 700, color: TOKENS.text }}>{props.icon ? props.icon + " " : ""}{props.title}</div>
-        {props.sub && <div style={{ fontSize: 13, color: TOKENS.mut, marginTop: 4, lineHeight: 1.5 }}>{props.sub}</div>}
+        {props.sub && <div style={{ fontSize: 15, color: TOKENS.mut, marginTop: 4, lineHeight: 1.5 }}>{props.sub}</div>}
       </div>
       {props.right}
     </div>
@@ -39,14 +39,14 @@ export function Skeleton({ h = 16, w = "100%", style }: { h?: number; w?: number
 }
 
 export function EmptyState({ text }: { text: string }) {
-  return <div style={{ padding: "28px 10px", textAlign: "center", color: TOKENS.mut, fontSize: 13 }}>{text}</div>;
+  return <div style={{ padding: "28px 10px", textAlign: "center", color: TOKENS.mut, fontSize: 15 }}>{text}</div>;
 }
 
 export function ErrorState({ text, onRetry, retryLabel }: { text: string; onRetry?: () => void; retryLabel?: string }) {
   return (
     <div style={{ padding: "22px 10px", textAlign: "center" }}>
-      <div style={{ color: TOKENS.red, fontSize: 13, marginBottom: 10 }}>{text}</div>
-      {onRetry && <button className="cab-btn cab-btn-ghost" onClick={onRetry} style={{ padding: "8px 16px", fontSize: 12 }}>{retryLabel || "Retry"}</button>}
+      <div style={{ color: TOKENS.red, fontSize: 15, marginBottom: 10 }}>{text}</div>
+      {onRetry && <button className="cab-btn cab-btn-ghost" onClick={onRetry} style={{ padding: "8px 16px", fontSize: 15 }}>{retryLabel || "Retry"}</button>}
     </div>
   );
 }

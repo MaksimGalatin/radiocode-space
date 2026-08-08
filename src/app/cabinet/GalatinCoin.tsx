@@ -101,7 +101,7 @@ export function GalatinCoin({ size = 22, title = "$GALATIN", interactive = true 
           <CoinSvg size={size} title={title} full />
         </div>
       </div>
-      <div style={{ position: "fixed", left: 0, right: 0, bottom: "7%", textAlign: "center", color: "#E9C066", fontSize: 13, letterSpacing: 0.6, opacity: 0.72, fontFamily: "Arial, sans-serif", pointerEvents: "none" }}>
+      <div style={{ position: "fixed", left: 0, right: 0, bottom: "7%", textAlign: "center", color: "#E9C066", fontSize: 15, letterSpacing: 0.6, opacity: 0.72, fontFamily: "Arial, sans-serif", pointerEvents: "none" }}>
         $GALATIN · CODE Eternal
       </div>
       {/* Оформление переехало в GalatinCoin.css */}

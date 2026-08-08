@@ -89,11 +89,11 @@ export default function DailiesTab(props: { onGalatin: (balance: number | null, 
               const active = day === st.claimedDay + 1 && st.canClaim;
               return (
                 <div key={day} className="cab-card" style={{ padding: "16px 10px", textAlign: "center", borderColor: active ? "rgba(34,211,238,0.5)" : claimed ? "rgba(16,185,129,0.4)" : undefined }}>
-                  <div style={{ fontSize: 11, color: TOKENS.mut, marginBottom: 6 }}>{t("day").toUpperCase()} {day}</div>
+                  <div style={{ fontSize: 14, color: TOKENS.mut, marginBottom: 6 }}>{t("day").toUpperCase()} {day}</div>
                   <div style={{ marginBottom: 6, display: "flex", justifyContent: "center" }}><GalatinCoin size={44} /></div>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: TOKENS.gold }}>+{day} GALATIN</div>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: TOKENS.gold }}>+{day} GALATIN</div>
                   <button className="cab-btn" disabled={!active || !!busy} onClick={claimDaily}
-                    style={{ marginTop: 8, width: "100%", padding: 6, fontSize: 11, borderRadius: 8,
+                    style={{ marginTop: 8, width: "100%", padding: 6, fontSize: 14, borderRadius: 8,
                       background: claimed ? "rgba(16,185,129,0.15)" : active ? "linear-gradient(135deg,#06B6D4,#7C3AED)" : "#2A2A3A",
                       color: claimed ? TOKENS.green : "#fff" }}>
                     {claimed ? t("claimed") : active ? t("claim") : t("locked")}
@@ -103,7 +103,7 @@ export default function DailiesTab(props: { onGalatin: (balance: number | null, 
             })}
           </div>
         )}
-        {msg && <div role="status" style={{ marginTop: 14, fontSize: 13, color: msgErr ? TOKENS.red : TOKENS.green, textAlign: "center" }}>{msg}</div>}
+        {msg && <div role="status" style={{ marginTop: 14, fontSize: 15, color: msgErr ? TOKENS.red : TOKENS.green, textAlign: "center" }}>{msg}</div>}
       </Card>
 
       <Card>
@@ -114,7 +114,7 @@ export default function DailiesTab(props: { onGalatin: (balance: number | null, 
           <div className="cab-cols2">
             {(["daily", "weekly"] as const).map(period => (
               <div key={period}>
-                <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: 1.5, color: period === "daily" ? TOKENS.cyan : TOKENS.violet, marginBottom: 10 }}>
+                <div style={{ fontSize: 14, fontWeight: 800, letterSpacing: 1.5, color: period === "daily" ? TOKENS.cyan : TOKENS.violet, marginBottom: 10 }}>
                   {period === "daily" ? t("qDaily") : t("qWeekly")}
                 </div>
                 <div style={{ display: "grid", gap: 10 }}>
@@ -123,15 +123,15 @@ export default function DailiesTab(props: { onGalatin: (balance: number | null, 
                     return (
                       <div key={q.quest} className="cab-card" style={{ padding: 14, borderColor: ready ? "rgba(212,162,76,0.5)" : undefined }}>
                         <div style={{ display: "flex", justifyContent: "space-between", gap: 10, marginBottom: 8, alignItems: "center" }}>
-                          <div style={{ fontSize: 13, fontWeight: 600, color: TOKENS.text }}>{t("q_" + q.quest)}</div>
-                          <div style={{ fontSize: 12, fontWeight: 700, color: TOKENS.gold, whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 4 }}>+{q.reward} <GalatinCoin size={20} /></div>
+                          <div style={{ fontSize: 15, fontWeight: 600, color: TOKENS.text }}>{t("q_" + q.quest)}</div>
+                          <div style={{ fontSize: 15, fontWeight: 700, color: TOKENS.gold, whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 4 }}>+{q.reward} <GalatinCoin size={20} /></div>
                         </div>
                         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                           <div style={{ flex: 1 }}><ProgressBar value={q.progress} max={q.target} /></div>
-                          <div style={{ fontSize: 11, color: TOKENS.mut, whiteSpace: "nowrap" }}>{q.progress}/{q.target}</div>
+                          <div style={{ fontSize: 14, color: TOKENS.mut, whiteSpace: "nowrap" }}>{q.progress}/{q.target}</div>
                           {q.claimed
-                            ? <span style={{ fontSize: 11, color: TOKENS.green, whiteSpace: "nowrap" }}>{t("qDone")}</span>
-                            : <button className="cab-btn cab-btn-primary" disabled={!ready || busy === q.quest} onClick={() => claimQuest(q)} style={{ padding: "6px 12px", fontSize: 11 }}>{t("qClaim", { n: q.reward })}</button>}
+                            ? <span style={{ fontSize: 14, color: TOKENS.green, whiteSpace: "nowrap" }}>{t("qDone")}</span>
+                            : <button className="cab-btn cab-btn-primary" disabled={!ready || busy === q.quest} onClick={() => claimQuest(q)} style={{ padding: "6px 12px", fontSize: 14 }}>{t("qClaim", { n: q.reward })}</button>}
                         </div>
                       </div>
                     );

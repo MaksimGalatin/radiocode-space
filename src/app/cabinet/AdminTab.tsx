@@ -69,7 +69,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
             onKeyDown={e => { if (e.key === "Enter") enter(); }} placeholder="Admin password" style={{ flex: "1 1 200px", width: "auto" }} />
           <button className="cab-btn cab-btn-violet" onClick={enter}>{t("admEnter")}</button>
         </div>
-        {err && <div style={{ marginTop: 10, fontSize: 12, color: TOKENS.red }}>{err}</div>}
+        {err && <div style={{ marginTop: 10, fontSize: 15, color: TOKENS.red }}>{err}</div>}
       </Card>
     );
   }
@@ -83,13 +83,13 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
     <div className="cab-fade">
       <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 16 }}>
         {SUBS.map(([id, label]) => (
-          <button key={id} className="cab-tab" aria-selected={sub === id} onClick={() => setSub(id)} style={{ fontSize: 12, padding: "8px 12px" }}>{label}</button>
+          <button key={id} className="cab-tab" aria-selected={sub === id} onClick={() => setSub(id)} style={{ fontSize: 15, padding: "8px 12px" }}>{label}</button>
         ))}
       </div>
 
       {sub === "stats" && (
         <Card>
-          <SectionTitle icon="📊" title={t("admStats")} right={<button className="cab-btn cab-btn-ghost" onClick={loadStats} style={{ padding: "6px 12px", fontSize: 12 }}>↻</button>} />
+          <SectionTitle icon="📊" title={t("admStats")} right={<button className="cab-btn cab-btn-ghost" onClick={loadStats} style={{ padding: "6px 12px", fontSize: 15 }}>↻</button>} />
           {!stats ? <Skeleton h={120} /> : (
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))", gap: 12 }}>
               {[
@@ -103,7 +103,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
                 ["📨 Submissions", stats.submissions],
               ].map(([k, v]) => (
                 <div key={String(k)} style={{ background: "#13131C", border: "1px solid #2A2A3A", borderRadius: 12, padding: 14 }}>
-                  <div style={{ fontSize: 11, color: TOKENS.mut }}>{k}</div>
+                  <div style={{ fontSize: 14, color: TOKENS.mut }}>{k}</div>
                   <div style={{ fontSize: 20, fontWeight: 800, color: TOKENS.text, marginTop: 4 }}>{String(v)}</div>
                 </div>
               ))}
@@ -116,8 +116,8 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
         <Card>
           <SectionTitle icon="👥" title={t("admUsers")} right={
             <div style={{ display: "flex", gap: 8 }}>
-              <input className="cab-input" value={uQ} onChange={e => setUQ(e.target.value)} onKeyDown={e => { if (e.key === "Enter") loadUsers(0, uQ); }} placeholder="search email…" style={{ width: 180, padding: "7px 10px", fontSize: 12 }} />
-              <button className="cab-btn cab-btn-ghost" onClick={() => loadUsers(0, uQ)} style={{ padding: "6px 12px", fontSize: 12 }}>🔍</button>
+              <input className="cab-input" value={uQ} onChange={e => setUQ(e.target.value)} onKeyDown={e => { if (e.key === "Enter") loadUsers(0, uQ); }} placeholder="search email…" style={{ width: 180, padding: "7px 10px", fontSize: 15 }} />
+              <button className="cab-btn cab-btn-ghost" onClick={() => loadUsers(0, uQ)} style={{ padding: "6px 12px", fontSize: 15 }}>🔍</button>
             </div>} />
           {!users ? <Skeleton h={160} /> : users.length === 0 ? <EmptyState text={t("empty")} /> : (
             <div style={{ overflowX: "auto" }}>
@@ -126,7 +126,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
                 <tbody>
                   {users.map(u => (
                     <tr key={u.email}>
-                      <td style={{ fontFamily: "monospace", fontSize: 12 }}>{u.email}</td>
+                      <td style={{ fontFamily: "monospace", fontSize: 15 }}>{u.email}</td>
                       <td>{u.username ? "@" + u.username : "—"}</td>
                       <td>{u.xp}</td><td>{u.tier || "—"}</td>
                       <td style={{ color: TOKENS.gold }}>{u.galatin}</td><td>{u.invited}</td>
@@ -136,9 +136,9 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
                 </tbody>
               </table>
               <div style={{ display: "flex", gap: 8, justifyContent: "center", marginTop: 12 }}>
-                <button className="cab-btn cab-btn-ghost" disabled={uPage <= 0} onClick={() => loadUsers(uPage - 1, uQ)} style={{ padding: "5px 12px", fontSize: 12 }}>←</button>
-                <span style={{ fontSize: 12, color: TOKENS.mut, alignSelf: "center" }}>{uPage + 1}</span>
-                <button className="cab-btn cab-btn-ghost" disabled={!uMore} onClick={() => loadUsers(uPage + 1, uQ)} style={{ padding: "5px 12px", fontSize: 12 }}>→</button>
+                <button className="cab-btn cab-btn-ghost" disabled={uPage <= 0} onClick={() => loadUsers(uPage - 1, uQ)} style={{ padding: "5px 12px", fontSize: 15 }}>←</button>
+                <span style={{ fontSize: 15, color: TOKENS.mut, alignSelf: "center" }}>{uPage + 1}</span>
+                <button className="cab-btn cab-btn-ghost" disabled={!uMore} onClick={() => loadUsers(uPage + 1, uQ)} style={{ padding: "5px 12px", fontSize: 15 }}>→</button>
               </div>
             </div>
           )}
@@ -147,7 +147,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
 
       {sub === "payouts" && (
         <Card>
-          <SectionTitle icon="💸" title={t("admPayouts")} right={<button className="cab-btn cab-btn-ghost" onClick={loadPayouts} style={{ padding: "6px 12px", fontSize: 12 }}>↻</button>} />
+          <SectionTitle icon="💸" title={t("admPayouts")} right={<button className="cab-btn cab-btn-ghost" onClick={loadPayouts} style={{ padding: "6px 12px", fontSize: 15 }}>↻</button>} />
           {!payouts ? <Skeleton h={120} /> : payouts.length === 0 ? <EmptyState text={t("empty")} /> : (
             <div style={{ overflowX: "auto" }}>
               <table className="cab-table">
@@ -155,16 +155,16 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
                 <tbody>
                   {payouts.map(p => (
                     <tr key={p.id}>
-                      <td style={{ fontFamily: "monospace", fontSize: 12 }}>{p.email}</td>
+                      <td style={{ fontFamily: "monospace", fontSize: 15 }}>{p.email}</td>
                       <td style={{ color: TOKENS.green, fontWeight: 700 }}>${Number(p.amount).toFixed(2)}</td>
-                      <td style={{ fontFamily: "monospace", fontSize: 11 }}>{p.address}</td>
+                      <td style={{ fontFamily: "monospace", fontSize: 14 }}>{p.address}</td>
                       <td style={{ color: p.status === "pending" ? TOKENS.amber : p.status === "paid" ? TOKENS.green : TOKENS.red }}>{p.status}</td>
                       <td style={{ color: TOKENS.mut }}>{String(p.created_at).slice(0, 10)}</td>
                       <td>
                         {p.status === "pending" && (
                           <div style={{ display: "flex", gap: 6 }}>
-                            <button className="cab-btn cab-btn-green" onClick={() => markPayout(p.id, "paid")} style={{ padding: "4px 10px", fontSize: 11 }}>PAID</button>
-                            <button className="cab-btn cab-btn-ghost" onClick={() => markPayout(p.id, "rejected")} style={{ padding: "4px 10px", fontSize: 11, color: TOKENS.red }}>✕</button>
+                            <button className="cab-btn cab-btn-green" onClick={() => markPayout(p.id, "paid")} style={{ padding: "4px 10px", fontSize: 14 }}>PAID</button>
+                            <button className="cab-btn cab-btn-ghost" onClick={() => markPayout(p.id, "rejected")} style={{ padding: "4px 10px", fontSize: 14, color: TOKENS.red }}>✕</button>
                           </div>
                         )}
                       </td>
@@ -179,7 +179,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
 
       {sub === "inbox" && (
         <Card>
-          <SectionTitle icon="📥" title={t("admInbox")} right={<button className="cab-btn cab-btn-ghost" onClick={loadInbox} style={{ padding: "6px 12px", fontSize: 12 }}>↻</button>} />
+          <SectionTitle icon="📥" title={t("admInbox")} right={<button className="cab-btn cab-btn-ghost" onClick={loadInbox} style={{ padding: "6px 12px", fontSize: 15 }}>↻</button>} />
           {!inbox ? <Skeleton h={120} /> : inbox.length === 0 ? <EmptyState text={t("empty")} /> : (
             <div style={{ overflowX: "auto" }}>
               <table className="cab-table">
@@ -188,8 +188,8 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
                   {inbox.map((s: any) => (
                     <tr key={s.id}>
                       <td>{s.site}</td><td>{s.kind}</td><td>{s.name || "—"}</td>
-                      <td style={{ fontFamily: "monospace", fontSize: 11 }}>{s.email || "—"}</td>
-                      <td style={{ fontSize: 11, color: TOKENS.sub, maxWidth: 300, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={s.message || ""}>{s.message || "—"}</td>
+                      <td style={{ fontFamily: "monospace", fontSize: 14 }}>{s.email || "—"}</td>
+                      <td style={{ fontSize: 14, color: TOKENS.sub, maxWidth: 300, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={s.message || ""}>{s.message || "—"}</td>
                       <td style={{ color: TOKENS.mut }}>{String(s.created_at).slice(0, 16).replace("T", " ")}</td>
                     </tr>
                   ))}
@@ -204,9 +204,9 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
         <Card>
           <SectionTitle icon="🪙" title={t("admCredit")} sub="Manual GALATIN credit/debit — audited." />
           <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 2fr auto", gap: 10, alignItems: "end" }} className="cab-cols2">
-            <div><label style={{ fontSize: 11, color: TOKENS.mut }}>Email</label><input className="cab-input" value={cEmail} onChange={e => setCEmail(e.target.value)} placeholder="user@…" /></div>
-            <div><label style={{ fontSize: 11, color: TOKENS.mut }}>Amount ±</label><input className="cab-input" value={cAmt} onChange={e => setCAmt(e.target.value.replace(/[^0-9-]/g, ""))} placeholder="100" /></div>
-            <div><label style={{ fontSize: 11, color: TOKENS.mut }}>Note</label><input className="cab-input" value={cNote} onChange={e => setCNote(e.target.value)} placeholder="reason…" /></div>
+            <div><label style={{ fontSize: 14, color: TOKENS.mut }}>Email</label><input className="cab-input" value={cEmail} onChange={e => setCEmail(e.target.value)} placeholder="user@…" /></div>
+            <div><label style={{ fontSize: 14, color: TOKENS.mut }}>Amount ±</label><input className="cab-input" value={cAmt} onChange={e => setCAmt(e.target.value.replace(/[^0-9-]/g, ""))} placeholder="100" /></div>
+            <div><label style={{ fontSize: 14, color: TOKENS.mut }}>Note</label><input className="cab-input" value={cNote} onChange={e => setCNote(e.target.value)} placeholder="reason…" /></div>
             <button className="cab-btn cab-btn-primary" disabled={cBusy || !cEmail || !cAmt} onClick={credit}>OK</button>
           </div>
         </Card>
@@ -214,7 +214,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
 
       {sub === "audit" && (
         <Card>
-          <SectionTitle icon="📝" title={t("admAudit")} right={<button className="cab-btn cab-btn-ghost" onClick={loadAudit} style={{ padding: "6px 12px", fontSize: 12 }}>↻</button>} />
+          <SectionTitle icon="📝" title={t("admAudit")} right={<button className="cab-btn cab-btn-ghost" onClick={loadAudit} style={{ padding: "6px 12px", fontSize: 15 }}>↻</button>} />
           {!audit ? <Skeleton h={120} /> : audit.length === 0 ? <EmptyState text={t("empty")} /> : (
             <div style={{ overflowX: "auto" }}>
               <table className="cab-table">
@@ -224,9 +224,9 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
                     <tr key={a.id}>
                       <td>{a.id}</td>
                       <td style={{ fontWeight: 700, color: a.action.includes("failed") ? TOKENS.red : TOKENS.cyan }}>{a.action}</td>
-                      <td style={{ fontSize: 11, fontFamily: "monospace", color: TOKENS.sub, maxWidth: 320, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={JSON.stringify(a.detail)}>{JSON.stringify(a.detail)}</td>
-                      <td style={{ fontSize: 11, color: TOKENS.mut }}>{a.ip || "—"}</td>
-                      <td style={{ color: TOKENS.mut, fontSize: 11 }}>{String(a.created_at).slice(0, 19).replace("T", " ")}</td>
+                      <td style={{ fontSize: 14, fontFamily: "monospace", color: TOKENS.sub, maxWidth: 320, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={JSON.stringify(a.detail)}>{JSON.stringify(a.detail)}</td>
+                      <td style={{ fontSize: 14, color: TOKENS.mut }}>{a.ip || "—"}</td>
+                      <td style={{ color: TOKENS.mut, fontSize: 14 }}>{String(a.created_at).slice(0, 19).replace("T", " ")}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -251,7 +251,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
               ["🌐 Arweave ViewBlock", "https://viewblock.io/arweave"],
             ].map(([label, url]) => (
               <a key={url} className="cab-card cab-card-hover" href={url} target="_blank" rel="noopener noreferrer"
-                style={{ padding: 16, textDecoration: "none", color: TOKENS.text, fontSize: 13, fontWeight: 600, display: "block" }}>
+                style={{ padding: 16, textDecoration: "none", color: TOKENS.text, fontSize: 15, fontWeight: 600, display: "block" }}>
                 {label} <span style={{ color: TOKENS.cyan }}>↗</span>
               </a>
             ))}

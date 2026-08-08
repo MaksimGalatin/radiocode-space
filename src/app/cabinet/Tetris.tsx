@@ -153,15 +153,15 @@ export default function Tetris({ lang, onWin, onGameEnd }: { lang: string; onWin
         </div>
       </div>
       <div style={{ minWidth: 130 }}>
-        <div style={{ fontSize: 12, color: TOKENS.mut }}>{L("Счёт", "Score", "Puntos", "得分")}</div>
+        <div style={{ fontSize: 15, color: TOKENS.mut }}>{L("Счёт", "Score", "Puntos", "得分")}</div>
         <div style={{ fontSize: 24, fontWeight: 800, color: TOKENS.cyan }}>{score}</div>
-        <div style={{ fontSize: 12, color: TOKENS.mut, marginTop: 8 }}>{L("Линии", "Lines", "Líneas", "行数")} · {L("награда за каждые", "reward every", "premio cada", "每消行奖励：")} {MILESTONE}</div>
+        <div style={{ fontSize: 15, color: TOKENS.mut, marginTop: 8 }}>{L("Линии", "Lines", "Líneas", "行数")} · {L("награда за каждые", "reward every", "premio cada", "每消行奖励：")} {MILESTONE}</div>
         <div style={{ fontSize: 24, fontWeight: 800, color: TOKENS.gold }}>{lines}</div>
-        <div style={{ fontSize: 12, color: TOKENS.mut, marginTop: 14, marginBottom: 6 }}>{L("Следующая", "Next", "Siguiente", "下一个")}</div>
+        <div style={{ fontSize: 15, color: TOKENS.mut, marginTop: 14, marginBottom: 6 }}>{L("Следующая", "Next", "Siguiente", "下一个")}</div>
         <div style={{ display: "inline-grid", gridTemplateColumns: `repeat(${next.m[0].length}, 16px)`, gap: 1 }}>
           {next.m.flat().map((v, i) => <div key={i} style={{ width: 16, height: 16, borderRadius: 2, background: v ? next.c : "transparent" }} />)}
         </div>
-        <div style={{ fontSize: 11, color: TOKENS.mut, marginTop: 14, lineHeight: 1.6 }}>
+        <div style={{ fontSize: 14, color: TOKENS.mut, marginTop: 14, lineHeight: 1.6 }}>
           ← → ▼ · ↑ {L("поворот", "rotate", "girar", "旋转")} · Space {L("сброс", "drop", "caída", "速降")}
         </div>
       </div>

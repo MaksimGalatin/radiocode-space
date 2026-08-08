@@ -312,7 +312,7 @@ export default function CabinetPage() {
     ...(isOwner ? [{ id: "admin" as Tab, icon: "🔐", label: t("tabAdmin") }] : []),
   ];
 
-  const authLabel: React.CSSProperties = { display: "block", fontSize: 11, fontWeight: 700, letterSpacing: 0.5, color: TOKENS.sub, marginBottom: 7 };
+  const authLabel: React.CSSProperties = { display: "block", fontSize: 14, fontWeight: 700, letterSpacing: 0.5, color: TOKENS.sub, marginBottom: 7 };
 
   return (
     <main className="cab-root" style={{ maxWidth: "min(1720px, 94vw)", margin: "0 auto", padding: "96px 20px 60px" }}>
@@ -326,15 +326,15 @@ export default function CabinetPage() {
         <h1 style={{ fontSize: 26, fontWeight: 800, background: "linear-gradient(90deg,#06B6D4,#7C3AED)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", margin: 0, minWidth: 0 }}>{t("title")}</h1>
         <span style={{ marginLeft: "auto", display: "inline-flex", gap: 4 }}>
           {(["ru","en","es","zh"] as const).map(L => (
-            <button key={L} onClick={() => { try { localStorage.setItem("code-eternal-lang-user", "1"); } catch {} setLang(L); }} className="cab-tab" aria-selected={lang === L} style={{ padding: "4px 8px", fontSize: 11, textTransform: "uppercase" }}>{L}</button>
+            <button key={L} onClick={() => { try { localStorage.setItem("code-eternal-lang-user", "1"); } catch {} setLang(L); }} className="cab-tab" aria-selected={lang === L} style={{ padding: "4px 8px", fontSize: 14, textTransform: "uppercase" }}>{L}</button>
           ))}
         </span>
-        <a href="/" className="cab-btn cab-btn-ghost" style={{ textDecoration: "none", fontSize: 12 }}>{t("backToSite")}</a>
-        {me && <button className="cab-btn cab-btn-ghost" onClick={doLogout} style={{ padding: "7px 14px", fontSize: 12, color: TOKENS.red, borderColor: "rgba(239,68,68,0.4)" }}>{t("logout")}</button>}
+        <a href="/" className="cab-btn cab-btn-ghost" style={{ textDecoration: "none", fontSize: 15 }}>{t("backToSite")}</a>
+        {me && <button className="cab-btn cab-btn-ghost" onClick={doLogout} style={{ padding: "7px 14px", fontSize: 15, color: TOKENS.red, borderColor: "rgba(239,68,68,0.4)" }}>{t("logout")}</button>}
       </div>
-      <div style={{ fontSize: 13, color: TOKENS.mut, marginBottom: 20 }}>
+      <div style={{ fontSize: 15, color: TOKENS.mut, marginBottom: 20 }}>
         {t("subtitle")} · {me ? (me.nickname
-          ? <><b style={{ color: TOKENS.cyan2 }} title={me.email}>@{me.nickname}</b><span style={{ fontSize: 11, opacity: 0.65 }}> · {me.email}</span></>
+          ? <><b style={{ color: TOKENS.cyan2 }} title={me.email}>@{me.nickname}</b><span style={{ fontSize: 14, opacity: 0.65 }}> · {me.email}</span></>
           : me.email) : t("loginToSave")}
       </div>
 
@@ -342,7 +342,7 @@ export default function CabinetPage() {
       {!authChecked && <div style={{ maxWidth: 430, margin: "0 auto" }}><Skeleton h={320} /></div>}
       {authChecked && !me && paidNotice === "ok" && (
         <Card style={{ maxWidth: 430, margin: "0 auto 14px", borderColor: "rgba(16,185,129,0.45)" }}>
-          <div style={{ fontSize: 13, color: TOKENS.green, textAlign: "center", lineHeight: 1.5 }}>{t("paidLogin")}</div>
+          <div style={{ fontSize: 15, color: TOKENS.green, textAlign: "center", lineHeight: 1.5 }}>{t("paidLogin")}</div>
         </Card>
       )}
       {authChecked && !me && (
@@ -353,7 +353,7 @@ export default function CabinetPage() {
           {regToken ? (
             <>
               <div style={{ fontSize: 22, fontWeight: 800, color: TOKENS.text, textAlign: "center", marginBottom: 8 }}>{t("createPassTitle")}</div>
-              <div style={{ fontSize: 13, color: TOKENS.sub, textAlign: "center", lineHeight: 1.5, marginBottom: 22 }}>{t("createPassDesc")}</div>
+              <div style={{ fontSize: 15, color: TOKENS.sub, textAlign: "center", lineHeight: 1.5, marginBottom: 22 }}>{t("createPassDesc")}</div>
               <label style={authLabel}>{t("nick")}</label>
               <input className="cab-input" value={aNick} onChange={e => setANick(e.target.value)} placeholder="your_nick" style={{ marginBottom: 16 }} />
               <label style={authLabel}>{t("password")}</label>
@@ -365,11 +365,11 @@ export default function CabinetPage() {
           ) : (
             <>
               <div style={{ fontSize: 24, fontWeight: 800, color: TOKENS.text, textAlign: "center", marginBottom: 8 }}>{t("loginTitle")}</div>
-              <div style={{ fontSize: 13, color: TOKENS.sub, textAlign: "center", lineHeight: 1.5, marginBottom: 22 }}>{t("loginDesc")}</div>
+              <div style={{ fontSize: 15, color: TOKENS.sub, textAlign: "center", lineHeight: 1.5, marginBottom: 22 }}>{t("loginDesc")}</div>
               <div style={{ display: "flex", marginBottom: 22, borderBottom: "1px solid rgba(42,42,58,0.8)" }} role="tablist">
                 {(["login", "register"] as const).map(m => (
                   <button key={m} role="tab" aria-selected={aMode === m} onClick={() => { setAMode(m); setResetMode(false); setCodeSent(false); setAMsg(""); }}
-                    style={{ flex: 1, padding: 12, border: "none", background: "transparent", cursor: "pointer", fontWeight: 700, fontSize: 15, color: aMode === m ? "#22D3EE" : "#8b8b9e", borderBottom: "2px solid " + (aMode === m ? "#22D3EE" : "transparent"), marginBottom: -1 }}>
+                    style={{ flex: 1, padding: 12, border: "none", background: "transparent", cursor: "pointer", fontWeight: 700, fontSize: 16, color: aMode === m ? "#22D3EE" : "#8b8b9e", borderBottom: "2px solid " + (aMode === m ? "#22D3EE" : "transparent"), marginBottom: -1 }}>
                     {m === "login" ? t("tabLogin") : t("tabRegister")}
                   </button>
                 ))}
@@ -384,7 +384,7 @@ export default function CabinetPage() {
                 ].map((c, i) => (
                   <label key={i} style={{ display: "flex", alignItems: "flex-start", gap: 9, cursor: "pointer", padding: "9px 12px", borderRadius: 10, border: `1px solid ${c.v ? "rgba(6,182,212,0.45)" : "rgba(42,42,58,0.8)"}`, background: c.v ? "rgba(6,182,212,0.06)" : "transparent" }}>
                     <input type="checkbox" checked={c.v} onChange={e => c.set(e.target.checked)} style={{ marginTop: 2, accentColor: "#06B6D4" }} />
-                    <span style={{ fontSize: 11, color: TOKENS.sub, lineHeight: 1.5 }}>{t("agreeRead")} <a href={c.href} target="_blank" rel="noopener noreferrer" style={{ color: "#22D3EE", textDecoration: "underline" }}>{c.doc}</a></span>
+                    <span style={{ fontSize: 14, color: TOKENS.sub, lineHeight: 1.5 }}>{t("agreeRead")} <a href={c.href} target="_blank" rel="noopener noreferrer" style={{ color: "#22D3EE", textDecoration: "underline" }}>{c.doc}</a></span>
                   </label>
                 ))}
               </div>
@@ -394,7 +394,7 @@ export default function CabinetPage() {
                     <label style={authLabel}>{t("password")}</label>
                     <input type="password" className="cab-input" value={aPass} onChange={e => setAPass(e.target.value)} placeholder="••••••" autoComplete="current-password" onKeyDown={e => { if (e.key === "Enter" && allAgreed) doLogin(); }} style={{ marginBottom: 16 }} />
                     <button className="cab-btn cab-btn-primary" style={{ width: "100%" }} onClick={doLogin} disabled={aBusy || !aEmail || !aPass || !allAgreed}>{aBusy ? t("signinBusy") : t("signin")}</button>
-                    <button onClick={() => { setResetMode(true); setCodeSent(false); setAPass(""); setAPass2(""); setACode(""); setAMsg(""); }} style={{ marginTop: 14, width: "100%", textAlign: "center", fontSize: 12, color: "#22D3EE", cursor: "pointer", background: "none", border: "none" }}>{t("forgotPass")}</button>
+                    <button onClick={() => { setResetMode(true); setCodeSent(false); setAPass(""); setAPass2(""); setACode(""); setAMsg(""); }} style={{ marginTop: 14, width: "100%", textAlign: "center", fontSize: 15, color: "#22D3EE", cursor: "pointer", background: "none", border: "none" }}>{t("forgotPass")}</button>
                   </>
                 ) : (
                   <>
@@ -409,18 +409,18 @@ export default function CabinetPage() {
                         <label style={authLabel}>{t("repeatPass")}</label>
                         <input type="password" className="cab-input" value={aPass2} onChange={e => setAPass2(e.target.value)} placeholder="••••••" autoComplete="new-password" onKeyDown={e => { if (e.key === "Enter") doResetPassword(); }} style={{ marginBottom: 18 }} />
                         <button className="cab-btn cab-btn-primary" style={{ width: "100%" }} onClick={doResetPassword} disabled={aBusy || !aCode || !aPass || !aPass2 || !allAgreed}>{aBusy ? "…" : t("resetAndEnter")}</button>
-                        <button onClick={doSendCode} disabled={aBusy || resendIn > 0} style={{ marginTop: 10, width: "100%", textAlign: "center", fontSize: 12, color: resendIn > 0 ? TOKENS.mut : "#22D3EE", cursor: resendIn > 0 ? "default" : "pointer", background: "none", border: "none" }}>
+                        <button onClick={doSendCode} disabled={aBusy || resendIn > 0} style={{ marginTop: 10, width: "100%", textAlign: "center", fontSize: 15, color: resendIn > 0 ? TOKENS.mut : "#22D3EE", cursor: resendIn > 0 ? "default" : "pointer", background: "none", border: "none" }}>
                           {resendIn > 0 ? `↻ ${resendIn}s` : "↻ " + t("getCode")}
                         </button>
                       </>
                     )}
-                    <button onClick={() => { setResetMode(false); setAMsg(""); }} style={{ marginTop: 8, width: "100%", textAlign: "center", fontSize: 12, color: "#8b8b9e", cursor: "pointer", background: "none", border: "none" }}>{t("byPass")}</button>
+                    <button onClick={() => { setResetMode(false); setAMsg(""); }} style={{ marginTop: 8, width: "100%", textAlign: "center", fontSize: 15, color: "#8b8b9e", cursor: "pointer", background: "none", border: "none" }}>{t("byPass")}</button>
                   </>
                 )
               ) : (
                 <>
                   <button className="cab-btn cab-btn-primary" style={{ width: "100%" }} onClick={doRegister} disabled={aBusy || !aEmail || !allAgreed}>{aBusy ? "…" : t("createAcc")}</button>
-                  <div style={{ marginTop: 10, textAlign: "center", fontSize: 11, color: TOKENS.mut, lineHeight: 1.5 }}>{t("regHint")}</div>
+                  <div style={{ marginTop: 10, textAlign: "center", fontSize: 14, color: TOKENS.mut, lineHeight: 1.5 }}>{t("regHint")}</div>
                 </>
               )}
               {GOOGLE_CLIENT_ID && (
@@ -430,10 +430,10 @@ export default function CabinetPage() {
                   {!allAgreed && <div onClick={() => setAMsg(agreeFirstMsg)} aria-hidden="true" title="" style={{ position: "absolute", inset: 0, cursor: "not-allowed", zIndex: 5 }} />}
                 </div>
               )}
-              {GOOGLE_CLIENT_ID && <div style={{ marginTop: 10, textAlign: "center", fontSize: 11, color: TOKENS.mut, lineHeight: 1.5 }}>{t("agreeGoogleHint")}</div>}
+              {GOOGLE_CLIENT_ID && <div style={{ marginTop: 10, textAlign: "center", fontSize: 14, color: TOKENS.mut, lineHeight: 1.5 }}>{t("agreeGoogleHint")}</div>}
             </>
           )}
-          {aMsg && <div style={{ marginTop: 12, fontSize: 12, color: aMsg.startsWith("✉") || aMsg === t("regHint") ? TOKENS.green : TOKENS.red, textAlign: "center" }}>{aMsg}</div>}
+          {aMsg && <div style={{ marginTop: 12, fontSize: 15, color: aMsg.startsWith("✉") || aMsg === t("regHint") ? TOKENS.green : TOKENS.red, textAlign: "center" }}>{aMsg}</div>}
         </Card>
       )}
 
@@ -447,7 +447,7 @@ export default function CabinetPage() {
             { label: t("tier"), val: tierObj ? tierObj.name : "—", color: tierObj?.color ?? TOKENS.sub, hint: t("statHintTier") },
           ].map(s => (
             <div key={s.label} className="cab-card cab-card-hover" style={{ padding: "12px 18px", cursor: "help", flex: "1 1 120px", minWidth: 120 }} title={s.hint}>
-              <div style={{ fontSize: 11, color: TOKENS.mut, display: "flex", gap: 4, alignItems: "center" }}>{s.label} <span style={{ opacity: 0.45, fontSize: 10 }}>ⓘ</span></div>
+              <div style={{ fontSize: 14, color: TOKENS.mut, display: "flex", gap: 4, alignItems: "center" }}>{s.label} <span style={{ opacity: 0.45, fontSize: 13 }}>ⓘ</span></div>
               <div style={{ fontSize: 18, fontWeight: 800, color: s.color, display: "flex", alignItems: "center", gap: 6 }}>
                 {(s as any).coin && <GalatinCoin size={30} />}{s.val}
               </div>
@@ -458,13 +458,13 @@ export default function CabinetPage() {
         {/* мини-форма «Выбери никнейм» — показывается, пока у аккаунта нет ника */}
         {!me.nickname && (
           <Card className="cab-fade" style={{ padding: "16px 20px", marginBottom: 20, borderColor: "rgba(6,182,212,0.35)" }}>
-            <div style={{ fontSize: 14, fontWeight: 800, color: TOKENS.text, marginBottom: 4 }}>✨ {t("nickTitle")}</div>
-            <div style={{ fontSize: 12, color: TOKENS.mut, marginBottom: 10 }}>{t("nickHint")}</div>
+            <div style={{ fontSize: 16, fontWeight: 800, color: TOKENS.text, marginBottom: 4 }}>✨ {t("nickTitle")}</div>
+            <div style={{ fontSize: 15, color: TOKENS.mut, marginBottom: 10 }}>{t("nickHint")}</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               <input className="cab-input" value={nickInput} onChange={e => setNickInput(e.target.value)} placeholder="your_nick" maxLength={20} style={{ flex: "1 1 200px" }} onKeyDown={e => { if (e.key === "Enter") saveNickname(); }} />
               <button className="cab-btn cab-btn-primary" onClick={saveNickname} disabled={nickBusy || nickInput.trim().length < 3}>{nickBusy ? "…" : t("nickBtn")}</button>
             </div>
-            {nickMsg && <div style={{ marginTop: 8, fontSize: 12, color: TOKENS.red }}>{nickMsg}</div>}
+            {nickMsg && <div style={{ marginTop: 8, fontSize: 15, color: TOKENS.red }}>{nickMsg}</div>}
           </Card>
         )}
 
@@ -487,11 +487,11 @@ export default function CabinetPage() {
           <div className="cab-fade">
             <Card style={{ padding: "16px 20px", marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10 }}>
               <div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: TOKENS.text }}>🧠 {t("terminalTitle")}</div>
-                <div style={{ fontSize: 12, color: TOKENS.mut }}>{t("terminalSub")}</div>
+                <div style={{ fontSize: 16, fontWeight: 700, color: TOKENS.text }}>🧠 {t("terminalTitle")}</div>
+                <div style={{ fontSize: 15, color: TOKENS.mut }}>{t("terminalSub")}</div>
               </div>
               <div style={{ minWidth: 180 }}>
-                <div style={{ fontSize: 12, color: TOKENS.sub, marginBottom: 4 }}>{t("level")} <b style={{ color: TOKENS.cyan2 }}>{me.level}</b>{me.level >= 50 ? " · MAX" : <> · <b className={xpPulse ? "xp-pulse" : ""} key={xpPulse} style={{ color: TOKENS.violet }}>{xpInLevel}</b>/{xpNeed} XP</>}</div>
+                <div style={{ fontSize: 15, color: TOKENS.sub, marginBottom: 4 }}>{t("level")} <b style={{ color: TOKENS.cyan2 }}>{me.level}</b>{me.level >= 50 ? " · MAX" : <> · <b className={xpPulse ? "xp-pulse" : ""} key={xpPulse} style={{ color: TOKENS.violet }}>{xpInLevel}</b>/{xpNeed} XP</>}</div>
                 <ProgressBar value={me.level >= 50 ? 1 : xpInLevel} max={me.level >= 50 ? 1 : xpNeed} />
               </div>
             </Card>
@@ -507,10 +507,10 @@ export default function CabinetPage() {
         {tab === "games" && (
           <div className="cab-fade">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8, marginBottom: 10 }}>
-              <div style={{ fontSize: 13, color: TOKENS.sub }}>{t("gamesRewardNote")}</div>
-              <div className="cab-card" style={{ padding: "8px 14px", fontSize: 13 }}>GALATIN: <b style={{ color: TOKENS.gold }}>{me.galatin}</b></div>
+              <div style={{ fontSize: 15, color: TOKENS.sub }}>{t("gamesRewardNote")}</div>
+              <div className="cab-card" style={{ padding: "8px 14px", fontSize: 15 }}>GALATIN: <b style={{ color: TOKENS.gold }}>{me.galatin}</b></div>
             </div>
-            {winToast && <div className="cab-card" style={{ padding: "10px 14px", marginBottom: 12, fontSize: 13, color: TOKENS.green, borderColor: "rgba(16,185,129,0.4)" }}>{winToast}</div>}
+            {winToast && <div className="cab-card" style={{ padding: "10px 14px", marginBottom: 12, fontSize: 15, color: TOKENS.green, borderColor: "rgba(16,185,129,0.4)" }}>{winToast}</div>}
             <GamesArena tetrisSlot={
               <Tetris lang={lang}
                 onWin={() => { try { (window as any).__aifaGameWin && (window as any).__aifaGameWin("tetris"); } catch {} }}
@@ -523,7 +523,7 @@ export default function CabinetPage() {
               <SectionTitle icon="🏆" title={t("lbTitle")} right={
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                   {[["chess", "♟"], ["checkers", "⛀"], ["backgammon", "🎲"], ["ttt", "❌"], ["tetris", "🧱"]].map(([g, ic]) => (
-                    <button key={g} className="cab-tab" aria-selected={lbGame === g} onClick={() => setLbGame(g)} style={{ padding: "6px 12px", fontSize: 12 }}>{ic}</button>
+                    <button key={g} className="cab-tab" aria-selected={lbGame === g} onClick={() => setLbGame(g)} style={{ padding: "6px 12px", fontSize: 15 }}>{ic}</button>
                   ))}
                 </div>} />
               {lb === null ? <Skeleton h={90} /> : lb.length === 0 ? <EmptyState text={t("lbEmpty")} /> : (
