@@ -50,7 +50,7 @@ export function GenreFilter({ selectedGenre, onSelect }: GenreFilterProps) {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 + i * 0.04, duration: 0.3 }}
-              className="relative flex-shrink-0 rounded-full px-4 py-2 text-[11px] tracking-[0.1em] uppercase font-medium border cursor-pointer transition-all duration-200"
+              className="relative flex-shrink-0 rounded-full px-4 py-2 text-[13px] tracking-[0.1em] uppercase font-medium border cursor-pointer transition-all duration-200"
               style={
                 isActive
                   ? {
@@ -62,7 +62,7 @@ export function GenreFilter({ selectedGenre, onSelect }: GenreFilterProps) {
                   : {
                       backgroundColor: 'rgba(255,255,255,0.02)',
                       borderColor: 'rgba(255,255,255,0.06)',
-                      color: '#6B6B80',
+                      color: '#8B8BA8',
                     }
               }
             >

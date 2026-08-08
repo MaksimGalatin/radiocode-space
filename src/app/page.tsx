@@ -24,6 +24,7 @@ import { AnimatedCounter } from '@/components/radio/AnimatedCounter';
 import { useRadioT, useStationI18n } from '@/lib/radioI18n';
 import { useLikes } from '@/lib/likes';
 import { useSocial, captureAndLinkRef, findTrackLocation, AIFA_BOT_URL } from '@/lib/radioSocial';
+import { readableAccent } from '@/lib/readableAccent';
 import { motion, AnimatePresence } from 'framer-motion';
 
 function LiveTicker() {
@@ -49,8 +50,12 @@ function LiveTicker() {
         {[0, 1, 2, 3].map((i) => (
           <span
             key={i}
-            className="text-[10px] font-mono tracking-[0.3em] uppercase px-4 shrink-0"
-            style={{ color: `${color}50` }}
+            className="text-[13px] font-mono tracking-[0.3em] uppercase px-4 shrink-0"
+            // Было `${color}50` — акцент на 31% прозрачности, контраст 2.16
+            // при норме 4.5: бегущая строка на тёмной полосе почти сливалась
+            // с фоном. Прозрачность убрана, фиолетовый акцент подменяется
+            // осветлённым — см. readableAccent.
+            style={{ color: readableAccent(color) }}
           >
             {rt('ticker')}
           </span>
@@ -220,12 +225,12 @@ export default function Home() {
               <div className="text-sm sm:text-base font-bold text-[#E8E8ED] truncate">
                 {rt('createTrack')}
               </div>
-              <div className="text-[11px] sm:text-xs text-[#6B6B80] truncate">
+              <div className="text-[13px] sm:text-xs text-[#8B8BA8] truncate">
                 {rt('createTrackSub')}
               </div>
             </div>
             <span
-              className="shrink-0 text-[11px] sm:text-xs font-mono font-semibold tracking-wider px-3 py-2 rounded-full transition-colors"
+              className="shrink-0 text-[13px] sm:text-xs font-mono font-semibold tracking-wider px-3 py-2 rounded-full transition-colors"
               style={{ background: 'rgba(0,240,255,0.12)', color: '#00F0FF', border: '1px solid rgba(0,240,255,0.3)' }}
             >
               @AIfaCreativityBot ↗
@@ -245,7 +250,7 @@ export default function Home() {
               <h2 className="text-xl sm:text-2xl font-bold text-[#E8E8ED] tracking-wide mb-2">
                 {rt('frequencies')}
               </h2>
-              <p className="text-sm text-[#6B6B80]">
+              <p className="text-sm text-[#8B8BA8]">
                 {stations.length} {rt('broadcasting')}
               </p>
             </div>
@@ -254,16 +259,16 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 2, duration: 0.8 }}
-              className="hidden lg:flex items-center gap-3 text-[10px] text-[#3a3a4a]"
+              className="hidden lg:flex items-center gap-3 text-[13px] text-[#7E7E99]"
             >
               <span>
-                <kbd className="px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-[#6B6B80] font-mono">Space</kbd> {rt('play')}
+                <kbd className="px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-[#8B8BA8] font-mono">Space</kbd> {rt('play')}
               </span>
               <span>
-                <kbd className="px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-[#6B6B80] font-mono">←→</kbd> {rt('seek')}
+                <kbd className="px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-[#8B8BA8] font-mono">←→</kbd> {rt('seek')}
               </span>
               <span>
-                <kbd className="px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-[#6B6B80] font-mono">M</kbd> {rt('mute')}
+                <kbd className="px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.06] text-[#8B8BA8] font-mono">M</kbd> {rt('mute')}
               </span>
             </motion.div>
           </motion.div>
@@ -341,7 +346,7 @@ export default function Home() {
                       {s.name}
                     </a>
                   </dt>
-                  <dd className="text-[#6B6B80]">{st.genre(s.id, s.genre)}</dd>
+                  <dd className="text-[#8B8BA8]">{st.genre(s.id, s.genre)}</dd>
                 </div>
               ))}
             </dl>
@@ -430,7 +435,7 @@ export default function Home() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
               {/* Ecosystem cross-links */}
               <div className="mb-8">
-                <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#3a3a4a] mb-4 text-center sm:text-left">
+                <p className="text-[13px] font-mono tracking-[0.3em] uppercase text-[#7E7E99] mb-4 text-center sm:text-left">
                   {rt('partOfEcosystem')}
                 </p>
                 <div className="flex flex-wrap justify-center sm:justify-start gap-x-6 gap-y-3">
@@ -449,7 +454,7 @@ export default function Home() {
                       href={l.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-medium text-[#6B6B80] hover:text-[#00F0FF] transition-colors duration-200"
+                      className="text-xs font-medium text-[#8B8BA8] hover:text-[#00F0FF] transition-colors duration-200"
                     >
                       {l.label}
                     </a>
@@ -473,8 +478,8 @@ export default function Home() {
                   >
                     RADIOCODE.SPACE
                   </span>
-                  <span className="text-xs text-[#3a3a4a]">|</span>
-                  <span className="text-xs text-[#6B6B80]">CODE Eternal</span>
+                  <span className="text-xs text-[#7E7E99]">|</span>
+                  <span className="text-xs text-[#8B8BA8]">CODE Eternal</span>
                 </div>
                 <div className="flex items-center gap-4">
                   {/* Ссылка на политику обязана быть на каждой странице: этого
@@ -487,21 +492,21 @@ export default function Home() {
                       Наш собственный Оракул отметил их отсутствие здесь. */}
                   <a
                     href="https://www.codeofdigitaleternity.com/legal"
-                    className="text-[10px] font-mono tracking-wider text-[#6B6B80] hover:text-[#00F0FF] transition-colors"
+                    className="text-[13px] font-mono tracking-wider text-[#8B8BA8] hover:text-[#00F0FF] transition-colors"
                     rel="noopener"
                   >
                     Конфиденциальность&nbsp;·&nbsp;Privacy&nbsp;·&nbsp;Правовая информация&nbsp;·&nbsp;Реквизиты
                   </a>
                   <a
                     href="mailto:contact@codeofdigitaleternity.com"
-                    className="text-[10px] font-mono tracking-wider text-[#6B6B80] hover:text-[#00F0FF] transition-colors"
+                    className="text-[13px] font-mono tracking-wider text-[#8B8BA8] hover:text-[#00F0FF] transition-colors"
                   >
                     contact@codeofdigitaleternity.com
                   </a>
-                  <span className="text-[10px] font-mono tracking-wider text-[#3a3a4a]">
+                  <span className="text-[13px] font-mono tracking-wider text-[#7E7E99]">
                     {rt('musicBy')} AIfa &amp; DJ Galatin
                   </span>
-                  <span className="text-[10px] font-mono tracking-wider text-[#3a3a4a]">
+                  <span className="text-[13px] font-mono tracking-wider text-[#7E7E99]">
                     © 2026
                   </span>
                 </div>

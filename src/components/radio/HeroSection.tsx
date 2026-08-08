@@ -7,6 +7,7 @@ import { MiniEqualizer } from './MiniEqualizer';
 import { ScrambleText, GlitchText } from './GlitchText';
 import { useRadioT } from '@/lib/radioI18n';
 import { useLiteMode } from '@/hooks/use-mobile';
+import { readableAccent } from '@/lib/readableAccent';
 
 const neonPalette = ['#00F0FF', '#FF003C', '#B000FF', '#39FF14'];
 
@@ -202,7 +203,9 @@ export function HeroSection() {
               )}
               <motion.span
                 className="text-xs font-semibold tracking-[0.25em] uppercase"
-                style={{ color: `${color}90` }}
+                // Было `${color}90` (56% прозрачности). Подпись «сейчас играет»
+                // у зелёной станции давала контраст 4.13 при норме 4.5.
+                style={{ color: readableAccent(color) }}
                 animate={isPlaying ? { opacity: [0.6, 1, 0.6] } : {}}
                 transition={{ duration: 2, repeat: Infinity }}
               >
@@ -234,11 +237,13 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-lg sm:text-xl text-[#6B6B80] mb-8"
+              className="text-lg sm:text-xl text-[#8B8BA8] mb-8"
             >
               {currentTrack.artist}
-              <span className="mx-2 text-[#3a3a4a]">—</span>
-              <span style={{ color: `${color}90` }}>{currentStation?.name}</span>
+              <span className="mx-2 text-[#7E7E99]">—</span>
+              {/* Название станции в подзаголовке: было `${color}90` — 4.13
+                  на зелёной станции. Прозрачность убрана. */}
+              <span style={{ color: readableAccent(color) }}>{currentStation?.name}</span>
             </motion.p>
           </>
         ) : (
@@ -277,7 +282,7 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="text-base sm:text-xl text-[#6B6B80] mb-10 tracking-wide"
+              className="text-base sm:text-xl text-[#8B8BA8] mb-10 tracking-wide"
             >
               {rt('selectFrequency')}{' '}
               <span className="text-[#E8E8ED]">{rt('enterVoid')}</span>

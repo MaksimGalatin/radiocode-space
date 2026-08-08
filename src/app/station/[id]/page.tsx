@@ -2,6 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { stations } from '@/lib/stations';
+// Подписи жанра и бегущие подписи пишутся акцентным цветом станции.
+// Фиолетовый #B000FF сам по себе не проходит WCAG AA (4.14 при норме 4.5),
+// поэтому для ТЕКСТА берём осветлённый двойник — см. readableAccent.
+import { readableAccent } from '@/lib/readableAccent';
 
 const SITE = 'https://radiocode.space';
 
@@ -91,8 +95,8 @@ export default async function StationPage(
           }}
         >
           <p
-            className="text-xs font-semibold uppercase tracking-[0.2em]"
-            style={{ color: station.color }}
+            className="text-[13px] font-semibold uppercase tracking-[0.2em]"
+            style={{ color: readableAccent(station.color) }}
           >
             {station.genre}
           </p>
@@ -101,18 +105,18 @@ export default async function StationPage(
 
           <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm">
             <div>
-              <dt className="text-white/45">Tracks</dt>
+              <dt className="text-white/60">Tracks</dt>
               <dd className="text-lg font-semibold">{station.tracks.length}</dd>
             </div>
             {hours > 0 && (
               <div>
-                <dt className="text-white/45">Runtime</dt>
+                <dt className="text-white/60">Runtime</dt>
                 <dd className="text-lg font-semibold">≈ {hours} h</dd>
               </div>
             )}
             {station.bitrate && (
               <div>
-                <dt className="text-white/45">Quality</dt>
+                <dt className="text-white/60">Quality</dt>
                 <dd className="text-lg font-semibold">{station.bitrate}</dd>
               </div>
             )}
@@ -121,7 +125,13 @@ export default async function StationPage(
           <Link
             href="/"
             className="mt-7 inline-flex items-center rounded-lg px-5 py-2.5 text-sm font-semibold text-[#05060a] transition-opacity hover:opacity-90"
-            style={{ background: station.color }}
+            /* Обратный случай той же беды: тут ТЁМНАЯ надпись на заливке
+               акцентом. У фиолетовой станции #B000FF заливка слишком тёмная,
+               и тёмный текст на ней давал 4.14 при норме 4.5 — единственная
+               главная кнопка страницы читалась хуже подписей вокруг.
+               Причина та же (низкая яркость чистого фиолетового), поэтому
+               и лечение то же — осветлённый двойник: 7.53. */
+            style={{ background: readableAccent(station.color) }}
           >
             ▶ Listen now
           </Link>
@@ -137,15 +147,15 @@ export default async function StationPage(
                 key={track.id}
                 className="flex items-baseline gap-4 px-4 py-2.5 text-sm hover:bg-white/[0.03]"
               >
-                <span className="w-8 shrink-0 tabular-nums text-white/35">{i + 1}</span>
+                <span className="w-8 shrink-0 tabular-nums text-white/60">{i + 1}</span>
                 <span className="min-w-0 flex-1 truncate">{track.title}</span>
-                <span className="shrink-0 tabular-nums text-white/35">
+                <span className="shrink-0 tabular-nums text-white/60">
                   {formatDuration(track.duration)}
                 </span>
               </li>
             ))}
           </ol>
-          <p className="mt-3 text-xs text-white/40">
+          <p className="mt-3 text-[13px] text-white/60">
             All tracks by {station.tracks[0]?.artist || 'AIfa & DJ Galatin'}. Original
             work, free to listen on air.
           </p>
@@ -161,13 +171,13 @@ export default async function StationPage(
                 className="rounded-xl border border-white/8 p-4 transition-colors hover:border-white/20"
               >
                 <p
-                  className="text-[11px] font-semibold uppercase tracking-[0.15em]"
-                  style={{ color: s.color }}
+                  className="text-[13px] font-semibold uppercase tracking-[0.15em]"
+                  style={{ color: readableAccent(s.color) }}
                 >
                   {s.genre}
                 </p>
                 <p className="mt-1.5 font-semibold">{s.name}</p>
-                <p className="mt-1 text-xs text-white/45">{s.tracks.length} tracks</p>
+                <p className="mt-1 text-[13px] text-white/60">{s.tracks.length} tracks</p>
               </Link>
             ))}
           </div>

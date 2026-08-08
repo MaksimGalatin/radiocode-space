@@ -149,11 +149,11 @@ export function SaveButton({
       ) : state === 'saved' ? (
         <Check width={size} height={size} style={{ color }} strokeWidth={2.4} />
       ) : loggedIn ? (
-        <Download width={size} height={size} style={{ color: '#6B6B80' }} strokeWidth={2} />
+        <Download width={size} height={size} style={{ color: '#8B8BA8' }} strokeWidth={2} />
       ) : (
         <span className="relative flex items-center">
-          <Download width={size} height={size} style={{ color: '#6B6B80' }} strokeWidth={2} />
-          <Lock width={size * 0.6} height={size * 0.6} style={{ color: '#6B6B80' }} strokeWidth={2.5} className="-ml-1 -mb-1.5 self-end" />
+          <Download width={size} height={size} style={{ color: '#8B8BA8' }} strokeWidth={2} />
+          <Lock width={size * 0.6} height={size * 0.6} style={{ color: '#8B8BA8' }} strokeWidth={2.5} className="-ml-1 -mb-1.5 self-end" />
         </span>
       )}
     </motion.button>

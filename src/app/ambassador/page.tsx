@@ -212,7 +212,9 @@ export default function AmbassadorPage() {
         </div>
 
         <div style={{ textAlign: 'center', marginBottom: 34 }}>
-          <div style={{ color: '#22D3EE', letterSpacing: 3, fontSize: 12, fontWeight: 700, textTransform: 'uppercase' }}>{t.kicker}</div>
+          {/* fontSize 12 → 13: под правило «мелкого текста нет нигде».
+              Контраст у #22D3EE и так был 9.94, менялся только размер. */}
+          <div style={{ color: '#22D3EE', letterSpacing: 3, fontSize: 13, fontWeight: 700, textTransform: 'uppercase' }}>{t.kicker}</div>
           <h1 style={{ fontSize: 38, fontWeight: 900, margin: '10px 0 12px', background: 'linear-gradient(90deg,#22D3EE,#818cf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{t.title}</h1>
           <p style={{ fontSize: 16, lineHeight: 1.6, color: '#94a3b8', maxWidth: 640, margin: '0 auto' }}>{t.sub}</p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginTop: 20, flexWrap: 'wrap' }}>
@@ -257,7 +259,11 @@ export default function AmbassadorPage() {
           <ol style={{ margin: 0, paddingLeft: 20, lineHeight: 1.8 }}>{t.steps.map((s: string, i: number) => <li key={i}>{s}</li>)}</ol>
         </section>
 
-        <p style={{ fontSize: 12, color: '#64748b', lineHeight: 1.6, textAlign: 'center', maxWidth: 720, margin: '0 auto' }}>{t.disclaimer}</p>
+        {/* Юридическая оговорка. Было fontSize 12 и цвет #64748b — контраст
+            4.28 на фоне #050507 при норме 4.5. Именно оговорку читают
+            внимательнее всего, а она была самым тусклым текстом страницы.
+            #94A3B8 даёт 7.94, размер поднят до 13px. */}
+        <p style={{ fontSize: 13, color: '#94A3B8', lineHeight: 1.6, textAlign: 'center', maxWidth: 720, margin: '0 auto' }}>{t.disclaimer}</p>
         <div style={{ textAlign: 'center', marginTop: 24 }}>
           <a href="/cabinet" style={{ padding: '13px 30px', borderRadius: 12, fontWeight: 800, background: 'linear-gradient(90deg,#06B6D4,#6366F1)', color: '#fff', textDecoration: 'none' }}>{t.ctaCabinet} →</a>
         </div>

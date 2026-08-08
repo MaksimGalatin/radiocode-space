@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useInView } from 'framer-motion';
 import { motion } from 'framer-motion';
+import { readableAccent } from '@/lib/readableAccent';
 
 interface AnimatedCounterProps {
   value: number;
@@ -37,17 +38,22 @@ export function AnimatedCounter({ value, label, sub, color, delay, suffix = '' }
       <motion.div
         className="text-2xl sm:text-3xl font-bold font-mono mb-1 transition-shadow duration-700"
         style={{
-          color: color,
+          // Крупная цифра (30px, жирная) формально проходит по порогу для
+          // крупного текста — 3.0. Но фиолетовый #B000FF давал ровно 3.99 и был
+          // самым слабым местом главной: цифра «596 треков» — то, ради чего
+          // сюда и заходят. Осветлённый двойник поднимает до 7.25, свечение
+          // (textShadow) продолжает строиться на исходном фирменном цвете.
+          color: readableAccent(color),
           textShadow: hasReachedEnd ? `0 0 20px ${color}40` : 'none',
         }}
         whileHover={{ scale: 1.1 }}
       >
         {displayValue}{suffix}
       </motion.div>
-      <div className="text-xs tracking-[0.15em] uppercase text-[#6B6B80]">
+      <div className="text-xs tracking-[0.15em] uppercase text-[#8B8BA8]">
         {label}
       </div>
-      <div className="text-[10px] text-[#3a3a4a] mt-0.5">{sub}</div>
+      <div className="text-[13px] text-[#7E7E99] mt-0.5">{sub}</div>
     </div>
   );
 }

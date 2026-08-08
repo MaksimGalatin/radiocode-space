@@ -73,7 +73,7 @@ export function RadioHeader() {
               >
                 RADIOCODE
               </span>
-              <span className="text-[10px] tracking-[0.3em] text-[#6B6B80] font-medium mt-0.5">
+              <span className="text-[13px] tracking-[0.3em] text-[#8B8BA8] font-medium mt-0.5">
                 .SPACE
               </span>
             </div>
@@ -99,7 +99,7 @@ export function RadioHeader() {
                 <circle cx="12" cy="8" r="3.2" />
                 <path d="M5.5 20a6.5 6.5 0 0 1 13 0" />
               </svg>
-              <span className="text-[10px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
                 {rt('cabinet')}
               </span>
             </motion.a>
@@ -115,7 +115,7 @@ export function RadioHeader() {
                   onClick={() => setLang(l.code)}
                   aria-label={`Language: ${l.label}`}
                   aria-pressed={lang === l.code}
-                  className="text-[10px] font-mono font-medium tracking-wider px-1.5 py-0.5 rounded-full transition-colors cursor-pointer"
+                  className="text-[13px] font-mono font-medium tracking-wider px-1.5 py-0.5 rounded-full transition-colors cursor-pointer"
                   style={
                     lang === l.code
                       ? { color: '#050507', background: '#00F0FF' }
@@ -142,7 +142,11 @@ export function RadioHeader() {
                 border: '1px solid rgba(176, 0, 255, 0.15)',
               }}
             >
-              <span className="text-[10px] font-mono font-medium tracking-wider text-[#B000FF]/80">
+              {/* Было text-[#B000FF]/80 на фиолетовой плашке #1a1020 —
+                  контраст 2.78 при норме 4.5: ссылка на головной сайт
+                  экосистемы читалась хуже всего в шапке. Осветлённый
+                  фиолетовый #C77DFF на том же фоне даёт 6.62. */}
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#C77DFF]">
                 CODE ETERNAL ↗
               </span>
             </motion.a>
@@ -164,24 +168,33 @@ export function RadioHeader() {
                   style={{ boxShadow: '0 0 8px rgba(255, 0, 60, 0.6)' }}
                 />
               </div>
-              <span className="text-[11px] font-semibold tracking-[0.15em] text-[#FF003C]">
+              <span className="text-[13px] font-semibold tracking-[0.15em] text-[#FF003C]">
                 {rt('onAir')}
               </span>
             </motion.div>
 
             {/* HQ Badge */}
+            {/* Порог показа поднят с md (768px) до lg (1024px). Причина: после
+                подъёма подписей шапки с 10px до 13px правый блок в русской
+                локали переставал влезать в окно 768px — замерено, правый край
+                уходил на 853 при ширине окна 768. Страница не прокручивается по
+                горизонтали (overflow-x: hidden), поэтому «СИГНАЛ» просто молча
+                срезался бы за краем экрана: ошибки нет, всё «работает», а
+                элемента не видно. Убран самый декоративный бейдж — запас стал
+                +12px в русском и +35px в испанском. На 1024px он возвращается:
+                там правый край 1010 при окне 1024. */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
-              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.05)',
                 border: '1px solid rgba(0, 240, 255, 0.1)',
               }}
             >
               <div className="w-1.5 h-1.5 rounded-full bg-[#00F0FF]" />
-              <span className="text-[10px] font-mono font-medium tracking-wider text-[#00F0FF]/70">
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/70">
                 VBR ~182K
               </span>
             </motion.div>

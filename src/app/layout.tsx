@@ -190,7 +190,11 @@ export default async function RootLayout({
             aria-live="polite"
             data-gpc="1"
             style={{
-              width: '100%', textAlign: 'center', fontSize: 12, lineHeight: 1.6,
+              // fontSize 12 → 13 по правилу «мелкого текста нет нигде».
+              // Полоса во всю ширину, переносить нечего — раскладка не меняется.
+              // Контраст тут и был в норме: #6ee7b7 на собранном фоне #061713
+              // даёт 12.09, менялся только размер.
+              width: '100%', textAlign: 'center', fontSize: 13, lineHeight: 1.6,
               padding: '8px 16px', background: 'rgba(16,185,129,0.10)',
               borderBottom: '1px solid rgba(16,185,129,0.25)', color: '#6ee7b7',
             }}

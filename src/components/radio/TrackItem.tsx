@@ -85,7 +85,7 @@ export function TrackItem({
           <span
             className="text-xs font-mono transition-colors duration-300"
             style={{
-              color: active ? color : '#6B6B80',
+              color: active ? color : '#8B8BA8',
             }}
           >
             {String(trackIndex + 1).padStart(2, '0')}
@@ -103,14 +103,14 @@ export function TrackItem({
         >
           {title}
         </div>
-        <div className="text-xs text-[#6B6B80] truncate mt-0.5">
+        <div className="text-xs text-[#8B8BA8] truncate mt-0.5">
           {artist}
         </div>
       </div>
 
       {/* Duration */}
       <div className="flex-shrink-0">
-        <span className="text-xs font-mono text-[#6B6B80]">
+        <span className="text-xs font-mono text-[#8B8BA8]">
           {duration ? formatTime(duration) : '--:--'}
         </span>
       </div>
@@ -133,7 +133,7 @@ export function TrackItem({
           <Heart
             className="w-4 h-4 transition-colors duration-200"
             style={{
-              color: favorited ? '#FF003C' : '#3a3a4a',
+              color: favorited ? '#FF003C' : '#7E7E99',
               fill: favorited ? '#FF003C' : 'none',
             }}
           />

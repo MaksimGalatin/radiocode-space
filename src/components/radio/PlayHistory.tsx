@@ -8,6 +8,7 @@ import { ShareButton } from './ShareButton';
 import { SaveButton } from './SaveButton';
 import { findTrackLocation } from '@/lib/radioSocial';
 import { useRadioT } from '@/lib/radioI18n';
+import { readableAccent } from '@/lib/readableAccent';
 
 interface Entry {
   trackId: string;
@@ -86,7 +87,7 @@ export function PlayHistory() {
             <h3 className="text-sm font-semibold tracking-[0.15em] uppercase text-[#E8E8ED] leading-none">
               {rt('broadcastHist')}
             </h3>
-            <p className="text-[10px] text-[#6B6B80] mt-1">
+            <p className="text-[13px] text-[#8B8BA8] mt-1">
               {rt('lastTracks')}
             </p>
           </div>
@@ -115,8 +116,8 @@ export function PlayHistory() {
                   <div className="text-xs font-medium text-[#E8E8ED] truncate group-hover:text-white transition-colors">
                     {entry.title}
                   </div>
-                  <div className="text-[10px] text-[#6B6B80] truncate">
-                    {entry.artist} · <span style={{ color: `${entry.color}80` }}>{entry.stationName}</span>
+                  <div className="text-[13px] text-[#8B8BA8] truncate">
+                    {entry.artist} · <span style={{ color: readableAccent(entry.color) }}>{entry.stationName}</span>
                   </div>
                 </div>
               </button>
@@ -125,7 +126,7 @@ export function PlayHistory() {
                 <ShareButton trackId={entry.trackId} title={entry.title} color={entry.color} size={14} />
                 <SaveButton trackId={entry.trackId} title={entry.title} color={entry.color} size={14} />
               </div>
-              <span className="text-[10px] font-mono text-[#3a3a4a] flex-shrink-0 w-8 text-right">
+              <span className="text-[13px] font-mono text-[#7E7E99] flex-shrink-0 w-8 text-right">
                 {formatTimeAgo(entry.at)}
               </span>
             </motion.div>

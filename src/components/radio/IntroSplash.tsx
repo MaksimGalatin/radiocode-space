@@ -122,7 +122,7 @@ export function IntroSplash({ onComplete }: { onComplete: () => void }) {
             />
 
             <motion.div
-              className="mt-4 text-xs tracking-[0.4em] text-[#6B6B80] uppercase"
+              className="mt-4 text-xs tracking-[0.4em] text-[#8B8BA8] uppercase"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}

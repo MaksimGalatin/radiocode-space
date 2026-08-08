@@ -404,7 +404,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
                         )}
                       </p>
                       {!isStreaming && (
-                        <p className="text-[10px] text-muted-foreground/50 mt-2">
+                        <p className="text-[13px] text-muted-foreground/50 mt-2">
                           {msg.timestamp.toLocaleString([], { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                         </p>
                       )}

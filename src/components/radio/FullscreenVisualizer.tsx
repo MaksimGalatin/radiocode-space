@@ -225,7 +225,7 @@ export function FullscreenVisualizer() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 0.7 }}
                   transition={{ delay: 0.15 }}
-                  className="text-sm text-[#6B6B80] text-center truncate max-w-full mt-1"
+                  className="text-sm text-[#8B8BA8] text-center truncate max-w-full mt-1"
                 >
                   {currentTrack.artist}
                 </motion.div>
@@ -275,7 +275,7 @@ export function FullscreenVizToggle() {
       }}
       title={rt('fullscreen')}
     >
-      <Maximize2 className="w-4 h-4 text-[#6B6B80] hover:text-[#E8E8ED] transition-colors" />
+      <Maximize2 className="w-4 h-4 text-[#8B8BA8] hover:text-[#E8E8ED] transition-colors" />
     </motion.button>
   );
 }

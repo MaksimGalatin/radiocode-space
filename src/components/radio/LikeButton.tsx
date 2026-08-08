@@ -36,14 +36,14 @@ export function LikeButton({
       <Heart
         width={size}
         height={size}
-        style={{ color: liked ? color : '#6B6B80' }}
+        style={{ color: liked ? color : '#8B8BA8' }}
         fill={liked ? color : 'none'}
         strokeWidth={2}
       />
       {showCount && count > 0 && (
         <span
-          className="text-[10px] font-mono tabular-nums"
-          style={{ color: liked ? color : '#6B6B80' }}
+          className="text-[13px] font-mono tabular-nums"
+          style={{ color: liked ? color : '#8B8BA8' }}
         >
           {count}
         </span>

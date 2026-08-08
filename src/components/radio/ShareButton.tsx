@@ -46,10 +46,10 @@ export function ShareButton({
       {done ? (
         <>
           <Check width={size} height={size} style={{ color }} strokeWidth={2.4} />
-          <span className="text-[10px] font-mono hidden sm:inline" style={{ color }}>{rt('copied')}</span>
+          <span className="text-[13px] font-mono hidden sm:inline" style={{ color }}>{rt('copied')}</span>
         </>
       ) : (
-        <Share2 width={size} height={size} style={{ color: '#6B6B80' }} strokeWidth={2} />
+        <Share2 width={size} height={size} style={{ color: '#8B8BA8' }} strokeWidth={2} />
       )}
     </motion.button>
   );

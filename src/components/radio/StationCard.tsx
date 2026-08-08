@@ -6,6 +6,7 @@ import { Station } from '@/lib/stations';
 import { usePlayerStore } from '@/stores/playerStore';
 import { TiltCard } from './TiltCard';
 import { useRadioT, useStationI18n } from '@/lib/radioI18n';
+import { readableAccent } from '@/lib/readableAccent';
 
 const iconMap: Record<string, React.ReactNode> = {
   Radio: <Radio className="w-5 h-5 sm:w-6 sm:h-6" />,
@@ -223,11 +224,12 @@ export function StationCard({ station, index }: StationCardProps) {
 
               {/* Bitrate badge with gradient bg */}
               <motion.div
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono tracking-wider"
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[13px] font-mono tracking-wider"
                 style={{
                   background: `linear-gradient(135deg, ${station.color}10, ${station.color}05)`,
                   border: `1px solid ${station.color}15`,
-                  color: `${station.color}90`,
+                  // Бейдж битрейта: было 56% прозрачности акцента.
+                  color: readableAccent(station.color),
                 }}
                 whileHover={{ scale: 1.05, borderColor: `${station.color}30` }}
               >
@@ -257,10 +259,14 @@ export function StationCard({ station, index }: StationCardProps) {
             {/* Genre tag with gradient background */}
             <div>
               <div
-                className="inline-block text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] mb-3 uppercase px-2 py-0.5 rounded-sm"
+                className="inline-block text-[13px] sm:text-[13px] font-semibold tracking-[0.2em] mb-3 uppercase px-2 py-0.5 rounded-sm"
                 style={{
                   background: `linear-gradient(135deg, ${station.color}12, ${station.color}06)`,
-                  color: `${station.color}80`,
+                  // Было `${station.color}80` — акцент на 50% прозрачности:
+                  // контраст 1.73 (фиолет), 1.92 (красный), 4.04 (циан),
+                  // 4.17 (зелёный) при норме 4.5. Заливка плашки осталась
+                  // прежней, поднята только яркость самих букв.
+                  color: readableAccent(station.color),
                 }}
               >
                 {st.genre(station.id, station.genre)}
@@ -268,7 +274,7 @@ export function StationCard({ station, index }: StationCardProps) {
             </div>
 
             {/* Description */}
-            <p className="text-xs sm:text-sm text-[#6B6B80] leading-relaxed line-clamp-2 mb-4">
+            <p className="text-xs sm:text-sm text-[#8B8BA8] leading-relaxed line-clamp-2 mb-4">
               {st.desc(station.id, station.description)}
             </p>
 
@@ -277,12 +283,12 @@ export function StationCard({ station, index }: StationCardProps) {
               {/* Track count */}
               <div className="flex items-center gap-2">
                 <motion.span
-                  className="text-xs font-mono text-[#6B6B80]"
+                  className="text-xs font-mono text-[#8B8BA8]"
                   style={{ fontVariantNumeric: 'tabular-nums' }}
                 >
                   {station.tracks.length}
                 </motion.span>
-                <span className="text-xs text-[#3a3a4a]">{rt('tracksLower')}</span>
+                <span className="text-xs text-[#7E7E99]">{rt('tracksLower')}</span>
               </div>
 
               {isCurrentlyPlaying ? (
@@ -302,7 +308,7 @@ export function StationCard({ station, index }: StationCardProps) {
                     <div className="w-[2px] rounded-full eq-bar-3" style={{ backgroundColor: station.color, minHeight: '2px' }} />
                     <div className="w-[2px] rounded-full eq-bar-4" style={{ backgroundColor: station.color, minHeight: '2px' }} />
                   </div>
-                  <span className="text-[10px] font-medium tracking-wider" style={{ color: station.color }}>
+                  <span className="text-[13px] font-medium tracking-wider" style={{ color: station.color }}>
                     {rt('live')}
                   </span>
                 </motion.div>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { stations } from '@/lib/stations';
+import { readableAccent } from '@/lib/readableAccent';
 
 const SITE = 'https://radiocode.space';
 
@@ -100,7 +101,11 @@ export default function MusicPage() {
         </nav>
 
         <header className="rounded-2xl border border-white/8 p-6 sm:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45">
+          {/* Здесь и ниже: было text-white/45 — контраст 4.47 при норме 4.5,
+              то есть брак с крошечным недобором, который на глаз выглядит
+              «почти нормально» и потому годами не замечается.
+              text-white/60 даёт 7.33. */}
+          <p className="text-[13px] font-semibold uppercase tracking-[0.2em] text-white/60">
             Full catalogue
           </p>
           <h1 className="mt-3 text-3xl font-bold sm:text-4xl">
@@ -114,16 +119,16 @@ export default function MusicPage() {
 
           <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm">
             <div>
-              <dt className="text-white/45">Tracks</dt>
+              <dt className="text-white/60">Tracks</dt>
               <dd className="text-lg font-semibold">{total}</dd>
             </div>
             <div>
-              <dt className="text-white/45">Stations</dt>
+              <dt className="text-white/60">Stations</dt>
               <dd className="text-lg font-semibold">{stations.length}</dd>
             </div>
             {hours > 0 && (
               <div>
-                <dt className="text-white/45">Runtime</dt>
+                <dt className="text-white/60">Runtime</dt>
                 <dd className="text-lg font-semibold">≈ {hours} h</dd>
               </div>
             )}
@@ -134,9 +139,12 @@ export default function MusicPage() {
           <section key={station.id} className="mt-12">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <div>
+                {/* Было 11px чистым station.color: у фиолетовой станции
+                    #B000FF контраст 4.14 при норме 4.5 — подпись жанра
+                    не дотягивала. readableAccent осветляет только фиолетовый. */}
                 <p
-                  className="text-[11px] font-semibold uppercase tracking-[0.15em]"
-                  style={{ color: station.color }}
+                  className="text-[13px] font-semibold uppercase tracking-[0.15em]"
+                  style={{ color: readableAccent(station.color) }}
                 >
                   {station.genre}
                 </p>
@@ -150,7 +158,7 @@ export default function MusicPage() {
                   </Link>
                 </h2>
               </div>
-              <p className="text-sm text-white/45">{station.tracks.length} tracks</p>
+              <p className="text-sm text-white/60">{station.tracks.length} tracks</p>
             </div>
 
             <p className="mt-2 max-w-2xl text-sm text-white/60">{station.description}</p>
@@ -161,9 +169,9 @@ export default function MusicPage() {
                   key={track.id}
                   className="flex items-baseline gap-4 px-4 py-2.5 text-sm hover:bg-white/[0.03]"
                 >
-                  <span className="w-10 shrink-0 tabular-nums text-white/35">{i + 1}</span>
+                  <span className="w-10 shrink-0 tabular-nums text-white/60">{i + 1}</span>
                   <span className="min-w-0 flex-1 truncate">{track.title}</span>
-                  <span className="shrink-0 tabular-nums text-white/35">
+                  <span className="shrink-0 tabular-nums text-white/60">
                     {formatDuration(track.duration)}
                   </span>
                 </li>
@@ -172,7 +180,7 @@ export default function MusicPage() {
           </section>
         ))}
 
-        <p className="mt-12 text-sm text-white/45">
+        <p className="mt-12 text-sm text-white/60">
           All recordings are original work by AIfa &amp; DJ Galatin. Nothing here is
           licensed from anyone, which is why listening costs nothing.{' '}
           <Link href="/" className="text-white/70 hover:text-white">

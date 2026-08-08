@@ -5,6 +5,7 @@ import { X } from 'lucide-react';
 import { usePlayerStore } from '@/stores/playerStore';
 import { TrackItem } from './TrackItem';
 import { useRadioT, useStationI18n } from '@/lib/radioI18n';
+import { readableAccent } from '@/lib/readableAccent';
 
 export function PlaylistPanel() {
   const rt = useRadioT();
@@ -55,7 +56,7 @@ export function PlaylistPanel() {
                   <div className="text-sm font-semibold text-[#E8E8ED]">
                     {currentStation.name} — {rt('queue')}
                   </div>
-                  <div className="text-[10px] tracking-[0.15em] uppercase" style={{ color: `${color}70` }}>
+                  <div className="text-[13px] tracking-[0.15em] uppercase" style={{ color: readableAccent(color) }}>
                     {st.genre(currentStation.id, currentStation.genre)}
                   </div>
                 </div>
@@ -66,7 +67,7 @@ export function PlaylistPanel() {
                 onClick={toggleShowPlaylist}
                 className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/[0.04] transition-colors"
               >
-                <X className="w-4 h-4 text-[#6B6B80]" />
+                <X className="w-4 h-4 text-[#8B8BA8]" />
               </motion.button>
             </div>
 

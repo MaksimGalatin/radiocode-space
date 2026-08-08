@@ -91,7 +91,7 @@ export function PlayerBar() {
             >
               <Play className="w-6 h-6 text-[#00F0FF] ml-1" fill="#00F0FF" />
             </motion.button>
-            <span className="text-sm text-[#6B6B80]">{rt('selectStation')}</span>
+            <span className="text-sm text-[#8B8BA8]">{rt('selectStation')}</span>
           </div>
         </div>
       </motion.div>
@@ -207,7 +207,7 @@ export function PlayerBar() {
               >
                 {currentStation && (
                   <span
-                    className="hidden sm:inline-block text-[10px] sm:text-xs font-mono px-1.5 py-0.5 rounded flex-shrink-0"
+                    className="hidden sm:inline-block text-[13px] sm:text-xs font-mono px-1.5 py-0.5 rounded flex-shrink-0"
                     style={{
                       backgroundColor: `${color}15`,
                       color: color,
@@ -224,7 +224,7 @@ export function PlayerBar() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.1 }}
-                className="text-xs text-[#6B6B80] truncate mt-0.5"
+                className="text-xs text-[#8B8BA8] truncate mt-0.5"
               >
                 {currentTrack.artist}
               </motion.div>
@@ -245,7 +245,7 @@ export function PlayerBar() {
             >
               <Shuffle
                 className="w-[15px] h-[15px] sm:w-[18px] sm:h-[18px] transition-colors duration-200"
-                style={{ color: isShuffled ? color : '#6B6B80' }}
+                style={{ color: isShuffled ? color : '#8B8BA8' }}
               />
             </motion.button>
 
@@ -310,14 +310,14 @@ export function PlayerBar() {
             >
               <RepeatIcon
                 className="w-4 h-4 sm:w-[18px] sm:h-[18px] transition-colors duration-200"
-                style={{ color: repeatMode !== 'off' ? color : '#6B6B80' }}
+                style={{ color: repeatMode !== 'off' ? color : '#8B8BA8' }}
               />
               {repeatMode === 'one' && (
                 <motion.span
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0, opacity: 0 }}
-                  className="absolute -top-0.5 -right-0.5 text-[9px] font-bold leading-none rounded-full w-3.5 h-3.5 flex items-center justify-center"
+                  className="absolute -top-0.5 -right-0.5 text-[13px] font-bold leading-none rounded-full w-3.5 h-3.5 flex items-center justify-center"
                   style={{
                     color: color,
                     background: `${color}20`,
@@ -333,9 +333,9 @@ export function PlayerBar() {
           {/* Right: Time + Volume */}
           <div className="flex items-center gap-2 sm:gap-4 flex-1 justify-end">
             {/* Time */}
-            <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-[#6B6B80]">
+            <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-[#8B8BA8]">
               <span>{formatTime(currentTime)}</span>
-              <span className="text-[#3a3a4a]">/</span>
+              <span className="text-[#7E7E99]">/</span>
               <span>{formatTime(duration)}</span>
             </div>
 
@@ -346,7 +346,7 @@ export function PlayerBar() {
                 whileTap={{ scale: 0.9 }}
                 onClick={toggleMute}
                 aria-label={isMuted ? rt('unmute') : rt('mute')}
-                className="text-[#6B6B80] hover:text-[#E8E8ED] transition-colors"
+                className="text-[#8B8BA8] hover:text-[#E8E8ED] transition-colors"
               >
                 <VolumeIcon className="w-4 h-4" />
               </motion.button>
@@ -400,10 +400,10 @@ export function PlayerBar() {
               }}
               title={sleepMinutes ? `${rt('sleepIn')} ${sleepMinutes} ${rt('minShort')}` : rt('sleepTimer')}
             >
-              <Moon className="w-4 h-4" style={{ color: sleepMinutes ? color : '#6B6B80' }} />
+              <Moon className="w-4 h-4" style={{ color: sleepMinutes ? color : '#8B8BA8' }} />
               {sleepMinutes && (
                 <span
-                  className="absolute -top-1 -right-1 text-[8px] font-bold leading-none rounded-full px-1 py-0.5"
+                  className="absolute -top-1 -right-1 text-[13px] font-bold leading-none rounded-full px-1 py-0.5"
                   style={{ background: color, color: '#050507' }}
                 >
                   {sleepMinutes}
@@ -425,7 +425,7 @@ export function PlayerBar() {
               }}
               title={rt('playlist')}
             >
-              <ListMusic className="w-4 h-4" style={{ color: showPlaylist ? color : '#6B6B80' }} />
+              <ListMusic className="w-4 h-4" style={{ color: showPlaylist ? color : '#8B8BA8' }} />
             </motion.button>
           </div>
         </div>

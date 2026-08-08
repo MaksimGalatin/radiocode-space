@@ -53,7 +53,7 @@ export function SignalStrength() {
         bar.style.height = `${h}px`;
         bar.style.background = isPlaying
           ? `linear-gradient(to top, #00F0FF, #B000FF)`
-          : '#3a3a4a';
+          : '#7E7E99';
         bar.style.boxShadow = isPlaying
           ? `0 0 6px ${stationColor}40`
           : 'none';
@@ -72,12 +72,18 @@ export function SignalStrength() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
       className="flex flex-col items-center select-none"
-      style={{ width: 40 }}
+      // Была жёсткая width: 40. Подпись «SIGNAL» набрана 8px с разрядкой 0.2em
+      // и в 40px укладывалась. После подъёма до 13px (правило «мелкого текста
+      // нет нигде») она стала 59px и вылезала за свой блок — замерено на живой
+      // странице: ширина 59 при родителе 40. minWidth вместо width даёт блоку
+      // растянуться по подписи; столбики эквалайзера остаются той же ширины и
+      // по-прежнему стоят по центру.
+      style={{ minWidth: 40 }}
     >
       {/* Label */}
       <span
-        className="text-[8px] tracking-[0.2em] uppercase mb-1.5"
-        style={{ color: '#3a3a4a' }}
+        className="text-[13px] tracking-[0.2em] uppercase mb-1.5"
+        style={{ color: '#7E7E99' }}
       >
         {rt('signal')}
       </span>
@@ -95,7 +101,7 @@ export function SignalStrength() {
               width: 5,
               height: STATIC_HEIGHTS[i],
               borderRadius: 1.5,
-              background: '#3a3a4a',
+              background: '#7E7E99',
               transition: isPlaying ? 'none' : 'height 0.4s ease-in-out',
             }}
           />
