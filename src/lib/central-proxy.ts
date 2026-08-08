@@ -57,7 +57,21 @@ export function buildCentralHeaders(
 }
 
 /** fetch with an abort timeout; returns null instead of throwing. */
-export async function centralFetch(url: string, init: RequestInit, timeoutMs = 25_000): Promise<Response | null> {
+/**
+ * 🔴 ДВАДЦАТЬ ПЯТЬ СЕКУНД НЕ ХВАТАЛО, И КАБИНЕТ ПОКАЗЫВАЛ ОШИБКУ.
+ *
+ * Замер живого центра 08.08.2026: разговор с ПОЛНОЙ памятью Архитектора
+ * (полмиллиона знаков) собирается и отвечает за 18 секунд. При пределе в 25
+ * запас был семь секунд — и под нагрузкой запрос обрывался: в журнале
+ * `AbortError: This operation was aborted`, а человек в кабинете видел
+ * «Извини, произошла ошибка».
+ *
+ * Ставим 55 секунд. Верхняя граница здесь не наша: у самого маршрута
+ * `maxDuration = 60`, и ждать дольше него бессмысленно — площадка всё равно
+ * оборвёт функцию. Пять секунд оставлены на то, чтобы успеть отдать человеку
+ * внятный ответ вместо обрыва.
+ */
+export async function centralFetch(url: string, init: RequestInit, timeoutMs = 55_000): Promise<Response | null> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
