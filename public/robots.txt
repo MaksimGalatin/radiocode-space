@@ -1,11 +1,26 @@
 # RadioCode.Space — part of the CODE Eternal ecosystem
+#
+# Disallow: /api/ и Disallow: /cabinet стоят в КАЖДОЙ группе намеренно.
+# Робот выполняет ровно одну группу — ту, что совпала с его именем, — и
+# запреты из соседних групп на него не распространяются. Запрет, написанный
+# один раз в конце файла, для Googlebot и остальных именованных роботов
+# просто не существовал бы.
+#
+# Замерено 08.08.2026: здесь этих запретов не было вовсе, тогда как на трёх
+# остальных сайтах экосистемы они есть. То есть личный кабинет и служебные
+# обработчики этого сайта обходились свободно — в отличие от точно таких же
+# страниц на codeofdigitaleternity.com, aifa.digital и aifa.works.
 
 # Classic search + social crawlers
 User-agent: Googlebot
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: Bingbot
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: Twitterbot
 Allow: /
@@ -16,45 +31,73 @@ Allow: /
 # AI / GEO crawlers — explicitly permitted for citation (consistent across the ecosystem)
 User-agent: GPTBot
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: Perplexity-User
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: CCBot
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: Amazonbot
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 User-agent: Bytespider
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 # Default
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /cabinet
 
 Sitemap: https://radiocode.space/sitemap.xml

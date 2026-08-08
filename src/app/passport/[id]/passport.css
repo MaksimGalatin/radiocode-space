@@ -258,4 +258,10 @@
   /* Крипто-полоса в один ряд на узком экране вылезала за край — переносим. */
   .crypto-strip { flex-wrap: wrap; justify-content: center; row-gap: 14px; }
   .chip-center { order: 3; flex-basis: 100%; }
+  /* Замер на 375 px показал две подписи по 8 пикселей — под идентиконом и под
+     QR. На бланке они служебные, но восемь пикселей на телефоне не читаются
+     вовсе, а именно за мелкий шрифт нам уже прилетало. Поднимаем. */
+  .identicon-label, .qr-label { font-size: 10px; letter-spacing: .16em; }
+  .f-label, .c-label, .mrz-label { font-size: 10px; }
+  .chip-tagline { font-size: 10px; }
 }

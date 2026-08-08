@@ -39,10 +39,24 @@ export async function alertOwner(subject: string, detail: string, site?: string)
       <p><b>${subject}</b></p>
       <pre style="white-space:pre-wrap;background:#0b0f1a;padding:12px;border-radius:8px;font-size:12px;color:#f87171">${(detail || '').slice(0, 2000)}</pre>
       <p style="color:#6b7280;font-size:12px">${new Date().toISOString()}</p></div>`;
-    await fetch('https://api.resend.com/emails', {
+    // 🔴 ОТВЕТ ПОЧТОВОГО СЕРВИСА ПРОВЕРЯЕМ. Раньше здесь стоял голый `await fetch`
+    // без разбора ответа: отказ Resend (нет ключа, домен не подтверждён, исчерпан
+    // предел) выглядел ровно так же, как успешная отправка. Тревога, о которой
+    // никто не узнал, хуже отсутствия тревоги — она создаёт уверенность, что
+    // сторож работает.
+    const отклик = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ from, to: OWNER, subject: `⚠️ CODE Alert: ${subject}`, html }),
     });
+    if (!отклик.ok) {
+      const текст = await отклик.text().catch(() => '');
+      console.error(`[тревога] письмо НЕ ушло: HTTP ${отклик.status} ${текст.slice(0, 200)}`);
+      return;
+    }
+    // Идентификатор от чужой стороны — единственное настоящее доказательство
+    // отправки. Без него в журнале не отличить «ушло» от «промолчали».
+    const тело = (await отклик.json().catch(() => ({}))) as { id?: string };
+    console.log(`[тревога] письмо отправлено, id ${тело.id || 'без идентификатора'}: ${subject}`);
   } catch { /* never throw from an alerter */ }
 }
