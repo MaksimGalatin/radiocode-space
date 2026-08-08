@@ -39,6 +39,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    {
+      // Глоссарий на 28 терминов. Страница /glossary есть на всех четырёх
+      // сайтах и на всех трёх остальных стоит в карте сайта
+      // (codeofdigitaleternity.com, aifa.digital, aifa.works) — здесь её не
+      // было вместе с самой страницей. Текст плотный и уникальный, меняется
+      // редко, отсюда monthly.
+      url: `${SITE}/glossary`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
     // 🔴 КАБИНЕТ ИЗ КАРТЫ САЙТА УБРАН.
     //
     // Здесь стояла запись `${SITE}/cabinet` с пояснением «кабинет — публичная
