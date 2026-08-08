@@ -292,7 +292,12 @@ export default function CabinetPage() {
     else if (paidNotice === "cancel") toastMsg(t("paidCancel"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paidNotice, authChecked, me]);
-  const xpInLevel = me?.inLevel ?? ((me?.xp || 0));
+  // Запасное значение — НОЛЬ, а не весь опыт.
+  // Стояло `me?.inLevel ?? (me?.xp || 0)`: если ручка не отдала inLevel, в полосу
+  // прогресса подставлялся ВЕСЬ суммарный опыт против запасного предела 100 —
+  // полоса упиралась в край, а число рядом читалось как бессмыслица. Теперь
+  // /api/me отдаёт inLevel всегда, но запасной путь тоже обязан быть честным.
+  const xpInLevel = me?.inLevel ?? 0;
   const xpNeed = me?.need && me.need > 0 ? me.need : 100;
 
   const TABS: { id: Tab; icon: string; label: string }[] = [
