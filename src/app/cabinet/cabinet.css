@@ -1,3 +1,13 @@
+
+/* ── 🔴 ЦВЕТА АКЦЕНТОВ НЕ ЧИТАЛИСЬ НА СВЕТЛОЙ ТЕМЕ. ПОЧИНЕНО 08.08.2026 ──────
+   Акценты были зашиты одним набором на обе темы. Замерено по WCAG (норма 4.5
+   для обычного текста) на светлом фоне #f5f6fb:
+     cyan  #22D3EE — 1.67   cyan2 #06B6D4 — 2.25   gold  #D4A24C — 2.14
+     green #10B981 — 2.35   amber #F59E0B — 1.99   red   #EF4444 — 3.49
+   То есть номер уровня в кабинете (он рисуется cyan2) на светлой теме имел
+   контраст 2.25 при норме 4.5 — его буквально не видно. На тёмной теме своя
+   пара бед: mut 3.82 и violet 3.24.
+   Теперь у каждой темы свои значения, все проверены расчётом: минимум 4.65. */
 /* Оформление кабинета.
    Раньше эта таблица стилей жила строкой в ui.tsx и вставлялась блоком
    <style> прямо в страницу. Из-за таких блоков политика содержимого была
@@ -8,7 +18,7 @@
 @keyframes lvlUpFlash { 0%{ transform: scale(.6); opacity:0; } 40%{ transform: scale(1.15); opacity:1; } 100%{ transform: scale(1); opacity:1; } }
 .lvl-up-flash { animation: lvlUpFlash .7s cubic-bezier(.22,1,.36,1); }
 
-  .cab-root { --cab-text:#E8E8F0; --cab-sub:#8B8B9E; --cab-mut:#6B7280; --cab-panel:rgba(19,19,28,0.55); --cab-panel-solid:#13131C; --cab-line:rgba(42,42,58,0.8); --cab-ink:#0B0F1A; color: var(--cab-text); position: relative; z-index: 1; }
+  .cab-root { --cab-text:#E8E8F0; --cab-sub:#8B8B9E; --cab-mut:#9AA3B4; --cab-panel:rgba(19,19,28,0.55); --cab-panel-solid:#13131C; --cab-line:rgba(42,42,58,0.8); --cab-ink:#0B0F1A; --cab-cyan:#22D3EE; --cab-cyan2:#06B6D4; --cab-violet:#A78BFA; --cab-violet2:#8B5CF6; --cab-gold:#D4A24C; --cab-green:#10B981; --cab-red:#EF4444; --cab-amber:#F59E0B; color: var(--cab-text); position: relative; z-index: 1; }
   .cab-card { background: rgba(19,19,28,0.55); border: 1px solid rgba(42,42,58,0.8); border-radius: 16px; backdrop-filter: blur(8px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 2px 22px rgba(0,0,0,0.28); transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
   .cab-card-hover:hover { border-color: rgba(34,211,238,0.35); box-shadow: 0 10px 44px rgba(6,182,212,0.12); transform: translateY(-2px); }
   .cab-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; border:none; border-radius:12px; font-weight:700; cursor:pointer; transition: filter .15s ease, transform .15s ease, opacity .15s ease; font-size:14px; padding: 11px 18px; color:#fff; }
@@ -67,7 +77,7 @@
   .cab-bg-cursor { position: absolute; top: 0; left: 0; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%; background: radial-gradient(circle, rgba(34,211,238,0.10), transparent 60%); will-change: transform; }
   .cab-bg-static .cab-bg-grid, .cab-bg-static .cab-bg-orb { animation: none; }
   /* ─── СВЕТЛАЯ ТЕМА (html:not(.dark)) — тёмную НЕ трогаем, это только переопределения ─── */
-  html:not(.dark) .cab-root { --cab-text:#1b1b2b; --cab-sub:#4f4f66; --cab-mut:#6c6c84; --cab-panel:rgba(255,255,255,0.72); --cab-panel-solid:#f5f6fb; --cab-line:rgba(20,20,45,0.14); --cab-ink:#e9ebf4; }
+  html:not(.dark) .cab-root { --cab-text:#1b1b2b; --cab-sub:#4f4f66; --cab-mut:#6c6c84; --cab-panel:rgba(255,255,255,0.72); --cab-panel-solid:#f5f6fb; --cab-line:rgba(20,20,45,0.14); --cab-ink:#e9ebf4; --cab-cyan:#0E7490; --cab-cyan2:#155E75; --cab-violet:#6D28D9; --cab-violet2:#5B21B6; --cab-gold:#7A5A18; --cab-green:#047857; --cab-red:#B91C1C; --cab-amber:#B45309; }
   html:not(.dark) .cab-card { background: rgba(255,255,255,0.82); border: 1px solid rgba(20,20,45,0.13); box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 22px rgba(20,20,60,0.08); }
   html:not(.dark) .cab-card-hover:hover { border-color: rgba(6,182,212,0.5); box-shadow: 0 10px 44px rgba(6,182,212,0.14); }
   html:not(.dark) .cab-input { background:#ffffff; border:1px solid rgba(20,20,45,0.20); color:#1b1b2b; }

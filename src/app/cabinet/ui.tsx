@@ -9,8 +9,9 @@ import React from "react";
  */
 
 export const TOKENS = {
-  cyan: "#22D3EE", cyan2: "#06B6D4", violet: "#7C3AED", violet2: "#6D28D9",
-  gold: "#D4A24C", green: "#10B981", red: "#EF4444", amber: "#F59E0B",
+  // Акценты — переменные темы, а не зашитые значения (разбор в cabinet.css).
+  cyan: "var(--cab-cyan)", cyan2: "var(--cab-cyan2)", violet: "var(--cab-violet)", violet2: "var(--cab-violet2)",
+  gold: "var(--cab-gold)", green: "var(--cab-green)", red: "var(--cab-red)", amber: "var(--cab-amber)",
   text: "var(--cab-text)", sub: "var(--cab-sub)", mut: "var(--cab-mut)",
   panel: "var(--cab-panel)", panelSolid: "var(--cab-panel-solid)", line: "var(--cab-line)", ink: "var(--cab-ink)",
 };
