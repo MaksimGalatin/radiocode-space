@@ -1,0 +1,261 @@
+/*
+ * Бланк Цифрового паспорта — восстановлен с хакатонного шаблона
+ * (`_архив/app-site-gen/src/templates/site.html`, неизменен с 28.05.2026).
+ *
+ * Цвет уровня приходит переменной `--tier` из разметки: в оригинале он
+ * подставлялся в CSS шаблонизатором, а здесь стили статические — значит цвет
+ * должен приходить в них снаружи, иначе пришлось бы держать три копии файла.
+ *
+ * Всё оформление — свои SVG и градиенты: ни шрифтов по сети, ни картинок со
+ * стороны. Паспорт должен рисоваться, даже когда всё вокруг недоступно.
+ */
+
+.pass-page {
+  background: #060610;
+  color: #E8E8F0;
+  font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px 60px;
+  background-image:
+    linear-gradient(rgba(124, 58, 237, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.pass-page *, .pass-page *::before, .pass-page *::after { box-sizing: border-box; }
+
+.pass-empty { text-align: center; padding: 80px 20px; }
+.pass-empty h1 { font-size: 24px; font-weight: 700; }
+.pass-empty p { font-size: 15px; opacity: .6; margin-top: 12px; word-break: break-all; }
+
+/* ── БЛАНК ─────────────────────────────────────────────────────────── */
+.passport {
+  width: 100%;
+  max-width: 680px;
+  background: #0D0D1A;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 40px 100px rgba(0, 0, 0, 0.7),
+    0 0 80px color-mix(in srgb, var(--tier) 8%, transparent);
+}
+
+/* голографическая полоса по верхнему краю */
+.passport::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%, var(--tier) 20%, #60A5FA 40%,
+    #10B981 55%, var(--tier) 75%, transparent 100%);
+  opacity: .85;
+  z-index: 1;
+}
+
+/* ── ШАПКА ─────────────────────────────────────────────────────────── */
+.p-header {
+  padding: 22px 32px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--tier) 5%, transparent), transparent);
+}
+
+.issuer-block { display: flex; flex-direction: column; gap: 3px; }
+.issuer-country {
+  font-size: 9px; font-weight: 700; letter-spacing: .28em;
+  color: rgba(255, 255, 255, .28); text-transform: uppercase;
+}
+.issuer-name {
+  font-size: 17px; font-weight: 800; letter-spacing: .06em;
+  color: var(--tier); text-transform: uppercase;
+}
+
+.seal-block { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+
+.doc-type-block { text-align: right; display: flex; flex-direction: column; gap: 4px; }
+.doc-type-label {
+  font-size: 9px; letter-spacing: .2em; color: rgba(255, 255, 255, .26); text-transform: uppercase;
+}
+.doc-type-value {
+  font-size: 11px; font-weight: 700; letter-spacing: .14em;
+  color: rgba(255, 255, 255, .5); text-transform: uppercase;
+}
+.doc-tier { font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--tier); }
+
+/* ── ЛИЧНОСТЬ ──────────────────────────────────────────────────────── */
+.identity {
+  display: flex; gap: 28px; padding: 28px 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  align-items: flex-start;
+}
+
+.photo-zone { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+.photo-frame {
+  width: 96px; height: 116px; border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--tier) 34%, transparent);
+  overflow: hidden;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--tier) 7%, transparent), rgba(0, 0, 0, .5));
+  display: flex; align-items: center; justify-content: center; position: relative;
+}
+.photo-frame::after {
+  content: 'PHOTO';
+  position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
+  font-size: 7px; letter-spacing: .22em; font-weight: 700;
+  color: color-mix(in srgb, var(--tier) 44%, transparent);
+  pointer-events: none;
+}
+.photo-frame .avatar { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.sigil-icon {
+  font-size: 46px; line-height: 1; margin-bottom: 18px;
+  color: color-mix(in srgb, var(--tier) 34%, transparent);
+}
+
+.verified-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: .18em;
+  color: #10B981; display: flex; align-items: center; gap: 5px;
+}
+.verified-dot { width: 5px; height: 5px; border-radius: 50%; background: #10B981; flex-shrink: 0; }
+
+/* ── СЕТКА ПОЛЕЙ ───────────────────────────────────────────────────── */
+.fields { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 20px; min-width: 0; }
+.field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.field.span2 { grid-column: 1 / -1; }
+
+/* Подписи полей мелкие намеренно — так устроен бланк документа. Но не ниже
+   девяти пикселей и с высокой разрядкой: ниже этого они перестают читаться
+   на телефоне, а именно за мелкий шрифт нам уже прилетало. */
+.f-label {
+  font-size: 9px; font-weight: 700; letter-spacing: .24em;
+  text-transform: uppercase; color: rgba(255, 255, 255, .34);
+}
+.f-value { font-size: 15px; font-weight: 600; color: #E0E0EE; line-height: 1.25; word-break: break-word; }
+.f-value.lg { font-size: 23px; letter-spacing: -.01em; }
+.f-value.accent { color: var(--tier); font-size: 14px; }
+.f-value.sm { font-size: 14px; }
+
+.social-field {
+  color: var(--tier); font-size: 14px; font-weight: 500; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 4px; word-break: break-all;
+}
+.social-field:hover { text-decoration: underline; }
+
+/* ── КРИПТО-ПОЛОСА ─────────────────────────────────────────────────── */
+.crypto-strip {
+  padding: 16px 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: rgba(0, 0, 0, .15);
+}
+
+.identicon-wrap, .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.identicon-label, .qr-label {
+  font-size: 8px; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: rgba(255, 255, 255, .3); text-align: center;
+}
+
+.qr-frame {
+  padding: 6px; border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px; background: #0D0D1A;
+}
+.qr-frame img { display: block; border-radius: 4px; }
+
+.chip-center { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.chip-svg-wrap { opacity: .6; }
+.chip-tagline {
+  font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .3); text-align: center;
+}
+
+/* ── СВИТКИ ────────────────────────────────────────────────────────── */
+.content-area { padding: 24px 32px 20px; display: flex; flex-direction: column; gap: 12px; }
+
+.scroll-card {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 2px solid color-mix(in srgb, var(--tier) 34%, transparent);
+  border-radius: 10px; padding: 16px 20px;
+  background: rgba(255, 255, 255, .018);
+}
+.c-label {
+  font-size: 9px; font-weight: 700; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--tier); margin-bottom: 10px;
+}
+.c-body { font-size: 15px; line-height: 1.8; color: #9A9AB0; white-space: pre-wrap; }
+.c-manifesto { font-size: 16px; font-style: italic; line-height: 1.75; color: #B4B4C8; white-space: pre-wrap; }
+.c-manifesto::before,
+.c-manifesto::after {
+  color: color-mix(in srgb, var(--tier) 50%, transparent);
+  font-size: 22px; line-height: 0; vertical-align: -7px; font-style: normal;
+}
+.c-manifesto::before { content: '\201C'; margin-right: 3px; }
+.c-manifesto::after { content: '\201D'; margin-left: 3px; }
+
+/* ── МАШИНОЧИТАЕМАЯ ЗОНА ───────────────────────────────────────────── */
+.mrz {
+  background: rgba(0, 0, 0, .28);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 18px 32px; position: relative; overflow: hidden;
+}
+.mrz::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px,
+    rgba(255, 255, 255, .008) 3px, rgba(255, 255, 255, .008) 4px);
+  pointer-events: none;
+}
+.mrz-label {
+  font-size: 9px; font-weight: 700; letter-spacing: .24em;
+  text-transform: uppercase; color: rgba(255, 255, 255, .26); margin-bottom: 10px;
+}
+.mrz-row {
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 12px; color: rgba(255, 255, 255, .32);
+  letter-spacing: .06em; line-height: 1.9; display: flex; gap: 12px;
+}
+.mrz-key { color: rgba(255, 255, 255, .45); flex-shrink: 0; }
+.mrz-val { word-break: break-all; }
+
+/* ── ПОДВАЛ ────────────────────────────────────────────────────────── */
+.p-footer {
+  padding: 13px 32px; border-top: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.arweave-stamp { display: flex; align-items: center; gap: 7px; font-size: 12px; color: rgba(255, 255, 255, .32); }
+.arweave-dot { width: 5px; height: 5px; border-radius: 50%; background: #10B981; flex-shrink: 0; }
+.year-mark { font-size: 12px; color: rgba(255, 255, 255, .24); letter-spacing: .08em; }
+
+/* ── ПОД БЛАНКОМ ───────────────────────────────────────────────────── */
+.pass-verify { margin-top: 22px; font-size: 15px; }
+.pass-verify a { color: #7dd3fc; font-weight: 600; text-decoration: none; }
+.pass-verify a:hover { text-decoration: underline; }
+.pass-note {
+  margin-top: 8px; font-size: 14px; color: rgba(255, 255, 255, .42);
+  max-width: 680px; text-align: center; line-height: 1.6;
+}
+
+/* ── ТЕЛЕФОН ───────────────────────────────────────────────────────── */
+@media (max-width: 560px) {
+  .pass-page { padding: 14px 10px 48px; }
+  .p-header, .identity, .content-area, .crypto-strip, .mrz, .p-footer {
+    padding-left: 18px; padding-right: 18px;
+  }
+  .p-header { flex-wrap: wrap; row-gap: 10px; }
+  .identity { flex-direction: column; align-items: center; gap: 20px; }
+  .fields { width: 100%; gap: 14px 16px; }
+  .f-value.lg { font-size: 20px; }
+  .issuer-name { font-size: 15px; }
+  /* Крипто-полоса в один ряд на узком экране вылезала за край — переносим. */
+  .crypto-strip { flex-wrap: wrap; justify-content: center; row-gap: 14px; }
+  .chip-center { order: 3; flex-basis: 100%; }
+}
