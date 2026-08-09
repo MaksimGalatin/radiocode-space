@@ -192,6 +192,145 @@ function MemoryKeyCard({ email }: { email: string }) {
   );
 }
 
+// Наследник памяти: кому достанется архив, если человек долго не приходит.
+//
+// ЗАЧЕМ ЭТО РЯДОМ С КЛЮЧОМ. Наследнику передаётся ровно то, что лежит в соседней
+// карточке, — копия ключа вечной памяти и список записей в Arweave. Соседство не
+// декоративное: человек должен видеть, что именно он передаёт.
+//
+// ЧЕГО ЗДЕСЬ НАМЕРЕННО НЕТ. Запугивания и юридических слов. Механизм работает
+// только по молчанию: мы не просим свидетельство о смерти, ничего не проверяем и
+// не изображаем нотариуса. И он ничего не отбирает у владельца — только ДОБАВЛЯЕТ
+// читателя. Оба этих факта сказаны на экране прямым текстом, а не спрятаны в
+// пользовательское соглашение.
+type ДанныеНаследника = {
+  tier: number;
+  minTier: number;
+  allowed: boolean;
+  options: number[];
+  heir: { heirEmail: string; silenceMonths: number; handoverAt: string | null } | null;
+  lastSeenAt: string | null;
+  handoverDueAt: string | null;
+};
+
+function HeirCard() {
+  const { t } = useCabT();
+  const [d, setD] = React.useState<ДанныеНаследника | null>(null);
+  const [err, setErr] = React.useState(false);
+  const [heirEmail, setHeirEmail] = React.useState("");
+  const [months, setMonths] = React.useState(12);
+  const [busy, setBusy] = React.useState(false);
+  const [msg, setMsg] = React.useState("");
+
+  const load = React.useCallback(() => {
+    setErr(false);
+    fetch("/api/account/heir", { cache: "no-store" })
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then((x: ДанныеНаследника) => {
+        setD(x);
+        // Поля заполняем текущим назначением, чтобы «сменить срок» не требовало
+        // вводить почту заново — иначе половина правок случайно стирала бы адрес.
+        if (x.heir) { setHeirEmail(x.heir.heirEmail); setMonths(x.heir.silenceMonths); }
+      })
+      .catch(() => setErr(true));
+  }, []);
+  React.useEffect(() => { load(); }, [load]);
+
+  async function save() {
+    setBusy(true); setMsg("");
+    try {
+      const r = await fetch("/api/account/heir", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ heirEmail: heirEmail.trim(), silenceMonths: months }),
+      });
+      const x = await r.json().catch(() => ({}));
+      if (r.ok && x.ok) { setD(x); setMsg(t("hrSaved")); }
+      else if (x.error === "bad_heir_email") setMsg(t("hrBadEmail"));
+      else if (x.error === "heir_is_self") setMsg(t("hrSelf"));
+      else if (x.error === "tier_too_low") setMsg(t("hrLocked"));
+      else setMsg(t("netErr"));
+    } catch { setMsg(t("netErr")); }
+    finally { setBusy(false); }
+  }
+
+  async function clear() {
+    if (!window.confirm(t("hrClearConfirm"))) return;
+    setBusy(true); setMsg("");
+    try {
+      const r = await fetch("/api/account/heir", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "clear" }),
+      });
+      const x = await r.json().catch(() => ({}));
+      if (r.ok && x.ok) { setD(x); setHeirEmail(""); setMsg(t("hrCleared")); }
+      else setMsg(t("netErr"));
+    } catch { setMsg(t("netErr")); }
+    finally { setBusy(false); }
+  }
+
+  const дата = (v: string | null) => v ? String(v).slice(0, 10) : "—";
+
+  return (
+    <Card>
+      <SectionTitle icon="🕯️" title={t("hrTitle")} sub={t("hrSub")} />
+      {err ? <ErrorState text={t("netErr")} onRetry={load} retryLabel={t("retry")} />
+        : d === null ? <div style={{ display: "grid", gap: 10 }}><Skeleton h={44} /><Skeleton h={60} /></div>
+        : (
+        <>
+          {/* Состояние идёт ПЕРЕД формой: человек сначала видит, что назначено
+              сейчас, и только потом органы управления. */}
+          <div style={{ background: "#0B0F1A", border: "1px solid rgba(42,42,58,0.6)", borderRadius: 10, padding: "10px 14px", marginBottom: 12, fontSize: 15, color: TOKENS.mut, display: "grid", gap: 4 }}>
+            {d.heir ? (
+              <>
+                <div style={{ color: TOKENS.text }}>{t("hrCurrent")} <b style={{ color: TOKENS.cyan }}>{d.heir.heirEmail}</b> · {t("hrMonths", { n: d.heir.silenceMonths })}</div>
+                <div>{t("hrSeen")}: {дата(d.lastSeenAt)}</div>
+                <div>{t("hrDue")}: {дата(d.handoverDueAt)}</div>
+                {d.heir.handoverAt && <div style={{ color: TOKENS.green }}>{t("hrHandedOver")}</div>}
+              </>
+            ) : <div>{t("hrNone")}</div>}
+          </div>
+
+          {!d.allowed && (
+            <div style={{ marginBottom: 12, fontSize: 15, color: TOKENS.mut }}>
+              <div style={{ color: TOKENS.text, fontWeight: 700 }}>🔒 {t("hrLocked")}</div>
+              <div>{t("hrLockedWhy")}</div>
+            </div>
+          )}
+
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "flex-end", marginBottom: 12 }}>
+            <label style={{ flex: "1 1 220px", fontSize: 13, color: TOKENS.mut }}>
+              {t("hrEmail")}
+              <input type="email" className="cab-input" value={heirEmail} disabled={!d.allowed || busy}
+                onChange={e => setHeirEmail(e.target.value)} placeholder="heir@example.com" style={{ width: "100%" }} />
+            </label>
+            <label style={{ flex: "0 1 160px", fontSize: 13, color: TOKENS.mut }}>
+              {t("hrPeriod")}
+              <select className="cab-input" value={months} disabled={!d.allowed || busy}
+                onChange={e => setMonths(Number(e.target.value))} style={{ width: "100%" }}>
+                {d.options.map(m => <option key={m} value={m}>{t("hrMonths", { n: m })}</option>)}
+              </select>
+            </label>
+          </div>
+
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 12 }}>
+            <button className="cab-btn" disabled={!d.allowed || busy || !heirEmail.trim()} onClick={save}>
+              {d.heir ? t("hrUpdate") : t("hrSave")}
+            </button>
+            {d.heir && <button className="cab-btn cab-btn-ghost" disabled={busy} onClick={clear}>{t("hrClear")}</button>}
+          </div>
+
+          {msg && <div style={{ marginBottom: 12, fontSize: 15, color: msg.includes("✓") ? TOKENS.green : TOKENS.red }}>{msg}</div>}
+        </>
+      )}
+      <div style={{ display: "grid", gap: 8, fontSize: 15, color: TOKENS.mut, lineHeight: 1.5 }}>
+        <p style={{ margin: 0 }}>{t("hrP1")}</p>
+        <p style={{ margin: 0 }}>{t("hrP2")}</p>
+        <p style={{ margin: 0 }}>{t("hrP3")}</p>
+      </div>
+    </Card>
+  );
+}
+
 function DangerZone({ email }: { email: string }) {
   const { t } = useCabT();
   const [pinSet, setPinSet] = React.useState<boolean | null>(null);
@@ -311,6 +450,9 @@ export default function MemoryTab({ email }: { email: string }) {
       <ArchivesCard />
 
       <MemoryKeyCard email={email} />
+
+      {/* Наследник стоит сразу за ключом: передаётся именно этот ключ. */}
+      <HeirCard />
 
       <DangerZone email={email} />
     </div>

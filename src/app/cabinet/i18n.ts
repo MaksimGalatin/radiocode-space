@@ -272,6 +272,34 @@ const D: Record<string, L4> = {
   mkP1: ["Этим ключом зашифрована твоя память в блокчейне Arweave.", "This key encrypts your memory in the Arweave blockchain.", "Esta clave cifra tu memoria en la cadena de bloques Arweave.", "此密钥用于加密你在 Arweave 区块链中的记忆。"],
   mkP2: ["Записи в Arweave вечные: переписать или удалить их нельзя.", "Records on Arweave are permanent: they cannot be rewritten or deleted.", "Los registros en Arweave son permanentes: no se pueden reescribir ni borrar.", "Arweave 上的记录是永久的：无法改写，也无法删除。"],
   mkP3: ["Если ключ утрачен и сервис исчез, расшифровать записи будет нельзя. Копию стоит хранить у себя.", "If the key is lost and the service is gone, the records cannot be decrypted. Keep your own copy.", "Si pierdes la clave y el servicio desaparece, los registros no podrán descifrarse. Guarda tu propia copia.", "如果密钥丢失且服务不复存在，这些记录将无法解密。请自行保存一份副本。"],
+
+  // ── Наследник памяти ──
+  // Тон намеренно спокойный и бытовой: раздел про то, что человек может не
+  // прийти, и запугивать здесь нельзя. Нигде не обещается юридическая процедура —
+  // мы не нотариус, и механизм работает ТОЛЬКО по молчанию, о чём сказано прямо.
+  hrTitle: ["Наследник памяти", "Memory heir", "Heredero de la memoria", "记忆继承人"],
+  hrSub: ["На всякий случай: кому передать архив, если тебя долго не будет.", "Just in case: who receives your archive if you are gone for a long time.", "Por si acaso: quién recibe tu archivo si te ausentas mucho tiempo.", "以防万一：如果你长时间不出现，由谁接收你的归档。"],
+  hrP1: ["Если ты не заходишь дольше выбранного срока, мы напишем тебе дважды — за 30 и за 7 дней. Любой заход обнуляет отсчёт.", "If you do not sign in for longer than the chosen period, we write to you twice — 30 and 7 days before. Any visit resets the countdown.", "Si no entras durante más tiempo del plazo elegido, te escribimos dos veces: 30 y 7 días antes. Cualquier visita reinicia la cuenta.", "如果你超过所选期限没有登录，我们会在到期前 30 天和 7 天各写信一次。任何一次登录都会重置倒计时。"],
+  hrP2: ["Только после этого наследник получит письмо со ссылкой: копия архива памяти и ключ для его чтения. Пароль и вход в твою учётную запись не передаются никому.", "Only then does the heir receive a link: a copy of the memory archive and the key to read it. Your password and account access are never handed over to anyone.", "Solo entonces el heredero recibe un enlace: una copia del archivo de memoria y la clave para leerlo. Tu contraseña y el acceso a tu cuenta no se entregan a nadie.", "只有到那时，继承人才会收到一个链接：记忆归档副本和读取它的密钥。你的密码和账户登录权限不会移交给任何人。"],
+  hrP3: ["Мы не просим свидетельство о смерти и ничего не проверяем: механизм основан только на молчании. Убрать наследника или сменить срок можно в любой момент — о каждом изменении придёт письмо.", "We do not ask for a death certificate and verify nothing: the mechanism runs on silence alone. You can remove the heir or change the period at any time — every change is confirmed by email.", "No pedimos certificado de defunción ni verificamos nada: el mecanismo se basa solo en el silencio. Puedes eliminar al heredero o cambiar el plazo cuando quieras; cada cambio se confirma por correo.", "我们不索取死亡证明，也不做任何核实：该机制仅以沉默为依据。你可以随时移除继承人或更改期限——每次更改都会有邮件确认。"],
+  hrNone: ["Наследник не назначен. По умолчанию механизм выключен.", "No heir assigned. The mechanism is off by default.", "Sin heredero asignado. El mecanismo está desactivado por defecto.", "尚未指定继承人。该机制默认关闭。"],
+  hrEmail: ["ПОЧТА НАСЛЕДНИКА", "HEIR'S EMAIL", "CORREO DEL HEREDERO", "继承人邮箱"],
+  hrPeriod: ["СРОК МОЛЧАНИЯ", "SILENCE PERIOD", "PLAZO DE SILENCIO", "沉默期"],
+  hrMonths: ["{n} мес.", "{n} months", "{n} meses", "{n} 个月"],
+  hrSave: ["Назначить наследника", "Assign heir", "Asignar heredero", "指定继承人"],
+  hrUpdate: ["Сохранить изменения", "Save changes", "Guardar cambios", "保存更改"],
+  hrClear: ["Убрать наследника", "Remove heir", "Eliminar heredero", "移除继承人"],
+  hrClearConfirm: ["Убрать наследника памяти? Отсчёт остановится, никому ничего не передастся.", "Remove the memory heir? The countdown stops and nothing will be passed to anyone.", "¿Eliminar al heredero de la memoria? La cuenta atrás se detiene y no se entregará nada a nadie.", "移除记忆继承人？倒计时将停止，不会向任何人移交任何内容。"],
+  hrCurrent: ["Назначен наследник:", "Heir assigned:", "Heredero asignado:", "已指定继承人："],
+  hrSeen: ["Последний раз мы видели тебя", "We last saw you", "La última vez que te vimos", "我们最后一次见到你是"],
+  hrDue: ["Архив передадут не раньше", "The archive would be passed on no earlier than", "El archivo se entregaría no antes de", "归档最早移交时间"],
+  hrHandedOver: ["Архив уже передан наследнику. Твоя память и твой вход при этом остались полностью твоими — ничего не отобрано.", "The archive has already been passed to the heir. Your memory and your sign-in remain fully yours — nothing was taken away.", "El archivo ya se entregó al heredero. Tu memoria y tu acceso siguen siendo totalmente tuyos: no se te quitó nada.", "归档已移交给继承人。你的记忆和登录权限仍然完全属于你——没有任何东西被拿走。"],
+  hrSaved: ["Сохранено ✓ Письмо с подтверждением отправлено на твою почту.", "Saved ✓ A confirmation email has been sent to you.", "Guardado ✓ Te hemos enviado un correo de confirmación.", "已保存 ✓ 确认邮件已发送到你的邮箱。"],
+  hrCleared: ["Наследник убран ✓", "Heir removed ✓", "Heredero eliminado ✓", "继承人已移除 ✓"],
+  hrBadEmail: ["Проверь адрес почты наследника.", "Check the heir's email address.", "Revisa el correo del heredero.", "请检查继承人的邮箱地址。"],
+  hrSelf: ["Нельзя назначить наследником самого себя.", "You cannot name yourself as your own heir.", "No puedes designarte a ti mismo como heredero.", "不能把自己指定为自己的继承人。"],
+  hrLocked: ["Доступно с тарифа Family Archive и выше.", "Available from the Family Archive tier and above.", "Disponible desde el plan Family Archive en adelante.", "需 Family Archive 及以上套餐。"],
+  hrLockedWhy: ["Раздел показан, чтобы ты знал, что такая возможность есть. Перейди на старший тариф, и наследника можно будет назначить.", "This section is shown so you know the option exists. Upgrade your tier and you will be able to assign an heir.", "Mostramos esta sección para que sepas que la opción existe. Cambia a un plan superior y podrás asignar un heredero.", "显示此部分是为了让你知道有这个选项。升级套餐后即可指定继承人。"],
 };
 
 export function useCabT() {
