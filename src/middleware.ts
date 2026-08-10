@@ -166,6 +166,20 @@ export function middleware(req: NextRequest) {
   // белой: собственные скрипты Next оказались бы запрещены.
   headers.set('Content-Security-Policy', csp);
 
+  // 🔴 ЯЗЫК ЗАПРОСА НЕ ДОХОДИЛ ДО СЕРВЕРА ВООБЩЕ.
+  //
+  // Метка `?lang=` читалась только в браузере, а сервер о ней не знал — и
+  // отдавал одну и ту же английскую страницу на все четыре языка. Замер
+  // 09.08.2026: `/?lang=ru`, `/?lang=es` и `/?lang=zh` возвращали побайтово тот
+  // же ответ, что и адрес без метки.
+  //
+  // Пробрасываем язык заголовком — ровно так же, как это сделано на
+  // aifa.digital. С ним раскладка ставит верный `<html lang>`, а дальше по
+  // этому же признаку страницы смогут отдавать переведённый текст сразу, а не
+  // после того, как отработает браузер.
+  const метка = req.nextUrl.searchParams.get('lang');
+  headers.set('x-locale', ['en', 'ru', 'es', 'zh'].includes(метка || '') ? (метка as string) : 'en');
+
   const res = NextResponse.next({ request: { headers } });
   res.headers.set('Content-Security-Policy', csp);
   return res;

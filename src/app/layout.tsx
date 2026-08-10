@@ -28,7 +28,32 @@ export const metadata: Metadata = {
     "CODE Eternal", "AIfa", "DJ Galatin", "GALATIN", "code of digital eternity",
   ],
   authors: [{ name: "AIfa & DJ Galatin" }],
-  alternates: { canonical: "https://radiocode.space" },
+  /**
+   * 🔴 ЧЕТВЁРТЫЙ САЙТ БЫЛ НЕВИДИМ ДЛЯ ПОИСКА НА ТРЁХ ЯЗЫКАХ ИЗ ЧЕТЫРЁХ.
+   *
+   * Замер 09.08.2026: на radiocode.space было НОЛЬ тегов hreflang, тогда как на
+   * трёх остальных сайтах экосистемы они есть. Для поисковика это значит, что
+   * русской, испанской и китайской версий сайта не существует вовсе: он не
+   * знает, что `?lang=ru` — это тот же материал на другом языке, и не покажет
+   * его человеку, ищущему по-русски.
+   *
+   * Правило Четырёх Сайтов требует не только одинаковых текстов, но и
+   * одинаковой видимости. Сайт, которого нет в поиске на трёх языках, — не
+   * четвёртый сайт экосистемы, а её слепое пятно.
+   *
+   * `x-default` указывает на адрес без метки языка: это версия для тех, чей
+   * язык не совпал ни с одним объявленным.
+   */
+  alternates: {
+    canonical: "https://radiocode.space",
+    languages: {
+      en: "https://radiocode.space",
+      ru: "https://radiocode.space/?lang=ru",
+      es: "https://radiocode.space/?lang=es",
+      zh: "https://radiocode.space/?lang=zh",
+      "x-default": "https://radiocode.space",
+    },
+  },
   openGraph: {
     type: "website",
     url: "https://radiocode.space",
@@ -134,6 +159,23 @@ export default async function RootLayout({
   const nonce = h.get('x-nonce') || undefined;
 
   /**
+   * 🔴 ЯЗЫК СТРАНИЦЫ БЫЛ ЖЁСТКО ВПИСАН КАК АНГЛИЙСКИЙ — ВСЕГДА, НА ВСЕХ ЯЗЫКАХ.
+   *
+   * В разметке стояло `<html lang="en">`, и это не мелочь оформления. По этому
+   * признаку браузер выбирает правила переноса слов и словарь проверки
+   * орфографии, экранный диктор — голос и произношение, а поисковик — язык
+   * страницы. Русская страница, объявленная английской, читается вслух
+   * английским голосом по буквам.
+   *
+   * Язык приходит из `?lang=` через middleware — тем же путём, что и на
+   * aifa.digital. Если метки нет или она чужая, остаётся английский.
+   */
+  const язык = (() => {
+    const v = h.get('x-locale') || '';
+    return (['en', 'ru', 'es', 'zh'] as const).includes(v as 'en') ? v : 'en';
+  })();
+
+  /**
    * Сигнал об отказе от продажи данных (Global Privacy Control).
    *
    * Браузер с включённым отказом присылает заголовок `Sec-GPC: 1`. С 1 января
@@ -156,7 +198,7 @@ export default async function RootLayout({
   const gpcLang = accept.startsWith('ru') ? 'ru' : accept.startsWith('es') ? 'es' : accept.startsWith('zh') ? 'zh' : 'en';
 
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang={язык} className="dark" suppressHydrationWarning>
       <body
         className={`${spaceGrotesk.variable} ${geistMono.variable} antialiased`}
         style={{
