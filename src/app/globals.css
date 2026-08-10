@@ -1202,3 +1202,23 @@ html.perf-lite .scan-line-h::after { display: none !important; }
 /* На настоящих ТВ дополнительно снимаем «промоушен» слоёв (will-change держит их
    в GPU-памяти и провоцирует лишние перерисовки). Текст/цвета не трогаем. */
 html.perf-tv * { will-change: auto !important; }
+
+/* Бегущий градиент по крупным заголовкам.
+   Раньше это делал framer-motion: он писал новое значение backgroundPosition в
+   стиль КАЖДЫЙ КАДР из JavaScript, а браузер пересчитывал стиль и перерисовывал
+   огромный текст с background-clip:text. По замеру Lighthouse 10.08.2026 на
+   пересчёт стилей уходило 896 мс основного потока.
+   Объявленные здесь кадры браузер проигрывает сам — главный поток свободен,
+   вид тот же. */
+@keyframes бегущий-градиент {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.бегущий-градиент {
+  animation: бегущий-градиент 6s ease-in-out infinite;
+}
+/* Кому движение мешает — тому его нет. Требование WCAG 2.3.3. */
+@media (prefers-reduced-motion: reduce) {
+  .бегущий-градиент { animation: none; }
+}

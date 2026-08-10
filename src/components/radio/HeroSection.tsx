@@ -248,9 +248,20 @@ export function HeroSection() {
           </>
         ) : (
           <>
-            {/* ENORMOUS RADIOCODE title */}
-            <motion.h1
-              className="text-5xl sm:text-7xl lg:text-9xl font-bold tracking-tighter leading-[0.85] mb-6 break-words"
+            {/* ENORMOUS RADIOCODE title.
+                🔴 БЕГУЩИЙ ГРАДИЕНТ ПЕРЕВЕДЁН С JAVASCRIPT НА CSS.
+                Было: framer-motion крутил backgroundPosition бесконечно, то есть
+                КАЖДЫЙ КАДР писал новое значение в стиль элемента из JavaScript, а
+                браузер пересчитывал стиль и перерисовывал огромный текст с
+                background-clip:text. Замер Lighthouse 10.08.2026: «Style &
+                Layout» 896 мс основного потока, «Other» 1011 мс — и это на
+                странице, где крупнейший элемент как раз этот заголовок.
+                Стало: те же кадры объявлены в globals.css, браузер проигрывает
+                их сам. Главный поток свободен, вид не изменился, а тем, у кого
+                в системе выключены анимации, движение теперь не показывается
+                вовсе — этого framer-motion здесь не делал. */}
+            <h1
+              className="бегущий-градиент text-5xl sm:text-7xl lg:text-9xl font-bold tracking-tighter leading-[0.85] mb-6 break-words"
               style={{
                 background: 'linear-gradient(135deg, #00F0FF 0%, #B000FF 35%, #FF003C 65%, #39FF14 100%)',
                 WebkitBackgroundClip: 'text',
@@ -258,13 +269,9 @@ export function HeroSection() {
                 backgroundSize: '300% 300%',
                 filter: 'drop-shadow(0 0 40px rgba(0,240,255,0.15)) drop-shadow(0 0 80px rgba(176,0,255,0.08))',
               }}
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
             >
               <GlitchText>RADIOCODE</GlitchText>
-            </motion.h1>
+            </h1>
 
             {/* Animated divider line */}
             <motion.div

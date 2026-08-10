@@ -96,21 +96,24 @@ export function IntroSplash({ onComplete }: { onComplete: () => void }) {
             }}
             transition={{ duration: 0.6 }}
           >
-            <motion.div
-              className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-[0.2em] mb-4"
+            {/* Тот же перевод бегущего градиента с JavaScript на CSS, что и в
+                HeroSection. Здесь это важнее вдвойне: заставка показывается
+                ИМЕННО ВО ВРЕМЯ ЗАГРУЗКИ, то есть отнимала главный поток ровно
+                тогда, когда он нужен для первой отрисовки страницы.
+                Длительность у заставки своя (3 с против 6 с), поэтому общий
+                класс дополнен одной строкой стиля. */}
+            <div
+              className="бегущий-градиент text-4xl sm:text-6xl lg:text-7xl font-bold tracking-[0.2em] mb-4"
               style={{
                 background: 'linear-gradient(135deg, #00F0FF 0%, #B000FF 50%, #FF003C 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundSize: '200% 200%',
+                animationDuration: '3s',
               }}
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             >
               RADIOCODE
-            </motion.div>
+            </div>
 
             {/* Animated line */}
             <motion.div
