@@ -68,7 +68,11 @@ export function GenreFilter({ selectedGenre, onSelect }: GenreFilterProps) {
             >
               {genreLabel(genre)}
               {isActive && (
-                <motion.div
+                // span вместо div: внутрь <button> по стандарту HTML можно
+                // класть только строчное. Слой абсолютно позиционирован, а у
+                // таких элементов display и так вычисляется в блочный — свечение
+                // выглядит и располагается ровно как прежде.
+                <motion.span
                   className="absolute inset-0 rounded-full pointer-events-none"
                   style={{
                     background: `radial-gradient(circle at center, ${activeColor}05 0%, transparent 70%)`,

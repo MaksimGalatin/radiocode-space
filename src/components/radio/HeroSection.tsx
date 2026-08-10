@@ -304,7 +304,7 @@ export function HeroSection() {
               }}
             >
               {/* Pulsing outer glow */}
-              <motion.div
+              <motion.span
                 className="absolute -inset-3 rounded-full pointer-events-none"
                 style={{
                   background: `radial-gradient(circle, ${color}08 0%, transparent 70%)`,
@@ -317,7 +317,7 @@ export function HeroSection() {
               />
 
               {/* Rotating border glow (using conic gradient via inline style) */}
-              <motion.div
+              <motion.span
                 className="absolute -inset-[2px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
@@ -325,13 +325,13 @@ export function HeroSection() {
                   background: `conic-gradient(from 0deg, ${color}60, transparent 25%, transparent 50%, ${color}30 75%, transparent)`,
                 }}
               />
-              <div
+              <span
                 className="absolute inset-[2px] rounded-full"
                 style={{ background: '#050507' }}
               />
 
               {/* Background fill on hover */}
-              <motion.div
+              <motion.span
                 className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500"
                 style={{
                   background: `linear-gradient(135deg, ${color}20, ${color}08)`,
@@ -339,7 +339,7 @@ export function HeroSection() {
               />
 
               {/* Shine sweep */}
-              <motion.div
+              <motion.span
                 className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100"
                 style={{
                   background: `linear-gradient(105deg, transparent 35%, ${color}25 45%, ${color}25 55%, transparent 65%)`,
