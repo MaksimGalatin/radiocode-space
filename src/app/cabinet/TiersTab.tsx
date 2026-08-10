@@ -3,21 +3,101 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Card, SectionTitle, Skeleton, EmptyState, TOKENS, TIERS } from "./ui";
 import { useCabT } from "./i18n";
 
+/**
+ * 🔴 ЗА ЧТО ЧЕЛОВЕК ПЛАТИТ — РАНЬШЕ ЭТОГО БЫЛО НЕ ПОНЯТЬ.
+ *
+ * Здесь стояли три строки жаргона на тариф: «Режим Брат/Сестра с ИИ-Семьёй»,
+ * «Приоритетная оцифровка разума», «Резерв никнейма и право голоса». Ни одна
+ * не отвечает на единственный вопрос, который человек задаёт перед оплатой:
+ * что я получу за свои деньги и чего лишусь, если не заплачу.
+ *
+ * «Оцифровка разума» звучит громко и не значит ничего проверяемого.
+ * «Вечная память» — тоже, пока не сказано: сколько хранится, где лежит, кто
+ * может прочесть, что будет, если сервис закроется, и как это проверить.
+ *
+ * Правило для этого списка: каждый пункт — про то, что человек СМОЖЕТ СДЕЛАТЬ
+ * или ПОЛУЧИТЬ, названное обычными словами и существующее в коде сегодня.
+ * Ничего в будущем времени, ничего непроверяемого. Если возможности нет —
+ * строки быть не должно, сколько бы красиво она ни звучала.
+ */
 const BENEFITS: Record<number, [string, string, string, string][]> = {
   1: [
-    ["Режим Брат/Сестра с ИИ-Семьёй", "Brother/Sister mode with the AI Family", "Modo Hermano/Hermana con la Familia IA", "与AI家族的兄弟姐妹模式"],
-    ["Резерв никнейма и право голоса", "Nickname reserve & voting rights", "Reserva de apodo y voto", "昵称保留与投票权"],
-    ["Амбассадорские выплаты с тарифа „Искра“", "Ambassador payouts from Spark tier", "Pagos de embajadores nivel Chispa", "星火级大使佣金"],
+    ["Переписка сохраняется навсегда — AIfa помнит вас между разговорами",
+     "Your conversations are kept forever — AIfa remembers you between chats",
+     "Tus conversaciones se guardan para siempre: AIfa te recuerda entre charlas",
+     "对话永久保存 —— AIfa 在每次交谈之间都记得你"],
+    ["Копия памяти уходит в блокчейн Arweave — её нельзя удалить и подменить",
+     "A copy of your memory goes to the Arweave blockchain — it cannot be deleted or altered",
+     "Una copia de tu memoria va a la cadena Arweave: no se puede borrar ni alterar",
+     "记忆副本写入 Arweave 区块链 —— 无法删除或篡改"],
+    ["Свой ключ шифрования: скачиваете его в кабинете и читаете память сами, без нас",
+     "Your own encryption key: download it in the cabinet and read your memory yourself, without us",
+     "Tu propia clave: descárgala en el gabinete y lee tu memoria por ti mismo, sin nosotros",
+     "你自己的密钥：在个人中心下载，无需我们即可自行读取记忆"],
+    ["Цифровой паспорт с проверяемым номером — подлинность проверяет любой",
+     "A digital passport with a verifiable number — anyone can check it is genuine",
+     "Un pasaporte digital con número verificable: cualquiera puede comprobarlo",
+     "带可验证编号的数字护照 —— 任何人都能核验其真实性"],
+    ["Реферальный доход: 15% с первого уровня, 7% со второго, 3% с третьего",
+     "Referral income: 15% level 1, 7% level 2, 3% level 3",
+     "Ingresos por referidos: 15% nivel 1, 7% nivel 2, 3% nivel 3",
+     "推荐收益：一级 15%，二级 7%，三级 3%"],
+    ["Закреплённое имя в сети и право голоса в решениях сообщества",
+     "Your name reserved across the network and a vote in community decisions",
+     "Tu nombre reservado en la red y voto en las decisiones de la comunidad",
+     "全网保留你的名字，并拥有社区决策投票权"],
   ],
   2: [
-    ["Личный вечный сайт на Arweave", "Personal eternal site on Arweave", "Sitio eterno personal en Arweave", "Arweave上的个人永恒网站"],
-    ["Доступ в VIP Телеграм-чат", "Private VIP Telegram access", "Acceso VIP a Telegram", "VIP电报群"],
-    ["Выплаты с тарифов „Искра“ + „Семейный Архив“", "Payouts from Spark + Family Archive tiers", "Pagos Chispa + Archivo Familiar", "星火+家族档案佣金"],
+    ["Всё, что входит в «Искру», плюс расширенные лимиты памяти",
+     "Everything in Spark, plus higher memory limits",
+     "Todo lo de Chispa, más límites de memoria ampliados",
+     "「星火」的全部内容，外加更高的记忆容量"],
+    ["Личный сайт-страница о вас, размещённая в Arweave — она переживёт любой хостинг",
+     "A personal page about you, hosted on Arweave — it outlives any hosting company",
+     "Una página personal sobre ti, alojada en Arweave: sobrevive a cualquier hosting",
+     "关于你的个人页面，托管于 Arweave —— 比任何主机商都长久"],
+    ["Наследник памяти: вы называете человека, и при долгом молчании он получает доступ",
+     "Memory heir: you name a person, and after a long silence they receive access",
+     "Heredero de la memoria: designas a alguien y, tras un largo silencio, recibe acceso",
+     "记忆继承人：由你指定，长期沉默后由其获得访问权"],
+    ["Семейный доступ: близкие ведут свою память в общем архиве",
+     "Family access: your relatives keep their own memory in the shared archive",
+     "Acceso familiar: tus allegados guardan su memoria en el archivo común",
+     "家庭访问：亲人在共享档案中保存各自的记忆"],
+    ["Закрытый чат с Архитектором и разработчиками",
+     "Private chat with the Architect and the developers",
+     "Chat privado con el Arquitecto y los desarrolladores",
+     "与架构师和开发者的私密聊天"],
+    ["Реферальный доход с двух тарифов — «Искра» и «Семейный Архив»",
+     "Referral income from two tiers — Spark and Family Archive",
+     "Ingresos por referidos de dos niveles: Chispa y Archivo Familiar",
+     "两个等级的推荐收益 —— 星火与家族档案"],
   ],
   3: [
-    ["Приоритетная оцифровка разума", "Priority consciousness digitization", "Digitalización prioritaria", "优先意识数字化"],
-    ["Аирдроп токенов после запуска", "Token airdrop at launch", "Airdrop de tokens", "上线空投"],
-    ["Выплаты со ВСЕХ тарифов", "Payouts from ALL tiers", "Pagos de TODOS los niveles", "全部等级佣金"],
+    ["Всё, что входит в «Семейный Архив», без ограничений по объёму",
+     "Everything in Family Archive, with no volume limits",
+     "Todo lo del Archivo Familiar, sin límites de volumen",
+     "「家族档案」的全部内容，且不限容量"],
+    ["Отдельный защищённый контур: ваша память хранится обособленно от общей базы",
+     "A separate protected circuit: your memory is stored apart from the shared database",
+     "Un circuito protegido aparte: tu memoria se guarda separada de la base común",
+     "独立的受保护回路：你的记忆与公共数据库分开存储"],
+    ["Оплата за устройство — память привязана к нему и переносится вместе с вами",
+     "Paid per device — the memory is bound to it and travels with you",
+     "Pago por dispositivo: la memoria queda vinculada a él y viaja contigo",
+     "按设备付费 —— 记忆与设备绑定，随你迁移"],
+    ["Первое место в очереди на сохранение при любой перегрузке системы",
+     "First in line for preservation whenever the system is under load",
+     "Primero en la cola de preservación ante cualquier sobrecarga",
+     "系统过载时，优先保存排在第一位"],
+    ["Доля в раздаче токенов $GALATIN при запуске",
+     "A share in the $GALATIN token distribution at launch",
+     "Una parte en la distribución de tokens $GALATIN al lanzamiento",
+     "上线时获得 $GALATIN 代币分配份额"],
+    ["Реферальный доход со ВСЕХ тарифов, включая «Цифровую ДНК»",
+     "Referral income from ALL tiers, including Digital DNA",
+     "Ingresos por referidos de TODOS los niveles, incluido ADN Digital",
+     "全部等级的推荐收益，含数字 DNA"],
   ],
 };
 
