@@ -6,6 +6,7 @@ import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { HtmlLangSync } from "@/components/HtmlLangSync";
 import { ЯзыкССервера } from '@/lib/server-locale';
 import ClientErrorMonitor from "@/components/ClientErrorMonitor";
+import Script from "next/script";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -283,10 +284,26 @@ export default async function RootLayout({
             попадал ни в один отчёт. Поток общий с aifa.digital: в отчётах
             разрезается по hostName. Consent Mode v2: по умолчанию запрещено.
             При сигнале отказа (Sec-GPC: 1) счётчик НЕ подключается вовсе. */}
+        {/* 🔴 СЧЁТЧИК ГРУЗИЛСЯ ВМЕСТЕ СО СТРАНИЦЕЙ И ТЯНУЛ ЕЁ ВНИЗ.
+            Замер Lighthouse 10.08.2026: gtag/js весит 166 КБ — больше ЛЮБОГО
+            нашего файла (следующий 72 КБ), из них 67 КБ не используются вовсе,
+            и он же отъедает 168 мс основного потока. Стоял обычный
+            <script async>: браузер начинает качать его сразу и конкурирует с
+            нашим же кодом за канал и за поток.
+            Переведён на next/script со стратегией afterInteractive — ровно так,
+            как это давно сделано на aifa.digital. Счётчик грузится ПОСЛЕ того,
+            как страница ожила; статистика при этом не теряется, а первая
+            отрисовка перестаёт ждать чужие 166 КБ. */}
         {!gpc && (
         <>
-        <script async nonce={nonce} src="https://www.googletagmanager.com/gtag/js?id=G-PCP8MD0NQ9" />
-        <script
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-PCP8MD0NQ9"
+          strategy="afterInteractive"
+          nonce={nonce}
+        />
+        <Script
+          id="ga4-init"
+          strategy="afterInteractive"
           nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || [];
