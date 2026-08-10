@@ -8,6 +8,7 @@ Contact: https://codeofdigitaleternity.com/contact
 Expires: 2027-07-26T00:00:00.000Z
 Preferred-Languages: ru, en, es
 Canonical: https://www.codeofdigitaleternity.com/.well-known/security.txt
+Canonical: https://radiocode.space/.well-known/security.txt
 Policy: https://www.codeofdigitaleternity.com/legal
 
 # Мы отвечаем на сообщения о безопасности в течение 48 часов.
