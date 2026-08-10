@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { Space_Grotesk, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
-import { HtmlLangSync } from "@/components/HtmlLangSync";
+import { HtmlLangSync } from "@/components/HtmlLangSync";
 import { ЯзыкССервера } from '@/lib/server-locale';
 import ClientErrorMonitor from "@/components/ClientErrorMonitor";
 import "./globals.css";
@@ -81,7 +81,24 @@ export const metadata: Metadata = {
     title: "RadioCode",
   },
   icons: {
-    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300F0FF' stroke-width='1.5'><path d='M4.9 19.1C1 15.2 1 8.8 4.9 4.9'/><path d='M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.4'/><circle cx='12' cy='12' r='2' fill='%2300F0FF'/><path d='M16.2 7.8c2.3 2.3 2.3 6.1 0 8.4'/><path d='M19.1 4.9C23 8.8 23 15.1 19.1 19'/></svg>",
+    /**
+     * 🔴 ЗНАЧОК САЙТА БЫЛ ЗАПИСАН С НЕДОПУСТИМЫМ СИМВОЛОМ.
+     *
+     * Замер официальным проверяльщиком разметки W3C (validator.w3.org),
+     * 10.08.2026: «Bad value for attribute href on element link: Illegal
+     * character after "ta:". "<" is not allowed». Из одиннадцати ошибок
+     * разметки на radiocode эта была первой.
+     *
+     * Причина: в адресе вида `data:image/svg+xml,<svg ...>` угловые скобки и
+     * кавычки нельзя оставлять как есть — по правилам адресов они запрещены.
+     * Браузеры прощают и рисуют значок, поэтому беду не видно глазами; строгий
+     * разбор — например, у поискового робота или у проверяющего клиента —
+     * спотыкается.
+     *
+     * Символы закодированы: `<` → %3C, `>` → %3E, `'` → %27, `#` → %23.
+     * Картинка та же, ни один пиксель не изменился.
+     */
+    icon: "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%2300F0FF%27 stroke-width=%271.5%27%3E%3Cpath d=%27M4.9 19.1C1 15.2 1 8.8 4.9 4.9%27/%3E%3Cpath d=%27M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.4%27/%3E%3Ccircle cx=%2712%27 cy=%2712%27 r=%272%27 fill=%27%2300F0FF%27/%3E%3Cpath d=%27M16.2 7.8c2.3 2.3 2.3 6.1 0 8.4%27/%3E%3Cpath d=%27M19.1 4.9C23 8.8 23 15.1 19.1 19%27/%3E%3C/svg%3E",
     apple: "/apple-touch-icon.png",
   },
 };
