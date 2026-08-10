@@ -2,6 +2,7 @@
 // Lightweight i18n for the RadioCode player UI. Shares the language state with the
 // cabinet via @/lib/i18n (useLang), so switching language is consistent site-wide.
 import { useLang } from '@/lib/i18n';
+import { useЯзык } from '@/lib/server-locale';
 
 type L = 'en' | 'ru' | 'es' | 'zh';
 
@@ -177,7 +178,7 @@ const S = {
 export type RadioKey = keyof typeof S;
 
 export function useRadioT() {
-  const lang = (useLang((s: { lang: L }) => s.lang) as L) || 'en';
+  const lang = (useЯзык() as L);
   return (k: RadioKey) => (S[k] && (S[k][lang] || S[k].en)) || k;
 }
 
@@ -192,7 +193,7 @@ export function useSetLang() {
   return useLang((s: { setLang: (l: L) => void }) => s.setLang);
 }
 export function useCurrentLang() {
-  return (useLang((s: { lang: L }) => s.lang) as L) || 'en';
+  return (useЯзык() as L);
 }
 
 // ── Localised station copy ──────────────────────────────────────────────────
@@ -259,7 +260,7 @@ export const GENRE_I18N: Record<string, LocalizedText> = {
 // Hook: returns localizers for a station's description/genre by id (falls back
 // to the English value stored on the station itself).
 export function useStationI18n() {
-  const lang = (useLang((s: { lang: L }) => s.lang) as L) || 'en';
+  const lang = (useЯзык() as L);
   return {
     desc: (id: string, fallback: string) => STATION_I18N[id]?.description[lang] ?? fallback,
     genre: (id: string, fallback: string) => STATION_I18N[id]?.genre[lang] ?? fallback,
@@ -268,7 +269,7 @@ export function useStationI18n() {
 
 // Hook: returns a localizer for a single genre-filter token ('ALL' → localized).
 export function useGenreLabel() {
-  const lang = (useLang((s: { lang: L }) => s.lang) as L) || 'en';
+  const lang = (useЯзык() as L);
   return (token: string) =>
     token === 'ALL'
       ? (S.all[lang] || S.all.en)

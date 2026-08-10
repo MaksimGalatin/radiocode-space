@@ -1,6 +1,6 @@
 'use client';
 import React, { memo, useState, useEffect } from "react";
-import { useLang } from "@/lib/i18n";
+import { useЯзык } from "@/lib/server-locale";
 import "./GamesArena.css";
 
 // Self-contained game labels (ported from the CODE app) so this component
@@ -1128,7 +1128,7 @@ function Backgammon({ lang }: { lang: Lang }) {
 type GameId = "chess"|"ttt"|"checkers"|"backgammon"|"tetris";
 
 function GamesArena({ tetrisSlot }: { tetrisSlot?: React.ReactNode } = {}) {
-  const { lang } = useLang();
+  const lang = useЯзык();
   const mobile = useIsMobile();
   const [active, setActive] = useState<GameId>("chess");
   const [keys, setKeys] = useState<Record<GameId,number>>({chess:0,ttt:0,checkers:0,backgammon:0,tetris:0});

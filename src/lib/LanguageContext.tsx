@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext } from 'react';
 import { useLang, t as tFunc, Lang } from './i18n';
+import { useЯзык } from './server-locale';
 
 type LanguageContextType = {
   locale: Lang;
@@ -48,7 +49,8 @@ type LanguageContextType = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const { lang, setLang } = useLang();
+  const lang = useЯзык();
+  const setLang = useLang((s: { setLang: (l: Lang) => void }) => s.setLang);
 
   const tObject = {
     bookPage: {

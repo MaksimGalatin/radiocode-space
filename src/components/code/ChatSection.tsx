@@ -4,7 +4,8 @@ import { reactToAnswer } from "@/lib/aifa-mood";
 import { useState, useRef, useEffect, useCallback, FormEvent } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Send, Trash2, Bot, User, Loader2, Mic, Volume2, VolumeX } from "lucide-react";
-import { useLang, t } from "@/lib/i18n";
+import { t } from "@/lib/i18n";
+import { useЯзык } from "@/lib/server-locale";
 import { useVoiceChat } from "@/hooks/useVoiceChat";
 
 interface Message {
@@ -61,7 +62,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const { lang } = useLang();
+  const lang = useЯзык();
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");

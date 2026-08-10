@@ -3,7 +3,8 @@ import { headers } from "next/headers";
 import { Space_Grotesk, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
-import { HtmlLangSync } from "@/components/HtmlLangSync";
+import { HtmlLangSync } from "@/components/HtmlLangSync";
+import { ЯзыкССервера } from '@/lib/server-locale';
 import ClientErrorMonitor from "@/components/ClientErrorMonitor";
 import "./globals.css";
 
@@ -250,7 +251,13 @@ export default async function RootLayout({
               : 'Your opt-out has been honored. Global Privacy Control signal detected — we do not sell or share your personal data, and analytics is disabled on this page.'}
           </div>
         )}
-        {children}
+        {/* Язык, вычисленный на сервере, кладётся в контекст ОДНОГО запроса.
+            Без него страница отрисовывалась по-английски на всех четырёх
+            языках: выбор языка живёт в браузерном хранилище, которого на
+            сервере нет. Подробный разбор — в src/lib/server-locale.tsx. */}
+        <ЯзыкССервера язык={язык as 'en' | 'ru' | 'es' | 'zh'}>
+          {children}
+        </ЯзыкССервера>
         <HtmlLangSync />
         <ServiceWorkerRegister />
         <ClientErrorMonitor />
