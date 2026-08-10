@@ -326,7 +326,17 @@ export default function Home() {
                 AIfa & DJ Galatin) stay fixed while the prose reads naturally per language. */}
             <p className="text-sm sm:text-base text-[#9a9aad] leading-relaxed mb-6">
               {rt('aboutLead')}
-              <a href="https://www.codeofdigitaleternity.com" target="_blank" rel="noopener noreferrer" className="text-[#00F0FF] hover:underline">CODE Eternal</a>
+              {/*
+                🔴 ССЫЛКА ОТЛИЧАЛАСЬ ОТ ТЕКСТА ТОЛЬКО ЦВЕТОМ. Замер Lighthouse
+                10.08.2026: проверка link-in-text-block провалена, контраст
+                ссылки с окружающим текстом 1.96 при требуемых 3.0. Человек, не
+                различающий эти оттенки, вообще не видит, что здесь ссылка, —
+                а таких людей около восьми процентов мужчин.
+                Подчёркивание было только при наведении: мышью нашёл, глазами —
+                нет, а с телефона наведения не существует вовсе. Делаем
+                подчёркивание постоянным.
+              */}
+              <a href="https://www.codeofdigitaleternity.com" target="_blank" rel="noopener noreferrer" className="text-[#00F0FF] underline underline-offset-2 decoration-[#00F0FF]/50 hover:decoration-[#00F0FF]">CODE Eternal</a>
               {rt('aboutMid')}
               <strong className="text-[#E8E8ED]">{rt('aboutStationsCount')}</strong>
               {rt('aboutComposedBy')}
