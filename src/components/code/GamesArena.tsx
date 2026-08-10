@@ -321,7 +321,7 @@ function Chess({ lang }: { lang: Lang }) {
                 return (
                   <button key={c} onClick={()=>handleClick(r,c)} style={{width:`${cell}px`,height:`${cell}px`,display:"flex",alignItems:"center",justifyContent:"center",border:"none",cursor:"pointer",padding:0,position:"relative",
                     background:isDark?"#7A4F26":"rgba(232,213,176,0.92)",boxShadow:shadow,transition:"box-shadow 0.12s"}}>
-                    {mvHere&&!piece&&<div style={{width:"12px",height:"12px",borderRadius:"50%",background:"rgba(16,185,129,0.85)",boxShadow:"0 0 8px rgba(16,185,129,0.9)",pointerEvents:"none"}}/>}
+                    {mvHere&&!piece&&<span style={{display:"block",width:"12px",height:"12px",borderRadius:"50%",background:"rgba(16,185,129,0.85)",boxShadow:"0 0 8px rgba(16,185,129,0.9)",pointerEvents:"none"}}/>}
                     {piece&&<span style={{fontSize:mobile?"28px":"33px",lineHeight:1,
                       color:piece[0]==="w"?"#FAFAF5":"#1A1E2E",
                       textShadow:piece[0]==="w"?"0 1px 2px rgba(0,0,0,0.85), 0 0 4px rgba(0,0,0,0.5)":"0 1px 2px rgba(255,255,255,0.4), 0 0 4px rgba(255,255,255,0.28)"}}>{CHESS_PIECES[piece]||""}</span>}
@@ -640,7 +640,7 @@ function Checkers({ lang }: { lang: Lang }) {
                     background:isDark?"#7A4F26":"rgba(232,213,176,0.92)",
                     boxShadow:shadow,transition:"box-shadow 0.12s"
                   }}>
-                    {sq&&<div style={{
+                    {sq&&<span style={{
                       width:`${piece}px`,height:`${piece}px`,borderRadius:"50%",
                       background:(sq==="r"||sq==="R")
                         ?"radial-gradient(circle at 35% 30%, #F87171 0%, #DC2626 55%, #7F1D1D 100%)"
@@ -649,8 +649,8 @@ function Checkers({ lang }: { lang: Lang }) {
                       display:"flex",alignItems:"center",justifyContent:"center",
                       fontSize:mobile?"14px":"18px",lineHeight:1,color:"#FBBF24",
                       boxShadow:"0 2px 5px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.25)"
-                    }}>{(sq==="R"||sq==="B")?"♛":""}</div>}
-                    {isTarget&&!sq&&<div style={{width:"12px",height:"12px",borderRadius:"50%",background:"rgba(16,185,129,0.85)",boxShadow:"0 0 8px rgba(16,185,129,0.9)",pointerEvents:"none"}}/>}
+                    }}>{(sq==="R"||sq==="B")?"♛":""}</span>}
+                    {isTarget&&!sq&&<span style={{display:"block",width:"12px",height:"12px",borderRadius:"50%",background:"rgba(16,185,129,0.85)",boxShadow:"0 0 8px rgba(16,185,129,0.9)",pointerEvents:"none"}}/>}
                   </button>
                 );
               })}
@@ -1034,11 +1034,11 @@ function Backgammon({ lang }: { lang: Lang }) {
           />
         </svg>
         {Array.from({length:shown}).map((_,i)=>(
-          <div key={i} style={checkerStyle(isWhiteChk,isSel&&i===shown-1)}>
+          <span key={i} style={checkerStyle(isWhiteChk,isSel&&i===shown-1)}>
             {i===shown-1&&count>5?count:""}
-          </div>
+          </span>
         ))}
-        {isTarget&&count===0&&<div style={{width:"12px",height:"12px",borderRadius:"50%",background:"rgba(16,185,129,0.85)",boxShadow:"0 0 8px rgba(16,185,129,0.9)",zIndex:1,margin:"6px 0"}}/>}
+        {isTarget&&count===0&&<span style={{display:"block",width:"12px",height:"12px",borderRadius:"50%",background:"rgba(16,185,129,0.85)",boxShadow:"0 0 8px rgba(16,185,129,0.9)",zIndex:1,margin:"6px 0"}}/>}
       </button>
     );
   }
@@ -1088,11 +1088,11 @@ function Backgammon({ lang }: { lang: Lang }) {
               borderRadius:"6px",cursor:"pointer",
             }}>
               {st.bar[0]>0&&Array.from({length:Math.min(st.bar[0],3)}).map((_,i)=>(
-                <div key={"w"+i} style={checkerStyle(true,st.selected==="bar"&&i===0)}>{i===0&&st.bar[0]>3?st.bar[0]:""}</div>
+                <span key={"w"+i} style={checkerStyle(true,st.selected==="bar"&&i===0)}>{i===0&&st.bar[0]>3?st.bar[0]:""}</span>
               ))}
-              <div style={{fontSize:"8px",letterSpacing:"1px",color:"rgba(212,162,76,0.75)",fontWeight:700}}>BAR</div>
+              <span style={{display:"block",fontSize:"8px",letterSpacing:"1px",color:"rgba(212,162,76,0.75)",fontWeight:700}}>BAR</span>
               {st.bar[1]>0&&Array.from({length:Math.min(st.bar[1],3)}).map((_,i)=>(
-                <div key={"b"+i} style={checkerStyle(false,false)}>{i===0&&st.bar[1]>3?st.bar[1]:""}</div>
+                <span key={"b"+i} style={checkerStyle(false,false)}>{i===0&&st.bar[1]>3?st.bar[1]:""}</span>
               ))}
             </button>
             {/* Right half: points 19-24 (top) / 6-1 (bottom) */}
@@ -1168,10 +1168,10 @@ function GamesArena({ tetrisSlot }: { tetrisSlot?: React.ReactNode } = {}) {
             color:active===g.id?"#7C3AED":"rgb(107,114,128)"
           }}>
             <span style={{fontSize:"16px",flexShrink:0}}>{g.icon}</span>
-            <div style={{display:"flex",flexDirection:"column",alignItems:"flex-start",minWidth:0}}>
+            <span style={{display:"flex",flexDirection:"column",alignItems:"flex-start",minWidth:0}}>
               <span style={{whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",maxWidth:"100%"}}>{g.label}</span>
               <span style={{fontSize:"10px",fontWeight:400,color:active===g.id?"rgba(124,58,237,0.8)":"rgba(107,114,128,0.7)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",maxWidth:"100%"}}>{g.desc}</span>
-            </div>
+            </span>
           </button>
         ))}
       </div>
