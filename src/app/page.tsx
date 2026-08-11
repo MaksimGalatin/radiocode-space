@@ -611,7 +611,7 @@ export default function Home() {
                     номера должны быть доступны постоянно и напрямую. До этой
                     правки их не было ни на одном из четырёх сайтов. Источник
                     один — lib/requisites.ts; незаполненные поля не выводятся. */}
-                <p className="mt-6 pt-4 border-t border-[#8B8BA8]/20 text-[12px] font-mono text-[#7E7E99] leading-relaxed break-words">
+                <p className="mt-6 pt-4 border-t border-[#8B8BA8]/20 text-[13px] font-mono text-[#7E7E99] leading-relaxed break-words">
                   {строкаРеквизитов((языкПодвала as Язык) || 'en')}
                 </p>
               </div>
