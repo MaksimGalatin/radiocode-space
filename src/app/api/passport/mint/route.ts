@@ -95,8 +95,22 @@ export async function POST(req: NextRequest) {
         avatarDataUrl: row.avatar_data_url || '',
         tier: t.rows[0] ? Number(t.rows[0].tier) : 0,
       },
-      // email hash only - no raw PII on-chain
-      subject: crypto.createHash('sha256').update(String(email)).digest('hex'),
+      // 🔴 ПОЧТА БОЛЬШЕ НЕ УЧАСТВУЕТ В ВЕЧНОЙ ЗАПИСИ.
+      //
+      // Здесь стоял sha256 от адреса почты. Отпечаток называли односторонним, и
+      // по механизму это верно — но адреса низкоэнтропийны: имея список
+      // кандидатов, хеш подбирается перебором за копейки. А запись в Arweave
+      // вечная и неотзывная, то есть связь с человеком сохранялась бы навсегда.
+      // Юридически это псевдонимизация, а не обезличивание.
+      //
+      // Теперь тот же отпечаток считается от ПСЕВДОНИМА, который и так
+      // публикуется на паспорте. В цепь не попадает ничего, чего там ещё нет, а
+      // номер паспорта CE-XXXXXXXX и узор-идентикон, выводимые из этого поля,
+      // остаются стабильными. Соль не нужна: солят то, что скрывают, а здесь
+      // скрывать уже нечего.
+      subject: crypto.createHash('sha256')
+        .update('CODE-ETERNAL-PASSPORT:' + String(row.username))
+        .digest('hex'),
     };
     const data = Buffer.from(JSON.stringify(doc, null, 2), 'utf8');
 

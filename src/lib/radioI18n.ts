@@ -90,6 +90,7 @@ const S = {
   privacy:        { en: 'Privacy Policy',                     ru: 'Конфиденциальность',                   es: 'Privacidad',                            zh: '隐私政策' },
   legalInfo:      { en: 'Legal & company details',            ru: 'Правовая информация и реквизиты',      es: 'Información legal y datos',             zh: '法律信息与企业资料' },
   publicOffer:    { en: 'Public Offer',                       ru: 'Публичная оферта',                     es: 'Oferta pública',                        zh: '公开要约' },
+  userAgreement:  { en: 'User Agreement',                     ru: 'Пользовательское соглашение',          es: 'Acuerdo de usuario',                    zh: '用户协议' },
   // Возрастная маркировка. Значение взято не с потолка: наши же условия,
   // раздел 10.2, говорят «Сайт не предназначен для лиц младше 18 лет».
   ageNote:        { en: 'Not intended for persons under 18',  ru: 'Не предназначено для лиц младше 18 лет', es: 'No destinado a menores de 18 años',    zh: '不适合 18 岁以下人士' },

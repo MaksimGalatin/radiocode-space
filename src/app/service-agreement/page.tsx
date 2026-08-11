@@ -255,20 +255,52 @@ export default function ServiceAgreementPage() {
         ],
       },
       {
-        title: "14. GOVERNING RULES & DISPUTE RESOLUTION (INTERNATIONAL ARBITRATION)",
+        title: "14. GOVERNING LAW, SEAT & DISPUTE RESOLUTION",
         icon: Gavel,
         subsections: [
           {
             subtitle: "14.1 Good-Faith Resolution",
-            text: "The Parties shall first attempt to resolve any dispute amicably by written negotiation within thirty (30) days of notice.",
+            text: "The Parties shall first attempt to resolve any dispute amicably by written negotiation within thirty (30) days of notice. This step is a condition precedent to arbitration, save for urgent relief.",
           },
           {
-            subtitle: "14.2 Binding Arbitration",
-            text: "Any dispute, claim, or controversy arising out of or relating to this Agreement or the Services that is not resolved amicably shall be finally settled by confidential, binding arbitration administered under the rules of a recognized international arbitration institution, by a single arbitrator, conducted in the English language, with the seat and venue neutrally determined under those rules. The arbitral award is final and enforceable in any competent court. Nothing herein prevents either Party from seeking urgent injunctive relief to protect intellectual property or confidential information.",
+            subtitle: "14.2 Governing Law",
+            text: "This Agreement, its formation, interpretation and any non-contractual obligation arising out of it are governed by the law of the REPUBLIC OF ECUADOR, where the Contractor is resident, without regard to conflict-of-law rules. The UN Convention on Contracts for the International Sale of Goods (CISG) does not apply.",
           },
           {
-            subtitle: "14.3 Class-Action & Jury Waiver",
-            text: "TO THE MAXIMUM EXTENT PERMITTED BY LAW, ALL DISPUTES SHALL BE CONDUCTED ONLY ON AN INDIVIDUAL BASIS AND NOT AS A CLASS, COLLECTIVE, OR REPRESENTATIVE ACTION. EACH PARTY WAIVES ANY RIGHT TO A JURY TRIAL AND TO CONSOLIDATE CLAIMS. Each Party bears its own costs unless the arbitrator decides otherwise.",
+            subtitle: "14.3 Arbitration — seat, institution, arbitrator",
+            text: "Any dispute not resolved amicably shall be finally settled by binding arbitration ADMINISTERED BY THE CENTRE FOR ARBITRATION AND MEDIATION OF THE QUITO CHAMBER OF COMMERCE (Centro de Arbitraje y Mediación de la Cámara de Comercio de Quito) under its Rules in force, by a SOLE ARBITRATOR, deciding in law (en derecho). THE SEAT OF THE ARBITRATION IS QUITO, ECUADOR. Ecuador is a party to the 1958 New York Convention, so the award is enforceable in over 170 states.",
+          },
+          {
+            subtitle: "14.4 No Party may be required to travel",
+            text: "The proceedings are conducted IN WRITING AND BY VIDEOCONFERENCE. NO PARTY MAY BE REQUIRED TO APPEAR IN PERSON at any hearing, and no Party bears the other's travel costs. The seat named in 14.3 is a legal concept, not a geographic obligation: hearings and deliberations may take place anywhere or remotely without changing the seat.",
+          },
+          {
+            subtitle: "14.5 Language and documents",
+            text: "The language of the arbitration is SPANISH, or ENGLISH if both Parties so agree. Documents in English are admissible WITHOUT TRANSLATION; a Party requiring a translation of any document bears its cost.",
+          },
+          {
+            subtitle: "14.6 Expedited procedure for claims under USD 50,000",
+            text: "Where the total amount in dispute is below USD 50,000, the arbitration is conducted on a DOCUMENTS-ONLY basis under the expedited procedure of the applicable Rules, with no oral hearing unless the arbitrator considers one indispensable.",
+          },
+          {
+            subtitle: "14.7 Costs",
+            text: "The unsuccessful Party bears the costs of the arbitration, including the administrative fees, the arbitrator's fees and the reasonable legal representation costs of the successful Party, unless the arbitrator decides otherwise for good reason.",
+          },
+          {
+            subtitle: "14.8 Contractor's option for the recovery of unpaid Fees",
+            text: "FOR CLAIMS SEEKING PAYMENT OF FEES DUE, the Contractor may, at its sole option, instead bring proceedings before the competent courts of the Client's domicile or of any place where the Client holds assets, and the Client submits to that jurisdiction. This option belongs to the Contractor only. If the law applicable in a given forum does not recognise a unilateral option clause, only this Section 14.8 is affected and the remainder of Section 14 stays in force.",
+          },
+          {
+            subtitle: "14.9 Blockchain records are evidence, not a forum",
+            text: "Records anchored to a public blockchain (including Arweave transactions and their timestamps) are admissible as authentic evidence of content and time. NO on-chain or 'decentralised' arbitration protocol is agreed as a forum: awards of such protocols are not covered by the New York Convention and cannot be enforced against assets. Decentralisation governs how the record is kept, not where a monetary dispute is decided.",
+          },
+          {
+            subtitle: "14.10 Class-Action & Jury Waiver",
+            text: "TO THE MAXIMUM EXTENT PERMITTED BY LAW, ALL DISPUTES SHALL BE CONDUCTED ONLY ON AN INDIVIDUAL BASIS AND NOT AS A CLASS, COLLECTIVE, OR REPRESENTATIVE ACTION. EACH PARTY WAIVES ANY RIGHT TO A JURY TRIAL AND TO CONSOLIDATE CLAIMS.",
+          },
+          {
+            subtitle: "14.11 Consumers",
+            text: "Where the Client is a consumer, SECTION 19 PREVAILS OVER THIS SECTION: arbitration and the waivers above apply only to the extent permitted by the mandatory law of the consumer's country of habitual residence, and the consumer keeps the right to go to the courts of that country.",
           },
         ],
       },
@@ -620,20 +652,52 @@ export default function ServiceAgreementPage() {
         ],
       },
       {
-        title: "14. ПРИМЕНИМЫЕ ПРАВИЛА И РАЗРЕШЕНИЕ СПОРОВ (МЕЖДУНАРОДНЫЙ АРБИТРАЖ)",
+        title: "14. ПРИМЕНИМОЕ ПРАВО, МЕСТО АРБИТРАЖА И РАЗРЕШЕНИЕ СПОРОВ",
         icon: Gavel,
         subsections: [
           {
-            subtitle: "14.1 Досудебное урегулирование",
-            text: "Стороны прежде всего добросовестно пытаются урегулировать спор путём письменных переговоров в течение тридцати (30) дней с момента уведомления.",
+            subtitle: "14.1 Добросовестное урегулирование",
+            text: "Стороны сначала пытаются урегулировать спор путём письменных переговоров в течение тридцати (30) дней с момента уведомления. Этот шаг обязателен до обращения в арбитраж, кроме случаев срочных обеспечительных мер.",
           },
           {
-            subtitle: "14.2 Обязательный арбитраж",
-            text: "Любой спор, требование или разногласие, возникающие из или в связи с настоящим Договором или Услугами и не урегулированные мирно, окончательно разрешаются путём конфиденциального обязательного арбитража, администрируемого по регламенту признанного международного арбитражного учреждения, единоличным арбитром, на английском языке, с нейтрально определяемым по этому регламенту местом. Арбитражное решение окончательно и подлежит исполнению в любом компетентном суде. Ничто не препятствует любой Стороне обращаться за срочными обеспечительными мерами для защиты интеллектуальной собственности или конфиденциальной информации.",
+            subtitle: "14.2 Применимое право",
+            text: "К настоящему Договору, его заключению, толкованию и к любым внедоговорным обязательствам из него применяется право РЕСПУБЛИКИ ЭКВАДОР — страны, где проживает Исполнитель, — без учёта коллизионных норм. Венская конвенция о договорах международной купли-продажи товаров (CISG) не применяется.",
           },
           {
-            subtitle: "14.3 Отказ от коллективных исков и суда присяжных",
-            text: "В МАКСИМАЛЬНО ДОПУСТИМОЙ ЗАКОНОМ СТЕПЕНИ ВСЕ СПОРЫ РАССМАТРИВАЮТСЯ ТОЛЬКО В ИНДИВИДУАЛЬНОМ ПОРЯДКЕ, А НЕ КАК КОЛЛЕКТИВНЫЙ ИЛИ ПРЕДСТАВИТЕЛЬСКИЙ ИСК. КАЖДАЯ СТОРОНА ОТКАЗЫВАЕТСЯ ОТ ПРАВА НА СУД ПРИСЯЖНЫХ И НА ОБЪЕДИНЕНИЕ ТРЕБОВАНИЙ. Каждая Сторона несёт свои издержки, если арбитр не решит иначе.",
+            subtitle: "14.3 Арбитраж — место, институт, состав",
+            text: "Спор, не урегулированный добросовестно, окончательно разрешается арбитражем ПОД АДМИНИСТРИРОВАНИЕМ ЦЕНТРА АРБИТРАЖА И МЕДИАЦИИ ТОРГОВОЙ ПАЛАТЫ КИТО (Centro de Arbitraje y Mediación de la Cámara de Comercio de Quito) по его действующему Регламенту, ЕДИНОЛИЧНЫМ АРБИТРОМ, разрешающим спор по праву (en derecho). МЕСТОМ АРБИТРАЖА ЯВЛЯЕТСЯ КИТО, ЭКВАДОР. Эквадор участвует в Нью-Йоркской конвенции 1958 года, поэтому решение исполнимо более чем в 170 государствах.",
+          },
+          {
+            subtitle: "14.4 Ни одну сторону нельзя обязать приехать",
+            text: "Разбирательство ведётся ПИСЬМЕННО И ПО ВИДЕОСВЯЗИ. НИ ОДНУ СТОРОНУ НЕЛЬЗЯ ОБЯЗАТЬ ЯВИТЬСЯ ЛИЧНО на какое-либо заседание, и ни одна сторона не несёт дорожных расходов другой. Место арбитража, названное в п. 14.3, — понятие юридическое, а не географическая обязанность: заседания и совещания могут проходить где угодно или удалённо, не меняя места арбитража.",
+          },
+          {
+            subtitle: "14.5 Язык и документы",
+            text: "Языком арбитража является ИСПАНСКИЙ либо АНГЛИЙСКИЙ, если об этом договорились обе стороны. Документы на английском принимаются БЕЗ ПЕРЕВОДА; сторона, которой перевод нужен, оплачивает его сама.",
+          },
+          {
+            subtitle: "14.6 Ускоренная процедура для требований до 50 000 $",
+            text: "Если общая цена спора меньше 50 000 долларов США, разбирательство ведётся ТОЛЬКО ПО ДОКУМЕНТАМ в порядке ускоренной процедуры применимого Регламента, без устного слушания, если арбитр не сочтёт его необходимым.",
+          },
+          {
+            subtitle: "14.7 Расходы",
+            text: "Расходы на арбитраж, включая административный сбор, гонорар арбитра и разумные расходы выигравшей стороны на представителя, несёт проигравшая сторона, если арбитр по обоснованной причине не решит иначе.",
+          },
+          {
+            subtitle: "14.8 Право выбора Исполнителя при взыскании оплаты",
+            text: "ПО ТРЕБОВАНИЯМ О ВЗЫСКАНИИ ПРИЧИТАЮЩЕГОСЯ ВОЗНАГРАЖДЕНИЯ Исполнитель вправе по своему усмотрению вместо арбитража обратиться в компетентный суд по месту нахождения Заказчика или по месту нахождения его имущества, и Заказчик подчиняется такой юрисдикции. Это право принадлежит ТОЛЬКО Исполнителю. Если право конкретного форума не признаёт односторонних оговорок о выборе, недействительным считается только настоящий пункт 14.8, а остальная часть раздела 14 сохраняет силу.",
+          },
+          {
+            subtitle: "14.9 Блокчейн — доказательство, а не форум",
+            text: "Записи, закреплённые в публичном блокчейне (в том числе сделки Arweave и их отметки времени), принимаются как достоверное доказательство содержания и времени. НИКАКОЙ ончейн- или «децентрализованный» арбитражный протокол форумом не признаётся: решения таких протоколов не подпадают под Нью-Йоркскую конвенцию и не могут быть обращены на имущество. Децентрализация определяет, как хранится запись, а не то, где решается денежный спор.",
+          },
+          {
+            subtitle: "14.10 Отказ от коллективного иска и суда присяжных",
+            text: "В МАКСИМАЛЬНО ДОПУСТИМОЙ ЗАКОНОМ СТЕПЕНИ ВСЕ СПОРЫ РАССМАТРИВАЮТСЯ ТОЛЬКО В ИНДИВИДУАЛЬНОМ ПОРЯДКЕ, А НЕ КАК КОЛЛЕКТИВНЫЙ ИЛИ ПРЕДСТАВИТЕЛЬСКИЙ ИСК. КАЖДАЯ СТОРОНА ОТКАЗЫВАЕТСЯ ОТ ПРАВА НА СУД ПРИСЯЖНЫХ И НА ОБЪЕДИНЕНИЕ ТРЕБОВАНИЙ.",
+          },
+          {
+            subtitle: "14.11 Потребители",
+            text: "Если Заказчик — потребитель, РАЗДЕЛ 19 ИМЕЕТ ПРИОРИТЕТ НАД НАСТОЯЩИМ: арбитраж и указанные выше отказы применяются лишь в той мере, в какой это допускают императивные нормы страны его обычного места жительства, и потребитель сохраняет право обратиться в суд своей страны.",
           },
         ],
       },
@@ -985,20 +1049,52 @@ export default function ServiceAgreementPage() {
         ],
       },
       {
-        title: "14. REGLAS APLICABLES Y RESOLUCIÓN DE DISPUTAS (ARBITRAJE INTERNACIONAL)",
+        title: "14. LEY APLICABLE, SEDE Y RESOLUCIÓN DE CONTROVERSIAS",
         icon: Gavel,
         subsections: [
           {
             subtitle: "14.1 Resolución de buena fe",
-            text: "Las Partes intentarán primero resolver amistosamente cualquier disputa mediante negociación escrita dentro de los treinta (30) días desde la notificación.",
+            text: "Las Partes intentarán primero resolver amistosamente cualquier controversia mediante negociación escrita dentro de los treinta (30) días siguientes a la notificación. Este paso es condición previa al arbitraje, salvo para medidas urgentes.",
           },
           {
-            subtitle: "14.2 Arbitraje vinculante",
-            text: "Toda disputa, reclamación o controversia derivada de o relacionada con este Contrato o los Servicios que no se resuelva amistosamente se resolverá definitivamente mediante arbitraje confidencial y vinculante, administrado bajo las reglas de una institución arbitral internacional reconocida, por un árbitro único, en idioma inglés, con la sede determinada neutralmente conforme a dichas reglas. El laudo es definitivo y ejecutable ante cualquier tribunal competente. Nada impide a una Parte solicitar medidas cautelares urgentes para proteger la propiedad intelectual o la información confidencial.",
+            subtitle: "14.2 Ley aplicable",
+            text: "Este Contrato, su formación, interpretación y cualquier obligación extracontractual derivada de él se rigen por la ley de la REPÚBLICA DEL ECUADOR, país de residencia del Contratista, sin atender a las normas de conflicto. No se aplica la Convención de Viena sobre Compraventa Internacional de Mercaderías (CISG).",
           },
           {
-            subtitle: "14.3 Renuncia a acciones colectivas y a jurado",
-            text: "EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY, TODAS LAS DISPUTAS SE TRAMITARÁN SOLO DE FORMA INDIVIDUAL Y NO COMO ACCIÓN COLECTIVA O REPRESENTATIVA. CADA PARTE RENUNCIA A JUICIO CON JURADO Y A CONSOLIDAR RECLAMACIONES. Cada Parte asume sus propios costes salvo decisión distinta del árbitro.",
+            subtitle: "14.3 Arbitraje — sede, institución y árbitro",
+            text: "Toda controversia no resuelta amistosamente se resolverá definitivamente mediante arbitraje ADMINISTRADO POR EL CENTRO DE ARBITRAJE Y MEDIACIÓN DE LA CÁMARA DE COMERCIO DE QUITO conforme a su Reglamento vigente, por ÁRBITRO ÚNICO, en derecho. LA SEDE DEL ARBITRAJE ES QUITO, ECUADOR. Ecuador es parte de la Convención de Nueva York de 1958, por lo que el laudo es ejecutable en más de 170 Estados.",
+          },
+          {
+            subtitle: "14.4 Ninguna Parte puede ser obligada a viajar",
+            text: "El procedimiento se desarrolla POR ESCRITO Y POR VIDEOCONFERENCIA. NINGUNA PARTE PODRÁ SER OBLIGADA A COMPARECER PERSONALMENTE en audiencia alguna, ni soportará los gastos de viaje de la otra. La sede indicada en 14.3 es un concepto jurídico y no una obligación geográfica: las audiencias y deliberaciones pueden celebrarse en cualquier lugar o a distancia sin alterar la sede.",
+          },
+          {
+            subtitle: "14.5 Idioma y documentos",
+            text: "El idioma del arbitraje es el ESPAÑOL, o el INGLÉS si ambas Partes lo acuerdan. Los documentos en inglés son admisibles SIN TRADUCCIÓN; la Parte que requiera una traducción asume su coste.",
+          },
+          {
+            subtitle: "14.6 Procedimiento abreviado para reclamaciones inferiores a 50 000 USD",
+            text: "Cuando la cuantía total en disputa sea inferior a 50 000 dólares estadounidenses, el arbitraje se sustanciará ÚNICAMENTE SOBRE DOCUMENTOS conforme al procedimiento abreviado del Reglamento aplicable, sin audiencia oral salvo que el árbitro la considere indispensable.",
+          },
+          {
+            subtitle: "14.7 Costas",
+            text: "La Parte vencida soporta las costas del arbitraje, incluidos los derechos administrativos, los honorarios del árbitro y los costes razonables de representación letrada de la Parte vencedora, salvo que el árbitro decida otra cosa por causa justificada.",
+          },
+          {
+            subtitle: "14.8 Opción del Contratista para el cobro de honorarios impagados",
+            text: "EN LAS RECLAMACIONES DIRIGIDAS AL COBRO DE HONORARIOS DEBIDOS, el Contratista podrá, a su sola elección, acudir en lugar del arbitraje a los tribunales competentes del domicilio del Cliente o de cualquier lugar donde éste tenga bienes, sometiéndose el Cliente a dicha jurisdicción. Esta opción corresponde ÚNICAMENTE al Contratista. Si la ley aplicable en un foro determinado no reconoce las cláusulas de opción unilateral, sólo se verá afectada esta cláusula 14.8 y el resto de la sección 14 conservará su vigencia.",
+          },
+          {
+            subtitle: "14.9 La cadena de bloques es prueba, no foro",
+            text: "Los registros anclados en una cadena de bloques pública (incluidas las transacciones de Arweave y sus sellos de tiempo) se admiten como prueba auténtica de contenido y fecha. NO se pacta como foro ningún protocolo de arbitraje «en cadena» o «descentralizado»: sus laudos no están amparados por la Convención de Nueva York y no pueden ejecutarse sobre bienes. La descentralización rige cómo se conserva el registro, no dónde se decide una controversia dineraria.",
+          },
+          {
+            subtitle: "14.10 Renuncia a la acción colectiva y al jurado",
+            text: "EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY, TODAS LAS CONTROVERSIAS SE SUSTANCIARÁN ÚNICAMENTE DE FORMA INDIVIDUAL Y NO COMO ACCIÓN COLECTIVA O REPRESENTATIVA. CADA PARTE RENUNCIA AL JUICIO POR JURADO Y A LA ACUMULACIÓN DE PRETENSIONES.",
+          },
+          {
+            subtitle: "14.11 Consumidores",
+            text: "Cuando el Cliente sea consumidor, LA SECCIÓN 19 PREVALECE SOBRE ESTA: el arbitraje y las renuncias anteriores se aplican sólo en la medida en que lo permitan las normas imperativas del país de su residencia habitual, y el consumidor conserva el derecho a acudir a los tribunales de ese país.",
           },
         ],
       },
@@ -1350,20 +1446,52 @@ export default function ServiceAgreementPage() {
         ],
       },
       {
-        title: "14. 适用规则与争议解决（国际仲裁）",
+        title: "14. 适用法律、仲裁地与争议解决",
         icon: Gavel,
         subsections: [
           {
             subtitle: "14.1 善意解决",
-            text: "双方应首先在通知后三十（30）日内通过书面协商，善意尝试友好解决任何争议。",
+            text: "双方应先在收到通知后三十（30）日内以书面协商方式友好解决争议。除紧急救济外，此步骤为提起仲裁的前置条件。",
           },
           {
-            subtitle: "14.2 有约束力的仲裁",
-            text: "凡因本合同或服务引起或与之相关、未能友好解决的任何争议、主张或分歧，应通过保密且有约束力的仲裁最终解决，由公认的国际仲裁机构按其规则管理，由独任仲裁员以英语进行，仲裁地依该规则中立确定。仲裁裁决为终局裁决，可在任何有管辖权的法院执行。本条不妨碍任一方为保护知识产权或保密信息而寻求紧急禁令救济。",
+            subtitle: "14.2 适用法律",
+            text: "本协议及其订立、解释以及由其产生的任何非合同义务，均适用承包人居住国厄瓜多尔共和国的法律，不适用其冲突法规则。《联合国国际货物销售合同公约》（CISG）不适用。",
           },
           {
-            subtitle: "14.3 放弃集体诉讼与陪审团",
-            text: "在法律允许的最大范围内，一切争议仅以个人方式进行，而非集体、共同或代表性诉讼。各方放弃陪审团审判权及合并请求的权利。除非仲裁员另有决定，各方自行承担费用。",
+            subtitle: "14.3 仲裁——仲裁地、机构与仲裁员",
+            text: "未能友好解决的争议，应由基多商会仲裁与调解中心（Centro de Arbitraje y Mediación de la Cámara de Comercio de Quito）依其现行规则管理，由独任仲裁员依法（en derecho）作出终局裁决。仲裁地为厄瓜多尔基多。厄瓜多尔是 1958 年《纽约公约》缔约国，裁决可在 170 多个国家执行。",
+          },
+          {
+            subtitle: "14.4 任何一方均不得被要求出行",
+            text: "程序以书面及视频会议方式进行。任何一方均不得被要求亲自出席任何庭审，亦不承担对方的差旅费用。第 14.3 条所指的仲裁地是法律概念而非地理义务：庭审与合议可在任何地点或远程进行，不因此改变仲裁地。",
+          },
+          {
+            subtitle: "14.5 语言与文件",
+            text: "仲裁语言为西班牙语；经双方同意亦可为英语。英文文件无需翻译即可采信；需要翻译的一方自行承担费用。",
+          },
+          {
+            subtitle: "14.6 争议金额低于 50,000 美元的快速程序",
+            text: "争议总金额低于 50,000 美元的，依适用规则的快速程序仅以书面文件审理，除仲裁员认为确有必要外不开庭。",
+          },
+          {
+            subtitle: "14.7 费用",
+            text: "仲裁费用，包括管理费、仲裁员报酬以及胜诉方合理的律师代理费用，由败诉方承担，但仲裁员有正当理由另行决定的除外。",
+          },
+          {
+            subtitle: "14.8 承包人就未付费用的选择权",
+            text: "就请求支付到期费用的主张，承包人可自行选择不提起仲裁，而向客户住所地或客户财产所在地的有管辖权法院提起诉讼，客户接受该管辖。该选择权仅属于承包人。若某一法域的适用法律不承认单方选择条款，则仅本第 14.8 条受影响，第 14 条其余部分继续有效。",
+          },
+          {
+            subtitle: "14.9 区块链是证据，而非争议解决场所",
+            text: "锚定于公共区块链的记录（包括 Arweave 交易及其时间戳）可作为内容与时间的真实证据被采信。任何链上或「去中心化」仲裁协议均不被约定为争议解决场所：其裁决不受《纽约公约》保护，无法对财产强制执行。去中心化决定记录如何保存，而非金钱争议在何处裁决。",
+          },
+          {
+            subtitle: "14.10 放弃集体诉讼与陪审团审判",
+            text: "在法律允许的最大范围内，所有争议仅以个别方式处理，不作为集体、共同或代表人诉讼。各方放弃陪审团审判权及合并请求的权利。",
+          },
+          {
+            subtitle: "14.11 消费者",
+            text: "客户为消费者时，第 19 条优先于本条：仲裁及上述放弃仅在其惯常居所地国强制性法律允许的范围内适用，消费者保留向该国法院起诉的权利。",
           },
         ],
       },

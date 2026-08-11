@@ -22,6 +22,8 @@ import { useSocial, captureAndLinkRef, findTrackLocation, AIFA_BOT_URL } from '@
 import { readableAccent } from '@/lib/readableAccent';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import { useЯзык } from '@/lib/server-locale';
+import { строкаРеквизитов, type Язык } from '@/lib/requisites';
 
 /* Украшения и закрытые панели не нужны для ПЕРВОЙ отрисовки.
 
@@ -115,6 +117,7 @@ function SectionDivider() {
 
 export default function Home() {
   const rt = useRadioT();
+  const языкПодвала = useЯзык();
   const st = useStationI18n();
   const [showSplash, setShowSplash] = useState(true);
   const [selectedGenre, setSelectedGenre] = useState('ALL');
@@ -552,6 +555,22 @@ export default function Home() {
                   >
                     {rt('publicOffer')}
                   </a>
+                  {/* 🔴 СОГЛАШЕНИЯ НА ЭТОМ САЙТЕ НЕ БЫЛО ВОВСЕ.
+                      Замер: /terms здесь отвечал 404, тогда как на двух других
+                      сайтах документ открывался. При этом кабинет, тарифы,
+                      токены и вечная память у четырёх сайтов ОБЩИЕ — живая
+                      проверка показала одну и ту же таблицу игроков и один
+                      MEMORY_MASTER_KEY. То есть человек регистрировался здесь,
+                      принимая условия, которых на этом сайте нельзя было найти
+                      ни по какому адресу. Ссылка на чужой домен этого не
+                      закрывает: условия должны быть на том сайте, где нажимают
+                      кнопку. */}
+                  <a
+                    href="/user-agreement"
+                    className="text-[13px] font-mono tracking-wider text-[#8B8BA8] hover:text-[#00F0FF] transition-colors"
+                  >
+                    {rt('userAgreement')}
+                  </a>
                   {/* Возрастная маркировка. Наши же условия говорят: «Сайт не
                       предназначен для лиц младше 18 лет» (раздел 10.2). До сих
                       пор это было написано только внутри договора, который
@@ -576,6 +595,14 @@ export default function Home() {
                     © 2026
                   </span>
                 </div>
+                {/* Реквизиты оператора. Ст. 5 Директивы 2000/31/EC: имя,
+                    правовая форма, географический адрес и регистрационные
+                    номера должны быть доступны постоянно и напрямую. До этой
+                    правки их не было ни на одном из четырёх сайтов. Источник
+                    один — lib/requisites.ts; незаполненные поля не выводятся. */}
+                <p className="mt-6 pt-4 border-t border-[#8B8BA8]/20 text-[12px] font-mono text-[#7E7E99] leading-relaxed break-words">
+                  {строкаРеквизитов((языкПодвала as Язык) || 'en')}
+                </p>
               </div>
             </div>
           </div>
