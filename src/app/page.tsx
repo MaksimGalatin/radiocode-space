@@ -6,26 +6,45 @@ import { useAudioEngine } from '@/hooks/useAudioEngine';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { usePlayerStore } from '@/stores/playerStore';
 import { stations } from '@/lib/stations';
-import { ParticleBackground } from '@/components/radio/ParticleBackground';
-import { AmbientOrbs } from '@/components/radio/AmbientOrbs';
 import { ScanlineOverlay, MatrixGrid } from '@/components/radio/ScanlineOverlay';
 import { RadioHeader } from '@/components/radio/RadioHeader';
 import { HeroSection } from '@/components/radio/HeroSection';
 import { StationCard } from '@/components/radio/StationCard';
 import { PlayerBar } from '@/components/radio/PlayerBar';
-import { PlaylistPanel } from '@/components/radio/PlaylistPanel';
 import { WaveformBar } from '@/components/radio/WaveformBar';
 import { VolumeVisualizer } from '@/components/radio/VolumeVisualizer';
-import { PlayHistory } from '@/components/radio/PlayHistory';
 import { IntroSplash } from '@/components/radio/IntroSplash';
 import { GenreFilter } from '@/components/radio/GenreFilter';
-import { FullscreenVisualizer } from '@/components/radio/FullscreenVisualizer';
 import { AnimatedCounter } from '@/components/radio/AnimatedCounter';
 import { useRadioT, useStationI18n } from '@/lib/radioI18n';
 import { useLikes } from '@/lib/likes';
 import { useSocial, captureAndLinkRef, findTrackLocation, AIFA_BOT_URL } from '@/lib/radioSocial';
 import { readableAccent } from '@/lib/readableAccent';
 import { motion, AnimatePresence } from 'framer-motion';
+import dynamic from 'next/dynamic';
+
+/* Украшения и закрытые панели не нужны для ПЕРВОЙ отрисовки.
+
+   Фоновые слои позиционированы абсолютно и места в потоке не занимают,
+   поэтому их появление тактом позже ничего не сдвигает. Панели закрыты до
+   нажатия, история воспроизведения — далеко за первым экраном.
+
+   Замер Lighthouse 10.08.2026 до правки: работа сценариев 884 мс, пересчёт
+   стилей 793 мс, отрисовка крупнейшего элемента 4,5 с. Всё это грузилось
+   одним куском, включая полноэкранный визуализатор, который человек может
+   не открыть ни разу.
+
+   НЕ откладываем: PlayerBar, HeroSection, RadioHeader, StationCard,
+   GenreFilter, IntroSplash, VolumeVisualizer — они видны сразу или влияют
+   на раскладку.
+
+   Приём тот же, что давно применён на aifa.digital. */
+const ParticleBackground = dynamic(() => import('@/components/radio/ParticleBackground').then(m => m.ParticleBackground), { ssr: false, loading: () => null });
+const AmbientOrbs = dynamic(() => import('@/components/radio/AmbientOrbs').then(m => m.AmbientOrbs), { ssr: false, loading: () => null });
+const PlaylistPanel = dynamic(() => import('@/components/radio/PlaylistPanel').then(m => m.PlaylistPanel), { ssr: false, loading: () => null });
+const PlayHistory = dynamic(() => import('@/components/radio/PlayHistory').then(m => m.PlayHistory), { ssr: false, loading: () => null });
+const FullscreenVisualizer = dynamic(() => import('@/components/radio/FullscreenVisualizer').then(m => m.FullscreenVisualizer), { ssr: false, loading: () => null });
+
 
 function LiveTicker() {
   const rt = useRadioT();
