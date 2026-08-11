@@ -81,6 +81,33 @@ export function RadioHeader() {
 
           {/* Right side: Status + Signal + Clock */}
           <div className="flex items-center gap-3 sm:gap-4">
+            {/* Лента новостей. На трёх других сайтах экосистемы вход в неё есть
+                в навигации, здесь до сих пор была только ссылка в подвале — то
+                есть чтобы найти новости, надо было доскроллить весь сайт до
+                конца. Иконка та же по духу, что у кабинета: подпись прячется на
+                узких экранах, чтобы шапка не переносилась. */}
+            <motion.a
+              href="/news"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              whileHover={{ scale: 1.04 }}
+              aria-label={rt('newsLink')}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              style={{
+                background: 'rgba(0, 240, 255, 0.06)',
+                border: '1px solid rgba(0, 240, 255, 0.18)',
+              }}
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M4 5h11a2 2 0 0 1 2 2v11a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2V5z" />
+                <path d="M7.5 9h6M7.5 12.5h6M7.5 16h4" />
+              </svg>
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
+                {rt('newsLink')}
+              </span>
+            </motion.a>
+
             {/* Personal cabinet (unified account across the ecosystem) */}
             <motion.a
               href="/cabinet"
