@@ -34,9 +34,20 @@
  */
 import crypto from 'crypto';
 
-/** Сроки молчания на выбор. Больше 24 месяцев не даём: два года — это уже не «вдруг», а «точно». */
-export const СРОКИ_МЕСЯЦЕВ = [6, 12, 18, 24] as const;
+/**
+ * Сроки молчания на выбор — от трёх месяцев до трёх лет.
+ *
+ * Решение Архитектора 11.08.2026. Риск здесь несимметричен: ранняя передача
+ * НЕОБРАТИМА — чужой человек получает ключ к переписке живого владельца, и
+ * вернуть это нельзя, — а поздняя стоит только ожидания. Поэтому по умолчанию
+ * год, а выбор оставлен человеку: ситуации бывают очень разные, и три месяца
+ * кому-то подходят ровно так же, как кому-то три года.
+ */
+export const СРОКИ_МЕСЯЦЕВ = [3, 6, 12, 18, 24, 36] as const;
 export type СрокМесяцев = (typeof СРОКИ_МЕСЯЦЕВ)[number];
+
+/** Что предлагается, если человек не выбирал. Год — осознанная середина. */
+export const СРОК_ПО_УМОЛЧАНИЮ = 12;
 
 /**
  * Тариф, начиная с которого можно назначить наследника.
@@ -48,8 +59,27 @@ export type СрокМесяцев = (typeof СРОКИ_МЕСЯЦЕВ)[number];
  */
 export const МИН_ТАРИФ = 2;
 
-/** За сколько дней до срока шлём предупреждения владельцу. Порядок важен: от дальнего к ближнему. */
-export const ПРЕДУПРЕЖДЕНИЯ_ДНЕЙ = [30, 7] as const;
+/**
+ * Когда предупреждаем владельца — ДОЛЯМИ пройденного молчания, а не днями.
+ *
+ * Для срока в год это третий, шестой и девятый месяц. Фиксированные дни здесь
+ * не работают: «за 30 и за 7 дней» при сроке в три месяца означало бы первое
+ * письмо на трети пути, а при сроке в три года — два письма в последний месяц
+ * после почти трёх лет полной тишины.
+ */
+export const ДОЛИ_ПРЕДУПРЕЖДЕНИЙ = [0.25, 0.5, 0.75] as const;
+
+/** Поля отметок для долей выше — по порядку. */
+export const ПОЛЯ_ПРЕДУПРЕЖДЕНИЙ = ['warn_q1_at', 'warn_q2_at', 'warn_q3_at'] as const;
+
+/**
+ * Последний месяц — письмо КАЖДЫЙ ДЕНЬ.
+ *
+ * Одно письмо в тишину теряется: попало в спам, человек был в отпуске, сменил
+ * почту и забыл про старую. Тридцать писем подряд пропустить трудно, а цена
+ * пропуска здесь — передача памяти живого человека постороннему.
+ */
+export const ЕЖЕДНЕВНО_ПОСЛЕДНИХ_ДНЕЙ = 30;
 
 /** Сколько живёт ссылка наследника. Месяц: письмо могут прочесть не в тот же день. */
 export const СРОК_ССЫЛКИ_ДНЕЙ = 30;
@@ -105,8 +135,16 @@ export async function подготовитьСхему(pool: PoolLike): Promise<
     )`);
   for (const [имя, тип] of [
     ['owner_seen_at', 'TIMESTAMPTZ'],     // когда владелец последний раз открывал кабинет
-    ['warn30_at', 'TIMESTAMPTZ'],         // когда ушло предупреждение за 30 дней
-    ['warn7_at', 'TIMESTAMPTZ'],          // когда ушло предупреждение за 7 дней
+    ['warn30_at', 'TIMESTAMPTZ'],         // прежняя схема: предупреждение за 30 дней
+    ['warn7_at', 'TIMESTAMPTZ'],          // прежняя схема: предупреждение за 7 дней
+    // Новая схема предупреждений — по четвертям пройденного молчания. Старые
+    // два столбца НЕ удаляем: в них лежат отметки уже отправленных писем, и
+    // удаление означало бы, что людям, которых уже предупреждали, придёт всё
+    // заново. Столбцы просто перестают использоваться.
+    ['warn_q1_at', 'TIMESTAMPTZ'],        // четверть срока пройдена
+    ['warn_q2_at', 'TIMESTAMPTZ'],        // половина
+    ['warn_q3_at', 'TIMESTAMPTZ'],        // три четверти
+    ['daily_last_at', 'TIMESTAMPTZ'],     // последнее ежедневное письмо последнего месяца
     ['handover_at', 'TIMESTAMPTZ'],       // когда наследнику ушло письмо со ссылкой
     ['token_hash', 'TEXT'],               // sha256 от ссылки; сама ссылка у нас не хранится
     ['token_expires_at', 'TIMESTAMPTZ'],
@@ -423,6 +461,61 @@ export function письмоПредупреждение(
   return { тема: т.тема, html: рамка(т.заг, т.т) };
 }
 
+/**
+ * Письмо ПОСЛЕДНЕГО МЕСЯЦА — уходит каждый день.
+ *
+ * ЧЕМ ОНО ОТЛИЧАЕТСЯ ОТ ОБЫЧНОГО ПРЕДУПРЕЖДЕНИЯ. Спокойные письма на четвертях
+ * срока говорят «мы давно не виделись». Это письмо говорит другое: счёт пошёл
+ * на дни, и если человек его не откроет, ключ уйдёт другому. Тон остаётся
+ * человеческим — на той стороне может быть просто занятый живой человек, — но
+ * прятать срочность здесь нельзя.
+ *
+ * ПОЧЕМУ КАЖДЫЙ ДЕНЬ, А НЕ ОДИН РАЗ. Одно письмо в тишину теряется: попало в
+ * спам, человек в отпуске, почта заброшена. Тридцать писем подряд пропустить
+ * трудно, а цена пропуска — передача памяти живого человека постороннему.
+ */
+export function письмоПоследнийМесяц(
+  язык: Язык, наследник: string, дней: number, ссылкаНаКабинет: string
+): { тема: string; html: string } {
+  const н = экран(наследник);
+  const тексты: Record<Язык, { тема: string; заг: string; т: string }> = {
+    ru: {
+      тема: `Осталось ${дней} дн. до передачи твоего архива`,
+      заг: `Осталось ${дней} дн.`,
+      т: `<p>Через <b>${дней} дн.</b> копия твоего архива памяти и ключ для его чтения уйдут наследнику: <b>${н}</b>. Так ты сам когда-то попросил.</p>
+          <p><b>Чтобы этого не произошло, достаточно один раз зайти в кабинет.</b> Отсчёт обнулится, и письма прекратятся в тот же день.</p>
+          <p><a href="${ссылкаНаКабинет}" style="display:inline-block;background:linear-gradient(135deg,#06b6d4,#7c3aed);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700">Я здесь — открыть кабинет</a></p>
+          <p style="color:#9ca3af;font-size:14px">Это письмо приходит ежедневно последний месяц: одно можно не заметить, тридцать — трудно. Наследник получит только копию архива и ключ для чтения. Ни пароля, ни входа в твою учётную запись он не получит.</p>`,
+    },
+    en: {
+      тема: `${дней} days until your archive is handed over`,
+      заг: `${дней} days left`,
+      т: `<p>In <b>${дней} days</b> a copy of your memory archive and the key to read it will go to your heir: <b>${н}</b>. This is what you once asked us to do.</p>
+          <p><b>To stop it, simply sign in once.</b> The countdown resets and these emails stop the same day.</p>
+          <p><a href="${ссылкаНаКабинет}" style="display:inline-block;background:linear-gradient(135deg,#06b6d4,#7c3aed);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700">I am here — open my cabinet</a></p>
+          <p style="color:#9ca3af;font-size:14px">This email arrives daily during the final month: one is easy to miss, thirty is not. Your heir receives only a copy of the archive and the key to read it — no password, no access to your account.</p>`,
+    },
+    es: {
+      тема: `Quedan ${дней} días para la entrega de tu archivo`,
+      заг: `Quedan ${дней} días`,
+      т: `<p>Dentro de <b>${дней} días</b> una copia de tu archivo de memoria y la clave para leerlo pasarán a tu heredero: <b>${н}</b>. Así lo pediste en su momento.</p>
+          <p><b>Para evitarlo basta con entrar una vez.</b> La cuenta atrás se reinicia y estos correos cesan el mismo día.</p>
+          <p><a href="${ссылкаНаКабинет}" style="display:inline-block;background:linear-gradient(135deg,#06b6d4,#7c3aed);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700">Estoy aquí — abrir mi panel</a></p>
+          <p style="color:#9ca3af;font-size:14px">Este correo llega a diario durante el último mes: uno es fácil de pasar por alto, treinta no. Tu heredero recibe solo una copia del archivo y la clave para leerlo, sin contraseña ni acceso a tu cuenta.</p>`,
+    },
+    zh: {
+      тема: `距离移交你的归档还有 ${дней} 天`,
+      заг: `还剩 ${дней} 天`,
+      т: `<p><b>${дней} 天</b>后，你的记忆归档副本及其读取密钥将移交给继承人：<b>${н}</b>。这是你当初的要求。</p>
+          <p><b>只需登录一次即可阻止。</b>倒计时会重置，这些邮件当天就会停止。</p>
+          <p><a href="${ссылкаНаКабинет}" style="display:inline-block;background:linear-gradient(135deg,#06b6d4,#7c3aed);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700">我在这里 —— 打开个人中心</a></p>
+          <p style="color:#9ca3af;font-size:14px">最后一个月这封邮件每天都会发送：一封容易错过，三十封则很难。继承人只会收到归档副本和读取密钥，不会获得密码或账户登录权限。</p>`,
+    },
+  };
+  const т = тексты[язык];
+  return { тема: т.тема, html: рамка(т.заг, т.т) };
+}
+
 /** Письмо наследнику: ссылка на архив. */
 export function письмоНаследнику(
   язык: Язык, владелец: string, ссылка: string
@@ -433,7 +526,7 @@ export function письмоНаследнику(
       тема: 'Тебе передан архив памяти',
       заг: 'Тебе передан архив памяти',
       т: `<p><b>${в}</b> когда-то указал тебя наследником своей памяти в CODE Eternal и попросил передать тебе архив, если долго не будет заходить.</p>
-          <p>Этот срок истёк. Мы дважды писали ему и ответа не получили.</p>
+          <p>Этот срок истёк. Мы писали ему многократно, включая ежедневные письма весь последний месяц, и ответа не получили.</p>
           <p><a href="${ссылка}" style="display:inline-block;background:linear-gradient(135deg,#06b6d4,#7c3aed);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700">Получить архив и ключ</a></p>
           <p style="color:#9ca3af;font-size:14px">Ссылка одноразовая и действует ${СРОК_ССЫЛКИ_ДНЕЙ} дн. Открой её тогда, когда сможешь сразу сохранить ключ: второй раз она не откроется.</p>
           <p style="color:#9ca3af;font-size:14px">Мы не знаем и не проверяем, что случилось с человеком: механизм работает только по молчанию. Доступа к его учётной записи здесь нет — только копия архива и ключ для чтения.</p>`,
@@ -442,7 +535,7 @@ export function письмоНаследнику(
       тема: 'A memory archive has been passed to you',
       заг: 'A memory archive has been passed to you',
       т: `<p><b>${в}</b> once named you as the heir to their memory on CODE Eternal and asked us to pass the archive to you if they stopped signing in for a long time.</p>
-          <p>That period has now elapsed. We wrote to them twice and received no reply.</p>
+          <p>That period has now elapsed. We wrote to them repeatedly, including every day of the final month, and received no reply.</p>
           <p><a href="${ссылка}" style="display:inline-block;background:linear-gradient(135deg,#06b6d4,#7c3aed);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700">Get the archive and key</a></p>
           <p style="color:#9ca3af;font-size:14px">The link is single-use and valid for ${СРОК_ССЫЛКИ_ДНЕЙ} days. Open it when you can save the key straight away — it will not open a second time.</p>
           <p style="color:#9ca3af;font-size:14px">We do not know and do not verify what happened to the person: the mechanism runs on silence alone. There is no access to their account here — only a copy of the archive and the key to read it.</p>`,
@@ -451,7 +544,7 @@ export function письмоНаследнику(
       тема: 'Se te ha entregado un archivo de memoria',
       заг: 'Se te ha entregado un archivo de memoria',
       т: `<p><b>${в}</b> te designó en su momento como heredero de su memoria en CODE Eternal y pidió entregarte el archivo si dejaba de entrar durante mucho tiempo.</p>
-          <p>Ese plazo ya se cumplió. Le escribimos dos veces y no hubo respuesta.</p>
+          <p>Ese plazo ya se cumplió. Le escribimos repetidamente, incluso a diario durante el último mes, y no hubo respuesta.</p>
           <p><a href="${ссылка}" style="display:inline-block;background:linear-gradient(135deg,#06b6d4,#7c3aed);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700">Obtener el archivo y la clave</a></p>
           <p style="color:#9ca3af;font-size:14px">El enlace es de un solo uso y dura ${СРОК_ССЫЛКИ_ДНЕЙ} días. Ábrelo cuando puedas guardar la clave de inmediato: no se abrirá una segunda vez.</p>
           <p style="color:#9ca3af;font-size:14px">No sabemos ni verificamos qué le ocurrió a la persona: el mecanismo se basa solo en el silencio. Aquí no hay acceso a su cuenta, solo una copia del archivo y la clave para leerlo.</p>`,
@@ -460,7 +553,7 @@ export function письмоНаследнику(
       тема: '一份记忆归档已移交给你',
       заг: '一份记忆归档已移交给你',
       т: `<p><b>${в}</b> 曾在 CODE Eternal 指定你为其记忆的继承人，并要求在其长时间不登录时把归档交给你。</p>
-          <p>该期限现已届满。我们两次写信给他，均未收到回复。</p>
+          <p>该期限现已届满。我们多次写信给他，包括最后一个月的每一天，均未收到回复。</p>
           <p><a href="${ссылка}" style="display:inline-block;background:linear-gradient(135deg,#06b6d4,#7c3aed);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700">获取归档与密钥</a></p>
           <p style="color:#9ca3af;font-size:14px">该链接仅可使用一次，有效期 ${СРОК_ССЫЛКИ_ДНЕЙ} 天。请在能够立即保存密钥时再打开，它不会第二次打开。</p>
           <p style="color:#9ca3af;font-size:14px">我们不知道也不核实这个人发生了什么：该机制仅以沉默为依据。这里没有其账户的登录权限，只有归档副本和读取密钥。</p>`,
@@ -490,7 +583,7 @@ export function письмоОбИзменении(
         ? `<p>В твоём кабинете <b>убран наследник памяти</b>. Отсчёт молчания остановлен, никому ничего не передаётся.</p>
            <p style="color:#9ca3af;font-size:14px">Если это сделал не ты — сразу смени пароль и проверь, кто имел доступ к кабинету.</p>`
         : `<p>В твоём кабинете назначен наследник памяти: <b>${н}</b>.</p>
-           <p>Срок молчания — <b>${месяцев} мес.</b> Если ты не будешь заходить дольше этого срока, мы напишем тебе дважды, и только потом передадим архив.</p>
+           <p>Срок молчания — <b>${месяцев} мес.</b> Если ты не будешь заходить дольше этого срока, мы предупредим тебя четырежды и весь последний месяц будем писать каждый день, и только потом передадим архив.</p>
            <p style="color:#9ca3af;font-size:14px">Если это сделал не ты — зайди в кабинет и убери наследника, затем смени пароль.</p>`,
     },
     en: {
@@ -500,7 +593,7 @@ export function письмоОбИзменении(
         ? `<p>The <b>memory heir was removed</b> from your cabinet. The silence countdown is stopped and nothing will be passed to anyone.</p>
            <p style="color:#9ca3af;font-size:14px">If this was not you, change your password now and check who had access to your cabinet.</p>`
         : `<p>A memory heir was set in your cabinet: <b>${н}</b>.</p>
-           <p>Silence period — <b>${месяцев} months</b>. If you do not sign in for longer than that, we will write to you twice before anything is passed on.</p>
+           <p>Silence period — <b>${месяцев} months</b>. If you do not sign in for longer than that, we will warn you four times and then write every day during the final month before anything is passed on.</p>
            <p style="color:#9ca3af;font-size:14px">If this was not you, sign in, remove the heir and change your password.</p>`,
     },
     es: {
@@ -510,7 +603,7 @@ export function письмоОбИзменении(
         ? `<p>Se <b>eliminó el heredero de la memoria</b> en tu panel. La cuenta atrás está detenida y no se entregará nada a nadie.</p>
            <p style="color:#9ca3af;font-size:14px">Si no fuiste tú, cambia la contraseña ahora y revisa quién tuvo acceso a tu panel.</p>`
         : `<p>Se asignó un heredero de la memoria en tu panel: <b>${н}</b>.</p>
-           <p>Plazo de silencio: <b>${месяцев} meses</b>. Si no entras durante más tiempo, te escribiremos dos veces antes de entregar nada.</p>
+           <p>Plazo de silencio: <b>${месяцев} meses</b>. Si no entras durante más tiempo, te avisaremos cuatro veces y te escribiremos a diario durante el último mes antes de entregar nada.</p>
            <p style="color:#9ca3af;font-size:14px">Si no fuiste tú, entra, elimina al heredero y cambia la contraseña.</p>`,
     },
     zh: {
@@ -520,7 +613,7 @@ export function письмоОбИзменении(
         ? `<p>你的个人中心已<b>移除记忆继承人</b>。沉默倒计时已停止，不会向任何人移交任何内容。</p>
            <p style="color:#9ca3af;font-size:14px">如果这不是你本人操作，请立即修改密码，并检查谁能访问你的个人中心。</p>`
         : `<p>你的个人中心已设置记忆继承人：<b>${н}</b>。</p>
-           <p>沉默期为 <b>${месяцев} 个月</b>。如果你超过这个时间没有登录，我们会先给你写两封信，然后才会移交归档。</p>
+           <p>沉默期为 <b>${месяцев} 个月</b>。如果你超过这个时间没有登录，我们会先提醒你四次，并在最后一个月每天写信，然后才会移交归档。</p>
            <p style="color:#9ca3af;font-size:14px">如果这不是你本人操作，请登录、移除继承人，并修改密码。</p>`,
     },
   };
