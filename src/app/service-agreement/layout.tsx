@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { LanguageProvider } from '@/lib/LanguageContext';
 
 // Публичная оферта — один и тот же документ на всех четырёх сайтах экосистемы.
 // Отличаются только заголовок вкладки и адрес: этого требует разметка для
@@ -18,6 +19,17 @@ export const metadata: Metadata = {
   },
 };
 
+// 🔴 БЕЗ ЭТОЙ ОБЁРТКИ СТРАНИЦА ОТДАВАЛА 500.
+//
+// На трёх сайтах `LanguageProvider` смонтирован в корневом макете, и страница
+// оферты берёт язык оттуда. На radiocode.space провайдер объявлен, но не
+// используется НИГДЕ: сайт живёт на своём словаре `radioI18n`, а кабинет — на
+// собственном. Поэтому `useLanguage()` внутри оферты падал с «must be used
+// within a LanguageProvider», и весь маршрут отвечал 500.
+//
+// Провайдер поставлен точечно на этот маршрут, а не в корень: в корне он
+// затронул бы каждую страницу сайта ради одной. Так текст самой оферты
+// остаётся побайтово одинаковым на всех четырёх сайтах.
 export default function ServiceAgreementLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return <LanguageProvider>{children}</LanguageProvider>;
 }
