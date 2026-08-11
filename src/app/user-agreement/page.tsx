@@ -22,9 +22,26 @@ const ЗАГОЛОВОК_РЕКВИЗИТОВ: Record<string, string> = {
   zh: '运营方登记信息',
 };
 
+const СООТНОШЕНИЕ_ДОКУМЕНТОВ: Record<string, any> = {
+  en: { заголовок: "How our documents fit together", документы: [{ имя: "User Agreement (ecosystem)", href: "/user-agreement", описание: "The cabinet, the eternal memory, GALATIN points, subscription tiers and the ambassador programme. The same document on all four sites." }, { имя: "Public Offer (services)", href: "/service-agreement", описание: "One-off professional work ordered under a Statement of Work: websites, Oracle remediation, AI integration, design." }, { имя: "Terms of Service — this site", href: "/terms", описание: "Rules specific to aifa.works: what the Site does, what it does not promise and how liability is allocated here." }, { имя: "Privacy Policy", href: "/privacy", описание: "What data is collected, how it is stored and encrypted, and how to have it erased." }], старшинство: "Which one governs: a dispute about the cabinet, memory, points or tiers is governed by the User Agreement; a dispute about work you ordered is governed by the Public Offer; a dispute about personal data is governed by the Privacy Policy. Where a consumer is involved, the consumer-rights section of the Public Offer prevails over everything above, to the extent the mandatory law of the consumer's country requires." },
+  ru: { заголовок: "Как связаны наши документы", документы: [{ имя: "Пользовательское соглашение (экосистема)", href: "/user-agreement", описание: "Кабинет, вечная память, баллы GALATIN, тарифы подписки и амбассадорская программа. Один и тот же документ на всех четырёх сайтах." }, { имя: "Публичная оферта (услуги)", href: "/service-agreement", описание: "Разовые работы по Техническому заданию: сайты, устранение нарушений по Оракулу, интеграция ИИ, дизайн." }, { имя: "Условия обслуживания — этот сайт", href: "/terms", описание: "Правила именно aifa.works: что Сайт делает, чего не обещает и как распределяется ответственность здесь." }, { имя: "Политика конфиденциальности", href: "/privacy", описание: "Какие данные собираются, как хранятся и шифруются и как добиться их удаления." }], старшинство: "Что чем правит: спор о кабинете, памяти, баллах или тарифах решает Пользовательское соглашение; спор о заказанной работе — Публичная оферта; спор о персональных данных — Политика конфиденциальности. Если участник — потребитель, раздел о правах потребителя в Публичной оферте имеет приоритет над всем перечисленным в той мере, в какой этого требуют императивные нормы его страны." },
+  es: { заголовок: "Cómo se relacionan nuestros documentos", документы: [{ имя: "Acuerdo de usuario (ecosistema)", href: "/user-agreement", описание: "El panel personal, la memoria eterna, los puntos GALATIN, los planes de suscripción y el programa de embajadores. El mismo documento en los cuatro sitios." }, { имя: "Oferta pública (servicios)", href: "/service-agreement", описание: "Trabajos puntuales encargados mediante un Pliego de Trabajo: sitios web, subsanación del Oráculo, integración de IA, diseño." }, { имя: "Condiciones del servicio — este sitio", href: "/terms", описание: "Reglas propias de aifa.works: qué hace el Sitio, qué no promete y cómo se reparte la responsabilidad aquí." }, { имя: "Política de privacidad", href: "/privacy", описание: "Qué datos se recogen, cómo se conservan y cifran y cómo lograr su supresión." }], старшинство: "Cuál rige: una controversia sobre el panel, la memoria, los puntos o los planes se rige por el Acuerdo de usuario; una sobre un trabajo encargado, por la Oferta pública; una sobre datos personales, por la Política de privacidad. Cuando interviene un consumidor, la sección de derechos del consumidor de la Oferta pública prevalece sobre todo lo anterior en la medida en que lo exijan las normas imperativas de su país." },
+  zh: { заголовок: "我们的各份文件如何衔接", документы: [{ имя: "用户协议（生态）", href: "/user-agreement", описание: "个人面板、永久记忆、GALATIN 积分、订阅套餐与大使计划。四个站点使用同一份文件。" }, { имя: "公开要约（服务）", href: "/service-agreement", описание: "依工作说明书订购的一次性专业工作：网站、Oracle 整改、AI 集成、设计。" }, { имя: "服务条款——本站", href: "/terms", описание: "aifa.works 专有规则：本站做什么、不承诺什么，以及此处的责任如何分配。" }, { имя: "隐私政策", href: "/privacy", описание: "收集哪些数据、如何存储与加密，以及如何要求删除。" }], старшинство: "以何者为准：关于面板、记忆、积分或套餐的争议适用《用户协议》；关于所订购工作的争议适用《公开要约》；关于个人数据的争议适用《隐私政策》。涉及消费者时，《公开要约》中的消费者权利条款在其所在国强制性法律要求的范围内优先于上述全部内容。" },
+};
+
+// Условия конкретного сайта существуют только на aifa.works. Показываем ссылку
+// на них лишь там, где страница есть: обещать документ, которого нет, хуже, чем
+// не упоминать его вовсе.
+function документыДляСайта(язык: string) {
+  const б = СООТНОШЕНИЕ_ДОКУМЕНТОВ[язык] || СООТНОШЕНИЕ_ДОКУМЕНТОВ.en;
+  const этоWorks = typeof window !== 'undefined' && window.location.hostname.endsWith('aifa.works');
+  return { ...б, документы: б.документы.filter((д: any) => д.href !== '/terms' || этоWorks) };
+}
+
 export default function UserAgreementPage() {
   const { locale } = useLanguage();
   const t = текстСоглашения(String(locale || 'en'));
+  const СВЯЗЬ = документыДляСайта(String(locale || 'en'));
 
   const Раздел = ({ children }: { children: React.ReactNode }) => (
     <section className="space-y-2">{children}</section>
@@ -222,6 +239,22 @@ export default function UserAgreementPage() {
         </div>
 
         <LegalAddendum doc="terms" />
+
+        {/* Соотношение документов. Документы у нас разные и смешивать их незачем,
+            но ни один не упоминал остальных, и нигде не было сказано, ЧТО
+            ГЛАВНЕЕ при расхождении — а этот вопрос задаётся первым. */}
+        <div className="mt-10 rounded-2xl border border-[#00FF88]/25 p-6">
+          <h2 className="text-lg font-bold text-[#00FF88] mb-4">{СВЯЗЬ.заголовок}</h2>
+          <ul className="space-y-3 mb-4">
+            {СВЯЗЬ.документы.map((д: any) => (
+              <li key={д.href} className="text-sm leading-relaxed">
+                <a href={д.href} className="font-semibold text-[#00FF88] hover:underline">{д.имя}</a>
+                <span className="text-muted-foreground"> — {д.описание}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-sm text-muted-foreground leading-relaxed">{СВЯЗЬ.старшинство}</p>
+        </div>
 
         {/* Реквизиты оператора. Ст. 5 Директивы 2000/31/EC требует, чтобы имя,
             правовая форма, адрес и регистрационные номера были доступны на

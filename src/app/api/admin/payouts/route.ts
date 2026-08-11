@@ -1,14 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin, adminDenied, auditLog } from '@/lib/admin-guard';
 import { getPool } from '@/lib/economy';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
 // Admin: referral payout queue.
 export async function GET(req: NextRequest) {
   // Ограничение частоты: выплаты.
-  if (!allowRequest(req as NextRequest, 'admin_payouts', 20, 60000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_admin_payouts = clientIp(req as never);
+  if (адрес_admin_payouts !== 'unknown' && !(await dbRateLimit(`admin_payouts:${адрес_admin_payouts}`, 20, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 
@@ -25,7 +29,11 @@ export async function GET(req: NextRequest) {
 // Mark a payout paid / rejected (audited).
 export async function POST(req: NextRequest) {
   // Ограничение частоты: выплаты.
-  if (!allowRequest(req as NextRequest, 'admin_payouts', 20, 60000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_admin_payouts = clientIp(req as never);
+  if (адрес_admin_payouts !== 'unknown' && !(await dbRateLimit(`admin_payouts:${адрес_admin_payouts}`, 20, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

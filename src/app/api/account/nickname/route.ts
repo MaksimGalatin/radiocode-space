@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
 import { getPool } from '@/lib/economy';
 import { validateNickname, nicknameErrorMessage } from '@/lib/nickname';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,7 +12,11 @@ export const dynamic = 'force-dynamic';
 // Уникальность глобальная: уникальный индекс + SELECT-проверка занятости.
 export async function POST(req: NextRequest) {
   // Ограничение частоты: перебор занятых имён.
-  if (!allowRequest(req as NextRequest, 'account_nickname', 10, 600000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_account_nickname = clientIp(req as never);
+  if (адрес_account_nickname !== 'unknown' && !(await dbRateLimit(`account_nickname:${адрес_account_nickname}`, 10, 600000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

@@ -64,3 +64,28 @@ export async function relayAuth(req: NextRequest, path: string): Promise<NextRes
   if (token) res.cookies.set(USER_COOKIE, token, userCookieOptions());
   return res;
 }
+
+/**
+ * То же, что relayAuth, но для GET-ручек (живая проверка никнейма).
+ * Куку не перекладывает: проверка доступности имени сессии не создаёт.
+ */
+export async function relayGetAuth(req: NextRequest, path: string): Promise<NextResponse> {
+  const запрос = new URL(req.url);
+  const clientIp = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim();
+  const internal = process.env.AIFA_INTERNAL_SECRET || '';
+  const headers: Record<string, string> = {};
+  if (clientIp && internal) {
+    headers['x-aifa-client-ip'] = clientIp;
+    headers['x-aifa-internal'] = internal;
+  }
+  try {
+    const upstream = await fetch(`${CENTRAL}/api/auth/${path}${запрос.search}`, { headers });
+    const text = await upstream.text();
+    return new NextResponse(text, {
+      status: upstream.status,
+      headers: { 'Content-Type': upstream.headers.get('content-type') || 'application/json' },
+    });
+  } catch {
+    return NextResponse.json({ available: false, reason: 'Service unavailable' }, { status: 502 });
+  }
+}

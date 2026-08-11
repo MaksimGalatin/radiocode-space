@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
 import { readFullTranscript, ensureChunkTable } from '@/lib/memory-archive';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,7 +10,11 @@ export const dynamic = 'force-dynamic';
 // the owner only. No key entry, works on any device.
 export async function GET(req: NextRequest) {
   // Ограничение частоты: чтение и запись памяти.
-  if (!allowRequest(req as NextRequest, 'memory', 60, 60000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_memory = clientIp(req as never);
+  if (адрес_memory !== 'unknown' && !(await dbRateLimit(`memory:${адрес_memory}`, 60, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

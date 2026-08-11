@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
 import { requestDeletion } from '@/lib/account-security';
-import { clientIp } from '@/lib/rate-limit-db';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,7 +9,11 @@ export const dynamic = 'force-dynamic';
 // Does NOT delete immediately — schedules deletion so the owner can cancel.
 export async function POST(req: NextRequest) {
   // Ограничение частоты: удаление аккаунта — необратимо.
-  if (!allowRequest(req as NextRequest, 'account_delete', 5, 3600000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_account_delete = clientIp(req as never);
+  if (адрес_account_delete !== 'unknown' && !(await dbRateLimit(`account_delete:${адрес_account_delete}`, 5, 3600000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

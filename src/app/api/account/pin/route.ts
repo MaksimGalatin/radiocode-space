@@ -1,13 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
 import { setPin, clearPin, hasPin } from '@/lib/account-security';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
   // Ограничение частоты: подбор ПИН-кода.
-  if (!allowRequest(req as NextRequest, 'account_pin', 10, 900000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_account_pin = clientIp(req as never);
+  if (адрес_account_pin !== 'unknown' && !(await dbRateLimit(`account_pin:${адрес_account_pin}`, 10, 900000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 
@@ -17,7 +21,11 @@ export async function GET(req: NextRequest) {
 }
 export async function POST(req: NextRequest) {
   // Ограничение частоты: подбор ПИН-кода.
-  if (!allowRequest(req as NextRequest, 'account_pin', 10, 900000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_account_pin = clientIp(req as never);
+  if (адрес_account_pin !== 'unknown' && !(await dbRateLimit(`account_pin:${адрес_account_pin}`, 10, 900000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

@@ -1,16 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { signSession, ADMIN_COOKIE } from '@/lib/admin-session';
-import { allowRequest } from '@/lib/rate-limit';
 import { getPool } from '@/lib/economy';
 import { auditLog } from '@/lib/admin-guard';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 const OWNER = 'codeofdigitaleternity@gmail.com';
 
 export async function POST(req: NextRequest) {
   // Brute-force shield: 5 attempts / 15 min per IP.
-  if (!allowRequest(req, 'admin_enter', 5, 900000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_admin_enter = clientIp(req as never);
+  if (адрес_admin_enter !== 'unknown' && !(await dbRateLimit(`admin_enter:${адрес_admin_enter}`, 5, 900000))) {
     return NextResponse.json({ ok: false, error: 'rate_limited' }, { status: 429 });
   }
   const { password } = await req.json().catch(() => ({}));

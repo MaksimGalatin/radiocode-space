@@ -31,6 +31,7 @@ const D: Record<string, L4> = {
   nickTitle: ["Выбери свой никнейм", "Choose your nickname", "Elige tu apodo", "选择你的昵称"],
   nickHint: ["Латиница, цифры, _, 3–20 символов. Виден всем и используется AIfa.", "Latin letters, digits, _, 3–20 characters. Visible to everyone and used by AIfa.", "Letras latinas, dígitos, _, 3–20 caracteres. Visible para todos y usado por AIfa.", "拉丁字母、数字、_，3–20 个字符。所有人可见，AIfa 也会使用。"],
   nickTaken: ["Никнейм занят", "Nickname already taken", "El apodo ya está ocupado", "昵称已被占用"],
+  nickFree: ["Имя свободно", "Name is available", "El nombre está libre", "该名称可用"],
   nickBad: ["Недопустимый никнейм", "Invalid nickname", "Apodo no válido", "昵称无效"],
   nickSaved: ["Никнейм сохранён ✓", "Nickname saved ✓", "Apodo guardado ✓", "昵称已保存 ✓"],
   nickBtn: ["Сохранить", "Save", "Guardar", "保存"],

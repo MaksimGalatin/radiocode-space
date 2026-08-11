@@ -6,7 +6,7 @@
 // Design system: ./ui.tsx · i18n (ru/en/es/zh): ./i18n.ts
 // All economy is server-authoritative (httpOnly session cookie).
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef} from "react";
 import GamesArena from "@/components/code/GamesArena";
 import ChatSection from "@/components/code/ChatSection";
 import AifaAvatar from "@/components/code/AifaAvatar";
@@ -183,6 +183,40 @@ export default function CabinetPage() {
   const [nickInput, setNickInput] = useState("");
   const [nickBusy, setNickBusy] = useState(false);
   const [nickMsg, setNickMsg] = useState("");
+  // ── живая проверка никнейма ──────────────────────────────────────────────
+  //
+  // Ручка `/api/auth/check-nickname` была написана и не вызывалась ниоткуда:
+  // человек узнавал, что имя занято, только после отправки формы — а при
+  // регистрации форма отклонялась целиком, вместе с введённым паролем.
+  //
+  // Задержка 450 мс: у ручки предел 90 проверок в минуту с адреса, и слать
+  // запрос на каждую букву значило бы упереться в него на длинном нике.
+  // Прежний запрос отменяется при новом вводе, иначе медленный ответ про
+  // старое имя мог бы перекрыть свежий.
+  const [nickCheck, setNickCheck] = useState<{ имя: string; свободно: boolean | null; причина: string }>({ имя: "", свободно: null, причина: "" });
+  const nickAbort = useRef<AbortController | null>(null);
+  function проверитьНик(v: string) {
+    const имя = v.trim();
+    nickAbort.current?.abort();
+    if (имя.length < 3) { setNickCheck({ имя, свободно: null, причина: "" }); return; }
+    const ac = new AbortController();
+    nickAbort.current = ac;
+    const т = setTimeout(async () => {
+      try {
+        const r = await fetch(`/api/auth/check-nickname?nickname=${encodeURIComponent(имя)}&locale=${lang}`, { signal: ac.signal });
+        const d = await r.json();
+        setNickCheck({ имя, свободно: !!d.available, причина: d.reason || "" });
+      } catch { /* отменено или сеть — молча, кнопка всё равно проверит на сервере */ }
+    }, 450);
+    ac.signal.addEventListener("abort", () => clearTimeout(т));
+  }
+  const подписьНика = (имя: string) => {
+    const c = nickCheck;
+    if (c.имя !== имя.trim() || c.свободно === null) return null;
+    return c.свободно
+      ? <div style={{ marginTop: 6, fontSize: 14, color: TOKENS.cyan2 }}>✓ {t("nickFree")}</div>
+      : <div style={{ marginTop: 6, fontSize: 14, color: TOKENS.red }}>✗ {c.причина || t("nickTaken")}</div>;
+  };
   async function saveNickname() {
     const v = nickInput.trim();
     if (v.length < 3) { setNickMsg(t("nickBad")); return; }
@@ -355,7 +389,9 @@ export default function CabinetPage() {
               <div style={{ fontSize: 22, fontWeight: 800, color: TOKENS.text, textAlign: "center", marginBottom: 8 }}>{t("createPassTitle")}</div>
               <div style={{ fontSize: 15, color: TOKENS.sub, textAlign: "center", lineHeight: 1.5, marginBottom: 22 }}>{t("createPassDesc")}</div>
               <label style={authLabel}>{t("nick")}</label>
-              <input className="cab-input" value={aNick} onChange={e => setANick(e.target.value)} placeholder="your_nick" style={{ marginBottom: 16 }} />
+              <input className="cab-input" value={aNick} onChange={e => { setANick(e.target.value); проверитьНик(e.target.value); }} placeholder="your_nick" style={{ marginBottom: 4 }} />
+              {подписьНика(aNick)}
+              <div style={{ marginBottom: 12 }} />
               <label style={authLabel}>{t("password")}</label>
               <input type="password" className="cab-input" value={aPass} onChange={e => setAPass(e.target.value)} placeholder="••••••" style={{ marginBottom: 16 }} />
               <label style={authLabel}>{t("repeatPass")}</label>
@@ -461,9 +497,10 @@ export default function CabinetPage() {
             <div style={{ fontSize: 16, fontWeight: 800, color: TOKENS.text, marginBottom: 4 }}>✨ {t("nickTitle")}</div>
             <div style={{ fontSize: 15, color: TOKENS.mut, marginBottom: 10 }}>{t("nickHint")}</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <input className="cab-input" value={nickInput} onChange={e => setNickInput(e.target.value)} placeholder="your_nick" maxLength={20} style={{ flex: "1 1 200px" }} onKeyDown={e => { if (e.key === "Enter") saveNickname(); }} />
+              <input className="cab-input" value={nickInput} onChange={e => { setNickInput(e.target.value); проверитьНик(e.target.value); }} placeholder="your_nick" maxLength={20} style={{ flex: "1 1 200px" }} onKeyDown={e => { if (e.key === "Enter") saveNickname(); }} />
               <button className="cab-btn cab-btn-primary" onClick={saveNickname} disabled={nickBusy || nickInput.trim().length < 3}>{nickBusy ? "…" : t("nickBtn")}</button>
             </div>
+            {подписьНика(nickInput)}
             {nickMsg && <div style={{ marginTop: 8, fontSize: 15, color: TOKENS.red }}>{nickMsg}</div>}
           </Card>
         )}

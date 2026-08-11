@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { USER_COOKIE, signUserToken, userCookieOptions } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -34,7 +34,11 @@ const CLIENT_ID =
  */
 export async function POST(req: NextRequest) {
   // Ограничение частоты: наплыв входов.
-  if (!allowRequest(req as NextRequest, 'auth_google', 20, 600000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_auth_google = clientIp(req as never);
+  if (адрес_auth_google !== 'unknown' && !(await dbRateLimit(`auth_google:${адрес_auth_google}`, 20, 600000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

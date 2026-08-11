@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -9,7 +9,11 @@ export const dynamic = 'force-dynamic';
 // Returns only the caller's own rows — session-gated.
 export async function GET(req: NextRequest) {
   // Ограничение частоты: выгрузка архивов.
-  if (!allowRequest(req as NextRequest, 'memory_archives', 30, 60000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_memory_archives = clientIp(req as never);
+  if (адрес_memory_archives !== 'unknown' && !(await dbRateLimit(`memory_archives:${адрес_memory_archives}`, 30, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

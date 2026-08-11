@@ -1,14 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin, adminDenied } from '@/lib/admin-guard';
 import { getPool } from '@/lib/economy';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
 // Admin: unified user list (progress + tier + balances + passport), paginated.
 export async function GET(req: NextRequest) {
   // Ограничение частоты: список людей.
-  if (!allowRequest(req as NextRequest, 'admin_users', 30, 60000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_admin_users = clientIp(req as never);
+  if (адрес_admin_users !== 'unknown' && !(await dbRateLimit(`admin_users:${адрес_admin_users}`, 30, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

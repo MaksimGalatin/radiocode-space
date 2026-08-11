@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifySession, isAdminEmail, ADMIN_COOKIE } from '@/lib/admin-session';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
   // Ограничение частоты: админский раздел.
-  if (!allowRequest(req as NextRequest, 'admin_inbox', 30, 60000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_admin_inbox = clientIp(req as never);
+  if (адрес_admin_inbox !== 'unknown' && !(await dbRateLimit(`admin_inbox:${адрес_admin_inbox}`, 30, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

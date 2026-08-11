@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { USER_COOKIE } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   // Ограничение частоты: наплыв.
-  if (!allowRequest(req, 'auth_logout', 30, 60000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_auth_logout = clientIp(req as never);
+  if (адрес_auth_logout !== 'unknown' && !(await dbRateLimit(`auth_logout:${адрес_auth_logout}`, 30, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

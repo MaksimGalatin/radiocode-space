@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { allowRequest } from '@/lib/rate-limit';
 import { getSessionEmail } from '@/lib/user-auth';
 import { getUserKeyB64 } from '@/lib/user-key';
 import { маскаПочты } from '@/lib/log-privacy';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -32,7 +32,11 @@ export async function GET(req: NextRequest) {
   // (in-memory allowRequest), и тот же порядок цифр. Свой ключ человек берёт раз
   // в жизни, так что низкий порог не мешает никому законному, зато ограничивает
   // ущерб от угнанной сессии: выкачать ключ тысячей запросов не выйдет.
-  if (!allowRequest(req as NextRequest, 'account_memory_key', 10, 900000)) {
+  // Счёт ведётся в базе, а не в памяти процесса: счётчик в памяти
+  // обнуляется при каждой выкладке и у каждого экземпляра свой,
+  // поэтому заявленный предел на деле мягче объявленного.
+  const адрес_account_memory_key = clientIp(req as never);
+  if (адрес_account_memory_key !== 'unknown' && !(await dbRateLimit(`account_memory_key:${адрес_account_memory_key}`, 10, 900000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 
