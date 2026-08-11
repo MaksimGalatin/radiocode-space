@@ -52,7 +52,21 @@ export async function POST(req: NextRequest) {
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   if (!allowRequest(req, 'mint', 3, 600000)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
 
-  const walletJson = process.env.ARWEAVE_WALLET_JSON || '';
+  // 🔴 ИМЯ ПЕРЕМЕННОЙ КОШЕЛЬКА РАЗЪЕХАЛОСЬ ПО САЙТАМ. СВЕДЕНО 11.08.2026.
+  //
+  // Замер по боевым проектам (перечислены ИМЕНА, значения не запрашивались):
+  //   codeofdigitaleternity.com — ARWEAVE_WALLET_KEY
+  //   code-eternal              — ARWEAVE_WALLET_JSON
+  //   radiocode-space           — ARWEAVE_WALLET_JSON
+  //   aifa.works                — НИ ОДНОЙ ИЗ ДВУХ
+  //
+  // Правку от 08.08 внесли только на центральный сайт, и три остальных читали
+  // одно имя. Теперь все четыре принимают оба — расхождение имён больше не
+  // решает, уедет паспорт в вечность или нет.
+  //
+  // Это НЕ запасной ключ из исходников: обе ветки читают окружение, и если
+  // пусто в обеих — ручка отвечает 503 not_configured, как и раньше.
+  const walletJson = process.env.ARWEAVE_WALLET_KEY || process.env.ARWEAVE_WALLET_JSON || '';
   try {
     const pool = await getPool();
     const p = await pool.query(`SELECT * FROM passports WHERE email=$1`, [email]);

@@ -74,7 +74,20 @@ const D: Record<string, L4> = {
   mintBtn: ["Выпустить вечный паспорт", "Mint eternal passport", "Emitir pasaporte eterno", "铸造永恒护照"],
   minting: ["Выпуск в Arweave…", "Minting to Arweave…", "Emitiendo en Arweave…", "正在铸造…"],
   mintDone: ["Паспорт навечно в Arweave ✓", "Passport is on Arweave forever ✓", "Pasaporte eterno en Arweave ✓", "护照已永存于 Arweave ✓"],
-  mintConfirm: ["Паспорт будет навечно записан в блокчейн Arweave. Данные изменить будет нельзя. Продолжить?", "Your passport will be written to Arweave forever. It cannot be changed afterwards. Continue?", "Tu pasaporte se escribirá en Arweave para siempre. ¿Continuar?", "护照将被永久写入 Arweave，无法更改。继续？"],
+  // 🔴 СОГЛАСИЕ ВСЛЕПУЮ — НЕ СОГЛАСИЕ.
+  //
+  // Прежний текст говорил только «навечно записан в блокчейн, изменить будет
+  // нельзя» — и ни слова о том, ЧТО именно уходит в цепь. А уходит имя,
+  // биография, манифест, ссылки и ФОТОГРАФИЯ. Навсегда и без возможности
+  // отозвать: из Arweave не удаляют. Человек должен видеть список ДО нажатия,
+  // а не искать его в договоре после.
+  //
+  // Отдельно сказано успокаивающее и важное: почта в цепь НЕ идёт, только её
+  // односторонний отпечаток — так и сделано в api/passport/mint.
+  //
+  // Испанский перевод вдобавок терял половину смысла: в нём не было слов о
+  // том, что изменить будет нельзя.
+  mintConfirm: ["ПАСПОРТ БУДЕТ ЗАПИСАН В БЛОКЧЕЙН ARWEAVE НАВСЕГДА.\n\nВ открытый доступ уйдут: имя, псевдоним, биография, манифест, ссылки (телеграм, твиттер, сайт), уровень тарифа и ФОТОГРАФИЯ профиля.\n\nПочта НЕ публикуется — только её односторонний отпечаток.\n\nОтменить, удалить или изменить запись будет НЕВОЗМОЖНО: из Arweave не удаляют. Продолжить?", "YOUR PASSPORT WILL BE WRITTEN TO THE ARWEAVE BLOCKCHAIN FOREVER.\n\nThe following becomes public: name, username, bio, manifesto, links (Telegram, X, website), your plan level and your profile PHOTO.\n\nYour email is NOT published — only a one-way hash of it.\n\nIt will be IMPOSSIBLE to cancel, delete or change the record: nothing is ever removed from Arweave. Continue?", "TU PASAPORTE SE ESCRIBIRÁ EN LA CADENA ARWEAVE PARA SIEMPRE.\n\nSe harán públicos: nombre, alias, biografía, manifiesto, enlaces (Telegram, X, sitio web), tu nivel de plan y tu FOTO de perfil.\n\nTu correo NO se publica: solo un hash unidireccional.\n\nSerá IMPOSIBLE cancelar, borrar o modificar el registro: de Arweave no se elimina nada. ¿Continuar?", "您的护照将被永久写入 ARWEAVE 区块链。\n\n以下内容将公开：姓名、昵称、简介、宣言、链接（Telegram、X、网站）、套餐等级以及您的头像照片。\n\n邮箱不会公开 —— 只会公开其单向哈希值。\n\n记录将无法撤销、删除或修改：Arweave 上的内容永不删除。是否继续？"],
   mintFirstSave: ["Сначала сохрани паспорт (ник и имя).", "Save the passport first (username & name).", "Primero guarda el pasaporte.", "请先保存护照。"],
   usernameTaken: ["Никнейм занят", "Username taken", "Usuario ocupado", "用户名已被占用"],
   mintNotConfigured: ["Минт временно недоступен (кошелёк не подключён).", "Minting temporarily unavailable.", "Emisión no disponible.", "铸造暂不可用。"],
