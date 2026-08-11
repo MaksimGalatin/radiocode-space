@@ -519,13 +519,39 @@ export default function Home() {
                       страницы: этого требует директива ЕС об электронной
                       торговле, и это же первое, что смотрит проверяющий.
                       Наш собственный Оракул отметил их отсутствие здесь. */}
+                  {/* 🔴 ССЫЛКА ОБЕЩАЛА ОДНО, А ВЕЛА НА ДРУГОЕ.
+                      Подпись гласила «Конфиденциальность · Privacy», а адрес
+                      /legal переадресует на страницу УСЛОВИЙ, где политики
+                      конфиденциальности нет. Человек, которому нужно узнать,
+                      что мы делаем с его данными, попадал не туда.
+                      Разделено на две ссылки, каждая ведёт куда обещает.
+                      Подписи переведены: раньше они были прибиты по-русски и
+                      показывались так же испанцу и китайцу. */}
+                  <a
+                    href="https://www.codeofdigitaleternity.com/privacy-policy"
+                    className="text-[13px] font-mono tracking-wider text-[#8B8BA8] hover:text-[#00F0FF] transition-colors"
+                    rel="noopener"
+                  >
+                    {rt('privacy')}
+                  </a>
                   <a
                     href="https://www.codeofdigitaleternity.com/legal"
                     className="text-[13px] font-mono tracking-wider text-[#8B8BA8] hover:text-[#00F0FF] transition-colors"
                     rel="noopener"
                   >
-                    Конфиденциальность&nbsp;·&nbsp;Privacy&nbsp;·&nbsp;Правовая информация&nbsp;·&nbsp;Реквизиты
+                    {rt('legalInfo')}
                   </a>
+                  {/* Возрастная маркировка. Наши же условия говорят: «Сайт не
+                      предназначен для лиц младше 18 лет» (раздел 10.2). До сих
+                      пор это было написано только внутри договора, который
+                      никто не открывает, — а на самих страницах ни на одном из
+                      четырёх сайтов возраста не стояло. */}
+                  <span
+                    className="text-[13px] font-mono tracking-wider text-[#7E7E99] border border-[#7E7E99]/40 rounded px-1.5"
+                    title={rt('ageNote')}
+                  >
+                    18+
+                  </span>
                   <a
                     href="mailto:contact@codeofdigitaleternity.com"
                     className="text-[13px] font-mono tracking-wider text-[#8B8BA8] hover:text-[#00F0FF] transition-colors"
