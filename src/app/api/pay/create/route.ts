@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { TIER_AMOUNT, TIER_MONTHLY } from '@/lib/referral';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 export const dynamic = 'force-dynamic';
 
 const BASE = 'https://api.nowpayments.io/v1';
@@ -11,7 +11,10 @@ const ALLOWED_SITES = new Set(['https://www.aifa.digital','https://aifa.digital'
 // Create a NOWPayments hosted invoice for a tier purchase — for the logged-in
 // user only. Amount always comes from the server-side TIER_AMOUNT table.
 export async function POST(req: NextRequest) {
-  if (!allowRequest(req, 'paycreate', 10, 60 * 60_000)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  // Счёт в базе: создание платежа — денежная ручка, а счётчик в памяти
+  // обнуляется каждой выкладкой и у каждого экземпляра свой.
+  const адрес_paycreate = clientIp(req as never);
+  if (адрес_paycreate !== 'unknown' && !(await dbRateLimit(`paycreate:${адрес_paycreate}`, 10, 60 * 60_000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   let b: any = {}; try { b = await req.json(); } catch {}
   // Внутренний релей с сестринских сайтов (central/works): они уже проверили
   // сессию у себя и передают email + подписанный секрет. Иначе — своя сессия.

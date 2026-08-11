@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
 import { getPool } from '@/lib/economy';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -46,7 +46,10 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-  if (!allowRequest(req, 'passport', 20, 60000)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_passport = clientIp(req as never);
+  if (адрес_passport !== 'unknown' && !(await dbRateLimit(`passport:${адрес_passport}`, 20, 60000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   let body: any = {};
   try { body = await req.json(); } catch { return NextResponse.json({ error: 'bad_json' }, { status: 400 }); }
 

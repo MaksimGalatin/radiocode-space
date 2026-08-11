@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 export const dynamic = 'force-dynamic';
 const RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -8,7 +8,10 @@ const RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // username). First referrer wins forever (ON CONFLICT DO NOTHING).
 export async function POST(req: NextRequest) {
   // Ограничение частоты: сбор ссылок.
-  if (!allowRequest(req as NextRequest, 'referrals_link', 30, 60000)) {
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_referrals_link = clientIp(req as never);
+  if (адрес_referrals_link !== 'unknown' && !(await dbRateLimit(`referrals_link:${адрес_referrals_link}`, 30, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

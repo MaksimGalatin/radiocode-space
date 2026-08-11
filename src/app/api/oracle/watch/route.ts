@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -30,7 +30,10 @@ async function forward(req: NextRequest, method: 'GET' | 'POST' | 'DELETE') {
   // через наш сайт долбить Оракул сколько угодно, и там это выглядело бы как
   // поток от одного доверенного источника. Страж (scripts/guard.mjs) правильно
   // отметил это как публичный маршрут без ограничения.
-  if (!allowRequest(req, 'owatch-proxy', 30, 60_000)) {
+  // Счёт в базе: это относ на центральный сайт, и он тратит НАШ исходящий
+  // запрос ещё до того, как центр успеет отказать.
+  const адрес_owatch_proxy = clientIp(req as never);
+  if (адрес_owatch_proxy !== 'unknown' && !(await dbRateLimit(`owatch_proxy:${адрес_owatch_proxy}`, 30, 60_000))) {
     return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   }
 

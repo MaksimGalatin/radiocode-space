@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { AIFA_SYSTEM_PROMPT } from "@/lib/knowledge-base";
 import { allowRequest } from "@/lib/rate-limit";
 import { centralConfig, buildCentralHeaders, centralFetch } from "@/lib/central-proxy";
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 
 /**
@@ -164,7 +165,9 @@ function trimConversation(messages: Array<{ role: string; content: string }>) {
 export async function POST(request: NextRequest) {
   // Edge per-IP flood/cost shield. Generous & fail-open; the central brain also
   // limits, but bypasses for our internal proxy, so this is the real user limit.
-  if (!allowRequest(request, 'aifa-chat', 40, 60_000)) {
+  // Счёт в базе: каждый разговор стоит денег на стороне модели.
+  const адрес_чата = clientIp(request as never);
+  if (адрес_чата !== 'unknown' && !(await dbRateLimit(`aifa_chat:${адрес_чата}`, 40, 60_000))) {
     return NextResponse.json({ error: 'Too many requests. Please slow down.' }, { status: 429 });
   }
 

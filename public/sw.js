@@ -16,6 +16,16 @@ self.addEventListener('install', (e) => {
   self.skipWaiting();
 });
 
+// Просьба со страницы «начинай работать сейчас».
+//
+// skipWaiting() при установке уже стоит, но он срабатывает только когда воркер
+// ставится ВПЕРВЫЕ. Обновление встаёт в очередь и ждёт, пока закроются все
+// вкладки сайта, — а радио держат открытым часами. Сообщение со страницы
+// снимает ожидание, дальше controllerchange перезагружает вкладку один раз.
+self.addEventListener('message', (e) => {
+  if (e.data && e.data.тип === 'ВЗЯТЬ_УПРАВЛЕНИЕ') self.skipWaiting();
+});
+
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))

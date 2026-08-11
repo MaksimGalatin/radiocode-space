@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
 import { getPool, weekKeyUTC, todayUTC, bumpQuest } from '@/lib/economy';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,7 +12,10 @@ const SCORE_GAMES = new Set(['tetris']);
 export async function POST(req: NextRequest) {
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-  if (!allowRequest(req, 'gscore', 12, 60_000)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_gscore = clientIp(req as never);
+  if (адрес_gscore !== 'unknown' && !(await dbRateLimit(`gscore:${адрес_gscore}`, 12, 60_000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   let b: any = {}; try { b = await req.json(); } catch {}
   const game = String(b?.game || '').trim().toLowerCase();
   const lines = Math.floor(Number(b?.lines));

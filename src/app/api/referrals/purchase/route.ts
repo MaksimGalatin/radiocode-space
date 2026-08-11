@@ -1,14 +1,17 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import crypto from 'crypto';
 import { creditReferralChain, setUserTier, amountToTier } from '@/lib/referral';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 export const dynamic = 'force-dynamic';
 
 // INTERNAL-ONLY commission trigger (tests / manual ops). Requires the shared
 // internal secret header — otherwise anyone could grant themselves a tier.
 export async function POST(req: Request) {
   // Ограничение частоты: покупка.
-  if (!allowRequest(req as NextRequest, 'referrals_purchase', 20, 60000)) {
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_referrals_purchase = clientIp(req as never);
+  if (адрес_referrals_purchase !== 'unknown' && !(await dbRateLimit(`referrals_purchase:${адрес_referrals_purchase}`, 20, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

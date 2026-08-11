@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
 import { getOrCreateUserKey, encryptForUser } from '@/lib/user-key';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 const MAX_BYTES = 600_000;
@@ -13,7 +13,10 @@ const MAX_BYTES = 600_000;
 export async function POST(req: NextRequest) {
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-  if (!allowRequest(req, 'memimport', 20, 60_000)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_memimport = clientIp(req as never);
+  if (адрес_memimport !== 'unknown' && !(await dbRateLimit(`memimport:${адрес_memimport}`, 20, 60_000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   let b: any = {}; try { b = await req.json(); } catch {}
   const chatType = String(b?.chatType || '').trim().toLowerCase().slice(0, 24);
   let text = String(b?.text || '');

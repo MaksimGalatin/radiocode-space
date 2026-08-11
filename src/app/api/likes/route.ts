@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -35,7 +35,10 @@ function likerOf(req: NextRequest, deviceId?: string | null): string | null {
 // POST { trackId, deviceId? } → toggle like. Returns { liked, count }.
 export async function POST(req: NextRequest) {
   // Ограничение частоты: накрутка лайков.
-  if (!allowRequest(req as NextRequest, 'likes', 60, 60000)) {
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_likes = clientIp(req as never);
+  if (адрес_likes !== 'unknown' && !(await dbRateLimit(`likes:${адрес_likes}`, 60, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 
@@ -65,7 +68,10 @@ export async function POST(req: NextRequest) {
 //   ?top=1 → the leaderboard (album shortlist): [{ track_id, count }] desc.
 export async function GET(req: NextRequest) {
   // Ограничение частоты: накрутка лайков.
-  if (!allowRequest(req as NextRequest, 'likes', 60, 60000)) {
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_likes = clientIp(req as never);
+  if (адрес_likes !== 'unknown' && !(await dbRateLimit(`likes:${адрес_likes}`, 60, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

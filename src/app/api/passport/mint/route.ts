@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { Readable } from 'stream';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
 import { getPool } from '@/lib/economy';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
@@ -50,7 +50,10 @@ export const maxDuration = 60;
 export async function POST(req: NextRequest) {
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-  if (!allowRequest(req, 'mint', 3, 600000)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_mint = clientIp(req as never);
+  if (адрес_mint !== 'unknown' && !(await dbRateLimit(`mint:${адрес_mint}`, 3, 600000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
 
   // 🔴 ИМЯ ПЕРЕМЕННОЙ КОШЕЛЬКА РАЗЪЕХАЛОСЬ ПО САЙТАМ. СВЕДЕНО 11.08.2026.
   //

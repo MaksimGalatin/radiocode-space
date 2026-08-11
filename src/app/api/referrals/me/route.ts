@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 export const dynamic = 'force-dynamic';
 function mask(e: string): string { const [u, d] = e.split('@'); return (u.slice(0, 2) + '***') + '@' + (d || ''); }
 
@@ -8,7 +8,10 @@ function mask(e: string): string { const [u, d] = e.split('@'); return (u.slice(
 // missed earnings (tier gate) + paginated downline list.
 export async function GET(req: NextRequest) {
   // Ограничение частоты: опрос своей сетки.
-  if (!allowRequest(req as NextRequest, 'referrals_me', 60, 60000)) {
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_referrals_me = clientIp(req as never);
+  if (адрес_referrals_me !== 'unknown' && !(await dbRateLimit(`referrals_me:${адрес_referrals_me}`, 60, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

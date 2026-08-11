@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
 import { getPool, creditGalatin, weekKeyUTC, todayUTC, bumpQuest } from '@/lib/economy';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,7 +19,10 @@ export async function POST(req: NextRequest) {
   const game = String(body?.game || '').trim().toLowerCase();
   if (!(game in REWARD)) return NextResponse.json({ error: 'bad_request' }, { status: 400 });
   // Per-IP shield + per-account pacing: a human can't win faster than MIN_SECONDS.
-  if (!allowRequest(req, 'gwin', 10, 60_000)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_gwin = clientIp(req as never);
+  if (адрес_gwin !== 'unknown' && !(await dbRateLimit(`gwin:${адрес_gwin}`, 10, 60_000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
 
   try {
     const pool = await getPool();

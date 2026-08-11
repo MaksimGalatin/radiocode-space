@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 export const dynamic = 'force-dynamic';
 
 // Request a USDT (TRC20) withdrawal of the full available balance — for the
@@ -8,7 +8,9 @@ export const dynamic = 'force-dynamic';
 export async function POST(req: NextRequest) {
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-  if (!allowRequest(req, 'payout', 5, 60 * 60_000)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  // Счёт в базе: здесь речь о деньгах, уходящих наружу.
+  const адрес_payout = clientIp(req as never);
+  if (адрес_payout !== 'unknown' && !(await dbRateLimit(`payout:${адрес_payout}`, 5, 60 * 60_000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   let b: any = {}; try { b = await req.json(); } catch {}
   const address = String(b?.address || '').trim();
   // TRC20 address sanity: T + 33 base58 chars

@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
 import { getPool, getBalances, levelInfo } from '@/lib/economy';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
 // One round-trip summary for the cabinet header: xp, level, balances, tier, passport.
 export async function GET(req: NextRequest) {
   // Ограничение частоты: частый опрос профиля.
-  if (!allowRequest(req as NextRequest, 'me', 120, 60000)) {
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_me = clientIp(req as never);
+  if (адрес_me !== 'unknown' && !(await dbRateLimit(`me:${адрес_me}`, 120, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 

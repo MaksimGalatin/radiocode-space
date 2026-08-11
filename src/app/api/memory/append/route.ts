@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
 import { getOrCreateUserKey, encryptForUser, decryptForUser } from '@/lib/user-key';
 import { SEAL_THRESHOLD, ensureChunkTable } from '@/lib/memory-archive';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,7 +11,10 @@ export const dynamic = 'force-dynamic';
 export async function POST(req: NextRequest) {
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-  if (!allowRequest(req, 'memappend', 60, 60_000)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_memappend = clientIp(req as never);
+  if (адрес_memappend !== 'unknown' && !(await dbRateLimit(`memappend:${адрес_memappend}`, 60, 60_000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   let b: any = {}; try { b = await req.json(); } catch {}
   const chatType = String(b?.chatType || 'terminal').trim().toLowerCase().slice(0, 24);
   const userMsg = String(b?.userMessage || '').slice(0, 8000);

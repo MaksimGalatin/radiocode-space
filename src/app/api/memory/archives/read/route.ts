@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
 import { decryptForUserTagged } from '@/lib/user-key';
-import { allowRequest } from '@/lib/rate-limit';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,7 +11,10 @@ export const dynamic = 'force-dynamic';
 export async function GET(req: NextRequest) {
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-  if (!allowRequest(req, 'archread', 10, 60_000)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_archread = clientIp(req as never);
+  if (адрес_archread !== 'unknown' && !(await dbRateLimit(`archread:${адрес_archread}`, 10, 60_000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   const tx = (req.nextUrl.searchParams.get('tx') || '').trim();
   if (!/^[A-Za-z0-9_-]{43}$/.test(tx)) return NextResponse.json({ error: 'bad_request' }, { status: 400 });
   const url = process.env.SUBMISSIONS_DB_URL;

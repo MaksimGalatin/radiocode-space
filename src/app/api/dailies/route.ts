@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { allowRequest } from '@/lib/rate-limit';
 import { getPool, creditGalatin, weekKeyUTC, bumpQuest } from '@/lib/economy';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 const MIN_GAP_H = 20; // >=20h between claims ("once per day", timezone-friendly)
@@ -31,7 +31,10 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const email = getSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-  if (!allowRequest(req, 'daily', 10, 60_000)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
+  // у каждого экземпляра свой.
+  const адрес_daily = clientIp(req as never);
+  if (адрес_daily !== 'unknown' && !(await dbRateLimit(`daily:${адрес_daily}`, 10, 60_000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   try {
     const pool = await getPool();
     const st = await stateFor(pool, email);
