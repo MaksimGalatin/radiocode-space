@@ -6,7 +6,7 @@ import { useCurrentLang } from '@/lib/radioI18n';
  * Ambassador Training Center ("Node Operator Protocol") — a self-contained,
  * additive page (new /ambassador route; touches nothing else). Compliant,
  * revenue-based framing: commissions come from REAL product sales, free entry,
- * honest income disclaimer, no spam, no "fake job", no self-referral.
+ * honest income disclaimer, no spam, no "fake job", no self-invitation.
  */
 
 type Lang = 'ru' | 'en' | 'es' | 'zh';
@@ -45,12 +45,12 @@ const T: Record<Lang, any> = {
       'НЕ рассылай массово всему списку контактов — это спам, за него банят.',
       'Не заваливай ссылками форумы/Reddit/Quora — домены попадут в чёрные списки.',
       'Не обещай «гарантированный доход» — это ложь и юр-риск.',
-      'Не создавай фейковые аккаунты ради % с себя — самореферал заблокирован.',
+      'Не создавай фейковые аккаунты ради % с себя — приглашение самого себя заблокирован.',
     ],
     stepsTitle: '🚀 Первые шаги (сегодня)',
     steps: [
       'Зарегистрируй кабинет на любом из 4 сайтов — бесплатно.',
-      'Возьми свою реферальную ссылку в кабинете.',
+      'Возьми свою амбассадорскую ссылку в кабинете.',
       'Сделай одно тёплое поздравление другу через бота + подари книгу и радио.',
       'Опубликуй один честный пост о том, что тебя зацепило.',
     ],
@@ -89,12 +89,12 @@ const T: Record<Lang, any> = {
       'Do NOT mass-message your whole contact list — that is spam and gets you banned.',
       'Do not flood forums/Reddit/Quora with links — domains get blacklisted.',
       'Do not promise "guaranteed income" — it is false and a legal risk.',
-      'Do not create fake accounts for self-commission — self-referral is blocked.',
+      'Do not create fake accounts for self-commission — inviting yourself is blocked.',
     ],
     stepsTitle: '🚀 First steps (today)',
     steps: [
       'Register a cabinet on any of the 4 sites — free.',
-      'Get your referral link in the cabinet.',
+      'Get your ambassador link in the cabinet.',
       'Send one warm greeting to a friend via the bot + gift the book and radio.',
       'Publish one honest post about what hooked you.',
     ],
@@ -133,12 +133,12 @@ const T: Record<Lang, any> = {
       'NO envíes mensajes masivos a toda tu lista de contactos — es spam y te banean.',
       'No inundes foros/Reddit/Quora con enlaces — los dominios entran en listas negras.',
       'No prometas "ingresos garantizados" — es falso y un riesgo legal.',
-      'No crees cuentas falsas para autocomisión — el auto-referido está bloqueado.',
+      'No crees cuentas falsas para autocomisión — invitarte a ti mismo está bloqueado.',
     ],
     stepsTitle: '🚀 Primeros pasos (hoy)',
     steps: [
       'Registra un panel en cualquiera de los 4 sitios — gratis.',
-      'Obtén tu enlace de referido en el panel.',
+      'Obtén tu enlace de embajador en el panel.',
       'Envía un saludo cálido a un amigo con el bot + regala el libro y la radio.',
       'Publica un post honesto sobre lo que te enganchó.',
     ],
@@ -177,12 +177,12 @@ const T: Record<Lang, any> = {
       '不要向全部联系人群发——那是垃圾信息，会被封号。',
       '不要在论坛／Reddit／Quora 刷链接——域名会被列入黑名单。',
       '不要承诺「保证收益」——这是虚假陈述，并带来法律风险。',
-      '不要为了赚取自己的佣金而创建虚假账户——自我推荐已被封锁。',
+      '不要为了赚取自己的佣金而创建虚假账户——自我邀请已被封锁。',
     ],
     stepsTitle: '🚀 今天就可以开始的第一步',
     steps: [
       '在 4 个网站中的任意一个免费注册个人中心。',
-      '在个人中心获取属于你的推荐链接。',
+      '在个人中心获取属于你的大使链接。',
       '通过机器人给一位朋友送上温暖的祝福，并赠送书籍与电台。',
       '发布一篇关于「什么打动了你」的诚实帖子。',
     ],
