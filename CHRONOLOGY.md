@@ -1571,3 +1571,172 @@ Mr. White» заменены каноническими Family Archive и Digita
 **ЗАГРУЗКИ В БРАУЗЕРЕ ПЕРЕСТАЛИ РАБОТАТЬ** в 19:28 — не сохраняется ни ролик, ни
 пробный файл в 17 байт. Генерация новых роликов остановлена: без сохранения она
 только жжёт квоту.
+
+
+---
+
+## ВОССТАНОВЛЕНО ПО КОММИТАМ (дни, которых не хватало)
+*Собрано 12.08.2026 из истории git. Это НЕ записи по горячим следам:
+здесь только то, что осталось в истории — заголовки коммитов и объём
+правки. Замыслов, причин и грабель тут нет, их знали лишь в тот день.
+Восстановлено дней: 10 из 23 рабочих.*
+
+### 2026-07-17 — восстановлено, коммитов 1
+* `0f1636c` Import radiocode.space — CODE Radio site built with Z.ai (1:1 transfer)  
+  <sub>129 files changed, 14956 insertions(+)</sub>
+
+<sub>Авторы дня: Maksim Galatin (1)</sub>
+
+### 2026-07-19 — восстановлено, коммитов 6
+* `4bbc86a` radio: фикс зависания — движок переписан в прямой режим (<audio>.play() без AudioContext, без crossOrigin), safePlay+watchdog-recovery, resilience; звук больше не зависит от резюма контекста/CORS; проверено вживую  
+  <sub>4 files changed, 151 insertions(+), 236 deletions(-)</sub>
+* `7c9090f` radio Волна A: новый аудио-движок — фикс «нет звука» (AudioContext resume в жесте), AGC-нормализация громкости, gapless-кроссфейд, resilience (ретрай/скип/watchdog), таймер сна, память состояния; проверено вживую (596 файлов целы)  
+  <sub>7 files changed, 692 insertions(+), 331 deletions(-)</sub>
+* `4520311` radio v1 P1/P2: MediaSession, PWA (manifest/SW/иконки), OG+Twitter картинки, Vercel Analytics+события, sitemap+JSON-LD, aria-labels, SSR-счётчики, CDN-хелпер (NEXT_PUBLIC_AUDIO_CDN)  
+  <sub>20 files changed, 333 insertions(+), 39 deletions(-)</sub>
+* `50f8702` radio v1 P0: композиционно-осознанная ротация (эпохи, зазор ≥N/2, round-robin версий, persist) + автотест; битрейт приведён к фактическому VBR ~182 (было 320/256); исправлены 4 битых названия; отчёты compositions/bitrate  
+  <sub>12 files changed, 4761 insertions(+), 71 deletions(-)</sub>
+* `d9f7647` radio: показ Shuffle на мобиле (hidden lg:flex→flex); треки во всех 4 станциях упорядочены — английские первыми (ASCII→лат.→кириллица)  
+  <sub>2 files changed, 4245 insertions(+), 185 deletions(-)</sub>
+* `2c19dd9` perf(mobile): stop whole-page jitter — gate heavy background layers on mobile & prefers-reduced-motion  
+  <sub>3 files changed, 165 insertions(+), 87 deletions(-)</sub>
+
+<sub>Авторы дня: Maksim Galatin (6)</sub>
+
+### 2026-07-22 — восстановлено, коммитов 3
+* `e8c070e` AIfa memory: resolve session e-mail before proxying chat to central (radiocode)  
+  <sub>1 file changed, 242 insertions(+)</sub>
+* `11f35c5` pay: block withdrawal while Digital DNA subscription overdue (unified pause)  
+  <sub>1 file changed, 31 insertions(+)</sub>
+* `478a798` pay(radiocode): unified cabinet parity — ambassadors + Digital DNA $200/mo renewal  
+  <sub>3 files changed, 236 insertions(+)</sub>
+
+<sub>Авторы дня: Maksim Galatin (3)</sub>
+
+### 2026-07-23 — восстановлено, коммитов 15
+* `3ef7e9f` cabinet: AIfa avatar (Level 1) — living figure of light + code, left of the terminal  
+  <sub>3 files changed, 169 insertions(+), 3 deletions(-)</sub>
+* `6787c39` cabinet: widen column to ~94vw so the terminal fills the screen  
+  <sub>1 file changed, 1 insertion(+), 1 deletion(-)</sub>
+* `68f5927` cabinet chat: embedded mode — terminal fills full width  
+  <sub>2 files changed, 7 insertions(+), 5 deletions(-)</sub>
+* `5d238df` cabinet: widen content column 1150->1360 so the AIfa terminal fully expands  
+  <sub>1 file changed, 1 insertion(+), 1 deletion(-)</sub>
+* `28e8245` ChatSection(radio cabinet): wider (max-w-7xl) + auto-growing input textarea  
+  <sub>1 file changed, 470 insertions(+)</sub>
+* `8336f99` perf(CWV): show radio IntroSplash once per session (was re-covering hero/LCP every load)  
+  <sub>1 file changed, 13 insertions(+), 1 deletion(-)</sub>
+* `9e800d3` a11y/i18n: sync <html lang> to the active UI language (radio was static en)  
+  <sub>2 files changed, 41 insertions(+), 5 deletions(-)</sub>
+* `b6c4d1d` seo: /ambassador self-canonical layout + add /ambassador to sitemap  
+  <sub>2 files changed, 22 insertions(+)</sub>
+* `33112cc` security: aifa-chat identity from session only (cross-user memory IDOR fix)  
+  <sub>1 file changed, 9 insertions(+), 10 deletions(-)</sub>
+* `7d29b9a` footer: add Ambassador program link to ecosystem cross-links  
+  <sub>1 file changed, 182 insertions(+), 18 deletions(-)</sub>
+* `79276c8` cabinet: Ambassador Training button (radiocode)  
+  <sub>1 file changed, 113 insertions(+)</sub>
+* `426e040` referral: anti-fraud — block self-referral & cycles in commission chain  
+  <sub>1 file changed, 5 insertions(+)</sub>
+* `8496835` cabinet: add /ambassador training page (radiocode)  
+  <sub>1 file changed, 215 insertions(+)</sub>
+* `f036f34` AIfa memory: chunked append-only archive on radiocode (seal-instead-of-trim)  
+  <sub>3 files changed, 151 insertions(+)</sub>
+* `797d36f` radiocode: fix 404 on legal docs — point consent links to canonical central pages  
+  <sub>1 file changed, 527 insertions(+)</sub>
+
+<sub>Авторы дня: Maksim Galatin (15)</sub>
+
+### 2026-07-28 — восстановлено, коммитов 3
+* `b63b4ea` Валидатор Конституции: файл добавлен и подключён к автопроверке  
+  <sub>2 files changed, 93 insertions(+)</sub>
+* `a0a8f32` radiocode: 27 открытых маршрутов получили ограничение частоты, добавлен страж  
+  <sub>30 files changed, 317 insertions(+), 11 deletions(-)</sub>
+* `3ec48a2` При выходе из кабинета данные браузера стираются  
+  <sub>1 file changed, 11 insertions(+)</sub>
+
+<sub>Авторы дня: Maksim Galatin (3)</sub>
+
+### 2026-07-31 — восстановлено, коммитов 2
+* `2485d20` Согласие: сначала прочитать документы, потом отмечать  
+  <sub>2 files changed, 6 insertions(+), 2 deletions(-)</sub>
+* `2f4be6e` Страницы станций + строгая политика оформления на экране входа  
+  <sub>5 files changed, 216 insertions(+), 10 deletions(-)</sub>
+
+<sub>Авторы дня: Maksim Galatin (2)</sub>
+
+### 2026-08-02 — восстановлено, коммитов 1
+* `706882e` AIfa speaks with a woman's voice in all four languages  
+  <sub>8 files changed, 26906 insertions(+), 5 deletions(-)</sub>
+
+<sub>Авторы дня: Maksim Galatin (1)</sub>
+
+### 2026-08-08 — восстановлено, коммитов 13
+* `fcb83f6` Наследник памяти: статья обещала то, чего в кабинете не было  
+  <sub>5 files changed, 1061 insertions(+)</sub>
+* `7c6eed1` В блокчейн память уходит личным ключом каждого; ключ выдаётся человеку в кабинете  
+  <sub>6 files changed, 333 insertions(+), 3 deletions(-)</sub>
+* `ba53967` Временные файлы разбора закрыты от попадания в репозиторий  
+  <sub>1 file changed, 15 insertions(+)</sub>
+* `e0a9467` Шесть статей доведены до полноты; глоссарий заведён на четвёртом сайте  
+  <sub>4 files changed, 895 insertions(+), 9 deletions(-)</sub>
+* `8c7b163` Кабинет обрывал разговор: 25 секунд ожидания центра не хватало  
+  <sub>1 file changed, 15 insertions(+), 1 deletion(-)</sub>
+* `46b7422` Читаемость новостей: текст было не видно, и мерка тоже врала  
+  <sub>24 files changed, 247 insertions(+), 113 deletions(-)</sub>
+* `64900cd` Паспорта не могли попасть в поиск; зеркало Мозга умеет шифроваться  
+  <sub>5 files changed, 177 insertions(+), 10 deletions(-)</sub>
+* `02c33ba` Паспорт хакатона найден и восстановлен на всех четырёх сайтах  
+  <sub>5 files changed, 601 insertions(+), 136 deletions(-)</sub>
+* `cde41ea` Паспорт стало можно посмотреть: страница /passport/<id> на всех четырёх сайтах  
+  <sub>1 file changed, 257 insertions(+)</sub>
+* `6c36dd7` Шрифты, уровни и четвёртая копия бэкапа — в облако Google  
+  <sub>12 files changed, 161 insertions(+), 142 deletions(-)</sub>
+* `38f1dd3` Один разговор вместо трёх лент: чат, Терминал и Оракул склеены  
+  <sub>3 files changed, 11 insertions(+), 4 deletions(-)</sub>
+* `be2759b` Читаемость: акценты стали цветами темы, а не одним набором на обе  
+  <sub>2 files changed, 15 insertions(+), 4 deletions(-)</sub>
+* `73a88c1` Уровни в кабинете: одна формула вместо двух  
+  <sub>2 files changed, 23 insertions(+), 3 deletions(-)</sub>
+
+<sub>Авторы дня: Maksim Galatin (13)</sub>
+
+### 2026-08-09 — восстановлено, коммитов 2
+* `33085da` Четвёртый сайт был невидим для поиска на трёх языках из четырёх  
+  <sub>2 files changed, 58 insertions(+), 2 deletions(-)</sub>
+* `f9429ce` Временные файлы с доступами исключены классом, а не поимённо  
+  <sub>1 file changed, 28 insertions(+)</sub>
+
+<sub>Авторы дня: Maksim Galatin (2)</sub>
+
+### 2026-08-10 — восстановлено, коммитов 14
+* `f8669f8` Публичная доска игр больше не показывает почту ни в каком виде  
+  <sub>1 file changed, 22 insertions(+), 14 deletions(-)</sub>
+* `a1d6964` radiocode.space: украшения и закрытые панели больше не грузятся при первой отрисовке  
+  <sub>1 file changed, 24 insertions(+), 5 deletions(-)</sub>
+* `ed2b3fb` radiocode.space: бегущий градиент переведён с JavaScript на CSS  
+  <sub>3 files changed, 45 insertions(+), 15 deletions(-)</sub>
+* `fedcf0f` security.txt: каждому сайту дописан СВОЙ адрес в поле Canonical  
+  <sub>1 file changed, 1 insertion(+)</sub>
+* `1337b78` radiocode.space: свечение за курсором не работало никогда — починено  
+  <sub>1 file changed, 26 insertions(+), 4 deletions(-)</sub>
+* `018c3fe` radiocode.space: в политику добавлена недостающая директива form-action  
+  <sub>1 file changed, 11 insertions(+)</sub>
+* `e34871a` radiocode.space: счётчик Google перестал тормозить первую отрисовку  
+  <sub>1 file changed, 19 insertions(+), 2 deletions(-)</sub>
+* `e5cd0a7` Обход всех страниц: блочные элементы в кнопках убраны и там, где их не искали  
+  <sub>2 files changed, 10 insertions(+), 6 deletions(-)</sub>
+* `fe1bd13` Внутри кнопок больше нет блочных элементов  
+  <sub>1 file changed, 12 insertions(+), 12 deletions(-)</sub>
+* `cea9500` Кабинет: тарифы описаны понятным языком вместо жаргона  
+  <sub>1 file changed, 89 insertions(+), 9 deletions(-)</sub>
+* `b4fd714` Значок сайта: закодированы и пробелы, не только скобки  
+  <sub>1 file changed, 1 insertion(+), 1 deletion(-)</sub>
+* `50760ad` ﻿Ошибки разметки по замеру официального проверяльщика W3C  
+  <sub>1 file changed, 304 insertions(+), 287 deletions(-)</sub>
+* `b81af37` Доступность доведена: ссылка не только цветом, контраст с запасом  
+  <sub>1 file changed, 11 insertions(+), 1 deletion(-)</sub>
+* `833ead8` Четвёртый сайт наконец отдаёт четыре языка, а не один  
+  <sub>6 files changed, 359 insertions(+), 290 deletions(-)</sub>
+
+<sub>Авторы дня: Maksim Galatin (14)</sub>
