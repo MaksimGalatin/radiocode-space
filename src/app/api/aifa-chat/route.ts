@@ -176,6 +176,39 @@ async function записатьДословно(
   }
 }
 
+/**
+ * 🔴 СМЫСЛОВАЯ ЗАПИСЬ — ЕЁ ЗДЕСЬ НЕ БЫЛО ВОВСЕ.
+ *
+ * У памяти два слоя. Дословный (зашифрованный, в базе кабинета) писался, а
+ * СМЫСЛОВОЙ — тот самый, из которого AIfa вспоминает, — не писался ни разу:
+ * файла memory-index.ts на этом сайте не существовало, и слова indexTurn в
+ * маршруте не встречалось ни одного раза. Замер: три остальных сайта его
+ * имеют, radiocode.space был единственным без него.
+ *
+ * Чем это грозило. Пока разговор уходит в центральный мозг, пишет центр, и
+ * потери нет. Но как только центр не отвечает и сайт отвечает сам, реплики
+ * ложились ТОЛЬКО в дословный слой: человек их видит в кабинете, а AIfa
+ * вспомнить не может — для неё этого разговора не существует. Отказа при этом
+ * не происходит, и заметить можно только по тому, что она «забыла» кусок.
+ *
+ * Ошибка записи не должна отнимать ответ: любой сбой уходит в журнал.
+ */
+async function записатьСмыслом(
+  email: string,
+  chatType: string,
+  вопрос: string,
+  ответ: string
+): Promise<void> {
+  const почта = (email || '').trim();
+  if (!почта) return; // гость — писать некуда, и это нормально
+  try {
+    const { indexTurn } = await import('@/lib/memory-index');
+    await indexTurn(почта, chatType, вопрос, ответ);
+  } catch (e) {
+    console.error('[AIfa чат] смысловая запись сорвалась:', e);
+  }
+}
+
 // ── Grok API (xAI) - OpenAI compatible ──
 /**
  * Второй параметр — ВСЁ, что дописывается к системной подсказке: и
@@ -419,6 +452,9 @@ export async function POST(request: NextRequest) {
       }
       // Ответ пришёл из центра — дословную копию всё равно кладём у себя.
       await записатьДословно(userEmail, chatType, message, central.текст);
+      // Оба слоя памяти пишутся рядом и одним каналом: иначе разговор ложится
+      // под разными именами и счёт по каналам показывает дыры, которых нет.
+      await записатьСмыслом(userEmail, chatType, message, central.текст);
       return NextResponse.json({ success: true, response: central.текст, provider: "central" });
     }
     // Otherwise fall through to the local providers so chat never dies.
@@ -523,6 +559,7 @@ export async function POST(request: NextRequest) {
     // Тот же дословный слой и на запасном пути: человеку всё равно, кто ответил,
     // а память обязана сохраниться в обоих случаях.
     await записатьДословно(userEmail, chatType, message, aiResponse);
+    await записатьСмыслом(userEmail, chatType, message, aiResponse);
 
     return NextResponse.json({
       success: true,
