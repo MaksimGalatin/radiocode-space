@@ -404,46 +404,67 @@ export default function MemoryTab({ email }: { email: string }) {
           : server === null ? <div style={{ display: "grid", gap: 10 }}><Skeleton h={80} /><Skeleton h={60} /></div>
           : server.length === 0 ? <EmptyState text={t("memEmpty")} />
           : (
-            <div style={{ display: "grid", gap: 12 }}>
-              {server.map(ch => {
-                const msgs = parseChat(ch.text);
+            (() => {
+              // 🔴 ОДНА ЛЕНТА, А НЕ КУСКИ ПО КАНАЛАМ.
+              //
+              // Раньше здесь рисовался отдельный блок на каждый канал: «Main»,
+              // «Terminal», «Oracle». Разговор один, а человек видел его
+              // разрезанным на три части, и в каждой своё время — понять, что
+              // было раньше, было нельзя. Хуже: чат кабинета какое-то время
+              // писался в дословный слой под именем «terminal», так что у
+              // давних пользователей один и тот же разговор лежит в двух
+              // блоках сразу.
+              //
+              // Память едина по человеку, а не по окну, в котором он говорил.
+              // Поэтому реплики всех каналов сливаются в одну ленту по времени,
+              // а откуда пришла реплика — подпись рядом с ней, а не заголовок
+              // отдельного ящика.
+              const всеРеплики = server
+                .flatMap(ch => parseChat(ch.text).map(mm => ({ ...mm, откуда: ch.chatType })))
+                .sort((a, b) => (a.ts || "").localeCompare(b.ts || ""));
+
+              if (!всеРеплики.length) {
                 return (
-                  <div key={ch.chatType} style={{ background: "#0B0F1A", border: "1px solid rgba(42,42,58,0.6)", borderRadius: 12, padding: 14 }}>
-                    <div style={{ fontSize: 15, color: TOKENS.cyan, fontWeight: 700, marginBottom: 10 }}>{chatLabel(ch.chatType)}</div>
-                    {msgs.length ? (
-                      <div style={{ display: "grid", gap: 8, maxHeight: 460, overflowY: "auto" }}>
-                        {(() => {
-                          // Сессии по датам: последняя — раскрыта, старые — свёрнуты
-                          const groups: { date: string; items: typeof msgs }[] = [];
-                          for (const mm of msgs) {
-                            const d = (mm.ts || "").slice(0, 10) || t("earlier");
-                            const g = groups.find(x => x.date === d);
-                            if (g) g.items.push(mm); else groups.push({ date: d, items: [mm] });
-                          }
-                          return groups.map((g, gi) => (
-                            <details key={g.date} open={gi === groups.length - 1}>
-                              <summary style={{ cursor: "pointer", fontSize: 15, color: TOKENS.mut, fontWeight: 700, padding: "4px 0" }}>📅 {g.date} · {g.items.length} {t("archMsgs")}</summary>
-                              <div style={{ display: "grid", gap: 8, paddingTop: 6 }}>
-                                {g.items.map((mm, i) => (
-                                  <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: mm.role === "user" ? "flex-end" : "flex-start" }}>
-                                    <div style={{ maxWidth: "85%", background: mm.role === "user" ? "rgba(124,58,237,0.15)" : "rgba(6,182,212,0.1)", border: `1px solid ${mm.role === "user" ? "rgba(124,58,237,0.3)" : "rgba(6,182,212,0.25)"}`, borderRadius: 12, padding: "8px 12px" }}>
-                                      <div style={{ fontSize: 13, color: TOKENS.mut, marginBottom: 3 }}>{mm.role === "user" ? "🧑 " + email.split("@")[0] : "🤖 AIfa"} · {mm.ts}</div>
-                                      <div style={{ fontSize: 15, color: TOKENS.text, whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.5 }}>{mm.content}</div>
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            </details>
-                          ));
-                        })()}
-                      </div>
-                    ) : (
-                      <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word", fontSize: 15, color: TOKENS.text, margin: 0, maxHeight: 320, overflowY: "auto" }}>{ch.text.slice(0, 20000)}</pre>
-                    )}
-                  </div>
+                  <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word", fontSize: 15, color: TOKENS.text, margin: 0, maxHeight: 320, overflowY: "auto" }}>
+                    {server.map(ch => ch.text).join("\n\n").slice(0, 20000)}
+                  </pre>
                 );
-              })}
-            </div>
+              }
+
+              const дни: { date: string; items: typeof всеРеплики }[] = [];
+              for (const mm of всеРеплики) {
+                const d = (mm.ts || "").slice(0, 10) || t("earlier");
+                const g = дни.find(x => x.date === d);
+                if (g) g.items.push(mm); else дни.push({ date: d, items: [mm] });
+              }
+
+              return (
+                <div style={{ background: "#0B0F1A", border: "1px solid rgba(42,42,58,0.6)", borderRadius: 12, padding: 14 }}>
+                  <div style={{ fontSize: 15, color: TOKENS.cyan, fontWeight: 700, marginBottom: 10 }}>
+                    🧠 {всеРеплики.length} {t("archMsgs")} · {дни[0]?.date} — {дни[дни.length - 1]?.date}
+                  </div>
+                  <div style={{ display: "grid", gap: 8, maxHeight: 620, overflowY: "auto" }}>
+                    {дни.map((g, gi) => (
+                      <details key={g.date} open={gi === дни.length - 1}>
+                        <summary style={{ cursor: "pointer", fontSize: 15, color: TOKENS.mut, fontWeight: 700, padding: "4px 0" }}>📅 {g.date} · {g.items.length} {t("archMsgs")}</summary>
+                        <div style={{ display: "grid", gap: 8, paddingTop: 6 }}>
+                          {g.items.map((mm, i) => (
+                            <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: mm.role === "user" ? "flex-end" : "flex-start" }}>
+                              <div style={{ maxWidth: "85%", background: mm.role === "user" ? "rgba(124,58,237,0.15)" : "rgba(6,182,212,0.1)", border: `1px solid ${mm.role === "user" ? "rgba(124,58,237,0.3)" : "rgba(6,182,212,0.25)"}`, borderRadius: 12, padding: "8px 12px" }}>
+                                <div style={{ fontSize: 13, color: TOKENS.mut, marginBottom: 3 }}>
+                                  {mm.role === "user" ? "🧑 " + email.split("@")[0] : "🤖 AIfa"} · {mm.ts} · {chatLabel(mm.откуда)}
+                                </div>
+                                <div style={{ fontSize: 15, color: TOKENS.text, whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.5 }}>{mm.content}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </details>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()
           )}
       </Card>
 
