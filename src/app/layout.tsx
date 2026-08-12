@@ -56,6 +56,27 @@ export const metadata: Metadata = {
       zh: "https://radiocode.space/?lang=zh",
       "x-default": "https://radiocode.space",
     },
+    /**
+     * Ленты подписки, объявленные в <head>.
+     *
+     * ЗАЧЕМ. Лента, о которой не объявлено на странице, для читалки почти не
+     * существует: человек вставляет в неё адрес сайта, а не адрес файла ленты,
+     * и программа ищет ровно этот тег. Без него подписка не заводится, хотя
+     * /feed.xml и /atom.xml отвечают.
+     *
+     * ⚠️ ВНИМАНИЕ ПРИ ПРАВКАХ. Next при слиянии метаданных заменяет поле
+     * `alternates` ЦЕЛИКОМ, а не по ключам. Любая страница, объявившая свой
+     * `alternates`, теряет и эти типы, и языковые ссылки отсюда — значит
+     * дописывать их надо и туда (сделано на /news и на странице статьи).
+     */
+    types: {
+      "application/rss+xml": [
+        { url: "https://radiocode.space/feed.xml", title: "RadioCode.Space — News (RSS)" },
+      ],
+      "application/atom+xml": [
+        { url: "https://radiocode.space/atom.xml", title: "RadioCode.Space — News (Atom)" },
+      ],
+    },
   },
   openGraph: {
     type: "website",
@@ -73,9 +94,21 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@CODE_AIfa",
+    // `creator` — автор материала, `site` — сам сайт. У нас это одна учётная
+    // запись, но поля разные: без creator карточка не подписывает автора вовсе,
+    // и ссылка на него в ленте не появляется.
+    creator: "@CODE_AIfa",
     title: "RadioCode.Space — Eternal Cyberpunk Radio",
     description: "Part of the CODE Eternal ecosystem. Select a frequency. Enter the void.",
-    images: ["/twitter-image.png"],
+    // Картинку задаём объектом, а не строкой, ради `alt`: без подписи человек с
+    // экранным диктором слышит вместо карточки пустоту, и это единственное
+    // место, где мы можем её задать.
+    images: [
+      {
+        url: "/twitter-image.png",
+        alt: "RadioCode.Space — eternal cyberpunk radio of the CODE Eternal ecosystem",
+      },
+    ],
   },
   appleWebApp: {
     capable: true,

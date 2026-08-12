@@ -91,9 +91,30 @@ export async function generateMetadata(
   return {
     title,
     description,
-    alternates: { canonical: url, languages: languageAlternates(article.id) },
+    alternates: {
+      canonical: url,
+      languages: languageAlternates(article.id),
+      // Со страницы статьи подписываются чаще всего — дочитал и захотел
+      // получать дальше. Типы дублируются из корневой раскладки намеренно:
+      // объявив свой `alternates`, страница затирает корневой целиком.
+      types: {
+        'application/rss+xml': [{ url: `${BASE}/feed.xml`, title: 'RadioCode.Space — News (RSS)' }],
+        'application/atom+xml': [{ url: `${BASE}/atom.xml`, title: 'RadioCode.Space — News (Atom)' }],
+      },
+    },
     openGraph: { title, description, url, siteName: 'RadioCODE', type: 'article' },
-    twitter: { card: 'summary_large_image', site: '@CODE_AIfa', title, description },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@CODE_AIfa',
+      creator: '@CODE_AIfa',
+      title,
+      description,
+      // Карточка объявлена как «большая с картинкой», но самой картинки тут не
+      // было: `twitter` при слиянии тоже заменяется целиком, поэтому общая
+      // картинка из корневой раскладки сюда не доходила и в ленте выходил
+      // пустой прямоугольник.
+      images: [{ url: `${BASE}/twitter-image.png`, alt: title }],
+    },
   };
 }
 

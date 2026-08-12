@@ -32,7 +32,17 @@ export async function generateMetadata(
     description,
     alternates: { canonical: url },
     openGraph: { title, description, url, type: 'music.radio_station' },
-    twitter: { card: 'summary_large_image', title, description },
+    // Картинка с подписью и авторская учётная запись. Своё поле `twitter`
+    // заменяет корневое целиком, поэтому карточка станции объявляла «большую с
+    // картинкой», а картинки не отдавала — в ленте выходил пустой прямоугольник.
+    twitter: {
+      card: 'summary_large_image',
+      site: '@CODE_AIfa',
+      creator: '@CODE_AIfa',
+      title,
+      description,
+      images: [{ url: `${SITE}/twitter-image.png`, alt: `${station.name} — ${station.genre} station on RadioCode.Space` }],
+    },
   };
 }
 

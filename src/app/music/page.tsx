@@ -38,7 +38,18 @@ export const metadata: Metadata = {
   description,
   alternates: { canonical: `${SITE}/music` },
   openGraph: { title, description, url: `${SITE}/music`, type: 'website' },
-  twitter: { card: 'summary_large_image', title, description },
+  // Карточка объявлена «большой с картинкой», но самой картинки не было: Next
+  // при слиянии заменяет поле `twitter` целиком, поэтому общая картинка из
+  // корневой раскладки сюда не доходила и в ленте выходил пустой прямоугольник.
+  // `alt` — подпись для экранного диктора, `creator` — авторская учётная запись.
+  twitter: {
+    card: 'summary_large_image',
+    site: '@CODE_AIfa',
+    creator: '@CODE_AIfa',
+    title,
+    description,
+    images: [{ url: `${SITE}/twitter-image.png`, alt: 'RadioCode.Space — full catalogue of 596 original tracks' }],
+  },
 };
 
 /** Длительность в формате ISO 8601 — того, который понимают поисковики. */

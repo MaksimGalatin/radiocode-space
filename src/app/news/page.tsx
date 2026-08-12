@@ -61,6 +61,14 @@ export async function generateMetadata(): Promise<Metadata> {
         zh: `${BASE}/news?lang=zh`,
         'x-default': `${BASE}/news`,
       },
+      // Ленты объявлены и здесь, хотя они уже есть в корневой раскладке: Next
+      // при слиянии заменяет `alternates` целиком, и без этих строк страница
+      // новостей — единственная, где подписка нужна больше всего, — осталась бы
+      // без тега ленты.
+      types: {
+        'application/rss+xml': [{ url: `${BASE}/feed.xml`, title: 'RadioCode.Space — News (RSS)' }],
+        'application/atom+xml': [{ url: `${BASE}/atom.xml`, title: 'RadioCode.Space — News (Atom)' }],
+      },
     },
     openGraph: { title: п.заголовок, description: п.описание, url: `${BASE}/news`, siteName: 'RadioCODE', type: 'website' },
   };

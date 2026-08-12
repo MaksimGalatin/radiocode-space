@@ -29,7 +29,17 @@ export const metadata: Metadata = {
   description,
   alternates: { canonical: `${SITE}/glossary` },
   openGraph: { title, description, url: `${SITE}/glossary`, type: 'article' },
-  twitter: { card: 'summary_large_image', title, description },
+  // Картинка, подпись к ней и авторская учётная запись — по той же причине, что
+  // и на /music: своё поле `twitter` затирает корневое целиком, и карточка,
+  // объявленная «большой с картинкой», выходила без картинки вовсе.
+  twitter: {
+    card: 'summary_large_image',
+    site: '@CODE_AIfa',
+    creator: '@CODE_AIfa',
+    title,
+    description,
+    images: [{ url: `${SITE}/twitter-image.png`, alt: 'CODE Eternal glossary — 28 terms of the ecosystem' }],
+  },
 };
 
 // Разметка DefinedTermSet — те же 28 терминов, что на трёх остальных сайтах,

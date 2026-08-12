@@ -8,7 +8,29 @@ export const metadata: Metadata = {
   title: 'Public Service Agreement (Offer)',
   description:
     'Public offer for professional services: website development, Oracle compliance remediation, AI integration and web design. Master Services Agreement with Statement-of-Work framework, consumer rights, taxes, sanctions and export-control provisions.',
-  alternates: { canonical: 'https://radiocode.space/service-agreement' },
+  /**
+   * 🔴 ЯЗЫКОВЫЕ ССЫЛКИ У ОФЕРТЫ ОТСУТСТВОВАЛИ.
+   *
+   * Здесь стоял один `canonical`, а объявив своё поле `alternates`, страница
+   * затирает корневое ЦЕЛИКОМ — вместе с четырьмя hreflang из раскладки. То
+   * есть у самого главного документа сайта в поиске существовала одна языковая
+   * версия из четырёх, хотя переведён он на все четыре.
+   *
+   * Адреса настоящие, а не выдуманные: обёртка LanguageProvider ниже берёт язык
+   * из useЯзык, а тот — из заголовка `x-locale`, который middleware ставит по
+   * метке `?lang=`. Значит `/service-agreement?lang=ru` отдаёт русский текст уже
+   * с сервера, а не после оживления страницы в браузере.
+   */
+  alternates: {
+    canonical: 'https://radiocode.space/service-agreement',
+    languages: {
+      en: 'https://radiocode.space/service-agreement',
+      ru: 'https://radiocode.space/service-agreement?lang=ru',
+      es: 'https://radiocode.space/service-agreement?lang=es',
+      zh: 'https://radiocode.space/service-agreement?lang=zh',
+      'x-default': 'https://radiocode.space/service-agreement',
+    },
+  },
   openGraph: {
     title: 'Public Service Agreement (Offer) | RadioCODE',
     description:

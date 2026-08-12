@@ -11,6 +11,30 @@ function датаСтатьи(д: string): Date {
   return m ? new Date(`${m[3]}-${m[2]}-${m[1]}T00:00:00Z`) : new Date();
 }
 
+/**
+ * ЯЗЫКОВЫЕ ВЕРСИИ ОДНОГО АДРЕСА для карты сайта.
+ *
+ * 🔴 ЗАЧЕМ. В карте не было НИ ОДНОЙ пометки xhtml:link, то есть поисковик
+ * узнавал о переводах только из тегов на самой странице — а до страницы ещё
+ * надо дойти. Пометка в карте связывает четыре адреса в одну группу сразу, до
+ * первого обхода, и именно так Google просит объявлять языки.
+ *
+ * Ставим ТОЛЬКО там, где перевод действительно отдаётся с сервера: язык на этом
+ * сайте приходит из метки `?lang=` через middleware (заголовок `x-locale`).
+ * Страницы станций и каталог музыки написаны по-английски и от метки не
+ * меняются — обещать для них четыре версии значило бы соврать карте.
+ */
+function языковые(путь: string): Record<string, string> {
+  const адрес = `${SITE}${путь}`;
+  return {
+    en: адрес,
+    ru: `${адрес}?lang=ru`,
+    es: `${адрес}?lang=es`,
+    zh: `${адрес}?lang=zh`,
+    'x-default': адрес,
+  };
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
@@ -20,6 +44,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 1,
+      // У главной языковые адреса пишутся с косой чертой перед меткой — ровно
+      // так они объявлены в hreflang корневой раскладки. Расхождение хотя бы в
+      // одном знаке Google считает разными адресами и группу не собирает.
+      alternates: {
+        languages: {
+          en: SITE,
+          ru: `${SITE}/?lang=ru`,
+          es: `${SITE}/?lang=es`,
+          zh: `${SITE}/?lang=zh`,
+          'x-default': SITE,
+        },
+      },
     },
     // Страницы станций: у каждой свой полный список треков и своя разметка.
     // Это единственные страницы сайта с уникальным текстовым содержимым в
@@ -68,13 +104,43 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
+      alternates: { languages: языковые('/news') },
     },
     ...(тольковышедшие(newsDataВесь as Array<{ date?: string }>) as Array<{ id: string; date: string }>).map((с) => ({
       url: `${SITE}/news/${с.id}`,
       lastModified: датаСтатьи(с.date),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
+      alternates: { languages: языковые(`/news/${с.id}`) },
     })),
+    // 🔴 ПРАВОВЫХ СТРАНИЦ В КАРТЕ НЕ БЫЛО ВОВСЕ.
+    //
+    // Обе отвечают 200 (проверено запросом к живому сайту 11.08.2026), обе
+    // переведены на четыре языка и обе — документы, по которым человек
+    // принимает решение платить. Отсутствие в карте не запрещает их
+    // индексировать, но лишает единственного прямого приглашения: на страницы,
+    // на которые с главной ведёт только подвал, робот заходит редко и поздно.
+    //
+    // Приоритет 0.5, changeFrequency yearly: тексты договоров меняются реже
+    // всего на сайте, и просить обходить их еженедельно — врать карте.
+    {
+      url: `${SITE}/service-agreement`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.5,
+      alternates: { languages: языковые('/service-agreement') },
+    },
+    {
+      url: `${SITE}/user-agreement`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.5,
+      alternates: { languages: языковые('/user-agreement') },
+    },
+    // /contact и /cart в карту НЕ добавлены: этих страниц на radiocode.space
+    // нет — обе отвечают 404 (проверено запросом к живому сайту 11.08.2026).
+    // Адрес, отдающий 404, в карте сайта — прямая ошибка в Search Console и
+    // потеря доверия ко всей карте.
     // 🔴 КАБИНЕТ ИЗ КАРТЫ САЙТА УБРАН.
     //
     // Здесь стояла запись `${SITE}/cabinet` с пояснением «кабинет — публичная
