@@ -45,12 +45,43 @@ type ОтветЦентра =
   | { вид: 'отказ'; статус: number; error?: string; userMessage?: string; retryAfterMs?: number }
   | null;
 
+/**
+ * 🔴 ЗАПАСНОЙ ПУТЬ ОБЯЗАН БЫТЬ ГРОМКИМ.
+ *
+ * `centralConfig()` возвращает null, если не задана хотя бы одна из двух
+ * переменных, — и раньше это проходило бесследно: чат молча отвечал напрямую
+ * через api.x.ai, без общего мозга и без памяти. Снаружи это выглядит не как
+ * поломка, а как «AIfa стала хуже помнить», поэтому неделями никто не замечал.
+ *
+ * Пишем в журнал ИМЯ недостающей переменной и последствие. Молчаливый откат —
+ * ровно то, из-за чего поломку не видели: не найдено — значит, надо сказать.
+ * Предупреждение намеренно не глушится и не считает разы: редкая строка в
+ * журнале ничего не стоит, а пропущенная поломка стоит памяти человека.
+ */
+function предупредитьЧтоБезОбщегоМозга(где: string): void {
+  const нет: string[] = [];
+  if (!process.env.AIFA_CENTRAL_API) нет.push('AIFA_CENTRAL_API');
+  if (!process.env.AIFA_INTERNAL_SECRET) нет.push('AIFA_INTERNAL_SECRET');
+  const чего = нет.length
+    ? `не задана переменная окружения ${нет.join(' и не задана ')}`
+    : 'настройка центра не сложилась при заданных переменных';
+  console.warn(
+    `[AIfa ${где}] ОБЩИЙ МОЗГ НЕ ПОДКЛЮЧЁН: ${чего}. ` +
+    `Разговор идёт напрямую через api.x.ai, БЕЗ центрального мозга: ` +
+    `без общей истории с других сайтов и без знаний проекта. ` +
+    `Локальная память подставляется отдельно и работает только при заданной DATABASE_URL_VECTOR.`
+  );
+}
+
 async function proxyToCentral(
   req: NextRequest,
   payload: { message: string; history: any[]; userEmail: string; chatType: string; locale: string }
 ): Promise<ОтветЦентра> {
   const cfg = centralConfig();
-  if (!cfg) return null; // not configured → use local provider
+  if (!cfg) {
+    предупредитьЧтоБезОбщегоМозга('чат');
+    return null; // not configured → use local provider
+  }
 
   const path = payload.chatType === 'oracle' ? '/api/oracle' : '/api/aifa-chat';
   const res = await centralFetch(`${cfg.base}${path}`, {
@@ -107,9 +138,16 @@ async function buildIdentitySection(userEmail: string, locale: string): Promise<
 }
 
 // ── Grok API (xAI) - OpenAI compatible ──
+/**
+ * Второй параметр — ВСЁ, что дописывается к системной подсказке: и
+ * представление человека, и его память. Раньше он назывался identitySection и
+ * нёс только имя; после подключения памяти имя перестало быть единственным
+ * содержимым, и оставить прежнее название значило бы соврать читателю о том,
+ * что уходит в модель.
+ */
 async function getGrokResponse(
   messages: Array<{ role: string; content: string }>,
-  identitySection: string = ''
+  дополнениеПодсказки: string = ''
 ): Promise<string> {
   const apiKey = process.env.GROK_API_KEY;
   
@@ -119,7 +157,7 @@ async function getGrokResponse(
 
   // Build messages with system prompt
   const formattedMessages = [
-    { role: "system", content: AIFA_SYSTEM_PROMPT + identitySection },
+    { role: "system", content: AIFA_SYSTEM_PROMPT + дополнениеПодсказки },
     ...messages.map((m) => ({
       role: m.role === "assistant" ? "assistant" : "user",
       content: m.content,
@@ -246,7 +284,33 @@ export async function POST(request: NextRequest) {
     const trimmed = trimConversation(allMessages);
 
     const identitySection = await buildIdentitySection(userEmail, locale);
-    const aiResponse = await getGrokResponse(trimmed, identitySection);
+
+    // ── ПАМЯТЬ НА ЛОКАЛЬНОМ ПУТИ ────────────────────────────────────────────
+    //
+    // Раньше здесь заканчивалось всё: если центр не настроен, AIfa отвечала
+    // вообще без истории — «первый раз вижу» каждому знакомому человеку.
+    // Теперь тот же сбор памяти, что на эталоне aifa.works (см. в нём
+    // app/api/chat/route.ts, где buildMemorySection добавляется к системной
+    // подсказке): семантический поиск по общей базе, свежие реплики со всех
+    // сайтов и знания проекта.
+    //
+    // Оборачиваем в try: память — это улучшение ответа, а не условие ответа.
+    // Упала база или не выданы ключи — человек всё равно получит ответ, но в
+    // журнале будет сказано, чего он недополучил. Тихо терять память нельзя.
+    let memorySection = '';
+    try {
+      // Ключ человека приходит заголовком — им расшифровываются его архивные
+      // куски, если они лежат локально (на эталоне так же).
+      const clientKey = request.headers.get('x-client-key') || '';
+      const { buildMemorySection } = await import('@/lib/memory');
+      memorySection += await buildMemorySection(userEmail || '', message, clientKey);
+    } catch (memErr) {
+      console.warn('[AIfa чат] Память не собралась, отвечаю без неё:', memErr);
+    }
+
+    // Память идёт в системную подсказку следом за представлением человека —
+    // тем же способом, что на эталоне: одна строка системного сообщения.
+    const aiResponse = await getGrokResponse(trimmed, identitySection + memorySection);
 
     return NextResponse.json({
       success: true,
@@ -294,6 +358,12 @@ export async function GET(request: NextRequest) {
         const data = await res.json().catch(() => null);
         if (data) return NextResponse.json(data);
       }
+      console.warn('[AIfa история] Центр не отдал историю — возвращаю пустую ленту');
+    } else {
+      // Пустая лента без единого слова в журнале выглядит как «у человека нет
+      // переписки», хотя на самом деле мы просто не спросили у центра. Ровно
+      // та же тихая поломка, что и в POST, — говорим о ней вслух.
+      предупредитьЧтоБезОбщегоМозга('история');
     }
     return NextResponse.json({ success: true, history: [] });
   } catch (error) {
