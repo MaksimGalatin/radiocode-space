@@ -219,10 +219,36 @@ async function ответБесплатнымИлиГрантом(
     process.env.GEMINI_API_KEY_4,
   ].filter((k): k is string => typeof k === 'string' && k.trim().length > 0);
 
+  /**
+   * Лесенка бесплатных моделей — теперь та же, что на центральном сайте.
+   *
+   * ЗАЧЕМ ПОЛНАЯ, А НЕ ТРИ СТУПЕНИ. Суточная квота бесплатного тира считается
+   * ОТДЕЛЬНО по каждой модели, а не общим котлом на проект. Значит каждая
+   * пропущенная ступень — это выброшенные бесплатные ответы: на трёх ступенях
+   * запас кончается примерно на 540 ответах в сутки на ключ, на полной — около
+   * 1100. Всё, что не добрано здесь, оплачивается ниже по цепочке личным ключом
+   * Архитектора, то есть короткая лесенка — это прямой расход из его кармана.
+   *
+   * Имена моделей, которые здесь уже стояли, сохранены и идут в прежнем порядке;
+   * добавлены только пропущенные ступени. Чем отвечает сайт — решение
+   * Архитектора, и правка порядка расходов не имеет права его менять.
+   */
   const лесенка = [
     process.env.GEMINI_FREE_TOP || 'gemini-3.6-flash',
+    'gemini-3.5-flash',
+    'gemini-3-flash',
     'gemini-3.5-flash-lite',
     process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite',
+    // Псевдонимы «последняя актуальная»: переживут смену поколений, даже если
+    // конкретные имена выше устареют. Ёмкая ветка идёт первой — у lite суточный
+    // предел кратно выше.
+    'gemini-flash-lite-latest',
+    'gemini-flash-latest',
+    // Прошлое поколение: по 20 бесплатных запросов в сутки у каждой, и до сих
+    // пор не тронутых — лесенка обрывалась выше, и эти сорок ответов в сутки
+    // уходили на платный канал.
+    'gemini-2.5-flash',
+    'gemini-2.5-flash-lite',
   ];
 
   for (const модель of лесенка) {
@@ -266,10 +292,22 @@ async function getGrokResponse(
   messages: Array<{ role: string; content: string }>,
   дополнениеПодсказки: string = ''
 ): Promise<string> {
-  const apiKey = process.env.GROK_API_KEY;
-  
+  /**
+   * 🔴 ДВА ИМЕНИ У ОДНОГО КЛЮЧА — иначе последняя ступень не находит ключ.
+   *
+   * По экосистеме личный ключ Архитектора задаётся то как GROK_API_KEY, то как
+   * XAI_API_KEY (в env соседнего спутника code-eternal — именно XAI_API_KEY), а
+   * код читал только первое имя. Где имена расходятся, там последняя ступень
+   * цепочки мертва при полностью заполненных настройках, и снаружи это выглядит
+   * как «AIfa временно недоступна».
+   *
+   * Центральный сайт принимает оба имени. Принимаем и мы: одна и та же
+   * настройка обязана означать одно и то же на всех сайтах экосистемы.
+   */
+  const apiKey = process.env.GROK_API_KEY || process.env.XAI_API_KEY;
+
   if (!apiKey) {
-    throw new Error("GROK_API_KEY not configured");
+    throw new Error("Grok API key not configured (GROK_API_KEY / XAI_API_KEY)");
   }
 
   // Build messages with system prompt
@@ -383,20 +421,23 @@ export async function POST(request: NextRequest) {
       await записатьДословно(userEmail, chatType, message, central.текст);
       return NextResponse.json({ success: true, response: central.текст, provider: "central" });
     }
-    // Otherwise fall through to the local Grok call so chat never dies.
+    // Otherwise fall through to the local providers so chat never dies.
 
-    // Local fallback requires Grok; if absent, return a soft message (never 500).
-    if (!process.env.GROK_API_KEY) {
-      const fallbackMsg = locale === 'ru' ? "Я временно недоступна. Пожалуйста, попробуйте ещё раз чуть позже." :
-                          locale === 'es' ? "No estoy disponible temporalmente. Por favor, inténtelo de nuevo más tarde." :
-                          locale === 'zh' ? "我暂时无法提供服务。请稍后再试。" :
-                          "I am temporarily unavailable. Please try again later.";
-      return NextResponse.json({
-        success: true,
-        response: fallbackMsg,
-        provider: "hard-fallback",
-      });
-    }
+    // ── 🔴 ЗДЕСЬ СТОЯЛ ЗАСЛОН: «нет GROK_API_KEY — сразу отказ». УБРАН ────────
+    //
+    // Проверка личного платного ключа стояла ПЕРЕД бесплатной лесенкой и перед
+    // грантом Google, то есть ровно наоборот требуемому порядку расходов. Итог:
+    // без личного ключа Архитектора бесплатные модели и грант были недостижимы
+    // ВООБЩЕ — код до них не доходил, и сайт отвечал «я временно недоступна»,
+    // имея при этом бесплатные ключи и грант в настройках.
+    //
+    // Заслон читал только имя GROK_API_KEY, тогда как по экосистеме тот же ключ
+    // задаётся и как XAI_API_KEY (разбор в шапке getGrokResponse) — то есть
+    // срабатывал он и при заданном ключе тоже.
+    //
+    // Теперь отказ наступает ниже и только тогда, когда промолчали ВСЕ каналы:
+    // бесплатный, грантовый и Grok. Мягкий ответ вместо пятисотки сохранён —
+    // менялось место проверки, а не её вежливость.
 
     // Build conversation from history + current message
     const allMessages = [...history, { role: "user", content: message }];
@@ -454,9 +495,30 @@ export async function POST(request: NextRequest) {
       memorySection = memorySection.slice(0, ОКНО_ЗАПАСНОГО) + '\n…';
     }
     // Бесплатное → грант → личный Grok. Порядок расходов, а не вкусов.
-    const aiResponse =
-      (await ответБесплатнымИлиГрантом(trimmed, identitySection + memorySection)) ??
-      (await getGrokResponse(trimmed, identitySection + memorySection));
+    //
+    // К Grok идём ТОЛЬКО при наличии ключа: без ключа getGrokResponse бросает
+    // исключение, а исключение здесь означало бы, что обычная настройка «личного
+    // платного ключа нет» считается поломкой и пишется в журнал как авария.
+    let aiResponse = await ответБесплатнымИлиГрантом(trimmed, identitySection + memorySection);
+    if (!aiResponse && (process.env.GROK_API_KEY || process.env.XAI_API_KEY)) {
+      aiResponse = await getGrokResponse(trimmed, identitySection + memorySection);
+    }
+
+    // Отказ — только теперь, когда не сработало НИЧЕГО: ни бесплатные ключи, ни
+    // грант, ни Grok. Раньше эта же фраза встречала человека ещё до первой
+    // попытки хоть куда-нибудь обратиться.
+    if (!aiResponse) {
+      console.error('[AIfa] Молчат ВСЕ каналы: бесплатные ключи, грант Vertex и Grok. Отвечаю отказом.');
+      const fallbackMsg = locale === 'ru' ? "Я временно недоступна. Пожалуйста, попробуйте ещё раз чуть позже." :
+                          locale === 'es' ? "No estoy disponible temporalmente. Por favor, inténtelo de nuevo más tarde." :
+                          locale === 'zh' ? "我暂时无法提供服务。请稍后再试。" :
+                          "I am temporarily unavailable. Please try again later.";
+      return NextResponse.json({
+        success: true,
+        response: fallbackMsg,
+        provider: "hard-fallback",
+      });
+    }
 
     // Тот же дословный слой и на запасном пути: человеку всё равно, кто ответил,
     // а память обязана сохраниться в обоих случаях.
