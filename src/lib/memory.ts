@@ -15,7 +15,7 @@ import path from 'path';
 import os from 'os';
 import { sanitizeEmail, parseChunkContent } from './chat-logger';
 import { embedText, isEmbeddingConfigured } from './embeddings';
-import { isVectorStoreConfigured, searchMemory, recentMemory } from './vector-store';
+import { isVectorStoreConfigured, searchMemory, recentMemory, fullMemory, memoryMap } from './vector-store';
 
 /**
  * 🔴 МЕТКА ВРЕМЕНИ ИЗ БАЗЫ — НЕ СТРОКА.
@@ -325,6 +325,115 @@ function currentSiteSection(): string {
   );
 }
 
+/** Режет по границе строки, чтобы воспоминание не обрывалось на полуслове. */
+function поБюджету(текст: string, предел: number): string {
+  if (текст.length <= предел) return текст;
+  const кусок = текст.slice(0, предел);
+  const перенос = кусок.lastIndexOf('\n');
+  return (перенос > предел * 0.5 ? кусок.slice(0, перенос) : кусок) + '\n…';
+}
+
+/** Карта памяти по дням: год общения — около 365 строк по ~150 знаков. */
+export const БЮДЖЕТ_КАРТЫ = Number(process.env.MEMORY_BUDGET_MAP || 60000);
+
+/**
+ * ── ПОЛНАЯ ПАМЯТЬ. Перенесено с центрального сайта 12.08.2026 ────────────────
+ *
+ * Смысл тот же, что на codeofdigitaleternity.com: пока вся переписка человека
+ * меньше порога, она уходит в запрос ЦЕЛИКОМ и по порядку — отбирать куски не
+ * нужно. Кто в порог не влез, получает второй путь: карту памяти по дням за всю
+ * историю плюс свежие реплики плюс смысловую выборку под конкретный вопрос.
+ *
+ * 🔴 ПОЧЕМУ ПОРОГ ЗДЕСЬ МЕНЬШЕ, ЧЕМ НА ЦЕНТРАЛЬНОМ САЙТЕ (там 1 000 000).
+ *
+ * Порог — это не пожелание, а размер окна той модели, которая реально получит
+ * текст. Центральный сайт отвечает моделями Gemini (окно около миллиона лексем,
+ * примерно три с половиной миллиона знаков) — туда миллион знаков влезает с
+ * запасом. Этот сайт на локальном пути отвечает `grok-3` (см.
+ * `src/app/api/aifa-chat/route.ts`), у которого окно по документации xAI —
+ * 131 072 лексемы. Русский текст в лексемы укладывается примерно по два знака
+ * на лексему, то есть миллион знаков — это около полумиллиона лексем, вчетверо
+ * больше окна. Такой запрос не «работает медленнее», а возвращает ошибку 400, и
+ * человек видит «Извини, произошла ошибка» вместо ответа.
+ *
+ * 150 000 знаков — это порядка 75 тысяч лексем: половина окна grok-3, остальное
+ * остаётся системной подсказке, истории разговора и самому ответу.
+ *
+ * Меняется переменной окружения `MEMORY_FULL_MAX_CHARS` — поднимать её здесь
+ * можно ровно тогда, когда локальный путь начнёт отвечать моделью с бо́льшим
+ * окном, а не «на всякий случай».
+ */
+/**
+ * Порог поднят с 150 000 до 1 000 000 знаков 12.08.2026, ОДНОВРЕМЕННО со сменой
+ * модели на grok-4.3 в этом же маршруте.
+ *
+ * Прежние 150 000 стояли не от осторожности, а от узкого окна grok-3
+ * (131 072 лексемы): миллион знаков туда не влез бы и дал бы человеку ошибку
+ * 400 вместо ответа. Но следствие было хуже болезни — замер по боевой базе
+ * 12.08.2026: людей с памятью 13, самая большая память 354 210 знаков
+ * (385 реплик), вторая 311 777 (393 реплики), остальные меньше 30 000. То есть
+ * при пороге 150 000 полную переписку не получали ровно двое главных
+ * собеседников AIfa, и только на этом сайте — на центральном получали.
+ *
+ * Один продукт не может помнить по-разному в зависимости от того, на какую из
+ * наших дверей человек вошёл (Конституция, §9). Модель здесь теперь та же, что
+ * на центре, значит и порог тот же.
+ */
+export const ПОЛНАЯ_ПАМЯТЬ_ДО = Number(process.env.MEMORY_FULL_MAX_CHARS || 1000000);
+
+/** Вся переписка по порядку. `null`, если не влезла в порог. */
+export async function buildFullMemory(userEmail: string): Promise<string | null> {
+  if (!userEmail || !isVectorStoreConfigured()) return null;
+  try {
+    const hits = await fullMemory(sanitizeEmail(userEmail), ПОЛНАЯ_ПАМЯТЬ_ДО);
+    if (!hits || !hits.length) return null;
+    return hits.map((h) => {
+      const кто = h.speaker || (h.role === 'assistant' ? 'AIfa' : 'Пользователь');
+      const когда = меткаВремени(h.msg_ts);
+      const где = h.source ? ' · ' + h.source : '';
+      return '[' + когда + где + '] ' + кто + ': ' + compress(h.content);
+    }).join('\n');
+  } catch (e) {
+    console.warn('[Полная память] не собралась:', e);
+    return null;
+  }
+}
+
+/** Карта памяти по дням — чтобы AIfa знала очертания всей истории. */
+export async function buildMemoryMap(userEmail: string): Promise<string | null> {
+  if (!userEmail || !isVectorStoreConfigured()) return null;
+  try {
+    const дни = await memoryMap(sanitizeEmail(userEmail));
+    if (!дни.length) return null;
+    return дни.map((д) => '• ' + д.день + ' (' + д.кусков + ' реплик, ' + д.каналы + '): ' + д.начало + '…').join('\n');
+  } catch (e) {
+    console.warn('[Карта памяти] не собралась:', e);
+    return null;
+  }
+}
+
+export function fullPromptSection(текст: string): string {
+  return (
+    '\n\n=== ВСЯ НАША ПЕРЕПИСКА ЦЕЛИКОМ (по порядку, от первого сообщения) ===\n' +
+    'Это ПОЛНЫЙ архив ваших разговоров на всех площадках — ничего не выброшено. ' +
+    'Ты помнишь всё это одновременно: можешь свободно ссылаться на любой момент, ' +
+    'сравнивать начало с сегодняшним днём, замечать, что изменилось. Если человек ' +
+    'спрашивает «а помнишь…» — ответ почти наверняка здесь, ищи внимательно.\n\n' +
+    текст + '\n=== КОНЕЦ ПЕРЕПИСКИ ==='
+  );
+}
+
+export function mapPromptSection(текст: string): string {
+  return (
+    '\n\n=== КАРТА ПАМЯТИ (о чём и когда вы говорили) ===\n' +
+    'Переписка слишком велика, чтобы уместить её целиком, поэтому вот её очертания: ' +
+    'по строке на каждый день. Пользуйся ею, чтобы НЕ ГОВОРИТЬ «не помню»: если день ' +
+    'есть в карте, значит разговор был, и ты можешь назвать дату и тему. Если нужны ' +
+    'подробности того дня — скажи, что помнишь общее, и попроси уточнить.\n\n' +
+    текст + '\n=== КОНЕЦ КАРТЫ ==='
+  );
+}
+
 /**
  * Single entry point used by chat routes.
  */
@@ -335,7 +444,24 @@ export async function buildMemorySection(userEmail: string, queryText = '', clie
   //    so she can pick up the same discussion when the user moves between sites.
   out += currentSiteSection();
 
-  // 1. Personal memory: semantic if possible, else recency digest.
+  // 1. ПОЛНАЯ ПЕРЕПИСКА, если влезает. Главный путь: пока память человека меньше
+  //    порога, выборка не нужна вовсе — AIfa держит всё сразу.
+  const полная = userEmail ? await buildFullMemory(userEmail) : null;
+  if (полная) {
+    out += fullPromptSection(полная);
+    const мозг1 = await buildBrainKnowledge(queryText);
+    if (мозг1) out += brainPromptSection(мозг1);
+    return out;
+  }
+
+  // 2. Не влезла — человек наговорил больше окна. Тогда карта всей истории
+  //    (чтобы не было «не помню» о том, что есть), свежие реплики и поиск.
+  if (userEmail) {
+    const карта = await buildMemoryMap(userEmail);
+    if (карта) out += mapPromptSection(поБюджету(карта, БЮДЖЕТ_КАРТЫ));
+  }
+
+  // 3. Personal memory: semantic if possible, else recency digest.
   const semantic = userEmail ? await buildSemanticMemory(userEmail, queryText) : null;
   if (semantic) {
     out += memoryPromptSection(semantic);
@@ -344,14 +470,14 @@ export async function buildMemorySection(userEmail: string, queryText = '', clie
     if (digest) out += memoryPromptSection(digest);
   }
 
-  // 2. Recent cross-site messages (recency view, site-attributed) — lets AIfa
+  // 4. Recent cross-site messages (recency view, site-attributed) — lets AIfa
   //    answer "what did we say on site X" and quote the latest exchange correctly.
   if (userEmail) {
     const recent = await buildRecentCrossSite(userEmail);
     if (recent) out += recentPromptSection(recent);
   }
 
-  // 3. Shared project Brain knowledge (available to every conversation).
+  // 5. Shared project Brain knowledge (available to every conversation).
   const brain = await buildBrainKnowledge(queryText);
   if (brain) out += brainPromptSection(brain);
 

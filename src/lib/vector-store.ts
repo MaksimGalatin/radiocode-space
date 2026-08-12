@@ -234,6 +234,84 @@ export async function recentMemory(userKey: string, limit = 12): Promise<MemoryH
   return rows;
 }
 
+/**
+ * ВСЯ память человека, по времени, от первого сообщения до последнего.
+ *
+ * ЗАЧЕМ ЭТО ЕСТЬ. Смысловой поиск отвечает на вопрос «что похоже на этот
+ * вопрос». Он не отвечает на вопрос «что вообще было» — а именно это значит
+ * «помнить разговор». Пока вся память человека меньше порога, выбирать куски
+ * не нужно: AIfa держит её ВСЮ и может свободно ходить по ней в любую сторону.
+ * Смысловой поиск включается только тогда, когда человек наговорил больше
+ * порога, — и тогда он уже честно работает по назначению.
+ *
+ * `пределЗнаков` — в ЗНАКАХ, а не в кусках: куски бывают от ста знаков до
+ * четырнадцати тысяч, и считать их — значит не знать, сколько на самом деле
+ * уйдёт в запрос. Возвращает null, если память в предел не помещается: тогда
+ * вызывающий сам решает, чем её заменить (карта памяти + свежие + смысловой).
+ *
+ * 🔴 ЗАМЕР ДЛИНЫ ИДЁТ ПО ТОМУ, ЧТО ЛЕЖИТ В БАЗЕ. На этом сайте запись всё ещё
+ * шифруется (см. upsertMemory выше), поэтому `length(content)` — это длина
+ * ШИФРОТЕКСТА, а он длиннее открытого текста. Значит проверка строгая в
+ * безопасную сторону: кто прошёл порог по шифротексту, тот тем более пройдёт
+ * его по расшифрованному. Занизить объём эта мерка не может.
+ */
+export async function fullMemory(userKey: string, пределЗнаков: number): Promise<MemoryHit[] | null> {
+  await ensureSchema();
+  const sql = getSql();
+  const hashedKey = hashUserKey(userKey);
+
+  const мера = (await sql`
+    SELECT COALESCE(SUM(length(content)), 0)::int AS знаков, COUNT(*)::int AS кусков
+      FROM chat_memory WHERE user_key = ${hashedKey}`) as unknown as Array<{ знаков: number; кусков: number }>;
+  const всего = Number(мера[0]?.знаков ?? 0);
+  if (!всего || всего > пределЗнаков) return null;
+
+  const rows = (await sql`
+    SELECT content, role, speaker, chat_type, msg_ts, source, 1 AS score
+    FROM chat_memory
+    WHERE user_key = ${hashedKey}
+    ORDER BY msg_ts ASC NULLS FIRST, id ASC`) as MemoryHit[];
+
+  for (const h of rows) {
+    if (userKey !== '__brain__' && h.content) {
+      try { h.content = await decryptText(h.content); } catch { /* старые записи открытым текстом */ }
+    }
+  }
+  return rows;
+}
+
+/**
+ * КАРТА памяти: по одной строке на день — сколько было сказано и о чём примерно.
+ *
+ * Нужна ровно тогда, когда вся память в запрос не влезла. Без карты AIfa не
+ * знает даже, ЧТО у неё есть: смысловой поиск покажет десяток похожих кусков, и
+ * на вопрос «а помнишь, мы в июне говорили про...» она честно ответит «нет»,
+ * хотя запись лежит рядом. С картой она видит очертания всей истории и может
+ * сказать «да, 15 июня был длинный разговор про Терминал» — и попросить
+ * уточнить, чтобы найти точнее.
+ */
+export async function memoryMap(userKey: string, днейМакс = 400): Promise<Array<{ день: string; кусков: number; каналы: string; начало: string }>> {
+  await ensureSchema();
+  const sql = getSql();
+  const hashedKey = hashUserKey(userKey);
+  const rows = (await sql`
+    SELECT to_char(msg_ts, 'YYYY-MM-DD') AS день,
+           COUNT(*)::int AS кусков,
+           string_agg(DISTINCT chat_type, ', ') AS каналы,
+           (ARRAY_AGG(content ORDER BY msg_ts ASC))[1] AS начало
+      FROM chat_memory
+     WHERE user_key = ${hashedKey} AND msg_ts IS NOT NULL
+     GROUP BY 1 ORDER BY 1 ASC
+     LIMIT ${днейМакс}`) as unknown as Array<{ день: string; кусков: number; каналы: string; начало: string }>;
+  for (const r of rows) {
+    if (userKey !== '__brain__' && r.начало) {
+      try { r.начало = await decryptText(r.начало); } catch { /* старые записи */ }
+    }
+    r.начало = String(r.начало || '').replace(/\s+/g, ' ').slice(0, 110);
+  }
+  return rows;
+}
+
 /** Returns the set of content hashes already stored for a user (backfill dedup). */
 export async function existingHashes(userKey: string): Promise<Set<string>> {
   await ensureSchema();

@@ -258,6 +258,16 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
 
     try {
       const userEmail = typeof window !== 'undefined' ? (localStorage.getItem('aifa_user_email') || '') : '';
+      // ОДИН тип чата на оба слоя памяти — смысловой и дословный.
+      //
+      // Здесь стояло два разных значения: в чат уходило 'main', а в дословную
+      // запись — 'terminal'. Один и тот же разговор ложился под двумя именами, и
+      // теперь, когда дословную копию пишет ещё и сервер (внутри /api/aifa-chat,
+      // тем же типом, что у смыслового слоя), расхождение означало бы удвоение:
+      // сервер писал бы в 'main', браузер — в 'terminal', и защита от повтора не
+      // увидела бы пару, потому что она сверяет запись того же типа. Одна
+      // переменная на оба запроса — чтобы значения больше не разошлись.
+      const типЧата = 'main';
       const res = await fetch("/api/aifa-chat", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -265,7 +275,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
           history: messages.filter(m => m.role !== 'assistant' || m.revealed >= m.content.length)
             .map(m => ({ role: m.role, content: m.content })),
           userEmail,
-          chatType: 'main',
+          chatType: типЧата,
           locale: lang,
         }),
       });
@@ -286,8 +296,12 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
         if (ttsRef.current) speakRef.current(data.response);
         // Persist this exchange into the server-managed memory (owner reads it
         // later in the cabinet with no key). Fire-and-forget; 401 if not logged in.
+        //
+        // Запрос ОСТАВЛЕН, хотя ту же пару уже записал сервер: если серверная
+        // запись сорвётся (моргнула база), эта её подстрахует. Повтор не удвоит
+        // память — appendVerbatim сверяет последнюю запись и пропускает её.
         try {
-          fetch("/api/memory/append", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chatType: "terminal", userMessage: text.trim(), assistantMessage: data.response }) })
+          fetch("/api/memory/append", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chatType: типЧата, userMessage: text.trim(), assistantMessage: data.response }) })
             // Молчаливое .catch(()=>{}) прятало потерю переписки: человек видел
             // ответ AIfa и был уверен, что диалог сохранён. Теперь неудача
             // хотя бы кричит в консоль — её видно и в журнале ошибок.

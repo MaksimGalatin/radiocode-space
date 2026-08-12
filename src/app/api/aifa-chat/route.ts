@@ -137,6 +137,45 @@ async function buildIdentitySection(userEmail: string, locale: string): Promise<
   }
 }
 
+/**
+ * ДОСЛОВНАЯ ЗАПИСЬ — НА СЕРВЕРЕ, ТАМ ЖЕ, ГДЕ СМЫСЛОВАЯ.
+ *
+ * ЗАЧЕМ. Дословный зашифрованный слой (chat_memory в SUBMISSIONS_DB_URL) до
+ * 12.08.2026 писался ТОЛЬКО отдельным запросом из браузера на
+ * /api/memory/append — то есть держался на том, что человек не закрыл вкладку и
+ * что сеть не моргнула. Замер в боевой базе: значение chat_type там бывает
+ * только 'terminal' и 'oracle', записей главного чата ('main') нет ни у кого.
+ * Смысловой слой при этом цел, потому что пишется на сервере. Значит, лечится
+ * это одним — писать дословный слой здесь же, пока запрос ещё жив.
+ *
+ * Ждём завершения намеренно, не «отпускаем в фон»: на serverless процесс
+ * замораживается сразу после ответа, и отложенная запись просто не состоялась
+ * бы — ровно та же тихая потеря, от которой уходим. Заодно порядок становится
+ * определённым: сервер записал первым, и повторный вызов из браузера отсеется
+ * защитой от удвоения внутри appendVerbatim.
+ *
+ * Ошибка записи НЕ должна отнимать у человека ответ: любая беда уходит в
+ * console.error, а ответ отдаётся как обычно.
+ */
+async function записатьДословно(
+  email: string,
+  chatType: string,
+  вопрос: string,
+  ответ: string
+): Promise<void> {
+  const почта = (email || '').trim();
+  if (!почта) return; // не вошёл — писать некуда: у гостя нет своего ключа
+  try {
+    const { appendVerbatim } = await import('@/lib/memory-write');
+    const итог = await appendVerbatim(почта, chatType, вопрос, ответ);
+    if (!итог.ok) {
+      console.error(`[AIfa чат] дословная запись не легла (${chatType}): ${итог.error}`);
+    }
+  } catch (e) {
+    console.error('[AIfa чат] дословная запись сорвалась:', e);
+  }
+}
+
 // ── Grok API (xAI) - OpenAI compatible ──
 /**
  * Второй параметр — ВСЁ, что дописывается к системной подсказке: и
@@ -171,7 +210,13 @@ async function getGrokResponse(
       "Authorization": `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "grok-3",
+      // Была grok-3 с окном 131 072 лексемы. Из-за узкого окна порог полной
+      // памяти на этом сайте пришлось держать на 150 000 знаков — и двое самых
+      // активных людей полной переписки здесь не получали, хотя на центральном
+      // сайте получали. Один продукт не может помнить по-разному в зависимости
+      // от того, на какую из наших дверей человек вошёл (Конституция, §9).
+      // grok-4.3 — та же модель, что на центре и на aifa.works.
+      model: "grok-4.3",
       messages: formattedMessages,
       max_tokens: 2048,
       temperature: 0.8,
@@ -262,6 +307,8 @@ export async function POST(request: NextRequest) {
           { status: central.статус }
         );
       }
+      // Ответ пришёл из центра — дословную копию всё равно кладём у себя.
+      await записатьДословно(userEmail, chatType, message, central.текст);
       return NextResponse.json({ success: true, response: central.текст, provider: "central" });
     }
     // Otherwise fall through to the local Grok call so chat never dies.
@@ -311,6 +358,10 @@ export async function POST(request: NextRequest) {
     // Память идёт в системную подсказку следом за представлением человека —
     // тем же способом, что на эталоне: одна строка системного сообщения.
     const aiResponse = await getGrokResponse(trimmed, identitySection + memorySection);
+
+    // Тот же дословный слой и на запасном пути: человеку всё равно, кто ответил,
+    // а память обязана сохраниться в обоих случаях.
+    await записатьДословно(userEmail, chatType, message, aiResponse);
 
     return NextResponse.json({
       success: true,
