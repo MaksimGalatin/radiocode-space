@@ -9,6 +9,7 @@ import ClientErrorMonitor from "@/components/ClientErrorMonitor";
 import СогласиеНаCookie from "@/components/СогласиеНаCookie";
 import Script from "next/script";
 import "./globals.css";
+import { разметкаТарифов } from '@/lib/tiers-schema';
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -164,6 +165,16 @@ const JSON_LD = [
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    // Заявка на строку поиска прямо в выдаче Google: если поисковик
+    // сочтёт сайт достойным, под ссылкой появится поле поиска по сайту.
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://radiocode.space/news?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
     name: "RadioCode.Space",
     url: "https://radiocode.space",
     description:
@@ -271,6 +282,10 @@ export default async function RootLayout({
             __html:
               "(function(){try{var d=document.documentElement,ua=navigator.userAgent||'',lite=false,tv=false,big=Math.max(screen.width||0,screen.height||0),noHover=matchMedia('(hover: none)').matches,coarse=matchMedia('(pointer: coarse)').matches;if(/\\b(SMART[- ]?TV|SmartTV|GoogleTV|Google TV|AndroidTV|Android TV|AppleTV|HbbTV|NetCast|Web0S|webOS|Tizen|BRAVIA|AFT[A-Z]{1,3}|CrKey|VIDAA|DTV|PlayStation|Nintendo|Xbox)\\b/i.test(ua)){lite=true;tv=true;}if(/Android/i.test(ua)&&!/Mobile/i.test(ua)&&big>=1280&&noHover){lite=true;tv=true;}var c=navigator.hardwareConcurrency||8,m=navigator.deviceMemory||8;if(c<=2||m<=2)lite=true;if(matchMedia('(prefers-reduced-motion: reduce)').matches)lite=true;if(noHover&&coarse&&window.innerWidth>=1024){lite=true;tv=true;}var hard=lite;if(window.innerWidth<768)lite=true;if(lite)d.classList.add('perf-lite');if(tv)d.classList.add('perf-tv');if(!hard){var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(window.innerWidth<768)d.classList.add('perf-lite');else d.classList.remove('perf-lite');},200);});}}catch(e){}})();",
           }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(разметкаТарифов("https://radiocode.space")) }}
         />
         <script
           type="application/ld+json"
