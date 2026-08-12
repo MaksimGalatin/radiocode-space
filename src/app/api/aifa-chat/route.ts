@@ -184,6 +184,84 @@ async function записатьДословно(
  * содержимым, и оставить прежнее название значило бы соврать читателю о том,
  * что уходит в модель.
  */
+/**
+ * 🔴 ПОРЯДОК ПРОВАЙДЕРОВ — ЭТО ПОРЯДОК РАСХОДОВ.
+ *
+ * Требование Архитектора: сначала БЕСПЛАТНОЕ, потом ГРАНТ Google, и только
+ * потом его собственный оплачиваемый ключ Grok.
+ *
+ * Здесь этой лесенки не было вовсе: локальный путь шёл СРАЗУ в api.x.ai, то
+ * есть на личный счёт Архитектора. В обычной работе разговор уходит в
+ * центральный мозг и сюда не попадает — потому расход и оставался незаметным:
+ * он случается ровно тогда, когда центр недоступен, и тогда за каждый ответ
+ * платит он сам.
+ *
+ * Возвращает null, если бесплатное и грант не настроены или не ответили —
+ * тогда зовущий идёт к Grok, как и раньше. Ключей нет — поведение прежнее.
+ */
+async function ответБесплатнымИлиГрантом(
+  messages: Array<{ role: string; content: string }>,
+  дополнениеПодсказки: string
+): Promise<string | null> {
+  const formattedMessages = [
+    { role: "system", content: AIFA_SYSTEM_PROMPT + дополнениеПодсказки },
+    ...messages.map((m) => ({
+      role: m.role === "assistant" ? "assistant" : "user",
+      content: m.content,
+    })),
+  ];
+
+  // 1. Бесплатные ключи Google AI Studio — их может быть несколько.
+  const ключи = [
+    process.env.GEMINI_API_KEY,
+    process.env.GEMINI_API_KEY_2,
+    process.env.GEMINI_API_KEY_3,
+    process.env.GEMINI_API_KEY_4,
+  ].filter((k): k is string => typeof k === 'string' && k.trim().length > 0);
+
+  const лесенка = [
+    process.env.GEMINI_FREE_TOP || 'gemini-3.6-flash',
+    'gemini-3.5-flash-lite',
+    process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite',
+  ];
+
+  for (const модель of лесенка) {
+    for (let i = 0; i < ключи.length; i++) {
+      try {
+        const ответ = await fetch("https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Authorization": `Bearer ${ключи[i]}` },
+          body: JSON.stringify({ model: модель, messages: formattedMessages, max_tokens: 2048, temperature: 0.8 }),
+        });
+        if (ответ.ok) {
+          const данные = await ответ.json();
+          const текст = данные.choices?.[0]?.message?.content;
+          if (текст) return текст;
+        } else {
+          const почему = ответ.status === 429 ? 'лимит исчерпан' : 'ОШИБКА НАСТРОЙКИ';
+          console.warn(`[AIfa] бесплатный ключ №${i + 1} · ${модель}: ${ответ.status} (${почему})`);
+        }
+      } catch (err) {
+        console.warn(`[AIfa] бесплатный ключ №${i + 1} · ${модель} недоступен:`, err);
+      }
+    }
+  }
+
+  // 2. Грант Google Cloud (Vertex AI) — платный, но из гранта, а не из кармана.
+  try {
+    const { vertexChatCompletion, isVertexConfigured } = await import("@/lib/vertex-ai");
+    if (isVertexConfigured()) {
+      const ответ = await vertexChatCompletion(formattedMessages, 2048, 0.8);
+      if (ответ) return ответ;
+      console.warn('[AIfa] Vertex не ответил, идём к Grok — это уже личный ключ');
+    }
+  } catch (err) {
+    console.warn('[AIfa] Vertex недоступен:', err);
+  }
+
+  return null; // 3. дальше зовущий пойдёт к Grok
+}
+
 async function getGrokResponse(
   messages: Array<{ role: string; content: string }>,
   дополнениеПодсказки: string = ''
@@ -375,7 +453,10 @@ export async function POST(request: NextRequest) {
       );
       memorySection = memorySection.slice(0, ОКНО_ЗАПАСНОГО) + '\n…';
     }
-    const aiResponse = await getGrokResponse(trimmed, identitySection + memorySection);
+    // Бесплатное → грант → личный Grok. Порядок расходов, а не вкусов.
+    const aiResponse =
+      (await ответБесплатнымИлиГрантом(trimmed, identitySection + memorySection)) ??
+      (await getGrokResponse(trimmed, identitySection + memorySection));
 
     // Тот же дословный слой и на запасном пути: человеку всё равно, кто ответил,
     // а память обязана сохраниться в обоих случаях.
