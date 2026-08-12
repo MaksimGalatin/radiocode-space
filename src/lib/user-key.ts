@@ -84,6 +84,22 @@ export async function decryptForUser(email: string, cipher: string): Promise<str
   return aeadDecrypt(key, cipher).toString('utf8');
 }
 
+/**
+ * Те же конверты, но ключ УЖЕ на руках.
+ *
+ * ЗАЧЕМ. `encryptForUser`/`decryptForUser` каждый раз добывают ключ заново, а
+ * это запрос в базу, распаковка в KMS и стотысячная прокрутка pbkdf2. Там, где
+ * за один заход надо расшифровать десятки блобов подряд (чтение всей переписки
+ * человека админской ручкой), это умножалось на число блобов. Ключ добывается
+ * один раз, конверт остаётся ровно тот же.
+ */
+export function encryptWithUserKey(key: Buffer, text: string): string {
+  return aeadEncrypt(key, Buffer.from(text, 'utf8'));
+}
+export function decryptWithUserKey(key: Buffer, cipher: string): string {
+  return aeadDecrypt(key, cipher).toString('utf8');
+}
+
 /** Raw key as base64 (for showing the owner their recovery key). Use sparingly. */
 export async function getUserKeyB64(email: string): Promise<string> {
   return (await getOrCreateUserKey(email)).toString('base64');
