@@ -319,7 +319,7 @@ async function ответБесплатнымИлиГрантом(
   // 2. Грант Google Cloud (Vertex AI) — платный, но из гранта, а не из кармана.
   try {
     const { vertexChatCompletion, isVertexConfigured } = await import("@/lib/vertex-ai");
-    if (платныеРазрешены() && isVertexConfigured()) {
+    if (isVertexConfigured()) {
       const ответ = await vertexChatCompletion(formattedMessages, 2048, 0.8);
       if (ответ) return ответ;
       console.warn('[AIfa] Vertex не ответил, идём к Grok — это уже личный ключ');
