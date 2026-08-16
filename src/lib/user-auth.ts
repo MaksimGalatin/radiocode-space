@@ -43,9 +43,29 @@ export function verifyUserToken(token: string | undefined | null): string | null
     const data = token.slice(0, idx);
     const sep = data.lastIndexOf(':');
     if (sep < 0) return null;
-    const email = data.slice(0, sep);
-    const expStr = data.slice(sep + 1);
-    if (!/^\d+$/.test(expStr) || Date.now() > parseInt(expStr, 10)) return null;
+    /**
+     * ДВА ФОРМАТА КЛЮЧА, А НЕ ОДИН (16.08.2026).
+     *
+     * Центральный сайт выдаёт `почта:срок:поколение` — поколение позволяет
+     * ОТОЗВАТЬ выданные сессии при смене пароля. Здесь разбор понимал только
+     * старый `почта:срок`: у трёхчастного ключа за срок принималось поколение
+     * («0»), проверка `Date.now() > 0` срабатывала всегда, и вход отвергался.
+     *
+     * Снаружи это выглядело так: человек вошёл на codeofdigitaleternity.com или
+     * aifa.works, открыл radiocode.space — и он там НЕ авторизован, хотя по
+     * разделу 9 Конституции учётная запись у всех четырёх сайтов общая.
+     * Проверено живым запросом: центр отвечал 200, радио — 401.
+     */
+    let email = data.slice(0, sep);
+    let expStr = data.slice(sep + 1);
+    if (!/^\d+$/.test(expStr)) return null;
+    // Трёхчастный ключ: последний кусок — поколение, срок стоит перед ним.
+    const предыдущий = email.lastIndexOf(':');
+    if (предыдущий >= 0 && /^\d+$/.test(email.slice(предыдущий + 1))) {
+      expStr = email.slice(предыдущий + 1);
+      email = email.slice(0, предыдущий);
+    }
+    if (Date.now() > parseInt(expStr, 10)) return null;
     const expected = crypto.createHmac('sha256', SECRET_KEY).update(data).digest('hex');
     if (hmac.length !== expected.length) return null;
     if (!crypto.timingSafeEqual(Buffer.from(hmac), Buffer.from(expected))) return null;
