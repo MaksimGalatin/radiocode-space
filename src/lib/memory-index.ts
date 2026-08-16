@@ -28,25 +28,33 @@ const MIN_CONTENT_LEN = 12;
  * Пропускаем ВЕСЬ кусок целиком: вырезать ключ из середины ненадёжно, а потеря
  * одного куска знаний дешевле утечки.
  */
+/**
+ * ГРАНИЦА СЛОВА ПЕРЕД ПРИСТАВКОЙ — не украшение.
+ *
+ * Без неё `sk-` совпадало внутри обычных слов: `task-based-asynchronous-…`,
+ * `disk-keys-…`, `task-list-item-…` из таблиц стилей. Ежедневная проверка
+ * 16.08.2026 подняла 12 таких «находок», а сторож на этих же словах молча
+ * выбрасывал бы куски знаний из поиска — и заметить это было бы нечем.
+ */
 const СЕКРЕТЫ: RegExp[] = [
-  /ghp_[A-Za-z0-9]{20,}/,                      // токен GitHub
-  /github_pat_[A-Za-z0-9_]{20,}/,
-  /AIza[A-Za-z0-9_-]{20,}/,                    // ключ Google
-  /xai-[A-Za-z0-9]{15,}/,                      // ключ xAI
-  /sk-[A-Za-z0-9_-]{20,}/,                     // ключ OpenAI/Anthropic (в т.ч. sk-proj-, sk-ant-)
+  /(?<![A-Za-z0-9_-])ghp_[A-Za-z0-9]{20,}/,                      // токен GitHub
+  /(?<![A-Za-z0-9_-])github_pat_[A-Za-z0-9_]{20,}/,
+  /(?<![A-Za-z0-9_-])AIza[A-Za-z0-9_-]{20,}/,                    // ключ Google
+  /(?<![A-Za-z0-9_-])xai-[A-Za-z0-9]{15,}/,                      // ключ xAI
+  /(?<![A-Za-z0-9_-])sk-[A-Za-z0-9_-]{20,}/,                     // ключ OpenAI/Anthropic (в т.ч. sk-proj-, sk-ant-)
   /postgres(ql)?:\/\/[^\s]+:[^@\s]+@/,        // строка подключения с паролем
-  /npg_[A-Za-z0-9]{15,}/,                      // пароль Neon
-  /MII[A-Za-z0-9+/]{40,}/,                     // тело приватного ключа
+  /(?<![A-Za-z0-9_-])npg_[A-Za-z0-9]{15,}/,                      // пароль Neon
+  /(?<![A-Za-z0-9_-])MII[A-Za-z0-9+/]{40,}/,                     // тело приватного ключа
   /BEGIN [A-Z ]*PRIVATE KEY/,                  // заголовок PEM
   /xox[bpsa]-[A-Za-z0-9-]{20,}/,               // токен Slack
-  /AKIA[A-Z0-9]{12,}/,                         // ключ AWS
+  /(?<![A-Za-z0-9_-])AKIA[A-Z0-9]{12,}/,                         // ключ AWS
   /\b[0-9]{8,12}:[A-Za-z0-9_-]{25,}\b/,        // токен Telegram
-  /gsk_[A-Za-z0-9]{20,}/,                      // ключ Groq
-  /hf_[A-Za-z0-9]{30,}/,                       // ключ HuggingFace
-  /r8_[A-Za-z0-9]{20,}/,                       // ключ Replicate
-  /(sk|rk)_(live|test)_[A-Za-z0-9]{20,}/,      // ключ Stripe
-  /vcp_[A-Za-z0-9]{20,}/,                      // токен Vercel
-  /moltbook_sk_[A-Za-z0-9]{15,}/,              // ключ Moltbook
+  /(?<![A-Za-z0-9_-])gsk_[A-Za-z0-9]{20,}/,                      // ключ Groq
+  /(?<![A-Za-z0-9_-])hf_[A-Za-z0-9]{30,}/,                       // ключ HuggingFace
+  /(?<![A-Za-z0-9_-])r8_[A-Za-z0-9]{20,}/,                       // ключ Replicate
+  /(?<![A-Za-z0-9_-])(sk|rk)_(live|test)_[A-Za-z0-9]{20,}/,      // ключ Stripe
+  /(?<![A-Za-z0-9_-])vcp_[A-Za-z0-9]{20,}/,                      // токен Vercel
+  /(?<![A-Za-z0-9_-])moltbook_sk_[A-Za-z0-9]{15,}/,              // ключ Moltbook
   /(mysql|mongodb(\+srv)?|redis|amqps?):\/\/[^\s]+:[^@\s]+@/, // прочие строки подключения с паролем
   /BEGIN (OPENSSH|PGP) PRIVATE KEY/,
   /"kty"\s*:\s*"RSA"[\s\S]{0,400}"d"\s*:/,
