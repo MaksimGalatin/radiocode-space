@@ -394,7 +394,9 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
           </div>
 
           {/* Messages area */}
-          <div ref={scrollContainerRef} className="h-[400px] md:h-[500px] overflow-y-auto p-4 md:p-6 space-y-4 scroll-smooth">
+          <div ref={scrollContainerRef} className={`${embedded
+              ? "h-[calc(100vh-300px)] min-h-[560px]"
+              : "h-[400px] md:h-[500px]"} overflow-y-auto p-4 md:p-6 space-y-4 scroll-smooth`}>
             <AnimatePresence mode="popLayout">
               {messages.map((msg) => {
                 const isStreaming = msg.revealed < msg.content.length;
@@ -494,7 +496,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
                 className={`px-3 py-3 rounded-xl border transition-all ${ttsOn ? "border-cyan-400/50 bg-cyan-400/10 text-cyan-400" : "border-border text-muted-foreground hover:text-cyan-400 hover:border-cyan-400/30"}`}>
                 {ttsOn ? <Volume2 size={18} /> : <VolumeX size={18} />}
               </button>
-              <textarea ref={inputRef} rows={1} value={input} onChange={(e) => setInput(e.target.value)}
+              <textarea ref={inputRef} rows={embedded ? 3 : 1} value={input} onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
                   // Enter sends; Shift+Enter inserts a new line (grows the box down).
                   if (e.key === "Enter" && !e.shiftKey) {
@@ -503,7 +505,9 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
                   }
                 }}
                 placeholder={t("chat.placeholder", lang)} aria-label={t("chat.placeholder", lang)} disabled={isBusy}
-                className="flex-1 resize-none max-h-[160px] overflow-y-auto bg-card border border-border rounded-xl px-4 py-3 text-sm leading-relaxed focus:outline-none chat-input-glow placeholder:text-muted-foreground/50 disabled:opacity-50 transition-all" />
+                className={`flex-1 resize-none overflow-y-auto bg-card border border-border rounded-xl px-4 py-3 leading-relaxed focus:outline-none chat-input-glow placeholder:text-muted-foreground/50 disabled:opacity-50 transition-all ${embedded
+                  ? "max-h-[320px] min-h-[84px] text-base"
+                  : "max-h-[160px] text-sm"}`} />
               <motion.button type="submit" disabled={!input.trim() || isBusy} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                 aria-label="Send message"
                 className="px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-600 text-black rounded-xl font-medium disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:from-cyan-400 hover:to-cyan-500">

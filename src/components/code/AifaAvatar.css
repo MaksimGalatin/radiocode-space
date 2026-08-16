@@ -3,7 +3,9 @@
    Из-за таких блоков политика содержимого разрешала любые встроенные
    стили. Файл синхронизируется байт-в-байт между четырьмя сайтами. */
 .cab-aifa-stage{display:flex;gap:18px;align-items:stretch}
-.cab-aifa-figure{flex:0 0 380px;min-width:300px;align-self:stretch;position:relative;border:1px solid rgba(0,240,255,0.16);border-radius:16px;overflow:hidden;min-height:560px;
+/* Аватар сужен, разговор занимает всё остальное: в кабинете важнее текст,
+   а не картинка (16.08.2026, требование Архитектора). */
+.cab-aifa-figure{flex:0 0 280px;min-width:240px;align-self:stretch;position:relative;border:1px solid rgba(0,240,255,0.16);border-radius:16px;overflow:hidden;min-height:560px;
   background:radial-gradient(120% 70% at 50% 4%, rgba(0,240,255,0.06), rgba(4,5,12,0) 62%),#04050c}
 .cab-aifa-figure video{display:block;width:100%;height:100%;object-fit:cover}
 .cab-aifa-figure .cab-aifa-stalled{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#5f8fb0;font-size:13px;line-height:1.6;font-family:monospace;pointer-events:none}
