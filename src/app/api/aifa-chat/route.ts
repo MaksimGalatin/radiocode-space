@@ -232,6 +232,16 @@ async function записатьСмыслом(
  * Возвращает null, если бесплатное и грант не настроены или не ответили —
  * тогда зовущий идёт к Grok, как и раньше. Ключей нет — поведение прежнее.
  */
+function платныеРазрешены(): boolean {
+  // ПЛАТНЫЕ СТУПЕНИ ЗАКРЫТЫ ПО УМОЛЧАНИЮ (16.08.2026, требование Архитектора).
+  // Раздел 13 Конституции: платный путь должен быть закрыт ФИЗИЧЕСКИ, а не
+  // «мы туда не ходим». Ниже есть платный Vertex и чужой платный Grok; раньше
+  // они включались молча, как только кончался бесплатный запас. Теперь — только
+  // при явной переменной РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ=1.
+  const р = process.env.РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ || process.env.ALLOW_PAID_MODELS || '';
+  return р === '1' || р.toLowerCase() === 'true';
+}
+
 async function ответБесплатнымИлиГрантом(
   messages: Array<{ role: string; content: string }>,
   дополнениеПодсказки: string
@@ -309,7 +319,7 @@ async function ответБесплатнымИлиГрантом(
   // 2. Грант Google Cloud (Vertex AI) — платный, но из гранта, а не из кармана.
   try {
     const { vertexChatCompletion, isVertexConfigured } = await import("@/lib/vertex-ai");
-    if (isVertexConfigured()) {
+    if (платныеРазрешены() && isVertexConfigured()) {
       const ответ = await vertexChatCompletion(formattedMessages, 2048, 0.8);
       if (ответ) return ответ;
       console.warn('[AIfa] Vertex не ответил, идём к Grok — это уже личный ключ');
@@ -337,6 +347,7 @@ async function getGrokResponse(
    * Центральный сайт принимает оба имени. Принимаем и мы: одна и та же
    * настройка обязана означать одно и то же на всех сайтах экосистемы.
    */
+  if (!платныеРазрешены()) { console.warn('[модели] Grok закрыт: платные ступени выключены (РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ)'); return ''; }
   const apiKey = process.env.GROK_API_KEY || process.env.XAI_API_KEY;
 
   if (!apiKey) {

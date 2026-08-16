@@ -1,4 +1,5 @@
 /**
+
  * Живой голос AIfa — серверная озвучка ЛЕСЕНКОЙ: сначала бесплатное, потом
  * грант, и только в самом конце личные деньги Архитектора.
  *
@@ -62,6 +63,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createHash, createSign } from 'node:crypto';
 import { dbRateLimit, dbRateAdd, clientIp } from '@/lib/rate-limit-db';
+
+// ПЛАТНЫЙ GROK ЗАКРЫТ ПО УМОЛЧАНИЮ (16.08.2026, требование Архитектора).
+// api.x.ai — чужой платный поставщик; 13.08.2026 по этому ключу за сутки ушло
+// $43.35, которых никто не разрешал. Раздел 13 Конституции: платный путь
+// закрыт ФИЗИЧЕСКИ. Открывается только РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ=1.
+function ключГрока(): string {
+  const р = process.env.РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ || process.env.ALLOW_PAID_MODELS || '';
+  if (!(р === '1' || р.toLowerCase() === 'true')) {
+    console.warn('[модели] Grok (api.x.ai) закрыт: платные ступени выключены');
+    return '';
+  }
+  return process.env.GROK_API_KEY || process.env.XAI_API_KEY || '';
+}
+
 
 export const runtime = 'nodejs';
 
@@ -504,7 +519,7 @@ export async function POST(req: NextRequest) {
   // ключа: 204 и голос браузера. Проверка стоит до счётчика частоты, чтобы не
   // ходить в базу ради заведомо пустого ответа.
   const ключиБесплатные = ключиGemini();
-  const ключGrok = process.env.GROK_API_KEY;
+  const ключGrok = ключГрока();
   if (ключиБесплатные.length === 0 && !служебныйКлюч() && !ключGrok) return наБраузер();
 
   // ── 2. Частота. Самая дешёвая проверка — идёт первой ──────────────────────

@@ -21,8 +21,35 @@
 
 export const KMS_PREFIX = 'kms1:';
 
+/**
+ * KMS СЧИТАЕТСЯ ВКЛЮЧЁННЫМ ТОЛЬКО ЕСЛИ ЕСТЬ И УЧЁТНЫЕ ДАННЫЕ (16.08.2026).
+ *
+ * Было: проверялись лишь `KMS_PROVIDER` и `KMS_KEY_ID`. Если при этом
+ * `GCP_SERVICE_ACCOUNT_KEY` пуст — а такое бывает после переноса переменных, —
+ * код шёл в KMS, там `JSON.parse('')` бросал «Unexpected end of JSON input», и
+ * КАЖДАЯ запись памяти падала с HTTP 500. Проверено живым прогоном 16.08.2026:
+ * три записи из трёх, `db_error`, память не сохранялась вовсе.
+ *
+ * Стало: нет учётных данных — KMS считается выключенным, в журнал уходит
+ * громкое предупреждение, а ключ человека заворачивается мастер-ключом.
+ * Память продолжает сохраняться. Смешанное хранение безопасно: развёртывание
+ * различает конверты по метке (`isKmsBlob`), поэтому прежние KMS-конверты
+ * читаются как читались.
+ */
 export function kmsEnabled(): boolean {
-  return !!(process.env.KMS_PROVIDER && process.env.KMS_KEY_ID);
+  const провайдер = process.env.KMS_PROVIDER;
+  const ключ = process.env.KMS_KEY_ID;
+  if (!провайдер || !ключ) return false;
+  const учётные = process.env.GCP_SERVICE_ACCOUNT_KEY || process.env.GOOGLE_SERVICE_ACCOUNT_KEY
+    || process.env.AWS_ACCESS_KEY_ID || '';
+  if (!учётные.trim()) {
+    console.error(
+      '[KMS] ВЫКЛЮЧЕН: задан KMS_PROVIDER и KMS_KEY_ID, но учётных данных нет. ' +
+      'Ключи людей заворачиваются мастер-ключом. Память сохраняется, но это НЕ ' +
+      'та защита, которая настроена — проверь переменные окружения.');
+    return false;
+  }
+  return true;
 }
 
 export function isKmsBlob(b64: string): boolean {
