@@ -123,7 +123,25 @@ export async function backfillUser(userEmail: string): Promise<{ scanned: number
   let scanned = 0;
   let inserted = 0;
 
-  for (const type of CHAT_TYPES) {
+  // КАНАЛЫ БЕРЁМ ИЗ ИМЁН ФАЙЛОВ, А НЕ ИЗ СПИСКА В КОДЕ.
+  //
+  // Здесь наполняется ПАМЯТЬ AIfa. Пока перечень был вписан руками (`main`,
+  // `terminal`, `oracle`), новый канал не индексировался вовсе — AIfa о нём
+  // просто не знала. Замер 15.08.2026: в смысловой базе лежит четвёртый канал
+  // `telegram_chat`, 164 реплики у 3 человек.
+  //
+  // Почта известна (`userKey`), файл называется `почта_канал_chunk_N.md` —
+  // значит канал вырезается однозначно даже с подчёркиванием внутри имени.
+  const типыИзФайлов = new Set<string>(CHAT_TYPES);
+  for (const f of files) {
+    if (!f.startsWith(`${userKey}_`) || !f.endsWith('.md')) continue;
+    const где = f.lastIndexOf('_chunk_');
+    if (где <= userKey.length) continue;
+    const канал = f.slice(userKey.length + 1, где);
+    if (канал && канал.length <= 24) типыИзФайлов.add(канал);
+  }
+
+  for (const type of типыИзФайлов) {
     const prefix = `${userKey}_${type}_chunk_`;
     const chunkFiles = files
       .filter((f) => f.startsWith(prefix) && f.endsWith('.md'))

@@ -91,7 +91,17 @@ export async function buildMemoryDigest(userEmail: string, clientKey = ''): Prom
     if (names.length === 0) return null;
 
     const sections: string[] = [];
-    for (const type of CHAT_TYPES) {
+    // Каналы выводим из имён файлов человека, а не из списка в коде: жёсткая
+    // тройка молча теряла новые каналы (15.08.2026 — `telegram_chat`).
+    const типыИзФайлов = new Set<string>(CHAT_TYPES);
+    for (const n of names) {
+      if (!n.startsWith(`${sanitized}_`) || !n.endsWith('.md')) continue;
+      const где = n.lastIndexOf('_chunk_');
+      if (где <= sanitized.length) continue;
+      const канал = n.slice(sanitized.length + 1, где);
+      if (канал && канал.length <= 24) типыИзФайлов.add(канал);
+    }
+    for (const type of типыИзФайлов) {
       const prefix = `${sanitized}_${type}_chunk_`;
       const chunkItems = names
         .filter(n => n.startsWith(prefix))
