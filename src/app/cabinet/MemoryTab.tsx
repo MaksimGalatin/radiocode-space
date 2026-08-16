@@ -400,6 +400,12 @@ export default function MemoryTab({ email }: { email: string }) {
     <div style={{ display: "grid", gap: 16 }} className="cab-fade">
       <Card>
         <SectionTitle icon="🧠" title={t("memAuto")} sub={t("memAutoSub")} />
+        {/* Заливка в вечную цепь — только на платных тарифах. Человек должен
+            видеть это здесь, а не узнавать потом, что его память не сохранилась
+            в блокчейне (16.08.2026). */}
+        <div style={{ fontSize: 13, opacity: 0.8, marginTop: -6, marginBottom: 10 }}>
+          ⛓️ {t("memChainPaidOnly")}
+        </div>
         {err ? <ErrorState text={t("netErr")} onRetry={load} retryLabel={t("retry")} />
           : server === null ? <div style={{ display: "grid", gap: 10 }}><Skeleton h={80} /><Skeleton h={60} /></div>
           : server.length === 0 ? <EmptyState text={t("memEmpty")} />
