@@ -24,7 +24,32 @@ const LEGACY_SECRET = 'CODE-Eternal-Secret-Key-2026';
 
 /** Ключи, которыми допустимо ЧИТАТЬ старые записи, но не создавать новые. */
 function legacyKeys(): Buffer[] {
-  return [crypto.createHash('sha256').update(LEGACY_SECRET).digest()];
+  const список = [crypto.createHash('sha256').update(LEGACY_SECRET).digest()];
+
+  /**
+   * ПРЕЖНИЙ КОШЕЛЁК — чтобы его замена не осиротила архив.
+   *
+   * Ключ шифрования выводится из содержимого кошелька Arweave (SHA-256 ниже).
+   * Значит замена кошелька МЕНЯЕТ ключ, и всё, зашифрованное прежним, читаться
+   * перестаёт. Это ровно та ловушка, на которой мы уже обожглись: когда убрали
+   * запасной ключ, 227 реплик из 665 стали нечитаемы, и заметили это через две
+   * недели — не по падению, а по тому, что «AIfa не помнит начало разговоров».
+   *
+   * Поэтому: старое значение кладётся в ARWEAVE_WALLET_KEY_PREV (можно
+   * несколько через перевод строки), и прежние записи продолжают читаться.
+   * ПИСАТЬ этими ключами нельзя — они только для чтения.
+   */
+  const прежние = process.env.ARWEAVE_WALLET_KEY_PREV || '';
+  for (const значение of прежние.split('\n')) {
+    const v = значение.trim();
+    if (v.length > 40) список.push(crypto.createHash('sha256').update(v).digest());
+  }
+
+  // Прежний отдельный секрет — на случай, если менялся и он.
+  const прежнийСекрет = (process.env.ARWEAVE_ENCRYPTION_SECRET_PREV || '').trim();
+  if (прежнийСекрет) список.push(crypto.createHash('sha256').update(прежнийСекрет).digest());
+
+  return список;
 }
 
 // Получение мастер-ключа для шифрования
@@ -41,9 +66,16 @@ function getEncryptionKey(): Buffer {
   }
 
   // Файл кошелька — путь для локальной работы. В сборке его нет.
+  // Файл кошелька — путь для локальной работы. В сборке его нет.
+  //
+  // 14.08.2026: второй путь указывал на «d:\Aifa\ХАКАТОН\ТОКЕНЫ и API\» —
+  // диска с такой папкой больше нет, буквы менялись трижды (D: → E: → F: → E:).
+  // Строка молча не срабатывала: она обёрнута в проверку существования, и
+  // отсутствие файла выглядело как обычная работа. Путь берётся из переменной
+  // ARWEAVE_WALLET_FILE, а если её нет — только локальная папка data.
   const fallbackPaths = [
     path.join(process.cwd(), 'data', 'arweave-wallet.json'),
-    path.join('d:', 'Aifa', 'ХАКАТОН', 'ТОКЕНЫ и API', 'arweave-wallet.json'),
+    ...(process.env.ARWEAVE_WALLET_FILE ? [process.env.ARWEAVE_WALLET_FILE] : []),
   ];
   for (const fp of fallbackPaths) {
     try {
