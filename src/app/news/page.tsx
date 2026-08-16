@@ -121,7 +121,10 @@ export default async function NewsIndexPage() {
                   <h2 className="text-lg font-bold leading-snug mb-2 group-hover:text-[#00F0FF] transition-colors">
                     {с.title[loc] || с.title.en}
                   </h2>
-                  <p className="text-[15px] text-[#A8A8C0] leading-relaxed line-clamp-3">
+                  {/* Лента, а не квадратная плитка: пустого места под текстом нет, но три
+                      строки всё равно обрывали описание на полуслове. Пять строк
+                      показывают краткое описание целиком почти во всех статьях. */}
+                  <p className="text-[15px] text-[#A8A8C0] leading-relaxed line-clamp-5">
                     {с.summary[loc] || с.summary.en}
                   </p>
                   <span className="inline-flex items-center gap-1 mt-3 text-[13px] font-mono tracking-wider text-[#00F0FF]">
