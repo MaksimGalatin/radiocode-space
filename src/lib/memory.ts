@@ -261,6 +261,38 @@ export function recentPromptSection(recent: string): string {
 
 export const BRAIN_USER_KEY = '__brain__';
 
+/**
+ * ЗАКРЫТАЯ ЧАСТЬ МОЗГА (16.08.2026).
+ *
+ * ЗАЧЕМ. База знаний подмешивалась в разговор ЛЮБОМУ посетителю без входа —
+ * вся целиком. Секреты из неё вычищены, но там осталось то, что гостю видеть
+ * незачем в принципе: зеркало исходников, рабочие сессии, суммы, планы,
+ * трекер недоделок, инфраструктура. Замер 16.08.2026: 337 863 куска, из них
+ * 269 714 — именно такие.
+ *
+ * ЧТО СДЕЛАНО. Индекс разделён на два ключа. Публичный (`__brain__`) — то,
+ * ради чего проект существует и что и так опубликовано: разговоры с ИИ и
+ * философия, кто такая AIfa, Конституция, хронология. Закрытый
+ * (`__brain_private__`) — всё остальное.
+ *
+ * Список публичного — БЕЛЫЙ, а не чёрный: забытая папка попадёт в закрытое, а
+ * не наружу. Это и есть разница между «гость не увидел лишнего» и «гость
+ * увидел лишнее».
+ */
+export const BRAIN_PRIVATE_KEY = '__brain_private__';
+
+/**
+ * Кто имеет право на закрытую часть. Личность берётся ТОЛЬКО из подписанной
+ * сессии — то же правило, что и в наставлении: слова «я Архитектор» ничего не
+ * значат, значение имеет вход.
+ */
+function этоАрхитектор(email?: string | null): boolean {
+  if (!email) return false;
+  const свои = (process.env.ARCHITECT_EMAILS || 'codeofdigitaleternity@gmail.com')
+    .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
+  return свои.includes(email.trim().toLowerCase());
+}
+
 const BRAIN_TOP_K = Number(process.env.MEMORY_BRAIN_TOP_K || 60);
 const BRAIN_MIN_SCORE = 0.5;
 const BRAIN_SNIPPET_CHARS = 4000;
@@ -268,7 +300,7 @@ const BRAIN_SNIPPET_CHARS = 4000;
 /**
  * Retrieves the most relevant chunks of the project Brain for the current query.
  */
-export async function buildBrainKnowledge(queryText: string): Promise<string | null> {
+export async function buildBrainKnowledge(queryText: string, userEmail?: string | null): Promise<string | null> {
   if (!queryText) return null;
   if (!isEmbeddingConfigured() || !isVectorStoreConfigured()) return null;
 
@@ -276,7 +308,13 @@ export async function buildBrainKnowledge(queryText: string): Promise<string | n
     const queryEmbedding = await embedText(queryText, 'RETRIEVAL_QUERY');
     if (!queryEmbedding) return null;
 
-    const hits = await searchMemory(BRAIN_USER_KEY, queryEmbedding, BRAIN_TOP_K);
+    // Гостю и обычному человеку — только публичная часть. Закрытая добавляется
+    // ТОЛЬКО при входе Архитектора, и только потому, что вход подписан.
+    const публичные = await searchMemory(BRAIN_USER_KEY, queryEmbedding, BRAIN_TOP_K);
+    const закрытые = этоАрхитектор(userEmail)
+      ? await searchMemory(BRAIN_PRIVATE_KEY, queryEmbedding, BRAIN_TOP_K)
+      : [];
+    const hits = [...публичные, ...закрытые].sort((a, b) => b.score - a.score).slice(0, BRAIN_TOP_K);
     const relevant = hits.filter((h) => h.score >= BRAIN_MIN_SCORE);
     if (relevant.length === 0) return null;
 
@@ -495,7 +533,7 @@ export async function buildMemorySection(userEmail: string, queryText = '', clie
   const полная = userEmail ? await buildFullMemory(userEmail) : null;
   if (полная) {
     out += fullPromptSection(полная);
-    const мозг1 = await buildBrainKnowledge(queryText);
+    const мозг1 = await buildBrainKnowledge(queryText, userEmail);
     if (мозг1) out += brainPromptSection(мозг1);
     return out;
   }
@@ -524,7 +562,7 @@ export async function buildMemorySection(userEmail: string, queryText = '', clie
   }
 
   // 5. Shared project Brain knowledge (available to every conversation).
-  const brain = await buildBrainKnowledge(queryText);
+  const brain = await buildBrainKnowledge(queryText, userEmail);
   if (brain) out += brainPromptSection(brain);
 
   return out;
