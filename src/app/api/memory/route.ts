@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { readFullTranscript, ensureChunkTable } from '@/lib/memory-archive';
+import { readFullTranscript, readAllChannels, ensureChunkTable } from '@/lib/memory-archive';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
@@ -38,7 +38,29 @@ export async function GET(req: NextRequest) {
       const text = await readFullTranscript(pool, em, row.chat_type);
       if (text) chats.push({ chatType: row.chat_type, text, updatedAt: row.updated_at });
     }
+    /**
+     * ЕДИНЫЙ РАЗГОВОР. Раньше эта ручка отдавала переписку разрезанной по
+     * каналам: отдельно чат, отдельно Синаптический Терминал, отдельно Оракул.
+     * Человек, начавший разговор в терминале на одном сайте и продолживший в
+     * чате на другом, видел два обрывка вместо одной беседы.
+     *
+     * Теперь рядом с разбивкой отдаётся `unified` — всё склеенное по времени
+     * реплик. Разбивку НЕ убираю: на неё может опираться уже написанный
+     * кабинет, и менять форму ответа молча значит ломать работающее.
+     */
+    const unified = await readAllChannels(pool, em);
+    const последнее = meta.rows
+      .map((r: any) => r.updated_at)
+      .filter(Boolean)
+      .sort()
+      .pop() || null;
+
     await pool.end();
-    return NextResponse.json({ ok: true, chats });
+    return NextResponse.json({
+      ok: true,
+      chats,
+      unified: { text: unified, chars: unified.length, updatedAt: последнее,
+                 channels: meta.rows.map((r: any) => r.chat_type) },
+    });
   } catch (e) { console.error('[memory/get]', e); return NextResponse.json({ error: 'db_error' }, { status: 500 }); }
 }
