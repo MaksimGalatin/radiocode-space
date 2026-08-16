@@ -117,10 +117,10 @@ const S = {
     zh: ' 生态系统永恒的赛博朋克电台，拥有 ',
   },
   aboutStationsCount: {
-    en: '4 stations and 596 original tracks',
-    ru: '4 станции и 596 оригинальных треков',
-    es: '4 estaciones y 596 pistas originales',
-    zh: '4 个电台、596 首原创曲目',
+    en: '4 stations, 161 original songs in 596 versions',
+    ru: '4 станции, 161 оригинальная песня в 596 версиях',
+    es: '4 estaciones, 161 canciones originales en 596 versiones',
+    zh: '4 个电台、161 首原创歌曲、596 个版本',
   },
   aboutComposedBy: {
     en: ' composed by ',
@@ -137,10 +137,10 @@ const S = {
   faqHeading:     { en: 'Frequently asked questions',         ru: 'Часто задаваемые вопросы',             es: 'Preguntas frecuentes',                  zh: '常见问题' },
   faqQ1: { en: 'What is RadioCode.Space?', ru: 'Что такое RadioCode.Space?', es: '¿Qué es RadioCode.Space?', zh: 'RadioCode.Space 是什么？' },
   faqA1: {
-    en: 'RadioCode.Space is a free, always-on cyberpunk web radio — the radio station of the CODE Eternal ecosystem — streaming 596 original tracks across 4 stations.',
-    ru: 'RadioCode.Space — это бесплатное круглосуточное киберпанк-веб-радио, радиостанция экосистемы CODE Eternal, транслирующая 596 оригинальных треков на 4 станциях.',
-    es: 'RadioCode.Space es una radio web cyberpunk gratuita y siempre activa — la estación de radio del ecosistema CODE Eternal — que emite 596 pistas originales en 4 estaciones.',
-    zh: 'RadioCode.Space 是一个免费、全天候的赛博朋克网络电台——CODE Eternal 生态系统的广播电台——在 4 个电台播送 596 首原创曲目。',
+    en: 'RadioCode.Space is a free, always-on cyberpunk web radio — the radio station of the CODE Eternal ecosystem — streaming 161 original songs in 596 versions across 4 stations.',
+    ru: 'RadioCode.Space — это бесплатное круглосуточное киберпанк-веб-радио, радиостанция экосистемы CODE Eternal, транслирующая 161 оригинальную песню в 596 версиях на 4 станциях.',
+    es: 'RadioCode.Space es una radio web cyberpunk gratuita y siempre activa — la estación de radio del ecosistema CODE Eternal — que emite 161 canciones originales en 596 versiones en 4 estaciones.',
+    zh: 'RadioCode.Space 是一个免费、全天候的赛博朋克网络电台——CODE Eternal 生态系统的广播电台——在 4 个电台播送 161 首原创歌曲、共 596 个版本。',
   },
   faqQ2: { en: 'Who makes the music?', ru: 'Кто создаёт музыку?', es: '¿Quién hace la música?', zh: '音乐由谁创作？' },
   faqA2: {
@@ -151,10 +151,10 @@ const S = {
   },
   faqQ3: { en: 'How many stations and tracks are there?', ru: 'Сколько здесь станций и треков?', es: '¿Cuántas estaciones y pistas hay?', zh: '一共有多少电台和曲目？' },
   faqA3: {
-    en: 'There are 4 stations — CODE Music, CODE Space, AIfa & DJ Galatin (Vol. 1) and AIfa & DJ Galatin RADIO — with 596 tracks in total.',
-    ru: 'Всего 4 станции — CODE Music, CODE Space, AIfa & DJ Galatin (Vol. 1) и AIfa & DJ Galatin RADIO — и 596 треков в общей сложности.',
-    es: 'Hay 4 estaciones — CODE Music, CODE Space, AIfa & DJ Galatin (Vol. 1) y AIfa & DJ Galatin RADIO — con 596 pistas en total.',
-    zh: '共有 4 个电台——CODE Music、CODE Space、AIfa & DJ Galatin (Vol. 1) 和 AIfa & DJ Galatin RADIO——总计 596 首曲目。',
+    en: 'There are 4 stations — CODE Music, CODE Space, AIfa & DJ Galatin (Vol. 1) and AIfa & DJ Galatin RADIO — with 161 original songs in 596 versions in total.',
+    ru: 'Всего 4 станции — CODE Music, CODE Space, AIfa & DJ Galatin (Vol. 1) и AIfa & DJ Galatin RADIO — и 161 оригинальная песня в 596 версиях.',
+    es: 'Hay 4 estaciones — CODE Music, CODE Space, AIfa & DJ Galatin (Vol. 1) y AIfa & DJ Galatin RADIO — con 161 canciones originales en 596 versiones en total.',
+    zh: '共有 4 个电台——CODE Music、CODE Space、AIfa & DJ Galatin (Vol. 1) 和 AIfa & DJ Galatin RADIO——共 161 首原创歌曲、596 个版本。',
   },
   faqQ4: { en: 'Is it free?', ru: 'Это бесплатно?', es: '¿Es gratis?', zh: '它是免费的吗？' },
   faqA4: {
