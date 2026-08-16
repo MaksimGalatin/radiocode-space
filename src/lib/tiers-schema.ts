@@ -13,6 +13,20 @@
  */
 import { ТАРИФЫ } from './pricing';
 
+/** Продавец — обязательное поле для карточек товара в поиске Google. */
+const ПРОДАВЕЦ = { '@type': 'Organization', name: 'CODE Eternal', url: 'https://codeofdigitaleternity.com' } as const;
+
+/** Описание тарифа для разметки: берём пояснение, иначе собираем из названия и цены. */
+function описаниеТарифа(т: { название: Record<string, string>; вМесяц: number; разово: number;
+                            разовоПояснение?: Record<string, string> }, язык: string): string {
+  const имя = т.название[язык] ?? т.название.en;
+  const пояснение = т.разовоПояснение?.[язык] ?? т.разовоПояснение?.en;
+  if (пояснение) return пояснение;
+  return т.разово
+    ? `${имя}: $${т.разово} единовременно, далее $${т.вМесяц} в месяц.`
+    : `${имя}: $${т.вМесяц} в месяц.`;
+}
+
 export function разметкаТарифов(адресСайта: string, язык: string = 'en') {
   return {
     '@context': 'https://schema.org',
@@ -25,6 +39,18 @@ export function разметкаТарифов(адресСайта: string, я�
       item: {
         '@type': 'Product',
         name: т.название[язык] ?? т.название.en,
+        /**
+         * ОПИСАНИЕ, АРТИКУЛ, КАРТИНКА И ПРОДАВЕЦ (16.08.2026).
+         *
+         * Google Search Console прислал два письма: «Описания товара» и
+         * «Данные о товарах продавца». Причина простая — у товара не было
+         * поля `description`, а у предложения не было `seller`. Без них
+         * карточка товара в поиске не собирается, и в консоли это выглядит
+         * как «обнаружены новые проблемы».
+         */
+        description: описаниеТарифа(т, язык),
+        sku: `code-eternal-${т.код}`,
+        image: `${адресСайта}/logo.png`,
         brand: { '@type': 'Brand', name: 'CODE Eternal' },
         offers: т.разово
           ? [
@@ -33,6 +59,7 @@ export function разметкаТарифов(адресСайта: string, я�
                 price: String(т.разово),
                 priceCurrency: 'USD',
                 availability: 'https://schema.org/InStock',
+                seller: ПРОДАВЕЦ,
                 url: `${адресСайта}/#pricing`,
                 description: т.разовоПояснение?.[язык] ?? т.разовоПояснение?.en,
               },
@@ -41,6 +68,7 @@ export function разметкаТарифов(адресСайта: string, я�
                 price: String(т.вМесяц),
                 priceCurrency: 'USD',
                 availability: 'https://schema.org/InStock',
+                seller: ПРОДАВЕЦ,
                 url: `${адресСайта}/#pricing`,
                 priceSpecification: {
                   '@type': 'UnitPriceSpecification',
@@ -57,6 +85,7 @@ export function разметкаТарифов(адресСайта: string, я�
               price: String(т.вМесяц),
               priceCurrency: 'USD',
               availability: 'https://schema.org/InStock',
+              seller: ПРОДАВЕЦ,
               url: `${адресСайта}/#pricing`,
               priceSpecification: {
                 '@type': 'UnitPriceSpecification',
