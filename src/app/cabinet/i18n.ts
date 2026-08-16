@@ -214,7 +214,9 @@ const D: Record<string, L4> = {
   memOkN: ["Расшифровано {a} из {b}.", "Decrypted {a} of {b}.", "Descifrados {a} de {b}.", "已解密 {a}/{b}。"],
   memArchiveTitle: ["Децентрализованный архив (PADAM)", "Decentralized archive (PADAM)", "Archivo descentralizado (PADAM)", "去中心化档案（PADAM）"],
   memArchiveSub: ["Сессии навечно в Arweave в зашифрованном виде.", "Sessions live forever on Arweave, encrypted.", "Sesiones eternas y cifradas en Arweave.", "会话已加密永存于 Arweave。"],
-  tiersPayNote: ["Оплата криптой через NOWPayments. Тариф активируется автоматически после подтверждения сети.", "Crypto payment via NOWPayments. Tier activates automatically after confirmation.", "Pago cripto vía NOWPayments.", "通过 NOWPayments 加密支付，确认后自动激活。"],
+  // К оплате добавлена правда про блокчейн: человек выбирает тариф именно здесь,
+  // и здесь же должен видеть, что вечная запись идёт только на платных (16.08.2026).
+  tiersPayNote: ["Оплата криптой через NOWPayments. Тариф активируется автоматически после подтверждения сети. Запись памяти в блокчейн Arweave идёт ТОЛЬКО на платных тарифах: на бесплатном переписка хранится и читается как обычно, но в вечную цепь не уходит.", "Crypto payment via NOWPayments. Tier activates automatically after confirmation. Memory is written to the Arweave blockchain on PAID plans only: on the free plan your conversations are stored and readable as usual, but are not written to the eternal chain.", "Pago cripto vía NOWPayments. La memoria se escribe en la cadena Arweave SOLO en planes de pago: en el plan gratuito tus conversaciones se guardan y se leen con normalidad, pero no se escriben en la cadena eterna.", "通过 NOWPayments 加密支付，确认后自动激活。记忆写入 Arweave 区块链仅限付费套餐：免费套餐下对话照常保存和读取，但不会写入永恒链。"],
   tierActive: ["✓ Активен", "✓ Active", "✓ Activo", "✓ 已激活"],
   tierLower: ["Ниже вашего", "Below yours", "Inferior al tuyo", "低于当前"],
   tierPay: ["Оплатить ${p}", "Pay ${p}", "Pagar ${p}", "支付 ${p}"],
