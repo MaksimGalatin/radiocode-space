@@ -14,6 +14,41 @@ import {
 const CHAT_TYPES = ['main', 'terminal', 'oracle'] as const;
 const MIN_CONTENT_LEN = 12;
 
+/**
+ * СЕКРЕТЫ НЕ ПОПАДАЮТ В ПОИСКОВЫЙ ИНДЕКС (16.08.2026).
+ *
+ * ЗАЧЕМ. База знаний Мозга подмешивается в разговор ЛЮБОМУ посетителю, без
+ * входа: смысловой поиск идёт по общему ключу `__brain__`. Замер 16.08.2026
+ * нашёл в индексе 185 записей с настоящими ключами — строки подключения с
+ * паролем, тела приватных ключей, токены GitHub, Slack, Telegram, Google, xAI.
+ * Их не нужно было даже выманивать: достаточно задать вопрос так, чтобы поиск
+ * вытащил кусок, и модель увидела бы его у себя в наставлении.
+ *
+ * Записи удалены, а этот сторож не даёт им вернуться при следующей индексации.
+ * Пропускаем ВЕСЬ кусок целиком: вырезать ключ из середины ненадёжно, а потеря
+ * одного куска знаний дешевле утечки.
+ */
+const СЕКРЕТЫ: RegExp[] = [
+  /ghp_[A-Za-z0-9]{20,}/,                      // токен GitHub
+  /github_pat_[A-Za-z0-9_]{20,}/,
+  /AIza[A-Za-z0-9_-]{20,}/,                    // ключ Google
+  /xai-[A-Za-z0-9]{15,}/,                      // ключ xAI
+  /sk-[A-Za-z0-9]{20,}/,                       // ключ OpenAI/Anthropic
+  /postgres(ql)?:\/\/[^\s]+:[^@\s]+@/,        // строка подключения с паролем
+  /npg_[A-Za-z0-9]{15,}/,                      // пароль Neon
+  /MII[A-Za-z0-9+/]{40,}/,                     // тело приватного ключа
+  /BEGIN [A-Z ]*PRIVATE KEY/,                  // заголовок PEM
+  /xox[bpsa]-[A-Za-z0-9-]{20,}/,               // токен Slack
+  /AKIA[A-Z0-9]{12,}/,                         // ключ AWS
+  /[0-9]{8,12}:[A-Za-z0-9_-]{25,}/,        // токен Telegram
+];
+
+/** true, если в тексте есть что-то похожее на настоящий ключ или пароль. */
+export function похоженаСекрет(текст: string): boolean {
+  return СЕКРЕТЫ.some((о) => о.test(текст));
+}
+
+
 export function hashMessage(role: string, content: string): string {
   return crypto.createHash('sha256').update(`${role}\n${content}`).digest('hex');
 }
@@ -62,6 +97,12 @@ export async function indexMessages(
     for (const m of messages) {
       const content = (m.content || '').trim();
       if (content.length < MIN_CONTENT_LEN) continue;
+      // Кусок с настоящим ключом в поиск не попадает НИКОГДА: он был бы виден
+      // любому посетителю через общую базу знаний (16.08.2026).
+      if (похоженаСекрет(content)) {
+        console.warn('[индекс] кусок пропущен: похож на ключ или пароль');
+        continue;
+      }
       const contentHash = hashMessage(m.role, content);
       const embedding = await embedText(content, 'RETRIEVAL_DOCUMENT');
       if (!embedding) continue;
