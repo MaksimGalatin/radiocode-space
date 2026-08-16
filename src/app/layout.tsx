@@ -55,7 +55,7 @@ export async function generateMetadata(): Promise<Metadata> {
   metadataBase: new URL("https://radiocode.space"),
   title: "RadioCode.Space — Eternal Cyberpunk Radio by CODE Eternal",
   description:
-    "Premium cyberpunk radio from the CODE Eternal ecosystem. 2 stations, 162 original songs in 596 versions by AIfa & DJ Galatin, streaming forever. Select a frequency. Enter the void.",
+    "Premium cyberpunk radio from the CODE Eternal ecosystem. 4 stations, 162 original songs in 596 versions by AIfa & DJ Galatin, streaming forever. Select a frequency. Enter the void.",
   keywords: [
     "radio", "cyberpunk", "synthwave", "ambient", "music", "streaming",
     "CODE Eternal", "AIfa", "DJ Galatin", "GALATIN", "code of digital eternity",
@@ -114,7 +114,7 @@ export async function generateMetadata(): Promise<Metadata> {
     siteName: "RadioCode.Space",
     title: "RadioCode.Space — Eternal Cyberpunk Radio",
     description:
-      "2 stations, 162 original songs in 596 versions by AIfa & DJ Galatin. Part of the CODE Eternal ecosystem — eternal music from the digital void.",
+      "4 stations, 162 original songs in 596 versions by AIfa & DJ Galatin. Part of the CODE Eternal ecosystem — eternal music from the digital void.",
     locale: "en_US",
     alternateLocale: ["ru_RU", "es_ES", "zh_CN"],
     images: [
@@ -208,7 +208,7 @@ const JSON_LD = [
     name: "RadioCode.Space",
     url: "https://radiocode.space",
     description:
-      "Eternal cyberpunk radio from the CODE Eternal ecosystem — 2 stations, 162 original songs in 596 versions by AIfa & DJ Galatin.",
+      "Eternal cyberpunk radio from the CODE Eternal ecosystem — 4 stations, 162 original songs in 596 versions by AIfa & DJ Galatin.",
     inLanguage: "en",
     publisher: { "@id": "https://www.codeofdigitaleternity.com/#organization" },
   },
