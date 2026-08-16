@@ -126,7 +126,12 @@ export async function appendVerbatim(
     // сохранённое нетронутым. Лучше потерять одну реплику, чем всю память.
     if (r.rows[0]?.ciphertext) {
       try {
-        prev = await decryptForUser(email, r.rows[0].ciphertext);
+        // ОТКРЫТЫЙ ТЕКСТ ИЛИ ШИФР — понимаем оба (16.08.2026, раздел 10
+        // Конституции). Во время перевода базы в таблице лежат оба вида.
+        // Дословная переписка всегда начинается с отметки реплики `### [`.
+        prev = r.rows[0].ciphertext.trimStart().startsWith('###')
+          ? r.rows[0].ciphertext
+          : await decryptForUser(email, r.rows[0].ciphertext);
       } catch (e) {
         await pool.end();
         console.error('[memory/append] прежняя запись не расшифровалась — запись прервана, история сохранена', em, тип, e);
@@ -165,14 +170,19 @@ export async function appendVerbatim(
         `SELECT COALESCE(MAX(chunk_index),0)+1 AS n FROM chat_memory_chunks WHERE email=$1 AND chat_type=$2`,
         [em, тип]);
       const nextIdx = Number(idxRes.rows[0].n);
-      const sealed = await encryptForUser(email, prev);
+      // В базу — ОТКРЫТЫЙ ТЕКСТ (раздел 10). Шифруется только то, что уходит
+      // в Arweave: цепь публична и необратима. Прикладное шифрование базы
+      // уже стоило 227 нечитаемых реплик из 665.
+      const sealed = prev;
       await pool.query(
         `INSERT INTO chat_memory_chunks(email,chat_type,chunk_index,ciphertext) VALUES($1,$2,$3,$4)
          ON CONFLICT(email,chat_type,chunk_index) DO NOTHING`,
         [em, тип, nextIdx, sealed]);
       combined = entry;
     }
-    const cipher = await encryptForUser(email, combined);
+    // Живой блок — открытым текстом (раздел 10). Имя переменной прежнее:
+    // её значение сравнивает сторож записи ниже.
+    const cipher = combined;
     await pool.query(
       `INSERT INTO chat_memory(email, chat_type, ciphertext) VALUES($1,$2,$3)
        ON CONFLICT(email, chat_type) DO UPDATE SET ciphertext=EXCLUDED.ciphertext, updated_at=now()`,

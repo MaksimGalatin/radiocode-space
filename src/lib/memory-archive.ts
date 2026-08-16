@@ -15,6 +15,36 @@
  */
 import { decryptForUser } from './user-key';
 
+/**
+ * ЧТЕНИЕ ПОНИМАЕТ И ОТКРЫТЫЙ ТЕКСТ, И ШИФР (16.08.2026).
+ *
+ * Раздел 10 Конституции требует держать переписку в базе ОТКРЫТЫМ ТЕКСТОМ и
+ * шифровать только то, что уходит в Arweave. Пока это не сделано, база
+ * зашифрована — но перевод должен пройти без единой потерянной реплики, а
+ * значит читать нужно уметь ОБА вида ОДНОВРЕМЕННО: во время перевода в таблице
+ * будут лежать и те, и другие.
+ *
+ * Раньше нерасшифрованный кусок молча пропускался (`catch { }`). Если бы мы
+ * записали открытый текст в базу при таком чтении, записи просто ИСЧЕЗЛИ бы из
+ * ленты, и выглядело бы это как «AIfa забыла человека», а не как ошибка.
+ *
+ * Признак открытого текста надёжный: дословная переписка всегда начинается с
+ * отметки реплики `### [`. Шифротекст — это base64, он так начинаться не может.
+ */
+async function прочитатьКусок(email: string, значение: string): Promise<string> {
+  if (!значение) return '';
+  const начало = значение.trimStart().slice(0, 5);
+  if (начало.startsWith('### [') || начало.startsWith('###')) return значение; // уже открытый
+  try {
+    return await decryptForUser(email, значение);
+  } catch {
+    // Не расшифровалось и на открытый текст не похоже — пропускаем кусок, но
+    // громко: молчание здесь и есть та самая потеря памяти.
+    console.error('[память] кусок не прочитан: не расшифровался и не похож на открытый текст');
+    return '';
+  }
+}
+
 export const SEAL_THRESHOLD = 68 * 1024;
 
 /** Create the sealed-chunks table if absent (idempotent). */
@@ -45,13 +75,13 @@ export async function readFullTranscript(pool: any, email: string, chatType: str
       `SELECT ciphertext FROM chat_memory_chunks WHERE email=$1 AND chat_type=$2 ORDER BY chunk_index`,
       [em, chatType]);
     for (const c of chunks.rows) {
-      try { out += await decryptForUser(em, c.ciphertext); } catch { /* skip unreadable chunk */ }
+      out += await прочитатьКусок(em, c.ciphertext);
     }
   } catch { /* table missing / query error — fall through to live blob */ }
   try {
     const cur = await pool.query(`SELECT ciphertext FROM chat_memory WHERE email=$1 AND chat_type=$2`, [em, chatType]);
     if (cur.rows[0]?.ciphertext) {
-      try { out += await decryptForUser(em, cur.rows[0].ciphertext); } catch { /* skip */ }
+      out += await прочитатьКусок(em, cur.rows[0].ciphertext);
     }
   } catch { /* ignore */ }
   return out;
