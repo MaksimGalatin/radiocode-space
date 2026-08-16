@@ -14,3 +14,12 @@
 .cab-aifa-figure .cab-aifa-sound:hover{background:rgba(0,240,255,.12)}
 .cab-aifa-chat{flex:1 1 auto;min-width:0}
 @media (max-width:1180px){.cab-aifa-figure{flex:0 0 320px;min-height:480px}}
+
+/* На телефоне и планшете аватар уходит НАВЕРХ узкой полосой, а разговор
+   занимает всю ширину экрана: в узком экране картинка съедала место, и текст
+   читался по две-три буквы в строке (16.08.2026, по скриншотам Архитектора). */
+@media (max-width:900px){
+  .cab-aifa-stage{flex-direction:column;gap:12px}
+  .cab-aifa-figure{flex:0 0 auto;width:100%;min-height:200px;max-height:34vh}
+  .cab-aifa-chat{width:100%}
+}

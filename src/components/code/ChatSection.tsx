@@ -350,7 +350,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
   return (
     <section id="terminal" className={embedded ? "w-full" : "relative py-24 md:py-32"} ref={ref}>
       {!embedded && <div className="section-divider mb-24" />}
-      <div className={embedded ? "w-full" : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}>
+      <div className={embedded ? "w-full" : "max-w-7xl mx-auto px-2 sm:px-6 lg:px-8"}>
         {!embedded && (
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}
           className="text-center mb-12">
@@ -396,7 +396,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
           {/* Messages area */}
           <div ref={scrollContainerRef} className={`${embedded
               ? "h-[calc(100vh-300px)] min-h-[560px]"
-              : "h-[400px] md:h-[500px]"} overflow-y-auto p-4 md:p-6 space-y-4 scroll-smooth`}>
+              : "h-[400px] md:h-[500px]"} overflow-y-auto p-2 sm:p-4 md:p-6 space-y-3 md:space-y-4 scroll-smooth`}>
             <AnimatePresence mode="popLayout">
               {messages.map((msg) => {
                 const isStreaming = msg.revealed < msg.content.length;
@@ -409,12 +409,12 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
                     }`}>
                       {msg.role === "user" ? <User size={14} className="text-muted-foreground" /> : <Bot size={14} className="text-cyan-400" />}
                     </div>
-                    <div className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+                    <div className={`max-w-[94%] sm:max-w-[88%] md:max-w-[80%] rounded-2xl px-3 py-2.5 md:px-4 md:py-3 ${
                       msg.role === "user"
                         ? "bg-cyan-400/10 border border-cyan-400/20 rounded-tr-md"
                         : `bg-card border rounded-tl-md ${isStreaming ? "border-cyan-400/30 streaming-fog" : "border-border"}`
                     }`}>
-                      <p className={`text-sm whitespace-pre-wrap leading-relaxed ${msg.role === "assistant" && isStreaming ? "text-cyan-700 dark:text-cyan-50/90" : ""}`}>
+                      <p className={`text-[13px] md:text-sm whitespace-pre-wrap leading-relaxed ${msg.role === "assistant" && isStreaming ? "text-cyan-700 dark:text-cyan-50/90" : ""}`}>
                         {msg.role === "assistant" ? visibleText : msg.content}
                         {msg.role === "assistant" && isStreaming && (
                           <span className="inline-block w-[2px] h-[14px] bg-cyan-400 animate-pulse ml-[1px] align-middle rounded-full" />
@@ -480,7 +480,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
                 return "🎙️ " + (voice.interim || V.listening[li]); })()}
             </div>
           )}
-          <form onSubmit={handleSubmit} className="border-t border-border p-3 md:p-4">
+          <form onSubmit={handleSubmit} className="border-t border-border p-2 sm:p-3 md:p-4">
             <div className="flex items-end gap-2 md:gap-3">
               {voice.supportsSTT && (
               <button type="button" aria-label="voice input" onClick={() => {
@@ -506,8 +506,8 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
                 }}
                 placeholder={t("chat.placeholder", lang)} aria-label={t("chat.placeholder", lang)} disabled={isBusy}
                 className={`flex-1 resize-none overflow-y-auto bg-card border border-border rounded-xl px-4 py-3 leading-relaxed focus:outline-none chat-input-glow placeholder:text-muted-foreground/50 disabled:opacity-50 transition-all ${embedded
-                  ? "max-h-[320px] min-h-[84px] text-base"
-                  : "max-h-[160px] text-sm"}`} />
+                  ? "max-h-[320px] min-h-[84px] text-[13px] md:text-sm"
+                  : "max-h-[160px] text-[13px] md:text-sm"}`} />
               <motion.button type="submit" disabled={!input.trim() || isBusy} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                 aria-label="Send message"
                 className="px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-600 text-black rounded-xl font-medium disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:from-cyan-400 hover:to-cyan-500">
