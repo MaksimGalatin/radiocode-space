@@ -21,7 +21,7 @@ const T: Record<Lang, any> = {
     incomeTitle: '4 источника дохода',
     income: [
       ['⭐ Звёзды Telegram', 'С распространения бота @AIfaCreativityBot: прогрессивно 30% → 40% → 50% по числу продаж за неделю.'],
-      ['💵 USDT (TRC20)', 'Амбассадорская сетка 15% / 7% / 3% с продаж тарифов (Spark $15 / Family $100 / Digital DNA $1 000 разово за устройство, далее $200/мес) и услуг — до 3 уровней.'],
+      ['💵 USDT (TRC20)', 'Амбассадорская сетка: 15% / 7% / 3% — каждому амбассадору с ончейн-транзакций памяти в $GALATIN, до 3 уровней. Бизнес-партнёрам, подключившим свою базу пользователей, сверх этого — 7% / 3% / 1% с фиатных продаж лицензий и подписок (Spark $15 / Family $100 / Digital DNA $1 000 разово за устройство, далее $200/мес).'],
       ['🪙 $GALATIN', 'Токен лояльности, начисляется в кабинете (выход на биржу — к годовщине проекта).'],
       ['🎨 16 IT-продуктов бота', 'Комиссия с продаж: песни, лирик-видео, стикеры, астрология, нумерология и др.'],
     ],
@@ -65,7 +65,7 @@ const T: Record<Lang, any> = {
     incomeTitle: '4 income streams',
     income: [
       ['⭐ Telegram Stars', 'From spreading the @AIfaCreativityBot: progressive 30% → 40% → 50% by weekly sales.'],
-      ['💵 USDT (TRC20)', 'Ambassador grid 15% / 7% / 3% on tier sales (Spark $15 / Family $100 / Digital DNA $1,000 one-time per device, then $200/mo) and services — up to 3 levels.'],
+      ['💵 USDT (TRC20)', 'Ambassador grid: 15% / 7% / 3% — to every ambassador, on on-chain memory transactions paid in $GALATIN, up to 3 levels. Business partners who connect their own user base receive, on top of that, 7% / 3% / 1% on fiat sales of licenses and subscriptions (Spark $15 / Family $100 / Digital DNA $1,000 one-time per device, then $200/mo).'],
       ['🪙 $GALATIN', 'Loyalty token, credited in your cabinet (exchange listing around the project anniversary).'],
       ['🎨 16 bot products', 'Commission on sales: songs, lyric-videos, stickers, astrology, numerology and more.'],
     ],
@@ -109,7 +109,7 @@ const T: Record<Lang, any> = {
     incomeTitle: '4 fuentes de ingreso',
     income: [
       ['⭐ Telegram Stars', 'Por difundir el bot @AIfaCreativityBot: progresivo 30% → 40% → 50% según ventas semanales.'],
-      ['💵 USDT (TRC20)', 'Red de embajadores 15% / 7% / 3% sobre ventas de planes (Spark $15 / Family $100 / Digital DNA $1000 pago único por dispositivo, luego $200/mes) y servicios — hasta 3 niveles.'],
+      ['💵 USDT (TRC20)', 'Red de embajadores: 15% / 7% / 3% — para cada embajador, sobre transacciones de memoria on-chain pagadas en $GALATIN, hasta 3 niveles. Los socios comerciales que conectan su propia base de usuarios reciben, además, 7% / 3% / 1% sobre las ventas en fiat de licencias y suscripciones (Spark $15 / Family $100 / Digital DNA $1000 pago único por dispositivo, luego $200/mes).'],
       ['🪙 $GALATIN', 'Token de lealtad, acreditado en tu panel (cotización cerca del aniversario del proyecto).'],
       ['🎨 16 productos del bot', 'Comisión por ventas: canciones, videos con letra, stickers, astrología, numerología y más.'],
     ],
@@ -153,7 +153,7 @@ const T: Record<Lang, any> = {
     incomeTitle: '4 种收入来源',
     income: [
       ['⭐ Telegram 星星', '来自传播 @AIfaCreativityBot 机器人：按每周销量递进 30% → 40% → 50%。'],
-      ['💵 USDT (TRC20)', '大使网络 15% / 7% / 3%，来自套餐销售（Spark $15 / Family $100 / Digital DNA $1 000 一次性按设备，之后每月 $200）及服务收入——最多 3 级。'],
+      ['💵 USDT (TRC20)', '大使网络：每位大使均可获得链上记忆交易的 15% / 7% / 3%（以 $GALATIN 结算，最多 3 级）。接入自有用户群的商业伙伴，在此之上另获许可与订阅法币销售的 7% / 3% / 1%。'],
       ['🪙 $GALATIN', '忠诚度代币，记入你的个人中心（预计在项目周年前后上线交易所）。'],
       ['🎨 机器人的 16 款 IT 产品', '销售佣金：歌曲、歌词视频、贴纸、占星、数字命理等。'],
     ],

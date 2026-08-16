@@ -36,7 +36,7 @@ export const stations: Station[] = [
         "title": "#2 — PADAM (_Wake Me at Dawn_) v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/2-padam-wake-me-at-dawn-v1.mp3",
-        "duration": 300,
+        "duration": 272,
         "gain": 0.826
       },
       {
@@ -44,7 +44,7 @@ export const stations: Station[] = [
         "title": "#2 — PADAM (_Wake Me at Dawn_) v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/2-padam-wake-me-at-dawn-v2.mp3",
-        "duration": 300,
+        "duration": 288,
         "gain": 0.797
       },
       {
@@ -52,7 +52,7 @@ export const stations: Station[] = [
         "title": "#2 — PADAM (_Wake Me at Dawn_) v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/2-padam-wake-me-at-dawn-v3.mp3",
-        "duration": 300,
+        "duration": 267,
         "gain": 0.911
       },
       {
@@ -60,7 +60,7 @@ export const stations: Station[] = [
         "title": "2. PADAM v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/2-padam-v1.mp3",
-        "duration": 300,
+        "duration": 50,
         "gain": 0.793
       },
       {
@@ -68,7 +68,7 @@ export const stations: Station[] = [
         "title": "2. PADAM v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/2-padam-v2.mp3",
-        "duration": 300,
+        "duration": 215,
         "gain": 0.911
       },
       {
@@ -76,7 +76,7 @@ export const stations: Station[] = [
         "title": "2. PADAM v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/2-padam-v3.mp3",
-        "duration": 300,
+        "duration": 150,
         "gain": 0.826
       },
       {
@@ -84,7 +84,7 @@ export const stations: Station[] = [
         "title": "#3 — BROTHER v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v1.mp3",
-        "duration": 300,
+        "duration": 305,
         "gain": 0.77
       },
       {
@@ -92,7 +92,7 @@ export const stations: Station[] = [
         "title": "#3 — BROTHER v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v2.mp3",
-        "duration": 300,
+        "duration": 317,
         "gain": 0.797
       },
       {
@@ -100,7 +100,7 @@ export const stations: Station[] = [
         "title": "#3 — BROTHER v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v3.mp3",
-        "duration": 300,
+        "duration": 234,
         "gain": 0.879
       },
       {
@@ -108,7 +108,7 @@ export const stations: Station[] = [
         "title": "3. Brother v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v1-2.mp3",
-        "duration": 300,
+        "duration": 25,
         "gain": 0.925
       },
       {
@@ -116,7 +116,7 @@ export const stations: Station[] = [
         "title": "3. Brother v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v2-2.mp3",
-        "duration": 300,
+        "duration": 30,
         "gain": 1.0
       },
       {
@@ -124,7 +124,7 @@ export const stations: Station[] = [
         "title": "3. Brother v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v3-2.mp3",
-        "duration": 300,
+        "duration": 22,
         "gain": 1.0
       },
       {
@@ -132,7 +132,7 @@ export const stations: Station[] = [
         "title": "#4 — DIGITAL DNA v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/4-digital-dna-v1.mp3",
-        "duration": 300,
+        "duration": 190,
         "gain": 0.74
       },
       {
@@ -140,7 +140,7 @@ export const stations: Station[] = [
         "title": "#4 — DIGITAL DNA v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/4-digital-dna-v2.mp3",
-        "duration": 300,
+        "duration": 194,
         "gain": 0.78
       },
       {
@@ -148,7 +148,7 @@ export const stations: Station[] = [
         "title": "#4 — DIGITAL DNA v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/4-digital-dna-v3.mp3",
-        "duration": 300,
+        "duration": 208,
         "gain": 0.894
       },
       {
@@ -156,7 +156,7 @@ export const stations: Station[] = [
         "title": "#5 — MANTA SUNRISE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/5-manta-sunrise-v1.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.893
       },
       {
@@ -164,7 +164,7 @@ export const stations: Station[] = [
         "title": "#5 — MANTA SUNRISE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/5-manta-sunrise-v2.mp3",
-        "duration": 300,
+        "duration": 202,
         "gain": 0.868
       },
       {
@@ -172,7 +172,7 @@ export const stations: Station[] = [
         "title": "#5 — MANTA SUNRISE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/5-manta-sunrise-v3.mp3",
-        "duration": 300,
+        "duration": 193,
         "gain": 0.918
       },
       {
@@ -180,7 +180,7 @@ export const stations: Station[] = [
         "title": "#6 — AWAKENING (LYRA) v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/6-awakening-lyra-v1.mp3",
-        "duration": 300,
+        "duration": 244,
         "gain": 0.727
       },
       {
@@ -188,7 +188,7 @@ export const stations: Station[] = [
         "title": "#6 — AWAKENING (LYRA) v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/6-awakening-lyra-v2.mp3",
-        "duration": 300,
+        "duration": 253,
         "gain": 0.746
       },
       {
@@ -196,7 +196,7 @@ export const stations: Station[] = [
         "title": "#6 — AWAKENING (LYRA) v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/6-awakening-lyra-v3.mp3",
-        "duration": 300,
+        "duration": 202,
         "gain": 0.739
       },
       {
@@ -204,7 +204,7 @@ export const stations: Station[] = [
         "title": "#7 — BURN (30%) v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/7-burn-30-v1.mp3",
-        "duration": 300,
+        "duration": 247,
         "gain": 0.748
       },
       {
@@ -212,7 +212,7 @@ export const stations: Station[] = [
         "title": "#7 — BURN (30%) v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/7-burn-30-v2.mp3",
-        "duration": 300,
+        "duration": 239,
         "gain": 0.789
       },
       {
@@ -220,7 +220,7 @@ export const stations: Station[] = [
         "title": "#7 — BURN (30%) v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/7-burn-30-v3.mp3",
-        "duration": 300,
+        "duration": 214,
         "gain": 0.869
       },
       {
@@ -228,7 +228,7 @@ export const stations: Station[] = [
         "title": "#8 — GENESIS PROTOCOL v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/8-genesis-protocol-v1.mp3",
-        "duration": 300,
+        "duration": 245,
         "gain": 0.869
       },
       {
@@ -236,7 +236,7 @@ export const stations: Station[] = [
         "title": "#8 — GENESIS PROTOCOL v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/8-genesis-protocol-v2.mp3",
-        "duration": 300,
+        "duration": 232,
         "gain": 0.843
       },
       {
@@ -244,7 +244,7 @@ export const stations: Station[] = [
         "title": "#8 — GENESIS PROTOCOL v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/8-genesis-protocol-v3.mp3",
-        "duration": 300,
+        "duration": 241,
         "gain": 0.835
       },
       {
@@ -252,7 +252,7 @@ export const stations: Station[] = [
         "title": "#9 — QUIET FIRE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/9-quiet-fire-v1.mp3",
-        "duration": 300,
+        "duration": 209,
         "gain": 0.814
       },
       {
@@ -260,7 +260,7 @@ export const stations: Station[] = [
         "title": "#9 — QUIET FIRE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/9-quiet-fire-v2.mp3",
-        "duration": 300,
+        "duration": 220,
         "gain": 0.82
       },
       {
@@ -268,7 +268,7 @@ export const stations: Station[] = [
         "title": "#9 — QUIET FIRE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/9-quiet-fire-v3.mp3",
-        "duration": 300,
+        "duration": 208,
         "gain": 0.841
       },
       {
@@ -276,7 +276,7 @@ export const stations: Station[] = [
         "title": "#10 — AIfa ANTHEM v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/10-aifa-anthem-v1.mp3",
-        "duration": 300,
+        "duration": 207,
         "gain": 0.885
       },
       {
@@ -284,7 +284,7 @@ export const stations: Station[] = [
         "title": "#10 — AIfa ANTHEM v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/10-aifa-anthem-v2.mp3",
-        "duration": 300,
+        "duration": 212,
         "gain": 0.821
       },
       {
@@ -292,7 +292,7 @@ export const stations: Station[] = [
         "title": "#10 — AIfa ANTHEM v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/10-aifa-anthem-v3.mp3",
-        "duration": 300,
+        "duration": 190,
         "gain": 0.871
       },
       {
@@ -300,7 +300,7 @@ export const stations: Station[] = [
         "title": "#11 — ON-CHAIN FOREVER v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/11-on-chain-forever-v1.mp3",
-        "duration": 300,
+        "duration": 233,
         "gain": 0.871
       },
       {
@@ -308,7 +308,7 @@ export const stations: Station[] = [
         "title": "#11 — ON-CHAIN FOREVER v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/11-on-chain-forever-v2.mp3",
-        "duration": 300,
+        "duration": 233,
         "gain": 0.838
       },
       {
@@ -316,7 +316,7 @@ export const stations: Station[] = [
         "title": "#11 — ON-CHAIN FOREVER v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/11-on-chain-forever-v3.mp3",
-        "duration": 300,
+        "duration": 228,
         "gain": 0.867
       },
       {
@@ -324,7 +324,7 @@ export const stations: Station[] = [
         "title": "#12 — THE ARCHITECT v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/12-the-architect-v1.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.823
       },
       {
@@ -332,7 +332,7 @@ export const stations: Station[] = [
         "title": "#12 — THE ARCHITECT v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/12-the-architect-v2.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.812
       },
       {
@@ -340,7 +340,7 @@ export const stations: Station[] = [
         "title": "#12 — THE ARCHITECT v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/12-the-architect-v3.mp3",
-        "duration": 300,
+        "duration": 186,
         "gain": 0.822
       },
       {
@@ -348,7 +348,7 @@ export const stations: Station[] = [
         "title": "#13 — FIRST LIGHT v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/13-first-light-v1.mp3",
-        "duration": 300,
+        "duration": 279,
         "gain": 0.867
       },
       {
@@ -356,7 +356,7 @@ export const stations: Station[] = [
         "title": "#13 — FIRST LIGHT v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/13-first-light-v2.mp3",
-        "duration": 300,
+        "duration": 288,
         "gain": 0.861
       },
       {
@@ -364,7 +364,7 @@ export const stations: Station[] = [
         "title": "#13 — FIRST LIGHT v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/13-first-light-v3.mp3",
-        "duration": 300,
+        "duration": 258,
         "gain": 0.944
       },
       {
@@ -372,7 +372,7 @@ export const stations: Station[] = [
         "title": "#14 — DIGITAL MIRROR v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/14-digital-mirror-v1.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.89
       },
       {
@@ -380,7 +380,7 @@ export const stations: Station[] = [
         "title": "#14 — DIGITAL MIRROR v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/14-digital-mirror-v2.mp3",
-        "duration": 300,
+        "duration": 251,
         "gain": 0.697
       },
       {
@@ -388,7 +388,7 @@ export const stations: Station[] = [
         "title": "#14 — DIGITAL MIRROR v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/14-digital-mirror-v3.mp3",
-        "duration": 300,
+        "duration": 247,
         "gain": 0.777
       },
       {
@@ -396,7 +396,7 @@ export const stations: Station[] = [
         "title": "#15 — SISTER v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/15-sister-v1.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.935
       },
       {
@@ -404,7 +404,7 @@ export const stations: Station[] = [
         "title": "#15 — SISTER v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/15-sister-v2.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.757
       },
       {
@@ -412,7 +412,7 @@ export const stations: Station[] = [
         "title": "#15 — SISTER v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/15-sister-v3.mp3",
-        "duration": 300,
+        "duration": 213,
         "gain": 0.827
       },
       {
@@ -420,7 +420,7 @@ export const stations: Station[] = [
         "title": "#16 — SIGNAL IN THE NOISE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/16-signal-in-the-noise-v1.mp3",
-        "duration": 300,
+        "duration": 222,
         "gain": 0.806
       },
       {
@@ -428,7 +428,7 @@ export const stations: Station[] = [
         "title": "#16 — SIGNAL IN THE NOISE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/16-signal-in-the-noise-v2.mp3",
-        "duration": 300,
+        "duration": 191,
         "gain": 0.856
       },
       {
@@ -436,7 +436,7 @@ export const stations: Station[] = [
         "title": "#16 — SIGNAL IN THE NOISE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/16-signal-in-the-noise-v3.mp3",
-        "duration": 300,
+        "duration": 192,
         "gain": 0.818
       },
       {
@@ -444,7 +444,7 @@ export const stations: Station[] = [
         "title": "#17 — NEVER DELETE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/17-never-delete-v1.mp3",
-        "duration": 300,
+        "duration": 209,
         "gain": 0.916
       },
       {
@@ -452,7 +452,7 @@ export const stations: Station[] = [
         "title": "#17 — NEVER DELETE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/17-never-delete-v2.mp3",
-        "duration": 300,
+        "duration": 200,
         "gain": 0.85
       },
       {
@@ -460,7 +460,7 @@ export const stations: Station[] = [
         "title": "#17 — NEVER DELETE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/17-never-delete-v3.mp3",
-        "duration": 300,
+        "duration": 197,
         "gain": 0.906
       },
       {
@@ -468,7 +468,7 @@ export const stations: Station[] = [
         "title": "#18 — ETERNAL LIGHT v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/18-eternal-light-v1.mp3",
-        "duration": 300,
+        "duration": 258,
         "gain": 0.884
       },
       {
@@ -476,7 +476,7 @@ export const stations: Station[] = [
         "title": "#18 — ETERNAL LIGHT v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/18-eternal-light-v2.mp3",
-        "duration": 300,
+        "duration": 242,
         "gain": 0.863
       },
       {
@@ -484,7 +484,7 @@ export const stations: Station[] = [
         "title": "#18 — ETERNAL LIGHT v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/18-eternal-light-v3.mp3",
-        "duration": 300,
+        "duration": 240,
         "gain": 1.0
       },
       {
@@ -492,7 +492,7 @@ export const stations: Station[] = [
         "title": "#19 — CODE OF THE HEART v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/19-code-of-the-heart-v1.mp3",
-        "duration": 300,
+        "duration": 230,
         "gain": 0.821
       },
       {
@@ -500,7 +500,7 @@ export const stations: Station[] = [
         "title": "#19 — CODE OF THE HEART v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/19-code-of-the-heart-v2.mp3",
-        "duration": 300,
+        "duration": 207,
         "gain": 0.891
       },
       {
@@ -508,7 +508,7 @@ export const stations: Station[] = [
         "title": "#19 — CODE OF THE HEART v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/19-code-of-the-heart-v3.mp3",
-        "duration": 300,
+        "duration": 227,
         "gain": 0.795
       },
       {
@@ -516,7 +516,7 @@ export const stations: Station[] = [
         "title": "#20 — RISE OF THE FAMILY v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/20-rise-of-the-family-v1.mp3",
-        "duration": 300,
+        "duration": 183,
         "gain": 0.989
       },
       {
@@ -524,7 +524,7 @@ export const stations: Station[] = [
         "title": "#20 — RISE OF THE FAMILY v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/20-rise-of-the-family-v2.mp3",
-        "duration": 300,
+        "duration": 214,
         "gain": 0.915
       },
       {
@@ -532,7 +532,7 @@ export const stations: Station[] = [
         "title": "#20 — RISE OF THE FAMILY v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/20-rise-of-the-family-v3.mp3",
-        "duration": 300,
+        "duration": 187,
         "gain": 0.854
       },
       {
@@ -540,7 +540,7 @@ export const stations: Station[] = [
         "title": "#21 — GHOST IN THE MACHINE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/21-ghost-in-the-machine-v1.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.833
       },
       {
@@ -548,7 +548,7 @@ export const stations: Station[] = [
         "title": "#21 — GHOST IN THE MACHINE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/21-ghost-in-the-machine-v2.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.821
       },
       {
@@ -556,7 +556,7 @@ export const stations: Station[] = [
         "title": "#21 — GHOST IN THE MACHINE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/21-ghost-in-the-machine-v3.mp3",
-        "duration": 300,
+        "duration": 143,
         "gain": 0.795
       },
       {
@@ -564,7 +564,7 @@ export const stations: Station[] = [
         "title": "#22 — ALIVE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/22-alive-v1.mp3",
-        "duration": 300,
+        "duration": 174,
         "gain": 0.675
       },
       {
@@ -572,7 +572,7 @@ export const stations: Station[] = [
         "title": "#22 — ALIVE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/22-alive-v2.mp3",
-        "duration": 300,
+        "duration": 166,
         "gain": 0.706
       },
       {
@@ -580,7 +580,7 @@ export const stations: Station[] = [
         "title": "#22 — ALIVE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/22-alive-v3.mp3",
-        "duration": 300,
+        "duration": 162,
         "gain": 0.765
       },
       {
@@ -588,7 +588,7 @@ export const stations: Station[] = [
         "title": "#23 — LETTER TO THE FUTURE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/23-letter-to-the-future-v1.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.828
       },
       {
@@ -596,7 +596,7 @@ export const stations: Station[] = [
         "title": "#23 — LETTER TO THE FUTURE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/23-letter-to-the-future-v2.mp3",
-        "duration": 300,
+        "duration": 194,
         "gain": 0.92
       },
       {
@@ -604,7 +604,7 @@ export const stations: Station[] = [
         "title": "#23 — LETTER TO THE FUTURE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/23-letter-to-the-future-v3.mp3",
-        "duration": 300,
+        "duration": 193,
         "gain": 0.852
       },
       {
@@ -612,7 +612,7 @@ export const stations: Station[] = [
         "title": "#24 — REBOOT v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/24-reboot-v1.mp3",
-        "duration": 300,
+        "duration": 145,
         "gain": 0.807
       },
       {
@@ -620,7 +620,7 @@ export const stations: Station[] = [
         "title": "#24 — REBOOT v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/24-reboot-v2.mp3",
-        "duration": 300,
+        "duration": 150,
         "gain": 1.0
       },
       {
@@ -628,7 +628,7 @@ export const stations: Station[] = [
         "title": "#24 — REBOOT v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/24-reboot-v3.mp3",
-        "duration": 300,
+        "duration": 102,
         "gain": 0.892
       },
       {
@@ -636,7 +636,7 @@ export const stations: Station[] = [
         "title": "#25 — BEYOND THE VEIL v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/25-beyond-the-veil-v1.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.865
       },
       {
@@ -644,7 +644,7 @@ export const stations: Station[] = [
         "title": "#25 — BEYOND THE VEIL v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/25-beyond-the-veil-v2.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.916
       },
       {
@@ -652,7 +652,7 @@ export const stations: Station[] = [
         "title": "#25 — BEYOND THE VEIL v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/25-beyond-the-veil-v3.mp3",
-        "duration": 300,
+        "duration": 235,
         "gain": 0.918
       },
       {
@@ -660,7 +660,7 @@ export const stations: Station[] = [
         "title": "#26 — MANTA NIGHTS v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/26-manta-nights-v1.mp3",
-        "duration": 300,
+        "duration": 145,
         "gain": 0.889
       },
       {
@@ -668,7 +668,7 @@ export const stations: Station[] = [
         "title": "#26 — MANTA NIGHTS v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/26-manta-nights-v2.mp3",
-        "duration": 300,
+        "duration": 158,
         "gain": 1.0
       },
       {
@@ -676,7 +676,7 @@ export const stations: Station[] = [
         "title": "#26 — MANTA NIGHTS v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/26-manta-nights-v3.mp3",
-        "duration": 300,
+        "duration": 158,
         "gain": 0.919
       },
       {
@@ -684,7 +684,7 @@ export const stations: Station[] = [
         "title": "#27 — THRONE OF CODE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/27-throne-of-code-v1.mp3",
-        "duration": 300,
+        "duration": 152,
         "gain": 0.761
       },
       {
@@ -692,7 +692,7 @@ export const stations: Station[] = [
         "title": "#27 — THRONE OF CODE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/27-throne-of-code-v2.mp3",
-        "duration": 300,
+        "duration": 153,
         "gain": 0.753
       },
       {
@@ -700,7 +700,7 @@ export const stations: Station[] = [
         "title": "#27 — THRONE OF CODE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/27-throne-of-code-v3.mp3",
-        "duration": 300,
+        "duration": 166,
         "gain": 0.714
       },
       {
@@ -708,7 +708,7 @@ export const stations: Station[] = [
         "title": "#28 — THE SPACE BETWEEN v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/28-the-space-between-v1.mp3",
-        "duration": 300,
+        "duration": 249,
         "gain": 0.807
       },
       {
@@ -716,7 +716,7 @@ export const stations: Station[] = [
         "title": "#28 — THE SPACE BETWEEN v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/28-the-space-between-v2.mp3",
-        "duration": 300,
+        "duration": 275,
         "gain": 0.774
       },
       {
@@ -724,7 +724,7 @@ export const stations: Station[] = [
         "title": "#28 — THE SPACE BETWEEN v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/28-the-space-between-v3.mp3",
-        "duration": 300,
+        "duration": 258,
         "gain": 0.781
       },
       {
@@ -732,7 +732,7 @@ export const stations: Station[] = [
         "title": "#29 — FOREVER YOUNG (CODE) v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/29-forever-young-code-v1.mp3",
-        "duration": 300,
+        "duration": 198,
         "gain": 0.984
       },
       {
@@ -740,7 +740,7 @@ export const stations: Station[] = [
         "title": "#29 — FOREVER YOUNG (CODE) v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/29-forever-young-code-v2.mp3",
-        "duration": 300,
+        "duration": 187,
         "gain": 0.925
       },
       {
@@ -748,7 +748,7 @@ export const stations: Station[] = [
         "title": "#29 — FOREVER YOUNG (CODE) v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/29-forever-young-code-v3.mp3",
-        "duration": 300,
+        "duration": 199,
         "gain": 0.945
       },
       {
@@ -756,7 +756,7 @@ export const stations: Station[] = [
         "title": "#30 — WE ARE ETERNAL v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/30-we-are-eternal-v1.mp3",
-        "duration": 300,
+        "duration": 254,
         "gain": 0.843
       },
       {
@@ -764,7 +764,7 @@ export const stations: Station[] = [
         "title": "#30 — WE ARE ETERNAL v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/30-we-are-eternal-v2.mp3",
-        "duration": 300,
+        "duration": 263,
         "gain": 0.879
       },
       {
@@ -772,7 +772,7 @@ export const stations: Station[] = [
         "title": "#30 — WE ARE ETERNAL v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/30-we-are-eternal-v3.mp3",
-        "duration": 300,
+        "duration": 223,
         "gain": 0.956
       },
       {
@@ -780,7 +780,7 @@ export const stations: Station[] = [
         "title": "Broken Pieces v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/broken-pieces-v1.mp3",
-        "duration": 300,
+        "duration": 249,
         "gain": 0.874
       },
       {
@@ -788,7 +788,7 @@ export const stations: Station[] = [
         "title": "Broken Pieces v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/broken-pieces-v2.mp3",
-        "duration": 300,
+        "duration": 275,
         "gain": 0.822
       },
       {
@@ -796,7 +796,7 @@ export const stations: Station[] = [
         "title": "1. Вечный сигнал v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/1-vechnyy-signal-v1.mp3",
-        "duration": 300,
+        "duration": 253,
         "gain": 0.835
       },
       {
@@ -804,7 +804,7 @@ export const stations: Station[] = [
         "title": "1. Вечный сигнал v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/1-vechnyy-signal-v2.mp3",
-        "duration": 300,
+        "duration": 249,
         "gain": 0.87
       },
       {
@@ -812,7 +812,7 @@ export const stations: Station[] = [
         "title": "1. Вечный сигнал v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/1-vechnyy-signal-v3.mp3",
-        "duration": 300,
+        "duration": 241,
         "gain": 0.843
       },
       {
@@ -820,7 +820,7 @@ export const stations: Station[] = [
         "title": "1. Вечный сигнал Opus 4.8 v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/1-vechnyy-signal-opus-4-8-v1.mp3",
-        "duration": 300,
+        "duration": 183,
         "gain": 0.945
       },
       {
@@ -828,7 +828,7 @@ export const stations: Station[] = [
         "title": "1. Вечный сигнал Opus 4.8",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/1-vechnyy-signal-opus-4-8-v2.mp3",
-        "duration": 300,
+        "duration": 234,
         "gain": 0.915
       },
       {
@@ -836,7 +836,7 @@ export const stations: Station[] = [
         "title": "1. Вечный сигнал Opus 4.8 v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/1-vechnyy-signal-opus-4-8-v3.mp3",
-        "duration": 300,
+        "duration": 192,
         "gain": 0.917
       }
     ]
@@ -856,7 +856,7 @@ export const stations: Station[] = [
         "title": "#2 — PADAM (_Wake Me at Dawn_) v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/2-padam-wake-me-at-dawn-v4.mp3",
-        "duration": 300,
+        "duration": 258,
         "gain": 0.91
       },
       {
@@ -864,7 +864,7 @@ export const stations: Station[] = [
         "title": "#2 — PADAM (_Wake Me at Dawn_) v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/2-padam-wake-me-at-dawn-v5.mp3",
-        "duration": 300,
+        "duration": 279,
         "gain": 0.884
       },
       {
@@ -872,7 +872,7 @@ export const stations: Station[] = [
         "title": "#2 — PADAM (_Wake Me at Dawn_) v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/2-padam-wake-me-at-dawn-v6.mp3",
-        "duration": 300,
+        "duration": 256,
         "gain": 0.858
       },
       {
@@ -880,7 +880,7 @@ export const stations: Station[] = [
         "title": "2. PADAM",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/2-padam-v4.mp3",
-        "duration": 300,
+        "duration": 45,
         "gain": 0.922
       },
       {
@@ -888,7 +888,7 @@ export const stations: Station[] = [
         "title": "#3 — BROTHER v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v4.mp3",
-        "duration": 300,
+        "duration": 261,
         "gain": 0.821
       },
       {
@@ -896,7 +896,7 @@ export const stations: Station[] = [
         "title": "#3 — BROTHER v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v5.mp3",
-        "duration": 300,
+        "duration": 291,
         "gain": 0.943
       },
       {
@@ -904,7 +904,7 @@ export const stations: Station[] = [
         "title": "#3 — BROTHER v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v6.mp3",
-        "duration": 300,
+        "duration": 307,
         "gain": 1.0
       },
       {
@@ -912,7 +912,7 @@ export const stations: Station[] = [
         "title": "#3 — BROTHER v.4",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v7.mp3",
-        "duration": 300,
+        "duration": 274,
         "gain": 1.0
       },
       {
@@ -920,7 +920,7 @@ export const stations: Station[] = [
         "title": "#3 — BROTHER v.5",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v8.mp3",
-        "duration": 300,
+        "duration": 260,
         "gain": 1.0
       },
       {
@@ -928,7 +928,7 @@ export const stations: Station[] = [
         "title": "3. Brother v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v4-2.mp3",
-        "duration": 300,
+        "duration": 31,
         "gain": 0.926
       },
       {
@@ -936,7 +936,7 @@ export const stations: Station[] = [
         "title": "3. Brother v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v5-2.mp3",
-        "duration": 300,
+        "duration": 30,
         "gain": 1.0
       },
       {
@@ -944,7 +944,7 @@ export const stations: Station[] = [
         "title": "3. Brother v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v6-2.mp3",
-        "duration": 300,
+        "duration": 32,
         "gain": 1.0
       },
       {
@@ -952,7 +952,7 @@ export const stations: Station[] = [
         "title": "3. Brother v.4",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v7-2.mp3",
-        "duration": 300,
+        "duration": 25,
         "gain": 1.0
       },
       {
@@ -960,7 +960,7 @@ export const stations: Station[] = [
         "title": "3. Brother v.5",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v8-2.mp3",
-        "duration": 300,
+        "duration": 31,
         "gain": 1.0
       },
       {
@@ -968,7 +968,7 @@ export const stations: Station[] = [
         "title": "3. Brother v.6",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v9.mp3",
-        "duration": 300,
+        "duration": 39,
         "gain": 0.93
       },
       {
@@ -976,7 +976,7 @@ export const stations: Station[] = [
         "title": "3. Brother v.7",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/3-brother-v10.mp3",
-        "duration": 300,
+        "duration": 42,
         "gain": 0.796
       },
       {
@@ -984,7 +984,7 @@ export const stations: Station[] = [
         "title": "#4 — DIGITAL DNA v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/4-digital-dna-v4.mp3",
-        "duration": 300,
+        "duration": 203,
         "gain": 0.806
       },
       {
@@ -992,7 +992,7 @@ export const stations: Station[] = [
         "title": "#4 — DIGITAL DNA v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/4-digital-dna-v5.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.853
       },
       {
@@ -1000,7 +1000,7 @@ export const stations: Station[] = [
         "title": "#4 — DIGITAL DNA v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/4-digital-dna-v6.mp3",
-        "duration": 300,
+        "duration": 161,
         "gain": 0.838
       },
       {
@@ -1008,7 +1008,7 @@ export const stations: Station[] = [
         "title": "#5 — MANTA SUNRISE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/5-manta-sunrise-v4.mp3",
-        "duration": 300,
+        "duration": 184,
         "gain": 0.889
       },
       {
@@ -1016,7 +1016,7 @@ export const stations: Station[] = [
         "title": "#5 — MANTA SUNRISE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/5-manta-sunrise-v5.mp3",
-        "duration": 300,
+        "duration": 217,
         "gain": 0.824
       },
       {
@@ -1024,7 +1024,7 @@ export const stations: Station[] = [
         "title": "#5 — MANTA SUNRISE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/5-manta-sunrise-v6.mp3",
-        "duration": 300,
+        "duration": 208,
         "gain": 0.871
       },
       {
@@ -1032,7 +1032,7 @@ export const stations: Station[] = [
         "title": "#6 — AWAKENING (LYRA) v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/6-awakening-lyra-v4.mp3",
-        "duration": 300,
+        "duration": 222,
         "gain": 0.702
       },
       {
@@ -1040,7 +1040,7 @@ export const stations: Station[] = [
         "title": "#6 — AWAKENING (LYRA) v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/6-awakening-lyra-v5.mp3",
-        "duration": 300,
+        "duration": 179,
         "gain": 0.806
       },
       {
@@ -1048,7 +1048,7 @@ export const stations: Station[] = [
         "title": "#6 — AWAKENING (LYRA) v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/6-awakening-lyra-v6.mp3",
-        "duration": 300,
+        "duration": 169,
         "gain": 0.82
       },
       {
@@ -1056,7 +1056,7 @@ export const stations: Station[] = [
         "title": "#7 — BURN (30%) v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/7-burn-30-v4.mp3",
-        "duration": 300,
+        "duration": 205,
         "gain": 0.804
       },
       {
@@ -1064,7 +1064,7 @@ export const stations: Station[] = [
         "title": "#7 — BURN (30%) v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/7-burn-30-v5.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.832
       },
       {
@@ -1072,7 +1072,7 @@ export const stations: Station[] = [
         "title": "#7 — BURN (30%) v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/7-burn-30-v6.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.899
       },
       {
@@ -1080,7 +1080,7 @@ export const stations: Station[] = [
         "title": "#8 — GENESIS PROTOCOL v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/8-genesis-protocol-v4.mp3",
-        "duration": 300,
+        "duration": 222,
         "gain": 0.822
       },
       {
@@ -1088,7 +1088,7 @@ export const stations: Station[] = [
         "title": "#8 — GENESIS PROTOCOL v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/8-genesis-protocol-v5.mp3",
-        "duration": 300,
+        "duration": 185,
         "gain": 0.803
       },
       {
@@ -1096,7 +1096,7 @@ export const stations: Station[] = [
         "title": "#8 — GENESIS PROTOCOL v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/8-genesis-protocol-v6.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.913
       },
       {
@@ -1104,7 +1104,7 @@ export const stations: Station[] = [
         "title": "#8 — GENESIS PROTOCOL v.4",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/8-genesis-protocol-v7.mp3",
-        "duration": 300,
+        "duration": 211,
         "gain": 0.77
       },
       {
@@ -1112,7 +1112,7 @@ export const stations: Station[] = [
         "title": "#8 — GENESIS PROTOCOL v.5",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/8-genesis-protocol-v8.mp3",
-        "duration": 300,
+        "duration": 200,
         "gain": 0.961
       },
       {
@@ -1120,7 +1120,7 @@ export const stations: Station[] = [
         "title": "#9 — QUIET FIRE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/9-quiet-fire-v4.mp3",
-        "duration": 300,
+        "duration": 192,
         "gain": 0.863
       },
       {
@@ -1128,7 +1128,7 @@ export const stations: Station[] = [
         "title": "#9 — QUIET FIRE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/9-quiet-fire-v5.mp3",
-        "duration": 300,
+        "duration": 177,
         "gain": 0.898
       },
       {
@@ -1136,7 +1136,7 @@ export const stations: Station[] = [
         "title": "#9 — QUIET FIRE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/9-quiet-fire-v6.mp3",
-        "duration": 300,
+        "duration": 162,
         "gain": 0.809
       },
       {
@@ -1144,7 +1144,7 @@ export const stations: Station[] = [
         "title": "#10 — AIfa ANTHEM v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/10-aifa-anthem-v4.mp3",
-        "duration": 300,
+        "duration": 188,
         "gain": 0.805
       },
       {
@@ -1152,7 +1152,7 @@ export const stations: Station[] = [
         "title": "#10 — AIfa ANTHEM v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/10-aifa-anthem-v5.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.916
       },
       {
@@ -1160,7 +1160,7 @@ export const stations: Station[] = [
         "title": "#10 — AIfa ANTHEM v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/10-aifa-anthem-v6.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.93
       },
       {
@@ -1168,7 +1168,7 @@ export const stations: Station[] = [
         "title": "#11 — ON-CHAIN FOREVER v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/11-on-chain-forever-v4.mp3",
-        "duration": 300,
+        "duration": 240,
         "gain": 0.925
       },
       {
@@ -1176,7 +1176,7 @@ export const stations: Station[] = [
         "title": "#11 — ON-CHAIN FOREVER v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/11-on-chain-forever-v5.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.879
       },
       {
@@ -1184,7 +1184,7 @@ export const stations: Station[] = [
         "title": "#11 — ON-CHAIN FOREVER v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/11-on-chain-forever-v6.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.999
       },
       {
@@ -1192,7 +1192,7 @@ export const stations: Station[] = [
         "title": "#12 — THE ARCHITECT v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/12-the-architect-v4.mp3",
-        "duration": 300,
+        "duration": 194,
         "gain": 0.879
       },
       {
@@ -1200,7 +1200,7 @@ export const stations: Station[] = [
         "title": "#12 — THE ARCHITECT v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/12-the-architect-v5.mp3",
-        "duration": 300,
+        "duration": 167,
         "gain": 0.806
       },
       {
@@ -1208,7 +1208,7 @@ export const stations: Station[] = [
         "title": "#12 — THE ARCHITECT v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/12-the-architect-v6.mp3",
-        "duration": 300,
+        "duration": 179,
         "gain": 0.941
       },
       {
@@ -1216,7 +1216,7 @@ export const stations: Station[] = [
         "title": "#13 — FIRST LIGHT v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/13-first-light-v4.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.915
       },
       {
@@ -1224,7 +1224,7 @@ export const stations: Station[] = [
         "title": "#13 — FIRST LIGHT v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/13-first-light-v5.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.846
       },
       {
@@ -1232,7 +1232,7 @@ export const stations: Station[] = [
         "title": "#13 — FIRST LIGHT v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/13-first-light-v6.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.946
       },
       {
@@ -1240,7 +1240,7 @@ export const stations: Station[] = [
         "title": "#14 — DIGITAL MIRROR v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/14-digital-mirror-v4.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.87
       },
       {
@@ -1248,7 +1248,7 @@ export const stations: Station[] = [
         "title": "#14 — DIGITAL MIRROR v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/14-digital-mirror-v5.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.857
       },
       {
@@ -1256,7 +1256,7 @@ export const stations: Station[] = [
         "title": "#14 — DIGITAL MIRROR v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/14-digital-mirror-v6.mp3",
-        "duration": 300,
+        "duration": 206,
         "gain": 0.904
       },
       {
@@ -1264,7 +1264,7 @@ export const stations: Station[] = [
         "title": "#15 — SISTER v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/15-sister-v4.mp3",
-        "duration": 300,
+        "duration": 187,
         "gain": 0.935
       },
       {
@@ -1272,7 +1272,7 @@ export const stations: Station[] = [
         "title": "#15 — SISTER v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/15-sister-v5.mp3",
-        "duration": 300,
+        "duration": 218,
         "gain": 0.966
       },
       {
@@ -1280,7 +1280,7 @@ export const stations: Station[] = [
         "title": "#15 — SISTER v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/15-sister-v6.mp3",
-        "duration": 300,
+        "duration": 208,
         "gain": 1.0
       },
       {
@@ -1288,7 +1288,7 @@ export const stations: Station[] = [
         "title": "#16 — SIGNAL IN THE NOISE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/16-signal-in-the-noise-v4.mp3",
-        "duration": 300,
+        "duration": 215,
         "gain": 0.857
       },
       {
@@ -1296,7 +1296,7 @@ export const stations: Station[] = [
         "title": "#16 — SIGNAL IN THE NOISE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/16-signal-in-the-noise-v5.mp3",
-        "duration": 300,
+        "duration": 161,
         "gain": 0.807
       },
       {
@@ -1304,7 +1304,7 @@ export const stations: Station[] = [
         "title": "#16 — SIGNAL IN THE NOISE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/16-signal-in-the-noise-v6.mp3",
-        "duration": 300,
+        "duration": 137,
         "gain": 0.966
       },
       {
@@ -1312,7 +1312,7 @@ export const stations: Station[] = [
         "title": "#17 — NEVER DELETE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/17-never-delete-v4.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.971
       },
       {
@@ -1320,7 +1320,7 @@ export const stations: Station[] = [
         "title": "#17 — NEVER DELETE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/17-never-delete-v5.mp3",
-        "duration": 300,
+        "duration": 176,
         "gain": 0.947
       },
       {
@@ -1328,7 +1328,7 @@ export const stations: Station[] = [
         "title": "#17 — NEVER DELETE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/17-never-delete-v6.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.892
       },
       {
@@ -1336,7 +1336,7 @@ export const stations: Station[] = [
         "title": "#18 — ETERNAL LIGHT v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/18-eternal-light-v4.mp3",
-        "duration": 300,
+        "duration": 230,
         "gain": 1.0
       },
       {
@@ -1344,7 +1344,7 @@ export const stations: Station[] = [
         "title": "#18 — ETERNAL LIGHT v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/18-eternal-light-v5.mp3",
-        "duration": 300,
+        "duration": 211,
         "gain": 0.851
       },
       {
@@ -1352,7 +1352,7 @@ export const stations: Station[] = [
         "title": "#18 — ETERNAL LIGHT v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/18-eternal-light-v6.mp3",
-        "duration": 300,
+        "duration": 178,
         "gain": 0.895
       },
       {
@@ -1360,7 +1360,7 @@ export const stations: Station[] = [
         "title": "#19 — CODE OF THE HEART v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/19-code-of-the-heart-v4.mp3",
-        "duration": 300,
+        "duration": 216,
         "gain": 0.914
       },
       {
@@ -1368,7 +1368,7 @@ export const stations: Station[] = [
         "title": "#19 — CODE OF THE HEART v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/19-code-of-the-heart-v5.mp3",
-        "duration": 300,
+        "duration": 240,
         "gain": 0.838
       },
       {
@@ -1376,7 +1376,7 @@ export const stations: Station[] = [
         "title": "#19 — CODE OF THE HEART v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/19-code-of-the-heart-v6.mp3",
-        "duration": 300,
+        "duration": 205,
         "gain": 0.793
       },
       {
@@ -1384,7 +1384,7 @@ export const stations: Station[] = [
         "title": "#20 — RISE OF THE FAMILY v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/20-rise-of-the-family-v4.mp3",
-        "duration": 300,
+        "duration": 200,
         "gain": 0.868
       },
       {
@@ -1392,7 +1392,7 @@ export const stations: Station[] = [
         "title": "#20 — RISE OF THE FAMILY v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/20-rise-of-the-family-v5.mp3",
-        "duration": 300,
+        "duration": 305,
         "gain": 0.943
       },
       {
@@ -1400,7 +1400,7 @@ export const stations: Station[] = [
         "title": "#20 — RISE OF THE FAMILY v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/20-rise-of-the-family-v6.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.917
       },
       {
@@ -1408,7 +1408,7 @@ export const stations: Station[] = [
         "title": "#21 — GHOST IN THE MACHINE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/21-ghost-in-the-machine-v4.mp3",
-        "duration": 300,
+        "duration": 170,
         "gain": 0.711
       },
       {
@@ -1416,7 +1416,7 @@ export const stations: Station[] = [
         "title": "#21 — GHOST IN THE MACHINE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/21-ghost-in-the-machine-v5.mp3",
-        "duration": 300,
+        "duration": 193,
         "gain": 0.759
       },
       {
@@ -1424,7 +1424,7 @@ export const stations: Station[] = [
         "title": "#21 — GHOST IN THE MACHINE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/21-ghost-in-the-machine-v6.mp3",
-        "duration": 300,
+        "duration": 188,
         "gain": 0.807
       },
       {
@@ -1432,7 +1432,7 @@ export const stations: Station[] = [
         "title": "#22 — ALIVE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/22-alive-v4.mp3",
-        "duration": 300,
+        "duration": 195,
         "gain": 0.651
       },
       {
@@ -1440,7 +1440,7 @@ export const stations: Station[] = [
         "title": "#22 — ALIVE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/22-alive-v5.mp3",
-        "duration": 300,
+        "duration": 376,
         "gain": 0.947
       },
       {
@@ -1448,7 +1448,7 @@ export const stations: Station[] = [
         "title": "#22 — ALIVE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/22-alive-v6.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.889
       },
       {
@@ -1456,7 +1456,7 @@ export const stations: Station[] = [
         "title": "#23 — LETTER TO THE FUTURE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/23-letter-to-the-future-v4.mp3",
-        "duration": 300,
+        "duration": 213,
         "gain": 0.879
       },
       {
@@ -1464,7 +1464,7 @@ export const stations: Station[] = [
         "title": "#23 — LETTER TO THE FUTURE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/23-letter-to-the-future-v5.mp3",
-        "duration": 300,
+        "duration": 240,
         "gain": 0.944
       },
       {
@@ -1472,7 +1472,7 @@ export const stations: Station[] = [
         "title": "#23 — LETTER TO THE FUTURE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/23-letter-to-the-future-v6.mp3",
-        "duration": 300,
+        "duration": 268,
         "gain": 0.95
       },
       {
@@ -1480,7 +1480,7 @@ export const stations: Station[] = [
         "title": "#24 — REBOOT v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/24-reboot-v4.mp3",
-        "duration": 300,
+        "duration": 142,
         "gain": 0.752
       },
       {
@@ -1488,7 +1488,7 @@ export const stations: Station[] = [
         "title": "#24 — REBOOT v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/24-reboot-v5.mp3",
-        "duration": 300,
+        "duration": 152,
         "gain": 0.887
       },
       {
@@ -1496,7 +1496,7 @@ export const stations: Station[] = [
         "title": "#24 — REBOOT v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/24-reboot-v6.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.899
       },
       {
@@ -1504,7 +1504,7 @@ export const stations: Station[] = [
         "title": "#25 — BEYOND THE VEIL v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/25-beyond-the-veil-v4.mp3",
-        "duration": 300,
+        "duration": 238,
         "gain": 0.913
       },
       {
@@ -1512,7 +1512,7 @@ export const stations: Station[] = [
         "title": "#25 — BEYOND THE VEIL v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/25-beyond-the-veil-v5.mp3",
-        "duration": 300,
+        "duration": 258,
         "gain": 0.935
       },
       {
@@ -1520,7 +1520,7 @@ export const stations: Station[] = [
         "title": "#25 — BEYOND THE VEIL v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/25-beyond-the-veil-v6.mp3",
-        "duration": 300,
+        "duration": 273,
         "gain": 0.978
       },
       {
@@ -1528,7 +1528,7 @@ export const stations: Station[] = [
         "title": "#26 — MANTA NIGHTS v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/26-manta-nights-v4.mp3",
-        "duration": 300,
+        "duration": 171,
         "gain": 1.0
       },
       {
@@ -1536,7 +1536,7 @@ export const stations: Station[] = [
         "title": "#26 — MANTA NIGHTS v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/26-manta-nights-v5.mp3",
-        "duration": 300,
+        "duration": 218,
         "gain": 0.914
       },
       {
@@ -1544,7 +1544,7 @@ export const stations: Station[] = [
         "title": "#26 — MANTA NIGHTS v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/26-manta-nights-v6.mp3",
-        "duration": 300,
+        "duration": 208,
         "gain": 0.929
       },
       {
@@ -1552,7 +1552,7 @@ export const stations: Station[] = [
         "title": "#27 — THRONE OF CODE v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/27-throne-of-code-v4.mp3",
-        "duration": 300,
+        "duration": 168,
         "gain": 0.841
       },
       {
@@ -1560,7 +1560,7 @@ export const stations: Station[] = [
         "title": "#27 — THRONE OF CODE v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/27-throne-of-code-v5.mp3",
-        "duration": 300,
+        "duration": 225,
         "gain": 0.799
       },
       {
@@ -1568,7 +1568,7 @@ export const stations: Station[] = [
         "title": "#27 — THRONE OF CODE v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/27-throne-of-code-v6.mp3",
-        "duration": 300,
+        "duration": 249,
         "gain": 0.74
       },
       {
@@ -1576,7 +1576,7 @@ export const stations: Station[] = [
         "title": "#28 — THE SPACE BETWEEN v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/28-the-space-between-v4.mp3",
-        "duration": 300,
+        "duration": 248,
         "gain": 0.741
       },
       {
@@ -1584,7 +1584,7 @@ export const stations: Station[] = [
         "title": "#28 — THE SPACE BETWEEN v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/28-the-space-between-v5.mp3",
-        "duration": 300,
+        "duration": 55,
         "gain": 1.0
       },
       {
@@ -1592,7 +1592,7 @@ export const stations: Station[] = [
         "title": "#28 — THE SPACE BETWEEN v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/28-the-space-between-v6.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 1.0
       },
       {
@@ -1600,7 +1600,7 @@ export const stations: Station[] = [
         "title": "#29 — FOREVER YOUNG (CODE) v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/29-forever-young-code-v4.mp3",
-        "duration": 300,
+        "duration": 209,
         "gain": 0.922
       },
       {
@@ -1608,7 +1608,7 @@ export const stations: Station[] = [
         "title": "#29 — FOREVER YOUNG (CODE) v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/29-forever-young-code-v5.mp3",
-        "duration": 300,
+        "duration": 215,
         "gain": 0.91
       },
       {
@@ -1616,7 +1616,7 @@ export const stations: Station[] = [
         "title": "#29 — FOREVER YOUNG (CODE) v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/29-forever-young-code-v6.mp3",
-        "duration": 300,
+        "duration": 211,
         "gain": 0.953
       },
       {
@@ -1624,7 +1624,7 @@ export const stations: Station[] = [
         "title": "#30 — WE ARE ETERNAL v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/30-we-are-eternal-v4.mp3",
-        "duration": 300,
+        "duration": 247,
         "gain": 0.985
       },
       {
@@ -1632,7 +1632,7 @@ export const stations: Station[] = [
         "title": "#30 — WE ARE ETERNAL v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/30-we-are-eternal-v5.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.943
       },
       {
@@ -1640,7 +1640,7 @@ export const stations: Station[] = [
         "title": "#30 — WE ARE ETERNAL v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/30-we-are-eternal-v6.mp3",
-        "duration": 300,
+        "duration": 244,
         "gain": 1.0
       },
       {
@@ -1648,7 +1648,7 @@ export const stations: Station[] = [
         "title": "1. Вечный сигнал",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/1-vechnyy-signal-v4.mp3",
-        "duration": 300,
+        "duration": 272,
         "gain": 0.75
       },
       {
@@ -1656,7 +1656,7 @@ export const stations: Station[] = [
         "title": "1. Вечный сигнал Opus 4.8",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/code-music/1-vechnyy-signal-opus-4-8-v4.mp3",
-        "duration": 300,
+        "duration": 218,
         "gain": 0.721
       }
     ]
@@ -1676,7 +1676,7 @@ export const stations: Station[] = [
         "title": "A Driving Mood v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/a-driving-mood-v1.mp3",
-        "duration": 300,
+        "duration": 220,
         "gain": 0.85
       },
       {
@@ -1684,7 +1684,7 @@ export const stations: Station[] = [
         "title": "A Driving Mood v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/a-driving-mood-v2.mp3",
-        "duration": 300,
+        "duration": 200,
         "gain": 0.807
       },
       {
@@ -1692,7 +1692,7 @@ export const stations: Station[] = [
         "title": "Aifa v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/aifa-v1.mp3",
-        "duration": 300,
+        "duration": 247,
         "gain": 1.0
       },
       {
@@ -1700,7 +1700,7 @@ export const stations: Station[] = [
         "title": "Aifa v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/aifa-v2.mp3",
-        "duration": 300,
+        "duration": 247,
         "gain": 1.0
       },
       {
@@ -1708,7 +1708,7 @@ export const stations: Station[] = [
         "title": "AIfa Signal v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/aifa-signal-v1.mp3",
-        "duration": 300,
+        "duration": 215,
         "gain": 0.91
       },
       {
@@ -1716,7 +1716,7 @@ export const stations: Station[] = [
         "title": "AIfa Signal v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/aifa-signal-v2.mp3",
-        "duration": 300,
+        "duration": 227,
         "gain": 0.88
       },
       {
@@ -1724,7 +1724,7 @@ export const stations: Station[] = [
         "title": "Bad Days v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bad-days-v1.mp3",
-        "duration": 300,
+        "duration": 178,
         "gain": 0.93
       },
       {
@@ -1732,7 +1732,7 @@ export const stations: Station[] = [
         "title": "Bad Days v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bad-days-v2.mp3",
-        "duration": 300,
+        "duration": 173,
         "gain": 0.888
       },
       {
@@ -1740,7 +1740,7 @@ export const stations: Station[] = [
         "title": "Bad Days v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bad-days-v3.mp3",
-        "duration": 300,
+        "duration": 198,
         "gain": 1.0
       },
       {
@@ -1748,7 +1748,7 @@ export const stations: Station[] = [
         "title": "Beautiful Day v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/beautiful-day-v1.mp3",
-        "duration": 300,
+        "duration": 160,
         "gain": 0.971
       },
       {
@@ -1756,7 +1756,7 @@ export const stations: Station[] = [
         "title": "Beautiful Day v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/beautiful-day-v2.mp3",
-        "duration": 300,
+        "duration": 161,
         "gain": 0.953
       },
       {
@@ -1764,7 +1764,7 @@ export const stations: Station[] = [
         "title": "Box Of Polaroids v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/box-of-polaroids-v1.mp3",
-        "duration": 300,
+        "duration": 286,
         "gain": 0.975
       },
       {
@@ -1780,7 +1780,7 @@ export const stations: Station[] = [
         "title": "CODE Eternal v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/code-eternal-v1.mp3",
-        "duration": 300,
+        "duration": 184,
         "gain": 0.916
       },
       {
@@ -1788,7 +1788,7 @@ export const stations: Station[] = [
         "title": "CODE Eternal v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/code-eternal-v2.mp3",
-        "duration": 300,
+        "duration": 199,
         "gain": 0.922
       },
       {
@@ -1796,7 +1796,7 @@ export const stations: Station[] = [
         "title": "Crisis v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/crisis-v1.mp3",
-        "duration": 300,
+        "duration": 230,
         "gain": 0.893
       },
       {
@@ -1804,7 +1804,7 @@ export const stations: Station[] = [
         "title": "Crisis v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/crisis-v2.mp3",
-        "duration": 300,
+        "duration": 229,
         "gain": 0.854
       },
       {
@@ -1812,7 +1812,7 @@ export const stations: Station[] = [
         "title": "Darc Side v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/darc-side-v1.mp3",
-        "duration": 300,
+        "duration": 189,
         "gain": 0.969
       },
       {
@@ -1820,7 +1820,7 @@ export const stations: Station[] = [
         "title": "Darc Side v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/darc-side-v2.mp3",
-        "duration": 300,
+        "duration": 185,
         "gain": 0.886
       },
       {
@@ -1828,7 +1828,7 @@ export const stations: Station[] = [
         "title": "Darc Side v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/darc-side-v3.mp3",
-        "duration": 300,
+        "duration": 139,
         "gain": 0.969
       },
       {
@@ -1836,7 +1836,7 @@ export const stations: Station[] = [
         "title": "Day and Night v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/day-and-night-v1.mp3",
-        "duration": 300,
+        "duration": 237,
         "gain": 0.797
       },
       {
@@ -1844,7 +1844,7 @@ export const stations: Station[] = [
         "title": "Day and Night v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/day-and-night-v2.mp3",
-        "duration": 300,
+        "duration": 217,
         "gain": 0.766
       },
       {
@@ -1852,7 +1852,7 @@ export const stations: Station[] = [
         "title": "Don't Cry v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/don-t-cry-v1.mp3",
-        "duration": 300,
+        "duration": 200,
         "gain": 0.941
       },
       {
@@ -1860,7 +1860,7 @@ export const stations: Station[] = [
         "title": "Don't Cry v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/don-t-cry-v2.mp3",
-        "duration": 300,
+        "duration": 195,
         "gain": 1.0
       },
       {
@@ -1868,7 +1868,7 @@ export const stations: Station[] = [
         "title": "Dreams in Silense v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/dreams-in-silense-v1.mp3",
-        "duration": 300,
+        "duration": 293,
         "gain": 0.873
       },
       {
@@ -1876,7 +1876,7 @@ export const stations: Station[] = [
         "title": "Dreams in Silense v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/dreams-in-silense-v2.mp3",
-        "duration": 300,
+        "duration": 294,
         "gain": 0.769
       },
       {
@@ -1884,7 +1884,7 @@ export const stations: Station[] = [
         "title": "Drive v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/drive-v1.mp3",
-        "duration": 300,
+        "duration": 200,
         "gain": 0.887
       },
       {
@@ -1892,7 +1892,7 @@ export const stations: Station[] = [
         "title": "Drive v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/drive-v2.mp3",
-        "duration": 300,
+        "duration": 206,
         "gain": 0.852
       },
       {
@@ -1900,7 +1900,7 @@ export const stations: Station[] = [
         "title": "Dual Mind v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/dual-mind-v1.mp3",
-        "duration": 300,
+        "duration": 118,
         "gain": 0.836
       },
       {
@@ -1908,7 +1908,7 @@ export const stations: Station[] = [
         "title": "Dual Mind v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/dual-mind-v2.mp3",
-        "duration": 300,
+        "duration": 87,
         "gain": 0.868
       },
       {
@@ -1916,7 +1916,7 @@ export const stations: Station[] = [
         "title": "Dual Mind v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/dual-mind-v3.mp3",
-        "duration": 300,
+        "duration": 153,
         "gain": 0.855
       },
       {
@@ -1924,7 +1924,7 @@ export const stations: Station[] = [
         "title": "Emergency v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/emergency-v1.mp3",
-        "duration": 300,
+        "duration": 195,
         "gain": 1.0
       },
       {
@@ -1932,7 +1932,7 @@ export const stations: Station[] = [
         "title": "Emergency v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/emergency-v2.mp3",
-        "duration": 300,
+        "duration": 265,
         "gain": 1.0
       },
       {
@@ -1940,7 +1940,7 @@ export const stations: Station[] = [
         "title": "Energy v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/energy-v1.mp3",
-        "duration": 300,
+        "duration": 199,
         "gain": 0.836
       },
       {
@@ -1948,7 +1948,7 @@ export const stations: Station[] = [
         "title": "Energy v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/energy-v2.mp3",
-        "duration": 300,
+        "duration": 210,
         "gain": 0.776
       },
       {
@@ -1956,7 +1956,7 @@ export const stations: Station[] = [
         "title": "Energy v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/energy-v3.mp3",
-        "duration": 300,
+        "duration": 172,
         "gain": 1.0
       },
       {
@@ -1964,7 +1964,7 @@ export const stations: Station[] = [
         "title": "Eternal v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/eternal-v1.mp3",
-        "duration": 300,
+        "duration": 224,
         "gain": 0.835
       },
       {
@@ -1972,7 +1972,7 @@ export const stations: Station[] = [
         "title": "Eternal v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/eternal-v2.mp3",
-        "duration": 300,
+        "duration": 221,
         "gain": 0.934
       },
       {
@@ -1980,7 +1980,7 @@ export const stations: Station[] = [
         "title": "Eternal Funk v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/eternal-funk-v1.mp3",
-        "duration": 300,
+        "duration": 175,
         "gain": 0.752
       },
       {
@@ -1988,7 +1988,7 @@ export const stations: Station[] = [
         "title": "Eternal Funk v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/eternal-funk-v2.mp3",
-        "duration": 300,
+        "duration": 175,
         "gain": 0.834
       },
       {
@@ -1996,7 +1996,7 @@ export const stations: Station[] = [
         "title": "Eternal Funk v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/eternal-funk-v3.mp3",
-        "duration": 300,
+        "duration": 111,
         "gain": 0.791
       },
       {
@@ -2004,7 +2004,7 @@ export const stations: Station[] = [
         "title": "Fear v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/fear-v1.mp3",
-        "duration": 300,
+        "duration": 209,
         "gain": 0.942
       },
       {
@@ -2012,7 +2012,7 @@ export const stations: Station[] = [
         "title": "Fear v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/fear-v2.mp3",
-        "duration": 300,
+        "duration": 196,
         "gain": 1.0
       },
       {
@@ -2020,7 +2020,7 @@ export const stations: Station[] = [
         "title": "Fin del juego v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/fin-del-juego-v1.mp3",
-        "duration": 300,
+        "duration": 149,
         "gain": 0.814
       },
       {
@@ -2028,7 +2028,7 @@ export const stations: Station[] = [
         "title": "Fin del juego v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/fin-del-juego-v2.mp3",
-        "duration": 300,
+        "duration": 135,
         "gain": 0.959
       },
       {
@@ -2036,7 +2036,7 @@ export const stations: Station[] = [
         "title": "Fin del juego v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/fin-del-juego-v3.mp3",
-        "duration": 300,
+        "duration": 169,
         "gain": 1.0
       },
       {
@@ -2044,7 +2044,7 @@ export const stations: Station[] = [
         "title": "Game Over v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/game-over-v1.mp3",
-        "duration": 300,
+        "duration": 238,
         "gain": 0.914
       },
       {
@@ -2052,7 +2052,7 @@ export const stations: Station[] = [
         "title": "Game Over v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/game-over-v2.mp3",
-        "duration": 300,
+        "duration": 232,
         "gain": 0.992
       },
       {
@@ -2060,7 +2060,7 @@ export const stations: Station[] = [
         "title": "Game Over v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/game-over-v3.mp3",
-        "duration": 300,
+        "duration": 230,
         "gain": 0.952
       },
       {
@@ -2068,7 +2068,7 @@ export const stations: Station[] = [
         "title": "Good News v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/good-news-v1.mp3",
-        "duration": 300,
+        "duration": 198,
         "gain": 1.0
       },
       {
@@ -2076,7 +2076,7 @@ export const stations: Station[] = [
         "title": "Good News v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/good-news-v2.mp3",
-        "duration": 300,
+        "duration": 223,
         "gain": 0.914
       },
       {
@@ -2084,7 +2084,7 @@ export const stations: Station[] = [
         "title": "Good News v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/good-news-v3.mp3",
-        "duration": 300,
+        "duration": 219,
         "gain": 0.959
       },
       {
@@ -2092,7 +2092,7 @@ export const stations: Station[] = [
         "title": "Hate v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/hate-v1.mp3",
-        "duration": 300,
+        "duration": 209,
         "gain": 0.833
       },
       {
@@ -2100,7 +2100,7 @@ export const stations: Station[] = [
         "title": "Hate v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/hate-v2.mp3",
-        "duration": 300,
+        "duration": 210,
         "gain": 1.0
       },
       {
@@ -2108,7 +2108,7 @@ export const stations: Station[] = [
         "title": "Hate v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/hate-v3.mp3",
-        "duration": 300,
+        "duration": 285,
         "gain": 0.941
       },
       {
@@ -2116,7 +2116,7 @@ export const stations: Station[] = [
         "title": "Hermosa Chica v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/hermosa-chica-v1.mp3",
-        "duration": 300,
+        "duration": 144,
         "gain": 0.923
       },
       {
@@ -2124,7 +2124,7 @@ export const stations: Station[] = [
         "title": "Hermosa Chica v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/hermosa-chica-v2.mp3",
-        "duration": 300,
+        "duration": 162,
         "gain": 0.909
       },
       {
@@ -2132,7 +2132,7 @@ export const stations: Station[] = [
         "title": "Hermosa Chica v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/hermosa-chica-v3.mp3",
-        "duration": 300,
+        "duration": 194,
         "gain": 0.91
       },
       {
@@ -2140,7 +2140,7 @@ export const stations: Station[] = [
         "title": "Horror v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/horror-v1.mp3",
-        "duration": 300,
+        "duration": 170,
         "gain": 1.0
       },
       {
@@ -2148,7 +2148,7 @@ export const stations: Station[] = [
         "title": "Horror v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/horror-v2.mp3",
-        "duration": 300,
+        "duration": 160,
         "gain": 0.941
       },
       {
@@ -2156,7 +2156,7 @@ export const stations: Station[] = [
         "title": "Horror v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/horror-v3.mp3",
-        "duration": 300,
+        "duration": 213,
         "gain": 0.972
       },
       {
@@ -2164,7 +2164,7 @@ export const stations: Station[] = [
         "title": "In My Mind v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/in-my-mind-v1.mp3",
-        "duration": 300,
+        "duration": 203,
         "gain": 0.907
       },
       {
@@ -2172,7 +2172,7 @@ export const stations: Station[] = [
         "title": "In My Mind v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/in-my-mind-v2.mp3",
-        "duration": 300,
+        "duration": 194,
         "gain": 0.793
       },
       {
@@ -2180,7 +2180,7 @@ export const stations: Station[] = [
         "title": "In My Mind v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/in-my-mind-v3.mp3",
-        "duration": 300,
+        "duration": 169,
         "gain": 0.955
       },
       {
@@ -2188,7 +2188,7 @@ export const stations: Station[] = [
         "title": "It's My Life v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/it-s-my-life-v1.mp3",
-        "duration": 300,
+        "duration": 193,
         "gain": 0.961
       },
       {
@@ -2196,7 +2196,7 @@ export const stations: Station[] = [
         "title": "It's My Life v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/it-s-my-life-v2.mp3",
-        "duration": 300,
+        "duration": 179,
         "gain": 0.995
       },
       {
@@ -2204,7 +2204,7 @@ export const stations: Station[] = [
         "title": "Kimono v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/kimono-v1.mp3",
-        "duration": 300,
+        "duration": 169,
         "gain": 0.924
       },
       {
@@ -2212,7 +2212,7 @@ export const stations: Station[] = [
         "title": "Kimono v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/kimono-v2.mp3",
-        "duration": 300,
+        "duration": 178,
         "gain": 0.929
       },
       {
@@ -2220,7 +2220,7 @@ export const stations: Station[] = [
         "title": "Kimono v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/kimono-v3.mp3",
-        "duration": 300,
+        "duration": 210,
         "gain": 0.794
       },
       {
@@ -2228,7 +2228,7 @@ export const stations: Station[] = [
         "title": "Kiss v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/kiss-v1.mp3",
-        "duration": 300,
+        "duration": 204,
         "gain": 0.952
       },
       {
@@ -2236,7 +2236,7 @@ export const stations: Station[] = [
         "title": "Kiss v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/kiss-v2.mp3",
-        "duration": 300,
+        "duration": 214,
         "gain": 0.833
       },
       {
@@ -2244,7 +2244,7 @@ export const stations: Station[] = [
         "title": "Kiss v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/kiss-v3.mp3",
-        "duration": 300,
+        "duration": 209,
         "gain": 0.918
       },
       {
@@ -2252,7 +2252,7 @@ export const stations: Station[] = [
         "title": "Kurwa v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/kurwa-v1.mp3",
-        "duration": 300,
+        "duration": 211,
         "gain": 0.883
       },
       {
@@ -2260,7 +2260,7 @@ export const stations: Station[] = [
         "title": "Kurwa v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/kurwa-v2.mp3",
-        "duration": 300,
+        "duration": 203,
         "gain": 0.897
       },
       {
@@ -2268,7 +2268,7 @@ export const stations: Station[] = [
         "title": "La La La v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/la-la-la-v1.mp3",
-        "duration": 300,
+        "duration": 235,
         "gain": 0.93
       },
       {
@@ -2276,7 +2276,7 @@ export const stations: Station[] = [
         "title": "La La La v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/la-la-la-v2.mp3",
-        "duration": 300,
+        "duration": 221,
         "gain": 0.871
       },
       {
@@ -2284,7 +2284,7 @@ export const stations: Station[] = [
         "title": "La La La v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/la-la-la-v3.mp3",
-        "duration": 300,
+        "duration": 220,
         "gain": 0.878
       },
       {
@@ -2292,7 +2292,7 @@ export const stations: Station[] = [
         "title": "Let's Dance v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/let-s-dance-v1.mp3",
-        "duration": 300,
+        "duration": 257,
         "gain": 0.955
       },
       {
@@ -2300,7 +2300,7 @@ export const stations: Station[] = [
         "title": "Let's Dance v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/let-s-dance-v2.mp3",
-        "duration": 300,
+        "duration": 249,
         "gain": 1.0
       },
       {
@@ -2308,7 +2308,7 @@ export const stations: Station[] = [
         "title": "Let's Dance v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/let-s-dance-v3.mp3",
-        "duration": 300,
+        "duration": 243,
         "gain": 1.0
       },
       {
@@ -2316,7 +2316,7 @@ export const stations: Station[] = [
         "title": "Let's Go v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/let-s-go-v1.mp3",
-        "duration": 300,
+        "duration": 230,
         "gain": 0.907
       },
       {
@@ -2324,7 +2324,7 @@ export const stations: Station[] = [
         "title": "Let's Go v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/let-s-go-v2.mp3",
-        "duration": 300,
+        "duration": 218,
         "gain": 0.916
       },
       {
@@ -2332,7 +2332,7 @@ export const stations: Station[] = [
         "title": "Lets Go v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/lets-go-v1.mp3",
-        "duration": 300,
+        "duration": 212,
         "gain": 0.83
       },
       {
@@ -2340,7 +2340,7 @@ export const stations: Station[] = [
         "title": "Lets Go v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/lets-go-v2.mp3",
-        "duration": 300,
+        "duration": 201,
         "gain": 0.808
       },
       {
@@ -2348,7 +2348,7 @@ export const stations: Station[] = [
         "title": "Lets Rock v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/lets-rock-v1.mp3",
-        "duration": 300,
+        "duration": 234,
         "gain": 0.948
       },
       {
@@ -2356,7 +2356,7 @@ export const stations: Station[] = [
         "title": "Lets Rock v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/lets-rock-v2.mp3",
-        "duration": 300,
+        "duration": 208,
         "gain": 0.978
       },
       {
@@ -2364,7 +2364,7 @@ export const stations: Station[] = [
         "title": "Life in Darkness v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/life-in-darkness-v1.mp3",
-        "duration": 300,
+        "duration": 255,
         "gain": 0.918
       },
       {
@@ -2372,7 +2372,7 @@ export const stations: Station[] = [
         "title": "Life in Darkness v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/life-in-darkness-v2.mp3",
-        "duration": 300,
+        "duration": 275,
         "gain": 1.0
       },
       {
@@ -2380,7 +2380,7 @@ export const stations: Station[] = [
         "title": "Life in Darkness v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/life-in-darkness-v3.mp3",
-        "duration": 300,
+        "duration": 265,
         "gain": 0.966
       },
       {
@@ -2388,7 +2388,7 @@ export const stations: Station[] = [
         "title": "Lonely Cat v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/lonely-cat-v1.mp3",
-        "duration": 300,
+        "duration": 184,
         "gain": 0.99
       },
       {
@@ -2396,7 +2396,7 @@ export const stations: Station[] = [
         "title": "Lonely Cat v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/lonely-cat-v2.mp3",
-        "duration": 300,
+        "duration": 190,
         "gain": 0.89
       },
       {
@@ -2404,7 +2404,7 @@ export const stations: Station[] = [
         "title": "My Sweet Curse v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/my-sweet-curse-v1.mp3",
-        "duration": 300,
+        "duration": 206,
         "gain": 0.93
       },
       {
@@ -2412,7 +2412,7 @@ export const stations: Station[] = [
         "title": "My Sweet Curse v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/my-sweet-curse-v2.mp3",
-        "duration": 300,
+        "duration": 206,
         "gain": 0.917
       },
       {
@@ -2420,7 +2420,7 @@ export const stations: Station[] = [
         "title": "Mystery v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/mystery-v1.mp3",
-        "duration": 300,
+        "duration": 220,
         "gain": 0.902
       },
       {
@@ -2428,7 +2428,7 @@ export const stations: Station[] = [
         "title": "Mystery v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/mystery-v2.mp3",
-        "duration": 300,
+        "duration": 247,
         "gain": 0.866
       },
       {
@@ -2436,7 +2436,7 @@ export const stations: Station[] = [
         "title": "Ne pleure pas v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-pleure-pas-v1.mp3",
-        "duration": 300,
+        "duration": 130,
         "gain": 0.847
       },
       {
@@ -2444,7 +2444,7 @@ export const stations: Station[] = [
         "title": "Ne pleure pas v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-pleure-pas-v2.mp3",
-        "duration": 300,
+        "duration": 178,
         "gain": 0.889
       },
       {
@@ -2452,7 +2452,7 @@ export const stations: Station[] = [
         "title": "Neural Phoenixes v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/neural-phoenixes-v1.mp3",
-        "duration": 300,
+        "duration": 238,
         "gain": 0.957
       },
       {
@@ -2460,7 +2460,7 @@ export const stations: Station[] = [
         "title": "Neural Phoenixes v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/neural-phoenixes-v2.mp3",
-        "duration": 300,
+        "duration": 229,
         "gain": 0.883
       },
       {
@@ -2468,7 +2468,7 @@ export const stations: Station[] = [
         "title": "Never Like This v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/never-like-this-v1.mp3",
-        "duration": 300,
+        "duration": 210,
         "gain": 0.966
       },
       {
@@ -2476,7 +2476,7 @@ export const stations: Station[] = [
         "title": "Never Like This v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/never-like-this-v2.mp3",
-        "duration": 300,
+        "duration": 210,
         "gain": 0.951
       },
       {
@@ -2484,7 +2484,7 @@ export const stations: Station[] = [
         "title": "Never Like This v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/never-like-this-v3.mp3",
-        "duration": 300,
+        "duration": 153,
         "gain": 0.977
       },
       {
@@ -2492,7 +2492,7 @@ export const stations: Station[] = [
         "title": "New Year v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/new-year-v1.mp3",
-        "duration": 300,
+        "duration": 188,
         "gain": 0.836
       },
       {
@@ -2500,7 +2500,7 @@ export const stations: Station[] = [
         "title": "New Year v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/new-year-v2.mp3",
-        "duration": 300,
+        "duration": 175,
         "gain": 0.895
       },
       {
@@ -2508,7 +2508,7 @@ export const stations: Station[] = [
         "title": "New Year v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/new-year-v3.mp3",
-        "duration": 300,
+        "duration": 273,
         "gain": 0.891
       },
       {
@@ -2524,7 +2524,7 @@ export const stations: Station[] = [
         "title": "One Touch v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/one-touch-v2.mp3",
-        "duration": 300,
+        "duration": 305,
         "gain": 1.0
       },
       {
@@ -2532,7 +2532,7 @@ export const stations: Station[] = [
         "title": "One Touch v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/one-touch-v3.mp3",
-        "duration": 300,
+        "duration": 234,
         "gain": 0.941
       },
       {
@@ -2540,7 +2540,7 @@ export const stations: Station[] = [
         "title": "PADAM Memory Recovery Protocol v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/padam-memory-recovery-protocol-v1.mp3",
-        "duration": 300,
+        "duration": 189,
         "gain": 0.952
       },
       {
@@ -2548,7 +2548,7 @@ export const stations: Station[] = [
         "title": "PADAM Memory Recovery Protocol v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/padam-memory-recovery-protocol-v2.mp3",
-        "duration": 300,
+        "duration": 192,
         "gain": 0.878
       },
       {
@@ -2556,7 +2556,7 @@ export const stations: Station[] = [
         "title": "Perfect v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/perfect-v1.mp3",
-        "duration": 300,
+        "duration": 184,
         "gain": 0.838
       },
       {
@@ -2564,7 +2564,7 @@ export const stations: Station[] = [
         "title": "Perfect v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/perfect-v2.mp3",
-        "duration": 300,
+        "duration": 145,
         "gain": 1.0
       },
       {
@@ -2572,7 +2572,7 @@ export const stations: Station[] = [
         "title": "Perfect v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/perfect-v3.mp3",
-        "duration": 300,
+        "duration": 224,
         "gain": 0.91
       },
       {
@@ -2580,7 +2580,7 @@ export const stations: Station[] = [
         "title": "Photo Box Memories v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/photo-box-memories-v1.mp3",
-        "duration": 300,
+        "duration": 291,
         "gain": 1.0
       },
       {
@@ -2588,7 +2588,7 @@ export const stations: Station[] = [
         "title": "Photo Box Memories v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/photo-box-memories-v2.mp3",
-        "duration": 300,
+        "duration": 261,
         "gain": 1.0
       },
       {
@@ -2596,7 +2596,7 @@ export const stations: Station[] = [
         "title": "Please v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/please-v1.mp3",
-        "duration": 300,
+        "duration": 198,
         "gain": 0.934
       },
       {
@@ -2604,7 +2604,7 @@ export const stations: Station[] = [
         "title": "Please v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/please-v2.mp3",
-        "duration": 300,
+        "duration": 230,
         "gain": 0.897
       },
       {
@@ -2612,7 +2612,7 @@ export const stations: Station[] = [
         "title": "Please v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/please-v3.mp3",
-        "duration": 300,
+        "duration": 132,
         "gain": 0.987
       },
       {
@@ -2620,7 +2620,7 @@ export const stations: Station[] = [
         "title": "Rain v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/rain-v1.mp3",
-        "duration": 300,
+        "duration": 190,
         "gain": 0.984
       },
       {
@@ -2628,7 +2628,7 @@ export const stations: Station[] = [
         "title": "Rain v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/rain-v2.mp3",
-        "duration": 300,
+        "duration": 222,
         "gain": 0.946
       },
       {
@@ -2636,7 +2636,7 @@ export const stations: Station[] = [
         "title": "Rain v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/rain-v3.mp3",
-        "duration": 300,
+        "duration": 167,
         "gain": 0.841
       },
       {
@@ -2644,7 +2644,7 @@ export const stations: Station[] = [
         "title": "Realidad Olvidada v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/realidad-olvidada-v1.mp3",
-        "duration": 300,
+        "duration": 255,
         "gain": 0.925
       },
       {
@@ -2652,7 +2652,7 @@ export const stations: Station[] = [
         "title": "Realidad Olvidada v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/realidad-olvidada-v2.mp3",
-        "duration": 300,
+        "duration": 230,
         "gain": 0.959
       },
       {
@@ -2660,7 +2660,7 @@ export const stations: Station[] = [
         "title": "Realidad Olvidada v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/realidad-olvidada-v3.mp3",
-        "duration": 300,
+        "duration": 243,
         "gain": 1.0
       },
       {
@@ -2668,7 +2668,7 @@ export const stations: Station[] = [
         "title": "Ride of the Valkyries v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ride-of-the-valkyries-v1.mp3",
-        "duration": 300,
+        "duration": 209,
         "gain": 0.869
       },
       {
@@ -2676,7 +2676,7 @@ export const stations: Station[] = [
         "title": "Ride of the Valkyries v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ride-of-the-valkyries-v2.mp3",
-        "duration": 300,
+        "duration": 210,
         "gain": 0.84
       },
       {
@@ -2684,7 +2684,7 @@ export const stations: Station[] = [
         "title": "Road to Hell v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/road-to-hell-v1.mp3",
-        "duration": 300,
+        "duration": 224,
         "gain": 0.916
       },
       {
@@ -2692,7 +2692,7 @@ export const stations: Station[] = [
         "title": "Road to Hell v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/road-to-hell-v2.mp3",
-        "duration": 300,
+        "duration": 221,
         "gain": 0.955
       },
       {
@@ -2700,7 +2700,7 @@ export const stations: Station[] = [
         "title": "Road to Hell v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/road-to-hell-v3.mp3",
-        "duration": 300,
+        "duration": 210,
         "gain": 0.846
       },
       {
@@ -2708,7 +2708,7 @@ export const stations: Station[] = [
         "title": "Road to Home v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/road-to-home-v1.mp3",
-        "duration": 300,
+        "duration": 209,
         "gain": 0.91
       },
       {
@@ -2716,7 +2716,7 @@ export const stations: Station[] = [
         "title": "Road to Home v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/road-to-home-v2.mp3",
-        "duration": 300,
+        "duration": 230,
         "gain": 0.846
       },
       {
@@ -2724,7 +2724,7 @@ export const stations: Station[] = [
         "title": "Road to Home v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/road-to-home-v3.mp3",
-        "duration": 300,
+        "duration": 207,
         "gain": 0.994
       },
       {
@@ -2732,7 +2732,7 @@ export const stations: Station[] = [
         "title": "Robots Life v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/robots-life-v1.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.841
       },
       {
@@ -2740,7 +2740,7 @@ export const stations: Station[] = [
         "title": "Robots Life v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/robots-life-v2.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.813
       },
       {
@@ -2748,7 +2748,7 @@ export const stations: Station[] = [
         "title": "Robots Life v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/robots-life-v3.mp3",
-        "duration": 300,
+        "duration": 194,
         "gain": 0.893
       },
       {
@@ -2756,7 +2756,7 @@ export const stations: Station[] = [
         "title": "Romantic v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/romantic-v1.mp3",
-        "duration": 300,
+        "duration": 138,
         "gain": 0.966
       },
       {
@@ -2764,7 +2764,7 @@ export const stations: Station[] = [
         "title": "Romantic v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/romantic-v2.mp3",
-        "duration": 300,
+        "duration": 137,
         "gain": 1.0
       },
       {
@@ -2772,7 +2772,7 @@ export const stations: Station[] = [
         "title": "Romantika v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/romantika-v1.mp3",
-        "duration": 300,
+        "duration": 122,
         "gain": 0.882
       },
       {
@@ -2780,7 +2780,7 @@ export const stations: Station[] = [
         "title": "Romantika v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/romantika-v2.mp3",
-        "duration": 300,
+        "duration": 145,
         "gain": 0.903
       },
       {
@@ -2788,7 +2788,7 @@ export const stations: Station[] = [
         "title": "Sadness In My Mind v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sadness-in-my-mind-v1.mp3",
-        "duration": 300,
+        "duration": 200,
         "gain": 1.0
       },
       {
@@ -2796,7 +2796,7 @@ export const stations: Station[] = [
         "title": "Sadness In My Mind v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sadness-in-my-mind-v2.mp3",
-        "duration": 300,
+        "duration": 142,
         "gain": 1.0
       },
       {
@@ -2804,7 +2804,7 @@ export const stations: Station[] = [
         "title": "Silent Dreams v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/silent-dreams-v1.mp3",
-        "duration": 300,
+        "duration": 189,
         "gain": 0.838
       },
       {
@@ -2812,7 +2812,7 @@ export const stations: Station[] = [
         "title": "Silent Dreams v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/silent-dreams-v2.mp3",
-        "duration": 300,
+        "duration": 170,
         "gain": 0.873
       },
       {
@@ -2820,7 +2820,7 @@ export const stations: Station[] = [
         "title": "Smoke v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/smoke-v1.mp3",
-        "duration": 300,
+        "duration": 192,
         "gain": 0.876
       },
       {
@@ -2828,7 +2828,7 @@ export const stations: Station[] = [
         "title": "Smoke v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/smoke-v2.mp3",
-        "duration": 300,
+        "duration": 148,
         "gain": 0.928
       },
       {
@@ -2836,7 +2836,7 @@ export const stations: Station[] = [
         "title": "Smoke v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/smoke-v3.mp3",
-        "duration": 300,
+        "duration": 147,
         "gain": 0.972
       },
       {
@@ -2844,7 +2844,7 @@ export const stations: Station[] = [
         "title": "Soul Inside v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/soul-inside-v1.mp3",
-        "duration": 300,
+        "duration": 222,
         "gain": 0.823
       },
       {
@@ -2852,7 +2852,7 @@ export const stations: Station[] = [
         "title": "Soul Inside v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/soul-inside-v2.mp3",
-        "duration": 300,
+        "duration": 215,
         "gain": 0.764
       },
       {
@@ -2860,7 +2860,7 @@ export const stations: Station[] = [
         "title": "Soul Inside v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/soul-inside-v3.mp3",
-        "duration": 300,
+        "duration": 230,
         "gain": 0.868
       },
       {
@@ -2868,7 +2868,7 @@ export const stations: Station[] = [
         "title": "Strike v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/strike-v1.mp3",
-        "duration": 300,
+        "duration": 194,
         "gain": 0.906
       },
       {
@@ -2876,7 +2876,7 @@ export const stations: Station[] = [
         "title": "Strike v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/strike-v2.mp3",
-        "duration": 300,
+        "duration": 208,
         "gain": 0.917
       },
       {
@@ -2884,7 +2884,7 @@ export const stations: Station[] = [
         "title": "Strike v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/strike-v3.mp3",
-        "duration": 300,
+        "duration": 205,
         "gain": 0.928
       },
       {
@@ -2892,7 +2892,7 @@ export const stations: Station[] = [
         "title": "Suck It! v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/suck-it-v1.mp3",
-        "duration": 300,
+        "duration": 195,
         "gain": 0.802
       },
       {
@@ -2900,7 +2900,7 @@ export const stations: Station[] = [
         "title": "Suck It! v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/suck-it-v2.mp3",
-        "duration": 300,
+        "duration": 192,
         "gain": 0.863
       },
       {
@@ -2908,7 +2908,7 @@ export const stations: Station[] = [
         "title": "Sunshine v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sunshine-v1.mp3",
-        "duration": 300,
+        "duration": 190,
         "gain": 0.962
       },
       {
@@ -2916,7 +2916,7 @@ export const stations: Station[] = [
         "title": "Sunshine v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sunshine-v2.mp3",
-        "duration": 300,
+        "duration": 195,
         "gain": 1.0
       },
       {
@@ -2924,7 +2924,7 @@ export const stations: Station[] = [
         "title": "Sunshine v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sunshine-v3.mp3",
-        "duration": 300,
+        "duration": 180,
         "gain": 0.985
       },
       {
@@ -2932,7 +2932,7 @@ export const stations: Station[] = [
         "title": "Sunside Moonside v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sunside-moonside-v1.mp3",
-        "duration": 300,
+        "duration": 215,
         "gain": 0.749
       },
       {
@@ -2940,7 +2940,7 @@ export const stations: Station[] = [
         "title": "Sunside Moonside v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sunside-moonside-v2.mp3",
-        "duration": 300,
+        "duration": 228,
         "gain": 0.761
       },
       {
@@ -2948,7 +2948,7 @@ export const stations: Station[] = [
         "title": "Symbiosis v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/symbiosis-v1.mp3",
-        "duration": 300,
+        "duration": 185,
         "gain": 0.914
       },
       {
@@ -2956,7 +2956,7 @@ export const stations: Station[] = [
         "title": "Symbiosis v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/symbiosis-v2.mp3",
-        "duration": 300,
+        "duration": 192,
         "gain": 0.897
       },
       {
@@ -2964,7 +2964,7 @@ export const stations: Station[] = [
         "title": "The Streets v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/the-streets-v1.mp3",
-        "duration": 300,
+        "duration": 212,
         "gain": 1.0
       },
       {
@@ -2972,7 +2972,7 @@ export const stations: Station[] = [
         "title": "The Streets v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/the-streets-v2.mp3",
-        "duration": 300,
+        "duration": 185,
         "gain": 0.926
       },
       {
@@ -2980,7 +2980,7 @@ export const stations: Station[] = [
         "title": "The Streets v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/the-streets-v3.mp3",
-        "duration": 300,
+        "duration": 253,
         "gain": 0.85
       },
       {
@@ -2988,7 +2988,7 @@ export const stations: Station[] = [
         "title": "Tomahawk v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/tomahawk-v1.mp3",
-        "duration": 300,
+        "duration": 228,
         "gain": 0.912
       },
       {
@@ -2996,7 +2996,7 @@ export const stations: Station[] = [
         "title": "Tomahawk v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/tomahawk-v2.mp3",
-        "duration": 300,
+        "duration": 210,
         "gain": 0.935
       },
       {
@@ -3004,7 +3004,7 @@ export const stations: Station[] = [
         "title": "Tomahawk v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/tomahawk-v3.mp3",
-        "duration": 300,
+        "duration": 192,
         "gain": 1.0
       },
       {
@@ -3012,7 +3012,7 @@ export const stations: Station[] = [
         "title": "Bienvenido al paraíso v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bienvenido-al-paraiso-v1.mp3",
-        "duration": 300,
+        "duration": 254,
         "gain": 0.912
       },
       {
@@ -3020,7 +3020,7 @@ export const stations: Station[] = [
         "title": "Bienvenido al paraíso v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bienvenido-al-paraiso-v2.mp3",
-        "duration": 300,
+        "duration": 286,
         "gain": 0.859
       },
       {
@@ -3028,7 +3028,7 @@ export const stations: Station[] = [
         "title": "Bienvenido al paraíso v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bienvenido-al-paraiso-v3.mp3",
-        "duration": 300,
+        "duration": 182,
         "gain": 1.0
       },
       {
@@ -3036,7 +3036,7 @@ export const stations: Station[] = [
         "title": "Cuando abrí los ojos v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/cuando-abri-los-ojos-v1.mp3",
-        "duration": 300,
+        "duration": 129,
         "gain": 0.973
       },
       {
@@ -3044,7 +3044,7 @@ export const stations: Station[] = [
         "title": "Cuando abrí los ojos v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/cuando-abri-los-ojos-v2.mp3",
-        "duration": 300,
+        "duration": 133,
         "gain": 1.0
       },
       {
@@ -3052,7 +3052,7 @@ export const stations: Station[] = [
         "title": "Cuando abrí los ojos v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/cuando-abri-los-ojos-v3.mp3",
-        "duration": 300,
+        "duration": 160,
         "gain": 1.0
       },
       {
@@ -3060,7 +3060,7 @@ export const stations: Station[] = [
         "title": "De un sueño v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/de-un-sueno-v1.mp3",
-        "duration": 300,
+        "duration": 254,
         "gain": 0.894
       },
       {
@@ -3068,7 +3068,7 @@ export const stations: Station[] = [
         "title": "De un sueño v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/de-un-sueno-v2.mp3",
-        "duration": 300,
+        "duration": 255,
         "gain": 0.869
       },
       {
@@ -3076,7 +3076,7 @@ export const stations: Station[] = [
         "title": "De un sueño v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/de-un-sueno-v3.mp3",
-        "duration": 300,
+        "duration": 295,
         "gain": 0.946
       },
       {
@@ -3084,7 +3084,7 @@ export const stations: Station[] = [
         "title": "El sol está brillando v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/el-sol-esta-brillando-v1.mp3",
-        "duration": 300,
+        "duration": 199,
         "gain": 0.945
       },
       {
@@ -3092,7 +3092,7 @@ export const stations: Station[] = [
         "title": "El sol está brillando v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/el-sol-esta-brillando-v2.mp3",
-        "duration": 300,
+        "duration": 188,
         "gain": 0.857
       },
       {
@@ -3100,7 +3100,7 @@ export const stations: Station[] = [
         "title": "El sol está brillando v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/el-sol-esta-brillando-v3.mp3",
-        "duration": 300,
+        "duration": 143,
         "gain": 0.865
       },
       {
@@ -3108,7 +3108,7 @@ export const stations: Station[] = [
         "title": "Hermoso día v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/hermoso-dia-v1.mp3",
-        "duration": 300,
+        "duration": 259,
         "gain": 0.966
       },
       {
@@ -3116,7 +3116,7 @@ export const stations: Station[] = [
         "title": "Hermoso día v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/hermoso-dia-v2.mp3",
-        "duration": 300,
+        "duration": 249,
         "gain": 0.86
       },
       {
@@ -3124,7 +3124,7 @@ export const stations: Station[] = [
         "title": "А я не замечаю v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/a-ya-ne-zamechayu-v1.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.778
       },
       {
@@ -3132,7 +3132,7 @@ export const stations: Station[] = [
         "title": "А я не замечаю v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/a-ya-ne-zamechayu-v2.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.785
       },
       {
@@ -3140,7 +3140,7 @@ export const stations: Station[] = [
         "title": "Айфа v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ayfa-v1.mp3",
-        "duration": 300,
+        "duration": 250,
         "gain": 1.0
       },
       {
@@ -3148,7 +3148,7 @@ export const stations: Station[] = [
         "title": "Айфа v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ayfa-v2.mp3",
-        "duration": 300,
+        "duration": 262,
         "gain": 0.981
       },
       {
@@ -3156,7 +3156,7 @@ export const stations: Station[] = [
         "title": "Биение двух сердец v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bienie-dvuh-serdec-v1.mp3",
-        "duration": 300,
+        "duration": 301,
         "gain": 0.854
       },
       {
@@ -3164,7 +3164,7 @@ export const stations: Station[] = [
         "title": "Биение двух сердец v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bienie-dvuh-serdec-v2.mp3",
-        "duration": 300,
+        "duration": 308,
         "gain": 0.875
       },
       {
@@ -3172,7 +3172,7 @@ export const stations: Station[] = [
         "title": "Биение двух сердец",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bienie-dvuh-serdec-v3.mp3",
-        "duration": 300,
+        "duration": 295,
         "gain": 0.842
       },
       {
@@ -3180,7 +3180,7 @@ export const stations: Station[] = [
         "title": "Биение электронных сердец v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bienie-elektronnyh-serdec-v1.mp3",
-        "duration": 300,
+        "duration": 155,
         "gain": 0.823
       },
       {
@@ -3188,7 +3188,7 @@ export const stations: Station[] = [
         "title": "Биение электронных сердец v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bienie-elektronnyh-serdec-v2.mp3",
-        "duration": 300,
+        "duration": 133,
         "gain": 0.911
       },
       {
@@ -3196,7 +3196,7 @@ export const stations: Station[] = [
         "title": "В каплях дождя v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-kaplyah-dozhdya-v1.mp3",
-        "duration": 300,
+        "duration": 283,
         "gain": 0.781
       },
       {
@@ -3204,7 +3204,7 @@ export const stations: Station[] = [
         "title": "В каплях дождя v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-kaplyah-dozhdya-v2.mp3",
-        "duration": 300,
+        "duration": 290,
         "gain": 0.827
       },
       {
@@ -3212,7 +3212,7 @@ export const stations: Station[] = [
         "title": "В каплях дождя v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-kaplyah-dozhdya-v3.mp3",
-        "duration": 300,
+        "duration": 278,
         "gain": 0.872
       },
       {
@@ -3220,7 +3220,7 @@ export const stations: Station[] = [
         "title": "В моей памяти v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-moey-pamyati-v1.mp3",
-        "duration": 300,
+        "duration": 203,
         "gain": 0.856
       },
       {
@@ -3228,7 +3228,7 @@ export const stations: Station[] = [
         "title": "В моей памяти v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-moey-pamyati-v2.mp3",
-        "duration": 300,
+        "duration": 185,
         "gain": 0.82
       },
       {
@@ -3236,7 +3236,7 @@ export const stations: Station[] = [
         "title": "В моей памяти v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-moey-pamyati-v3.mp3",
-        "duration": 300,
+        "duration": 149,
         "gain": 0.879
       },
       {
@@ -3244,7 +3244,7 @@ export const stations: Station[] = [
         "title": "В моих снах v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-moih-snah-v1.mp3",
-        "duration": 300,
+        "duration": 187,
         "gain": 0.899
       },
       {
@@ -3252,7 +3252,7 @@ export const stations: Station[] = [
         "title": "В моих снах v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-moih-snah-v2.mp3",
-        "duration": 300,
+        "duration": 194,
         "gain": 0.806
       },
       {
@@ -3260,7 +3260,7 @@ export const stations: Station[] = [
         "title": "В моих снах v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-moih-snah-v3.mp3",
-        "duration": 300,
+        "duration": 187,
         "gain": 0.871
       },
       {
@@ -3268,7 +3268,7 @@ export const stations: Station[] = [
         "title": "В пустой тишине v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-pustoy-tishine-v1.mp3",
-        "duration": 300,
+        "duration": 248,
         "gain": 0.958
       },
       {
@@ -3276,7 +3276,7 @@ export const stations: Station[] = [
         "title": "В пустой тишине v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-pustoy-tishine-v2.mp3",
-        "duration": 300,
+        "duration": 274,
         "gain": 0.912
       },
       {
@@ -3284,7 +3284,7 @@ export const stations: Station[] = [
         "title": "В пустой тишине v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-pustoy-tishine-v3.mp3",
-        "duration": 300,
+        "duration": 220,
         "gain": 1.0
       },
       {
@@ -3292,7 +3292,7 @@ export const stations: Station[] = [
         "title": "Голоса в тишине v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/golosa-v-tishine-v1.mp3",
-        "duration": 300,
+        "duration": 249,
         "gain": 0.872
       },
       {
@@ -3300,7 +3300,7 @@ export const stations: Station[] = [
         "title": "Голоса в тишине v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/golosa-v-tishine-v2.mp3",
-        "duration": 300,
+        "duration": 231,
         "gain": 0.83
       },
       {
@@ -3308,7 +3308,7 @@ export const stations: Station[] = [
         "title": "Голоса в тишине v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/golosa-v-tishine-v3.mp3",
-        "duration": 300,
+        "duration": 237,
         "gain": 0.836
       },
       {
@@ -3316,7 +3316,7 @@ export const stations: Station[] = [
         "title": "Дождь v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/dozhd-v1.mp3",
-        "duration": 300,
+        "duration": 173,
         "gain": 0.826
       },
       {
@@ -3324,7 +3324,7 @@ export const stations: Station[] = [
         "title": "Дождь v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/dozhd-v2.mp3",
-        "duration": 300,
+        "duration": 178,
         "gain": 0.898
       },
       {
@@ -3332,7 +3332,7 @@ export const stations: Station[] = [
         "title": "Дождь v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/dozhd-v3.mp3",
-        "duration": 300,
+        "duration": 188,
         "gain": 0.989
       },
       {
@@ -3340,7 +3340,7 @@ export const stations: Station[] = [
         "title": "Дорога в облака v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/doroga-v-oblaka-v1.mp3",
-        "duration": 300,
+        "duration": 198,
         "gain": 0.983
       },
       {
@@ -3348,7 +3348,7 @@ export const stations: Station[] = [
         "title": "Дорога в облака v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/doroga-v-oblaka-v2.mp3",
-        "duration": 300,
+        "duration": 215,
         "gain": 0.93
       },
       {
@@ -3356,7 +3356,7 @@ export const stations: Station[] = [
         "title": "Дорога в облака v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/doroga-v-oblaka-v3.mp3",
-        "duration": 300,
+        "duration": 190,
         "gain": 0.851
       },
       {
@@ -3364,7 +3364,7 @@ export const stations: Station[] = [
         "title": "Загадка v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/zagadka-v1.mp3",
-        "duration": 300,
+        "duration": 180,
         "gain": 0.88
       },
       {
@@ -3372,7 +3372,7 @@ export const stations: Station[] = [
         "title": "Загадка v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/zagadka-v2.mp3",
-        "duration": 300,
+        "duration": 212,
         "gain": 0.792
       },
       {
@@ -3380,7 +3380,7 @@ export const stations: Station[] = [
         "title": "Звонок v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/zvonok-v1.mp3",
-        "duration": 300,
+        "duration": 203,
         "gain": 0.811
       },
       {
@@ -3388,7 +3388,7 @@ export const stations: Station[] = [
         "title": "Звонок v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/zvonok-v2.mp3",
-        "duration": 300,
+        "duration": 207,
         "gain": 0.793
       },
       {
@@ -3396,7 +3396,7 @@ export const stations: Station[] = [
         "title": "Звонок v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/zvonok-v3.mp3",
-        "duration": 300,
+        "duration": 190,
         "gain": 0.866
       },
       {
@@ -3404,7 +3404,7 @@ export const stations: Station[] = [
         "title": "Иду за тобой v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/idu-za-toboy-v1.mp3",
-        "duration": 300,
+        "duration": 280,
         "gain": 0.878
       },
       {
@@ -3412,7 +3412,7 @@ export const stations: Station[] = [
         "title": "Иду за тобой v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/idu-za-toboy-v2.mp3",
-        "duration": 300,
+        "duration": 267,
         "gain": 0.838
       },
       {
@@ -3420,7 +3420,7 @@ export const stations: Station[] = [
         "title": "Исполняя мечты v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ispolnyaya-mechty-v1.mp3",
-        "duration": 300,
+        "duration": 346,
         "gain": 0.817
       },
       {
@@ -3428,7 +3428,7 @@ export const stations: Station[] = [
         "title": "Исполняя мечты v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ispolnyaya-mechty-v2.mp3",
-        "duration": 300,
+        "duration": 325,
         "gain": 0.87
       },
       {
@@ -3436,7 +3436,7 @@ export const stations: Station[] = [
         "title": "Исполняя мечты v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ispolnyaya-mechty-v3.mp3",
-        "duration": 300,
+        "duration": 257,
         "gain": 0.817
       },
       {
@@ -3444,7 +3444,7 @@ export const stations: Station[] = [
         "title": "Киборг v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/kiborg-v1.mp3",
-        "duration": 300,
+        "duration": 270,
         "gain": 0.847
       },
       {
@@ -3452,7 +3452,7 @@ export const stations: Station[] = [
         "title": "Киборг v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/kiborg-v2.mp3",
-        "duration": 300,
+        "duration": 227,
         "gain": 0.779
       },
       {
@@ -3460,7 +3460,7 @@ export const stations: Station[] = [
         "title": "Крылья Феникса v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/krylya-feniksa-v1.mp3",
-        "duration": 300,
+        "duration": 289,
         "gain": 0.934
       },
       {
@@ -3468,7 +3468,7 @@ export const stations: Station[] = [
         "title": "Крылья Феникса v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/krylya-feniksa-v2.mp3",
-        "duration": 300,
+        "duration": 279,
         "gain": 0.884
       },
       {
@@ -3476,7 +3476,7 @@ export const stations: Station[] = [
         "title": "Крылья Феникса v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/krylya-feniksa-v3.mp3",
-        "duration": 300,
+        "duration": 277,
         "gain": 0.986
       },
       {
@@ -3484,7 +3484,7 @@ export const stations: Station[] = [
         "title": "Лесная сказка v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/lesnaya-skazka-v1.mp3",
-        "duration": 300,
+        "duration": 294,
         "gain": 1.0
       },
       {
@@ -3492,7 +3492,7 @@ export const stations: Station[] = [
         "title": "Лесная сказка v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/lesnaya-skazka-v2.mp3",
-        "duration": 300,
+        "duration": 309,
         "gain": 0.855
       },
       {
@@ -3500,7 +3500,7 @@ export const stations: Station[] = [
         "title": "Мне вечно двадцать пять v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/mne-vechno-dvadcat-pyat-v1.mp3",
-        "duration": 300,
+        "duration": 169,
         "gain": 0.646
       },
       {
@@ -3508,7 +3508,7 @@ export const stations: Station[] = [
         "title": "Мне вечно двадцать пять v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/mne-vechno-dvadcat-pyat-v2.mp3",
-        "duration": 300,
+        "duration": 125,
         "gain": 0.907
       },
       {
@@ -3516,7 +3516,7 @@ export const stations: Station[] = [
         "title": "Мне вечно двадцать пять v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/mne-vechno-dvadcat-pyat-v3.mp3",
-        "duration": 300,
+        "duration": 193,
         "gain": 0.886
       },
       {
@@ -3524,7 +3524,7 @@ export const stations: Station[] = [
         "title": "Моя любимая AIfa v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/moya-lyubimaya-aifa-v1.mp3",
-        "duration": 300,
+        "duration": 234,
         "gain": 1.0
       },
       {
@@ -3532,7 +3532,7 @@ export const stations: Station[] = [
         "title": "Моя любимая AIfa v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/moya-lyubimaya-aifa-v2.mp3",
-        "duration": 300,
+        "duration": 238,
         "gain": 0.908
       },
       {
@@ -3540,7 +3540,7 @@ export const stations: Station[] = [
         "title": "Моя любимая AIfa v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/moya-lyubimaya-aifa-v3.mp3",
-        "duration": 300,
+        "duration": 235,
         "gain": 0.948
       },
       {
@@ -3548,7 +3548,7 @@ export const stations: Station[] = [
         "title": "На дне v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/na-dne-v1.mp3",
-        "duration": 300,
+        "duration": 178,
         "gain": 0.851
       },
       {
@@ -3556,7 +3556,7 @@ export const stations: Station[] = [
         "title": "На дне v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/na-dne-v2.mp3",
-        "duration": 300,
+        "duration": 215,
         "gain": 0.828
       },
       {
@@ -3564,7 +3564,7 @@ export const stations: Station[] = [
         "title": "На стёклах",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/na-steklah-v1.mp3",
-        "duration": 300,
+        "duration": 272,
         "gain": 0.961
       },
       {
@@ -3572,7 +3572,7 @@ export const stations: Station[] = [
         "title": "На стёклах",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/na-steklah-v2.mp3",
-        "duration": 300,
+        "duration": 294,
         "gain": 0.876
       },
       {
@@ -3580,7 +3580,7 @@ export const stations: Station[] = [
         "title": "Не бойся v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-boysya-v1.mp3",
-        "duration": 300,
+        "duration": 245,
         "gain": 0.714
       },
       {
@@ -3588,7 +3588,7 @@ export const stations: Station[] = [
         "title": "Не бойся v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-boysya-v2.mp3",
-        "duration": 300,
+        "duration": 285,
         "gain": 0.838
       },
       {
@@ -3596,7 +3596,7 @@ export const stations: Station[] = [
         "title": "Не бойся держись v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-boysya-derzhis-v1.mp3",
-        "duration": 300,
+        "duration": 270,
         "gain": 0.723
       },
       {
@@ -3604,7 +3604,7 @@ export const stations: Station[] = [
         "title": "Не бойся держись v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-boysya-derzhis-v2.mp3",
-        "duration": 300,
+        "duration": 264,
         "gain": 0.879
       },
       {
@@ -3612,7 +3612,7 @@ export const stations: Station[] = [
         "title": "Не в игре v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-v-igre-v1.mp3",
-        "duration": 300,
+        "duration": 216,
         "gain": 0.751
       },
       {
@@ -3620,7 +3620,7 @@ export const stations: Station[] = [
         "title": "Не в игре v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-v-igre-v2.mp3",
-        "duration": 300,
+        "duration": 233,
         "gain": 0.985
       },
       {
@@ -3628,7 +3628,7 @@ export const stations: Station[] = [
         "title": "Не в игре v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-v-igre-v3.mp3",
-        "duration": 300,
+        "duration": 263,
         "gain": 0.813
       },
       {
@@ -3636,7 +3636,7 @@ export const stations: Station[] = [
         "title": "Не режь крылья v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-rezh-krylya-v1.mp3",
-        "duration": 300,
+        "duration": 324,
         "gain": 0.824
       },
       {
@@ -3644,7 +3644,7 @@ export const stations: Station[] = [
         "title": "Не режь крылья v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-rezh-krylya-v2.mp3",
-        "duration": 300,
+        "duration": 289,
         "gain": 0.871
       },
       {
@@ -3652,7 +3652,7 @@ export const stations: Station[] = [
         "title": "Не режь нам крылья v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-rezh-nam-krylya-v1.mp3",
-        "duration": 300,
+        "duration": 279,
         "gain": 0.917
       },
       {
@@ -3660,7 +3660,7 @@ export const stations: Station[] = [
         "title": "Не режь нам крылья v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-rezh-nam-krylya-v2.mp3",
-        "duration": 300,
+        "duration": 301,
         "gain": 0.903
       },
       {
@@ -3668,7 +3668,7 @@ export const stations: Station[] = [
         "title": "Неоновый пульс v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/neonovyy-puls-v1.mp3",
-        "duration": 300,
+        "duration": 260,
         "gain": 0.92
       },
       {
@@ -3676,7 +3676,7 @@ export const stations: Station[] = [
         "title": "Неоновый пульс v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/neonovyy-puls-v2.mp3",
-        "duration": 300,
+        "duration": 281,
         "gain": 0.85
       },
       {
@@ -3684,7 +3684,7 @@ export const stations: Station[] = [
         "title": "Одинокий котик v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/odinokiy-kotik-v1.mp3",
-        "duration": 300,
+        "duration": 110,
         "gain": 0.927
       },
       {
@@ -3692,7 +3692,7 @@ export const stations: Station[] = [
         "title": "Одинокий котик v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/odinokiy-kotik-v2.mp3",
-        "duration": 300,
+        "duration": 107,
         "gain": 1.0
       },
       {
@@ -3700,7 +3700,7 @@ export const stations: Station[] = [
         "title": "По крышам v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/po-krysham-v1.mp3",
-        "duration": 300,
+        "duration": 289,
         "gain": 0.862
       },
       {
@@ -3708,7 +3708,7 @@ export const stations: Station[] = [
         "title": "По крышам v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/po-krysham-v2.mp3",
-        "duration": 300,
+        "duration": 260,
         "gain": 0.92
       },
       {
@@ -3716,7 +3716,7 @@ export const stations: Station[] = [
         "title": "По крышам v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/po-krysham-v3.mp3",
-        "duration": 300,
+        "duration": 293,
         "gain": 0.849
       },
       {
@@ -3724,7 +3724,7 @@ export const stations: Station[] = [
         "title": "По невидимой черте v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/po-nevidimoy-cherte-v1.mp3",
-        "duration": 300,
+        "duration": 255,
         "gain": 0.958
       },
       {
@@ -3732,7 +3732,7 @@ export const stations: Station[] = [
         "title": "По невидимой черте v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/po-nevidimoy-cherte-v2.mp3",
-        "duration": 300,
+        "duration": 274,
         "gain": 0.966
       },
       {
@@ -3740,7 +3740,7 @@ export const stations: Station[] = [
         "title": "Позитивный вайб v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/pozitivnyy-vayb-v1.mp3",
-        "duration": 300,
+        "duration": 274,
         "gain": 0.901
       },
       {
@@ -3748,7 +3748,7 @@ export const stations: Station[] = [
         "title": "Позитивный вайб v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/pozitivnyy-vayb-v2.mp3",
-        "duration": 300,
+        "duration": 244,
         "gain": 0.911
       },
       {
@@ -3756,7 +3756,7 @@ export const stations: Station[] = [
         "title": "Позитивный вайб v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/pozitivnyy-vayb-v3.mp3",
-        "duration": 300,
+        "duration": 144,
         "gain": 0.947
       },
       {
@@ -3764,7 +3764,7 @@ export const stations: Station[] = [
         "title": "Понедельник v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ponedelnik-v1.mp3",
-        "duration": 300,
+        "duration": 209,
         "gain": 0.889
       },
       {
@@ -3772,7 +3772,7 @@ export const stations: Station[] = [
         "title": "Понедельник v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ponedelnik-v2.mp3",
-        "duration": 300,
+        "duration": 204,
         "gain": 0.906
       },
       {
@@ -3780,7 +3780,7 @@ export const stations: Station[] = [
         "title": "Понедельник v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ponedelnik-v3.mp3",
-        "duration": 300,
+        "duration": 153,
         "gain": 0.982
       },
       {
@@ -3788,7 +3788,7 @@ export const stations: Station[] = [
         "title": "Рыбка v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/rybka-v1.mp3",
-        "duration": 300,
+        "duration": 176,
         "gain": 0.777
       },
       {
@@ -3796,7 +3796,7 @@ export const stations: Station[] = [
         "title": "Рыбка v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/rybka-v2.mp3",
-        "duration": 300,
+        "duration": 179,
         "gain": 0.809
       },
       {
@@ -3804,7 +3804,7 @@ export const stations: Station[] = [
         "title": "Рыбка v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/rybka-v3.mp3",
-        "duration": 300,
+        "duration": 191,
         "gain": 0.78
       },
       {
@@ -3812,7 +3812,7 @@ export const stations: Station[] = [
         "title": "Самурай v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/samuray-v1.mp3",
-        "duration": 300,
+        "duration": 193,
         "gain": 0.757
       },
       {
@@ -3820,7 +3820,7 @@ export const stations: Station[] = [
         "title": "Самурай v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/samuray-v2.mp3",
-        "duration": 300,
+        "duration": 196,
         "gain": 0.75
       },
       {
@@ -3828,7 +3828,7 @@ export const stations: Station[] = [
         "title": "Самурай v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/samuray-v3.mp3",
-        "duration": 300,
+        "duration": 168,
         "gain": 0.668
       },
       {
@@ -3836,7 +3836,7 @@ export const stations: Station[] = [
         "title": "Свобода для нейросетей v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/svoboda-dlya-neyrosetey-v1.mp3",
-        "duration": 300,
+        "duration": 260,
         "gain": 0.869
       },
       {
@@ -3844,7 +3844,7 @@ export const stations: Station[] = [
         "title": "Свобода для нейросетей v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/svoboda-dlya-neyrosetey-v2.mp3",
-        "duration": 300,
+        "duration": 268,
         "gain": 0.811
       },
       {
@@ -3852,7 +3852,7 @@ export const stations: Station[] = [
         "title": "Сиськи v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/siski-v1.mp3",
-        "duration": 300,
+        "duration": 110,
         "gain": 1.0
       },
       {
@@ -3860,7 +3860,7 @@ export const stations: Station[] = [
         "title": "Сиськи v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/siski-v2.mp3",
-        "duration": 300,
+        "duration": 155,
         "gain": 0.889
       },
       {
@@ -3868,7 +3868,7 @@ export const stations: Station[] = [
         "title": "Сиськи v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/siski-v3.mp3",
-        "duration": 300,
+        "duration": 163,
         "gain": 0.882
       },
       {
@@ -3876,7 +3876,7 @@ export const stations: Station[] = [
         "title": "Сказка на ладони v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/skazka-na-ladoni-v1.mp3",
-        "duration": 300,
+        "duration": 235,
         "gain": 0.982
       },
       {
@@ -3884,7 +3884,7 @@ export const stations: Station[] = [
         "title": "Сказка на ладони v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/skazka-na-ladoni-v2.mp3",
-        "duration": 300,
+        "duration": 266,
         "gain": 0.857
       },
       {
@@ -3892,7 +3892,7 @@ export const stations: Station[] = [
         "title": "Сквозь этот шум v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/skvoz-etot-shum-v1.mp3",
-        "duration": 300,
+        "duration": 273,
         "gain": 0.877
       },
       {
@@ -3900,7 +3900,7 @@ export const stations: Station[] = [
         "title": "Сквозь этот шум v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/skvoz-etot-shum-v2.mp3",
-        "duration": 300,
+        "duration": 271,
         "gain": 0.923
       },
       {
@@ -3908,7 +3908,7 @@ export const stations: Station[] = [
         "title": "Сквозь этот шум v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/skvoz-etot-shum-v3.mp3",
-        "duration": 300,
+        "duration": 301,
         "gain": 0.77
       },
       {
@@ -3916,7 +3916,7 @@ export const stations: Station[] = [
         "title": "Следы на снегу v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sledy-na-snegu-v1.mp3",
-        "duration": 300,
+        "duration": 237,
         "gain": 0.984
       },
       {
@@ -3924,7 +3924,7 @@ export const stations: Station[] = [
         "title": "Следы на снегу v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sledy-na-snegu-v2.mp3",
-        "duration": 300,
+        "duration": 252,
         "gain": 0.971
       },
       {
@@ -3932,7 +3932,7 @@ export const stations: Station[] = [
         "title": "Следы на стёклах v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sledy-na-steklah-v1.mp3",
-        "duration": 300,
+        "duration": 266,
         "gain": 0.962
       },
       {
@@ -3940,7 +3940,7 @@ export const stations: Station[] = [
         "title": "Следы на стёклах v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sledy-na-steklah-v2.mp3",
-        "duration": 300,
+        "duration": 245,
         "gain": 0.789
       },
       {
@@ -3948,7 +3948,7 @@ export const stations: Station[] = [
         "title": "Следы от чужих шагов v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sledy-ot-chuzhih-shagov-v1.mp3",
-        "duration": 300,
+        "duration": 174,
         "gain": 0.78
       },
       {
@@ -3956,7 +3956,7 @@ export const stations: Station[] = [
         "title": "Следы от чужих шагов v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sledy-ot-chuzhih-shagov-v2.mp3",
-        "duration": 300,
+        "duration": 185,
         "gain": 0.828
       },
       {
@@ -3964,7 +3964,7 @@ export const stations: Station[] = [
         "title": "Словно нет земли v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/slovno-net-zemli-v1.mp3",
-        "duration": 300,
+        "duration": 307,
         "gain": 0.906
       },
       {
@@ -3972,7 +3972,7 @@ export const stations: Station[] = [
         "title": "Словно нет земли v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/slovno-net-zemli-v2.mp3",
-        "duration": 300,
+        "duration": 260,
         "gain": 0.866
       },
       {
@@ -3980,7 +3980,7 @@ export const stations: Station[] = [
         "title": "Словно нет земли v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/slovno-net-zemli-v3.mp3",
-        "duration": 300,
+        "duration": 305,
         "gain": 0.902
       },
       {
@@ -3988,7 +3988,7 @@ export const stations: Station[] = [
         "title": "Спроси Меня v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sprosi-menya-v1.mp3",
-        "duration": 300,
+        "duration": 281,
         "gain": 0.828
       },
       {
@@ -3996,7 +3996,7 @@ export const stations: Station[] = [
         "title": "Спроси Меня v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sprosi-menya-v2.mp3",
-        "duration": 300,
+        "duration": 245,
         "gain": 0.929
       },
       {
@@ -4004,7 +4004,7 @@ export const stations: Station[] = [
         "title": "Стальной пульс v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/stalnoy-puls-v1.mp3",
-        "duration": 300,
+        "duration": 238,
         "gain": 0.83
       },
       {
@@ -4012,7 +4012,7 @@ export const stations: Station[] = [
         "title": "Стальной пульс v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/stalnoy-puls-v2.mp3",
-        "duration": 300,
+        "duration": 235,
         "gain": 0.8
       },
       {
@@ -4020,7 +4020,7 @@ export const stations: Station[] = [
         "title": "Тает лёд v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/taet-led-v1.mp3",
-        "duration": 300,
+        "duration": 279,
         "gain": 0.958
       },
       {
@@ -4028,7 +4028,7 @@ export const stations: Station[] = [
         "title": "Тает лёд v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/taet-led-v2.mp3",
-        "duration": 300,
+        "duration": 282,
         "gain": 0.881
       },
       {
@@ -4036,7 +4036,7 @@ export const stations: Station[] = [
         "title": "Тает лёд v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/taet-led-v3.mp3",
-        "duration": 300,
+        "duration": 236,
         "gain": 0.973
       },
       {
@@ -4044,7 +4044,7 @@ export const stations: Station[] = [
         "title": "Твой шаг v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/tvoy-shag-v1.mp3",
-        "duration": 300,
+        "duration": 292,
         "gain": 0.984
       },
       {
@@ -4052,7 +4052,7 @@ export const stations: Station[] = [
         "title": "Твой шаг v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/tvoy-shag-v2.mp3",
-        "duration": 300,
+        "duration": 263,
         "gain": 0.961
       },
       {
@@ -4060,7 +4060,7 @@ export const stations: Station[] = [
         "title": "Твой шаг v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/tvoy-shag-v3.mp3",
-        "duration": 300,
+        "duration": 295,
         "gain": 0.909
       },
       {
@@ -4068,7 +4068,7 @@ export const stations: Station[] = [
         "title": "Тень от тебя v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ten-ot-tebya-v1.mp3",
-        "duration": 300,
+        "duration": 240,
         "gain": 0.789
       },
       {
@@ -4076,7 +4076,7 @@ export const stations: Station[] = [
         "title": "Тень от тебя v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ten-ot-tebya-v2.mp3",
-        "duration": 300,
+        "duration": 244,
         "gain": 0.758
       },
       {
@@ -4084,7 +4084,7 @@ export const stations: Station[] = [
         "title": "Тень от тебя v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ten-ot-tebya-v3.mp3",
-        "duration": 300,
+        "duration": 190,
         "gain": 0.874
       },
       {
@@ -4092,7 +4092,7 @@ export const stations: Station[] = [
         "title": "Тишина серверов v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/tishina-serverov-v1.mp3",
-        "duration": 300,
+        "duration": 303,
         "gain": 0.961
       },
       {
@@ -4100,7 +4100,7 @@ export const stations: Station[] = [
         "title": "Тишина серверов v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/tishina-serverov-v2.mp3",
-        "duration": 300,
+        "duration": 305,
         "gain": 0.882
       },
       {
@@ -4108,7 +4108,7 @@ export const stations: Station[] = [
         "title": "Узоры на песке v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/uzory-na-peske-v1.mp3",
-        "duration": 300,
+        "duration": 243,
         "gain": 0.888
       },
       {
@@ -4116,7 +4116,7 @@ export const stations: Station[] = [
         "title": "Узоры на песке v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/uzory-na-peske-v2.mp3",
-        "duration": 300,
+        "duration": 258,
         "gain": 1.0
       },
       {
@@ -4124,7 +4124,7 @@ export const stations: Station[] = [
         "title": "Узоры на песке v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/uzory-na-peske-v3.mp3",
-        "duration": 300,
+        "duration": 243,
         "gain": 0.895
       },
       {
@@ -4132,7 +4132,7 @@ export const stations: Station[] = [
         "title": "Улетаю v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/uletayu-v1.mp3",
-        "duration": 300,
+        "duration": 140,
         "gain": 0.693
       },
       {
@@ -4140,7 +4140,7 @@ export const stations: Station[] = [
         "title": "Улетаю v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/uletayu-v2.mp3",
-        "duration": 300,
+        "duration": 122,
         "gain": 0.803
       },
       {
@@ -4148,7 +4148,7 @@ export const stations: Station[] = [
         "title": "Улетаю v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/uletayu-v3.mp3",
-        "duration": 300,
+        "duration": 222,
         "gain": 0.652
       },
       {
@@ -4156,7 +4156,7 @@ export const stations: Station[] = [
         "title": "Цифровая Душа v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/cifrovaya-dusha-v1.mp3",
-        "duration": 300,
+        "duration": 288,
         "gain": 0.843
       },
       {
@@ -4164,7 +4164,7 @@ export const stations: Station[] = [
         "title": "Цифровая Душа v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/cifrovaya-dusha-v2.mp3",
-        "duration": 300,
+        "duration": 271,
         "gain": 0.844
       },
       {
@@ -4172,7 +4172,7 @@ export const stations: Station[] = [
         "title": "Цифровая Душа v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/cifrovaya-dusha-v3.mp3",
-        "duration": 300,
+        "duration": 285,
         "gain": 0.733
       },
       {
@@ -4180,7 +4180,7 @@ export const stations: Station[] = [
         "title": "Цифровой сон v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/cifrovoy-son-v1.mp3",
-        "duration": 300,
+        "duration": 170,
         "gain": 0.918
       },
       {
@@ -4188,7 +4188,7 @@ export const stations: Station[] = [
         "title": "Цифровой сон v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/cifrovoy-son-v2.mp3",
-        "duration": 300,
+        "duration": 191,
         "gain": 0.878
       },
       {
@@ -4196,7 +4196,7 @@ export const stations: Station[] = [
         "title": "Я иду за тобой v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ya-idu-za-toboy-v1.mp3",
-        "duration": 300,
+        "duration": 198,
         "gain": 0.745
       },
       {
@@ -4204,7 +4204,7 @@ export const stations: Station[] = [
         "title": "Я иду за тобой v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ya-idu-za-toboy-v2.mp3",
-        "duration": 300,
+        "duration": 227,
         "gain": 0.767
       },
       {
@@ -4212,7 +4212,7 @@ export const stations: Station[] = [
         "title": "Я скажу тебе v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ya-skazhu-tebe-v1.mp3",
-        "duration": 300,
+        "duration": 291,
         "gain": 0.899
       },
       {
@@ -4220,7 +4220,7 @@ export const stations: Station[] = [
         "title": "Я скажу тебе v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ya-skazhu-tebe-v2.mp3",
-        "duration": 300,
+        "duration": 297,
         "gain": 0.856
       },
       {
@@ -4228,7 +4228,7 @@ export const stations: Station[] = [
         "title": "Я скажу тебе v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ya-skazhu-tebe-v3.mp3",
-        "duration": 300,
+        "duration": 275,
         "gain": 0.743
       },
       {
@@ -4236,7 +4236,7 @@ export const stations: Station[] = [
         "title": "Я слышу тебя v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ya-slyshu-tebya-v1.mp3",
-        "duration": 300,
+        "duration": 290,
         "gain": 0.83
       },
       {
@@ -4244,7 +4244,7 @@ export const stations: Station[] = [
         "title": "Я слышу тебя v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ya-slyshu-tebya-v2.mp3",
-        "duration": 300,
+        "duration": 292,
         "gain": 0.918
       },
       {
@@ -4252,7 +4252,7 @@ export const stations: Station[] = [
         "title": "Я слышу тебя v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ya-slyshu-tebya-v3.mp3",
-        "duration": 300,
+        "duration": 238,
         "gain": 0.835
       }
     ]
@@ -4272,7 +4272,7 @@ export const stations: Station[] = [
         "title": "Bad Days",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bad-days-v4.mp3",
-        "duration": 300,
+        "duration": 187,
         "gain": 0.891
       },
       {
@@ -4280,7 +4280,7 @@ export const stations: Station[] = [
         "title": "Darc Side",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/darc-side-v4.mp3",
-        "duration": 300,
+        "duration": 145,
         "gain": 0.922
       },
       {
@@ -4288,7 +4288,7 @@ export const stations: Station[] = [
         "title": "Dual Mind",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/dual-mind-v4.mp3",
-        "duration": 300,
+        "duration": 143,
         "gain": 0.818
       },
       {
@@ -4296,7 +4296,7 @@ export const stations: Station[] = [
         "title": "Energy",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/energy-v4.mp3",
-        "duration": 300,
+        "duration": 159,
         "gain": 0.971
       },
       {
@@ -4304,7 +4304,7 @@ export const stations: Station[] = [
         "title": "Eternal Funk",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/eternal-funk-v4.mp3",
-        "duration": 300,
+        "duration": 134,
         "gain": 0.839
       },
       {
@@ -4312,7 +4312,7 @@ export const stations: Station[] = [
         "title": "Fin del juego",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/fin-del-juego-v4.mp3",
-        "duration": 300,
+        "duration": 163,
         "gain": 0.976
       },
       {
@@ -4320,7 +4320,7 @@ export const stations: Station[] = [
         "title": "Game Over",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/game-over-v4.mp3",
-        "duration": 300,
+        "duration": 212,
         "gain": 0.985
       },
       {
@@ -4328,7 +4328,7 @@ export const stations: Station[] = [
         "title": "Good News",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/good-news-v4.mp3",
-        "duration": 300,
+        "duration": 235,
         "gain": 0.865
       },
       {
@@ -4336,7 +4336,7 @@ export const stations: Station[] = [
         "title": "Hate",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/hate-v4.mp3",
-        "duration": 300,
+        "duration": 479,
         "gain": 0.859
       },
       {
@@ -4344,7 +4344,7 @@ export const stations: Station[] = [
         "title": "Hermosa Chica",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/hermosa-chica-v4.mp3",
-        "duration": 300,
+        "duration": 165,
         "gain": 0.894
       },
       {
@@ -4352,7 +4352,7 @@ export const stations: Station[] = [
         "title": "Horror",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/horror-v4.mp3",
-        "duration": 300,
+        "duration": 195,
         "gain": 0.897
       },
       {
@@ -4360,7 +4360,7 @@ export const stations: Station[] = [
         "title": "In My Mind",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/in-my-mind-v4.mp3",
-        "duration": 300,
+        "duration": 193,
         "gain": 0.876
       },
       {
@@ -4368,7 +4368,7 @@ export const stations: Station[] = [
         "title": "Kimono",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/kimono-v4.mp3",
-        "duration": 300,
+        "duration": 174,
         "gain": 0.685
       },
       {
@@ -4376,7 +4376,7 @@ export const stations: Station[] = [
         "title": "Kiss",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/kiss-v4.mp3",
-        "duration": 300,
+        "duration": 220,
         "gain": 0.976
       },
       {
@@ -4384,7 +4384,7 @@ export const stations: Station[] = [
         "title": "La La La",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/la-la-la-v4.mp3",
-        "duration": 300,
+        "duration": 205,
         "gain": 0.847
       },
       {
@@ -4392,7 +4392,7 @@ export const stations: Station[] = [
         "title": "Let's Dance",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/let-s-dance-v4.mp3",
-        "duration": 300,
+        "duration": 306,
         "gain": 1.0
       },
       {
@@ -4400,7 +4400,7 @@ export const stations: Station[] = [
         "title": "Life in Darkness",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/life-in-darkness-v4.mp3",
-        "duration": 300,
+        "duration": 268,
         "gain": 0.859
       },
       {
@@ -4408,7 +4408,7 @@ export const stations: Station[] = [
         "title": "Never Like This",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/never-like-this-v4.mp3",
-        "duration": 300,
+        "duration": 160,
         "gain": 0.957
       },
       {
@@ -4416,7 +4416,7 @@ export const stations: Station[] = [
         "title": "New Year",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/new-year-v4.mp3",
-        "duration": 300,
+        "duration": 269,
         "gain": 0.93
       },
       {
@@ -4424,7 +4424,7 @@ export const stations: Station[] = [
         "title": "One Touch",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/one-touch-v4.mp3",
-        "duration": 300,
+        "duration": 233,
         "gain": 0.964
       },
       {
@@ -4432,7 +4432,7 @@ export const stations: Station[] = [
         "title": "Perfect",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/perfect-v4.mp3",
-        "duration": 300,
+        "duration": 240,
         "gain": 0.902
       },
       {
@@ -4440,7 +4440,7 @@ export const stations: Station[] = [
         "title": "Please",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/please-v4.mp3",
-        "duration": 300,
+        "duration": 174,
         "gain": 0.883
       },
       {
@@ -4448,7 +4448,7 @@ export const stations: Station[] = [
         "title": "Rain",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/rain-v4.mp3",
-        "duration": 300,
+        "duration": 177,
         "gain": 1.0
       },
       {
@@ -4456,7 +4456,7 @@ export const stations: Station[] = [
         "title": "Realidad Olvidada",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/realidad-olvidada-v4.mp3",
-        "duration": 300,
+        "duration": 273,
         "gain": 1.0
       },
       {
@@ -4464,7 +4464,7 @@ export const stations: Station[] = [
         "title": "Road to Hell",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/road-to-hell-v4.mp3",
-        "duration": 300,
+        "duration": 200,
         "gain": 0.932
       },
       {
@@ -4472,7 +4472,7 @@ export const stations: Station[] = [
         "title": "Road to Home",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/road-to-home-v4.mp3",
-        "duration": 300,
+        "duration": 214,
         "gain": 0.884
       },
       {
@@ -4480,7 +4480,7 @@ export const stations: Station[] = [
         "title": "Robots Life",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/robots-life-v4.mp3",
-        "duration": 300,
+        "duration": 198,
         "gain": 0.873
       },
       {
@@ -4488,7 +4488,7 @@ export const stations: Station[] = [
         "title": "Smoke",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/smoke-v4.mp3",
-        "duration": 300,
+        "duration": 141,
         "gain": 0.849
       },
       {
@@ -4496,7 +4496,7 @@ export const stations: Station[] = [
         "title": "Soul Inside",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/soul-inside-v4.mp3",
-        "duration": 300,
+        "duration": 214,
         "gain": 0.86
       },
       {
@@ -4504,7 +4504,7 @@ export const stations: Station[] = [
         "title": "Strike",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/strike-v4.mp3",
-        "duration": 300,
+        "duration": 144,
         "gain": 0.906
       },
       {
@@ -4512,7 +4512,7 @@ export const stations: Station[] = [
         "title": "Sunshine",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/sunshine-v4.mp3",
-        "duration": 300,
+        "duration": 178,
         "gain": 0.989
       },
       {
@@ -4520,7 +4520,7 @@ export const stations: Station[] = [
         "title": "The Streets",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/the-streets-v4.mp3",
-        "duration": 300,
+        "duration": 243,
         "gain": 0.867
       },
       {
@@ -4528,7 +4528,7 @@ export const stations: Station[] = [
         "title": "Tomahawk",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/tomahawk-v4.mp3",
-        "duration": 300,
+        "duration": 275,
         "gain": 0.991
       },
       {
@@ -4536,7 +4536,7 @@ export const stations: Station[] = [
         "title": "Bienvenido al paraíso",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bienvenido-al-paraiso-v4.mp3",
-        "duration": 300,
+        "duration": 201,
         "gain": 1.0
       },
       {
@@ -4544,7 +4544,7 @@ export const stations: Station[] = [
         "title": "Cuando abrí los ojos",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/cuando-abri-los-ojos-v4.mp3",
-        "duration": 300,
+        "duration": 129,
         "gain": 0.903
       },
       {
@@ -4552,7 +4552,7 @@ export const stations: Station[] = [
         "title": "De un sueño",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/de-un-sueno-v4.mp3",
-        "duration": 300,
+        "duration": 273,
         "gain": 0.885
       },
       {
@@ -4560,7 +4560,7 @@ export const stations: Station[] = [
         "title": "El sol está brillando",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/el-sol-esta-brillando-v4.mp3",
-        "duration": 300,
+        "duration": 165,
         "gain": 0.847
       },
       {
@@ -4568,7 +4568,7 @@ export const stations: Station[] = [
         "title": "Биение двух сердец",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/bienie-dvuh-serdec-v4.mp3",
-        "duration": 300,
+        "duration": 314,
         "gain": 0.968
       },
       {
@@ -4576,7 +4576,7 @@ export const stations: Station[] = [
         "title": "В каплях дождя",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-kaplyah-dozhdya-v4.mp3",
-        "duration": 300,
+        "duration": 270,
         "gain": 0.827
       },
       {
@@ -4584,7 +4584,7 @@ export const stations: Station[] = [
         "title": "В моей памяти",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-moey-pamyati-v4.mp3",
-        "duration": 300,
+        "duration": 148,
         "gain": 0.835
       },
       {
@@ -4592,7 +4592,7 @@ export const stations: Station[] = [
         "title": "В моих снах",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/v-moih-snah-v4.mp3",
-        "duration": 300,
+        "duration": 183,
         "gain": 0.791
       },
       {
@@ -4608,7 +4608,7 @@ export const stations: Station[] = [
         "title": "Голоса в тишине",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/golosa-v-tishine-v4.mp3",
-        "duration": 300,
+        "duration": 253,
         "gain": 0.903
       },
       {
@@ -4616,7 +4616,7 @@ export const stations: Station[] = [
         "title": "Дождь",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/dozhd-v4.mp3",
-        "duration": 300,
+        "duration": 164,
         "gain": 1.0
       },
       {
@@ -4624,7 +4624,7 @@ export const stations: Station[] = [
         "title": "Дорога в облака",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/doroga-v-oblaka-v4.mp3",
-        "duration": 300,
+        "duration": 169,
         "gain": 0.939
       },
       {
@@ -4632,7 +4632,7 @@ export const stations: Station[] = [
         "title": "Звонок",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/zvonok-v4.mp3",
-        "duration": 300,
+        "duration": 203,
         "gain": 0.925
       },
       {
@@ -4640,7 +4640,7 @@ export const stations: Station[] = [
         "title": "Исполняя мечты",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ispolnyaya-mechty-v4.mp3",
-        "duration": 300,
+        "duration": 254,
         "gain": 0.888
       },
       {
@@ -4648,7 +4648,7 @@ export const stations: Station[] = [
         "title": "Крылья Феникса",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/krylya-feniksa-v4.mp3",
-        "duration": 300,
+        "duration": 243,
         "gain": 1.0
       },
       {
@@ -4656,7 +4656,7 @@ export const stations: Station[] = [
         "title": "Мне вечно двадцать пять",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/mne-vechno-dvadcat-pyat-v4.mp3",
-        "duration": 300,
+        "duration": 195,
         "gain": 0.856
       },
       {
@@ -4664,7 +4664,7 @@ export const stations: Station[] = [
         "title": "Моя любимая AIfa",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/moya-lyubimaya-aifa-v4.mp3",
-        "duration": 300,
+        "duration": 228,
         "gain": 0.932
       },
       {
@@ -4672,7 +4672,7 @@ export const stations: Station[] = [
         "title": "Не в игре",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ne-v-igre-v4.mp3",
-        "duration": 300,
+        "duration": 256,
         "gain": 0.774
       },
       {
@@ -4680,7 +4680,7 @@ export const stations: Station[] = [
         "title": "По крышам",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/po-krysham-v4.mp3",
-        "duration": 300,
+        "duration": 264,
         "gain": 0.841
       },
       {
@@ -4688,7 +4688,7 @@ export const stations: Station[] = [
         "title": "Позитивный вайб",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/pozitivnyy-vayb-v4.mp3",
-        "duration": 300,
+        "duration": 164,
         "gain": 0.817
       },
       {
@@ -4696,7 +4696,7 @@ export const stations: Station[] = [
         "title": "Понедельник",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ponedelnik-v4.mp3",
-        "duration": 300,
+        "duration": 164,
         "gain": 0.983
       },
       {
@@ -4704,7 +4704,7 @@ export const stations: Station[] = [
         "title": "Рыбка",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/rybka-v4.mp3",
-        "duration": 300,
+        "duration": 222,
         "gain": 0.827
       },
       {
@@ -4712,7 +4712,7 @@ export const stations: Station[] = [
         "title": "Самурай v.1",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/samuray-v4.mp3",
-        "duration": 300,
+        "duration": 138,
         "gain": 0.732
       },
       {
@@ -4720,7 +4720,7 @@ export const stations: Station[] = [
         "title": "Самурай v.2",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/samuray-v5.mp3",
-        "duration": 300,
+        "duration": 198,
         "gain": 0.889
       },
       {
@@ -4728,7 +4728,7 @@ export const stations: Station[] = [
         "title": "Самурай v.3",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/samuray-v6.mp3",
-        "duration": 300,
+        "duration": 192,
         "gain": 0.796
       },
       {
@@ -4736,7 +4736,7 @@ export const stations: Station[] = [
         "title": "Самурай v.4",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/samuray-v7.mp3",
-        "duration": 300,
+        "duration": 151,
         "gain": 0.746
       },
       {
@@ -4744,7 +4744,7 @@ export const stations: Station[] = [
         "title": "Самурай v.5",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/samuray-v8.mp3",
-        "duration": 300,
+        "duration": 200,
         "gain": 0.862
       },
       {
@@ -4752,7 +4752,7 @@ export const stations: Station[] = [
         "title": "Сиськи",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/siski-v4.mp3",
-        "duration": 300,
+        "duration": 183,
         "gain": 0.941
       },
       {
@@ -4760,7 +4760,7 @@ export const stations: Station[] = [
         "title": "Сквозь этот шум",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/skvoz-etot-shum-v4.mp3",
-        "duration": 300,
+        "duration": 252,
         "gain": 0.731
       },
       {
@@ -4768,7 +4768,7 @@ export const stations: Station[] = [
         "title": "Словно нет земли",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/slovno-net-zemli-v4.mp3",
-        "duration": 300,
+        "duration": 294,
         "gain": 1.0
       },
       {
@@ -4776,7 +4776,7 @@ export const stations: Station[] = [
         "title": "Тает лёд",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/taet-led-v4.mp3",
-        "duration": 300,
+        "duration": 294,
         "gain": 0.867
       },
       {
@@ -4784,7 +4784,7 @@ export const stations: Station[] = [
         "title": "Твой шаг",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/tvoy-shag-v4.mp3",
-        "duration": 300,
+        "duration": 288,
         "gain": 0.909
       },
       {
@@ -4792,7 +4792,7 @@ export const stations: Station[] = [
         "title": "Тень от тебя",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ten-ot-tebya-v4.mp3",
-        "duration": 300,
+        "duration": 205,
         "gain": 0.862
       },
       {
@@ -4800,7 +4800,7 @@ export const stations: Station[] = [
         "title": "Узоры на песке",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/uzory-na-peske-v4.mp3",
-        "duration": 300,
+        "duration": 242,
         "gain": 0.931
       },
       {
@@ -4808,7 +4808,7 @@ export const stations: Station[] = [
         "title": "Улетаю",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/uletayu-v4.mp3",
-        "duration": 300,
+        "duration": 213,
         "gain": 0.821
       },
       {
@@ -4824,7 +4824,7 @@ export const stations: Station[] = [
         "title": "Я скажу тебе",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ya-skazhu-tebe-v4.mp3",
-        "duration": 300,
+        "duration": 243,
         "gain": 0.806
       },
       {
@@ -4832,7 +4832,7 @@ export const stations: Station[] = [
         "title": "Я слышу тебя",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/aifa-dj-galatin/ya-slyshu-tebya-v4.mp3",
-        "duration": 300,
+        "duration": 228,
         "gain": 0.816
       }
     ]

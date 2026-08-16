@@ -103,3 +103,5 @@ vc_env*.txt
 !_turbotest.mjs
 !_uk.mjs
 !_x402test.mjs
+# Резервные копии AIfa перед правкой — в репозиторий не идут.
+*.before_*

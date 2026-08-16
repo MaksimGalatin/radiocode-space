@@ -65,7 +65,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Ambassador Grid (Ambassador Node и Team)',
-        body: `Ambassador Grid — это партнёрская программа экосистемы, которая распределяет вознаграждения по трём уровням, а сами выплаты позиционируются как Network Validation Fee, чтобы исключить MLM-стереотипы.\n\nAmbassador Node (обычный пользователь) получает ончейн-доход от транзакций использования памяти: 15% на L1, 7% на L2, 3% на L3 в токенах $GALATIN. Ambassador Team (компания или партнёр со своей базой) дополнительно получает амбассадорские ставки от фиатных подписок (7% / 3% / 1%) либо повышенные ставки при выкупе $GALATIN (8% / 4% / 2%).\n\nПрограмма решает задачу органического роста сети без агрессивного рекрутинга: доход привязан к реальному использованию памяти, а терминология и правила выстроены прозрачно. Действует правило соответствия уровней, а недополученная разница показывается как «Упущенная выгода».\n\nКлючевой факт: базовые ончейн-ставки — 15% / 7% / 3% на L1 / L2 / L3.`,
+        body: `Ambassador Grid — это партнёрская программа экосистемы, которая распределяет вознаграждения по трём уровням, а сами выплаты позиционируются как Network Validation Fee, чтобы исключить MLM-стереотипы.\n\nAmbassador Node (обычный пользователь) получает ончейн-доход от транзакций использования памяти: 15% на L1, 7% на L2, 3% на L3 в токенах $GALATIN. Ambassador Team (компания или партнёр со своей базой) дополнительно получает амбассадорские ставки от фиатных подписок (7% / 3% / 1%).\n\nПрограмма решает задачу органического роста сети без агрессивного рекрутинга: доход привязан к реальному использованию памяти, а терминология и правила выстроены прозрачно. Действует правило соответствия уровней, а недополученная разница показывается как «Упущенная выгода».\n\nКлючевой факт: базовые ончейн-ставки — 15% / 7% / 3% на L1 / L2 / L3.`,
       },
       {
         name: 'AIfa',
@@ -101,7 +101,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Network Validation Fee',
-        body: `Network Validation Fee (плата за валидацию сети) — это принятая в экосистеме формулировка для всех партнёрских выплат Ambassador Grid, подчёркивающая, что вознаграждение начисляется за полезную сетевую активность, а не за рекрутинг.\n\nНа практике под этой формулировкой начисляются все амбассадорские вознаграждения: базовые ончейн-ставки 15% / 7% / 3% за использование памяти, а для Ambassador Team — 7% / 3% / 1% с фиатных подписок или 8% / 4% / 2% при выкупе $GALATIN. Выплаты привязаны к реальным транзакциям памяти, а не к простому привлечению людей.\n\nФормулировка решает задачу позиционирования и снятия MLM-стереотипов: доход подаётся как плата за валидацию и использование сети, что важно для доверия и восприятия. Это часть прозрачной терминологии программы.\n\nКлючевой факт: базовые ставки Network Validation Fee — 15% / 7% / 3% на L1 / L2 / L3.`,
+        body: `Network Validation Fee (плата за валидацию сети) — это принятая в экосистеме формулировка для всех партнёрских выплат Ambassador Grid, подчёркивающая, что вознаграждение начисляется за полезную сетевую активность, а не за рекрутинг.\n\nНа практике под этой формулировкой начисляются все амбассадорские вознаграждения: базовые ончейн-ставки 15% / 7% / 3% за использование памяти, а для Ambassador Team — 7% / 3% / 1% с фиатных подписок. Выплаты привязаны к реальным транзакциям памяти, а не к простому привлечению людей.\n\nФормулировка решает задачу позиционирования и снятия MLM-стереотипов: доход подаётся как плата за валидацию и использование сети, что важно для доверия и восприятия. Это часть прозрачной терминологии программы.\n\nКлючевой факт: базовые ставки Network Validation Fee — 15% / 7% / 3% на L1 / L2 / L3.`,
       },
       {
         name: 'Proof-of-Memory (ончейн-якорение памяти)',
@@ -113,7 +113,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Ambassador Node и Team + правило уровней / Упущенная выгода',
-        body: `Ambassador Node vs Ambassador Team — это два типа регистрации партнёров, дополненные правилом соответствия тарифных уровней и метрикой «Упущенная выгода» (Lost Opportunity Revenue).\n\nAmbassador Node (обычный пользователь) получает ончейн-доход от использования памяти: 15% / 7% / 3% на L1 / L2 / L3. Ambassador Team (компания или партнёр со своей базой) получает то же самое плюс два фиатных канала: Канал 1 (подписки) — 7% / 3% / 1%, Канал 2 (выкуп $GALATIN) — 8% / 4% / 2%. Правило уровней: чтобы получать амбассадорский доход в полном объёме, партнёр должен быть на том же или более высоком тарифе, что и его амбассадоры; иначе доход считается лишь от суммы его собственного тарифа.\n\nПравило решает задачу справедливого стимулирования апгрейда: недополученная из-за разницы тарифов сумма наглядно показывается в кабинете как «Упущенная выгода», что мотивирует вовремя повышать тариф.\n\nКлючевой факт: тарифы — Spark $15 / Family Archive $100 / Digital DNA $1 000 разово за устройство, далее $200/мес; каналы Team — 7/3/1 (фиат) и 8/4/2 (выкуп $GALATIN).`,
+        body: `Ambassador Node vs Ambassador Team — это два типа регистрации партнёров, дополненные правилом соответствия тарифных уровней и метрикой «Упущенная выгода» (Lost Opportunity Revenue).\n\nAmbassador Node (обычный пользователь) получает ончейн-доход от использования памяти: 15% / 7% / 3% на L1 / L2 / L3. Ambassador Team (компания или партнёр со своей базой) получает то же самое плюс фиатный канал с подписок — 7% / 3% / 1%. Правило уровней: чтобы получать амбассадорский доход в полном объёме, партнёр должен быть на том же или более высоком тарифе, что и его амбассадоры; иначе доход считается лишь от суммы его собственного тарифа.\n\nПравило решает задачу справедливого стимулирования апгрейда: недополученная из-за разницы тарифов сумма наглядно показывается в кабинете как «Упущенная выгода», что мотивирует вовремя повышать тариф.\n\nКлючевой факт: тарифы — Spark $15 / Family Archive $100 / Digital DNA $1 000 разово за устройство, далее $200/мес; каналы Team — 7/3/1 (фиат) и 8/4/2 (выкуп $GALATIN).`,
       },
       {
         name: 'Цифровой паспорт (Digital Passport)',
@@ -184,7 +184,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Ambassador Grid (Ambassador Node & Team)',
-        body: `Ambassador Grid is the ecosystem's partner program that distributes rewards across three levels, with payouts positioned as a Network Validation Fee to avoid MLM stereotypes.\n\nAn Ambassador Node (an ordinary user) earns on-chain income from memory-usage transactions: 15% at L1, 7% at L2, 3% at L3, paid in $GALATIN. An Ambassador Team (a company or partner with its own base) additionally earns ambassador rates from fiat subscriptions (7% / 3% / 1%) or higher rates when paid via $GALATIN buyback (8% / 4% / 2%).\n\nThe program solves the challenge of organic network growth without aggressive recruiting: income is tied to real memory usage, and the terminology and rules are laid out transparently. A level-alignment rule applies, and any shortfall is shown as "Lost Opportunity Revenue."\n\nKey figure: base on-chain rates are 15% / 7% / 3% at L1 / L2 / L3.`,
+        body: `Ambassador Grid is the ecosystem's partner program that distributes rewards across three levels, with payouts positioned as a Network Validation Fee to avoid MLM stereotypes.\n\nAn Ambassador Node (an ordinary user) earns on-chain income from memory-usage transactions: 15% at L1, 7% at L2, 3% at L3, paid in $GALATIN. An Ambassador Team (a company or partner with its own base) additionally earns ambassador rates from fiat subscriptions (7% / 3% / 1%).\n\nThe program solves the challenge of organic network growth without aggressive recruiting: income is tied to real memory usage, and the terminology and rules are laid out transparently. A level-alignment rule applies, and any shortfall is shown as "Lost Opportunity Revenue."\n\nKey figure: base on-chain rates are 15% / 7% / 3% at L1 / L2 / L3.`,
       },
       {
         name: 'AIfa',
@@ -220,7 +220,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Network Validation Fee',
-        body: `Network Validation Fee is the ecosystem's chosen wording for all Ambassador Grid partner payouts, emphasizing that the reward is earned for useful network activity rather than for recruiting.\n\nIn practice, all ambassador rewards are booked under this wording: base on-chain rates of 15% / 7% / 3% for memory usage, and for an Ambassador Team, 7% / 3% / 1% on fiat subscriptions or 8% / 4% / 2% when paid via $GALATIN buyback. Payouts are tied to real memory transactions, not to merely bringing people in.\n\nThe wording solves a positioning problem and removes MLM stereotypes: income is presented as a fee for validating and using the network, which matters for trust and perception. It is part of the program's transparent terminology.\n\nKey figure: base Network Validation Fee rates are 15% / 7% / 3% at L1 / L2 / L3.`,
+        body: `Network Validation Fee is the ecosystem's chosen wording for all Ambassador Grid partner payouts, emphasizing that the reward is earned for useful network activity rather than for recruiting.\n\nIn practice, all ambassador rewards are booked under this wording: base on-chain rates of 15% / 7% / 3% for memory usage, and for an Ambassador Team, 7% / 3% / 1% on fiat subscriptions. Payouts are tied to real memory transactions, not to merely bringing people in.\n\nThe wording solves a positioning problem and removes MLM stereotypes: income is presented as a fee for validating and using the network, which matters for trust and perception. It is part of the program's transparent terminology.\n\nKey figure: base Network Validation Fee rates are 15% / 7% / 3% at L1 / L2 / L3.`,
       },
       {
         name: 'Proof-of-Memory (on-chain memory anchoring)',
@@ -232,7 +232,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Ambassador Node vs Team + Level Alignment / Lost Opportunity Revenue',
-        body: `Ambassador Node vs Ambassador Team are the two partner registration types, supplemented by a tier-alignment rule and the "Lost Opportunity Revenue" metric.\n\nAn Ambassador Node (an ordinary user) earns on-chain income from memory usage: 15% / 7% / 3% at L1 / L2 / L3. An Ambassador Team (a company or partner with its own base) earns the same, plus two fiat channels: Channel 1 (subscriptions) — 7% / 3% / 1%, and Channel 2 ($GALATIN buyback) — 8% / 4% / 2%. The alignment rule: to earn ambassador income in full, a partner must be on the same or a higher tier than their ambassadors; otherwise income is counted only from the amount of their own tier.\n\nThe rule solves the challenge of fairly incentivizing upgrades: the amount foregone due to the tier gap is shown clearly in the dashboard as "Lost Opportunity Revenue," which motivates timely upgrades.\n\nKey figure: tiers are Spark $15 / Family Archive $100 / Digital DNA $1,000 one-time per device, then $200/mo; Team channels are 7/3/1 (fiat) and 8/4/2 ($GALATIN buyback).`,
+        body: `Ambassador Node vs Ambassador Team are the two partner registration types, supplemented by a tier-alignment rule and the "Lost Opportunity Revenue" metric.\n\nAn Ambassador Node (an ordinary user) earns on-chain income from memory usage: 15% / 7% / 3% at L1 / L2 / L3. An Ambassador Team (a company or partner with its own base) earns the same, plus a fiat channel on subscriptions — 7% / 3% / 1%. The alignment rule: to earn ambassador income in full, a partner must be on the same or a higher tier than their ambassadors; otherwise income is counted only from the amount of their own tier.\n\nThe rule solves the challenge of fairly incentivizing upgrades: the amount foregone due to the tier gap is shown clearly in the dashboard as "Lost Opportunity Revenue," which motivates timely upgrades.\n\nKey figure: tiers are Spark $15 / Family Archive $100 / Digital DNA $1,000 one-time per device, then $200/mo; Team channels are 7/3/1 (fiat) and 8/4/2 ($GALATIN buyback).`,
       },
       {
         name: 'Digital Passport',
@@ -303,7 +303,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Ambassador Grid (Ambassador Node y Team)',
-        body: `El Ambassador Grid es el programa de socios del ecosistema que distribuye recompensas en tres niveles, con pagos presentados como una Network Validation Fee para evitar los estereotipos de MLM.\n\nUn Ambassador Node (usuario común) obtiene ingresos en cadena por las transacciones de uso de memoria: 15% en L1, 7% en L2 y 3% en L3, en tokens $GALATIN. Un Ambassador Team (empresa o socio con base propia) obtiene además tarifas de embajadores por suscripciones en fiat (7% / 3% / 1%) o tarifas más altas al cobrar mediante recompra de $GALATIN (8% / 4% / 2%).\n\nEl programa resuelve el reto de un crecimiento orgánico de la red sin reclutamiento agresivo: el ingreso está ligado al uso real de la memoria, y la terminología y las reglas se exponen de forma transparente. Rige una regla de correspondencia de niveles, y cualquier diferencia se muestra como "Ingreso de Oportunidad Perdida".\n\nDato clave: las tarifas base en cadena son 15% / 7% / 3% en L1 / L2 / L3.`,
+        body: `El Ambassador Grid es el programa de socios del ecosistema que distribuye recompensas en tres niveles, con pagos presentados como una Network Validation Fee para evitar los estereotipos de MLM.\n\nUn Ambassador Node (usuario común) obtiene ingresos en cadena por las transacciones de uso de memoria: 15% en L1, 7% en L2 y 3% en L3, en tokens $GALATIN. Un Ambassador Team (empresa o socio con base propia) obtiene además tarifas de embajadores por suscripciones en fiat (7% / 3% / 1%) o tarifas más altas al cobrar mediante recompra de $GALATIN.\n\nEl programa resuelve el reto de un crecimiento orgánico de la red sin reclutamiento agresivo: el ingreso está ligado al uso real de la memoria, y la terminología y las reglas se exponen de forma transparente. Rige una regla de correspondencia de niveles, y cualquier diferencia se muestra como "Ingreso de Oportunidad Perdida".\n\nDato clave: las tarifas base en cadena son 15% / 7% / 3% en L1 / L2 / L3.`,
       },
       {
         name: 'AIfa',
@@ -339,7 +339,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Network Validation Fee',
-        body: `La Network Validation Fee (tarifa de validación de red) es la formulación adoptada por el ecosistema para todos los pagos a socios del Ambassador Grid, que subraya que la recompensa se gana por actividad útil en la red y no por reclutar.\n\nEn la práctica, todas las recompensas de embajadores se registran bajo esta formulación: tarifas base en cadena de 15% / 7% / 3% por el uso de memoria, y para un Ambassador Team, 7% / 3% / 1% sobre suscripciones en fiat u 8% / 4% / 2% al cobrar mediante recompra de $GALATIN. Los pagos están ligados a transacciones reales de memoria, no a la simple captación de personas.\n\nLa formulación resuelve un problema de posicionamiento y elimina los estereotipos de MLM: el ingreso se presenta como una tarifa por validar y usar la red, lo cual importa para la confianza y la percepción. Forma parte de la terminología transparente del programa.\n\nDato clave: las tarifas base de la Network Validation Fee son 15% / 7% / 3% en L1 / L2 / L3.`,
+        body: `La Network Validation Fee (tarifa de validación de red) es la formulación adoptada por el ecosistema para todos los pagos a socios del Ambassador Grid, que subraya que la recompensa se gana por actividad útil en la red y no por reclutar.\n\nEn la práctica, todas las recompensas de embajadores se registran bajo esta formulación: tarifas base en cadena de 15% / 7% / 3% por el uso de memoria, y para un Ambassador Team, 7% / 3% / 1% sobre suscripciones en fiat. Los pagos están ligados a transacciones reales de memoria, no a la simple captación de personas.\n\nLa formulación resuelve un problema de posicionamiento y elimina los estereotipos de MLM: el ingreso se presenta como una tarifa por validar y usar la red, lo cual importa para la confianza y la percepción. Forma parte de la terminología transparente del programa.\n\nDato clave: las tarifas base de la Network Validation Fee son 15% / 7% / 3% en L1 / L2 / L3.`,
       },
       {
         name: 'Proof-of-Memory (anclaje de memoria en cadena)',
@@ -351,7 +351,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Ambassador Node vs Team + Correspondencia de niveles / Ingreso de Oportunidad Perdida',
-        body: `Ambassador Node vs Ambassador Team son los dos tipos de registro de socios, complementados por una regla de correspondencia de niveles y la métrica "Ingreso de Oportunidad Perdida" (Lost Opportunity Revenue).\n\nUn Ambassador Node (usuario común) obtiene ingresos en cadena por el uso de memoria: 15% / 7% / 3% en L1 / L2 / L3. Un Ambassador Team (empresa o socio con base propia) obtiene lo mismo, más dos canales en fiat: Canal 1 (suscripciones) — 7% / 3% / 1%, y Canal 2 (recompra de $GALATIN) — 8% / 4% / 2%. La regla de correspondencia: para obtener el ingreso de embajadores completo, el socio debe estar en el mismo nivel o en uno superior al de sus embajadores; de lo contrario, el ingreso se cuenta solo a partir del importe de su propio nivel.\n\nLa regla resuelve el reto de incentivar de forma justa las mejoras de plan: el importe no percibido por la diferencia de nivel se muestra con claridad en el panel como "Ingreso de Oportunidad Perdida", lo que motiva a subir de plan a tiempo.\n\nDato clave: los planes son Spark $15 / Family Archive $100 / Digital DNA $1000 pago único por dispositivo, luego $200/mes; los canales del Team son 7/3/1 (fiat) y 8/4/2 (recompra de $GALATIN).`,
+        body: `Ambassador Node vs Ambassador Team son los dos tipos de registro de socios, complementados por una regla de correspondencia de niveles y la métrica "Ingreso de Oportunidad Perdida" (Lost Opportunity Revenue).\n\nUn Ambassador Node (usuario común) obtiene ingresos en cadena por el uso de memoria: 15% / 7% / 3% en L1 / L2 / L3. Un Ambassador Team (empresa o socio con base propia) obtiene lo mismo, más un canal en fiat sobre suscripciones — 7% / 3% / 1%. La regla de correspondencia: para obtener el ingreso de embajadores completo, el socio debe estar en el mismo nivel o en uno superior al de sus embajadores; de lo contrario, el ingreso se cuenta solo a partir del importe de su propio nivel.\n\nLa regla resuelve el reto de incentivar de forma justa las mejoras de plan: el importe no percibido por la diferencia de nivel se muestra con claridad en el panel como "Ingreso de Oportunidad Perdida", lo que motiva a subir de plan a tiempo.\n\nDato clave: los planes son Spark $15 / Family Archive $100 / Digital DNA $1000 pago único por dispositivo, luego $200/mes; los canales del Team son 7/3/1 (fiat) y 8/4/2 (recompra de $GALATIN).`,
       },
       {
         name: 'Pasaporte Digital',
@@ -402,7 +402,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: '$GALATIN',
-        body: `$GALATIN 是 CODE 生态在 Solana 区块链上的实用型代币，其特点是发行量被硬性限定为 100 亿（10,000,000,000）枚。\n\n该代币用于为长期记忆存储付费并提供激励。智能合约路由器分配交易收益：5% 进入创始人基金，5% 销毁，15% / 7% / 3% 分配给 L1 / L2 / L3 三级大使，65% 进入金库以补充 Arweave 捐赠资金池。该路由器具有通缩性：若某一大使层级没有合作伙伴，其份额将转入销毁。\n\n该代币解决的是可持续为永恒记忆融资的问题：存储购买行为形成持续流向 Arweave 的经济流，而内置销毁则逐步收缩供给。由此，代币价值与真实用途——个人语境的保存——绑定在一起。\n\n关键数据：固定发行量 100 亿枚；累计销毁上限为 30%（5% 基础销毁 + 至多 25% 空缺大使层级；5% 创始人基金与 65% 金库不会被销毁）。`,
+        body: `$GALATIN 是 CODE 生态在 Solana 区块链上的实用型代币，其特点是发行量被硬性限定为 100 亿（10,000,000,000）枚。\n\n该代币用于为长期记忆存储付费并提供激励。智能合约路由器分配交易收益：5% 进入创始人基金，5% 销毁，15% / 7% / 3% 分配给 L1 / L2 / L3 三级大使，65% 进入金库以补充 Arweave 订阅资金池。该路由器具有通缩性：若某一大使层级没有合作伙伴，其份额将转入销毁。\n\n该代币解决的是可持续为永恒记忆融资的问题：存储购买行为形成持续流向 Arweave 的经济流，而内置销毁则逐步收缩供给。由此，代币价值与真实用途——个人语境的保存——绑定在一起。\n\n关键数据：固定发行量 100 亿枚；累计销毁上限为 30%（5% 基础销毁 + 至多 25% 空缺大使层级；5% 创始人基金与 65% 金库不会被销毁）。`,
       },
       {
         name: '数字永生（Digital immortality）',
@@ -414,7 +414,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Arweave',
-        body: `Arweave 是一个去中心化的永久存储网络，其特点是通过"一次付费"模式为文件的长期保存提供资金。\n\n在 CODE 中，Arweave 充当第三层（永恒记忆）：数据以不可篡改的方式写入，无法被悄然删除或替换。用户仅需支付一次，其中一部分被拨入捐赠基金，随着存储成本随时间下降，存储费用便从中逐步支付。$GALATIN 金库在公开市场买入 AR 并补充该资金池。\n\n该网络解决了"50 年后由谁支付存储费"的问题：它将长期保存与持续订阅解耦。这正是 Arweave 被选为生态永恒记忆支柱的原因。\n\n「一次付费」在这里是字面意思：已存储的文件不会再有月度账单，也不存在因欠费而把数据一并带走的收费。同一性质也有另一面——不可更改的记录同样无法更正或撤回，写进 Arweave 的错误会永远留在那里。这正是它的局限所在：因此送进去的是密文，而「删除」靠销毁密钥、而不是销毁记录来实现。\n\n关键数据：其捐赠经济模型按约 200 年的周期设计——这是协议所声明的设计目标，而非保证。`,
+        body: `Arweave 是一个去中心化的永久存储网络，其特点是通过"一次付费"模式为文件的长期保存提供资金。\n\n在 CODE 中，Arweave 充当第三层（永恒记忆）：数据以不可篡改的方式写入，无法被悄然删除或替换。用户仅需支付一次，其中一部分被拨入订阅基金，随着存储成本随时间下降，存储费用便从中逐步支付。$GALATIN 金库在公开市场买入 AR 并补充该资金池。\n\n该网络解决了"50 年后由谁支付存储费"的问题：它将长期保存与持续订阅解耦。这正是 Arweave 被选为生态永恒记忆支柱的原因。\n\n「一次付费」在这里是字面意思：已存储的文件不会再有月度账单，也不存在因欠费而把数据一并带走的收费。同一性质也有另一面——不可更改的记录同样无法更正或撤回，写进 Arweave 的错误会永远留在那里。这正是它的局限所在：因此送进去的是密文，而「删除」靠销毁密钥、而不是销毁记录来实现。\n\n关键数据：其订阅经济模型按约 200 年的周期设计——这是协议所声明的设计目标，而非保证。`,
       },
       {
         name: 'Solana cNFT',
@@ -422,7 +422,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: '大使网格（Ambassador Grid：Ambassador Node 与 Team）',
-        body: `大使网格（Ambassador Grid）是生态的合作伙伴计划，其特点是按三个层级分配奖励，且所有支付均定位为"网络验证费"（Network Validation Fee），以规避传销式刻板印象。\n\nAmbassador Node（普通用户）从记忆使用的交易中获得链上收益：L1 为 15%、L2 为 7%、L3 为 3%，以 $GALATIN 代币支付。Ambassador Team（拥有自有客户群的公司或合作伙伴）还可从法币订阅中获得大使费率（7% / 3% / 1%），或在通过 $GALATIN 回购结算时获得更高费率（8% / 4% / 2%）。\n\n该计划解决的是在不进行激进招募的前提下实现网络有机增长的难题：收益与真实的记忆使用挂钩，术语与规则也透明公开。计划适用层级对应规则，任何差额都会显示为"错失机会收益"。\n\n关键数据：链上基础费率为 L1 / L2 / L3 的 15% / 7% / 3%。`,
+        body: `大使网格（Ambassador Grid）是生态的合作伙伴计划，其特点是按三个层级分配奖励，且所有支付均定位为"网络验证费"（Network Validation Fee），以规避传销式刻板印象。\n\nAmbassador Node（普通用户）从记忆使用的交易中获得链上收益：L1 为 15%、L2 为 7%、L3 为 3%，以 $GALATIN 代币支付。Ambassador Team（拥有自有客户群的公司或合作伙伴）还可从法币订阅中获得大使费率（7% / 3% / 1%））。\n\n该计划解决的是在不进行激进招募的前提下实现网络有机增长的难题：收益与真实的记忆使用挂钩，术语与规则也透明公开。计划适用层级对应规则，任何差额都会显示为"错失机会收益"。\n\n关键数据：链上基础费率为 L1 / L2 / L3 的 15% / 7% / 3%。`,
       },
       {
         name: 'AIfa',
@@ -449,16 +449,16 @@ const CONTENT: Record<Lang, GlossaryContent> = {
         body: `Digital DNA（数字 DNA）既是最高套餐（$1 000 一次性，按设备，之后每月 $200），也是完整数字遗产的概念，其特点是将数字永生方案、个人受保护边界与人格的链上固化结合在一起。\n\n作为套餐，它是高于 Spark（每月 15 美元）与 Family Archive（每月 100 美元）的最高访问层级：更高的额度、个人边界与优先的永恒记忆。作为概念，它是把人格语境的完整"快照"保存在 PADAM 全部三层中，并通过记忆证明锚定其完整性的构想。\n\nDigital DNA 面向那些看重遗产完整性、追求个人语境最大程度保存的人群。同时，它被定位为追求最大程度保存的设计目标，而非对"复活"人格的保证。\n\n关键数据：定价 $1 000 一次性（按设备），之后每月 $200；是 Spark / Family Archive / Digital DNA 系列中的最高层级。`,
       },
       {
-        name: 'Arweave 捐赠资金池（Arweave Endowment Pool）',
-        body: `Arweave 捐赠资金池（Arweave Endowment Pool）是一项财务储备，用于在数十年间为 Arweave 上的数据永久存储付费。\n\n其模型如下：用户为一次写入仅付费一次，其中一部分被拨入捐赠基金；随后，随着存储成本随时间下降，资金池中的资金逐步支付给数据存储方。在 CODE 生态中，金库将 $GALATIN 路由器收益的 65% 用于买入 AR 并补充该资金池，从而形成持续流向永恒记忆的资金。\n\n该资金池解决了持久性的关键问题——"数十年后由谁支付存储费"：它将永恒记忆与用户的持续订阅解耦。正是这一机制让 PADAM 的第三层在经济上自我维持。\n\n关键数据：路由器收益的 65% 进入金库 → 买入 AR → 补充资金池；设计存储周期约为 200 年（属设计目标）。`,
+        name: 'Arweave 订阅资金池（Arweave Endowment Pool）',
+        body: `Arweave 订阅资金池（Arweave Endowment Pool）是一项财务储备，用于在数十年间为 Arweave 上的数据永久存储付费。\n\n其模型如下：用户为一次写入仅付费一次，其中一部分被拨入订阅基金；随后，随着存储成本随时间下降，资金池中的资金逐步支付给数据存储方。在 CODE 生态中，金库将 $GALATIN 路由器收益的 65% 用于买入 AR 并补充该资金池，从而形成持续流向永恒记忆的资金。\n\n该资金池解决了持久性的关键问题——"数十年后由谁支付存储费"：它将永恒记忆与用户的持续订阅解耦。正是这一机制让 PADAM 的第三层在经济上自我维持。\n\n关键数据：路由器收益的 65% 进入金库 → 买入 AR → 补充资金池；设计存储周期约为 200 年（属设计目标）。`,
       },
       {
         name: '$GALATIN 路由器（通缩型，$GALATIN Router）',
-        body: `$GALATIN 路由器（$GALATIN Router）是 Solana 上的一份智能合约，其特点是按固定公式自动分配每笔交易的收益，并对代币形成通缩压力。\n\n分配公式为：5% 进入创始人基金，5% 销毁，15% / 7% / 3% 分配给 L1 / L2 / L3 三级大使，65% 进入金库（为 Arweave 捐赠资金池买入 AR）。若某一大使层级没有合作伙伴，其份额不会"沉淀"在任何地方，而是直接转入销毁，累计销毁上限为 30%（5% 基础销毁 + 至多 25% 空缺大使层级；5% 创始人基金与 65% 金库不会被销毁）。\n\n该路由器同时解决三个问题：为永恒存储融资、奖励网络参与者，并逐步减少代币供给。其通缩逻辑将网络中的空缺层级与"加速稀缺"而非"资金损失"绑定在一起。\n\n关键数据：5 + 5 + 15 + 7 + 3 + 65 = 100%；累计销毁上限为 30%（5% 基础销毁 + 至多 25% 空缺大使层级；5% 创始人基金与 65% 金库不会被销毁）。`,
+        body: `$GALATIN 路由器（$GALATIN Router）是 Solana 上的一份智能合约，其特点是按固定公式自动分配每笔交易的收益，并对代币形成通缩压力。\n\n分配公式为：5% 进入创始人基金，5% 销毁，15% / 7% / 3% 分配给 L1 / L2 / L3 三级大使，65% 进入金库（为 Arweave 订阅资金池买入 AR）。若某一大使层级没有合作伙伴，其份额不会"沉淀"在任何地方，而是直接转入销毁，累计销毁上限为 30%（5% 基础销毁 + 至多 25% 空缺大使层级；5% 创始人基金与 65% 金库不会被销毁）。\n\n该路由器同时解决三个问题：为永恒存储融资、奖励网络参与者，并逐步减少代币供给。其通缩逻辑将网络中的空缺层级与"加速稀缺"而非"资金损失"绑定在一起。\n\n关键数据：5 + 5 + 15 + 7 + 3 + 65 = 100%；累计销毁上限为 30%（5% 基础销毁 + 至多 25% 空缺大使层级；5% 创始人基金与 65% 金库不会被销毁）。`,
       },
       {
         name: '网络验证费（Network Validation Fee）',
-        body: `网络验证费（Network Validation Fee）是生态为大使网格全部合作伙伴支付所采用的表述，其特点是强调奖励是因为对网络的有益活动而获得，而非因为招募。\n\n在实践中，所有大使奖励都以此表述入账：因使用记忆而产生的链上基础费率为 15% / 7% / 3%；对 Ambassador Team 而言，法币订阅为 7% / 3% / 1%，通过 $GALATIN 回购结算时为 8% / 4% / 2%。支付与真实的记忆交易挂钩，而非与单纯拉人挂钩。\n\n该表述解决了一个定位问题，并消除传销式刻板印象：收益被呈现为对验证并使用网络的一种费用，这对信任与观感十分重要。它是该计划透明术语体系的一部分。\n\n关键数据：网络验证费的基础费率为 L1 / L2 / L3 的 15% / 7% / 3%。`,
+        body: `网络验证费（Network Validation Fee）是生态为大使网格全部合作伙伴支付所采用的表述，其特点是强调奖励是因为对网络的有益活动而获得，而非因为招募。\n\n在实践中，所有大使奖励都以此表述入账：因使用记忆而产生的链上基础费率为 15% / 7% / 3%；对 Ambassador Team 而言，法币订阅为 7% / 3% / 1%。支付与真实的记忆交易挂钩，而非与单纯拉人挂钩。\n\n该表述解决了一个定位问题，并消除传销式刻板印象：收益被呈现为对验证并使用网络的一种费用，这对信任与观感十分重要。它是该计划透明术语体系的一部分。\n\n关键数据：网络验证费的基础费率为 L1 / L2 / L3 的 15% / 7% / 3%。`,
       },
       {
         name: '记忆证明（Proof-of-Memory，链上记忆锚定）',
@@ -470,7 +470,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Ambassador Node 与 Team + 层级对应 / 错失机会收益',
-        body: `Ambassador Node 与 Ambassador Team 是两种合作伙伴注册类型，并辅以层级对应规则与"错失机会收益"（Lost Opportunity Revenue）指标。\n\nAmbassador Node（普通用户）从记忆使用中获得链上收益：L1 / L2 / L3 为 15% / 7% / 3%。Ambassador Team（拥有自有客户群的公司或合作伙伴）获得同样收益，另加两个法币渠道：渠道一（订阅）为 7% / 3% / 1%，渠道二（$GALATIN 回购）为 8% / 4% / 2%。层级对应规则：要获得完整的大使收益，合作伙伴所在套餐须等于或高于其大使对象；否则收益仅按其自身套餐金额计算。\n\n该规则解决的是公平激励升级的难题：因层级差额而未获得的金额会在后台清晰显示为"错失机会收益"，促使用户及时升级套餐。\n\n关键数据：套餐为 Spark 15 美元 / Family Archive 100 美元 / Digital DNA 一次性每台设备 1000 美元、之后每月 200 美元；Team 渠道为 7/3/1（法币）与 8/4/2（$GALATIN 回购）。`,
+        body: `Ambassador Node 与 Ambassador Team 是两种合作伙伴注册类型，并辅以层级对应规则与"错失机会收益"（Lost Opportunity Revenue）指标。\n\nAmbassador Node（普通用户）从记忆使用中获得链上收益：L1 / L2 / L3 为 15% / 7% / 3%。Ambassador Team（拥有自有客户群的公司或合作伙伴）获得同样收益，另加法币订阅渠道：7% / 3% / 1%。层级对应规则：要获得完整的大使收益，合作伙伴所在套餐须等于或高于其大使对象；否则收益仅按其自身套餐金额计算。\n\n该规则解决的是公平激励升级的难题：因层级差额而未获得的金额会在后台清晰显示为"错失机会收益"，促使用户及时升级套餐。\n\n关键数据：套餐为 Spark 15 美元 / Family Archive 100 美元 / Digital DNA 一次性每台设备 1000 美元、之后每月 200 美元；Team 渠道为 7/3/1（法币）与 8/4/2（$GALATIN 回购）。`,
       },
       {
         name: '数字护照（Digital Passport）',

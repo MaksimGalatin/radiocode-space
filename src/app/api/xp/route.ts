@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail } from '@/lib/user-auth';
-import { getPool, creditGalatin, weekKeyUTC, todayUTC, bumpQuest, levelInfo } from '@/lib/economy';
+import { getPool, creditGalatin, weekKeyUTC, todayUTC, bumpQuest, levelInfo, отложитьGalatin } from '@/lib/economy';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
     const gainedToday = dRes.rows[0]?.gained ?? 0;
     const willAward = gainedToday < DAILY_CAP;
     let xp = 0, leveledUp = false, galatin: number | null = null;
+    let cappedGalatin = false;
     if (willAward) {
       await pool.query(`UPDATE xp_daily SET gained = gained + $2 WHERE email=$1 AND day=CURRENT_DATE`, [email, PER_TURN]);
       const uRes = await pool.query(
@@ -48,8 +49,15 @@ export async function POST(req: NextRequest) {
       leveledUp = newLevel > prevLevel;
       if (leveledUp) {
         // idempotent per level reached (награда за КАЖДЫЙ новый уровень, если перескочил несколько)
+        //
+        // Суточный потолок GALATIN. Раньше он стоял только на центральном сайте,
+        // а база у всех четырёх общая — значит обходился переходом на соседний
+        // сайт: три сайта из четырёх раздавали токен без ограничения. Теперь
+        // потолок берётся из economy.ts и потому общий для всей экосистемы.
         for (let L = prevLevel + 1; L <= newLevel; L++) {
-          galatin = await creditGalatin(pool, email, LEVELUP_BONUS, 'levelup', `L${L}`);
+          const разрешено = await отложитьGalatin(pool, email, LEVELUP_BONUS);
+          if (разрешено <= 0) { cappedGalatin = true; break; }
+          galatin = await creditGalatin(pool, email, разрешено, 'levelup', `L${L}`);
         }
       }
       // quest progress: chat turns (daily + weekly)

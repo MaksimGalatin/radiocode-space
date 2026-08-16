@@ -11,6 +11,23 @@ export const TIER_MONTHLY: Record<number, number> = { 3: 200 };
 export function amountToTier(a: number): number {
   if (a >= 1000) return 3; if (a >= 100) return 2; if (a >= 15) return 1; return 0;
 }
+// Держатель Digital DNA с просроченным $200/мес — на ПАУЗЕ: пока пауза длится,
+// новые амбассадорские комиссии ему не начисляются и вывод недоступен, до
+// продления. Проверка идёт в реальном времени (next_due < now), поэтому пауза
+// наступает сразу, а не по расписанию. Нет строки подписки (или таблицы ещё
+// нет) — значит не на паузе.
+//
+// 14.08.2026: раньше эта проверка была ТОЛЬКО на aifa.digital, а база у всех
+// четырёх сайтов общая — просроченный амбассадор получал комиссию, если платёж
+// прошёл на любом другом сайте. Перенесено дословно, чтобы правило было одним,
+// а не похожим.
+export async function isPaused(pool: any, email: string): Promise<boolean> {
+  try {
+    const r = await pool.query(`SELECT 1 FROM subscriptions WHERE email=$1 AND next_due < now() LIMIT 1`, [email]);
+    return (r.rowCount || 0) > 0;
+  } catch { return false; }
+}
+
 export async function creditReferralChain(pool: any, buyer: string, amount: number, tier: number, orderId: string) {
   const out: any[] = [];
   // Anti-fraud: never pay commission on your OWN purchase (self-referral) and
@@ -26,7 +43,8 @@ export async function creditReferralChain(pool: any, buyer: string, amount: numb
     const tRes = await pool.query(`SELECT tier FROM user_tiers WHERE email=$1`, [earner]);
     const earnerTier = tRes.rows[0] ? Number(tRes.rows[0].tier) : 0;
     const amt = Math.round(amount * RATES[lvl - 1] * 100) / 100;
-    const credited = earnerTier >= tier; // gate
+    const paused = await isPaused(pool, earner);
+    const credited = earnerTier >= tier && !paused; // уровень + действующая подписка
     const ins = await pool.query(
       `INSERT INTO referral_earnings(earner_email,source_email,lvl,amount_usdt,base_amount,order_id,credited,purchase_tier)
        VALUES($1,$2,$3,$4,$5,$6,$7,$8) ON CONFLICT(order_id,lvl) DO NOTHING RETURNING id`,

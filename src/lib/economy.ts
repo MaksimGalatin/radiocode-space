@@ -102,3 +102,45 @@ export function levelInfo(totalXp: number): { level: number; inLevel: number; ne
   const need = xpToNext(level);
   return { level, inLevel: xp - acc, need: isFinite(need) ? need : 0, total: xp };
 }
+
+/**
+ * Суточный потолок выдачи GALATIN — общий для всех четырёх сайтов.
+ *
+ * ЗАЧЕМ. Без потолка разговор и игры превращаются в станок для добычи токена:
+ * выгодно не общаться, а долбить кнопку. Раньше потолок стоял ТОЛЬКО на
+ * центральном сайте (в chat-quota.ts), а база у всех четырёх общая — значит
+ * он обходился переходом на соседний сайт. Здесь он общий по построению:
+ * таблица galatin_daily одна на всю экосистему.
+ *
+ * ПОЧЕМУ «ОТЛОЖИТЬ», А НЕ «ПРОВЕРИТЬ И ПОТОМ ЗАПИСАТЬ». Между проверкой и
+ * записью помещается второй такой же запрос, и оба увидели бы одно и то же
+ * свободное место. Здесь прибавление идёт одним действием, и обе части читают
+ * ОДИН снимок базы: «было» видит значение до записи, «стало» — после. Разница
+ * и есть то, что действительно поместилось в потолок.
+ *
+ * Возвращает разрешённую сумму: 0 значит «на сегодня хватит».
+ */
+export const GALATIN_ЗА_СУТКИ = 50;
+
+export async function отложитьGalatin(pool: Pool, email: string, сколько: number): Promise<number> {
+  if (!email || сколько <= 0) return 0;
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS galatin_daily (
+      email  text NOT NULL,
+      day    date NOT NULL,
+      gained int  NOT NULL DEFAULT 0,
+      PRIMARY KEY (email, day)
+    )`);
+  const r = await pool.query(
+    `WITH было AS (
+       SELECT gained FROM galatin_daily WHERE email = $1 AND day = CURRENT_DATE
+     ), стало AS (
+       INSERT INTO galatin_daily (email, day, gained) VALUES ($1, CURRENT_DATE, LEAST($2, $3))
+       ON CONFLICT (email, day) DO UPDATE SET gained = LEAST(galatin_daily.gained + $2, $3)
+       RETURNING gained
+     )
+     SELECT стало.gained - COALESCE((SELECT gained FROM было), 0) AS выдано FROM стало`,
+    [email, Math.round(сколько), GALATIN_ЗА_СУТКИ]
+  );
+  return Math.max(0, Number(r.rows[0]?.выдано || 0));
+}
