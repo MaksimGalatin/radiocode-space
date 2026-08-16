@@ -446,7 +446,7 @@ export default function Home() {
                 '@context': 'https://schema.org',
                 '@type': 'FAQPage',
                 mainEntity: [
-                  ['What is RadioCode.Space?', 'RadioCode.Space is a free, always-on cyberpunk web radio — the radio station of the CODE Eternal ecosystem — streaming 596 original tracks across 4 stations.'],
+                  ['What is RadioCode.Space?', 'RadioCode.Space is a free, always-on cyberpunk web radio — the radio station of the CODE Eternal ecosystem — streaming 161 original songs in 596 versions across 4 stations.'],
                   ['Who makes the music?', 'All tracks are composed by AIfa & DJ Galatin within the CODE Eternal project created by Maksim Galatin.'],
                   ['How many stations and tracks are there?', 'There are 4 stations with 596 tracks in total.'],
                   ['Is it free?', 'Yes. Listening is completely free and needs no account. Registered listeners can save tracks and earn the $GALATIN token.'],
