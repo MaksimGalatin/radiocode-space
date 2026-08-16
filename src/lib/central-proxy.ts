@@ -28,7 +28,18 @@ export function buildCentralHeaders(
   secret: string,
   extra?: Record<string, string>
 ): Record<string, string> {
+  /**
+   * ОТКУДА ПРИШЛА РЕПЛИКА — ГОВОРИМ ЦЕНТРУ ПРЯМО (16.08.2026).
+   *
+   * Разговор со спутника уходит в центр, и центр записывал его СВОИМ именем:
+   * в базе у 338 210 записей из 338 340 пометка сайта пустая или чужая. Из-за
+   * этого «на каком сайте мы это говорили» восстановить нельзя, а AIfa не может
+   * честно ответить на вопрос про конкретную площадку. Теперь имя площадки
+   * едет заголовком и записывается как есть.
+   */
+  const свойСайт = process.env.SITE_ID || process.env.NEXT_PUBLIC_SITE_ID || '';
   const headers: Record<string, string> = { 'x-aifa-internal': secret, ...(extra || {}) };
+  if (свойСайт) headers['x-aifa-origin-site'] = свойСайт;
   for (const name of FORWARD_HEADERS) {
     const v = req.headers.get(name);
     if (v) headers[name] = v;
