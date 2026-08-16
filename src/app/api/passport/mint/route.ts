@@ -82,6 +82,28 @@ export async function POST(req: NextRequest) {
     if (!walletJson) { await pool.end(); return NextResponse.json({ error: 'not_configured' }, { status: 503 }); }
 
     const t = await pool.query(`SELECT tier FROM user_tiers WHERE email=$1`, [email]);
+
+    /**
+     * ВЕЧНАЯ ЗАПИСЬ — ТОЛЬКО С ПЛАТНОГО ТАРИФА (16.08.2026).
+     *
+     * Тариф раньше лишь ВПИСЫВАЛСЯ в документ паспорта, но ничего не решал:
+     * залить паспорт в Arweave мог кто угодно. Замер по боевой базе 16.08.2026:
+     * из пяти паспортов четыре в цепи, и ОДИН из них принадлежит человеку на
+     * бесплатном тарифе. Запись в Arweave необратима и стоит денег кошелька —
+     * значит бесплатный тариф оплачивал бы себе вечность за наш счёт.
+     *
+     * Порог: тариф 1 и выше (Spark и старше). Ответ 402 — «нужна оплата», а не
+     * «отказано»: человеку понятно, что делать.
+     */
+    const уровень = t.rows[0] ? Number(t.rows[0].tier) : 0;
+    if (!(уровень >= 1)) {
+      await pool.end();
+      return NextResponse.json({
+        error: 'paid_tier_required',
+        сообщение: 'Вечная запись паспорта в блокчейн доступна с платного тарифа (Spark и выше).',
+        tier: уровень,
+      }, { status: 402 });
+    }
     const doc = {
       protocol: 'CODE-ETERNAL-PASSPORT',
       version: 1,
