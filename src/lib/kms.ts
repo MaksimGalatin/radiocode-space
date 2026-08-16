@@ -40,8 +40,16 @@ export function kmsEnabled(): boolean {
   const провайдер = process.env.KMS_PROVIDER;
   const ключ = process.env.KMS_KEY_ID;
   if (!провайдер || !ключ) return false;
-  const учётные = process.env.GCP_SERVICE_ACCOUNT_KEY || process.env.GOOGLE_SERVICE_ACCOUNT_KEY
-    || process.env.AWS_ACCESS_KEY_ID || '';
+  // ВАЖНО: перечень переменных должен ТОЧНО совпадать с тем, что читает сам
+  // вызов KMS ниже (`GCP_KMS_SERVICE_ACCOUNT_KEY || GCP_SERVICE_ACCOUNT_KEY`).
+  // Иначе проверка соврёт: 16.08.2026 я сверила боевые переменные четырёх
+  // проектов Vercel и увидела, что на aifa.digital и radiocode.space задан
+  // ТОЛЬКО `GCP_KMS_SERVICE_ACCOUNT_KEY`. Проверка по другому имени объявила бы
+  // KMS выключенным, и прежние конверты перестали бы разворачиваться — то есть
+  // память людей стала бы нечитаемой. Проверка обязана смотреть туда же, куда
+  // смотрит рабочий код.
+  const учётные = process.env.GCP_KMS_SERVICE_ACCOUNT_KEY || process.env.GCP_SERVICE_ACCOUNT_KEY
+    || process.env.GOOGLE_SERVICE_ACCOUNT_KEY || process.env.AWS_ACCESS_KEY_ID || '';
   if (!учётные.trim()) {
     console.error(
       '[KMS] ВЫКЛЮЧЕН: задан KMS_PROVIDER и KMS_KEY_ID, но учётных данных нет. ' +
