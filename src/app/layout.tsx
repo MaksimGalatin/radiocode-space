@@ -22,7 +22,36 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+/**
+ * КАНОНИЧЕСКИЙ АДРЕС ЗАВИСИТ ОТ ЯЗЫКА (16.08.2026).
+ *
+ * ПОЧЕМУ ПРИШЛОСЬ МЕНЯТЬ. Google Search Console прислал письмо: «Вариант
+ * страницы с тегом canonical — страницы не индексируются». Причина была в
+ * противоречии, которое мы создали сами: карта сайта объявляет четыре
+ * языковые версии (`?lang=ru`, `?lang=es`, `?lang=zh`) как отдельные
+ * страницы, а каждая из них в своём HTML говорила `canonical: /` — то есть
+ * «я копия английской». Поисковик верит канону, а не карте: русская,
+ * испанская и китайская версии в индекс не попадали вовсе.
+ *
+ * Теперь канон самоссылающийся: `?lang=ru` объявляет каноном себя. Карта и
+ * страница говорят одно и то же, и каждая языковая версия индексируется.
+ *
+ * Язык берётся из заголовка `x-locale`, который ставит middleware из `?lang=`
+ * — тот же способ, что уже работает на /news.
+ */
+const ЯЗЫКИ = ['en', 'ru', 'es', 'zh'] as const;
+const САЙТ = 'https://radiocode.space';
+
+function адресЯзыка(яз: string): string {
+  return яз === 'en' ? САЙТ : `${САЙТ}/?lang=${яз}`;
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { headers } = await import('next/headers');
+  const заголовки = await headers();
+  const сырой = заголовки.get('x-locale') || 'en';
+  const яз = (ЯЗЫКИ as readonly string[]).includes(сырой) ? сырой : 'en';
+  return {
   metadataBase: new URL("https://radiocode.space"),
   title: "RadioCode.Space — Eternal Cyberpunk Radio by CODE Eternal",
   description:
@@ -49,7 +78,7 @@ export const metadata: Metadata = {
    * язык не совпал ни с одним объявленным.
    */
   alternates: {
-    canonical: "https://radiocode.space",
+    canonical: адресЯзыка(яз),
     languages: {
       en: "https://radiocode.space",
       ru: "https://radiocode.space/?lang=ru",
@@ -137,7 +166,8 @@ export const metadata: Metadata = {
     icon: "data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2024%2024%27%20fill=%27none%27%20stroke=%27%2300F0FF%27%20stroke-width=%271.5%27%3E%3Cpath%20d=%27M4.9%2019.1C1%2015.2%201%208.8%204.9%204.9%27/%3E%3Cpath%20d=%27M7.8%2016.2c-2.3-2.3-2.3-6.1%200-8.4%27/%3E%3Ccircle%20cx=%2712%27%20cy=%2712%27%20r=%272%27%20fill=%27%2300F0FF%27/%3E%3Cpath%20d=%27M16.2%207.8c2.3%202.3%202.3%206.1%200%208.4%27/%3E%3Cpath%20d=%27M19.1%204.9C23%208.8%2023%2015.1%2019.1%2019%27/%3E%3C/svg%3E",
     apple: "/apple-touch-icon.png",
   },
-};
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#050507",
