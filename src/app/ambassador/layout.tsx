@@ -1,12 +1,35 @@
 import type { Metadata } from "next";
 import { ТАРИФЫ, ценаСтрокой } from "@/lib/pricing";
 
-export const metadata: Metadata = {
+/**
+ * Канон, зависящий от языка (16.08.2026).
+ *
+ * Карта сайта объявляет языковые версии `?lang=…` отдельными страницами, а
+ * страница объявляла каноном адрес без метки — то есть «я копия английской».
+ * Google верит канону: русская, испанская и китайская версии не индексировались
+ * вовсе, о чём и пришло письмо Search Console. Канон должен ссылаться сам на
+ * себя, тогда карта и страница говорят одно и то же.
+ */
+const ЯЗЫКИ_СТР = ['en', 'ru', 'es', 'zh'];
+async function канонПоЯзыку(база: string): Promise<{ canonical: string; languages: Record<string, string> }> {
+  const { headers } = await import('next/headers');
+  const сырой = (await headers()).get('x-locale') || 'en';
+  const яз = ЯЗЫКИ_СТР.includes(сырой) ? сырой : 'en';
+  const адрес = (я: string) => (я === 'en' ? база : `${база}?lang=${я}`);
+  return {
+    canonical: адрес(яз),
+    languages: { en: адрес('en'), ru: адрес('ru'), es: адрес('es'), zh: адрес('zh'), 'x-default': адрес('en') },
+  };
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
   title: "Ambassador Program — RADIOCODE",
   description:
     "Become a CODE Eternal Ambassador — an honest partnership where you spread real products and earn a commission on real sales. Free entry, no spam, no fake jobs.",
-  alternates: { canonical: "https://radiocode.space/ambassador" },
-};
+  alternates: await канонПоЯзыку("https://radiocode.space/ambassador" + ''),
+  };
+}
 
 /**
  * РАЗМЕТКА ТАРИФОВ (Product + Offer).

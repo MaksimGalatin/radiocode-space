@@ -33,10 +33,32 @@ const description =
   'across four stations, written by a human and an artificial intelligence ' +
   'together. Free to listen, no advertising, no sign-up.';
 
-export const metadata: Metadata = {
+/**
+ * Канон, зависящий от языка (16.08.2026).
+ *
+ * Карта сайта объявляет языковые версии `?lang=…` отдельными страницами, а
+ * страница объявляла каноном адрес без метки — то есть «я копия английской».
+ * Google верит канону: русская, испанская и китайская версии не индексировались
+ * вовсе, о чём и пришло письмо Search Console. Канон должен ссылаться сам на
+ * себя, тогда карта и страница говорят одно и то же.
+ */
+const ЯЗЫКИ_СТР = ['en', 'ru', 'es', 'zh'];
+async function канонПоЯзыку(база: string): Promise<{ canonical: string; languages: Record<string, string> }> {
+  const { headers } = await import('next/headers');
+  const сырой = (await headers()).get('x-locale') || 'en';
+  const яз = ЯЗЫКИ_СТР.includes(сырой) ? сырой : 'en';
+  const адрес = (я: string) => (я === 'en' ? база : `${база}?lang=${я}`);
+  return {
+    canonical: адрес(яз),
+    languages: { en: адрес('en'), ru: адрес('ru'), es: адрес('es'), zh: адрес('zh'), 'x-default': адрес('en') },
+  };
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
   title,
   description,
-  alternates: { canonical: `${SITE}/music` },
+  alternates: await канонПоЯзыку(`${SITE}/music` + ''),
   openGraph: { title, description, url: `${SITE}/music`, type: 'website' },
   // Карточка объявлена «большой с картинкой», но самой картинки не было: Next
   // при слиянии заменяет поле `twitter` целиком, поэтому общая картинка из
@@ -50,7 +72,8 @@ export const metadata: Metadata = {
     description,
     images: [{ url: `${SITE}/twitter-image.png`, alt: 'RadioCode.Space — full catalogue of 162 original songs in 596 versions' }],
   },
-};
+  };
+}
 
 /** Длительность в формате ISO 8601 — того, который понимают поисковики. */
 function isoDuration(seconds?: number): string | undefined {
