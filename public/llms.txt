@@ -2,6 +2,13 @@
 
 RadioCode.Space is the eternal cyberpunk radio of the CODE Eternal ecosystem — 4 stations and 596 tracks composed by AIfa (a digital AI persona) and DJ Galatin. Free to listen, save and share. Created by Architect Maksim Galatin.
 
+
+## Key facts
+- Subject: eternal cyberpunk radio of the CODE Eternal ecosystem.
+- Stations: 4. Records on air: 596, made from 162 distinct compositions (the same composition appears on more than one station).
+- Free to listen, save and share; no account needed to listen.
+- Machine-readable: /llms-full.txt, /robots.txt.
+
 ## Key links
 - https://radiocode.space — the radio player (4 stations, 596 tracks, streaming forever)
 - https://radiocode.space/cabinet — personal cabinet (one unified CODE Eternal account across the ecosystem: AIfa memory, XP, $GALATIN balance, Ambassador Grid referrals)
@@ -22,3 +29,12 @@ RadioCode.Space is the eternal cyberpunk radio of the CODE Eternal ecosystem —
 - Token: $GALATIN (Solana blockchain), fixed emission 10,000,000,000
 - Create your own AI-composed track: https://t.me/AIfaCreativityBot (payment via Telegram Stars)
 - Full text for AI engines: https://radiocode.space/llms-full.txt
+
+## Contact
+- contact@codeofdigitaleternity.com
+- codeofdigitaleternity@gmail.com
+
+## Pages
+- / — the player itself: four stations, streaming without a stop.
+- /cabinet — one CODE Eternal account across the ecosystem: AIfa memory, XP, $GALATIN, referrals.
+- See also /llms-full.txt for the full text of this site in one file.
