@@ -89,6 +89,9 @@ const S = {
   // политику конфиденциальности.
   privacy:        { en: 'Privacy Policy',                     ru: 'Конфиденциальность',                   es: 'Privacidad',                            zh: '隐私政策' },
   legalInfo:      { en: 'Legal & company details',            ru: 'Правовая информация и реквизиты',      es: 'Información legal y datos',             zh: '法律信息与企业资料' },
+  // Библиотека разборов на .ink. Замер 17.08.2026: 172 страницы там не были
+  // связаны ни с одним главным сайтом — ни в меню, ни в подвале.
+  libraryLink:    { en: 'Library of analyses',                  ru: 'Библиотека разборов',                  es: 'Biblioteca de análisis',                zh: '解析文库' },
   publicOffer:    { en: 'Public Offer',                       ru: 'Публичная оферта',                     es: 'Oferta pública',                        zh: '公开要约' },
   userAgreement:  { en: 'User Agreement',                     ru: 'Пользовательское соглашение',          es: 'Acuerdo de usuario',                    zh: '用户协议' },
   newsLink:       { en: 'News',                               ru: 'Новости',                              es: 'Noticias',                              zh: '新闻' },
