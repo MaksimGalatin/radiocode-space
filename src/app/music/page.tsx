@@ -27,9 +27,9 @@ const SITE = 'https://radiocode.space';
  * новая станция — каталог обновится сам, без правок здесь.
  */
 
-const title = 'All music — 162 original songs in 596 versions · RadioCode.Space';
+const title = 'All music — 530 original songs in 1024 versions · RadioCode.Space';
 const description =
-  'Full catalogue of every track on RadioCode.Space: 596 original recordings ' +
+  'Full catalogue of every track on RadioCode.Space: 1024 original recordings ' +
   'across four stations, written by a human and an artificial intelligence ' +
   'together. Free to listen, no advertising, no sign-up.';
 
@@ -70,7 +70,7 @@ export async function generateMetadata(): Promise<Metadata> {
     creator: '@CODE_AIfa',
     title,
     description,
-    images: [{ url: `${SITE}/twitter-image.png`, alt: 'RadioCode.Space — full catalogue of 162 original songs in 596 versions' }],
+    images: [{ url: `${SITE}/twitter-image.png`, alt: 'RadioCode.Space — full catalogue of 530 original songs in 1024 versions' }],
   },
   };
 }

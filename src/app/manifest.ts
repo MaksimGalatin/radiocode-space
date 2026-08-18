@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'RadioCode.Space — Eternal Cyberpunk Radio',
     short_name: 'RadioCode',
     description:
-      'Premium cyberpunk radio from the CODE Eternal ecosystem — 4 stations, 162 compositions in 596 recordings by AIfa & DJ Galatin.',
+      'Premium cyberpunk radio from the CODE Eternal ecosystem — 6 stations, 530 compositions in 1024 recordings by AIfa & DJ Galatin.',
     start_url: '/',
     scope: '/',
     display: 'standalone',
