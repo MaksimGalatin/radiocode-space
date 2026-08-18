@@ -350,28 +350,73 @@ export function PlayerBar() {
               >
                 <VolumeIcon className="w-4 h-4" />
               </motion.button>
-              <div className="relative w-20 h-1.5 rounded-full overflow-hidden cursor-pointer group"
+              {/* ГРОМКОСТЬ. Раньше ползунок работал ТОЛЬКО по клику: перетащить
+                  его мышью было нельзя, а кружка не было вовсе — да и появиться
+                  он не мог, потому что дорожка стояла с overflow-hidden и обрезала
+                  бы его. Человек видит полоску, тянет её и ничего не происходит:
+                  выглядит как поломка, хотя «работает».
+                  Теперь: захват указателя (тянется даже если увести курсор за
+                  пределы дорожки), кружок, стрелки с клавиатуры. Высота дорожки
+                  оставлена прежней, кружок выступает за неё — поэтому обрезание
+                  снято, а под палец добавлено невидимое поле по вертикали. */}
+              <div
+                className="relative w-20 h-4 flex items-center cursor-pointer group touch-none"
                 role="slider"
+                tabIndex={0}
                 aria-label={rt('volume')}
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-valuenow={Math.round((isMuted ? 0 : volume) * 100)}
-                onClick={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const pct = Math.max(0, Math.min(1, x / rect.width));
-                  setVolume(pct);
+                onKeyDown={(e) => {
+                  const шаг = e.shiftKey ? 0.1 : 0.05;
+                  if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+                    e.preventDefault(); setVolume(Math.min(1, volume + шаг));
+                  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+                    e.preventDefault(); setVolume(Math.max(0, volume - шаг));
+                  } else if (e.key === 'Home') { e.preventDefault(); setVolume(0); }
+                  else if (e.key === 'End') { e.preventDefault(); setVolume(1); }
+                }}
+                onPointerDown={(e) => {
+                  const дорожка = e.currentTarget;
+                  дорожка.setPointerCapture(e.pointerId);
+                  const выставить = (клиентX: number) => {
+                    const r = дорожка.getBoundingClientRect();
+                    setVolume(Math.max(0, Math.min(1, (клиентX - r.left) / r.width)));
+                  };
+                  выставить(e.clientX);
+                  const тянуть = (ev: PointerEvent) => выставить(ev.clientX);
+                  const отпустить = () => {
+                    дорожка.removeEventListener('pointermove', тянуть);
+                    дорожка.removeEventListener('pointerup', отпустить);
+                    дорожка.removeEventListener('pointercancel', отпустить);
+                  };
+                  дорожка.addEventListener('pointermove', тянуть);
+                  дорожка.addEventListener('pointerup', отпустить);
+                  дорожка.addEventListener('pointercancel', отпустить);
                 }}
               >
-                <div className="absolute inset-0 bg-white/[0.06] rounded-full" />
-                <div
-                  className="absolute left-0 top-0 h-full rounded-full transition-all duration-100"
-                  style={{
-                    width: `${(isMuted ? 0 : volume) * 100}%`,
-                    background: color,
-                    opacity: 0.6,
-                  }}
-                />
+                <div className="relative w-full h-1.5">
+                  <div className="absolute inset-0 bg-white/[0.06] rounded-full" />
+                  <div
+                    className="absolute left-0 top-0 h-full rounded-full"
+                    style={{
+                      width: `${(isMuted ? 0 : volume) * 100}%`,
+                      background: color,
+                      opacity: 0.6,
+                    }}
+                  />
+                  <div
+                    className="absolute top-1/2 rounded-full shadow-md pointer-events-none
+                               transition-transform duration-100 group-hover:scale-125"
+                    style={{
+                      left: `${(isMuted ? 0 : volume) * 100}%`,
+                      width: 12, height: 12,
+                      transform: 'translate(-50%, -50%)',
+                      background: color,
+                      border: '2px solid rgba(0,0,0,0.35)',
+                    }}
+                  />
+                </div>
               </div>
             </div>
 

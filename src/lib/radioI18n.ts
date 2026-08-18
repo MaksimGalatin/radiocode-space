@@ -256,6 +256,24 @@ export const STATION_I18N: Record<string, { description: LocalizedText; genre: L
     },
     genre: { en: 'Dark Ambient / Industrial', ru: 'Дарк-эмбиент / Индастриал', es: 'Dark Ambient / Industrial', zh: '暗黑氛围 / 工业' },
   },
+  'code-stories': {
+    description: {
+      en: 'Songs about the people we still have time to call. Acoustic warmth against the machine hum.',
+      ru: 'Песни о тех, кому мы ещё успеваем позвонить. Живое тепло против машинного гула.',
+      es: 'Canciones sobre las personas a las que aún estamos a tiempo de llamar. Calor acústico contra el zumbido de la máquina.',
+      zh: '唱给那些我们还来得及打电话的人。原声的温度，对抗机器的嗡鸣。',
+    },
+    genre: { en: 'Songwriter / Heartland', ru: 'Авторская песня / Хартленд', es: 'Cantautor / Heartland', zh: '创作歌手 / 心地摇滚' },
+  },
+  'code-spectrum': {
+    description: {
+      en: 'Seven genre records and a symphony. The widest span the machine can sing.',
+      ru: 'Семь жанровых пластинок и симфония. Самый широкий диапазон, на который способна машина.',
+      es: 'Siete discos de género y una sinfonía. El rango más amplio que la máquina puede cantar.',
+      zh: '七张风格唱片与一部交响。机器所能歌唱的最宽音域。',
+    },
+    genre: { en: 'Orchestral / Genre Span', ru: 'Оркестр / Весь спектр', es: 'Orquestal / Todo el espectro', zh: '管弦 / 全谱系' },
+  },
 };
 
 // Localised labels for the individual genre tokens used by the genre filter.
@@ -263,6 +281,10 @@ export const STATION_I18N: Record<string, { description: LocalizedText; genre: L
 // in stations.ts — so the underlying filter value stays English while the chip
 // shows a translated label. Missing tokens fall back to the raw token.
 export const GENRE_I18N: Record<string, LocalizedText> = {
+  'SONGWRITER':     { en: 'Songwriter',    ru: 'Авторская',     es: 'Cantautor',     zh: '创作歌手' },
+  'HEARTLAND':      { en: 'Heartland',     ru: 'Хартленд',      es: 'Heartland',     zh: '心地摇滚' },
+  'ORCHESTRAL':     { en: 'Orchestral',    ru: 'Оркестр',       es: 'Orquestal',     zh: '管弦' },
+  'GENRE SPAN':     { en: 'Genre Span',    ru: 'Весь спектр',   es: 'Todo el espectro', zh: '全谱系' },
   'CYBERPUNK':      { en: 'Cyberpunk',     ru: 'Киберпанк',     es: 'Cyberpunk',     zh: '赛博朋克' },
   'SYNTHWAVE':      { en: 'Synthwave',     ru: 'Синтвейв',      es: 'Synthwave',     zh: '合成波' },
   'AMBIENT':        { en: 'Ambient',       ru: 'Эмбиент',       es: 'Ambient',       zh: '氛围' },

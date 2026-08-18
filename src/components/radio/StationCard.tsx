@@ -274,7 +274,12 @@ export function StationCard({ station, index }: StationCardProps) {
             </div>
 
             {/* Description */}
-            <p className="text-xs sm:text-sm text-[#8B8BA8] leading-relaxed line-clamp-2 mb-4">
+            {/* Описание показывается ЦЕЛИКОМ. Было line-clamp-2: текст резался
+                на второй строке многоточием, и на русском с испанским — самых
+                длинных — от описания оставалась половина. Карточка растёт под
+                текст, а сетка выравнивает высоту соседей, поэтому ряд не
+                разъезжается. */}
+            <p className="text-xs sm:text-sm text-[#8B8BA8] leading-relaxed mb-4">
               {st.desc(station.id, station.description)}
             </p>
 
