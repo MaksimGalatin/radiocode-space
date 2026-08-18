@@ -283,7 +283,6 @@ async function ответБесплатнымИлиГрантом(
     'gemini-3.7-flash',
     process.env.GEMINI_FREE_TOP || 'gemini-3.6-flash',
     'gemini-3.5-flash',
-    'gemini-3-flash-preview',
     'gemini-3.5-flash-lite',
     process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite',
     // Псевдонимы «последняя актуальная»: переживут смену поколений, даже если

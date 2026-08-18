@@ -161,6 +161,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
         rot.setShuffled(get().isShuffled);
         const track = rot.start();
         set({ currentStation: station, currentTrack: track, currentTrackIndex: indexOf(station, track), isPlaying: true, isLoading: true });
+    // Длина перехода выставляется СРАЗУ при смене станции: движок решает,
+    // когда запрашивать следующий трек, по этому значению, и решает это
+    // ЗАРАНЕЕ — до того, как начнётся сам переход.
+    getEngine().setCrossfadeSec(crossfadeFor(station.id));
         eng.playNow(track);
       }
       return;
@@ -187,6 +191,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     rot.setShuffled(get().isShuffled);
     const track = rot.start();
     set({ currentStation: station, currentTrack: track, currentTrackIndex: indexOf(station, track), currentTime: 0, duration: track.duration || 0, isPlaying: true, isLoading: true, pendingSeek: 0 });
+    // Длина перехода выставляется СРАЗУ при смене станции: движок решает,
+    // когда запрашивать следующий трек, по этому значению, и решает это
+    // ЗАРАНЕЕ — до того, как начнётся сам переход.
+    getEngine().setCrossfadeSec(crossfadeFor(station.id));
     eng.playNow(track);
   },
 
@@ -200,6 +208,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     rot.setShuffled(get().isShuffled);
     rot.consume(track);
     set({ currentStation: station, currentTrack: track, currentTrackIndex: trackIndex, currentTime: 0, duration: track.duration || 0, isPlaying: true, isLoading: true, pendingSeek: 0 });
+    // Длина перехода выставляется СРАЗУ при смене станции: движок решает,
+    // когда запрашивать следующий трек, по этому значению, и решает это
+    // ЗАРАНЕЕ — до того, как начнётся сам переход.
+    getEngine().setCrossfadeSec(crossfadeFor(station.id));
     eng.playNow(track);
   },
 
@@ -215,6 +227,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
       currentTime: 0, duration: track.duration || 0,
       isPlaying: false, isLoading: false, pendingSeek: 0,
     });
+    // Длина перехода выставляется СРАЗУ при смене станции: движок решает,
+    // когда запрашивать следующий трек, по этому значению, и решает это
+    // ЗАРАНЕЕ — до того, как начнётся сам переход.
+    getEngine().setCrossfadeSec(crossfadeFor(station.id));
   },
 
   // manual next — quick blend
@@ -357,6 +373,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
           pendingSeek: s.position || 0,
           isPlaying: false, // never autoplay — wait for a user gesture
         });
+    // Длина перехода выставляется СРАЗУ при смене станции: движок решает,
+    // когда запрашивать следующий трек, по этому значению, и решает это
+    // ЗАРАНЕЕ — до того, как начнётся сам переход.
+    getEngine().setCrossfadeSec(crossfadeFor(station.id));
       }
     } catch { /* ignore corrupt state */ }
   },
