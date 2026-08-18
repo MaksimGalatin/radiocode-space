@@ -242,7 +242,7 @@ export function RadioHeader() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.05)',
                 border: '1px solid rgba(0, 240, 255, 0.1)',
@@ -255,12 +255,12 @@ export function RadioHeader() {
             </motion.div>
 
             {/* Signal Strength */}
-            <div className="hidden sm:block">
+            <div className="hidden xl:block">
               <SignalStrength />
             </div>
 
             {/* Live Clock */}
-            <div className="hidden lg:block">
+            <div className="hidden xl:block">
               <LiveClock />
             </div>
           </div>

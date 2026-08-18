@@ -378,6 +378,80 @@ function DangerZone({ email }: { email: string }) {
   );
 }
 
+/**
+ * ЛИЧНЫЙ РЕЕСТР ЗАПИСЕЙ — только показ.
+ *
+ * Вопрос Архитектора 18.08.2026: «почему у каждого пользователя, у которого
+ * свой ключ, не вести также ЕГО ЛИЧНЫЙ реестр?» Механизм был: каждая уходящая
+ * в Arweave запись уже шифруется отдельным ключом, привязанным к человеку.
+ * Не было окна, через которое он это видит. Вот оно.
+ *
+ * КНОПОК УДАЛЕНИЯ ЗДЕСЬ НЕТ И НЕ ПОЯВИТСЯ БЕЗ ОТДЕЛЬНОГО РЕШЕНИЯ: уничтожение
+ * ключа записи необратимо (раздел 18), а на боевых сайтах разрешено только
+ * добавлять (раздел 19).
+ */
+function RegistryCard() {
+  const { t } = useCabT();
+  const [data, setData] = useState<{
+    всего: number; уничтожено: number;
+    записи: { номер: string; что: string | null; создана: string; уничтожена: string | null }[];
+    каналы: { chat_type: string; всего: number; в_arweave: number }[];
+  } | null>(null);
+  const [err, setErr] = useState(false);
+
+  const load = useCallback(() => {
+    setErr(false);
+    fetch("/api/memory/registry", { cache: "no-store" })
+      .then(r => (r.ok ? r.json() : Promise.reject()))
+      .then(d => setData(d))
+      .catch(() => setErr(true));
+  }, []);
+  useEffect(() => { load(); }, [load]);
+
+  const вЦепи = data ? data.каналы.reduce((s, k) => s + k.в_arweave, 0) : 0;
+
+  return (
+    <Card>
+      <SectionTitle icon="📇" title={t("regTitle")} sub={t("regSub")} />
+      {err ? <ErrorState text={t("netErr")} onRetry={load} retryLabel={t("retry")} />
+        : data === null ? <div style={{ display: "grid", gap: 10 }}><Skeleton h={54} /><Skeleton h={80} /></div>
+        : (
+          <>
+            <div style={{ display: "flex", gap: 18, flexWrap: "wrap", marginBottom: 12 }}>
+              <div><div style={{ fontSize: 12, opacity: 0.7 }}>{t("regTotal")}</div>
+                   <div style={{ fontSize: 22, fontWeight: 600 }}>{data.всего}</div></div>
+              <div><div style={{ fontSize: 12, opacity: 0.7 }}>{t("regChain")}</div>
+                   <div style={{ fontSize: 22, fontWeight: 600 }}>{вЦепи}</div></div>
+            </div>
+
+            {data.всего === 0 ? <EmptyState text={t("regEmpty")} /> : (
+              <div style={{ display: "grid", gap: 6, maxHeight: 260, overflowY: "auto" }}>
+                {data.записи.slice(0, 100).map((z) => (
+                  <div key={z.номер} style={{
+                    display: "flex", justifyContent: "space-between", gap: 12,
+                    fontSize: 13, padding: "6px 8px", borderRadius: 6,
+                    background: "rgba(255,255,255,0.03)",
+                  }}>
+                    <span style={{ opacity: 0.85, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      {z.что || z.номер.slice(0, 12)}
+                    </span>
+                    <span style={{ opacity: 0.6, whiteSpace: "nowrap" }}>
+                      {String(z.создана).slice(0, 10)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div style={{ fontSize: 12, opacity: 0.75, marginTop: 10 }}>
+              🔑 {t("regNote")}
+            </div>
+          </>
+        )}
+    </Card>
+  );
+}
+
 export default function MemoryTab({ email }: { email: string }) {
   const { t } = useCabT();
   const [server, setServer] = useState<{ chatType: string; text: string }[] | null>(null);
@@ -398,6 +472,7 @@ export default function MemoryTab({ email }: { email: string }) {
 
   return (
     <div style={{ display: "grid", gap: 16 }} className="cab-fade">
+      <RegistryCard />
       <Card>
         <SectionTitle icon="🧠" title={t("memAuto")} sub={t("memAutoSub")} />
         {/* Заливка в вечную цепь — только на платных тарифах. Человек должен

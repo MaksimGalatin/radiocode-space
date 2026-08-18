@@ -30,7 +30,7 @@ export function LiveClock() {
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-      className="flex flex-col items-end select-none p-3 rounded-lg"
+      className="flex flex-col items-end select-none px-3 py-1.5 rounded-lg"
       style={{
         border: '1px solid rgba(0, 240, 255, 0.3)',
         boxShadow: '0 0 15px rgba(0, 240, 255, 0.2), inset 0 0 10px rgba(0, 240, 255, 0.1)',
@@ -40,14 +40,14 @@ export function LiveClock() {
     >
       {/* Label */}
       <span
-        className="text-[13px] tracking-[0.2em] uppercase mb-1"
+        className="text-[10px] leading-none tracking-[0.1em] uppercase mb-1 whitespace-nowrap"
         style={{ color: '#7E7E99' }}
       >
         {rt('localTime')}
       </span>
 
       {/* Time display */}
-      <div className="font-mono text-xl sm:text-2xl leading-none flex items-baseline">
+      <div className="font-mono text-lg sm:text-xl leading-none flex items-baseline">
         <span
           className="tabular-nums"
           style={{
@@ -69,7 +69,7 @@ export function LiveClock() {
         </span>
         <ColonBlink />
         <span
-          className="tabular-nums text-xs sm:text-sm"
+          className="tabular-nums text-[10px] sm:text-xs"
           style={{
             color: '#8B8BA8',
           }}
@@ -80,7 +80,7 @@ export function LiveClock() {
 
       {/* Date */}
       <span
-        className="font-mono text-xs mt-1 tabular-nums"
+        className="font-mono text-[10px] leading-none mt-1 tabular-nums"
         style={{ color: '#7E7E99' }}
       >
         {day} {monthShort} {year}
