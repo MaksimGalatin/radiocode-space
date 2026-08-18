@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Radio, Waves, Zap, Skull } from 'lucide-react';
+import { Radio, Waves, Zap, Skull, Heart, Disc3 } from 'lucide-react';
 import { Station } from '@/lib/stations';
 import { usePlayerStore } from '@/stores/playerStore';
 import { TiltCard } from './TiltCard';
@@ -13,6 +13,10 @@ const iconMap: Record<string, React.ReactNode> = {
   Waves: <Waves className="w-5 h-5 sm:w-6 sm:h-6" />,
   Zap: <Zap className="w-5 h-5 sm:w-6 sm:h-6" />,
   Skull: <Skull className="w-5 h-5 sm:w-6 sm:h-6" />,
+  // Значки двух новых станций. Без них iconMap[station.icon] отдавал
+  // undefined, и на карточке оставался пустой квадрат.
+  Heart: <Heart className="w-5 h-5 sm:w-6 sm:h-6" />,
+  Disc3: <Disc3 className="w-5 h-5 sm:w-6 sm:h-6" />,
 };
 
 interface StationCardProps {
