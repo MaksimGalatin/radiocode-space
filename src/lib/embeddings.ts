@@ -98,21 +98,44 @@ export async function embedText(
   const clean = prepare(text);
   if (!clean) return null;
 
-  if (process.env.GOOGLE_SERVICE_ACCOUNT_KEY || process.env.GCP_SERVICE_ACCOUNT_KEY) {
+  // ── СНАЧАЛА БЕСПЛАТНО. Порядок здесь — это порядок расходов.
+  //
+  // Было наоборот: Vertex стоял первым, служебный ключ в боевом окружении
+  // задан — и до бесплатного пути дело не доходило НИКОГДА. За час
+  // 13:00–14:00 UTC 18.08.2026 так ушло 84 221 платное обращение к
+  // gemini-embedding-001. Бесплатная лестница прикрывала только чат;
+  // эмбеддинги шли мимо неё, и заслонка РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ их не
+  // касалась. У бесплатного тарифа эмбеддинги есть: 1000 в сутки на модель.
+  if (process.env.GEMINI_API_KEY) {
+    try {
+      const v = await embedGemini(clean, task);
+      if (v && v.length) return normalize(v);
+    } catch (e) {
+      console.warn('[Embeddings] бесплатный ключ не ответил:', e);
+    }
+  }
+
+  // ── Платный Vertex — только запасным путём и только с разрешения.
+  //
+  // Без разрешения молчим и возвращаем null: отсутствие вектора означает, что
+  // поиск по смыслу отработает хуже, а это несравнимо дешевле тихого счёта.
+  const платныйРазрешён =
+    (process.env.РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ || process.env.ALLOW_PAID_MODELS || '')
+      .toLowerCase() === '1' ||
+    (process.env.РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ || process.env.ALLOW_PAID_MODELS || '')
+      .toLowerCase() === 'true';
+
+  if (платныйРазрешён &&
+      (process.env.GOOGLE_SERVICE_ACCOUNT_KEY || process.env.GCP_SERVICE_ACCOUNT_KEY)) {
     try {
       const v = await embedVertex(clean, task);
       if (v && v.length) return normalize(v);
     } catch (e) {
       console.warn('[Embeddings] Vertex error:', e);
     }
-  }
-  if (process.env.GEMINI_API_KEY) {
-    try {
-      const v = await embedGemini(clean, task);
-      if (v && v.length) return normalize(v);
-    } catch (e) {
-      console.warn('[Embeddings] Gemini error:', e);
-    }
+  } else if (process.env.GOOGLE_SERVICE_ACCOUNT_KEY || process.env.GCP_SERVICE_ACCOUNT_KEY) {
+    console.warn('[Embeddings] бесплатный путь не дал вектора, платный Vertex ЗАКРЫТ ' +
+      '(нет РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ=1) — возвращаю null, денег не тратим');
   }
   return null;
 }
