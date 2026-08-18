@@ -92,6 +92,7 @@ const S = {
   // Библиотека разборов на .ink. Замер 17.08.2026: 172 страницы там не были
   // связаны ни с одним главным сайтом — ни в меню, ни в подвале.
   libraryLink:    { en: 'Library of analyses',                  ru: 'Библиотека разборов',                  es: 'Biblioteca de análisis',                zh: '解析文库' },
+  readingRooms:   { en: 'Reading rooms',                       ru: 'Читальни сети',                        es: 'Salas de lectura',                      zh: '阅读室' },
   publicOffer:    { en: 'Public Offer',                       ru: 'Публичная оферта',                     es: 'Oferta pública',                        zh: '公开要约' },
   userAgreement:  { en: 'User Agreement',                     ru: 'Пользовательское соглашение',          es: 'Acuerdo de usuario',                    zh: '用户协议' },
   newsLink:       { en: 'News',                               ru: 'Новости',                              es: 'Noticias',                              zh: '新闻' },

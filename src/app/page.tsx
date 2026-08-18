@@ -555,6 +555,13 @@ export default function Home() {
                   >
                     {rt('libraryLink')}
                   </a>
+                  <a
+                    href={`https://codeofdigitaleternity.ink${языкПодвала === 'ru' ? '' : '/' + языкПодвала}/reading-rooms/`}
+                    className="text-[13px] font-mono tracking-wider text-[#8B8BA8] hover:text-[#00F0FF] transition-colors"
+                    rel="noopener"
+                  >
+                    {rt('readingRooms')}
+                  </a>
                   {/* Публичная оферта. Договор, который негде найти, юридически
                       равен ненаписанному: условия обязаны быть доступны ДО
                       заказа, а не только тому, кто знает точный адрес страницы.
