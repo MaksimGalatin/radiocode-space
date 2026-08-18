@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { stations, Track, Station } from '@/lib/stations';
 import { StationRotation } from '@/lib/rotation';
-import { getEngine, CROSSFADE_SEC } from '@/lib/audioEngine';
+import { getEngine, CROSSFADE_SEC, crossfadeFor } from '@/lib/audioEngine';
 
 // One composition-aware rotation engine per station (manages its own localStorage).
 const rotations = new Map<string, StationRotation>();
@@ -257,7 +257,11 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     const rot = getRotation(currentStation);
     const track = rot.next();
     set({ currentTrack: track, currentTrackIndex: indexOf(currentStation, track), duration: track.duration || 0, isLoading: false });
-    getEngine().crossfadeTo(track, CROSSFADE_SEC * 1000);
+    // Длина перехода зависит от станции: на песенных короткая, иначе
+    // два голоса накладываются и слышатся как два разных трека.
+    const длина = crossfadeFor(get().currentStation?.id);
+    getEngine().setCrossfadeSec(длина);
+    getEngine().crossfadeTo(track, длина * 1000);
   },
 
   // track ended with no crossfade (short track / repeat one)

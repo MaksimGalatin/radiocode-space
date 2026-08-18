@@ -46,7 +46,26 @@ function applyCors(el: HTMLAudioElement, url: string) {
   }
 }
 
+/**
+ * ДЛИНА ПЕРЕХОДА МЕЖДУ ТРЕКАМИ.
+ *
+ * Четыре секунды — сколько два трека звучат ОДНОВРЕМЕННО. Для эмбиента и
+ * электроники это незаметно и красиво: хвост одного растворяется в начале
+ * другого. Для песен с голосом — нет: четыре секунды наложенного вокала
+ * слышатся как «играют сразу два трека», и именно на это указал Архитектор
+ * 18.08.2026, когда появились станции CODE Stories и CODE Spectrum.
+ *
+ * Старые четыре станции сохраняют прежние 4 секунды — их звучание не меняется.
+ * Песенным даём 1.2 секунды: стык остаётся мягким, но наложения вокала не
+ * слышно.
+ */
 export const CROSSFADE_SEC = 4;
+export const CROSSFADE_SEC_VOCAL = 1.2;
+/** Станции, где поют: там длинный кроссфейд накладывает два голоса. */
+export const VOCAL_STATIONS = new Set(['code-stories', 'code-spectrum']);
+export function crossfadeFor(stationId: string | undefined): number {
+  return stationId && VOCAL_STATIONS.has(stationId) ? CROSSFADE_SEC_VOCAL : CROSSFADE_SEC;
+}
 const MAX_RETRIES = 3;
 const STALL_SECONDS = 12;
 const RAMP_STEP_MS = 60;
@@ -119,7 +138,7 @@ class RadioAudioEngine {
         this.recoverTries = 0;
         this.cb.onTime?.(el.currentTime, el.duration || 0);
         const dur = el.duration || 0;
-        if (dur > 0 && !this.needNextFired && !this.crossing && dur - el.currentTime <= CROSSFADE_SEC + 0.2) {
+        if (dur > 0 && !this.needNextFired && !this.crossing && dur - el.currentTime <= this.crossfadeSec + 0.2) {
           this.needNextFired = true;
           this.cb.onNeedNext?.();
         }
@@ -245,6 +264,16 @@ class RadioAudioEngine {
   }
 
   /** Gapless crossfade to the next track on the idle deck via volume ramps. */
+  /**
+   * Длина перехода, которой пользуется СЧЁТЧИК запуска следующего трека.
+   * Держим её здесь, а не берём константу: момент запроса и длительность
+   * наложения обязаны совпадать. Если запрос идёт за 4 с до конца, а наложение
+   * длится 1.2 с, старый трек продолжает звучать все 4 с рядом с новым — то
+   * есть «короткий кроссфейд» на слух станет длиннее прежнего.
+   */
+  crossfadeSec = CROSSFADE_SEC;
+  setCrossfadeSec(sec: number) { this.crossfadeSec = Math.max(0.2, Math.min(8, sec)); }
+
   crossfadeTo(track: Track, ms: number) {
     const from = this.decks[this.active];
     const to = this.decks[1 - this.active];
