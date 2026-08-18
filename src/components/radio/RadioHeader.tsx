@@ -108,6 +108,34 @@ export function RadioHeader() {
               </span>
             </motion.a>
 
+            {/* Читальни сети. Шестнадцать читален живут на отдельных доменах,
+                и попасть на них можно было только зная адрес. В подвале ссылка
+                уже есть, но подвал — это конец страницы; в шапке она нужна
+                затем же, зачем новости: чтобы по ней ходили. Подпись прячется
+                на узких экранах, чтобы шапка не переносилась. */}
+            <motion.a
+              href={`https://codeofdigitaleternity.ink${lang === 'ru' ? '' : '/' + lang}/reading-rooms/`}
+              rel="noopener"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.35, duration: 0.6 }}
+              whileHover={{ scale: 1.04 }}
+              aria-label={rt('readingRooms')}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              style={{
+                background: 'rgba(0, 240, 255, 0.06)',
+                border: '1px solid rgba(0, 240, 255, 0.18)',
+              }}
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H5.5A1.5 1.5 0 0 1 4 15.5z" />
+                <path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H14a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h4.5a1.5 1.5 0 0 0 1.5-1.5z" />
+              </svg>
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden lg:inline uppercase">
+                {rt('readingRooms')}
+              </span>
+            </motion.a>
+
             {/* Personal cabinet (unified account across the ecosystem) */}
             <motion.a
               href="/cabinet"
