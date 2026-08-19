@@ -188,8 +188,51 @@ export function middleware(req: NextRequest) {
   // aifa.digital. С ним раскладка ставит верный `<html lang>`, а дальше по
   // этому же признаку страницы смогут отдавать переведённый текст сразу, а не
   // после того, как отработает браузер.
+  // 🔴 АДРЕС С ПРЕФИКСОМ ЯЗЫКА ОТДАВАЛ 404, А НА ДВУХ СОСЕДНИХ САЙТАХ РАБОТАЛ.
+  //
+  // Замер 18.08.2026 по одной статье, тремя способами на каждом из четырёх
+  // сайтов:
+  //     central / works : /ru/news/<слаг> → 200 перевод
+  //     eternal / radio : /ru/news/<слаг> → 404
+  //                       /news/<слаг>?lang=ru → 200 перевод
+  //
+  // То есть перевод здесь НЕ ТЕРЯЛСЯ — он был доступен только другой формой
+  // адреса. Но форма важна: ссылки, карта сайта, hreflang и поисковики ходят
+  // по пути, а не по метке, и с меткой все четыре языка выглядят для них одной
+  // страницей. Половина экосистемы адресовалась одним способом, половина —
+  // другим, и разошлось это молча.
+  //
+  // Дальше — тот же блок, что на codeofdigitaleternity.com и aifa.works,
+  // скопированный, а не сочинённый заново: первый сегмент пути, если он
+  // 'ru'/'es'/'zh'/'en', снимается, а язык уходит заголовком и печенькой.
+  //
+  // ⚠️ Разбор `?lang=` НИЖЕ ОСТАВЛЕН НЕТРОНУТЫМ намеренно. Ссылки с меткой уже
+  // разошлись — по ним ходят и люди, и внешние ресурсы, и корневой путь без
+  // префикса обязан продолжать отдавать английский. Это правило «только
+  // улучшать»: адрес, который работал, работать не перестаёт.
+  //
+  // Проверено, что снятие префикса ничего не перехватит: маршрута верхнего
+  // уровня с именем ru/en/es/zh на сайте нет (ambassador, api, atom.xml,
+  // cabinet, feed.xml, glossary, music, news, passport, service-agreement,
+  // station, user-agreement).
+  const ЯЗЫКИ = ['ru', 'es', 'zh', 'en'];
+  const первый = req.nextUrl.pathname.split('/')[1];
+
+  if (ЯЗЫКИ.includes(первый)) {
+    const остаток = req.nextUrl.pathname.slice(первый.length + 1) || '/';
+    const адрес = req.nextUrl.clone();
+    адрес.pathname = остаток;
+    headers.set('x-locale', первый);
+    headers.set('x-pathname', остаток);
+    const переписан = NextResponse.rewrite(адрес, { request: { headers } });
+    переписан.headers.set('Content-Security-Policy', csp);
+    переписан.cookies.set('locale', первый, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+    return переписан;
+  }
+
   const метка = req.nextUrl.searchParams.get('lang');
   headers.set('x-locale', ['en', 'ru', 'es', 'zh'].includes(метка || '') ? (метка as string) : 'en');
+  headers.set('x-pathname', req.nextUrl.pathname);
 
   const res = NextResponse.next({ request: { headers } });
   res.headers.set('Content-Security-Policy', csp);
