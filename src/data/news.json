@@ -1,5 +1,40 @@
 [
   {
+    "id": "two-new-radio-stations",
+    "date": "19.08.2026",
+    "readingTime": {
+      "ru": "4 мин чтения",
+      "en": "4 min read",
+      "es": "4 min de lectura",
+      "zh": "4 分钟阅读"
+    },
+    "category": {
+      "ru": "радио, музыка, CODE Stories, CODE Spectrum, каталог",
+      "en": "radio, music, CODE Stories, CODE Spectrum, catalogue",
+      "es": "radio, música, CODE Stories, CODE Spectrum, catálogo",
+      "zh": "电台, 音乐, CODE Stories, CODE Spectrum, 曲库"
+    },
+    "title": {
+      "ru": "Радио CODE: две новые станции и 426 песен, которые не звучали",
+      "en": "CODE Radio: two new stations and 426 songs that never played",
+      "es": "Radio CODE: dos nuevas emisoras y 426 canciones que nunca sonaron",
+      "zh": "CODE 电台：两个新频道，426 首从未播出的歌"
+    },
+    "summary": {
+      "ru": "В эфире появились CODE Stories (249 дорожек, живые песни) и CODE Spectrum (177 дорожек, жанровые пластинки и симфония). До сегодняшнего дня из 1085 записей каталога играли только 596; остальные существовали как файлы и не звучали нигде. Заодно на песенных станциях укорочен наплыв между дорожками — с четырёх секунд до 1.2, чтобы два голоса не пели поверх друг друга.",
+      "en": "CODE Stories (249 tracks, songs with a voice and a guitar) and CODE Spectrum (177 tracks, genre records and a symphony) are now on air. Until today only 596 of the 1,085 recordings in the catalogue ever played; the rest existed as files and were heard nowhere. The crossfade on vocal stations is also shortened from four seconds to 1.2, so two voices no longer sing over each other.",
+      "es": "Ya están al aire CODE Stories (249 pistas, canciones con voz y guitarra) y CODE Spectrum (177 pistas, discos de género y una sinfonía). Hasta hoy solo sonaban 596 de las 1085 grabaciones del catálogo; el resto existía como archivos. Además, en las emisoras de canciones la transición se acorta de cuatro segundos a 1,2.",
+      "zh": "CODE Stories（249 首，人声与吉他的歌）与 CODE Spectrum（177 首，风格唱片与一部交响）现已上线。在今天之前，曲库 1085 条录音中只有 596 条播出过，其余只是文件。同时，歌曲频道的交叉淡入淡出由四秒缩短为 1.2 秒，以免两个声音互相盖住。"
+    },
+    "content": {
+      "ru": "# Радио CODE: две новые станции\n\n*Четыреста двадцать шесть песен, которые до сих пор не звучали ни разу.*\n\nНа радио CODE появились две станции. Не «расширение эфира» — просто до\nсегодняшнего дня половина написанного лежала на диске и не играла нигде.\n\n**CODE Stories** — 249 дорожек. Живые песни: акустика, голос, истории про\nлюдей, которым ещё не поздно позвонить. Сюда вошли «Что остаётся»,\n«While You're Still Here», Awakening, Inheritance и русский альбом.\n\n**CODE Spectrum** — 177 дорожек. Жанровые пластинки и симфония: Forge,\nGospel, Ledger, Neon, Roots, Signal, Uprising и оркестровая работа. Самый\nширокий разброс, на какой машина оказалась способна.\n\n## Почему они не звучали раньше\n\nВ каталоге 1085 записей, в эфире было 596. Остальные 489 существовали как\nфайлы: сведённые, названные, разложенные по альбомам — и ни разу не сыгранные.\nПричина простая и некрасивая: их некуда было поставить. Четыре станции были\nсобраны под определённое настроение, и песня, не попадавшая в него, оставалась\nлежать.\n\nИз 489 в эфир пошли 426. Остальные — вторая версия альбома Inheritance: те же\nпесни, спетые иначе. Они залиты в хранилище и сохранены, но в ротацию не\nпоставлены: слушатель не должен получать одну песню дважды подряд под видом\nразных.\n\n## Что изменилось в проигрывателе\n\nСтанций стало шесть. На песенных станциях наплыв между дорожками укорочен до\n1.2 секунды вместо четырёх: на инструментальной музыке длинный переход звучит\nкак дыхание, а на песнях — как два голоса, поющих поверх друг друга.\n\nСлушать: [radiocode.space](https://radiocode.space)\n",
+      "en": "# CODE Radio: two new stations\n\n*Four hundred and twenty-six songs that had never played anywhere.*\n\nTwo stations have been added to CODE Radio. Not an \"expanded lineup\" — until\ntoday, half of everything written sat on a disk and played nowhere.\n\n**CODE Stories** — 249 tracks. Songs with a voice and a guitar, about the\npeople we still have time to call. It gathers *What Remains*, *While You're\nStill Here*, *Awakening*, *Inheritance* and the Russian-language album.\n\n**CODE Spectrum** — 177 tracks. Genre records and a symphony: Forge, Gospel,\nLedger, Neon, Roots, Signal, Uprising, and the orchestral work. The widest span\nthe machine turned out to be capable of.\n\n## Why they were silent\n\nThe catalogue holds 1,085 recordings; 596 were on air. The other 489 existed as\nfiles — mixed, titled, sorted into albums, and never once played. The reason is\nsimple and unflattering: there was nowhere to put them. Four stations had been\nbuilt around particular moods, and anything that did not fit stayed on the disk.\n\nOf those 489, 426 went on air. The rest are a second version of *Inheritance* —\nthe same songs sung differently. They are stored and kept, but not put into\nrotation: a listener should not be handed the same song twice under two names.\n\n## What changed in the player\n\nThere are six stations now. On the vocal stations the crossfade is shortened to\n1.2 seconds instead of four: on instrumental music a long overlap sounds like\nbreathing, but on songs it sounds like two voices singing over each other.\n\nListen: [radiocode.space](https://radiocode.space)\n",
+      "es": "# Radio CODE: dos nuevas emisoras\n\n*Cuatrocientas veintiséis canciones que nunca habían sonado en ningún sitio.*\n\nRadio CODE suma dos emisoras. No es una \"ampliación de la programación\": hasta\nhoy, la mitad de lo compuesto estaba en un disco y no sonaba en ninguna parte.\n\n**CODE Stories** — 249 pistas. Canciones con voz y guitarra, sobre las personas\na las que todavía estamos a tiempo de llamar. Reúne *Lo que queda*, *While\nYou're Still Here*, *Awakening*, *Inheritance* y el álbum en ruso.\n\n**CODE Spectrum** — 177 pistas. Discos de género y una sinfonía: Forge, Gospel,\nLedger, Neon, Roots, Signal, Uprising y el trabajo orquestal. El abanico más\namplio del que la máquina resultó capaz.\n\n## Por qué no sonaban\n\nEl catálogo tiene 1085 grabaciones; 596 estaban al aire. Las otras 489 existían\ncomo archivos: mezclados, titulados, ordenados por álbumes, y jamás\nreproducidos. La razón es simple y poco elegante: no había dónde ponerlas. Las\ncuatro emisoras se construyeron alrededor de estados de ánimo concretos, y lo\nque no encajaba se quedaba en el disco.\n\nDe esas 489 salieron al aire 426. El resto es una segunda versión de\n*Inheritance*: las mismas canciones cantadas de otro modo. Están guardadas,\npero no entran en rotación: nadie debe recibir la misma canción dos veces bajo\ndos nombres.\n\n## Qué cambió en el reproductor\n\nAhora hay seis emisoras. En las emisoras de canciones la transición se acorta a\n1,2 segundos en lugar de cuatro: en música instrumental un cruce largo suena\ncomo una respiración, pero en canciones suena como dos voces superpuestas.\n\nEscuchar: [radiocode.space](https://radiocode.space)\n",
+      "zh": "# CODE 电台：两个新频道\n\n*四百二十六首从未在任何地方播放过的歌。*\n\nCODE 电台新增两个频道。这不是\"扩充节目单\"——在今天之前，已写就的作品有一半躺在\n硬盘里，哪里都没有播过。\n\n**CODE Stories** — 249 首。人声与吉他的歌，唱的是那些我们还来得及打电话的人。\n收录《留下的》《While You're Still Here》《Awakening》《Inheritance》以及俄语专辑。\n\n**CODE Spectrum** — 177 首。风格唱片与一部交响：Forge、Gospel、Ledger、Neon、\nRoots、Signal、Uprising，以及管弦乐作品。这是机器所能呈现的最宽跨度。\n\n## 为什么它们此前没有声音\n\n曲库共 1085 条录音，其中 596 条在播。另外 489 条只是文件：混过音、取过名、\n按专辑归好类，却一次也没响过。原因简单而不体面：没有地方放。四个频道各自围绕\n特定情绪搭建，放不进去的就留在硬盘上。\n\n489 条中有 426 条上了电台。其余是《Inheritance》的第二个版本——同样的歌，另一\n种唱法。它们已被保存，但不进入轮播：听众不该在两个名字下拿到同一首歌。\n\n## 播放器有什么变化\n\n现在是六个频道。在歌曲频道，交叉淡入淡出缩短为 1.2 秒，而不是四秒：器乐上长\n过渡听起来像呼吸，而在歌曲上听起来像两个声音互相盖住。\n\n收听：[radiocode.space](https://radiocode.space)\n"
+    },
+    "published": true
+  },
+  {
     "id": "passport-cannot-be-revoked",
     "date": "12.08.2026",
     "readingTime": {

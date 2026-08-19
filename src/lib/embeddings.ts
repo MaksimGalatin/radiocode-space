@@ -98,6 +98,17 @@ export async function embedText(
   const clean = prepare(text);
   if (!clean) return null;
 
+  // Учёт расхода ПО ФАКТУ: пишем уже после того, как стало известно, каким
+  // путём ушёл вызов. Бесплатный ключ и платный Vertex попадают в разные
+  // строки, и сторож считает бесплатное нулём (см. ставкаЗа1K в cost-guard).
+  const учесть = async (путь: 'free' | 'vertex') => {
+    try {
+      const { record } = await import('./cost-guard');
+      await record(`gemini-embedding-${путь}`, clean.length);
+    } catch { /* учёт не имеет права мешать работе */ }
+  };
+
+
   // ── СНАЧАЛА БЕСПЛАТНО. Порядок здесь — это порядок расходов.
   //
   // Было наоборот: Vertex стоял первым, служебный ключ в боевом окружении
@@ -109,7 +120,10 @@ export async function embedText(
   if (process.env.GEMINI_API_KEY) {
     try {
       const v = await embedGemini(clean, task);
-      if (v && v.length) return normalize(v);
+      if (v && v.length) {
+        await учесть('free');
+        return normalize(v);
+      }
     } catch (e) {
       console.warn('[Embeddings] бесплатный ключ не ответил:', e);
     }
@@ -129,7 +143,10 @@ export async function embedText(
       (process.env.GOOGLE_SERVICE_ACCOUNT_KEY || process.env.GCP_SERVICE_ACCOUNT_KEY)) {
     try {
       const v = await embedVertex(clean, task);
-      if (v && v.length) return normalize(v);
+      if (v && v.length) {
+        await учесть('vertex');
+        return normalize(v);
+      }
     } catch (e) {
       console.warn('[Embeddings] Vertex error:', e);
     }
