@@ -1,20 +1,59 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { useLang } from '@/lib/i18n';
 
 /**
- * Keeps <html lang> in sync with the client-toggled UI language. Radio has no
- * per-locale URLs, so the server renders lang="en" for the first paint; once the
- * persisted language (Zustand) rehydrates, this corrects <html lang> for a11y
- * and a correct language signal to assistive tech / crawlers.
+ * Держит <html lang> в согласии с языком, которым СТРАНИЦА ОТДАНА.
+ *
+ * 🔴 ЗДЕСЬ СТОЯЛА УСТАРЕВШАЯ ПОСЫЛКА. Прежнее пояснение гласило: «у радио нет
+ * адресов с языком, поэтому сервер рисует lang="en"». С 18.08.2026 это уже
+ * неправда — прослойка снимает префикс /ru, /es, /zh и отдаёт страницу на этом
+ * языке. А компонент продолжал ставить язык ИЗ СОХРАНЁННОГО ВЫБОРА, и
+ * получалось расхождение: текст русский, а атрибут говорит «английский».
+ *
+ * Замерено в браузере 18.08.2026 на /ru/news/two-new-radio-stations:
+ *   сервер отдал lang="ru" (видно запросом curl),
+ *   после загрузки скриптов стало lang="en" — при русском тексте на экране.
+ * На codeofdigitaleternity.com в том же замере осталось lang="ru": там
+ * порядок старшинства «адрес важнее сохранённого выбора» соблюдён.
+ *
+ * Голосовой доступ читает страницу правилами того языка, что объявлен здесь:
+ * русский текст английскими правилами превращается в бессмыслицу. Поисковик
+ * с исполнением скриптов видит то же расхождение.
+ *
+ * ПОРЯДОК СТАРШИНСТВА — тот же, что на центральном сайте:
+ *     префикс в адресе  >  сохранённый выбор  >  язык браузера
+ * Человек, открывший ссылку /ru/..., хотел русскую страницу — независимо от
+ * того, что он выбирал в прошлый раз.
  */
+const ЯЗЫКИ = ['ru', 'es', 'zh', 'en'] as const;
+type Язык = (typeof ЯЗЫКИ)[number];
+
 export function HtmlLangSync() {
   const lang = useLang((s) => s.lang);
+  const setLang = useLang((s) => s.setLang);
+  const путь = usePathname();
+
+  // Язык из адреса: /ru/news/... -> 'ru'. Пустая строка, если префикса нет.
+  const изАдреса = (() => {
+    const первый = (путь || '/').split('/')[1];
+    return (ЯЗЫКИ as readonly string[]).includes(первый) ? (первый as Язык) : '';
+  })();
+
+  // Адрес старше сохранённого выбора: подтягиваем ХРАНИЛИЩЕ к адресу, иначе
+  // подписи в шапке останутся на прежнем языке рядом с переведённым текстом.
   useEffect(() => {
-    if (typeof document !== 'undefined' && lang) {
-      document.documentElement.lang = lang;
+    if (изАдреса && изАдреса !== lang) setLang(изАдреса as Язык);
+  }, [изАдреса, lang, setLang]);
+
+  useEffect(() => {
+    const итог = изАдреса || lang;
+    if (typeof document !== 'undefined' && итог) {
+      document.documentElement.lang = итог;
     }
-  }, [lang]);
+  }, [изАдреса, lang]);
+
   return null;
 }
