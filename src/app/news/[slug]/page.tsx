@@ -102,7 +102,27 @@ export async function generateMetadata(
         'application/atom+xml': [{ url: `${BASE}/atom.xml`, title: 'RadioCode.Space — News (Atom)' }],
       },
     },
-    openGraph: { title, description, url, siteName: 'RadioCODE', type: 'article' },
+    // 🔴 КАРТИНКИ ЗДЕСЬ НЕ БЫЛО ВОВСЕ — ровно та же беда, что абзацем ниже у
+    // карточки Twitter, и по той же причине: Next при слиянии заменяет блок
+    // openGraph ЦЕЛИКОМ, поэтому общая картинка из корневой раскладки до
+    // страницы статьи не доходит. Соседняя беда была замечена и подписана, а
+    // эта осталась — потому что смотрели на карточку Twitter, а не перебирали
+    // оба блока.
+    //
+    // Замер 18.08.2026 по всем четырём сайтам: og:image отдают central, works
+    // и aifa.digital, radiocode.space — единственный без него. Ссылка на
+    // статью в мессенджере и в ленте выглядела пустым прямоугольником.
+    //
+    // Берём тот же файл, что и карточка Twitter (проверено запросом: код 200,
+    // image/png, 29 253 байта), — отдельная генерация тут не нужна.
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: 'RadioCODE',
+      type: 'article',
+      images: [{ url: `${BASE}/og-image.png`, width: 1200, height: 630, alt: title }],
+    },
     twitter: {
       card: 'summary_large_image',
       site: '@CODE_AIfa',
