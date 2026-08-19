@@ -54,15 +54,26 @@ function toIso(d: string): string {
 }
 
 function selfUrl(id: string, loc: Loc): string {
-  return loc === 'en' ? `${BASE}/news/${id}` : `${BASE}/news/${id}?lang=${loc}`;
+  // Адрес с ПРЕФИКСОМ языка, а не с меткой `?lang=`. Так же на
+  // codeofdigitaleternity.com и aifa.works — форма должна быть одна на все
+  // четыре сайта, иначе поисковик видит два адреса с одним содержимым.
+  return loc === 'en' ? `${BASE}/news/${id}` : `${BASE}/${loc}/news/${id}`;
 }
 
 function languageAlternates(id: string): Record<string, string> {
+  // 🔴 БЫЛО `?lang=`, СТАЛО ПРЕФИКС — из-за прежней формы Google 19.08.2026
+  // прислал «Страница является копией, канонические версии не совпадают».
+  // Причина: с утра того же дня заработали адреса `/ru/news/...`, а здесь
+  // по-прежнему объявлялась форма с меткой, и один материал получил два
+  // объявленных адреса.
+  //
+  // Форма взята с aifa.works дословно, а не написана заново: у двух сайтов из
+  // четырёх она с самого начала правильная, и расходиться им незачем.
   return {
     en: `${BASE}/news/${id}`,
-    ru: `${BASE}/news/${id}?lang=ru`,
-    es: `${BASE}/news/${id}?lang=es`,
-    zh: `${BASE}/news/${id}?lang=zh`,
+    ru: `${BASE}/ru/news/${id}`,
+    es: `${BASE}/es/news/${id}`,
+    zh: `${BASE}/zh/news/${id}`,
     'x-default': `${BASE}/news/${id}`,
   };
 }
