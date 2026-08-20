@@ -27,7 +27,11 @@ const SKIP_PATH = /ignored_during_vercel_build|\.d\.ts$/;
 const EXEMPT = [/\/api\/admin\//, /\/api\/cron\//, /\/api\/health\//, /\/api\/pay\/ipn\//, /\/api\/auth\/logout\//,
   // Статические ответы без базы и без внешних вызовов: флуд по ним — обычная
   // раздача статики, её берёт на себя сеть Vercel.
-  /\/api\/manifesto\//, /\/api\/status\//, /\/api\/honeypot-env\//, /\/api\/koan\//];
+  /\/api\/manifesto\//, /\/api\/status\//, /\/api\/honeypot-env\//, /\/api\/koan\//,
+  // Ловушка для несуществующих ручек: отдаёт постоянный JSON с кодом 404,
+  // без базы и без внешних вызовов. Ограничивать её частоту незачем —
+  // это та же раздача статики, что и /api/status выше.
+  /\[\.\.\.[^\]]+\]/];
 
 const SECRETS = [
   [/postgres(ql)?:\/\/[^\s'"`]{12,}/i, 'строка подключения к базе'],
