@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail } from '@/lib/user-auth';
+import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
 import { getPool } from '@/lib/economy';
 import { validateNickname, nicknameErrorMessage } from '@/lib/nickname';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 
-  const email = (getSessionEmail(req) || '').trim().toLowerCase();
+  const email = (await сессияДействительна(req) || '').trim().toLowerCase();
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   let nickname = '';

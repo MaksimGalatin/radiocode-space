@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
-import { getSessionEmail } from '@/lib/user-auth';
+import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
 import { getDbPool } from '@/lib/db-pool';
 import { маскаПочты } from '@/lib/log-privacy';
 import {
@@ -90,7 +90,7 @@ export async function GET(req: NextRequest) {
   if (ip !== 'unknown' && !(await dbRateLimit(`account-heir:${ip}`, 120, 60_000))) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   try {
     return NextResponse.json(await состояние(email), {
@@ -109,7 +109,7 @@ export async function POST(req: NextRequest) {
   if (ip !== 'unknown' && !(await dbRateLimit(`account-heir-write:${ip}`, 20, 60_000))) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   let тело: Record<string, unknown> = {};

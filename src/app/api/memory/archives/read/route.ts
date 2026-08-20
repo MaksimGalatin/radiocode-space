@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail } from '@/lib/user-auth';
+import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
 import { decryptForUserTagged } from '@/lib/user-key';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 // расшифровываем персональным ключом пользователя (KMS). Владелец сессии
 // может читать только транзакции из СВОЕГО memory_arweave_log.
 export async function GET(req: NextRequest) {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
   // у каждого экземпляра свой.

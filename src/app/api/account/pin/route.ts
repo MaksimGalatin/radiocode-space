@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail } from '@/lib/user-auth';
+import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
 import { setPin, clearPin, hasPin } from '@/lib/account-security';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   return NextResponse.json({ ok: true, hasPin: await hasPin(email) });
 }
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   let b: any = {}; try { b = await req.json(); } catch {}
   if (b.action === 'set') {

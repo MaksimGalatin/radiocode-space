@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail } from '@/lib/user-auth';
+import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 export const dynamic = 'force-dynamic';
 
 // Request a USDT (TRC20) withdrawal of the full available balance — for the
 // LOGGED-IN user only (session), never an arbitrary email from the body.
 export async function POST(req: NextRequest) {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   // Счёт в базе: здесь речь о деньгах, уходящих наружу.
   const адрес_payout = clientIp(req as never);

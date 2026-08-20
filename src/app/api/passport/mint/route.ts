@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { Readable } from 'stream';
-import { getSessionEmail } from '@/lib/user-auth';
+import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
 import { getPool } from '@/lib/economy';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
@@ -48,7 +48,7 @@ export const maxDuration = 60;
  * или Solana. Тогда разбор надо делать заново.
  */
 export async function POST(req: NextRequest) {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
   // у каждого экземпляра свой.

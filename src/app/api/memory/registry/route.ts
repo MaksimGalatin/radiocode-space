@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
-import { getSessionEmail } from '@/lib/user-auth';
+import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
 import { getDbPool, type PoolLike } from '@/lib/db-pool';
 import { маскаПочты } from '@/lib/log-privacy';
 
@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
   // функции нет, соседние ручки кабинета (`account/delete`, `account/heir`)
   // ходят через `getSessionEmail`. Берём то же самое, чтобы поведение входа
   // в одном кабинете было единым, а не разным от ручки к ручке.
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   const em = email.trim().toLowerCase();

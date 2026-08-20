@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail } from '@/lib/user-auth';
+import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
 import { appendVerbatim } from '@/lib/memory-write';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
@@ -16,7 +16,7 @@ const КОД: Record<string, number> = { empty: 400, no_db: 500, prev_unreadable
 // запрос не отправил (закрыл вкладку, моргнула сеть). Здесь остались только
 // вещи, свойственные ручке: проверка сессии, счёт обращений и коды ответов.
 export async function POST(req: NextRequest) {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
   // у каждого экземпляра свой.
