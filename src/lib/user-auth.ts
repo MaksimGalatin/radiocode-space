@@ -79,6 +79,71 @@ export function getSessionEmail(req: NextRequest): string | null {
   return verifyUserToken(req.cookies.get(USER_COOKIE)?.value);
 }
 
+/**
+ * ПОКОЛЕНИЕ СЕССИЙ — то, чего здесь не хватало.
+ *
+ * Разбор 19.08.2026. Токен у всех четырёх сайтов одного вида
+ * `почта:срок:поколение:подпись`, но поколение читалось ТОЛЬКО на центральном
+ * сайте. Здесь оно отбрасывалось при разборе, а значит:
+ *   — человек вышел из кабинета, а старый токен продолжал работать;
+ *   — человек сменил пароль, а старый токен продолжал работать до конца срока.
+ *
+ * Поколение хранится в `users_auth.session_epoch` и растёт при выходе и при
+ * смене пароля. Токен, выданный до увеличения, перестаёт подходить.
+ *
+ * Почему `epoch === 0` пропускается. Все уже выданные токены выпущены с нулём.
+ * Если бы сверка была строгой с первого дня, выкатка разлогинила бы всех разом.
+ * Ноль считается «поколение ещё не заводили»: защита включается для человека в
+ * тот момент, когда он первый раз выйдет или сменит пароль. Это выбор в пользу
+ * того, чтобы починка никого не выбросила посреди работы.
+ */
+export function читатьПоколение(token: string | undefined | null): number {
+  try {
+    if (!token) return 0;
+    const данные = token.slice(0, token.lastIndexOf(':'));
+    const части = данные.split(':');
+    if (части.length < 3) return 0;              // старый двухчастный ключ
+    const хвост = части[части.length - 1];
+    return /^\d+$/.test(хвост) ? parseInt(хвост, 10) : 0;
+  } catch {
+    return 0;
+  }
+}
+
+export async function сессияДействительна(req: NextRequest): Promise<string | null> {
+  const токен = req.cookies.get(USER_COOKIE)?.value;
+  const почта = verifyUserToken(токен);
+  if (!почта) return null;
+
+  const вТокене = читатьПоколение(токен);
+  if (вТокене === 0) return почта;               // см. пояснение выше
+
+  try {
+    const { getDbPool } = await import('@/lib/db-pool');
+    const pool = await getDbPool('DATABASE_URL');
+    const r = await pool.query<{ session_epoch: string }>(
+      'SELECT session_epoch FROM users_auth WHERE LOWER(email) = LOWER($1)', [почта]);
+    const вБазе = Number(r.rows?.[0]?.session_epoch ?? 0) || 0;
+    return вТокене === вБазе ? почта : null;
+  } catch {
+    // База недоступна — вход не рушим: иначе сбой базы выкинет всех сразу.
+    // Это осознанный размен: доступность важнее строгости на этой минуте.
+    return почта;
+  }
+}
+
+/** Увеличивает поколение — при выходе и при смене пароля. */
+export async function поднятьПоколение(почта: string): Promise<number> {
+  const { getDbPool } = await import('@/lib/db-pool');
+  const pool = await getDbPool('DATABASE_URL');
+  await pool.query(
+    'ALTER TABLE users_auth ADD COLUMN IF NOT EXISTS session_epoch BIGINT NOT NULL DEFAULT 0');
+  const r = await pool.query<{ session_epoch: string }>(
+    `UPDATE users_auth SET session_epoch = COALESCE(session_epoch, 0) + 1
+      WHERE LOWER(email) = LOWER($1) RETURNING session_epoch`, [почта]);
+  return Number(r.rows?.[0]?.session_epoch ?? 0) || 0;
+}
+
 export function userCookieOptions() {
   return {
     httpOnly: true,

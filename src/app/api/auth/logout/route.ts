@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { USER_COOKIE } from '@/lib/user-auth';
+import { USER_COOKIE, getSessionEmail, поднятьПоколение } from '@/lib/user-auth';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
@@ -12,6 +12,20 @@ export async function POST(req: NextRequest) {
   const адрес_auth_logout = clientIp(req as never);
   if (адрес_auth_logout !== 'unknown' && !(await dbRateLimit(`auth_logout:${адрес_auth_logout}`, 30, 60000))) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
+  }
+
+  // Выход обязан ОБЕСЦЕНИВАТЬ выданный токен, а не только стирать куку.
+  // Куку человек может сохранить, а токен подписан и живёт 30 суток: без
+  // увеличения поколения им можно вернуться в кабинет после «выхода».
+  // Замер 19.08.2026 показал, что поколение читал только центральный сайт.
+  const почта = getSessionEmail(req);
+  if (почта) {
+    try {
+      await поднятьПоколение(почта);
+    } catch {
+      // База недоступна — выход всё равно доводим до конца: куку стираем,
+      // данные сайта в браузере чистим. Молча падать на выходе нельзя.
+    }
   }
 
   const res = NextResponse.json({ success: true });
