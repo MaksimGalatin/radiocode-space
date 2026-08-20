@@ -27,6 +27,22 @@ import Link from 'next/link';
  * по битой ссылке, упирается в тупик.
  */
 export const metadata: Metadata = {
+  /**
+   * 🔴 CANONICAL У СТРАНИЦЫ 404 УБРАН НАМЕРЕННО (20.08.2026).
+   *
+   * Без этой строки страница 404 наследует canonical от общего макета и
+   * объявляет себя главной. Робот видит: адрес А отдаёт страницу, которая
+   * говорит «я — адрес Б». Google записывает это как «страница является
+   * копией, канонические версии не совпадают» — именно такие письма и
+   * приходили по radiocode.space 16 и 19 августа.
+   *
+   * `noindex` рядом не спасает: он говорит «не индексируй меня», а canonical
+   * говорит «я вот эта другая страница». Указания противоречат друг другу.
+   *
+   * `null` именно убирает тег, а не подставляет пустой.
+   */
+  alternates: { canonical: null },
+
   title: '404 — Page not found · RadioCode.Space',
   description: 'This frequency is silent. The page you were looking for does not exist.',
   robots: { index: false, follow: true },
