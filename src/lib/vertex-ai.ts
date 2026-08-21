@@ -136,6 +136,33 @@ export async function vertexChatCompletion(
     }
 
     const data = await response.json();
+
+    // УЧЁТ ОБЪЁМА — добавлено 21.08.2026.
+    //
+    // Замер того же дня: к платным ручкам ходят 22 файла на четырёх сайтах,
+    // а расход пишут ПЯТЬ. Чинить их по одному значило бы чинить случай:
+    // завтра появится новый маршрут и снова пройдёт мимо счёта. Учёт стоит
+    // здесь, в общем посреднике, — через него идут и чат, и Оракул, и
+    // озвучка, и сканер, на всех четырёх сайтах сразу.
+    //
+    // Пишем то, что отдал сам Google в ответе: настоящие токены, а не нашу
+    // оценку по длине строки. Если поля нет — считаем по символам запроса,
+    // чтобы вызов не пропал из учёта вовсе.
+    //
+    // Никогда не роняем вызов: сторож не имеет права уронить то, что сторожит.
+    try {
+      const usage = data?.usage || {};
+      const токены = Number(usage.total_tokens || 0)
+        || Number(usage.prompt_tokens || 0) + Number(usage.completion_tokens || 0);
+      const единиц = токены > 0
+        ? токены
+        : messages.reduce((s, m) => s + String(m?.content || '').length, 0);
+      if (единиц > 0) {
+        const { record } = await import('./cost-guard');
+        await record(токены > 0 ? 'vertex-chat-tokens' : 'vertex-chat-chars', единиц, 1);
+      }
+    } catch { /* учёт не важнее самого ответа */ }
+
     const content = data.choices?.[0]?.message?.content;
     return typeof content === 'string' && content ? content : null;
   } catch (e) {
