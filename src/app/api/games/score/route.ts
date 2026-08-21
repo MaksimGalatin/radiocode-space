@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail } from '@/lib/user-auth';
+import { сессияДействительна } from '@/lib/user-auth';
 import { getPool, weekKeyUTC, todayUTC, bumpQuest } from '@/lib/economy';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 const SCORE_GAMES = new Set(['tetris']);
 
 export async function POST(req: NextRequest) {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
   // у каждого экземпляра свой.

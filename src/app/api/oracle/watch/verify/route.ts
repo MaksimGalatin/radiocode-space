@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail } from '@/lib/user-auth';
+import { сессияДействительна } from '@/lib/user-auth';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
@@ -20,7 +20,7 @@ export const dynamic = 'force-dynamic';
 const TARGET = 'https://aifa.works/api/oracle/watch/verify';
 
 async function forward(req: NextRequest, method: 'GET' | 'POST' | 'DELETE') {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   // Ограничение частоты нужно ЗДЕСЬ, а не только на приёмной стороне.

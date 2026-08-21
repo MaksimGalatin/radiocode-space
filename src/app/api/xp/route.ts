@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail } from '@/lib/user-auth';
+import { сессияДействительна } from '@/lib/user-auth';
 import { getPool, creditGalatin, weekKeyUTC, todayUTC, bumpQuest, levelInfo, отложитьGalatin } from '@/lib/economy';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
@@ -9,7 +9,7 @@ const DAILY_CAP = 300; // max XP/day from chatting (anti-farm)
 const LEVELUP_BONUS = 10; // GALATIN per level-up (server-authoritative)
 
 export async function GET(req: NextRequest) {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   try {
     const pool = await getPool();
@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
 
 // Award XP for one AIfa chat turn (server-authoritative, session-based, daily-capped).
 export async function POST(req: NextRequest) {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
   // у каждого экземпляра свой.

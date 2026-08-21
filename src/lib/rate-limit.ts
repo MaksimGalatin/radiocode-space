@@ -14,8 +14,55 @@ type Bucket = { count: number; resetAt: number };
 const store = new Map<string, Bucket>();
 const MAX_KEYS = 20000; // crude memory cap against key explosion
 
-/** Best-effort client IP. Vercel/nginx set x-real-ip (not client-spoofable). */
+/**
+ * Сверка секрета за постоянное время.
+ *
+ * Обычное сравнение строк обрывается на первом несовпавшем знаке, поэтому
+ * время ответа зависит от числа угаданных знаков и секрет подбирается
+ * посимвольно. Владение этим секретом даёт доверие к заголовку с чужим
+ * адресом — то есть подбор стоит того, чтобы его закрыть.
+ *
+ * Модуль объявлен «без зависимостей», поэтому `crypto` берётся мягко: если его
+ * в среде нет (пограничный слой), сравнение откатывается на прежнее поведение
+ * и ничего не ломается.
+ *
+ * Разную длину `timingSafeEqual` сравнивать отказывается, поэтому длина
+ * проверяется отдельно: её утечка безобидна, она и так видна по заголовку.
+ */
+function секретСовпал(пришло: string | null | undefined, ожидается: string | undefined): boolean {
+  if (!ожидается || !пришло) return false;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const crypto = require('crypto') as typeof import('crypto');
+    const a = Buffer.from(пришло, 'utf8');
+    const b = Buffer.from(ожидается, 'utf8');
+    if (a.length !== b.length) return false;
+    return crypto.timingSafeEqual(a, b);
+  } catch {
+    // Среда без node:crypto — ведём себя как прежде, чтобы не сломать работу.
+    return пришло === ожидается;
+  }
+}
+
+/**
+ * Best-effort client IP. Vercel/nginx set x-real-ip (not client-spoofable).
+ *
+ * ВЫРОВНЕНО С ЦЕНТРАЛЬНЫМ 20.08.2026 (раздел 9). Сайты-сёстры пересылают вход
+ * через свой сервер и кладут настоящий адрес человека в `x-aifa-client-ip`.
+ * Приёмником пересылки сегодня работает только центральный, поэтому здесь эта
+ * ветка ничего не меняет — но библиотека обязана быть одинаковой на всех
+ * четырёх сайтах, иначе следующая правка ляжет туда, где основы нет.
+ *
+ * Заголовку верим ТОЛЬКО вместе с общим внутренним секретом: без
+ * `AIFA_INTERNAL_SECRET` в окружении ветка не срабатывает вовсе, и поведение
+ * остаётся ровно таким, каким было до этой правки.
+ */
 export function getClientIp(req: NextRequest): string {
+  const internal = process.env.AIFA_INTERNAL_SECRET || '';
+  const relayed = req.headers.get('x-aifa-client-ip');
+  if (relayed && секретСовпал(req.headers.get('x-aifa-internal'), internal)) {
+    return relayed.split(',')[0].trim() || 'unknown';
+  }
   return (
     req.headers.get('x-real-ip') ||
     req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||

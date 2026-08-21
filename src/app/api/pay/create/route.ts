@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { TIER_AMOUNT, TIER_MONTHLY } from '@/lib/referral';
-import { getSessionEmail } from '@/lib/user-auth';
+import { сессияДействительна } from '@/lib/user-auth';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 export const dynamic = 'force-dynamic';
 
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
   const gotSecret = req.headers.get('x-aifa-internal') || '';
   const internalOk = !!internalSecret && gotSecret.length === internalSecret.length &&
     (await import('crypto')).timingSafeEqual(Buffer.from(gotSecret), Buffer.from(internalSecret));
-  const email = internalOk ? String(b?.email || '').trim().toLowerCase() : getSessionEmail(req);
+  const email = internalOk ? String(b?.email || '').trim().toLowerCase() : await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   const tier = Number(b?.tier || 0);
   if (!(tier in TIER_AMOUNT)) return NextResponse.json({ error: 'bad_request' }, { status: 400 });
@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
 
 // Payment history for the logged-in user.
 export async function GET(req: NextRequest) {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   const url = process.env.SUBMISSIONS_DB_URL;
   if (!url) return NextResponse.json({ error: 'no_db' }, { status: 500 });

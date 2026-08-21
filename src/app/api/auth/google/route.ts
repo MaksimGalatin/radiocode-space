@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { USER_COOKIE, signUserToken, userCookieOptions } from '@/lib/user-auth';
+import { USER_COOKIE, signUserToken, userCookieOptions, currentEpoch } from '@/lib/user-auth';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
@@ -68,6 +68,8 @@ export async function POST(req: NextRequest) {
 
   const email = String(info.email).trim().toLowerCase();
   const res = NextResponse.json({ success: true, email });
-  res.cookies.set(USER_COOKIE, signUserToken(email), userCookieOptions());
+  // Поколение сессии вшивается в токен, иначе «выйти везде» его не отзовёт
+  // (правка 21.08.2026, подробности в lib/user-auth.ts).
+  res.cookies.set(USER_COOKIE, signUserToken(email, undefined, await currentEpoch(email)), userCookieOptions());
   return res;
 }

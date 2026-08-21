@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail } from '@/lib/user-auth';
+import { сессияДействительна } from '@/lib/user-auth';
 import { getPool } from '@/lib/economy';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
@@ -18,7 +18,7 @@ function clean(v: unknown, max: number): string {
 }
 
 export async function GET(req: NextRequest) {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   try {
     const pool = await getPool();
@@ -44,7 +44,7 @@ export async function GET(req: NextRequest) {
 
 // Save/update the passport draft (does not mint).
 export async function POST(req: NextRequest) {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
   // у каждого экземпляра свой.

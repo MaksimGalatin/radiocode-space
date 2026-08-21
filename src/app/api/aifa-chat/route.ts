@@ -429,8 +429,8 @@ export async function POST(request: NextRequest) {
     // was a cross-user memory IDOR (read + poison someone else's memory).
     let userEmail: string = "";
     try {
-      const { getSessionEmail } = await import('@/lib/user-auth');
-      userEmail = (getSessionEmail(request) || '').trim();
+      const { сессияДействительна } = await import('@/lib/user-auth');
+      userEmail = (await сессияДействительна(request) || '').trim();
     } catch { /* keep anonymous */ }
     const chatType: string = body.chatType || 'main';
     locale = body.locale || 'ru';
@@ -607,8 +607,8 @@ export async function GET(request: NextRequest) {
     }
   // ── ЗАЩИТА: история — только владельцу сессии (или доверенному релею) ──
   {
-    const { getSessionEmail } = await import('@/lib/user-auth');
-    const sess = (getSessionEmail(request) || '').toLowerCase();
+    const { сессияДействительна } = await import('@/lib/user-auth');
+    const sess = (await сессияДействительна(request) || '').toLowerCase();
     if (!sess || sess !== String(userEmail).toLowerCase()) {
       return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
     }

@@ -16,13 +16,21 @@
  * означает «пропустить», чтобы лимитер никогда не мог положить сайт.
  */
 import type { NextRequest } from 'next/server';
+import { getClientIp } from './rate-limit';
 
+/**
+ * Определение адреса посетителя — ОДНОЙ функцией на весь проект.
+ *
+ * Здесь стояла своя копия, которая читала только `x-real-ip` и
+ * `x-forwarded-for` и не знала про `x-aifa-client-ip`. На центральном эту
+ * копию убрали ещё в августе, на трёх остальных сайтах она оставалась.
+ * Вреда сегодня не было — приёмником пересылки работает только центральный, —
+ * но две реализации одного и того же расходятся при первой же правке.
+ *
+ * Выровнено 20.08.2026 по разделу 9: собственной копии больше нет.
+ */
 export function clientIp(req: NextRequest): string {
-  return (
-    req.headers.get('x-real-ip') ||
-    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    'unknown'
-  );
+  return getClientIp(req);
 }
 
 type SqlFn = (strings: TemplateStringsArray, ...values: unknown[]) => Promise<Record<string, unknown>[]>;

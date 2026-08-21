@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail } from '@/lib/user-auth';
+import { сессияДействительна } from '@/lib/user-auth';
 import { getPool, creditGalatin, weekKeyUTC, todayUTC, bumpQuest } from '@/lib/economy';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
@@ -12,7 +12,7 @@ const DAILY_REWARD_CAP = 5; // only the first 5 wins per game per day pay GALATI
 const MIN_SECONDS: Record<string, number> = { ttt: 5, checkers: 20, chess: 40, backgammon: 30, tetris: 45 };
 
 export async function POST(req: NextRequest) {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   let body: any = {};
   try { body = await req.json(); } catch {}

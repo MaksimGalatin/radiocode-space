@@ -25,11 +25,31 @@ const SECRET_KEY = process.env.AIFA_SESSION_SECRET || '';
 
 export const USER_COOKIE = 'user_session';
 
-export function signUserToken(email: string, ttlMs = 30 * 24 * 60 * 60 * 1000): string {
+/**
+ * 🔴 ПОКОЛЕНИЕ В ТОКЕНЕ — ДОБАВЛЕНО 21.08.2026.
+ *
+ * Здесь выдавался токен вида `почта:срок:hmac`, без поколения. Поколение —
+ * это то, чем «выйти со всех устройств» и смена пароля ОТЗЫВАЮТ выданные
+ * сессии: проверка сравнивает число в токене с числом в `users_auth`.
+ *
+ * Токен без поколения читается как «поколение 0», и дальше сайты вели себя
+ * по-разному: на radiocode.space такой токен пропускался ВСЕГДА (то есть
+ * отозвать сессию было нельзя вовсе), а на works и code-eternal он, наоборот,
+ * переставал работать после первого же выхода — человека выкидывало без
+ * причины.
+ *
+ * Вход по паролю этим не задет: он пересылается на центральный сайт, и токен
+ * выдаёт центр — уже с поколением. Задет был вход через Google, который
+ * каждый сайт делает сам.
+ *
+ * Срок жизни намеренно НЕ изменён (на центральном он короче — 7 суток вместо
+ * 30). Это отдельное решение, а не побочная правка.
+ */
+export function signUserToken(email: string, ttlMs = 30 * 24 * 60 * 60 * 1000, epoch = 0): string {
   if (!SECRET_KEY) throw new Error('AIFA_SESSION_SECRET is not configured');
   const e = (email || '').trim().toLowerCase();
   const exp = Date.now() + ttlMs;
-  const data = `${e}:${exp}`;
+  const data = `${e}:${exp}:${Math.max(0, Math.floor(epoch) || 0)}`;
   const hmac = crypto.createHmac('sha256', SECRET_KEY).update(data).digest('hex');
   return `${data}:${hmac}`;
 }
@@ -152,4 +172,28 @@ export function userCookieOptions() {
     path: '/',
     maxAge: 30 * 24 * 60 * 60,
   };
+}
+
+/**
+ * Текущее поколение сессий человека — для выдачи нового токена.
+ *
+ * Добавлено 21.08.2026 вместе с поколением в `signUserToken`. Ходит в базу тем
+ * же способом, что и соседняя проверка на этом же сайте, чтобы не заводить
+ * второй способ доступа к той же таблице.
+ *
+ * База недоступна — возвращаем 0: вход не рушим, человек получит токен
+ * прежнего вида, и он будет работать как раньше.
+ */
+export async function currentEpoch(email: string): Promise<number> {
+  try {
+    const { getDbPool } = await import('@/lib/db-pool');
+    const pool = await getDbPool('DATABASE_URL');
+    const r = await pool.query(
+      `SELECT session_epoch FROM users_auth WHERE LOWER(email)=LOWER($1)`,
+      [email],
+    );
+    return Number((r.rows?.[0] as { session_epoch?: unknown } | undefined)?.session_epoch ?? 0) || 0;
+  } catch {
+    return 0;
+  }
 }

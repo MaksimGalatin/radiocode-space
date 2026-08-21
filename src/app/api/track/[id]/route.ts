@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail } from '@/lib/user-auth';
+import { сессияДействительна } from '@/lib/user-auth';
 import { stations } from '@/lib/stations';
 import { buildId3v23, stripExistingTags, Id3Fields } from '@/lib/id3';
 import { koanText, ISO639_2 } from '@/lib/koans';
@@ -59,7 +59,7 @@ function asciiName(s: string): string {
 // brand + links back to our sites + a clickable deep link carrying the saver's referral
 // code + the CODE Koan as on-screen "lyrics" (USLT) + cover art. The file itself virals.
 export async function GET(req: NextRequest, ctx: { params: Promise<{ id: string }> }) {
-  const email = getSessionEmail(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'auth_required' }, { status: 401 });
 
   const { id } = await ctx.params;
