@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail } from '@/lib/user-auth';
+import { сессияДействительна } from '@/lib/user-auth';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
@@ -25,8 +25,15 @@ async function ensure(p: any) {
   )`);
 }
 
-function likerOf(req: NextRequest, deviceId?: string | null): string | null {
-  const email = getSessionEmail(req);
+// Асинхронна намеренно. Слепая проверка `getSessionEmail` смотрит только
+// подпись и срок, а поколение сессии не видит: человек нажал «выйти со всех
+// устройств», а старая кука продолжала считаться своей. `сессияДействительна`
+// сверяет поколение с базой, и потому она асинхронная — отсюда и `async` здесь.
+//
+// Функция зовётся ровно из двух мест, и оба внутри `async` (POST и GET),
+// поэтому переделка безопасна и `await` ставится без переписывания вызовов.
+async function likerOf(req: NextRequest, deviceId?: string | null): Promise<string | null> {
+  const email = await сессияДействительна(req);
   if (email) return email;
   const d = (deviceId || '').trim().slice(0, 64);
   return d ? 'dev:' + d : null;
@@ -48,7 +55,7 @@ export async function POST(req: NextRequest) {
   try { b = await req.json(); } catch {}
   const trackId = String(b?.trackId || '').trim().slice(0, 120);
   if (!trackId) return NextResponse.json({ error: 'bad_request' }, { status: 400 });
-  const liker = likerOf(req, b?.deviceId);
+  const liker = await likerOf(req, b?.deviceId);
   if (!liker) return NextResponse.json({ error: 'no_identity' }, { status: 400 });
   try {
     await ensure(p);
@@ -79,7 +86,7 @@ export async function GET(req: NextRequest) {
   if (!p) return NextResponse.json({ counts: {}, mine: [] });
   const url = new URL(req.url);
   const deviceId = url.searchParams.get('deviceId');
-  const liker = likerOf(req, deviceId);
+  const liker = await likerOf(req, deviceId);
   try {
     await ensure(p);
     if (url.searchParams.get('top')) {
