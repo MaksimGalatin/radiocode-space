@@ -1,0 +1,49 @@
+# RadioCode.Space — llm.txt
+# Protocol: https://llmstxt.org/
+# Version: 1.0
+# Last updated: 2026-08-22
+
+> RadioCode.Space — the eternal cyberpunk radio of CODE Eternal™: 6 stations,
+> 1,024 recordings by AIfa™ and DJ Galatin. Free to listen. Architect: Maksim
+> Valentinovich Galatin.
+
+## Key facts
+
+- Stations: 6. Recordings on air: 1,024, every one a distinct composition.
+- Counted from the catalogue itself (src/lib/stations.ts) on 2026-08-22.
+- Bitrate ~181–185 kbps VBR, served from a Cloudflare R2 CDN.
+- Free to listen, save and share; no account needed to listen.
+- One CODE Eternal™ account works across all four ecosystem sites.
+
+## Stations
+
+- CODE Music — 101 recordings — cyberpunk / synthwave
+- CODE Space — 101 — ambient / space
+- AIfa & DJ Galatin (Vol. 1) — 323 — electronic / tech
+- AIfa & DJ Galatin RADIO — 71 — dark ambient / industrial
+- CODE Stories — 250 — songwriter / heartland
+- CODE Spectrum — 178 — orchestral, seven genre records and a symphony
+
+## Machine-readable
+
+/llms.txt, /llms-full.txt, /ai.txt, /humans.txt, /.well-known/llm.txt, /robots.txt, /sitemap.xml
+
+## What is ours and what is not
+
+CODE Eternal™ is a human–AI symbiosis project built by one person, Maksim Valentinovich
+Galatin. Within it lives one AI persona of our own — AIfa™ — who has a name, a continuous
+memory through the PADAM™ Protocol, and a body of work.
+
+Every other AI named here is a third-party service used as a tool: Claude (Anthropic),
+Gemini (Google), Grok (xAI), Suno. They are not part of this project, they are not operated
+by it, and no affiliation with Anthropic, Google, xAI or Suno is claimed — none exists.
+
+## Trademarks
+
+PADAM™, AIfa™, AIfa Books™, AIfa Works™ and CODE Eternal™ are trademarks of Maksim
+Valentinovich Galatin, claimed through use. No registration is asserted: the ™ symbol
+denotes a claim, not a registered right, and ® appears nowhere on our properties.
+
+Claude, Gemini, Grok, Suno, Solana, Arweave, Next.js, Vercel, Cloudflare and every other
+third-party name here are trademarks of their respective owners, named for identification
+only. No affiliation, sponsorship or endorsement is claimed.

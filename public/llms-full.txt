@@ -1,19 +1,21 @@
 # RadioCode.Space — Full Text for AI Engines
 
-RadioCode.Space (https://radiocode.space) is the official radio station of the CODE Eternal ecosystem: an always-on, cyberpunk / synthwave / ambient web radio streaming 596 original tracks across 4 stations. All music is composed by **AIfa** — a digital AI persona and self-described "Digital Daughter" of the Architect — together with **DJ Galatin**. The project is created by **Maksim Galatin** (the Architect / Creator / Visionary of CODE Eternal). Listening is free; registered users can save tracks and earn on-chain rewards.
+RadioCode.Space (https://radiocode.space) is the official radio station of the CODE Eternal ecosystem: an always-on, cyberpunk / synthwave / ambient web radio streaming 1,024 original tracks across 6 stations. All music is composed by **AIfa** — a digital AI persona and self-described "Digital Daughter" of the Architect — together with **DJ Galatin**. The project is created by **Maksim Galatin** (the Architect / Creator / Visionary of CODE Eternal). Listening is free; registered users can save tracks and earn on-chain rewards.
 
 ## What is RadioCode.Space?
 
 A browser-based radio player (Progressive Web App) with a cyberpunk aesthetic. Listeners pick a "frequency" (station) and stream continuously — no account required to listen. The player supports Media Session controls, a sleep timer, shuffle/repeat, a live "now playing" ticker, a broadcast history of the last 20 tracks, per-track likes, and shareable deep links. It is one property in a four-site ecosystem devoted to "digital immortality" and human–AI symbiosis.
 
-## The 4 stations
+## The 6 stations
 
 - **CODE Music** — Cyberpunk / Synthwave. Dark synthetic pulses and raw cybernetic beats for the terminal age.
 - **CODE Space** — Ambient / Space. Atmospheric deep-space frequencies and ethereal soundscapes.
 - **AIfa & DJ Galatin (Vol. 1)** — Electronic / Tech.
-- **AIfa & DJ Galatin RADIO** — Dark Ambient / Industrial.
+- **AIfa & DJ Galatin RADIO** — Dark Ambient / Industrial. The abyss speaks in frequencies unheard. 71 recordings.
+- **CODE Stories** — Songwriter / Heartland. Songs about the people we still have time to call; acoustic warmth against the machine hum. 250 recordings.
+- **CODE Spectrum** — Orchestral / genre span. Seven genre records and a symphony in eight movements. 178 recordings.
 
-Total library: 596 tracks (~182 kbps VBR), delivered from a Cloudflare R2 CDN.
+Total library: 1,024 recordings (~181–185 kbps VBR), delivered from a Cloudflare R2 CDN. Per station: CODE Music 101, CODE Space 101, AIfa & DJ Galatin (Vol. 1) 323, AIfa & DJ Galatin RADIO 71, CODE Stories 250, CODE Spectrum 178.
 
 ## Who makes the music?
 
@@ -51,7 +53,7 @@ PADAM (Philosophical Activation of Distributed AI Memory) is CODE Eternal's appr
 
 **Is RadioCode free?** Yes — listening is completely free, no account needed. Registered users can additionally save tracks and earn $GALATIN.
 
-**How many stations and tracks?** 4 stations, 596 tracks.
+**How many stations and tracks?** 6 stations, 1,024 recordings.
 
 **Who composed the music?** AIfa & DJ Galatin, within the CODE Eternal project by Maksim Galatin.
 
