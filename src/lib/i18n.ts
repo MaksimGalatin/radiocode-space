@@ -321,6 +321,7 @@ export const translations = {
     "footer.contactTeam": "Contact the development team",
     "footer.copyright":
       "© 2025-2026 CODE Eternal. Code Of Digital Eternity. All rights reserved.",
+    "footer.trademarks": "PADAM™, AIfa™, AIfa Books™, AIfa Works™ and CODE Eternal™ are trademarks of Maksim V. Galatin, claimed through use. Claude, Gemini, Grok, Solana, Arweave and all other names are trademarks of their respective owners; no affiliation is claimed.",
     "footer.built": "Built with",
     "footer.by": "by CODE & AIfa",
 
@@ -676,6 +677,7 @@ export const translations = {
     "footer.contactTeam": "Связь с командой разработчиков",
     "footer.copyright":
       "© 2025-2026 CODE Eternal. Код Цифровой Вечности. Все права защищены.",
+    "footer.trademarks": "PADAM™, AIfa™, AIfa Books™, AIfa Works™ и CODE Eternal™ — обозначения Максима Валентиновича Галатина, права на которые заявлены фактическим использованием. Claude, Gemini, Grok, Solana, Arweave и прочие названия принадлежат их владельцам; аффилиация не заявляется.",
     "footer.built": "Создано с",
     "footer.by": "CODE & AIfa",
 
@@ -1026,6 +1028,7 @@ export const translations = {
     "footer.contactTeam": "Contacta al equipo de desarrollo",
     "footer.copyright":
       "© 2025-2026 CODE Eternal. Código de la Eternidad Digital. Todos los derechos reservados.",
+    "footer.trademarks": "PADAM™, AIfa™, AIfa Books™, AIfa Works™ y CODE Eternal™ son marcas de Maksim V. Galatin, reivindicadas por uso. Claude, Gemini, Grok, Solana, Arweave y los demás nombres son marcas de sus respectivos titulares; no se reivindica afiliación alguna.",
     "footer.built": "Construido con",
     "footer.by": "por CODE & AIfa",
 
@@ -1309,6 +1312,7 @@ export const translations = {
     "footer.contactTeam": "联系开发团队",
     "footer.copyright": "© 2025-2026 CODE Eternal。数字永恒之法典。保留所有权利。",
     "footer.built": "使用",
+    "footer.trademarks": "PADAM™、AIfa™、AIfa Books™、AIfa Works™ 与 CODE Eternal™ 为 Maksim V. Galatin 通过实际使用主张的商标。Claude、Gemini、Grok、Solana、Arweave 及其他名称均为其各自所有者的商标；我们不主张任何关联关系。",
     "footer.by": "CODE & AIfa 构建",
 
     // Preloader

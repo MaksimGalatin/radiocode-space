@@ -79,6 +79,13 @@ const S = {
   statVbrAvg:     { en: 'VBR avg',                            ru: 'VBR средн.',                           es: 'VBR prom.',                             zh: 'VBR 平均' },
   statSpectrum:   { en: 'Spectrum',                           ru: 'Спектр',                               es: 'Espectro',                              zh: '频谱' },
   // footer
+  // ЗНАКИ: свои с TM, чужие названы чужими. Добавлено 22.08.2026.
+  trademarks: {
+    en: 'PADAM™, AIfa™, AIfa Books™, AIfa Works™ and CODE Eternal™ are trademarks of Maksim V. Galatin, claimed through use. Claude, Gemini, Grok, Solana, Arweave and all other names are trademarks of their respective owners; no affiliation is claimed.',
+    ru: 'PADAM™, AIfa™, AIfa Books™, AIfa Works™ и CODE Eternal™ — обозначения Максима Валентиновича Галатина, права на которые заявлены фактическим использованием. Claude, Gemini, Grok, Solana, Arweave и прочие названия принадлежат их владельцам; аффилиация не заявляется.',
+    es: 'PADAM™, AIfa™, AIfa Books™, AIfa Works™ y CODE Eternal™ son marcas de Maksim V. Galatin, reivindicadas por uso. Claude, Gemini, Grok, Solana, Arweave y los demás nombres son marcas de sus respectivos titulares; no se reivindica afiliación alguna.',
+    zh: 'PADAM™、AIfa™、AIfa Books™、AIfa Works™ 与 CODE Eternal™ 为 Maksim V. Galatin 通过实际使用主张的商标。Claude、Gemini、Grok、Solana、Arweave 及其他名称均为其各自所有者的商标；我们不主张任何关联关系。',
+  },
   musicBy:        { en: 'Music by',                           ru: 'Музыка:',                              es: 'Música de',                             zh: '音乐:' },
   linkWhitepaper: { en: 'Whitepaper',                         ru: 'Whitepaper',                           es: 'Whitepaper',                            zh: '白皮书' },
   linkRoadmap:    { en: 'Roadmap',                            ru: 'Дорожная карта',                       es: 'Hoja de ruta',                          zh: '路线图' },
