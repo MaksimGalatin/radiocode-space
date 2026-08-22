@@ -72,7 +72,7 @@ export function renderTextWithMarkdown(text: string) {
 }
 
 export interface Block {
-  type: 'h1' | 'h2' | 'h3' | 'blockquote' | 'code' | 'ul' | 'ol' | 'table' | 'hr' | 'p';
+  type: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote' | 'code' | 'ul' | 'ol' | 'table' | 'hr' | 'p';
   lines: string[];
   lang?: string;
 }
@@ -137,6 +137,28 @@ export function parseMarkdownToBlocks(markdown: string): Block[] {
     }
 
     // Headings
+    // Порядок важен: длинные образцы проверяются ПЕРВЫМИ. '#### X' не совпадает
+    // с '# ', '## ' и '### ', и до появления этих трёх веток такая строка
+    // падала в обычный абзац — читатель видел решётки прямо в тексте.
+    // Замер 22.08.2026: 36 пар «статья+язык», девять статей, до 38 вхождений.
+    if (trimmed.startsWith('###### ')) {
+      if (currentBlock) blocks.push(currentBlock);
+      blocks.push({ type: 'h6', lines: [trimmed.substring(7).trim()] });
+      currentBlock = null;
+      continue;
+    }
+    if (trimmed.startsWith('##### ')) {
+      if (currentBlock) blocks.push(currentBlock);
+      blocks.push({ type: 'h5', lines: [trimmed.substring(6).trim()] });
+      currentBlock = null;
+      continue;
+    }
+    if (trimmed.startsWith('#### ')) {
+      if (currentBlock) blocks.push(currentBlock);
+      blocks.push({ type: 'h4', lines: [trimmed.substring(5).trim()] });
+      currentBlock = null;
+      continue;
+    }
     if (trimmed.startsWith('# ')) {
       if (currentBlock) blocks.push(currentBlock);
       blocks.push({ type: 'h1', lines: [trimmed.substring(2).trim()] });
@@ -231,6 +253,24 @@ export function renderMarkdownToReact(content: string) {
           <h3 key={idx} className="text-lg font-semibold text-gray-800 dark:text-zinc-300 mt-5 mb-2">
             {renderTextWithMarkdown(block.lines[0])}
           </h3>
+        );
+      case 'h4':
+        return (
+          <h4 key={idx} className="text-base font-semibold text-gray-800 dark:text-zinc-300 mt-4 mb-2">
+            {renderTextWithMarkdown(block.lines[0])}
+          </h4>
+        );
+      case 'h5':
+        return (
+          <h5 key={idx} className="text-base font-medium text-gray-700 dark:text-zinc-400 mt-4 mb-1">
+            {renderTextWithMarkdown(block.lines[0])}
+          </h5>
+        );
+      case 'h6':
+        return (
+          <h6 key={idx} className="text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-zinc-400 mt-4 mb-1">
+            {renderTextWithMarkdown(block.lines[0])}
+          </h6>
         );
       case 'hr':
         return <hr key={idx} className="border-gray-200 dark:border-white/5 my-6" />;
