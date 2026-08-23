@@ -231,7 +231,13 @@ export function middleware(req: NextRequest) {
   }
 
   const метка = req.nextUrl.searchParams.get('lang');
-  headers.set('x-locale', ['en', 'ru', 'es', 'zh'].includes(метка || '') ? (метка as string) : 'en');
+  const cookieLocale = req.cookies.get('locale')?.value;
+  const loc = ['en', 'ru', 'es', 'zh'].includes(метка || '')
+    ? (метка as string)
+    : ['en', 'ru', 'es', 'zh'].includes(cookieLocale || '')
+    ? (cookieLocale as string)
+    : 'en';
+  headers.set('x-locale', loc);
   headers.set('x-pathname', req.nextUrl.pathname);
 
   const res = NextResponse.next({ request: { headers } });

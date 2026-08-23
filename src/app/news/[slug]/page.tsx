@@ -194,7 +194,7 @@ export default async function NewsArticlePage(
 
   return (
     <main className="min-h-screen bg-[#050507] text-[#E8E8F0] pt-16 pb-24">
-      <div className="max-w-3xl mx-auto px-6">
+      <div className="max-w-3xl lg:max-w-[1400px] mx-auto px-6">
         <Link
           href="/news"
           className="inline-flex items-center gap-2 text-[13px] font-mono tracking-wider text-[#8B8BA8] hover:text-[#00F0FF] transition-colors mb-10"
