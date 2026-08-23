@@ -90,6 +90,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,
+      // Пометки добавлены 22.08.2026 по правилу, объявленному в шапке этого
+      // файла: ставим их там, где перевод ДЕЙСТВИТЕЛЬНО отдаётся с сервера.
+      // Замер того же дня: /ru/ambassador — 1826 знаков кириллицы,
+      // /es/ambassador — испанские слова, /zh/ambassador — 672 иероглифа.
+      // Без пометки поисковик узнавал о переводах только дойдя до самой
+      // страницы, тогда как карта связывает адреса в группу сразу.
+      alternates: { languages: языковые('/ambassador') },
     },
     {
       // Глоссарий на 28 терминов. Страница /glossary есть на всех четырёх
@@ -101,6 +108,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.8,
+      // То же основание, что и у /ambassador. Замер 22.08.2026:
+      // /ru/glossary — 19 693 знака кириллицы, /zh/glossary — 6652 иероглифа,
+      // /es/glossary — испанский. Перевод настоящий, значит пометка честная.
+      alternates: { languages: языковые('/glossary') },
     },
     // Лента новостей и все вышедшие статьи. До появления раздела на этом сайте
     // новостей не было вовсе — /news отвечал 404, — и в карте их, разумеется,

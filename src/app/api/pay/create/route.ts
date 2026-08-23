@@ -1,66 +1,68 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { TIER_AMOUNT, TIER_MONTHLY } from '@/lib/referral';
 import { сессияДействительна } from '@/lib/user-auth';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 export const dynamic = 'force-dynamic';
 
-const BASE = 'https://api.nowpayments.io/v1';
-const DEFAULT_SITE = 'https://www.aifa.digital';
-const ALLOWED_SITES = new Set(['https://www.aifa.digital','https://aifa.digital','https://www.codeofdigitaleternity.com','https://codeofdigitaleternity.com','https://aifa.works','https://radiocode.space','https://www.radiocode.space']);
+// ОПЛАТА ИДЁТ ЧЕРЕЗ ЕДИНЫЙ ПЛАТЁЖНЫЙ УЗЕЛ — переведено 22.08.2026.
+//
+// Было: этот файл сам ходил в NOWPayments, а значит на radiocode.space должен
+// был лежать `NOWPAYMENTS_API_KEY`. Ключ был развёрнут на большем числе
+// площадок, чем нужно: четыре сайта вместо одного. Каждая лишняя площадка —
+// это ещё одно место, откуда ключ может утечь, и ещё одно, которое придётся
+// обновлять при отзыве.
+//
+// Стало: как на central и works — проверяем СВОЮ сессию, релеим запрос на узел
+// внутренним секретом. Ключ NOWPayments остаётся ровно в одном месте.
+// Замер до правки: `NOWPAYMENTS_API_KEY` встречался в radiocode-space ровно в
+// одном файле — в этом. После правки — ни в одном.
+//
+// Возврат после оплаты. Узел ставит `success_url` по полю `site`, но принимает
+// его только из своего белого списка. Поэтому 22.08 в списке узла
+// (`code-eternal/web/src/app/api/pay/create/route.ts`) добавлены оба написания
+// radiocode.space — иначе человек, заплативший отсюда, вернулся бы на
+// aifa.digital. Порядок правок был именно такой: сначала узел, потом эта.
+//
+// Колбэк оплаты (IPN) сюда не приходит и не должен: `NOWPAYMENTS_IPN_SECRET`
+// лежит на узле, здесь его нет, и уведомление было бы отвергнуто.
+const PAY_HUB = 'https://www.aifa.digital/api/pay/create';
+const SITE = 'https://radiocode.space';
 
-// Create a NOWPayments hosted invoice for a tier purchase — for the logged-in
-// user only. Amount always comes from the server-side TIER_AMOUNT table.
 export async function POST(req: NextRequest) {
-  // Счёт в базе: создание платежа — денежная ручка, а счётчик в памяти
-  // обнуляется каждой выкладкой и у каждого экземпляра свой.
-  const адрес_paycreate = clientIp(req as never);
-  if (адрес_paycreate !== 'unknown' && !(await dbRateLimit(`paycreate:${адрес_paycreate}`, 10, 60 * 60_000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
-  let b: any = {}; try { b = await req.json(); } catch {}
-  // Внутренний релей с сестринских сайтов (central/works): они уже проверили
-  // сессию у себя и передают email + подписанный секрет. Иначе — своя сессия.
-  const internalSecret = process.env.AIFA_INTERNAL_SECRET || '';
-  const gotSecret = req.headers.get('x-aifa-internal') || '';
-  const internalOk = !!internalSecret && gotSecret.length === internalSecret.length &&
-    (await import('crypto')).timingSafeEqual(Buffer.from(gotSecret), Buffer.from(internalSecret));
-  const email = internalOk ? String(b?.email || '').trim().toLowerCase() : await сессияДействительна(req);
+  const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
+
+  // Счёт в базе, а не в памяти: создание платежа — денежная ручка, а память
+  // процесса на Vercel своя у каждого экземпляра и обнуляется при выкладке.
+  // Проверка стояла здесь и до правки — сохранена как была.
+  const адрес_paycreate = clientIp(req as never);
+  if (адрес_paycreate !== 'unknown' && !(await dbRateLimit(`paycreate:${адрес_paycreate}`, 10, 60 * 60_000))) {
+    return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  }
+
+  let b: any = {}; try { b = await req.json(); } catch {}
   const tier = Number(b?.tier || 0);
-  if (!(tier in TIER_AMOUNT)) return NextResponse.json({ error: 'bad_request' }, { status: 400 });
-  const isRenewal = String(b?.kind || '') === 'renewal' && tier in TIER_MONTHLY;
-  const amount = isRenewal ? TIER_MONTHLY[tier] : TIER_AMOUNT[tier];
-  const apiKey = process.env.NOWPAYMENTS_API_KEY;
-  const url = process.env.SUBMISSIONS_DB_URL;
-  if (!apiKey || !url) return NextResponse.json({ error: 'not_configured' }, { status: 500 });
-  const orderId = `AIFA-T${tier}${isRenewal ? 'R' : ''}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  // Намерение «продление» пропускаем на узел как есть: сумму по нему считает
+  // узел из своей таблицы, здесь никаких сумм больше нет и быть не должно.
+  const kind = b?.kind === 'renewal' ? 'renewal' : undefined;
+
+  const secret = process.env.AIFA_INTERNAL_SECRET || '';
+  if (!secret) return NextResponse.json({ error: 'not_configured' }, { status: 500 });
+
   try {
-    const { Pool } = await import('@neondatabase/serverless');
-    const pool = new Pool({ connectionString: url });
-    const reqSite = String(b?.site || '');
-    const SITE = ALLOWED_SITES.has(reqSite) ? reqSite : DEFAULT_SITE;
-    await pool.query(`INSERT INTO pay_orders(order_id,email,tier,amount,status) VALUES($1,$2,$3,$4,'pending')`, [orderId, email, tier, amount]);
-    const inv = await fetch(`${BASE}/invoice`, {
+    const r = await fetch(PAY_HUB, {
       method: 'POST',
-      headers: { 'x-api-key': apiKey, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        price_amount: amount, price_currency: 'usd', order_id: orderId,
-        order_description: `AIfa CODE tier ${tier}${isRenewal ? ' (monthly renewal)' : ''}`,
-        // ВАЖНО: колбэк оплаты ВСЕГДА идёт на платёжный узел (здесь лежит
-        // NOWPAYMENTS_IPN_SECRET). На сайтах-сёстрах его нет — они отвергли бы
-        // уведомление, и оплаченный тариф не активировался бы.
-        ipn_callback_url: `${DEFAULT_SITE}/api/pay/ipn`,
-        // А возврат пользователя — на тот сайт, откуда он платил.
-        success_url: `${SITE}/cabinet?paid=1`, cancel_url: `${SITE}/cabinet?paid=0`,
-      }),
+      headers: { 'Content-Type': 'application/json', 'x-aifa-internal': secret },
+      body: JSON.stringify({ tier, email, site: SITE, kind }),
+      signal: AbortSignal.timeout(20000),
     });
-    if (!inv.ok) { await pool.end(); console.error('[pay/create] invoice_failed', await inv.text()); return NextResponse.json({ error: 'invoice_failed' }, { status: 502 }); }
-    const j: any = await inv.json();
-    await pool.query(`UPDATE pay_orders SET np_id=$2 WHERE order_id=$1`, [orderId, String(j.id || '')]);
-    await pool.end();
-    return NextResponse.json({ ok: true, invoice_url: j.invoice_url, order_id: orderId });
-  } catch (e) { console.error('[pay/create]', e); return NextResponse.json({ error: 'db_error' }, { status: 500 }); }
+    const j: any = await r.json().catch(() => ({}));
+    if (r.ok && j.invoice_url) return NextResponse.json({ ok: true, invoice_url: j.invoice_url, order_id: j.order_id });
+    return NextResponse.json({ error: j.error || 'invoice_failed' }, { status: 502 });
+  } catch (e) { console.error('[pay/create relay]', e); return NextResponse.json({ error: 'upstream_unavailable' }, { status: 502 }); }
 }
 
-// Payment history for the logged-in user.
+// История платежей — из общей БД, по своей сессии. Не менялась: она читает
+// таблицу напрямую и к NOWPayments не ходит.
 export async function GET(req: NextRequest) {
   const email = await сессияДействительна(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
