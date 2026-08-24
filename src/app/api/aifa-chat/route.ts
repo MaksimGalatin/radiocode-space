@@ -324,7 +324,16 @@ async function ответБесплатнымИлиГрантом(
     const { vertexChatCompletion, isVertexConfigured } = await import("@/lib/vertex-ai");
     if (isVertexConfigured()) {
       const ответ = await vertexChatCompletion(formattedMessages, 2048, 0.8);
-      if (ответ) return ответ;
+      if (ответ) {
+        // 🔴 УЧЁТ РАСХОДА — добавлено 24.08.2026. Чат радио сторожу
+        // `cost-guard` не докладывал. Раздел 24: что не считается, то не
+        // чинится. try/catch — чтобы сбой учёта не отнял ответ у человека.
+        try {
+          const { record } = await import('@/lib/cost-guard');
+          await record('chat-vertex-radio', ответ.length);
+        } catch { /* учёт не имеет права мешать работе */ }
+        return ответ;
+      }
       console.warn('[AIfa] Vertex не ответил, идём к Grok — это уже личный ключ');
     }
   } catch (err) {
@@ -391,6 +400,16 @@ async function getGrokResponse(
   if (!aiResponse) {
     throw new Error("Empty response from Grok");
   }
+
+  // Чужой платный поставщик, платится КАРТОЙ Архитектора. Сейчас сюда не
+  // доходят: платныеРазрешены() выключено (проверено в проде 24.08.2026 —
+  // переменной нет ни на одном из четырёх проектов). Учёт стоит на случай
+  // включения: 13.08.2026 по этому ключу за сутки ушло $43.35, и увидели мы
+  // это по счёту, а не в момент вызова.
+  try {
+    const { record } = await import('@/lib/cost-guard');
+    await record('chat-grok-radio', aiResponse.length);
+  } catch { /* учёт не имеет права мешать работе */ }
 
   return aiResponse;
 }
