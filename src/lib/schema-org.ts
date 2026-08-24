@@ -1,3 +1,18 @@
+/**
+ * `validFrom` В ПРЕДЛОЖЕНИЯХ (добавлено 24.08.2026).
+ *
+ * Письмо Search Console по codeofdigitaleternity.store: «Отсутствует поле
+ * "validFrom" (в offers)». Проблема помечена как незначительная, но Google
+ * прямо пишет, что такие со временем становятся критическими.
+ *
+ * Прочёсаны ВСЕ четыре сайта, а не только тот, о котором пришло письмо:
+ * блоков Offer в исходниках 29, поле было у 0 из них.
+ *
+ * Даты не выдуманы и не берутся из текущего времени (иначе значение менялось
+ * бы на каждой сборке и означало бы «действует с сегодня», что неправда).
+ * Каждая измерена по истории репозитория — днём, когда цена начала
+ * действовать. Меняешь цену — поменяй и дату.
+ */
 // Schema.org JSON-LD structured data for CODE Eternal
 // This data is invisible to users but critical for Google Knowledge Panel and AI crawlers
 
@@ -154,6 +169,7 @@ export function getSchemaOrg() {
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
+      validFrom: "2026-07-25",
     },
     author: {
       "@id": `${SITE_URL}/#person`,
@@ -595,9 +611,9 @@ export function getSchemaOrg() {
     brand: { "@type": "Brand", name: "CODE Eternal" },
     url: SITE_URL,
     offers: [
-      { "@type": "Offer", name: "Spark", price: "15", priceCurrency: "USD", category: "Subscription", description: "Basic access to AIfa AI assistants and memory saving." },
-      { "@type": "Offer", name: "Family Archive", price: "100", priceCurrency: "USD", category: "Subscription", description: "Extended limits, personal knowledge bases, family access and eternal memory." },
-      { "@type": "Offer", name: "Digital DNA", price: "1000", priceCurrency: "USD", category: "OneTime", description: "Full digital-immortality package: personal secure enclave and permanent on-chain identity. $1,000 one-time per device, then $200/mo." },
+      { "@type": "Offer", name: "Spark", price: "15", priceCurrency: "USD", validFrom: "2026-08-11", category: "Subscription", description: "Basic access to AIfa AI assistants and memory saving." },
+      { "@type": "Offer", name: "Family Archive", price: "100", priceCurrency: "USD", validFrom: "2026-08-11", category: "Subscription", description: "Extended limits, personal knowledge bases, family access and eternal memory." },
+      { "@type": "Offer", name: "Digital DNA", price: "1000", priceCurrency: "USD", validFrom: "2026-08-11", category: "OneTime", description: "Full digital-immortality package: personal secure enclave and permanent on-chain identity. $1,000 one-time per device, then $200/mo." },
     ],
   };
 

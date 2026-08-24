@@ -1,4 +1,19 @@
 /**
+ * `validFrom` В ПРЕДЛОЖЕНИЯХ (добавлено 24.08.2026).
+ *
+ * Письмо Search Console по codeofdigitaleternity.store: «Отсутствует поле
+ * "validFrom" (в offers)». Проблема помечена как незначительная, но Google
+ * прямо пишет, что такие со временем становятся критическими.
+ *
+ * Прочёсаны ВСЕ четыре сайта, а не только тот, о котором пришло письмо:
+ * блоков Offer в исходниках 29, поле было у 0 из них.
+ *
+ * Даты не выдуманы и не берутся из текущего времени (иначе значение менялось
+ * бы на каждой сборке и означало бы «действует с сегодня», что неправда).
+ * Каждая измерена по истории репозитория — днём, когда цена начала
+ * действовать. Меняешь цену — поменяй и дату.
+ */
+/**
  * РАЗМЕТКА ТАРИФОВ ДЛЯ ПОИСКОВИКОВ.
  *
  * Google и Bing показывают цену прямо в выдаче, если тариф размечен как Product
@@ -58,6 +73,7 @@ export function разметкаТарифов(адресСайта: string, я�
                 '@type': 'Offer',
                 price: String(т.разово),
                 priceCurrency: 'USD',
+                validFrom: '2026-08-11',
                 availability: 'https://schema.org/InStock',
                 seller: ПРОДАВЕЦ,
                 url: `${адресСайта}/#pricing`,
@@ -67,6 +83,7 @@ export function разметкаТарифов(адресСайта: string, я�
                 '@type': 'Offer',
                 price: String(т.вМесяц),
                 priceCurrency: 'USD',
+                validFrom: '2026-08-11',
                 availability: 'https://schema.org/InStock',
                 seller: ПРОДАВЕЦ,
                 url: `${адресСайта}/#pricing`,
@@ -84,6 +101,7 @@ export function разметкаТарифов(адресСайта: string, я�
               '@type': 'Offer',
               price: String(т.вМесяц),
               priceCurrency: 'USD',
+              validFrom: '2026-08-11',
               availability: 'https://schema.org/InStock',
               seller: ПРОДАВЕЦ,
               url: `${адресСайта}/#pricing`,
