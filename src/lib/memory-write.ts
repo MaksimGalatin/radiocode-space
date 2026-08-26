@@ -175,8 +175,29 @@ export async function appendVerbatim(
       // уже стоило 227 нечитаемых реплик из 665.
       const sealed = prev;
       await pool.query(
-        `INSERT INTO chat_memory_chunks(email,chat_type,chunk_index,ciphertext) VALUES($1,$2,$3,$4)
-         ON CONFLICT(email,chat_type,chunk_index) DO NOTHING`,
+        /*
+        * ЗАЩИТА ОТ ПОВТОРА ПО СОДЕРЖИМОМУ, а не только по номеру.
+        *
+        * НАЙДЕНО ЗАМЕРОМ 26.08.2026: из 17 архивных кусков 15 разных —
+        * у двух человек куски 1 и 2 оказались ПОБАЙТОВО одинаковыми,
+        * и каждый уехал в блокчейн отдельным адресом. Оттуда не
+        * изымается ничего: повтор там теперь навсегда, и при сборке
+        * архива этот отрезок разговора читается дважды.
+        *
+        * Как выходит: две записи, идущие одновременно, видят один и тот
+        * же `прежнее`, обе решают запечатать, и MAX(chunk_index)+1 даёт
+        * им РАЗНЫЕ номера — 1 и 2. Прежняя защита ловила совпадение
+        * номера и такой случай пропускала.
+        *
+        * Сверяем по md5, а не по всему тексту: куски бывают под сто
+        * килобайт, и сравнивать их целиком на каждой записи дорого.
+        */
+        `INSERT INTO chat_memory_chunks(email,chat_type,chunk_index,ciphertext)
+        SELECT $1,$2,$3,$4
+        WHERE NOT EXISTS (
+        SELECT 1 FROM chat_memory_chunks
+        WHERE email=$1 AND chat_type=$2 AND md5(ciphertext)=md5($4::text))
+        ON CONFLICT(email,chat_type,chunk_index) DO NOTHING`,
         [em, тип, nextIdx, sealed]);
       combined = entry;
     }
