@@ -163,3 +163,86 @@ export async function decryptForUserTagged(email: string, v: string): Promise<st
   return decryptForUser(email, помеченЛичнымКлючом(v) ? v.slice(МЕТКА_ЛИЧНОГО_КЛЮЧА.length) : v);
 }
 
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ЗАБЫТЬ ОДИН ДИАЛОГ — не всю память.
+//
+// Требование Архитектора 25.08.2026: «каждый диалог шифруется отдельно при
+// выгрузке в блокчейн, чтобы можно было удалить ОДИН диалог стерев его ключ,
+// а не всю память. И мы это должны были уже давно доделать».
+//
+// ПОЧЕМУ ЭТО ЗДЕСЬ, А НЕ ТОЛЬКО НА ЦЕНТРАЛЬНОМ. Кабинет ЕДИНЫЙ на четыре
+// сайта, база одна. Человек, вошедший здесь, должен иметь то же действие,
+// что и на центральном, — иначе получится четыре разных продукта с
+// расходящимися правами (раздел 9). Сам механизм ключей записи живёт на
+// центральном; здесь — только чтение перечня и уничтожение, обе операции
+// идут в ту же общую таблицу `record_keys`.
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function таблицаКлючейЗаписей(p: { query: (s: string, v?: unknown[]) => Promise<unknown> }) {
+  await p.query(`CREATE TABLE IF NOT EXISTS record_keys(
+    key_id      text PRIMARY KEY,
+    email       text NOT NULL,
+    ссылка      text,
+    wrapped_key text NOT NULL,
+    created_at  timestamptz DEFAULT now(),
+    destroyed_at timestamptz)`);
+  await p.query(`CREATE INDEX IF NOT EXISTS record_keys_email_idx ON record_keys(email)`);
+}
+
+/**
+ * Уничтожить ВСЕ ключи одного диалога.
+ *
+ * Именно все: в блокчейне лежат все прежние состояния разговора, оттуда
+ * ничего не изымается. Оставленный ключ оставил бы читаемым один старый
+ * слепок этого же разговора.
+ *
+ * Необратимо (раздел 18). Только по явному действию человека.
+ *
+ * @returns сколько ключей затёрто; ноль — «нет такого или уже забыт».
+ */
+export async function уничтожитьДиалог(email: string, ссылка: string): Promise<number> {
+  const em = email.trim().toLowerCase();
+  const метка = (ссылка ?? '').trim();
+  // Пустая метка снесла бы ВСЕ ключи человека — просят обратное.
+  if (!метка) throw new Error('уничтожитьДиалог: пустая ссылка на диалог');
+
+  const p = await pool();
+  try {
+    await таблицаКлючейЗаписей(p);
+    const r = await p.query<{ key_id: string }>(
+      `UPDATE record_keys SET wrapped_key='', destroyed_at=now()
+        WHERE email=$1 AND ссылка=$2 AND destroyed_at IS NULL
+        RETURNING key_id`, [em, метка]);
+    return r.rows?.length ?? 0;
+  } finally { await p.end(); }
+}
+
+/** Перечень диалогов человека — чтобы выбрать ДО необратимого действия. */
+export async function диалогиЧеловека(email: string): Promise<
+  Array<{ ссылка: string; ключей: number; закрытых: number; последняя: string | null }>
+> {
+  const em = email.trim().toLowerCase();
+  const p = await pool();
+  try {
+    await таблицаКлючейЗаписей(p);
+    const r = await p.query<{
+      ссылка: string; ключей: string; закрытых: string; последняя: string | null;
+    }>(
+      `SELECT ссылка,
+              COUNT(*) FILTER (WHERE destroyed_at IS NULL)     AS ключей,
+              COUNT(*) FILTER (WHERE destroyed_at IS NOT NULL) AS закрытых,
+              MAX(created_at)::text                            AS последняя
+         FROM record_keys
+        WHERE email=$1 AND ссылка IS NOT NULL AND ссылка <> ''
+        GROUP BY ссылка
+        ORDER BY MAX(created_at) DESC`, [em]);
+    return (r.rows ?? []).map((x) => ({
+      ссылка: x.ссылка,
+      ключей: Number(x.ключей),
+      закрытых: Number(x.закрытых),
+      последняя: x.последняя,
+    }));
+  } finally { await p.end(); }
+}
