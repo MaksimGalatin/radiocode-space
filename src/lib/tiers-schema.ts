@@ -65,7 +65,7 @@ export function разметкаТарифов(адресСайта: string, я�
          */
         description: описаниеТарифа(т, язык),
         sku: `code-eternal-${т.код}`,
-        image: `${адресСайта}/logo.png`,
+        image: `${адресСайта}/code-cover-512.png`,
         brand: { '@type': 'Brand', name: 'CODE Eternal' },
         offers: т.разово
           ? [
@@ -74,6 +74,7 @@ export function разметкаТарифов(адресСайта: string, я�
                 price: String(т.разово),
                 priceCurrency: 'USD',
                 validFrom: '2026-08-11',
+                priceValidUntil: '2026-12-31',
                 availability: 'https://schema.org/InStock',
                 seller: ПРОДАВЕЦ,
                 url: `${адресСайта}/#pricing`,
@@ -84,6 +85,7 @@ export function разметкаТарифов(адресСайта: string, я�
                 price: String(т.вМесяц),
                 priceCurrency: 'USD',
                 validFrom: '2026-08-11',
+                priceValidUntil: '2026-12-31',
                 availability: 'https://schema.org/InStock',
                 seller: ПРОДАВЕЦ,
                 url: `${адресСайта}/#pricing`,
@@ -102,6 +104,7 @@ export function разметкаТарифов(адресСайта: string, я�
               price: String(т.вМесяц),
               priceCurrency: 'USD',
               validFrom: '2026-08-11',
+              priceValidUntil: '2026-12-31',
               availability: 'https://schema.org/InStock',
               seller: ПРОДАВЕЦ,
               url: `${адресСайта}/#pricing`,

@@ -70,6 +70,7 @@ const РАЗМЕТКА_ТАРИФОВ = {
   name: "CODE Eternal — subscription tiers",
   description:
     "Access to the AIfa assistants and eternal memory of the CODE Eternal ecosystem: three tiers, from basic access to a full digital-continuity package.",
+  image: "https://radiocode.space/code-cover-512.png",
   brand: { "@type": "Brand", name: "CODE Eternal" },
   url: "https://radiocode.space/ambassador",
   offers: ТАРИФЫ.map((т) => ({
@@ -81,6 +82,7 @@ const РАЗМЕТКА_ТАРИФОВ = {
     price: String(т.разово || т.вМесяц),
     priceCurrency: "USD",
     validFrom: "2026-08-11",
+    priceValidUntil: "2026-12-31",
     category: т.разово ? "OneTime" : "Subscription",
     availability: "https://schema.org/InStock",
     url: "https://radiocode.space/ambassador",

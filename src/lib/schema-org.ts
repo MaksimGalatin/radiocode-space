@@ -170,6 +170,7 @@ export function getSchemaOrg() {
       price: "0",
       priceCurrency: "USD",
       validFrom: "2026-07-25",
+      priceValidUntil: "2026-12-31",
     },
     author: {
       "@id": `${SITE_URL}/#person`,
