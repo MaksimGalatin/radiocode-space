@@ -447,7 +447,7 @@ export default function ServiceAgreementPage() {
           },
           {
             subtitle: "1.3 Термины",
-            text: "«Услуги» — работы, описанные в Разделе 2 и детализированные в Техническом задании.\n«Результаты» — результаты Услуг (код, сайты, исправления, интеграции, дизайн, файлы), передаваемые Заказчику.\n«Техническое задание» (в международной практике — Statement of Work, сокр. SOW) — письменный бриф (email, документ или веб-форма), определяющий объём, сроки и цену конкретного проекта.\n«Вознаграждение» — суммы, подлежащие уплате за Услуги.\n«Оракул» — автоматический сканер соответствия сайтов, эксплуатируемый Исполнителем.",
+            text: "«Услуги» — работы, описанные в Разделе 2 и детализированные в Техническом задании.\n«Результаты» — результаты Услуг (код, сайты, исправления, интеграции, дизайн, файлы), передаваемые Заказчику.\n«Техническое задание» (в международной практике — Statement of Work, сокр. SOW) — письменный бриф (email, документ или веб-форма), определяющий объём, сроки и цену конкретного проекта.\n«Вознаграждение» — суммы, подлежащие уплате за Услуги.\n«AIfaFocus» — автоматический сканер соответствия сайтов, эксплуатируемый Исполнителем.",
           },
         ],
       },
@@ -844,7 +844,7 @@ export default function ServiceAgreementPage() {
           },
           {
             subtitle: "1.3 Definiciones",
-            text: "«Servicios» — el trabajo descrito en la Sección 2 y detallado en una Orden de Trabajo.\n«Entregables» — los resultados de los Servicios (código, sitios, correcciones, integraciones, diseños, archivos) entregados al Cliente.\n«Orden de Trabajo» (en la práctica internacional — Statement of Work, abrev. SOW) — un brief escrito (email, documento o formulario) que define alcance, plazo y precio de un proyecto.\n«Honorarios» — los importes pagaderos por los Servicios.\n«Oráculo» — el escáner automático de cumplimiento de sitios web operado por el Prestador.",
+            text: "«Servicios» — el trabajo descrito en la Sección 2 y detallado en una Orden de Trabajo.\n«Entregables» — los resultados de los Servicios (código, sitios, correcciones, integraciones, diseños, archivos) entregados al Cliente.\n«Orden de Trabajo» (en la práctica internacional — Statement of Work, abrev. SOW) — un brief escrito (email, documento o formulario) que define alcance, plazo y precio de un proyecto.\n«Honorarios» — los importes pagaderos por los Servicios.\n«AIfaFocus» — el escáner automático de cumplimiento de sitios web operado por el Prestador.",
           },
         ],
       },

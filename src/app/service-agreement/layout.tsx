@@ -7,7 +7,7 @@ import { LanguageProvider } from '@/lib/LanguageContext';
 export const metadata: Metadata = {
   title: 'Public Service Agreement (Offer)',
   description:
-    'Public offer for professional services: website development, Oracle compliance remediation, AI integration and web design. Master Services Agreement with Statement-of-Work framework, consumer rights, taxes, sanctions and export-control provisions.',
+    'Public offer for professional services: website development, AIfaFocus compliance remediation, AI integration and web design. Master Services Agreement with Statement-of-Work framework, consumer rights, taxes, sanctions and export-control provisions.',
   /**
    * 🔴 ЯЗЫКОВЫЕ ССЫЛКИ У ОФЕРТЫ ОТСУТСТВОВАЛИ.
    *
