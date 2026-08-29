@@ -148,6 +148,31 @@ export default function TariffsClient() {
           <Link href="/cabinet" className="text-base text-cyan-400 underline">
             {т.вКабинет}
           </Link>
+
+          {/*
+            СЕТКА ПРОВЕРОК И ПАРТНЁРСКИЙ ТАРИФ.
+            Решение Архитектора 29.08.2026: «на максимальном тарифе — 100 в
+            сутки, а сверх — отдельный партнёрский тариф», отдельной строкой
+            под карточками, а не четвёртой карточкой. Числа те же, что стоят
+            в app/api/scan/route.ts на aifa.works: расхождение витрины и кода
+            человек обнаружил бы отказом, которого не ждал.
+          */}
+          <div style={{ marginTop: 22, paddingTop: 18, borderTop: '1px solid rgba(148,163,184,0.15)' }}>
+            <div style={{ fontSize: 15, fontWeight: 700, color: '#e2e8f0', marginBottom: 10 }}>
+              {т.лимитыЗаголовок}
+            </div>
+            <ul style={{ margin: 0, paddingLeft: 20, color: '#94a3b8', fontSize: 14, lineHeight: 1.9 }}>
+              {т.лимитыСтроки.map((с) => (
+                <li key={с}>{с}</li>
+              ))}
+            </ul>
+            <div style={{ fontSize: 15, fontWeight: 700, color: '#e2e8f0', marginTop: 18, marginBottom: 8 }}>
+              {т.партнёрскийЗаголовок}
+            </div>
+            <p style={{ color: '#94a3b8', fontSize: 14, lineHeight: 1.7, margin: 0, maxWidth: 720 }}>
+              {т.партнёрскийТекст}
+            </p>
+          </div>
         </div>
 
       </div>

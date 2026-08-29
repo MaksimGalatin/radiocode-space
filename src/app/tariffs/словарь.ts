@@ -62,6 +62,10 @@ export type ТекстыТарифов = {
   оракулЗамерВыделено: string;
   оракулЗамерКонец: string;
   оракулСсылка: string;
+  лимитыЗаголовок: string;
+  лимитыСтроки: string[];
+  партнёрскийЗаголовок: string;
+  партнёрскийТекст: string;
   оплатаЗаголовок: string;
   оплата1: string;
   оплата2: string;
@@ -143,6 +147,10 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
       'в 52,6 % случаев машина говорит «доступно», а человек не проходит',
     оракулЗамерКонец: '. Поэтому мы проходим путь клавиатурой сами.',
     оракулСсылка: 'Проверить свой сайт бесплатным сканером — без регистрации',
+    лимитыЗаголовок: 'Сколько проверок в сутки',
+    лимитыСтроки: ['Без регистрации — 1', 'После бесплатной регистрации — 3', 'Spark, $15 в месяц — 10', 'Family Archive, $100 в месяц — 30', 'Digital DNA — 100'],
+    партнёрскийЗаголовок: 'Партнёрский тариф',
+    партнёрскийТекст: 'Для агентств и компаний, проверяющих много доменов: без ограничения числа проверок и без предела на один домен, прямая поддержка. От $500 в месяц, по договорённости — напишите на contact@codeofdigitaleternity.com.',
     оплатаЗаголовок: 'Как оплатить',
     оплата1:
       'Оплата принимается криптовалютой и звёздами Telegram. Оплата картами готовится.',
@@ -225,6 +233,10 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
       'in 52.6 % of cases the machine says “accessible” and the human does not get through',
     оракулЗамерКонец: '. That is why we walk the path by keyboard ourselves.',
     оракулСсылка: 'Scan your own site free — no signup required',
+    лимитыЗаголовок: 'Scans per day',
+    лимитыСтроки: ['Without an account — 1', 'After free registration — 3', 'Spark, $15 a month — 10', 'Family Archive, $100 a month — 30', 'Digital DNA — 100'],
+    партнёрскийЗаголовок: 'Partner plan',
+    партнёрскийТекст: 'For agencies and businesses scanning many domains: no cap on the number of scans and no per-domain limit, direct support. From $500 a month, by agreement — write to contact@codeofdigitaleternity.com.',
     оплатаЗаголовок: 'How to pay',
     оплата1:
       'We accept cryptocurrency and Telegram Stars. Card payments are being prepared.',
@@ -307,6 +319,10 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
       'en el 52,6 % de los casos la máquina dice «accesible» y la persona no pasa',
     оракулЗамерКонец: '. Por eso recorremos el camino con el teclado nosotros mismos.',
     оракулСсылка: 'Analiza tu sitio gratis, sin registro',
+    лимитыЗаголовок: 'Análisis por día',
+    лимитыСтроки: ['Sin registro — 1', 'Tras el registro gratuito — 3', 'Spark, 15 $ al mes — 10', 'Family Archive, 100 $ al mes — 30', 'Digital DNA — 100'],
+    партнёрскийЗаголовок: 'Plan de socio',
+    партнёрскийТекст: 'Para agencias y empresas que analizan muchos dominios: sin límite en el número de análisis ni tope por dominio, soporte directo. Desde 500 $ al mes, según acuerdo — escriba a contact@codeofdigitaleternity.com.',
     оплатаЗаголовок: 'Cómo pagar',
     оплата1:
       'Aceptamos criptomonedas y Telegram Stars. El pago con tarjeta está en preparación.',
@@ -388,6 +404,10 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     оракулЗамерВыделено: '有 52.6 % 的情况机器说「可访问」，而人走不通',
     оракулЗамерКонец: '。因此我们自己用键盘走完全程。',
     оракулСсылка: '免费检测你的网站，无需注册',
+    лимитыЗаголовок: '每日检测次数',
+    лимитыСтроки: ['未注册 — 1 次', '免费注册后 — 3 次', 'Spark，每月 15 美元 — 10 次', 'Family Archive，每月 100 美元 — 30 次', 'Digital DNA — 100 次'],
+    партнёрскийЗаголовок: '合作伙伴方案',
+    партнёрскийТекст: '面向需要检测大量域名的机构与企业：不限检测次数，无单域名上限，专线支持。每月 500 美元起，具体面议 — 请联系 contact@codeofdigitaleternity.com。',
     оплатаЗаголовок: '如何付款',
     оплата1: '支持加密货币与 Telegram Stars 付款。银行卡支付正在准备中。',
     оплата2:
