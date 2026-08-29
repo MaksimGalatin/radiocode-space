@@ -15,6 +15,41 @@ const CHAT_TYPES = ['main', 'terminal', 'oracle'] as const;
 const MIN_CONTENT_LEN = 12;
 
 /**
+ * 🔴 ПОТОЛОК РАСХОДА НА ОДИН ПРОГОН.
+ *
+ * ЧТО СЛУЧИЛОСЬ. 16–17 августа 2026 backfill сжёг кредит Google: $12.38 и
+ * $21.24 за сутки вместо привычного доллара. Один SKU «Large Text Embedding
+ * Model» дал 115 963 591 единиц — около 116 МБ текста, отправленных на
+ * векторизацию за сутки. Обнаружил Архитектор глазами, через двое суток.
+ *
+ * ПОЧЕМУ ОДНОЙ ДЕДУПЛИКАЦИИ МАЛО. Она правильная: хеш содержимого, вставка с
+ * ON CONFLICT DO NOTHING. Но эмбеддинг ОПЛАЧИВАЕТСЯ РАНЬШЕ, чем строка ложится
+ * в базу. Любая причина, по которой запись не состоялась — обрыв по
+ * maxDuration, ошибка вставки, потерянное соединение — оставляет деньги
+ * потраченными, а работу несделанной.
+ *
+ * 27.08.2026: потолок стоял ТОЛЬКО на центральном сайте. Здесь его не было —
+ * то есть Правило Четырёх Сайтов (раздел 9 Конституции) не выполнялось, и
+ * защита от самой дорогой ошибки проекта прикрывала один сайт из четырёх.
+ *
+ * 200 000 символов ≈ $0.03 по проверенному тарифу ($0.00015 за 1000).
+ */
+const MAX_CHARS_PER_RUN = Number(process.env.MEMORY_INDEX_MAX_CHARS || '200000');
+
+/** Символы, отправленные на векторизацию в текущем запуске. */
+let истраченоЗаПрогон = 0;
+
+/** Сбрасывается в начале каждого запуска backfill*, а не при импорте модуля. */
+function начатьПрогон(): void {
+  истраченоЗаПрогон = 0;
+}
+
+function бюджетИсчерпан(): boolean {
+  return истраченоЗаПрогон >= MAX_CHARS_PER_RUN;
+}
+
+
+/**
  * СЕКРЕТЫ НЕ ПОПАДАЮТ В ПОИСКОВЫЙ ИНДЕКС (16.08.2026).
  *
  * ЗАЧЕМ. База знаний Мозга подмешивается в разговор ЛЮБОМУ посетителю, без
@@ -276,8 +311,12 @@ function getChatsDir(): string {
   return path.join(process.cwd(), 'data', 'chats');
 }
 
-export async function backfillUser(userEmail: string): Promise<{ scanned: number; inserted: number }> {
+export async function backfillUser(userEmail: string, продолжитьБюджет = false): Promise<{ scanned: number; inserted: number }> {
   if (!memoryEnabled()) return { scanned: 0, inserted: 0 };
+  // Счётчик сбрасываем только у самостоятельного запуска. Вызов из
+  // backfillAll идёт с продолжитьБюджет=true, иначе потолок обнулялся бы
+  // на каждом человеке и не ограничивал бы ничего.
+  if (!продолжитьБюджет) начатьПрогон();
   const userKey = sanitizeEmail(userEmail);
   const chatsDir = getChatsDir();
   if (!fs.existsSync(chatsDir)) return { scanned: 0, inserted: 0 };
@@ -334,6 +373,10 @@ export async function backfillUser(userEmail: string): Promise<{ scanned: number
       });
       if (fresh.length === 0) continue;
 
+      // Проверяем ДО вызова: эмбеддинг оплачивается в момент отправки,
+      // а не в момент записи в базу.
+      if (бюджетИсчерпан()) return { scanned, inserted };
+      истраченоЗаПрогон += fresh.reduce((с, m) => с + m.content.trim().length, 0);
       const embeddings = await embedBatch(
         fresh.map((m) => m.content.trim()),
         'RETRIEVAL_DOCUMENT'
@@ -377,11 +420,13 @@ export async function backfillAll(): Promise<{ users: number; scanned: number; i
     if (m) userKeys.add(m[1]);
   }
 
+  начатьПрогон();
   let scanned = 0;
   let inserted = 0;
   const userKeysArray = Array.from(userKeys);
   for (const userKey of userKeysArray) {
-    const r = await backfillUser(userKey);
+    if (бюджетИсчерпан()) break;
+    const r = await backfillUser(userKey, true);
     scanned += r.scanned;
     inserted += r.inserted;
   }

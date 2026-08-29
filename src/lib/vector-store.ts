@@ -137,12 +137,38 @@ export async function upsertMemory(rows: MemoryRow[]): Promise<number> {
   let inserted = 0;
   for (const r of rows) {
     const hashedKey = hashUserKey(r.userKey);
-    const encryptedContent = r.userKey === '__brain__' ? r.content : await encryptText(r.content);
+    // 🔴 В БАЗЕ ПЕРЕПИСКА ЛЕЖИТ ОТКРЫТЫМ ТЕКСТОМ. Решение Архитектора 08.08.2026.
+    //
+    // 27.08.2026: это решение было применено ТОЛЬКО на центральном сайте, а
+    // здесь строка продолжала шифровать. Правило Четырёх Сайтов (раздел 9
+    // Конституции) нарушалось полгода, и нарушение было не бумажным:
+    //
+    //   * запись, сделанная через этот сайт, шифровалась ЕГО ключом;
+    //   * у сайтов ключи выводятся по-разному (у aifa.works есть
+    //     ARWEAVE_ENCRYPTION_SECRET, у центрального его нет и ключ берётся
+    //     как sha256(ARWEAVE_WALLET_KEY));
+    //   * поэтому центральный сайт не мог прочитать то, что записал этот, —
+    //     а раздел 34 требует одной памяти на все четыре двери кабинета.
+    //
+    // Так и вышло: записи #535424 и #535425 (источник aifa.works) не читались
+    // сторожем памяти и открылись только секретом aifa.works.
+    //
+    // ПОЧЕМУ ОТКРЫТЫЙ ТЕКСТ ПРАВИЛЬНЕЕ. Шифрование здесь защищало ровно от
+    // одного случая: доступ к базе без доступа к приложению. А ключ живёт в
+    // переменных того же приложения. Защита узкая, цена несоразмерная:
+    // 25.07.2026 из кода убрали запасной ключ, и 227 реплик из 665 стали
+    // нечитаемы — снаружи это выглядело как «AIfa не помнит начало разговоров».
+    //
+    // ГДЕ ШИФРОВАНИЕ ОСТАЁТСЯ: при заливке в Arweave. Там сеть публичная и
+    // вечная, и шифрование защищает от всего мира, а не от узкого случая.
+    //
+    // Чтение по-прежнему понимает оба вида: старые зашифрованные записи
+    // расшифровываются на лету.
     const res = await sql`
       INSERT INTO chat_memory
         (user_key, chat_type, role, speaker, content, content_hash, msg_ts, source, embedding)
       VALUES
-        (${hashedKey}, ${r.chatType}, ${r.role}, ${r.speaker ?? null}, ${encryptedContent},
+        (${hashedKey}, ${r.chatType}, ${r.role}, ${r.speaker ?? null}, ${r.content},
          ${r.contentHash}, ${r.msgTs ?? null}, ${r.source ?? ''}, ${toVectorLiteral(r.embedding)}::halfvec)
       ON CONFLICT (user_key, content_hash) DO NOTHING
       RETURNING id`;
