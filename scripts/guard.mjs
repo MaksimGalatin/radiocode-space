@@ -20,6 +20,18 @@ import { join, relative } from 'node:path';
 
 const ROOT = process.cwd();
 const SKIP_DIRS = new Set(['node_modules', '.next', '.git', 'dist', 'build', 'coverage']);
+// Те же папки с приставкой: node_modules_old, node_modules_del_1756,
+// .next_backup, dist_old. Такие имена появляются при чистке и переносе, и
+// страж заходил внутрь, потому что искал ТОЧНОЕ совпадение имени.
+//
+// Замер 29.08.2026 в code-eternal: 14 «секретов» из node_modules_old —
+// приватные ключи и строки подключения из README чужих пакетов, то есть
+// примеры в документации. Настоящих ноль. Папка не в git и стоит в
+// .gitignore, но страж об этом не знал.
+//
+// Страж, который кричит о чужих примерах, приучает пролистывать свой
+// вывод — и настоящий ключ теряется именно в таком списке.
+const SKIP_PREFIX = /^(node_modules|\.next|dist|build|coverage)[._-]/;
 const SKIP_PATH = /ignored_during_vercel_build|\.d\.ts$/;
 
 // Роуты, которым лимит не нужен: админка закрыта паролем, cron — секретом,
@@ -64,7 +76,7 @@ function walk(dir, out = []) {
   let entries;
   try { entries = readdirSync(dir); } catch { return out; }
   for (const name of entries) {
-    if (SKIP_DIRS.has(name)) continue;
+    if (SKIP_DIRS.has(name) || SKIP_PREFIX.test(name)) continue;
     const p = join(dir, name);
     let st;
     try { st = statSync(p); } catch { continue; }
