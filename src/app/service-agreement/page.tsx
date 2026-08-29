@@ -60,7 +60,7 @@ export default function ServiceAgreementPage() {
         subsections: [
           {
             subtitle: "2.1 Categories of Services",
-            text: "The Contractor provides, in whole or in part, the following Services:\n\n• Website creation and development (landing pages, corporate sites, web applications);\n• Remediation of violations and defects identified by the Oracle compliance scan (e.g., accessibility/ADA/WCAG, privacy/CCPA, tracking/HIPAA, email/DMARC and similar technical exposures);\n• Integration of AI agents and assistants (AIfa and third-party models) into the Client's products and workflows;\n• Web design, UX/UI, branding, and related creative services.\n\nThe exact scope for any project is fixed exclusively by the corresponding Statement of Work. Anything not expressly listed in a Statement of Work is out of scope.",
+            text: "The Contractor provides, in whole or in part, the following Services:\n\n• Website creation and development (landing pages, corporate sites, web applications);\n• Remediation of violations and defects identified by the AIfaFocus compliance scan (e.g., accessibility/ADA/WCAG, privacy/CCPA, tracking/HIPAA, email/DMARC and similar technical exposures);\n• Integration of AI agents and assistants (AIfa and third-party models) into the Client's products and workflows;\n• Web design, UX/UI, branding, and related creative services.\n\nThe exact scope for any project is fixed exclusively by the corresponding Statement of Work. Anything not expressly listed in a Statement of Work is out of scope.",
           },
           {
             subtitle: "2.2 Nature and Limits of Remediation Services",
