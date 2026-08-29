@@ -40,7 +40,7 @@ export function LiveClock() {
     >
       {/* Label */}
       <span
-        className="text-[10px] leading-none tracking-[0.1em] uppercase mb-1 whitespace-nowrap"
+        className="text-xs leading-none tracking-[0.1em] uppercase mb-1 whitespace-nowrap"
         style={{ color: '#7E7E99' }}
       >
         {rt('localTime')}
@@ -69,7 +69,7 @@ export function LiveClock() {
         </span>
         <ColonBlink />
         <span
-          className="tabular-nums text-[10px] sm:text-xs"
+          className="tabular-nums text-xs sm:text-xs"
           style={{
             color: '#8B8BA8',
           }}
@@ -80,7 +80,7 @@ export function LiveClock() {
 
       {/* Date */}
       <span
-        className="font-mono text-[10px] leading-none mt-1 tabular-nums"
+        className="font-mono text-xs leading-none mt-1 tabular-nums"
         style={{ color: '#7E7E99' }}
       >
         {day} {monthShort} {year}

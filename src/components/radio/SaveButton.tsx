@@ -142,7 +142,7 @@ export function SaveButton({
       onClick={onSave}
       aria-label={loggedIn ? rt('save') : rt('saveHint')}
       title={loggedIn ? rt('save') : rt('saveHint')}
-      className="flex items-center gap-1 shrink-0 rounded-full px-1.5 py-1 transition-colors hover:bg-white/[0.05]"
+      className="flex items-center gap-1 shrink-0 rounded-full px-1.5 py-1 transition-colors hover:bg-white/[0.05] relative after:absolute after:content-[''] after:inset-[-10px]"
     >
       {state === 'saving' ? (
         <Loader2 width={size} height={size} className="animate-spin" style={{ color }} strokeWidth={2} />

@@ -41,7 +41,7 @@ export function ShareButton({
       onClick={onShare}
       aria-label={rt('shareTrack')}
       title={done ? rt('copied') : rt('shareTrack')}
-      className="flex items-center gap-1 shrink-0 rounded-full px-1.5 py-1 transition-colors hover:bg-white/[0.05]"
+      className="flex items-center gap-1 shrink-0 rounded-full px-1.5 py-1 transition-colors hover:bg-white/[0.05] relative after:absolute after:content-[''] after:inset-[-10px]"
     >
       {done ? (
         <>
