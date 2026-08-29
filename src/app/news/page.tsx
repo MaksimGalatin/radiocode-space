@@ -147,7 +147,7 @@ export default async function NewsIndexPage() {
                 key={я.код}
                 href={я.код === 'en' ? '/news' : `/news?lang=${я.код}`}
                 aria-current={я.код === loc ? 'true' : undefined}
-                className={`px-3 py-1.5 rounded-lg text-[13px] font-mono tracking-wider transition-colors ${
+                className={`relative after:absolute after:content-[''] after:inset-[-5px] px-3 py-1.5 rounded-lg text-[13px] font-mono tracking-wider transition-colors ${
                   я.код === loc
                     ? 'bg-[#00F0FF]/15 text-[#00F0FF] border border-[#00F0FF]/40'
                     : 'text-[#8B8BA8] border border-[#8B8BA8]/20 hover:text-[#00F0FF] hover:border-[#00F0FF]/40'
@@ -194,7 +194,7 @@ export default async function NewsIndexPage() {
                     {(с.category[loc] || с.category.en || '').split(',').slice(0, 3).map((метка, i) => (
                       <span
                         key={i}
-                        className="px-2 py-0.5 rounded-lg border border-[#8B8BA8]/20 bg-white/[0.03] text-[11px] font-mono tracking-wider text-[#8B8BA8] whitespace-nowrap"
+                        className="px-2 py-0.5 rounded-lg border border-[#8B8BA8]/20 bg-white/[0.03] text-[12px] font-mono tracking-wider text-[#8B8BA8] whitespace-nowrap"
                       >
                         {метка.trim()}
                       </span>

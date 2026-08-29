@@ -31,7 +31,7 @@ export function LikeButton({
       aria-label={liked ? rt('unlike') : rt('like')}
       aria-pressed={liked}
       title={liked ? rt('unlike') : rt('like')}
-      className="flex items-center gap-1 shrink-0 rounded-full px-1.5 py-1 transition-colors hover:bg-white/[0.05]"
+      className="flex items-center gap-1 shrink-0 rounded-full px-1.5 py-1 transition-colors hover:bg-white/[0.05] relative after:absolute after:content-[''] after:inset-[-10px]"
     >
       <Heart
         width={size}

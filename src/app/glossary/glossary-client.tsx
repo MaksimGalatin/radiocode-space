@@ -548,7 +548,7 @@ export default function GlossaryClient() {
                 onClick={() => setLang(l.code)}
                 aria-label={`Language: ${l.label}`}
                 aria-pressed={lang === l.code}
-                className="cursor-pointer rounded-full px-1.5 py-0.5 font-mono text-[13px] font-medium tracking-wider transition-colors"
+                className="cursor-pointer rounded-full px-1.5 py-0.5 font-mono text-[13px] font-medium tracking-wider transition-colors relative after:absolute after:content-[''] after:inset-[-10px]"
                 style={
                   lang === l.code
                     ? { color: '#050507', background: '#00F0FF' }

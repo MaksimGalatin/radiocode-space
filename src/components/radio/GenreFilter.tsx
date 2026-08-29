@@ -50,7 +50,7 @@ export function GenreFilter({ selectedGenre, onSelect }: GenreFilterProps) {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 + i * 0.04, duration: 0.3 }}
-              className="relative flex-shrink-0 rounded-full px-4 py-2 text-[13px] tracking-[0.1em] uppercase font-medium border cursor-pointer transition-all duration-200"
+              className="relative flex-shrink-0 after:absolute after:content-[''] after:inset-y-[-3px] after:inset-x-0 rounded-full px-4 py-2 text-[13px] tracking-[0.1em] uppercase font-medium border cursor-pointer transition-all duration-200"
               style={
                 isActive
                   ? {
