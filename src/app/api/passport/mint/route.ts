@@ -72,12 +72,59 @@ export async function POST(req: NextRequest) {
   const walletJson = process.env.ARWEAVE_WALLET_KEY || process.env.ARWEAVE_WALLET_JSON || '';
   try {
     const pool = await getPool();
+    // Колонка счётчика перевыпусков. Отдельных файлов миграций в проекте
+    // нет — схема доводится из кода, тем же приёмом, что в games/score:
+    // ALTER ... IF NOT EXISTS идемпотентен и на существующей колонке
+    // ничего не делает. Без этой строки ручка упала бы на первом же
+    // обращении к reissue_count.
+    try {
+      await pool.query(`ALTER TABLE passports ADD COLUMN IF NOT EXISTS reissue_count INT DEFAULT 0`);
+    } catch { /* нет прав на ALTER — считаем перевыпуски недоступными */ }
+
     const p = await pool.query(`SELECT * FROM passports WHERE email=$1`, [email]);
     const row = p.rows[0];
     if (!row) { await pool.end(); return NextResponse.json({ error: 'no_passport' }, { status: 400 }); }
+    /**
+     * ПЕРЕВЫПУСК ПАСПОРТА (30.08.2026, числа Архитектора).
+     *
+     *   Искра ......... перевыпуска нет
+     *   Семейный ...... до 3
+     *   Цифровая ДНК .. до 10
+     *
+     * Здесь стояло безусловное «already: true»: паспорт, однажды попавший
+     * в цепь, нельзя было выпустить заново НИКОМУ. Тарифы при этом уже
+     * обещали перевыпуск — обещание без реализации.
+     *
+     * Активным остаётся ОДИН паспорт: поле arweave_tx перезаписывается на
+     * свежую запись, а прежняя остаётся в цепи (оттуда ничего не изымается)
+     * и перечисляется в arweave_history. Право на забвение обеспечивается
+     * не удалением записи, а стиранием её ключа — см. раздел 34
+     * Конституции, пункт 10.
+     *
+     * ДЕНЬГИ: перевыпуск стоит НОЛЬ. Turbo грузит бесплатно всё меньше
+     * 100 КиБ, а документ паспорта в худшем случае 94,3 КиБ (замер
+     * 30.08.2026: поля 96 100 байт при пределе аватара 95 000, плюс 500
+     * байт структуры). Запас 5,7 % — поэтому ниже стоит сторож размера.
+     */
+    const ЛИМИТ_ПЕРЕВЫПУСКА: Record<number, number> = { 0: 0, 1: 0, 2: 3, 3: 10 };
+    const тарифДляЛимита = Number(
+      (await pool.query(`SELECT tier FROM user_tiers WHERE email=$1`, [email])).rows[0]?.tier ?? 0,
+    );
+    const сделано = Number(row.reissue_count ?? 0);
+    const можно = ЛИМИТ_ПЕРЕВЫПУСКА[тарифДляЛимита] ?? 0;
+
     if (row.arweave_tx) {
-      await pool.end();
-      return NextResponse.json({ ok: true, already: true, arweaveUrl: `https://arweave.net/${row.arweave_tx}` });
+      if (сделано >= можно) {
+        await pool.end();
+        return NextResponse.json({
+          ok: true,
+          already: true,
+          перевыпусков_сделано: сделано,
+          перевыпусков_доступно: можно,
+          arweaveUrl: `https://arweave.net/${row.arweave_tx}`,
+        });
+      }
+      // лимит есть и не исчерпан — идём дальше и выпускаем заново
     }
     if (!walletJson) { await pool.end(); return NextResponse.json({ error: 'not_configured' }, { status: 503 }); }
 
@@ -139,6 +186,30 @@ export async function POST(req: NextRequest) {
     };
     const data = Buffer.from(JSON.stringify(doc, null, 2), 'utf8');
 
+    /**
+     * СТОРОЖ РАЗМЕРА: не даём кошельку молча заплатить.
+     *
+     * Turbo грузит бесплатно всё, что меньше 100 КиБ. Документ паспорта в
+     * худшем случае 94,3 КиБ — запас всего 5,7 %. Одно новое поле или
+     * поднятый предел аватара уводят за порог, и заливка начинает стоить
+     * денег, ничем этого не показывая: fileSizeFactory сообщает размер, но
+     * ни с чем его не сверяет.
+     *
+     * Отказ лучше тихого расхода: незалитый паспорт можно залить завтра,
+     * ушедшие из кошелька AR не вернуть.
+     */
+    const БЕСПЛАТНО_ДО = 100 * 1024;
+    if (data.length >= БЕСПЛАТНО_ДО) {
+      await pool.end();
+      console.warn('[passport/mint] документ %d байт — больше бесплатного порога Turbo, заливка отменена', data.length);
+      return NextResponse.json({
+        error: 'too_large',
+        сообщение: 'Документ паспорта превысил бесплатный порог Arweave (100 КиБ). Уменьшите аватар и повторите.',
+        размер: data.length,
+        предел: БЕСПЛАТНО_ДО,
+      }, { status: 413 });
+    }
+
     const { TurboFactory } = await import('@ardrive/turbo-sdk');
     const jwk = JSON.parse(walletJson);
     const turbo = TurboFactory.authenticated({ privateKey: jwk });
@@ -155,7 +226,11 @@ export async function POST(req: NextRequest) {
       },
     });
     const txId = result.id;
-    await pool.query(`UPDATE passports SET arweave_tx=$2, minted_at=now(), updated_at=now() WHERE email=$1 AND arweave_tx IS NULL`, [email, txId]);
+    // reissue_count растёт только при ПОВТОРНОЙ записи: первый выпуск
+    // перевыпуском не считается.
+    await pool.query(`UPDATE passports SET arweave_tx=$2, minted_at=now(), updated_at=now(),
+        reissue_count = COALESCE(reissue_count, 0) + CASE WHEN arweave_tx IS NULL THEN 0 ELSE 1 END
+      WHERE email=$1 AND arweave_tx IS NULL`, [email, txId]);
     await pool.end();
     return NextResponse.json({ ok: true, arweaveUrl: `https://arweave.net/${txId}`, txId });
   } catch (e) {
