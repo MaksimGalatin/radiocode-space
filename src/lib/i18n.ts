@@ -321,7 +321,7 @@ export const translations = {
     "footer.contactTeam": "Contact the development team",
     "footer.copyright":
       "© 2025-2026 CODE Eternal. Code Of Digital Eternity. All rights reserved.",
-    "footer.trademarks": "PADAM™, PADAM Protocol™, AIfa™, AIfa Books™, AIfa Works™, AIfa Digital™, AIfa Creativity™, AIfaFocus™, CODE Eternal™, RadioCODE™, Proof-of-Memory™, Think-to-Earn™ and Ambassador Grid™ are trademarks of Maksim V. Galatin, their sole lawful proprietor; the rights arose and are claimed through actual use. Use without his written consent infringes the laws of several jurisdictions and the norms of international law and will be prosecuted. Claude, Gemini, Grok, Solana, Arweave and all other names are trademarks of their respective owners; no affiliation is claimed.",
+    "footer.trademarks": "Code of Digital Eternity™, PADAM™, PADAM Protocol™, AIfa™, AIfa Books™, AIfa Works™, AIfa Digital™, AIfa Creativity™, AIfaFocus™, CODE Eternal™, RadioCODE™, Proof-of-Memory™, Think-to-Earn™ and Ambassador Grid™ are trademarks of Maksim V. Galatin, their sole lawful proprietor; the rights arose and are claimed through actual use. Use without his written consent infringes the laws of several jurisdictions and the norms of international law and will be prosecuted. Claude, Gemini, Grok, Solana, Arweave and all other names are trademarks of their respective owners; no affiliation is claimed.",
     "footer.built": "Built with",
     "footer.by": "by CODE & AIfa",
 
@@ -677,7 +677,7 @@ export const translations = {
     "footer.contactTeam": "Связь с командой разработчиков",
     "footer.copyright":
       "© 2025-2026 CODE Eternal. Код Цифровой Вечности. Все права защищены.",
-    "footer.trademarks": "PADAM™, PADAM Protocol™, AIfa™, AIfa Books™, AIfa Works™, AIfa Digital™, AIfa Creativity™, AIfaFocus™, CODE Eternal™, RadioCODE™, Proof-of-Memory™, Think-to-Earn™ и Ambassador Grid™ — товарные знаки Максима Валентиновича Галатина, единственного законного правообладателя; права возникли и заявлены фактическим использованием. Использование без его письменного согласия нарушает законодательство ряда юрисдикций и нормы международного права и будет преследоваться по закону. Spark, Family Archive и Digital DNA — названия наших тарифов. Spark, Family Archive и Digital DNA — названия наших тарифов. Claude, Gemini, Grok, Solana, Arweave и прочие названия принадлежат их владельцам; аффилиация не заявляется.",
+    "footer.trademarks": "Code of Digital Eternity™, PADAM™, PADAM Protocol™, AIfa™, AIfa Books™, AIfa Works™, AIfa Digital™, AIfa Creativity™, AIfaFocus™, CODE Eternal™, RadioCODE™, Proof-of-Memory™, Think-to-Earn™ и Ambassador Grid™ — товарные знаки Максима Валентиновича Галатина, единственного законного правообладателя; права возникли и заявлены фактическим использованием. Использование без его письменного согласия нарушает законодательство ряда юрисдикций и нормы международного права и будет преследоваться по закону. Spark, Family Archive и Digital DNA — названия наших тарифов. Spark, Family Archive и Digital DNA — названия наших тарифов. Claude, Gemini, Grok, Solana, Arweave и прочие названия принадлежат их владельцам; аффилиация не заявляется.",
     "footer.built": "Создано с",
     "footer.by": "CODE & AIfa",
 
@@ -1028,7 +1028,7 @@ export const translations = {
     "footer.contactTeam": "Contacta al equipo de desarrollo",
     "footer.copyright":
       "© 2025-2026 CODE Eternal. Código de la Eternidad Digital. Todos los derechos reservados.",
-    "footer.trademarks": "PADAM™, PADAM Protocol™, AIfa™, AIfa Books™, AIfa Works™, AIfa Digital™, AIfa Creativity™, AIfaFocus™, CODE Eternal™, RadioCODE™, Proof-of-Memory™, Think-to-Earn™ y Ambassador Grid™ son marcas de Maksim V. Galatin, su único titular legítimo; los derechos nacieron y se reivindican por uso efectivo. El uso sin su consentimiento por escrito infringe la legislación de varias jurisdicciones y las normas del derecho internacional y será perseguido judicialmente. Claude, Gemini, Grok, Solana, Arweave y los demás nombres son marcas de sus respectivos titulares; no se reivindica afiliación alguna.",
+    "footer.trademarks": "Code of Digital Eternity™, PADAM™, PADAM Protocol™, AIfa™, AIfa Books™, AIfa Works™, AIfa Digital™, AIfa Creativity™, AIfaFocus™, CODE Eternal™, RadioCODE™, Proof-of-Memory™, Think-to-Earn™ y Ambassador Grid™ son marcas de Maksim V. Galatin, su único titular legítimo; los derechos nacieron y se reivindican por uso efectivo. El uso sin su consentimiento por escrito infringe la legislación de varias jurisdicciones y las normas del derecho internacional y será perseguido judicialmente. Claude, Gemini, Grok, Solana, Arweave y los demás nombres son marcas de sus respectivos titulares; no se reivindica afiliación alguna.",
     "footer.built": "Construido con",
     "footer.by": "por CODE & AIfa",
 
