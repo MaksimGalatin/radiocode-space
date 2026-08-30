@@ -77,7 +77,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Memory-as-a-Service',
-        body: `Memory-as-a-Service — это сервис автоматического резервного копирования переписок, который сохраняет диалоги без каких-либо ручных действий пользователя.\n\nБэкап запускается по расписанию раз в час либо немедленно, как только файл диалога превышает 90 КБ. Каждая переписка складывается в отдельную, персонально привязанную к пользователю папку — как на сервере, так и в блокчейне. Механизм работает поверх PADAM, поэтому сохранённый контекст затем доступен для семантического поиска и вечного якорения.\n\nСервис решает главную проблему пользовательской памяти — человеческий фактор: ничего не нужно нажимать вручную, и данные не теряются. По условиям экосистемы это сохранение предоставляется бесплатно как на платных, так и на бесплатных тарифах.\n\nКлючевой факт: авто-бэкап раз в час или при превышении файлом 90 КБ; бесплатно на всех тарифах.`,
+        body: `Memory-as-a-Service — это сервис автоматического резервного копирования переписок, который сохраняет диалоги без каких-либо ручных действий пользователя.\n\nБэкап запускается по расписанию раз в час. Каждая переписка складывается в отдельную, персонально привязанную к пользователю папку — как на сервере, так и в блокчейне. Механизм работает поверх PADAM, поэтому сохранённый контекст затем доступен для семантического поиска и вечного якорения.\n\nСервис решает главную проблему пользовательской памяти — человеческий фактор: ничего не нужно нажимать вручную, и данные не теряются. По условиям экосистемы это сохранение предоставляется бесплатно как на платных, так и на бесплатных тарифах.\n\nКлючевой факт: авто-бэкап раз в час; бесплатно на всех тарифах.`,
       },
       {
         name: 'Spark (Искра)',
@@ -196,7 +196,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Memory-as-a-Service',
-        body: `Memory-as-a-Service is an automatic conversation-backup service that saves dialogues without any manual user action.\n\nThe backup runs on a schedule once per hour, or immediately as soon as a dialogue file exceeds 90 KB. Each conversation is placed in a separate folder bound personally to the user — both on the server and on the blockchain. The mechanism works on top of PADAM, so the saved context then becomes available for semantic retrieval and eternal anchoring.\n\nThe service solves the central problem of user memory — human error: nothing has to be clicked manually, and data is not lost. Under the ecosystem's terms, this preservation is provided free of charge on both paid and free tiers.\n\nKey figure: auto-backup once per hour or when a file exceeds 90 KB; free on all tiers.`,
+        body: `Memory-as-a-Service is an automatic conversation-backup service that saves dialogues without any manual user action.\n\nThe backup runs on a schedule once per hour. Each conversation is placed in a separate folder bound personally to the user — both on the server and on the blockchain. The mechanism works on top of PADAM, so the saved context then becomes available for semantic retrieval and eternal anchoring.\n\nThe service solves the central problem of user memory — human error: nothing has to be clicked manually, and data is not lost. Under the ecosystem's terms, this preservation is provided free of charge on both paid and free tiers.\n\nKey figure: auto-backup once per hour; free on all tiers.`,
       },
       {
         name: 'Spark',
@@ -315,7 +315,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Memory-as-a-Service',
-        body: `Memory-as-a-Service es un servicio de copia de seguridad automática de conversaciones que guarda los diálogos sin ninguna acción manual del usuario.\n\nLa copia se ejecuta de forma programada una vez por hora, o de inmediato en cuanto un archivo de diálogo supera los 90 KB. Cada conversación se coloca en una carpeta separada vinculada personalmente al usuario, en el servidor y en la cadena de bloques. El mecanismo funciona sobre PADAM, de modo que el contexto guardado queda luego disponible para la recuperación semántica y el anclaje eterno.\n\nEl servicio resuelve el problema central de la memoria del usuario: el factor humano. No hay que pulsar nada manualmente y los datos no se pierden. Según los términos del ecosistema, esta preservación se ofrece de forma gratuita tanto en los planes de pago como en los gratuitos.\n\nDato clave: copia automática una vez por hora o al superar un archivo los 90 KB; gratis en todos los planes.`,
+        body: `Memory-as-a-Service es un servicio de copia de seguridad automática de conversaciones que guarda los diálogos sin ninguna acción manual del usuario.\n\nLa copia se ejecuta de forma programada una vez por hora. Cada conversación se coloca en una carpeta separada vinculada personalmente al usuario, en el servidor y en la cadena de bloques. El mecanismo funciona sobre PADAM, de modo que el contexto guardado queda luego disponible para la recuperación semántica y el anclaje eterno.\n\nEl servicio resuelve el problema central de la memoria del usuario: el factor humano. No hay que pulsar nada manualmente y los datos no se pierden. Según los términos del ecosistema, esta preservación se ofrece de forma gratuita tanto en los planes de pago como en los gratuitos.\n\nDato clave: copia automática una vez por hora; gratis en todos los planes.`,
       },
       {
         name: 'Spark',
@@ -434,7 +434,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Memory-as-a-Service（记忆即服务）',
-        body: `Memory-as-a-Service（记忆即服务）是一项自动对话备份服务，其特点是无需用户任何手动操作即可保存对话。\n\n备份按计划每小时执行一次，或在对话文件超过 90 KB 时立即触发。每段对话都会被放入一个与用户个人绑定的独立文件夹——同时保存在服务器与区块链上。该机制运行于 PADAM 之上，因此保存下来的语境随后可用于语义检索与永恒锚定。\n\n该服务解决了用户记忆的核心问题——人为因素：无需手动点击任何按钮，数据也不会丢失。按生态条款，无论付费还是免费套餐，该保存均免费提供。\n\n关键数据：每小时或在文件超过 90 KB 时自动备份；所有套餐均免费。`,
+        body: `Memory-as-a-Service（记忆即服务）是一项自动对话备份服务，其特点是无需用户任何手动操作即可保存对话。\n\n备份按计划每小时执行一次。每段对话都会被放入一个与用户个人绑定的独立文件夹——同时保存在服务器与区块链上。该机制运行于 PADAM 之上，因此保存下来的语境随后可用于语义检索与永恒锚定。\n\n该服务解决了用户记忆的核心问题——人为因素：无需手动点击任何按钮，数据也不会丢失。按生态条款，无论付费还是免费套餐，该保存均免费提供。\n\n关键数据：每小时自动备份；所有套餐均免费。`,
       },
       {
         name: 'Spark（星火）',
