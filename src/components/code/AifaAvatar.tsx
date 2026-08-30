@@ -254,7 +254,16 @@ export default function AifaAvatar() {
     // Возвращаем звук только тем, кто САМ его когда-то включил.
     let firstTry = 0;
     try {
-      if (localStorage.getItem(SOUND_KEY) === 'on') {
+      // ЗВУК ПО УМОЛЧАНИЮ ВКЛЮЧЁН (30.08.2026, слово Архитектора:
+      // «по умолчанию — в Терминале звук должен быть ВСЕГДА включён —
+      // я сейчас перешёл, он был выключен»).
+      //
+      // Прежде включали только тем, кто САМ когда-то включил. Причина
+      // была разумная: человек пришёл работать, а ему в лицо говорят.
+      // Но она относится к БЕСКОНЕЧНОМУ ролику — и теперь снята иначе:
+      // цикл хвоста молчит (см. onTime выше), а первое приветствие
+      // звучит. Кто не хочет — выключает кнопкой, и выбор запомнится.
+      if (localStorage.getItem(SOUND_KEY) !== 'off') {
         firstTry = window.setTimeout(() => { void enableSound(); }, 200);
       }
     } catch { /* приватный режим — остаёмся беззвучными */ }
@@ -270,6 +279,15 @@ export default function AifaAvatar() {
       const d = v.duration;
       if (!d || Number.isNaN(d)) return;
       if (v.currentTime >= d - 0.15) {
+        // ЦИКЛ ХВОСТА ИДЁТ БЕЗ ЗВУКА (30.08.2026, слово Архитектора:
+        // «когда она договорит, зацикливалась БЕЗ звука… а именно этот
+        // цикл был на беззвучном, когда она просто там бездействует»).
+        //
+        // Приветствие человек слышит целиком — глушим только бесконечное
+        // повторение последних секунд. В localStorage НЕ пишем: выбор
+        // человека остаётся, и после перезагрузки страницы звук снова
+        // будет таким, каким он его оставил.
+        if (!v.muted) { v.muted = true; setSoundOn(false); }
         v.currentTime = Math.max(0, d - LOOP_TAIL_SEC);
         void v.play().catch(() => {});
       }
@@ -279,6 +297,8 @@ export default function AifaAvatar() {
     const onEnded = () => {
       if (moodBusy) return;
       const d = v.duration || 0;
+      // То же, что в onTime: доиграла — дальше крутится молча.
+      if (!v.muted) { v.muted = true; setSoundOn(false); }
       v.currentTime = Math.max(0, d - LOOP_TAIL_SEC);
       void v.play().catch(() => {});
     };
