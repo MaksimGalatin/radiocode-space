@@ -96,9 +96,6 @@
     "postcss": "^8.5.23",
     "viem": {
       "ws": "^8.21.0"
-    },
-    "bigint-buffer": "npm:@trufflesuite/bigint-buffer@^1.1.10",
-    "undici": "^7.29.0",
-    "deepmerge-ts": "^8.0.0"
+    }
   }
 }
