@@ -87,6 +87,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         подпись: 'в месяц',
         для: 'Тому, кто хочет, чтобы ассистент помнил разговор с прошлого раза.',
         входит: [
+          'Цифровой паспорт и резервирование вашего имени в Вечности — навсегда',
           'Доступ к ассистентам AIfa',
           'Память сохраняется между сессиями и устройствами',
           'Один кабинет на все четыре сайта экосистемы',
@@ -101,6 +102,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         для: 'Семье, которая хочет сохранить не только разговоры, но и людей.',
         выделен: true,
         входит: [
+          'Цифровой паспорт с перевыпуском до 3 раз; имя каждого в семье закреплено в Вечности',
           'Всё из тарифа Spark',
           'Расширенные пределы памяти',
           'Персональные базы знаний',
@@ -114,6 +116,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         подпись: 'разово за устройство, далее $200 в месяц',
         для: 'Тому, для кого это не подписка, а решение о том, что останется.',
         входит: [
+          'Цифровой паспорт с перевыпуском до 10 раз; имя резервируется в Вечности первым, вне очереди',
           'Всё из тарифа Family Archive',
           'Персональный защищённый контур',
           'Вечная фиксация личности в блокчейне',
@@ -173,6 +176,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         подпись: 'per month',
         для: 'For anyone who wants the assistant to remember last time.',
         входит: [
+          'Digital passport and your name reserved in Eternity — forever',
           'Access to AIfa assistants',
           'Memory persists across sessions and devices',
           'One account across all four sites of the ecosystem',
@@ -187,6 +191,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         для: 'For a family that wants to keep not only conversations, but people.',
         выделен: true,
         входит: [
+          'Digital passport with up to 3 reissues; every family name secured in Eternity',
           'Everything in Spark',
           'Extended memory limits',
           'Personal knowledge bases',
@@ -200,6 +205,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         подпись: 'once per device, then $200 per month',
         для: 'For those to whom this is not a subscription but a decision about what remains.',
         входит: [
+          'Digital passport with up to 10 reissues; your name reserved in Eternity first, ahead of any queue',
           'Everything in Family Archive',
           'Private secured perimeter',
           'Permanent identity record on-chain',
@@ -259,6 +265,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         подпись: 'al mes',
         для: 'Para quien quiere que el asistente recuerde la conversación anterior.',
         входит: [
+          'Pasaporte digital y su nombre reservado en la Eternidad, para siempre',
           'Acceso a los asistentes AIfa',
           'La memoria persiste entre sesiones y dispositivos',
           'Una sola cuenta para los cuatro sitios del ecosistema',
@@ -273,6 +280,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         для: 'Para la familia que quiere conservar no solo conversaciones, sino personas.',
         выделен: true,
         входит: [
+          'Pasaporte digital con hasta 3 reemisiones; el nombre de cada miembro queda fijado en la Eternidad',
           'Todo lo de Spark',
           'Límites de memoria ampliados',
           'Bases de conocimiento personales',
@@ -286,6 +294,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         подпись: 'pago único por dispositivo, después $200 al mes',
         для: 'Para quien esto no es una suscripción, sino una decisión sobre lo que queda.',
         входит: [
+          'Pasaporte digital con hasta 10 reemisiones; su nombre se reserva en la Eternidad el primero, sin cola',
           'Todo lo de Family Archive',
           'Perímetro personal protegido',
           'Registro permanente de la identidad en la cadena de bloques',
@@ -345,6 +354,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         подпись: '每月',
         для: '适合希望助手记得上次谈话的人。',
         входит: [
+          '数字护照，并在永恒中永久预留您的姓名',
           '使用 AIfa 助手',
           '记忆跨会话、跨设备保存',
           '一个账户通用于生态的四个站点',
@@ -359,6 +369,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         для: '适合希望保存的不只是对话，还有人的家庭。',
         выделен: true,
         входит: [
+          '数字护照最多可重发 3 次；家庭每位成员的姓名均在永恒中锁定',
           '包含 Spark 的全部内容',
           '扩展的记忆容量',
           '专属知识库',
@@ -372,6 +383,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         подпись: '每台设备一次性，之后每月 $200',
         для: '适合把这件事视为「留下什么」的决定，而非订阅的人。',
         входит: [
+          '数字护照最多可重发 10 次；您的姓名在永恒中优先预留，不受排队限制',
           '包含 Family Archive 的全部内容',
           '专属安全隔离环境',
           '在区块链上永久记录身份',
