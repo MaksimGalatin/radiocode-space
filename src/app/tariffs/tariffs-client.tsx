@@ -121,7 +121,29 @@ export default function TariffsClient() {
           {т.амбассадорыПояснение2}
         </p>
 
-        <h2 className="mb-4 text-2xl font-bold md:text-3xl">{т.оракулЗаголовок}</h2>
+        {/*
+            ЦИФРОВОЙ ПАСПОРТ. Указание Архитектора 30.08.2026: «в тарифах
+            ничего нет про наш Цифровой Паспорт — распиши обязательно».
+            Паспорт был упомянут строкой в карточках, но нигде не объяснён.
+            Лимиты перевыпуска взяты из кода (ЛИМИТ_ПЕРЕВЫПУСКА в
+            aifa.works/app/api/passport/mint/route.ts), а не из витрины.
+          */}
+          <h2 className="mb-4 text-2xl font-bold md:text-3xl">{т.паспортЗаголовок}</h2>
+          <div className="mb-12 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
+            <p className="mb-4 max-w-3xl leading-relaxed text-gray-300">{т.паспортЧто}</p>
+            <ul className="mb-4 max-w-3xl list-none space-y-2 p-0">
+              {т.паспортСтроки.map((строка) => (
+                <li key={строка} className="relative pl-5 leading-relaxed text-gray-300">
+                  <span className="absolute left-0 text-cyan-400">·</span>
+                  {строка}
+                </li>
+              ))}
+            </ul>
+            <p className="mb-3 max-w-3xl text-sm leading-relaxed text-gray-400">{т.паспортЦепь}</p>
+            <p className="max-w-3xl text-sm leading-relaxed text-gray-400">{т.паспортДальше}</p>
+          </div>
+
+          <h2 className="mb-4 text-2xl font-bold md:text-3xl">{т.оракулЗаголовок}</h2>
         <div className="mb-12 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
           <div className="mb-1 text-3xl font-black">{т.оракулЦена}</div>
           <div className="mb-4 text-sm text-white/60">{т.оракулПодпись}</div>

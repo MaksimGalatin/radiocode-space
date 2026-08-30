@@ -54,6 +54,11 @@ export type ТекстыТарифов = {
   строки: [string, string, string];
   амбассадорыПояснение1: string;
   амбассадорыПояснение2: string;
+  паспортЗаголовок: string;
+  паспортЧто: string;
+  паспортСтроки: string[];
+  паспортЦепь: string;
+  паспортДальше: string;
   оракулЗаголовок: string;
   оракулЦена: string;
   оракулПодпись: string;
@@ -87,7 +92,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         подпись: 'в месяц',
         для: 'Тому, кто хочет, чтобы ассистент помнил разговор с прошлого раза.',
         входит: [
-          'Цифровой паспорт и резервирование вашего имени в Вечности — навсегда',
+          'Цифровой паспорт: имя резервируется за вами навсегда (перевыпуск — с Семейного Архива)',
           'Доступ к ассистентам AIfa',
           'Память сохраняется между сессиями и устройствами',
           'Один кабинет на все четыре сайта экосистемы',
@@ -139,6 +144,30 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
       'Ambassador Team — для компаний и партнёров со своей базой. Кроме ончейн-дохода даёт двухканальную сетку от фиатных продаж: обычную и повышенную при выплате в токенах.',
     амбассадорыПояснение2:
       'Доход считается от уровня вашего собственного тарифа. Если ваш амбассадор на более дорогом тарифе, чем вы, разница показывается в кабинете как упущенная выгода — и открывается полностью при переходе на соответствующий уровень.',
+    паспортЗаголовок: 'Цифровой Паспорт',
+    паспортЧто:
+      'Документ вашей личности в экосистеме. У него есть номер вида ' +
+      'CE-XXXXXXXX, гербовый бланк, машиночитаемая зона и QR — как у ' +
+      'настоящего паспорта, только проверяется он не пограничником, а ' +
+      'любым человеком по ссылке. Имя, которое вы в нём заняли, ' +
+      'закрепляется за вами: второго такого в экосистеме не будет.',
+    паспортСтроки: [
+      'Имя резервируется за вами — навсегда, кто первым занял, того и имя',
+      'Публичная страница-бланк: её можно показать, отправить, распечатать',
+      'Почта в паспорт НЕ попадает: личность держится на отпечатке, а не на адресе',
+      'Перевыпуск: на Искре — нет, на Семейном Архиве — до 3 раз, на Цифровой ДНК — до 10',
+      'Активен всегда один паспорт; прежние версии остаются в истории',
+    ],
+    паспортЦепь:
+      'Паспорт записывается в Arweave — постоянное хранилище, откуда ' +
+      'запись не изымается никогда. Это уже работает, и для вас это ' +
+      'бесплатно: документ меньше порога бесплатной загрузки, поэтому ни ' +
+      'выпуск, ни перевыпуск не стоят ничего сверх тарифа.',
+    паспортДальше:
+      'Следующий шаг — тот же паспорт как cNFT в Solana: сжатый ' +
+      'невзаимозаменяемый токен, который лежит в вашем кошельке и ' +
+      'предъявляется без нас. Это в работе, и мы говорим об этом как о ' +
+      'планах, а не как о готовом: сегодня подтверждение живёт в Arweave.',
     оракулЗаголовок: 'AIfaFocus — аудит доступности сайта',
     оракулЦена: '$500',
     оракулПодпись: 'разово за сайт',
@@ -228,6 +257,30 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
       'Ambassador Team is for companies and partners with their own audience. On top of on-chain income it opens a two-channel grid on fiat sales: the standard one, and a higher rate when paid in tokens.',
     амбассадорыПояснение2:
       'Income is calculated from the level of your own plan. If your ambassador is on a more expensive plan than you, the difference is shown in your dashboard as lost opportunity — and unlocks in full when you move up.',
+    паспортЗаголовок: 'Digital Passport',
+    паспортЧто:
+      'Your identity document within the ecosystem. It carries a number ' +
+      'of the form CE-XXXXXXXX, a formal blank, a machine-readable zone ' +
+      'and a QR code \u2014 like a real passport, except it is checked ' +
+      'not by a border officer but by anyone with the link. The name you ' +
+      'claim in it stays yours: there will be no second one like it.',
+    паспортСтроки: [
+      'The name is reserved for you \u2014 permanently, first claim wins',
+      'A public document page: show it, send it, print it',
+      'Your email does NOT go into the passport: identity rests on a fingerprint, not an address',
+      'Reissue: none on Spark, up to 3 on Family Archive, up to 10 on Digital DNA',
+      'Exactly one passport is active; earlier versions remain in its history',
+    ],
+    паспортЦепь:
+      'The passport is written to Arweave \u2014 permanent storage from ' +
+      'which nothing is ever withdrawn. This already works, and it costs ' +
+      'you nothing: the document is below the free-upload threshold, so ' +
+      'neither issuing nor reissuing adds anything to your plan.',
+    паспортДальше:
+      'The next step is the same passport as a cNFT on Solana: a ' +
+      'compressed non-fungible token that sits in your own wallet and can ' +
+      'be presented without us. It is in progress, and we call it a plan ' +
+      'rather than a feature: today the proof lives in Arweave.',
     оракулЗаголовок: 'Oracle — website accessibility audit',
     оракулЦена: '$500',
     оракулПодпись: 'one-off, per site',
@@ -317,6 +370,32 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
       'Ambassador Team es para empresas y socios con su propia audiencia. Además del ingreso en cadena, abre una red de dos canales sobre las ventas en fiat: la estándar y una tarifa superior si se cobra en tokens.',
     амбассадорыПояснение2:
       'El ingreso se calcula desde el nivel de tu propio plan. Si tu embajador está en un plan más caro que el tuyo, la diferencia aparece en el panel como beneficio perdido — y se desbloquea por completo al subir de nivel.',
+    паспортЗаголовок: 'Pasaporte Digital',
+    паспортЧто:
+      'El documento de su identidad dentro del ecosistema. Lleva un ' +
+      'n\u00famero del tipo CE-XXXXXXXX, un formulario oficial, una zona ' +
+      'de lectura mec\u00e1nica y un c\u00f3digo QR \u2014 como un ' +
+      'pasaporte real, salvo que no lo revisa un agente de fronteras sino ' +
+      'cualquiera con el enlace. El nombre que reserve queda suyo: no ' +
+      'habr\u00e1 un segundo igual.',
+    паспортСтроки: [
+      'El nombre queda reservado para usted, de forma permanente: quien llega primero se lo lleva',
+      'P\u00e1gina p\u00fablica del documento: se puede mostrar, enviar e imprimir',
+      'Su correo NO entra en el pasaporte: la identidad se apoya en una huella, no en una direcci\u00f3n',
+      'Reemisi\u00f3n: ninguna en Spark, hasta 3 en Family Archive, hasta 10 en Digital DNA',
+      'Siempre hay un solo pasaporte activo; las versiones anteriores quedan en su historial',
+    ],
+    паспортЦепь:
+      'El pasaporte se inscribe en Arweave, un almacenamiento permanente ' +
+      'del que nunca se retira nada. Esto ya funciona y a usted no le ' +
+      'cuesta nada: el documento est\u00e1 por debajo del umbral de ' +
+      'carga gratuita, de modo que ni la emisi\u00f3n ni la reemisi\u00f3n ' +
+      'a\u00f1aden nada a su plan.',
+    паспортДальше:
+      'El siguiente paso es el mismo pasaporte como cNFT en Solana: un ' +
+      'token no fungible comprimido que reside en su propia cartera y se ' +
+      'presenta sin nosotros. Est\u00e1 en desarrollo, y lo llamamos plan ' +
+      'y no funci\u00f3n: hoy la prueba vive en Arweave.',
     оракулЗаголовок: 'Oráculo — auditoría de accesibilidad web',
     оракулЦена: '$500',
     оракулПодпись: 'pago único por sitio',
@@ -406,6 +485,25 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
       'Ambassador Team 面向拥有自有受众的公司与合作伙伴。除链上收益外，还开启法币销售的双通道：标准比例，以及以代币结算时的更高比例。',
     амбассадорыПояснение2:
       '收益按你自己所在方案的级别计算。若你的大使所在方案高于你，差额会在个人中心显示为「错失收益」，升级后即可全额解锁。',
+    паспортЗаголовок: '数字护照',
+    паспортЧто:
+      '您在生态系统中的身份证件。它有形如 CE-XXXXXXXX 的编号、正式版式、' +
+      '机读区与二维码——如同真实护照，只是查验者不是边检人员，而是任何拿到链接的人。' +
+      '您在其中占用的名字将归您所有：生态系统中不会有第二个相同的名字。',
+    паспортСтроки: [
+      '名字永久保留给您——先到先得',
+      '公开的证件页面：可展示、可发送、可打印',
+      '您的邮箱不会写入护照：身份依托于指纹，而非邮件地址',
+      '补发：Spark 不提供，Family Archive 最多 3 次，Digital DNA 最多 10 次',
+      '始终只有一本护照处于有效状态；旧版本保留在其历史记录中',
+    ],
+    паспортЦепь:
+      '护照写入 Arweave——永久存储，其中的记录永不撤回。这一点已经在运行，' +
+      '且对您免费：文件小于免费上传阈值，因此签发与补发都不会在套餐之外产生任何费用。',
+    паспортДальше:
+      '下一步是把同一本护照做成 Solana 上的 cNFT：一枚压缩型非同质化代币，' +
+      '存放在您自己的钱包中，无需经过我们即可出示。该功能正在开发中，' +
+      '我们称其为计划而非既有功能：目前的凭证保存在 Arweave。',
     оракулЗаголовок: '神谕 — 网站无障碍审计',
     оракулЦена: '$500',
     оракулПодпись: '每个站点一次性',
