@@ -147,6 +147,26 @@ const CONTENT: Record<Lang, GlossaryContent> = {
         name: 'Право на забвение против вечной записи',
         body: `Право на забвение против вечной записи — это прямое столкновение статьи 17 GDPR, которая даёт человеку право требовать удаления своих данных, и блокчейна вроде Arweave, где запись не может удалить вообще никто.\n\nУдалением тут не выкрутиться: в сети нет операции удаления, и даже при полном желании подчиниться дёргать нечего. Рабочий ответ — шифрование и контроль ключа: в вечное хранение уходит шифротекст, а человек распоряжается тем, существует ли ключ; уничтожение ключа делает запись нечитаемой навсегда — это максимально близкое к удалению, что вечный носитель вообще позволяет.\n\nВ экосистеме CODE именно поэтому память пользователя шифруется (AES-256-GCM) перед записью, а не уходит в сеть открытым текстом.\n\nКлючевой факт: признает ли регулятор уничтожение ключа удалением — вопрос нерешённый. Это наш инженерный подход, а не юридическая гарантия.`,
       },
+          {
+        name: 'WCAG 2.1 AA',
+        body: `WCAG 2.1 AA — это международный стандарт веб-доступности и тот уровень, на который ссылаются законы и суды. Он построен на четырёх принципах: воспринимаемость, управляемость, понятность, надёжность, — а уровень AA это рабочая середина: уровень A слишком слаб, чтобы что-то значить, уровень AAA недостижим для большинства сайтов. Требования конкретны и проверяемы: контраст текста не ниже 4,5:1, каждое поле формы связано с видимой меткой, вся функциональность доступна с одной клавиатуры, видимый индикатор фокуса, альтернативный текст у значимых изображений. По нашему собственному замеру 10 440 муниципальных сайтов США до цели дошли только 14,6 % проверок — а наличие опубликованного заявления о доступности меняло это на 1,3 процентных пункта. Поэтому AIfaFocus проверяет поведение, а не декларации.`,
+      },
+      {
+        name: 'ADA Title II и Title III',
+        body: `ADA Title II и Title III — это разделы Закона об американцах с инвалидностью, которые делают сайт предметом права в США. Title II охватывает штаты и местные власти: каждый город, округ, суд и школьный округ; Title III — места общественного пользования, к которым суды относят и коммерческие сайты. В апреле 2024 года Министерство юстиции США приняло правило, закрепляющее WCAG 2.1 AA как технический стандарт для организаций Title II, со сроками соответствия в апреле 2026 года для крупных и апреле 2027 для небольших. Правоприменение здесь не теоретическое: исков о недоступности сайтов подаются тысячи в год, и урегулирование одного обычно стоит дороже, чем починка сайта.`,
+      },
+      {
+        name: 'Section 508 и EN 301 549',
+        body: `Section 508 и EN 301 549 — это стандарты закупок, от которых зависит, можно ли вообще продать продукт государственному заказчику. Section 508 Закона о реабилитации США требует, чтобы федеральные ведомства покупали и создавали технологии, пригодные для людей с инвалидностью; EN 301 549 — европейский аналог, обязательный для государственных органов ЕС. Оба ссылаются на WCAG, то есть один технический стандарт управляет тремя правовыми режимами на двух континентах. Для поставщика следствие простое: провал проверки доступности не приводит к штрафу — он вычёркивает вас из списка допущенных к торгам.`,
+      },
+      {
+        name: 'GDPR',
+        body: `GDPR (Общий регламент по защите данных) — регламент Европейского союза, действующий с 25 мая 2018 года и применимый к любому, кто обрабатывает данные людей в ЕС, независимо от того, где находится компания. Практический вес ему даёт статья 83: штрафы достигают 20 миллионов евро или 4 % мирового годового оборота — по большей из величин. Две его статьи определили устройство нашей памяти: статья 17 (право на удаление) и статья 20 (право получить свои данные в переносимом виде). Вечный блокчейн не умеет удалять ничего — поэтому AIfa шифрует каждый диалог отдельным производным ключом: уничтожение ключа делает запись нечитаемой навсегда, включая нас самих. Это единственный честный способ дать право на забвение внутри вечного хранилища.`,
+      },
+      {
+        name: 'CCPA и CPRA',
+        body: `CCPA и CPRA — законы Калифорнии о приватности, и именно из-за них американская компания без единого европейского клиента всё равно не может обойтись без работы с данными. CCPA дал жителям Калифорнии право знать, что о них собрано, удалить это и отказаться от продажи; CPRA, действующий с января 2023 года, добавил право исправлять данные и ограничивать использование чувствительных сведений, а также создал отдельный надзорный орган. Взыскания — 2 500 долларов за нарушение и 7 500 за умышленное или затрагивающее несовершеннолетних, и считаются они за каждого пострадавшего человека: именно это превращает техническую недоработку в семизначную сумму. Заметное требование, которое чаще всего пропускают, — ссылка в подвале «Не продавать и не передавать мою личную информацию».`,
+      },
     ],
   },
   en: {
@@ -278,6 +298,26 @@ const CONTENT: Record<Lang, GlossaryContent> = {
         name: 'Shamir’s Secret Sharing',
         body: `Shamir’s Secret Sharing is a scheme in which a key is split into n shares such that any k of them reconstruct it, while any k−1 give away nothing at all. It rests on a polynomial: the secret is the value at zero, each share is one point on the curve, and defining a curve of degree k−1 takes exactly k points; with fewer, every possible value of the secret remains equally likely. That «nothing» is literal, not a matter of brute-force difficulty: k−1 shares do not make guessing the key any easier — which is what separates this scheme from simply cutting a password into pieces. It is used where a key must outlive people: shares are handed to different holders in different places, so no one of them can act alone, and losing some shares does not lose the secret. In the CODE ecosystem it is the mechanism that would make Pandora’s Box Protocol possible.`,
       },
+          {
+        name: 'WCAG 2.1 AA',
+        body: `WCAG 2.1 AA is the international standard for web accessibility, and the level that laws and courts actually reference. It is built on four principles — perceivable, operable, understandable, robust — and level AA is the practical middle: level A is too weak to be meaningful, level AAA is unreachable for most sites. The requirements are specific and testable: text contrast of at least 4.5:1, every form field bound to a visible label, all functionality reachable by keyboard alone, a visible focus indicator, alternative text for meaningful images. In our own measurement of 10,440 US municipal websites, only 14.6 % of journeys reached their goal — and having a published accessibility statement changed that by 1.3 percentage points. This is why AIfaFocus checks behaviour rather than declarations.`,
+      },
+      {
+        name: 'ADA Title II and Title III',
+        body: `ADA Title II and Title III are the parts of the Americans with Disabilities Act that make websites a legal matter in the United States. Title II covers state and local government — every city, county, court and school district; Title III covers places of public accommodation, which courts have read to include commercial websites. In April 2024 the Department of Justice issued a rule that fixes WCAG 2.1 AA as the technical standard for Title II entities, with compliance dates of April 2026 for larger public bodies and April 2027 for smaller ones. Enforcement is not theoretical: thousands of ADA web lawsuits are filed each year, and the cost of settling one typically exceeds the cost of fixing the site.`,
+      },
+      {
+        name: 'Section 508 and EN 301 549',
+        body: `Section 508 and EN 301 549 are the procurement standards that decide whether an accessible product can be sold to the public sector at all. Section 508 of the US Rehabilitation Act requires federal agencies to buy and build information technology that people with disabilities can use; EN 301 549 is its European counterpart, mandatory for public bodies across the EU. Both incorporate WCAG by reference, which means one technical standard now governs three legal regimes on two continents. For a vendor the practical consequence is blunt: failing an accessibility review does not produce a fine — it removes you from the bidding list.`,
+      },
+      {
+        name: 'GDPR',
+        body: `GDPR (General Data Protection Regulation) is the European Union regulation that has governed personal data since 25 May 2018, and it applies to anyone processing the data of people in the EU regardless of where the company sits. Its practical weight comes from Article 83: fines reach €20 million or 4 % of worldwide annual turnover, whichever is higher. Two of its articles shape how we built memory itself — Article 17, the right to erasure, and Article 20, the right to receive your data in a portable form. A permanent blockchain cannot delete anything, which is why AIfa encrypts each dialogue with its own derived key: destroying that key makes the record unreadable forever, including to us. That is the only honest way to offer erasure inside permanent storage.`,
+      },
+      {
+        name: 'CCPA and CPRA',
+        body: `CCPA and CPRA are California's privacy laws, and they are the reason a US company with no European customers still cannot ignore privacy engineering. The CCPA gave Californians the right to know what is collected, to delete it, and to opt out of its sale; the CPRA, in force since January 2023, added the right to correct data and to limit the use of sensitive information, and created a dedicated enforcement agency. Penalties run to $2,500 per violation and $7,500 for intentional ones or those involving minors — counted per affected consumer, which is what turns a technical oversight into a seven-figure exposure. The visible obligation most sites miss is the footer link: «Do Not Sell or Share My Personal Information».`,
+      },
     ],
   },
   es: {
@@ -397,6 +437,26 @@ const CONTENT: Record<Lang, GlossaryContent> = {
         name: 'Derecho al olvido frente al registro permanente',
         body: `El derecho al olvido frente al registro permanente es el choque directo entre el artículo 17 del RGPD, que permite a una persona exigir la supresión de sus datos, y una cadena de bloques como Arweave, donde un registro escrito no lo puede borrar absolutamente nadie.\n\nPor la vía del borrado no hay salida: la red no tiene operación de borrado y, aun queriendo cumplir, no hay palanca que accionar. La respuesta viable es el cifrado más el control de la clave: al almacenamiento permanente va texto cifrado, y la persona decide si la clave sigue existiendo; destruirla vuelve el registro ilegible para siempre, que es lo más cerca del borrado que permite un soporte permanente.\n\nEn el ecosistema CODE esa es la razón de que la memoria del usuario se cifre (AES-256-GCM) antes de escribirse, en lugar de publicarse en claro.\n\nDato clave: si un regulador aceptará la destrucción de la clave como supresión es algo no resuelto. Este es nuestro enfoque de ingeniería, no una garantía jurídica.`,
       },
+          {
+        name: 'WCAG 2.1 AA',
+        body: `WCAG 2.1 AA es la norma internacional de accesibilidad web y el nivel al que remiten las leyes y los tribunales. Se apoya en cuatro principios —perceptible, operable, comprensible, robusto— y el nivel AA es el término medio práctico: el nivel A es demasiado débil para significar algo y el AAA resulta inalcanzable para la mayoría de los sitios. Los requisitos son concretos y verificables: contraste de texto de al menos 4,5:1, cada campo de formulario vinculado a una etiqueta visible, toda la funcionalidad accesible sólo con teclado, un indicador de foco visible y texto alternativo en las imágenes significativas. En nuestra propia medición de 10 440 sitios municipales de EE. UU., sólo el 14,6 % de los recorridos alcanzó su objetivo, y publicar una declaración de accesibilidad cambiaba esa cifra en 1,3 puntos porcentuales. Por eso AIfaFocus comprueba el comportamiento y no las declaraciones.`,
+      },
+      {
+        name: 'ADA Title II y Title III',
+        body: `ADA Title II y Title III son las partes de la Ley de Estadounidenses con Discapacidades que convierten un sitio web en materia jurídica en EE. UU. El Title II cubre a los gobiernos estatales y locales: cada ciudad, condado, tribunal y distrito escolar; el Title III cubre los lugares de acceso público, entre los que los tribunales incluyen los sitios comerciales. En abril de 2024 el Departamento de Justicia aprobó una norma que fija WCAG 2.1 AA como estándar técnico para las entidades del Title II, con plazos de cumplimiento en abril de 2026 para los organismos grandes y abril de 2027 para los pequeños. La aplicación no es teórica: cada año se presentan miles de demandas por accesibilidad web, y resolver una suele costar más que arreglar el sitio.`,
+      },
+      {
+        name: 'Section 508 y EN 301 549',
+        body: `Section 508 y EN 301 549 son las normas de contratación pública que deciden si un producto puede venderse al sector público. La Section 508 de la Ley de Rehabilitación de EE. UU. obliga a las agencias federales a comprar y desarrollar tecnología utilizable por personas con discapacidad; EN 301 549 es su equivalente europeo, obligatorio para los organismos públicos de la UE. Ambas incorporan WCAG por referencia, de modo que un único estándar técnico gobierna tres regímenes jurídicos en dos continentes. Para un proveedor la consecuencia es simple: suspender una revisión de accesibilidad no genera una multa, sino que lo excluye de la lista de licitadores.`,
+      },
+      {
+        name: 'GDPR',
+        body: `El GDPR (Reglamento General de Protección de Datos) es el reglamento de la Unión Europea que rige los datos personales desde el 25 de mayo de 2018 y se aplica a quien trate datos de personas en la UE, con independencia de dónde esté la empresa. Su peso práctico viene del artículo 83: las multas alcanzan 20 millones de euros o el 4 % de la facturación anual mundial, la cifra que sea mayor. Dos de sus artículos determinaron cómo construimos la memoria: el artículo 17 (derecho de supresión) y el artículo 20 (derecho a recibir los datos en formato portátil). Una cadena de bloques permanente no puede borrar nada, por eso AIfa cifra cada diálogo con su propia clave derivada: destruir esa clave vuelve el registro ilegible para siempre, también para nosotros. Es la única forma honesta de ofrecer el derecho al olvido dentro de un almacenamiento eterno.`,
+      },
+      {
+        name: 'CCPA y CPRA',
+        body: `CCPA y CPRA son las leyes de privacidad de California, y son la razón por la que una empresa estadounidense sin un solo cliente europeo tampoco puede ignorar la ingeniería de privacidad. La CCPA otorgó a los californianos el derecho a saber qué se recopila, a borrarlo y a oponerse a su venta; la CPRA, en vigor desde enero de 2023, añadió el derecho a corregir los datos y a limitar el uso de información sensible, y creó una agencia de control específica. Las sanciones llegan a 2 500 dólares por infracción y 7 500 por las intencionadas o que afecten a menores, y se cuentan por cada consumidor afectado: eso es lo que convierte un descuido técnico en una cifra de siete dígitos. La obligación visible que más sitios omiten es el enlace del pie de página: «No vender ni compartir mi información personal».`,
+      },
     ],
   },
   zh: {
@@ -515,6 +575,26 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       {
         name: '被遗忘权与永久记录之争',
         body: `被遗忘权与永久记录之争是 GDPR 第 17 条与 Arweave 这类区块链之间的正面冲突：前者允许个人要求删除自己的数据，而后者上已写入的记录任何人都删不掉。\n\n走删除这条路是走不通的：网络根本没有删除操作，即便完全愿意配合，也没有可拉的闸。可行的答案是加密加上对密钥的控制：进入永久存储的是密文，而密钥是否还存在由本人决定；销毁密钥会让这条记录永远无法读取，这已是永久介质所能提供的、最接近删除的做法。\n\n在 CODE 生态中，用户的记忆之所以在写入前先行加密（AES-256-GCM）而不是以明文上链，正是出于这个原因。\n\n关键数据：监管机构是否会承认销毁密钥等同于删除，目前尚无定论。这是我们的工程做法，而非法律保证。`,
+      },
+          {
+        name: 'WCAG 2.1 AA',
+        body: `WCAG 2.1 AA 是网页无障碍的国际标准，也是法律与法院实际援引的等级。它建立在四项原则之上——可感知、可操作、可理解、健壮——而 AA 级是务实的中间层：A 级过于宽松而失去意义，AAA 级对多数网站而言无法达到。其要求具体且可验证：文本对比度不低于 4.5:1，每个表单字段都绑定可见标签，全部功能仅用键盘即可完成，具备可见的焦点指示，重要图片配有替代文本。在我们对美国 10 440 个市政网站的实测中，只有 14.6 % 的操作路径抵达了目标；而是否发布无障碍声明，只带来 1.3 个百分点的差别。正因如此，AIfaFocus 检查的是行为，而不是声明。`,
+      },
+      {
+        name: 'ADA Title II 与 Title III',
+        body: `ADA Title II 与 Title III 是《美国残疾人法案》中让网站成为法律问题的条款。Title II 适用于州与地方政府——每一个城市、县、法院和学区；Title III 适用于公共服务场所，法院已将商业网站纳入其中。2024 年 4 月，美国司法部发布规则，将 WCAG 2.1 AA 确立为 Title II 主体的技术标准，大型公共机构的合规期限为 2026 年 4 月，小型机构为 2027 年 4 月。执法并非纸面文章：每年都有数以千计的网站无障碍诉讼，而和解一起案件的花费通常高于修好网站的成本。`,
+      },
+      {
+        name: 'Section 508 与 EN 301 549',
+        body: `Section 508 与 EN 301 549 是决定产品能否卖给公共部门的采购标准。美国《康复法》第 508 条要求联邦机构采购和建设残障人士可用的信息技术；EN 301 549 是其欧洲对应标准，对欧盟公共机构具有强制力。两者都以引用方式采纳 WCAG，也就是说，同一套技术标准同时统辖两大洲的三种法律体系。对供应商而言后果很直白：无障碍审查不合格并不会带来罚款，而是把你从投标名单中划掉。`,
+      },
+      {
+        name: 'GDPR',
+        body: `GDPR（通用数据保护条例）是欧盟自 2018 年 5 月 25 日起施行的个人数据法规，适用于任何处理欧盟境内人员数据的主体，无论公司位于何处。其现实分量来自第 83 条：罚款可达 2 000 万欧元或全球年营业额的 4 %，以较高者为准。其中两条塑造了我们记忆系统的构造：第 17 条（删除权）与第 20 条（数据可携权）。永久区块链无法删除任何内容，因此 AIfa 为每一次对话派生独立密钥加密：销毁该密钥即使记录永远不可读，对我们自己也是如此。这是在永久存储中提供被遗忘权的唯一诚实做法。`,
+      },
+      {
+        name: 'CCPA 与 CPRA',
+        body: `CCPA 与 CPRA 是加利福尼亚州的隐私法，也是一家没有任何欧洲客户的美国公司同样无法回避隐私工程的原因。CCPA 赋予加州居民知悉所收集信息、删除信息以及拒绝其被出售的权利；自 2023 年 1 月起生效的 CPRA 增加了更正数据和限制敏感信息使用的权利，并设立了专门的执法机构。处罚为每次违规 2 500 美元，故意违规或涉及未成年人的为 7 500 美元，且按受影响的每一位消费者计算——正是这一点把技术疏漏变成七位数的风险敞口。多数网站遗漏的可见义务，是页脚那条链接：「不要出售或分享我的个人信息」。`,
       },
     ],
   },
