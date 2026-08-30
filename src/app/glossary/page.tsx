@@ -139,9 +139,9 @@ const definedTermSetSchema = {
     },
     {
       '@type': 'DefinedTerm',
-      name: 'Oracle',
+      name: 'AIfaFocus',
       description:
-        "Oracle is the entry point of the B2B model (the wedge): a personalized technical security audit of a client's website.",
+        "AIfaFocus is the entry point of the B2B model (the wedge): a personalized technical security audit of a client's website.",
       inDefinedTermSet: GLOSSARY_TERMSET_ID,
     },
     {
