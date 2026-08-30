@@ -87,7 +87,7 @@ const nextConfig: NextConfig = {
           { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           {
-            // Наш же Оракул нашёл это на нас: без Permissions-Policy браузер
+            // Наш же AIfaFocus нашёл это на нас: без Permissions-Policy браузер
             // не ограничивает доступ к камере, микрофону и геопозиции. Явно
             // отключаем всё, чем сайт не пользуется, — если чужой скрипт
             // попробует, браузер откажет.

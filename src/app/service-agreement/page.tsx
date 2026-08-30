@@ -64,7 +64,7 @@ export default function ServiceAgreementPage() {
           },
           {
             subtitle: "2.2 Nature and Limits of Remediation Services",
-            text: "Compliance-remediation Services are technical services aimed at reducing identifiable technical exposure. They are NOT legal advice, legal representation, a legal audit, or a certification of compliance with any law, standard, or regulation (including ADA, WCAG, CCPA/CPRA, HIPAA, GDPR, TCPA, or others). The Oracle scan and any report are automated heuristic analyses provided for informational purposes. The Contractor is not a law firm, licensed auditor, or regulatory authority. The Client remains solely responsible for its legal compliance and is strongly advised to consult qualified professionals.",
+            text: "Compliance-remediation Services are technical services aimed at reducing identifiable technical exposure. They are NOT legal advice, legal representation, a legal audit, or a certification of compliance with any law, standard, or regulation (including ADA, WCAG, CCPA/CPRA, HIPAA, GDPR, TCPA, or others). AIfaFocus scan and any report are automated heuristic analyses provided for informational purposes. The Contractor is not a law firm, licensed auditor, or regulatory authority. The Client remains solely responsible for its legal compliance and is strongly advised to consult qualified professionals.",
           },
           {
             subtitle: "2.3 Authorisation for In-Depth Technical Assessment",
