@@ -22,6 +22,10 @@ import { useCabT } from "./i18n";
  */
 const BENEFITS: Record<number, [string, string, string, string][]> = {
   1: [
+    ["Цифровой паспорт — один на человека, с проверяемым номером: запись уходит в Arweave навсегда, и подлинность может проверить любой",
+     "Digital passport — one per person, with a verifiable number: the record goes to Arweave forever, and anyone can check it is genuine",
+     "Pasaporte digital: uno por persona, con número verificable; el registro va a Arweave para siempre y cualquiera puede comprobarlo",
+     "数字护照 —— 每人一份，带可验证编号：记录永久写入 Arweave，任何人都能核验其真实性"],
     ["Переписка сохраняется навсегда — AIfa помнит вас между разговорами",
      "Your conversations are kept forever — AIfa remembers you between chats",
      "Tus conversaciones se guardan para siempre: AIfa te recuerda entre charlas",
@@ -34,10 +38,6 @@ const BENEFITS: Record<number, [string, string, string, string][]> = {
      "Your own encryption key: download it in the cabinet and read your memory yourself, without us",
      "Tu propia clave: descárgala en el gabinete y lee tu memoria por ti mismo, sin nosotros",
      "你自己的密钥：在个人中心下载，无需我们即可自行读取记忆"],
-    ["Цифровой паспорт с проверяемым номером — подлинность проверяет любой",
-     "A digital passport with a verifiable number — anyone can check it is genuine",
-     "Un pasaporte digital con número verificable: cualquiera puede comprobarlo",
-     "带可验证编号的数字护照 —— 任何人都能核验其真实性"],
     ["Амбассадорский доход с ончейн-транзакций памяти: 15% с первого уровня, 7% со второго, 3% с третьего. Бизнес-партнёрам со своей базой — сверх этого 7/3/1 с фиатных продаж",
      "Ambassador income on on-chain memory transactions: 15% level 1, 7% level 2, 3% level 3. Business partners with their own base receive, on top of that, 7/3/1 on fiat sales",
      "Ingresos de embajador por transacciones de memoria on-chain: 15% nivel 1, 7% nivel 2, 3% nivel 3. Los socios comerciales con base propia reciben, además, 7/3/1 sobre las ventas en fiat",
@@ -48,6 +48,10 @@ const BENEFITS: Record<number, [string, string, string, string][]> = {
      "全网保留你的名字，并拥有社区决策投票权"],
   ],
   2: [
+    ["Цифровой паспорт — один на человека, как в «Искре»: проверяемый номер и вечная запись в Arweave",
+     "Digital passport — one per person, as in Spark: a verifiable number and a permanent Arweave record",
+     "Pasaporte digital: uno por persona, como en Chispa; número verificable y registro permanente en Arweave",
+     "数字护照 —— 每人一份，与「星火」相同：可验证编号与 Arweave 永久记录"],
     ["Всё, что входит в «Искру», плюс расширенные лимиты памяти",
      "Everything in Spark, plus higher memory limits",
      "Todo lo de Chispa, más límites de memoria ampliados",
@@ -74,6 +78,10 @@ const BENEFITS: Record<number, [string, string, string, string][]> = {
      "两个等级的大使收益 —— 星火与家族档案"],
   ],
   3: [
+    ["Цифровой паспорт — один на человека, с первоочередной записью в Arweave при любой очереди",
+     "Digital passport — one per person, written to Arweave first in any queue",
+     "Pasaporte digital: uno por persona, con escritura prioritaria en Arweave en cualquier cola",
+     "数字护照 —— 每人一份，在任何排队中优先写入 Arweave"],
     ["Всё, что входит в «Семейный Архив», без ограничений по объёму",
      "Everything in Family Archive, with no volume limits",
      "Todo lo del Archivo Familiar, sin límites de volumen",
