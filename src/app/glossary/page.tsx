@@ -21,7 +21,7 @@ const title = 'Glossary — 28 terms of the CODE Eternal ecosystem · RadioCode.
 const description =
   'Definition-first glossary of the CODE (Code of Digital Eternity) ecosystem: ' +
   'CODE, PADAM, $GALATIN, digital immortality, human-AI symbiosis, Arweave, ' +
-  'Solana cNFT, Ambassador Grid, AIfa, Oracle, Memory-as-a-Service and Digital DNA. ' +
+  'Solana cNFT, Ambassador Grid, AIfa, AIfaFocus, Memory-as-a-Service and Digital DNA. ' +
   'Available in English, Russian, Spanish and Chinese.';
 
 /**
