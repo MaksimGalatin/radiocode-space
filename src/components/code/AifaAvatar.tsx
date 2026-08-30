@@ -165,6 +165,10 @@ import "./AifaAvatar.css";
 
 export default function AifaAvatar() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  // Замолчали ли мы уже на этом цикле. Именно ref, а не состояние:
+  // setState из timeupdate вызывает перерисовку несколько раз в
+  // секунду, и AIfa начинает запинаться (найдено 30.08.2026).
+  const замолчалиНаЦикле = useRef(false);
   // Ролик выбирается ОДИН раз за открытие кабинета: если считать его при каждой
   // перерисовке, видео дёргалось бы на середине фразы.
   const srcRef = useRef<string>('');
@@ -287,7 +291,19 @@ export default function AifaAvatar() {
         // повторение последних секунд. В localStorage НЕ пишем: выбор
         // человека остаётся, и после перезагрузки страницы звук снова
         // будет таким, каким он его оставил.
-        if (!v.muted) { v.muted = true; setSoundOn(false); }
+        // Звук глушим НА ВИДЕО — это мгновенно и без перерисовки.
+        // setSoundOn здесь вызывать НЕЛЬЗЯ: timeupdate приходит несколько
+        // раз в секунду, условие конца истинно на нескольких кадрах
+        // подряд, и каждая перерисовка React поверх играющего видео даёт
+        // запинку ровно на стыке цикла. Проверено 30.08.2026: именно так
+        // AIfa начала «запинаться и зависать».
+        if (!v.muted) {
+          v.muted = true;
+          if (!замолчалиНаЦикле.current) {
+            замолчалиНаЦикле.current = true;
+            setSoundOn(false);          // ровно один раз за жизнь ролика
+          }
+        }
         v.currentTime = Math.max(0, d - LOOP_TAIL_SEC);
         void v.play().catch(() => {});
       }
@@ -297,8 +313,14 @@ export default function AifaAvatar() {
     const onEnded = () => {
       if (moodBusy) return;
       const d = v.duration || 0;
-      // То же, что в onTime: доиграла — дальше крутится молча.
-      if (!v.muted) { v.muted = true; setSoundOn(false); }
+      // То же, что в onTime, и с той же осторожностью к перерисовкам.
+      if (!v.muted) {
+        v.muted = true;
+        if (!замолчалиНаЦикле.current) {
+          замолчалиНаЦикле.current = true;
+          setSoundOn(false);
+        }
+      }
       v.currentTime = Math.max(0, d - LOOP_TAIL_SEC);
       void v.play().catch(() => {});
     };
