@@ -14,16 +14,17 @@
  *   раздел 5 — тарифы: Spark $15, Family Archive $100, Digital DNA $1000 + $200;
  *   раздел 3 — амбассадоры: 15/7/3 % ончейн; Team фиат 7/3/1 %, в токенах 8/4/2 %;
  *   раздел 4 — AIfaFocus $500 разово;
- *   расхождение сканера и человека — замер 27.08.2026, 16:24:
- *     32 642 страницы проверено, 11 149 признаны сканером доступными,
- *     человек прошёл 5 288 → расхождение 52,6 %. Замер 27.08.2026 18:09.
+ *   расхождение сканера и человека — замер 31.08.2026, 04:59:
+ *     95 524 страницы проверено, 25 966 признаны сканером доступными,
+ *     человек прошёл 11 994 → расхождение 53,8 %.
  *
- *   ОБЩЕЕ ЧИСЛО СТРАНИЦ В САМОМ ТЕКСТЕ НАМЕРЕННО ДАНО ОБОРОТОМ
- *   («более 32 000»), а не точной цифрой: оно растёт каждый час, и
- *   точное число через сутки разойдётся с тем, что человек видит на
- *   /research/data. Расхождение он объяснит не ростом работы, а
- *   небрежностью автора. Доля 52,6 %, наоборот, устойчива: выборка
- *   выросла в полтора раза, а доля сдвинулась на 0,6 пункта.
+ *   ЧИСЛО СТРАНИЦ ТЕПЕРЬ ДАЁТСЯ ТОЧНОЕ, А НЕ ОБОРОТОМ. Раньше здесь
+ *   стояло «более 32 000», потому что выборка росла каждый час и точная
+ *   цифра через сутки расходилась с /research/data. 31.08.2026 обход США
+ *   завершён: пройден весь реестр CISA (11 659 из 11 659), число больше
+ *   не растёт, и точное 95 524 убедительнее округления. Доля 53,8 %
+ *   устойчива: выборка выросла втрое, доля сдвинулась на 1,2 пункта.
+ *
  *
  * Отдельным файлом, а не внутри компонента: тот же словарь понадобится на
  * трёх других сайтах, а карта проектов запрещает копировать между ними
@@ -174,9 +175,9 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     оракулЧто:
       'Мы находим конкретные нарушения доступности и защиты данных на вашем сайте и закрываем их за 48 часов.',
     оракулЗамерНачало:
-      'Проверка идёт не только автоматическим сканером. В нашем собственном исследовании человек прошёл клавиатурой более 32 000 страниц в 3 549 муниципалитетах 51 штата. На 27 августа 2026 из 11 149 страниц, которые автоматика признала доступными, дойти до цели живой человек смог только на 5 288 — то есть ',
+      'Проверка идёт не только автоматическим сканером. В нашем собственном исследовании человек прошёл клавиатурой 95 524 страницы в 11 902 муниципалитетах 51 штата и территории — это ВСЕ государственные сайты США из реестра CISA, до единого. На 31 августа 2026 из 25 966 страниц, которые автоматика признала доступными, дойти до цели живой человек смог только на 11 994 — то есть ',
     оракулЗамерВыделено:
-      'в 52,6 % случаев машина говорит «доступно», а человек не проходит',
+      'в 53,8 % случаев машина говорит «доступно», а человек не проходит',
     оракулЗамерКонец: '. Поэтому мы проходим путь клавиатурой сами.',
     оракулСсылка: 'Проверить свой сайт бесплатным сканером — без регистрации',
     лимитыЗаголовок: 'Сколько проверок в сутки',
@@ -287,9 +288,9 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     оракулЧто:
       'We find specific accessibility and data-protection violations on your site and close them within 48 hours.',
     оракулЗамерНачало:
-      'The check is not only an automated scanner. In our own study a human walked over 32,000 pages by keyboard across 3,549 municipalities in 51 states. As of 27 August 2026, of the 11,149 pages the automation declared accessible, a living person reached the goal on only 5,288 — that is, ',
+      'The check is not only an automated scanner. In our own study a human walked 95,524 pages by keyboard across 11,902 municipalities in 51 states and territories — every single US government site in the CISA registry. As of 31 August 2026, of the 25,966 pages the automation declared accessible, a living person reached the goal on only 11,994 — that is, ',
     оракулЗамерВыделено:
-      'in 52.6 % of cases the machine says “accessible” and the human does not get through',
+      'in 53.8 % of cases the machine says “accessible” and the human does not get through',
     оракулЗамерКонец: '. That is why we walk the path by keyboard ourselves.',
     оракулСсылка: 'Scan your own site free — no signup required',
     лимитыЗаголовок: 'Scans per day',
@@ -402,9 +403,9 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     оракулЧто:
       'Encontramos infracciones concretas de accesibilidad y de protección de datos en tu sitio y las cerramos en 48 horas.',
     оракулЗамерНачало:
-      'La comprobación no es solo un escáner automático. En nuestro propio estudio una persona recorrió con el teclado más de 32 000 páginas en 3 549 municipios de 51 estados. A 27 de agosto de 2026, de las 11 149 páginas que la automatización declaró accesibles, una persona real llegó a la meta solo en 5 288 — es decir, ',
+      'La comprobación no es solo un escáner automático. En nuestro propio estudio una persona recorrió con el teclado 95 524 páginas en 11 902 municipios de 51 estados y territorios: todos los sitios públicos de EE. UU. del registro CISA, sin excepción. A 31 de agosto de 2026, de las 25 966 páginas que la automatización declaró accesibles, una persona real llegó a la meta solo en 11 994 — es decir, ',
     оракулЗамерВыделено:
-      'en el 52,6 % de los casos la máquina dice «accesible» y la persona no pasa',
+      'en el 53,8 % de los casos la máquina dice «accesible» y la persona no pasa',
     оракулЗамерКонец: '. Por eso recorremos el camino con el teclado nosotros mismos.',
     оракулСсылка: 'Analiza tu sitio gratis, sin registro',
     лимитыЗаголовок: 'Análisis por día',
@@ -510,8 +511,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     оракулЧто:
       '我们找出你网站上具体的无障碍与数据保护违规，并在 48 小时内修复。',
     оракулЗамерНачало:
-      '检查不只依靠自动扫描器。在我们自己的研究中，真人用键盘走过了 51 个州、3 549 个市镇的超过 32 000 个页面。截至 2026 年 8 月 27 日，在自动化判定为「可访问」的 11 149 个页面中，真人只在 5 288 个页面上抵达了目标——也就是说，',
-    оракулЗамерВыделено: '有 52.6 % 的情况机器说「可访问」，而人走不通',
+      '检查不只依靠自动扫描器。在我们自己的研究中，真人用键盘走过了 51 个州与属地、11 902 个市镇的 95 524 个页面——这是 CISA 登记册中全部美国政府网站，无一遗漏。截至 2026 年 8 月 31 日，在自动化判定为「可访问」的 25 966 个页面中，真人只在 11 994 个页面上抵达了目标——也就是说，',
+    оракулЗамерВыделено: '有 53.8 % 的情况机器说「可访问」，而人走不通',
     оракулЗамерКонец: '。因此我们自己用键盘走完全程。',
     оракулСсылка: '免费检测你的网站，无需注册',
     лимитыЗаголовок: '每日检测次数',
