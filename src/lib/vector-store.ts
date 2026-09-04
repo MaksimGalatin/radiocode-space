@@ -201,15 +201,20 @@ export async function searchMemory(
   const sql = getSql();
   const vec = `${toVectorLiteral(queryEmbedding)}`;
   const hashedKey = hashUserKey(userKey);
-  const rows = chatType
-    ? await sql`
-        SELECT content, role, speaker, chat_type, msg_ts, source,
-               1 - (embedding <=> ${vec}::halfvec) AS score
-        FROM chat_memory
-        WHERE user_key = ${hashedKey} AND chat_type = ${chatType}
-        ORDER BY embedding <=> ${vec}::halfvec
-        LIMIT ${k}`
-    : await sql`
+  /**
+   * 🔴 СМЫСЛОВОЙ ПОИСК ИДЁТ ПО ВСЕЙ ПАМЯТИ, А НЕ ПО ОДНОМУ КАНАЛУ.
+   *
+   * Здесь стояла развилка: при заданном `chatType` поиск ограничивался этим
+   * каналом. То есть на вопрос «о чём мы говорили» в Терминале не находилось
+   * ничего из главного чата, хотя разговор лежит в той же таблице.
+   *
+   * Конституция, раздел 34 пункт 9: память человека ОДНА, канал — метка
+   * внутри одной последовательности, а не отдельная память. Канал приходит
+   * в каждой найденной строке (`chat_type`), поэтому различать записи по
+   * происхождению по-прежнему можно — но искать надо по всему.
+   */
+  void chatType; // канал больше не сужает поиск — см. разбор выше
+  const rows = await sql`
         SELECT content, role, speaker, chat_type, msg_ts, source,
                1 - (embedding <=> ${vec}::halfvec) AS score
         FROM chat_memory
@@ -375,10 +380,26 @@ export async function countMemory(userKey: string): Promise<number> {
  */
 export async function readTurnsFromMemory(
   userEmail: string,
-  chatType: string,
+  /**
+   * 🔴 КАНАЛ БОЛЬШЕ НЕ РЕЖЕТ ПАМЯТЬ — он остаётся МЕТКОЙ, а не границей.
+   *
+   * Здесь стояло `AND chat_type = ${chatType}`: память читалась только того
+   * канала, в котором человек пишет сейчас. Поговорил в главном чате, зашёл
+   * в Семантический Терминал — и AIfa его там не помнит, хотя вся переписка
+   * лежит в базе целиком.
+   *
+   * Замер 04.09.2026 на боевой базе: шесть человек из восьми имеющих память
+   * говорят более чем в одном канале; у Архитектора 412 реплик в трёх
+   * каналах (main, oracle, terminal), у самого активного — 463 в трёх.
+   *
+   * Конституция, раздел 34 пункт 9: «Айфа помнит весь диалог с пользователем,
+   * не зависимо от того где он ей пишет… единой последовательной базой».
+   */
+  chatType?: string,
   limit = 400,
-): Promise<Array<{ role: 'user' | 'assistant'; content: string; timestamp: string }>> {
+): Promise<Array<{ role: 'user' | 'assistant'; content: string; timestamp: string; chatType: string }>> {
   if (!userEmail || !isVectorStoreConfigured()) return [];
+  void chatType; // канал не фильтрует — см. разбор выше
   const sql = getSql();
   // Ключ считается ровно так же, как при ЗАПИСИ: сначала почта приводится к
   // безопасному виду (собака и точки заменяются подчёркиванием), и только
@@ -387,10 +408,9 @@ export async function readTurnsFromMemory(
   // поймала; чтение исходника — нет.
   const key = hashUserKey(sanitizeEmail(userEmail));
   const rows = (await sql`
-    SELECT role, content, msg_ts, created_at
+    SELECT role, content, chat_type, msg_ts, created_at
       FROM chat_memory
      WHERE user_key = ${key}
-       AND chat_type = ${chatType}
        AND role IN ('user','assistant')
      ORDER BY COALESCE(msg_ts, created_at) DESC
      LIMIT ${limit}`) as Array<Record<string, unknown>>;
@@ -399,6 +419,7 @@ export async function readTurnsFromMemory(
       role: (r.role === 'user' ? 'user' : 'assistant') as 'user' | 'assistant',
       content: String(r.content || ''),
       timestamp: new Date(String(r.msg_ts || r.created_at)).toISOString(),
+      chatType: String(r.chat_type || 'main'),
     }))
     .filter((m) => m.content)
     .reverse();
