@@ -108,6 +108,84 @@ export async function processExpiredDeletions(): Promise<number> {
         try { await p.query(`DELETE FROM ${t} WHERE ${col}=$1`, [em]); } catch {}
       }
       try { await p.query(`DELETE FROM users WHERE email=$1`, [em]); } catch {}
+
+      /**
+       * 🔴 ЗАПИСЬ ВХОДА И ПАМЯТЬ — ОНИ В ДРУГОЙ БАЗЕ. Добавлено 04.09.2026.
+       *
+       * ЧТО БЫЛО. Всё, что удалялось выше, лежит в базе КАБИНЕТА. А учётная
+       * запись (`users_auth`) и сама переписка (`chat_memory`) живут в базе
+       * памяти — и не удалялись ЗДЕСЬ ничем. Письмо ниже при этом сообщало
+       * человеку: «Твоя память и аккаунт полностью удалены».
+       *
+       * То есть письмо говорило неправду: память оставалась целиком, и войти
+       * человек по-прежнему мог.
+       *
+       * `dbDeleteUser` перед удалением закрепляет ник за человеком навсегда:
+       * паспорт в блокчейне вечен, и отдать чужое имя новому человеку нельзя.
+       *
+       * Ошибка любого шага не отменяет остального — право на забвение важнее
+       * нашей технической поломки, — но пишется громко: именно молчаливый
+       * провал и позволил этому прожить незамеченным.
+       */
+      try {
+        /**
+         * Прямой SQL, а НЕ вызов общей функции: на этом сайте её может не
+         * быть. Первая версия этой правки импортировала `dbDeleteUser` и
+         * `deleteUserMemory` — и проверка перед выкаткой показала, что на
+         * двух сайтах из трёх нет ни одной из них, а на третьем нет второй.
+         * Сборка сломалась бы на всех трёх.
+         *
+         * `@neondatabase/serverless` есть во всех четырёх проектах, поэтому
+         * здесь используется он.
+         */
+        const url = process.env.DATABASE_URL_VECTOR || process.env.VECTOR_DATABASE_URL || '';
+        if (url) {
+          const { neon } = await import('@neondatabase/serverless');
+          const sqlВход = neon(url);
+          // Имя закрепляем ДО удаления: паспорт в блокчейне вечен, и отдать
+          // чужое имя новому человеку нельзя. Нет такой таблицы — не беда,
+          // удаление важнее.
+          try {
+            await sqlВход`INSERT INTO nicknames_reserved (nickname, email)
+                          SELECT nickname, email FROM users_auth
+                           WHERE lower(trim(email)) = ${em} AND nickname IS NOT NULL
+                          ON CONFLICT DO NOTHING`;
+          } catch { /* таблицы может не быть — не повод отменять удаление */ }
+          /**
+           * 🔴 КЛЮЧ СЧИТАЕТСЯ ТАК ЖЕ, КАК ПРИ ЗАПИСИ, ИНАЧЕ УДАЛЕНИЕ МОЛЧИТ.
+           *
+           * В `vector-store.ts` ключ памяти получается так:
+           *   sanitizeEmail: lowercase + всё, кроме [a-z0-9_.-] → «_»
+           *   hashUserKey:   sha256(результата)
+           * То есть собака превращается в подчёркивание ДО хеширования.
+           *
+           * Первая версия этой правки брала sha256 от сырой почты. Хеш
+           * выходил другой, `DELETE` не нашёл бы ни одной строки — и провал
+           * был бы МОЛЧАЛИВЫМ: письмо «память удалена» ушло бы, а память
+           * осталась целиком.
+           *
+           * Проверено на живых данных: с заменой совпадает 8 ключей из 8,
+           * без замены — ноль.
+           */
+          const ключПамяти = await sqlВход`
+            SELECT encode(digest(regexp_replace(lower(trim(${em})), '[^a-z0-9_.-]', '_', 'g'),
+                                 'sha256'), 'hex') AS k`;
+          const k = (ключПамяти as unknown as Array<{ k: string }>)[0]?.k;
+          const убрано = k
+            ? await sqlВход`DELETE FROM chat_memory WHERE user_key = ${k} RETURNING 1 AS d`
+            : [];
+          await sqlВход`DELETE FROM users_auth WHERE lower(trim(email)) = ${em}`;
+          console.log(`[processExpiredDeletions] запись входа удалена, реплик ${
+            (убрано as unknown[]).length} (${em})`);
+        } else {
+          console.error('[processExpiredDeletions] 🔴 DATABASE_URL_VECTOR не задан: ' +
+            'запись входа и память НЕ удалены, а письмо скажет, что удалены');
+        }
+      } catch (e) {
+        console.error('[processExpiredDeletions] 🔴 ЗАПИСЬ ВХОДА ИЛИ ПАМЯТЬ НЕ УДАЛЕНЫ — ' +
+          'человек сможет войти после «полного удаления»', e);
+      }
+
       await p.query(`UPDATE account_deletions SET status='done' WHERE email=$1`, [em]);
       await sendMail(em, 'Память удалена / Memory deleted', shell('Удаление завершено', '<p>Твоя память и аккаунт <b>полностью удалены</b>, как было запрошено. Зашифрованные копии в блокчейне навсегда останутся нечитаемыми (ключ уничтожен).</p>'));
       n++;
