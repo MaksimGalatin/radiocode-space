@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import RegistryClient from './registry-client';
 
 /**
@@ -39,6 +40,12 @@ export const metadata: Metadata = {
     'Открытые данные: из 11 902 доменов федерального реестра муниципальных сайтов США у 1 650 (13,9 %) нет записи в DNS — имени не существует. Срез на 31 августа 2026, проверка двумя независимыми резолверами, метод и ограничения раскрыты.',
 };
 
-export default function ResearchRegistryPage() {
-  return <RegistryClient />;
+export default async function ResearchRegistryPage() {
+  // Язык берётся из заголовка, который выставляет middleware, отрезая первый
+  // сегмент пути. Нужен затем, что на одном из сайтов клиентский контекст
+  // языка стартует с английского и серверная разметка всегда выходила
+  // английской — подробности в клиентском файле рядом.
+  const h = await headers();
+  const языкИзПути = h.get('x-locale') || undefined;
+  return <RegistryClient языкИзПути={языкИзПути} />;
 }

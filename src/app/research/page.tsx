@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import DataClient from './data/data-client';
 
 /**
@@ -46,6 +47,12 @@ export const metadata: Metadata = {
     + 'Platform comparison by share of pages with a barrier for a human.',
 };
 
-export default function ResearchIndexPage() {
-  return <DataClient />;
+export default async function ResearchIndexPage() {
+  // Язык берётся из заголовка, который выставляет middleware, отрезая первый
+  // сегмент пути. Нужен затем, что на одном из сайтов клиентский контекст
+  // языка стартует с английского и серверная разметка всегда выходила
+  // английской — подробности в клиентском файле рядом.
+  const h = await headers();
+  const языкИзПути = h.get('x-locale') || undefined;
+  return <DataClient языкИзПути={языкИзПути} />;
 }

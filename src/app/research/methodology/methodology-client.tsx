@@ -82,9 +82,14 @@ function датаСнимка(язык: ЯзыкКод): string {
   });
 }
 
-export default function MethodologyClient() {
+export default function MethodologyClient({ языкИзПути }: { языкИзПути?: string } = {}) {
   const { locale } = useLanguage();
-  const язык = (['ru', 'en', 'es', 'zh'].includes(locale) ? locale : 'en') as ЯзыкКод;
+  // 🔴 ЯЗЫК ИЗ ПУТИ СТАРШЕ КОНТЕКСТА (05.09.2026). На aifa.digital
+  // серверная разметка всегда выходила английской: язык там живёт в
+  // клиентском хранилище со значением `en` по умолчанию. Проп из
+  // заголовка `x-locale` чинит это, не трогая контекст сайта.
+  const _изПути = ['ru', 'en', 'es', 'zh'].includes(языкИзПути || '') ? языкИзПути : null;
+  const язык = (['ru', 'en', 'es', 'zh'].includes(_изПути || locale) ? (_изПути || locale) : 'en') as ЯзыкКод;
   const т = ТЕКСТЫ[язык];
   // Числа — в записи языка читателя. Без этого английская
   // методология показывала «53,8» и «11 902» (замер 01.09.2026).

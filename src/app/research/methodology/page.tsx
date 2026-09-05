@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import MethodologyClient from './methodology-client';
 
 /**
@@ -25,6 +26,12 @@ export const metadata: Metadata = {
     'Как мы измеряем доступность государственных сайтов: автоматическая проверка axe-core в настоящем браузере плюс клавиатурный обход того же браузера. Открытые данные, открытый код, признанные ограничения.',
 };
 
-export default function MethodologyPage() {
-  return <MethodologyClient />;
+export default async function MethodologyPage() {
+  // Язык берётся из заголовка, который выставляет middleware, отрезая первый
+  // сегмент пути. Нужен затем, что на одном из сайтов клиентский контекст
+  // языка стартует с английского и серверная разметка всегда выходила
+  // английской — подробности в клиентском файле рядом.
+  const h = await headers();
+  const языкИзПути = h.get('x-locale') || undefined;
+  return <MethodologyClient языкИзПути={языкИзПути} />;
 }

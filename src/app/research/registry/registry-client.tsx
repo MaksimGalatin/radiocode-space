@@ -60,9 +60,14 @@ function разряды(n: number): string {
   return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
-export default function RegistryClient() {
+export default function RegistryClient({ языкИзПути }: { языкИзПути?: string } = {}) {
   const { locale } = useLanguage();
-  const язык = (['ru', 'en', 'es', 'zh'].includes(locale) ? locale : 'en') as ЯзыкКод;
+  // 🔴 ЯЗЫК ИЗ ПУТИ СТАРШЕ КОНТЕКСТА (05.09.2026). На aifa.digital
+  // серверная разметка всегда выходила английской: язык там живёт в
+  // клиентском хранилище со значением `en` по умолчанию. Проп из
+  // заголовка `x-locale` чинит это, не трогая контекст сайта.
+  const _изПути = ['ru', 'en', 'es', 'zh'].includes(языкИзПути || '') ? языкИзПути : null;
+  const язык = (['ru', 'en', 'es', 'zh'].includes(_изПути || locale) ? (_изПути || locale) : 'en') as ЯзыкКод;
   const т = ТЕКСТЫ_РЕЕСТРА[язык];
   const Д = ЖИВЫЕ_ДОМЕНЫ;
 
