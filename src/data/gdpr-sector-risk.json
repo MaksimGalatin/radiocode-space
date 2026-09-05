@@ -1,0 +1,701 @@
+{
+ "source": "CMS GDPR Enforcement Tracker",
+ "fetchedAt": "2026-09-04T11:14:23.202Z",
+ "totalWithFine": 3072,
+ "caution": "Это назначенные взыскания по опубликованным делам, а НЕ прогноз для конкретной компании. Сумма зависит от оборота, тяжести и поведения нарушителя. В отчёте подавать только как «в вашей отрасли за это штрафовали, вот сколько раз и на какие суммы», без слов «вам грозит».",
+ "sectors": {
+  "Industry and Commerce": {
+   "count": 604,
+   "median": 5000,
+   "p90": 240000,
+   "max": 150000000,
+   "withArticle": 589,
+   "topArticles": [
+    {
+     "article": "Art. 5 GDPR",
+     "count": 219,
+     "share": 36
+    },
+    {
+     "article": "Art. 13 GDPR",
+     "count": 172,
+     "share": 28
+    },
+    {
+     "article": "Art. 6 GDPR",
+     "count": 165,
+     "share": 27
+    },
+    {
+     "article": "Art. 32 GDPR",
+     "count": 131,
+     "share": 22
+    },
+    {
+     "article": "Art. 12 GDPR",
+     "count": 80,
+     "share": 13
+    }
+   ],
+   "examples": [
+    {
+     "company": "Kolibri Image\nRegina und Dirk Maass GbR",
+     "country": "GERMANY",
+     "fine": 5000,
+     "date": "2018-12-17",
+     "articles": "Art. 28 (3) GDPR",
+     "violationType": "Insufficient data processing agreement",
+     "sourceUrl": "https://www.heise.de/newsticker/meldung/DSGVO-5000-Euro-Bussgeld-fuer-fehlenden-Auftragsverarbeitungsvertrag-4282737.html"
+    },
+    {
+     "company": "Shop Macoyn, S.L.",
+     "country": "SPAIN",
+     "fine": 5000,
+     "date": "2019-12-10",
+     "articles": "Art. 32 GDPR",
+     "violationType": "Insufficient technical and organisational measures to ensure information security",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-00320-2019.pdf"
+    },
+    {
+     "company": "Queseria Artesenal Ameco S.L.",
+     "country": "SPAIN",
+     "fine": 5000,
+     "date": "2020-02-03",
+     "articles": "Art. 5 GDPR, Art. 6 GDPR",
+     "violationType": "Insufficient legal basis for data processing",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-00259-2019.pdf"
+    }
+   ]
+  },
+  "Accomodation and Hospitality": {
+   "count": 100,
+   "median": 2700,
+   "p90": 50100,
+   "max": 20450000,
+   "withArticle": 97,
+   "topArticles": [
+    {
+     "article": "Art. 5 GDPR",
+     "count": 67,
+     "share": 67
+    },
+    {
+     "article": "Art. 13 GDPR",
+     "count": 40,
+     "share": 40
+    },
+    {
+     "article": "Art. 32 GDPR",
+     "count": 16,
+     "share": 16
+    },
+    {
+     "article": "Art. 6 GDPR",
+     "count": 16,
+     "share": 16
+    },
+    {
+     "article": "Art. 12 GDPR",
+     "count": 8,
+     "share": 8
+    }
+   ],
+   "examples": [
+    {
+     "company": "Restaurant",
+     "country": "SPAIN",
+     "fine": 3000,
+     "date": "2020-08-05",
+     "articles": "Art. 5 (1) c) GDPR, Art. 12 GDPR, Art. 13 GDPR",
+     "violationType": "Non-compliance with general data processing principles",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-00479-2019.pdf"
+    },
+    {
+     "company": "Charly Mike s.r.l.",
+     "country": "ITALY",
+     "fine": 3000,
+     "date": "2020-11-26",
+     "articles": "Art. 5 (1) a) GDPR, Art. 13 GDPR",
+     "violationType": "Insufficient legal basis for data processing",
+     "sourceUrl": "https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/9533587"
+    },
+    {
+     "company": "Bar owner",
+     "country": "SPAIN",
+     "fine": 3000,
+     "date": "2021-09-28",
+     "articles": "Art. 5 (1) b) GDPR",
+     "violationType": "Non-compliance with general data processing principles",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-00236-2021.pdf"
+    }
+   ]
+  },
+  "Individuals and Private Associations": {
+   "count": 351,
+   "median": 1000,
+   "p90": 10000,
+   "max": 3501000,
+   "withArticle": 344,
+   "topArticles": [
+    {
+     "article": "Art. 5 GDPR",
+     "count": 208,
+     "share": 59
+    },
+    {
+     "article": "Art. 6 GDPR",
+     "count": 118,
+     "share": 34
+    },
+    {
+     "article": "Art. 13 GDPR",
+     "count": 69,
+     "share": 20
+    },
+    {
+     "article": "Art. 32 GDPR",
+     "count": 27,
+     "share": 8
+    },
+    {
+     "article": "Art. 58 GDPR",
+     "count": 19,
+     "share": 5
+    }
+   ],
+   "examples": [
+    {
+     "company": "Non-profit organisation",
+     "country": "BELGIUM",
+     "fine": 1000,
+     "date": "2020-05-29",
+     "articles": "Art. 6 GDPR, Art. 21 GDPR",
+     "violationType": "Insufficient fulfilment of data subjects rights",
+     "sourceUrl": "https://www.gegevensbeschermingsautoriteit.be/sites/privacycommission/files/documents/Beslissing_GK_28-2020_NL.pdf"
+    },
+    {
+     "company": "Property Owner",
+     "country": "SPAIN",
+     "fine": 1000,
+     "date": "2020-06-09",
+     "articles": "Art. 5 (1) c) GDPR",
+     "violationType": "Non-compliance with general data processing principles",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-00373-2019.pdf"
+    },
+    {
+     "company": "Centro Internacional De Crecimiento Laboral Y Profesional S.L.",
+     "country": "SPAIN",
+     "fine": 1000,
+     "date": "2020-07-10",
+     "articles": "Art. 5 GDPR, Art. 6 GDPR",
+     "violationType": "Insufficient legal basis for data processing",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-00149-2020.pdf"
+    }
+   ]
+  },
+  "Public Sector and Education": {
+   "count": 359,
+   "median": 10000,
+   "p90": 150000,
+   "max": 5000000,
+   "withArticle": 351,
+   "topArticles": [
+    {
+     "article": "Art. 5 GDPR",
+     "count": 224,
+     "share": 62
+    },
+    {
+     "article": "Art. 6 GDPR",
+     "count": 165,
+     "share": 46
+    },
+    {
+     "article": "Art. 32 GDPR",
+     "count": 99,
+     "share": 28
+    },
+    {
+     "article": "Art. 9 GDPR",
+     "count": 57,
+     "share": 16
+    },
+    {
+     "article": "Art. 13 GDPR",
+     "count": 49,
+     "share": 14
+    }
+   ],
+   "examples": [
+    {
+     "company": "Community of Francavilla Fontana",
+     "country": "ITALY",
+     "fine": 10000,
+     "date": "2020-01-15",
+     "articles": "Art. 5 GDPR, Art. 6 GDPR",
+     "violationType": "Insufficient legal basis for data processing",
+     "sourceUrl": "https://www.gpdp.it/web/guest/home/docweb/-/docweb-display/docweb/9261227"
+    },
+    {
+     "company": "Community of Baronissi",
+     "country": "ITALY",
+     "fine": 10000,
+     "date": "2020-08-10",
+     "articles": "Art. 5 GDPR, Art. 6 GDPR",
+     "violationType": "Insufficient legal basis for data processing",
+     "sourceUrl": "https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/9446659"
+    },
+    {
+     "company": "Cypriot Real Estate Registration Authority",
+     "country": "CYPRUS",
+     "fine": 10000,
+     "date": "2021-03-03",
+     "articles": "Art. 12 GDPR, Art. 15 GDPR, Art. 31 GDPR, Art. 58 (1) e) GDPR",
+     "violationType": "Insufficient fulfilment of information obligations",
+     "sourceUrl": "http://www.dataprotection.gov.cy/dataprotection/dataprotection.nsf/All/B0CED3EDDC2EE5EDC225868D0037E7A4?OpenDocument"
+    }
+   ]
+  },
+  "Finance, Insurance and Consulting": {
+   "count": 326,
+   "median": 20000,
+   "p90": 900000,
+   "max": 31800000,
+   "withArticle": 323,
+   "topArticles": [
+    {
+     "article": "Art. 5 GDPR",
+     "count": 156,
+     "share": 48
+    },
+    {
+     "article": "Art. 32 GDPR",
+     "count": 103,
+     "share": 32
+    },
+    {
+     "article": "Art. 6 GDPR",
+     "count": 98,
+     "share": 30
+    },
+    {
+     "article": "Art. 12 GDPR",
+     "count": 32,
+     "share": 10
+    },
+    {
+     "article": "Art. 33 GDPR",
+     "count": 28,
+     "share": 9
+    }
+   ],
+   "examples": [
+    {
+     "company": "Vreau Credit SRL",
+     "country": "ROMANIA",
+     "fine": 20000,
+     "date": "2019-10-09",
+     "articles": "Art. 32 GDPR, Art. 33 GDPR",
+     "violationType": "Insufficient technical and organisational measures to ensure information security",
+     "sourceUrl": "https://www.dataprotection.ro/?page=Comunicat_Presa_09_10_2019&lang=ro"
+    },
+    {
+     "company": "National Bank of Greece",
+     "country": "GREECE",
+     "fine": 20000,
+     "date": "2021-08-26",
+     "articles": "Art. 12 (1), (2), (3) GDPR, Art. 15 (1) GDPR",
+     "violationType": "Insufficient fulfilment of data subjects rights",
+     "sourceUrl": "https://www.dpa.gr/sites/default/files/2021-09/36_2021anonym.pdf"
+    },
+    {
+     "company": "DO VALUE GREECE LOANS & CREDITS CLAIM MANAGEMENT S.A.",
+     "country": "GREECE",
+     "fine": 20000,
+     "date": "2022-07-19",
+     "articles": "Art. 5 (1) a) GDPR, Art. 5 (2) GDPR, Art. 6 GDPR, Art. 12 (2) GDPR",
+     "violationType": "Insufficient fulfilment of data subjects rights",
+     "sourceUrl": "https://www.dpa.gr/el/enimerwtiko/prakseisArxis/epiboli-dioikitikoy-prostimoy-gia-paranomi-epexergasia-prosopikon"
+    }
+   ]
+  },
+  "Media, Telecoms and Broadcasting": {
+   "count": 370,
+   "median": 55000,
+   "p90": 4900000,
+   "max": 1200000000,
+   "withArticle": 369,
+   "topArticles": [
+    {
+     "article": "Art. 6 GDPR",
+     "count": 175,
+     "share": 47
+    },
+    {
+     "article": "Art. 5 GDPR",
+     "count": 169,
+     "share": 46
+    },
+    {
+     "article": "Art. 32 GDPR",
+     "count": 63,
+     "share": 17
+    },
+    {
+     "article": "Art. 12 GDPR",
+     "count": 52,
+     "share": 14
+    },
+    {
+     "article": "Art. 13 GDPR",
+     "count": 35,
+     "share": 9
+    }
+   ],
+   "examples": [
+    {
+     "company": "Xfera Moviles S.A.",
+     "country": "SPAIN",
+     "fine": 55000,
+     "date": "2020-07-10",
+     "articles": "Art. 5 GDPR, Art. 32 GDPR",
+     "violationType": "Insufficient technical and organisational measures to ensure information security",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-000104-2020.pdf"
+    },
+    {
+     "company": "Telefónica Móviles España, SAU",
+     "country": "SPAIN",
+     "fine": 55000,
+     "date": "2020-07-23",
+     "articles": "Art. 5 GDPR, Art. 6 GDPR",
+     "violationType": "Insufficient legal basis for data processing",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-000114-2019.pdf"
+    },
+    {
+     "company": "Vodafone España, S.A.U.",
+     "country": "SPAIN",
+     "fine": 54000,
+     "date": "2021-01-04",
+     "articles": "Art. 5 (1) d), f) GDPR",
+     "violationType": "Non-compliance with general data processing principles",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-00415-2020.pdf"
+    }
+   ]
+  },
+  "Employment": {
+   "count": 213,
+   "median": 8000,
+   "p90": 120000,
+   "max": 290000000,
+   "withArticle": 211,
+   "topArticles": [
+    {
+     "article": "Art. 5 GDPR",
+     "count": 158,
+     "share": 74
+    },
+    {
+     "article": "Art. 6 GDPR",
+     "count": 108,
+     "share": 51
+    },
+    {
+     "article": "Art. 13 GDPR",
+     "count": 58,
+     "share": 27
+    },
+    {
+     "article": "Art. 12 GDPR",
+     "count": 46,
+     "share": 22
+    },
+    {
+     "article": "Art. 15 GDPR",
+     "count": 32,
+     "share": 15
+    }
+   ],
+   "examples": [
+    {
+     "company": "Rhodes Municipal Transport Company",
+     "country": "GREECE",
+     "fine": 8000,
+     "date": "2021-09-03",
+     "articles": "Art. 5 (1) c) GDPR, Art. 12 (3) GDPR, Art. 15 GDPR",
+     "violationType": "Insufficient fulfilment of data subjects rights",
+     "sourceUrl": "https://www.dpa.gr/sites/default/files/2021-09/39_2021anonym.pdf"
+    },
+    {
+     "company": "Agenzia Regionale per la Tutela dell'Ambiente dell'Abruzzo",
+     "country": "ITALY",
+     "fine": 8000,
+     "date": "2022-03-10",
+     "articles": "Art. 5 (1) a), c) GDPR, Art. 6 GDPR, Art. 10 GDPR, Art. 2-ter Codice della privacy, Art. 2-octies Codice della privacy",
+     "violationType": "Insufficient legal basis for data processing",
+     "sourceUrl": "https://www.gpdp.it/web/guest/home/docweb/-/docweb-display/docweb/9761383"
+    },
+    {
+     "company": "Comune di Vicchio",
+     "country": "ITALY",
+     "fine": 8000,
+     "date": "2022-12-15",
+     "articles": "Art. 5 (1) a) GDPR, Art. 6 GDPR, Art. 9 (2), (4) GDPR",
+     "violationType": "Insufficient legal basis for data processing",
+     "sourceUrl": "https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/9852800"
+    }
+   ]
+  },
+  "Health Care": {
+   "count": 274,
+   "median": 10000,
+   "p90": 243800,
+   "max": 5000000,
+   "withArticle": 268,
+   "topArticles": [
+    {
+     "article": "Art. 5 GDPR",
+     "count": 167,
+     "share": 61
+    },
+    {
+     "article": "Art. 32 GDPR",
+     "count": 120,
+     "share": 44
+    },
+    {
+     "article": "Art. 9 GDPR",
+     "count": 76,
+     "share": 28
+    },
+    {
+     "article": "Art. 6 GDPR",
+     "count": 50,
+     "share": 18
+    },
+    {
+     "article": "Art. 13 GDPR",
+     "count": 33,
+     "share": 12
+    }
+   ],
+   "examples": [
+    {
+     "company": "Asociación de Médicos Demócratas",
+     "country": "SPAIN",
+     "fine": 10000,
+     "date": "2020-01-07",
+     "articles": "Art. 6 GDPR",
+     "violationType": "Insufficient legal basis for data processing",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-00231-2019.pdf"
+    },
+    {
+     "company": "Azienda Ospedaliero Universitaria di Parma",
+     "country": "ITALY",
+     "fine": 10000,
+     "date": "2021-01-27",
+     "articles": "Art. 5 (1) f) GDPR, Art. 9 GDPR",
+     "violationType": "Non-compliance with general data processing principles",
+     "sourceUrl": "https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/9544092"
+    },
+    {
+     "company": "Hospital Campogrande DE",
+     "country": "SPAIN",
+     "fine": 10000,
+     "date": "2021-03-10",
+     "articles": "Art. 5 (1) f) GDPR",
+     "violationType": "Non-compliance with general data processing principles",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-00074-2020.pdf"
+    }
+   ]
+  },
+  "Not assigned": {
+   "count": 218,
+   "median": 3905,
+   "p90": 25000,
+   "max": 5004000,
+   "withArticle": 204,
+   "topArticles": [
+    {
+     "article": "Art. 5 GDPR",
+     "count": 47,
+     "share": 22
+    },
+    {
+     "article": "Art. 6 GDPR",
+     "count": 45,
+     "share": 21
+    },
+    {
+     "article": "Art. 13 GDPR",
+     "count": 39,
+     "share": 18
+    },
+    {
+     "article": "Art. 58 GDPR",
+     "count": 29,
+     "share": 13
+    },
+    {
+     "article": "Art. 15 GDPR",
+     "count": 28,
+     "share": 13
+    }
+   ],
+   "examples": [
+    {
+     "company": "Unknown",
+     "country": "MALTA",
+     "fine": 4000,
+     "date": "2020",
+     "articles": "Art. 13 GDPR, Art. 15 GDPR, Regulation 9 S.L 586.01",
+     "violationType": "Insufficient fulfilment of data subjects rights",
+     "sourceUrl": "https://idpc.org.mt/decisions/"
+    },
+    {
+     "company": "Legal Person",
+     "country": "CZECH REPUBLIC",
+     "fine": 3810,
+     "date": "2023-05-04",
+     "articles": "Art. 6 GDPR, Art. 14 (1), (2), (3) GDPR",
+     "violationType": "Insufficient legal basis for data processing",
+     "sourceUrl": "https://uoou.gov.cz/media/poskytnute-informace/2024/2592024/160-cj-uoou-0352321-14-dokument-c-160.pdf"
+    },
+    {
+     "company": "Legal Person",
+     "country": "CZECH REPUBLIC",
+     "fine": 4010,
+     "date": "2020-06-11",
+     "articles": "Art. 17 (1) GDPR",
+     "violationType": "Insufficient fulfilment of data subjects rights",
+     "sourceUrl": "https://uoou.gov.cz/media/poskytnute-informace/2024/2592024/130-cj-uoou-0103920-11-dokument-c-130.pdf"
+    }
+   ]
+  },
+  "Transportation and Energy": {
+   "count": 170,
+   "median": 40000,
+   "p90": 3000000,
+   "max": 100000000,
+   "withArticle": 165,
+   "topArticles": [
+    {
+     "article": "Art. 5 GDPR",
+     "count": 74,
+     "share": 44
+    },
+    {
+     "article": "Art. 32 GDPR",
+     "count": 57,
+     "share": 34
+    },
+    {
+     "article": "Art. 6 GDPR",
+     "count": 52,
+     "share": 31
+    },
+    {
+     "article": "Art. 12 GDPR",
+     "count": 28,
+     "share": 16
+    },
+    {
+     "article": "Art. 28 GDPR",
+     "count": 21,
+     "share": 12
+    }
+   ],
+   "examples": [
+    {
+     "company": "Iberia Lae SA Operadora Unipersonal",
+     "country": "SPAIN",
+     "fine": 40000,
+     "date": "2020-07-20",
+     "articles": "Art. 58 GDPR",
+     "violationType": "Insufficient cooperation with supervisory authority",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-00060-2020.pdf"
+    },
+    {
+     "company": "Amazon Italia Transport s.r.l.",
+     "country": "ITALY",
+     "fine": 40000,
+     "date": "2023-11-16",
+     "articles": "Art. 12 GDPR, Art. 15 GDPR",
+     "violationType": "Insufficient fulfilment of data subjects rights",
+     "sourceUrl": "https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/9960875"
+    },
+    {
+     "company": "IBERIA LÍNEAS AÉREAS DE ESPAÑA, S.A. OPERADORA.",
+     "country": "SPAIN",
+     "fine": 40000,
+     "date": "2024-02-13",
+     "articles": "Art. 15 GDPR",
+     "violationType": "Insufficient fulfilment of data subjects rights",
+     "sourceUrl": "https://www.aepd.es/documento/ps-00138-2023.pdf"
+    }
+   ]
+  },
+  "Real Estate": {
+   "count": 87,
+   "median": 2000,
+   "p90": 40000,
+   "max": 1900000,
+   "withArticle": 87,
+   "topArticles": [
+    {
+     "article": "Art. 5 GDPR",
+     "count": 44,
+     "share": 51
+    },
+    {
+     "article": "Art. 6 GDPR",
+     "count": 35,
+     "share": 40
+    },
+    {
+     "article": "Art. 13 GDPR",
+     "count": 23,
+     "share": 26
+    },
+    {
+     "article": "Art. 12 GDPR",
+     "count": 13,
+     "share": 15
+    },
+    {
+     "article": "Art. 32 GDPR",
+     "count": 11,
+     "share": 13
+    }
+   ],
+   "examples": [
+    {
+     "company": "Homeowners Association",
+     "country": "SPAIN",
+     "fine": 2000,
+     "date": "2020-03-12",
+     "articles": "Art. 5 GDPR, Art. 13 GDPR, Art. 14 GDPR",
+     "violationType": "Non-compliance with general data processing principles",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-00272-2019.pdf"
+    },
+    {
+     "company": "Comunidad de propietarios demelza beach",
+     "country": "SPAIN",
+     "fine": 2000,
+     "date": "2020-06-22",
+     "articles": "Art. 5 GDPR, Art. 6 GDPR, Art. 13 GDPR, Art. 14 GDPR",
+     "violationType": "Non-compliance with general data processing principles",
+     "sourceUrl": "https://www.aepd.es/es/documento/ps-00273-2019.pdf"
+    },
+    {
+     "company": "Asociația de proprietari Militari R",
+     "country": "ROMANIA",
+     "fine": 2000,
+     "date": "2020-10-01",
+     "articles": "Art. 31 GDPR, Art. 58 GDPR",
+     "violationType": "Insufficient cooperation with supervisory authority",
+     "sourceUrl": "https://www.dataprotection.ro/?page=Comunicat_Presa_01_/_10_/_2020&lang=ro"
+    }
+   ]
+  }
+ }
+}

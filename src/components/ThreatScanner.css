@@ -1,0 +1,52 @@
+/* Печатная версия отчёта Оракула.
+   Раньше лежало встроенным блоком <style> прямо в разметке — из-за таких
+   блоков политика содержимого разрешала любые встроенные стили. */
+@media print {
+  body, html {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  header, footer, nav, button, .print\:hidden, #lead-capture-form, iframe, .chat-widget {
+    display: none !important;
+  }
+  .bg-\[\#0a0f1a\], .glass {
+    background-color: #ffffff !important;
+    border-color: #d1d5db !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+  }
+  .text-white {
+    color: #000000 !important;
+  }
+  .text-gray-300, .text-gray-400, .text-gray-500, .text-gray-600 {
+    color: #1f2937 !important;
+  }
+  .border-white\/10, .border-white\/8, .border-white\/6 {
+    border-color: #e5e7eb !important;
+  }
+  .bg-white\/\[0\.01\], .bg-white\/\[0\.02\], .bg-white\/\[0\.03\] {
+    background-color: #f9fafb !important;
+  }
+  .text-emerald-400 {
+    color: #047857 !important;
+  }
+  .text-teal-400 {
+    color: #0d9488 !important;
+  }
+  .text-cyan-400 {
+    color: #0369a1 !important;
+  }
+  .text-yellow-400 {
+    color: #a16207 !important;
+  }
+  .text-orange-400 {
+    color: #c2410c !important;
+  }
+  .text-red-400 {
+    color: #b91c1c !important;
+  }
+  .page-break-inside-avoid {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}

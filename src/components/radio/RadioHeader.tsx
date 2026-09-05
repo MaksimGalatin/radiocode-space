@@ -108,6 +108,33 @@ export function RadioHeader() {
               </span>
             </motion.a>
 
+            {/* AIfaFocus — сканер доступности и исследование.
+                Добавлено 05.09.2026 по Правилу Четырёх Сайтов: страницы
+                перенесены сюда в тот же день (до этого `/accessibility` и
+                `/research` отдавали 404), но без ссылки в шапке их бы никто
+                не нашёл. Подпись прячется на узких экранах, как у соседей. */}
+            <motion.a
+              href="/accessibility"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.32, duration: 0.6 }}
+              whileHover={{ scale: 1.04 }}
+              aria-label="AIfaFocus"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              style={{
+                background: 'rgba(0, 240, 255, 0.06)',
+                border: '1px solid rgba(0, 240, 255, 0.18)',
+              }}
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="M20 20l-3.5-3.5" />
+              </svg>
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
+                AIfaFocus
+              </span>
+            </motion.a>
+
             {/* Читальни сети. Шестнадцать читален живут на отдельных доменах,
                 и попасть на них можно было только зная адрес. В подвале ссылка
                 уже есть, но подвал — это конец страницы; в шапке она нужна
