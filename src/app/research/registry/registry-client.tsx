@@ -19,7 +19,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useLanguage } from '../../../lib/LanguageContext';
+import { useLanguageOptional } from '../../../lib/LanguageContext';
 import { ТЕКСТЫ_РЕЕСТРА, type ЯзыкКод } from './словарь';
 import { ЖИВЫЕ_ДОМЕНЫ } from '../data/данные';
 
@@ -61,7 +61,8 @@ function разряды(n: number): string {
 }
 
 export default function RegistryClient({ языкИзПути }: { языкИзПути?: string } = {}) {
-  const { locale } = useLanguage();
+  const _ctx = useLanguageOptional();
+  const locale = _ctx?.locale ?? 'en';
   // 🔴 ЯЗЫК ИЗ ПУТИ СТАРШЕ КОНТЕКСТА (05.09.2026). На aifa.digital
   // серверная разметка всегда выходила английской: язык там живёт в
   // клиентском хранилище со значением `en` по умолчанию. Проп из

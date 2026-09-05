@@ -19,7 +19,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useLanguage } from '../../../lib/LanguageContext';
+import { useLanguageOptional } from '../../../lib/LanguageContext';
 import { ТЕКСТЫ, type ЯзыкКод } from './словарь';
 import {
   СНИМОК, Ч as Ч_РУССКИЕ, РОСТ as РОСТ_РУССКИЙ, ВЕНДОРЫ, ШТАТЫ,
@@ -106,7 +106,8 @@ function датаСнимка(язык: ЯзыкКод): string {
 }
 
 export default function DataClient({ языкИзПути }: { языкИзПути?: string } = {}) {
-  const { locale } = useLanguage();
+  const _ctx = useLanguageOptional();
+  const locale = _ctx?.locale ?? 'en';
   // 🔴 ЯЗЫК ИЗ ПУТИ СТАРШЕ КОНТЕКСТА (05.09.2026). На aifa.digital
   // серверная разметка всегда выходила английской: язык там живёт в
   // клиентском хранилище со значением `en` по умолчанию. Проп из
