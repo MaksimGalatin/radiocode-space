@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { AlertOctagon, ShieldAlert, DollarSign, Scale, ArrowRight } from 'lucide-react';
-import { useLanguage } from '../lib/LanguageContext';
+import { useLanguageOptional } from '../lib/LanguageContext';
 
 const calculatorTranslations = {
   en: {
@@ -107,7 +107,8 @@ const calculatorTranslations = {
 type Jurisdiction = 'ada' | 'gdpr' | 'ccpa' | 'rf' | 'global';
 
 export default function RiskCalculator() {
-  const { locale } = useLanguage();
+  const _ctx = useLanguageOptional();
+  const locale = _ctx?.locale ?? 'en';
   const t = calculatorTranslations[locale] || calculatorTranslations.en;
 
   const [traffic, setTraffic] = useState<number>(25000);

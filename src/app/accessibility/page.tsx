@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle, XCircle, Shield, ShieldCheck, Zap, Eye, Users } from 'lucide-react';
-import { useLanguage } from '../../lib/LanguageContext';
+import { useLanguageOptional } from '../../lib/LanguageContext';
 import ThreatScanner from '../../components/ThreatScanner';
 import RiskCalculator from '../../components/RiskCalculator';
 import { ТЕКСТЫ_СКАНЕРА, type ЯзыкКодСканера } from './словарь';
@@ -12,7 +12,8 @@ const TIER_PRICES = ['$149', '$375', '$750', '$1,200', '$1,800', '$2,500', '$3,5
 const TIER_HIGHLIGHTS = [false, false, false, true, false, false, false, false];
 
 export default function AccessibilityPage() {
-  const { locale } = useLanguage();
+  const _ctx = useLanguageOptional();
+  const locale = _ctx?.locale ?? 'en';
   // Тексты берём из словаря рядом со страницей, а не из общего словаря
   // сайта: у каждого из четырёх сайтов он своей формы, и ключа
   // `accessibility` там нет. Приведение нужно потому, что `locale`

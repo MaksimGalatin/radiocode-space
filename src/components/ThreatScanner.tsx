@@ -8,7 +8,7 @@ import {
   FileText, ShieldCheck
 } from 'lucide-react';
 import Link from 'next/link';
-import { useLanguage } from '../lib/LanguageContext';
+import { useLanguageOptional } from '../lib/LanguageContext';
 import { getLawMeta, CATEGORY_COLORS, type Category } from '../data/threatMatrix';
 import { ТЕКСТЫ_УГРОЗ, НАДПИСЬ_РЕЕСТРА, type ЯзыкКодСканера } from '../app/accessibility/словарь';
 import type { FoundThreat, ScanResponse } from '../app/api/scan/route';
@@ -247,7 +247,8 @@ function calculateGrade(score: number): { letter: string; color: string; bg: str
 interface ThreatCardProps { threat: FoundThreat; }
 
 function ThreatCard({ threat }: ThreatCardProps) {
-  const { locale } = useLanguage();
+  const _ctx = useLanguageOptional();
+  const locale = _ctx?.locale ?? 'en';
   // Тексты — из словаря рядом со страницей сканера, а не из общего словаря
   // сайта: на четырёх сайтах он разной формы, и ключа `threatScanner` в нём
   // нет. Так компонент переносится куда угодно, завися только от `locale`.
@@ -435,7 +436,8 @@ const formTranslations: Record<string, {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function ThreatScanner() {
-  const { locale } = useLanguage();
+  const _ctx = useLanguageOptional();
+  const locale = _ctx?.locale ?? 'en';
   // Тексты — из словаря рядом со страницей сканера, а не из общего словаря
   // сайта: на четырёх сайтах он разной формы, и ключа `threatScanner` в нём
   // нет. Так компонент переносится куда угодно, завися только от `locale`.
