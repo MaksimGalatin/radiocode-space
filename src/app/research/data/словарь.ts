@@ -296,7 +296,7 @@ const ru: ТекстыДанных = {
   охватШтатов: 'Охват по штатам',
   шапкаШтат: 'Штат',
   шапкаСтраницПроверено: 'Страниц проверено',
-  шапкаГородов: 'Городов',
+  шапкаГородов: 'Сайтов',
   охватПояснение: 'Показаны двенадцать штатов с наибольшим охватом из 51 пройденного. Обход идёт по кругу — по одному городу из каждого штата, затем следующий круг, — чтобы на любой момент остановки охват оставался географически сбалансированным. Сбалансированный охват — не то же, что выборка, представительная по населению: город на восемь миллионов и посёлок на триста жителей дают по восемь страниц каждый.',
 
   чемНужнее: 'Чем нужнее страница, тем она недоступнее',
@@ -543,7 +543,7 @@ const en: ТекстыДанных = {
   охватШтатов: 'Coverage by state',
   шапкаШтат: 'State',
   шапкаСтраницПроверено: 'Pages checked',
-  шапкаГородов: 'Municipalities',
+  шапкаГородов: 'Sites',
   охватПояснение: 'Shown are the twelve states with the widest coverage out of 51 visited. The traversal runs in rounds — one municipality from each state, then the next round — so that coverage stays geographically balanced at any moment we stop. Balanced coverage is not the same as a population-representative sample: a city of eight million and a town of three hundred each contribute eight pages.',
 
   чемНужнее: 'The more a page is needed, the less reachable it is',
@@ -791,7 +791,7 @@ const es: ТекстыДанных = {
   охватШтатов: 'Cobertura por estado',
   шапкаШтат: 'Estado',
   шапкаСтраницПроверено: 'Páginas revisadas',
-  шапкаГородов: 'Municipios',
+  шапкаГородов: 'Sitios',
   охватПояснение: 'Se muestran los doce estados con mayor cobertura de los 51 recorridos. El recorrido avanza por rondas — un municipio de cada estado, luego la siguiente ronda — para que la muestra siga siendo representativa del país en cualquier momento en que se detenga.',
 
   чемНужнее: 'Cuanto más necesaria es la página, menos accesible resulta',
@@ -1039,7 +1039,7 @@ const zh: ТекстыДанных = {
   охватШтатов: '各州覆盖情况',
   шапкаШтат: '州',
   шапкаСтраницПроверено: '已检测页面',
-  шапкаГородов: '市政当局',
+  шапкаГородов: '网站',
   охватПояснение: '此处显示已走访的 51 个州中覆盖最广的十二个。遍历按轮次推进——每州取一个市政当局，然后进入下一轮——这样无论在哪个时刻停止，样本对全国仍具代表性。',
 
   чемНужнее: '页面越是必需，越是难以抵达',
