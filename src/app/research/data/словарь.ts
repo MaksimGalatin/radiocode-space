@@ -201,6 +201,10 @@ export type ТекстыДанных = {
   фаза2Pdf: (наДомен: string, доказательств: string) => string;
   фаза2СкринридерЗаголовок: string;
   фаза2Скринридер: (ax: string, nvda: string) => string;
+  перепрЗаголовок: string;
+  перепрТекст1: (дом: string, жив: string, доля: string, зап: string, сотни: string) => string;
+  перепрТекст2: (гор: string, есть: string, доля: string, згл: string, зглД: string, отд: string, отдД: string, тиш: string, тишД: string) => string;
+  перепрВывод: string;
   журналЗаголовок: string;
   журналВступление: string;
   журналКолДата: string;
@@ -464,6 +468,11 @@ const ru: ТекстыДанных = {
   фаза2Интервалы: (д538, д746, д126) => `Для ключевых долей исследования посчитаны 95-процентные доверительные интервалы методом Уилсона — он остаётся верным у краёв диапазона, где нормальное приближение врёт. Расхождение сканера и обхода: 53,8 % при интервале ${д538} %. Недостижение цели на живых сайтах: 74,6 % при интервале ${д746} %. Настоящая доступность для человека: 12,6 % при интервале ${д126} %. Прежние числа не менялись: интервалы добавлены рядом, и на выборках от семи до девяноста пяти тысяч записей предельная погрешность меньше половины процента.`,
   фаза2Этика: 'Сбор идёт с честным User-Agent, в котором назван проект и контактный адрес; не более одного запроса в секунду на домен и не более десяти одновременных соединений; при ответах 429 и 503 пауза увеличивается.',
   фаза2Итог: 'По завершении каждой фазы реестр целостности пересчитывается: расхождение хотя бы в одном хеше останавливает работу. Новые доказательства будут нотаризованы через OpenTimestamps тем же порядком, что и первые, а сырые файлы — выложены в /data.',
+
+  перепрЗаголовок: 'Мы перепроверили свои же отрицательные вердикты',
+  перепрТекст1: (дом, жив, доля, зап, сотни) => `Почти все графы этого исследования говорят о НАС: «не смогли открыть», «не смогли измерить». К таким утверждениям не придраться. Но две графы говорят о МИРЕ — «домена не существует» и «сайт закрыт», — и проверить их может кто угодно одним запросом из браузера. Поэтому мы проверили сами. Взяли все домены этой графы — их ${дом} — и сходили к каждому как человек: браузерным заголовком, по четырём адресам (с www и без, https и http), с паузой в десять секунд. Существуют ${жив} из ${дом} — ${доля} %. За ними ${зап} записей журнала, и ${сотни} из них отдают полноценную страницу: среди них официальные сайты округов и городов.`,
+  перепрТекст2: (гор, есть, доля, згл, зглД, отд, отдД, тиш, тишД) => `Вторая проверка касается вердикта «закрыт». Он ставился, когда сервер отвечал отказом, а снимок страницы совпадал у разных городов — то есть мы видели не сайт, а страницу блокировки. Таких городов ${гор}. Живая проверка: сайт существует у ${есть} из них (${доля} %). Из них ${згл} (${зглД} %) отдали именно заглушку защиты от роботов — человек такой сайт откроет; ${отд} (${отдД} %) отдали живую страницу. По-настоящему молчат ${тиш} (${тишД} %) — только для них вердикт был верен.`,
+  перепрВывод: 'Мы не переписываем прошлые числа молча и не прячем поправку в примечание. Доли основного исследования опираются на страницы, а эти две графы — на домены, и потому главный вывод не сдвигается. Но утверждение о том, что чужого сайта не существует, должно быть обеспечено проверкой, а не отказом нашего клиента. Полная перепроверка всех записей этих двух граф идёт; её результаты появятся здесь тем же порядком.',
 };
 
 const en: ТекстыДанных = {
@@ -712,6 +721,11 @@ Only ${нм} records carrying the verdict “formal access, human barrier” fal
   фаза2Интервалы: (д538, д746, д126) => `95 % confidence intervals were computed for the study's key shares using the Wilson method, which stays correct near the edges of the range where the normal approximation does not. Scanner versus traversal disagreement: 53.8 %, interval ${д538} %. Target not reached on live sites: 74.6 %, interval ${д746} %. Genuine accessibility for a person: 12.6 %, interval ${д126} %. Earlier numbers were not touched: the intervals were added beside them, and on samples from seven to ninety five thousand records the margin of error stays under half a percentage point.`,
   фаза2Этика: 'Collection runs with an honest User-Agent naming the project and a contact address; no more than one request per second per domain and no more than ten concurrent connections; on 429 and 503 responses the delay grows.',
   фаза2Итог: 'After each phase the integrity register is recomputed: a mismatch in a single hash stops the work. New evidence will be notarised through OpenTimestamps in the same way as the first, and the raw files will be published in /data.',
+
+  перепрЗаголовок: 'We re-checked our own negative verdicts',
+  перепрТекст1: (дом, жив, доля, зап, сотни) => `Almost every column in this study speaks about US: we could not open it, we could not measure it. Such claims are hard to dispute. But two columns speak about THE WORLD — “domain does not exist” and “site closed” — and anyone can test them with a single request from a browser. So we tested them ourselves. We took ${дом} domains our traversal had marked as non-existent and visited each one the way a person would: browser user agent, four addresses (with and without www, https and http), ten seconds apart. ${жив} of ${дом} exist — ${доля} %. They carry ${зап} log records, and ${сотни} domains serve a full page: county and city official websites among them.`,
+  перепрТекст2: (гор, есть, доля, згл, зглД, отд, отдД, тиш, тишД) => `The second check concerns the “closed” verdict. It was assigned when a server refused us and the screenshot matched across different cities — meaning we were looking at a block page, not a site. There are ${гор} such cities. Live check: the site exists for ${есть} of them (${доля} %). Of those, ${згл} (${зглД} %) returned a bot-protection page — a person opens such a site normally; ${отд} (${отдД} %) returned a live page. Only ${тиш} (${тишД} %) are genuinely silent — and only for them was the verdict correct.`,
+  перепрВывод: 'We do not rewrite past figures silently, and we do not bury the correction in a footnote. The study\u2019s headline shares rest on pages while these two columns rest on domains, so the main finding does not move. But a claim that someone else\u2019s website does not exist must be backed by a check, not by our client failing. A full re-check of every record in these two columns is under way; its results will appear here the same way.',
 };
 
 const es: ТекстыДанных = {
@@ -962,6 +976,11 @@ Solo ${нм} registros con el veredicto «acceso formal, barrera humana» corres
   фаза2Интервалы: (д538, д746, д126) => `Para las proporciones clave del estudio se calcularon intervalos de confianza del 95 % por el método de Wilson, que sigue siendo correcto en los extremos del rango donde la aproximación normal falla. Discrepancia entre el escáner y el recorrido: 53,8 %, intervalo ${д538} %. Objetivo no alcanzado en sitios vivos: 74,6 %, intervalo ${д746} %. Accesibilidad real para una persona: 12,6 %, intervalo ${д126} %. Las cifras anteriores no se tocaron: los intervalos se añadieron al lado, y en muestras de siete mil a noventa y cinco mil registros el margen de error queda por debajo de medio punto porcentual.`,
   фаза2Этика: 'La recogida se hace con un User-Agent honesto que nombra el proyecto y una dirección de contacto; no más de una petición por segundo por dominio y no más de diez conexiones simultáneas; ante respuestas 429 y 503 la pausa aumenta.',
   фаза2Итог: 'Al terminar cada fase se recalcula el registro de integridad: una discrepancia en un solo hash detiene el trabajo. Las pruebas nuevas se notarizarán mediante OpenTimestamps igual que las primeras, y los archivos en bruto se publicarán en /data.',
+
+  перепрЗаголовок: 'Hemos vuelto a comprobar nuestros propios veredictos negativos',
+  перепрТекст1: (дом, жив, доля, зап, сотни) => `Casi todas las columnas de este estudio hablan de NOSOTROS: no pudimos abrirlo, no pudimos medirlo. Tales afirmaciones son difíciles de rebatir. Pero dos columnas hablan del MUNDO —«el dominio no existe» y «sitio cerrado»— y cualquiera puede comprobarlas con una sola petición desde el navegador. Así que las comprobamos nosotros. Tomamos ${дом} dominios que nuestro recorrido había marcado como inexistentes y visitamos cada uno como lo haría una persona: con agente de navegador, cuatro direcciones (con y sin www, https y http), con diez segundos de pausa. Existen ${жив} de ${дом} — ${доля} %. Tras ellos hay ${зап} registros, y ${сотни} dominios sirven una página completa: entre ellos sitios oficiales de condados y ciudades.`,
+  перепрТекст2: (гор, есть, доля, згл, зглД, отд, отдД, тиш, тишД) => `La segunda comprobación afecta al veredicto «cerrado». Se asignaba cuando el servidor nos rechazaba y la captura coincidía entre ciudades distintas: mirábamos una página de bloqueo, no un sitio. Hay ${гор} ciudades así. Comprobación en vivo: el sitio existe en ${есть} de ellas (${доля} %). De esas, ${згл} (${зглД} %) devolvieron una página antirrobot —una persona abre ese sitio sin problema—; ${отд} (${отдД} %) devolvieron una página viva. Realmente callan ${тиш} (${тишД} %): solo para ellas el veredicto era correcto.`,
+  перепрВывод: 'No reescribimos cifras pasadas en silencio ni escondemos la corrección en una nota. Las proporciones principales del estudio se apoyan en páginas y estas dos columnas en dominios, por lo que la conclusión central no se mueve. Pero afirmar que el sitio de otro no existe debe sustentarse en una comprobación, no en el fallo de nuestro cliente. La revisión completa de todos los registros de estas dos columnas está en marcha; sus resultados aparecerán aquí del mismo modo.',
 };
 
 const zh: ТекстыДанных = {
@@ -1203,6 +1222,11 @@ const zh: ТекстыДанных = {
   фаза2Интервалы: (д538, д746, д126) => `研究的关键比例均以 Wilson 方法计算了 95% 置信区间——在正态近似失效的分布边缘，该方法依然正确。扫描器与遍历的分歧：53.8%，区间 ${д538} %。在可访问站点上未能到达目标：74.6%，区间 ${д746} %。对人而言真正可访问：12.6%，区间 ${д126} %。既有数字未作改动：区间加在旁边；在七千到九万五千条记录的样本上，误差幅度小于半个百分点。`,
   фаза2Этика: '采集使用诚实的 User-Agent，注明项目与联系地址；每个域名每秒不超过一次请求，同时连接不超过十个；遇到 429 与 503 响应时延长等待。',
   фаза2Итог: '每个阶段结束后重新计算完整性登记：哪怕一个哈希不一致也会停止工作。新的证据将以与第一批相同的方式通过 OpenTimestamps 公证，原始文件将发布在 /data。',
+
+  перепрЗаголовок: '我们复核了自己给出的否定结论',
+  перепрТекст1: (дом, жив, доля, зап, сотни) => `本研究几乎所有分类都是在说「我们」：打不开、测不了。这类说法无可指摘。但有两个分类说的是「世界」——「域名不存在」和「网站关闭」——任何人在浏览器里发一次请求就能验证。所以我们自己先验证了。取被判定为不存在的 ${дом} 个域名，像真人那样逐个访问：浏览器标识、四个地址（带与不带 www，https 与 http）、每次间隔十秒。${дом} 个中有 ${жив} 个确实存在，占 ${доля} %。其后有 ${зап} 条日志记录，其中 ${сотни} 个域名返回完整页面，包括多个县市官方网站。`,
+  перепрТекст2: (гор, есть, доля, згл, зглД, отд, отдД, тиш, тишД) => `第二项复核针对「关闭」这一判定。它是在服务器拒绝我们、且不同城市的截图彼此相同时给出的——也就是说我们看到的是拦截页，不是网站。这样的城市共 ${гор} 个。实测结果：其中 ${есть} 个（${доля} %）网站确实存在。其中 ${згл} 个（${зглД} %）返回的是反机器人拦截页——真人能正常打开；${отд} 个（${отдД} %）返回了正常页面。真正无响应的只有 ${тиш} 个（${тишД} %），只有对它们，原判定才是成立的。`,
+  перепрВывод: '我们不会悄悄改写旧数字，也不会把更正藏进脚注。研究的主要比例基于页面，而这两个分类基于域名，因此核心结论不受影响。但「他人网站不存在」这样的论断，必须由核查来支撑，而不是由我们客户端的失败来支撑。这两个分类全部记录的完整复核正在进行，结果将以同样方式公布。',
 };
 
 export const ТЕКСТЫ: Record<ЯзыкКод, ТекстыДанных> = { ru, en, es, zh };
