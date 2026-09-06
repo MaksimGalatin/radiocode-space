@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { LiveClock } from '@/components/radio/LiveClock';
 import { SignalStrength } from '@/components/radio/SignalStrength';
 import { RADIO_LANGS, useCurrentLang, useSetLang, useRadioT } from '@/lib/radioI18n';
@@ -9,6 +10,102 @@ export function RadioHeader() {
   const rt = useRadioT();
   const lang = useCurrentLang();
   const setLang = useSetLang();
+
+  // ВЫПАДАЮЩЕЕ МЕНЮ AIfaFocus — приведено к виду aifa.works 05.09.2026.
+  //
+  // Было: одна ссылка на `/accessibility`. Замер того же дня показал, что
+  // на радио из трёх пунктов меню не видно ни одного, тогда как на
+  // aifa.works, центральном и aifa.digital исследование и методика в шапке
+  // есть. Прямое поручение Архитектора: «доделай пожалуйста на всех наших
+  // сайтах и языках», эталон — aifa.works.
+  //
+  // Задержка закрытия 200 мс — чтобы меню не захлопывалось, пока курсор
+  // переходит с кнопки на список.
+  const [фокусОткрыт, setФокусОткрыт] = useState(false);
+  const фокусТаймер = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const открытьФокус = useCallback(() => {
+    if (фокусТаймер.current) {
+      clearTimeout(фокусТаймер.current);
+      фокусТаймер.current = null;
+    }
+    setФокусОткрыт(true);
+  }, []);
+
+  const закрытьФокусПогодя = useCallback(() => {
+    if (фокусТаймер.current) clearTimeout(фокусТаймер.current);
+    фокусТаймер.current = setTimeout(() => setФокусОткрыт(false), 200);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (фокусТаймер.current) clearTimeout(фокусТаймер.current);
+    };
+  }, []);
+
+  // Пункты меню. Порядок как на aifa.works: сначала сам сканер, затем данные
+  // исследования, затем методика. Четыре языка — ru, es, zh и английский по
+  // умолчанию: Правило Четырёх Сайтов требует и четырёх языков тоже.
+  const фокусПункты = [
+    {
+      href: '/accessibility',
+      label:
+        lang === 'ru'
+          ? 'Проверить свой сайт'
+          : lang === 'es'
+          ? 'Analizar mi sitio'
+          : lang === 'zh'
+          ? '检测我的网站'
+          : 'Scan my site',
+      пояснение:
+        lang === 'ru'
+          ? 'бесплатно, без регистрации'
+          : lang === 'es'
+          ? 'gratis, sin registro'
+          : lang === 'zh'
+          ? '免费，无需注册'
+          : 'free, no signup',
+    },
+    {
+      href: '/research/data',
+      label:
+        lang === 'ru'
+          ? 'Исследование'
+          : lang === 'es'
+          ? 'Investigación'
+          : lang === 'zh'
+          ? '研究数据'
+          : 'Research data',
+      пояснение:
+        lang === 'ru'
+          ? '95 524 страницы, проверенных человеком'
+          : lang === 'es'
+          ? '95 524 páginas verificadas por humanos'
+          : lang === 'zh'
+          ? '95 524 个由人工核查的页面'
+          : '95,524 pages verified by a human',
+    },
+    {
+      href: '/research/methodology',
+      label:
+        lang === 'ru'
+          ? 'Методика'
+          : lang === 'es'
+          ? 'Metodología'
+          : lang === 'zh'
+          ? '研究方法'
+          : 'Methodology',
+      пояснение:
+        lang === 'ru'
+          ? 'как именно мы измеряем'
+          : lang === 'es'
+          ? 'cómo medimos exactamente'
+          : lang === 'zh'
+          ? '我们如何进行测量'
+          : 'exactly how we measure',
+    },
+  ];
+
   return (
     <motion.header
       initial={{ y: -20, opacity: 0 }}
@@ -108,32 +205,82 @@ export function RadioHeader() {
               </span>
             </motion.a>
 
-            {/* AIfaFocus — сканер доступности и исследование.
-                Добавлено 05.09.2026 по Правилу Четырёх Сайтов: страницы
-                перенесены сюда в тот же день (до этого `/accessibility` и
-                `/research` отдавали 404), но без ссылки в шапке их бы никто
-                не нашёл. Подпись прячется на узких экранах, как у соседей. */}
-            <motion.a
-              href="/accessibility"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.32, duration: 0.6 }}
-              whileHover={{ scale: 1.04 }}
-              aria-label="AIfaFocus"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
-              style={{
-                background: 'rgba(0, 240, 255, 0.06)',
-                border: '1px solid rgba(0, 240, 255, 0.18)',
-              }}
+            {/* AIfaFocus — выпадающее меню: сканер, исследование, методика.
+                05.09.2026 приведено к виду aifa.works по Правилу Четырёх
+                Сайтов. До этого здесь была ОДНА ссылка на `/accessibility`, и
+                замер показал: на радио из трёх пунктов меню не видно ни
+                одного, тогда как на трёх других сайтах исследование и методика
+                в шапке есть.
+
+                Меню открывается наведением и остаётся открытым 200 мс после
+                ухода курсора — иначе оно захлопывается по дороге к пунктам.
+                Кнопка при этом остаётся ССЫЛКОЙ на `/accessibility`: щелчок
+                по ней ведёт на сканер и без раскрытия списка, а с клавиатуры
+                фокус открывает меню событием onFocus. Подпись прячется на
+                узких экранах, как у соседних кнопок. */}
+            <div
+              className="relative"
+              onMouseEnter={открытьФокус}
+              onMouseLeave={закрытьФокусПогодя}
             >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="7" />
-                <path d="M20 20l-3.5-3.5" />
-              </svg>
-              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
-                AIfaFocus
-              </span>
-            </motion.a>
+              <motion.a
+                href="/accessibility"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.32, duration: 0.6 }}
+                whileHover={{ scale: 1.04 }}
+                aria-label="AIfaFocus"
+                aria-expanded={фокусОткрыт}
+                aria-haspopup="true"
+                onFocus={открытьФокус}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+                style={{
+                  background: 'rgba(0, 240, 255, 0.06)',
+                  border: '1px solid rgba(0, 240, 255, 0.18)',
+                }}
+              >
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M20 20l-3.5-3.5" />
+                </svg>
+                <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
+                  AIfaFocus
+                </span>
+              </motion.a>
+
+              <AnimatePresence>
+                {фокусОткрыт && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.16 }}
+                    className="absolute right-0 top-full mt-2 w-64 rounded-xl overflow-hidden z-50"
+                    style={{
+                      background: 'rgba(6, 10, 18, 0.96)',
+                      border: '1px solid rgba(0, 240, 255, 0.18)',
+                      backdropFilter: 'blur(12px)',
+                    }}
+                  >
+                    {фокусПункты.map((пункт) => (
+                      <a
+                        key={пункт.href}
+                        href={пункт.href}
+                        className="block px-4 py-3 transition-colors hover:bg-[rgba(0,240,255,0.07)]"
+                        style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}
+                      >
+                        <span className="block text-[13px] font-mono font-medium tracking-wide text-[#00F0FF]/90">
+                          {пункт.label}
+                        </span>
+                        <span className="block mt-0.5 text-[11px] text-white/45">
+                          {пункт.пояснение}
+                        </span>
+                      </a>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             {/* Читальни сети. Шестнадцать читален живут на отдельных доменах,
                 и попасть на них можно было только зная адрес. В подвале ссылка
