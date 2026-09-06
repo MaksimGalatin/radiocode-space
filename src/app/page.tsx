@@ -11,6 +11,7 @@ import { RadioHeader } from '@/components/radio/RadioHeader';
 import { HeroSection } from '@/components/radio/HeroSection';
 import { StationCard } from '@/components/radio/StationCard';
 import { PlayerBar } from '@/components/radio/PlayerBar';
+import AccessibilityPricing from '@/components/AccessibilityPricing';
 import { WaveformBar } from '@/components/radio/WaveformBar';
 import { VolumeVisualizer } from '@/components/radio/VolumeVisualizer';
 import { IntroSplash } from '@/components/radio/IntroSplash';
@@ -646,6 +647,8 @@ export default function Home() {
             </div>
           </div>
         </footer>
+      <AccessibilityPricing id="a11y-pricing" />
+
       </main>
 
       {/* Playlist panel */}
