@@ -231,6 +231,7 @@ export type ТекстыДанных = {
   версииЗаписей: string;
   версииОпубликовано: string;
   версииВРаботе: string;
+  версииСкачать: string;
 };
 
 const ru: ТекстыДанных = {
@@ -490,6 +491,7 @@ const ru: ТекстыДанных = {
   версииЗаписей: "Записей",
   версииОпубликовано: "опубликовано",
   версииВРаботе: "в работе",
+  версииСкачать: "скачать файл",
 };
 
 const en: ТекстыДанных = {
@@ -751,6 +753,7 @@ Only ${нм} records carrying the verdict “formal access, human barrier” fal
   версииЗаписей: "Records",
   версииОпубликовано: "published",
   версииВРаботе: "in progress",
+  версииСкачать: "download file",
 };
 
 const es: ТекстыДанных = {
@@ -1014,6 +1017,7 @@ Solo ${нм} registros con el veredicto «acceso formal, barrera humana» corres
   версииЗаписей: "Registros",
   версииОпубликовано: "publicado",
   версииВРаботе: "en curso",
+  версииСкачать: "descargar archivo",
 };
 
 const zh: ТекстыДанных = {
@@ -1268,6 +1272,7 @@ const zh: ТекстыДанных = {
   версииЗаписей: "记录数",
   версииОпубликовано: "已发布",
   версииВРаботе: "进行中",
+  версииСкачать: "下载文件",
 };
 
 export const ТЕКСТЫ: Record<ЯзыкКод, ТекстыДанных> = { ru, en, es, zh };

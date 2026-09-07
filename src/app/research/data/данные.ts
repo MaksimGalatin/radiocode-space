@@ -719,6 +719,10 @@ export type ВерсияДанных = {
   дата: string;
   записей: number;
   опубликовано: boolean;
+  /** Имя выложенного файла в aifa.works/data — если срез опубликован
+   *  отдельным набором. Без ссылки пометка «опубликовано» ничего не
+   *  значит: читатель не может ни скачать, ни пересчитать. */
+  файл?: string;
   текст: { ru: string; en: string; es: string; zh: string };
 };
 
@@ -814,7 +818,8 @@ export const ВЕРСИИ_ДАННЫХ: ВерсияДанных[] = [
   {
     дата: '2026-09-05',
     записей: 84265,
-    опубликовано: false,
+    опубликовано: true,
+    файл: 'retraversal-2026-09-05.jsonl.gz',
     текст: {
     ru: "Переобход 84 265 объектов после аварии медленного диска: часть прежних записей была браком измерения, а не свойством сайтов.",
     en: "Re-traversal of 84,265 objects after a slow-disk failure: some earlier records were measurement artefacts, not properties of the sites.",
@@ -825,7 +830,8 @@ export const ВЕРСИИ_ДАННЫХ: ВерсияДанных[] = [
   {
     дата: '2026-09-06',
     записей: 3593,
-    опубликовано: false,
+    опубликовано: true,
+    файл: 'closed-verdict-recheck-2026-09-06.jsonl.gz',
     текст: {
     ru: "Все 3 593 записи графы «закрыт» проверены живьём за 473 доменами: сайт существует у 99,78 %, полноценную страницу отдали 17,48 %, остальное — заглушки защиты. Вердикт «закрыт» обоснован ровно для одного домена.",
     en: "All 3,593 records marked \"closed\" were checked live across 473 domains: 99.78% of sites exist, 17.48% served a real page, the rest are WAF stubs. The \"closed\" verdict held for exactly one domain.",
@@ -836,7 +842,8 @@ export const ВЕРСИИ_ДАННЫХ: ВерсияДанных[] = [
   {
     дата: '2026-09-06',
     записей: 7076,
-    опубликовано: false,
+    опубликовано: true,
+    файл: 'screenshot-review-2026-09-06.jsonl.gz',
     текст: {
     ru: "Уточнение 7 076 записей по снимкам экрана: вердикт сверен с тем, что видно на картинке, а не только с кодом ответа.",
     en: "Refinement of 7,076 records against screenshots: each verdict checked against what the picture shows, not only the response code.",
@@ -847,7 +854,8 @@ export const ВЕРСИИ_ДАННЫХ: ВерсияДанных[] = [
   {
     дата: '2026-09-06',
     записей: 4877,
-    опубликовано: false,
+    опубликовано: true,
+    файл: 'notfound-recheck-2026-09-06.jsonl.gz',
     текст: {
     ru: "Живая проверка 4 877 записей графы «404»: часть адресов отвечает, если зайти с www или по http.",
     en: "Live re-check of 4,877 records marked \"404\": some addresses answer when tried with www or over http.",

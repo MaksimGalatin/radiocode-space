@@ -47,14 +47,58 @@ import DataClient from './data-client';
  * по двум адресам: разные заголовки у одного содержимого путают и человека,
  * и поисковик.
  */
-export const metadata: Metadata = {
+/**
+ * КАНОН И ЯЗЫКОВЫЕ ВЕРСИИ — СВОИ, А НЕ УНАСЛЕДОВАННЫЕ ОТ ГЛАВНОЙ.
+ *
+ * Замер 07.09.2026 показал: страница объявляла `canonical` равным
+ * адресу главной. Поисковик верит канону, а не содержимому, и такая
+ * страница в выдачу не попадает вовсе — весь раздел исследования на
+ * этом сайте был для поиска невидим.
+ *
+ * Причина: статический `export const metadata` без `alternates`. Next
+ * тогда берёт канон из корневой раскладки, а там стоит адрес главной.
+ * Соседний раздел /news сделан верно и взят образцом.
+ *
+ * Канон самоссылающийся: русская версия объявляет каноном себя, а не
+ * английскую. Иначе три языка из четырёх снова выпадут из индекса —
+ * ровно это Google прислал по сайту 19.08.2026.
+ */
+const ЯЗЫКИ_РАЗДЕЛА = ['en', 'ru', 'es', 'zh'] as const;
+const САЙТ_РАЗДЕЛА = 'https://radiocode.space';
+const ПУТЬ_РАЗДЕЛА = '/research/data';
+
+function адресЯзыкаРаздела(яз: string): string {
+  // Английский — язык по умолчанию, он живёт без префикса.
+  return яз === 'en'
+    ? `${САЙТ_РАЗДЕЛА}${ПУТЬ_РАЗДЕЛА}`
+    : `${САЙТ_РАЗДЕЛА}/${яз}${ПУТЬ_РАЗДЕЛА}`;
+}
+
+
+function languagesXDefault(языки: Record<string, string>): void {
+  // Версия для тех, чей язык не совпал ни с одним объявленным.
+  языки['x-default'] = адресЯзыкаРаздела('en');
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const сырой = (await headers()).get('x-locale') || 'en';
+  const яз = (ЯЗЫКИ_РАЗДЕЛА as readonly string[]).includes(сырой) ? сырой : 'en';
+  const языки: Record<string, string> = {};
+  for (const я of ЯЗЫКИ_РАЗДЕЛА) языки[я] = адресЯзыкаРаздела(я);
+  languagesXDefault(языки);
+  return {
   title: 'Accessibility of U.S. Municipal Websites — Open Research',
   description:
     'Open data: 95,524 keyboard traversal records in a real browser across '
     + '11,902 municipalities in 51 U.S. states and territories, 83,212 with a '
     + 'verified evidence screenshot. The full CISA .gov registry was covered. '
     + 'Platform comparison by share of pages with a barrier for a human.',
-};
+    alternates: {
+      canonical: адресЯзыкаРаздела(яз),
+      languages: языки,
+    },
+  };
+}
 
 export default async function ResearchDataPage() {
   // Язык берётся из заголовка, который выставляет middleware, отрезая первый

@@ -147,6 +147,48 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
       alternates: { languages: языковые(`/news/${с.id}`) },
     })),
+    // 🔴 РАЗДЕЛА ИССЛЕДОВАНИЯ НЕ БЫЛО В КАРТЕ ВОВСЕ (добавлено 07.09.2026).
+    //
+    // Замер по четырём сайтам: aifa.works объявляет 96 адресов раздела,
+    // здесь — НОЛЬ, при том что все четыре страницы отдают 200 на всех
+    // четырёх языках (проверено кодами ответа: 24 адреса, все 200).
+    // Для поисковика раздела не существовало.
+    //
+    // Ту же беду чинили 30.08.2026 на aifa.works и сюда не перенесли —
+    // раздел 26 Конституции про то, что чинить надо класс, а не случай,
+    // и раздел 9 про одинаковую видимость на четырёх сайтах.
+    {
+      url: `${SITE}/research`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+      alternates: { languages: языковые('/research') },
+    },
+    {
+      // Основной материал исследования: живые числа обхода и ссылки на
+      // сырые данные. Оттого weekly и высший приоритет среди материалов.
+      url: `${SITE}/research/data`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+      alternates: { languages: языковые('/research/data') },
+    },
+    {
+      // То, чем материал проверяют: метод, ограничения, что не измерялось.
+      url: `${SITE}/research/methodology`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+      alternates: { languages: языковые('/research/methodology') },
+    },
+    {
+      // Открытые данные о мёртвых доменах федерального реестра США.
+      url: `${SITE}/research/registry`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      alternates: { languages: языковые('/research/registry') },
+    },
     // 🔴 ПРАВОВЫХ СТРАНИЦ В КАРТЕ НЕ БЫЛО ВОВСЕ.
     //
     // Обе отвечают 200 (проверено запросом к живому сайту 11.08.2026), обе
