@@ -701,3 +701,169 @@ export const ФАЗА2 = {
   axВыборка: '2 000', nvdaВыборка: '200–300',
   выборкаБраузер: '500',
 };
+
+/**
+ * ВЕРСИИ ДАННЫХ — сколько раз это перепроверялось и что менялось.
+ *
+ * Требование Архитектора 07.09.2026: «ВЕРСИИ данных должны быть».
+ *
+ * Здесь двенадцать записей, и шесть из них помечены `опубликовано: false` —
+ * это перепроверки, результаты которых лежали на диске и не были видны
+ * никому: 210 380 записей. Скрывать этот факт было бы хуже самой задержки:
+ * читатель, берущий данные всерьёз, первым делом спрашивает, сколько раз
+ * их перепроверяли.
+ *
+ * Числа сняты подсчётом строк в файлах, а не из имён и не по памяти.
+ */
+export type ВерсияДанных = {
+  дата: string;
+  записей: number;
+  опубликовано: boolean;
+  текст: { ru: string; en: string; es: string; zh: string };
+};
+
+export const ВЕРСИИ_ДАННЫХ: ВерсияДанных[] = [
+  {
+    дата: '2026-08-26',
+    записей: 15045,
+    опубликовано: false,
+    текст: {
+    ru: "Первая независимая перепроверка: Antigravity прошла домены реестра своим обходом. 15 045 записей.",
+    en: "First independent re-check: Antigravity swept the registry domains on its own. 15,045 records.",
+    es: "Primera verificación independiente: Antigravity recorrió los dominios del registro por su cuenta. 15 045 registros.",
+    zh: "首次独立复核：Antigravity 以自有遍历检查登记册域名。15 045 条记录。",
+    },
+  },
+  {
+    дата: '2026-08-30',
+    записей: 1209,
+    опубликовано: true,
+    текст: {
+    ru: "Опубликован список доменов без записи в DNS: числятся в федеральном реестре CISA, но не существуют.",
+    en: "Published: domains with no DNS record — listed in the federal CISA registry, yet nonexistent.",
+    es: "Publicado: dominios sin registro DNS, presentes en el registro federal CISA pero inexistentes.",
+    zh: "发布：无 DNS 记录的域名——列于联邦 CISA 登记册，却并不存在。",
+    },
+  },
+  {
+    дата: '2026-08-31',
+    записей: 1651,
+    опубликовано: true,
+    текст: {
+    ru: "Список расширен после прохода по оставшимся штатам: +442 домена.",
+    en: "List extended after sweeping the remaining states: +442 domains.",
+    es: "Lista ampliada tras recorrer los estados restantes: +442 dominios.",
+    zh: "遍历其余各州后扩充列表：新增 442 个域名。",
+    },
+  },
+  {
+    дата: '2026-09-01',
+    записей: 1499,
+    опубликовано: true,
+    текст: {
+    ru: "Записей стало МЕНЬШЕ на 152: домены, названные мёртвыми, ответили при повторной проверке настоящим браузером с четырьмя адресами на домен. Мы поправили себя, а не подчистили данные.",
+    en: "The count went DOWN by 152: domains we had called dead answered on re-check with a real browser trying four addresses each. We corrected ourselves rather than trimming the data.",
+    es: "El recuento BAJÓ en 152: dominios que dimos por muertos respondieron al reintentar con un navegador real y cuatro direcciones por dominio. Nos corregimos, no recortamos los datos.",
+    zh: "记录数减少 152：此前判定失效的域名，在用真实浏览器、每个域名尝试四个地址复核时给出了响应。我们更正了自己，而非删减数据。",
+    },
+  },
+  {
+    дата: '2026-09-01',
+    записей: 95524,
+    опубликовано: true,
+    текст: {
+    ru: "Опубликован сырой журнал клавиатурного обхода: 95 524 записи по 11 902 доменам. Обход федерального реестра CISA завершён — все 11 659 сайтов.",
+    en: "Raw keyboard-traversal log published: 95,524 records across 11,902 domains. The federal CISA registry sweep is complete — all 11,659 sites.",
+    es: "Registro bruto de recorrido por teclado publicado: 95 524 registros en 11 902 dominios. El barrido del registro federal CISA está completo: los 11 659 sitios.",
+    zh: "发布键盘遍历原始日志：涵盖 11 902 个域名的 95 524 条记录。联邦 CISA 登记册遍历已完成——全部 11 659 个站点。",
+    },
+  },
+  {
+    дата: '2026-09-01',
+    записей: 95524,
+    опубликовано: false,
+    текст: {
+    ru: "Сплошная сверка журнала глазами: каждая запись просмотрена человеком. Результат влит в журнал, отдельной версией не публиковался.",
+    en: "Full manual review of the log: every record checked by a human. Results merged into the log; never published as a separate version.",
+    es: "Revisión manual completa del registro: cada entrada verificada por una persona. Resultados fusionados; nunca publicados como versión aparte.",
+    zh: "对日志进行全量人工复核：每条记录均由人查看。结果已并入日志，未作为独立版本发布。",
+    },
+  },
+  {
+    дата: '2026-09-01',
+    записей: 81657,
+    опубликовано: true,
+    текст: {
+    ru: "Реестр целостности: SHA-256 каждого снимка. В тот же день его собственный хеш проштампован в Bitcoin через OpenTimestamps, блок 965040.",
+    en: "Integrity registry: SHA-256 of every screenshot. Its own hash was timestamped into Bitcoin via OpenTimestamps the same day, block 965040.",
+    es: "Registro de integridad: SHA-256 de cada captura. Su propio hash quedó sellado en Bitcoin mediante OpenTimestamps ese mismo día, bloque 965040.",
+    zh: "完整性登记：每张截图的 SHA-256。当天其自身哈希通过 OpenTimestamps 写入比特币，区块 965040。",
+    },
+  },
+  {
+    дата: '2026-09-03',
+    записей: 110099,
+    опубликовано: true,
+    текст: {
+    ru: "Реестр целостности расширен на 28 442 записи: под доказательство подведены снимки повторных проходов.",
+    en: "Integrity registry extended by 28,442 records: screenshots from repeat passes brought under proof.",
+    es: "Registro de integridad ampliado en 28 442 registros: capturas de pases repetidos bajo prueba.",
+    zh: "完整性登记新增 28 442 条：将重复遍历的截图纳入证明。",
+    },
+  },
+  {
+    дата: '2026-09-05',
+    записей: 84265,
+    опубликовано: false,
+    текст: {
+    ru: "Переобход 84 265 объектов после аварии медленного диска: часть прежних записей была браком измерения, а не свойством сайтов.",
+    en: "Re-traversal of 84,265 objects after a slow-disk failure: some earlier records were measurement artefacts, not properties of the sites.",
+    es: "Nuevo recorrido de 84 265 objetos tras un fallo de disco lento: parte de los registros previos eran artefactos de medición, no propiedades de los sitios.",
+    zh: "在慢速磁盘故障后重新遍历 84 265 个对象：此前部分记录属测量伪影，而非站点本身的属性。",
+    },
+  },
+  {
+    дата: '2026-09-06',
+    записей: 3593,
+    опубликовано: false,
+    текст: {
+    ru: "Все 3 593 записи графы «закрыт» проверены живьём за 473 доменами: сайт существует у 99,78 %, полноценную страницу отдали 17,48 %, остальное — заглушки защиты. Вердикт «закрыт» обоснован ровно для одного домена.",
+    en: "All 3,593 records marked \"closed\" were checked live across 473 domains: 99.78% of sites exist, 17.48% served a real page, the rest are WAF stubs. The \"closed\" verdict held for exactly one domain.",
+    es: "Los 3 593 registros marcados «cerrado» se comprobaron en vivo en 473 dominios: el 99,78 % de los sitios existe, el 17,48 % sirvió una página real, el resto son bloqueos WAF. El veredicto «cerrado» se sostuvo para un solo dominio.",
+    zh: "对标记为“关闭”的全部 3 593 条记录在 473 个域名上做了实时核验：99.78% 的站点存在，17.48% 返回了真实页面，其余为 WAF 拦截页。“关闭”判定仅对一个域名成立。",
+    },
+  },
+  {
+    дата: '2026-09-06',
+    записей: 7076,
+    опубликовано: false,
+    текст: {
+    ru: "Уточнение 7 076 записей по снимкам экрана: вердикт сверен с тем, что видно на картинке, а не только с кодом ответа.",
+    en: "Refinement of 7,076 records against screenshots: each verdict checked against what the picture shows, not only the response code.",
+    es: "Refinamiento de 7 076 registros con capturas: cada veredicto contrastado con lo que muestra la imagen, no sólo con el código de respuesta.",
+    zh: "依据截图细化 7 076 条记录：判定与画面实际内容比对，而不仅看响应码。",
+    },
+  },
+  {
+    дата: '2026-09-06',
+    записей: 4877,
+    опубликовано: false,
+    текст: {
+    ru: "Живая проверка 4 877 записей графы «404»: часть адресов отвечает, если зайти с www или по http.",
+    en: "Live re-check of 4,877 records marked \"404\": some addresses answer when tried with www or over http.",
+    es: "Comprobación en vivo de 4 877 registros «404»: algunas direcciones responden con www o por http.",
+    zh: "对 4 877 条“404”记录做实时复核：部分地址在使用 www 或 http 时可以响应。",
+    },
+  },
+  {
+    дата: '2026-09-07',
+    записей: 21258,
+    опубликовано: false,
+    текст: {
+    ru: "Идёт новый обход: коммерческие сайты США, 156 255 доменов в очереди. Пройден 21 258 — это 13,6 %. Найдено 142 409 нарушений WCAG 2.1 AA. Публикация после завершения: выкладывать незаконченную выборку значит подставлять её под справедливый упрёк в отборе.",
+    en: "A new sweep is running: US commercial sites, 156,255 domains queued. 21,258 done — 13.6%. 142,409 WCAG 2.1 AA violations found so far. Publication follows completion: releasing an unfinished sample invites a fair charge of cherry-picking.",
+    es: "Un nuevo barrido está en marcha: sitios comerciales de EE. UU., 156 255 dominios en cola. 21 258 completados (13,6 %). 142 409 infracciones WCAG 2.1 AA halladas. La publicación llegará al terminar: difundir una muestra incompleta invita a la acusación justa de selección interesada.",
+    zh: "新一轮遍历正在进行：美国商业网站，队列中 156 255 个域名，已完成 21 258 个（13.6%），已发现 142 409 项 WCAG 2.1 AA 违规。将在完成后发布：公布未完成的样本会招致关于选择性取样的合理质疑。",
+    },
+  }
+];

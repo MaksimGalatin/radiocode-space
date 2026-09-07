@@ -223,6 +223,14 @@ export type ТекстыДанных = {
   фаза2Интервалы: (д538: string, д746: string, д126: string) => string;
   фаза2Этика: string;
   фаза2Итог: string;
+
+  версииЗаголовок: string;
+  версииТекст: string;
+  версииДата: string;
+  версииЧто: string;
+  версииЗаписей: string;
+  версииОпубликовано: string;
+  версииВРаботе: string;
 };
 
 const ru: ТекстыДанных = {
@@ -475,6 +483,13 @@ const ru: ТекстыДанных = {
   перепрТекст2: (гор, есть, доля, згл, зглД, отд, отдД, тиш, тишД) => `Вторая проверка касается вердикта «закрыт». Он ставился, когда сервер отвечал отказом, а снимок страницы совпадал у разных городов — то есть мы видели не сайт, а страницу блокировки. Таких городов ${гор}. Живая проверка: сайт существует у ${есть} из них (${доля} %). Из них ${згл} (${зглД} %) отдали именно заглушку защиты от роботов — человек такой сайт откроет; ${отд} (${отдД} %) отдали живую страницу. По-настоящему молчат ${тиш} (${тишД} %) — только для них вердикт был верен.`,
   перепрПолный: (зап, дом, отд, отдД, отдДом, згл, зглД, зглДом, тиш, тишД, есть, естьД) => `Выборка была первой, а не единственной проверкой. Следом прошли ВСЕ записи этой графы: их ${зап}, а доменов за ними ${дом}. Итог: сайт существует у ${есть} записей из ${зап}, это ${естьД} %. Полноценную страницу с первого обращения отдали ${отд} записей (${отдД} %, доменов ${отдДом}); ${згл} записей (${зглД} %, доменов ${зглДом}) упёрлись в заглушку защиты от роботов — сайт есть, но нашего робота не пустили. По-настоящему не ответил ОДИН домен: ${тиш} записей, ${тишД} %. Выборка предсказала это с точностью до процента — 16,5 % против ${отдД} %, — и это важнее самих чисел: метод устойчив, а не подогнан под результат.`,
   перепрВывод: 'Мы не переписываем прошлые числа молча и не прячем поправку в примечание. Доли основного исследования опираются на страницы, а эти две графы — на домены, и потому главный вывод не сдвигается. Но утверждение о том, что чужого сайта не существует, должно быть обеспечено проверкой, а не отказом нашего клиента. Полная перепроверка всех записей этих двух граф идёт; её результаты появятся здесь тем же порядком.',
+  версииЗаголовок: "Версии данных",
+  версииТекст: "Сколько раз это перепроверялось и что менялось. Строки с пометкой «в работе» — перепроверки, результаты которых ещё не выложены отдельными файлами. Их числа приведены здесь намеренно: молчание о них читается как «измерили один раз и на том всё».",
+  версииДата: "Дата",
+  версииЧто: "Что сделано",
+  версииЗаписей: "Записей",
+  версииОпубликовано: "опубликовано",
+  версииВРаботе: "в работе",
 };
 
 const en: ТекстыДанных = {
@@ -729,6 +744,13 @@ Only ${нм} records carrying the verdict “formal access, human barrier” fal
   перепрТекст2: (гор, есть, доля, згл, зглД, отд, отдД, тиш, тишД) => `The second check concerns the “closed” verdict. It was assigned when a server refused us and the screenshot matched across different cities — meaning we were looking at a block page, not a site. There are ${гор} such cities. Live check: the site exists for ${есть} of them (${доля} %). Of those, ${згл} (${зглД} %) returned a bot-protection page — a person opens such a site normally; ${отд} (${отдД} %) returned a live page. Only ${тиш} (${тишД} %) are genuinely silent — and only for them was the verdict correct.`,
   перепрПолный: (зап, дом, отд, отдД, отдДом, згл, зглД, зглДом, тиш, тишД, есть, естьД) => `The sample was the first check, not the only one. Every record in this column followed — ${зап} of them across ${дом} domains. Result: the site exists for ${есть} records out of ${зап}, that is ${естьД} %. A full page came back on first contact for ${отд} records (${отдД} %, ${отдДом} domains); ${згл} records (${зглД} %, ${зглДом} domains) hit a bot-protection page — the site is there, our crawler was not let in. Exactly ONE domain never answered: ${тиш} records, ${тишД} %. The sample predicted this to within a percentage point — 16.5 % against ${отдД} % — and that matters more than the figures themselves: the method holds, it was not fitted to the outcome.`,
   перепрВывод: 'We do not rewrite past figures silently, and we do not bury the correction in a footnote. The study\u2019s headline shares rest on pages while these two columns rest on domains, so the main finding does not move. But a claim that someone else\u2019s website does not exist must be backed by a check, not by our client failing. A full re-check of every record in these two columns is under way; its results will appear here the same way.',
+  версииЗаголовок: "Data versions",
+  версииТекст: "How many times this was re-checked and what changed. Rows marked \"in progress\" are re-checks not yet released as separate files. Their counts are shown deliberately: staying silent about them reads as \"measured once and left at that\".",
+  версииДата: "Date",
+  версииЧто: "What was done",
+  версииЗаписей: "Records",
+  версииОпубликовано: "published",
+  версииВРаботе: "in progress",
 };
 
 const es: ТекстыДанных = {
@@ -985,6 +1007,13 @@ Solo ${нм} registros con el veredicto «acceso formal, barrera humana» corres
   перепрТекст2: (гор, есть, доля, згл, зглД, отд, отдД, тиш, тишД) => `La segunda comprobación afecta al veredicto «cerrado». Se asignaba cuando el servidor nos rechazaba y la captura coincidía entre ciudades distintas: mirábamos una página de bloqueo, no un sitio. Hay ${гор} ciudades así. Comprobación en vivo: el sitio existe en ${есть} de ellas (${доля} %). De esas, ${згл} (${зглД} %) devolvieron una página antirrobot —una persona abre ese sitio sin problema—; ${отд} (${отдД} %) devolvieron una página viva. Realmente callan ${тиш} (${тишД} %): solo para ellas el veredicto era correcto.`,
   перепрПолный: (зап, дом, отд, отдД, отдДом, згл, зглД, зглДом, тиш, тишД, есть, естьД) => `La muestra fue la primera comprobación, no la única. Después pasaron TODOS los registros de esta columna: ${зап} sobre ${дом} dominios. Resultado: el sitio existe en ${есть} registros de ${зап}, es decir ${естьД} %. Devolvieron una página completa al primer intento ${отд} registros (${отдД} %, ${отдДом} dominios); ${згл} registros (${зглД} %, ${зглДом} dominios) chocaron con una página antirrobot: el sitio existe, pero no dejaron entrar a nuestro rastreador. Realmente no respondió UN solo dominio: ${тиш} registros, ${тишД} %. La muestra lo predijo con un punto de margen —16,5 % frente a ${отдД} %—, y eso importa más que las cifras: el método se sostiene, no se ajustó al resultado.`,
   перепрВывод: 'No reescribimos cifras pasadas en silencio ni escondemos la corrección en una nota. Las proporciones principales del estudio se apoyan en páginas y estas dos columnas en dominios, por lo que la conclusión central no se mueve. Pero afirmar que el sitio de otro no existe debe sustentarse en una comprobación, no en el fallo de nuestro cliente. La revisión completa de todos los registros de estas dos columnas está en marcha; sus resultados aparecerán aquí del mismo modo.',
+  версииЗаголовок: "Versiones de los datos",
+  версииТекст: "Cuántas veces se volvió a comprobar esto y qué cambió. Las filas «en curso» son verificaciones aún no publicadas como archivos aparte. Sus cifras se muestran a propósito: callarlas se lee como «se midió una vez y ya está».",
+  версииДата: "Fecha",
+  версииЧто: "Qué se hizo",
+  версииЗаписей: "Registros",
+  версииОпубликовано: "publicado",
+  версииВРаботе: "en curso",
 };
 
 const zh: ТекстыДанных = {
@@ -1232,6 +1261,13 @@ const zh: ТекстыДанных = {
   перепрТекст2: (гор, есть, доля, згл, зглД, отд, отдД, тиш, тишД) => `第二项复核针对「关闭」这一判定。它是在服务器拒绝我们、且不同城市的截图彼此相同时给出的——也就是说我们看到的是拦截页，不是网站。这样的城市共 ${гор} 个。实测结果：其中 ${есть} 个（${доля} %）网站确实存在。其中 ${згл} 个（${зглД} %）返回的是反机器人拦截页——真人能正常打开；${отд} 个（${отдД} %）返回了正常页面。真正无响应的只有 ${тиш} 个（${тишД} %），只有对它们，原判定才是成立的。`,
   перепрПолный: (зап, дом, отд, отдД, отдДом, згл, зглД, зглДом, тиш, тишД, есть, естьД) => `抽样只是第一次核查，不是唯一一次。随后我们跑完了该分类的全部记录——共 ${зап} 条，涉及 ${дом} 个域名。结果：${зап} 条中有 ${есть} 条对应的网站确实存在，占 ${естьД} %。首次访问即返回完整页面的有 ${отд} 条（${отдД} %，${отдДом} 个域名）；${згл} 条（${зглД} %，${зглДом} 个域名）撞上了反机器人拦截页——网站存在，只是没放我们的爬虫进去。真正毫无响应的只有一个域名：${тиш} 条，${тишД} %。抽样的预测与全量结果相差不到一个百分点——16.5 % 对 ${отдД} %——这比数字本身更重要：方法是稳的，不是为结果拼凑的。`,
   перепрВывод: '我们不会悄悄改写旧数字，也不会把更正藏进脚注。研究的主要比例基于页面，而这两个分类基于域名，因此核心结论不受影响。但「他人网站不存在」这样的论断，必须由核查来支撑，而不是由我们客户端的失败来支撑。这两个分类全部记录的完整复核正在进行，结果将以同样方式公布。',
+  версииЗаголовок: "数据版本",
+  версииТекст: "这些数据被复核了多少次、发生了哪些变化。标记为“进行中”的行是尚未以独立文件发布的复核。此处特意列出其数量：对其保持沉默，读起来就像“只测量过一次便就此作罢”。",
+  версииДата: "日期",
+  версииЧто: "所做工作",
+  версииЗаписей: "记录数",
+  версииОпубликовано: "已发布",
+  версииВРаботе: "进行中",
 };
 
 export const ТЕКСТЫ: Record<ЯзыкКод, ТекстыДанных> = { ru, en, es, zh };

@@ -28,6 +28,7 @@ import {
   МЕХАНИЗМ_РАСХОЖДЕНИЯ, МЕХАНИЗМ,
   КОГО_КАСАЕТСЯ as КОГО_КАСАЕТСЯ_РУССКИЕ, СЕМЕЙСТВО_НЕИЗМЕРИМО,
   ФАЗА2 as ФАЗА2_РУССКИЕ,
+  ВЕРСИИ_ДАННЫХ,
 } from './данные';
 import { числаНаЯзыке } from '../числа_на_языке';
 
@@ -775,6 +776,48 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <div style={{ border: '1px solid rgba(148,163,184,0.18)', borderRadius: 10, padding: '14px 16px', marginBottom: 22, background: 'rgba(148,163,184,0.03)' }}>
           <p style={{ ...ТЕКСТ, marginBottom: 0, fontSize: 15 }}>{т.раскрытиеТекст}</p>
+        </div>
+
+
+        {/* ─── Версии данных ───────────────────────────────────────────
+            Требование Архитектора 07.09.2026. Отвечает на вопрос, который
+            задаёт всякий, кто берёт чужие данные всерьёз: сколько раз это
+            перепроверялось. Строки «в работе» показаны намеренно — молчание
+            о неопубликованных перепроверках читается как «мерили однажды». */}
+        <h2 style={ЗАГ2}>{т.версииЗаголовок}</h2>
+        <p style={ТЕКСТ}>{т.версииТекст}</p>
+        <div style={{ overflowX: 'auto', marginBottom: 28 }} tabIndex={0}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 620 }}>
+            <thead>
+              <tr>
+                <th style={{ ...ЯЧЕЙКА, whiteSpace: 'nowrap', color: '#94a3b8',
+                             textAlign: 'left', fontWeight: 600 }}>{т.версииДата}</th>
+                <th style={{ ...ЯЧЕЙКА, color: '#94a3b8', textAlign: 'left',
+                             fontWeight: 600 }}>{т.версииЧто}</th>
+                <th style={{ ...ЯЧЕЙКА, color: '#94a3b8', textAlign: 'right',
+                             fontWeight: 600, whiteSpace: 'nowrap' }}>{т.версииЗаписей}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ВЕРСИИ_ДАННЫХ.map((в, i) => (
+                <tr key={в.дата + i}>
+                  <td style={{ ...ЯЧЕЙКА, whiteSpace: 'nowrap', color: '#94a3b8',
+                               fontSize: 13, verticalAlign: 'top' }}>{в.дата}</td>
+                  <td style={{ ...ЯЧЕЙКА, color: '#cbd5e1', lineHeight: 1.55 }}>
+                    {в.текст[язык]}
+                    <div style={{ marginTop: 4, fontSize: 12,
+                                  color: в.опубликовано ? '#4ade80' : '#fbbf24' }}>
+                      {в.опубликовано ? т.версииОпубликовано : т.версииВРаботе}
+                    </div>
+                  </td>
+                  <td style={{ ...ЯЧЕЙКА, textAlign: 'right', whiteSpace: 'nowrap',
+                               color: '#e2e8f0', fontSize: 13, verticalAlign: 'top' }}>
+                    {в.записей.toLocaleString('ru-RU').replace(/,/g, ' ')}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         <p style={ТЕКСТ}>
