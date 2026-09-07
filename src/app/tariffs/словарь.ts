@@ -61,6 +61,11 @@ export type ТекстыТарифов = {
   строки: [string, string, string];
   амбассадорыПояснение1: string;
   амбассадорыПояснение2: string;
+  /** Правовая оговорка: партнёрская программа, а не
+   *  инвестиционное предложение. Без неё страница с
+   *  процентами дохода читается по тесту Хауи как
+   *  предложение ценной бумаги. */
+  амбассадорыОговорка: string;
   паспортЗаголовок: string;
   паспортЧто: string;
   паспортСтроки: string[];
@@ -202,7 +207,9 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     оплата2:
       'Подписка не продлевается автоматически без вашего согласия. Данные карт мы не храним — их у нас попросту нет.',
     вКабинет: 'Перейти в личный кабинет',
-  },
+      амбассадорыОговорка:
+      'CODE Eternal — партнёрская программа, а не инвестиционное предложение. Доход зависит от реальных продаж и ваших усилий и не гарантирован; большинство новичков в первые недели зарабатывают мало. Токен $GALATIN — программа лояльности: он не является ценной бумагой, не даёт права на долю в выручке и не предполагает дохода от усилий других лиц.',
+},
 
   en: {
     метка: 'Pricing',
@@ -321,7 +328,9 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     оплата2:
       'Subscriptions do not renew automatically without your consent. We do not store card data — we simply do not have it.',
     вКабинет: 'Go to your dashboard',
-  },
+      амбассадорыОговорка:
+      'CODE Eternal is an affiliate program, not an investment offering. Income depends on real sales and your own effort and is not guaranteed; most newcomers earn little in the first weeks. The $GALATIN token is a loyalty program: it is not a security, confers no claim on revenue, and implies no profit derived from the efforts of others.',
+},
 
   es: {
     метка: 'Precios',
@@ -442,7 +451,9 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     оплата2:
       'La suscripción no se renueva automáticamente sin tu consentimiento. No guardamos datos de tarjetas — sencillamente no los tenemos.',
     вКабинет: 'Ir a mi panel',
-  },
+      амбассадорыОговорка:
+      'CODE Eternal es un programa de afiliados, no una oferta de inversión. Los ingresos dependen de ventas reales y de su propio esfuerzo y no están garantizados; la mayoría de los nuevos gana poco en las primeras semanas. El token $GALATIN es un programa de fidelidad: no es un valor negociable, no otorga derecho sobre los ingresos ni implica beneficio derivado del esfuerzo de terceros.',
+},
 
   zh: {
     метка: '价格',
@@ -554,7 +565,9 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     оплата2:
       '未经你同意，订阅不会自动续费。我们不保存银行卡信息——我们根本没有这些数据。',
     вКабинет: '进入个人中心',
-  },
+      амбассадорыОговорка:
+      'CODE Eternal 是联盟推广计划，而非投资要约。收益取决于真实销售与您本人的努力，并无保证；多数新人在最初几周收入很少。$GALATIN 代币属于忠诚度计划：它不是证券，不赋予对收入的任何权利，也不意味着可从他人的努力中获利。',
+},
 };
 
 export const ДОЛИ: [string, string, string][] = [
