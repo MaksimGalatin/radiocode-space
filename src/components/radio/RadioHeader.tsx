@@ -136,12 +136,12 @@ export function RadioHeader() {
           : 'Registry versus reality',
       пояснение:
         lang === 'ru'
-          ? '1 650 доменов без записи в DNS'
+          ? '1 498 доменов без записи в DNS'
           : lang === 'es'
-          ? '1 650 dominios sin registro DNS'
+          ? '1 498 dominios sin registro DNS'
           : lang === 'zh'
-          ? '1 650 个域名没有 DNS 记录'
-          : '1,650 domains with no DNS record',
+          ? '1 498 个域名没有 DNS 记录'
+          : '1,498 domains with no DNS record',
     },
   ];
 
