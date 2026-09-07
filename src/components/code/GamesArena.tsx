@@ -24,7 +24,11 @@ function useIsMobile() {
 
 // ─── Chess — full rules engine: check, checkmate, stalemate, castling, en passant, promotion ─
 const CHESS_PIECES: Record<string, string> = {
-  wK:"♔", wQ:"♕", wR:"♖", wB:"♗", wN:"♘", wP:"♙",
+  // 06.09.2026. Было: белые контурными глифами (♔♕♖), чёрные залитыми.
+  // На тёмной доске контурная фигура выглядит дырявой — Архитектор увидел
+  // это как «шахматы местами кривые». Теперь глиф один и тот же, а цвет
+  // различают заливка и обводка противоположного тона.
+  wK:"♚", wQ:"♛", wR:"♜", wB:"♝", wN:"♞", wP:"♟",
   bK:"♚", bQ:"♛", bR:"♜", bB:"♝", bN:"♞", bP:"♟",
 };
 type ChessBoard = (string|null)[][];
@@ -324,7 +328,7 @@ function Chess({ lang }: { lang: Lang }) {
                     {mvHere&&!piece&&<span style={{display:"block",width:"12px",height:"12px",borderRadius:"50%",background:"rgba(16,185,129,0.85)",boxShadow:"0 0 8px rgba(16,185,129,0.9)",pointerEvents:"none"}}/>}
                     {piece&&<span style={{fontSize:mobile?"28px":"33px",lineHeight:1,
                       color:piece[0]==="w"?"#FAFAF5":"#1A1E2E",
-                      textShadow:piece[0]==="w"?"0 1px 2px rgba(0,0,0,0.85), 0 0 4px rgba(0,0,0,0.5)":"0 1px 2px rgba(255,255,255,0.4), 0 0 4px rgba(255,255,255,0.28)"}}>{CHESS_PIECES[piece]||""}</span>}
+                      WebkitTextStroke:piece[0]==="w"?"1.1px rgba(20,20,30,0.92)":"1.1px rgba(245,245,240,0.55)"}}>{CHESS_PIECES[piece]||""}</span>}
                   </button>
                 );
               })}

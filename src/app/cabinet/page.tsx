@@ -360,7 +360,7 @@ export default function CabinetPage() {
         <h1 style={{ fontSize: 26, fontWeight: 800, background: "linear-gradient(90deg,#06B6D4,#7C3AED)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", margin: 0, minWidth: 0 }}>{t("title")}</h1>
         <span style={{ marginLeft: "auto", display: "inline-flex", gap: 4 }}>
           {(["ru","en","es","zh"] as const).map(L => (
-            <button key={L} onClick={() => { try { localStorage.setItem("code-eternal-lang-user", "1"); } catch {} setLang(L); }} className="cab-tab" aria-selected={lang === L} style={{ padding: "4px 8px", fontSize: 14, textTransform: "uppercase" }}>{L}</button>
+            <button key={L} onClick={() => { try { localStorage.setItem("code-eternal-lang-user", "1"); } catch {} setLang(L); }} className="cab-tab" aria-pressed={lang === L} style={{ padding: "4px 8px", fontSize: 14, textTransform: "uppercase" }}>{L}</button>
           ))}
         </span>
         <a href="/" className="cab-btn cab-btn-ghost" style={{ textDecoration: "none", fontSize: 15 }}>{t("backToSite")}</a>
@@ -382,7 +382,7 @@ export default function CabinetPage() {
       {authChecked && !me && (
         <Card className="cab-fade" style={{ padding: "34px 30px", maxWidth: 430, margin: "0 auto 28px", borderColor: "rgba(6,182,212,0.18)" }}>
           <div style={{ width: 62, height: 62, margin: "0 auto 16px", borderRadius: 16, background: "linear-gradient(135deg,rgba(6,182,212,0.18),rgba(124,58,237,0.18))", border: "1px solid rgba(6,182,212,0.35)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--cab-cyan)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
           </div>
           {regToken ? (
             <>
@@ -405,7 +405,7 @@ export default function CabinetPage() {
               <div style={{ display: "flex", marginBottom: 22, borderBottom: "1px solid rgba(42,42,58,0.8)" }} role="tablist">
                 {(["login", "register"] as const).map(m => (
                   <button key={m} role="tab" aria-selected={aMode === m} onClick={() => { setAMode(m); setResetMode(false); setCodeSent(false); setAMsg(""); }}
-                    style={{ flex: 1, padding: 12, border: "none", background: "transparent", cursor: "pointer", fontWeight: 700, fontSize: 16, color: aMode === m ? "#22D3EE" : "#8b8b9e", borderBottom: "2px solid " + (aMode === m ? "#22D3EE" : "transparent"), marginBottom: -1 }}>
+                    style={{ flex: 1, padding: 12, border: "none", background: "transparent", cursor: "pointer", fontWeight: 700, fontSize: 16, color: aMode === m ? TOKENS.cyan : TOKENS.sub, borderBottom: "2px solid " + (aMode === m ? TOKENS.cyan : "transparent"), marginBottom: -1 }}>
                     {m === "login" ? t("tabLogin") : t("tabRegister")}
                   </button>
                 ))}
@@ -419,8 +419,8 @@ export default function CabinetPage() {
                   { v: agreePriv, set: setAgreePriv, doc: t("docPriv"), href: "https://www.codeofdigitaleternity.com/privacy-policy" },
                 ].map((c, i) => (
                   <label key={i} style={{ display: "flex", alignItems: "flex-start", gap: 9, cursor: "pointer", padding: "9px 12px", borderRadius: 10, border: `1px solid ${c.v ? "rgba(6,182,212,0.45)" : "rgba(42,42,58,0.8)"}`, background: c.v ? "rgba(6,182,212,0.06)" : "transparent" }}>
-                    <input type="checkbox" checked={c.v} onChange={e => c.set(e.target.checked)} style={{ marginTop: 2, accentColor: "#06B6D4" }} />
-                    <span style={{ fontSize: 14, color: TOKENS.sub, lineHeight: 1.5 }}>{t("agreeRead")} <a href={c.href} target="_blank" rel="noopener noreferrer" style={{ color: "#22D3EE", textDecoration: "underline" }}>{c.doc}</a></span>
+                    <input type="checkbox" checked={c.v} onChange={e => c.set(e.target.checked)} style={{ marginTop: 2, accentColor: TOKENS.cyan2 }} />
+                    <span style={{ fontSize: 14, color: TOKENS.sub, lineHeight: 1.5 }}>{t("agreeRead")} <a href={c.href} target="_blank" rel="noopener noreferrer" style={{ color: TOKENS.cyan, textDecoration: "underline" }}>{c.doc}</a></span>
                   </label>
                 ))}
               </div>
@@ -430,7 +430,7 @@ export default function CabinetPage() {
                     <label style={authLabel}>{t("password")}</label>
                     <input type="password" className="cab-input" value={aPass} onChange={e => setAPass(e.target.value)} placeholder="••••••" autoComplete="current-password" onKeyDown={e => { if (e.key === "Enter" && allAgreed) doLogin(); }} style={{ marginBottom: 16 }} />
                     <button className="cab-btn cab-btn-primary" style={{ width: "100%" }} onClick={doLogin} disabled={aBusy || !aEmail || !aPass || !allAgreed}>{aBusy ? t("signinBusy") : t("signin")}</button>
-                    <button onClick={() => { setResetMode(true); setCodeSent(false); setAPass(""); setAPass2(""); setACode(""); setAMsg(""); }} style={{ marginTop: 14, width: "100%", textAlign: "center", fontSize: 15, color: "#22D3EE", cursor: "pointer", background: "none", border: "none" }}>{t("forgotPass")}</button>
+                    <button onClick={() => { setResetMode(true); setCodeSent(false); setAPass(""); setAPass2(""); setACode(""); setAMsg(""); }} style={{ marginTop: 14, width: "100%", textAlign: "center", fontSize: 15, color: TOKENS.cyan, cursor: "pointer", background: "none", border: "none" }}>{t("forgotPass")}</button>
                   </>
                 ) : (
                   <>
@@ -445,12 +445,12 @@ export default function CabinetPage() {
                         <label style={authLabel}>{t("repeatPass")}</label>
                         <input type="password" className="cab-input" value={aPass2} onChange={e => setAPass2(e.target.value)} placeholder="••••••" autoComplete="new-password" onKeyDown={e => { if (e.key === "Enter") doResetPassword(); }} style={{ marginBottom: 18 }} />
                         <button className="cab-btn cab-btn-primary" style={{ width: "100%" }} onClick={doResetPassword} disabled={aBusy || !aCode || !aPass || !aPass2 || !allAgreed}>{aBusy ? "…" : t("resetAndEnter")}</button>
-                        <button onClick={doSendCode} disabled={aBusy || resendIn > 0} style={{ marginTop: 10, width: "100%", textAlign: "center", fontSize: 15, color: resendIn > 0 ? TOKENS.mut : "#22D3EE", cursor: resendIn > 0 ? "default" : "pointer", background: "none", border: "none" }}>
+                        <button onClick={doSendCode} disabled={aBusy || resendIn > 0} style={{ marginTop: 10, width: "100%", textAlign: "center", fontSize: 15, color: resendIn > 0 ? TOKENS.mut : TOKENS.cyan, cursor: resendIn > 0 ? "default" : "pointer", background: "none", border: "none" }}>
                           {resendIn > 0 ? `↻ ${resendIn}s` : "↻ " + t("getCode")}
                         </button>
                       </>
                     )}
-                    <button onClick={() => { setResetMode(false); setAMsg(""); }} style={{ marginTop: 8, width: "100%", textAlign: "center", fontSize: 15, color: "#8b8b9e", cursor: "pointer", background: "none", border: "none" }}>{t("byPass")}</button>
+                    <button onClick={() => { setResetMode(false); setAMsg(""); }} style={{ marginTop: 8, width: "100%", textAlign: "center", fontSize: 15, color: TOKENS.sub, cursor: "pointer", background: "none", border: "none" }}>{t("byPass")}</button>
                   </>
                 )
               ) : (
@@ -560,7 +560,7 @@ export default function CabinetPage() {
               <SectionTitle icon="🏆" title={t("lbTitle")} right={
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                   {[["chess", "♟"], ["checkers", "⛀"], ["backgammon", "🎲"], ["ttt", "❌"], ["tetris", "🧱"]].map(([g, ic]) => (
-                    <button key={g} className="cab-tab" aria-selected={lbGame === g} onClick={() => setLbGame(g)} style={{ padding: "6px 12px", fontSize: 15 }}>{ic}</button>
+                    <button key={g} className="cab-tab" aria-pressed={lbGame === g} onClick={() => setLbGame(g)} style={{ padding: "6px 12px", fontSize: 15 }}>{ic}</button>
                   ))}
                 </div>} />
               {lb === null ? <Skeleton h={90} /> : lb.length === 0 ? <EmptyState text={t("lbEmpty")} /> : (

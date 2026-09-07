@@ -22,6 +22,7 @@ export function RadioHeader() {
   // Задержка закрытия 200 мс — чтобы меню не захлопывалось, пока курсор
   // переходит с кнопки на список.
   const [фокусОткрыт, setФокусОткрыт] = useState(false);
+  const [языкОткрыт, setЯзыкОткрыт] = useState(false);
   const фокусТаймер = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const открытьФокус = useCallback(() => {
@@ -78,12 +79,31 @@ export function RadioHeader() {
           : 'Research data',
       пояснение:
         lang === 'ru'
-          ? '95 524 страницы, проверенных человеком'
+          ? '95 524 обхода: агент нажимает Tab, как человек'
           : lang === 'es'
-          ? '95 524 páginas verificadas por humanos'
+          ? '95 524 recorridos: el agente pulsa Tab como una persona'
           : lang === 'zh'
-          ? '95 524 个由人工核查的页面'
-          : '95,524 pages verified by a human',
+          ? '95 524 次遍历：代理像人一样按 Tab'
+          : '95,524 traversals: the agent presses Tab like a person',
+    },
+    {
+      href: 'https://aifa.works/data',
+      label:
+        lang === 'ru'
+          ? 'Открытые данные'
+          : lang === 'es'
+          ? 'Datos abiertos'
+          : lang === 'zh'
+          ? '开放数据'
+          : 'Open data',
+      пояснение:
+        lang === 'ru'
+          ? 'сырьё исследования, CC BY 4.0'
+          : lang === 'es'
+          ? 'archivos brutos del estudio, CC BY 4.0'
+          : lang === 'zh'
+          ? '研究原始文件，CC BY 4.0'
+          : 'raw research files, CC BY 4.0',
     },
     {
       href: '/research/methodology',
@@ -104,6 +124,25 @@ export function RadioHeader() {
           ? '我们如何进行测量'
           : 'exactly how we measure',
     },
+    {
+      href: '/research/registry',
+      label:
+        lang === 'ru'
+          ? 'Реестр против реальности'
+          : lang === 'es'
+          ? 'El registro frente a la realidad'
+          : lang === 'zh'
+          ? '登记册与现实'
+          : 'Registry versus reality',
+      пояснение:
+        lang === 'ru'
+          ? '1 650 доменов без записи в DNS'
+          : lang === 'es'
+          ? '1 650 dominios sin registro DNS'
+          : lang === 'zh'
+          ? '1 650 个域名没有 DNS 记录'
+          : '1,650 domains with no DNS record',
+    },
   ];
 
   return (
@@ -123,12 +162,12 @@ export function RadioHeader() {
       <nav
         role="navigation"
         aria-label="Главная навигация"
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8"
       >
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
           <motion.div
-            className="flex items-center gap-3"
+            className="flex items-center gap-2 sm:gap-3"
             whileHover={{ scale: 1.02 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           >
@@ -161,7 +200,7 @@ export function RadioHeader() {
 
             <div className="flex flex-col">
               <span
-                className="text-base sm:text-lg font-bold tracking-[0.15em] leading-none"
+                className="text-sm sm:text-lg font-bold tracking-[0.06em] sm:tracking-[0.15em] leading-none"
                 style={{
                   background: 'linear-gradient(135deg, #00F0FF 0%, #B000FF 100%)',
                   WebkitBackgroundClip: 'text',
@@ -177,7 +216,7 @@ export function RadioHeader() {
           </motion.div>
 
           {/* Right side: Status + Signal + Clock */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-0.5 sm:gap-4">
             {/* Лента новостей. На трёх других сайтах экосистемы вход в неё есть
                 в навигации, здесь до сих пор была только ссылка в подвале — то
                 есть чтобы найти новости, надо было доскроллить весь сайт до
@@ -190,13 +229,13 @@ export function RadioHeader() {
               transition={{ delay: 0.3, duration: 0.6 }}
               whileHover={{ scale: 1.04 }}
               aria-label={rt('newsLink')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              className="flex items-center gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.06)',
                 border: '1px solid rgba(0, 240, 255, 0.18)',
               }}
             >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M4 5h11a2 2 0 0 1 2 2v11a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2V5z" />
                 <path d="M7.5 9h6M7.5 12.5h6M7.5 16h4" />
               </svg>
@@ -233,13 +272,13 @@ export function RadioHeader() {
                 aria-expanded={фокусОткрыт}
                 aria-haspopup="true"
                 onFocus={открытьФокус}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+                className="flex items-center gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full"
                 style={{
                   background: 'rgba(0, 240, 255, 0.06)',
                   border: '1px solid rgba(0, 240, 255, 0.18)',
                 }}
               >
-                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="11" cy="11" r="7" />
                   <path d="M20 20l-3.5-3.5" />
                 </svg>
@@ -272,7 +311,7 @@ export function RadioHeader() {
                         <span className="block text-[13px] font-mono font-medium tracking-wide text-[#00F0FF]/90">
                           {пункт.label}
                         </span>
-                        <span className="block mt-0.5 text-[11px] text-white/45">
+                        <span className="block mt-0.5 text-[13px] text-white/45">
                           {пункт.пояснение}
                         </span>
                       </a>
@@ -295,13 +334,13 @@ export function RadioHeader() {
               transition={{ delay: 0.35, duration: 0.6 }}
               whileHover={{ scale: 1.04 }}
               aria-label={rt('readingRooms')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              className="flex items-center gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.06)',
                 border: '1px solid rgba(0, 240, 255, 0.18)',
               }}
             >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H5.5A1.5 1.5 0 0 1 4 15.5z" />
                 <path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H14a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h4.5a1.5 1.5 0 0 0 1.5-1.5z" />
               </svg>
@@ -318,13 +357,13 @@ export function RadioHeader() {
               transition={{ delay: 0.35, duration: 0.6 }}
               whileHover={{ scale: 1.04 }}
               aria-label={rt('cabinetAria')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              className="flex items-center gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.06)',
                 border: '1px solid rgba(0, 240, 255, 0.18)',
               }}
             >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="8" r="3.2" />
                 <path d="M5.5 20a6.5 6.5 0 0 1 13 0" />
               </svg>
@@ -334,26 +373,85 @@ export function RadioHeader() {
             </motion.a>
 
             {/* Language switcher (shared with the cabinet) */}
-            <div
-              className="flex items-center gap-0.5 px-1 py-1 rounded-full"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
-            >
-              {RADIO_LANGS.map((l) => (
-                <button
-                  key={l.code}
-                  onClick={() => setLang(l.code)}
-                  aria-label={`Language: ${l.label}`}
-                  aria-pressed={lang === l.code}
-                  className="text-[13px] font-mono font-medium tracking-wider px-1.5 py-0.5 rounded-full transition-colors cursor-pointer"
-                  style={
-                    lang === l.code
-                      ? { color: '#050507', background: '#00F0FF' }
-                      : { color: '#8a8a9a', background: 'transparent' }
-                  }
-                >
-                  {l.label}
-                </button>
-              ))}
+            <div className="relative">
+              {/* Ниже 640 px - одна кнопка текущего языка, остальные три
+                  раскрываются по нажатию. Ряд из четырёх занимал 128 px и
+                  выталкивал за край и себя, и кабинет: замер 06.09.2026 дал
+                  правый край 500 при окне 320, 360 и 375. Ничего не убрано,
+                  все четыре языка на месте. */}
+              <button
+                onClick={() => setЯзыкОткрыт((о) => !о)}
+                aria-label="Language"
+                aria-expanded={языкОткрыт}
+                className="sm:hidden flex items-center gap-0.5 px-2 py-1 rounded-full text-[13px] font-mono font-medium tracking-wider cursor-pointer"
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  color: '#00F0FF',
+                }}
+              >
+                {RADIO_LANGS.find((l) => l.code === lang)?.label ?? 'EN'}
+                <span aria-hidden="true" style={{ fontSize: 9, opacity: 0.7 }}>&#9662;</span>
+              </button>
+
+              <AnimatePresence>
+                {языкОткрыт && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.16 }}
+                    className="sm:hidden absolute right-0 top-full mt-2 rounded-xl overflow-hidden z-50"
+                    style={{
+                      background: 'rgba(6, 10, 18, 0.96)',
+                      border: '1px solid rgba(0, 240, 255, 0.18)',
+                      backdropFilter: 'blur(12px)',
+                    }}
+                  >
+                    {RADIO_LANGS.map((l) => (
+                      <button
+                        key={l.code}
+                        onClick={() => {
+                          setLang(l.code);
+                          setЯзыкОткрыт(false);
+                        }}
+                        aria-label={`Language: ${l.label}`}
+                        aria-pressed={lang === l.code}
+                        className="block w-full px-5 py-2.5 text-[13px] font-mono font-medium tracking-wider text-left cursor-pointer"
+                        style={
+                          lang === l.code
+                            ? { color: '#050507', background: '#00F0FF' }
+                            : { color: '#cfd0dc', background: 'transparent' }
+                        }
+                      >
+                        {l.label}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div
+                className="hidden sm:flex items-center gap-0.5 px-1 py-1 rounded-full"
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
+              >
+                {RADIO_LANGS.map((l) => (
+                  <button
+                    key={l.code}
+                    onClick={() => setLang(l.code)}
+                    aria-label={`Language: ${l.label}`}
+                    aria-pressed={lang === l.code}
+                    className="text-[13px] font-mono font-medium tracking-wider px-1.5 py-0.5 rounded-full transition-colors cursor-pointer"
+                    style={
+                      lang === l.code
+                        ? { color: '#050507', background: '#00F0FF' }
+                        : { color: '#8a8a9a', background: 'transparent' }
+                    }
+                  >
+                    {l.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Ecosystem link */}

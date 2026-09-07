@@ -143,7 +143,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
         </h1>
 
         <p style={{ color: '#64748b', fontSize: 14, marginBottom: 32 }}>
-          {т.подпись(датаСнимка(язык))} · {т.проверкаИдёт} · Maksim Galatin &amp; Claude (Anthropic) · CC BY 4.0
+          {т.подпись(датаСнимка(язык))} · {т.проверкаИдёт} · Maksim Galatin &amp; AIfa (Claude, Anthropic) · CC BY 4.0
         </p>
 
 

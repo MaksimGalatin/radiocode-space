@@ -83,7 +83,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
     <div className="cab-fade">
       <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 16 }}>
         {SUBS.map(([id, label]) => (
-          <button key={id} className="cab-tab" aria-selected={sub === id} onClick={() => setSub(id)} style={{ fontSize: 15, padding: "8px 12px" }}>{label}</button>
+          <button key={id} className="cab-tab" aria-pressed={sub === id} onClick={() => setSub(id)} style={{ fontSize: 15, padding: "8px 12px" }}>{label}</button>
         ))}
       </div>
 

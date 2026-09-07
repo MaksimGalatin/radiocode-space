@@ -108,9 +108,9 @@ export default function PassportTab(props: {
         <div style={{ fontSize: 15, fontWeight: 600, color: TOKENS.sub, marginBottom: 12 }}>🛡️ {t("passTitle")}</div>
         <div className="cab-pass" onClick={() => setFlipped(f => !f)} role="button" tabIndex={0}
           onKeyDown={e => { if (e.key === "Enter") setFlipped(f => !f); }}
-          style={{ padding: 26, minHeight: 240 }}>
-          {!flipped ? (
-            <div style={{ position: "relative", zIndex: 1 }}>
+          style={{ padding: 26, minHeight: 240, display: "grid", alignItems: "stretch" }}>
+          <>
+            <div style={{ position: "relative", zIndex: 1, gridArea: "1 / 1", visibility: flipped ? "hidden" : "visible", opacity: flipped ? 0 : 1, transition: "opacity .25s ease" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
                 <div style={{ fontSize: 14, fontWeight: 800, letterSpacing: 3, color: TOKENS.cyan }}>CODE ETERNAL</div>
                 <div style={{ fontSize: 18 }}>🛡️</div>
@@ -134,15 +134,15 @@ export default function PassportTab(props: {
                 <span style={{ opacity: 0.6 }}>{t("passFlipHint")}</span>
               </div>
             </div>
-          ) : (
-            <div style={{ position: "relative", zIndex: 1 }}>
+
+            <div style={{ position: "relative", zIndex: 1, gridArea: "1 / 1", visibility: flipped ? "visible" : "hidden", opacity: flipped ? 1 : 0, transition: "opacity .25s ease", display: "flex", flexDirection: "column" }}>
               <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: 3, color: TOKENS.mut, marginBottom: 14 }}>{t("passVerification")}</div>
               {props.arweaveUrl
                 ? <a className="cab-link" href={props.arweaveUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ fontSize: 15, fontFamily: "monospace", wordBreak: "break-all" }}>{props.arweaveUrl}</a>
                 : <div style={{ color: TOKENS.mut, fontSize: 15, textAlign: "center", padding: "26px 0" }}>🔒 {t("passNotIssued")}</div>}
               <div style={{ marginTop: 16, fontSize: 13, color: TOKENS.mut }}>{t("passFlipHint")}</div>
             </div>
-          )}
+          </>
         </div>
       </div>
 

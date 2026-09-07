@@ -160,6 +160,9 @@ export default function MethodologyClient({ языкИзПути }: { языкИ
         <h3 style={ЗАГ3}>{т.ктоПроверяющий}</h3>
         <p style={ТЕКСТ}><strong>{т.ктоПроверяющийГлавное}</strong></p>
         <p style={ТЕКСТ}>{т.ктоПроверяющийКак}</p>
+        {/* Интеллект агента: почему он ходит как человек,
+            а не как обычный сканер. 06.09.2026, по коду обходчика. */}
+        <p style={ТЕКСТ}>{т.интеллектАгента}</p>
         <p style={ТЕКСТ}>
           <strong>{т.чтоЭтоДаётЗаголовок}</strong>
           {т.чтоЭтоДаётТекст}
@@ -281,7 +284,7 @@ export default function MethodologyClient({ языкИзПути }: { языкИ
 
         <h2 style={ЗАГ2}>{т.какСослаться}</h2>
         <p style={{ ...ТЕКСТ, fontSize: 15, color: '#94a3b8' }}>
-          Maksim Galatin &amp; Claude (Anthropic). Municipal Website Accessibility: Automated Scan
+          Maksim Galatin &amp; AIfa (Claude, Anthropic). Municipal Website Accessibility: Automated Scan
           versus Keyboard Traversal. AIfa Works, 2026. CC BY 4.0. aifa.works/research/methodology
         </p>
 

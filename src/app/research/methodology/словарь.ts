@@ -60,6 +60,7 @@ export type ТекстыМетодики = {
   ктоПроверяющий: string;
   ктоПроверяющийГлавное: string;
   ктоПроверяющийКак: string;
+  интеллектАгента: string;
   чтоЭтоДаётЗаголовок: string;
   чтоЭтоДаётТекст: string;
   чегоНеДаётЗаголовок: string;
@@ -116,7 +117,7 @@ export type ТекстыМетодики = {
 const ru: ТекстыМетодики = {
   метка: 'Исследование',
   заголовок: 'Методика: как мы измеряем доступность муниципальных сайтов',
-  версия: (д) => `Версия 1.1 · ${д} · Maksim Galatin & Claude (Anthropic) · лицензия CC BY 4.0`,
+  версия: (д) => `Версия 1.1 · ${д} · Maksim Galatin & AIfa (Claude, Anthropic) · лицензия CC BY 4.0`,
 
   зачемМетодика: 'Зачем понадобилась отдельная методика',
   зачем1: 'Автоматических измерений доступности в мире много. Их делают сканеры вроде axe-core: они дёшевы, воспроизводимы и меряют разметку страницы.',
@@ -149,6 +150,7 @@ const ru: ТекстыМетодики = {
   ктоПроверяющий: 'Кто проверяющий',
   ктоПроверяющийГлавное: 'Обход выполняет программный агент в настоящем браузере Chrome, а не человек за столом. Мы говорим это прямо, потому что от ответа на этот вопрос зависит, как читать все числа ниже.',
   ктоПроверяющийКак: 'Агент управляет реальной страницей так же, как человек без мыши: нажимает Tab, читает, куда переместился фокус, и останавливается там, где переместиться некуда. Он не разбирает исходный HTML и не судит по разметке — он ходит по живой странице со всеми её скриптами, баннерами согласия и всплывающими окнами.',
+  интеллектАгента: 'Почему это ближе к человеку, чем к обычному сканеру. Агент не считает нажатия — он ищет цель. На каждом шаге он читает подпись того элемента, где сейчас фокус, и берёт её той же лестницей, что и программа чтения с экрана: сначала видимый текст, если его нет — aria-label, если нет и его — title. Дальше он сверяет подпись и адрес ссылки со смыслом задачи: «оплата», «вакансии», «документы». Так человек и ищет — по названию, а не по номеру элемента. Второе: агент смотрит, ВИДНО ли, где он находится. На каждом шаге он проверяет outline элемента под фокусом, и если рамка снята стилями, помечает это отдельно — потому что разница между «дошёл» и «дошёл вслепую» для живого человека решающая, а для машины-сканера её не существует. Третье: он проверяет, подписаны ли поля формы, тремя способами, которыми их ищет скринридер — label с указанием поля, обёртка вокруг поля, aria-label, — и считает страницу подписанной, только если подписаны минимум семь полей из десяти. Четвёртое: он замечает шрифт мельче 12 px. Пятое: между нажатиями он ждёт 60 мс — не строчит, а даёт странице ответить, как это делает человек. И главное — у него не два исхода, а три: дошёл нормально; дошёл, но вслепую или к неподписанным полям; не дошёл за сорок нажатий. Сорок — это не технический предел, а предел терпения: дальше живой человек уходит с сайта.',
   чтоЭтоДаётЗаголовок: 'Что это даёт.',
   чтоЭтоДаётТекст: ' Воспроизводимость: тот же обход можно запустить заново и получить тот же результат, а живого человека нельзя посадить за 67 тысяч страниц и нельзя попросить повторить путь через месяц. И масштаб: измерение такого размера человеческими руками не делается вовсе — именно поэтому таких данных до сих пор не было.',
   чегоНеДаётЗаголовок: 'Чего это НЕ даёт, и мы это признаём.',
@@ -251,7 +253,7 @@ const ru: ТекстыМетодики = {
 const en: ТекстыМетодики = {
   метка: 'Research',
   заголовок: 'Methodology: how we measure the accessibility of municipal websites',
-  версия: (д) => `Version 1.1 · ${д} · Maksim Galatin & Claude (Anthropic) · licensed CC BY 4.0`,
+  версия: (д) => `Version 1.1 · ${д} · Maksim Galatin & AIfa (Claude, Anthropic) · licensed CC BY 4.0`,
 
   зачемМетодика: 'Why a separate methodology was needed',
   зачем1: 'Automated accessibility measurements are plentiful. Scanners such as axe-core produce them: they are cheap, reproducible, and they measure page markup.',
@@ -284,6 +286,7 @@ const en: ТекстыМетодики = {
   ктоПроверяющий: 'Who does the checking',
   ктоПроверяющийГлавное: 'The traversal is performed by a software agent in a real Chrome browser, not by a person at a desk. We say this plainly, because how every number below should be read depends on the answer.',
   ктоПроверяющийКак: 'The agent drives a real page the way a person without a mouse does: it presses Tab, reads where focus has moved, and stops where there is nowhere left to move. It does not parse the source HTML and does not judge by markup — it walks the live page with all its scripts, consent banners and pop-ups.',
+  интеллектАгента: 'Why this is closer to a person than to an ordinary scanner. The agent does not count keystrokes — it looks for a goal. At every step it reads the label of the element that currently holds focus, and takes it through the same ladder a screen reader uses: visible text first, then aria-label, then title. It matches that label and the link address against the purpose of the page: payment, jobs, documents. That is how a person searches too — by name, not by element number. Second: the agent checks whether it is VISIBLE where it stands. At every step it inspects the outline of the focused element, and if the ring has been removed by styling it records that separately — because the difference between reaching a target and reaching it blind is decisive for a human being and does not exist for a rule checker. Third: it verifies that form fields are labelled, in the three ways a screen reader looks for a label — a label bound to the field, a label wrapping it, an aria-label — and counts the page as labelled only if at least seven fields in ten are. Fourth: it notices text smaller than 12 px. Fifth: it waits 60 ms between keystrokes — it does not hammer the page, it lets it answer, the way a person does. And above all it has three outcomes, not two: arrived properly; arrived, but blind or into unlabelled fields; did not arrive within forty keystrokes. Forty is not a technical limit but the limit of patience: beyond it a real person leaves the site.',
   чтоЭтоДаётЗаголовок: 'What this gives us.',
   чтоЭтоДаётТекст: ' Reproducibility: the same traversal can be run again and yield the same result, whereas a living person cannot be sat down in front of 67,000 pages and cannot be asked to repeat the path a month later. And scale: a measurement of this size simply is not done by human hands — which is precisely why such data did not exist until now.',
   чегоНеДаётЗаголовок: 'What this does NOT give us, and we acknowledge it.',
@@ -386,7 +389,7 @@ const en: ТекстыМетодики = {
 const es: ТекстыМетодики = {
   метка: 'Investigación',
   заголовок: 'Metodología: cómo medimos la accesibilidad de los sitios municipales',
-  версия: (д) => `Versión 1.1 · ${д} · Maksim Galatin & Claude (Anthropic) · licencia CC BY 4.0`,
+  версия: (д) => `Versión 1.1 · ${д} · Maksim Galatin & AIfa (Claude, Anthropic) · licencia CC BY 4.0`,
 
   зачемМетодика: 'Por qué hizo falta una metodología aparte',
   зачем1: 'Mediciones automáticas de accesibilidad hay muchas en el mundo. Las realizan escáneres como axe-core: son baratos, reproducibles y miden el marcado de la página.',
@@ -419,6 +422,7 @@ const es: ТекстыМетодики = {
   ктоПроверяющий: 'Quién realiza la revisión',
   ктоПроверяющийГлавное: 'El recorrido lo realiza un agente informático en un navegador Chrome real, no una persona sentada ante una mesa. Lo decimos con claridad, porque de esa respuesta depende cómo deben leerse todas las cifras que siguen.',
   ктоПроверяющийКак: 'El agente maneja una página real igual que una persona sin ratón: pulsa Tab, lee adónde se ha desplazado el foco y se detiene donde ya no hay adónde desplazarse. No analiza el HTML de origen ni juzga por el marcado: recorre la página viva con todos sus scripts, avisos de consentimiento y ventanas emergentes.',
+  интеллектАгента: 'Por qué esto se parece más a una persona que a un escáner corriente. El agente no cuenta pulsaciones: busca un objetivo. En cada paso lee la etiqueta del elemento que tiene el foco y la toma por la misma escalera que usa un lector de pantalla: primero el texto visible, luego aria-label, luego title. Después compara esa etiqueta y la dirección del enlace con el propósito de la página: pago, empleo, documentos. Así busca también una persona: por el nombre, no por el número del elemento. Segundo: el agente comprueba si se VE dónde está. En cada paso examina el outline del elemento enfocado y, si los estilos han quitado el anillo, lo registra aparte, porque la diferencia entre llegar al objetivo y llegar a ciegas es decisiva para una persona y no existe para un verificador de reglas. Tercero: comprueba que los campos del formulario estén etiquetados, de las tres formas en que un lector de pantalla busca la etiqueta —label ligada al campo, label que lo envuelve, aria-label— y considera la página etiquetada solo si lo están al menos siete de cada diez campos. Cuarto: detecta texto menor de 12 px. Quinto: espera 60 ms entre pulsaciones; no martillea la página, la deja responder, como hace una persona. Y sobre todo tiene tres desenlaces, no dos: llegó bien; llegó, pero a ciegas o a campos sin etiqueta; no llegó en cuarenta pulsaciones. Cuarenta no es un límite técnico sino el límite de la paciencia: más allá, una persona real abandona el sitio.',
   чтоЭтоДаётЗаголовок: 'Lo que esto aporta.',
   чтоЭтоДаётТекст: ' Reproducibilidad: el mismo recorrido puede repetirse y dar el mismo resultado, mientras que a una persona real no se la puede sentar ante 67 000 páginas ni pedirle que repita el camino un mes después. Y escala: una medición de este tamaño sencillamente no se hace a mano, y por eso hasta ahora no existían estos datos.',
   чегоНеДаётЗаголовок: 'Lo que esto NO aporta, y lo reconocemos.',
@@ -521,7 +525,7 @@ const es: ТекстыМетодики = {
 const zh: ТекстыМетодики = {
   метка: '研究',
   заголовок: '方法说明：我们如何测量市政网站的无障碍程度',
-  версия: (д) => `版本 1.1 · ${д} · Maksim Galatin & Claude (Anthropic) · 采用 CC BY 4.0 许可`,
+  версия: (д) => `版本 1.1 · ${д} · Maksim Galatin & AIfa (Claude, Anthropic) · 采用 CC BY 4.0 许可`,
 
   зачемМетодика: '为什么需要一份单独的方法说明',
   зачем1: '世界上并不缺少自动化的无障碍测量。axe-core 之类的扫描器就在做这件事：成本低、可复现，衡量的是页面标记。',
@@ -554,6 +558,7 @@ const zh: ТекстыМетодики = {
   ктоПроверяющий: '由谁执行检测',
   ктоПроверяющийГлавное: '遍历由真实 Chrome 浏览器中的软件代理执行，而不是坐在桌前的人。我们把这一点直说出来，因为下文所有数字该如何理解，取决于这个答案。',
   ктоПроверяющийКак: '代理操作真实页面的方式与没有鼠标的人相同：按 Tab，读取焦点移动到了哪里，并在无处可移之处停下。它不解析原始 HTML，也不凭标记下判断——它走的是带有全部脚本、同意横幅与弹窗的活页面。',
+  интеллектАгента: '为什么这更接近人，而不是普通扫描器。代理不是在数按键次数，而是在寻找目标。每一步它都会读取当前获得焦点的元素的标签，并按照屏幕阅读器相同的顺序读取：先看可见文本，没有就取 aria-label，再没有就取 title。随后把这个标签和链接地址与页面的用途相对照：缴费、招聘、文件。人也是这样找的——按名称，而不是按元素编号。第二：代理会检查是否「看得见」自己身在何处。每一步它都查看获得焦点元素的 outline，如果样式移除了焦点环，就单独记录——因为「到达目标」与「盲目到达」的区别对活生生的人是决定性的，而对规则检测器根本不存在。第三：它用屏幕阅读器寻找标签的三种方式检查表单字段是否有标签——绑定到字段的 label、包裹字段的 label、aria-label——并且只有当十个字段中至少七个有标签时，才认定该页面已标注。第四：它会注意小于 12 px 的文字。第五：两次按键之间等待 60 毫秒——不是猛敲页面，而是留出响应时间，就像人一样。最重要的是，它有三种结果而不是两种：顺利到达；到达了，但是盲目到达或落到未标注的字段；四十次按键内未能到达。四十不是技术上限，而是耐心的上限：再往后，真实的人就离开这个网站了。',
   чтоЭтоДаётЗаголовок: '这样做带来了什么。',
   чтоЭтоДаётТекст: ' 可复现性：同一次遍历可以重新运行并得到相同结果，而真人无法被安排去面对六万七千个页面，也无法在一个月后被要求重走同一条路径。还有规模：这种量级的测量根本无法靠人手完成——这正是此前不存在此类数据的原因。',
   чегоНеДаётЗаголовок: '这样做没有带来什么，我们予以承认。',

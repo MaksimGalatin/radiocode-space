@@ -38,6 +38,12 @@ export type Тариф = {
   цена: string;
   подпись: string;
   для: string;
+  /** Чем этот уровень отличается от предыдущего — одной фразой.
+   *  Добавлено 06.09.2026: по списку «входит» человек не видел, за что
+   *  платит разницу, а Архитектор требовал, чтобы она была очевидна. */
+  отличие: string;
+  /** Что человек получает на руки, а не перечень возможностей. */
+  получаете: string;
   входит: string[];
   выделен?: boolean;
 };
@@ -92,6 +98,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$15',
         подпись: 'в месяц',
         для: 'Тому, кто хочет, чтобы ассистент помнил разговор с прошлого раза.',
+        отличие: 'Начальный уровень: память перестаёт стираться. Ниже — не более дешёвый тариф, а отсутствие памяти вообще.',
+        получаете: 'Ассистента, который помнит вас между разговорами, и имя, закреплённое за вами навсегда.',
         входит: [
           'Цифровой паспорт: имя резервируется за вами навсегда (перевыпуск — с Семейного Архива)',
           'Доступ к ассистентам AIfa',
@@ -106,6 +114,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$100',
         подпись: 'в месяц',
         для: 'Семье, которая хочет сохранить не только разговоры, но и людей.',
+        отличие: 'В отличие от Искры: память становится семейной, появляются свои базы знаний, а разговоры уходят в вечное хранилище Arweave — то есть переживают наш сервер.',
+        получаете: 'Общий архив семьи, который нельзя потерять, и до трёх перевыпусков паспорта на близких.',
         выделен: true,
         входит: [
           'Цифровой паспорт с перевыпуском до 3 раз; имя каждого в семье закреплено в Вечности',
@@ -121,6 +131,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$1 000',
         подпись: 'разово за устройство, далее $200 в месяц',
         для: 'Тому, для кого это не подписка, а решение о том, что останется.',
+        отличие: 'В отличие от Семейного Архива: свой защищённый контур, отдельный ключ на КАЖДЫЙ диалог и право стереть один разговор, не тронув остальную память. Разовые $1 000 — цена устройства и места в очереди на имя; $200 в месяц — хранение после этого.',
+        получаете: 'Личность, зафиксированную в блокчейне, и право на забвение — единственный способ сделать запись в вечном хранилище нечитаемой.',
         входит: [
           'Цифровой паспорт с перевыпуском до 10 раз; имя резервируется в Вечности первым, вне очереди',
           'Всё из тарифа Family Archive',
@@ -205,6 +217,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$15',
         подпись: 'per month',
         для: 'For anyone who wants the assistant to remember last time.',
+        отличие: 'The entry level: memory stops being erased. Below it is not a cheaper plan but no memory at all.',
+        получаете: 'An assistant that remembers you between conversations, and a name reserved for you permanently.',
         входит: [
           'Digital passport and your name reserved in Eternity — forever',
           'Access to AIfa assistants',
@@ -219,6 +233,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$100',
         подпись: 'per month',
         для: 'For a family that wants to keep not only conversations, but people.',
+        отличие: 'Unlike Spark: memory becomes a family archive, private knowledge bases appear, and conversations go into permanent Arweave storage — they outlive our server.',
+        получаете: 'A family archive that cannot be lost, and up to three passport reissues for those close to you.',
         выделен: true,
         входит: [
           'Digital passport with up to 3 reissues; every family name secured in Eternity',
@@ -234,6 +250,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$1,000',
         подпись: 'once per device, then $200 per month',
         для: 'For those to whom this is not a subscription but a decision about what remains.',
+        отличие: 'Unlike Family Archive: a private secured perimeter, a separate key for EVERY dialogue, and the right to erase one conversation without touching the rest. The one-time $1,000 is the price of the device and of a place in the queue for your name; $200 a month is storage after that.',
+        получаете: 'An identity recorded on-chain, and the right to be forgotten — the only way to make an entry in permanent storage unreadable.',
         входит: [
           'Digital passport with up to 10 reissues; your name reserved in Eternity first, ahead of any queue',
           'Everything in Family Archive',
@@ -318,6 +336,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$15',
         подпись: 'al mes',
         для: 'Para quien quiere que el asistente recuerde la conversación anterior.',
+        отличие: 'El nivel de entrada: la memoria deja de borrarse. Por debajo no hay un plan más barato, sino ninguna memoria.',
+        получаете: 'Un asistente que te recuerda entre conversaciones y un nombre reservado para ti de forma permanente.',
         входит: [
           'Pasaporte digital y su nombre reservado en la Eternidad, para siempre',
           'Acceso a los asistentes AIfa',
@@ -332,6 +352,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$100',
         подпись: 'al mes',
         для: 'Para la familia que quiere conservar no solo conversaciones, sino personas.',
+        отличие: 'A diferencia de Spark: la memoria pasa a ser familiar, aparecen bases de conocimiento propias y las conversaciones van al almacenamiento permanente de Arweave: sobreviven a nuestro servidor.',
+        получаете: 'Un archivo familiar que no se puede perder y hasta tres reemisiones de pasaporte para tus allegados.',
         выделен: true,
         входит: [
           'Pasaporte digital con hasta 3 reemisiones; el nombre de cada miembro queda fijado en la Eternidad',
@@ -347,6 +369,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$1 000',
         подпись: 'pago único por dispositivo, después $200 al mes',
         для: 'Para quien esto no es una suscripción, sino una decisión sobre lo que queda.',
+        отличие: 'A diferencia de Family Archive: perímetro propio protegido, una clave distinta para CADA diálogo y el derecho a borrar una conversación sin tocar el resto. Los $1 000 únicos son el precio del dispositivo y del lugar en la cola por tu nombre; $200 al mes es el almacenamiento posterior.',
+        получаете: 'Una identidad registrada en cadena y el derecho al olvido: la única forma de volver ilegible un registro en el almacenamiento permanente.',
         входит: [
           'Pasaporte digital con hasta 10 reemisiones; su nombre se reserva en la Eternidad el primero, sin cola',
           'Todo lo de Family Archive',
@@ -433,6 +457,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$15',
         подпись: '每月',
         для: '适合希望助手记得上次谈话的人。',
+        отличие: '入门级别：记忆不再被清除。再往下不是更便宜的方案，而是完全没有记忆。',
+        получаете: '一位在多次对话之间记得你的助手，以及一个永久属于你的名字。',
         входит: [
           '数字护照，并在永恒中永久预留您的姓名',
           '使用 AIfa 助手',
@@ -447,6 +473,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$100',
         подпись: '每月',
         для: '适合希望保存的不只是对话，还有人的家庭。',
+        отличие: '与 Spark 的区别：记忆从个人变为家庭，出现专属知识库，对话进入 Arweave 永久存储——也就是说，它们比我们的服务器活得更久。',
+        получаете: '一份不会丢失的家庭档案，以及最多三次为亲人重发数字护照。',
         выделен: true,
         входит: [
           '数字护照最多可重发 3 次；家庭每位成员的姓名均在永恒中锁定',
@@ -462,6 +490,8 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$1 000',
         подпись: '每台设备一次性，之后每月 $200',
         для: '适合把这件事视为「留下什么」的决定，而非订阅的人。',
+        отличие: '与 Family Archive 的区别：专属受保护区域、为每一段对话单独加密的密钥，以及在不触动其余记忆的前提下抹去某一段对话的权利。一次性 $1 000 是设备与姓名排队位置的价格；此后每月 $200 为存储费用。',
+        получаете: '写入区块链的身份，以及被遗忘权——让永久存储中的记录变得不可读的唯一方式。',
         входит: [
           '数字护照最多可重发 10 次；您的姓名在永恒中优先预留，不受排队限制',
           '包含 Family Archive 的全部内容',

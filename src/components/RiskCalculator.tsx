@@ -335,12 +335,12 @@ export default function RiskCalculator() {
                 впечатление. Раздел 11 Конституции: единица измерения должна
                 быть объявлена.
               */}
-              <p className="text-[11px] leading-relaxed text-gray-500 pt-1">{fineNote}</p>
+              <p className="text-[13px] leading-relaxed text-gray-500 pt-1">{fineNote}</p>
               <a
                 href="https://www.enforcementtracker.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] text-cyan-500/70 hover:text-cyan-400 underline underline-offset-2"
+                className="text-[13px] text-cyan-500/70 hover:text-cyan-400 underline underline-offset-2"
               >
                 CMS GDPR Enforcement Tracker
               </a>
