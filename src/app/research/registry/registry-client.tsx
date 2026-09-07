@@ -185,13 +185,13 @@ export default function RegistryClient({ языкИзПути }: { языкИз�
           <p style={ТЕКСТ}>{т.файлПояснение}</p>
           <div className="flex flex-col gap-2 mb-4">
             <a
-              href="/data/dead-domains-2026-09-01.csv"
+              href="https://aifa.works/data/dead-domains-2026-09-01.csv"
               className="text-cyan-600 dark:text-cyan-400 hover:underline text-sm"
             >
               {т.файлСсылка} →
             </a>
             <a
-              href="/data/dead-domains-README.txt"
+              href="https://aifa.works/data/dead-domains-README.txt"
               className="text-cyan-600 dark:text-cyan-400 hover:underline text-sm"
             >
               {т.файлReadme} →

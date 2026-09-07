@@ -51,6 +51,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const заголовки = await headers();
   const сырой = заголовки.get('x-locale') || 'en';
   const яз = (ЯЗЫКИ as readonly string[]).includes(сырой) ? сырой : 'en';
+  // og:locale обязан совпадать с языком страницы: его читают поисковик и
+  // всё, что разворачивает ссылку в предпросмотр. Замер 07.09.2026: на
+  // /ru, /es и /zh стояло en_US — страница объявляла себя английской,
+  // будучи русской. Образец взят с центрального сайта.
+  const ogLocale = яз === 'ru' ? 'ru_RU' : яз === 'es' ? 'es_ES' : яз === 'zh' ? 'zh_CN' : 'en_US';
+  const ogAltLocales = ['en_US', 'ru_RU', 'es_ES', 'zh_CN'].filter((l) => l !== ogLocale);
   return {
   metadataBase: new URL("https://radiocode.space"),
   title: "RadioCode.Space — Eternal Cyberpunk Radio by CODE Eternal",
@@ -115,8 +121,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "RadioCode.Space — Eternal Cyberpunk Radio",
     description:
       "6 stations, 530 original songs in 1024 versions by AIfa & DJ Galatin. Part of the CODE Eternal ecosystem — eternal music from the digital void.",
-    locale: "en_US",
-    alternateLocale: ["ru_RU", "es_ES", "zh_CN"],
+    locale: ogLocale,
+    alternateLocale: ogAltLocales,
     images: [
       { url: "/og-image.png", width: 1200, height: 630, alt: "RadioCode.Space — Eternal Cyberpunk Radio" },
     ],

@@ -179,13 +179,13 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10,
                       marginBottom: 34 }}>
-          <a href="/data/traversal-log-2026-09-01.jsonl.gz"
+          <a href="https://aifa.works/data/traversal-log-2026-09-01.jsonl.gz"
              style={{ padding: '10px 18px', borderRadius: 999,
                       border: '1px solid rgba(6,182,212,0.5)', color: '#22d3ee',
                       fontSize: 14, textDecoration: 'none' }}>
             {т.витринаКнопкаДанные}
           </a>
-          <a href="/data/traversal-log-SCHEMA.md"
+          <a href="https://aifa.works/data/traversal-log-SCHEMA.md"
              style={{ padding: '10px 18px', borderRadius: 999,
                       border: '1px solid rgba(148,163,184,0.3)', color: '#cbd5e1',
                       fontSize: 14, textDecoration: 'none' }}>
