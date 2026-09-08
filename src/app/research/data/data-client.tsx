@@ -198,6 +198,16 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
                       fontSize: 14, textDecoration: 'none' }}>
             {т.витринаКнопкаМетод}
           </Link>
+          {/* Европейский обход, 08.09.2026. Ссылка стоит здесь, в витрине, а
+              не в словаре оглавления разделов: /research показывает саму
+              витрину данных, а файл оглавления в дереве есть, но не
+              рендерится с 04.09.2026. */}
+          <Link href="/research/europe"
+             style={{ padding: '10px 18px', borderRadius: 999,
+                      border: '1px solid rgba(148,163,184,0.3)', color: '#cbd5e1',
+                      fontSize: 14, textDecoration: 'none' }}>
+            {т.витринаКнопкаЕвропа}
+          </Link>
         </div>
 
         <p style={ТЕКСТ}>
