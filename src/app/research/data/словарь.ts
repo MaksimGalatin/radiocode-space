@@ -345,7 +345,7 @@ const ru: ТекстыДанных = {
     retry: 'Ответил при повторе',
     policy: 'Закрыт по политике (401/403)',
   },
-  мёртвыеВывод: (н, д) => `${н} доменов официального реестра CISA не существуют в DNS. Это ${д} % всего реестра — каждый восьмой адрес. Города при этом живы: albanyky.gov, alamogordo.gov, carlinnv.gov — это существующие муниципалитеты, чьи официальные домены больше не отвечают. Проверено дважды: обходчиком и отдельным запросом к DNS с контрольным доменом, который жив.`,
+  мёртвыеВывод: (н, д) => `${н} доменов официального реестра CISA не существуют в DNS. Это ${д} % всего реестра — каждый восьмой адрес. Города при этом живы: albanyky.gov, abilene.gov, arlington.gov — это существующие муниципалитеты, чьи официальные домены не отвечают. Каждый пример подтверждён повторным замером в другой день: домен остаётся в списке, только если молчал во ВСЕХ замерах. Одного ответа в любой день довольно, чтобы домен выбыл, — так проверка отличает мёртвый адрес от временного сбоя связи.`,
 
   дваСпособаЗаголовок: 'Два способа счёта — и оба здесь',
   дваСпособа: (в, б1, ж, б2, р, нм) => `Из выборки не отвечает ни один DNS-сервер у части доменов: сайта нет вовсе. Такие адреса можно считать двумя способами, и мы показываем оба.
@@ -607,7 +607,7 @@ const en: ТекстыДанных = {
     retry: 'Answered on retry',
     policy: 'Closed by policy (401/403)',
   },
-  мёртвыеВывод: (н, д) => `${н} domains from the official CISA registry do not exist in DNS. That is ${д} % of the whole registry — every eighth address. The towns themselves are alive: albanyky.gov, alamogordo.gov, carlinnv.gov are existing municipalities whose official domains no longer answer. Verified twice: by the traversal agent and by a separate DNS query with a control domain known to be alive.`,
+  мёртвыеВывод: (н, д) => `${н} domains from the official CISA registry do not exist in DNS. That is ${д} % of the whole registry — every eighth address. The towns themselves are alive: albanyky.gov, abilene.gov, arlington.gov are existing municipalities whose official domains do not answer. Every example is confirmed by a repeat measurement on a different day: a domain stays on the list only if it stayed silent in EVERY measurement. A single answer on any day is enough for it to drop out — that is how the check tells a dead address from a momentary network failure.`,
 
   дваСпособаЗаголовок: 'Two ways to count — both shown here',
   дваСпособа: (в, б1, ж, б2, р, нм) => `For part of the sample no DNS server answers at all: the site does not exist. Such addresses can be counted two ways, and we show both.
@@ -870,7 +870,7 @@ const es: ТекстыДанных = {
     retry: 'Respondió al reintentar',
     policy: 'Cerrado por política (401/403)',
   },
-  мёртвыеВывод: (н, д) => `${н} dominios del registro oficial de CISA no existen en el DNS. Es el ${д} % de todo el registro: una de cada ocho direcciones. Las ciudades, en cambio, siguen vivas: albanyky.gov, alamogordo.gov, carlinnv.gov son municipios existentes cuyos dominios oficiales ya no responden. Verificado dos veces: con el agente de recorrido y con una consulta DNS independiente que incluía un dominio de control vivo.`,
+  мёртвыеВывод: (н, д) => `${н} dominios del registro oficial de CISA no existen en el DNS. Es el ${д} % de todo el registro: una de cada ocho direcciones. Las ciudades, en cambio, siguen vivas: albanyky.gov, abilene.gov, arlington.gov son municipios existentes cuyos dominios oficiales no responden. Cada ejemplo está confirmado por una medición repetida en otro día: un dominio permanece en la lista solo si guardó silencio en TODAS las mediciones. Una sola respuesta cualquier día basta para que salga: así la comprobación distingue una dirección muerta de un fallo puntual de red.`,
 
   дваСпособаЗаголовок: 'Dos formas de contar — ambas aquí',
   дваСпособа: (в, б1, ж, б2, р, нм) => `En parte de la muestra ningún servidor DNS responde: el sitio no existe. Estas direcciones pueden contarse de dos maneras, y mostramos ambas.
@@ -1133,7 +1133,7 @@ const zh: ТекстыДанных = {
     retry: '重试时有响应',
     policy: '按策略关闭（401/403）',
   },
-  мёртвыеВывод: (н, д) => `CISA 官方登记册中有 ${н} 个域名在 DNS 中并不存在，占整个登记册的 ${д} %——每八个地址就有一个。而这些城市本身仍在：albanyky.gov、alamogordo.gov、carlinnv.gov 都是现存的市政当局，只是官方域名不再响应。经过两次验证：一次由遍历代理完成，一次通过独立的 DNS 查询并带上一个确认存活的对照域名。`,
+  мёртвыеВывод: (н, д) => `CISA 官方登记册中有 ${н} 个域名在 DNS 中并不存在，占整个登记册的 ${д} %——每八个地址就有一个。而这些城市本身仍在：albanyky.gov、abilene.gov、arlington.gov 都是现存的市政当局，只是官方域名没有响应。每个例子都经过另一天的重复测量确认：只有在所有测量中都保持沉默的域名才会留在名单上。任何一天只要回应过一次就会被剔除——检查正是以此把真正失效的地址与一时的网络故障区分开。`,
 
   дваСпособаЗаголовок: '两种统计方式——两者并列',
   дваСпособа: (в, б1, ж, б2, р, нм) => `样本中有部分域名无法解析：没有任何 DNS 服务器应答，网站根本不存在。这类地址有两种统计方式，我们两种都列出。
