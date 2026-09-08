@@ -6,7 +6,7 @@
  * сайта в момент обращения: сервер мог лежать, отдавать таймаут, рвать
  * соединение.
  *
- * Здесь измеряется ДРУГОЕ и более сильное: у 1 498 доменов из 11 902
+ * Здесь измеряется ДРУГОЕ и более сильное: у 1 441 доменов из 11 902
  * **вообще нет записи в DNS**. Не «сайт не открылся», а «имени не
  * существует». Домен не продлили, и он растворился.
  *
@@ -158,8 +158,8 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
       'Инструмент, которым получены эти числа, лежит в открытом виде и запускается без ключей и без оплаты.',
 
     файлЗаголовок: 'Сырые данные',
-    файлПояснение: 'Полный список из 1 498 доменов, CSV: имя домена и число записей обхода на каждый. Открывается в Excel двойным щелчком. Дата в имени файла стоит намеренно: проверка DNS — снимок момента, домен может ожить.',
-    файлСсылка: 'Скачать список (CSV, 1 498 строк)',
+    файлПояснение: 'Полный список из 1 441 доменов, CSV: имя домена и число записей обхода на каждый. Открывается в Excel двойным щелчком. Дата в имени файла стоит намеренно: проверка DNS — снимок момента, домен может ожить.',
+    файлСсылка: 'Скачать список (CSV, 1 441 строк)',
     файлReadme: 'Пояснение к файлу: метод, ограничения, как проверить строку самому',
     авторЗаголовок: 'Автор и раскрытие',
     автор1: 'Максим Валентинович Галатин.',
@@ -237,8 +237,8 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
       'The tool that produced these numbers is open and runs with no keys and no payment.',
 
     файлЗаголовок: 'Raw data',
-    файлПояснение: 'The complete list of 1,498 domains as CSV: domain name and how many crawl records belong to each. Opens in Excel with a double click. The date in the filename is deliberate: a DNS check is a snapshot, and a domain may come back.',
-    файлСсылка: 'Download the list (CSV, 1,498 rows)',
+    файлПояснение: 'The complete list of 1,441 domains as CSV: domain name and how many crawl records belong to each. Opens in Excel with a double click. The date in the filename is deliberate: a DNS check is a snapshot, and a domain may come back.',
+    файлСсылка: 'Download the list (CSV, 1,441 rows)',
     файлReadme: 'File notes: method, limitations, how to verify a row yourself',
     авторЗаголовок: 'Author and disclosure',
     автор1: 'Maksim Valentinovich Galatin.',
@@ -316,8 +316,8 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
       'La herramienta que produjo estas cifras es abierta y se ejecuta sin claves y sin pago.',
 
     файлЗаголовок: 'Datos en bruto',
-    файлПояснение: 'La lista completa de 1.498 dominios en CSV: nombre del dominio y número de registros de rastreo de cada uno. Se abre en Excel con doble clic. La fecha en el nombre del archivo es intencionada: una comprobación de DNS es una instantánea y un dominio puede revivir.',
-    файлСсылка: 'Descargar la lista (CSV, 1.498 filas)',
+    файлПояснение: 'La lista completa de 1.441 dominios en CSV: nombre del dominio y número de registros de rastreo de cada uno. Se abre en Excel con doble clic. La fecha en el nombre del archivo es intencionada: una comprobación de DNS es una instantánea y un dominio puede revivir.',
+    файлСсылка: 'Descargar la lista (CSV, 1.441 filas)',
     файлReadme: 'Notas del archivo: método, limitaciones, cómo verificar una fila usted mismo',
     авторЗаголовок: 'Autor y divulgación',
     автор1: 'Maksim Valentinovich Galatin.',
@@ -388,8 +388,8 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
     проверить2: '产出这些数字的工具是公开的，运行时不需要密钥，也不需要付费。',
 
     файлЗаголовок: '原始数据',
-    файлПояснение: '完整的 1,498 个域名列表，CSV 格式：域名及其对应的抓取记录数。双击即可在 Excel 中打开。文件名中的日期是有意为之：DNS 检查只是某一刻的快照，域名可能恢复。',
-    файлСсылка: '下载列表（CSV，1,498 行）',
+    файлПояснение: '完整的 1,441 个域名列表，CSV 格式：域名及其对应的抓取记录数。双击即可在 Excel 中打开。文件名中的日期是有意为之：DNS 检查只是某一刻的快照，域名可能恢复。',
+    файлСсылка: '下载列表（CSV，1,441 行）',
     файлReadme: '文件说明：方法、局限，以及如何自行核验其中一行',
     авторЗаголовок: '作者与披露',
     автор1: 'Maksim Valentinovich Galatin（马克西姆·瓦连京诺维奇·加拉京）。',
