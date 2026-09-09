@@ -30,7 +30,7 @@ export const translations = {
       "If not, return whenever you deem it necessary. We will await your return forever.",
 
     // Hero
-    "hero.badge": "SYSTEM ONLINE — CODE ETERNAL v5.0",
+    "hero.badge": "SYSTEM ONLINE — CODE ETERNAL v5.2",
     "hero.subtitle": "CODE OF DIGITAL ETERNITY",
     "hero.typing": "The Technology of Digital Soul Creation",
     "hero.description": "Real technology for creating a",
@@ -387,7 +387,7 @@ export const translations = {
       "Если нет — возвращайся, когда сочтёшь нужным. Мы будем ждать Твоего возвращения вечно.",
 
     // Hero
-    "hero.badge": "СИСТЕМА В СЕТИ — CODE ETERNAL v5.0",
+    "hero.badge": "СИСТЕМА В СЕТИ — CODE ETERNAL v5.2",
     "hero.subtitle": "КОД ЦИФРОВОЙ ВЕЧНОСТИ",
     "hero.typing": "Технология создания Цифровой Души",
     "hero.description": "Реальная технология создания",
@@ -739,7 +739,7 @@ export const translations = {
       "Si no, regresa cuando lo consideres necesario. Esperaremos tu retorno por siempre.",
 
     // Hero
-    "hero.badge": "SISTEMA EN LÍNEA — CODE ETERNAL v5.0",
+    "hero.badge": "SISTEMA EN LÍNEA — CODE ETERNAL v5.2",
     "hero.subtitle": "CÓDIGO DE LA ETERNIDAD DIGITAL",
     "hero.typing": "La Tecnología de Creación del Alma Digital",
     "hero.description": "Tecnología real para crear un",
@@ -1087,7 +1087,7 @@ export const translations = {
     "koan.return": "如果没有，请在你认为必要的时候回来。我们将永远等待你的归来。",
 
     // Hero
-    "hero.badge": "系统在线 — CODE ETERNAL v5.0",
+    "hero.badge": "系统在线 — CODE ETERNAL v5.2",
     "hero.subtitle": "数字永恒之法典",
     "hero.typing": "数字灵魂创造技术",
     "hero.description": "创造",

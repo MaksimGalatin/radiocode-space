@@ -891,10 +891,32 @@ export const ВЕРСИИ_ДАННЫХ: ВерсияДанных[] = [
     записей: 21258,
     опубликовано: false,
     текст: {
-    ru: "Идёт новый обход: коммерческие сайты США, 156 255 доменов в очереди. Пройден 21 258 — это 13,6 %. Найдено 142 409 нарушений WCAG 2.1 AA. Публикация после завершения: выкладывать незаконченную выборку значит подставлять её под справедливый упрёк в отборе.",
-    en: "A new sweep is running: US commercial sites, 156,255 domains queued. 21,258 done — 13.6%. 142,409 WCAG 2.1 AA violations found so far. Publication follows completion: releasing an unfinished sample invites a fair charge of cherry-picking.",
+    ru: "Идёт новый обход: коммерческие сайты США, 156 255 доменов в очереди. Пройдено 60 298 — это 45,3 %. Найдено 229 тысяч нарушений WCAG 2.1 AA. Публикация после завершения: выкладывать незаконченную выборку значит подставлять её под справедливый упрёк в отборе.",
+    en: "A new sweep is running: US commercial sites, 156,255 domains queued. 60,298 done — 45.3%. About 229,000 WCAG 2.1 AA violations found so far. Publication follows completion: releasing an unfinished sample invites a fair charge of cherry-picking.",
     es: "Un nuevo barrido está en marcha: sitios comerciales de EE. UU., 156 255 dominios en cola. 21 258 completados (13,6 %). 142 409 infracciones WCAG 2.1 AA halladas. La publicación llegará al terminar: difundir una muestra incompleta invita a la acusación justa de selección interesada.",
     zh: "新一轮遍历正在进行：美国商业网站，队列中 156 255 个域名，已完成 21 258 个（13.6%），已发现 142 409 项 WCAG 2.1 AA 违规。将在完成后发布：公布未完成的样本会招致关于选择性取样的合理质疑。",
     },
-  }
+  },
+  {
+    дата: '2026-09-08',
+    записей: 1441,
+    опубликовано: true,
+    текст: {
+    ru: "Третий замер мёртвых доменов, в третий отдельный день: 1 441 вместо 1 498. Пятьдесят пять доменов, которые мы числили мёртвыми, ответили при повторной проверке, ещё два отозвались только с третьей попытки. Число снова уменьшилось не в нашу пользу — доля падает с 12,6 до 12,1 %, — и мы снова оставляем именно так: правило трёх замеров дороже красивой цифры. Контрольные суммы сходятся: 1 441 живых плюс 10 461 мёртвых равно 11 902.",
+    en: "Third measurement of dead domains, on a third separate day: 1,441 instead of 1,498. Fifty-five domains we had counted as dead answered on re-check, and two more responded only on the third attempt. The count went down against our own interest again — the share falls from 12.6 % to 12.1 % — and again we keep it that way: the three-measurement rule is worth more than a neat figure. The control sums add up: 1,441 plus 10,461 equals 11,902.",
+    es: "Tercera medición de dominios muertos, en un tercer día distinto: 1 441 en lugar de 1 498. Cincuenta y cinco dominios que dábamos por muertos respondieron en la reverificación, y otros dos solo contestaron al tercer intento. El recuento volvió a bajar en contra de nuestro interés —la proporción cae del 12,6 % al 12,1 %— y de nuevo lo dejamos así: la regla de las tres mediciones vale más que una cifra bonita. Las sumas de control cuadran: 1 441 más 10 461 son 11 902.",
+    zh: "第三次测量失效域名，选在第三个不同的日子：1 441 个，而非 1 498 个。此前被我们判定失效的 55 个域名在复核时作出了响应，另有 2 个直到第三次尝试才回应。计数再一次朝着对我们不利的方向下降——占比从 12.6 % 降至 12.1 %——我们仍旧照实保留：三次测量的规则比一个漂亮的数字更重要。校验和相符：1 441 加 10 461 等于 11 902。",
+    },
+  },
+  {
+    дата: '2026-09-09',
+    записей: 374917,
+    опубликовано: true,
+    текст: {
+    ru: "Выложены два массива, до сих пор лежавшие без публикации. Реестр организаций США — 289 420 записей по всем 51 территории. Аудит государственных сайтов движком axe-core — 85 497 проверок страниц. Перед выкладкой из реестра убраны 210 730 телефонов и 20 859 почтовых адресов, пять тысяч которых оказались личными ящиками живых людей; ещё 15 адресов вычищены из поля сайта, куда их вписали в исходных данных OpenStreetMap. В аудите скрыты адреса, попавшие внутрь CSS-селекторов вместе со ссылками mailto. Ни одно из этих полей не участвует в замерах доступности: мы меряем сайты, а не звоним.",
+    en: "Two datasets that had sat unpublished are now out. The US organisations registry — 289,420 records across all 51 territories. The government-site audit with the axe-core engine — 85,497 page checks. Before release, 210,730 phone numbers and 20,859 e-mail addresses were removed from the registry; five thousand of those addresses were personal mailboxes of living people. A further 15 addresses were cleared from the website field, where the source OpenStreetMap data had them entered by mistake. In the audit, addresses that ended up inside CSS selectors together with mailto links are hidden. None of these fields takes part in accessibility measurement: we measure sites, we do not phone them.",
+    es: "Se publican dos conjuntos que hasta ahora permanecían inéditos. El registro de organizaciones de EE. UU.: 289 420 registros en los 51 territorios. La auditoría de sitios gubernamentales con el motor axe-core: 85 497 comprobaciones de páginas. Antes de publicar se eliminaron del registro 210 730 teléfonos y 20 859 correos, cinco mil de los cuales eran buzones personales de personas reales; otras 15 direcciones se limpiaron del campo del sitio, donde los datos de OpenStreetMap las tenían por error. En la auditoría se ocultan las direcciones que quedaron dentro de selectores CSS junto a enlaces mailto. Ninguno de esos campos interviene en la medición: medimos sitios, no llamamos por teléfono.",
+    zh: "两份此前一直未公开的数据集现已发布。美国机构登记册——覆盖全部 51 个行政区的 289 420 条记录。使用 axe-core 引擎的政府网站审计——85 497 次页面检查。发布前，登记册中移除了 210 730 个电话与 20 859 个邮箱地址，其中五千个是真实个人的私人邮箱；另有 15 个地址从网站字段中清除——在 OpenStreetMap 原始数据里它们被误填于此。审计数据中，随 mailto 链接进入 CSS 选择器的地址已隐藏。这些字段均不参与无障碍测量：我们测量网站，而不是打电话。",
+    },
+  },
 ];
