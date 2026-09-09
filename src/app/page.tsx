@@ -640,7 +640,7 @@ export default function Home() {
                     Вторая половина строки не менее важна первой: страница,
                     которая метит своё и молчит про чужое, выглядит хуже, чем
                     страница без ™ вовсе. */}
-                <p className="mt-3 text-[12px] font-mono text-[#6A6A85] leading-relaxed break-words">
+                <p className="mt-3 text-[12px] font-mono text-[#8A8AA0] leading-relaxed break-words">
                   {rt('trademarks')}
                 </p>
               </div>

@@ -63,19 +63,14 @@ export default function AccessibilityPricing({ сЗаголовком = true, id
           {a.tiers.map((tier, idx) => (
             <div
               key={tier.name}
-              role="button"
-              tabIndex={0}
-              aria-haspopup="dialog"
+              /* Роль кнопки снята 08.09.2026: внутри карточки есть настоящая
+                 <button> «Подробнее», и axe справедливо находил
+                 nested-interactive — кнопку внутри кнопки. Экранный диктор
+                 объявлял карточку кнопкой, а Tab уводил внутрь на вторую
+                 кнопку с тем же действием: двойной фокус на одном элементе.
+                 Клик мышью по карточке работает как работал; клавиатурный
+                 путь идёт через кнопку внутри, которая для этого и есть. */
               onClick={() => установитьРаскрытый(idx)}
-              onKeyDown={(е) => {
-                // Карточка кликабельна — значит должна открываться и с
-                // клавиатуры. Мы продаём доступность: недоступная витрина
-                // доступности опровергала бы сама себя.
-                if (е.key === 'Enter' || е.key === ' ') {
-                  е.preventDefault();
-                  установитьРаскрытый(idx);
-                }
-              }}
               className={`glass rounded-2xl p-6 border flex flex-col cursor-pointer transition hover:-translate-y-1 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 ${
                 TIER_HIGHLIGHTS[idx]
                   ? 'border-cyan-500/40 shadow-[0_0_30px_rgba(6,182,212,0.15)]'

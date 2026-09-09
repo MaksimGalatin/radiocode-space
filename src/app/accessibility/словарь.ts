@@ -166,6 +166,24 @@ const ТЕКСТЫ_СКАНЕРА_en = {
       tierMoreDetails: 'Full details',
       tiers: [
 
+        { name: 'Lite Audit', timeline: '1 day', features: ['25 pages scanned', 'Full violation list', 'Dated PDF certificate', 'Severity breakdown'],
+          slug: 'lite-audit',
+          price: 50,
+          who: 'You need proof on paper that the site was checked — for a lawyer, an insurer or a client — and you are not ready to pay for analysis yet.',
+          diff: 'The free scan looks at THREE pages and leaves you nothing but a screen. Here: twenty-five pages and a dated document you can hand to someone. What is NOT here: the reading of what each finding means for you in court, and the dollar figure of your exposure — that starts at Quick Audit.',
+          includes: [
+            'Automated WCAG 2.1 AA scan of up to 25 pages, not 3',
+            'Every violation listed with the page and the element named',
+            'Findings split by severity: critical, serious, moderate, minor',
+            'Text contrast, tap-target size and heading order verified',
+          ],
+          deliverables: [
+            'A PDF with the scan date and the full list of violations',
+            'A severity table you can attach to a contract or an insurance form',
+            'The scan is repeatable: the same URL, the same method, any time later',
+          ],
+        },
+
         { name: 'Quick Audit', timeline: '1 day', features: ['Automated WCAG 2.1 AA scan', 'Top 10 issues report', 'PDF summary', 'Priority list'],
           slug: 'quick-audit',
           price: 149,
@@ -476,6 +494,24 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
       tierMoreDetails: 'Подробно',
       tiers: [
 
+        { name: 'Лайт-Аудит', timeline: '1 день', features: ['25 страниц вместо 3', 'Полный список нарушений', 'PDF с датой проверки', 'Разбивка по тяжести'],
+          slug: 'lite-audit',
+          price: 50,
+          who: 'Нужно подтверждение на бумаге, что сайт проверен — для юриста, страховщика или заказчика, — а платить за разбор пока рано.',
+          diff: 'Бесплатная проверка смотрит ТРИ страницы и не оставляет на руках ничего, кроме экрана. Здесь двадцать пять страниц и документ с датой, который можно кому-то показать. Чего здесь НЕТ: объяснения, чем каждое нарушение грозит в суде, и оценки риска в долларах — это начинается с Быстрого Аудита.',
+          includes: [
+            'Автоматическое сканирование WCAG 2.1 AA до 25 страниц, а не 3',
+            'Каждое нарушение с указанием страницы и конкретного элемента',
+            'Разделение находок по тяжести: критические, серьёзные, средние, мелкие',
+            'Проверка контраста текста, размера кнопок и порядка заголовков',
+          ],
+          deliverables: [
+            'PDF с датой проверки и полным перечнем нарушений',
+            'Таблица по тяжести — её можно приложить к договору или страховой форме',
+            'Проверка повторяема: тот же адрес, та же методика, в любой момент позже',
+          ],
+        },
+
         { name: 'Быстрый Аудит', timeline: '1 день', features: ['Автоматизированное сканирование WCAG 2.1 AA', 'Отчёт о топ-10 проблемах', 'Резюме в PDF', 'Список приоритетов'],
           slug: 'quick-audit',
           price: 149,
@@ -756,6 +792,24 @@ const ТЕКСТЫ_СКАНЕРА_es = {
       tierMoreDetails: 'Detalles completos',
       tiers: [
 
+        { name: 'Auditoría Lite', timeline: '1 día', features: ['25 páginas en vez de 3', 'Lista completa de infracciones', 'PDF con fecha de la revisión', 'Desglose por gravedad'],
+          slug: 'lite-audit',
+          price: 50,
+          who: 'Necesita una prueba en papel de que el sitio fue revisado — para un abogado, una aseguradora o un cliente — y todavía no quiere pagar por el análisis.',
+          diff: 'El escaneo gratuito mira TRES páginas y no deja nada en las manos salvo una pantalla. Aquí: veinticinco páginas y un documento fechado que se puede entregar. Lo que NO está aquí: la lectura de lo que cada hallazgo significa ante un tribunal y la cifra en dólares de su exposición — eso empieza en la Auditoría Rápida.',
+          includes: [
+            'Escaneo automatizado WCAG 2.1 AA de hasta 25 páginas, no 3',
+            'Cada infracción con la página y el elemento concretos indicados',
+            'Hallazgos separados por gravedad: críticos, serios, moderados, menores',
+            'Contraste del texto, tamaño de los botones y orden de los encabezados verificados',
+          ],
+          deliverables: [
+            'Un PDF con la fecha del escaneo y la lista completa de infracciones',
+            'Una tabla por gravedad para adjuntar a un contrato o a un formulario de seguro',
+            'El escaneo es repetible: la misma URL, el mismo método, en cualquier momento',
+          ],
+        },
+
         { name: 'Auditoría Rápida', timeline: '1 día', features: ['Escaneo automatizado WCAG 2.1 AA', 'Informe de los 10 principales problemas', 'Resumen en PDF', 'Lista de prioridades'],
           slug: 'quick-audit',
           price: 149,
@@ -1035,6 +1089,24 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
       tierClose: '关闭',
       tierMoreDetails: '详细说明',
       tiers: [
+
+        { name: '轻度审计', timeline: '1天', features: ['扫描25个页面而非3个', '完整违规清单', '带检测日期的PDF', '按严重程度分类'],
+          slug: 'lite-audit',
+          price: 50,
+          who: '您需要一份书面证明，表明网站已被检测——用于律师、保险公司或客户——但暂时还不打算为分析付费。',
+          diff: '免费扫描只查看三个页面，除了屏幕上的结果什么也留不下。这里是二十五个页面，以及一份可以出示给他人的带日期文件。这里没有的：每项违规在法庭上意味着什么的解读，以及以美元计的风险评估——那从快速审计开始。',
+          includes: [
+            '自动化WCAG 2.1 AA扫描，最多25个页面，而非3个',
+            '每项违规均标明具体页面和元素',
+            '按严重程度划分：严重、重大、中等、轻微',
+            '验证文本对比度、点击目标尺寸和标题层级顺序',
+          ],
+          deliverables: [
+            '包含扫描日期和完整违规清单的PDF文件',
+            '可附于合同或保险表格的严重程度对照表',
+            '扫描可重复：相同网址、相同方法，日后随时可再次进行',
+          ],
+        },
 
         { name: '快速审计', timeline: '1天', features: ['自动化WCAG 2.1 AA扫描', '前10问题报告', 'PDF摘要', '优先级列表'],
           slug: 'quick-audit',

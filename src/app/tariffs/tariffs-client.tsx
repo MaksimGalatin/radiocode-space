@@ -106,7 +106,16 @@ export default function TariffsClient() {
           {т.амбассадорыВступление}
         </p>
 
-        <div className="mb-5 overflow-x-auto">
+        <div
+            className="mb-5 overflow-x-auto"
+            /* tabIndex, role и aria-label добавлены 08.09.2026: наш же axe нашёл
+               нарушение scrollable-region-focusable. Таблица шире экрана и
+               листается мышью, а с клавиатуры фокус в неё не попадал — человек,
+               работающий клавиатурой, не видел столбцы L2 и L3. */
+            tabIndex={0}
+            role="region"
+            aria-label={т.амбассадорыЗаголовок}
+          >
           <table className="w-full min-w-[520px] border-collapse">
             <thead>
               <tr className="text-left text-cyan-700 dark:text-cyan-400">
