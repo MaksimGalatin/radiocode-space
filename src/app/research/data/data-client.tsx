@@ -186,6 +186,18 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
                       fontSize: 14, textDecoration: 'none' }}>
             {т.витринаКнопкаДанные}
           </a>
+          <a href="https://aifa.works/data/us-organizations-registry.jsonl.gz"
+             style={{ padding: '10px 18px', borderRadius: 999,
+                      border: '1px solid rgba(148,163,184,0.3)', color: '#cbd5e1',
+                      fontSize: 14, textDecoration: 'none' }}>
+            {т.витринаКнопкаРеестрОрг}
+          </a>
+          <a href="https://aifa.works/data/us-government-axe-audit.jsonl.gz"
+             style={{ padding: '10px 18px', borderRadius: 999,
+                      border: '1px solid rgba(148,163,184,0.3)', color: '#cbd5e1',
+                      fontSize: 14, textDecoration: 'none' }}>
+            {т.витринаКнопкаГосАудит}
+          </a>
           <a href="https://aifa.works/data/traversal-log-SCHEMA.md"
              style={{ padding: '10px 18px', borderRadius: 999,
                       border: '1px solid rgba(148,163,184,0.3)', color: '#cbd5e1',
