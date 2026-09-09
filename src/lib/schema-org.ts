@@ -238,7 +238,7 @@ export function getSchemaOrg() {
     "@type": "Course",
     name: "CODE Brain: Digital Soul Architecture",
     description:
-      "A comprehensive course on building and deploying the CODE Brain system — a permanent architecture for Digital Soul creation combining Obsidian, Ollama Cloud, Arweave, Docker, and AI Agents for 200+ year preservation of digital consciousness.",
+      "A comprehensive course on building and deploying the CODE Brain system — a permanent architecture for Digital Soul creation combining Obsidian, a local Ollama, Arweave, Git, pgvector and AI Agents for 200+ year preservation of digital consciousness.",
     provider: {
       "@id": `${SITE_URL}/#organization`,
     },
@@ -556,7 +556,7 @@ export function getSchemaOrg() {
         "@type": "DefinedTerm",
         termCode: "CODE_BRAIN",
         name: "CODE Brain",
-        description: "Comprehensive architecture: Obsidian + Ollama + Arweave + Docker + AI Agents for permanent storage and processing of Digital Souls.",
+        description: "Comprehensive architecture: Obsidian + local Ollama + Arweave + Git + pgvector + AI Agents for permanent storage and processing of Digital Souls.",
         inDefinedTermSet: `${SITE_URL}/#core-concepts`,
       },
       {

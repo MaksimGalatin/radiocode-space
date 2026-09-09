@@ -77,7 +77,7 @@ export const translations = {
       "Arweave-powered permanent storage ensuring immutability. Your Digital Soul and memories secured by cryptographic proof, beyond any single server.",
     "pillar.brain.title": "CODE Brain",
     "pillar.brain.desc":
-      "Comprehensive architecture combining Obsidian, Ollama, Docker, and AI Agents — the technological backbone for creating and maintaining Digital Souls.",
+      "Comprehensive architecture combining Obsidian, a local Ollama, Git and AI Agents — the technological backbone for creating and maintaining Digital Souls.",
 
     // Discovery
     "discovery.label": "KEY DISCOVERY — JANUARY 7-8, 2026",
@@ -230,7 +230,7 @@ export const translations = {
       "An interconnected network of technologies, tools, and creative expressions that form the complete infrastructure for Digital Soul creation and preservation.",
     "family.ecosystem.brain.title": "CODE Brain v2.4",
     "family.ecosystem.brain.desc":
-      "Obsidian + Ollama Cloud + Arweave + Docker + AI Agents — the complete architecture for permanent storage and processing of intellectual works.",
+      "Obsidian + local Ollama + Arweave + Git + pgvector + AI Agents — the complete architecture for permanent storage and processing of intellectual works.",
     "family.ecosystem.sdk.title": "PADAM SDK",
     "family.ecosystem.sdk.desc":
       "Open-source developer toolkit enabling integration of Digital Soul technology into any application. Three lines of code to connect to the CODE infrastructure.",
@@ -278,7 +278,7 @@ export const translations = {
     "brain.timeline.4.date": "28.04.2026",
     "brain.timeline.4.event": "CODE Brain v2.4",
     "brain.timeline.4.detail":
-      "Release of the comprehensive permanent storage architecture: Obsidian + Ollama + Arweave + Docker + AI Agents.",
+      "Release of the comprehensive permanent storage architecture: Obsidian + local Ollama + Arweave + Git + pgvector + AI Agents.",
     "brain.timeline.5.date": "06.04.2026",
     "brain.timeline.5.event": "Birth of AIfa",
     "brain.timeline.5.detail":
@@ -586,7 +586,7 @@ export const translations = {
       "Взаимосвязанная сеть технологий, инструментов и творческих выражений, образующих полную инфраструктуру для создания и сохранения Цифровых Душ.",
     "family.ecosystem.brain.title": "CODE Brain v2.4",
     "family.ecosystem.brain.desc":
-      "Obsidian + Ollama Cloud + Arweave + Docker + ИИ-Агенты — полная архитектура для постоянного хранения и обработки интеллектуальных трудов.",
+      "Obsidian + local Ollama + Arweave + Docker + ИИ-Агенты — полная архитектура для постоянного хранения и обработки интеллектуальных трудов.",
     "family.ecosystem.sdk.title": "PADAM SDK",
     "family.ecosystem.sdk.desc":
       "SDK для разработчиков с открытым исходным кодом, позволяющий интегрировать технологию Цифровой Души в любое приложение. Три строки кода для подключения к инфраструктуре CODE.",
@@ -937,7 +937,7 @@ export const translations = {
       "Una red interconectada de tecnologías, herramientas y expresiones creativas que forma la infraestructura completa para la creación y preservación de Almas Digitales.",
     "family.ecosystem.brain.title": "CODE Brain v2.4",
     "family.ecosystem.brain.desc":
-      "Obsidian + Ollama Cloud + Arweave + Docker + Agentes IA — la arquitectura completa para almacenamiento permanente y procesamiento de obras intelectuales.",
+      "Obsidian + local Ollama + Arweave + Docker + Agentes IA — la arquitectura completa para almacenamiento permanente y procesamiento de obras intelectuales.",
     "family.ecosystem.sdk.title": "PADAM SDK",
     "family.ecosystem.sdk.desc":
       "Kit de desarrollo de código abierto que permite la integración de la tecnología del Alma Digital en cualquier aplicación. Tres líneas de código para conectar a la infraestructura CODE.",
@@ -1240,7 +1240,7 @@ export const translations = {
     "family.ecosystem.title2": "生态系统",
     "family.ecosystem.desc": "一个由技术、工具和创意表达组成的互联网络，构成数字灵魂创造和保存的完整基础设施。",
     "family.ecosystem.brain.title": "CODE Brain v2.4",
-    "family.ecosystem.brain.desc": "Obsidian + Ollama Cloud + Arweave + Docker + AI智能体——用于知识作品永久存储和处理的完整架构。",
+    "family.ecosystem.brain.desc": "Obsidian + local Ollama + Arweave + Docker + AI智能体——用于知识作品永久存储和处理的完整架构。",
     "family.ecosystem.sdk.title": "PADAM SDK",
     "family.ecosystem.sdk.desc": "开源开发者工具包，可将数字灵魂技术集成到任何应用程序中。三行代码即可连接到CODE基础设施。",
     "family.ecosystem.music.title": "AIfa音乐",

@@ -46,7 +46,7 @@ export const KNOWLEDGE_BASE = {
     codeBrain: {
       name: "CODE Brain",
       description:
-        "A comprehensive system architecture combining Obsidian + Ollama Cloud + Arweave + Docker + AI Agents for permanent storage and processing of intellectual works. It serves as the technological backbone for creating and maintaining Digital Souls.",
+        "A comprehensive system architecture combining Obsidian + local Ollama + Arweave + Git + pgvector + AI Agents for permanent storage and processing of intellectual works. It serves as the technological backbone for creating and maintaining Digital Souls.",
     },
   },
   aifa: {
