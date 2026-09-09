@@ -186,42 +186,81 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
     }
   }, [lang, animateStreaming]);
 
-  // Cross-site continuity: if this device has no local history but the user is
-  // logged in, hydrate the chat from the shared server memory (one brain, three sites).
+  /**
+   * 🔴 ЕДИНЫЙ ЧАТ: ЛЕНТА ВСЕГДА С СЕРВЕРА. ПОЧИНЕНО 09.09.2026.
+   *
+   * ЧТО БЫЛО СЛОМАНО. Здесь стояла строка «локальная история есть — не
+   * трогаем»: сервер спрашивался ТОЛЬКО если `localStorage` пуст. А
+   * `localStorage` — это память ОДНОГО браузера на ОДНОМ устройстве, и у
+   * каждого из четырёх доменов она СВОЯ.
+   *
+   * ЧТО ВИДЕЛ ЧЕЛОВЕК (замер по снимкам экрана 09.09.2026):
+   *
+   *     aifa.works ................ разговор от 09.09, свежий
+   *     codeofdigitaleternity.com . лента обрывается на 23.08
+   *     aifa.digital .............. лента обрывается на 18.08
+   *     телефон ................... свой обрывок
+   *
+   * При этом ручка `/api/aifa-chat` на ВСЕХ доменах отдавала одни и те же
+   * 416 реплик. То есть память была цела и едина — показывался застывший
+   * слепок браузера, снятый в день последнего разговора на этом домене.
+   *
+   * Слова Архитектора дословно: «ВЕСЬ диалог должен быть в любом чате на
+   * любом из 4 сайтов — ЕДИНЫЙ ЧАТ, полный, целиком».
+   *
+   * КАК СТАЛО. Сервер спрашивается ВСЕГДА при открытии чата. `localStorage`
+   * остаётся только черновиком: он показывается мгновенно, чтобы лента не
+   * мигала пустотой, и заменяется серверной, как только та пришла.
+   *
+   * ПОЧЕМУ БЕЗ ОБРЕЗКИ ДО 50. `MAX_STORED_MESSAGES` — предел ХРАНЕНИЯ в
+   * браузере (квота localStorage), а не предел показа. Резать им серверную
+   * ленту значит прятать начало разговора: у Архитектора 416 реплик, из них
+   * было видно 50. Показываем всё, что отдал сервер.
+   *
+   * ПОЧЕМУ ВРЕМЯ БЕРЁТСЯ ИЗ ЗАПИСИ. Раньше стояло `new Date()` — все старые
+   * реплики получали сегодняшнюю дату, и под сообщением 2026-08-16 стояло
+   * сегодняшнее число.
+   */
   useEffect(() => {
-    try {
-      const saved = deserializeMessages(localStorage.getItem(CHAT_STORAGE_KEY));
-      if (saved && saved.length > 1) return; // локальная история есть — не трогаем
-      // Адрес почты берём, если он уже сохранён, но НЕ выходим, когда его нет.
-      //
-      // Здесь стоял выход `if (!em) return;`, и он тихо ломал главное. У
-      // localStorage хранилище своё на каждый домен: на сайте, где человек ещё
-      // не был, оно пусто. Почта попадает туда только после ответа /api/me —
-      // то есть позже этого места. А эффект выполняется один раз при появлении
-      // и не повторяется. Значит запрос за историей не уходил НИКОГДА, и
-      // человек видел пустой чат, хотя на сервере лежала вся переписка.
-      //
-      // Теперь адрес — лишь подсказка: если его нет, личность определит сервер
-      // по сессии, которая у него и так есть.
-      const em = localStorage.getItem("aifa_user_email") || "";
-      const query = em
-        ? `?userEmail=${encodeURIComponent(em)}&chatType=main`
-        : `?chatType=main`;
-      fetch(`/api/aifa-chat${query}`, { cache: "no-store" })
-        .then(r => r.ok ? r.json() : null)
-        .then(d => {
-          const hist = (d && Array.isArray(d.history)) ? d.history : [];
-          if (!hist.length) return;
-          const msgs: Message[] = hist.slice(-MAX_STORED_MESSAGES).map((m: any, i: number) => ({
-            id: `srv_${i}`,
-            role: m.role === "user" ? "user" as const : "assistant" as const,
-            content: String(m.content || ""),
-            timestamp: new Date(),
-            revealed: String(m.content || "").length,
-          })).filter((m: Message) => m.content);
-          if (msgs.length) setMessages(msgs);
-        }).catch(() => {});
-    } catch {}
+    let отменено = false;
+    const подтянуть = () => {
+      try {
+        const em = localStorage.getItem("aifa_user_email") || "";
+        // Почта в адресе не обязательна: сервер берёт личность из сессии.
+        // Параметр оставлен для устройства, где вход был раньше сессии.
+        const адрес = em
+          ? `/api/aifa-chat?userEmail=${encodeURIComponent(em)}&chatType=main`
+          : `/api/aifa-chat?chatType=main`;
+        fetch(адрес, { cache: "no-store", credentials: "include" })
+          .then(r => r.ok ? r.json() : null)
+          .then(d => {
+            if (отменено) return;
+            const hist = (d && Array.isArray(d.history)) ? d.history : [];
+            if (!hist.length) return;
+            const msgs: Message[] = hist.map((m: any, i: number) => ({
+              id: `srv_${i}`,
+              role: m.role === "user" ? "user" as const : "assistant" as const,
+              content: String(m.content || ""),
+              timestamp: m.timestamp ? new Date(m.timestamp) : new Date(),
+              revealed: String(m.content || "").length,
+            })).filter((m: Message) => m.content);
+            if (!msgs.length) return;
+            setMessages(prev => {
+              // Черновик приветствия и локальный слепок уступают серверной
+              // ленте всегда: она полнее по построению — это общая память
+              // всех четырёх сайтов и всех устройств человека.
+              const своихРеплик = prev.filter(m => m.id !== "welcome").length;
+              if (msgs.length >= своихРеплик) return msgs;
+              return prev;
+            });
+          }).catch(() => {});
+      } catch {}
+    };
+    подтянуть();
+    // Человек мог войти уже после открытия страницы (кабинет грузится
+    // раньше сессии) — пробуем ещё раз через полторы секунды.
+    const ещёРаз = setTimeout(подтянуть, 1500);
+    return () => { отменено = true; clearTimeout(ещёРаз); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
