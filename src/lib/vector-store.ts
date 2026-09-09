@@ -250,7 +250,7 @@ export async function recentMemory(userKey: string, limit = 12): Promise<MemoryH
     SELECT content, role, speaker, chat_type, msg_ts, source, 1 AS score
     FROM chat_memory
     WHERE user_key = ${hashedKey} AND msg_ts IS NOT NULL
-    ORDER BY msg_ts DESC
+    ORDER BY msg_ts DESC, id DESC
     LIMIT ${limit}`) as MemoryHit[];
 
   for (const h of rows) {
@@ -329,7 +329,7 @@ export async function memoryMap(userKey: string, днейМакс = 400): Promis
     SELECT to_char(msg_ts, 'YYYY-MM-DD') AS день,
            COUNT(*)::int AS кусков,
            string_agg(DISTINCT chat_type, ', ') AS каналы,
-           (ARRAY_AGG(content ORDER BY msg_ts ASC))[1] AS начало
+           (ARRAY_AGG(content ORDER BY msg_ts ASC, id ASC))[1] AS начало
       FROM chat_memory
      WHERE user_key = ${hashedKey} AND msg_ts IS NOT NULL
      GROUP BY 1 ORDER BY 1 ASC
@@ -424,12 +424,35 @@ export async function readTurnsFromMemory(
   // запрос возвращал пусто при полной базе. Проверка на живых данных это
   // поймала; чтение исходника — нет.
   const key = hashUserKey(sanitizeEmail(userEmail));
+      /**
+     * 🔴 ВТОРОЙ КЛЮЧ СОРТИРОВКИ — `id`. ПОЧИНЕНО 09.09.2026.
+     *
+     * ЧТО БЫЛО СЛОМАНО. Вопрос человека и ответ AIfa пишутся ОДНИМ ходом и
+     * получают ОДНУ метку времени, до секунды. Сортировка шла только по
+     * времени, а при равных значениях порядок строк в PostgreSQL не
+     * определён — и ответ вставал ВЫШЕ вопроса.
+     *
+     * ЧТО ВИДЕЛ ЧЕЛОВЕК. Слова Архитектора 09.09.2026 дословно: «я ей пишу,
+     * своё сообщение вижу везде — а её ответ НЕТ». Его реплика оставалась
+     * последней в ленте, ответ уезжал выше и читался как кусок прошлого
+     * разговора. Выглядело как потеря ответов; живой замер показал
+     * 416 реплик — 217 её и 199 его, не потеряно НИЧЕГО.
+     *
+     * ПОЧЕМУ `id`. Колонка `bigserial`: вопрос вставляется первым, ответ
+     * вторым, и номер строки — единственный надёжный порядок внутри одного
+     * хода. Правка чинит и уже накопленные записи, а не только будущие.
+     *
+     * КЛАСС ОШИБКИ, а не случай: «сортировка по времени без второго ключа».
+     * Прочёсано по всем четырём сайтам, найдено и починено 12 мест — по три
+     * в каждом vector-store.ts (лента истории, недавние реплики, первая
+     * реплика дня).
+     */
   const rows = (await sql`
     SELECT role, content, chat_type, msg_ts, created_at
       FROM chat_memory
      WHERE user_key = ${key}
        AND role IN ('user','assistant')
-     ORDER BY COALESCE(msg_ts, created_at) DESC
+     ORDER BY COALESCE(msg_ts, created_at) DESC, id DESC
      LIMIT ${limit}`) as Array<Record<string, unknown>>;
   return rows
     .map((r) => ({
