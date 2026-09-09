@@ -1,15 +1,55 @@
 import { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { buildAlternates } from '@/lib/seo';
 import { LanguageProvider } from '@/lib/LanguageContext';
+
+// 🔴 ЗАГОЛОВОК И ОПИСАНИЕ — НА ЧЕТЫРЁХ ЯЗЫКАХ.
+//
+// Было: английский заголовок на русской, испанской и китайской версиях. В
+// коде стоял комментарий «title/description preserved verbatim» — локализацию
+// отложили и не вернулись. Заголовок и описание это то, что человек видит в
+// выдаче поисковика ДО перехода: русскому человеку Google показывал
+// английскую строку.
+//
+// Тексты не переведены машинно: у каждого языка свой заголовок, потому что
+// дословный перевод продающей строки звучит как объявление, а не как
+// обещание пользы. Смысл один, слова свои.
+const МЕТА: Record<string, { title: string; desc: string }> = {
+  en: {
+    title: 'Free Web Accessibility Audit — WCAG 2.1 AA Compliance',
+    desc:
+      'Scan your website for WCAG 2.1 AA accessibility issues in seconds. Get a free score, the violations that matter, and expert remediation from AIfa Works.',
+  },
+  ru: {
+    title: 'Проверка доступности сайта — WCAG 2.1 AA, бесплатно',
+    desc:
+      'Проверьте сайт на соответствие WCAG 2.1 AA за секунды: оценка, список нарушений с указанием страниц и цена исправления. Без регистрации.',
+  },
+  es: {
+    title: 'Auditoría gratuita de accesibilidad web — WCAG 2.1 AA',
+    desc:
+      'Revise su sitio según WCAG 2.1 AA en segundos: puntuación, lista de incumplimientos con las páginas donde están y presupuesto de corrección. Sin registro.',
+  },
+  zh: {
+    title: '免费网站无障碍检测 — 符合 WCAG 2.1 AA',
+    desc:
+      '数秒内按 WCAG 2.1 AA 标准检查您的网站：评分、按页面列出的违规项，以及修复报价。无需注册。',
+  },
+};
+
+function язык(v: string | null | undefined): string {
+  return ['en', 'ru', 'es', 'zh'].includes(v || '') ? (v as string) : 'en';
+}
 
 // Per-locale self-canonical + reciprocal hreflang (was a static English-only
 // canonical that deindexed /ru,/es,/zh). Only `alternates` becomes locale-aware;
 // title/description/keywords/openGraph/twitter are preserved verbatim.
 export async function generateMetadata(): Promise<Metadata> {
+  const л = язык((await headers()).get('x-locale'));
+  const м = МЕТА[л];
   return {
-    title: 'Free Web Accessibility Audit — WCAG 2.1 AA Compliance',
-    description:
-      'Scan your website for WCAG 2.1 AA accessibility issues in seconds. Get a free score, top violations, and expert remediation from AIfa Works. ADA compliant websites built fast.',
+    title: м.title,
+    description: м.desc,
     keywords: [
       'web accessibility audit',
       'WCAG 2.1 AA compliance',
