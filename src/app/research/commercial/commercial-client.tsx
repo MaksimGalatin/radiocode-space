@@ -272,6 +272,13 @@ export default function CommercialClient({ языкИзПути }: { языкИ�
           <p className="mt-3 leading-relaxed text-gray-300">{t.разница}</p>
           <div className="mt-5 overflow-x-auto">
             <table className="w-full border-collapse text-left text-sm">
+              {/* Подпись обязательна: без неё программа чтения с экрана
+                  объявляет «таблица из трёх столбцов» и не говорит, о чём она.
+                  Найдено проверкой собственной страницы 09.09.2026 — ровно то
+                  нарушение, которое мы ищем у других (`caption` отсутствовал
+                  только здесь, у двух соседних таблиц он был). Писать об
+                  исследовании доступности со страницы с таким изъяном стыдно. */}
+              <caption className="sr-only">{t.разницаЗаг}</caption>
               <thead>
                 <tr className="border-b border-white/15">
                   {t.разницаТаблица.map((к, i) => (
