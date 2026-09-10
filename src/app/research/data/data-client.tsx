@@ -143,7 +143,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
           {т.заголовок}
         </h1>
 
-        <p style={{ color: '#64748b', fontSize: 14, marginBottom: 32 }}>
+        <p style={{ color: '#72839a', fontSize: 14, marginBottom: 32 }}>
           {т.подпись(датаСнимка(язык))} · {т.проверкаИдёт} · Maksim Galatin &amp; AIfa (Claude, Anthropic) · CC BY 4.0
         </p>
 
@@ -359,7 +359,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
                 <tr key={в.ключ}>
                   <td style={ЯЧЕЙКА}>
                     {в.имя ?? т.вендор[в.ключ]}
-                    {в.мало && <span style={{ color: '#64748b', fontSize: 13 }}>{т.выборкаМала}</span>}
+                    {в.мало && <span style={{ color: '#72839a', fontSize: 13 }}>{т.выборкаМала}</span>}
                   </td>
                   <td style={ЯЧЕЙКА}>{чис(в.страниц)}</td>
                   <td style={{ ...ЯЧЕЙКА, color: '#22d3ee' }}>{в.доступно} %</td>
@@ -879,7 +879,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         {/* Раздел 20 Конституции: ровно одна нейтральная ссылка на услуги, в конце. */}
         <div style={{ marginTop: 40, paddingTop: 20, borderTop: '1px solid rgba(148,163,184,0.15)' }}>
-          <p style={{ color: '#64748b', fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ color: '#72839a', fontSize: 14, lineHeight: 1.7 }}>
             {т.инструментОткрыт}
             <Link href="/accessibility" style={{ color: '#94a3b8', textDecoration: 'underline' }}>
               aifa.works/accessibility

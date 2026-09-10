@@ -122,7 +122,7 @@ export default function MethodologyClient({ языкИзПути }: { языкИ
           {т.заголовок}
         </h1>
 
-        <p style={{ color: '#64748b', fontSize: 14, marginBottom: 32 }}>{т.версия(дата)}</p>
+        <p style={{ color: '#72839a', fontSize: 14, marginBottom: 32 }}>{т.версия(дата)}</p>
 
         <h2 style={ЗАГ2}>{т.зачемМетодика}</h2>
         <p style={ТЕКСТ}>{т.зачем1}</p>
