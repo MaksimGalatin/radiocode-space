@@ -751,6 +751,17 @@ export type ВерсияДанных = {
 
 export const ВЕРСИИ_ДАННЫХ: ВерсияДанных[] = [
   {
+    дата: '2026-09-10',
+    записей: 133199,
+    опубликовано: true,
+    текст: {
+    ru: "Новый массив, и другой прибор. Автоматическая проверка коммерческих сайтов США движком axe-core: 133 199 записей по 133 165 организациям, 533 387 нарушений — из них 164 901 критических и 364 762 серьёзных. У 122 512 записей сохранён снимок экрана как доказательство. Складывать эти числа с клавиатурным обходом государственных сайтов НЕЛЬЗЯ: там агент нажимает Tab и смотрит, дойдёт ли человек до цели, здесь машина считает нарушения правил в коде. Расхождение между этими двумя приборами и есть главный результат нашего американского исследования — 53,8 % страниц, которые машина назвала чистыми, оказались непроходимыми для человека с клавиатурой.",
+    en: "A new dataset, and a different instrument. An axe-core check of US commercial websites: 133,199 records across 133,165 organisations, 533,387 violations — 164,901 critical and 364,762 serious among them. 122,512 records keep a screenshot as evidence. These numbers must NOT be added to the keyboard traversal of government sites: there an agent presses Tab and sees whether a person reaches the goal, here a machine counts rule violations in the code. The gap between those two instruments is the main result of our U.S. study — 53.8 % of the pages the machine called clean turned out to be impassable for a keyboard user.",
+    es: "Un conjunto nuevo, y otro instrumento. Comprobación con axe-core de sitios comerciales de EE. UU.: 133 199 registros de 133 165 organizaciones, 533 387 infracciones, de las cuales 164 901 críticas y 364 762 graves. 122 512 registros conservan una captura como evidencia. Estas cifras NO deben sumarse al recorrido de teclado por sitios gubernamentales: allí un agente pulsa Tab y comprueba si una persona llega al objetivo; aquí una máquina cuenta infracciones de reglas en el código. La diferencia entre ambos instrumentos es el hallazgo principal de nuestro estudio estadounidense: el 53,8 % de las páginas que la máquina consideró limpias resultaron intransitables con teclado.",
+    zh: "新的数据集，不同的仪器。使用 axe-core 对美国商业网站的自动检测：133,165 家机构的 133,199 条记录，533,387 项违规，其中严重 164,901 项、重要 364,762 项。122,512 条记录保存了截图作为证据。这些数字不可与政府网站的键盘遍历相加：那里由代理按 Tab 键、检验人能否到达目标，这里由机器统计代码中的规则违规。这两种仪器之间的差距，正是我们美国研究的主要结论——机器判定为「干净」的页面中，有 53.8 % 对键盘用户来说根本走不通。",
+    },
+  },
+  {
     дата: '2026-08-26',
     записей: 15045,
     опубликовано: false,
