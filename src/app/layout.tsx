@@ -11,6 +11,7 @@ import Script from "next/script";
 import "./globals.css";
 import { разметкаТарифов } from '@/lib/tiers-schema';
 import СквознойВход from "@/components/СквознойВход";
+import ЧатAIfaОтложенно from "@/components/ЧатAIfaОтложенно";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -411,6 +412,7 @@ gtag('config','G-PCP8MD0NQ9');`,
         </>
         )}
         <Analytics />
+        <ЧатAIfaОтложенно />
       </body>
     </html>
   );
