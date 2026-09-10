@@ -566,6 +566,7 @@ export default function CabinetPage() {
               {lb === null ? <Skeleton h={90} /> : lb.length === 0 ? <EmptyState text={t("lbEmpty")} /> : (
                 <div style={{ overflowX: "auto" }}>
                   <table className="cab-table">
+                    <caption className="sr-only">{t("title")}</caption>
                     <thead><tr><th>#</th><th>{t("lbPlayer")}</th>{lbGame === "tetris" ? (<><th>{t("lbLines")}</th><th>{t("lbScore")}</th></>) : <th>{t("lbWins")}</th>}<th>GALATIN</th></tr></thead>
                     <tbody>
                       {lb.map(r => (

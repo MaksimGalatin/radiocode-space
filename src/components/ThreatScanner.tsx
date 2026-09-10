@@ -317,7 +317,7 @@ function ThreatCard({ threat }: ThreatCardProps) {
           <p className="text-[13px] text-gray-400 uppercase tracking-widest font-semibold mb-1">
             {ts.violatingCode}
           </p>
-          <div className="overflow-x-auto rounded-lg bg-black/40 border border-white/5 p-2.5 font-mono text-[13px] text-cyan-300/90 leading-relaxed whitespace-pre-wrap break-all">
+          <div className="overflow-x-auto rounded-lg bg-black/40 border border-white/5 p-2.5 font-mono text-[13px] text-cyan-300/90 leading-relaxed whitespace-pre-wrap break-all" tabIndex={0}>
             {threat.violatingHtml}
           </div>
         </div>
@@ -350,7 +350,7 @@ function ThreatCard({ threat }: ThreatCardProps) {
             {advice.codeFix && (
               <div className="mt-3 space-y-1">
                 <p className="text-[13px] text-gray-400 uppercase tracking-widest font-semibold">Suggested Fix</p>
-                <div className="overflow-x-auto rounded-lg bg-black/60 border border-white/5 p-2.5 font-mono text-[13px] text-emerald-400 leading-relaxed whitespace-pre-wrap">
+                <div className="overflow-x-auto rounded-lg bg-black/60 border border-white/5 p-2.5 font-mono text-[13px] text-emerald-400 leading-relaxed whitespace-pre-wrap" tabIndex={0}>
                   {advice.codeFix}
                 </div>
               </div>
@@ -1311,7 +1311,7 @@ export default function ThreatScanner() {
             </div>
             <div className="space-y-1">
               <span className="text-[13px] font-mono text-gray-400 uppercase tracking-widest font-semibold">cURL Request</span>
-              <div className="bg-black/60 rounded-lg p-2.5 font-mono text-[13px] text-emerald-400 border border-white/5 overflow-x-auto whitespace-pre leading-relaxed">
+              <div className="bg-black/60 rounded-lg p-2.5 font-mono text-[13px] text-emerald-400 border border-white/5 overflow-x-auto whitespace-pre leading-relaxed" tabIndex={0}>
 {`curl -X POST https://aifa.works/api/scan \\
   -H "Content-Type: application/json" \\
   -d '{

@@ -89,7 +89,7 @@ const ТЕКСТЫ: Record<Язык, {
       'Считаются строки журнала, а не сайты. Один и тот же адрес может дать несколько записей.',
     ],
     авторЗаг: 'Кто это сделал',
-    автор: 'Максим Валентинович Галатин, самофинансируемое исследование. Сканер написан с нуля, сырые данные и методика опубликованы целиком.',
+    автор: 'Максим Валентинович Галатин, самофинансируемое исследование. Сканер написан с нуля, сырые данные и методика опубликованы целиком. Список организаций для обхода получен из OpenStreetMap, © участники OpenStreetMap.',
     конфликт: 'Раскрытие конфликта интересов: автор оказывает услуги по исправлению доступности. Исследование самофинансировано, никто не платил за включение в выборку и за исключение из неё.',
     снимокПодпись: 'Снимок данных на',
     услуги: 'Проверить свой сайт',
@@ -136,7 +136,7 @@ const ТЕКСТЫ: Record<Язык, {
       'Log records are counted, not sites. The same address can yield several records.',
     ],
     авторЗаг: 'Who did this',
-    автор: 'Maksim Galatin, self-funded research. The scanner was written from scratch; the raw data and the methodology are published in full.',
+    автор: 'Maksim Galatin, self-funded research. The scanner was written from scratch; the raw data and the methodology are published in full. The list of organisations used for traversal comes from OpenStreetMap, © OpenStreetMap contributors.',
     конфликт: 'Conflict of interest disclosure: the author provides accessibility remediation services. The research is self-funded; nobody paid to be included in the sample or excluded from it.',
     снимокПодпись: 'Data snapshot as of',
     услуги: 'Check your own site',
@@ -183,7 +183,7 @@ const ТЕКСТЫ: Record<Язык, {
       'Se cuentan registros, no sitios. Una misma dirección puede generar varios registros.',
     ],
     авторЗаг: 'Quién lo hizo',
-    автор: 'Maksim Galatin, investigación autofinanciada. El escáner se escribió desde cero; los datos brutos y la metodología están publicados íntegramente.',
+    автор: 'Maksim Galatin, investigación autofinanciada. El escáner se escribió desde cero; los datos brutos y la metodología están publicados íntegramente. La lista de organizaciones para el recorrido procede de OpenStreetMap, © colaboradores de OpenStreetMap.',
     конфликт: 'Declaración de conflicto de intereses: el autor presta servicios de corrección de accesibilidad. La investigación es autofinanciada; nadie pagó por entrar en la muestra ni por quedar fuera de ella.',
     снимокПодпись: 'Datos a fecha de',
     услуги: 'Comprobar su propio sitio',
@@ -230,7 +230,7 @@ const ТЕКСТЫ: Record<Язык, {
       '统计的是日志记录，不是网站。同一地址可能产生多条记录。',
     ],
     авторЗаг: '谁做的',
-    автор: 'Maksim Galatin，自筹经费的研究。扫描器从零写起；原始数据与方法论全部公开。',
+    автор: 'Maksim Galatin，自筹经费的研究。扫描器从零写起；原始数据与方法论全部公开。用于遍历的机构名单来自 OpenStreetMap，© OpenStreetMap 贡献者。',
     конфликт: '利益冲突声明：作者提供无障碍整改服务。本研究自筹经费；没有人为进入样本或被排除在外付过费。',
     снимокПодпись: '数据快照日期',
     услуги: '检测您自己的网站',
@@ -270,8 +270,9 @@ export default function CommercialClient({ языкИзПути }: { языкИ�
         <section className="mt-10 rounded-lg border border-amber-500/20 bg-amber-500/[0.04] p-6">
           <h2 className="text-xl font-semibold text-white">{t.разницаЗаг}</h2>
           <p className="mt-3 leading-relaxed text-gray-300">{t.разница}</p>
-          <div className="mt-5 overflow-x-auto">
+          <div className="mt-5 overflow-x-auto" tabIndex={0}>
             <table className="w-full border-collapse text-left text-sm">
+              <caption className="sr-only">{t.разницаЗаг}</caption>
               {/* Подпись обязательна: без неё программа чтения с экрана
                   объявляет «таблица из трёх столбцов» и не говорит, о чём она.
                   Найдено проверкой собственной страницы 09.09.2026 — ровно то
@@ -334,7 +335,7 @@ export default function CommercialClient({ языкИзПути }: { языкИ�
           </section>
         )}
 
-        <section className="mt-12 overflow-x-auto">
+        <section className="mt-12 overflow-x-auto" tabIndex={0}>
           <h2 className="text-xl font-semibold text-white">{t.ответыЗаг}</h2>
           <table className="mt-4 w-full border-collapse text-left text-sm">
             <caption className="sr-only">{t.ответыЗаг}</caption>

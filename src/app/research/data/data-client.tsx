@@ -186,12 +186,6 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
                       fontSize: 14, textDecoration: 'none' }}>
             {т.витринаКнопкаДанные}
           </a>
-          <a href="https://aifa.works/data/us-organizations-registry.jsonl.gz"
-             style={{ padding: '10px 18px', borderRadius: 999,
-                      border: '1px solid rgba(148,163,184,0.3)', color: '#cbd5e1',
-                      fontSize: 14, textDecoration: 'none' }}>
-            {т.витринаКнопкаРеестрОрг}
-          </a>
           <a href="https://aifa.works/data/us-government-axe-audit.jsonl.gz"
              style={{ padding: '10px 18px', borderRadius: 999,
                       border: '1px solid rgba(148,163,184,0.3)', color: '#cbd5e1',
@@ -237,6 +231,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <div style={{ overflowX: 'auto', marginBottom: 24 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 14 }}>
+            <caption className="sr-only">{т.заголовок}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА_ЛЕВАЯ}>{т.ростШапкаЗаписей}</th>

@@ -117,6 +117,7 @@ export default function TariffsClient() {
             aria-label={т.амбассадорыЗаголовок}
           >
           <table className="w-full min-w-[520px] border-collapse">
+            <caption className="sr-only">{т.амбассадорыЗаголовок}</caption>
             <thead>
               <tr className="text-left text-cyan-700 dark:text-cyan-400">
                 {т.столбцы.map((с) => (

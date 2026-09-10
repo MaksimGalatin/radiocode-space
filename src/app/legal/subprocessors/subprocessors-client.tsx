@@ -152,7 +152,7 @@ export default function SubprocessorsClient({ языкИзПути }: { язык
         <p className="mt-2 text-sm text-gray-400">{c.updated}</p>
         <p className="mt-6 text-base leading-relaxed text-gray-300">{c.intro}</p>
 
-        <div className="mt-10 overflow-x-auto">
+        <div className="mt-10 overflow-x-auto" tabIndex={0}>
           <table className="w-full border-collapse text-left text-sm">
             <caption className="sr-only">{c.title}</caption>
             <thead>

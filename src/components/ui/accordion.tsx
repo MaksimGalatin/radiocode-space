@@ -30,8 +30,14 @@ function AccordionTrigger({
   children,
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {
+  // Уровень заголовка. Radix по умолчанию рисует <h3>, из-за чего на /faq
+  // лестница шла h1 → h3 с пропуском уровня: программа чтения объявляет это
+  // как потерянный раздел. `asChild` отдаёт свойства нашему <h2>, поэтому
+  // уровень становится вторым, а вид остаётся прежним — размер текста задают
+  // классы кнопки внутри, а глобальных стилей для h2 у нас нет.
   return (
-    <AccordionPrimitive.Header className="flex">
+    <AccordionPrimitive.Header className="flex" asChild>
+      <h2 className="flex">
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
@@ -43,6 +49,7 @@ function AccordionTrigger({
         {children}
         <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200" />
       </AccordionPrimitive.Trigger>
+      </h2>
     </AccordionPrimitive.Header>
   )
 }

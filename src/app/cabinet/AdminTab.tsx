@@ -122,6 +122,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
           {!users ? <Skeleton h={160} /> : users.length === 0 ? <EmptyState text={t("empty")} /> : (
             <div style={{ overflowX: "auto" }}>
               <table className="cab-table">
+                <caption className="sr-only">{`Email, @nick, XP, Tier, GALATIN, Invited`}</caption>
                 <thead><tr><th>Email</th><th>@nick</th><th>XP</th><th>Tier</th><th>GALATIN</th><th>Invited</th><th>Arweave</th></tr></thead>
                 <tbody>
                   {users.map(u => (
@@ -151,6 +152,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
           {!payouts ? <Skeleton h={120} /> : payouts.length === 0 ? <EmptyState text={t("empty")} /> : (
             <div style={{ overflowX: "auto" }}>
               <table className="cab-table">
+                <caption className="sr-only">{`Email, USDT, Address, Status, Date`}</caption>
                 <thead><tr><th>Email</th><th>USDT</th><th>Address</th><th>Status</th><th>Date</th><th></th></tr></thead>
                 <tbody>
                   {payouts.map(p => (
@@ -183,6 +185,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
           {!inbox ? <Skeleton h={120} /> : inbox.length === 0 ? <EmptyState text={t("empty")} /> : (
             <div style={{ overflowX: "auto" }}>
               <table className="cab-table">
+                <caption className="sr-only">{`Site, Type, Name, Email, Message, Date`}</caption>
                 <thead><tr><th>Site</th><th>Type</th><th>Name</th><th>Email</th><th>Message</th><th>Date</th></tr></thead>
                 <tbody>
                   {inbox.map((s: any) => (
@@ -218,6 +221,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
           {!audit ? <Skeleton h={120} /> : audit.length === 0 ? <EmptyState text={t("empty")} /> : (
             <div style={{ overflowX: "auto" }}>
               <table className="cab-table">
+                <caption className="sr-only">{`#, Action, Detail, IP, Date`}</caption>
                 <thead><tr><th>#</th><th>Action</th><th>Detail</th><th>IP</th><th>Date</th></tr></thead>
                 <tbody>
                   {audit.map((a: any) => (

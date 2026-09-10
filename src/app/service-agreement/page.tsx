@@ -1612,7 +1612,7 @@ export default function ServiceAgreementPage() {
   const ui = dict[locale as string] || en;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#030711] text-gray-900 dark:text-white pt-28 pb-16">
+    <main className="min-h-screen bg-white dark:bg-[#030711] text-gray-900 dark:text-white pt-28 pb-16">
       <div className="max-w-4xl mx-auto px-6">
 
         {/* Navigation */}
@@ -1712,6 +1712,6 @@ export default function ServiceAgreementPage() {
         </div>
 
       </div>
-    </div>
+    </main>
   );
 }

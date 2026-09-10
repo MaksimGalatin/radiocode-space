@@ -54,7 +54,7 @@ export default function UserAgreementPage() {
   );
 
   return (
-    <div className="bg-background text-foreground py-20 px-4 transition-colors duration-200">
+    <main className="bg-background text-foreground py-20 px-4 transition-colors duration-200">
       <div className="max-w-[1200px] mx-auto">
         <h1 className="text-2xl md:text-4xl font-bold mb-4">{t.title}</h1>
         <p className="text-muted-foreground text-sm mb-12">{t.effectiveDate}</p>
@@ -269,6 +269,6 @@ export default function UserAgreementPage() {
           </p>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

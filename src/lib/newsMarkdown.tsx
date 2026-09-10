@@ -234,44 +234,65 @@ export function parseMarkdownToBlocks(markdown: string): Block[] {
 export function renderMarkdownToReact(content: string) {
   const blocks = parseMarkdownToBlocks(content);
 
+  /**
+   * РОВНАЯ ЛЕСТНИЦА ЗАГОЛОВКОВ.
+   *
+   * Уровни в текстах статей писали люди, и они перескакивают: в теле
+   * встречается второй `#` (ещё один h1 на странице) и переходы вида h1 → h3.
+   * По заголовкам незрячий человек ходит клавишей H как по оглавлению, и
+   * пропущенный уровень читается как потерянный раздел.
+   *
+   * Здесь уровни ВЫВОДА выпрямляются: первый заголовок тела — h2 (h1 занят
+   * заголовком страницы), дальше без пропусков. Оформление берётся по
+   * ИСХОДНОМУ уровню, поэтому крупный заголовок остаётся крупным и читатель
+   * разницы не видит.
+   */
+  const уровниТегов: number[] = [];
+  {
+    let прошлыйИсходный = 0;
+    let прошлыйТег = 1;
+    for (const блок of blocks) {
+      const совпало = /^h([1-6])$/.exec(блок.type);
+      if (!совпало) {
+        уровниТегов.push(0);
+        continue;
+      }
+      const исходный = Number(совпало[1]);
+      let тег;
+      if (прошлыйИсходный === 0) тег = 2;
+      else if (исходный > прошлыйИсходный) тег = прошлыйТег + 1;
+      else if (исходный === прошлыйИсходный) тег = прошлыйТег;
+      else тег = прошлыйТег - (прошлыйИсходный - исходный);
+      тег = Math.min(6, Math.max(2, тег));
+      уровниТегов.push(тег);
+      прошлыйИсходный = исходный;
+      прошлыйТег = тег;
+    }
+  }
+
   return blocks.map((block, idx) => {
     switch (block.type) {
       case 'h1':
-        return (
-          <h1 key={idx} className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-zinc-100 mt-8 mb-4 border-b border-gray-200 dark:border-zinc-800/80 pb-2">
-            {renderTextWithMarkdown(block.lines[0])}
-          </h1>
-        );
       case 'h2':
-        return (
-          <h2 key={idx} className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-zinc-200 mt-6 mb-3">
-            {renderTextWithMarkdown(block.lines[0])}
-          </h2>
-        );
       case 'h3':
-        return (
-          <h3 key={idx} className="text-lg font-semibold text-gray-800 dark:text-zinc-300 mt-5 mb-2">
-            {renderTextWithMarkdown(block.lines[0])}
-          </h3>
-        );
       case 'h4':
-        return (
-          <h4 key={idx} className="text-base font-semibold text-gray-800 dark:text-zinc-300 mt-4 mb-2">
-            {renderTextWithMarkdown(block.lines[0])}
-          </h4>
-        );
       case 'h5':
-        return (
-          <h5 key={idx} className="text-base font-medium text-gray-700 dark:text-zinc-400 mt-4 mb-1">
-            {renderTextWithMarkdown(block.lines[0])}
-          </h5>
+      case 'h6': {
+        const ОФОРМЛЕНИЕ: Record<string, string> = {
+          h1: 'text-2xl md:text-3xl font-bold text-gray-900 dark:text-zinc-100 mt-8 mb-4 border-b border-gray-200 dark:border-zinc-800/80 pb-2',
+          h2: 'text-xl md:text-2xl font-semibold text-gray-900 dark:text-zinc-200 mt-6 mb-3',
+          h3: 'text-lg font-semibold text-gray-800 dark:text-zinc-300 mt-5 mb-2',
+          h4: 'text-base font-semibold text-gray-800 dark:text-zinc-300 mt-4 mb-2',
+          h5: 'text-base font-medium text-gray-700 dark:text-zinc-400 mt-4 mb-1',
+          h6: 'text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-zinc-400 mt-4 mb-1',
+        };
+        const тег = 'h' + (уровниТегов[idx] || 2);
+        return React.createElement(
+          тег,
+          { key: idx, className: ОФОРМЛЕНИЕ[block.type] },
+          renderTextWithMarkdown(block.lines[0]),
         );
-      case 'h6':
-        return (
-          <h6 key={idx} className="text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-zinc-400 mt-4 mb-1">
-            {renderTextWithMarkdown(block.lines[0])}
-          </h6>
-        );
+      }
       case 'hr':
         return <hr key={idx} className="border-gray-200 dark:border-white/5 my-6" />;
       case 'blockquote':
@@ -286,7 +307,7 @@ export function renderMarkdownToReact(content: string) {
         );
       case 'code':
         return (
-          <pre key={idx} className="bg-gray-100 dark:bg-[#080d1a] text-gray-800 dark:text-zinc-300 font-mono text-sm p-4 rounded-xl border border-gray-200 dark:border-white/5 my-4 overflow-x-auto">
+          <pre key={idx} className="bg-gray-100 dark:bg-[#080d1a] text-gray-800 dark:text-zinc-300 font-mono text-sm p-4 rounded-xl border border-gray-200 dark:border-white/5 my-4 overflow-x-auto" tabIndex={0}>
             <code>{block.lines.join('\n')}</code>
           </pre>
         );
@@ -317,6 +338,22 @@ export function renderMarkdownToReact(content: string) {
 
         if (rows.length === 0) return null;
 
+        /**
+         * ПОДПИСЬ ТАБЛИЦЫ ДЛЯ ПРОГРАММ ЧТЕНИЯ С ЭКРАНА.
+         *
+         * Без неё таблица объявляется как «таблица из двух столбцов» без темы.
+         * Берём ближайший заголовок перед таблицей — тот, что человек видит
+         * глазами; он уже на языке статьи, поэтому переводить нечего.
+         * Заголовка нет — перечисляем столбцы: это хуже темы, но лучше тишины.
+         */
+        let темаТаблицы = '';
+        for (let i = idx - 1; i >= 0; i--) {
+          if (/^h[1-6]$/.test(blocks[i].type)) {
+            темаТаблицы = blocks[i].lines.join(' ').replace(/[*_`]/g, '').trim();
+            break;
+          }
+        }
+
         const rawHeaders = rows[0].split('|').slice(1, -1).map(h => h.trim());
         const isDividerRow = (cells: string[]) => cells.every(c => /^:?-+:?$/.test(c) || c === '');
         const bodyRows = rows.slice(1)
@@ -324,8 +361,11 @@ export function renderMarkdownToReact(content: string) {
           .filter(cells => !isDividerRow(cells));
 
         return (
-          <div key={idx} className="overflow-x-auto my-6 rounded-xl border border-gray-200 dark:border-white/5">
+          <div key={idx} className="overflow-x-auto my-6 rounded-xl border border-gray-200 dark:border-white/5" tabIndex={0}>
             <table className="min-w-full border-collapse text-sm text-gray-600 dark:text-zinc-300 bg-white dark:bg-white/[0.01]">
+              <caption className="sr-only">
+                {темаТаблицы || rawHeaders.join(', ')}
+              </caption>
               <thead>
                 <tr className="bg-gray-100 dark:bg-white/5 border-b border-gray-200 dark:border-white/5">
                   {rawHeaders.map((header, hIdx) => (

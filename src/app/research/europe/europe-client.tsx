@@ -231,7 +231,7 @@ export default function EuropeClient({ языкИзПути }: { языкИзП�
           ))}
         </div>
 
-        <section className="mt-12 overflow-x-auto">
+        <section className="mt-12 overflow-x-auto" tabIndex={0}>
           <table className="w-full border-collapse text-left text-sm">
             <caption className="sr-only">{t.заголовок}</caption>
             <thead>
