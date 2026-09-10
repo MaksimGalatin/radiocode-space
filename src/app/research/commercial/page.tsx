@@ -1,6 +1,14 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import CommercialClient from './commercial-client';
+import { Ч } from './данные';
+
+/**
+ * Разделитель разрядов для метаданных. Своя функция, а не `toLocaleString`:
+ * та зависит от сборки ICU в Node и на другой машине может дать неразрывный
+ * пробел вместо запятой — описание для робота должно быть одинаковым всегда.
+ */
+const тыс = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
 /**
  * КОММЕРЧЕСКИЕ САЙТЫ США — СЕРВЕРНАЯ ОБЁРТКА.
@@ -15,14 +23,21 @@ import CommercialClient from './commercial-client';
  * незаметное снаружи; ровно это нашлось 05.09.2026 на странице данных.
  *
  * Метаданные остаются на сервере: поисковому роботу отдаётся одно описание,
- * не зависящее от выбора человека. В описании НЕ утверждается «столько-то
+ * не зависящее от выбора человека.
+ *
+ * 🔴 ЧИСЛА В ОПИСАНИИ ВЫЧИСЛЯЮТСЯ ИЗ `Ч`, А НЕ ПИШУТСЯ РУКАМИ — оплачено
+ * 10.09.2026. В тексте страницы стояло 133 199, а в `description` и
+ * `og:description` — 149 704, счёт прошлого прогона: инструмент обновления
+ * правит `данные.ts`, а сюда не заглядывал. Снаружи это не видно вовсе —
+ * человек читает верное число, а поисковик и карточка ссылки в мессенджере
+ * показывают отозванное. Литералов здесь больше нет; разойтись нечему. В описании НЕ утверждается «столько-то
  * процентов сайтов недоступны»: доли здесь считаются от строк журнала, и
  * подмена знаменателя в описании была бы враньём в самом заметном месте.
  */
 export const metadata: Metadata = {
   title: 'US Commercial Websites: Automated Accessibility Check — Open Research',
   description:
-    'An axe-core check of US commercial websites: shops, cafés, clinics, banks. 149,704 log records across 147,798 organisations, 809,179 rule violations, screenshots kept as evidence. Not the same instrument as the keyboard traversal — the two sets of numbers do not add up.',
+    `An axe-core check of US commercial websites: shops, cafés, clinics, banks. ${тыс(Ч.строк)} log records across ${тыс(Ч.организаций)} organisations, ${тыс(Ч.нарушений)} rule violations, screenshots kept as evidence. Not the same instrument as the keyboard traversal — the two sets of numbers do not add up.`,
   keywords: [
     'accessibility research',
     'axe-core',
@@ -34,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'US Commercial Websites: Automated Accessibility Check',
     description:
-      '149,704 records, 147,798 organisations, 809,179 violations found by axe-core. Method, denominators and limitations stated in full.',
+      `${тыс(Ч.строк)} records, ${тыс(Ч.организаций)} organisations, ${тыс(Ч.нарушений)} violations found by axe-core. Method, denominators and limitations stated in full.`,
     type: 'article',
   },
 };
