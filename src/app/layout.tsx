@@ -10,6 +10,7 @@ import СогласиеНаCookie from "@/components/СогласиеНаCookie"
 import Script from "next/script";
 import "./globals.css";
 import { разметкаТарифов } from '@/lib/tiers-schema';
+import СквознойВход from "@/components/СквознойВход";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -307,6 +308,11 @@ export default async function RootLayout({
           fontFamily: 'var(--font-space-grotesk), system-ui, sans-serif',
         }}
       >
+        {/* Единый вход на четыре сайта: если здесь сессии нет, один раз
+            за вкладку берём билет у центрального и возвращаемся своей
+            кукой. Добавлено 09.09.2026 по прямому слову Архитектора:
+            «Один аккаунт на ВСЕ 4 сайта». */}
+        <СквознойВход />
         {/* Device performance tier — runs synchronously before the body renders so
             heavy GPU layers (canvas rAF, animated blur, backdrop-filter) are gated
             off on weak devices BEFORE first paint. Android TVs have big screens but
