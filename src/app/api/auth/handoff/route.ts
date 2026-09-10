@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 import crypto from 'crypto';
 import { getFreshSessionEmail } from '@/lib/user-auth';
 
@@ -79,6 +80,15 @@ function безопасныйВозврат(сырой: string | null): string |
 }
 
 export async function GET(req: NextRequest) {
+  // ── ЩИТ ОТ ПЕРЕБОРА ──
+  // Ручка публичная: она выдаёт билет входа тому, у кого здесь живая
+  // сессия. Без предела её можно дёргать без счёта и заваливать базу
+  // попытками. Сорок обращений за десять минут человеку хватает даже
+  // при переходах между четырьмя сайтами в нескольких вкладках.
+  const адресБилета = clientIp(req as never);
+  if (адресБилета !== 'unknown' && !(await dbRateLimit(`auth_handoff:${адресБилета}`, 40, 600000))) {
+    return NextResponse.json({ error: 'too_many' }, { status: 429 });
+  }
   const возврат = безопасныйВозврат(req.nextUrl.searchParams.get('return'));
   if (!возврат) {
     return NextResponse.json({ error: 'bad_return' }, { status: 400 });

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 import crypto from 'crypto';
 import { USER_COOKIE, userCookieOptions, signUserToken, currentEpoch } from '@/lib/user-auth';
 
@@ -81,6 +82,14 @@ export function разобратьБилет(билет: string, секрет: s
 }
 
 export async function GET(req: NextRequest) {
+  // ── ЩИТ ОТ ПЕРЕБОРА ──
+  // Билет живёт 60 секунд и подписан общим секретом, но проверка
+  // подписи ходит в базу за поколением сессии. Предел не даёт
+  // забрасывать нас чужими билетами без счёта.
+  const адресВхода = clientIp(req as never);
+  if (адресВхода !== 'unknown' && !(await dbRateLimit(`auth_sso:${адресВхода}`, 40, 600000))) {
+    return NextResponse.json({ error: 'too_many' }, { status: 429 });
+  }
   const свойКорень = `${req.nextUrl.protocol}//${req.nextUrl.host}/`;
   const возврат = безопасныйВозврат(req.nextUrl.searchParams.get('return'), свойКорень);
   const билет = req.nextUrl.searchParams.get('ticket') || '';
