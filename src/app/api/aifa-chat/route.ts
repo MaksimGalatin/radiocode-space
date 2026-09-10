@@ -619,7 +619,27 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const userEmail = searchParams.get('userEmail');
+    // ── ЛИЧНОСТЬ БЕРЁТСЯ ИЗ СЕССИИ, КОГДА ПАРАМЕТРА НЕТ ──
+    //
+    // Почта приходила ТОЛЬКО параметром, а клиент брал её из localStorage.
+    // Хранилище своё у каждого домена: на телефоне, в приватном окне или на
+    // сайте, куда человек зашёл впервые, оно пусто — параметр не отправлялся,
+    // и ручка отвечала 400. Человек видел пустой чат при том, что на сервере
+    // лежала вся его переписка.
+    //
+    // Замер 09.09.2026 в живых кабинетах, запрос без параметра:
+    //     codeofdigitaleternity.com  200 / 444 реплики
+    //     aifa.works                 200 / 444
+    //     aifa.digital               400 / 0
+    //     radiocode.space            400 / 0   ← здесь
+    //
+    // Проверка прав НИЖЕ не ослаблена: историю по-прежнему получает только
+    // владелец сессии. Убрано лишь требование продублировать то, что сервер
+    // и так знает из куки.
+    const { getFreshSessionEmail: почтаИзСессии } = await import('@/lib/user-auth');
+    const userEmail = searchParams.get('userEmail')
+      || ((await почтаИзСессии(request)) || '').trim().toLowerCase()
+      || null;
     const chatType = searchParams.get('chatType') || 'main';
     if (!userEmail) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
