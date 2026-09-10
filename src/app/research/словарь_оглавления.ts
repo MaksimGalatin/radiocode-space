@@ -73,6 +73,14 @@ const ru: ТекстыОглавления = {
         'Из чего составлена выборка: источник списка доменов, правила ' +
         'отбора, что исключено и по какой причине.',
     },
+    {
+      путь: 'commercial',
+      имя: 'Коммерческие сайты',
+      описание:
+        'Другой прибор и другая выборка: автоматическая проверка axe-core ' +
+        'по коммерческим сайтам США. Числа этого набора и клавиатурного ' +
+        'обхода не складываются — почему, сказано на самой странице.',
+    },
   ],
   ограниченияЗаголовок: 'Чего это исследование не говорит',
   ограничения: [
@@ -120,6 +128,14 @@ const en: ТекстыОглавления = {
       описание:
         'How the sample was built: the source of the domain list, selection ' +
         'rules, what was excluded and why.',
+    },
+    {
+      путь: 'commercial',
+      имя: 'Commercial sites',
+      описание:
+        'A different instrument and a different sample: an axe-core check ' +
+        'of US commercial websites. Its numbers and the keyboard traversal ' +
+        'do not add up — the page explains why.',
     },
   ],
   ограниченияЗаголовок: 'What this research does not claim',
@@ -171,6 +187,14 @@ const es: ТекстыОглавления = {
         'Cómo se formó la muestra: origen de la lista de dominios, reglas ' +
         'de selección, qué se excluyó y por qué.',
     },
+    {
+      путь: 'commercial',
+      имя: 'Sitios comerciales',
+      описание:
+        'Otro instrumento y otra muestra: comprobación con axe-core de ' +
+        'sitios comerciales de EE. UU. Sus cifras y las del recorrido de ' +
+        'teclado no se suman; la página explica por qué.',
+    },
   ],
   ограниченияЗаголовок: 'Lo que esta investigación no afirma',
   ограничения: [
@@ -217,6 +241,13 @@ const zh: ТекстыОглавления = {
       имя: '样本清单',
       описание:
         '样本如何构成：域名清单的来源、筛选规则、剔除了什么以及为什么。',
+    },
+    {
+      путь: 'commercial',
+      имя: '商业网站',
+      описание:
+        '不同的仪器与不同的样本：使用 axe-core 对美国商业网站的自动检测。' +
+        '本数据集与键盘遍历的数字不可相加——页面上说明了原因。',
     },
   ],
   ограниченияЗаголовок: '本研究没有断言什么',
