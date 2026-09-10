@@ -7,6 +7,7 @@ import { HtmlLangSync } from "@/components/HtmlLangSync";
 import { ЯзыкССервера } from '@/lib/server-locale';
 import ClientErrorMonitor from "@/components/ClientErrorMonitor";
 import СогласиеНаCookie from "@/components/СогласиеНаCookie";
+import ЧатAIfaОтложенно from "@/components/ЧатAIfaОтложенно";
 import Script from "next/script";
 import "./globals.css";
 import { разметкаТарифов } from '@/lib/tiers-schema';
@@ -373,6 +374,10 @@ export default async function RootLayout({
         {/* Баннер согласия на cookie. На этом сайте его не было вовсе —
             единственном из четырёх, при том что счётчик Google здесь есть. */}
         <СогласиеНаCookie />
+        {/* Виджет чата с AIfa. До 10.09.2026 его здесь не было вовсе —
+            человек не мог заговорить с ней прямо на сайте, хотя ручки
+            чата тут работают. */}
+        <ЧатAIfaОтложенно />
         {/* Google Analytics 4. Раньше на radiocode тега НЕ БЫЛО вовсе (только
             платная Vercel-аналитика, которая не подключена) — поэтому сайт не
             попадал ни в один отчёт. Поток общий с aifa.digital: в отчётах
