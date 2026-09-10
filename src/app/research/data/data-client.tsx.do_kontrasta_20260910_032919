@@ -143,7 +143,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
           {т.заголовок}
         </h1>
 
-        <p style={{ color: '#72839a', fontSize: 14, marginBottom: 32 }}>
+        <p style={{ color: '#64748b', fontSize: 14, marginBottom: 32 }}>
           {т.подпись(датаСнимка(язык))} · {т.проверкаИдёт} · Maksim Galatin &amp; AIfa (Claude, Anthropic) · CC BY 4.0
         </p>
 
@@ -229,7 +229,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
           {т.ключевоеТекст(Ч.расхождение)}
         </p>
 
-        <div style={{ overflowX: 'auto', marginBottom: 24 }} tabIndex={0}>
+        <div style={{ overflowX: 'auto', marginBottom: 24 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 14 }}>
             <caption className="sr-only">{т.заголовок}</caption>
             <thead>
@@ -273,7 +273,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <h2 style={ЗАГ2}>{т.результатОбхода}</h2>
 
-        <div style={{ overflowX: 'auto', marginBottom: 20 }} tabIndex={0}>
+        <div style={{ overflowX: 'auto', marginBottom: 20 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 520 }}>
             <caption className="sr-only">{т.результатОбхода}</caption>
             <thead>
@@ -315,7 +315,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
           {т.причинаВступление(Ч.доляМёртвыхВНеизмеримом, Ч.записейМёртвыхВНеизмеримом)}
         </p>
 
-        <div style={{ overflowX: 'auto', marginBottom: 20 }} tabIndex={0}>
+        <div style={{ overflowX: 'auto', marginBottom: 20 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 520 }}>
             <caption className="sr-only">{т.причинаЗаголовок}</caption>
             <thead>
@@ -343,7 +343,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <p style={ТЕКСТ}>{т.платформыВступление}</p>
 
-        <div style={{ overflowX: 'auto', marginBottom: 16 }} tabIndex={0}>
+        <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 560 }}>
             <caption className="sr-only">{т.сравнениеПлатформ}</caption>
             <thead>
@@ -359,7 +359,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
                 <tr key={в.ключ}>
                   <td style={ЯЧЕЙКА}>
                     {в.имя ?? т.вендор[в.ключ]}
-                    {в.мало && <span style={{ color: '#72839a', fontSize: 13 }}>{т.выборкаМала}</span>}
+                    {в.мало && <span style={{ color: '#64748b', fontSize: 13 }}>{т.выборкаМала}</span>}
                   </td>
                   <td style={ЯЧЕЙКА}>{чис(в.страниц)}</td>
                   <td style={{ ...ЯЧЕЙКА, color: '#22d3ee' }}>{в.доступно} %</td>
@@ -381,7 +381,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <h2 style={ЗАГ2}>{т.охватШтатов}</h2>
 
-        <div style={{ overflowX: 'auto', marginBottom: 16 }} tabIndex={0}>
+        <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 420 }}>
             <caption className="sr-only">{т.охватШтатов}</caption>
             <thead>
@@ -409,7 +409,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <p style={ТЕКСТ}>{т.чемНужнееВступление}</p>
 
-        <div style={{ overflowX: 'auto', marginBottom: 16 }} tabIndex={0}>
+        <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 520, fontSize: 14 }}>
             <caption className="sr-only">{т.чемНужнее}</caption>
             <thead>
@@ -479,7 +479,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <p style={ТЕКСТ}>{т.подСрокВступление}</p>
 
-        <div style={{ overflowX: 'auto', marginBottom: 16 }} tabIndex={0}>
+        <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 560, fontSize: 14 }}>
             <caption className="sr-only">{т.подСрок}</caption>
             <thead>
@@ -556,7 +556,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
         <p style={ТЕКСТ}>{т.малоШагов}</p>
         <p style={ТЕКСТ}>{т.дефектИлиПривычка}</p>
 
-        <div style={{ overflowX: 'auto', marginBottom: 16 }} tabIndex={0}>
+        <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 520, fontSize: 14 }}>
             <caption className="sr-only">{т.механизмЗаголовок}</caption>
             <thead>
@@ -593,7 +593,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <p style={ТЕКСТ}>{т.сплошьВступление(датаСнимка(язык))}</p>
 
-        <div style={{ overflowX: 'auto', marginBottom: 16 }} tabIndex={0}>
+        <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 760, fontSize: 13 }}>
             <caption className="sr-only">{т.сплошь(Ч.закрытыхШтатов)}</caption>
             <thead>
@@ -652,7 +652,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
         <h3 style={{ ...ЗАГ2, fontSize: 20, marginTop: 28 }}>{т.фаза2ОверлеиЗаголовок}</h3>
         <p style={ТЕКСТ}>{т.фаза2ОверлеиЗачем}</p>
         <p style={ТЕКСТ}>{т.фаза2Оверлеи(Ф.реестр, Ф.живых, Ф.доляЖивых, Ф.неОткрылось, Ф.овНайдено, Ф.овДоля, Ф.овНиз, Ф.овВерх)}</p>
-        <div style={{ overflowX: 'auto', marginBottom: 16 }} tabIndex={0}>
+        <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 360 }}>
             <caption className="sr-only">{т.фаза2ОверлеиЗаголовок}</caption>
             <thead>
@@ -698,7 +698,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <h3 style={{ ...ЗАГ2, fontSize: 20, marginTop: 28 }}>{т.журналЗаголовок}</h3>
         <p style={ТЕКСТ}>{т.журналВступление}</p>
-        <div style={{ overflowX: 'auto', marginBottom: 20 }} tabIndex={0}>
+        <div style={{ overflowX: 'auto', marginBottom: 20 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 14 }}>
             <caption className="sr-only">{т.журналЗаголовок}</caption>
             <thead>
@@ -879,7 +879,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         {/* Раздел 20 Конституции: ровно одна нейтральная ссылка на услуги, в конце. */}
         <div style={{ marginTop: 40, paddingTop: 20, borderTop: '1px solid rgba(148,163,184,0.15)' }}>
-          <p style={{ color: '#72839a', fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ color: '#64748b', fontSize: 14, lineHeight: 1.7 }}>
             {т.инструментОткрыт}
             <Link href="/accessibility" style={{ color: '#94a3b8', textDecoration: 'underline' }}>
               aifa.works/accessibility

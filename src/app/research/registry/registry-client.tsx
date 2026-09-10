@@ -130,7 +130,7 @@ export default function RegistryClient({ языкИзПути }: { языкИз�
           <p style={ТЕКСТ}>{т.отличие1}</p>
           <p style={ТЕКСТ}>{т.отличие2}</p>
 
-          <div style={{ overflowX: 'auto', marginBottom: 20 }}>
+          <div style={{ overflowX: 'auto', marginBottom: 20 }} tabIndex={0}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <caption className="sr-only">{т.отличиеЗаголовок}</caption>
               <thead>
