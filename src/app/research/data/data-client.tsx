@@ -280,6 +280,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <div style={{ overflowX: 'auto', marginBottom: 20 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 520 }}>
+            <caption className="sr-only">{т.результатОбхода}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА}>{т.шапкаИтог}</th>
@@ -321,6 +322,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <div style={{ overflowX: 'auto', marginBottom: 20 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 520 }}>
+            <caption className="sr-only">{т.причинаЗаголовок}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА}>{т.шапкаИтог}</th>
@@ -348,6 +350,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 560 }}>
+            <caption className="sr-only">{т.сравнениеПлатформ}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА}>{т.шапкаПлатформа}</th>
@@ -385,6 +388,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 420 }}>
+            <caption className="sr-only">{т.охватШтатов}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА}>{т.шапкаШтат}</th>
@@ -412,6 +416,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 520, fontSize: 14 }}>
+            <caption className="sr-only">{т.чемНужнее}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА_ЛЕВАЯ}>{т.шапкаСтраница}</th>
@@ -481,6 +486,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 560, fontSize: 14 }}>
+            <caption className="sr-only">{т.подСрок}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА_ЛЕВАЯ}>{т.шапкаГруппа}</th>
@@ -557,6 +563,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 520, fontSize: 14 }}>
+            <caption className="sr-only">{т.механизмЗаголовок}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА_ЛЕВАЯ}>{т.шапкаПлатформа}</th>
@@ -593,6 +600,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
 
         <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 760, fontSize: 13 }}>
+            <caption className="sr-only">{т.сплошь(Ч.закрытыхШтатов)}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА_ЛЕВАЯ}>{т.шапкаШтат}</th>
@@ -651,6 +659,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
         <p style={ТЕКСТ}>{т.фаза2Оверлеи(Ф.реестр, Ф.живых, Ф.доляЖивых, Ф.неОткрылось, Ф.овНайдено, Ф.овДоля, Ф.овНиз, Ф.овВерх)}</p>
         <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 360 }}>
+            <caption className="sr-only">{т.фаза2ОверлеиЗаголовок}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА}>{т.шапкаПродукт}</th>
@@ -696,6 +705,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
         <p style={ТЕКСТ}>{т.журналВступление}</p>
         <div style={{ overflowX: 'auto', marginBottom: 20 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 14 }}>
+            <caption className="sr-only">{т.журналЗаголовок}</caption>
             <thead>
               <tr>
                 <th style={{ textAlign: 'left', padding: '8px 10px', borderBottom: '1px solid rgba(255,255,255,0.2)', whiteSpace: 'nowrap' }}>{т.журналКолДата}</th>
@@ -810,6 +820,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
         <p style={ТЕКСТ}>{т.версииТекст}</p>
         <div style={{ overflowX: 'auto', marginBottom: 28 }} tabIndex={0}>
           <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 620 }}>
+            <caption className="sr-only">{т.версииЗаголовок}</caption>
             <thead>
               <tr>
                 <th style={{ ...ЯЧЕЙКА, whiteSpace: 'nowrap', color: '#94a3b8',

@@ -175,6 +175,7 @@ export default function MethodologyClient({ языкИзПути }: { языкИ
         <h3 style={ЗАГ3}>{т.чтоЗаписывается}</h3>
         <div style={{ overflowX: 'auto', marginBottom: 20 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 520 }}>
+            <caption className="sr-only">{т.чтоЗаписывается}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА}>{т.шапкаПоле}</th>
@@ -222,6 +223,7 @@ export default function MethodologyClient({ языкИзПути }: { языкИ
         <h2 style={ЗАГ2}>{т.состояниеРаботы(дата)}</h2>
         <div style={{ overflowX: 'auto', marginBottom: 20 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 420 }}>
+            <caption className="sr-only">{т.состояниеРаботы(дата)}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА}>{т.шапкаПоказатель}</th>
@@ -255,6 +257,7 @@ export default function MethodologyClient({ языкИзПути }: { языкИ
         <p style={ТЕКСТ}>{т.проверилиСебяТекст}</p>
         <div style={{ overflowX: 'auto', marginBottom: 16 }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 520 }}>
+            <caption className="sr-only">{т.проверилиСебя}</caption>
             <thead>
               <tr>
                 <th style={ШАПКА}>{т.шапкаСайт}</th>
