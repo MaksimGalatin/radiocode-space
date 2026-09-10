@@ -209,10 +209,22 @@ const OracleWidget = () => {
 
     try {
       const userEmail = typeof window !== 'undefined' ? localStorage.getItem('aifa_user_email') || '' : '';
-      const res = await fetch("/api/oracle", {
+      // 🔴 ЗДЕСЬ `/api/aifa-chat`, А НЕ `/api/oracle`. Оплачено 10.09.2026.
+      //
+      // Виджет перенесён с центрального сайта, где ручка называется
+      // `oracle`. На этом сайте её НЕТ вовсе: живой запрос отдаёт 404
+      // «Такой ручки нет», в папке `api/oracle` лежат только `watch` и
+      // `watch/verify`. Человек видел виджет, писал в него и получал
+      // «Извини, произошла ошибка» — проверено вживую.
+      //
+      // Формат тоже другой: `aifa-chat` ждёт ОДНО поле `message`, а на
+      // массив `messages` отвечает «Message is required». Ответ при этом
+      // одинаковый — `success` + `response`, поэтому меняются только
+      // адрес и имя поля.
+      const res = await fetch("/api/aifa-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: updated, locale, userEmail, chatType: 'oracle' }),
+        body: JSON.stringify({ message: text, locale, userEmail, chatType: 'oracle' }),
       });
       
       const data = await res.json();
@@ -238,7 +250,8 @@ const OracleWidget = () => {
   };
 
   const clearChat = async () => {
-    try { await fetch("/api/oracle", { method: "DELETE" }); } catch { /* ignore */ }
+    // Очистка истории: на этом сайте ручка называется `aifa-chat`.
+    try { await fetch("/api/aifa-chat", { method: "DELETE" }); } catch { /* ignore */ }
     
     if (typeof window !== "undefined") {
       localStorage.removeItem(ORACLE_STORAGE_KEY);
