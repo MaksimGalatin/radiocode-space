@@ -303,7 +303,7 @@ export default function RiskCalculator() {
           <div className="glass bg-white/[0.01] border border-white/5 rounded-2xl p-6 flex flex-col justify-between h-full space-y-6">
             {/* Risk probability */}
             <div className="space-y-2 text-left">
-              <span className="text-[13px] uppercase tracking-widest text-gray-500 font-semibold">{t.riskLabel}</span>
+              <span className="text-[13px] uppercase tracking-widest text-gray-500 dark:text-gray-400 font-semibold">{t.riskLabel}</span>
               <div className="flex items-baseline gap-2">
                 <span className="text-4xl font-black text-white tracking-tight">{riskPercent}%</span>
                 <span className={`text-[13px] font-mono font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${getRiskColor()}`}>
@@ -324,7 +324,7 @@ export default function RiskCalculator() {
 
             {/* Fine exposure */}
             <div className="space-y-1 text-left border-t border-white/6 pt-4">
-              <div className="flex items-center gap-1 text-[13px] uppercase tracking-widest text-gray-500 font-semibold">
+              <div className="flex items-center gap-1 text-[13px] uppercase tracking-widest text-gray-500 dark:text-gray-400 font-semibold">
                 <DollarSign className="w-3 h-3 text-rose-400" />
                 <span>{t.fineLabel}</span>
               </div>
@@ -335,7 +335,7 @@ export default function RiskCalculator() {
                 впечатление. Раздел 11 Конституции: единица измерения должна
                 быть объявлена.
               */}
-              <p className="text-[13px] leading-relaxed text-gray-500 pt-1">{fineNote}</p>
+              <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400 pt-1">{fineNote}</p>
               <a
                 href="https://www.enforcementtracker.com/"
                 target="_blank"

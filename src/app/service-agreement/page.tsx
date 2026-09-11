@@ -1619,7 +1619,7 @@ export default function ServiceAgreementPage() {
         <div className="mb-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-white/60 hover:text-cyan-600 dark:text-cyan-400 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 dark:text-white/60 hover:text-cyan-600 dark:text-cyan-400 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             {ui.backBtn}
@@ -1708,7 +1708,7 @@ export default function ServiceAgreementPage() {
           <div className="inline-block px-6 py-2 rounded-full bg-cyan-500/5 border border-cyan-500/15">
             <p className="text-xs text-cyan-600 dark:text-cyan-400 font-mono font-bold tracking-wider">{ui.bannerTag}</p>
           </div>
-          <p className="text-xs text-gray-500 font-mono">{ui.bannerNote}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 font-mono">{ui.bannerNote}</p>
         </div>
 
       </div>

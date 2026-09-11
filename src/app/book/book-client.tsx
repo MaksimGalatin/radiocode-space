@@ -526,7 +526,7 @@ const BookPage = () => {
                         setStep('login');
                         setError('');
                       }}
-                      className="text-xs text-gray-500 hover:text-gray-400 transition-colors flex items-center justify-center gap-1.5 py-1"
+                      className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-400 transition-colors flex items-center justify-center gap-1.5 py-1"
                     >
                       <ArrowLeft className="w-3.5 h-3.5" />
                       {pageTrans.backBtn}

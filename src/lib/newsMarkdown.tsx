@@ -28,7 +28,7 @@ export function renderTextWithMarkdown(text: string) {
       );
     } else if (token.startsWith('*') && token.endsWith('*')) {
       parts.push(
-        <em key={matchIndex} className="italic text-gray-700 dark:text-zinc-300">
+        <em key={matchIndex} className="italic text-gray-700 dark:text-gray-300 dark:text-zinc-300">
           {token.slice(1, -1)}
         </em>
       );
@@ -283,8 +283,8 @@ export function renderMarkdownToReact(content: string) {
           h2: 'text-xl md:text-2xl font-semibold text-gray-900 dark:text-zinc-200 mt-6 mb-3',
           h3: 'text-lg font-semibold text-gray-800 dark:text-zinc-300 mt-5 mb-2',
           h4: 'text-base font-semibold text-gray-800 dark:text-zinc-300 mt-4 mb-2',
-          h5: 'text-base font-medium text-gray-700 dark:text-zinc-400 mt-4 mb-1',
-          h6: 'text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-zinc-400 mt-4 mb-1',
+          h5: 'text-base font-medium text-gray-700 dark:text-gray-300 dark:text-zinc-400 mt-4 mb-1',
+          h6: 'text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400 dark:text-zinc-400 mt-4 mb-1',
         };
         const тег = 'h' + (уровниТегов[idx] || 2);
         return React.createElement(
@@ -297,7 +297,7 @@ export function renderMarkdownToReact(content: string) {
         return <hr key={idx} className="border-gray-200 dark:border-white/5 my-6" />;
       case 'blockquote':
         return (
-          <blockquote key={idx} className="border-l-2 border-cyan-500/40 pl-4 py-2 my-4 text-gray-600 dark:text-zinc-400 bg-gray-50 dark:bg-white/[0.02] rounded-r-xl">
+          <blockquote key={idx} className="border-l-2 border-cyan-500/40 pl-4 py-2 my-4 text-gray-600 dark:text-gray-400 dark:text-zinc-400 bg-gray-50 dark:bg-white/[0.02] rounded-r-xl">
             {block.lines.map((line, lIdx) => (
               <p key={lIdx} className="mb-1 last:mb-0">
                 {renderTextWithMarkdown(line)}
@@ -313,7 +313,7 @@ export function renderMarkdownToReact(content: string) {
         );
       case 'ul':
         return (
-          <ul key={idx} className="list-disc list-outside ml-6 space-y-2 mb-4 text-gray-700 dark:text-zinc-300 text-sm md:text-base font-normal">
+          <ul key={idx} className="list-disc list-outside ml-6 space-y-2 mb-4 text-gray-700 dark:text-gray-300 dark:text-zinc-300 text-sm md:text-base font-normal">
             {block.lines.map((line, lIdx) => (
               <li key={lIdx} className="leading-relaxed">
                 {renderTextWithMarkdown(line)}
@@ -323,7 +323,7 @@ export function renderMarkdownToReact(content: string) {
         );
       case 'ol':
         return (
-          <ol key={idx} className="list-decimal list-outside ml-6 space-y-2 mb-4 text-gray-700 dark:text-zinc-300 text-sm md:text-base font-normal">
+          <ol key={idx} className="list-decimal list-outside ml-6 space-y-2 mb-4 text-gray-700 dark:text-gray-300 dark:text-zinc-300 text-sm md:text-base font-normal">
             {block.lines.map((line, lIdx) => (
               <li key={lIdx} className="leading-relaxed">
                 {renderTextWithMarkdown(line)}
@@ -362,7 +362,7 @@ export function renderMarkdownToReact(content: string) {
 
         return (
           <div key={idx} className="overflow-x-auto my-6 rounded-xl border border-gray-200 dark:border-white/5" tabIndex={0}>
-            <table className="min-w-full border-collapse text-sm text-gray-600 dark:text-zinc-300 bg-white dark:bg-white/[0.01]">
+            <table className="min-w-full border-collapse text-sm text-gray-600 dark:text-gray-400 dark:text-zinc-300 bg-white dark:bg-white/[0.01]">
               <caption className="sr-only">
                 {темаТаблицы || rawHeaders.join(', ')}
               </caption>
@@ -393,7 +393,7 @@ export function renderMarkdownToReact(content: string) {
       case 'p':
       default:
         return (
-          <p key={idx} className="text-gray-700 dark:text-zinc-300 text-sm md:text-base font-normal leading-relaxed mb-4 whitespace-pre-line">
+          <p key={idx} className="text-gray-700 dark:text-gray-300 dark:text-zinc-300 text-sm md:text-base font-normal leading-relaxed mb-4 whitespace-pre-line">
             {renderTextWithMarkdown(block.lines.join('\n'))}
           </p>
         );

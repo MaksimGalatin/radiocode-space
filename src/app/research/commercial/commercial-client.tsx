@@ -263,7 +263,7 @@ export default function CommercialClient({ языкИзПути }: { языкИ�
         <p className="text-xs font-semibold tracking-[0.2em] text-cyan-400">{t.метка}</p>
         <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl">{t.заголовок}</h1>
         <p className="mt-6 text-lg leading-relaxed text-gray-300">{t.лид}</p>
-        <p className="mt-3 text-sm text-gray-500">{t.снимокПодпись} {датаТекст}</p>
+        <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">{t.снимокПодпись} {датаТекст}</p>
 
         {/* Предупреждение стоит ДО чисел: прочитав числа первыми, читатель
             уже сложит несложимое, и оговорка внизу его не догонит. */}
