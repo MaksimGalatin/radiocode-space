@@ -54,7 +54,7 @@ export function renderTextWithMarkdown(text: string) {
           rel="noopener noreferrer"
           /* Ссылки в тексте статьи: cyan-600 на белом — 3.62 при норме 4.5.
              cyan-700 даёт 5.28 на белом и 5.05 на светло-сером фоне статьи. */
-          className="text-cyan-700 dark:text-cyan-400 hover:underline cursor-pointer"
+          className="text-cyan-700 dark:text-cyan-400 underline underline-offset-2 cursor-pointer"
         >
           {label}
         </a>
