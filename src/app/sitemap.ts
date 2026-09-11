@@ -232,6 +232,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
       alternates: { languages: языковые('/user-agreement') },
     },
+    // 🔴 СПИСКА СУБПОДРЯДЧИКОВ НЕ БЫЛО В КАРТЕ (добавлено 11.09.2026).
+    //
+    // Замер живым запросом 11.09.2026: /legal/subprocessors отдаёт 200, а
+    // в карте этого сайта ноль записей о нём. То же было на aifa.digital.
+    //
+    // Это список субподрядчиков обработки персональных данных — прямое
+    // требование GDPR. Страница, которую нельзя найти, требование не
+    // закрывает: человек должен иметь возможность до неё дойти.
+    {
+      url: `${SITE}/legal/subprocessors`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+      alternates: { languages: языковые('/legal/subprocessors') },
+    },
     // /contact и /cart в карту НЕ добавлены: этих страниц на radiocode.space
     // нет — обе отвечают 404 (проверено запросом к живому сайту 11.08.2026).
     // Адрес, отдающий 404, в карте сайта — прямая ошибка в Search Console и
