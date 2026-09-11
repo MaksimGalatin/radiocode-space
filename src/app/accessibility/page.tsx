@@ -138,7 +138,7 @@ export default function AccessibilityPage() {
             */}
             <div className="mt-8 text-center">
               <a
-                href="/audit-verify"
+                href="https://aifa.works/audit-verify"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-cyan-600/40 dark:border-cyan-400/40 text-cyan-700 dark:text-cyan-300 hover:border-cyan-600 dark:hover:border-cyan-300 hover:bg-cyan-600/5 transition-colors text-sm font-semibold"
               >
                 <ShieldCheck className="w-4 h-4" aria-hidden="true" />

@@ -22,6 +22,43 @@ function useIsMobile() {
   return mobile;
 }
 
+/**
+ * РАЗМЕР КЛЕТКИ СЧИТАЕТСЯ ОТ ЭКРАНА, А НЕ ЗАДАН ЧИСЛОМ.
+ *
+ * 🔴 БЫЛО `cell = mobile ? 38 : 48`, и доска не помещалась (10.09.2026).
+ *
+ * Ширина доски 8×8 на телефоне 375 пикселей:
+ *
+ *     клетки        8 × 38 = 304
+ *     координаты слева   20 + 4 = 24
+ *     координаты справа  20 + 4 = 24
+ *     поля панели        10 × 2 = 20
+ *     ─────────────────────────────
+ *     итого                    372
+ *
+ * У кабинета свои поля, доступно около 343 — доска обрезалась, и спасала
+ * только горизонтальная прокрутка: человек видел часть поля и не понимал,
+ * что она есть.
+ *
+ * Теперь клетка выводится из настоящей ширины окна: доска целиком в экране
+ * на любом телефоне вплоть до 320 пикселей.
+ */
+const ЗАПАС = 24 + 24 + 20 + 8;   // координаты + поля панели + поля страницы
+
+function useРазмерКлетки(мобильный: boolean, наДесктопе: number) {
+  const [ширина, setШирина] = useState(0);
+  useEffect(() => {
+    const снять = () => setШирина(window.innerWidth);
+    снять();
+    window.addEventListener("resize", снять);
+    return () => window.removeEventListener("resize", снять);
+  }, []);
+  if (!мобильный) return наДесктопе;
+  if (!ширина) return 34;
+  const доступно = Math.min(ширина, 480) - ЗАПАС;
+  return Math.max(30, Math.min(наДесктопе, Math.floor(доступно / 8)));
+}
+
 // ─── Chess — full rules engine: check, checkmate, stalemate, castling, en passant, promotion ─
 const CHESS_PIECES: Record<string, string> = {
   // 06.09.2026. Было: белые контурными глифами (♔♕♖), чёрные залитыми.
@@ -221,7 +258,7 @@ function noteC(before:ChessState,m:CMove,after:ChessState):string{
 
 function Chess({ lang }: { lang: Lang }) {
   const mobile = useIsMobile();
-  const cell = mobile ? 38 : 48;
+  const cell = useРазмерКлетки(mobile, 48);
   const files = ["a","b","c","d","e","f","g","h"];
   const [st, setSt] = useState<ChessState>(initChessState);
   const [selected, setSelected] = useState<[number,number]|null>(null);
@@ -326,7 +363,7 @@ function Chess({ lang }: { lang: Lang }) {
                   <button key={c} onClick={()=>handleClick(r,c)} style={{width:`${cell}px`,height:`${cell}px`,display:"flex",alignItems:"center",justifyContent:"center",border:"none",cursor:"pointer",padding:0,position:"relative",
                     background:isDark?"#7A4F26":"rgba(232,213,176,0.92)",boxShadow:shadow,transition:"box-shadow 0.12s"}}>
                     {mvHere&&!piece&&<span style={{display:"block",width:"12px",height:"12px",borderRadius:"50%",background:"rgba(16,185,129,0.85)",boxShadow:"0 0 8px rgba(16,185,129,0.9)",pointerEvents:"none"}}/>}
-                    {piece&&<span style={{fontSize:mobile?"28px":"33px",lineHeight:1,
+                    {piece&&<span style={{fontSize:`${Math.round(cell*0.72)}px`,lineHeight:1,
                       color:piece[0]==="w"?"#FAFAF5":"#1A1E2E",
                       WebkitTextStroke:piece[0]==="w"?"1.1px rgba(20,20,30,0.92)":"1.1px rgba(245,245,240,0.55)"}}>{CHESS_PIECES[piece]||""}</span>}
                   </button>
@@ -539,8 +576,10 @@ function applyCheckerMove(b:CheckersBoard, m:CheckerMove): CheckersBoard {
 
 function Checkers({ lang }: { lang: Lang }) {
   const mobile = useIsMobile();
-  const cell = mobile ? 38 : 50;
-  const piece = mobile ? 27 : 37;
+  const cell = useРазмерКлетки(mobile, 50);
+  // Фигура занимает три четверти клетки — иначе на узком экране
+  // она вылезает за края и выглядит смазанной.
+  const piece = Math.round(cell * 0.74);
   const files = ["a","b","c","d","e","f","g","h"];
   const [board, setBoard] = useState(initCheckers);
   const [selected, setSelected] = useState<[number,number]|null>(null);

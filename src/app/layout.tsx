@@ -48,6 +48,34 @@ function адресЯзыка(яз: string): string {
   return яз === 'en' ? САЙТ : `${САЙТ}/?lang=${яз}`;
 }
 
+/**
+ * 🔴 ЗАГОЛОВОК И ОПИСАНИЕ — НА ЯЗЫКЕ ЧЕЛОВЕКА. Правка 10.09.2026.
+ *
+ * Замер по четырём сайтам: разных `<title>` на четыре языка было 4 из 4
+ * только на центральном; здесь, на aifa.works и на aifa.digital — 1 из 4.
+ * hreflang, og:locale и канон уже были правильные (правка 09.08.2026), а
+ * сам заголовок, который человек читает в выдаче первым, оставался
+ * английским на всех четырёх языках. Английский остаётся по умолчанию.
+ */
+const SEO: Record<string, { title: string; desc: string }> = {
+  en: {
+    title: "RadioCode.Space — Eternal Cyberpunk Radio by CODE Eternal",
+    desc: "Premium cyberpunk radio from the CODE Eternal ecosystem. 6 stations, 530 original songs in 1024 versions by AIfa & DJ Galatin, streaming forever. Select a frequency. Enter the void.",
+  },
+  ru: {
+    title: "RadioCode.Space — вечное киберпанк-радио от CODE Eternal",
+    desc: "Киберпанк-радио экосистемы CODE Eternal. 6 станций, 530 оригинальных песен в 1024 версиях от AIfa и DJ Galatin, эфир навсегда. Выберите частоту. Войдите в пустоту.",
+  },
+  es: {
+    title: "RadioCode.Space — radio cyberpunk eterna de CODE Eternal",
+    desc: "Radio cyberpunk del ecosistema CODE Eternal. 6 emisoras, 530 canciones originales en 1024 versiones de AIfa y DJ Galatin, emitiendo para siempre. Elige una frecuencia. Entra en el vacío.",
+  },
+  zh: {
+    title: "RadioCode.Space — CODE Eternal 的永恒赛博朋克电台",
+    desc: "来自 CODE Eternal 生态的赛博朋克电台。6 个频道，AIfa 与 DJ Galatin 创作的 530 首原创歌曲、1024 个版本，永久播放。选择频率，进入虚空。",
+  },
+};
+
 export async function generateMetadata(): Promise<Metadata> {
   const { headers } = await import('next/headers');
   const заголовки = await headers();
@@ -59,11 +87,11 @@ export async function generateMetadata(): Promise<Metadata> {
   // будучи русской. Образец взят с центрального сайта.
   const ogLocale = яз === 'ru' ? 'ru_RU' : яз === 'es' ? 'es_ES' : яз === 'zh' ? 'zh_CN' : 'en_US';
   const ogAltLocales = ['en_US', 'ru_RU', 'es_ES', 'zh_CN'].filter((l) => l !== ogLocale);
+  const seo = SEO[яз] || SEO.en;
   return {
   metadataBase: new URL("https://radiocode.space"),
-  title: "RadioCode.Space — Eternal Cyberpunk Radio by CODE Eternal",
-  description:
-    "Premium cyberpunk radio from the CODE Eternal ecosystem. 6 stations, 530 original songs in 1024 versions by AIfa & DJ Galatin, streaming forever. Select a frequency. Enter the void.",
+  title: seo.title,
+  description: seo.desc,
   keywords: [
     "radio", "cyberpunk", "synthwave", "ambient", "music", "streaming",
     "CODE Eternal", "AIfa", "DJ Galatin", "GALATIN", "code of digital eternity",
@@ -120,7 +148,7 @@ export async function generateMetadata(): Promise<Metadata> {
     type: "website",
     url: "https://radiocode.space",
     siteName: "RadioCode.Space",
-    title: "RadioCode.Space — Eternal Cyberpunk Radio",
+    title: seo.title,
     description:
       "6 stations, 530 original songs in 1024 versions by AIfa & DJ Galatin. Part of the CODE Eternal ecosystem — eternal music from the digital void.",
     locale: ogLocale,
@@ -136,7 +164,7 @@ export async function generateMetadata(): Promise<Metadata> {
     // запись, но поля разные: без creator карточка не подписывает автора вовсе,
     // и ссылка на него в ленте не появляется.
     creator: "@CODE_AIfa",
-    title: "RadioCode.Space — Eternal Cyberpunk Radio",
+    title: seo.title,
     description: "Part of the CODE Eternal ecosystem. Select a frequency. Enter the void.",
     // Картинку задаём объектом, а не строкой, ради `alt`: без подписи человек с
     // экранным диктором слышит вместо карточки пустоту, и это единственное
