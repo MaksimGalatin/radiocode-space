@@ -38,3 +38,19 @@ RadioCode.Space is the eternal cyberpunk radio of the CODE Eternal ecosystem —
 - / — the player itself: four stations, streaming without a stop.
 - /cabinet — one CODE Eternal account across the ecosystem: AIfa memory, XP, $GALATIN, referrals.
 - See also /llms-full.txt for the full text of this site in one file.
+
+## Open research — accessibility of U.S. municipal websites
+Free, machine-readable, CC BY 4.0. Snapshot 1 September 2026. The research
+lives on aifa.works, the ecosystem's research site:
+- https://aifa.works/research — entry point
+- https://aifa.works/research/data — 95,524 real-browser keyboard traversals across 11,902 U.S. municipalities; 83,212 screenshots kept as evidence
+- https://aifa.works/research/methodology — an agent reaches the tax payment form using the Tab key only, the way a person who cannot use a mouse does
+- https://aifa.works/research/registry — 1,441 domains in the CISA registry with no DNS record at all
+- https://aifa.works/data — raw research files
+
+Key finding: automated scanners and real keyboard traversal disagree on
+53.8 % of pages. A page can pass an automated audit and still be unusable
+without a mouse.
+
+Separate dataset: us-organizations-registry.jsonl.gz — 289,420 U.S.
+organisations with websites, 16.0 MB, licensed under ODbL 1.0 (not CC BY 4.0).
