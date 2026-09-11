@@ -5,6 +5,5 @@
       "path": "/api/cron/cost-watch",
       "schedule": "30 * * * *"
     }
-  ],
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)*.md' ':(exclude).gitignore' ':(exclude)LICENSE' ':(exclude)*.txt' ':(exclude)CHRONOLOGY.md'"
+  ]
 }
