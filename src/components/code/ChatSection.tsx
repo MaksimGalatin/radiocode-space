@@ -543,6 +543,29 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
                     if (input.trim() && !isBusy) sendMessage(input);
                   }
                 }}
+                // 🔴 ФОКУС ПРИХОДИЛ СЮДА, А ЭКРАН ОСТАВАЛСЯ НАВЕРХУ (11.09.2026).
+                //
+                // Замер клавиатурным обходом на центральном сайте: на восьмом
+                // нажатии TAB фокус встаёт в это поле, а страница не
+                // прокручивается —
+                //
+                //     поле на Y = 1979,  высота окна 900,  scrollY = 0
+                //     через 0,9 с то же самое: видно = false
+                //
+                // Снимок экрана в этот момент показывает шапку страницы. То
+                // есть человек без мыши печатает вслепую: курсор в поле,
+                // которого он не видит.
+                //
+                // Карточка чата обёрнута в overflow-hidden, и обычная
+                // прокрутка браузера до неё не доходит. Поле прокручивает
+                // себя само — надёжнее, чем разбирать вёрстку обёртки.
+                onFocus={(e) => {
+                  try {
+                    e.currentTarget.scrollIntoView({ block: "center", behavior: "smooth" });
+                  } catch {
+                    e.currentTarget.scrollIntoView(false);
+                  }
+                }}
                 placeholder={t("chat.placeholder", lang)} aria-label={t("chat.placeholder", lang)} disabled={isBusy}
                 className={`flex-1 w-full min-w-0 resize-none overflow-y-auto bg-card border border-border rounded-xl px-3 py-2 sm:px-4 sm:py-3 leading-relaxed focus:outline-none chat-input-glow placeholder:text-muted-foreground/50 disabled:opacity-50 transition-all ${embedded
                   ? "max-h-[320px] min-h-[84px] text-[12px] sm:text-[13px] md:text-sm"
