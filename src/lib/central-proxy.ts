@@ -82,7 +82,7 @@ export function buildCentralHeaders(
  * оборвёт функцию. Пять секунд оставлены на то, чтобы успеть отдать человеку
  * внятный ответ вместо обрыва.
  */
-export async function centralFetch(url: string, init: RequestInit, timeoutMs = 55_000): Promise<Response | null> {
+export async function centralFetch(url: string, init: RequestInit, timeoutMs = 290_000): Promise<Response | null> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {

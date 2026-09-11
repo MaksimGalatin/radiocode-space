@@ -2,6 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
+/**
+ * Предел времени ответа — общий для всех ручек разговора
+ * на четырёх сайтах (10.09.2026).
+ *
+ * Здесь его не было вовсе, и работало умолчание площадки —
+ * короче, чем занимает ответ с полной памятью (замер: 29–42
+ * секунды). Человек получал общую ошибку вместо ответа.
+ *
+ * Предел — потолок, а не расход: ответ, пришедший за
+ * секунду, стоит секунду.
+ */
+export const maxDuration = 300;
+
 export const dynamic = 'force-dynamic';
 
 // Eternal archives: the user's dialog snapshots written to Arweave (encrypted)
