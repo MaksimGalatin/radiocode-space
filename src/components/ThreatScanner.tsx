@@ -342,7 +342,7 @@ function ThreatCard({ threat }: ThreatCardProps) {
           <div className="mt-2 pl-2 border-l border-cyan-500/30 space-y-2 text-xs text-gray-400">
             <ol className="list-decimal list-inside space-y-1.5 leading-relaxed">
               {advice.steps.map((step, idx) => (
-                <li key={idx} className="marker:text-cyan-500/70 marker:font-mono">
+                <li key={idx} className="marker:text-cyan-700 dark:text-cyan-400 marker:font-mono">
                   <span className="pl-1 text-gray-300">{step}</span>
                 </li>
               ))}

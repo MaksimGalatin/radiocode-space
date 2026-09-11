@@ -340,7 +340,7 @@ export default function RiskCalculator() {
                 href="https://www.enforcementtracker.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[13px] text-cyan-500/70 hover:text-cyan-400 underline underline-offset-2"
+                className="text-[13px] text-cyan-700 dark:text-cyan-400 hover:text-cyan-400 underline underline-offset-2"
               >
                 CMS GDPR Enforcement Tracker
               </a>

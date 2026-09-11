@@ -1637,7 +1637,7 @@ export default function ServiceAgreementPage() {
               <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 mt-1">{ui.subtitle}</p>
             </div>
           </div>
-          <p className="text-xs text-cyan-600 dark:text-cyan-400/80 font-mono mt-2">{ui.lastUpdated}</p>
+          <p className="text-xs text-cyan-700 dark:text-cyan-400 font-mono mt-2">{ui.lastUpdated}</p>
         </div>
 
         {/* Acceptance highlight box */}
