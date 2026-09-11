@@ -120,7 +120,7 @@ export default function TierDetails({ тариф, цена, надписи, ру
     значок: React.ElementType; заголовок: string; children: React.ReactNode;
   }) => (
     <section className="mb-6">
-      <h4 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-3">
+      <h4 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-cyan-700 dark:text-cyan-400 mb-3">
         <Значок className="w-4 h-4" aria-hidden="true" />
         {заголовок}
       </h4>
@@ -173,7 +173,7 @@ export default function TierDetails({ тариф, цена, надписи, ру
             <ul className="space-y-2">
               {тариф.includes.map((с) => (
                 <li key={с} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
-                  <CheckCircle className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0 mt-1" aria-hidden="true" />
+                  <CheckCircle className="w-4 h-4 text-cyan-700 dark:text-cyan-400 shrink-0 mt-1" aria-hidden="true" />
                   <span>{с}</span>
                 </li>
               ))}

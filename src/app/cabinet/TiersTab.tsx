@@ -188,7 +188,7 @@ export default function TiersTab(props: { tier: number; toast: (m: string) => vo
       <Card>
         <SectionTitle icon="🧾" title={t("payHistory")} />
         {orders === null ? <Skeleton h={60} /> : orders.length === 0 ? <EmptyState text={t("payEmpty")} /> : (
-          <div style={{ overflowX: "auto" }}>
+          <div style={{ overflowX: "auto" }} tabIndex={0}>
             <table className="cab-table">
               <caption className="sr-only">{`ID, Tier, USD, Status, Date`}</caption>
               <thead><tr><th>ID</th><th>Tier</th><th>USD</th><th>Status</th><th>Date</th></tr></thead>

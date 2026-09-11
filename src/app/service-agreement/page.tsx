@@ -1619,7 +1619,7 @@ export default function ServiceAgreementPage() {
         <div className="mb-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 dark:text-white/60 hover:text-cyan-600 dark:text-cyan-400 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 dark:text-white/60 hover:text-cyan-700 dark:text-cyan-400 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             {ui.backBtn}
@@ -1629,7 +1629,7 @@ export default function ServiceAgreementPage() {
         {/* Header */}
         <div className="mb-12">
           <div className="flex items-center gap-4 mb-4">
-            <div className="p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400">
+            <div className="p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 dark:text-cyan-400">
               <Handshake className="w-8 h-8" />
             </div>
             <div className="min-w-0">
@@ -1643,7 +1643,7 @@ export default function ServiceAgreementPage() {
         {/* Acceptance highlight box */}
         <div className="rounded-3xl border border-cyan-500/30 bg-cyan-950/10 backdrop-blur-xl p-6 sm:p-8 mb-10 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-[40px] pointer-events-none" />
-          <h2 className="text-xl font-bold text-cyan-600 dark:text-cyan-400 mb-3 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-cyan-700 dark:text-cyan-400 mb-3 flex items-center gap-2">
             <Handshake className="w-5 h-5" />
             {ui.acceptTitle}
           </h2>
@@ -1651,7 +1651,7 @@ export default function ServiceAgreementPage() {
           <div className="space-y-3">
             {ui.acceptSteps.map((stepText, idx) => (
               <div key={idx} className="flex gap-3">
-                <div className="w-6 h-6 rounded-full bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center shrink-0 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400">
+                <div className="w-6 h-6 rounded-full bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center shrink-0 text-xs font-mono font-bold text-cyan-700 dark:text-cyan-400">
                   {idx + 1}
                 </div>
                 <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed pt-0.5">{stepText}</p>
@@ -1670,7 +1670,7 @@ export default function ServiceAgreementPage() {
                 className="rounded-3xl border border-gray-200 dark:border-white/8 bg-white/[0.01] backdrop-blur-xl overflow-hidden"
               >
                 <div className="flex items-center gap-4 p-6 pb-4 border-b border-gray-200 dark:border-white/5 bg-white/[0.015]">
-                  <div className="p-2.5 rounded-2xl bg-cyan-500/5 border border-cyan-500/15 text-cyan-600 dark:text-cyan-400 shrink-0">
+                  <div className="p-2.5 rounded-2xl bg-cyan-500/5 border border-cyan-500/15 text-cyan-700 dark:text-cyan-400 shrink-0">
                     <Icon className="w-5 h-5" />
                   </div>
                   <h2 className="text-lg sm:text-xl font-bold tracking-tight text-gray-900 dark:text-white">{sec.title}</h2>
@@ -1678,7 +1678,7 @@ export default function ServiceAgreementPage() {
                 <div className="p-6 space-y-6">
                   {sec.subsections.map((sub, subIdx) => (
                     <div key={subIdx} className={subIdx > 0 ? "pt-6 border-t border-gray-200 dark:border-white/5" : ""}>
-                      <h3 className="text-sm font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider mb-3">{sub.subtitle}</h3>
+                      <h3 className="text-sm font-bold text-cyan-700 dark:text-cyan-400 uppercase tracking-wider mb-3">{sub.subtitle}</h3>
                       <div className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line font-[350]">
                         {sub.text}
                       </div>
@@ -1694,7 +1694,7 @@ export default function ServiceAgreementPage() {
             Источник один на все четыре сайта: lib/requisites.ts. Незаполненные
             поля не выводятся, поэтому блок никогда не показывает пустых строк. */}
         <div className="mt-10 rounded-3xl border border-cyan-500/20 bg-cyan-950/5 p-6 sm:p-8">
-          <h2 className="text-lg font-bold text-cyan-600 dark:text-cyan-400 mb-3 flex items-center gap-2">
+          <h2 className="text-lg font-bold text-cyan-700 dark:text-cyan-400 mb-3 flex items-center gap-2">
             <Info className="w-5 h-5" />
             {ЗАГОЛОВОК_РЕКВИЗИТОВ[locale as Язык] ?? ЗАГОЛОВОК_РЕКВИЗИТОВ.en}
           </h2>
@@ -1706,7 +1706,7 @@ export default function ServiceAgreementPage() {
         {/* Bottom Banner */}
         <div className="mt-16 pt-8 border-t border-gray-200 dark:border-white/8 text-center space-y-3">
           <div className="inline-block px-6 py-2 rounded-full bg-cyan-500/5 border border-cyan-500/15">
-            <p className="text-xs text-cyan-600 dark:text-cyan-400 font-mono font-bold tracking-wider">{ui.bannerTag}</p>
+            <p className="text-xs text-cyan-700 dark:text-cyan-400 font-mono font-bold tracking-wider">{ui.bannerTag}</p>
           </div>
           <p className="text-xs text-gray-500 dark:text-gray-400 font-mono">{ui.bannerNote}</p>
         </div>

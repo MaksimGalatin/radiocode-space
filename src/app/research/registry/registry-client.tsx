@@ -85,7 +85,7 @@ export default function RegistryClient({ языкИзПути }: { языкИз�
       <main id="main-content" className="pt-24 pb-24 px-6">
         <div className="max-w-3xl mx-auto">
 
-          <div className="text-sm uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-3">
+          <div className="text-sm uppercase tracking-wider text-cyan-700 dark:text-cyan-400 mb-3">
             {т.метка}
           </div>
           <h1 className="text-3xl sm:text-4xl font-black leading-tight mb-4">
@@ -187,13 +187,13 @@ export default function RegistryClient({ языкИзПути }: { языкИз�
           <div className="flex flex-col gap-2 mb-4">
             <a
               href="https://aifa.works/data/dead-domains-2026-09-01.csv"
-              className="text-cyan-600 dark:text-cyan-400 hover:underline text-sm"
+              className="text-cyan-700 dark:text-cyan-400 hover:underline text-sm"
             >
               {т.файлСсылка} →
             </a>
             <a
               href="https://aifa.works/data/dead-domains-README.txt"
-              className="text-cyan-600 dark:text-cyan-400 hover:underline text-sm"
+              className="text-cyan-700 dark:text-cyan-400 hover:underline text-sm"
             >
               {т.файлReadme} →
             </a>
@@ -207,7 +207,7 @@ export default function RegistryClient({ языкИзПути }: { языкИз�
           <div className="mt-10 pt-6 border-t border-gray-200 dark:border-gray-700">
             <Link
               href="/accessibility"
-              className="text-cyan-600 dark:text-cyan-400 hover:underline text-sm"
+              className="text-cyan-700 dark:text-cyan-400 hover:underline text-sm"
             >
               {т.ссылкаТекст} →
             </Link>

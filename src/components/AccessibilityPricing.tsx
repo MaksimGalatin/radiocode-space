@@ -78,7 +78,7 @@ export default function AccessibilityPricing({ сЗаголовком = true, id
               }`}
             >
               {TIER_HIGHLIGHTS[idx] && (
-                <div className="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest mb-3">
+                <div className="text-xs font-bold text-cyan-700 dark:text-cyan-400 uppercase tracking-widest mb-3">
                   {a.mostPopular}
                 </div>
               )}
@@ -88,7 +88,7 @@ export default function AccessibilityPricing({ сЗаголовком = true, id
               <ul className="space-y-2 flex-1 mb-6">
                 {tier.features.map((f) => (
                   <li key={f} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                    <CheckCircle className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" aria-hidden="true" />
+                    <CheckCircle className="w-4 h-4 text-cyan-700 dark:text-cyan-400 shrink-0 mt-0.5" aria-hidden="true" />
                     {f}
                   </li>
                 ))}

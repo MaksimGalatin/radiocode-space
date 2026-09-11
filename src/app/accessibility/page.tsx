@@ -34,7 +34,7 @@ export default function AccessibilityPage() {
 
   const colData = [
     { icon: XCircle, color: 'text-red-400',    bg: 'rgba(239,68,68,0.1)',    title: a.col1Title, points: a.col1Points },
-    { icon: Shield,  color: 'text-cyan-600 dark:text-cyan-400',   bg: 'rgba(6,182,212,0.1)',    title: a.col2Title, points: a.col2Points },
+    { icon: Shield,  color: 'text-cyan-700 dark:text-cyan-400',   bg: 'rgba(6,182,212,0.1)',    title: a.col2Title, points: a.col2Points },
     { icon: Zap,     color: 'text-purple-400', bg: 'rgba(139,92,246,0.1)',   title: a.col3Title, points: a.col3Points },
   ];
 
@@ -63,7 +63,7 @@ export default function AccessibilityPage() {
 
           <div className="max-w-3xl mx-auto relative z-10 text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/5 mb-8">
-              <Shield className="w-4 h-4 text-cyan-600 dark:text-cyan-400" aria-hidden="true" />
+              <Shield className="w-4 h-4 text-cyan-700 dark:text-cyan-400" aria-hidden="true" />
               <span className="text-xs font-medium text-cyan-700 dark:text-cyan-300 tracking-widest uppercase">{a.heroTag}</span>
             </div>
 
@@ -79,7 +79,7 @@ export default function AccessibilityPage() {
                 за пять секунд, не зная, что такое заголовок ответа. */}
             <div className="grid sm:grid-cols-3 gap-4 mb-10 text-left">
               <div className="p-4 rounded-xl border border-cyan-500/15 bg-cyan-500/[0.03]">
-                <div className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-wider mb-1.5">
+                <div className="text-cyan-700 dark:text-cyan-400 text-xs font-bold uppercase tracking-wider mb-1.5">
                   {locale === 'ru' ? 'Не только сайт' : locale === 'es' ? 'No solo el sitio' : locale === 'zh' ? '不只是网站' : 'Not just the site'}
                 </div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
@@ -93,7 +93,7 @@ export default function AccessibilityPage() {
                 </p>
               </div>
               <div className="p-4 rounded-xl border border-cyan-500/15 bg-cyan-500/[0.03]">
-                <div className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-wider mb-1.5">
+                <div className="text-cyan-700 dark:text-cyan-400 text-xs font-bold uppercase tracking-wider mb-1.5">
                   {locale === 'ru' ? 'Не мнение, а доказательство' : locale === 'es' ? 'Prueba, no opinion' : locale === 'zh' ? '证据，而非意见' : 'Proof, not opinion'}
                 </div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
@@ -107,7 +107,7 @@ export default function AccessibilityPage() {
                 </p>
               </div>
               <div className="p-4 rounded-xl border border-cyan-500/15 bg-cyan-500/[0.03]">
-                <div className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-wider mb-1.5">
+                <div className="text-cyan-700 dark:text-cyan-400 text-xs font-bold uppercase tracking-wider mb-1.5">
                   {locale === 'ru' ? 'Один сайт — один результат' : locale === 'es' ? 'Un sitio, un resultado' : locale === 'zh' ? '同一网站，同一结果' : 'One site, one result'}
                 </div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
@@ -250,7 +250,7 @@ export default function AccessibilityPage() {
                   zh: '到 2030 年美国视力损失将翻倍' },
               ].map((к) => (
                 <div key={к.n} className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
-                  <div className="text-2xl font-bold text-cyan-600 dark:text-cyan-400">{к.n}</div>
+                  <div className="text-2xl font-bold text-cyan-700 dark:text-cyan-400">{к.n}</div>
                   <div className="mt-2 text-sm text-gray-600 dark:text-gray-400 leading-snug">
                     {locale === 'ru' ? к.ru : locale === 'es' ? к.es : locale === 'zh' ? к.zh : к.en}
                   </div>
@@ -318,7 +318,7 @@ export default function AccessibilityPage() {
                   }`}
                 >
                   {ПОПУЛЯРНЫЕ.has(tier.slug) && (
-                    <div className="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest mb-3">{a.mostPopular}</div>
+                    <div className="text-xs font-bold text-cyan-700 dark:text-cyan-400 uppercase tracking-widest mb-3">{a.mostPopular}</div>
                   )}
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">{tier.name}</h3>
                   <div className="text-2xl font-black gradient-text mb-1">{tier.price === ЦЕНА_ПО_СМЕТЕ ? a.tierAskQuote : `$${tier.price.toLocaleString('en-US')}`}</div>
@@ -326,7 +326,7 @@ export default function AccessibilityPage() {
                   <ul className="space-y-2 flex-1 mb-6">
                     {tier.features.map((f) => (
                       <li key={f} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                        <CheckCircle className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" aria-hidden="true" />
+                        <CheckCircle className="w-4 h-4 text-cyan-700 dark:text-cyan-400 shrink-0 mt-0.5" aria-hidden="true" />
                         {f}
                       </li>
                     ))}
@@ -357,7 +357,7 @@ export default function AccessibilityPage() {
                 { icon: Shield, label: a.ctaBadge3 },
               ].map((badge) => (
                 <div key={badge.label} className="flex flex-col items-center gap-1 text-xs text-center max-w-[9rem] text-gray-500 dark:text-gray-400">
-                  <badge.icon className="w-6 h-6 text-cyan-600 dark:text-cyan-400" aria-hidden="true" />
+                  <badge.icon className="w-6 h-6 text-cyan-700 dark:text-cyan-400" aria-hidden="true" />
                   {badge.label}
                 </div>
               ))}

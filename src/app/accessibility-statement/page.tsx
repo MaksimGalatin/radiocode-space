@@ -52,7 +52,7 @@ export default function AccessibilityStatementPage() {
         {/* ── стандарт ─────────────────────────────────────────────── */}
         <section className="mb-14">
           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-            <ShieldCheck className="w-6 h-6 text-cyan-600 dark:text-cyan-400" aria-hidden="true" />
+            <ShieldCheck className="w-6 h-6 text-cyan-700 dark:text-cyan-400" aria-hidden="true" />
             {з.стандартЗаголовок}
           </h2>
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{з.стандартТекст}</p>
@@ -61,7 +61,7 @@ export default function AccessibilityStatementPage() {
         {/* ── наши числа ───────────────────────────────────────────── */}
         <section className="mb-14">
           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-            <Gauge className="w-6 h-6 text-cyan-600 dark:text-cyan-400" aria-hidden="true" />
+            <Gauge className="w-6 h-6 text-cyan-700 dark:text-cyan-400" aria-hidden="true" />
             {з.замерЗаголовок}
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
@@ -116,7 +116,7 @@ export default function AccessibilityStatementPage() {
         {/* ── обратная связь ───────────────────────────────────────── */}
         <section className="mb-14">
           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-            <Mail className="w-6 h-6 text-cyan-600 dark:text-cyan-400" aria-hidden="true" />
+            <Mail className="w-6 h-6 text-cyan-700 dark:text-cyan-400" aria-hidden="true" />
             {з.обратнаяСвязьЗаголовок}
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">

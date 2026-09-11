@@ -120,7 +120,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
               <button className="cab-btn cab-btn-ghost" onClick={() => loadUsers(0, uQ)} style={{ padding: "6px 12px", fontSize: 15 }}>🔍</button>
             </div>} />
           {!users ? <Skeleton h={160} /> : users.length === 0 ? <EmptyState text={t("empty")} /> : (
-            <div style={{ overflowX: "auto" }}>
+            <div style={{ overflowX: "auto" }} tabIndex={0}>
               <table className="cab-table">
                 <caption className="sr-only">{`Email, @nick, XP, Tier, GALATIN, Invited`}</caption>
                 <thead><tr><th>Email</th><th>@nick</th><th>XP</th><th>Tier</th><th>GALATIN</th><th>Invited</th><th>Arweave</th></tr></thead>
@@ -150,7 +150,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
         <Card>
           <SectionTitle icon="💸" title={t("admPayouts")} right={<button className="cab-btn cab-btn-ghost" onClick={loadPayouts} style={{ padding: "6px 12px", fontSize: 15 }}>↻</button>} />
           {!payouts ? <Skeleton h={120} /> : payouts.length === 0 ? <EmptyState text={t("empty")} /> : (
-            <div style={{ overflowX: "auto" }}>
+            <div style={{ overflowX: "auto" }} tabIndex={0}>
               <table className="cab-table">
                 <caption className="sr-only">{`Email, USDT, Address, Status, Date`}</caption>
                 <thead><tr><th>Email</th><th>USDT</th><th>Address</th><th>Status</th><th>Date</th><th></th></tr></thead>
@@ -183,7 +183,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
         <Card>
           <SectionTitle icon="📥" title={t("admInbox")} right={<button className="cab-btn cab-btn-ghost" onClick={loadInbox} style={{ padding: "6px 12px", fontSize: 15 }}>↻</button>} />
           {!inbox ? <Skeleton h={120} /> : inbox.length === 0 ? <EmptyState text={t("empty")} /> : (
-            <div style={{ overflowX: "auto" }}>
+            <div style={{ overflowX: "auto" }} tabIndex={0}>
               <table className="cab-table">
                 <caption className="sr-only">{`Site, Type, Name, Email, Message, Date`}</caption>
                 <thead><tr><th>Site</th><th>Type</th><th>Name</th><th>Email</th><th>Message</th><th>Date</th></tr></thead>
@@ -219,7 +219,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
         <Card>
           <SectionTitle icon="📝" title={t("admAudit")} right={<button className="cab-btn cab-btn-ghost" onClick={loadAudit} style={{ padding: "6px 12px", fontSize: 15 }}>↻</button>} />
           {!audit ? <Skeleton h={120} /> : audit.length === 0 ? <EmptyState text={t("empty")} /> : (
-            <div style={{ overflowX: "auto" }}>
+            <div style={{ overflowX: "auto" }} tabIndex={0}>
               <table className="cab-table">
                 <caption className="sr-only">{`#, Action, Detail, IP, Date`}</caption>
                 <thead><tr><th>#</th><th>Action</th><th>Detail</th><th>IP</th><th>Date</th></tr></thead>
