@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ardrive/turbo-sdk": "^1.41.3",
+    "@aws-sdk/client-bedrock-runtime": "^3.1130.0",
     "@aws-sdk/client-kms": "^3.700.0",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",

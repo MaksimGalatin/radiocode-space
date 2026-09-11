@@ -340,7 +340,33 @@ async function ответБесплатнымИлиГрантом(
     console.warn('[AIfa] Vertex недоступен:', err);
   }
 
-  return null; // 3. дальше зовущий пойдёт к Grok
+  // 3. AWS Bedrock — замена мёртвой ступени Vertex (добавлено 11.09.2026).
+  //
+  //    Грант Google кончился, `aiplatform.googleapis.com` отключён 06.09.2026,
+  //    и ступень выше теперь всегда возвращает null. Без этой ступени радио
+  //    уходило прямо к Grok, то есть к личному ключу Архитектора.
+  //
+  //    Bedrock платится кредитами AWS, держит внутри Nova Lite → Nova Micro и
+  //    свой суточный потолок вызовов (раздел 24). Правило четырёх сайтов
+  //    (раздел 9): та же правка внесена на центральном и на aifa.works.
+  try {
+    const { bedrockChatCompletion, bedrockНастроен } = await import("@/lib/bedrock");
+    if (bedrockНастроен()) {
+      const ответBedrock = await bedrockChatCompletion(formattedMessages, 2048, 0.8);
+      if (ответBedrock) {
+        try {
+          const { record } = await import('@/lib/cost-guard');
+          await record('chat-bedrock-radio', ответBedrock.length);
+        } catch { /* учёт не имеет права мешать работе */ }
+        return ответBedrock;
+      }
+      console.warn('[AIfa] Bedrock не ответил, идём к Grok — это уже личный ключ');
+    }
+  } catch (err) {
+    console.warn('[AIfa] Bedrock недоступен:', err);
+  }
+
+  return null; // 4. дальше зовущий пойдёт к Grok
 }
 
 async function getGrokResponse(
