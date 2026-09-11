@@ -626,6 +626,48 @@ export async function POST(req: NextRequest) {
     return звуком(звукGrok, false);
   }
 
-  // Молчат все три ступени — ровно тот же ответ, что и до этой правки.
+  // ── ЗАПАСНАЯ СТУПЕНЬ: СПРОСИТЬ ЦЕНТР (добавлено 10.09.2026) ───────────────
+  //
+  // Замер по четырём сайтам: центральный отдаёт настоящий звук, а этот сайт и
+  // aifa.digital — 204, при том что `AIFA_TTS_ENABLED=1` стоит у всех и ключ
+  // Gemini в окружении есть у всех. Значит ключи разные, и здешний бесплатную
+  // озвучку не отдаёт.
+  //
+  // Вместо того чтобы гадать, чей ключ жив, спрашиваем центр — там голос уже
+  // работает, там же кэш и учёт. Память у AIfa одна на четыре сайта
+  // (раздел 34); голос тем более должен быть один и тот же.
+  //
+  // Ничего не стоит: центр отвечает своей бесплатной ступенью, платный путь у
+  // него закрыт отдельной переменной.
+  try {
+    const { centralConfig, buildCentralHeaders, centralFetch } =
+      await import('@/lib/central-proxy');
+    const настройки = centralConfig();
+    if (настройки) {
+      const ответЦентра = await centralFetch(`${настройки.base}/api/voice`, {
+        method: 'POST',
+        headers: {
+          ...buildCentralHeaders(req, настройки.secret),
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: готовый, locale }),
+      });
+      if (ответЦентра && ответЦентра.ok) {
+        const изЦентра: Звук = {
+          байты: new Uint8Array(await ответЦентра.arrayBuffer()),
+          тип: ответЦентра.headers.get('content-type') || 'audio/wav',
+        };
+        if (годен(изЦентра, 'центр')) {
+          вКэш(отпечаток, изЦентра);
+          return звуком(изЦентра, false);
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('[voice] запасная ступень через центр не прошла:',
+      e instanceof Error ? e.message : String(e));
+  }
+
+  // Молчат все ступени — ровно тот же ответ, что и до этой правки.
   return наБраузер();
 }
