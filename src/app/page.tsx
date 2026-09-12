@@ -24,6 +24,7 @@ import { readableAccent } from '@/lib/readableAccent';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { useЯзык } from '@/lib/server-locale';
+import { t } from '@/lib/i18n';
 import { строкаРеквизитов, type Язык } from '@/lib/requisites';
 
 /* Украшения и закрытые панели не нужны для ПЕРВОЙ отрисовки.
@@ -198,7 +199,20 @@ export default function Home() {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#00F0FF] focus:text-black focus:font-semibold focus:text-sm"
       >
-        Перейти к содержимому · Skip to main content
+        {/* 🔴 БЫЛО ЗАШИТО ДВУМЯ ЯЗЫКАМИ СРАЗУ: «Перейти к содержимому ·
+            Skip to main content». Замер 12.09.2026 по всем 24 доменам: эта
+            русская строка стояла первой ссылкой и на английской, и на
+            испанской, и на китайской версии — три страницы из четырёх.
+
+            Для человека с экранным диктором это первое, что он слышит на
+            странице: чужой язык там, где интерфейс на его собственном.
+            Критерий WCAG 3.1.2 («язык фрагмента») именно об этом.
+
+            Перевод УЖЕ лежал готовый на все четыре языка — `nav.skipToContent`
+            в `lib/i18n.ts`, — и язык страницы уже известен (`языкПодвала`
+            из `useЯзык`, он же даёт верный язык серверу). Не хватало одной
+            строки, которая их соединит. */}
+        {t('nav.skipToContent', языкПодвала)}
       </a>
       <main id="main-content" className="relative z-10 flex-1 pb-32">
         {/* Hero with Visualizer */}
