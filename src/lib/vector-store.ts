@@ -27,6 +27,27 @@ import { EMBED_DIM } from './embeddings';
 import crypto from 'crypto';
 import { encryptText, decryptText } from './encryption';
 
+/**
+ * ── ПОХОЖЕ ЛИ НА ШИФР. Добавлено 12.09.2026 ─────────────────────────────────
+ *
+ * ЧТО БЫЛО НЕ ТАК. Расшифровка вызывалась на КАЖДОЙ найденной записи без
+ * разбора. На записи, лежащей открытым текстом (а по разделу 10 Конституции в
+ * базе всё лежит именно так), она не могла сработать и печатала в журнал
+ * `[Encryption] Decryption failed: no key matched`. При двухстах найденных
+ * записях это двести строк ошибок НА ОДИН запрос — и в них тонут настоящие
+ * поломки.
+ *
+ * Признак взят из `chat-logger.ts`, где он уже работает: шифротекст у нас —
+ * base64 без пробелов и достаточно длинный; у обычной реплики есть пробелы
+ * или она короче. Ошибка в любую сторону ничего не теряет: непонятное
+ * по-прежнему пробуем расшифровать, а неудача по-прежнему оставляет запись
+ * как есть.
+ */
+function похожНаШифр(значение: unknown): boolean {
+  return /^[A-Za-z0-9+/=]{60,}$/.test(String(значение ?? '').trim());
+}
+
+
 const VECTOR_DB_URL = process.env.DATABASE_URL_VECTOR || process.env.VECTOR_DATABASE_URL || '';
 
 /**
@@ -226,7 +247,7 @@ export async function searchMemory(
   for (const h of rows as MemoryHit[]) {
     if (userKey !== '__brain__' && h.content) {
       try {
-        h.content = await decryptText(h.content);
+        if (похожНаШифр(h.content)) h.content = await decryptText(h.content);
       } catch (err) {
         // Fallback for legacy plaintext entries
       }
@@ -256,7 +277,7 @@ export async function recentMemory(userKey: string, limit = 12): Promise<MemoryH
   for (const h of rows) {
     if (userKey !== '__brain__' && h.content) {
       try {
-        h.content = await decryptText(h.content);
+        if (похожНаШифр(h.content)) h.content = await decryptText(h.content);
       } catch {
         /* legacy plaintext */
       }
@@ -305,7 +326,7 @@ export async function fullMemory(userKey: string, пределЗнаков: numb
 
   for (const h of rows) {
     if (userKey !== '__brain__' && h.content) {
-      try { h.content = await decryptText(h.content); } catch { /* старые записи открытым текстом */ }
+      try { if (похожНаШифр(h.content)) h.content = await decryptText(h.content); } catch { /* старые записи открытым текстом */ }
     }
   }
   return rows;
@@ -336,7 +357,7 @@ export async function memoryMap(userKey: string, днейМакс = 400): Promis
      LIMIT ${днейМакс}`) as unknown as Array<{ день: string; кусков: number; каналы: string; начало: string }>;
   for (const r of rows) {
     if (userKey !== '__brain__' && r.начало) {
-      try { r.начало = await decryptText(r.начало); } catch { /* старые записи */ }
+      try { if (похожНаШифр(r.начало)) r.начало = await decryptText(r.начало); } catch { /* старые записи */ }
     }
     r.начало = String(r.начало || '').replace(/\s+/g, ' ').slice(0, 110);
   }
