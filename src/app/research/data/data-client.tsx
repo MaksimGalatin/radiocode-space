@@ -31,6 +31,7 @@ import {
   ВЕРСИИ_ДАННЫХ,
 } from './данные';
 import { числаНаЯзыке } from '../числа_на_языке';
+import { ЖУРНАЛ_ПО_ЯЗЫКАМ } from './журнал_переводы';
 
 
 const ЯЧЕЙКА: React.CSSProperties = {
@@ -130,6 +131,9 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
   const КОГО_КАСАЕТСЯ = числаНаЯзыке(КОГО_КАСАЕТСЯ_РУССКИЕ, язык);
   // Фаза 2 — числа промежуточные, подписаны датой снимка (03.09.2026).
   const Ф = числаНаЯзыке(ФАЗА2_РУССКИЕ, язык);
+  // Журнал изменений на языке читателя (перенос с aifa.works, 12.09.2026):
+  // до этого 17 записей выводились по-русски на всех четырёх языках.
+  const журнал = ЖУРНАЛ_ПО_ЯЗЫКАМ[язык] ?? Ф.журнал;
 
   return (
     <main style={{ minHeight: '100vh', background: '#05070d', color: '#e2e8f0', padding: '96px 24px 60px' }}>
@@ -709,7 +713,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
               </tr>
             </thead>
             <tbody>
-              {Ф.журнал.map(([д, ч, п2], i) => (
+              {журнал.map(([д, ч, п2], i) => (
                 <tr key={i}>
                   <td style={{ padding: '8px 10px', borderBottom: '1px solid rgba(255,255,255,0.07)', whiteSpace: 'nowrap', opacity: 0.75 }}>{д}</td>
                   <td style={{ padding: '8px 10px', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>{ч}</td>

@@ -82,16 +82,54 @@ function languagesXDefault(языки: Record<string, string>): void {
   языки['x-default'] = адресЯзыкаРаздела('en');
 }
 
+/**
+ * 🔴 ЗАГОЛОВОК И ОПИСАНИЕ — НА ЧЕТЫРЁХ ЯЗЫКАХ. Изменено 12.09.2026.
+ *
+ * Найдено сплошным обходом всех страниц из карт сайтов: 33 адреса отдавали
+ * русский заголовок вкладки при lang="en", "es" и "zh". Это строка в выдаче
+ * Google и подпись вкладки — то, что человек читает ДО перехода, и то, что
+ * произносит диктор. Англоязычный судья получал текст, который не может
+ * прочесть.
+ *
+ * Язык берётся из заголовка `x-locale`, который ставит middleware этого же
+ * сайта. Приём взят у соседних страниц, а не изобретён заново.
+ */
+const МЕТА: Record<string, { title: string; desc: string }> = {
+  ru: {
+    title: 'Реестр против реальности: мёртвые домены муниципальных сайтов США',
+    desc:
+      'Открытые данные: из 11 902 доменов федерального реестра муниципальных сайтов США у 1 441 (12,1 %) нет записи в DNS — имени не существует. Срез на 1 сентября 2026, проверка двумя независимыми резолверами, метод и ограничения раскрыты.',
+  },
+  en: {
+    title: 'Registry versus Reality: Dead Domains in US Municipal Websites',
+    desc:
+      'Domains listed in the federal CISA registry that have no DNS record at all. Not «the site is down»: the domain was never renewed, while the registry still lists it as working. Open data and the method behind it.',
+  },
+  es: {
+    title: 'El registro frente a la realidad: dominios muertos de sitios municipales de EE. UU.',
+    desc:
+      'Dominios que figuran en el registro federal CISA y no tienen ningún registro DNS. No es «el sitio está caído»: el dominio nunca se renovó, mientras el registro lo sigue dando por activo. Datos y método abiertos.',
+  },
+  zh: {
+    title: '登记册与现实：美国市政网站的失效域名',
+    desc:
+      '列于联邦 CISA 登记册、却完全没有 DNS 记录的域名。这不是「网站暂时无法访问」：域名从未续费，而登记册仍将其列为正常。开放数据与方法。',
+  },
+};
+
 export async function generateMetadata(): Promise<Metadata> {
+  const h2 = await headers();
+  const язык = (h2.get('x-locale') || 'en').toLowerCase();
+  const м = МЕТА[язык] ?? МЕТА.en;
+
   const сырой = (await headers()).get('x-locale') || 'en';
   const яз = (ЯЗЫКИ_РАЗДЕЛА as readonly string[]).includes(сырой) ? сырой : 'en';
   const языки: Record<string, string> = {};
   for (const я of ЯЗЫКИ_РАЗДЕЛА) языки[я] = адресЯзыкаРаздела(я);
   languagesXDefault(языки);
   return {
-  title: 'Реестр против реальности: мёртвые домены муниципальных сайтов США',
-  description:
-    'Открытые данные: из 11 902 доменов федерального реестра муниципальных сайтов США у 1 441 (12,1 %) нет записи в DNS — имени не существует. Срез на 1 сентября 2026, проверка двумя независимыми резолверами, метод и ограничения раскрыты.',
+  title: м.title,
+  description: м.desc,
     alternates: {
       canonical: адресЯзыкаРаздела(яз),
       languages: языки,

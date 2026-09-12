@@ -53,16 +53,54 @@ function languagesXDefault(языки: Record<string, string>): void {
   языки['x-default'] = адресЯзыкаРаздела('en');
 }
 
+/**
+ * 🔴 ЗАГОЛОВОК И ОПИСАНИЕ — НА ЧЕТЫРЁХ ЯЗЫКАХ. Изменено 12.09.2026.
+ *
+ * Найдено сплошным обходом всех страниц из карт сайтов: 33 адреса отдавали
+ * русский заголовок вкладки при lang="en", "es" и "zh". Это строка в выдаче
+ * Google и подпись вкладки — то, что человек читает ДО перехода, и то, что
+ * произносит диктор. Англоязычный судья получал текст, который не может
+ * прочесть.
+ *
+ * Язык берётся из заголовка `x-locale`, который ставит middleware этого же
+ * сайта. Приём взят у соседних страниц, а не изобретён заново.
+ */
+const МЕТА: Record<string, { title: string; desc: string }> = {
+  ru: {
+    title: 'Методика измерения доступности муниципальных сайтов',
+    desc:
+      'Как мы измеряем доступность государственных сайтов: автоматическая проверка axe-core в настоящем браузере плюс клавиатурный обход того же браузера. Открытые данные, открытый код, признанные ограничения.',
+  },
+  en: {
+    title: 'How We Measure Municipal Website Accessibility — Method',
+    desc:
+      'How we measure the accessibility of government websites: an automated axe-core check in a real browser, plus a keyboard traversal of the same browser to a task goal. Open data, open code, limitations stated rather than hidden.',
+  },
+  es: {
+    title: 'Cómo medimos la accesibilidad de los sitios municipales — Metodología',
+    desc:
+      'Cómo medimos la accesibilidad de los sitios públicos: comprobación automática con axe-core en un navegador real y un recorrido de teclado hasta el objetivo. Datos abiertos, código abierto y limitaciones declaradas.',
+  },
+  zh: {
+    title: '我们如何测量市政网站的无障碍性 — 方法',
+    desc:
+      '我们如何测量政府网站的无障碍性：在真实浏览器中运行 axe-core 自动检测，并在同一浏览器中用键盘遍历直到完成目标。开放数据、开放代码，并如实说明局限。',
+  },
+};
+
 export async function generateMetadata(): Promise<Metadata> {
+  const h2 = await headers();
+  const язык = (h2.get('x-locale') || 'en').toLowerCase();
+  const м = МЕТА[язык] ?? МЕТА.en;
+
   const сырой = (await headers()).get('x-locale') || 'en';
   const яз = (ЯЗЫКИ_РАЗДЕЛА as readonly string[]).includes(сырой) ? сырой : 'en';
   const языки: Record<string, string> = {};
   for (const я of ЯЗЫКИ_РАЗДЕЛА) языки[я] = адресЯзыкаРаздела(я);
   languagesXDefault(языки);
   return {
-  title: 'Методика измерения доступности муниципальных сайтов',
-  description:
-    'Как мы измеряем доступность государственных сайтов: автоматическая проверка axe-core в настоящем браузере плюс клавиатурный обход того же браузера. Открытые данные, открытый код, признанные ограничения.',
+  title: м.title,
+  description: м.desc,
     alternates: {
       canonical: адресЯзыкаРаздела(яз),
       languages: языки,
