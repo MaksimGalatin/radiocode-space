@@ -22,7 +22,7 @@ import EuropeClient from './europe-client';
 export const metadata: Metadata = {
   title: 'Europe: Municipal Website Accessibility in Germany and Spain — Open Research',
   description:
-    '20,833 keyboard traversals across 9,745 municipal domains in Germany and Spain. 10.0 % reachable by keyboard against 25.4 % in the U.S., both from the same denominator. Method, limitations and the dataset we withdrew.',
+    '20,833 keyboard traversals across 2,605 municipal domains in Germany and Spain. 10.0 % reachable by keyboard against 25.4 % in the U.S., both from the same denominator. Method, limitations and the dataset we withdrew.',
   keywords: [
     'accessibility research europe',
     'municipal websites germany',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Europe: Municipal Website Accessibility in Germany and Spain',
     description:
-      '20,833 keyboard traversals across 9,745 municipal domains. 10.0 % reachable by keyboard against 25.4 % in the U.S.',
+      '20,833 keyboard traversals across 2,605 municipal domains. 10.0 % reachable by keyboard against 25.4 % in the U.S.',
     type: 'article',
   },
 };
