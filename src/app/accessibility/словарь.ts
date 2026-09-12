@@ -166,7 +166,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
       tierMoreDetails: 'Full details',
       tiers: [
 
-        { name: 'Lite Audit', timeline: '1 day', features: ['25 pages scanned', 'Full violation list', 'Dated PDF certificate', 'Severity breakdown'],
+        { name: 'Lite Audit', timeline: '1 day', features: ['1 month of AIfa Spark memory included ($15)', '25 pages scanned', 'Full violation list', 'Dated PDF certificate', 'Severity breakdown'],
           slug: 'lite-audit',
           price: 50,
           who: 'You need proof on paper that the site was checked — for a lawyer, an insurer or a client — and you are not ready to pay for analysis yet.',
@@ -176,6 +176,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
             'Every violation listed with the page and the element named',
             'Findings split by severity: critical, serious, moderate, minor',
             'Text contrast, tap-target size and heading order verified',
+            'One month of AIfa Spark memory included at no extra cost ($15 value): your AI assistant keeps every conversation and remembers your site, its issues and what was fixed',
           ],
           deliverables: [
             'A PDF with the scan date and the full list of violations',
@@ -184,7 +185,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
           ],
         },
 
-        { name: 'Quick Audit', timeline: '1 day', features: ['Automated WCAG 2.1 AA scan', 'Top 10 issues report', 'PDF summary', 'Priority list'],
+        { name: 'Quick Audit', timeline: '1 day', features: ['1 month of AIfa Spark memory included ($15)', 'Automated WCAG 2.1 AA scan', 'Top 10 issues report', 'PDF summary', 'Priority list'],
           slug: 'quick-audit',
           price: 149,
           who: 'You need to know fast whether the site is a liability, and whether there is a problem at all.',
@@ -194,6 +195,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
             'Text contrast, tap-target size and heading order verified',
             'Images without descriptions and form fields without labels identified',
             'Findings ranked by risk: what invites a lawsuit versus what is cosmetic',
+            'One month of AIfa Spark memory included at no extra cost ($15 value): your AI assistant keeps every conversation and remembers your site, its issues and what was fixed',
           ],
           deliverables: [
             'An 8–12 page PDF report with a screenshot of every issue',
@@ -202,7 +204,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
           ],
         },
 
-        { name: 'Starter Fix', timeline: '3–5 days', features: ['Full automated audit', 'Manual spot-check', 'Fix critical & serious issues', 'Re-audit included'],
+        { name: 'Starter Fix', timeline: '3–5 days', features: ['1 month of AIfa Spark memory included ($15)', 'Full automated audit', 'Manual spot-check', 'Fix critical & serious issues', 'Re-audit included'],
           slug: 'starter-fix',
           price: 375,
           who: 'The problem is known. You need the lawsuit-grade issues closed without overpaying.',
@@ -213,6 +215,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
             'Every critical and serious violation remediated',
             'Fixes applied to your code, or handed to your developers ready to merge',
             'Re-audit after the work — proof that it actually improved',
+            'One month of AIfa Spark memory included at no extra cost ($15 value): your AI assistant keeps every conversation and remembers your site, its issues and what was fixed',
           ],
           deliverables: [
             'Fixed code, or a complete patch set with each change explained',
@@ -221,7 +224,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
           ],
         },
 
-        { name: 'Professional', timeline: '5–7 days', features: ['Full WCAG 2.1 AA audit', 'Screen-reader testing', 'Fix all violations', 'ARIA improvements', 'Re-audit'],
+        { name: 'Professional', timeline: '5–7 days', features: ['1 month of AIfa Spark memory included ($15)', 'Full WCAG 2.1 AA audit', 'Screen-reader testing', 'Fix all violations', 'ARIA improvements', 'Re-audit'],
           slug: 'professional',
           price: 750,
           who: 'You want the matter closed completely, not halfway, and you want evidence.',
@@ -232,6 +235,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
             'ALL WCAG 2.1 AA violations remediated, not only the critical ones',
             'ARIA markup for elements that carry no built-in meaning',
             'Dynamic elements verified: modals, dropdowns, tab panels',
+            'One month of AIfa Spark memory included at no extra cost ($15 value): your AI assistant keeps every conversation and remembers your site, its issues and what was fixed',
           ],
           deliverables: [
             'Fully remediated code',
@@ -240,7 +244,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
           ],
         },
 
-        { name: 'AI-Enhanced', timeline: '7–10 days', features: ['Everything in Professional', 'AI component review', 'Keyboard navigation overhaul', 'Focus management', 'Compliance statement'],
+        { name: 'AI-Enhanced', timeline: '7–10 days', features: ['1 month of AIfa Family Archive memory included ($100)', 'Everything in Professional', 'AI component review', 'Keyboard navigation overhaul', 'Focus management', 'Compliance statement'],
           slug: 'ai-enhanced',
           price: 1200,
           who: 'A complex site with many custom components, and you want legal cover.',
@@ -251,6 +255,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
             'Keyboard navigation rebuilt: tab order, skip links, landmark structure',
             'Focus management in dynamic elements — where the cursor returns after a dialog closes',
             'An Accessibility Statement drafted to the WAI template',
+            'One month of AIfa Family Archive memory included at no extra cost ($100 value): extended limits, family access and permanent memory of your site, its issues and every fix',
           ],
           deliverables: [
             'Remediated code with rebuilt components',
@@ -259,7 +264,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
           ],
         },
 
-        { name: 'Ecosystem', timeline: '10–14 days', features: ['Full site + design system audit', 'WCAG 2.2 coverage', 'Component-level ARIA patterns', 'Training session (1h)', 'Ongoing monitoring'],
+        { name: 'Ecosystem', timeline: '10–14 days', features: ['1 month of AIfa Family Archive memory included ($100)', 'Full site + design system audit', 'WCAG 2.2 coverage', 'Component-level ARIA patterns', 'Training session (1h)', 'Ongoing monitoring'],
           slug: 'ecosystem',
           price: 1800,
           who: 'Several sites, or a design system, and it must not break again.',
@@ -271,6 +276,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
             'ARIA patterns at component level rather than page by page',
             'A one-hour training session for your team, recorded',
             'Continuous monitoring: daily checks, an email whenever a new issue appears',
+            'One month of AIfa Family Archive memory included at no extra cost ($100 value): extended limits, family access and permanent memory of your site, its issues and every fix',
           ],
           deliverables: [
             'A remediated design system with per-component documentation',
@@ -279,7 +285,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
           ],
         },
 
-        { name: 'Enterprise Lite', timeline: '2–3 weeks', features: ['Multi-page / SPA audit', 'Assistive tech compatibility', 'Legal compliance review', 'Developer documentation', 'Slack support (30d)'],
+        { name: 'Enterprise Lite', timeline: '2–3 weeks', features: ['1 month of AIfa Family Archive memory included ($100)', 'Multi-page / SPA audit', 'Assistive tech compatibility', 'Legal compliance review', 'Developer documentation', 'Slack support (30d)'],
           slug: 'enterprise-lite',
           price: 2500,
           who: 'A single-page application, or a large multi-page portal.',
@@ -291,6 +297,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
             'Legal review of your wording against ADA requirements',
             'Developer documentation on sustaining accessibility going forward',
             'A Slack support channel for 30 days, next-business-day response',
+            'One month of AIfa Family Archive memory included at no extra cost ($100 value): extended limits, family access and permanent memory of your site, its issues and every fix',
           ],
           deliverables: [
             'A remediated application and a maintenance handbook',
@@ -299,7 +306,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
           ],
         },
 
-        { name: 'Enterprise Pro', timeline: '3–4 weeks', features: ['Everything in Enterprise Lite', 'ADA / Section 508 alignment', 'User testing with disabled users', 'CI/CD integration', 'Quarterly re-audit'],
+        { name: 'Enterprise Pro', timeline: '3–4 weeks', features: ['1 month of AIfa Family Archive memory included ($100)', 'Everything in Enterprise Lite', 'ADA / Section 508 alignment', 'User testing with disabled users', 'CI/CD integration', 'Quarterly re-audit'],
           slug: 'enterprise-pro',
           price: 3500,
           who: 'An organisation bound by ADA or Section 508: government, contractors, finance.',
@@ -310,6 +317,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
             'Testing with participants who have vision, hearing and motor impairments',
             'Accessibility checks wired into CI/CD: the build fails on a new violation',
             'A re-audit every quarter for a year',
+            'One month of AIfa Family Archive memory included at no extra cost ($100 value): extended limits, family access and permanent memory of your site, its issues and every fix',
           ],
           deliverables: [
             'An ADA and Section 508 conformance report',
@@ -319,7 +327,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
           ],
         },
 
-        { name: 'Full Remediation', timeline: 'Custom', features: ['Complete codebase remediation', 'VPAT documentation', 'Legal risk mitigation', 'Dedicated a11y engineer', 'Annual audit contract'],
+        { name: 'Full Remediation', timeline: 'Custom', features: ['1 month of AIfa Family Archive memory included ($100)', 'Complete codebase remediation', 'VPAT documentation', 'Legal risk mitigation', 'Dedicated a11y engineer', 'Annual audit contract'],
           slug: 'full-remediation',
           price: 0,
           who: 'The codebase is easier to rewrite than to patch. Or litigation is already under way.',
@@ -331,6 +339,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
             'Work alongside your counsel to reduce legal exposure',
             'A dedicated accessibility engineer for the term of the contract',
             'An annual support and audit agreement',
+            'One month of AIfa Family Archive memory included at no extra cost ($100 value): extended limits, family access and permanent memory of your site, its issues and every fix',
           ],
           deliverables: [
             'A rebuilt codebase',
@@ -494,7 +503,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
       tierMoreDetails: 'Подробно',
       tiers: [
 
-        { name: 'Лайт-Аудит', timeline: '1 день', features: ['25 страниц вместо 3', 'Полный список нарушений', 'PDF с датой проверки', 'Разбивка по тяжести'],
+        { name: 'Лайт-Аудит', timeline: '1 день', features: ['Месяц памяти AIfa «Искра» включён ($15)', '25 страниц вместо 3', 'Полный список нарушений', 'PDF с датой проверки', 'Разбивка по тяжести'],
           slug: 'lite-audit',
           price: 50,
           who: 'Нужно подтверждение на бумаге, что сайт проверен — для юриста, страховщика или заказчика, — а платить за разбор пока рано.',
@@ -504,6 +513,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
             'Каждое нарушение с указанием страницы и конкретного элемента',
             'Разделение находок по тяжести: критические, серьёзные, средние, мелкие',
             'Проверка контраста текста, размера кнопок и порядка заголовков',
+            'Месяц памяти AIfa «Искра» включён в стоимость ($15): ассистент хранит каждый разговор и помнит ваш сайт, его нарушения и то, что было исправлено',
           ],
           deliverables: [
             'PDF с датой проверки и полным перечнем нарушений',
@@ -512,7 +522,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
           ],
         },
 
-        { name: 'Быстрый Аудит', timeline: '1 день', features: ['Автоматизированное сканирование WCAG 2.1 AA', 'Отчёт о топ-10 проблемах', 'Резюме в PDF', 'Список приоритетов'],
+        { name: 'Быстрый Аудит', timeline: '1 день', features: ['Месяц памяти AIfa «Искра» включён ($15)', 'Автоматизированное сканирование WCAG 2.1 AA', 'Отчёт о топ-10 проблемах', 'Резюме в PDF', 'Список приоритетов'],
           slug: 'quick-audit',
           price: 149,
           who: 'Нужно быстро узнать, чем грозит сайт, и есть ли вообще проблема.',
@@ -522,6 +532,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
             'Проверка контраста текста, размеров кликабельных областей и порядка заголовков',
             'Поиск изображений без описания и полей формы без подписи',
             'Ранжирование найденного по риску: что грозит иском, а что косметика',
+            'Месяц памяти AIfa «Искра» включён в стоимость ($15): ассистент хранит каждый разговор и помнит ваш сайт, его нарушения и то, что было исправлено',
           ],
           deliverables: [
             'PDF-отчёт на 8–12 страниц со снимками экрана каждой проблемы',
@@ -530,7 +541,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
           ],
         },
 
-        { name: 'Начальное Исправление', timeline: '3–5 дней', features: ['Полный автоматизированный аудит', 'Ручная точечная проверка', 'Устранение критических и серьёзных проблем', 'Повторный аудит включён'],
+        { name: 'Начальное Исправление', timeline: '3–5 дней', features: ['Месяц памяти AIfa «Искра» включён ($15)', 'Полный автоматизированный аудит', 'Ручная точечная проверка', 'Устранение критических и серьёзных проблем', 'Повторный аудит включён'],
           slug: 'starter-fix',
           price: 375,
           who: 'Проблема известна, нужно закрыть то, что грозит иском, и не переплатить.',
@@ -541,6 +552,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
             'Исправление всех нарушений уровня «критическое» и «серьёзное»',
             'Правки вносятся в ваш код или передаются вашим разработчикам готовыми',
             'Повторный аудит после исправлений — доказательство, что стало лучше',
+            'Месяц памяти AIfa «Искра» включён в стоимость ($15): ассистент хранит каждый разговор и помнит ваш сайт, его нарушения и то, что было исправлено',
           ],
           deliverables: [
             'Исправленный код или готовый набор правок с пояснением каждой',
@@ -549,7 +561,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
           ],
         },
 
-        { name: 'Профессиональный', timeline: '5–7 дней', features: ['Полный аудит WCAG 2.1 AA', 'Тестирование со скринридером', 'Исправление всех нарушений', 'Улучшения ARIA', 'Повторный аудит'],
+        { name: 'Профессиональный', timeline: '5–7 дней', features: ['Месяц памяти AIfa «Искра» включён ($15)', 'Полный аудит WCAG 2.1 AA', 'Тестирование со скринридером', 'Исправление всех нарушений', 'Улучшения ARIA', 'Повторный аудит'],
           slug: 'professional',
           price: 750,
           who: 'Нужно закрыть вопрос целиком, а не наполовину, и иметь доказательства.',
@@ -560,6 +572,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
             'Исправление ВСЕХ нарушений WCAG 2.1 AA, а не только критических',
             'Разметка ARIA для элементов, у которых нет стандартного смысла',
             'Проверка динамических элементов: модальные окна, выпадающие списки, вкладки',
+            'Месяц памяти AIfa «Искра» включён в стоимость ($15): ассистент хранит каждый разговор и помнит ваш сайт, его нарушения и то, что было исправлено',
           ],
           deliverables: [
             'Полностью исправленный код',
@@ -568,7 +581,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
           ],
         },
 
-        { name: 'С Усилением ИИ', timeline: '7–10 дней', features: ['Всё из Профессионального', 'Обзор компонентов с ИИ', 'Переработка клавиатурной навигации', 'Управление фокусом', 'Заявление о соответствии'],
+        { name: 'С Усилением ИИ', timeline: '7–10 дней', features: ['Месяц памяти AIfa «Семейный Архив» включён ($100)', 'Всё из Профессионального', 'Обзор компонентов с ИИ', 'Переработка клавиатурной навигации', 'Управление фокусом', 'Заявление о соответствии'],
           slug: 'ai-enhanced',
           price: 1200,
           who: 'Сайт сложный, много самописных компонентов, нужна юридическая защита.',
@@ -579,6 +592,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
             'Полная переработка навигации с клавиатуры: порядок обхода, пропуск блоков',
             'Управление фокусом в динамических элементах — куда возвращается курсор после закрытия окна',
             'Составление Заявления о доступности (Accessibility Statement) по форме WAI',
+            'Месяц памяти AIfa «Семейный Архив» включён в стоимость ($100): расширенные лимиты, семейный доступ и вечная память о вашем сайте, его нарушениях и каждом исправлении',
           ],
           deliverables: [
             'Исправленный код с переработанными компонентами',
@@ -587,7 +601,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
           ],
         },
 
-        { name: 'Экосистема', timeline: '10–14 дней', features: ['Аудит всего сайта + дизайн-системы', 'Покрытие WCAG 2.2', 'Паттерны ARIA на уровне компонентов', 'Обучающая сессия (1ч)', 'Непрерывный мониторинг'],
+        { name: 'Экосистема', timeline: '10–14 дней', features: ['Месяц памяти AIfa «Семейный Архив» включён ($100)', 'Аудит всего сайта + дизайн-системы', 'Покрытие WCAG 2.2', 'Паттерны ARIA на уровне компонентов', 'Обучающая сессия (1ч)', 'Непрерывный мониторинг'],
           slug: 'ecosystem',
           price: 1800,
           who: 'Сайтов несколько или есть дизайн-система, и нужно, чтобы не сломалось снова.',
@@ -599,6 +613,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
             'Паттерны ARIA на уровне компонентов, а не отдельных страниц',
             'Обучающая сессия для вашей команды, один час, с записью',
             'Непрерывный мониторинг: проверка раз в сутки, письмо при новой ошибке',
+            'Месяц памяти AIfa «Семейный Архив» включён в стоимость ($100): расширенные лимиты, семейный доступ и вечная память о вашем сайте, его нарушениях и каждом исправлении',
           ],
           deliverables: [
             'Исправленная дизайн-система с документацией по каждому компоненту',
@@ -607,7 +622,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
           ],
         },
 
-        { name: 'Enterprise Lite', timeline: '2–3 недели', features: ['Аудит многостраничного / SPA сайта', 'Совместимость со вспомогательными технологиями', 'Проверка юридического соответствия', 'Документация для разработчиков', 'Поддержка Slack (30д)'],
+        { name: 'Enterprise Lite', timeline: '2–3 недели', features: ['Месяц памяти AIfa «Семейный Архив» включён ($100)', 'Аудит многостраничного / SPA сайта', 'Совместимость со вспомогательными технологиями', 'Проверка юридического соответствия', 'Документация для разработчиков', 'Поддержка Slack (30д)'],
           slug: 'enterprise-lite',
           price: 2500,
           who: 'Одностраничное приложение или большой многостраничный портал.',
@@ -619,6 +634,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
             'Юридическая проверка формулировок на соответствие требованиям ADA',
             'Документация для разработчиков: как поддерживать доступность дальше',
             'Канал поддержки в Slack на 30 дней с ответом в рабочий день',
+            'Месяц памяти AIfa «Семейный Архив» включён в стоимость ($100): расширенные лимиты, семейный доступ и вечная память о вашем сайте, его нарушениях и каждом исправлении',
           ],
           deliverables: [
             'Исправленное приложение и руководство по поддержке',
@@ -627,7 +643,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
           ],
         },
 
-        { name: 'Enterprise Pro', timeline: '3–4 недели', features: ['Всё из Enterprise Lite', 'Соответствие ADA / Раздел 508', 'Пользовательское тестирование с людьми с ОВЗ', 'Интеграция CI/CD', 'Ежеквартальный повторный аудит'],
+        { name: 'Enterprise Pro', timeline: '3–4 недели', features: ['Месяц памяти AIfa «Семейный Архив» включён ($100)', 'Всё из Enterprise Lite', 'Соответствие ADA / Раздел 508', 'Пользовательское тестирование с людьми с ОВЗ', 'Интеграция CI/CD', 'Ежеквартальный повторный аудит'],
           slug: 'enterprise-pro',
           price: 3500,
           who: 'Организация под требованиями ADA или Раздела 508: госструктуры, подрядчики, финансы.',
@@ -638,6 +654,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
             'Тестирование с участием людей с нарушениями зрения, слуха и моторики',
             'Встраивание проверок в CI/CD: сборка падает при новом нарушении',
             'Повторный аудит раз в квартал в течение года',
+            'Месяц памяти AIfa «Семейный Архив» включён в стоимость ($100): расширенные лимиты, семейный доступ и вечная память о вашем сайте, его нарушениях и каждом исправлении',
           ],
           deliverables: [
             'Отчёт о соответствии ADA и Разделу 508',
@@ -647,7 +664,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
           ],
         },
 
-        { name: 'Полная Ремедиация', timeline: 'По запросу', features: ['Полная ремедиация кодовой базы', 'Документация VPAT', 'Снижение правовых рисков', 'Выделенный инженер a11y', 'Годовой контракт на аудит'],
+        { name: 'Полная Ремедиация', timeline: 'По запросу', features: ['Месяц памяти AIfa «Семейный Архив» включён ($100)', 'Полная ремедиация кодовой базы', 'Документация VPAT', 'Снижение правовых рисков', 'Выделенный инженер a11y', 'Годовой контракт на аудит'],
           slug: 'full-remediation',
           price: 0,
           who: 'Кодовую базу проще переписать, чем чинить. Или идёт судебное разбирательство.',
@@ -659,6 +676,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
             'Работа с вашими юристами по снижению правового риска',
             'Выделенный инженер по доступности на весь срок договора',
             'Годовой договор на сопровождение и аудит',
+            'Месяц памяти AIfa «Семейный Архив» включён в стоимость ($100): расширенные лимиты, семейный доступ и вечная память о вашем сайте, его нарушениях и каждом исправлении',
           ],
           deliverables: [
             'Переработанная кодовая база',
@@ -792,7 +810,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
       tierMoreDetails: 'Detalles completos',
       tiers: [
 
-        { name: 'Auditoría Lite', timeline: '1 día', features: ['25 páginas en vez de 3', 'Lista completa de infracciones', 'PDF con fecha de la revisión', 'Desglose por gravedad'],
+        { name: 'Auditoría Lite', timeline: '1 día', features: ['1 mes de memoria AIfa Chispa incluido ($15)', '25 páginas en vez de 3', 'Lista completa de infracciones', 'PDF con fecha de la revisión', 'Desglose por gravedad'],
           slug: 'lite-audit',
           price: 50,
           who: 'Necesita una prueba en papel de que el sitio fue revisado — para un abogado, una aseguradora o un cliente — y todavía no quiere pagar por el análisis.',
@@ -802,6 +820,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
             'Cada infracción con la página y el elemento concretos indicados',
             'Hallazgos separados por gravedad: críticos, serios, moderados, menores',
             'Contraste del texto, tamaño de los botones y orden de los encabezados verificados',
+            'Un mes de memoria AIfa Chispa incluido sin coste adicional ($15): el asistente conserva cada conversación y recuerda su sitio, sus incidencias y lo que se corrigió',
           ],
           deliverables: [
             'Un PDF con la fecha del escaneo y la lista completa de infracciones',
@@ -810,7 +829,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
           ],
         },
 
-        { name: 'Auditoría Rápida', timeline: '1 día', features: ['Escaneo automatizado WCAG 2.1 AA', 'Informe de los 10 principales problemas', 'Resumen en PDF', 'Lista de prioridades'],
+        { name: 'Auditoría Rápida', timeline: '1 día', features: ['1 mes de memoria AIfa Chispa incluido ($15)', 'Escaneo automatizado WCAG 2.1 AA', 'Informe de los 10 principales problemas', 'Resumen en PDF', 'Lista de prioridades'],
           slug: 'quick-audit',
           price: 149,
           who: 'Necesita saber rápido si el sitio supone un riesgo y si el problema existe siquiera.',
@@ -820,6 +839,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
             'Contraste del texto, tamaño de las zonas pulsables y orden de los encabezados',
             'Imágenes sin descripción y campos de formulario sin etiqueta',
             'Hallazgos ordenados por riesgo: qué invita a una demanda y qué es cosmético',
+            'Un mes de memoria AIfa Chispa incluido sin coste adicional ($15): el asistente conserva cada conversación y recuerda su sitio, sus incidencias y lo que se corrigió',
           ],
           deliverables: [
             'Informe PDF de 8–12 páginas con una captura de pantalla por cada problema',
@@ -828,7 +848,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
           ],
         },
 
-        { name: 'Corrección Inicial', timeline: '3–5 días', features: ['Auditoría automatizada completa', 'Revisión manual puntual', 'Corrección de problemas críticos y serios', 'Re-auditoría incluida'],
+        { name: 'Corrección Inicial', timeline: '3–5 días', features: ['1 mes de memoria AIfa Chispa incluido ($15)', 'Auditoría automatizada completa', 'Revisión manual puntual', 'Corrección de problemas críticos y serios', 'Re-auditoría incluida'],
           slug: 'starter-fix',
           price: 375,
           who: 'El problema ya se conoce. Hay que cerrar lo que expone a demanda sin pagar de más.',
@@ -839,6 +859,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
             'Corrección de todas las infracciones críticas y graves',
             'Las correcciones se aplican a su código o se entregan listas a sus desarrolladores',
             'Nueva auditoría tras el trabajo: prueba de que realmente mejoró',
+            'Un mes de memoria AIfa Chispa incluido sin coste adicional ($15): el asistente conserva cada conversación y recuerda su sitio, sus incidencias y lo que se corrigió',
           ],
           deliverables: [
             'Código corregido o un conjunto de parches con cada cambio explicado',
@@ -847,7 +868,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
           ],
         },
 
-        { name: 'Profesional', timeline: '5–7 días', features: ['Auditoría WCAG 2.1 AA completa', 'Pruebas con lector de pantalla', 'Corrección de todas las violaciones', 'Mejoras ARIA', 'Re-auditoría'],
+        { name: 'Profesional', timeline: '5–7 días', features: ['1 mes de memoria AIfa Chispa incluido ($15)', 'Auditoría WCAG 2.1 AA completa', 'Pruebas con lector de pantalla', 'Corrección de todas las violaciones', 'Mejoras ARIA', 'Re-auditoría'],
           slug: 'professional',
           price: 750,
           who: 'Quiere cerrar el asunto por completo, no a medias, y con pruebas.',
@@ -858,6 +879,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
             'Corrección de TODAS las infracciones WCAG 2.1 AA, no solo las críticas',
             'Marcado ARIA para elementos sin significado propio',
             'Verificación de elementos dinámicos: modales, desplegables, pestañas',
+            'Un mes de memoria AIfa Chispa incluido sin coste adicional ($15): el asistente conserva cada conversación y recuerda su sitio, sus incidencias y lo que se corrigió',
           ],
           deliverables: [
             'Código completamente corregido',
@@ -866,7 +888,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
           ],
         },
 
-        { name: 'Mejorado con IA', timeline: '7–10 días', features: ['Todo lo de Profesional', 'Revisión de componentes con IA', 'Renovación de navegación por teclado', 'Gestión del foco', 'Declaración de conformidad'],
+        { name: 'Mejorado con IA', timeline: '7–10 días', features: ['1 mes de memoria AIfa Archivo Familiar incluido ($100)', 'Todo lo de Profesional', 'Revisión de componentes con IA', 'Renovación de navegación por teclado', 'Gestión del foco', 'Declaración de conformidad'],
           slug: 'ai-enhanced',
           price: 1200,
           who: 'Sitio complejo, con muchos componentes propios, y necesita respaldo legal.',
@@ -877,6 +899,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
             'Navegación por teclado rehecha: orden de tabulación, enlaces de salto, regiones',
             'Gestión del foco en elementos dinámicos: adónde vuelve el cursor al cerrar un diálogo',
             'Redacción de la Declaración de Accesibilidad según la plantilla WAI',
+            'Un mes de memoria AIfa Archivo Familiar incluido sin coste adicional ($100): límites ampliados, acceso familiar y memoria permanente de su sitio, sus incidencias y cada corrección',
           ],
           deliverables: [
             'Código corregido con los componentes rehechos',
@@ -885,7 +908,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
           ],
         },
 
-        { name: 'Ecosistema', timeline: '10–14 días', features: ['Auditoría de sitio completo + sistema de diseño', 'Cobertura WCAG 2.2', 'Patrones ARIA a nivel de componente', 'Sesión de formación (1h)', 'Monitoreo continuo'],
+        { name: 'Ecosistema', timeline: '10–14 días', features: ['1 mes de memoria AIfa Archivo Familiar incluido ($100)', 'Auditoría de sitio completo + sistema de diseño', 'Cobertura WCAG 2.2', 'Patrones ARIA a nivel de componente', 'Sesión de formación (1h)', 'Monitoreo continuo'],
           slug: 'ecosystem',
           price: 1800,
           who: 'Varios sitios o un sistema de diseño, y no debe volver a romperse.',
@@ -897,6 +920,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
             'Patrones ARIA a nivel de componente, no página por página',
             'Sesión formativa de una hora para su equipo, grabada',
             'Monitorización continua: revisión diaria y correo ante cada nueva incidencia',
+            'Un mes de memoria AIfa Archivo Familiar incluido sin coste adicional ($100): límites ampliados, acceso familiar y memoria permanente de su sitio, sus incidencias y cada corrección',
           ],
           deliverables: [
             'Sistema de diseño corregido con documentación por componente',
@@ -905,7 +929,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
           ],
         },
 
-        { name: 'Enterprise Lite', timeline: '2–3 semanas', features: ['Auditoría de múltiples páginas / SPA', 'Compatibilidad con tecnología asistiva', 'Revisión de cumplimiento legal', 'Documentación para desarrolladores', 'Soporte Slack (30d)'],
+        { name: 'Enterprise Lite', timeline: '2–3 semanas', features: ['1 mes de memoria AIfa Archivo Familiar incluido ($100)', 'Auditoría de múltiples páginas / SPA', 'Compatibilidad con tecnología asistiva', 'Revisión de cumplimiento legal', 'Documentación para desarrolladores', 'Soporte Slack (30d)'],
           slug: 'enterprise-lite',
           price: 2500,
           who: 'Una aplicación de página única o un portal grande de muchas páginas.',
@@ -917,6 +941,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
             'Revisión jurídica de sus textos frente a los requisitos ADA',
             'Documentación para desarrolladores sobre cómo mantener la accesibilidad',
             'Canal de soporte en Slack durante 30 días, respuesta al siguiente día hábil',
+            'Un mes de memoria AIfa Archivo Familiar incluido sin coste adicional ($100): límites ampliados, acceso familiar y memoria permanente de su sitio, sus incidencias y cada corrección',
           ],
           deliverables: [
             'Aplicación corregida y manual de mantenimiento',
@@ -925,7 +950,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
           ],
         },
 
-        { name: 'Enterprise Pro', timeline: '3–4 semanas', features: ['Todo lo de Enterprise Lite', 'Alineación ADA / Sección 508', 'Pruebas de usuario con personas con discapacidad', 'Integración CI/CD', 'Re-auditoría trimestral'],
+        { name: 'Enterprise Pro', timeline: '3–4 semanas', features: ['1 mes de memoria AIfa Archivo Familiar incluido ($100)', 'Todo lo de Enterprise Lite', 'Alineación ADA / Sección 508', 'Pruebas de usuario con personas con discapacidad', 'Integración CI/CD', 'Re-auditoría trimestral'],
           slug: 'enterprise-pro',
           price: 3500,
           who: 'Organización sujeta a ADA o a la Sección 508: administración, contratistas, finanzas.',
@@ -936,6 +961,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
             'Pruebas con participantes con discapacidad visual, auditiva y motora',
             'Comprobaciones integradas en CI/CD: la compilación falla ante una nueva infracción',
             'Nueva auditoría cada trimestre durante un año',
+            'Un mes de memoria AIfa Archivo Familiar incluido sin coste adicional ($100): límites ampliados, acceso familiar y memoria permanente de su sitio, sus incidencias y cada corrección',
           ],
           deliverables: [
             'Informe de conformidad ADA y Sección 508',
@@ -945,7 +971,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
           ],
         },
 
-        { name: 'Remediación Completa', timeline: 'Personalizado', features: ['Remediación completa del código', 'Documentación VPAT', 'Mitigación del riesgo legal', 'Ingeniero a11y dedicado', 'Contrato de auditoría anual'],
+        { name: 'Remediación Completa', timeline: 'Personalizado', features: ['1 mes de memoria AIfa Archivo Familiar incluido ($100)', 'Remediación completa del código', 'Documentación VPAT', 'Mitigación del riesgo legal', 'Ingeniero a11y dedicado', 'Contrato de auditoría anual'],
           slug: 'full-remediation',
           price: 0,
           who: 'La base de código es más fácil de reescribir que de parchear. O ya hay un litigio en curso.',
@@ -957,6 +983,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
             'Trabajo junto a sus abogados para reducir el riesgo legal',
             'Ingeniero de accesibilidad dedicado durante toda la vigencia del contrato',
             'Contrato anual de acompañamiento y auditoría',
+            'Un mes de memoria AIfa Archivo Familiar incluido sin coste adicional ($100): límites ampliados, acceso familiar y memoria permanente de su sitio, sus incidencias y cada corrección',
           ],
           deliverables: [
             'Base de código reconstruida',
@@ -1090,7 +1117,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
       tierMoreDetails: '详细说明',
       tiers: [
 
-        { name: '轻度审计', timeline: '1天', features: ['扫描25个页面而非3个', '完整违规清单', '带检测日期的PDF', '按严重程度分类'],
+        { name: '轻度审计', timeline: '1天', features: ['含 1 个月 AIfa「火花」记忆订阅（价值 $15）', '扫描25个页面而非3个', '完整违规清单', '带检测日期的PDF', '按严重程度分类'],
           slug: 'lite-audit',
           price: 50,
           who: '您需要一份书面证明，表明网站已被检测——用于律师、保险公司或客户——但暂时还不打算为分析付费。',
@@ -1100,6 +1127,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
             '每项违规均标明具体页面和元素',
             '按严重程度划分：严重、重大、中等、轻微',
             '验证文本对比度、点击目标尺寸和标题层级顺序',
+            '免费包含 1 个月 AIfa「火花」记忆订阅（价值 $15）：助手保存每一次对话，记住您的网站、问题与已完成的修复',
           ],
           deliverables: [
             '包含扫描日期和完整违规清单的PDF文件',
@@ -1108,7 +1136,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
           ],
         },
 
-        { name: '快速审计', timeline: '1天', features: ['自动化WCAG 2.1 AA扫描', '前10问题报告', 'PDF摘要', '优先级列表'],
+        { name: '快速审计', timeline: '1天', features: ['含 1 个月 AIfa「火花」记忆订阅（价值 $15）', '自动化WCAG 2.1 AA扫描', '前10问题报告', 'PDF摘要', '优先级列表'],
           slug: 'quick-audit',
           price: 149,
           who: '需要快速判断网站是否存在法律风险，以及问题是否真的存在。',
@@ -1118,6 +1146,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
             '检查文字对比度、可点击区域尺寸与标题层级顺序',
             '找出缺少描述的图片和缺少标签的表单字段',
             '按风险排序：哪些可能招致诉讼，哪些只是外观问题',
+            '免费包含 1 个月 AIfa「火花」记忆订阅（价值 $15）：助手保存每一次对话，记住您的网站、问题与已完成的修复',
           ],
           deliverables: [
             '8–12 页 PDF 报告，每个问题均附截图',
@@ -1126,7 +1155,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
           ],
         },
 
-        { name: '入门修复', timeline: '3–5天', features: ['完整自动化审计', '手动抽查', '修复严重和重要问题', '包含复审'],
+        { name: '入门修复', timeline: '3–5天', features: ['含 1 个月 AIfa「火花」记忆订阅（价值 $15）', '完整自动化审计', '手动抽查', '修复严重和重要问题', '包含复审'],
           slug: 'starter-fix',
           price: 375,
           who: '问题已经清楚，需要先关闭可能招致诉讼的部分，又不想多花钱。',
@@ -1137,6 +1166,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
             '修复全部「严重」与「重大」等级的违规',
             '修改直接写入贵方代码，或整理成可合并的补丁交付开发团队',
             '完工后复审——用数据证明确实改善',
+            '免费包含 1 个月 AIfa「火花」记忆订阅（价值 $15）：助手保存每一次对话，记住您的网站、问题与已完成的修复',
           ],
           deliverables: [
             '修复后的代码，或逐条说明的完整补丁集',
@@ -1145,7 +1175,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
           ],
         },
 
-        { name: '专业版', timeline: '5–7天', features: ['完整WCAG 2.1 AA审计', '屏幕阅读器测试', '修复所有违规', 'ARIA改进', '复审'],
+        { name: '专业版', timeline: '5–7天', features: ['含 1 个月 AIfa「火花」记忆订阅（价值 $15）', '完整WCAG 2.1 AA审计', '屏幕阅读器测试', '修复所有违规', 'ARIA改进', '复审'],
           slug: 'professional',
           price: 750,
           who: '希望把问题彻底了结，而不是做一半，并且要留下证据。',
@@ -1156,6 +1186,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
             '修复全部 WCAG 2.1 AA 违规，而不仅是严重项',
             '为本身没有语义的元素补充 ARIA 标记',
             '核查动态元素：弹窗、下拉菜单、标签页',
+            '免费包含 1 个月 AIfa「火花」记忆订阅（价值 $15）：助手保存每一次对话，记住您的网站、问题与已完成的修复',
           ],
           deliverables: [
             '完全修复的代码',
@@ -1164,7 +1195,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
           ],
         },
 
-        { name: 'AI增强版', timeline: '7–10天', features: ['包含专业版所有内容', 'AI组件审查', '键盘导航全面改造', '焦点管理', '合规声明'],
+        { name: 'AI增强版', timeline: '7–10天', features: ['含 1 个月 AIfa「家庭档案」记忆订阅（价值 $100）', '包含专业版所有内容', 'AI组件审查', '键盘导航全面改造', '焦点管理', '合规声明'],
           slug: 'ai-enhanced',
           price: 1200,
           who: '网站结构复杂、自研组件多，并且需要法律层面的保障。',
@@ -1175,6 +1206,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
             '重构键盘导航：Tab 顺序、跳过链接、地标区域',
             '动态元素的焦点管理——对话框关闭后光标回到何处',
             '按 WAI 模板起草《无障碍声明》',
+            '免费包含 1 个月 AIfa「家庭档案」记忆订阅（价值 $100）：更高额度、家庭共享，并永久记住您的网站、问题与每一项修复',
           ],
           deliverables: [
             '含重构组件的修复代码',
@@ -1183,7 +1215,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
           ],
         },
 
-        { name: '生态系统版', timeline: '10–14天', features: ['完整站点+设计系统审计', 'WCAG 2.2覆盖', '组件级ARIA模式', '培训课程（1小时）', '持续监控'],
+        { name: '生态系统版', timeline: '10–14天', features: ['含 1 个月 AIfa「家庭档案」记忆订阅（价值 $100）', '完整站点+设计系统审计', 'WCAG 2.2覆盖', '组件级ARIA模式', '培训课程（1小时）', '持续监控'],
           slug: 'ecosystem',
           price: 1800,
           who: '有多个站点或已有设计系统，且要求今后不再反复出问题。',
@@ -1195,6 +1227,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
             '在组件层面而非逐页应用 ARIA 模式',
             '为贵方团队提供一小时培训，全程录制',
             '持续监控：每日检查，出现新问题即发邮件',
+            '免费包含 1 个月 AIfa「家庭档案」记忆订阅（价值 $100）：更高额度、家庭共享，并永久记住您的网站、问题与每一项修复',
           ],
           deliverables: [
             '修正后的设计系统，附每个组件的文档',
@@ -1203,7 +1236,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
           ],
         },
 
-        { name: '企业精简版', timeline: '2–3周', features: ['多页面/SPA审计', '辅助技术兼容性', '法律合规审查', '开发者文档', 'Slack支持（30天）'],
+        { name: '企业精简版', timeline: '2–3周', features: ['含 1 个月 AIfa「家庭档案」记忆订阅（价值 $100）', '多页面/SPA审计', '辅助技术兼容性', '法律合规审查', '开发者文档', 'Slack支持（30天）'],
           slug: 'enterprise-lite',
           price: 2500,
           who: '单页应用，或页面众多的大型门户。',
@@ -1215,6 +1248,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
             '依据 ADA 要求对贵方文案进行法律审查',
             '面向开发者的文档：今后如何持续维护无障碍',
             '30 天 Slack 支持频道，下一个工作日内答复',
+            '免费包含 1 个月 AIfa「家庭档案」记忆订阅（价值 $100）：更高额度、家庭共享，并永久记住您的网站、问题与每一项修复',
           ],
           deliverables: [
             '修复后的应用与维护手册',
@@ -1223,7 +1257,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
           ],
         },
 
-        { name: '企业专业版', timeline: '3–4周', features: ['包含企业精简版所有内容', 'ADA/508条款对齐', '残障用户测试', 'CI/CD集成', '季度复审'],
+        { name: '企业专业版', timeline: '3–4周', features: ['含 1 个月 AIfa「家庭档案」记忆订阅（价值 $100）', '包含企业精简版所有内容', 'ADA/508条款对齐', '残障用户测试', 'CI/CD集成', '季度复审'],
           slug: 'enterprise-pro',
           price: 3500,
           who: '受 ADA 或第 508 条约束的机构：政府部门、承包商、金融机构。',
@@ -1234,6 +1268,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
             '邀请视觉、听觉与肢体障碍人士参与测试',
             '将检查嵌入 CI/CD：出现新违规时构建直接失败',
             '一年内每季度复审一次',
+            '免费包含 1 个月 AIfa「家庭档案」记忆订阅（价值 $100）：更高额度、家庭共享，并永久记住您的网站、问题与每一项修复',
           ],
           deliverables: [
             'ADA 与第 508 条合规报告',
@@ -1243,7 +1278,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
           ],
         },
 
-        { name: '全面修复', timeline: '定制', features: ['完整代码库修复', 'VPAT文档', '法律风险缓解', '专属a11y工程师', '年度审计合同'],
+        { name: '全面修复', timeline: '定制', features: ['含 1 个月 AIfa「家庭档案」记忆订阅（价值 $100）', '完整代码库修复', 'VPAT文档', '法律风险缓解', '专属a11y工程师', '年度审计合同'],
           slug: 'full-remediation',
           price: 0,
           who: '代码库重写比修补更划算；或者诉讼已经开始。',
@@ -1255,6 +1290,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
             '与贵方律师协作降低法律风险',
             '合同期内配备专属无障碍工程师',
             '年度维护与审计合同',
+            '免费包含 1 个月 AIfa「家庭档案」记忆订阅（价值 $100）：更高额度、家庭共享，并永久记住您的网站、问题与每一项修复',
           ],
           deliverables: [
             '重建后的代码库',
