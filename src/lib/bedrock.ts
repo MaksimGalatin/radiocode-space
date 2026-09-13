@@ -89,7 +89,18 @@ async function потолокНеИсчерпан(): Promise<boolean> {
   if (!Number.isFinite(предел) || предел <= 0) return true;
   try {
     const { Pool } = await import('@neondatabase/serverless');
-    const строка = process.env.DATABASE_URL;
+    // 🔴 БАЗА НЕ ТА. Найдено живым журналом боевого 13.09.2026:
+    //
+    //     [Grok] потолок проверить не удалось: relation
+    //     "api_spend_hourly" does not exist
+    //
+    // Таблицу учёта ведёт `lib/cost-guard.ts`, и она подключается к
+    // SUBMISSIONS_DB_URL — а потолок искал её в DATABASE_URL. Это РАЗНЫЕ
+    // базы, поэтому проверка падала всегда, а падение здесь означает
+    // «считаю предел не достигнутым». То есть суточного потолка у платного
+    // пути НЕ БЫЛО НИ ОДНОГО ДНЯ — ни у Bedrock с 11.09, ни у Grok.
+    // Сторож, который не может прочитать свою таблицу, не сторож.
+    const строка = process.env.SUBMISSIONS_DB_URL || process.env.DATABASE_URL;
     if (!строка) return true;
     const pool = new Pool({ connectionString: строка });
     try {
@@ -107,7 +118,12 @@ async function потолокНеИсчерпан(): Promise<boolean> {
     } finally {
       try { await pool.end(); } catch { /* ignore */ }
     }
-  } catch {
+  } catch (e) {
+    // Молчать о сбое сторожа нельзя — именно молчание и скрывало, что он не
+    // работает. Печатаем причину, но путь не закрываем: единственный отказ
+    // базы не должен обесточить разговор.
+    console.warn('[Bedrock] потолок проверить не удалось, считаю не достигнутым:',
+      String(e).slice(0, 160));
     return true;
   }
 }
