@@ -97,7 +97,13 @@ export async function POST(req: Request) {
           'переменной NOWPAYMENTS_IPN_SECRET на aifa.digital.\n\n' +
           `Заказ в уведомлении: ${String(body?.order_id || '—')}\n` +
           `Статус в уведомлении: ${String(body?.payment_status || '—')}`,
-          'aifa.digital');
+          // 🔴 МЕТКА САЙТА ВРАЛА — исправлено 12.09.2026.
+          // Ручка перенесена с aifa.digital вместе с зашитой меткой, и
+          // все три сайта слали письмо с подписью «aifa.digital». Замер
+          // этого дня: тревога в 18:48 пришла НА САМОМ ДЕЛЕ отсюда, а я
+          // полчаса искала причину не на том сайте. Письмо, называющее
+          // чужой адрес, хуже отсутствия письма: оно уводит от места.
+          'radiocode.space');
       }
     } catch { /* тревога не важнее ответа шлюзу */ }
     await p.end();
@@ -207,7 +213,7 @@ export async function POST(req: Request) {
 
 `
           + `Тариф НЕ выдан, начисления амбассадорам нет. Решение за тобой: `
-          + `принять как есть или ждать доплаты.`, 'aifa.digital');
+          + `принять как есть или ждать доплаты.`, 'radiocode.space');
         return NextResponse.json({ ok: true, underpaid: true });
       }
 
@@ -218,7 +224,7 @@ export async function POST(req: Request) {
           `Заказ ${orderId} на $${amount} выдан БЕЗ сверки: в уведомлении нет `
           + `ни пары price_amount+price_currency, ни пары `
           + `pay_amount+actually_paid. Проверь у поставщика вручную.`,
-          'aifa.digital');
+          'radiocode.space');
       }
     }
 
@@ -238,5 +244,5 @@ export async function POST(req: Request) {
     const credited = await creditReferralChain(pool, email, amount, tier, orderId);
     await pool.end();
     return NextResponse.json({ ok: true, tier, credited });
-  } catch (e) { console.error('[pay/ipn]', e); await alertOwner('Payment IPN failed', String((e as any)?.message || e), 'aifa.digital'); return NextResponse.json({ error: 'db_error' }, { status: 500 }); }
+  } catch (e) { console.error('[pay/ipn]', e); await alertOwner('Payment IPN failed', String((e as any)?.message || e), 'radiocode.space'); return NextResponse.json({ error: 'db_error' }, { status: 500 }); }
 }
