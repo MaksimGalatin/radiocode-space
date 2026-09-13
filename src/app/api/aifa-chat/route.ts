@@ -409,8 +409,11 @@ async function ответБесплатнымИлиГрантом(
 
   // 2. Грант Google Cloud (Vertex AI) — платный, но из гранта, а не из кармана.
   try {
+    // 🔴 12.09.2026: платный Vertex звался БЕЗ проверки разрешения — на всех
+    // четырёх сайтах. Спасал выключенный на стороне Google API (403), а не
+    // наш предохранитель. Раздел 13: платный путь закрывается физически.
     const { vertexChatCompletion, isVertexConfigured } = await import("@/lib/vertex-ai");
-    if (isVertexConfigured()) {
+    if (платныеРазрешены() && isVertexConfigured()) {
       const ответ = await vertexChatCompletion(formattedMessages, 2048, 0.8);
       if (ответ) {
         // 🔴 УЧЁТ РАСХОДА — добавлено 24.08.2026. Чат радио сторожу
@@ -473,14 +476,16 @@ async function getGrokResponse(
    * Центральный сайт принимает оба имени. Принимаем и мы: одна и та же
    * настройка обязана означать одно и то же на всех сайтах экосистемы.
    */
-  if (!платныеРазрешены()) { console.warn('[модели] Grok закрыт: платные ступени выключены (РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ)'); return ''; }
-  const apiKey = process.env.GROK_API_KEY || process.env.XAI_API_KEY;
-
-  if (!apiKey) {
-    throw new Error("Grok API key not configured (GROK_API_KEY / XAI_API_KEY)");
-  }
-
-  // Build messages with system prompt
+  /**
+   * 🔴 ЗДЕСЬ СТОЯЛА МЁРТВАЯ МОДЕЛЬ `grok-3`. Найдено 12.09.2026 замером
+   * `GET https://api.x.ai/v1/models` живым ключом (HTTP 200): у x.ai сейчас
+   * grok-4.20 (три варианта), grok-4.3, grok-4.5, grok-4.6 и ветка imagine.
+   * Модели `grok-3` в списке НЕТ — ступень ответила бы 404, даже если бы её
+   * открыли. То же самое было и на aifa.digital: класс, а не случай.
+   *
+   * Теперь зовём общий модуль `lib/grok.ts` — флагман grok-4.6, запасная
+   * grok-4.5, суточный потолок вызовов и печать каждого отказа.
+   */
   const formattedMessages = [
     { role: "system", content: AIFA_SYSTEM_PROMPT + дополнениеПодсказки + ТОН_РАЗГОВОРА },
     ...messages.map((m) => ({
@@ -489,41 +494,22 @@ async function getGrokResponse(
     })),
   ];
 
-  const response = await fetch("https://api.x.ai/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: "grok-3",
-      messages: formattedMessages,
-      max_tokens: 2048,
-      temperature: 0.8,
-    }),
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Grok API error: ${response.status} - ${errorText}`);
+  const { grokChatCompletion, grokРазрешён } = await import("@/lib/grok");
+  if (!grokРазрешён()) {
+    console.warn('[модели] Grok закрыт: нет GROK_РАЗРЕШЁН=1 (или общего РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ)');
+    return '';
   }
 
-  const data = await response.json();
-  const aiResponse = data.choices?.[0]?.message?.content;
-
+  const aiResponse = await grokChatCompletion(formattedMessages, 2048, 0.8);
   if (!aiResponse) {
     throw new Error("Empty response from Grok");
   }
 
-  // Чужой платный поставщик, платится КАРТОЙ Архитектора. Сейчас сюда не
-  // доходят: платныеРазрешены() выключено (проверено в проде 24.08.2026 —
-  // переменной нет ни на одном из четырёх проектов). Учёт стоит на случай
-  // включения: 13.08.2026 по этому ключу за сутки ушло $43.35, и увидели мы
-  // это по счёту, а не в момент вызова.
-  try {
-    const { record } = await import('@/lib/cost-guard');
-    await record('chat-grok-radio', aiResponse.length);
-  } catch { /* учёт не имеет права мешать работе */ }
+  // Учёт ведёт сам модуль `lib/grok.ts` — ТОКЕНАМИ, которые назвал x.ai.
+  // Прежняя запись здесь считала знаки ответа; оставить обе значило бы
+  // сложить в одну таблицу две разные единицы (раздел 11).
+  // Повод для учёта прежний и не забыт: 13.08.2026 по этому ключу за сутки
+  // ушло $43.35, и увидели мы это по счёту, а не в момент вызова.
 
   return aiResponse;
 }
