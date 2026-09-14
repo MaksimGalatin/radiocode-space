@@ -583,7 +583,40 @@ export async function POST(request: NextRequest) {
     try {
       const { сессияДействительна } = await import('@/lib/user-auth');
       userEmail = (await сессияДействительна(request) || '').trim();
-    } catch { /* keep anonymous */ }
+    } catch (e) {
+      // Молчащий catch здесь делал поломку невидимой: не прочиталась сессия —
+      // человек молча становился гостем, и никто об этом не узнавал.
+      console.error('[aifa-chat] СЕССИЯ НЕ ПРОЧИТАНА:', String(e).slice(0, 300));
+    }
+    // 🔴 ВНУТРЕННИЙ РЕЛЕЙ ЛИЧНОСТИ. Добавлено 14.09.2026.
+    //
+    // Сайты-сёстры передают друг другу УЖЕ ОПОЗНАННОГО человека: почта в теле
+    // принимается только вместе с верным внутренним секретом, сравнение по
+    // байтам через timingSafeEqual. Без секрета — прежнее поведение, только
+    // своя cookie, и чужую почту подставить нельзя.
+    //
+    // Без этой ветки сайт отдавал центру ПУСТУЮ почту, центр считал запрос
+    // гостевым (ident = ip:<адрес сервера>) и упирался в гостевую норму 8 —
+    // при том, что у Архитектора тариф Digital DNA и норма 1500. Именно так
+    // родился отказ «На сегодня разговор исчерпан», которого быть не могло.
+    try {
+      const crypto = await import('crypto');
+      const секрет = process.env.AIFA_INTERNAL_SECRET || '';
+      const пришло = request.headers.get('x-aifa-internal') || '';
+      const свой = !!секрет && (() => {
+        const a = Buffer.from(пришло, 'utf8'), b = Buffer.from(секрет, 'utf8');
+        return a.length === b.length && crypto.timingSafeEqual(a, b);
+      })();
+      if (свой) {
+        const изТела = ((body as any).userEmail || '').trim();
+        if (изТела) {
+          userEmail = изТела;
+          console.warn('[aifa-chat] личность принята по внутреннему релею сестринского сайта');
+        }
+      }
+    } catch (e) {
+      console.error('[aifa-chat] внутренний релей не сработал:', String(e).slice(0, 200));
+    }
     const chatType: string = body.chatType || 'main';
     locale = body.locale || 'ru';
 
