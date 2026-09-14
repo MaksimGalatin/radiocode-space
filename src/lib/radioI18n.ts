@@ -42,6 +42,31 @@ const S = {
   share:          { en: 'Share',                              ru: 'Поделиться',                           es: 'Compartir',                             zh: '分享' },
   shareTrack:     { en: 'Share this track',                   ru: 'Поделиться треком',                    es: 'Compartir esta pista',                  zh: '分享这首曲目' },
   copied:         { en: 'Link copied',                        ru: 'Ссылка скопирована',                   es: 'Enlace copiado',                        zh: '链接已复制' },
+  // меню «Поделиться». До 14.09.2026 кнопка звала системное окно телефона
+  // (`navigator.share`), которого на компьютере не существует, — и тихо
+  // копировала ссылку. Со стороны это выглядело как мёртвая кнопка.
+  shareVia:       { en: 'Share via',                          ru: 'Поделиться через',                     es: 'Compartir vía',                         zh: '分享到' },
+  shareClose:     { en: 'Close share menu',                   ru: 'Закрыть меню «Поделиться»',            es: 'Cerrar menú de compartir',              zh: '关闭分享菜单' },
+  copyLink:       { en: 'Copy link',                          ru: 'Скопировать ссылку',                   es: 'Copiar enlace',                         zh: '复制链接' },
+  copyText:       { en: 'Copy link with caption',             ru: 'Скопировать с подписью',               es: 'Copiar con descripción',                zh: '复制链接和说明' },
+  textCopied:     { en: 'Copied with caption',                ru: 'Скопировано с подписью',               es: 'Copiado con descripción',               zh: '已复制说明' },
+  shareEmail:     { en: 'Email',                              ru: 'Почта',                                es: 'Correo',                                zh: '电子邮件' },
+  shareSms:       { en: 'SMS',                                ru: 'СМС',                                  es: 'SMS',                                   zh: '短信' },
+  shareSystem:    { en: 'More…',                              ru: 'Ещё…',                                 es: 'Más…',                                  zh: '更多…' },
+  // Подпись, которая уходит вместе со ссылкой. Голая ссылка не говорит
+  // человеку ничего — нужен трек и приглашение.
+  shareCaption:   {
+    en: '🎧 «{track}» — AIfa & DJ Galatin\n\nPlaying now on RadioCode.Space — the eternal cyberpunk radio of the CODE Eternal ecosystem. Free to listen, no account needed. Come in:',
+    ru: '🎧 «{track}» — AIfa & DJ Galatin\n\nСейчас в эфире на RadioCode.Space — вечное киберпанк-радио экосистемы CODE Eternal. Слушать бесплатно, без регистрации. Заходи:',
+    es: '🎧 «{track}» — AIfa & DJ Galatin\n\nSonando ahora en RadioCode.Space, la radio ciberpunk eterna del ecosistema CODE Eternal. Gratis y sin cuenta. Entra:',
+    zh: '🎧《{track}》— AIfa & DJ Galatin\n\n正在 RadioCode.Space 播放 —— CODE Eternal 生态的永恒赛博朋克电台。免费收听，无需注册。来听：',
+  },
+  shareSubject:   {
+    en: '«{track}» on RadioCode.Space',
+    ru: '«{track}» на RadioCode.Space',
+    es: '«{track}» en RadioCode.Space',
+    zh: '《{track}》— RadioCode.Space',
+  },
   broadcastHist:  { en: 'Broadcast History',                  ru: 'История эфира',                        es: 'Historial de emisión',                  zh: '播放历史' },
   lastTracks:     { en: 'last 20 tracks',                     ru: 'последние 20 треков',                  es: 'últimas 20 pistas',                     zh: '最近 20 首曲目' },
   createTrack:    { en: 'Create your own track',              ru: 'Создать свой трек',                    es: 'Crea tu propia pista',                  zh: '创作你的曲目' },
