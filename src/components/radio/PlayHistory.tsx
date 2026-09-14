@@ -5,6 +5,7 @@ import { usePlayerStore } from '@/stores/playerStore';
 import { useEffect, useRef, useState } from 'react';
 import { LikeButton } from './LikeButton';
 import { ShareButton } from './ShareButton';
+import { PlaylistButton } from './PlaylistButton';
 import { SaveButton } from './SaveButton';
 import { findTrackLocation } from '@/lib/radioSocial';
 import { useRadioT } from '@/lib/radioI18n';
@@ -123,6 +124,7 @@ export function PlayHistory() {
               </button>
               <div className="flex items-center gap-0.5 shrink-0">
                 <LikeButton trackId={entry.trackId} color="#FF003C" size={14} />
+                <PlaylistButton trackId={entry.trackId} color={entry.color} size={14} />
                 <ShareButton trackId={entry.trackId} title={entry.title} color={entry.color} size={14} />
                 <SaveButton trackId={entry.trackId} title={entry.title} color={entry.color} size={14} />
               </div>

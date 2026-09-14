@@ -15,6 +15,7 @@ import { VolumeVisualizer } from './VolumeVisualizer';
 import { FullscreenVizToggle } from './FullscreenVisualizer';
 import { LikeButton } from './LikeButton';
 import { ShareButton } from './ShareButton';
+import { PlaylistButton } from './PlaylistButton';
 import { SaveButton } from './SaveButton';
 import { useRadioT } from '@/lib/radioI18n';
 
@@ -428,6 +429,7 @@ export function PlayerBar() {
             {/* Current-track actions — grouped on the right, always visible, no overlap */}
             <div className="flex items-center gap-0.5 shrink-0">
               <LikeButton trackId={currentTrack.id} color={color} size={16} />
+              <PlaylistButton trackId={currentTrack.id} color={color} size={16} />
               <ShareButton trackId={currentTrack.id} title={currentTrack.title} color={color} size={16} />
               <SaveButton trackId={currentTrack.id} title={currentTrack.title} color={color} size={16} />
             </div>

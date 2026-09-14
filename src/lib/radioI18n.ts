@@ -57,6 +57,16 @@ const S = {
   // ссылку только внутри своего приложения. Поэтому им — копирование текста
   // и честное объяснение, что дальше вставить руками.
   shareNoLink:    { en: 'Copy & paste (no share link)',       ru: 'Копия для вставки',                    es: 'Copiar y pegar',                        zh: '复制后粘贴' },
+  // Плейлисты. Поручение Архитектора 14.09.2026: «у треков добавить кнопку
+  // Сохранить в плейлист и сделать у зарегистрированных пользователей
+  // опцию Мои Плейлисты».
+  toPlaylist:     { en: 'Save to playlist',                   ru: 'Сохранить в плейлист',                 es: 'Guardar en lista',                      zh: '保存到歌单' },
+  inPlaylist:     { en: 'In your playlist',                   ru: 'В твоём плейлисте',                    es: 'En tu lista',                           zh: '已在歌单中' },
+  playlistAdded:  { en: 'Added to playlist',                  ru: 'Добавлено в плейлист',                 es: 'Añadido a la lista',                    zh: '已添加到歌单' },
+  playlistLogin:  { en: 'Sign in to save playlists',          ru: 'Войди, чтобы собирать плейлисты',      es: 'Entra para guardar listas',             zh: '登录后可保存歌单' },
+  myPlaylists:    { en: 'My Playlists',                       ru: 'Мои Плейлисты',                        es: 'Mis Listas',                            zh: '我的歌单' },
+  playlistEmpty:  { en: 'No playlists yet — save a track',    ru: 'Плейлистов пока нет — сохрани трек',   es: 'Aún no hay listas — guarda una pista',  zh: '还没有歌单 —— 先保存一首曲目' },
+  playlistTracks: { en: 'tracks',                             ru: 'треков',                               es: 'pistas',                                zh: '首曲目' },
   shareCopiedFor: { en: 'Copied — paste it in {app}',         ru: 'Скопировано — вставь в {app}',         es: 'Copiado — pégalo en {app}',             zh: '已复制 —— 粘贴到 {app}' },
   // Подпись, которая уходит вместе со ссылкой. Голая ссылка не говорит
   // человеку ничего — нужен трек и приглашение.
