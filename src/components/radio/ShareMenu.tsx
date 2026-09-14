@@ -175,8 +175,15 @@ export function ShareMenu({
   useEffect(() => {
     if (!открыто || !якорь) return;
     const считать = () => {
-      const эШ = window.innerWidth;
-      const эВ = window.innerHeight;
+      // 🔴 ЗАЩИТА ОТ НУЛЕВОГО ЭКРАНА. Найдено замером 14.09.2026: у скрытой
+      // или ещё не отрисованной вкладки `innerWidth` и `innerHeight` равны
+      // НУЛЮ. Считая от нуля, меню получало высоту 1172 px при экране 812 —
+      // ровно то «наползание», которое видно глазами. Нулевой замер не
+      // описывает экран, поэтому мы его просто не принимаем: держим прежние
+      // значения до следующего пересчёта, он придёт с `resize`.
+      const эШ = window.innerWidth || document.documentElement.clientWidth || 0;
+      const эВ = window.innerHeight || document.documentElement.clientHeight || 0;
+      if (эШ < 200 || эВ < 200) return;
 
       // ширина и колонки — по ширине экрана
       let ш: number, колонок: number;
