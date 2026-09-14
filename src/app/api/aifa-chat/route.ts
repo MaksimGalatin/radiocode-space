@@ -702,8 +702,14 @@ export async function POST(request: NextRequest) {
     // исключение, а исключение здесь означало бы, что обычная настройка «личного
     // платного ключа нет» считается поломкой и пишется в журнал как авария.
     let aiResponse = await ответБесплатнымИлиГрантом(trimmed, identitySection + memorySection);
+    // 🔴 КТО ОТВЕТИЛ НА САМОМ ДЕЛЕ. Здесь стоял литерал `provider: "grok"`:
+    // ручка называла Grok кого угодно — Ollama, Gemini, Bedrock. Найдено
+    // 14.09.2026 в живом разговоре с Сестрой, и вчера эта же метка заставила
+    // меня доложить Архитектору поломку, которой не было.
+    let ктоОтветил = aiResponse ? 'ai' : '';
     if (!aiResponse && (process.env.GROK_API_KEY || process.env.XAI_API_KEY)) {
       aiResponse = await getGrokResponse(trimmed, identitySection + memorySection);
+      if (aiResponse) ктоОтветил = 'grok';
     }
 
     // Отказ — только теперь, когда не сработало НИЧЕГО: ни бесплатные ключи, ни
@@ -730,7 +736,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       response: aiResponse,
-      provider: "grok",
+      provider: ктоОтветил || "ai",
     });
   } catch (error) {
     console.error("AIfa chat error:", error);
