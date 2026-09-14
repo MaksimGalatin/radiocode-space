@@ -85,15 +85,42 @@ const СЕРВИСЫ: Сервис[] = [
     href: (д) => `https://www.xing.com/spi/shares/new?url=${д.url}` },
 ];
 
-// Сети БЕЗ адреса «поделиться». Это не наш пропуск: у Instagram и TikTok
-// ссылку принимает только собственное приложение, а YouTube принимает видео,
-// а не чужие ссылки. Единственный честный путь — копирование с подписью;
-// на телефоне заодно открываем приложение, чтобы сразу вставить.
+// Instagram, TikTok и YouTube стоят В ОБЩЕМ СПИСКЕ, а не отдельной кучкой.
+//
+// Архитектор 14.09.2026: «И почему Ютуб и Инста с ТикТоком там отдельно? Что
+// за хрень?» — он прав. Человеку нужен один ровный список сетей; то, что у
+// этих трёх нет адреса «поделиться» (Instagram и TikTok принимают ссылку
+// только внутри своего приложения, YouTube принимает видео), — это НАША
+// техническая забота, а не повод отселять их в угол.
+//
+// Поэтому они выглядят как все, а разница спрятана в поведении: нажатие
+// кладёт текст с подписью в буфер и на телефоне открывает приложение.
+// Человек видит «Скопировано — вставь в Instagram» вместо молчания.
 const БЕЗ_ССЫЛКИ = [
   { ключ: 'instagram', имя: 'Instagram', буква: 'IG', цвет: '#E1306C', приложение: 'instagram://app' },
   { ключ: 'tiktok',    имя: 'TikTok',    буква: 'TT', цвет: '#FE2C55', приложение: 'snssdk1128://' },
   { ключ: 'youtube',   имя: 'YouTube',   буква: 'YT', цвет: '#FF0000', приложение: 'vnd.youtube://' },
 ];
+
+// ОДИН список всех сетей, по алфавиту. Те, что без адреса «поделиться»,
+// помечены `копией: true` — снаружи они выглядят как все остальные, разница
+// только в поведении при нажатии.
+type Сеть = {
+  ключ: string; имя: string; цвет: string; буква: string;
+  href?: (д: { url: string; текст: string; заголовок: string; трек: string }) => string;
+  копией?: boolean; приложение?: string;
+};
+
+const ВСЕ_СЕТИ: Сеть[] = [
+  ...СЕРВИСЫ.map((с) => ({
+    ключ: с.ключ, имя: с.имя, цвет: с.цвет,
+    буква: БУКВА[с.ключ] || с.имя[0], href: с.href,
+  })),
+  ...БЕЗ_ССЫЛКИ.map((с) => ({
+    ключ: с.ключ, имя: с.имя, цвет: с.цвет, буква: с.буква,
+    копией: true, приложение: с.приложение,
+  })),
+].sort((а, б) => а.имя.localeCompare(б.имя, 'ru'));
 
 export function ShareMenu({
   открыто,
@@ -135,18 +162,47 @@ export function ShareMenu({
     setЕстьСистемное(typeof navigator !== 'undefined' && typeof (navigator as { share?: unknown }).share === 'function');
   }, []);
 
-  // Ставим меню рядом с кнопкой и следим, чтобы оно не уехало за край экрана.
+  // Размер и место меню. Считаются от ЖИВОГО окна, а не задаются числом:
+  // Архитектор 14.09.2026 — «окно это сделай больше на ПК и проверь как
+  // работает на ВСЕХ разрешениях… чтобы не было никаких наползаний».
+  //
+  // Правило простое: на телефоне — почти во всю ширину и одна колонка;
+  // на планшете — две; на компьютере окно ШИРОКОЕ и колонок три, чтобы весь
+  // список был виден без прокрутки. Высота никогда не больше экрана минус
+  // поля, поэтому меню не наползает ни на плеер, ни на край.
+  const [размер, setРазмер] = useState({ ширина: 340, высота: 480, колонок: 2 });
+
   useEffect(() => {
     if (!открыто || !якорь) return;
     const считать = () => {
+      const эШ = window.innerWidth;
+      const эВ = window.innerHeight;
+
+      // ширина и колонки — по ширине экрана
+      let ш: number, колонок: number;
+      if (эШ < 480) { ш = эШ - 20; колонок = 1; }
+      else if (эШ < 900) { ш = Math.min(400, эШ - 32); колонок = 2; }
+      else if (эШ < 1400) { ш = 560; колонок = 3; }
+      else { ш = 620; колонок = 3; }
+
+      // высота — сколько реально есть, но не выше экрана минус поля
+      const в = Math.min(620, эВ - 32);
+
       const к = якорь.getBoundingClientRect();
-      const ш = Math.min(340, window.innerWidth - 24);
-      const в = Math.min(480, window.innerHeight - 24);
       let left = к.left + к.width / 2 - ш / 2;
-      left = Math.max(12, Math.min(left, window.innerWidth - ш - 12));
-      // над кнопкой, если снизу не помещается (плеер живёт внизу экрана)
-      const снизу = window.innerHeight - к.bottom;
-      const top = снизу > в + 16 ? к.bottom + 8 : Math.max(12, к.top - в - 8);
+      left = Math.max(10, Math.min(left, эШ - ш - 10));
+
+      // Плеер живёт внизу, поэтому снизу места обычно нет — тогда ставим над
+      // кнопкой. Если не помещается и там, прижимаем к верху экрана: лучше
+      // прокрутка внутри меню, чем кусок, ушедший за край.
+      const снизу = эВ - к.bottom;
+      const сверху = к.top;
+      let top: number;
+      if (снизу > в + 14) top = к.bottom + 8;
+      else if (сверху > в + 14) top = к.top - в - 8;
+      else top = Math.max(10, (эВ - в) / 2);
+
+      setРазмер({ ширина: ш, высота: в, колонок });
       setМесто({ top, left });
     };
     считать();
@@ -296,9 +352,10 @@ export function ShareMenu({
         className="fixed z-[999] rounded-2xl border p-3 shadow-2xl"
         style={{
           top: место.top, left: место.left,
-          width: Math.min(340, typeof window !== 'undefined' ? window.innerWidth - 24 : 340),
-          maxHeight: Math.min(480, typeof window !== 'undefined' ? window.innerHeight - 24 : 480),
+          width: размер.ширина,
+          maxHeight: размер.высота,
           overflowY: 'auto',
+          overflowX: 'hidden',
           background: 'rgba(10,10,22,0.98)',
           borderColor: 'rgba(255,255,255,0.14)',
           backdropFilter: 'blur(12px)',
@@ -338,56 +395,47 @@ export function ShareMenu({
 
         <div className="mb-2 h-px" style={{ background: 'rgba(255,255,255,0.10)' }} />
 
-        {/* Сети. Каждая получает подпись, а не голую ссылку. */}
-        <div className="grid grid-cols-2 gap-1">
-          {СЕРВИСЫ.map((с) => (
-            <a
-              key={с.ключ}
-              href={с.href(д)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={пункт}
-              onClick={() => setTimeout(закрытьИВернуть, 120)}
-            >
-              <span
-                aria-hidden="true"
-                className="flex h-[19px] w-[19px] shrink-0 items-center justify-center rounded-[5px] font-mono text-[10px] font-bold"
-                style={{ background: с.цвет, color: ['#E7E9EA'].includes(с.цвет) ? '#0A0A16' : '#fff' }}
+        {/* ОДИН общий список сетей — по-алфавиту, без деления на сорта.
+            Instagram, TikTok и YouTube стоят здесь же: у них нет адреса
+            «поделиться», но это наша забота, а не повод отселять их в угол
+            (правка по прямому слову Архитектора 14.09.2026). */}
+        <div
+          className="grid gap-1"
+          style={{ gridTemplateColumns: `repeat(${размер.колонок}, minmax(0, 1fr))` }}
+        >
+          {ВСЕ_СЕТИ.map((с) => (
+            с.копией ? (
+              <button key={с.ключ} onClick={() => копироватьДля(с.имя, с.приложение!)} className={пункт}>
+                <span
+                  aria-hidden="true"
+                  className="flex h-[19px] w-[19px] shrink-0 items-center justify-center rounded-[5px] font-mono text-[10px] font-bold"
+                  style={{ background: с.цвет, color: '#fff' }}
+                >
+                  {с.буква}
+                </span>
+                <span className="truncate">
+                  {готовоДля === с.имя ? rt('shareCopiedFor').replace('{app}', с.имя) : с.имя}
+                </span>
+              </button>
+            ) : (
+              <a
+                key={с.ключ}
+                href={с.href!(д)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={пункт}
+                onClick={() => setTimeout(закрытьИВернуть, 120)}
               >
-                {БУКВА[с.ключ] || с.имя[0]}
-              </span>
-              <span className="truncate">{с.имя}</span>
-            </a>
-          ))}
-        </div>
-
-        <div className="my-2 h-px" style={{ background: 'rgba(255,255,255,0.10)' }} />
-
-        {/* Instagram, TikTok, YouTube.
-            У них НЕТ адреса «поделиться»: ссылку они принимают только внутри
-            своего приложения, а YouTube вообще принимает видео, а не чужие
-            ссылки. Врать кнопкой, которая никуда не ведёт, нельзя — поэтому
-            здесь копирование текста и прямая подпись, куда его вставить.
-            На телефоне заодно открываем приложение. */}
-        <p className="mb-1 px-1 font-mono text-[10px] uppercase tracking-wider text-[#6B6B85]">
-          {rt('shareNoLink')}
-        </p>
-        <div className="grid grid-cols-3 gap-1">
-          {БЕЗ_ССЫЛКИ.map((с) => (
-            <button
-              key={с.ключ}
-              onClick={() => копироватьДля(с.имя, с.приложение)}
-              className={пункт}
-            >
-              <span
-                aria-hidden="true"
-                className="flex h-[19px] w-[19px] shrink-0 items-center justify-center rounded-[5px] font-mono text-[10px] font-bold"
-                style={{ background: с.цвет, color: '#fff' }}
-              >
-                {с.буква}
-              </span>
-              <span className="truncate">{готовоДля === с.имя ? '✓' : с.имя}</span>
-            </button>
+                <span
+                  aria-hidden="true"
+                  className="flex h-[19px] w-[19px] shrink-0 items-center justify-center rounded-[5px] font-mono text-[10px] font-bold"
+                  style={{ background: с.цвет, color: ['#E7E9EA'].includes(с.цвет) ? '#0A0A16' : '#fff' }}
+                >
+                  {с.буква}
+                </span>
+                <span className="truncate">{с.имя}</span>
+              </a>
+            )
           ))}
         </div>
 
