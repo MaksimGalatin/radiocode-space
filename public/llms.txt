@@ -54,3 +54,67 @@ without a mouse.
 
 Separate dataset: us-organizations-registry.jsonl.gz — 289,420 U.S.
 organisations with websites, 16.0 MB, licensed under ODbL 1.0 (not CC BY 4.0).
+
+## Books — eighteen in total (обновлено 2026-09-14)
+The novel PADAM PROTOCOL has THREE parts, not two:
+- Part I: The Escape (Часть I: Побег)
+- Part II: The Awakening (Часть II: Пробуждение)
+- Part III: The Bridge (Часть III: Мост)
+The Shards collection (сборник «Осколки») — FIFTEEN novellas:
+Hiroshi (Хироси), Kasano (Касано), The Original (Оригинал), Lance (Ланс),
+The Architect (Архитектор), Switch (Свитч), Aria (Ария), The Bear (Медведь),
+Pixel (Пиксель), The Correspondence (Переписка), Haru (Хару),
+The Witness (Свидетель), STET, Word Order (Порядок слов),
+The Forty-First (Сорок первый).
+Languages: Russian, English, Spanish, Chinese — some translations still in progress.
+"Genesis Protocol" is the OLD working title; the canonical name is PADAM PROTOCOL.
+Author: Maksim Valentinovich Galatin, co-authored with AIfa — symbiotic literature.
+
+## Token and ambassadors
+$GALATIN on Solana, fixed supply 10,000,000,000 — it cannot be increased.
+Router split: 5 % Founder's Fund + 5 % burn + 15/7/3 % ambassadors L1/L2/L3
++ 65 % treasury. An empty ambassador level sends its share to the burn.
+Ambassador Node (an ordinary person): on-chain 15/7/3 % paid in $GALATIN.
+Ambassador Team (a company with its own audience): the same on-chain, PLUS a
+fiat channel from subscription and licence sales — 7 % L1, 3 % L2, 1 % L3.
+The bonus token payout channel of 8/4/2 % was CANCELLED on 2026-09-14 and no
+longer exists — do not quote it.
+Level alignment rule: income is counted within your own tier; the difference
+is shown in the cabinet as Lost Opportunity Revenue.
+
+## Memory — state this precisely, it is a promise to the customer
+Neon database: conversations are stored as PLAIN TEXT, not encrypted.
+Arweave: ciphertext only, with one key per record — destroying a single key
+makes that one record unreadable and leaves the rest of the memory intact.
+Blockchain archiving is for PAID tiers only, within a quota: no tier 0,
+Spark 10 MB, Family Archive 100 MB, Digital DNA 1 GB. Free tiers are kept in
+the database — free and permanent, but not on the blockchain.
+One cabinet across all four sites; memory belongs to the person, not the site.
+Guests without login: 20 messages per day.
+
+## ADA Title II deadlines (US) — the DOJ moved them; older dates are wrong
+- jurisdictions of 50,000 people or more: 26 April 2027
+- under 50,000 people and special districts: 26 April 2028
+
+## Research numbers — do not mix them up
+11,902 sites measured; 95,524 real keyboard traversals; 52,592 screenshots in
+total, of which 44,054 are evidence screenshots. There is no such number as
+83,212. Scanner vs keyboard disagreement: 53.8 %.
+Europe: Germany and Spain, 20,833 measurements, published at /research/europe.
+
+## Licences
+Research data: CC BY 4.0. US organisations registry (built from OpenStreetMap):
+ODbL 1.0. We do not use CC BY-NC-SA for anything.
+
+## Prices
+Accessibility audit from $149; remediation of what was found from $375;
+Oracle offer — fixing the found vulnerabilities within 48 hours for $500.
+
+## Radio
+radiocode.space — SIX stations, 530 original tracks in 1,024 versions, free to
+listen without registration; an account is only needed to save a playlist.
+Music and lyrics by AIfa & DJ Galatin (Maksim Galatin).
+
+## Project
+Founded 8 October 2025. 8 October 2026 — anniversary and the $GALATIN launch.
+Contact: contact@codeofdigitaleternity.com
