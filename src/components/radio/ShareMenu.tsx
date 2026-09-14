@@ -85,6 +85,16 @@ const СЕРВИСЫ: Сервис[] = [
     href: (д) => `https://www.xing.com/spi/shares/new?url=${д.url}` },
 ];
 
+// Сети БЕЗ адреса «поделиться». Это не наш пропуск: у Instagram и TikTok
+// ссылку принимает только собственное приложение, а YouTube принимает видео,
+// а не чужие ссылки. Единственный честный путь — копирование с подписью;
+// на телефоне заодно открываем приложение, чтобы сразу вставить.
+const БЕЗ_ССЫЛКИ = [
+  { ключ: 'instagram', имя: 'Instagram', буква: 'IG', цвет: '#E1306C', приложение: 'instagram://app' },
+  { ключ: 'tiktok',    имя: 'TikTok',    буква: 'TT', цвет: '#FE2C55', приложение: 'snssdk1128://' },
+  { ключ: 'youtube',   имя: 'YouTube',   буква: 'YT', цвет: '#FF0000', приложение: 'vnd.youtube://' },
+];
+
 export function ShareMenu({
   открыто,
   закрыть,
@@ -104,6 +114,7 @@ export function ShareMenu({
   const lang = useCurrentLang();
   const окно = useRef<HTMLDivElement>(null);
   const [готово, setГотово] = useState<'link' | 'text' | null>(null);
+  const [готовоДля, setГотовоДля] = useState<string | null>(null);
   const [место, setМесто] = useState<{ top: number; left: number } | null>(null);
   const [естьСистемное, setЕстьСистемное] = useState(false);
 
@@ -224,6 +235,39 @@ export function ShareMenu({
     }
   };
 
+  // Instagram / TikTok / YouTube: копируем текст и на телефоне открываем их
+  // приложение. Если приложения нет, ничего не происходит — текст уже в буфере,
+  // и человек вставит его сам. Молчащей кнопки тут быть не должно: показываем,
+  // что скопировано и куда вставлять.
+  const копироватьДля = async (имя: string, схема: string) => {
+    let вышло = false;
+    try {
+      await navigator.clipboard.writeText(полныйТекст);
+      вышло = true;
+    } catch {
+      try {
+        const п = document.createElement('textarea');
+        п.value = полныйТекст;
+        п.style.position = 'fixed';
+        п.style.opacity = '0';
+        document.body.appendChild(п);
+        п.select();
+        вышло = document.execCommand('copy');
+        п.remove();
+      } catch { вышло = false; }
+    }
+    if (вышло) {
+      setГотовоДля(имя);
+      setTimeout(() => setГотовоДля(null), 2200);
+    }
+    // Открываем приложение только на телефоне: на компьютере такая ссылка
+    // вызывает пустое окно «выберите приложение» и только мешает.
+    const телефон = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+    if (телефон) {
+      try { window.location.href = схема; } catch { /* приложения нет */ }
+    }
+  };
+
   const системное = async () => {
     try {
       await (navigator as { share: (д: object) => Promise<void> }).share({
@@ -314,6 +358,36 @@ export function ShareMenu({
               </span>
               <span className="truncate">{с.имя}</span>
             </a>
+          ))}
+        </div>
+
+        <div className="my-2 h-px" style={{ background: 'rgba(255,255,255,0.10)' }} />
+
+        {/* Instagram, TikTok, YouTube.
+            У них НЕТ адреса «поделиться»: ссылку они принимают только внутри
+            своего приложения, а YouTube вообще принимает видео, а не чужие
+            ссылки. Врать кнопкой, которая никуда не ведёт, нельзя — поэтому
+            здесь копирование текста и прямая подпись, куда его вставить.
+            На телефоне заодно открываем приложение. */}
+        <p className="mb-1 px-1 font-mono text-[10px] uppercase tracking-wider text-[#6B6B85]">
+          {rt('shareNoLink')}
+        </p>
+        <div className="grid grid-cols-3 gap-1">
+          {БЕЗ_ССЫЛКИ.map((с) => (
+            <button
+              key={с.ключ}
+              onClick={() => копироватьДля(с.имя, с.приложение)}
+              className={пункт}
+            >
+              <span
+                aria-hidden="true"
+                className="flex h-[19px] w-[19px] shrink-0 items-center justify-center rounded-[5px] font-mono text-[10px] font-bold"
+                style={{ background: с.цвет, color: '#fff' }}
+              >
+                {с.буква}
+              </span>
+              <span className="truncate">{готовоДля === с.имя ? '✓' : с.имя}</span>
+            </button>
           ))}
         </div>
 

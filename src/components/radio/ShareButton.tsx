@@ -31,7 +31,6 @@ export function ShareButton({
   const rt = useRadioT();
   const refCode = useSocial((s) => s.refCode);
   const [открыто, setОткрыто] = useState(false);
-  const [done] = useState(false);
   const кнопка = useRef<HTMLButtonElement>(null);
 
   const url = buildTrackShareUrl(trackId, refCode);
@@ -49,19 +48,12 @@ export function ShareButton({
         title={rt('shareTrack')}
         className="flex items-center gap-1 shrink-0 rounded-full px-1.5 py-1 transition-colors hover:bg-white/[0.05] relative after:absolute after:content-[''] after:inset-[-10px]"
       >
-        {done ? (
-          <>
-            <Check width={size} height={size} style={{ color }} strokeWidth={2.4} />
-            <span className="text-[13px] font-mono hidden sm:inline" style={{ color }}>{rt('copied')}</span>
-          </>
-        ) : (
-          <Share2
-            width={size}
-            height={size}
-            style={{ color: открыто ? color : '#8B8BA8' }}
-            strokeWidth={2}
-          />
-        )}
+        <Share2
+          width={size}
+          height={size}
+          style={{ color: открыто ? color : '#8B8BA8' }}
+          strokeWidth={2}
+        />
       </motion.button>
 
       <ShareMenu

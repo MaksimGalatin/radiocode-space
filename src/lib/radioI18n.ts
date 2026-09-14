@@ -53,6 +53,11 @@ const S = {
   shareEmail:     { en: 'Email',                              ru: 'Почта',                                es: 'Correo',                                zh: '电子邮件' },
   shareSms:       { en: 'SMS',                                ru: 'СМС',                                  es: 'SMS',                                   zh: '短信' },
   shareSystem:    { en: 'More…',                              ru: 'Ещё…',                                 es: 'Más…',                                  zh: '更多…' },
+  // Instagram, TikTok и YouTube не имеют адреса «поделиться»: они принимают
+  // ссылку только внутри своего приложения. Поэтому им — копирование текста
+  // и честное объяснение, что дальше вставить руками.
+  shareNoLink:    { en: 'Copy & paste (no share link)',       ru: 'Копия для вставки',                    es: 'Copiar y pegar',                        zh: '复制后粘贴' },
+  shareCopiedFor: { en: 'Copied — paste it in {app}',         ru: 'Скопировано — вставь в {app}',         es: 'Copiado — pégalo en {app}',             zh: '已复制 —— 粘贴到 {app}' },
   // Подпись, которая уходит вместе со ссылкой. Голая ссылка не говорит
   // человеку ничего — нужен трек и приглашение.
   shareCaption:   {
