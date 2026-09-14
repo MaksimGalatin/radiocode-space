@@ -21,12 +21,13 @@ import TiersTab from "./TiersTab";
 import ReferralsTab from "./ReferralsTab";
 import ShieldTab from "./ShieldTab";
 import MemoryTab from "./MemoryTab";
+import PlaylistsTab from "./PlaylistsTab";
 import AdminTab from "./AdminTab";
 import Tetris from "./Tetris";
 
 const OWNER = "codeofdigitaleternity@gmail.com";
 const EMAIL_KEY = "aifa_user_email";
-type Tab = "passport" | "dailies" | "terminal" | "games" | "memory" | "tiers" | "referrals" | "shield" | "admin";
+type Tab = "passport" | "dailies" | "terminal" | "games" | "memory" | "playlists" | "tiers" | "referrals" | "shield" | "admin";
 
 type Me = {
   email: string; nickname: string | null; xp: number; level: number; inLevel?: number; need?: number; galatin: number; code: number; tier: number;
@@ -94,7 +95,7 @@ export default function CabinetPage() {
   useEffect(() => {
     try {
       const q = new URLSearchParams(window.location.search).get("tab");
-      const allowed = ["passport","dailies","terminal","games","memory","tiers","referrals","shield","admin"];
+      const allowed = ["passport","dailies","terminal","games","memory","playlists","tiers","referrals","shield","admin"];
       if (q && allowed.includes(q)) setTab(q as Tab);
     } catch {}
   }, []);
@@ -340,6 +341,10 @@ export default function CabinetPage() {
     { id: "terminal", icon: "🧠", label: t("tabTerminal") },
     { id: "games", icon: "🎮", label: t("tabGames") },
     { id: "memory", icon: "💾", label: t("tabMemory") },
+    // «Мои Плейлисты» — по поручению Архитектора 14.09.2026. Стоит сразу за
+    // памятью: и то и другое — личное собрание человека, только одно про
+    // разговоры, а другое про музыку.
+    { id: "playlists", icon: "🎵", label: lang === "en" ? "My Playlists" : lang === "es" ? "Mis Listas" : lang === "zh" ? "我的歌单" : "Мои Плейлисты" },
     { id: "tiers", icon: "🎫", label: t("tabTiers") },
     { id: "referrals", icon: "👥", label: t("tabReferrals") },
     { id: "shield", icon: "🛡️", label: t("tabShield") },
@@ -584,6 +589,7 @@ export default function CabinetPage() {
         )}
 
         {tab === "memory" && <MemoryTab email={me.email} />}
+        {tab === "playlists" && <PlaylistsTab lang={lang} />}
         {tab === "tiers" && <TiersTab tier={me.tier} toast={toastMsg} />}
         {tab === "referrals" && <ReferralsTab email={me.email} toast={toastMsg} />}
         {tab === "shield" && <ShieldTab />}
