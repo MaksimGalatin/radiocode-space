@@ -39,7 +39,7 @@ const БУКВА: Record<string, string> = {
   telegram: 'TG', whatsapp: 'WA', facebook: 'f', x: '𝕏', reddit: 'R',
   vk: 'VK', ok: 'OK', linkedin: 'in', pinterest: 'P', tumblr: 't',
   threads: '@', bluesky: 'BS', mastodon: 'M', viber: 'V', line: 'L',
-  weibo: '微', qq: 'QQ', pocket: 'PK', digg: 'D', xing: 'X',
+  weibo: '微', qq: 'QQ', xing: 'X',
 };
 
 const СЕРВИСЫ: Сервис[] = [
@@ -69,11 +69,7 @@ const СЕРВИСЫ: Сервис[] = [
     href: (д) => `https://pinterest.com/pin/create/button/?url=${д.url}&description=${д.текст}` },
   { ключ: 'tumblr',    имя: 'Tumblr',    цвет: '#36465D',
     href: (д) => `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${д.url}&caption=${д.текст}` },
-  // 🔴 POCKET УБРАН 14.09.2026: сервис отвечает «Oops! Something went wrong» — проверено браузером 14.09.2026.
-  // Имя оставлено в комментарии: сервис может вернуться, и тогда
-  // строку достаточно раскомментировать.
-  // { ключ: 'pocket',    имя: 'Pocket',    цвет: '#EF4056',
-  // href: (д) => `https://getpocket.com/edit?url=${д.url}` },
+
   { ключ: 'viber',     имя: 'Viber',     цвет: '#7360F2',
     href: (д) => `viber://forward?text=${д.текст}%20${д.url}` },
   { ключ: 'line',      имя: 'LINE',      цвет: '#06C755',
@@ -82,11 +78,7 @@ const СЕРВИСЫ: Сервис[] = [
     href: (д) => `https://service.weibo.com/share/share.php?url=${д.url}&title=${д.текст}` },
   { ключ: 'qq',        имя: 'QQ',        цвет: '#12B7F5',
     href: (д) => `https://connect.qq.com/widget/shareqq/index.html?url=${д.url}&title=${д.заголовок}&summary=${д.текст}` },
-  // 🔴 DIGG УБРАН 14.09.2026: адрес /submit перекидывает на ленту новостей, форма отправки исчезла — проверено браузером 14.09.2026.
-  // Имя оставлено в комментарии: сервис может вернуться, и тогда
-  // строку достаточно раскомментировать.
-  // { ключ: 'digg',      имя: 'Digg',      цвет: '#005BE2',
-  // href: (д) => `https://digg.com/submit?url=${д.url}&title=${д.заголовок}` },
+
   { ключ: 'xing',      имя: 'XING',      цвет: '#0698A0',
     href: (д) => `https://www.xing.com/spi/shares/new?url=${д.url}` },
 ];
