@@ -104,6 +104,13 @@ const СЛОВА: Record<Loc, Record<string, string>> = {
  * Шлюзы перечислены по очереди: провал arweave.net не должен выглядеть как
  * «паспорта не существует».
  */
+/**
+ * Адрес своего сайта для обращения к собственной витрине паспорта.
+ * На боевом его даёт VERCEL_URL; локально — сам себя по localhost.
+ */
+const БАЗА_САЙТА = process.env.NEXT_PUBLIC_SITE_URL
+  || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+
 const ШЛЮЗЫ = ['https://arweave.net/', 'https://ar-io.net/', 'https://permagate.io/'];
 
 async function достать(id: string): Promise<Паспорт | null> {
@@ -116,7 +123,37 @@ async function достать(id: string): Promise<Паспорт | null> {
       });
       if (!r.ok) continue;
       const j = (await r.json()) as Паспорт;
-      if (j && j.protocol === 'CODE-ETERNAL-PASSPORT') return j;
+      if (j && j.protocol === 'CODE-ETERNAL-PASSPORT') {
+        /**
+         * 🔴 ЛИЧНАЯ ЧАСТЬ В ЦЕПИ ЗАШИФРОВАНА — с 14.09.2026.
+         *
+         * Поручение Архитектора: у каждого Паспорта свой ключ, чтобы
+         * уничтожение одного ключа отзывало один Паспорт и ничего больше.
+         * Поэтому в Arweave уходит только открытая часть (протокол, дата,
+         * номер, псевдоним), а имя, биография, манифест и аватар — под
+         * своим ключом, который в цепь не попадает никогда.
+         *
+         * Витрину берём из нашей базы по псевдониму. Уничтожили ключ и
+         * строку — витрина пуста, в цепи шум: право на забвение работает
+         * целиком, а не наполовину.
+         */
+        const закрыт = !j.identity && typeof (j as { identityEncrypted?: string }).identityEncrypted === 'string';
+        if (закрыт) {
+          const ник = (j as { username?: string }).username || '';
+          if (ник) {
+            try {
+              const в = await fetch(
+                `${БАЗА_САЙТА}/api/passport/public?username=${encodeURIComponent(ник)}`,
+                { next: { revalidate: 300 }, signal: AbortSignal.timeout(8000) });
+              if (в.ok) {
+                const д = (await в.json()) as { found?: boolean; identity?: Паспорт['identity'] };
+                if (д.found && д.identity) return { ...j, identity: д.identity };
+              }
+            } catch { /* витрина недоступна — покажем то, что есть в цепи */ }
+          }
+        }
+        return j;
+      }
     } catch { /* следующий шлюз */ }
   }
   return null;

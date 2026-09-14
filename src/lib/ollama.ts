@@ -195,3 +195,66 @@ export async function ollamaChatCompletion(
 
   return null;
 }
+
+/**
+ * ТО ЖЕ САМОЕ, НО С ИМЕНЕМ МОДЕЛИ. Добавлено 14.09.2026.
+ *
+ * ЗАЧЕМ. Архитектор спросил прямо: «разговор идёт через облачную Гемму?» — и
+ * ответить было НЕЧЕМ: ручка чата возвращала общую метку `provider: "ai"`,
+ * одинаковую для Ollama, Gemini и Bedrock. Настройка есть, а доказательства
+ * нет — значит работа не закончена (раздел 11: замер, а не рассуждение).
+ *
+ * Теперь имя ступени видно в каждом ответе: `ollama/gemma4:31b-cloud`.
+ * Проверка занимает один запрос и не требует чтения журналов.
+ */
+export async function ollamaОтветСМоделью(
+  messages: Array<{ role: string; content: string }>,
+  maxTokens: number = 4096,
+  temperature: number = 0.8,
+  modelOverride?: string,
+): Promise<{ текст: string; модель: string } | null> {
+  const ключ = (process.env.OLLAMA_API_KEY || '').trim();
+  if (!ключ) {
+    console.warn('[Ollama] пропущен: OLLAMA_API_KEY не задан');
+    return null;
+  }
+  const готовые = урезатьСистемный(messages);
+  const модели = modelOverride ? [modelOverride] : ЛЕСТНИЦА_OLLAMA;
+
+  for (const модель of модели) {
+    const начало = Date.now();
+    try {
+      const ответ = await fetch('https://ollama.com/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ключ}` },
+        body: JSON.stringify({
+          model: модель, messages: готовые, stream: false,
+          options: { temperature, num_predict: maxTokens },
+        }),
+      });
+      if (!ответ.ok) {
+        const тело = await ответ.text().catch(() => '');
+        console.warn(`[Ollama] ${модель}: HTTP ${ответ.status} за ${Date.now() - начало} мс — ${тело.slice(0, 200)}`);
+        continue;
+      }
+      const д = await ответ.json();
+      const текст = д?.message?.content;
+      if (typeof текст !== 'string' || !текст.trim()) {
+        console.warn(`[Ollama] ${модель}: успех, но ПУСТОЙ ответ — done_reason=${д?.done_reason || 'не назван'}`);
+        continue;
+      }
+      try {
+        const всего = Number(д?.prompt_eval_count || 0) + Number(д?.eval_count || 0);
+        if (всего > 0) {
+          const { record } = await import('./cost-guard');
+          await record(СЛУЖБА, всего, 1);
+        }
+      } catch { /* учёт не важнее самого ответа */ }
+      console.warn(`[Ollama] ${модель}: ответила за ${Date.now() - начало} мс`);
+      return { текст, модель };
+    } catch (e) {
+      console.warn(`[Ollama] ${модель}: сбой вызова — ${String((e as Error)?.message || e).slice(0, 200)}`);
+    }
+  }
+  return null;
+}

@@ -334,12 +334,15 @@ async function ответБесплатнымИлиГрантом(
    * Промолчала — идём дальше по лестнице, разговор не обрывается.
    */
   try {
-    const { ollamaChatCompletion, ollamaНастроен } = await import("@/lib/ollama");
+    const { ollamaОтветСМоделью, ollamaНастроен } = await import("@/lib/ollama");
     if (ollamaНастроен()) {
-      const первыйОтвет = await ollamaChatCompletion(formattedMessages, 4096, 0.8);
+      const первыйОтвет = await ollamaОтветСМоделью(formattedMessages, 4096, 0.8);
       if (первыйОтвет) {
-        console.warn('[AI] ответила Ollama (первая ступень, облачная Gemma)');
-        return первыйОтвет;
+        // Имя ступени видно в ответе: общая метка `ai` не отвечала на вопрос
+        // «разговор идёт через облачную Гемму?».
+        (globalThis as { __ктоОтветил?: string }).__ктоОтветил = 'ollama/' + первыйОтвет.модель;
+        console.warn('[AI] ответила Ollama (первая ступень, облачная Gemma): ' + первыйОтвет.модель);
+        return первыйОтвет.текст;
       }
       console.warn('[AI] Ollama первой ступенью промолчала — иду по лестнице дальше');
     } else {
@@ -769,7 +772,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       response: aiResponse,
-      provider: ктоОтветил || "ai",
+      provider: (globalThis as { __ктоОтветил?: string }).__ктоОтветил || ктоОтветил || "ai",
     });
   } catch (error) {
     console.error("AIfa chat error:", error);

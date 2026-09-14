@@ -184,7 +184,62 @@ export async function POST(req: NextRequest) {
         .update('CODE-ETERNAL-PASSPORT:' + String(row.username))
         .digest('hex'),
     };
-    const data = Buffer.from(JSON.stringify(doc, null, 2), 'utf8');
+    /**
+     * 🔴 СВОЙ КЛЮЧ У КАЖДОГО ПАСПОРТА. Добавлено 14.09.2026.
+     *
+     * Поручение Архитектора: «каждый Цифровой Паспорт — своим [ключом],
+     * чтобы можно было уничтожить доступ стерев ТОЛЬКО один ключ от диалога
+     * или Паспорта».
+     *
+     * До этой правки документ уходил в Arweave открытым текстом целиком, и
+     * отозвать его было НЕЧЕМ: из цепи не изымается ничто и никогда.
+     *
+     * Теперь личная часть — имя, биография, манифест, ссылки, аватар,
+     * уровень тарифа — шифруется своим одноразовым ключом (тот же механизм,
+     * что у записей памяти: ключ ложится в `record_keys` и в цепь не
+     * попадает). Уничтожили эту строку — личная часть стала шумом навсегда,
+     * остальная память человека цела.
+     *
+     * Открытыми остаются только протокол, версия, дата и номер паспорта:
+     * они и так публичны (номер выводится из псевдонима, псевдоним написан
+     * на самом паспорте), а без них паспорт нельзя проверить в цепи — ради
+     * чего он и существует.
+     *
+     * Если шифрование недоступно (нет мастер-ключа), паспорт НЕ уходит в
+     * цепь вовсе: запись необратима, и лучше отказ, чем вечная публикация
+     * личного текста, который человек считал закрытым.
+     */
+    let документВЦепь: Record<string, unknown>;
+    try {
+      const { зашифроватьЗапись } = await import('@/lib/user-key');
+      const закрытая = await зашифроватьЗапись(
+        email,
+        JSON.stringify((doc as Record<string, unknown>).identity),
+        `passport:${String(row.username)}`,
+      );
+      документВЦепь = {
+        protocol: (doc as Record<string, unknown>).protocol,
+        version: (doc as Record<string, unknown>).version,
+        issuedAt: (doc as Record<string, unknown>).issuedAt,
+        site: (doc as Record<string, unknown>).site,
+        subject: (doc as Record<string, unknown>).subject,
+        username: String(row.username),
+        // Личная часть — шифротекст. Ключ остаётся у нас, в record_keys.
+        identityEncrypted: закрытая,
+        encryption: 'aifa-record-key-v1',
+      };
+    } catch (e) {
+      await pool.end();
+      console.error('[passport/mint] шифрование паспорта не удалось, в цепь НЕ пишем:',
+        String(e).slice(0, 200));
+      return NextResponse.json({
+        error: 'encryption_unavailable',
+        сообщение: 'Паспорт не выпущен: не удалось зашифровать личную часть. '
+          + 'Запись в блокчейн необратима, поэтому открытым текстом мы её не отправляем.',
+      }, { status: 503 });
+    }
+
+    const data = Buffer.from(JSON.stringify(документВЦепь, null, 2), 'utf8');
 
     /**
      * СТОРОЖ РАЗМЕРА: не даём кошельку молча заплатить.

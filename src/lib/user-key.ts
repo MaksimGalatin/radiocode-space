@@ -72,6 +72,35 @@ export async function getOrCreateUserKey(email: string): Promise<Buffer> {
   } finally { await p.end(); }
 }
 
+/**
+ * КЛЮЧ ПАМЯТИ ЕСТЬ У КАЖДОГО — с первой минуты учётной записи.
+ *
+ * Поручение Архитектора 14.09.2026: «ИСПРАВИТЬ!!!! ДЛЯ НОВЫХ И СТАРЫХ!!!»
+ *
+ * ЧЕМ ОПЛАЧЕНО. Ключ создавался лениво — при первой записи памяти. Замер по
+ * базе кабинета 14.09.2026: в `users_auth` 13 человек, ключ есть у 7. Шесть
+ * живых людей завели учётную запись и остались без ключа: пока они молчат,
+ * терять нечего, но ключ — это ещё и то, что человек может ЗАБРАТЬ в
+ * кабинете, и то, чем его память будет закрыта в вечном хранилище. Он обязан
+ * существовать с самого начала, а не появляться неизвестно когда.
+ *
+ * НИКОГДА НЕ РОНЯЕТ ВЫЗЫВАЮЩЕГО. Эта функция зовётся на входе: если база
+ * недоступна, человек всё равно должен войти. Отказ пишется в журнал —
+ * молчащий catch уже стоил нам невидимой поломки узнавания.
+ */
+export async function обеспечитьКлючПамяти(email: string): Promise<boolean> {
+  const em = (email || '').trim().toLowerCase();
+  if (!em) return false;
+  try {
+    await getOrCreateUserKey(em);
+    return true;
+  } catch (e) {
+    console.error('[user-key] ключ памяти не создан для',
+      em.replace(/(.).*(@.*)/, '$1***$2'), '—', String(e).slice(0, 200));
+    return false;
+  }
+}
+
 /** Encrypt text with the user's data key (for storing a dialog). */
 export async function encryptForUser(email: string, text: string): Promise<string> {
   const key = await getOrCreateUserKey(email);
