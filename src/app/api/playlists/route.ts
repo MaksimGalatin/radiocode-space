@@ -64,9 +64,48 @@ function имяПоУмолчанию(язык: string): string {
   return имена[язык] || имена.en;
 }
 
+/**
+ * КТО ПЕРЕД НАМИ: своя сессия ИЛИ опознанный человек от сестринского сайта.
+ *
+ * ЗАЧЕМ. Кабинет у нас ЕДИНЫЙ на четыре сайта (раздел 34), а подборки живут
+ * только здесь — музыка есть только на радио. Значит кабинет на центральном,
+ * aifa.works или aifa.digital обязан уметь показать человеку его же
+ * подборки, а для этого сайт-сестра должен передать сюда, кто именно пришёл.
+ *
+ * Тот же механизм и та же защита, что в чате: почта из тела или запроса
+ * принимается ТОЛЬКО вместе с верным `x-aifa-internal`, сравнение постоянное
+ * по времени. Без секрета поведение прежнее — только своя cookie, чужую
+ * почту подставить нельзя.
+ *
+ * ЧЕМ ОПЛАЧЕНО. 14.09.2026 проверка плейлистов с боевого вернула 401 на
+ * каждый запрос: ручка знала только cookie, и убедиться, что подборки вообще
+ * работают, было нечем. Ровно та же слепота, из-за которой три сайта не
+ * могли сказать центру, кто пришёл, и человек упирался в чужой лимит.
+ */
+async function ктоПришёл(req: NextRequest, изТела?: string): Promise<string> {
+  const своя = await сессияДействительна(req);
+  if (своя) return своя;
+  try {
+    const crypto = await import('crypto');
+    const секрет = process.env.AIFA_INTERNAL_SECRET || '';
+    const пришло = req.headers.get('x-aifa-internal') || '';
+    if (!секрет || !пришло) return '';
+    const a = Buffer.from(пришло, 'utf8'), b = Buffer.from(секрет, 'utf8');
+    if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return '';
+    const почта = (изТела || req.nextUrl.searchParams.get('userEmail') || '').trim();
+    if (почта) {
+      console.warn('[playlists] личность принята по внутреннему релею сестринского сайта');
+      return почта.toLowerCase();
+    }
+  } catch (e) {
+    console.error('[playlists] релей не сработал:', String(e).slice(0, 160));
+  }
+  return '';
+}
+
 // ── GET: список плейлистов вошедшего, с треками ─────────────────────────────
 export async function GET(req: NextRequest) {
-  const почта = await сессияДействительна(req);
+  const почта = await ктоПришёл(req);
   if (!почта) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   const p = await pool();
@@ -111,11 +150,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   }
 
-  const почта = await сессияДействительна(req);
-  if (!почта) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-
+  // Тело читается ДО опознания: при внутреннем релее почта приходит именно
+  // в нём, а раньше объявления переменную не взять.
   let тело: Record<string, unknown> = {};
   try { тело = await req.json(); } catch { /* пустое тело — ниже отказ */ }
+
+  const почта = await ктоПришёл(req, (тело as { userEmail?: string })?.userEmail);
+  if (!почта) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   const действие = String(тело.action || 'add').trim();
   const p = await pool();
