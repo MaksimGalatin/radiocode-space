@@ -25,6 +25,27 @@ import { обеспечитьКлючПамяти } from '@/lib/user-key';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
+/**
+ * Кто может звать эту ручку: админ по куке ИЛИ внутренний секрет сайтов.
+ *
+ * ЗАЧЕМ ВТОРОЙ ПУТЬ. Ключи должны создаваться БОЕВЫМ кодом с БОЕВЫМ
+ * `MEMORY_MASTER_KEY`. Сделать это скриптом со своей машины нельзя: если
+ * локальный мастер-ключ хоть чем-то отличается от боевого, созданные им
+ * ключи на боевом не развернутся, и память станет нечитаемой — ровно та
+ * авария, которой оплачен раздел 10 Конституции (227 нечитаемых реплик из
+ * 665). Внутренний секрет знают только наши сайты; сравнение постоянное по
+ * времени, как в релее личности.
+ */
+async function свой(req: NextRequest): Promise<boolean> {
+  if (requireAdmin(req)) return true;
+  const crypto = await import('crypto');
+  const секрет = process.env.AIFA_INTERNAL_SECRET || '';
+  const пришло = req.headers.get('x-aifa-internal') || '';
+  if (!секрет || !пришло) return false;
+  const a = Buffer.from(пришло, 'utf8'), b = Buffer.from(секрет, 'utf8');
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
 async function собратьЛюдей(): Promise<{ всего: number; безКлюча: string[] }> {
   const { getDbPool } = await import('@/lib/db-pool');
   const p = await getDbPool();
@@ -42,8 +63,7 @@ async function собратьЛюдей(): Promise<{ всего: number; без�
 }
 
 export async function GET(req: NextRequest) {
-  const admin = requireAdmin(req);
-  if (!admin) return adminDenied();
+  if (!(await свой(req))) return adminDenied();
   const { всего, безКлюча } = await собратьЛюдей();
   return NextResponse.json({
     учётныхЗаписей: всего,
@@ -54,8 +74,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const admin = requireAdmin(req);
-  if (!admin) return adminDenied();
+  if (!(await свой(req))) return adminDenied();
 
   const { всего, безКлюча } = await собратьЛюдей();
   const создано: string[] = [];
