@@ -1,622 +1,644 @@
 {
-  "dataset": "US municipal websites — keyboard-only traversal",
-  "snapshot_date": "2026-09-01",
-  "method_url": "https://aifa.works/research/methodology",
-  "license": "CC BY 4.0",
-  "records": 95524,
-  "sites": 11902,
-  "sites_alive": 10592,
-  "sites_dead": 1310,
-  "territories": 51,
-  "unique_pairs": 95492,
-  "duplicates": 32,
-  "unknown_verdicts": 0,
-  "by_verdict": {
-    "unmeasurable_or_unreachable": 38328,
-    "partial_focus_or_labelling_barrier": 13972,
-    "formally_accessible_but_barrier_in_practice": 21305,
-    "reachable_by_a_person": 11994,
-    "server_silent": 1290,
-    "no_dns_record": 3950,
-    "blocked": 3609,
-    "broken_tls": 874,
-    "server_error": 202
+ "dataset": "US municipal websites — keyboard-only traversal",
+ "snapshot_date": "2026-09-01",
+ "method_url": "https://aifa.works/research/methodology",
+ "column_reference_url": "https://aifa.works/data/research-records-SCHEMA.md",
+ "measurement_code_url": "https://aifa.works/data/keyboard-traversal-engine.mjs",
+ "license": "CC BY 4.0",
+ "rebuilt_from": "research-records-2026-09-01.csv.gz, recomputed 2026-09-14",
+ "records": 95524,
+ "sites": 11902,
+ "sites_without_dns": 506,
+ "territories": 51,
+ "pages_without_field_labels": 52592,
+ "pages_with_text_below_12px": 44054,
+ "by_verdict": {
+  "unmeasurable_or_unreachable": 38328,
+  "formally_accessible_but_barrier_in_practice": 21305,
+  "partial_focus_or_labelling_barrier": 13972,
+  "reachable_by_a_person": 11994,
+  "no_dns_record": 3950,
+  "blocked": 3609,
+  "server_silent": 1290,
+  "broken_tls": 874,
+  "server_error": 202
+ },
+ "pages_per_page_type": {
+  "payment": 11955,
+  "documents": 11945,
+  "311_request": 11945,
+  "meetings": 11940,
+  "jobs": 11940,
+  "contact": 11936,
+  "calendar": 11933,
+  "home": 11930
+ },
+ "pages_with_any_barrier_by_page_type": {
+  "documents": 11029,
+  "311_request": 10857,
+  "payment": 10848,
+  "meetings": 10664,
+  "home": 10327,
+  "jobs": 10222,
+  "contact": 10066,
+  "calendar": 9517
+ },
+ "by_state": [
+  {
+   "state": "NY",
+   "sites": 1249,
+   "pages_measured": 10009,
+   "sites_without_dns": 8,
+   "reachable_percent": 15.8,
+   "partial_barrier_percent": 19.5,
+   "goal_not_reached_percent": 29.0,
+   "unmeasurable_percent": 35.6
   },
-  "by_page_type": {
-    "home": 11930,
-    "payment": 11955,
-    "contact": 11936,
-    "meetings": 11940,
-    "documents": 11945,
-    "jobs": 11940,
-    "311_request": 11945,
-    "calendar": 11933
+  {
+   "state": "WI",
+   "sites": 717,
+   "pages_measured": 5742,
+   "sites_without_dns": 15,
+   "reachable_percent": 14.0,
+   "partial_barrier_percent": 21.4,
+   "goal_not_reached_percent": 25.4,
+   "unmeasurable_percent": 39.2
   },
-  "barrier_by_page_type": {
-    "home": 10327,
-    "payment": 10848,
-    "contact": 10066,
-    "meetings": 10664,
-    "documents": 11029,
-    "jobs": 10222,
-    "311_request": 10857,
-    "calendar": 9517
+  {
+   "state": "TX",
+   "sites": 668,
+   "pages_measured": 5372,
+   "sites_without_dns": 11,
+   "reachable_percent": 16.9,
+   "partial_barrier_percent": 15.9,
+   "goal_not_reached_percent": 22.9,
+   "unmeasurable_percent": 44.3
   },
-  "pages_without_field_labels": 52592,
-  "pages_with_poor_contrast": 44054,
-  "by_state": [
-    {
-      "к": "PR",
-      "сайтов": 4,
-      "страниц": 32,
-      "мёртвых": 0,
-      "доступно": 0.0,
-      "частично": 0.0,
-      "барьер": 3.1,
-      "неизмеримо": 96.9
-    },
-    {
-      "к": "NJ",
-      "сайтов": 226,
-      "страниц": 1802,
-      "мёртвых": 36,
-      "доступно": 6.8,
-      "частично": 10.6,
-      "барьер": 18.2,
-      "неизмеримо": 64.4
-    },
-    {
-      "к": "KY",
-      "сайтов": 203,
-      "страниц": 1624,
-      "мёртвых": 40,
-      "доступно": 8.0,
-      "частично": 12.5,
-      "барьер": 21.4,
-      "неизмеримо": 58.1
-    },
-    {
-      "к": "NE",
-      "сайтов": 128,
-      "страниц": 1026,
-      "мёртвых": 3,
-      "доступно": 8.6,
-      "частично": 13.9,
-      "барьер": 26.0,
-      "неизмеримо": 51.5
-    },
-    {
-      "к": "WV",
-      "сайтов": 106,
-      "страниц": 841,
-      "мёртвых": 0,
-      "доступно": 9.3,
-      "частично": 10.2,
-      "барьер": 23.8,
-      "неизмеримо": 56.7
-    },
-    {
-      "к": "NC",
-      "сайтов": 296,
-      "страниц": 2386,
-      "мёртвых": 68,
-      "доступно": 9.4,
-      "частично": 9.8,
-      "барьер": 16.0,
-      "неизмеримо": 64.7
-    },
-    {
-      "к": "OR",
-      "сайтов": 166,
-      "страниц": 1331,
-      "мёртвых": 20,
-      "доступно": 9.4,
-      "частично": 15.0,
-      "барьер": 15.3,
-      "неизмеримо": 60.3
-    },
-    {
-      "к": "IL",
-      "сайтов": 383,
-      "страниц": 3065,
-      "мёртвых": 72,
-      "доступно": 9.9,
-      "частично": 10.0,
-      "барьер": 21.3,
-      "неизмеримо": 58.9
-    },
-    {
-      "к": "NH",
-      "сайтов": 199,
-      "страниц": 1592,
-      "мёртвых": 33,
-      "доступно": 9.9,
-      "частично": 15.1,
-      "барьер": 17.5,
-      "неизмеримо": 57.5
-    },
-    {
-      "к": "PA",
-      "сайтов": 337,
-      "страниц": 2710,
-      "мёртвых": 57,
-      "доступно": 10.0,
-      "частично": 9.6,
-      "барьер": 18.0,
-      "неизмеримо": 62.4
-    },
-    {
-      "к": "AR",
-      "сайтов": 325,
-      "страниц": 2612,
-      "мёртвых": 72,
-      "доступно": 10.1,
-      "частично": 6.1,
-      "барьер": 21.2,
-      "неизмеримо": 62.6
-    },
-    {
-      "к": "NV",
-      "сайтов": 30,
-      "страниц": 248,
-      "мёртвых": 0,
-      "доступно": 10.1,
-      "частично": 13.7,
-      "барьер": 14.5,
-      "неизмеримо": 61.7
-    },
-    {
-      "к": "OH",
-      "сайтов": 553,
-      "страниц": 4447,
-      "мёртвых": 58,
-      "доступно": 10.2,
-      "частично": 13.7,
-      "барьер": 24.7,
-      "неизмеримо": 51.4
-    },
-    {
-      "к": "FL",
-      "сайтов": 333,
-      "страниц": 2681,
-      "мёртвых": 73,
-      "доступно": 10.2,
-      "частично": 11.2,
-      "барьер": 18.7,
-      "неизмеримо": 59.9
-    },
-    {
-      "к": "MA",
-      "сайтов": 320,
-      "страниц": 2608,
-      "мёртвых": 48,
-      "доступно": 10.2,
-      "частично": 13.8,
-      "барьер": 13.8,
-      "неизмеримо": 62.2
-    },
-    {
-      "к": "OK",
-      "сайтов": 209,
-      "страниц": 1673,
-      "мёртвых": 35,
-      "доступно": 10.2,
-      "частично": 10.3,
-      "барьер": 17.8,
-      "неизмеримо": 61.7
-    },
-    {
-      "к": "AL",
-      "сайтов": 201,
-      "страниц": 1610,
-      "мёртвых": 36,
-      "доступно": 10.2,
-      "частично": 11.9,
-      "барьер": 26.5,
-      "неизмеримо": 51.4
-    },
-    {
-      "к": "IA",
-      "сайтов": 153,
-      "страниц": 1237,
-      "мёртвых": 18,
-      "доступно": 10.4,
-      "частично": 15.2,
-      "барьер": 21.3,
-      "неизмеримо": 53.0
-    },
-    {
-      "к": "CA",
-      "сайтов": 547,
-      "страниц": 4384,
-      "мёртвых": 87,
-      "доступно": 11.0,
-      "частично": 10.7,
-      "барьер": 16.9,
-      "неизмеримо": 61.4
-    },
-    {
-      "к": "MI",
-      "сайтов": 493,
-      "страниц": 3959,
-      "мёртвых": 57,
-      "доступно": 11.1,
-      "частично": 22.0,
-      "барьер": 23.9,
-      "неизмеримо": 43.0
-    },
-    {
-      "к": "CO",
-      "сайтов": 164,
-      "страниц": 1312,
-      "мёртвых": 18,
-      "доступно": 11.3,
-      "частично": 16.5,
-      "барьер": 20.0,
-      "неизмеримо": 52.1
-    },
-    {
-      "к": "AK",
-      "сайтов": 34,
-      "страниц": 272,
-      "мёртвых": 1,
-      "доступно": 11.4,
-      "частично": 16.2,
-      "барьер": 16.5,
-      "неизмеримо": 55.9
-    },
-    {
-      "к": "MO",
-      "сайтов": 305,
-      "страниц": 2442,
-      "мёртвых": 62,
-      "доступно": 11.6,
-      "частично": 5.5,
-      "барьер": 20.2,
-      "неизмеримо": 62.7
-    },
-    {
-      "к": "KS",
-      "сайтов": 167,
-      "страниц": 1339,
-      "мёртвых": 22,
-      "доступно": 11.7,
-      "частично": 12.2,
-      "барьер": 24.3,
-      "неизмеримо": 51.8
-    },
-    {
-      "к": "MS",
-      "сайтов": 120,
-      "страниц": 961,
-      "мёртвых": 5,
-      "доступно": 11.9,
-      "частично": 7.5,
-      "барьер": 25.6,
-      "неизмеримо": 55.0
-    },
-    {
-      "к": "GA",
-      "сайтов": 318,
-      "страниц": 2564,
-      "мёртвых": 48,
-      "доступно": 12.0,
-      "частично": 12.9,
-      "барьер": 18.7,
-      "неизмеримо": 56.5
-    },
-    {
-      "к": "TN",
-      "сайтов": 262,
-      "страниц": 2106,
-      "мёртвых": 48,
-      "доступно": 12.1,
-      "частично": 12.0,
-      "барьер": 21.4,
-      "неизмеримо": 54.6
-    },
-    {
-      "к": "CT",
-      "сайтов": 155,
-      "страниц": 1239,
-      "мёртвых": 10,
-      "доступно": 12.1,
-      "частично": 19.0,
-      "барьер": 16.8,
-      "неизмеримо": 52.1
-    },
-    {
-      "к": "WA",
-      "сайтов": 186,
-      "страниц": 1496,
-      "мёртвых": 20,
-      "доступно": 12.3,
-      "частично": 16.6,
-      "барьер": 16.3,
-      "неизмеримо": 54.8
-    },
-    {
-      "к": "LA",
-      "сайтов": 85,
-      "страниц": 680,
-      "мёртвых": 1,
-      "доступно": 12.4,
-      "частично": 14.4,
-      "барьер": 24.6,
-      "неизмеримо": 48.7
-    },
-    {
-      "к": "VA",
-      "сайтов": 208,
-      "страниц": 1668,
-      "мёртвых": 32,
-      "доступно": 12.5,
-      "частично": 14.9,
-      "барьер": 15.2,
-      "неизмеримо": 57.5
-    },
-    {
-      "к": "IN",
-      "сайтов": 125,
-      "страниц": 1004,
-      "мёртвых": 2,
-      "доступно": 12.5,
-      "частично": 16.2,
-      "барьер": 25.2,
-      "неизмеримо": 46.0
-    },
-    {
-      "к": "MD",
-      "сайтов": 106,
-      "страниц": 850,
-      "мёртвых": 1,
-      "доступно": 12.8,
-      "частично": 21.9,
-      "барьер": 25.4,
-      "неизмеримо": 39.9
-    },
-    {
-      "к": "UT",
-      "сайтов": 245,
-      "страниц": 1963,
-      "мёртвых": 24,
-      "доступно": 12.9,
-      "частично": 14.0,
-      "барьер": 17.3,
-      "неизмеримо": 55.8
-    },
-    {
-      "к": "ME",
-      "сайтов": 118,
-      "страниц": 944,
-      "мёртвых": 3,
-      "доступно": 13.1,
-      "частично": 18.2,
-      "барьер": 27.1,
-      "неизмеримо": 41.5
-    },
-    {
-      "к": "ID",
-      "сайтов": 72,
-      "страниц": 568,
-      "мёртвых": 1,
-      "доступно": 13.7,
-      "частично": 15.8,
-      "барьер": 18.1,
-      "неизмеримо": 52.3
-    },
-    {
-      "к": "WI",
-      "сайтов": 716,
-      "страниц": 5734,
-      "мёртвых": 35,
-      "доступно": 14.0,
-      "частично": 21.4,
-      "барьер": 25.4,
-      "неизмеримо": 39.2
-    },
-    {
-      "к": "SC",
-      "сайтов": 118,
-      "страниц": 943,
-      "мёртвых": 3,
-      "доступно": 14.3,
-      "частично": 12.6,
-      "барьер": 25.3,
-      "неизмеримо": 47.7
-    },
-    {
-      "к": "ND",
-      "сайтов": 45,
-      "страниц": 361,
-      "мёртвых": 0,
-      "доступно": 14.4,
-      "частично": 15.0,
-      "барьер": 20.2,
-      "неизмеримо": 50.4
-    },
-    {
-      "к": "HI",
-      "сайтов": 10,
-      "страниц": 80,
-      "мёртвых": 2,
-      "доступно": 15.0,
-      "частично": 2.5,
-      "барьер": 41.2,
-      "неизмеримо": 41.2
-    },
-    {
-      "к": "WY",
-      "сайтов": 54,
-      "страниц": 424,
-      "мёртвых": 0,
-      "доступно": 15.3,
-      "частично": 19.1,
-      "барьер": 22.2,
-      "неизмеримо": 43.4
-    },
-    {
-      "к": "NY",
-      "сайтов": 1244,
-      "страниц": 9969,
-      "мёртвых": 47,
-      "доступно": 15.8,
-      "частично": 19.6,
-      "барьер": 29.1,
-      "неизмеримо": 35.6
-    },
-    {
-      "к": "MT",
-      "сайтов": 82,
-      "страниц": 656,
-      "мёртвых": 0,
-      "доступно": 16.8,
-      "частично": 11.0,
-      "барьер": 22.6,
-      "неизмеримо": 49.7
-    },
-    {
-      "к": "RI",
-      "сайтов": 47,
-      "страниц": 376,
-      "мёртвых": 1,
-      "доступно": 16.8,
-      "частично": 22.9,
-      "барьер": 26.3,
-      "неизмеримо": 34.0
-    },
-    {
-      "к": "NM",
-      "сайтов": 73,
-      "страниц": 584,
-      "мёртвых": 1,
-      "доступно": 17.1,
-      "частично": 20.7,
-      "барьер": 25.3,
-      "неизмеримо": 36.8
-    },
-    {
-      "к": "TX",
-      "сайтов": 610,
-      "страниц": 4908,
-      "мёртвых": 50,
-      "доступно": 18.4,
-      "частично": 17.0,
-      "барьер": 24.7,
-      "неизмеримо": 40.0
-    },
-    {
-      "к": "VT",
-      "сайтов": 82,
-      "страниц": 656,
-      "мёртвых": 2,
-      "доступно": 18.6,
-      "частично": 17.4,
-      "барьер": 28.2,
-      "неизмеримо": 35.8
-    },
-    {
-      "к": "SD",
-      "сайтов": 46,
-      "страниц": 368,
-      "мёртвых": 1,
-      "доступно": 18.8,
-      "частично": 16.8,
-      "барьер": 30.4,
-      "неизмеримо": 34.0
-    },
-    {
-      "к": "MN",
-      "сайтов": 513,
-      "страниц": 4098,
-      "мёртвых": 41,
-      "доступно": 19.2,
-      "частично": 18.4,
-      "барьер": 23.4,
-      "неизмеримо": 39.0
-    },
-    {
-      "к": "AZ",
-      "сайтов": 113,
-      "страниц": 906,
-      "мёртвых": 8,
-      "доступно": 20.4,
-      "частично": 13.2,
-      "барьер": 19.1,
-      "неизмеримо": 47.2
-    },
-    {
-      "к": "DE",
-      "сайтов": 19,
-      "страниц": 152,
-      "мёртвых": 1,
-      "доступно": 27.0,
-      "частично": 14.5,
-      "барьер": 17.8,
-      "неизмеримо": 40.8
-    }
-  ],
-  "by_page_detail": [
-    {
-      "тип": "home",
-      "измеримых": 6341,
-      "дошёл": 25.3,
-      "фокус": 27.9,
-      "шагов": 4.8
-    },
-    {
-      "тип": "contact",
-      "измеримых": 6011,
-      "дошёл": 31.1,
-      "фокус": 40.1,
-      "шагов": 5.6
-    },
-    {
-      "тип": "calendar",
-      "измеримых": 5911,
-      "дошёл": 40.9,
-      "фокус": 24.2,
-      "шагов": 4.1
-    },
-    {
-      "тип": "jobs",
-      "измеримых": 5819,
-      "дошёл": 29.5,
-      "фокус": 15.2,
-      "шагов": 4.5
-    },
-    {
-      "тип": "payment",
-      "измеримых": 5817,
-      "дошёл": 19.0,
-      "фокус": 38.9,
-      "шагов": 11.9
-    },
-    {
-      "тип": "meetings",
-      "измеримых": 5815,
-      "дошёл": 21.9,
-      "фокус": 40.1,
-      "шагов": 9.6
-    },
-    {
-      "тип": "documents",
-      "измеримых": 5807,
-      "дошёл": 15.8,
-      "фокус": 28.4,
-      "шагов": 9.7
-    },
-    {
-      "тип": "311_request",
-      "измеримых": 5750,
-      "дошёл": 18.9,
-      "фокус": 21.5,
-      "шагов": 7.2
-    }
-  ],
-  "known_limits": {
-    "reproducibility_by_verdict_percent": 96,
-    "reproducibility_by_violation_count_percent": 89.9,
-    "note": "Verdicts describe the moment of measurement. Timeouts and silent servers reproduce in 55-61% of repeats."
+  {
+   "state": "CA",
+   "sites": 580,
+   "pages_measured": 4648,
+   "sites_without_dns": 34,
+   "reachable_percent": 11.2,
+   "partial_barrier_percent": 11.7,
+   "goal_not_reached_percent": 18.1,
+   "unmeasurable_percent": 59.1
+  },
+  {
+   "state": "OH",
+   "sites": 556,
+   "pages_measured": 4471,
+   "sites_without_dns": 30,
+   "reachable_percent": 10.2,
+   "partial_barrier_percent": 13.5,
+   "goal_not_reached_percent": 24.9,
+   "unmeasurable_percent": 51.5
+  },
+  {
+   "state": "MN",
+   "sites": 514,
+   "pages_measured": 4106,
+   "sites_without_dns": 18,
+   "reachable_percent": 19.1,
+   "partial_barrier_percent": 18.3,
+   "goal_not_reached_percent": 23.6,
+   "unmeasurable_percent": 38.9
+  },
+  {
+   "state": "MI",
+   "sites": 502,
+   "pages_measured": 4039,
+   "sites_without_dns": 16,
+   "reachable_percent": 11.3,
+   "partial_barrier_percent": 21.7,
+   "goal_not_reached_percent": 24.4,
+   "unmeasurable_percent": 42.7
+  },
+  {
+   "state": "IL",
+   "sites": 394,
+   "pages_measured": 3153,
+   "sites_without_dns": 27,
+   "reachable_percent": 10.3,
+   "partial_barrier_percent": 9.8,
+   "goal_not_reached_percent": 21.9,
+   "unmeasurable_percent": 58.0
+  },
+  {
+   "state": "FL",
+   "sites": 355,
+   "pages_measured": 2873,
+   "sites_without_dns": 28,
+   "reachable_percent": 10.1,
+   "partial_barrier_percent": 11.0,
+   "goal_not_reached_percent": 20.8,
+   "unmeasurable_percent": 58.0
+  },
+  {
+   "state": "PA",
+   "sites": 339,
+   "pages_measured": 2734,
+   "sites_without_dns": 25,
+   "reachable_percent": 9.9,
+   "partial_barrier_percent": 9.7,
+   "goal_not_reached_percent": 18.3,
+   "unmeasurable_percent": 62.1
+  },
+  {
+   "state": "MA",
+   "sites": 327,
+   "pages_measured": 2664,
+   "sites_without_dns": 12,
+   "reachable_percent": 10.7,
+   "partial_barrier_percent": 13.9,
+   "goal_not_reached_percent": 14.3,
+   "unmeasurable_percent": 61.1
+  },
+  {
+   "state": "AR",
+   "sites": 326,
+   "pages_measured": 2620,
+   "sites_without_dns": 55,
+   "reachable_percent": 10.2,
+   "partial_barrier_percent": 6.2,
+   "goal_not_reached_percent": 21.2,
+   "unmeasurable_percent": 62.4
+  },
+  {
+   "state": "GA",
+   "sites": 321,
+   "pages_measured": 2588,
+   "sites_without_dns": 14,
+   "reachable_percent": 11.9,
+   "partial_barrier_percent": 12.8,
+   "goal_not_reached_percent": 18.8,
+   "unmeasurable_percent": 56.6
+  },
+  {
+   "state": "MO",
+   "sites": 309,
+   "pages_measured": 2474,
+   "sites_without_dns": 26,
+   "reachable_percent": 11.5,
+   "partial_barrier_percent": 5.5,
+   "goal_not_reached_percent": 20.6,
+   "unmeasurable_percent": 62.4
+  },
+  {
+   "state": "NC",
+   "sites": 296,
+   "pages_measured": 2386,
+   "sites_without_dns": 17,
+   "reachable_percent": 9.4,
+   "partial_barrier_percent": 9.8,
+   "goal_not_reached_percent": 15.7,
+   "unmeasurable_percent": 65.0
+  },
+  {
+   "state": "TN",
+   "sites": 270,
+   "pages_measured": 2178,
+   "sites_without_dns": 16,
+   "reachable_percent": 12.1,
+   "partial_barrier_percent": 11.7,
+   "goal_not_reached_percent": 21.9,
+   "unmeasurable_percent": 54.3
+  },
+  {
+   "state": "UT",
+   "sites": 251,
+   "pages_measured": 2019,
+   "sites_without_dns": 3,
+   "reachable_percent": 12.6,
+   "partial_barrier_percent": 13.6,
+   "goal_not_reached_percent": 18.0,
+   "unmeasurable_percent": 55.9
+  },
+  {
+   "state": "NJ",
+   "sites": 236,
+   "pages_measured": 1882,
+   "sites_without_dns": 18,
+   "reachable_percent": 6.9,
+   "partial_barrier_percent": 10.6,
+   "goal_not_reached_percent": 19.5,
+   "unmeasurable_percent": 63.0
+  },
+  {
+   "state": "OK",
+   "sites": 211,
+   "pages_measured": 1689,
+   "sites_without_dns": 28,
+   "reachable_percent": 10.3,
+   "partial_barrier_percent": 10.4,
+   "goal_not_reached_percent": 18.2,
+   "unmeasurable_percent": 61.2
+  },
+  {
+   "state": "VA",
+   "sites": 209,
+   "pages_measured": 1676,
+   "sites_without_dns": 12,
+   "reachable_percent": 12.4,
+   "partial_barrier_percent": 14.8,
+   "goal_not_reached_percent": 15.6,
+   "unmeasurable_percent": 57.2
+  },
+  {
+   "state": "KY",
+   "sites": 205,
+   "pages_measured": 1640,
+   "sites_without_dns": 16,
+   "reachable_percent": 7.9,
+   "partial_barrier_percent": 12.4,
+   "goal_not_reached_percent": 21.6,
+   "unmeasurable_percent": 58.0
+  },
+  {
+   "state": "AL",
+   "sites": 204,
+   "pages_measured": 1634,
+   "sites_without_dns": 19,
+   "reachable_percent": 10.1,
+   "partial_barrier_percent": 11.7,
+   "goal_not_reached_percent": 26.5,
+   "unmeasurable_percent": 51.7
+  },
+  {
+   "state": "NH",
+   "sites": 199,
+   "pages_measured": 1592,
+   "sites_without_dns": 11,
+   "reachable_percent": 9.9,
+   "partial_barrier_percent": 15.1,
+   "goal_not_reached_percent": 17.5,
+   "unmeasurable_percent": 57.5
+  },
+  {
+   "state": "WA",
+   "sites": 188,
+   "pages_measured": 1512,
+   "sites_without_dns": 10,
+   "reachable_percent": 12.2,
+   "partial_barrier_percent": 16.4,
+   "goal_not_reached_percent": 16.7,
+   "unmeasurable_percent": 54.8
+  },
+  {
+   "state": "CO",
+   "sites": 173,
+   "pages_measured": 1385,
+   "sites_without_dns": 9,
+   "reachable_percent": 11.7,
+   "partial_barrier_percent": 16.4,
+   "goal_not_reached_percent": 21.3,
+   "unmeasurable_percent": 50.6
+  },
+  {
+   "state": "KS",
+   "sites": 170,
+   "pages_measured": 1363,
+   "sites_without_dns": 8,
+   "reachable_percent": 11.6,
+   "partial_barrier_percent": 12.3,
+   "goal_not_reached_percent": 24.1,
+   "unmeasurable_percent": 52.1
+  },
+  {
+   "state": "OR",
+   "sites": 167,
+   "pages_measured": 1339,
+   "sites_without_dns": 3,
+   "reachable_percent": 9.3,
+   "partial_barrier_percent": 14.9,
+   "goal_not_reached_percent": 15.2,
+   "unmeasurable_percent": 60.5
+  },
+  {
+   "state": "IA",
+   "sites": 162,
+   "pages_measured": 1309,
+   "sites_without_dns": 4,
+   "reachable_percent": 10.2,
+   "partial_barrier_percent": 14.7,
+   "goal_not_reached_percent": 24.8,
+   "unmeasurable_percent": 50.3
+  },
+  {
+   "state": "CT",
+   "sites": 156,
+   "pages_measured": 1247,
+   "sites_without_dns": 3,
+   "reachable_percent": 12.0,
+   "partial_barrier_percent": 18.9,
+   "goal_not_reached_percent": 16.7,
+   "unmeasurable_percent": 52.4
+  },
+  {
+   "state": "IN",
+   "sites": 137,
+   "pages_measured": 1100,
+   "sites_without_dns": 1,
+   "reachable_percent": 12.5,
+   "partial_barrier_percent": 15.9,
+   "goal_not_reached_percent": 28.7,
+   "unmeasurable_percent": 42.8
+  },
+  {
+   "state": "NE",
+   "sites": 129,
+   "pages_measured": 1034,
+   "sites_without_dns": 2,
+   "reachable_percent": 8.6,
+   "partial_barrier_percent": 13.8,
+   "goal_not_reached_percent": 25.7,
+   "unmeasurable_percent": 51.8
+  },
+  {
+   "state": "MS",
+   "sites": 122,
+   "pages_measured": 977,
+   "sites_without_dns": 2,
+   "reachable_percent": 12.0,
+   "partial_barrier_percent": 7.9,
+   "goal_not_reached_percent": 26.0,
+   "unmeasurable_percent": 54.1
+  },
+  {
+   "state": "SC",
+   "sites": 119,
+   "pages_measured": 951,
+   "sites_without_dns": 0,
+   "reachable_percent": 14.2,
+   "partial_barrier_percent": 12.5,
+   "goal_not_reached_percent": 26.0,
+   "unmeasurable_percent": 47.3
+  },
+  {
+   "state": "ME",
+   "sites": 118,
+   "pages_measured": 944,
+   "sites_without_dns": 0,
+   "reachable_percent": 13.1,
+   "partial_barrier_percent": 18.2,
+   "goal_not_reached_percent": 27.1,
+   "unmeasurable_percent": 41.5
+  },
+  {
+   "state": "AZ",
+   "sites": 114,
+   "pages_measured": 914,
+   "sites_without_dns": 1,
+   "reachable_percent": 20.2,
+   "partial_barrier_percent": 13.1,
+   "goal_not_reached_percent": 18.9,
+   "unmeasurable_percent": 47.7
+  },
+  {
+   "state": "MD",
+   "sites": 106,
+   "pages_measured": 850,
+   "sites_without_dns": 0,
+   "reachable_percent": 12.8,
+   "partial_barrier_percent": 21.9,
+   "goal_not_reached_percent": 25.4,
+   "unmeasurable_percent": 39.9
+  },
+  {
+   "state": "WV",
+   "sites": 106,
+   "pages_measured": 841,
+   "sites_without_dns": 0,
+   "reachable_percent": 9.3,
+   "partial_barrier_percent": 10.2,
+   "goal_not_reached_percent": 23.8,
+   "unmeasurable_percent": 56.7
+  },
+  {
+   "state": "LA",
+   "sites": 89,
+   "pages_measured": 712,
+   "sites_without_dns": 0,
+   "reachable_percent": 11.9,
+   "partial_barrier_percent": 14.3,
+   "goal_not_reached_percent": 26.1,
+   "unmeasurable_percent": 47.6
+  },
+  {
+   "state": "MT",
+   "sites": 82,
+   "pages_measured": 656,
+   "sites_without_dns": 0,
+   "reachable_percent": 16.8,
+   "partial_barrier_percent": 11.0,
+   "goal_not_reached_percent": 22.6,
+   "unmeasurable_percent": 49.7
+  },
+  {
+   "state": "VT",
+   "sites": 82,
+   "pages_measured": 656,
+   "sites_without_dns": 1,
+   "reachable_percent": 18.6,
+   "partial_barrier_percent": 17.4,
+   "goal_not_reached_percent": 28.2,
+   "unmeasurable_percent": 35.8
+  },
+  {
+   "state": "ID",
+   "sites": 77,
+   "pages_measured": 608,
+   "sites_without_dns": 0,
+   "reachable_percent": 13.8,
+   "partial_barrier_percent": 15.5,
+   "goal_not_reached_percent": 20.6,
+   "unmeasurable_percent": 50.2
+  },
+  {
+   "state": "NM",
+   "sites": 72,
+   "pages_measured": 576,
+   "sites_without_dns": 0,
+   "reachable_percent": 17.0,
+   "partial_barrier_percent": 20.1,
+   "goal_not_reached_percent": 25.5,
+   "unmeasurable_percent": 37.3
+  },
+  {
+   "state": "WY",
+   "sites": 56,
+   "pages_measured": 440,
+   "sites_without_dns": 0,
+   "reachable_percent": 16.1,
+   "partial_barrier_percent": 18.6,
+   "goal_not_reached_percent": 23.4,
+   "unmeasurable_percent": 41.8
+  },
+  {
+   "state": "RI",
+   "sites": 47,
+   "pages_measured": 376,
+   "sites_without_dns": 0,
+   "reachable_percent": 16.8,
+   "partial_barrier_percent": 22.9,
+   "goal_not_reached_percent": 26.3,
+   "unmeasurable_percent": 34.0
+  },
+  {
+   "state": "SD",
+   "sites": 46,
+   "pages_measured": 368,
+   "sites_without_dns": 1,
+   "reachable_percent": 18.8,
+   "partial_barrier_percent": 16.8,
+   "goal_not_reached_percent": 30.4,
+   "unmeasurable_percent": 34.0
+  },
+  {
+   "state": "ND",
+   "sites": 46,
+   "pages_measured": 369,
+   "sites_without_dns": 0,
+   "reachable_percent": 14.1,
+   "partial_barrier_percent": 14.6,
+   "goal_not_reached_percent": 22.0,
+   "unmeasurable_percent": 49.3
+  },
+  {
+   "state": "AK",
+   "sites": 34,
+   "pages_measured": 272,
+   "sites_without_dns": 0,
+   "reachable_percent": 11.4,
+   "partial_barrier_percent": 16.2,
+   "goal_not_reached_percent": 16.5,
+   "unmeasurable_percent": 55.9
+  },
+  {
+   "state": "NV",
+   "sites": 32,
+   "pages_measured": 264,
+   "sites_without_dns": 0,
+   "reachable_percent": 9.5,
+   "partial_barrier_percent": 18.2,
+   "goal_not_reached_percent": 14.4,
+   "unmeasurable_percent": 58.0
+  },
+  {
+   "state": "DE",
+   "sites": 19,
+   "pages_measured": 152,
+   "sites_without_dns": 0,
+   "reachable_percent": 27.0,
+   "partial_barrier_percent": 14.5,
+   "goal_not_reached_percent": 17.8,
+   "unmeasurable_percent": 40.8
+  },
+  {
+   "state": "HI",
+   "sites": 11,
+   "pages_measured": 88,
+   "sites_without_dns": 2,
+   "reachable_percent": 13.6,
+   "partial_barrier_percent": 2.3,
+   "goal_not_reached_percent": 37.5,
+   "unmeasurable_percent": 46.6
+  },
+  {
+   "state": "PR",
+   "sites": 4,
+   "pages_measured": 32,
+   "sites_without_dns": 0,
+   "reachable_percent": 0.0,
+   "partial_barrier_percent": 0.0,
+   "goal_not_reached_percent": 3.1,
+   "unmeasurable_percent": 96.9
   }
+ ],
+ "by_page_type_detail": [
+  {
+   "page_type": "home",
+   "measurable_traversals": 6341,
+   "reached_goal_cleanly_percent": 25.3,
+   "reached_but_focus_or_labels_missing_percent": 27.9,
+   "mean_tab_steps_when_clean": 4.8
+  },
+  {
+   "page_type": "contact",
+   "measurable_traversals": 6011,
+   "reached_goal_cleanly_percent": 31.1,
+   "reached_but_focus_or_labels_missing_percent": 40.1,
+   "mean_tab_steps_when_clean": 5.6
+  },
+  {
+   "page_type": "calendar",
+   "measurable_traversals": 5911,
+   "reached_goal_cleanly_percent": 40.9,
+   "reached_but_focus_or_labels_missing_percent": 24.2,
+   "mean_tab_steps_when_clean": 4.1
+  },
+  {
+   "page_type": "jobs",
+   "measurable_traversals": 5819,
+   "reached_goal_cleanly_percent": 29.5,
+   "reached_but_focus_or_labels_missing_percent": 15.2,
+   "mean_tab_steps_when_clean": 4.5
+  },
+  {
+   "page_type": "payment",
+   "measurable_traversals": 5817,
+   "reached_goal_cleanly_percent": 19.0,
+   "reached_but_focus_or_labels_missing_percent": 38.9,
+   "mean_tab_steps_when_clean": 11.9
+  },
+  {
+   "page_type": "meetings",
+   "measurable_traversals": 5815,
+   "reached_goal_cleanly_percent": 21.9,
+   "reached_but_focus_or_labels_missing_percent": 40.1,
+   "mean_tab_steps_when_clean": 9.6
+  },
+  {
+   "page_type": "documents",
+   "measurable_traversals": 5807,
+   "reached_goal_cleanly_percent": 15.8,
+   "reached_but_focus_or_labels_missing_percent": 28.4,
+   "mean_tab_steps_when_clean": 9.7
+  },
+  {
+   "page_type": "311_request",
+   "measurable_traversals": 5750,
+   "reached_goal_cleanly_percent": 18.9,
+   "reached_but_focus_or_labels_missing_percent": 21.5,
+   "mean_tab_steps_when_clean": 7.2
+  }
+ ],
+ "field_glossary": {
+  "reached_goal_cleanly_percent": "share of measurable traversals where the goal was reached AND the focus ring stayed visible AND fields were labelled",
+  "reached_but_focus_or_labels_missing_percent": "share where the goal WAS reached but the focus ring was removed or fields lacked labels - a barrier a rule-checker does not see",
+  "goal_not_reached_percent": "share where the page opened but the goal was not reached within 40 Tab presses",
+  "mean_tab_steps_when_clean": "average number of Tab presses spent on traversals counted as clean",
+  "pages_with_text_below_12px": "coarse proxy for small text met on the way; NOT a WCAG contrast ratio",
+  "sites": "distinct host names after folding www.example.gov into example.gov (11923 host names with www kept separate)"
+ },
+ "renamed_from": {
+  "pages_per_page_type": "by_page_type",
+  "pages_with_any_barrier_by_page_type": "barrier_by_page_type",
+  "pages_with_text_below_12px": "pages_with_poor_contrast",
+  "by_page_type_detail": "by_page_detail, Russian keys тип/измеримых/дошёл/фокус/шагов",
+  "by_state": "by_state, Russian keys к/сайтов/страниц/мёртвых/доступно/частично/барьер/неизмеримо"
+ },
+ "known_limits": {
+  "reproducibility_by_verdict_percent": 96,
+  "reproducibility_by_violation_count_percent": 89.9,
+  "note": "Verdicts describe the moment of measurement. Timeouts and silent servers reproduce in 55-61% of repeats.",
+  "disagreement_rate": {
+   "definition": "pages where the checker was clean AND the traversal was measurable, on which a person still hit a barrier",
+   "barrier_pages": 13972,
+   "checker_clean_measurable_pages": 25966,
+   "percent": 53.8,
+   "of_those_focus_ring_removed": 11436,
+   "not_a_claim": "this is NOT a claim that 53.8% of municipal sites are inaccessible"
+  }
+ }
 }

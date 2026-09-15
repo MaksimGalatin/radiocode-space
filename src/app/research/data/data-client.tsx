@@ -208,6 +208,12 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
                       fontSize: 14, textDecoration: 'none' }}>
             {т.витринаКнопкаТаблица}
           </a>
+          <a href="https://aifa.works/data/research-records-SCHEMA.md"
+             style={{ padding: '10px 18px', borderRadius: 999,
+                      border: '1px solid rgba(148,163,184,0.3)', color: '#cbd5e1',
+                      fontSize: 14, textDecoration: 'none' }}>
+            {т.витринаКнопкаСхемаТаблицы}
+          </a>
           <a href="https://aifa.works/data/research-summary-2026-09-01.json"
              style={{ padding: '10px 18px', borderRadius: 999,
                       border: '1px solid rgba(148,163,184,0.3)', color: '#cbd5e1',
