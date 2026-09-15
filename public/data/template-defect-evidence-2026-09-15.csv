@@ -1,0 +1,201 @@
+rule,css_selector,states,cities,state_list
+region,#divAjaxProgress,50,1689,AK AL AR AZ CA CO CT DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY
+aria-required-children,#secondaryMenusecondaryNav,50,1586,AK AL AR AZ CA CO CT DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY
+color-contrast,#divAjaxImgProgress > p,50,899,AK AL AR AZ CA CO CT DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY
+landmark-unique,#mainNav,49,1165,AK AL AR AZ CA CO CT DE FL GA IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY
+list,.layout2,49,764,AK AL AR AZ CA CO CT DE FL GA IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY
+heading-order,.tools > h3,47,502,AK AL AR AZ CA CO CT FL GA IA ID IL IN KS KY LA MA MD ME MI MN MO MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY
+aria-valid-attr-value,".tabbedWidget.cpTabs[role=""tablist""]",47,378,AK AL AR AZ CA CO CT DE FL GA IA ID IL IN KS KY LA MA MD ME MI MN MO MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WY
+region,#signedOutToolbarCreateProfileButton,46,715,AK AL AR AZ CA CO CT FL GA IA IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY
+landmark-main-is-top-level,#main-wrapper,44,488,AK AL AR AZ CA CO CT FL GA IA ID IL KS KY LA MA MD ME MI MN MO MT NC ND NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WY
+aria-required-parent,#nav-people-tab,44,377,AK AL AR AZ CA CO CT FL GA IA ID IL KS KY LA MA MD ME MI MN MO MT NC ND NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WY
+heading-order,#divMasterSearchContainer > h3,44,263,AK AL AR AZ CA CO CT FL GA IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NY OH OK OR PA RI SC SD TN TX UT VA WA WI WY
+landmark-no-duplicate-main,#mainWrapTS,43,382,AK AL AR AZ CA CO CT FL GA IA IL KS KY LA MA MD ME MI MN MO MT NC ND NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WY
+landmark-banner-is-top-level,.mb-4,43,337,AK AL AR AZ CA CO CT FL GA IA IL KS KY LA MA MD ME MI MN MO MT NC ND NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WY
+aria-required-children,#directory-nav-tab,43,320,AK AL AR AZ CA CO CT FL GA IA ID IL KS KY LA MA MD ME MI MN MO MT NC NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WY
+region,.skip-link,43,204,AL AR AZ CA CO CT DE FL GA IA ID IL IN KS KY LA MA ME MI MN MO MS MT NC NE NH NJ NY OH OK OR PA SC SD TN TX UT VA VT WA WI WV WY
+heading-order,#toolsHeader,42,172,AK AL AZ CA CT FL GA IA ID IL IN KS KY MA MD ME MI MN MO MT NC ND NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WY
+landmark-unique,#sidebarContainer1TS,41,150,AL AZ CA CO CT FL GA IA ID IL IN KS KY LA MA ME MI MN MO MT NC NE NH NJ NM NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WY
+skip-link,.skip-link,40,169,AL AR AZ CA CO DE FL GA IA ID IL KS KY LA ME MI MN MO MS MT NC NE NH NJ NY OH OK OR PA SC SD TN TX UT VA VT WA WI WV WY
+region,#\31 _divAlertBar,40,157,AL AR AZ CA CO CT FL GA IA ID IL IN KS KY MA MD ME MI MN MO MT NC ND NH NJ NM NY OH OK PA RI SC TN TX UT VA VT WA WI WY
+scope-attr-valid,".monthHeader[scope=""col""]:nth-child(1)",38,172,AL AR AZ CA CO CT FL GA IA IL IN KS LA MA MD ME MI MN MO MS MT NC ND NH NJ NM NY OH OK OR PA TN TX UT VA VT WA WI
+region,.cpBylineTextTS,38,129,AK AR AZ CA CT FL GA IA ID IL KS KY LA MA ME MI MN MO MT NC NE NH NJ NV NY OH OK OR PA RI TN TX UT VA VT WA WI WY
+listitem,#SideItem129,37,113,AL AZ CA CO CT FL GA IA KS KY MA MD ME MI MN MO MT NC ND NE NH NJ NV NY OH OK OR PA SC SD TN TX UT VA WA WI WY
+heading-order,.widgetHeader > h3,36,125,AL AR CA CO CT FL GA IA ID IN KS LA MA MD ME MI MN MS MT NC NH NJ NM NY OH OK OR PA SD TN TX UT VA WA WI WY
+color-contrast,#toolsHeader,35,95,AL AR CA CO CT FL GA IA IL KS LA MA MD ME MI MN MS NC ND NH NJ NV NY OH OK OR PA RI SC TN TX UT WA WI WY
+color-contrast,.outOfMonth.first,33,99,AR AZ CA CO CT FL GA IA IL IN KS MA MD ME MI MN MO NC ND NH NJ NY OH OK OR PA TN TX UT VA VT WA WI
+aria-valid-attr-value,.tabbedWidgetNarrow.cpTabs.accordion:nth-child(1),32,138,AL AZ CA CO CT FL GA IA IL KS MA MD ME MI MN MO NC ND NH NJ NM NY OH OK OR PA SC TX UT VA WA WI
+list,.tabbedWidgetNarrow.cpTabs.accordion:nth-child(1),32,138,AL AZ CA CO CT FL GA IA IL KS MA MD ME MI MN MO NC ND NH NJ NM NY OH OK OR PA SC TX UT VA WA WI
+listitem,.nav-item.pb-2:nth-child(2),31,124,AZ CA CO CT FL GA IA IL KS MA MD ME MI MN NC NH NJ NM NY OH OK PA SC SD TN TX UT VA VT WA WI
+listitem,#SideItem311,31,71,AZ CA CO CT DE FL GA ID IL MA ME MI MN MT NC NE NH NJ NM NV NY OH OK PA SC SD TN TX VA WA WI
+region,#initialFocus,30,127,AL AR CA CO CT FL GA ID IL KY LA MA MD MI MN MO MS NC NV OK OR SC TN TX UT VA WA WI WV WY
+region,#main-content,29,92,AR CO GA IA ID IL IN KS KY MD MI MO MT NC NE NH NJ NM NY OH OK OR SD TN TX UT VA VT WI
+landmark-no-duplicate-main,#mainSectionTS,29,67,AL AZ CA CT FL GA ID IL KS KY MA MD MN MO MT NC NH NM NY OK OR PA RI SC TX UT VA WA WI
+frame-title,#\:1\.container,28,79,AL AZ CA CO CT FL GA HI IA IL IN MD MI MN MO NC NJ NY OH OK OR PA RI TX UT VA WA WI
+landmark-main-is-top-level,.tribe-common,28,74,CA GA HI IL IN KS KY LA MD ME MI MN MO NC ND NJ NY OH OR PA TN TX UT VA VT WA WI WV
+color-contrast,#signedOutToolbarCreateProfileButton,28,72,AZ CA CO CT FL GA IN KS KY MA MN MO MS NC ND NE NH NM NY OH OK OR PA RI TX UT VA WI
+landmark-unique,".cpGrid4 > .widgetGraphicLinksNav[aria-labelledby=""GraphicLinkHeaderText""]",28,68,AL AR AZ CA CO CT FL GA IA IN MA MD ME MI MN NC NJ NY OH OK PA SC SD TN TX UT VA WA
+link-name,"li:nth-child(1) > .thumb[onkeypress=""return this.onclick();""]",28,68,AK CA FL IA IL KS KY MA MD MI MO MT NC NH NJ NY OH OR PA RI SC TN TX VA VT WA WI WY
+color-contrast,#loggedOutToolbarSignInButton,28,56,AZ CA CO CT FL GA IA IN MA MD MI MN MO NH NJ NY OH OK OR SC SD TN TX UT VA VT WA WI
+landmark-no-duplicate-main,#main,27,80,AZ CA FL GA IA IL IN KY ME MI MN MO MS NC NE NJ NY OH OR PA TN UT VA VT WA WI WV
+empty-heading,.MuiTypography-h4,27,80,AZ CA CT FL GA IA IN KS KY MA MD ME MI MN MO MT NC NH NY OH OR PA TN TX WA WI WY
+region,#root,27,70,AZ CA CO CT FL GA IA IL KS MA ME MI MN MS NC NH NY OH OK OR PA RI SD TX VA WA WI
+listitem,#SideItem158,27,41,AL CA CO FL GA MA MD MI MN MO MS MT NC NH NJ NY OH OR RI SC TN TX UT VA WA WI WY
+region,.et_pb_section_0,26,64,AL CA CO GA IA ID IL IN KS KY MD MI MN MO MS MT NC NH NY OH SD TN TX UT VA WI
+frame-title,.facebook-container > iframe,26,58,AL AR AZ CA CT FL GA IA KS MA MD MI MO NC NJ NM NV NY OH OK PA RI TX UT VA WA
+aria-valid-attr-value,"ol[aria-hidden="".ToString().ToLowerInvariant()""]",26,56,AL AZ CA CT FL GA KS LA MA ME MI MN MO MT NC NH NY OR PA RI TN TX UT VA WA WI
+color-contrast,"a[href=""jobs.aspx?CommunityJobs=False""]",26,56,AZ CA CT FL IA KS KY MA ME MN MO NC NH NY OH OK OR PA SC TN TX VA WA WI WV WY
+image-redundant-alt,#\31 _imgDot,26,52,AR CA CT FL GA HI IA ID KY MA MI MT NC ND NH NJ NM NV NY OK PA TN TX VA VT WA
+landmark-unique,#documents > nav,25,72,AR AZ CO CT FL GA ID IL KS LA MA MO NJ NY OH OK OR PA SC SD TN TX UT VA WI
+listitem,#SideItem157,25,69,AZ CA CT IA ID IL IN MA ME MN MO MT NC ND NH NJ NY OH OK RI SC TN TX VA WA
+landmark-unique,".cpGrid1.widgetBody.cpGrid > .widgetGraphicLinksNav[aria-labelledby=""GraphicLinkHeaderText""]",25,62,CA CO FL GA IN KS KY MA ME MI MN MO MT NC NH NY OH PA TN TX UT VA WA WI WY
+landmark-unique,#main,25,59,AZ CA GA IA IL IN KY ME MI MN MO MS NC NE NJ NY OH PA TN UT VA VT WA WI WV
+aria-valid-attr-value,.left,24,54,AL AR AZ CA CT FL GA ID KS KY LA MA ME MI MN NJ NY RI TN TX VA WA WI WY
+heading-order,.subhead2,24,53,CA CT FL IA ID IL KY MA ME MI MN MT NC NH NM NY OH PA SD TX UT VA WI WY
+aria-prohibited-attr,#arrowPrev_banner1,24,53,CA CT FL IL IN KS LA MA MD MN MO NC NH NJ NY OH PA RI TN TX VA VT WA WI
+image-alt,#ctl00_ctl00_cphBody_ctrlTutorialVideo1_imgPlayVideo,24,45,AR CA CO CT GA IA IL IN KS MA MI MN NC NH NY OH OK PA SD TN VA VT WA WI
+listitem,#SideItem312,23,47,AZ CA FL GA IA ID KS KY LA MA ME MI MN NC NJ NY OH OR RI TX VA WA WI
+region,#header,23,46,AL AR CT FL GA IL KS KY LA MI MN MO NC NM NY OH PA SC TN TX VA WI WV
+aria-valid-attr,"dt:nth-child(1) > a[aria-role=""button""][href=""#""]",23,41,AZ CA CO CT FL IL KS MA MD ME MN NC NH NM NY OH OK PA TN TX UT VA WA
+list,.col1.col:nth-child(1) > .layout3.semanticList,22,47,AZ CA CT FL GA IA IL IN KS LA MA MD MI MN NC NM NY OH OR SC TX WI
+link-name,#calendar-submit,22,39,AL AZ CA FL GA IL KY MI MN MO MT NJ NY OH PA SC SD TN TX UT WA WI
+label-title-only,.et-search-field,21,40,AL AR AZ CA IL IN KS KY LA MA MI MS NC NH NJ NM NY OH OK TX UT
+landmark-unique,#mainSectionTS,21,36,AZ CA CT FL GA ID IL KY MA MN MO NC NH NY OK PA RI TX VA WA WI
+list,.col1.col:nth-child(1) > .layout2.semanticList,21,36,CA CO IA IL KS MA MD MN NC NH NJ NY OH TN TX UT VA VT WA WI WY
+region,.d-inline-flex.gap-2.align-items-center > span:nth-child(2),21,35,AL AZ CA FL GA IL KY MI MN MO MT NJ NV NY OH PA SC TN TX UT WA
+aria-allowed-role,#mobileSearchDropdown,20,67,CA FL IL KS MD ME MN MO NC ND NH NJ NY OK OR PA SD VT WA WI
+list,.layout1,20,41,CA CT GA KY MA MI MN MO NH NJ NY OK OR PA TN TX UT VA WA WI
+landmark-unique,".cpGrid3 > .widgetGraphicLinksNav[aria-labelledby=""GraphicLinkHeaderText""]",20,40,CA CO CT FL GA HI KS MA MN MT NC NH NJ NY OH OK PA TX WA WI
+color-contrast,.outOfMonth:nth-child(1),20,29,AL AR CA CO CT GA IA MA MD ME MI MN MO NM OK TX UT VA WA WI
+region,#content,20,26,AL AR GA HI IA KY LA MI NC ND NY OH OK OR PA TN VA WI WV WY
+landmark-unique,.navbar,19,37,AL AZ CO GA IL IN KS LA ME MS NE NY OK PA RI TN UT WI WV
+color-contrast,".breadCrumb[href=""/""]",19,29,CA CT DE KS MD ME MN MO NC ND NM NV NY PA TX UT VA WA WV
+color-contrast,#ctl00_ctl00_MainContent_ModuleContent_ctl00_lblDefaultCategoryHeader,19,24,CO FL GA IA ID KS MA MI MN MT NH NY OH OK RI TN VA WA WI
+tabindex,.element-focusable,18,44,AK CA FL GA IL KS LA MN NC NH NM NY OR TX UT WA WI WY
+landmark-unique,".cpGrid5 > .widgetGraphicLinksNav[aria-labelledby=""GraphicLinkHeaderText""]",18,41,AL AZ CA CO FL GA MA MN MO NC ND NY OH OK PA TX VA WI
+aria-allowed-role,.owl-prev,18,40,AL CA DE FL GA KY MA ME MI MN NC NY OH PA UT WA WI WV
+presentation-role-conflict,.owl-prev,18,40,AL CA DE FL GA KY MA ME MI MN NC NY OH PA UT WA WI WV
+landmark-main-is-top-level,.main,18,37,AK CA FL GA IL KS LA MN MS NC NM NY OR TX UT WA WI WY
+listitem,#SideItem143,18,29,CA GA MA ME MI MN MO NC NH NJ NY OK PA SC TX VA WA WI
+landmark-unique,.header-display-desktop > .header-title-nav-wrapper > .header-nav > .header-nav-wrapper > .header-nav-list,18,29,AR HI IL KY MD MI MT NC NM NY OH OK PA TX VA VT WI WV
+heading-order,.paymentMethodsHeader,18,27,CA CT GA IN KS MA MI MN NE NH NY OH OK SD VA VT WA WI
+landmark-no-duplicate-banner,#headerContainerTS,18,27,CO CT FL GA IA IL KS NC NY OH OK OR PA RI TN TX VA WI
+landmark-unique,#headerContainerTS,18,27,CO CT FL GA IA IL KS NC NY OH OK OR PA RI TN TX VA WI
+label,.et_pb_contact_captcha,18,24,AL AR GA ID IL KS LA MI MS NC NJ NY OH SD TN TX UT VA
+region,.logo,17,49,AL CA FL GA IL IN KS KY MI MO NJ NY OH UT VA VT WI
+heading-order,.et_pb_blurb_0 > .et_pb_blurb_content > .et_pb_blurb_container > h4,17,28,CA GA ID IL KS KY MO NC NH NM NY OK TN TX UT VA WI
+link-name,".col1.first.col > ul > .GraphicLinks.widgetItem > .widgetGraphicLinksLink.widgetDesc[target=""_self""]",17,27,AL AR CA DE FL ID KS MA MI NC NY OH PA TX UT VA VT
+region,.et_pb_row_0,17,27,AL ID KS KY LA ME MI NC NH NY OH OK SD UT VA VT WI
+listitem,#SideItem310,17,25,CA CT FL GA IL MD NC NH NM NY OH PA TN TX UT VA WA
+region,#left-area,17,21,AL CA ID KS KY MD MI MT NC NH NM NY OH SD TN UT WI
+region,#headerbar,16,35,AK FL IA ID KS MD MI MO NC OR SD TX UT VA WI WY
+link-name,.et-pb-arrow-prev,16,28,CA IL KY LA MI NC NH NJ NM NY OH PA TN TX VT WI
+region,.rz-brand-footer,16,25,AL AZ CA GA KY MI MN MO MT NV NY OH PA TN TX UT
+aria-input-field-name,.carousel-inner,16,24,AL AR CA CT MN MO ND NJ NM NY OH OK PA UT WI WV
+listitem,#SideItem313,16,24,AZ CA GA IA IN MA MI MN MO NC NY OH RI TX UT WI
+heading-order,.subhead2:nth-child(1),16,23,CA CO CT FL IL KY MA ME MI MO NY OR TN TX UT WY
+listitem,#SideItem153,16,20,CT FL KY LA MA MI MN NC NH NY OK SD TX WA WI WY
+listitem,#SideItem162,16,19,CT GA KS MA MN MO MS NC NM NY OH PA TN TX VA WA
+listitem,#SideItem160,16,19,AL CT IA MA MD MI MO NM NY OH OK PA TN VA WA WI
+region,.logo-wrap,16,17,AR CT GA KY MA ME MI MN MO NC NY OH PA TX VA VT
+list,#homepage-nav,15,76,AR CA CO KS KY MD ME MN MO NY OK TX UT WA WI
+region,.slider_owl > .owl-stage-outer,15,56,FL IA MD ME MN MO NC NH NY OK OR PA RI TN WI
+link-name,.IT88M3,15,24,IL KY MN MO NE NJ NY OH OK TN TX UT VA WI WY
+region,.evo_skip_link,15,22,AK AR CT DE ID IN KS MA NC NY OH OR SD TX VA
+skip-link,.evo_skip_link,15,22,AK AR CT DE ID IN KS MA NC NY OH OR SD TX VA
+listitem,#SideItem27,15,21,CA FL GA IL MA MD MI NV NY TN TX VA WA WI WY
+listitem,#SideItem163,15,20,AZ CT IA ID KY MA MN NC ND NY OK SD TX UT WA
+region,.et_pb_section_1,15,19,AL AR CA IA ID KS KY LA MI NE NY OH TN VT WI
+heading-order,"li[data-index=""0""] > .text > h4",15,19,AR CA CO CT DE KS MA MI NC NM NY TN TX VA WA
+aria-required-children,.elementor-loop-container,15,18,AR FL IL LA MI MS NC NE NJ OH OK RI TN TX WI
+region,.page-header,14,77,KS KY MA MI MN MO NJ NY PA SC TN TX VA WI
+region,.heygov-widget-button,14,57,AZ ID IL MA MN MO NC NY OR TX UT VA WI WV
+color-contrast,.elementor-button-text,14,33,AZ FL GA KY MI MN MO MS NY OH OK TN WI WY
+listitem,#SideItem149,14,24,AZ CA FL GA IL KS MA MD MN NH OH TX VA WI
+page-has-heading-one,#html_background,14,24,AK CA FL GA KS LA NC NH NY OR TX UT WA WI
+color-contrast,#footer-info,14,23,AL AR IL KS KY MI MS MT NY OH OK TN TX UT
+aria-required-children,.carousel-inner,14,22,AL AR CT MN MO ND NJ NM NY OH OK PA WI WV
+color-contrast,#dayOfWeek_0,14,21,CA CO FL GA IL KS MA MI MO ND TN TX VT WY
+region,#skipToContentLinks,14,21,AZ FL GA KS LA MA ME MI MN NY OR SC TX VA
+label,.ytSearchboxComponentInput,14,19,AR CT FL IN KS MA ND NJ NY PA RI TN TX UT
+color-contrast,.requireSignIn,14,19,FL GA IA IN KS MA MD MN MO NY OR RI TX WA
+region,#evo_interior_title,14,18,CT DE FL ID MA MO NC NJ NY OH SD TX WI WV
+button-name,.ytdTextInputAssistantButton,14,18,AR CT FL IN KS MA ND NJ NY PA RI TN TX UT
+listitem,#SideItem72,14,17,AL AZ CA FL IA MA MI NM NY OH SD TX UT WY
+listitem,#SideItem165,14,16,GA IL LA MA MI MN NC NY OH TN TX UT VA VT
+heading-order,.col-md-6.col-lg-4.col-sm-12:nth-child(2) > h5,13,62,AR CA CO KS MD MN MO NY OK TX UT WA WI
+landmark-no-duplicate-contentinfo,.fusion-footer-widget-area,13,30,AZ CA IA IL IN KY MN NJ NY PA TN TX WI
+role-img-alt,.background-image,13,26,AZ CA CO LA MA MD MN NJ NM OH SC TX UT
+region,#skip,13,22,AR CO CT IN MA MI MN MO NC NE NY TN TX
+listitem,#SideItem130,13,21,CA GA MA MN NC ND NH NY OH OR SC TN WI
+region,.N0gd6,13,21,CA IN LA MA MI MN MO NC NY OH PA UT VT
+link-name,.thumb,13,21,FL KS MA MI MN NH NM NY SC TX VA WA WI
+aria-hidden-focus,#secondaryMenusecondaryNav,13,20,AZ FL GA KS MA ME MI MN NY OR SC TX VA
+link-name,.navbar-brand,13,20,AL FL GA IL MN MO NY OH PA TN UT WI WV
+region,.mainSectionNav,13,18,AL IA LA MI MN MO NE NH NY OK PA WI WV
+heading-order,.relatedDocumentsSection > h4,13,18,AL CA MA MN NH NJ NY OH OR SC TX UT WA
+region,.et_pb_text_0,13,17,AR AZ CA KS MD MS NH NY OH OR TN UT WI
+list,.layout3,13,17,CT GA IL MA MI MN NH NM NY TX UT WA WI
+link-name,".col1.col.first > ul > .GraphicLinks.widgetItem > .widgetGraphicLinksLink.widgetDesc[target=""_self""]",13,17,CA CO FL MA MI MN MO NC NM NY TX VA WA
+color-contrast,#table2 > thead > tr > th:nth-child(1),13,15,AL AR ID KS KY MT NC NY OR TX VA WA WI
+list,.col1.col:nth-child(1) > .layout3,13,15,AZ CA CT GA MA MO MT NC OH TX VA WA WI
+listitem,#SideItem184,13,15,AL CA FL GA MN NC NE NH NY OK SC TX VA
+landmark-unique,#mainWrapTS,13,14,AZ CA IA MA MN NC NH NM NY OH SC UT VT
+listitem,#SideItem271,13,13,AZ GA MA MD MO MS ND NH NJ OH TX UT WI
+listitem,#SideItem183,13,13,CO FL GA KS MI NM NY OH PA TN VA WI WY
+landmark-unique,.fusion-footer-widget-area,12,29,AZ CA IA IL KY MN NJ NY PA TN TX WI
+landmark-contentinfo-is-top-level,#footer,12,26,AL AR CO ID KS KY MN MS NC ND NY PA
+definition-list,.mec-calendar-table-head,12,24,AL FL GA IL MI MN MS NC NY OH PA WI
+listitem,#SideItem159,12,21,AK CA GA IL MA ME MN NC OH PA RI TN
+landmark-no-duplicate-banner,#header,12,20,AK KY MD ME MN MT NH NY OH TN VT WA
+tabindex,#pojo-a11y-skip-content,12,19,FL GA IL IN LA MO NY PA RI TN UT WI
+region,.min-h-screen,12,19,AK AZ IL MD MI NJ NY OK OR RI TX WI
+frame-title,#\:2\.container,12,18,AL CA FL GA IL NJ NM NY OH OR TX WI
+landmark-unique,".cpGrid6 > .widgetGraphicLinksNav[aria-labelledby=""GraphicLinkHeaderText""]",12,18,CA FL KS KY LA MN MO NC NM NY OH TX
+landmark-unique,".cpGrid4.widgetBody.cpGrid > .widgetGraphicLinksNav[aria-labelledby=""GraphicLinkHeaderText""]",12,17,CA GA KS KY MA NC NM OH PA SD TX WI
+heading-order,.et_pb_blurb_0 > .et_pb_blurb_content > .et_pb_blurb_container > .et_pb_module_header,12,17,GA ID KY MA MT NC NE NH NY OH TN WI
+page-has-heading-one,#facebook,12,17,AL FL GA IN KY MA MO NY OH SC TN WI
+empty-heading,#versionHeadLine,12,17,FL KS MI MN MO NV OH TN UT WA WI WY
+region,.et_pb_column_0,12,16,GA IL LA MI MN NH NJ NY OH UT VA WI
+listitem,#SideItem314,12,16,CA CT GA MA MN NJ NY OH TN TX VA WY
+listitem,#SideItem190,12,15,AL CA CT MA NY OH PA TN UT VA VT WY
+color-contrast,.button,12,15,AR CA CT IL MN NC NM NY OR UT VA WI
+heading-order,.subhead2:nth-child(2),12,15,CA GA MA MD MN NJ NY OH PA UT VA WY
+color-contrast,#spanStepNumber2,12,15,AL AR KY MA MN MO NH NY PA RI TN TX
+image-alt,"#start > ytd-topbar-logo-renderer > a > ytd-yoodle-renderer > picture > img[src=""""]",12,15,AR CT FL IN KS MA ND NJ NY RI TN TX
+link-name,#start > ytd-topbar-logo-renderer > a,12,15,AR CT FL IN KS MA ND NJ NY RI TN TX
+listitem,#SideItem308,12,15,FL GA KS MI MO MS NY PA TX VA WI WY
+listitem,#SideItem170,12,15,AZ CA CT GA MD MI NC ND TN TX VA WI
+heading-order,.et_pb_text_1 > .et_pb_text_inner > h3,12,14,AL AZ CA GA IN MI MT NY TN UT WA WI
+listitem,#SideItem166,12,14,CT FL KS MA MI NC NY OH OK TN VA VT
+region,.gt-selected,12,13,CA CT IN MN NE NJ NY OH TX VA WA WI
+listitem,#SideItem180,12,13,IN KS KY MD ME MO MT NE NJ NM NY TX
+listitem,#SideItem151,12,13,AL CA GA KY MA MN MO NY OH SC TX VA
+listitem,#SideItem150,12,13,AR CA CT FL MD MN MO NY OH TX VA WI
+listitem,#SideItem172,12,12,AK CA FL IL NJ NM NY PA TN TX UT VA
+landmark-no-duplicate-contentinfo,#footerDefault,11,92,ID MA MN MO NC NY OR UT VA VT WI
+landmark-contentinfo-is-top-level,.bottom-footer,11,91,ID MA MN MO NC NY OR UT VA VT WI
+landmark-contentinfo-is-top-level,.mt-3,11,88,ID MA MN MO NC NY OR UT VA VT WI
+landmark-unique,.container > nav,11,33,AZ CO FL IA ID KS ME NH NY UT WV
+region,.copy-right,11,24,AZ CO FL IA ID KS ME NH NY UT WV
+color-contrast,"li:nth-child(1) > .pageNavParent.pageNavRoot[onpointerenter=""parentNavOver(event)""] > span",11,20,AL IL MI MN MO MS NE NY SC TX WI
+label,.wpforms-recaptcha-hidden,11,20,AL AR CA LA MI NM NY OH UT WI WV
+listitem,#SideItem164,11,19,CA CO FL GA MA MD NC NJ NY OH TX
+region,#logo,11,19,CO IL MI MN MO NC NJ NY OH OK TX
+button-name,.et_pb_menu__search-button,11,18,CA FL KS KY NH NY OH PA TN UT WV
+region,#container,11,18,AL AR CA IL IN KY MA NC NY TN VT
+aria-valid-attr-value,.alignCenter,11,17,FL GA HI MD ME MI NH PA TX UT WA
+label,.em-month-picker,11,17,IL MN MO NY OH OR TN VA VT WI WV
+listitem,#SideItem181,11,16,AL CA CO CT MA MI MN NJ NY TX WI
+landmark-one-main,#facebook,11,16,AL FL GA IN KY MA MO NY SC TN WI
+listitem,#SideItem309,11,16,CT IL MA MN MO MT NC NH NJ PA TX
+landmark-no-duplicate-contentinfo,#footer,11,16,GA IA MI MO NC NY TX VA VT WI WV
+landmark-unique,#header,11,16,AK KY MD ME MN MT NH NY OH TN VT
+skip-link,#skip,11,16,AR CO CT IN MI MN NC NH NV NY TX
+role-img-alt,.lazyloading,11,15,AZ CA FL IN MN NJ NM TX UT WA WV
+landmark-unique,#footer,11,15,GA IA MI MO NC NY TX VA VT WI WV
+aria-hidden-focus,#tns2-item2,11,15,AL FL IL MI MN NC NJ NY PA TX UT
+listitem,#SideItem182,11,14,AZ CO KY MA MN NH NM NY OH OR TX
+color-contrast,.et_pb_button_0,11,14,LA MI MN MO MT NH NJ NV NY OH TN
+heading-order,.et_pb_text_2 > .et_pb_text_inner > h3,11,13,AZ GA KY MI NC NV NY TX UT WA WI
+region,.focusable,11,13,FL GA MD MN MO NC NE NY OK RI TN
