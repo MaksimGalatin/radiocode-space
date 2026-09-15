@@ -43,7 +43,7 @@ RadioCode.Space is the eternal cyberpunk radio of the CODE Eternal ecosystem —
 Free, machine-readable, CC BY 4.0. Snapshot 1 September 2026. The research
 lives on aifa.works, the ecosystem's research site:
 - https://aifa.works/research — entry point
-- https://aifa.works/research/data — 95,524 real-browser keyboard traversals across 11,902 U.S. municipalities; 83,212 screenshots kept as evidence
+- https://aifa.works/research/data — 95,524 real-browser keyboard traversals across 11,902 U.S. municipalities; 44,054 evidence screenshots kept (52,592 in total)
 - https://aifa.works/research/methodology — an agent reaches the tax payment form using the Tab key only, the way a person who cannot use a mouse does
 - https://aifa.works/research/registry — 1,441 domains in the CISA registry with no DNS record at all
 - https://aifa.works/data — raw research files
