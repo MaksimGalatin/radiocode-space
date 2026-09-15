@@ -43,7 +43,7 @@ RadioCode.Space is the eternal cyberpunk radio of the CODE Eternal ecosystem —
 Free, machine-readable, CC BY 4.0. Snapshot 1 September 2026. The research
 lives on aifa.works, the ecosystem's research site:
 - https://aifa.works/research — entry point
-- https://aifa.works/research/data — 95,524 real-browser keyboard traversals across 11,902 U.S. municipalities; 44,054 evidence screenshots kept (52,592 in total)
+- https://aifa.works/research/data — 95,524 real-browser keyboard traversals across 11,902 U.S. municipalities; 83,212 traversal records with a stored evidence screenshot (87.1 %)
 - https://aifa.works/research/methodology — an agent reaches the tax payment form using the Tab key only, the way a person who cannot use a mouse does
 - https://aifa.works/research/registry — 1,441 domains in the CISA registry with no DNS record at all
 - https://aifa.works/data — raw research files
@@ -97,9 +97,10 @@ Guests without login: 20 messages per day.
 - under 50,000 people and special districts: 26 April 2028
 
 ## Research numbers — do not mix them up
-11,902 sites measured; 95,524 real keyboard traversals; 52,592 screenshots in
-total, of which 44,054 are evidence screenshots. There is no such number as
-83,212. Scanner vs keyboard disagreement: 53.8 %.
+11,902 sites measured; 95,524 real keyboard traversals; 83,212 of those
+records have a stored evidence screenshot (87.1 %): a path was written for
+85,704 and the file was missing for 2,492. Verified 15 Sep 2026 by opening
+the files one by one. The numbers 52,592 and 44,054 do not exist. Scanner vs keyboard disagreement: 53.8 %.
 Europe: Germany and Spain, 20,833 measurements, published at /research/europe.
 
 ## Licences
@@ -136,8 +137,9 @@ auth/register и auth/google, и нет ни одного входа по кош
   • проверено сайтов: 11 902
   • реальных обходов клавиатурой: 95 524
   • территорий (штаты, округ Колумбия, территории): 51
-  • снимков экрана всего: 52 592
-  • снимков-доказательств: 44 054
+  • снимков-доказательств: 83 212 — столько записей обхода из 95 524 имеют
+    сохранённый файл снимка (87,1 %); путь записан у 85 704, у 2 492 файла
+    не оказалось. Чисел 52 592 и 44 054 не существует.
   • сайтов с ошибкой при обходе: 348
   • сайтов без ответа: 248
   • расхождение автоматического сканера и живого обхода: 53,8 %
