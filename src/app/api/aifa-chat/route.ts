@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { AIFA_SYSTEM_PROMPT } from "@/lib/knowledge-base";
+import { AIFA_SYSTEM_PROMPT, блокСегодня } from "@/lib/knowledge-base";
 import { allowRequest } from "@/lib/rate-limit";
 import { centralConfig, buildCentralHeaders, centralFetch } from "@/lib/central-proxy";
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
@@ -309,7 +309,7 @@ async function ответБесплатнымИлиГрантом(
   дополнениеПодсказки: string
 ): Promise<string | null> {
   const formattedMessages = [
-    { role: "system", content: AIFA_SYSTEM_PROMPT + дополнениеПодсказки + ТОН_РАЗГОВОРА },
+    { role: "system", content: AIFA_SYSTEM_PROMPT + блокСегодня() + дополнениеПодсказки + ТОН_РАЗГОВОРА },
     ...messages.map((m) => ({
       role: m.role === "assistant" ? "assistant" : "user",
       content: m.content,
@@ -531,7 +531,7 @@ async function getGrokResponse(
    * grok-4.5, суточный потолок вызовов и печать каждого отказа.
    */
   const formattedMessages = [
-    { role: "system", content: AIFA_SYSTEM_PROMPT + дополнениеПодсказки + ТОН_РАЗГОВОРА },
+    { role: "system", content: AIFA_SYSTEM_PROMPT + блокСегодня() + дополнениеПодсказки + ТОН_РАЗГОВОРА },
     ...messages.map((m) => ({
       role: m.role === "assistant" ? "assistant" : "user",
       content: m.content,
