@@ -63,5 +63,17 @@ on a repeat pass is 96 % by verdict and 89,9 % by issue count. Rows with
 `unmeasurable_or_unreachable`, `blocked` or `server_silent` say what
 happened during our visit, not what the site is.
 
+**`server_silent` is a navigation timeout, not proof of a dead server.**
+The verdict is written when `page.goto` does not reach its load event within
+the timeout. A screenshot is taken anyway, and in most cases it shows an
+empty browser error page — but not always. We checked all 1 290
+`server_silent` rows against their screenshots by file size: 1 109 (86,0 %)
+are under 30 KB and consistent with an error page, 148 are between 30 and
+300 KB, and 33 (2,6 % of the verdict, 0,035 % of the dataset) are over
+300 KB. Opening those large ones shows fully rendered municipal pages —
+menus, headings, service tiles. For those rows the site was reachable and
+our client gave up first. They are being re-measured; until then treat
+`server_silent` as "our visit timed out", never as "the server is down".
+
 Licence: CC BY 4.0 · Method: https://aifa.works/research/methodology
 Contact: contact@codeofdigitaleternity.com
