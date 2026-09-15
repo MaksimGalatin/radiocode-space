@@ -202,6 +202,24 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
                       fontSize: 14, textDecoration: 'none' }}>
             {т.витринаКнопкаСхема}
           </a>
+          <a href="https://aifa.works/data/research-records-2026-09-01.csv.gz"
+             style={{ padding: '10px 18px', borderRadius: 999,
+                      border: '1px solid rgba(148,163,184,0.3)', color: '#cbd5e1',
+                      fontSize: 14, textDecoration: 'none' }}>
+            {т.витринаКнопкаТаблица}
+          </a>
+          <a href="https://aifa.works/data/research-summary-2026-09-01.json"
+             style={{ padding: '10px 18px', borderRadius: 999,
+                      border: '1px solid rgba(148,163,184,0.3)', color: '#cbd5e1',
+                      fontSize: 14, textDecoration: 'none' }}>
+            {т.витринаКнопкаСводка}
+          </a>
+          <a href="https://aifa.works/data/keyboard-traversal-engine.mjs"
+             style={{ padding: '10px 18px', borderRadius: 999,
+                      border: '1px solid rgba(6,182,212,0.5)', color: '#22d3ee',
+                      fontSize: 14, textDecoration: 'none' }}>
+            {т.витринаКнопкаКод}
+          </a>
           <Link href="/research/methodology"
              style={{ padding: '10px 18px', borderRadius: 999,
                       border: '1px solid rgba(148,163,184,0.3)', color: '#cbd5e1',
