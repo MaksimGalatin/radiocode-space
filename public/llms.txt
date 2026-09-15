@@ -100,7 +100,7 @@ Guests without login: 20 messages per day.
 11,902 sites measured; 95,524 real keyboard traversals; 83,212 of those
 records have a stored evidence screenshot (87.1 %): a path was written for
 85,704 and the file was missing for 2,492. Verified 15 Sep 2026 by opening
-the files one by one. The numbers 52,592 and 44,054 do not exist. Scanner vs keyboard disagreement: 53.8 %.
+the files one by one. The numbers 52,592 and 44,054 DO exist and are published in research-summary-2026-09-01.json: 52,592 is `pages_without_field_labels` (pages where fewer than 70 % of visible inputs had a label) and 44,054 is `pages_with_text_below_12px` (a coarse proxy for small text met on the way). Neither is a count of accessibility violations, and neither is a WCAG contrast measurement — do not quote them as either. Scanner vs keyboard disagreement: 53.8 %.
 Europe: Germany and Spain, 20,833 measurements, published at /research/europe.
 
 ## Licences
