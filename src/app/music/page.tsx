@@ -30,7 +30,7 @@ const SITE = 'https://radiocode.space';
 const title = 'All music — 530 original songs in 1024 versions · RadioCode.Space';
 const description =
   'Full catalogue of every track on RadioCode.Space: 1024 original recordings ' +
-  'across four stations, written by a human and an artificial intelligence ' +
+  'across six stations, written by a human and an artificial intelligence ' +
   'together. Free to listen, no advertising, no sign-up.';
 
 /**

@@ -9,7 +9,10 @@ import { readableAccent } from '@/lib/readableAccent';
 
 const SITE = 'https://radiocode.space';
 
-/** Все четыре станции знаем на сборке — страницы статические. */
+/** Все станции знаем на сборке — страницы статические. Число берётся из
+ *  самого списка, поэтому новая станция подхватывается без правок здесь:
+ *  на 15.09.2026 их шесть, проверено живыми ответами /station/code-stories
+ *  и /station/code-spectrum (оба 200). */
 export function generateStaticParams() {
   return stations.map((s) => ({ id: s.id }));
 }

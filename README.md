@@ -3,7 +3,7 @@
 **Live:** https://radiocode.space
 **Architect:** Maksim Valentinovich Galatin — https://www.codeofdigitaleternity.com
 
-An immersive audio-visual player: four stations of original music, reactive
+An immersive audio-visual player: six stations of original music, reactive
 visualisations, an equaliser, playlists and crossfade — served as static
 assets, with no streaming backend to pay for.
 
@@ -14,7 +14,7 @@ and the same tools work here as on the other three sites.
 
 ## 1. The radio itself
 
-* **Four stations**, original tracks written and produced inside the project.
+* **Six stations**, original tracks written and produced inside the project.
 * **Web Audio API** — equaliser, visualisations at 60 fps, gapless playback.
 * **Crossfade tuned per station:** short (≈0.8 s) where there are vocals, long
   (≈3 s) for instrumental music, so words of one track never land on top of

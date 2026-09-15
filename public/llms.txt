@@ -35,7 +35,7 @@ RadioCode.Space is the eternal cyberpunk radio of the CODE Eternal ecosystem —
 - codeofdigitaleternity@gmail.com
 
 ## Pages
-- / — the player itself: four stations, streaming without a stop.
+- / — the player itself: six stations, streaming without a stop.
 - /cabinet — one CODE Eternal account across the ecosystem: AIfa memory, XP, $GALATIN, referrals.
 - See also /llms-full.txt for the full text of this site in one file.
 
