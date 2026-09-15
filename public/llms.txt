@@ -48,6 +48,20 @@ lives on aifa.works, the ecosystem's research site:
 - https://aifa.works/research/registry — 1,441 domains in the CISA registry with no DNS record at all
 - https://aifa.works/data — raw research files
 
+### What is in that folder — the files a fact-checker asks for
+- https://aifa.works/data/research-records-2026-09-01.csv.gz — all 95,524 measurements as a table
+- https://aifa.works/data/research-records-SCHEMA.md — what every column means
+- https://aifa.works/data/traversal-log-2026-09-01.jsonl.gz — the raw log, one object per visit
+- https://aifa.works/data/traversal-log-SCHEMA.md — field reference, every headline number derived
+- https://aifa.works/data/research-summary-2026-09-01.json — totals by verdict, page type, state
+- https://aifa.works/data/keyboard-traversal-engine.mjs — the measurement program itself
+- https://aifa.works/data/evidence-hashes-2026-09-01.txt.gz — SHA-256 of every screenshot,
+  anchored in Bitcoin block 965040 (proof file: .ots next to it)
+- https://aifa.works/data/template-defect-evidence-2026-09-15.csv — 200 CSS selectors failing on
+  the same node across up to 50 states: the defect is in a vendor template
+- https://aifa.works/data/DATASET-HISTORY.md — every release and what changed, our own
+  corrections listed first
+
 Key finding: automated scanners and real keyboard traversal disagree on
 53.8 % of pages. A page can pass an automated audit and still be unusable
 without a mouse.
