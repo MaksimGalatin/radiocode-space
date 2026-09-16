@@ -912,6 +912,33 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
           </table>
         </div>
 
+        {/* КАК ПРОВЕРИТЬ, ЧТО ЧИСЛА НЕ ПОДОГНАНЫ.
+            Блок отвечает на главный вопрос к любому исследованию, которое
+            ведёт заинтересованная сторона: «а вы не подогнали числа задним
+            числом?». До 16.09.2026 ответа, проверяемого БЕЗ НАС, не было.
+            Раздел 20 Конституции соблюдён: ни токена, ни тарифов, ни призывов. */}
+        <h2 style={{ color: '#e2e8f0', fontSize: 22, marginTop: 40, marginBottom: 12 }}>
+          {т.заверениеЗаголовок}
+        </h2>
+        <p style={ТЕКСТ}>{т.заверениеВступление}</p>
+        <ul style={{ ...ТЕКСТ, paddingLeft: 22, marginBottom: 32 }}>
+          {т.заверение.map((з) => (
+            <li key={з.цепь} style={{ marginBottom: 12 }}>
+              <strong style={{ color: '#7dd3fc' }}>{з.цепь}</strong>
+              {' — '}
+              {з.что}{' '}
+              <a
+                href={з.ссылка}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#7dd3fc', textDecoration: 'underline' }}
+              >
+                {з.цепь}
+              </a>
+            </li>
+          ))}
+        </ul>
+
         <p style={ТЕКСТ}>
           {т.методикаЦеликом}
           <Link href="/research/methodology" style={{ color: '#22d3ee' }}>

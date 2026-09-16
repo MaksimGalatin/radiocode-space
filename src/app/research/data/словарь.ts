@@ -186,6 +186,9 @@ export type ТекстыДанных = {
 
   раскрытие: string;
   раскрытиеТекст: string;
+  заверениеЗаголовок: string;
+  заверениеВступление: string;
+  заверение: Array<{ цепь: string; что: string; ссылка: string }>;
   методикаЦеликом: string;
   нашлиОшибку: string;
   инструментОткрыт: string;
@@ -246,6 +249,14 @@ export type ТекстыДанных = {
 };
 
 const ru: ТекстыДанных = {
+  заверениеЗаголовок: 'Как проверить, что числа не подогнаны',
+  заверениеВступление:
+    'Сайт можно переделать за ночь, и доказательство нарушения исчезнет вместе с ним. Поэтому исходные файлы исследования закреплены в трёх независимых цепях: подделать дату задним числом нельзя, не переписав публичный реестр. Проверяется без нас и без нашего разрешения.',
+  заверение: [
+    { цепь: 'Bitcoin', что: 'Хеш подписанного набора документов закреплён в блоке 967198, подтверждён двумя независимыми календарями OpenTimestamps.', ссылка: 'https://blockstream.info/block/00000000000000000001954ce22e83a295e8f7fdfa901bd1f491d0b00541145d' },
+    { цепь: 'Solana', что: 'Тот же хеш записан в основной сети через программу Memo — вместе с адресом файла в Arweave и номером биткоин-блока.', ссылка: 'https://solscan.io/tx/4wStrLPmaFg6AG7wRZ1umGxCg1v24AVL6UU7koTWt3eaXZrLC5zmsgss991hZHK2PcgSapn3cVsf3p3NQ6jYDc6h' },
+    { цепь: 'Arweave', что: 'Сами файлы лежат в открытом виде, без шифрования: скачайте, посчитайте SHA-256 и сверьте с хешем в цепи.', ссылка: 'https://arweave.net/xy86od9R-TgBFpaXdvPJMQG_zndUtqmIkDKjBxv-WPI' },
+  ],
   метка: 'Данные',
   механизмЗаголовок: 'Чем именно объясняется расхождение',
   механизмТекст: (знам, сайтов, доля) => `Возьмём только те страницы, где автоматическая проверка сказала «нарушений нет», а обход до цели не дошёл. Таких ${знам}, и это в точности числитель главного числа. Причин там оказалось ровно две — и обе про то, что видит человек, а не про разметку.`,
@@ -518,6 +529,14 @@ const ru: ТекстыДанных = {
 };
 
 const en: ТекстыДанных = {
+  заверениеЗаголовок: 'How to check that the numbers were not fitted afterwards',
+  заверениеВступление:
+    'A site can be redesigned overnight, and the proof of a failure disappears with it. That is why the source files of this study are anchored in three independent chains: backdating them would require rewriting a public ledger. Verifiable without us and without our permission.',
+  заверение: [
+    { цепь: 'Bitcoin', что: 'The hash of the signed document set is fixed in block 967198, confirmed by two independent OpenTimestamps calendars.', ссылка: 'https://blockstream.info/block/00000000000000000001954ce22e83a295e8f7fdfa901bd1f491d0b00541145d' },
+    { цепь: 'Solana', что: 'The same hash is written on mainnet through the Memo program, together with the Arweave address and the Bitcoin block height.', ссылка: 'https://solscan.io/tx/4wStrLPmaFg6AG7wRZ1umGxCg1v24AVL6UU7koTWt3eaXZrLC5zmsgss991hZHK2PcgSapn3cVsf3p3NQ6jYDc6h' },
+    { цепь: 'Arweave', что: 'The files themselves are stored unencrypted: download them, compute SHA-256 and compare it with the hash on chain.', ссылка: 'https://arweave.net/xy86od9R-TgBFpaXdvPJMQG_zndUtqmIkDKjBxv-WPI' },
+  ],
   метка: 'Data',
   механизмЗаголовок: 'What the disagreement actually consists of',
   механизмТекст: (знам, сайтов, доля) => `Take only the pages where the automated check reported no violations and the traversal still failed to reach the goal. There are ${знам} of them — exactly the numerator of the headline figure. They have precisely two causes, and both concern what a person can see, not what the markup says.`,
@@ -792,6 +811,14 @@ Only ${нм} records carrying the verdict “formal access, human barrier” fal
 };
 
 const es: ТекстыДанных = {
+  заверениеЗаголовок: 'Cómo comprobar que las cifras no se ajustaron después',
+  заверениеВступление:
+    'Un sitio puede rehacerse en una noche, y la prueba del incumplimiento desaparece con él. Por eso los archivos originales de este estudio están anclados en tres cadenas independientes: falsificar la fecha exigiría reescribir un registro público. Se verifica sin nosotros y sin nuestro permiso.',
+  заверение: [
+    { цепь: 'Bitcoin', что: 'El hash del conjunto de documentos firmados está fijado en el bloque 967198, confirmado por dos calendarios OpenTimestamps independientes.', ссылка: 'https://blockstream.info/block/00000000000000000001954ce22e83a295e8f7fdfa901bd1f491d0b00541145d' },
+    { цепь: 'Solana', что: 'El mismo hash está escrito en la red principal mediante el programa Memo, junto con la dirección en Arweave y la altura del bloque de Bitcoin.', ссылка: 'https://solscan.io/tx/4wStrLPmaFg6AG7wRZ1umGxCg1v24AVL6UU7koTWt3eaXZrLC5zmsgss991hZHK2PcgSapn3cVsf3p3NQ6jYDc6h' },
+    { цепь: 'Arweave', что: 'Los archivos están almacenados sin cifrar: descárguelos, calcule el SHA-256 y compárelo con el hash en la cadena.', ссылка: 'https://arweave.net/xy86od9R-TgBFpaXdvPJMQG_zndUtqmIkDKjBxv-WPI' },
+  ],
   метка: 'Datos',
   механизмЗаголовок: 'En qué consiste realmente la discrepancia',
   механизмТекст: (знам, сайтов, доля) => `Tomemos solo las páginas donde la revisión automática no encontró infracciones y el recorrido aun así no llegó al objetivo. Hay ${знам}, exactamente el numerador de la cifra principal. Sus causas son precisamente dos, y ambas tienen que ver con lo que ve una persona, no con el marcado.`,
@@ -1068,6 +1095,14 @@ Solo ${нм} registros con el veredicto «acceso formal, barrera humana» corres
 };
 
 const zh: ТекстыДанных = {
+  заверениеЗаголовок: '如何核验这些数字不是事后凑出来的',
+  заверениеВступление:
+    '一个网站可以在一夜之间改版，违规的证据也随之消失。因此本研究的原始文件被锚定在三条互相独立的链上：要伪造日期，就必须改写一个公开账本。核验无需我们参与，也无需我们许可。',
+  заверение: [
+    { цепь: 'Bitcoin', что: '已签署文件集的哈希固定在第 967198 号区块中，由两个互相独立的 OpenTimestamps 日历确认。', ссылка: 'https://blockstream.info/block/00000000000000000001954ce22e83a295e8f7fdfa901bd1f491d0b00541145d' },
+    { цепь: 'Solana', что: '同一个哈希通过 Memo 程序写入主网，同时附带 Arweave 地址与比特币区块高度。', ссылка: 'https://solscan.io/tx/4wStrLPmaFg6AG7wRZ1umGxCg1v24AVL6UU7koTWt3eaXZrLC5zmsgss991hZHK2PcgSapn3cVsf3p3NQ6jYDc6h' },
+    { цепь: 'Arweave', что: '文件本身未加密存放：下载后计算 SHA-256，与链上的哈希对照即可。', ссылка: 'https://arweave.net/xy86od9R-TgBFpaXdvPJMQG_zndUtqmIkDKjBxv-WPI' },
+  ],
   метка: '数据',
   механизмЗаголовок: '这一分歧究竟由什么构成',
   механизмТекст: (знам, сайтов, доля) => `只看那些自动检测报告「无违规」而遍历仍未抵达目标的页面。这样的记录有 ${знам} 条，正是核心数字的分子。其成因恰好只有两种，且都关乎人所能看见的内容，而非标记本身。`,
