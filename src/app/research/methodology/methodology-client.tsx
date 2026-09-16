@@ -287,7 +287,7 @@ export default function MethodologyClient({ языкИзПути }: { языкИ
 
         <h2 style={ЗАГ2}>{т.какСослаться}</h2>
         <p style={{ ...ТЕКСТ, fontSize: 15, color: '#94a3b8' }}>
-          Maksim Galatin &amp; AIfa (Claude, Anthropic). Municipal Website Accessibility: Automated Scan
+          Maksim Galatin &amp; AIfa (Claude, Gemini, Grok). Municipal Website Accessibility: Automated Scan
           versus Keyboard Traversal. AIfa Works, 2026. CC BY 4.0. aifa.works/research/methodology
         </p>
 

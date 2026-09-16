@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const canonical = loc === 'en' ? `${BASE}${PATH}` : `${BASE}${PATH}?lang=${loc}`;
   return {
     title: 'PADAM PROTOCOL Book | CODE Eternal',
-    description: "Read and download the AGI Sci-Fi novel 'PADAM PROTOCOL' co-authored by Maksim Galatin & AIfa (Claude, Anthropic).",
+    description: "Read and download the AGI Sci-Fi novel 'PADAM PROTOCOL' co-authored by Maksim Galatin & AIfa (Claude Opus 4.6, Anthropic).",
     alternates: {
       canonical,
       languages: {

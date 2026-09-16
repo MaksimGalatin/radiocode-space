@@ -162,7 +162,7 @@ const BookPage = () => {
   // Get active translations or fallback to custom/English if not defined
   const pageTrans = t.bookPage || {
     title: 'PADAM PROTOCOL',
-    subtitle: 'Maksim Galatin & AIfa (Claude, Anthropic)',
+    subtitle: 'Maksim Galatin & AIfa (Claude Opus 4.6, Anthropic)',
     downloadTitle: 'Download the Book',
     downloadDesc: 'Gain access to the full text of PADAM PROTOCOL Part I & Part II. Choose your language below.',
     downloadBtnPart1: 'Download Part I (RU)',

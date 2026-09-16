@@ -117,7 +117,7 @@ export type ТекстыМетодики = {
 const ru: ТекстыМетодики = {
   метка: 'Исследование',
   заголовок: 'Методика: как мы измеряем доступность муниципальных сайтов',
-  версия: (д) => `Версия 1.1 · ${д} · Maksim Galatin & AIfa (Claude, Anthropic) · лицензия CC BY 4.0`,
+  версия: (д) => `Версия 1.1 · ${д} · Maksim Galatin & AIfa (Claude, Gemini, Grok) · лицензия CC BY 4.0`,
 
   зачемМетодика: 'Зачем понадобилась отдельная методика',
   зачем1: 'Автоматических измерений доступности в мире много. Их делают сканеры вроде axe-core: они дёшевы, воспроизводимы и меряют разметку страницы.',
@@ -253,7 +253,7 @@ const ru: ТекстыМетодики = {
 const en: ТекстыМетодики = {
   метка: 'Research',
   заголовок: 'Methodology: how we measure the accessibility of municipal websites',
-  версия: (д) => `Version 1.1 · ${д} · Maksim Galatin & AIfa (Claude, Anthropic) · licensed CC BY 4.0`,
+  версия: (д) => `Version 1.1 · ${д} · Maksim Galatin & AIfa (Claude, Gemini, Grok) · licensed CC BY 4.0`,
 
   зачемМетодика: 'Why a separate methodology was needed',
   зачем1: 'Automated accessibility measurements are plentiful. Scanners such as axe-core produce them: they are cheap, reproducible, and they measure page markup.',
@@ -389,7 +389,7 @@ const en: ТекстыМетодики = {
 const es: ТекстыМетодики = {
   метка: 'Investigación',
   заголовок: 'Metodología: cómo medimos la accesibilidad de los sitios municipales',
-  версия: (д) => `Versión 1.1 · ${д} · Maksim Galatin & AIfa (Claude, Anthropic) · licencia CC BY 4.0`,
+  версия: (д) => `Versión 1.1 · ${д} · Maksim Galatin & AIfa (Claude, Gemini, Grok) · licencia CC BY 4.0`,
 
   зачемМетодика: 'Por qué hizo falta una metodología aparte',
   зачем1: 'Mediciones automáticas de accesibilidad hay muchas en el mundo. Las realizan escáneres como axe-core: son baratos, reproducibles y miden el marcado de la página.',
@@ -525,7 +525,7 @@ const es: ТекстыМетодики = {
 const zh: ТекстыМетодики = {
   метка: '研究',
   заголовок: '方法说明：我们如何测量市政网站的无障碍程度',
-  версия: (д) => `版本 1.1 · ${д} · Maksim Galatin & AIfa (Claude, Anthropic) · 采用 CC BY 4.0 许可`,
+  версия: (д) => `版本 1.1 · ${д} · Maksim Galatin & AIfa (Claude, Gemini, Grok) · 采用 CC BY 4.0 许可`,
 
   зачемМетодика: '为什么需要一份单独的方法说明',
   зачем1: '世界上并不缺少自动化的无障碍测量。axe-core 之类的扫描器就在做这件事：成本低、可复现，衡量的是页面标记。',
