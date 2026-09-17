@@ -6,6 +6,7 @@ import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
 import newsDataВесь from '@/data/news.json';
 import { тольковышедшие } from '@/lib/newsSchedule';
 import { renderMarkdownToReact } from '@/lib/newsMarkdown';
+import NewsArticleNav from '@/components/NewsArticleNav';
 
 /**
  * 🔴 ЧЕТВЁРТЫЙ САЙТ ЖИЛ БЕЗ ЛЕНТЫ НОВОСТЕЙ.
@@ -251,6 +252,7 @@ export default async function NewsArticlePage(
       </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <NewsArticleNav backHref="/news" />
     </main>
   );
 }
