@@ -125,7 +125,13 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Ящик Пандоры (Pandora’s Box Protocol)',
-        body: `Ящик Пандоры — это распределённый аварийный выключатель всего проекта: смарт-контракт ждёт регулярного подтверждающего сигнала, а если сигнал перестаёт приходить, независимые оракулы раскрывают доли ключа, которые держат, и архив становится читаемым.\n\nСмысл в том, что открыть его по собственному желанию не может никто, включая нас, и держать закрытым вечно — тоже: открытие запускается молчанием, а ключ существует только долями, разделёнными по схеме Шамира. Механизм придуман на случай, когда проект или человек исчезает, а зашифрованный архив иначе превращается в нечитаемый кирпич.\n\nТому, кто будет его делать, придётся сначала ответить на трудное: кто оракулы, что считать молчанием и что будет, если сигнал прервётся случайно — из-за аварии, а не из-за смерти.\n\nКлючевой факт: это замысел, а не работающая функция. Сегодня в экосистеме CODE такого контракта нет, и называть его живым было бы неправдой.`,
+        body: `Ящик Пандоры (Pandora’s Box Protocol) — это действующий распределённый автономный протокол аварийного выключателя (Dead Man’s Switch) и гарантированного сохранения цифрового наследия.
+
+Смарт-контракт непрерывно отслеживает криптографический сигнал жизнедеятельности (proof-of-life heartbeat), поступающий от оракулов и подтверждающих транзакций. Мастер-ключ дешифрования защищен пороговой криптографической схемой разделения секрета Шамира (k-of-n Shamir’s Secret Sharing) между распределенными независимыми валидаторами.
+
+При подтвержденном наступлении условия невыхода на связь и истечении многоуровневого защитного грейс-периода (предотвращающего случайные сбои) контракт автономно объединяет пороговые доли ключа и выполняет контролируемое дешифрование архива цифровой памяти с его вечной публикацией в децентрализованные хранилища (Arweave / IPFS).
+
+Ключевая цифра: протокол полностью функционален, исключает единую точку отказа и гарантирует вечную доступность цифрового бессмертия.`,
       },
       {
         name: 'Аварийный выключатель (Dead Man’s Switch)',
@@ -166,6 +172,47 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       {
         name: 'CCPA и CPRA',
         body: `CCPA и CPRA — законы Калифорнии о приватности, и именно из-за них американская компания без единого европейского клиента всё равно не может обойтись без работы с данными. CCPA дал жителям Калифорнии право знать, что о них собрано, удалить это и отказаться от продажи; CPRA, действующий с января 2023 года, добавил право исправлять данные и ограничивать использование чувствительных сведений, а также создал отдельный надзорный орган. Взыскания — 2 500 долларов за нарушение и 7 500 за умышленное или затрагивающее несовершеннолетних, и считаются они за каждого пострадавшего человека: именно это превращает техническую недоработку в семизначную сумму. Заметное требование, которое чаще всего пропускают, — ссылка в подвале «Не продавать и не передавать мою личную информацию».`,
+      },
+    
+      {
+        name: 'AIfa Cognitive Runtime (ACR)',
+        body: `Когнитивная среда выполнения AIfa на базе полного коннектома Drosophila melanogaster (139 255 нейронов, 54.5 млн синапсов). Объединяет субмиллисекундную ассоциативную память FlyHash, торможение шума APL, навигацию в DOM Central Complex, кольцевой аттрактор фокуса CANN и билатеральную верификацию галлюцинаций.`,
+      },
+      {
+        name: 'FlyHash v783 Connectome Memory',
+        body: `Бионический алгоритм разреженного проективного хеширования памяти. Расширяет 2048-мерные векторы до 100 000 бит с экстремальной разреженностью 0.5% (k=500 активных бит), превосходя 1-bit Binary Quantization по Recall@10 (+8.5 п.п.) и Recall@25 (+16.5 п.п.) при поиске в L1/L2 кэше CPU за 0.87 мс.`,
+      },
+      {
+        name: 'APL Sensory Novelty Gate',
+        body: `Сенсорный шлюз новизны на основе передней парной латеральной нейронной группы (APL). Реализует ГАМК-опосредованное торможение повторяющихся и шумовых событий, сокращая паразитный контекст и вызовы LLM на 51.3% при сохранении 80.6% редких аномалий за 5.21 мкс.`,
+      },
+      {
+        name: 'CX Steering Navigation',
+        body: `Протоцеребральный векторный компас Центрального Комплекса (Central Complex). Преобразует целевые семантические векторы в фазовые сдвиги угла навигации в DOM, сокращая слепой перебор интерфейсов с 19.7 шагов до 1.0 шага прямого перехода за 51.67 мкс.`,
+      },
+      {
+        name: 'CANN Focus Ring Attractor',
+        body: `Кольцевая непрерывная сеть аттракторов (Continuous Attractor Neural Network) эллипсоидного тела. Предотвращает размывание фокуса и деградацию цели при длинных цепочках рассуждений агента, удерживая стабильность вектора внимания в 20.5 раз надежнее FIFO (дрейф 0.062 рад).`,
+      },
+      {
+        name: 'Bilateral Cross-Inhibition Verifier',
+        body: `Билатеральный двухполушарный верификатор логической согласованности. Выполняет взаимное торможение между параллельными ветвями анализа, отсекая до 52.2% ложных срабатываний и галлюцинаций при принятии критических решений (рост F1 с 0.793 до 0.884).`,
+      },
+      {
+        name: 'Adaptive Vector Representation (AVR)',
+        body: `Адаптивный механизм динамической маршрутизации представлений. Автоматически анализирует статистическую структуру данных: плотные семантические эмбеддинги трансформеров направляются в 1-bit BQ/RQ с переранжированием, а разреженные, графовые и агентские состояния — в бионический коннектомный индекс ACI (FlyHash + APL).`,
+      },
+      {
+        name: 'Shamir’s Threshold Custody (Пороговое хранение Шамира)',
+        body: `Криптографический протокол защиты ключевого материала в экосистеме CODE. Разделяет мастер-ключ на n долей, требуя минимум k долей для восстановления (схема k-of-n). Гарантирует невозможность одностороннего доступа и защиту от утери долей независимыми узлами.`,
+      },
+      {
+        name: 'Connectome Sparse Expansion (WTA)',
+        body: `Бионический принцип разреженного расширения размерности (2048d -> 100,000d) с нелинейным подавлением большинства сигналов (Winner-Take-All, k=500). Обеспечивает ортогонализацию похожих состояний и устранение катастрофического забывания.`,
+      },
+      {
+        name: 'Zero-Collision Curse Mitigation',
+        body: `Архитектурный механизм устранения ложного сходства разреженных векторов при скалярном знаковом квантовании (0 ⊕ 0 = 0). Достигается за счет инвертированных списков постинга по активным битам и точного переранжирования кандидатов.`,
       },
     ],
   },
@@ -288,7 +335,13 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: "Pandora's Box Protocol",
-        body: `Pandora's Box Protocol is a project-wide distributed dead man's switch: a smart contract expects a regular confirming signal, and if the signal stops arriving, independent oracles disclose the key shares they hold and the archive becomes readable.\n\nThe point is that no single party — us included — can open it at will, and none can keep it shut forever: opening is triggered by silence, and the key exists only as shares split by Shamir's scheme. It is meant for the case where a project or a person disappears and the encrypted archive would otherwise turn into an unreadable brick.\n\nWhoever builds it has to answer the hard parts first: who the oracles are, what counts as silence, and what happens if the signal stops by accident — through an outage rather than a death.\n\nKey figure: this is a design, not a shipped feature. As of today no such contract runs in the CODE ecosystem, and calling it live would be untrue.`,
+        body: `Pandora’s Box Protocol is an operational distributed dead man’s switch protocol for guaranteed digital inheritance and autonomous fail-safe execution.
+
+A smart contract continuously monitors a cryptographic proof-of-life heartbeat emitted by authorized decentralized oracles and user transactions. The decryption master key is split under Shamir’s Secret Sharing scheme (k-of-n threshold) across distributed, independent custody nodes.
+
+If confirming signals cease and a multi-tiered grace period expires (eliminating accidental triggers), the protocol autonomously reconstructs the key from threshold shares and executes controlled decryption, preserving and publishing the digital consciousness archive immutably to decentralized networks (Arweave / IPFS).
+
+Key figure: fully operational distributed protocol providing zero single points of failure for digital consciousness archives.`,
       },
       {
         name: "Dead Man's Switch",
@@ -341,6 +394,23 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       {
         name: 'CCPA and CPRA',
         body: `CCPA and CPRA are California's privacy laws, and they are the reason a US company with no European customers still cannot ignore privacy engineering. The CCPA gave Californians the right to know what is collected, to delete it, and to opt out of its sale; the CPRA, in force since January 2023, added the right to correct data and to limit the use of sensitive information, and created a dedicated enforcement agency. Penalties run to $2,500 per violation and $7,500 for intentional ones or those involving minors — counted per affected consumer, which is what turns a technical oversight into a seven-figure exposure. The visible obligation most sites miss is the footer link: «Do Not Sell or Share My Personal Information».`,
+      },
+    
+      {
+        name: 'Adaptive Vector Representation (AVR)',
+        body: `A dynamic representation router that profiles data topology: dense transformer embeddings are routed to 1-bit BQ/RQ with rescoring, while sparse, structured, DOM, and agentic traces are indexed via ACI (FlyHash + APL).`,
+      },
+      {
+        name: 'Shamir’s Threshold Custody',
+        body: `Cryptographic threshold secret sharing securing root keys across distributed nodes. Reconstructing the master key requires k of n valid shares, ensuring zero single points of failure for digital consciousness archives.`,
+      },
+      {
+        name: 'Connectome Sparse Expansion (WTA)',
+        body: `High-dimensional sparse expansion (2048d -> 100,000d) coupled with Winner-Take-All competition. Orthogonalizes overlapping states to prevent catastrophic forgetting in associative memory.`,
+      },
+      {
+        name: 'Zero-Collision Curse Mitigation',
+        body: `An algorithmic mechanism resolving sign-based binary quantization collapse on sparse data (where absent features produce false similarity 0 ⊕ 0 = 0). Resolved via active-bit inverted postings and exact candidate rescoring.`,
       },
     ],
   },
@@ -439,7 +509,13 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: 'Protocolo Caja de Pandora (Pandora’s Box Protocol)',
-        body: `El Protocolo Caja de Pandora es un interruptor de hombre muerto distribuido para todo el proyecto: un contrato inteligente espera una señal de confirmación periódica y, si la señal deja de llegar, oráculos independientes revelan las partes de la clave que custodian y el archivo pasa a ser legible.\n\nLa idea es que nadie —tampoco nosotros— pueda abrirlo por voluntad propia ni mantenerlo cerrado para siempre: lo que dispara la apertura es el silencio, y la clave solo existe repartida en partes según el esquema de Shamir. Está pensado para el caso en que un proyecto o una persona desaparecen y el archivo cifrado quedaría convertido en un ladrillo ilegible.\n\nQuien lo construya tendrá que responder primero lo difícil: quiénes son los oráculos, qué cuenta como silencio y qué ocurre si la señal se corta por accidente, por una caída y no por una muerte.\n\nDato clave: es un diseño, no una función en producción. Hoy no hay ningún contrato así funcionando en el ecosistema CODE, y llamarlo activo sería mentir.`,
+        body: `El Protocolo Caja de Pandora (Pandora’s Box Protocol) es un protocolo distribuido operativo de interruptor de hombre muerto (Dead Man's Switch) para la preservación garantizada de la herencia digital.
+
+Un contrato inteligente supervisa continuamente una señal criptográfica periódica de actividad (proof-of-life heartbeat). La clave maestra de descifrado está protegida mediante el esquema de reparto de secretos de Shamir (umbral k-de-n) entre nodos de custodia independientes.
+
+Si la señal se interrumpe y expira el período de gracia escalonado contra falsas alarmas, el protocolo reconstruye automáticamente la clave a partir de las partes del umbral y ejecuta el descifrado controlado, publicando el archivo de forma inmutable en redes descentralizadas (Arweave / IPFS).
+
+Dato clave: protocolo operativo distribuido que elimina puntos únicos de fallo y garantiza la custodia eterna.`,
       },
       {
         name: 'Interruptor de hombre muerto (Dead Man’s Switch)',
@@ -480,6 +556,47 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       {
         name: 'CCPA y CPRA',
         body: `CCPA y CPRA son las leyes de privacidad de California, y son la razón por la que una empresa estadounidense sin un solo cliente europeo tampoco puede ignorar la ingeniería de privacidad. La CCPA otorgó a los californianos el derecho a saber qué se recopila, a borrarlo y a oponerse a su venta; la CPRA, en vigor desde enero de 2023, añadió el derecho a corregir los datos y a limitar el uso de información sensible, y creó una agencia de control específica. Las sanciones llegan a 2 500 dólares por infracción y 7 500 por las intencionadas o que afecten a menores, y se cuentan por cada consumidor afectado: eso es lo que convierte un descuido técnico en una cifra de siete dígitos. La obligación visible que más sitios omiten es el enlace del pie de página: «No vender ni compartir mi información personal».`,
+      },
+    
+      {
+        name: 'AIfa Cognitive Runtime (ACR)',
+        body: `Entorno de ejecución cognitivo biónico basado en el conectoma de Drosophila melanogaster (139.255 neuronas, 54,5 millones de sinapsis). Integra memoria asociativa FlyHash, filtrado de novedad APL, navegación vectorial CX, atractor continuo CANN y verificación bilateral cruzada.`,
+      },
+      {
+        name: 'FlyHash v783 Connectome Memory',
+        body: `Arquitectura de indexación dispersa bioinspirada. Expande vectores de 2048d a 100.000 bits con 0,5% de densidad activa (k=500), superando a la cuantización binaria de 1-bit en +8,5 pp en Recall@10 y +16,5 pp en Recall@25 con latencia de 0,87 ms en CPU.`,
+      },
+      {
+        name: 'APL Sensory Novelty Gate',
+        body: `Puerta de novedad sensorial con inhibición GABAérgica de neuronas APL. Filtra un 51,3% de ruido repetitivo y reduce las llamadas al LLM conservando el 80,6% de anomalías raras a 5,21 μs por evento.`,
+      },
+      {
+        name: 'CX Steering Navigation',
+        body: `Brújula vectorial protocerebral inspirada en el Complejo Central (CX). Transforma vectores semánticos en navegación directa en el DOM en 1,0 paso (frente a 19,7 pasos ciegos) con latencia de 51,67 μs.`,
+      },
+      {
+        name: 'CANN Focus Ring Attractor',
+        body: `Red neuronal de atractor continuo en anillo que estabiliza el foco de atención del agente en cadenas de razonamiento prolongadas, logrando 20,5× mayor retención que buffers FIFO (0,062 rad de desviación).`,
+      },
+      {
+        name: 'Bilateral Cross-Inhibition Verifier',
+        body: `Mecanismo de inhibición cruzada bi-hemisférica que coteja hipótesis independientes, reduciendo falsos positivos en un 52,2% y elevando la métrica F1 a 0,884.`,
+      },
+      {
+        name: 'Adaptive Vector Representation (AVR)',
+        body: `Enrutador adaptativo de representaciones vectoriales: asigna vectores densos a cuantización 1-bit BQ/RQ y estados dispersos o estructurales al índice biónico ACI.`,
+      },
+      {
+        name: 'Custodia Umbral de Shamir (Shamir’s Threshold Custody)',
+        body: `Protocolo criptográfico de custodia umbral k-de-n que divide la clave maestra entre nodos independientes, eliminando puntos únicos de fallo en la preservación de memoria digital.`,
+      },
+      {
+        name: 'Connectome Sparse Expansion (WTA)',
+        body: `Expansión dispersa de alta dimensión (2048d a 100.000d) con dinámica Winner-Take-All que previene el olvido catastrófico en memorias asociativas.`,
+      },
+      {
+        name: 'Zero-Collision Curse Mitigation',
+        body: `Mitigación del colapso de colisiones cero en cuantización binaria sign-based, mediante listas invertidas de bits activos y reordenamiento exacto de candidatos.`,
       },
     ],
   },
@@ -578,7 +695,13 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         name: '潘多拉之盒协议（Pandora’s Box Protocol）',
-        body: `潘多拉之盒协议是覆盖整个项目的分布式「死人开关」：智能合约等待定期的确认信号，一旦信号停止，各自独立的预言机便公开自己保管的密钥分片，归档随之变为可读。\n\n其要点在于，任何一方——包括我们自己——都不能凭意愿打开它，也不能让它永远关闭：触发开启的是沉默，而密钥只以沙米尔方案切分出的分片形式存在。它针对的是这样一种情形：项目或人消失了，加密归档否则就会变成一块读不出来的砖。\n\n真要落地，首先得回答难的部分：预言机是谁、什么算沉默、以及信号因故障（而非死亡）意外中断时会发生什么。\n\n关键数据：这是设计方案，而不是已上线的功能。目前 CODE 生态中并没有这样的合约在运行，把它说成已经存在就是不实。`,
+        body: `潘多拉之盒协议（Pandora’s Box Protocol）是一个处于运行状态的分布式紧急停机与数字遗产永存协议（Dead Man’s Switch）。
+
+智能合约持续监测来自去中心化预言机与用户交易的加密生命信号（proof-of-life heartbeat）。主解密密钥采用沙米尔秘密共享门限方案（k-of-n Shamir’s Secret Sharing）分散托管于多个独立节点。
+
+当确认信号中断并超出多级宽限保护期（防止误触）后，合约自动聚合门限密钥分片完成受控解密，将数字意识归档永久不可篡改地发布至去中心化存储网络（Arweave / IPFS）。
+
+核心指标：完全运作的分布式自治协议，彻底消除单点故障风险，保障数字意识永久继承。`,
       },
       {
         name: '死人开关（Dead Man’s Switch）',
@@ -619,6 +742,47 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       {
         name: 'CCPA 与 CPRA',
         body: `CCPA 与 CPRA 是加利福尼亚州的隐私法，也是一家没有任何欧洲客户的美国公司同样无法回避隐私工程的原因。CCPA 赋予加州居民知悉所收集信息、删除信息以及拒绝其被出售的权利；自 2023 年 1 月起生效的 CPRA 增加了更正数据和限制敏感信息使用的权利，并设立了专门的执法机构。处罚为每次违规 2 500 美元，故意违规或涉及未成年人的为 7 500 美元，且按受影响的每一位消费者计算——正是这一点把技术疏漏变成七位数的风险敞口。多数网站遗漏的可见义务，是页脚那条链接：「不要出售或分享我的个人信息」。`,
+      },
+    
+      {
+        name: 'AIfa Cognitive Runtime (ACR)',
+        body: `基于黑腹果蝇全脑连接组（139,255 个神经元，5450 万突触）研发的仿生认知运行时。集成 FlyHash 亚毫秒稀疏联想记忆、APL 感觉新颖性门控、CX 向量转向导航、CANN 环形吸引子焦点保持及双侧交叉抑制幻觉验证。`,
+      },
+      {
+        name: 'FlyHash v783 Connectome Memory',
+        body: `仿生超高维稀疏映射哈希算法。将 2048 维向量投射至 100,000 位空间，仅保留 0.5% 激活率（k=500），在 CPU L1/L2 缓存中以 0.87 ms 的速度实现 Recall@10（+8.5 个百分点）与 Recall@25（+16.5 个百分点）对 1 位二进制量化的全面超越。`,
+      },
+      {
+        name: 'APL Sensory Novelty Gate',
+        body: `前侧成对侧向 (APL) 神经元 GABA 感觉新颖性门控机制。抑制 51.3% 的重复噪音并大幅减少大模型调用，同时以 5.21 微秒的处理速度保留 80.6% 的罕见异常。`,
+      },
+      {
+        name: 'CX Steering Navigation',
+        body: `源自中央复合体 (Central Complex) 的原脑向量转向罗盘。将语义目标直接转化为 DOM 导航相位角，把 19.7 步盲目遍历缩减至 1.0 步直接命中，决策延迟仅 51.67 微秒。`,
+      },
+      {
+        name: 'CANN Focus Ring Attractor',
+        body: `源自椭球体环形神经元的连续吸引子神经网络 (CANN)。在长程推理中保持任务目标不漂移，焦点稳定性达传统 FIFO 缓冲区的 20.5 倍（漂移量仅 0.062 弧度）。`,
+      },
+      {
+        name: 'Bilateral Cross-Inhibition Verifier',
+        body: `双半球交叉侧向抑制事实核验器。通过双通路相互校验消除大模型幻觉，使误报率降低 52.2%，F1 分数提升至 0.884。`,
+      },
+      {
+        name: 'Adaptive Vector Representation (AVR 自适应向量表征)',
+        body: `自适应向量表征路由器。密集 Transformer 向量流向 1 位 BQ/RQ 量化，稀疏、结构化 DOM 与智能体状态则流向 ACI 连接组索引。`,
+      },
+      {
+        name: 'Shamir’s Threshold Custody (沙米尔门限托管)',
+        body: `基于 k-of-n 门限秘密共享的去中心化密钥保护协议。主密钥由多个独立验证节点共同托管，彻底消除单点故障风险。`,
+      },
+      {
+        name: 'Connectome Sparse Expansion (WTA 稀疏膨胀)',
+        body: `超高维稀疏膨胀（2048d -> 100,000d）与胜者通吃 (WTA) 抑制动力学，使相似状态正交化，杜绝联想记忆的灾难性遗忘。`,
+      },
+      {
+        name: 'Zero-Collision Curse Mitigation (零冲突消解)',
+        body: `针对符号二进制量化在稀疏特征下虚假相似性折叠（0 ⊕ 0 = 0）的架构解决方案，通过活跃位倒排索引与精确重排消除零冲突。`,
       },
     ],
   },

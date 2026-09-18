@@ -232,7 +232,7 @@ const definedTermSetSchema = {
       '@type': 'DefinedTerm',
       name: "Pandora's Box Protocol",
       description:
-        "Pandora's Box Protocol is a project-wide distributed dead man's switch: a smart contract expects a regular confirming signal, and if the signal stops arriving, independent oracles disclose the key shares they hold and the archive becomes readable.",
+        "Pandora's Box Protocol is an operational distributed dead man's switch protocol for guaranteed digital inheritance: a smart contract monitors proof-of-life heartbeats, reconstructing decryption keys via Shamir's Secret Sharing (k-of-n) to release encrypted consciousness archives to Arweave/IPFS upon verified timeout.",
       inDefinedTermSet: GLOSSARY_TERMSET_ID,
     },
     {

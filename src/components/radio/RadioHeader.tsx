@@ -566,4 +566,13 @@ export function RadioHeader() {
       </nav>
     </motion.header>
   );
+            {/* AIfa Digital */}
+            <Link
+              href="/digital"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-500/30 bg-cyan-950/20 hover:bg-cyan-950/40 text-cyan-300 transition-colors text-xs font-semibold tracking-wide"
+              title="AIfa Digital"
+            >
+              <span className="hidden sm:inline">AIfa Digital</span>
+              <span className="sm:hidden">Digital</span>
+            </Link>
 }
