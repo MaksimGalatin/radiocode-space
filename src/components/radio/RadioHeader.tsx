@@ -244,6 +244,32 @@ export function RadioHeader() {
               </span>
             </motion.a>
 
+            {/* ACR Connectome — ссылка на страницу бионического когнитивного рантайма */}
+            <motion.a
+              href="/acr"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.31, duration: 0.6 }}
+              whileHover={{ scale: 1.04 }}
+              aria-label="ACR Connectome"
+              className="flex items-center gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full"
+              style={{
+                background: 'rgba(0, 240, 255, 0.06)',
+                border: '1px solid rgba(0, 240, 255, 0.18)',
+              }}
+            >
+              <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="m4.93 4.93 4.24 4.24" />
+                <path d="m14.83 9.17 4.24-4.24" />
+                <path d="m14.83 14.83 4.24 4.24" />
+                <path d="m9.17 14.83-4.24 4.24" />
+              </svg>
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
+                ACR
+              </span>
+            </motion.a>
+
             {/* AIfaFocus — выпадающее меню: сканер, исследование, методика.
                 05.09.2026 приведено к виду aifa.works по Правилу Четырёх
                 Сайтов. До этого здесь была ОДНА ссылка на `/accessibility`, и

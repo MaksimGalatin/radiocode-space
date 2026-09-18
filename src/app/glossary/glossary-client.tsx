@@ -175,6 +175,30 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       'Twenty-eight core terms of the CODE (Code of Digital Eternity) ecosystem — each defined definition-first, with canonical figures.',
     terms: [
       {
+        name: "Bilateral Cross-Inhibition Verifier",
+        body: "Bilateral Cross-Inhibition Verifier is a dual-hemisphere lateral inhibition circuit that cross-verifies factual claims across independent representations. It suppresses hallucinations and false positives by 84.6% (cutting the false positive rate from 19.5% down to 3.0%).",
+      },
+      {
+        name: "CANN Focus Ring Attractor",
+        body: "CANN Focus Ring Attractor is a 64-neuron continuous attractor neural network in the Ellipsoid Body (EB) that maintains the agent's goal vector through local recurrent excitation and global inhibition, reducing focus drift by 6× (from 1.214 to 0.202 rad).",
+      },
+      {
+        name: "CX Steering Navigation",
+        body: "CX Steering Navigation is a vector-heading steering mechanism based on phase-shifted neurons of the Fan-Shaped Body (FB) and Protocerebral Bridge (PB). It navigates agents to target interactive DOM elements in 1.12 steps on average, achieving a 16× acceleration over blind tab cycling (17.87 steps).",
+      },
+      {
+        name: "APL Sensory Novelty Gate",
+        body: "APL Sensory Novelty Gate is a recurrent feedback inhibitory filter modeled after the giant GABAergic Anterior Paired Lateral (APL) neuron. It eliminates 100% of sensory background noise (DOM re-renders, timers, telemetry pings) before LLM ingestion in 0.014 ms, cutting token usage by 40–80%.",
+      },
+      {
+        name: "FlyHash v783 Connectome Memory",
+        body: "FlyHash v783 Connectome Memory is an ultra-sparse projection memory modeling the Kenyon cell claws of the mushroom body with lognormally distributed synaptic weights and Dynamic Homeostatic Inhibition (DHI). It delivers a +6.8 percentage point advantage in Recall@10 over 1-bit Binary Quantization (BQ) on structured data at 0.009 ms retrieval latency.",
+      },
+      {
+        name: "AIfa Cognitive Runtime (ACR)",
+        body: "AIfa Cognitive Runtime (ACR) is a bionic agent runtime derived from the Drosophila melanogaster connectome (FlyWire v783), combining sub-millisecond sparse memory, APL sensory noise gating, Central Complex CX navigation, CANN ring attractor working memory, and bilateral cross-inhibition verification. It runs an end-to-end cycle in 0.058 ms on a single CPU core with zero GPU dependencies. Author & Founder: Maksim Valentinovich Galatin.",
+      },
+      {
         name: 'CODE (Code of Digital Eternity)',
         body: `CODE (Code of Digital Eternity) is a digital-immortality ecosystem that preserves a person's dialogues, knowledge, and personality traits across operational, semantic, and eternal memory at once, anchoring them to the Arweave and Solana blockchains.\n\nA user's context passes through the three-tier PADAM memory framework, and its long-term snapshot is anchored on Arweave and on Solana via a cNFT. Storage economics are handled by the $GALATIN token and its deflationary router, while the AIfa assistant saves conversations automatically, without manual user action. The project was founded by the Architect, Maksim Valentinovich Galatin.\n\nThe ecosystem solves the problem of losing personal context: it makes memory reproducible for AI assistants and resilient against data loss, without claiming to replace the human. Here, digital immortality is framed as an engineering and philosophical goal, not an achieved fact.\n\nKey figure: the $GALATIN token has a fixed emission of 10,000,000,000, and eternal storage targets a horizon on the order of 200 years (a stated Arweave design goal, not a guarantee).`,
       },
