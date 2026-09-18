@@ -42,7 +42,7 @@ const I18N: Record<Lang, any> = {
     authorBadge: "Создатель, автор и главный архитектор: Максим Валентинович Галатин",
     tabSim: "Живой симулятор коннектома",
     tabMem: "Стресс-тест памяти (2 529 разделов)",
-    tabTech: "15 подтверждённых технологий",
+    tabTech: "20 подтверждённых технологий",
     tabTariffs: "Коммерческие тарифы и поставка",
     tabLegal: "Криптографический контур и OTS",
     
@@ -73,11 +73,11 @@ const I18N: Record<Lang, any> = {
     // Taxonomy
     taxHeading: "Честная научная таксономия технологий коннектома",
     taxSub: "Мы строго разделяем то, что уже работает в production, от экспериментальных R&D лабораторий и математических спецификаций.",
-    taxProd: "🟢 Внедрено в Production Core (#01 – #15)",
+    taxProd: "🟢 Внедрено в Production Core (#01 – #20)",
     taxProdDesc: "Реализовано в рабочем коде ядра, протестировано и замерено физическими бенчмарками на микросекундном уровне на CPU.",
-    taxRnd: "🟡 R&D Прототип (#16 – #20)",
+    taxRnd: "🟡 R&D Прототип (#21 – #25)",
     taxRndDesc: "Проходит экспериментальное моделирование на изолированных тестовых полигонах.",
-    taxMath: "🔵 Математическая спецификация (#21 – #30)",
+    taxMath: "🔵 Математическая спецификация (#26 – #30)",
     taxMathDesc: "Теоретический фундамент и алгоритмические формулы для будущих фаз квантово-бионического масштабирования.",
     
     // Tariffs
@@ -105,7 +105,7 @@ const I18N: Record<Lang, any> = {
     authorBadge: "Sole Creator, Author & Chief Architect: Maxim Valentinovich Galatin",
     tabSim: "Live Connectome Simulator",
     tabMem: "Memory Stress Test (2,529 Sections)",
-    tabTech: "15 Production Technologies",
+    tabTech: "20 Production Technologies",
     tabTariffs: "Commercial Plans & Deliverables",
     tabLegal: "Cryptographic & OTS Contour",
     
@@ -136,11 +136,11 @@ const I18N: Record<Lang, any> = {
     // Taxonomy
     taxHeading: "Rigorous Scientific Connectome Taxonomy",
     taxSub: "We strictly differentiate production-verified code from experimental R&D lab prototypes and mathematical specifications.",
-    taxProd: "🟢 Production Core Deployed (#01 – #15)",
+    taxProd: "🟢 Production Core Deployed (#01 – #20)",
     taxProdDesc: "Implemented in core production code, empirically benchmarked with microsecond CPU metrics.",
-    taxRnd: "🟡 R&D Lab Prototype (#16 – #20)",
+    taxRnd: "🟡 R&D Lab Prototype (#21 – #25)",
     taxRndDesc: "Undergoing experimental simulation in isolated testbed environments.",
-    taxMath: "🔵 Mathematical Specification (#21 – #30)",
+    taxMath: "🔵 Mathematical Specification (#26 – #30)",
     taxMathDesc: "Theoretical algorithmic blueprints formulated for future quantum-bionic scaling.",
     
     // Tariffs
@@ -168,7 +168,7 @@ const I18N: Record<Lang, any> = {
     authorBadge: "Creador, Autor y Arquitecto Principal: Maxim Valentinovich Galatin",
     tabSim: "Simulador Biónico en Vivo",
     tabMem: "Prueba de Estrés (2.529 Secciones)",
-    tabTech: "15 Tecnologías en Producción",
+    tabTech: "20 Tecnologías en Producción",
     tabTariffs: "Tarifas Comerciales y Entregables",
     tabLegal: "Contorno Criptográfico y OTS",
     
@@ -196,11 +196,11 @@ const I18N: Record<Lang, any> = {
     
     taxHeading: "Taxonomía Científica Rigurosa del Conectoma",
     taxSub: "Diferenciamos estrictamente el código de producción de los prototipos de I+D y las especificaciones teóricas.",
-    taxProd: "🟢 En Producción (#01 – #15)",
+    taxProd: "🟢 En Producción (#01 – #20)",
     taxProdDesc: "Implementado en el núcleo, probado empíricamente con métricas de microsegundos en CPU.",
-    taxRnd: "🟡 Prototipo R&D (#16 – #20)",
+    taxRnd: "🟡 Prototipo R&D (#21 – #25)",
     taxRndDesc: "En fase de simulación experimental en bancos de pruebas aislados.",
-    taxMath: "🔵 Especificación Teórica (#21 – #30)",
+    taxMath: "🔵 Especificación Teórica (#26 – #30)",
     taxMathDesc: "Bases matemáticas formuladas para futuras fases de escalamiento cuántico-biónico.",
     
     tariffsHeading: "Tarifas Comerciales Transparentes: Producto Llave en Mano",
@@ -226,7 +226,7 @@ const I18N: Record<Lang, any> = {
     authorBadge: "全案创造者、唯一著作权人兼首席架构师：马克西姆·瓦连京诺维奇·加拉廷 (Maxim Valentinovich Galatin)",
     tabSim: "连接组实时模拟器",
     tabMem: "内存压力测试 (2,529 分区)",
-    tabTech: "15 项生产级验证技术",
+    tabTech: "20 项生产级验证技术",
     tabTariffs: "商业化资费与交付物",
     tabLegal: "密码学存证与 OTS",
     
@@ -254,11 +254,11 @@ const I18N: Record<Lang, any> = {
     
     taxHeading: "严谨求实的连接组技术梯队分类法",
     taxSub: "我们严格区分已在生产环境运行的核心技术与实验室研发原型、理论数学规范。",
-    taxProd: "🟢 生产核心已部署 (#01 – #15)",
+    taxProd: "🟢 生产核心已部署 (#01 – #20)",
     taxProdDesc: "已在核心生产代码中落地运行，经物理 CPU 微秒级基准测试确凿验证。",
-    taxRnd: "🟡 实验室 R&D 原型 (#16 – #20)",
+    taxRnd: "🟡 实验室 R&D 原型 (#21 – #25)",
     taxRndDesc: "正在隔离测试环境中进行原型推演与仿真。",
-    taxMath: "🔵 理论数学规范 (#21 – #30)",
+    taxMath: "🔵 理论数学规范 (#26 – #30)",
     taxMathDesc: "为未来量子仿生尺度扩展制定的算法理论蓝图。",
     
     tariffsHeading: "透明商业资费标准：清晰明了的企业级商品",
@@ -281,7 +281,7 @@ const I18N: Record<Lang, any> = {
 // ---------------------------------------------------------------------------
 // 15 PRODUCTION TECHNOLOGIES DATA
 // ---------------------------------------------------------------------------
-const TECH_15 = [
+const TECH_20 = [
   { id: 1, name: "FlyHash v783 LSH Engine", metric: "0.058 ms", desc: "Sparse Locality-Sensitive Hashing based on Kenyon Cells (2048d -> 100k bits, 0.5% active)." },
   { id: 2, name: "k-WTA Sparsification (2.5%)", metric: "3.4 us", desc: "Winner-Take-All lateral inhibition creating interference-free sparse binary memories." },
   { id: 3, name: "APL Sensory Novelty Gate", metric: "0.014 ms", desc: "Giant GABAergic APL neuron filtering 100% familiar sensory noise; saves 40-80% tokens." },
@@ -296,7 +296,12 @@ const TECH_15 = [
   { id: 12, name: "Virtual Ablation Resilience", metric: "100.0%", desc: "Graceful degradation: 100% reachability preserved even after 30% random node knockout." },
   { id: 13, name: "Direct Synaptic Heuristics", metric: "2.04 us", desc: "Instant intent bitmask matching; 22,000x faster than local LLM inference (45 ms)." },
   { id: 14, name: "16-Neuron Phase Ring Attractor", metric: "16.21 us", desc: "16-compartment EB continuous attractor holding dialogue macro-phase with drift < 0.022 rad." },
-  { id: 15, name: "Neurotransmitter E/I Balance", metric: "1.68 us", desc: "Dynamic threshold modulation via 6 neuromodulators (ACh, GABA, DA, OA, 5HT, Glu)." }
+  { id: 15, name: "Neurotransmitter E/I Balance", metric: "1.68 us", desc: "Dynamic threshold modulation via 6 neuromodulators (ACh, GABA, DA, OA, 5HT, Glu)." },
+  { id: 16, name: "Biological IDF & Synaptic Pruning", metric: "3.29 us", desc: "Rare-features-first biological IDF weighting cutting 1.91x redundant sensory background noise." },
+  { id: 17, name: "CADF Architecture Zero-Copy Load", metric: "2.177 ms", desc: "Packed binary graph format deserializing 2,529 connectome nodes into CPU L2 cache." },
+  { id: 18, name: "ADAB Ground Truth Validation Suite", metric: "100.0%", desc: "1,000 query validation suite achieving 100.00% exact section match under 5% input noise." },
+  { id: 19, name: "Optimal Sparse Sampling d=6", metric: "166.38 us", desc: "Drosophila constant of 6 synapses per KC maximizing LSH separation at minimal compute." },
+  { id: 20, name: "Terminal Live Engine Showcase", metric: "6.99 us", desc: "Deterministic 5-layer end-to-end pipeline latency verified across 5,000 microsecond runs." }
 ];
 
 // ---------------------------------------------------------------------------
@@ -763,7 +768,7 @@ export default function DigitalPage() {
 
             {/* Grid of 15 Technologies */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {TECH_15.map((tech) => (
+              {TECH_20.map((tech) => (
                 <div
                   key={tech.id}
                   className="p-5 rounded-2xl bg-gray-950/70 border border-gray-800 hover:border-cyan-500/50 transition group flex flex-col justify-between"
