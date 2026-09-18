@@ -1,4 +1,5 @@
 "use client";
+import { useЯзык } from "@/lib/server-locale";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -340,7 +341,8 @@ const TARIFFS = [
 ];
 
 export default function DigitalPage() {
-  const [lang, setLang] = useState<Lang>("ru");
+    const siteLang = useЯзык();
+  const lang: Lang = (["ru", "en", "es", "zh"].includes(siteLang) ? siteLang : "ru") as Lang;
   const [activeTab, setActiveTab] = useState<"sim" | "mem" | "tech" | "tariffs" | "legal">("sim");
   
   // Simulator state
@@ -487,22 +489,7 @@ export default function DigitalPage() {
               ACR 30 Innovations →
             </Link>
 
-            {/* 4-Language Switcher */}
-            <div className="flex items-center bg-gray-900/90 border border-cyan-900/50 rounded-xl p-1">
-              {(["ru", "en", "es", "zh"] as Lang[]).map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLang(l)}
-                  className={`px-2.5 py-1 text-xs font-bold rounded-lg transition uppercase ${
-                    lang === l
-                      ? "bg-cyan-500 text-black shadow-lg shadow-cyan-500/30"
-                      : "text-gray-400 hover:text-white"
-                  }`}
-                >
-                  {l}
-                </button>
-              ))}
-            </div>
+            
           </div>
         </div>
       </header>

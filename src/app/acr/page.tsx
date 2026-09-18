@@ -1,4 +1,5 @@
 'use client';
+import { useЯзык } from "@/lib/server-locale";
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -1367,7 +1368,8 @@ const ALL_30_INNOVATIONS = {
 };
 
 export default function ACRPage() {
-  const [lang, setLang] = useState<Lang>('ru');
+    const siteLang = useЯзык();
+  const lang: Lang = (["ru", "en", "es", "zh"].includes(siteLang) ? siteLang : "ru") as Lang;
   const [selectedTech, setSelectedTech] = useState<number | null>(null);
   const t = I18N[lang];
   const top5 = TOP5_TECH[lang];
@@ -1377,22 +1379,7 @@ export default function ACRPage() {
     <div className="min-h-screen bg-[#030712] text-[#F8FAFC] py-24 px-4 sm:px-6 lg:px-8 selection:bg-[#00F0FF]/30">
       <div className="max-w-6xl mx-auto space-y-20">
         
-        {/* Language selector */}
-        <div className="flex justify-end gap-2">
-          {(['ru', 'en', 'es', 'zh'] as Lang[]).map((l) => (
-            <button
-              key={l}
-              onClick={() => setLang(l)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono uppercase transition-all ${
-                lang === l
-                  ? 'bg-[#00F0FF] text-black font-bold shadow-[0_0_15px_rgba(0,240,255,0.4)]'
-                  : 'bg-[#111827] text-gray-400 hover:text-white border border-white/5'
-              }`}
-            >
-              {l}
-            </button>
-          ))}
-        </div>
+        
 
         {/* Hero Section */}
         <header className="text-center space-y-6">
