@@ -1,0 +1,93 @@
+{
+  "$schema": "https://aifa.works/schemas/connectome-integrity-v1.json",
+  "title": "РЕЕСТР ЦЕЛОСТНОСТИ И АВТОРСКОГО ПРИОРИТЕТА AIFA CONNECTOME",
+  "jurisdiction": "Бернская конвенция об охране литературных и художественных произведений (179 государств)",
+  "author": {
+    "name": "Максим Валентинович Галатин",
+    "english": "Maksim Valentinovich Galatin",
+    "role": "Основатель, Создатель и Главный Архитектор экосистемы CODE Eternal",
+    "email": "codeofdigitaleternity@gmail.com",
+    "rights": "Исключительные авторские и смежные права на архитектуру AIfa Cognitive Runtime, бионический рантайм коннектома и стек 30 инноваций"
+  },
+  "timestamp_utc": "2026-09-18T08:30:31.129254Z",
+  "merkle_root_sha256": "e320915041b19853465b6ecefa50fe97c85d0a55ec7a4f26348fd689b58d552f",
+  "repositories": {
+    "aifa.works": {
+      "commit": "24a57401d6db6884a069e632bf0b300ff8b23c18",
+      "remote": "github.com/MaksimGalatin/aifa.works"
+    },
+    "codeofdigitaleternity.com": {
+      "commit": "3325752bf90a6adb914dbe4652d1754165a68cc3",
+      "remote": "github.com/MaksimGalatin/codeofdigitaleternity.com"
+    },
+    "radiocode.space": {
+      "commit": "5c0b70ee8d12083628519c8131cc02bd5cd92a3b",
+      "remote": "github.com/MaksimGalatin/radiocode.space"
+    },
+    "CODE-Brain": {
+      "commit": "f1040c5b950e7dcbe61d48813ceac2654b9042fb",
+      "remote": "github.com/MaksimGalatin/CODE-Brain"
+    }
+  },
+  "anchored_artifacts": {
+    "acr_monograph": {
+      "title": "AIfa Cognitive Runtime (ACR) Breakthrough Monograph",
+      "path": "E:/CODE/aifa.works/app/acr/page.tsx",
+      "sha256": "a8682cfeff6fc27a3c08b8f1886a11ab6ce1b939b0d62bb5df576b162ec4b271"
+    },
+    "digital_manifesto": {
+      "title": "AIfa Digital Architecture & Neural Phoenix Manifesto",
+      "path": "E:/CODE/aifa.works/app/digital/page.tsx",
+      "sha256": "f6d0f3e0c563cea658c3113401dcee96c5036c1e113059d34e2ed1a3ccf27a42"
+    },
+    "canonical_glossary_71": {
+      "title": "Canonical 71 Master Terms Connectome Glossary",
+      "path": "E:/BRAIN/canonical_glossary_dataset.json",
+      "sha256": "d4a148ffcf3f06ea65ede93a3cf72e03735937146c9243c0045303970c9cc533"
+    },
+    "benchmark_top5": {
+      "title": "TOP-5 Empirical Ablation Benchmark",
+      "path": "E:/Aifa/КОННЕКТОМ_МУШКИ/результаты/ИТОГОВЫЙ_МАСТЕР_БЕНЧМАРК_ТОП_5.json",
+      "sha256": "c688ef1a270cf5311a64ebc7b92f0a154d86da5c5e3e2387652089fb81151b1c"
+    },
+    "benchmark_06_10": {
+      "title": "Technologies #06-#10 Empirical Benchmark",
+      "path": "E:/Aifa/КОННЕКТОМ_МУШКИ/результаты/БЕНЧМАРК_ТЕХНОЛОГИИ_06_10.json",
+      "sha256": "c5bb9c204c28f6795a7779c6c317b305171af9f54fd0df152cca0927ded62f8a"
+    },
+    "reproducible_verifier": {
+      "title": "Reproducible 2529 Sections Memory Benchmark",
+      "path": "E:/CODE/aifa.works/public/verify_connectome_memory.js",
+      "sha256": "cad87fad6c5b56c8e5c1dbf6b419ff6016eeafc75edafd306402343a84805dbf"
+    }
+  },
+  "blockchain_proofs": {
+    "opentimestamps": {
+      "calendar_servers": [
+        "alice.btc.calendar.opentimestamps.org",
+        "bob.btc.calendar.opentimestamps.org",
+        "finney.calendar.eternitywall.com"
+      ],
+      "merkle_root": "e320915041b19853465b6ecefa50fe97c85d0a55ec7a4f26348fd689b58d552f",
+      "ots_status": "COMMITTED_BITCOIN_CALENDAR_PENDING_CONFIRMATION",
+      "proof_file": "РЕЕСТР_ЦЕЛОСТНОСТИ_КОННЕКТОМА.json.ots"
+    },
+    "arweave": {
+      "status": "QUEUED_PERMANENT_STORAGE",
+      "protocol": "Arweave SmartWeave / Bundlr",
+      "tags": {
+        "App-Name": "AIfa-Connectome-Registry",
+        "Version": "v783-1.0",
+        "Author": "Maksim Galatin",
+        "Content-Type": "application/json"
+      }
+    }
+  },
+  "flywire_source_attestation": {
+    "dataset": "FlyWire Whole-Brain Connectome v783",
+    "attribution": "FlyWire Consortium (Princeton, Cambridge, Janelia, MRC LMB, Nature 2024)",
+    "neurons_count": 139255,
+    "synapses_count": 54500000,
+    "licensing": "Creative Commons Attribution 4.0 International (CC-BY 4.0)"
+  }
+}

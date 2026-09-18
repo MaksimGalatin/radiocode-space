@@ -1,0 +1,56 @@
+{
+  "timestamp": "2026-09-18T03:23:58.565015",
+  "suite": "Technologies #06 - #10 Empirical Benchmarks",
+  "hardware": {
+    "cpu": "Intel/AMD x86_64 Architecture",
+    "python": "3.14.4",
+    "numpy": "2.5.2"
+  },
+  "benchmarks": {
+    "tech06_dopaminergic_td_plasticity": {
+      "name": "Dopaminergic TD-Learning Plasticity (DAN/MBON)",
+      "biological_basis": "Mushroom Body dopaminergic neurons (PAM/PPL1) projecting to MBON compartments",
+      "dopamine_latency_us": 14.65,
+      "backprop_latency_us": 88.89,
+      "speedup": 6.07,
+      "kc_count": 2000,
+      "mbon_count": 20,
+      "sparsity_pct": 5.0,
+      "convergence_steps": 1
+    },
+    "tech07_shunting_inhibition": {
+      "name": "Fan-Out / Fan-In Shunting Inhibition",
+      "biological_basis": "Antennal lobe local interneurons (LN) executing divisive shunting inhibition",
+      "shunting_latency_us": 5.22,
+      "softmax_latency_us": 9.41,
+      "speedup_vs_softmax": 1.8,
+      "dynamic_range_gain": 25.12
+    },
+    "tech08_episodic_binding": {
+      "name": "Multi-Sensory Episodic Binding (Tripartite Synapses)",
+      "biological_basis": "Mushroom Body Calyx claw synapses binding olfactory, visual, and temporal inputs",
+      "binding_latency_us": 5392.43,
+      "recall_latency_ms": 2.848,
+      "episodes_tested": 500,
+      "match_accuracy_pct": 100.0,
+      "trace_sparsity_pct": 0.3
+    },
+    "tech09_predictive_efference_copy": {
+      "name": "Predictive Sensory Cancellation (Efférence Copy)",
+      "biological_basis": "Lobula Plate tangential cells (LPTC) subtracting haltere/motor commands from visual optic flow",
+      "cancellation_latency_us": 1.87,
+      "echo_suppression_pct": 100.0,
+      "residual_error": 0.0,
+      "stream_dimension": 256
+    },
+    "tech10_saccadic_context_reset": {
+      "name": "Saccadic Rapid Context Relocalization (EB/PB Reset)",
+      "biological_basis": "P-EN and P-FN burst neurons jumping ellipsoid body compass heading instantaneously during body saccades",
+      "saccadic_reset_latency_us": 0.47,
+      "kv_cache_reset_latency_ms": 0.01,
+      "speedup_factor": 20.3,
+      "ring_wedges": 16,
+      "context_loss_pct": 0.0
+    }
+  }
+}

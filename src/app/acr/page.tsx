@@ -42,47 +42,53 @@ const I18N = {
     "commercialSubtitle": "Прозрачные условия облачного использования и корпоративной поставки закрытого бинарного ядра",
     "plans": [
       {
-        "name": "Spark Cloud",
+        "name": "Hacker / Indie",
         "price": "$15 / мес",
-        "desc": "Базовый доступ к облачному бионическому API памяти для персональных агентов.",
+        "desc": "Для соло-разработчиков, пет-проектов и независимых AI-мейкеров.",
         "features": [
-          "10 000 поисковых операций в день",
-          "1-bit BQ + базовый APL-гейтинг шума",
-          "Доступ к ассистенту AIfa",
-          "Автоматическое сохранение диалогов"
+          "До 100 000 векторов, 50 000 поисковых запросов в месяц (< 1.2 мс на CPU)",
+          "Поставка: Личный API-ключ Edge Gateway + npm/pip пакет aifa_connectome_web.js",
+          "Шаблон Next.js со встроенной памятью в IndexedDB без затрат на сервер",
+          "Срок выдачи: Мгновенно (60 секунд после оплаты)",
+          "Поддержка: Сообщество Discord/Telegram + документация"
         ]
       },
       {
-        "name": "Professional Agent",
+        "name": "Pro / Scale",
         "price": "$100 / мес",
-        "desc": "Расширенный стек для профессиональных автономных агентов и автоматизации задач.",
+        "desc": "Для быстрорастущих стартапов, SaaS-платформ и мультиагентных систем.",
         "features": [
-          "100 000 поисковых операций в день",
-          "Полный FlyHash v783 + CANN Ring Attractor",
-          "CX Steering навигация по DOM",
-          "SLA доступности 99.9%"
+          "До 2 000 000 векторов, 1M запросов/мес, задержка 0.35 мс, SLA 99.9%",
+          "Полный стек первых 10 бионических ядер (FlyHash, APL, CX, CANN, Bilateral, R-STDP)",
+          "Поставка: Выделенный gRPC/REST/WS эндпоинт + коннекторы LangChain & LlamaIndex",
+          "Срок выдачи: Мгновенно (ключи) + 1 час онбординг-аудита в течение 24 часов",
+          "Поддержка: Приоритетный тикет-канал, время реакции < 4 часов"
         ]
       },
       {
         "name": "Enterprise Cloud",
-        "price": "$1 000 разово + $200 / мес",
-        "desc": "Выделенный бионический инстанс с полным стеком 30 технологий и ончейн-якорением.",
+        "price": "$1 000+ / мес",
+        "desc": "Для корпораций, финтеха и больших корпоративных баз знаний.",
         "features": [
-          "Неограниченные вызовы памяти",
-          "Все 30 инноваций коннектома",
-          "Вечная память на Arweave + Solana cNFT",
-          "Приоритетная круглосуточная поддержка"
+          "Неограниченные векторы ($200 за 10M), до 50 000 QPS, SLA 99.99%",
+          "Экономия до $12 000/мес на GPU благодаря L1/L2 кэш-вычислениям на CPU",
+          "Поставка: Изолированный Kubernetes-кластер с приватным VPC в AWS/GCP/Bare-Metal",
+          "Двуполушарный арбитраж Bilateral Consensus (снижение ложных срабатываний на 52%)",
+          "Срок развертывания: 3–5 рабочих дней под ключ с официальным договором и NDA",
+          "Поддержка: Выделенный инженер 24/7 в Slack/Telegram, реакция < 15 мин"
         ]
       },
       {
-        "name": "On-Premise Core (.aci)",
-        "price": "$50 000 – $250 000",
-        "desc": "Поставка скомпилированного бинарного SIMD/AVX-512 ядра для изолированных корпоративных контуров.",
+        "name": "On-Premises Core (.aci)",
+        "price": "$50 000 – $250 000 разово",
+        "desc": "Для закрытых банковских, военных и суверенных контуров без выхода в Интернет.",
         "features": [
-          "Бессрочная лицензия на серверный кластер",
-          "Полные веса FlyWire v783 (connectome_weights.aci)",
-          "Нулевая утечка данных во внешние облака",
-          "1 год технической поддержки и обновлений"
+          "100% суверенная работа в режиме Air-Gapped без лицензионных серверов",
+          "Скомпилированные бинарные библиотеки C++/Rust с ручной оптимизацией AVX-512 / ARM NEON",
+          "Поставка: libaifa_core.so/.dll, Docker/Podman образы, C/C++ заголовочные файлы",
+          "Бессрочная (perpetual) лицензия на серверный кластер без роялти",
+          "Срок поставки: 14–30 календарных дней, включая приемо-сдаточные испытания (ПСИ)",
+          "Гарантия: 3 года гарантийного обслуживания и обновлений безопасности"
         ]
       }
     ],
@@ -1540,7 +1546,23 @@ export default function ACRPage() {
                   <div className="mt-4 pt-3 border-t border-[#1E293B] text-xs space-y-2 text-gray-300 animate-in fade-in duration-200">
                     <div><strong className="text-[#00F0FF]">Математика:</strong> {inn.math}</div>
                     <div><strong className="text-[#00F0FF]">Польза:</strong> {inn.gain}</div>
-                    <div className="text-[11px] text-gray-500 font-mono"><strong>Внедрено:</strong> {inn.deploy}</div>
+                    <div className="flex items-center justify-between pt-1 border-t border-gray-800/60 text-[11px] font-mono">
+                      <span className="text-gray-400">Статус зрелости:</span>
+                      {inn.num <= 10 ? (
+                        <span className="text-green-400 font-bold bg-green-950/60 px-2 py-0.5 rounded border border-green-800/60">
+                          🟢 Внедрено в Production Core
+                        </span>
+                      ) : inn.num <= 20 ? (
+                        <span className="text-yellow-400 font-bold bg-yellow-950/60 px-2 py-0.5 rounded border border-yellow-800/60">
+                          🟡 R&D Прототип (Лаборатория)
+                        </span>
+                      ) : (
+                        <span className="text-cyan-400 font-bold bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/60">
+                          🔵 Математическая Спецификация
+                        </span>
+                      )}
+                    </div>
+                    <div className="text-[11px] text-gray-500 font-mono"><strong>Контур:</strong> {inn.deploy}</div>
                   </div>
                 )}
               </div>
