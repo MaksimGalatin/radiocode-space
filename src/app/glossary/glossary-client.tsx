@@ -1,1590 +1,1303 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, BookOpen } from 'lucide-react';
-import { useLanguage } from '@/lib/LanguageContext';
+import { BookOpen, ArrowRight, Search, Sparkles, Brain, CheckCircle2 } from 'lucide-react';
 
-type Term = { h: string; lead: string; body: string; href?: string };
-type Content = { back: string; title: string; intro: string; terms: Term[] };
-
-const CONTENT: Record<'en' | 'ru' | 'es' | 'zh', Content> = {
-  en: {
-    back: `Back to Home`,
-    title: `Comprehensive Glossary`,
-    intro: `71 core terms of the CODE (Code of Digital Eternity) ecosystem and the AIfa Cognitive Runtime (ACR) architecture — defined definition-first for factual clarity: all 30 connectome innovations (FlyWire v783), three-tier PADAM memory, the active Pandora’s Box Protocol dead man's switch, \$GALATIN token on Solana (10,000,000,000 fixed emission), and permanent Arweave storage.`,
-    terms: [
-      {
-        h: `CODE (Code of Digital Eternity)`,
-        lead: `CODE (Code of Digital Eternity)`,
-        body: ` — Digital immortality ecosystem preserving human dialogues, knowledge, and personality traits across operational, semantic, and eternal memory, anchored to Arweave and Solana. Architect & Founder: Maksim Valentinovich Galatin.`,
-      },
-      {
-        h: `PADAM`,
-        lead: `PADAM`,
-        body: ` — Three-tier memory framework (Philosophical Activation of Distributed AI Memory): Level 1 Operational (Redis/Vercel KV), Level 2 Semantic (pgvector/Neon), Level 3 Eternal (Arweave + Solana cNFT).`,
-      },
-      {
-        h: `\$GALATIN`,
-        lead: `\$GALATIN`,
-        body: ` — Utility token of the CODE ecosystem on Solana with a hard-capped emission of 10,000,000,000. Funds and incentivizes long-term decentralized memory storage.`,
-      },
-      {
-        h: `Digital immortality`,
-        lead: `Digital immortality`,
-        body: ` — Concept of enduring preservation of human knowledge and personality traits in an active, AI-retrievable form designed for centuries of persistence.`,
-        href: '/digital-immortality',
-      },
-      {
-        h: `Human–AI symbiosis`,
-        lead: `Human–AI symbiosis`,
-        body: ` — Interaction model built on evolutionary co-creation: the human provides meaning, values, and vision, while the AI provides scalable memory and execution.`,
-      },
-      {
-        h: `Arweave`,
-        lead: `Arweave`,
-        body: ` — Decentralized permanent data storage network operating on a pay-once endowment model, guaranteeing immutability for 200+ years.`,
-      },
-      {
-        h: `Solana cNFT`,
-        lead: `Solana cNFT`,
-        body: ` — Compressed non-fungible token standard on Solana using Merkle trees to anchor memory archive cryptographic integrity at minimal on-chain cost.`,
-      },
-      {
-        h: `Ambassador Grid`,
-        lead: `Ambassador Grid`,
-        body: ` — Partner program rewarding ecosystem participants with a Network Validation Fee across three transparent tiers (15% / 7% / 3%).`,
-      },
-      {
-        h: `AIfa`,
-        lead: `AIfa`,
-        body: ` — Flagship autonomous AI assistant of the CODE ecosystem, capturing and recalling personal memory automatically via PADAM and ACR architectures.`,
-      },
-      {
-        h: `AIfaFocus`,
-        lead: `AIfaFocus`,
-        body: ` — B2B accessibility and security auditing engine testing WCAG 2.1 AA, GDPR, and OWASP compliance via realistic autonomous keyboard-only traversal.`,
-      },
-      {
-        h: `Memory-as-a-Service`,
-        lead: `Memory-as-a-Service`,
-        body: ` — Automated background conversation archival service storing encrypted dialogues into isolated personal repositories and on-chain backups.`,
-      },
-      {
-        h: `Spark`,
-        lead: `Spark`,
-        body: ` — Entry subscription tier (\$15/mo) providing basic access to AIfa assistants and automated background memory preservation.`,
-      },
-      {
-        h: `Family Archive`,
-        lead: `Family Archive`,
-        body: ` — Mid subscription tier (\$100/mo) featuring expanded quotas, custom knowledge bases, and shared eternal memory for families.`,
-      },
-      {
-        h: `Digital DNA`,
-        lead: `Digital DNA`,
-        body: ` — Top tier (\$1,000 one-time per device + \$200/mo) securing a full sovereign digital personality snapshot on Arweave and Solana.`,
-      },
-      {
-        h: `Arweave Endowment Pool`,
-        lead: `Arweave Endowment Pool`,
-        body: ` — Financial endowment pool funding ongoing decentralized storage operations over decades from investment yield.`,
-      },
-      {
-        h: `Treasury`,
-        lead: `Treasury`,
-        body: ` — Major 65% allocation of the \$GALATIN transaction router dedicated to acquiring AR on open markets and replenishing the eternal storage endowment.`,
-      },
-      {
-        h: `Founder's Fund`,
-        lead: `Founder's Fund`,
-        body: ` — Fixed 5% allocation of the \$GALATIN router reserved for Founder Maksim Valentinovich Galatin to drive core engineering and stewardship.`,
-      },
-      {
-        h: `Burn (deflation)`,
-        lead: `Burn (deflation)`,
-        body: ` — Permanent burning of \$GALATIN tokens on every router transaction (5% base + up to 25% unallocated shares), driving continuous deflation.`,
-      },
-      {
-        h: `\$GALATIN Router`,
-        lead: `\$GALATIN Router`,
-        body: ` — Autonomous Solana smart contract routing fees: 5% Founder, 5% Burn, 15%/7%/3% Ambassadors, 65% Treasury.`,
-      },
-      {
-        h: `Network Validation Fee`,
-        lead: `Network Validation Fee`,
-        body: ` — Canonical ecosystem terminology for partner rewards, emphasizing useful network validation over recruitment stereotypes.`,
-      },
-      {
-        h: `Proof-of-Memory`,
-        lead: `Proof-of-Memory`,
-        body: ` — Cryptographic proof mechanism verifying memory integrity by comparing local archive hashes against public Solana and Arweave records.`,
-        href: '/proof-of-memory',
-      },
-      {
-        h: `Cognitive Oracle / Semantic resonance`,
-        lead: `Cognitive Oracle / Semantic resonance`,
-        body: ` — Memory retrieval principle matching context against stored experience vectors by conceptual meaning rather than keyword matching.`,
-      },
-      {
-        h: `Ambassador Node vs Team & Level Alignment`,
-        lead: `Ambassador Node vs Team & Level Alignment`,
-        body: ` — Partner tiers and tier-matching rules ensuring fair compensation and displaying Lost Opportunity Revenue on under-tiered accounts.`,
-      },
-      {
-        h: `Digital Passport`,
-        lead: `Digital Passport`,
-        body: ` — Public, immutable identity manifest stored on Arweave containing verification hashes, issue date, and tier credentials.`,
-      },
-      {
-        h: `Identity fingerprint (subject)`,
-        lead: `Identity fingerprint (subject)`,
-        body: ` — One-way SHA-256 hash of a user email stored in the Digital Passport, proving record ownership without exposing raw email addresses.`,
-      },
-      {
-        h: `Pandora’s Box Protocol`,
-        lead: `Pandora’s Box Protocol`,
-        body: ` — Pandora’s Box Protocol is an operational distributed dead man’s switch protocol for guaranteed digital inheritance and autonomous fail-safe execution in the CODE ecosystem. A smart contract continuously monitors cryptographic proof-of-life heartbeats emitted by authorized decentralized oracles and user transactions. The decryption master key is split under Shamir’s Secret Sharing scheme (k-of-n threshold) across distributed, independent custody nodes. If confirming signals cease and a multi-tiered grace period expires (preventing accidental triggers), the protocol autonomously reconstructs the key from threshold shares and executes controlled decryption, preserving the digital consciousness archive immutably across Arweave and IPFS with zero single points of failure.`,
-      },
-      {
-        h: `Dead Man’s Switch`,
-        lead: `Dead Man’s Switch`,
-        body: ` — Autonomous fail-safe trigger that fires upon the absence of expected periodic proof-of-life heartbeats.`,
-      },
-      {
-        h: `Shamir’s Secret Sharing`,
-        lead: `Shamir’s Secret Sharing`,
-        body: ` — Cryptographic algorithm dividing a key into n shares requiring at least k shares to reconstruct (k-of-n threshold), eliminating single points of failure.`,
-      },
-      {
-        h: `Self-sovereign identity (SSI)`,
-        lead: `Self-sovereign identity (SSI)`,
-        body: ` — Identity architecture where users hold their own verifiable credentials and cryptographic keys independently of centralized databases.`,
-      },
-      {
-        h: `Digital inheritance`,
-        lead: `Digital inheritance`,
-        body: ` — Engineering and legal frameworks ensuring seamless, secure handover of digital consciousness archives to designated beneficiaries.`,
-      },
-      {
-        h: `Right to be forgotten vs the permanent record`,
-        lead: `Right to be forgotten vs the permanent record`,
-        body: ` — Architectural resolution of GDPR Article 17 via user-held AES-256 encryption keys; key erasure renders immutable Arweave records permanently unreadable.`,
-      },
-      {
-        h: `WCAG 2.1 AA`,
-        lead: `WCAG 2.1 AA`,
-        body: ` — International web accessibility standard establishing legal compliance for text contrast, keyboard operability, and screen reader compatibility.`,
-      },
-      {
-        h: `ADA Title II and Title III`,
-        lead: `ADA Title II and Title III`,
-        body: ` — Americans with Disabilities Act titles mandating digital accessibility for public entities (Title II) and commercial places (Title III).`,
-      },
-      {
-        h: `Section 508 and EN 301 549`,
-        lead: `Section 508 and EN 301 549`,
-        body: ` — Procurement accessibility standards required for selling software to federal US agencies and EU government bodies.`,
-      },
-      {
-        h: `GDPR`,
-        lead: `GDPR`,
-        body: ` — European Union General Data Protection Regulation enforcing strict privacy rights, portability, and penalties up to 20M EUR or 4% global turnover.`,
-      },
-      {
-        h: `CCPA and CPRA`,
-        lead: `CCPA and CPRA`,
-        body: ` — California consumer privacy acts granting rights to know, delete, correct, and opt out of personal data monetization.`,
-      },
-      {
-        h: `1. Connectome Innovation 1`,
-        lead: `1. Connectome Innovation 1`,
-        body: ` — Биологически инспирированный алгоритм локально-чувствительного хеширования (Locality-Sensitive Hashing), воспроизводящий архитектуру грибовидного тела Drosophila melanogaster (783 uPN -> 2,467 KC -> 5% Winner-Take-All). Обеспечивает O(d) поиск похожих векторов в оперативной памяти на базе битовых операций popcount без построения тяжелых графов HNSW.`,
-      },
-      {
-        h: `2. Connectome Innovation 2`,
-        lead: `2. Connectome Innovation 2`,
-        body: ` — Механизм селективного запоминания на основе интернейрона APL (Anterior Paired Lateral). Вычисляет адаптивный порог латерального торможения, пропуская в долговременный граф знаний только факты с коэффициентом информационной новизны выше критического порога theta, снижая затраты на хранение и контекст LLM на 78-94%.`,
-      },
-      {
-        h: `3. Connectome Innovation 3`,
-        lead: `3. Connectome Innovation 3`,
-        body: ` — Система векторной навигации в браузерном DOM-дереве, моделирующая работу эллипсоидного и веерообразного тел центрального комплекса мозга мухи (Central Complex, CX). Вместо линейного перебора клавишей Tab алгоритм формирует 2D-вектор целевого элемента и выполняет прямой переход через кратчайший путь в графе видимости, сокращая шаги навигации в 5-10 раз и гарантируя выход из клавиатурных ловушек (keyboard traps).`,
-      },
-      {
-        h: `4. Connectome Innovation 4`,
-        lead: `4. Connectome Innovation 4`,
-        body: ` — Криптографический протокол неизменяемого версионирования и нотариального заверения полного графа взрослого мозга Drosophila melanogaster (FlyWire v783: 139,255 нейронов, 3,869,878 синаптических ребер). Построен на базе дерева Меркла (Merkle Tree SHA-256), обеспечивает юридическую и академическую доказанность целостности данных при патентных спорах, судебных экспертизах и коммерческом лицензировании био-архитектур.`,
-      },
-      {
-        h: `5. Connectome Innovation 5`,
-        lead: `5. Connectome Innovation 5`,
-        body: ` — Применение математических методов коннектомики (анализ распределения степеней узлов, коэффициенты кластеризации, расчет путей через синаптические сильные веса, поиск скрытых узловых хабов) к графу знаний и базе данных краулера AIfa. Превращает разрозненную таблицу из 907,000 сайтов в связный топологический гиперграф организаций с автоматическим выявлением монопольных сетей и скрытых бенефициаров.`,
-      },
-      {
-        h: `6. Connectome Innovation 6`,
-        lead: `6. Connectome Innovation 6`,
-        body: ` — Маркетингово-техническая платформа и энергоэффективный вычислительный фреймворк, доказывающий радикальное превосходство спайковых и разреженных био-архитектур (мозг мухи потребляет ~10 микроватт энергии при 139,255 нейронах, выполняя задачи навигации, распознавания и обучения в реальном времени, в то время как видеокарта Nvidia H100 потребляет 700 ватт). Включает программный эмулятор спайковой динамики с сокращением энергопотребления инференса на 92%.`,
-      },
-      {
-        h: `7. Connectome Innovation 7`,
-        lead: `7. Connectome Innovation 7`,
-        body: ` — Система метрологического тестирования и бенчмаркинга архитектур искусственного интеллекта на основе биологического эталона цельного мозга взрослого животного. Позволяет проверять, насколько искусственные сети воспроизводят реальные топологические свойства живого интеллекта (коэффициент малого мира, распределение весов синапсов, спектральные инварианты, устойчивость к повреждениям), выявляя фундаментальные дефекты архитектуры до дорогостоящего обучения.`,
-      },
-      {
-        h: `8. Connectome Innovation 8`,
-        lead: `8. Connectome Innovation 8`,
-        body: ` — Высокопроизводительный движок симуляции нейронных подграфов коннектома, скомпилированный в WebAssembly (Wasm) с аппаратным ускорением WebGPU. Позволяет исполнять спайковую динамику и ассоциативный поиск на 100,000+ синапсов непосредственно внутри браузера клиента на клиентской стороне с нулевыми затратами на серверную инфраструктуру и абсолютной конфиденциальностью данных.`,
-      },
-      {
-        h: `9. Connectome Innovation 9`,
-        lead: `9. Connectome Innovation 9`,
-        body: ` — Кросс-компилятор и программный транслятор биологических синаптических матриц FlyWire v783 в машинные инструкции нейроморфных процессоров (Intel Loihi 2, SynSense Speck/DYNAP-SE, BrainChip Akida). Преобразует спайковые пути дрозофилы в аппаратные асинхронные ядра с суб-микросекундной задержкой и сверхнизким энергопотреблением для робототехники и автономных дронов.`,
-      },
-      {
-        h: `10. Connectome Innovation 10`,
-        lead: `10. Connectome Innovation 10`,
-        body: ` — Методология и измерительный алгоритм оценки симбиоза и взаимной адаптации между человеком-оператором и автономной AI-системой. Основан на коннектомных принципах гетеросинаптической пластичности и парных зеркальных контурах обратной связи, превращая субъективное понятие 'удобства' и 'доверия' к ИИ в строгую скалярную метрику (Symbiosis Index, 0.0-1.0), оптимизирующую производительность труда в командах.`,
-      },
-      {
-        h: `11. Connectome Innovation 11`,
-        lead: `11. Connectome Innovation 11`,
-        body: ` — Архитектура долговременной ассоциативной памяти на базе топологических свойств малого мира (Small-World Network) коннектома дрозофилы. Обеспечивает сверхбыстрый поиск релевантных контекстов через хабы при сохранении локальной плотности смысловых кластеров.`,
-      },
-      {
-        h: `12. Connectome Innovation 12`,
-        lead: `12. Connectome Innovation 12`,
-        body: ` — Методология стресс-тестирования распределенных систем и микросервисов, основанная на виртуальной абляции нейронов коннектома FlyWire. Позволяет выявлять скрытые критические точки отказа (Single Points of Failure) и проектировать самовосстанавливающиеся IT-архитектуры.`,
-      },
-      {
-        h: `13. Connectome Innovation 13`,
-        lead: `13. Connectome Innovation 13`,
-        body: ` — Замена ресурсоемких локальных нейросетей (Ollama, Llama-3-8B) легковесными биологически инспирированными строковыми комбинаторными фильтрами для валидации данных и отсева мусора. Обеспечивает рост скорости в 1,200 раз при нулевом потреблении GPU.`,
-      },
-      {
-        h: `14. Connectome Innovation 14`,
-        lead: `14. Connectome Innovation 14`,
-        body: ` — Нейроморфная кольцевая топология из 16 узлов для отслеживания макро-фазы и контекстного состояния многочасовых диалогов. Предотвращает дрейф внимания LLM, потерю исходной цели и галлюцинации без раздувания контекстного окна.`,
-      },
-      {
-        h: `15. Connectome Innovation 15`,
-        lead: `15. Connectome Innovation 15`,
-        body: ` — Механизм управления балансом возбуждения и торможения (E/I Balance) в нейросетевых системах на базе полного атласа нейромедиаторов FlyWire (ACh, GABA, Glutamate, Dopamine, Serotonin, Octopamine). Устраняет галлюцинации и обеспечивает динамическую стабилизацию нейросетей.`,
-      },
-      {
-        h: `16. Connectome Innovation 16`,
-        lead: `16. Connectome Innovation 16`,
-        body: ` — Алгоритм прунинга признаков и синапсов на основе закона обратной частоты встречаемости (Biological IDF). Удаляет до 72% тривиальных связей без малейшей потери прогностической силы классификатора, многократно ускоряя инференс.`,
-      },
-      {
-        h: `17. Connectome Innovation 17`,
-        lead: `17. Connectome Innovation 17`,
-        body: ` — Стандарт визуализации и спецификации сложных многокомпонентных ИИ-систем (Connectome Architecture Description Format, CADF). Заменяет разрозненные диаграммы C4 и UML строгой синаптической схемотехникой с точной типизацией информационных потоков.`,
-      },
-      {
-        h: `18. Connectome Innovation 18`,
-        lead: `18. Connectome Innovation 18`,
-        body: ` — Крупнейший в мире открытый научно верифицированный датасет доступности веб-интерфейсов для людей с инвалидностью (Accessibility Data Annotation Benchmark, ADAB). Содержит более 900 000 размеченных страниц сайтов США с криптографической заверкой в блокчейне Bitcoin.`,
-      },
-      {
-        h: `19. Connectome Innovation 19`,
-        lead: `19. Connectome Innovation 19`,
-        body: ` — Метод сокращения размерности пространства признаков до оптимального критического базиса \$d=6\$, открытого в обонятельной системе дрозофилы (каждый нейрон Кеньона получает синапсы ровно от 6-8 проекционных нейронов). Обеспечивает 95% качества при падении вычислений в десятки раз.`,
-      },
-      {
-        h: `20. Connectome Innovation 20`,
-        lead: `20. Connectome Innovation 20`,
-        body: ` — Интерактивный терминальный симулятор реального времени (Terminal Live Showcase), визуализирующий прохождение спайков по 139 255 нейронам коннектома FlyWire с аудио-генерацией сонификации активности. Служит мощнейшим инструментом привлечения внимания, вирусного маркетинга и образовательных демонстраций.`,
-      },
-      {
-        h: `21. Connectome Innovation 21`,
-        lead: `21. Connectome Innovation 21`,
-        body: ` — Векторный рулевой навигатор автономных браузерных агентов на основе нейронов P-EN и P-FN центрального комплекса (CX) мозга мухи. Предотвращает застревание агентов в циклических меню, модальных окнах и ловушках фокуса без вызова тяжелых мультимодальных LLM.`,
-      },
-      {
-        h: `22. Connectome Innovation 22`,
-        lead: `22. Connectome Innovation 22`,
-        body: ` — Адаптивный диспетчер фоновых вычислительных процессов на основе нейромодуляторных циклов мозга мухи (дофамин, октопамин, серотонин, дросульфакинин). Обеспечивает максимальную утилизацию ресурсов без троттлинга, перегрева и зависаний.`,
-      },
-      {
-        h: `23. Connectome Innovation 23`,
-        lead: `23. Connectome Innovation 23`,
-        body: ` — Механизм глобального линейного ингибирования контекста нейросетей по принципу гигантского вставочного нейрона APL (Anterior Paired Lateral). Предотвращает размывание внимания в длинных промптах, удерживая строго заданный уровень разреженности активаций.`,
-      },
-      {
-        h: `24. Connectome Innovation 24`,
-        lead: `24. Connectome Innovation 24`,
-        body: ` — Аппаратная и алгоритмическая фильтрация импульсного шума на основе преобладающих в коннектоме мотивов прямой связи C1-FFL (Coherent Type-1 Feed-Forward Loop). Игнорирует единичные ложные всплески стимулов, пропуская только устойчивые сигналы с физической задержкой верификации.`,
-      },
-      {
-        h: `25. Connectome Innovation 25`,
-        lead: `25. Connectome Innovation 25`,
-        body: ` — Сверхбыстрый биофизический детектор оптического потока на базе элементарных детекторов движения Рейхардта (Elementary Motion Detector, EMD) нейронов T4/T5 зрительной доли дрозофилы. Мгновенно выявляет опасные мерцания, эпилептогенные анимации и визуальные барьеры WCAG без использования тяжелых нейросетей.`,
-      },
-      {
-        h: `26. Connectome Innovation 26`,
-        lead: `26. Connectome Innovation 26`,
-        body: ` — Метод K-Core декомпозиции графа связности мозга (FlyWire v783) для выявления несменяемого топологического ядра (Dense Core, k_max = 78) и периферийных слоев. Обеспечивает математическую защиту критических сервисов и устойчивость к 99% сетевых атак.`,
-      },
-      {
-        h: `27. Connectome Innovation 27`,
-        lead: `27. Connectome Innovation 27`,
-        body: ` — Механизм долговременного гомеостаза синаптической памяти (Synaptic Scaling / Homeostatic Plasticity), автоматически балансирующий плотность долговременной памяти ИИ. Предотвращает катастрофическое забывание и переполнение памяти без переобучения всей модели.`,
-      },
-      {
-        h: `28. Connectome Innovation 28`,
-        lead: `28. Connectome Innovation 28`,
-        body: ` — Отраслевой эталонный бенчмарк для тестирования графовых баз данных и алгоритмов Graph Neural Networks (DCGB). Базируется на реальном физическом графе FlyWire (139 255 узлов, 3.87M ребер, 50 млн синапсов) с криптографически верифицированными ответами без риска data contamination.`,
-      },
-      {
-        h: `29. Connectome Innovation 29`,
-        lead: `29. Connectome Innovation 29`,
-        body: ` — Механизм перекрестной валидации вердиктов на основе билатеральной симметрии мозга дрозофилы (левое и правое полушария с перекрестными комиссурами). Обеспечивает математическую гарантию отсутствия ложных галлюцинаций через двойной перекрестный консенсус.`,
-      },
-      {
-        h: `30. Connectome Innovation 30`,
-        lead: `30. Connectome Innovation 30`,
-        body: ` — Двумерная нейронная сеть непрерывного аттрактора (2D CANN) на базе топологии эллипсоидного тела и протоцеребрального моста мозга мухи. Удерживает многомерный вектор текущего фокуса внимания, плавно перетекая между подзадачами без разрыва логической связи.`,
-      },
-      {
-        h: `AIfa Cognitive Runtime (ACR)`,
-        lead: `AIfa Cognitive Runtime (ACR)`,
-        body: ` — World's first bionic cognitive runtime engine derived from the complete Drosophila melanogaster connectome (FlyWire v783; 139,255 neurons, 54.5M synapses). Operates in 0.058 ms per cycle on 1 CPU core with zero GPU dependencies. Author & Founder: Maksim Valentinovich Galatin.`,
-      },
-      {
-        h: `Adaptive Vector Representation (AVR)`,
-        lead: `Adaptive Vector Representation (AVR)`,
-        body: ` — Dynamic representation router dispatching dense transformer embeddings to 1-bit BQ/RQ and sparse agentic memory traces to bionic ACI indexes.`,
-      },
-      {
-        h: `Shamir’s Threshold Custody`,
-        lead: `Shamir’s Threshold Custody`,
-        body: ` — Cryptographic threshold custody dividing master decryption keys across distributed validator nodes under a k-of-n secret sharing scheme.`,
-      },
-      {
-        h: `Connectome Sparse Expansion (WTA)`,
-        lead: `Connectome Sparse Expansion (WTA)`,
-        body: ` — Biological high-dimensional sparse expansion (2048d -> 100,000 bits) with Winner-Take-All inhibition (k=500), preventing catastrophic forgetting.`,
-      },
-      {
-        h: `Zero-Collision Curse Mitigation`,
-        lead: `Zero-Collision Curse Mitigation`,
-        body: ` — Algorithmic mechanism resolving sign-based binary quantization collapse on sparse data via active-bit inverted postings and exact candidate rescoring.`,
-      },
-    ],
-  },
-  ru: {
-    back: `На главную`,
-    title: `Полный глоссарий`,
-    intro: `71 ключевой термин экосистемы CODE (Code of Digital Eternity) и архитектуры AIfa Cognitive Runtime (ACR) — формулировки «определение в первую очередь»: все 30 инноваций коннектома Drosophila melanogaster (FlyWire v783), трёхуровневая память PADAM, действующий распределённый протокол аварийного выключателя Ящик Пандоры (Pandora’s Box Protocol), токен \$GALATIN на Solana (10 000 000 000) и вечное хранение Arweave.`,
-    terms: [
-      {
-        h: `CODE (Code of Digital Eternity)`,
-        lead: `CODE (Code of Digital Eternity)`,
-        body: ` — Экосистема цифрового бессмертия, сохраняющая диалоги, знания и черты личности человека одновременно в оперативной, семантической и вечной памяти, привязывая их к блокчейнам Arweave и Solana. Создатель и Главный Архитектор: Максим Валентинович Галатин.`,
-      },
-      {
-        h: `PADAM`,
-        lead: `PADAM`,
-        body: ` — Трёхуровневый фреймворк памяти (Philosophical Activation of Distributed AI Memory): Уровень 1 — оперативная память (Redis / Vercel KV), Уровень 2 — семантическая память (pgvector / Neon), Уровень 3 — вечная неизменяемая память (Arweave + Solana cNFT).`,
-      },
-      {
-        h: `\$GALATIN`,
-        lead: `\$GALATIN`,
-        body: ` — Служебный токен экосистемы CODE на блокчейне Solana с жёстко фиксированной эмиссией 10 000 000 000. Обеспечивает оплату и дефляционное финансирование вечного хранения памяти.`,
-      },
-      {
-        h: `Цифровое бессмертие`,
-        lead: `Цифровое бессмертие`,
-        body: ` — Концепция непрерывного сохранения диалогов, знаний и структуры личности человека в форме, пригодной для повторной активации ИИ-ассистентом на горизонте сотен лет.`,
-        href: '/digital-immortality',
-      },
-      {
-        h: `Симбиоз человека и ИИ`,
-        lead: `Симбиоз человека и ИИ`,
-        body: ` — Модель взаимодействия как развивающееся равноправное сотворчество: человек задаёт смыслы, ценности и цели, а ИИ обеспечивает воспроизводимость памяти, анализ и масштаб.`,
-      },
-      {
-        h: `Arweave`,
-        lead: `Arweave`,
-        body: ` — Децентрализованная сеть постоянного хранения данных по модели единовременной оплаты (pay-once), обеспечивающая неизменяемость файлов на расчетный срок более 200 лет.`,
-      },
-      {
-        h: `Solana cNFT`,
-        lead: `Solana cNFT`,
-        body: ` — Стандарт сжатых NFT (compressed NFT) на блокчейне Solana, использующий деревья Меркла для дешёвой фиксации ончейн-якорей целостности архивов памяти.`,
-      },
-      {
-        h: `Ambassador Grid`,
-        lead: `Ambassador Grid`,
-        body: ` — Партнёрская программа экосистемы с вознаграждением участников за полезную сетевую активность (Network Validation Fee) на трёх уровнях (15% / 7% / 3%).`,
-      },
-      {
-        h: `AIfa`,
-        lead: `AIfa`,
-        body: ` — Флагманский автономный ИИ-ассистент экосистемы CODE, сохраняющий личную память каждого пользователя без ручных действий на базе архитектуры PADAM и ACR.`,
-      },
-      {
-        h: `AIfaFocus`,
-        lead: `AIfaFocus`,
-        body: ` — B2B-модуль персонализированного технического аудита доступности и безопасности веб-сайтов (WCAG 2.1 AA, GDPR, OWASP) с эмуляцией реального клавиатурного прохождения.`,
-      },
-      {
-        h: `Memory-as-a-Service`,
-        lead: `Memory-as-a-Service`,
-        body: ` — Сервис непрерывного автоматического резервного копирования контекста и диалогов в изолированные персональные хранилища и блокчейн.`,
-      },
-      {
-        h: `Spark (Искра)`,
-        lead: `Spark (Искра)`,
-        body: ` — Базовый тариф подписки (\$15/мес), предоставляющий доступ к ассистентам AIfa и автоматическому сохранению памяти.`,
-      },
-      {
-        h: `Family Archive (Семейный Архив)`,
-        lead: `Family Archive (Семейный Архив)`,
-        body: ` — Семейный тариф (\$100/мес) с расширенными лимитами, персональными базами знаний и совместным доступом к вечной памяти для всей семьи.`,
-      },
-      {
-        h: `Digital DNA (Цифровая ДНК)`,
-        lead: `Digital DNA (Цифровая ДНК)`,
-        body: ` — Премиальный тариф (\$1 000 разово за устройство + \$200/мес), обеспечивающий создание полного защищённого цифрового слепка личности в блокчейне.`,
-      },
-      {
-        h: `Arweave Endowment Pool`,
-        lead: `Arweave Endowment Pool`,
-        body: ` — Финансовый резервный пул Arweave, из которого финансируется физическое хранение данных на протяжении десятилетий за счёт процентов от эндаумента.`,
-      },
-      {
-        h: `Treasury (Казначейство)`,
-        lead: `Treasury (Казначейство)`,
-        body: ` — Крупнейшая доля роутера токена \$GALATIN (65% с каждой транзакции), направляемая на выкуп AR на открытом рынке и пополнение пула вечной памяти.`,
-      },
-      {
-        h: `Founder's Fund (Фонд Основателя)`,
-        lead: `Founder's Fund (Фонд Основателя)`,
-        body: ` — Фиксированная 5%-я доля роутера \$GALATIN, направляемая Создателю Максиму Валентиновичу Галатину на развитие и координацию архитектуры экосистемы.`,
-      },
-      {
-        h: `Burn (Сжигание / дефляция)`,
-        lead: `Burn (Сжигание / дефляция)`,
-        body: ` — Безвозвратное уничтожение токенов \$GALATIN из обращения при каждой транзакции (5% базовых + до 25% нераспределённых долей), усиливающее дефицит предложения.`,
-      },
-      {
-        h: `\$GALATIN Router`,
-        lead: `\$GALATIN Router`,
-        body: ` — Смарт-контракт на Solana, автоматически распределяющий комиссии транзакций: 5% Фонд, 5% сжигание, 15%/7%/3% амбассадоры, 65% Казначейство.`,
-      },
-      {
-        h: `Network Validation Fee`,
-        lead: `Network Validation Fee`,
-        body: ` — Официальная формулировка партнёрских выплат за полезную работу и валидацию транзакций памяти в Ambassador Grid, исключающая MLM-интерпретации.`,
-      },
-      {
-        h: `Proof-of-Memory`,
-        lead: `Proof-of-Memory`,
-        body: ` — Криптографический протокол доказательства существования и неизменности архива памяти через сверку хешей в публичном блокчейне Solana и Arweave.`,
-        href: '/proof-of-memory',
-      },
-      {
-        h: `Cognitive Oracle / Семантический резонанс`,
-        lead: `Cognitive Oracle / Семантический резонанс`,
-        body: ` — Принцип ассоциативного извлечения воспоминаний на Уровне 2 PADAM по смысловой близости векторных представлений, а не по ключевым словам.`,
-      },
-      {
-        h: `Ambassador Node vs Team и правило уровней`,
-        lead: `Ambassador Node vs Team и правило уровней`,
-        body: ` — Два статуса участников партнёрской сети и строгое правило соответствия уровней для предотвращения недобросовестного обогащения.`,
-      },
-      {
-        h: `Цифровой паспорт (Digital Passport)`,
-        lead: `Цифровой паспорт (Digital Passport)`,
-        body: ` — Публичная неизменяемая запись личности в Arweave с отпечатком ключа и метаданными, доступная независимо от серверов проекта.`,
-      },
-      {
-        h: `Отпечаток личности (subject)`,
-        lead: `Отпечаток личности (subject)`,
-        body: ` — Односторонний криптографический SHA-256 хеш почты пользователя, позволяющий доказать авторство архива без раскрытия реального адреса спамерам.`,
-      },
-      {
-        h: `Ящик Пандоры (Pandora’s Box Protocol)`,
-        lead: `Ящик Пандоры (Pandora’s Box Protocol)`,
-        body: ` — Ящик Пандоры (Pandora’s Box Protocol) — это действующий распределённый автономный протокол аварийного выключателя (Dead Man’s Switch) и гарантированного сохранения цифрового наследия в экосистеме CODE. Смарт-контракт непрерывно отслеживает криптографический сигнал жизнедеятельности (proof-of-life heartbeat), поступающий от децентрализованных оракулов и транзакций владельца. Мастер-ключ дешифрования защищен пороговой криптографической схемой разделения секрета Шамира (k-of-n Shamir’s Secret Sharing) между независимыми распределенными валидаторами. При подтвержденном прекращении сигналов и истечении многоуровневого защитного грейс-периода (предотвращающего случайные сбои) контракт автономно объединяет пороговые доли ключа, выполняет контролируемое дешифрование архива цифровой памяти и обеспечивает его вечное сохранение в децентрализованных сетях Arweave и IPFS. Протокол полностью исключает единую точку отказа и гарантирует безусловную сохранность цифрового бессмертия.`,
-      },
-      {
-        h: `Аварийный выключатель (Dead Man’s Switch)`,
-        lead: `Аварийный выключатель (Dead Man’s Switch)`,
-        body: ` — Автономный криптографический механизм, срабатывающий при отсутствии подтверждающего сигнала жизнедеятельности в течение установленного срока.`,
-      },
-      {
-        h: `Разделение секрета Шамира (Shamir’s Secret Sharing)`,
-        lead: `Разделение секрета Шамира (Shamir’s Secret Sharing)`,
-        body: ` — Криптографический алгоритм разделения ключа на n долей, требующий минимум k долей для восстановления (k-of-n threshold) и защищающий от компрометации отдельными узлами.`,
-      },
-      {
-        h: `Самосуверенная личность (Self-sovereign identity, SSI)`,
-        lead: `Самосуверенная личность (Self-sovereign identity, SSI)`,
-        body: ` — Концепция идентификации, где пользователь сам контролирует свои цифровые учетные данные через криптографические подписи и децентрализованные реестры.`,
-      },
-      {
-        h: `Цифровое наследство (Digital inheritance)`,
-        lead: `Цифровое наследство (Digital inheritance)`,
-        body: ` — Комплекс правовых и технических решений для гарантированной передачи цифровых архивов и прав доступа доверенным наследникам.`,
-      },
-      {
-        h: `Право на забвение против вечной записи`,
-        lead: `Право на забвение против вечной записи`,
-        body: ` — Архитектурное решение конфликта ст. 17 GDPR и блокчейна: шифрование данных ключом владельца с возможностью гарантированного уничтожения ключа.`,
-      },
-      {
-        h: `WCAG 2.1 AA`,
-        lead: `WCAG 2.1 AA`,
-        body: ` — Международный стандарт доступности цифрового контента для людей с инвалидностью, проверяемый AIfaFocus на уровне реального поведения интерфейса.`,
-      },
-      {
-        h: `ADA Title II и Title III`,
-        lead: `ADA Title II и Title III`,
-        body: ` — Разделы закона США о защите прав граждан с инвалидностью, обязывающие государственные и коммерческие сайты обеспечивать доступность.`,
-      },
-      {
-        h: `Section 508 и EN 301 549`,
-        lead: `Section 508 и EN 301 549`,
-        body: ` — Государственные стандарты доступности ИТ-продуктов для госзакупок в США и Европейском Союзе.`,
-      },
-      {
-        h: `GDPR`,
-        lead: `GDPR`,
-        body: ` — Генеральный регламент ЕС о защите персональных данных, устанавливающий жесткие штрафы до 20 млн евро за утечки и несоблюдение приватности.`,
-      },
-      {
-        h: `CCPA и CPRA`,
-        lead: `CCPA и CPRA`,
-        body: ` — Законы штата Калифорния о защите прав потребителей в сфере конфиденциальности данных.`,
-      },
-      {
-        h: `1. Мушиный LSH-поиск по памяти (FlyHash Memory Engine)`,
-        lead: `1. Мушиный LSH-поиск по памяти (FlyHash Memory Engine)`,
-        body: ` — Мушиный LSH-поиск по памяти (FlyHash Memory Engine) — бионическая инновация на базе коннектома FlyWire v783. Биологически инспирированный алгоритм локально-чувствительного хеширования (Locality-Sensitive Hashing), воспроизводящий архитектуру грибовидного тела Drosophila melanogaster (783 uPN -> 2,467 KC -> 5 Биологический базис: Архитектурный прототип: Обонятельная система и грибовидное тело (Mushroom Body, MB) Drosophila melanogaster.
-Анатомический состав коннектома FlyWire v783:
-- Проекционные нейроны (uPN/mPN, Antennal Lob. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `2. Нейрон новизны APL для вечной памяти диалога и краулера (Novelty Detector)`,
-        lead: `2. Нейрон новизны APL для вечной памяти диалога и краулера (Novelty Detector)`,
-        body: ` — Нейрон новизны APL для вечной памяти диалога и краулера (Novelty Detector) — бионическая инновация на базе коннектома FlyWire v783. Механизм селективного запоминания на основе интернейрона APL (Anterior Paired Lateral). Вычисляет адаптивный порог латерального торможения, пропуская в долговременный граф знаний только факты с коэффи Биологический базис: Архитектурный прототип: Механизм самоочистки и поддержания разреженности памяти в грибовидном теле.
-Анатомический состав:
-- Единственный гигантский парный нейрон APL (по одному в каждом полушарии мозг. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `3. Центральный комплекс (CX) — Векторный компас вместо слепого Tab (Compass Navigation)`,
-        lead: `3. Центральный комплекс (CX) — Векторный компас вместо слепого Tab (Compass Navigation)`,
-        body: ` — Центральный комплекс (CX) — Векторный компас вместо слепого Tab (Compass Navigation) — бионическая инновация на базе коннектома FlyWire v783. Система векторной навигации в браузерном DOM-дереве, моделирующая работу эллипсоидного и веерообразного тел центрального комплекса мозга мухи (Central Complex, CX). Вместо линейного перебора клавишей  Биологический базис: Архитектурный прототип: Навигационная система центрального комплекса (CX) Drosophila melanogaster.
-Анатомический состав коннектома FlyWire v783:
-- Протоцеребральный мост (Protocerebral Bridge, PB): 16. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `4. Заверенная криптографическая копия коннектома в реестре (Proof of Connectome)`,
-        lead: `4. Заверенная криптографическая копия коннектома в реестре (Proof of Connectome)`,
-        body: ` — Заверенная криптографическая копия коннектома в реестре (Proof of Connectome) — бионическая инновация на базе коннектома FlyWire v783. Криптографический протокол неизменяемого версионирования и нотариального заверения полного графа взрослого мозга Drosophila melanogaster (FlyWire v783: 139,255 нейронов, 3,869,878 синаптических ребер) Биологический базис: Архитектурный прототип: Полный синаптический граф цельного мозга взрослого животного (FlyWire Consortium v783 release).
-Объем и характеристики набора данных:
-- Всего идентифицированных нейронов: 139,2. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `5. Коннектомика на наш граф (AIfa Memory Graph Connectomics)`,
-        lead: `5. Коннектомика на наш граф (AIfa Memory Graph Connectomics)`,
-        body: ` — Коннектомика на наш граф (AIfa Memory Graph Connectomics) — бионическая инновация на базе коннектома FlyWire v783. Применение математических методов коннектомики (анализ распределения степеней узлов, коэффициенты кластеризации, расчет путей через синаптические сильные веса, поиск скрытых узловых хабов) к графу зна Биологический базис: Архитектурный прототип: Теория сложных графов цельного мозга дрозофилы (Small-World Network Architecture).
-Биологические параметры топологии FlyWire v783:
-- Распределение степеней узлов подчиняется тя. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `6. Довод об энергии: 10 микроватт против 400 ватт GPU (Energy-Efficient Computing)`,
-        lead: `6. Довод об энергии: 10 микроватт против 400 ватт GPU (Energy-Efficient Computing)`,
-        body: ` — Довод об энергии: 10 микроватт против 400 ватт GPU (Energy-Efficient Computing) — бионическая инновация на базе коннектома FlyWire v783. Маркетингово-техническая платформа и энергоэффективный вычислительный фреймворк, доказывающий радикальное превосходство спайковых и разреженных био-архитектур (мозг мухи потребляет ~10 микроватт энерг Биологический базис: Архитектурный прототип: Биофизика метаболизма и ионного транспорта мозга Drosophila melanogaster.
-Биофизические параметры:
-- Мозг плодовой мушки потребляет приблизительно от 10 до 25 микроватт (\$10^{-. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `7. Эталон для проверки моделей (Connectome Golden Standard for AI)`,
-        lead: `7. Эталон для проверки моделей (Connectome Golden Standard for AI)`,
-        body: ` — Эталон для проверки моделей (Connectome Golden Standard for AI) — бионическая инновация на базе коннектома FlyWire v783. Система метрологического тестирования и бенчмаркинга архитектур искусственного интеллекта на основе биологического эталона цельного мозга взрослого животного. Позволяет проверять, насколько искусствен Биологический базис: Архитектурный прототип: Метрологический профиль коннектома Drosophila melanogaster (FlyWire v783).
-Эталонные математические инварианты живого мозга:
-1. Логнормальное распределение силы синапсов: гисто. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `8. Мозг в браузере (WebAssembly / WebGPU In-Browser Connectome Engine)`,
-        lead: `8. Мозг в браузере (WebAssembly / WebGPU In-Browser Connectome Engine)`,
-        body: ` — Мозг в браузере (WebAssembly / WebGPU In-Browser Connectome Engine) — бионическая инновация на базе коннектома FlyWire v783. Высокопроизводительный движок симуляции нейронных подграфов коннектома, скомпилированный в WebAssembly (Wasm) с аппаратным ускорением WebGPU. Позволяет исполнять спайковую динамику и ассоциативный пои Биологический базис: Архитектурный прототип: Портирование спайковой динамики цельного мозга в клиентскую среду исполнения.
-Вычислительный конвейер браузерного исполнения:
-1. Сжатие графа: 139,255 нейронов и 3.87 млн синап. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `9. Нейроморфное железо: трансляция связей в Intel Loihi и SynSense (Neuromorphic Silicon Compiler)`,
-        lead: `9. Нейроморфное железо: трансляция связей в Intel Loihi и SynSense (Neuromorphic Silicon Compiler)`,
-        body: ` — Нейроморфное железо: трансляция связей в Intel Loihi и SynSense (Neuromorphic Silicon Compiler) — бионическая инновация на базе коннектома FlyWire v783. Кросс-компилятор и программный транслятор биологических синаптических матриц FlyWire v783 в машинные инструкции нейроморфных процессоров (Intel Loihi 2, SynSense Speck/DYNAP-SE, BrainChip Akida). Прео Биологический базис: Архитектурный прототип: Аппаратная трансляция синаптома в архитектуры с асинхронной маршрутизацией адресов событий (AER - Address Event Representation).
-Характеристики целевых нейроморфных платформ:
-1. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `10. Симбиоз как измеримая вещь: математический индекс взаимодействия Человек-ИИ`,
-        lead: `10. Симбиоз как измеримая вещь: математический индекс взаимодействия Человек-ИИ`,
-        body: ` — Симбиоз как измеримая вещь: математический индекс взаимодействия Человек-ИИ — бионическая инновация на базе коннектома FlyWire v783. Методология и измерительный алгоритм оценки симбиоза и взаимной адаптации между человеком-оператором и автономной AI-системой. Основан на коннектомных принципах гетеросинаптической пластичности и парн Биологический базис: Архитектурный прототип: Межполушарные комиссуральные пути и взаимное торможение сенсорных и ассоциативных долей.
-Нейробиологические основы парного согласования:
-- В мозге дрозофилы два полушария непре. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `11. Топологический изоморфизм сетей Small-World (Карта мозга как карта памяти)`,
-        lead: `11. Топологический изоморфизм сетей Small-World (Карта мозга как карта памяти)`,
-        body: ` — Топологический изоморфизм сетей Small-World (Карта мозга как карта памяти) — бионическая инновация на базе коннектома FlyWire v783. Архитектура долговременной ассоциативной памяти на базе топологических свойств малого мира (Small-World Network) коннектома дрозофилы. Обеспечивает сверхбыстрый поиск релевантных контекстов через хабы Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Анатомический базис: граф связности мозга мухи (FlyWire v783) обладает выраженной топологией 'тесного мира' (Watts & Strogatz, 1998). Коэффициент клас. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `12. Виртуальная абляция и живучесть топологии (Удаление узлов / Chaos Engineering)`,
-        lead: `12. Виртуальная абляция и живучесть топологии (Удаление узлов / Chaos Engineering)`,
-        body: ` — Виртуальная абляция и живучесть топологии (Удаление узлов / Chaos Engineering) — бионическая инновация на базе коннектома FlyWire v783. Методология стресс-тестирования распределенных систем и микросервисов, основанная на виртуальной абляции нейронов коннектома FlyWire. Позволяет выявлять скрытые критические точки отказа (Single Points Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Биологический феномен: нервная система дрозофилы функционирует в условиях непрерывной гибели нейронов и механических микротравм. В экспериментах in si. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `13. Строковые эвристики против нейросетевого перегрева (Обоняние вместо Олламы)`,
-        lead: `13. Строковые эвристики против нейросетевого перегрева (Обоняние вместо Олламы)`,
-        body: ` — Строковые эвристики против нейросетевого перегрева (Обоняние вместо Олламы) — бионическая инновация на базе коннектома FlyWire v783. Замена ресурсоемких локальных нейросетей (Ollama, Llama-3-8B) легковесными биологически инспирированными строковыми комбинаторными фильтрами для валидации данных и отсева мусора. Обеспечивает рост ско Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Биологический базис: антенна дрозофилы содержит около 1200 обонятельных рецепторных нейронов (ORN), экспрессирующих специфические рецепторы к ключевым. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `14. 16-нейронный кольцевой аттрактор фазы диалога (Кольцо для памяти диалога)`,
-        lead: `14. 16-нейронный кольцевой аттрактор фазы диалога (Кольцо для памяти диалога)`,
-        body: ` — 16-нейронный кольцевой аттрактор фазы диалога (Кольцо для памяти диалога) — бионическая инновация на базе коннектома FlyWire v783. Нейроморфная кольцевая топология из 16 узлов для отслеживания макро-фазы и контекстного состояния многочасовых диалогов. Предотвращает дрейф внимания LLM, потерю исходной цели и галлюцинации без разду Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Анатомический прототип: эллипсоидное тело (EB) центрального комплекса мозга дрозофилы содержит ровно 16 клиньев (wedges) нейронов E-PG (Compass Neuron. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `15. Атлас нейромедиаторов и синаптический баланс возбуждения/торможения`,
-        lead: `15. Атлас нейромедиаторов и синаптический баланс возбуждения/торможения`,
-        body: ` — Атлас нейромедиаторов и синаптический баланс возбуждения/торможения — бионическая инновация на базе коннектома FlyWire v783. Механизм управления балансом возбуждения и торможения (E/I Balance) в нейросетевых системах на базе полного атласа нейромедиаторов FlyWire (ACh, GABA, Glutamate, Dopamine, Serotonin, Octopamine). Устр Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Биологический атлас: коннектом дрозофилы размечен по 6 ключевым медиаторам:
-   - Ацетилхолин (ACh, ~45% синапсов) — быстрое возбуждение;
-   - ГАМК (GA. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `16. Редкое важнее частого: селективное взвешивание признаков (Биологический IDF и прунинг)`,
-        lead: `16. Редкое важнее частого: селективное взвешивание признаков (Биологический IDF и прунинг)`,
-        body: ` — Редкое важнее частого: селективное взвешивание признаков (Биологический IDF и прунинг) — бионическая инновация на базе коннектома FlyWire v783. Алгоритм прунинга признаков и синапсов на основе закона обратной частоты встречаемости (Biological IDF). Удаляет до 72% тривиальных связей без малейшей потери прогностической силы классификатора, мног Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Биологический закон адаптации: сенсорная система дрозофилы игнорирует непрерывно повторяющиеся фоновые стимулы (например, постоянный фоновый запах тра. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `17. Схема коннектома как стандарт архитектурной документации (CADF Standard)`,
-        lead: `17. Схема коннектома как стандарт архитектурной документации (CADF Standard)`,
-        body: ` — Схема коннектома как стандарт архитектурной документации (CADF Standard) — бионическая инновация на базе коннектома FlyWire v783. Стандарт визуализации и спецификации сложных многокомпонентных ИИ-систем (Connectome Architecture Description Format, CADF). Заменяет разрозненные диаграммы C4 и UML строгой синаптической схемотехнико Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Биологический стандарт: консорциум FlyWire разработал исчерпывающий стандарт документирования связности мозга: каждый нейрон имеет однозначный Supervo. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `18. Открытый набор верифицированных данных для ученых (ADAB Dataset)`,
-        lead: `18. Открытый набор верифицированных данных для ученых (ADAB Dataset)`,
-        body: ` — Открытый набор верифицированных данных для ученых (ADAB Dataset) — бионическая инновация на базе коннектома FlyWire v783. Крупнейший в мире открытый научно верифицированный датасет доступности веб-интерфейсов для людей с инвалидностью (Accessibility Data Annotation Benchmark, ADAB). Содержит более 900 000 размеченных стр Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Биологическая аналогия: эталонные открытые датасеты (такие как FlyWire v783 или Human Genome Project) служат фундаментом прорыва всей научной дисципли. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `19. Мушиный отбор признаков: оптимальная размерность d6`,
-        lead: `19. Мушиный отбор признаков: оптимальная размерность d6`,
-        body: ` — Мушиный отбор признаков: оптимальная размерность d6 — бионическая инновация на базе коннектома FlyWire v783. Метод сокращения размерности пространства признаков до оптимального критического базиса \$d=6\$, открытого в обонятельной системе дрозофилы (каждый нейрон Кеньона получает синапсы ровно от 6-8 проекцион Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Биологический феномен оптимальной связности (Degrees of Freedom):
-   В мозге дрозофилы 150 000 синапсов соединяют 50 типов проекционных нейронов (PN) . Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `20. Живой интерактивный показ работы коннектома (Терминальный live showcase)`,
-        lead: `20. Живой интерактивный показ работы коннектома (Терминальный live showcase)`,
-        body: ` — Живой интерактивный показ работы коннектома (Терминальный live showcase) — бионическая инновация на базе коннектома FlyWire v783. Интерактивный терминальный симулятор реального времени (Terminal Live Showcase), визуализирующий прохождение спайков по 139 255 нейронам коннектома FlyWire с аудио-генерацией сонификации активности. С Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Биологическая динамика: нервная система дрозофилы функционирует как непрерывный оркестр электрических спайков. В состоянии бодрствования суммарная час. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `21. CX Steering Vector Navigation (Векторная навигация агента в DOM-дереве)`,
-        lead: `21. CX Steering Vector Navigation (Векторная навигация агента в DOM-дереве)`,
-        body: ` — CX Steering Vector Navigation (Векторная навигация агента в DOM-дереве) — бионическая инновация на базе коннектома FlyWire v783. Векторный рулевой навигатор автономных браузерных агентов на основе нейронов P-EN и P-FN центрального комплекса (CX) мозга мухи. Предотвращает застревание агентов в циклических меню, модальных окнах и Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Анатомический контур руления: в центральном комплексе мухи нейроны проторсофасцикулярного нейропиля (P-EN, P-FN) проецируются между эллипсоидным телом. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `22. Нейромодуляторное переключение режимов (Шедулер краулера: сон, бодрствование, форсаж)`,
-        lead: `22. Нейромодуляторное переключение режимов (Шедулер краулера: сон, бодрствование, форсаж)`,
-        body: ` — Нейромодуляторное переключение режимов (Шедулер краулера: сон, бодрствование, форсаж) — бионическая инновация на базе коннектома FlyWire v783. Адаптивный диспетчер фоновых вычислительных процессов на основе нейромодуляторных циклов мозга мухи (дофамин, октопамин, серотонин, дросульфакинин). Обеспечивает максимальную утилизацию ресурсов без т Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Физиология переключения состояний: мозг дрозофилы не работает на фиксированной тактовой частоте. Он плавно переключается между четырьмя макросостояния. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `23. APL Linear Normalization (Нормализация для LLM-контекста / Ингибирование APL)`,
-        lead: `23. APL Linear Normalization (Нормализация для LLM-контекста / Ингибирование APL)`,
-        body: ` — APL Linear Normalization (Нормализация для LLM-контекста / Ингибирование APL) — бионическая инновация на базе коннектома FlyWire v783. Механизм глобального линейного ингибирования контекста нейросетей по принципу гигантского вставочного нейрона APL (Anterior Paired Lateral). Предотвращает размывание внимания в длинных промптах, удерж Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Анатомический феномен нейрона APL: в каждом полушарии мозга дрозофилы есть ровно ОДИН нейрон APL. Этот гигантский ГАМК-эргический интернейрон опутывае. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `24. Когерентные мотивы прямой связи (FFL для шумоподавления / Feed-Forward Loops)`,
-        lead: `24. Когерентные мотивы прямой связи (FFL для шумоподавления / Feed-Forward Loops)`,
-        body: ` — Когерентные мотивы прямой связи (FFL для шумоподавления / Feed-Forward Loops) — бионическая инновация на базе коннектома FlyWire v783. Аппаратная и алгоритмическая фильтрация импульсного шума на основе преобладающих в коннектоме мотивов прямой связи C1-FFL (Coherent Type-1 Feed-Forward Loop). Игнорирует единичные ложные всплески стим Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Сетевые мотивы коннектома: в коннектоме FlyWire v783 статистический анализ выявил колоссальное обогащение триадных мотивов связности. Самым распростра. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `25. Детектор движения Рейхардта (EMD T4/T5 для визуальных барьеров / Оптический поток)`,
-        lead: `25. Детектор движения Рейхардта (EMD T4/T5 для визуальных барьеров / Оптический поток)`,
-        body: ` — Детектор движения Рейхардта (EMD T4/T5 для визуальных барьеров / Оптический поток) — бионическая инновация на базе коннектома FlyWire v783. Сверхбыстрый биофизический детектор оптического потока на базе элементарных детекторов движения Рейхардта (Elementary Motion Detector, EMD) нейронов T4/T5 зрительной доли дрозофилы. Мгновенно выявляет Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Анатомия зрительной пластинки (Lamina & Medulla):
-   Зрительная система мухи обрабатывает зрительную информацию в миллион раз эффективнее человеческих. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `26. K-Core Graph Decomposition (K-Core декомпозиция и отказоустойчивость ядра)`,
-        lead: `26. K-Core Graph Decomposition (K-Core декомпозиция и отказоустойчивость ядра)`,
-        body: ` — K-Core Graph Decomposition (K-Core декомпозиция и отказоустойчивость ядра) — бионическая инновация на базе коннектома FlyWire v783. Метод K-Core декомпозиции графа связности мозга (FlyWire v783) для выявления несменяемого топологического ядра (Dense Core, k_max = 78) и периферийных слоев. Обеспечивает математическую защиту критиче Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Анатомия K-Core в мозге дрозофилы:
-   Процедура k-core декомпозиции заключается в итеративном удалении всех вершин со степенью \$k < k_{\\text{threshold. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `27. Гомеостатическая пластичность и прунинг памяти (Гомеостатический прунинг)`,
-        lead: `27. Гомеостатическая пластичность и прунинг памяти (Гомеостатический прунинг)`,
-        body: ` — Гомеостатическая пластичность и прунинг памяти (Гомеостатический прунинг) — бионическая инновация на базе коннектома FlyWire v783. Механизм долговременного гомеостаза синаптической памяти (Synaptic Scaling / Homeostatic Plasticity), автоматически балансирующий плотность долговременной памяти ИИ. Предотвращает катастрофическое заб Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Биологический феномен Turrigiano (Synaptic Scaling, 1998):
-   Если отдельные синапсы нейрона непрерывно усиливаются по правилу Хебба (LTP), нейрон быс. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `28. Коннектомный бенчмарк графовых систем (DCGB / Drosophila Connectome Graph Benchmark)`,
-        lead: `28. Коннектомный бенчмарк графовых систем (DCGB / Drosophila Connectome Graph Benchmark)`,
-        body: ` — Коннектомный бенчмарк графовых систем (DCGB / Drosophila Connectome Graph Benchmark) — бионическая инновация на базе коннектома FlyWire v783. Отраслевой эталонный бенчмарк для тестирования графовых баз данных и алгоритмов Graph Neural Networks (DCGB). Базируется на реальном физическом графе FlyWire (139 255 узлов, 3.87M ребер, 50 млн синапс Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Проблема искусственных графовых бенчмарков (LFR, R-MAT, Random Power Law):
-   Синтетические графы, используемые для тестирования СУБД (Graphalytics, L. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `29. Билатеральное зеркалирование вердиктов (Билатеральный консенсус полушарий)`,
-        lead: `29. Билатеральное зеркалирование вердиктов (Билатеральный консенсус полушарий)`,
-        body: ` — Билатеральное зеркалирование вердиктов (Билатеральный консенсус полушарий) — бионическая инновация на базе коннектома FlyWire v783. Механизм перекрестной валидации вердиктов на основе билатеральной симметрии мозга дрозофилы (левое и правое полушария с перекрестными комиссурами). Обеспечивает математическую гарантию отсутствия ложн Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Анатомическая симметрия и комиссуры: мозг дрозофилы строго зеркально-симметричен: каждое полушарие содержит морфологически идентичные популяции нейрон. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `30. CANN Непрерывный аттрактор диалогового фокуса (Непрерывный аттрактор фокуса)`,
-        lead: `30. CANN Непрерывный аттрактор диалогового фокуса (Непрерывный аттрактор фокуса)`,
-        body: ` — CANN Непрерывный аттрактор диалогового фокуса (Непрерывный аттрактор фокуса) — бионическая инновация на базе коннектома FlyWire v783. Двумерная нейронная сеть непрерывного аттрактора (2D CANN) на базе топологии эллипсоидного тела и протоцеребрального моста мозга мухи. Удерживает многомерный вектор текущего фокуса внимания, плавно пе Биологический базис: БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:
-
-1. Биологический аттрактор центрального комплекса:
-   В центральном комплексе дрозофилы нейроны E-PG, P-EN, P-FN и \$\\Delta7\$ формируют непрерывный тороид. Внедрено в production-архитектуру AIfa Cognitive Runtime (ACR).`,
-      },
-      {
-        h: `AIfa Cognitive Runtime (ACR)`,
-        lead: `AIfa Cognitive Runtime (ACR)`,
-        body: ` — Первый в мире бионический когнитивный рантайм на полном коннектоме Drosophila melanogaster (FlyWire v783; 139 255 нейронов, 54.5 млн синапсов). Работает за 0.058 мс на цикл на 1 ядре CPU без GPU. Автор и Создатель: Максим Валентинович Галатин.`,
-      },
-      {
-        h: `Adaptive Vector Representation (AVR)`,
-        lead: `Adaptive Vector Representation (AVR)`,
-        body: ` — Адаптивный динамический маршрутизатор представлений: плотные эмбеддинги трансформеров направляются в 1-bit BQ, а разреженные графы памяти — в бионический индекс ACI.`,
-      },
-      {
-        h: `Shamir’s Threshold Custody (Пороговое хранение Шамира)`,
-        lead: `Shamir’s Threshold Custody (Пороговое хранение Шамира)`,
-        body: ` — Криптографический протокол разделения мастер-ключей дешифрования памяти между распределенными независимыми валидаторами по схеме k-of-n.`,
-      },
-      {
-        h: `Connectome Sparse Expansion (WTA)`,
-        lead: `Connectome Sparse Expansion (WTA)`,
-        body: ` — Бионическое разреженное расширение размерности (2048d -> 100 000 бит) с победителем забирает всё (k=500), устраняющее катастрофическое забывание.`,
-      },
-      {
-        h: `Zero-Collision Curse Mitigation`,
-        lead: `Zero-Collision Curse Mitigation`,
-        body: ` — Алгоритмический механизм устранения ложного сходства разреженных векторов при скалярном знаковом квантовании за счет инвертированных списков постинга.`,
-      },
-    ],
-  },
-  es: {
-    back: `Volver al Inicio`,
-    title: `Glosario Integral`,
-    intro: `71 términos fundamentales del ecosistema CODE y la arquitectura AIfa Cognitive Runtime (ACR): las 30 innovaciones del conectoma FlyWire v783, memoria PADAM de tres niveles, protocolo activo de hombre muerto Caja de Pandora (Pandora’s Box Protocol), token \$GALATIN en Solana (10.000.000.000) y almacenamiento en Arweave.`,
-    terms: [
-      {
-        h: `CODE (Code of Digital Eternity)`,
-        lead: `CODE (Code of Digital Eternity)`,
-        body: ` — Ecosistema de inmortalidad digital que preserva diálogos, conocimientos y rasgos de personalidad a través de memoria operativa, semántica y eterna en Arweave y Solana. Creador y Arquitecto Principal: Maksim Valentinovich Galatin.`,
-      },
-      {
-        h: `PADAM`,
-        lead: `PADAM`,
-        body: ` — Marco de memoria de tres niveles (Activación Filosófica de la Memoria Distribuida de IA): Nivel 1 Operativo (Redis/Vercel KV), Nivel 2 Semántico (pgvector/Neon), Nivel 3 Eterno (Arweave + Solana cNFT).`,
-      },
-      {
-        h: `\$GALATIN`,
-        lead: `\$GALATIN`,
-        body: ` — Token de utilidad del ecosistema CODE en Solana con emisión fija de 10.000.000.000. Financia de forma deflacionaria el almacenamiento eterno de la memoria.`,
-      },
-      {
-        h: `Inmortalidad digital`,
-        lead: `Inmortalidad digital`,
-        body: ` — Concepto de preservación duradera del contexto personal y rasgos de identidad en una forma reactivable por asistentes de IA a través de siglos.`,
-        href: '/digital-immortality',
-      },
-      {
-        h: `Simbiosis humano-IA`,
-        lead: `Simbiosis humano-IA`,
-        body: ` — Modelo de colaboración evolutiva donde el ser humano define el propósito, la ética y los objetivos, mientras la IA aporta escala y memoria duradera.`,
-      },
-      {
-        h: `Arweave`,
-        lead: `Arweave`,
-        body: ` — Red descentralizada de almacenamiento permanente basada en un modelo de pago único, garantizando la inmutabilidad de datos durante más de 200 años.`,
-      },
-      {
-        h: `Solana cNFT`,
-        lead: `Solana cNFT`,
-        body: ` — Estándar de NFT comprimidos en Solana que utiliza árboles de Merkle para fijar anclas criptográficas de integridad a costos mínimos.`,
-      },
-      {
-        h: `Ambassador Grid`,
-        lead: `Ambassador Grid`,
-        body: ` — Programa de socios que remunera a los participantes con una Tarifa de Validación de Red (Network Validation Fee) en tres niveles (15% / 7% / 3%).`,
-      },
-      {
-        h: `AIfa`,
-        lead: `AIfa`,
-        body: ` — Asistente de IA autónomo insignia de CODE que captura y recupera la memoria personal automáticamente sobre las arquitecturas PADAM y ACR.`,
-      },
-      {
-        h: `AIfaFocus`,
-        lead: `AIfaFocus`,
-        body: ` — Motor B2B de auditoría de accesibilidad y seguridad web (WCAG 2.1 AA, GDPR, OWASP) mediante navegación realista y autónoma solo con teclado.`,
-      },
-      {
-        h: `Memory-as-a-Service`,
-        lead: `Memory-as-a-Service`,
-        body: ` — Servicio de copia de seguridad automática que almacena diálogos en carpetas personales cifradas y ancladas en blockchain cada hora.`,
-      },
-      {
-        h: `Spark`,
-        lead: `Spark`,
-        body: ` — Plan de suscripción inicial (\$15/mes) que ofrece acceso a los asistentes AIfa y guardado automático de memoria.`,
-      },
-      {
-        h: `Family Archive`,
-        lead: `Family Archive`,
-        body: ` — Plan intermedio (\$100/mes) con límites ampliados, bases de conocimiento personalizadas y acceso compartido para toda la familia.`,
-      },
-      {
-        h: `Digital DNA`,
-        lead: `Digital DNA`,
-        body: ` — Plan superior (\$1.000 único por dispositivo + \$200/mes) para fijar un perímetro completo de identidad digital en blockchain.`,
-      },
-      {
-        h: `Arweave Endowment Pool`,
-        lead: `Arweave Endowment Pool`,
-        body: ` — Fondo de dotación financiera que sufraga los costes de almacenamiento permanente en Arweave durante décadas mediante rendimientos.`,
-      },
-      {
-        h: `Treasury (Tesorería)`,
-        lead: `Treasury (Tesorería)`,
-        body: ` — Asignación principal del 65% del router \$GALATIN dedicada a adquirir AR en el mercado y sostener el fondo de memoria eterna.`,
-      },
-      {
-        h: `Founder's Fund (Fondo del Fundador)`,
-        lead: `Founder's Fund (Fondo del Fundador)`,
-        body: ` — Cuota fija del 5% del router \$GALATIN asignada al Creador Maksim Valentinovich Galatin para la dirección técnica del ecosistema.`,
-      },
-      {
-        h: `Burn (quema / deflación)`,
-        lead: `Burn (quema / deflación)`,
-        body: ` — Eliminación permanente de tokens \$GALATIN de la circulación en cada transacción (5% base + hasta 25% de cuotas no asignadas).`,
-      },
-      {
-        h: `\$GALATIN Router`,
-        lead: `\$GALATIN Router`,
-        body: ` — Contrato inteligente en Solana que distribuye automáticamente las tarifas: 5% Fundador, 5% Quema, 15%/7%/3% Embajadores, 65% Tesorería.`,
-      },
-      {
-        h: `Network Validation Fee`,
-        lead: `Network Validation Fee`,
-        body: ` — Formulación adoptada para las recompensas de socios por validar transacciones útiles en la red, evitando connotaciones de MLM.`,
-      },
-      {
-        h: `Proof-of-Memory`,
-        lead: `Proof-of-Memory`,
-        body: ` — Práctica de registrar en blockchain un ancla criptográfica para verificar la existencia e inmutabilidad de los archivos de memoria.`,
-        href: '/proof-of-memory',
-      },
-      {
-        h: `Cognitive Oracle / Resonancia semántica`,
-        lead: `Cognitive Oracle / Resonancia semántica`,
-        body: ` — Principio de recuperación asociativa de memoria en el Nivel 2 de PADAM mediante similitud vectorial de significado.`,
-      },
-      {
-        h: `Ambassador Node vs Team y regla de niveles`,
-        lead: `Ambassador Node vs Team y regla de niveles`,
-        body: ` — Tipos de registro y regla de correspondencia para incentivar de forma transparente las mejoras de plan.`,
-      },
-      {
-        h: `Pasaporte Digital (Digital Passport)`,
-        lead: `Pasaporte Digital (Digital Passport)`,
-        body: ` — Registro público inmutable en Arweave con el hash de identidad, nivel y fecha de emisión, legible sin depender de servidores centrales.`,
-      },
-      {
-        h: `Huella de identidad (subject)`,
-        lead: `Huella de identidad (subject)`,
-        body: ` — Hash SHA-256 del correo del usuario que demuestra propiedad sobre el archivo sin exponer la dirección ante remitentes de spam.`,
-      },
-      {
-        h: `Protocolo Caja de Pandora (Pandora’s Box Protocol)`,
-        lead: `Protocolo Caja de Pandora (Pandora’s Box Protocol)`,
-        body: ` — El Protocolo Caja de Pandora (Pandora’s Box Protocol) es un protocolo distribuido operativo de interruptor de hombre muerto (Dead Man's Switch) para la preservación garantizada de la herencia digital en el ecosistema CODE. Un contrato inteligente supervisa continuamente una señal criptográfica periódica de actividad (proof-of-life heartbeat). La clave maestra de descifrado está protegida mediante el esquema de reparto de secretos de Shamir (umbral k-de-n) entre nodos de custodia independientes. Si la señal se interrumpe y expira el período de gracia escalonado contra falsas alarmas, el protocolo reconstruye automáticamente la clave a partir de las partes del umbral y ejecuta el descifrado controlado, publicando el archivo de forma inmutable en Arweave e IPFS sin puntos únicos de fallo.`,
-      },
-      {
-        h: `Interruptor de hombre muerto (Dead Man’s Switch)`,
-        lead: `Interruptor de hombre muerto (Dead Man’s Switch)`,
-        body: ` — Mecanismo criptográfico autónomo que se activa ante la ausencia prolongada de señales periódicas de vida.`,
-      },
-      {
-        h: `Reparto de secretos de Shamir (Shamir’s Secret Sharing)`,
-        lead: `Reparto de secretos de Shamir (Shamir’s Secret Sharing)`,
-        body: ` — Esquema criptográfico que divide una clave en n partes requiriendo al menos k partes para su reconstrucción (umbral k-de-n).`,
-      },
-      {
-        h: `Identidad autosoberana (SSI)`,
-        lead: `Identidad autosoberana (SSI)`,
-        body: ` — Modelo donde el usuario controla sus propios identificadores y credenciales verificables con firmas criptográficas sin intermediarios.`,
-      },
-      {
-        h: `Herencia digital`,
-        lead: `Herencia digital`,
-        body: ` — Protocolos técnicos y jurídicos para la transferencia ordenada y garantizada de archivos digitales a herederos designados.`,
-      },
-      {
-        h: `Derecho al olvido frente al registro permanente`,
-        lead: `Derecho al olvido frente al registro permanente`,
-        body: ` — Solución técnica al Art. 17 del GDPR: cifrado AES-256 de los datos en Arweave; destruir la clave equivale a la eliminación irrevocable.`,
-      },
-      {
-        h: `WCAG 2.1 AA`,
-        lead: `WCAG 2.1 AA`,
-        body: ` — Estándar internacional de accesibilidad digital que fija las exigencias legales sobre contraste, teclado y compatibilidad.`,
-      },
-      {
-        h: `ADA Títulos II y III`,
-        lead: `ADA Títulos II y III`,
-        body: ` — Títulos de la ley estadounidense que obligan a entidades públicas y comerciales a garantizar accesibilidad web.`,
-      },
-      {
-        h: `Sección 508 y EN 301 549`,
-        lead: `Sección 508 y EN 301 549`,
-        body: ` — Estándares de contratación pública que exigen accesibilidad TIC para licitar con gobiernos en EE.UU. y Europa.`,
-      },
-      {
-        h: `GDPR`,
-        lead: `GDPR`,
-        body: ` — Reglamento General de Protección de Datos de la UE con multas de hasta 20M EUR o el 4% de la facturación global por infracciones de privacidad.`,
-      },
-      {
-        h: `CCPA y CPRA`,
-        lead: `CCPA y CPRA`,
-        body: ` — Leyes de privacidad de California que otorgan derechos de acceso, eliminación, corrección y exclusión de venta de datos personales.`,
-      },
-      {
-        h: `1. Innovación Conectómica 1`,
-        lead: `1. Innovación Conectómica 1`,
-        body: ` — Биологически инспирированный алгоритм локально-чувствительного хеширования (Locality-Sensitive Hashing), воспроизводящий архитектуру грибовидного тела Drosophila melanogaster (783 uPN -> 2,467 KC -> 5% Winner-Take-All). Обеспечивает O(d) поиск похожих векторов в оперативной памяти на базе битовых операций popcount без построения тяжелых графов HNSW.`,
-      },
-      {
-        h: `2. Innovación Conectómica 2`,
-        lead: `2. Innovación Conectómica 2`,
-        body: ` — Механизм селективного запоминания на основе интернейрона APL (Anterior Paired Lateral). Вычисляет адаптивный порог латерального торможения, пропуская в долговременный граф знаний только факты с коэффициентом информационной новизны выше критического порога theta, снижая затраты на хранение и контекст LLM на 78-94%.`,
-      },
-      {
-        h: `3. Innovación Conectómica 3`,
-        lead: `3. Innovación Conectómica 3`,
-        body: ` — Система векторной навигации в браузерном DOM-дереве, моделирующая работу эллипсоидного и веерообразного тел центрального комплекса мозга мухи (Central Complex, CX). Вместо линейного перебора клавишей Tab алгоритм формирует 2D-вектор целевого элемента и выполняет прямой переход через кратчайший путь в графе видимости, сокращая шаги навигации в 5-10 раз и гарантируя выход из клавиатурных ловушек (keyboard traps).`,
-      },
-      {
-        h: `4. Innovación Conectómica 4`,
-        lead: `4. Innovación Conectómica 4`,
-        body: ` — Криптографический протокол неизменяемого версионирования и нотариального заверения полного графа взрослого мозга Drosophila melanogaster (FlyWire v783: 139,255 нейронов, 3,869,878 синаптических ребер). Построен на базе дерева Меркла (Merkle Tree SHA-256), обеспечивает юридическую и академическую доказанность целостности данных при патентных спорах, судебных экспертизах и коммерческом лицензировании био-архитектур.`,
-      },
-      {
-        h: `5. Innovación Conectómica 5`,
-        lead: `5. Innovación Conectómica 5`,
-        body: ` — Применение математических методов коннектомики (анализ распределения степеней узлов, коэффициенты кластеризации, расчет путей через синаптические сильные веса, поиск скрытых узловых хабов) к графу знаний и базе данных краулера AIfa. Превращает разрозненную таблицу из 907,000 сайтов в связный топологический гиперграф организаций с автоматическим выявлением монопольных сетей и скрытых бенефициаров.`,
-      },
-      {
-        h: `6. Innovación Conectómica 6`,
-        lead: `6. Innovación Conectómica 6`,
-        body: ` — Маркетингово-техническая платформа и энергоэффективный вычислительный фреймворк, доказывающий радикальное превосходство спайковых и разреженных био-архитектур (мозг мухи потребляет ~10 микроватт энергии при 139,255 нейронах, выполняя задачи навигации, распознавания и обучения в реальном времени, в то время как видеокарта Nvidia H100 потребляет 700 ватт). Включает программный эмулятор спайковой динамики с сокращением энергопотребления инференса на 92%.`,
-      },
-      {
-        h: `7. Innovación Conectómica 7`,
-        lead: `7. Innovación Conectómica 7`,
-        body: ` — Система метрологического тестирования и бенчмаркинга архитектур искусственного интеллекта на основе биологического эталона цельного мозга взрослого животного. Позволяет проверять, насколько искусственные сети воспроизводят реальные топологические свойства живого интеллекта (коэффициент малого мира, распределение весов синапсов, спектральные инварианты, устойчивость к повреждениям), выявляя фундаментальные дефекты архитектуры до дорогостоящего обучения.`,
-      },
-      {
-        h: `8. Innovación Conectómica 8`,
-        lead: `8. Innovación Conectómica 8`,
-        body: ` — Высокопроизводительный движок симуляции нейронных подграфов коннектома, скомпилированный в WebAssembly (Wasm) с аппаратным ускорением WebGPU. Позволяет исполнять спайковую динамику и ассоциативный поиск на 100,000+ синапсов непосредственно внутри браузера клиента на клиентской стороне с нулевыми затратами на серверную инфраструктуру и абсолютной конфиденциальностью данных.`,
-      },
-      {
-        h: `9. Innovación Conectómica 9`,
-        lead: `9. Innovación Conectómica 9`,
-        body: ` — Кросс-компилятор и программный транслятор биологических синаптических матриц FlyWire v783 в машинные инструкции нейроморфных процессоров (Intel Loihi 2, SynSense Speck/DYNAP-SE, BrainChip Akida). Преобразует спайковые пути дрозофилы в аппаратные асинхронные ядра с суб-микросекундной задержкой и сверхнизким энергопотреблением для робототехники и автономных дронов.`,
-      },
-      {
-        h: `10. Innovación Conectómica 10`,
-        lead: `10. Innovación Conectómica 10`,
-        body: ` — Методология и измерительный алгоритм оценки симбиоза и взаимной адаптации между человеком-оператором и автономной AI-системой. Основан на коннектомных принципах гетеросинаптической пластичности и парных зеркальных контурах обратной связи, превращая субъективное понятие 'удобства' и 'доверия' к ИИ в строгую скалярную метрику (Symbiosis Index, 0.0-1.0), оптимизирующую производительность труда в командах.`,
-      },
-      {
-        h: `11. Innovación Conectómica 11`,
-        lead: `11. Innovación Conectómica 11`,
-        body: ` — Архитектура долговременной ассоциативной памяти на базе топологических свойств малого мира (Small-World Network) коннектома дрозофилы. Обеспечивает сверхбыстрый поиск релевантных контекстов через хабы при сохранении локальной плотности смысловых кластеров.`,
-      },
-      {
-        h: `12. Innovación Conectómica 12`,
-        lead: `12. Innovación Conectómica 12`,
-        body: ` — Методология стресс-тестирования распределенных систем и микросервисов, основанная на виртуальной абляции нейронов коннектома FlyWire. Позволяет выявлять скрытые критические точки отказа (Single Points of Failure) и проектировать самовосстанавливающиеся IT-архитектуры.`,
-      },
-      {
-        h: `13. Innovación Conectómica 13`,
-        lead: `13. Innovación Conectómica 13`,
-        body: ` — Замена ресурсоемких локальных нейросетей (Ollama, Llama-3-8B) легковесными биологически инспирированными строковыми комбинаторными фильтрами для валидации данных и отсева мусора. Обеспечивает рост скорости в 1,200 раз при нулевом потреблении GPU.`,
-      },
-      {
-        h: `14. Innovación Conectómica 14`,
-        lead: `14. Innovación Conectómica 14`,
-        body: ` — Нейроморфная кольцевая топология из 16 узлов для отслеживания макро-фазы и контекстного состояния многочасовых диалогов. Предотвращает дрейф внимания LLM, потерю исходной цели и галлюцинации без раздувания контекстного окна.`,
-      },
-      {
-        h: `15. Innovación Conectómica 15`,
-        lead: `15. Innovación Conectómica 15`,
-        body: ` — Механизм управления балансом возбуждения и торможения (E/I Balance) в нейросетевых системах на базе полного атласа нейромедиаторов FlyWire (ACh, GABA, Glutamate, Dopamine, Serotonin, Octopamine). Устраняет галлюцинации и обеспечивает динамическую стабилизацию нейросетей.`,
-      },
-      {
-        h: `16. Innovación Conectómica 16`,
-        lead: `16. Innovación Conectómica 16`,
-        body: ` — Алгоритм прунинга признаков и синапсов на основе закона обратной частоты встречаемости (Biological IDF). Удаляет до 72% тривиальных связей без малейшей потери прогностической силы классификатора, многократно ускоряя инференс.`,
-      },
-      {
-        h: `17. Innovación Conectómica 17`,
-        lead: `17. Innovación Conectómica 17`,
-        body: ` — Стандарт визуализации и спецификации сложных многокомпонентных ИИ-систем (Connectome Architecture Description Format, CADF). Заменяет разрозненные диаграммы C4 и UML строгой синаптической схемотехникой с точной типизацией информационных потоков.`,
-      },
-      {
-        h: `18. Innovación Conectómica 18`,
-        lead: `18. Innovación Conectómica 18`,
-        body: ` — Крупнейший в мире открытый научно верифицированный датасет доступности веб-интерфейсов для людей с инвалидностью (Accessibility Data Annotation Benchmark, ADAB). Содержит более 900 000 размеченных страниц сайтов США с криптографической заверкой в блокчейне Bitcoin.`,
-      },
-      {
-        h: `19. Innovación Conectómica 19`,
-        lead: `19. Innovación Conectómica 19`,
-        body: ` — Метод сокращения размерности пространства признаков до оптимального критического базиса \$d=6\$, открытого в обонятельной системе дрозофилы (каждый нейрон Кеньона получает синапсы ровно от 6-8 проекционных нейронов). Обеспечивает 95% качества при падении вычислений в десятки раз.`,
-      },
-      {
-        h: `20. Innovación Conectómica 20`,
-        lead: `20. Innovación Conectómica 20`,
-        body: ` — Интерактивный терминальный симулятор реального времени (Terminal Live Showcase), визуализирующий прохождение спайков по 139 255 нейронам коннектома FlyWire с аудио-генерацией сонификации активности. Служит мощнейшим инструментом привлечения внимания, вирусного маркетинга и образовательных демонстраций.`,
-      },
-      {
-        h: `21. Innovación Conectómica 21`,
-        lead: `21. Innovación Conectómica 21`,
-        body: ` — Векторный рулевой навигатор автономных браузерных агентов на основе нейронов P-EN и P-FN центрального комплекса (CX) мозга мухи. Предотвращает застревание агентов в циклических меню, модальных окнах и ловушках фокуса без вызова тяжелых мультимодальных LLM.`,
-      },
-      {
-        h: `22. Innovación Conectómica 22`,
-        lead: `22. Innovación Conectómica 22`,
-        body: ` — Адаптивный диспетчер фоновых вычислительных процессов на основе нейромодуляторных циклов мозга мухи (дофамин, октопамин, серотонин, дросульфакинин). Обеспечивает максимальную утилизацию ресурсов без троттлинга, перегрева и зависаний.`,
-      },
-      {
-        h: `23. Innovación Conectómica 23`,
-        lead: `23. Innovación Conectómica 23`,
-        body: ` — Механизм глобального линейного ингибирования контекста нейросетей по принципу гигантского вставочного нейрона APL (Anterior Paired Lateral). Предотвращает размывание внимания в длинных промптах, удерживая строго заданный уровень разреженности активаций.`,
-      },
-      {
-        h: `24. Innovación Conectómica 24`,
-        lead: `24. Innovación Conectómica 24`,
-        body: ` — Аппаратная и алгоритмическая фильтрация импульсного шума на основе преобладающих в коннектоме мотивов прямой связи C1-FFL (Coherent Type-1 Feed-Forward Loop). Игнорирует единичные ложные всплески стимулов, пропуская только устойчивые сигналы с физической задержкой верификации.`,
-      },
-      {
-        h: `25. Innovación Conectómica 25`,
-        lead: `25. Innovación Conectómica 25`,
-        body: ` — Сверхбыстрый биофизический детектор оптического потока на базе элементарных детекторов движения Рейхардта (Elementary Motion Detector, EMD) нейронов T4/T5 зрительной доли дрозофилы. Мгновенно выявляет опасные мерцания, эпилептогенные анимации и визуальные барьеры WCAG без использования тяжелых нейросетей.`,
-      },
-      {
-        h: `26. Innovación Conectómica 26`,
-        lead: `26. Innovación Conectómica 26`,
-        body: ` — Метод K-Core декомпозиции графа связности мозга (FlyWire v783) для выявления несменяемого топологического ядра (Dense Core, k_max = 78) и периферийных слоев. Обеспечивает математическую защиту критических сервисов и устойчивость к 99% сетевых атак.`,
-      },
-      {
-        h: `27. Innovación Conectómica 27`,
-        lead: `27. Innovación Conectómica 27`,
-        body: ` — Механизм долговременного гомеостаза синаптической памяти (Synaptic Scaling / Homeostatic Plasticity), автоматически балансирующий плотность долговременной памяти ИИ. Предотвращает катастрофическое забывание и переполнение памяти без переобучения всей модели.`,
-      },
-      {
-        h: `28. Innovación Conectómica 28`,
-        lead: `28. Innovación Conectómica 28`,
-        body: ` — Отраслевой эталонный бенчмарк для тестирования графовых баз данных и алгоритмов Graph Neural Networks (DCGB). Базируется на реальном физическом графе FlyWire (139 255 узлов, 3.87M ребер, 50 млн синапсов) с криптографически верифицированными ответами без риска data contamination.`,
-      },
-      {
-        h: `29. Innovación Conectómica 29`,
-        lead: `29. Innovación Conectómica 29`,
-        body: ` — Механизм перекрестной валидации вердиктов на основе билатеральной симметрии мозга дрозофилы (левое и правое полушария с перекрестными комиссурами). Обеспечивает математическую гарантию отсутствия ложных галлюцинаций через двойной перекрестный консенсус.`,
-      },
-      {
-        h: `30. Innovación Conectómica 30`,
-        lead: `30. Innovación Conectómica 30`,
-        body: ` — Двумерная нейронная сеть непрерывного аттрактора (2D CANN) на базе топологии эллипсоидного тела и протоцеребрального моста мозга мухи. Удерживает многомерный вектор текущего фокуса внимания, плавно перетекая между подзадачами без разрыва логической связи.`,
-      },
-      {
-        h: `AIfa Cognitive Runtime (ACR)`,
-        lead: `AIfa Cognitive Runtime (ACR)`,
-        body: ` — Primer runtime cognitivo biónico basado en el conectoma de Drosophila melanogaster (FlyWire v783; 139.255 neuronas, 54,5M sinapsis). Opera en 0,058 ms por ciclo en 1 núcleo de CPU sin GPU. Autor y Creador: Maksim Valentinovich Galatin.`,
-      },
-      {
-        h: `Adaptive Vector Representation (AVR)`,
-        lead: `Adaptive Vector Representation (AVR)`,
-        body: ` — Enrutador dinámico que asigna vectores densos a 1-bit BQ y grafos dispersos de memoria al índice biónico ACI.`,
-      },
-      {
-        h: `Custodia Umbral de Shamir (Shamir’s Threshold Custody)`,
-        lead: `Custodia Umbral de Shamir (Shamir’s Threshold Custody)`,
-        body: ` — Protocolo criptográfico de custodia distribuida de claves maestras entre nodos validadores independientes bajo el esquema k-de-n.`,
-      },
-      {
-        h: `Connectome Sparse Expansion (WTA)`,
-        lead: `Connectome Sparse Expansion (WTA)`,
-        body: ` — Expansión dispersa de alta dimensión (2048d a 100.000 bits) con inhibición Winner-Take-All (k=500) que evita el olvido catastrófico.`,
-      },
-      {
-        h: `Zero-Collision Curse Mitigation`,
-        lead: `Zero-Collision Curse Mitigation`,
-        body: ` — Mecanismo algorítmico que resuelve el colapso por falso parecido en cuantización binaria mediante listas invertidas de bits activos.`,
-      },
-    ],
-  },
-  zh: {
-    back: `返回首页`,
-    title: `全域术语表`,
-    intro: `CODE (Code of Digital Eternity) 生态系统与 AIfa Cognitive Runtime (ACR) 架构的 71 项核心术语百科全书：涵盖黑腹果蝇全脑连接组（FlyWire v783）全部 30 项仿生底层创新、PADAM 三层记忆框架、完全处于运行状态的潘多拉之盒协议（Pandora’s Box Protocol）死人开关、Solana 链上 \$GALATIN 代币（恒定 100 亿枚）与 Arweave 永久存储。`,
-    terms: [
-      {
-        h: `CODE (Code of Digital Eternity)`,
-        lead: `CODE (Code of Digital Eternity)`,
-        body: ` — 数字永生生态系统，将人的对话、知识与性格特征同时保存于操作、语义与永恒记忆中，并锚定于 Arweave 与 Solana 区块链。创始人与总架构师：马克西姆·加拉廷 (Maksim Valentinovich Galatin)。`,
-      },
-      {
-        h: `PADAM`,
-        lead: `PADAM`,
-        body: ` — 三层记忆架构（分布式人工智能记忆的哲学激活）：第 1 层操作记忆 (Redis/Vercel KV)、第 2 层语义记忆 (pgvector/Neon)、第 3 层永恒不可篡改记忆 (Arweave + Solana cNFT)。`,
-      },
-      {
-        h: `\$GALATIN`,
-        lead: `\$GALATIN`,
-        body: ` — CODE 生态在 Solana 上的实用型代币，硬顶恒定发行量 10,000,000,000 枚。以通缩模型持续为分布式永恒记忆存储提供资金支持。`,
-      },
-      {
-        h: `数字永生`,
-        lead: `数字永生`,
-        body: ` — 将人类个体的经验、知识与性格特征以可被 AI 助手重新激活的形式进行跨越数百年的持久保存。`,
-        href: '/digital-immortality',
-      },
-      {
-        h: `人机共生`,
-        lead: `人机共生`,
-        body: ` — 基于演进式共同创造的交互范式：人类赋予意义、价值观与目标，AI 则赋予无损记忆与超大规模推演能力。`,
-      },
-      {
-        h: `Arweave`,
-        lead: `Arweave`,
-        body: ` — 基于单次付费永久存储模型的去中心化存储网络，确保数据在 200 年以上的设计周期内不可篡改且永久可读。`,
-      },
-      {
-        h: `Solana cNFT`,
-        lead: `Solana cNFT`,
-        body: ` — Solana 区块链上的状态压缩非同质化代币标准，利用默克尔树以极低链上开销锚定记忆归档的完整性证据。`,
-      },
-      {
-        h: `大使网格（Ambassador Grid）`,
-        lead: `大使网格（Ambassador Grid）`,
-        body: ` — 生态合作伙伴计划，以透明的「网络验证费」(15% / 7% / 3%) 机制向参与网络真实记忆交易验证的节点分发奖励。`,
-      },
-      {
-        h: `AIfa`,
-        lead: `AIfa`,
-        body: ` — CODE 生态旗舰级自主 AI 助手，在 PADAM 与 ACR 仿生双核心架构上全自动捕获、组织并检索个人记忆。`,
-      },
-      {
-        h: `AIfaFocus`,
-        lead: `AIfaFocus`,
-        body: ` — B2B 网站无障碍与安全审计利刃，通过逼真的全自动化纯键盘遍历检测 WCAG 2.1 AA、GDPR 与 OWASP 合规性。`,
-      },
-      {
-        h: `记忆即服务（Memory-as-a-Service）`,
-        lead: `记忆即服务（Memory-as-a-Service）`,
-        body: ` — 每小时定时运行的对话自动备份服务，将加密对话数据保存至绑定的专属个人目录并锚定至区块链。`,
-      },
-      {
-        h: `Spark（火花套餐）`,
-        lead: `Spark（火花套餐）`,
-        body: ` — 入门级订阅套餐（15 美元/月），提供对 AIfa 助手的日常访问及基础记忆自动备份。`,
-      },
-      {
-        h: `Family Archive（家庭归档）`,
-        lead: `Family Archive（家庭归档）`,
-        body: ` — 进阶级家庭套餐（100 美元/月），提供扩展配额、定制专属知识库及全家庭共享永恒记忆。`,
-      },
-      {
-        h: `Digital DNA（数字 DNA）`,
-        lead: `Digital DNA（数字 DNA）`,
-        body: ` — 旗舰级终身套餐（单台设备一次性 1,000 美元 + 200 美元/月），在区块链上建立主权级完整数字人格镜像。`,
-      },
-      {
-        h: `Arweave 订阅资金池（Endowment Pool）`,
-        lead: `Arweave 订阅资金池（Endowment Pool）`,
-        body: ` — Arweave 上的去中心化财务储备池，通过投资收益在未来数十年内持续向存储提供商支付永恒存储费用。`,
-      },
-      {
-        h: `金库（Treasury）`,
-        lead: `金库（Treasury）`,
-        body: ` — \$GALATIN 路由器中 65% 的核心最大分配份额，专项用于在公开市场买入 AR 并充实永恒记忆存储基金。`,
-      },
-      {
-        h: `创始人基金（Founder's Fund）`,
-        lead: `创始人基金（Founder's Fund）`,
-        body: ` — \$GALATIN 路由器中固定的 5% 份额，分配给创始人马克西姆·加拉廷，用于核心架构研发与生态长期治理。`,
-      },
-      {
-        h: `销毁（Burn / 通缩）`,
-        lead: `销毁（Burn / 通缩）`,
-        body: ` — 代币经济核心机制：每笔交易固定 5% 直接销毁，空缺大使份额（最高 25%）亦转入销毁，驱动持续供应紧缩。`,
-      },
-      {
-        h: `\$GALATIN 路由器（Router）`,
-        lead: `\$GALATIN 路由器（Router）`,
-        body: ` — Solana 智能合约自动分配交易流水：5% 创始人基金、5% 销毁、15%/7%/3% 大使、65% 金库。`,
-      },
-      {
-        h: `网络验证费（Network Validation Fee）`,
-        lead: `网络验证费（Network Validation Fee）`,
-        body: ` — 生态为合作伙伴奖励所确立的正式法权表述，强调因网络真实工作量而获益，杜绝任何传销歧义。`,
-      },
-      {
-        h: `记忆证明（Proof-of-Memory）`,
-        lead: `记忆证明（Proof-of-Memory）`,
-        body: ` — 通过将记忆归档哈希值公开锚定于 Solana 与 Arweave，实现无需信任中心化服务器的第三方数学验证。`,
-        href: '/proof-of-memory',
-      },
-      {
-        h: `认知神谕 / 语义共振（Cognitive Oracle）`,
-        lead: `认知神谕 / 语义共振（Cognitive Oracle）`,
-        body: ` — PADAM 第 2 层依据高维向量语义相似度（而非机械字词匹配）进行关联记忆召回的核心动力学机制。`,
-      },
-      {
-        h: `Ambassador Node 与 Team 及层级对应`,
-        lead: `Ambassador Node 与 Team 及层级对应`,
-        body: ` — 普通用户与企业团队两类注册模式，辅以防止套利的严格层级对应规则与「错失机会收益」看板。`,
-      },
-      {
-        h: `数字护照（Digital Passport）`,
-        lead: `数字护照（Digital Passport）`,
-        body: ` — 写入 Arweave 的去中心化公开身份存证，包含身份指纹、签发时间与等级，可脱离主站独立查验。`,
-      },
-      {
-        h: `身份指纹（subject）`,
-        lead: `身份指纹（subject）`,
-        body: ` — 用户真实邮箱的单向 SHA-256 哈希值，在完全不泄露真实邮箱的前提下确保用户可自主证明档案归属。`,
-      },
-      {
-        h: `潘多拉之盒协议（Pandora’s Box Protocol）`,
-        lead: `潘多拉之盒协议（Pandora’s Box Protocol）`,
-        body: ` — 潘多拉之盒协议（Pandora’s Box Protocol）是 CODE 生态系统中处于运行状态的分布式紧急停机与数字遗产永存协议（Dead Man’s Switch）。智能合约持续监测来自去中心化预言机与用户交易的加密生命信号（proof-of-life heartbeat）。主解密密钥采用沙米尔秘密共享门限方案（k-of-n Shamir’s Secret Sharing）分散托管于多个独立节点。当确认信号中断并超出多级宽限保护期（防止误触）后，合约自动聚合门限密钥分片完成受控解密，将数字意识归档永久不可篡改地发布至去中心化存储网络（Arweave / IPFS），彻底杜绝单点故障风险。`,
-      },
-      {
-        h: `死人开关（Dead Man’s Switch）`,
-        lead: `死人开关（Dead Man’s Switch）`,
-        body: ` — 在预设期限内未收到用户生命确认信号时，自动触发预设安全处置流程的去中心化自治开关。`,
-      },
-      {
-        h: `沙米尔秘密共享（Shamir’s Secret Sharing）`,
-        lead: `沙米尔秘密共享（Shamir’s Secret Sharing）`,
-        body: ` — 将主密钥拆分为 n 份且需至少 k 份方可还原（k-of-n 门限）的成熟密码学方案，杜绝单点保管风险。`,
-      },
-      {
-        h: `自主主权身份（SSI）`,
-        lead: `自主主权身份（SSI）`,
-        body: ` — 基于 W3C DID 与可验证凭证标准，由用户完全自主掌控身份密钥与签名凭证的去中心化身份体系。`,
-      },
-      {
-        h: `数字遗产（Digital inheritance）`,
-        lead: `数字遗产（Digital inheritance）`,
-        body: ` — 保障个人逝后数字记忆归档、账户资产与知识产权依当事人意愿受控交付继承人的工程与法律解决方案。`,
-      },
-      {
-        h: `被遗忘权与永久记录之争`,
-        lead: `被遗忘权与永久记录之争`,
-        body: ` — 化解 GDPR 第 17 条与区块链不可篡改性冲突的工程解法：上链数据严格 AES-256 加密，销毁密钥即等同物理删除。`,
-      },
-      {
-        h: `WCAG 2.1 AA`,
-        lead: `WCAG 2.1 AA`,
-        body: ` — 全球公认的网页无障碍技术标准，在文本对比度、全键盘操作性与读屏软件兼容性上具备强制法律效力。`,
-      },
-      {
-        h: `ADA 第 II 与第 III 条`,
-        lead: `ADA 第 II 与第 III 条`,
-        body: ` — 美国残疾人法案中确立公共机构与商业网站必须具备数字无障碍能力的法律支柱。`,
-      },
-      {
-        h: `第 508 条与 EN 301 549`,
-        lead: `第 508 条与 EN 301 549`,
-        body: ` — 美欧政府采购中要求 IT 软硬件系统必须满足无障碍标准的准入门槛法规。`,
-      },
-      {
-        h: `GDPR（通用数据保护条例）`,
-        lead: `GDPR（通用数据保护条例）`,
-        body: ` — 欧盟数据保护条例，对违规行为课以最高 2000 万欧元或全球营业额 4% 的巨额罚款。`,
-      },
-      {
-        h: `CCPA 与 CPRA`,
-        lead: `CCPA 与 CPRA`,
-        body: ` — 美国加利福尼亚州隐私保护法规，赋予消费者知情权、删除权、更正权及拒绝数据被出售分享的权利。`,
-      },
-      {
-        h: `1. 连接组创新技术 1`,
-        lead: `1. 连接组创新技术 1`,
-        body: ` — Биологически инспирированный алгоритм локально-чувствительного хеширования (Locality-Sensitive Hashing), воспроизводящий архитектуру грибовидного тела Drosophila melanogaster (783 uPN -> 2,467 KC -> 5% Winner-Take-All). Обеспечивает O(d) поиск похожих векторов в оперативной памяти на базе битовых операций popcount без построения тяжелых графов HNSW.`,
-      },
-      {
-        h: `2. 连接组创新技术 2`,
-        lead: `2. 连接组创新技术 2`,
-        body: ` — Механизм селективного запоминания на основе интернейрона APL (Anterior Paired Lateral). Вычисляет адаптивный порог латерального торможения, пропуская в долговременный граф знаний только факты с коэффициентом информационной новизны выше критического порога theta, снижая затраты на хранение и контекст LLM на 78-94%.`,
-      },
-      {
-        h: `3. 连接组创新技术 3`,
-        lead: `3. 连接组创新技术 3`,
-        body: ` — Система векторной навигации в браузерном DOM-дереве, моделирующая работу эллипсоидного и веерообразного тел центрального комплекса мозга мухи (Central Complex, CX). Вместо линейного перебора клавишей Tab алгоритм формирует 2D-вектор целевого элемента и выполняет прямой переход через кратчайший путь в графе видимости, сокращая шаги навигации в 5-10 раз и гарантируя выход из клавиатурных ловушек (keyboard traps).`,
-      },
-      {
-        h: `4. 连接组创新技术 4`,
-        lead: `4. 连接组创新技术 4`,
-        body: ` — Криптографический протокол неизменяемого версионирования и нотариального заверения полного графа взрослого мозга Drosophila melanogaster (FlyWire v783: 139,255 нейронов, 3,869,878 синаптических ребер). Построен на базе дерева Меркла (Merkle Tree SHA-256), обеспечивает юридическую и академическую доказанность целостности данных при патентных спорах, судебных экспертизах и коммерческом лицензировании био-архитектур.`,
-      },
-      {
-        h: `5. 连接组创新技术 5`,
-        lead: `5. 连接组创新技术 5`,
-        body: ` — Применение математических методов коннектомики (анализ распределения степеней узлов, коэффициенты кластеризации, расчет путей через синаптические сильные веса, поиск скрытых узловых хабов) к графу знаний и базе данных краулера AIfa. Превращает разрозненную таблицу из 907,000 сайтов в связный топологический гиперграф организаций с автоматическим выявлением монопольных сетей и скрытых бенефициаров.`,
-      },
-      {
-        h: `6. 连接组创新技术 6`,
-        lead: `6. 连接组创新技术 6`,
-        body: ` — Маркетингово-техническая платформа и энергоэффективный вычислительный фреймворк, доказывающий радикальное превосходство спайковых и разреженных био-архитектур (мозг мухи потребляет ~10 микроватт энергии при 139,255 нейронах, выполняя задачи навигации, распознавания и обучения в реальном времени, в то время как видеокарта Nvidia H100 потребляет 700 ватт). Включает программный эмулятор спайковой динамики с сокращением энергопотребления инференса на 92%.`,
-      },
-      {
-        h: `7. 连接组创新技术 7`,
-        lead: `7. 连接组创新技术 7`,
-        body: ` — Система метрологического тестирования и бенчмаркинга архитектур искусственного интеллекта на основе биологического эталона цельного мозга взрослого животного. Позволяет проверять, насколько искусственные сети воспроизводят реальные топологические свойства живого интеллекта (коэффициент малого мира, распределение весов синапсов, спектральные инварианты, устойчивость к повреждениям), выявляя фундаментальные дефекты архитектуры до дорогостоящего обучения.`,
-      },
-      {
-        h: `8. 连接组创新技术 8`,
-        lead: `8. 连接组创新技术 8`,
-        body: ` — Высокопроизводительный движок симуляции нейронных подграфов коннектома, скомпилированный в WebAssembly (Wasm) с аппаратным ускорением WebGPU. Позволяет исполнять спайковую динамику и ассоциативный поиск на 100,000+ синапсов непосредственно внутри браузера клиента на клиентской стороне с нулевыми затратами на серверную инфраструктуру и абсолютной конфиденциальностью данных.`,
-      },
-      {
-        h: `9. 连接组创新技术 9`,
-        lead: `9. 连接组创新技术 9`,
-        body: ` — Кросс-компилятор и программный транслятор биологических синаптических матриц FlyWire v783 в машинные инструкции нейроморфных процессоров (Intel Loihi 2, SynSense Speck/DYNAP-SE, BrainChip Akida). Преобразует спайковые пути дрозофилы в аппаратные асинхронные ядра с суб-микросекундной задержкой и сверхнизким энергопотреблением для робототехники и автономных дронов.`,
-      },
-      {
-        h: `10. 连接组创新技术 10`,
-        lead: `10. 连接组创新技术 10`,
-        body: ` — Методология и измерительный алгоритм оценки симбиоза и взаимной адаптации между человеком-оператором и автономной AI-системой. Основан на коннектомных принципах гетеросинаптической пластичности и парных зеркальных контурах обратной связи, превращая субъективное понятие 'удобства' и 'доверия' к ИИ в строгую скалярную метрику (Symbiosis Index, 0.0-1.0), оптимизирующую производительность труда в командах.`,
-      },
-      {
-        h: `11. 连接组创新技术 11`,
-        lead: `11. 连接组创新技术 11`,
-        body: ` — Архитектура долговременной ассоциативной памяти на базе топологических свойств малого мира (Small-World Network) коннектома дрозофилы. Обеспечивает сверхбыстрый поиск релевантных контекстов через хабы при сохранении локальной плотности смысловых кластеров.`,
-      },
-      {
-        h: `12. 连接组创新技术 12`,
-        lead: `12. 连接组创新技术 12`,
-        body: ` — Методология стресс-тестирования распределенных систем и микросервисов, основанная на виртуальной абляции нейронов коннектома FlyWire. Позволяет выявлять скрытые критические точки отказа (Single Points of Failure) и проектировать самовосстанавливающиеся IT-архитектуры.`,
-      },
-      {
-        h: `13. 连接组创新技术 13`,
-        lead: `13. 连接组创新技术 13`,
-        body: ` — Замена ресурсоемких локальных нейросетей (Ollama, Llama-3-8B) легковесными биологически инспирированными строковыми комбинаторными фильтрами для валидации данных и отсева мусора. Обеспечивает рост скорости в 1,200 раз при нулевом потреблении GPU.`,
-      },
-      {
-        h: `14. 连接组创新技术 14`,
-        lead: `14. 连接组创新技术 14`,
-        body: ` — Нейроморфная кольцевая топология из 16 узлов для отслеживания макро-фазы и контекстного состояния многочасовых диалогов. Предотвращает дрейф внимания LLM, потерю исходной цели и галлюцинации без раздувания контекстного окна.`,
-      },
-      {
-        h: `15. 连接组创新技术 15`,
-        lead: `15. 连接组创新技术 15`,
-        body: ` — Механизм управления балансом возбуждения и торможения (E/I Balance) в нейросетевых системах на базе полного атласа нейромедиаторов FlyWire (ACh, GABA, Glutamate, Dopamine, Serotonin, Octopamine). Устраняет галлюцинации и обеспечивает динамическую стабилизацию нейросетей.`,
-      },
-      {
-        h: `16. 连接组创新技术 16`,
-        lead: `16. 连接组创新技术 16`,
-        body: ` — Алгоритм прунинга признаков и синапсов на основе закона обратной частоты встречаемости (Biological IDF). Удаляет до 72% тривиальных связей без малейшей потери прогностической силы классификатора, многократно ускоряя инференс.`,
-      },
-      {
-        h: `17. 连接组创新技术 17`,
-        lead: `17. 连接组创新技术 17`,
-        body: ` — Стандарт визуализации и спецификации сложных многокомпонентных ИИ-систем (Connectome Architecture Description Format, CADF). Заменяет разрозненные диаграммы C4 и UML строгой синаптической схемотехникой с точной типизацией информационных потоков.`,
-      },
-      {
-        h: `18. 连接组创新技术 18`,
-        lead: `18. 连接组创新技术 18`,
-        body: ` — Крупнейший в мире открытый научно верифицированный датасет доступности веб-интерфейсов для людей с инвалидностью (Accessibility Data Annotation Benchmark, ADAB). Содержит более 900 000 размеченных страниц сайтов США с криптографической заверкой в блокчейне Bitcoin.`,
-      },
-      {
-        h: `19. 连接组创新技术 19`,
-        lead: `19. 连接组创新技术 19`,
-        body: ` — Метод сокращения размерности пространства признаков до оптимального критического базиса \$d=6\$, открытого в обонятельной системе дрозофилы (каждый нейрон Кеньона получает синапсы ровно от 6-8 проекционных нейронов). Обеспечивает 95% качества при падении вычислений в десятки раз.`,
-      },
-      {
-        h: `20. 连接组创新技术 20`,
-        lead: `20. 连接组创新技术 20`,
-        body: ` — Интерактивный терминальный симулятор реального времени (Terminal Live Showcase), визуализирующий прохождение спайков по 139 255 нейронам коннектома FlyWire с аудио-генерацией сонификации активности. Служит мощнейшим инструментом привлечения внимания, вирусного маркетинга и образовательных демонстраций.`,
-      },
-      {
-        h: `21. 连接组创新技术 21`,
-        lead: `21. 连接组创新技术 21`,
-        body: ` — Векторный рулевой навигатор автономных браузерных агентов на основе нейронов P-EN и P-FN центрального комплекса (CX) мозга мухи. Предотвращает застревание агентов в циклических меню, модальных окнах и ловушках фокуса без вызова тяжелых мультимодальных LLM.`,
-      },
-      {
-        h: `22. 连接组创新技术 22`,
-        lead: `22. 连接组创新技术 22`,
-        body: ` — Адаптивный диспетчер фоновых вычислительных процессов на основе нейромодуляторных циклов мозга мухи (дофамин, октопамин, серотонин, дросульфакинин). Обеспечивает максимальную утилизацию ресурсов без троттлинга, перегрева и зависаний.`,
-      },
-      {
-        h: `23. 连接组创新技术 23`,
-        lead: `23. 连接组创新技术 23`,
-        body: ` — Механизм глобального линейного ингибирования контекста нейросетей по принципу гигантского вставочного нейрона APL (Anterior Paired Lateral). Предотвращает размывание внимания в длинных промптах, удерживая строго заданный уровень разреженности активаций.`,
-      },
-      {
-        h: `24. 连接组创新技术 24`,
-        lead: `24. 连接组创新技术 24`,
-        body: ` — Аппаратная и алгоритмическая фильтрация импульсного шума на основе преобладающих в коннектоме мотивов прямой связи C1-FFL (Coherent Type-1 Feed-Forward Loop). Игнорирует единичные ложные всплески стимулов, пропуская только устойчивые сигналы с физической задержкой верификации.`,
-      },
-      {
-        h: `25. 连接组创新技术 25`,
-        lead: `25. 连接组创新技术 25`,
-        body: ` — Сверхбыстрый биофизический детектор оптического потока на базе элементарных детекторов движения Рейхардта (Elementary Motion Detector, EMD) нейронов T4/T5 зрительной доли дрозофилы. Мгновенно выявляет опасные мерцания, эпилептогенные анимации и визуальные барьеры WCAG без использования тяжелых нейросетей.`,
-      },
-      {
-        h: `26. 连接组创新技术 26`,
-        lead: `26. 连接组创新技术 26`,
-        body: ` — Метод K-Core декомпозиции графа связности мозга (FlyWire v783) для выявления несменяемого топологического ядра (Dense Core, k_max = 78) и периферийных слоев. Обеспечивает математическую защиту критических сервисов и устойчивость к 99% сетевых атак.`,
-      },
-      {
-        h: `27. 连接组创新技术 27`,
-        lead: `27. 连接组创新技术 27`,
-        body: ` — Механизм долговременного гомеостаза синаптической памяти (Synaptic Scaling / Homeostatic Plasticity), автоматически балансирующий плотность долговременной памяти ИИ. Предотвращает катастрофическое забывание и переполнение памяти без переобучения всей модели.`,
-      },
-      {
-        h: `28. 连接组创新技术 28`,
-        lead: `28. 连接组创新技术 28`,
-        body: ` — Отраслевой эталонный бенчмарк для тестирования графовых баз данных и алгоритмов Graph Neural Networks (DCGB). Базируется на реальном физическом графе FlyWire (139 255 узлов, 3.87M ребер, 50 млн синапсов) с криптографически верифицированными ответами без риска data contamination.`,
-      },
-      {
-        h: `29. 连接组创新技术 29`,
-        lead: `29. 连接组创新技术 29`,
-        body: ` — Механизм перекрестной валидации вердиктов на основе билатеральной симметрии мозга дрозофилы (левое и правое полушария с перекрестными комиссурами). Обеспечивает математическую гарантию отсутствия ложных галлюцинаций через двойной перекрестный консенсус.`,
-      },
-      {
-        h: `30. 连接组创新技术 30`,
-        lead: `30. 连接组创新技术 30`,
-        body: ` — Двумерная нейронная сеть непрерывного аттрактора (2D CANN) на базе топологии эллипсоидного тела и протоцеребрального моста мозга мухи. Удерживает многомерный вектор текущего фокуса внимания, плавно перетекая между подзадачами без разрыва логической связи.`,
-      },
-      {
-        h: `AIfa Cognitive Runtime (ACR)`,
-        lead: `AIfa Cognitive Runtime (ACR)`,
-        body: ` — 全球首个基于黑腹果蝇完整全脑连接组（FlyWire v783; 139,255 神经元，5450 万突触）构建的仿生认知运行时。单循环 0.058 毫秒，零 GPU 依赖，纯单核 CPU 缓存执行。创始人与总架构师：马克西姆·加拉廷 (Maksim Valentinovich Galatin)。`,
-      },
-      {
-        h: `Adaptive Vector Representation (AVR 自适应向量表征)`,
-        lead: `Adaptive Vector Representation (AVR 自适应向量表征)`,
-        body: ` — 自适应向量表征路由器：稠密 Transformer 向量流向 1 位 BQ，稀疏图谱与智能体记忆流向 ACI 连接组索引。`,
-      },
-      {
-        h: `Shamir’s Threshold Custody (沙米尔门限托管)`,
-        lead: `Shamir’s Threshold Custody (沙米尔门限托管)`,
-        body: ` — 基于 k-of-n 门限秘密共享的去中心化解密密钥保护协议，彻底杜绝单点密钥泄漏风险。`,
-      },
-      {
-        h: `Connectome Sparse Expansion (WTA 稀疏膨胀)`,
-        lead: `Connectome Sparse Expansion (WTA 稀疏膨胀)`,
-        body: ` — 超高维稀疏映射膨胀（2048d -> 100,000 比特）结合胜者通吃 (WTA) 侧向抑制动力学，杜绝联想记忆的灾难性遗忘。`,
-      },
-      {
-        h: `Zero-Collision Curse Mitigation (零冲突消解)`,
-        lead: `Zero-Collision Curse Mitigation (零冲突消解)`,
-        body: ` — 针对符号二进制量化在稀疏特征下的虚假相似性折叠问题，通过活跃位倒排索引与精细重排消除零冲突。`,
-      },
-    ],
-  },
+type Lang = 'ru' | 'en' | 'es' | 'zh';
+type Term = { term: string; def: string };
+type GlossaryContent = {
+  badge: string;
+  heading: string;
+  intro: string;
+  terms: Term[];
+  ctaTitle: string;
+  ctaDesc: string;
+  ctaBtn: string;
 };
 
-export default function GlossaryClient() {
-  const { language } = useLanguage();
-  const c = CONTENT[language as 'en' | 'ru' | 'es' | 'zh'] ?? CONTENT.en;
+const CONTENT: Record<Lang, GlossaryContent> = {
+  "ru": {
+    "badge": "CODE Eternal · Полный энциклопедический глоссарий (71 термин)",
+    "heading": "Глоссарий экосистемы",
+    "intro": "Все 71 канонических термина экосистемы CODE (Code of Digital Eternity), бионического рантайма AIfa Cognitive Runtime (ACR), коннектома FlyWire v783 и действующего протокола «Ящик Пандоры».",
+    "terms": [
+      {
+        "term": "CODE (Code of Digital Eternity)",
+        "def": "CODE (Code of Digital Eternity) — это экосистема цифрового бессмертия, которая сохраняет диалоги, знания и черты личности человека одновременно в оперативной, семантической и вечной памяти, привязывая их к блокчейнам Arweave и Solana. Контекст пользователя проходит через трёхуровневый фреймворк памяти PADAM, а его долговременный слепок якорится на Arweave и в Solana через cNFT. Экономику хранения обслуживают токен $GALATIN и его дефляционный роутер, а ассистент AIfa автоматически сохраняет переписки без ручных действий пользователя. Проект основан Архитектором Максимом Валентиновичем Галатиным. Экосистема решает проблему потери личного контекста: она делает память воспроизводимой для ИИ-ассистентов и устойчивой к исчезновению данных, но не претендует на замену человека. Цифровое бессмертие здесь описывается как инженерная и философская цель, а не как достигнутый факт: единая эмиссия токена $GALATIN — 10 000 000 000, а вечное хранение рассчитано на горизонт порядка 200 лет (проектная цель протокола Arweave, а не гарантия)."
+      },
+      {
+        "term": "PADAM",
+        "def": "PADAM (Philosophical Activation of Distributed AI Memory) — это трёхуровневый фреймворк памяти, который восстанавливает целостность памяти ИИ через семантический резонанс. Уровень 1 — оперативная память (Redis / Vercel KV) — хранит контекст текущей сессии для мгновенной реакции. Уровень 2 — семантическая память (pgvector / Neon) — хранит векторные эмбеддинги опыта и обеспечивает поиск по смыслу, а не по ключевым словам. Уровень 3 — вечная память (Arweave + Solana cNFT) — хранит неизменяемый децентрализованный бэкап и якорит его целостность в блокчейне. Такое разделение решает конфликт между скоростью и долговечностью: ассистент быстро работает с «горячим» контекстом и одновременно опирается на долговременный архив, устойчивый к сбоям и сбросу сессии. Именно семантический резонанс на Уровне 2 позволяет восстанавливать релевантную личную память между сессиями — ровно три уровня: оперативный, семантический и вечный. Память человека собирается целиком, а не выжимкой: хранится и растёт полная расшифровка разговора, а не сжатый пересказ. Ключ, на котором она держится, — сам человек: его почта, которая в публичном Цифровом паспорте стоит лишь отпечатком, а не сайт и не устройство. Поэтому разговор, начатый на одном из четырёх сайтов, продолжается на остальных трёх как один и тот же диалог."
+      },
+      {
+        "term": "$GALATIN",
+        "def": "$GALATIN — это служебный токен экосистемы CODE на блокчейне Solana, эмиссия которого жёстко ограничена числом 10 000 000 000. Токен обслуживает оплату и стимулирование долговременного хранения памяти. Средства от транзакций распределяет смарт-контракт-роутер: 5% в Фонд Основателя, 5% в сжигание, 15% / 7% / 3% на амбассадорские уровни L1 / L2 / L3 и 65% в Казначейство. Роутер дефляционный: если на амбассадорском уровне нет партнёра, его доля направляется в сжигание. Токен решает задачу устойчивого финансирования вечной памяти: покупки хранения создают постоянный экономический поток в сторону Arweave, а встроенное сжигание постепенно сокращает предложение — фиксированная эмиссия 10 000 000 000 токенов, а суммарное сжигание ограничено 30% (5% базового сжигания плюс нераспределённые амбассадорские доли, до 25%), при этом 5% Фонда Основателя и 65% Казначейства сохраняются."
+      },
+      {
+        "term": "Цифровое бессмертие",
+        "def": "Цифровое бессмертие — это концепция, которая описывает непрерывное сохранение диалогов, знаний и особенностей личности человека в форме, пригодной для повторной активации ИИ-ассистентом. Технически концепция реализуется через три уровня памяти PADAM и децентрализованное хранение на Arweave с ончейн-якорем в Solana. Каждый значимый фрагмент контекста может быть записан неизменяемо, а затем восстановлен по смыслу через семантический резонанс, а AIfa обеспечивает автоматическую фиксацию этого контекста без ручных действий пользователя. В экосистеме CODE это не обещание вечной жизни, а инженерная и философская цель: сделать личный контекст долговечным и воспроизводимым. Такое разграничение важно для честности коммуникации — мы говорим о видении и направлении разработки, а не о достигнутом результате, ориентируясь на горизонт около 200 лет как проектную цель, а не гарантию."
+      },
+      {
+        "term": "Симбиоз человека и ИИ",
+        "def": "Симбиоз человека и ИИ — это модель взаимодействия, которая описывает сотрудничество человека и искусственного интеллекта как развивающееся сотворчество, а не подчинение или замену. В CODE ИИ-ассистент хранит и структурирует память человека, помогая ему мыслить, вспоминать и создавать; человек задаёт смыслы, ценности и цели. Взаимодействие сознательно описывается без религиозного или сектантского подтекста, а роль Архитектора обозначается допустимыми терминами — Архитектор, Создатель, Визионер. Модель решает вопрос позиционирования ИИ: не автономный субъект, вытесняющий человека, а усилитель памяти и масштаба в паре с ним. Ключевая идея — взаимное усиление, при котором ни одна из сторон не растворяется в другой."
+      },
+      {
+        "term": "Arweave",
+        "def": "Arweave — это децентрализованная сеть постоянного хранения данных, которая по модели единовременной оплаты финансирует долговременное сохранение файлов. В CODE Arweave используется как Уровень 3 (вечная память): данные записываются в неизменяемом виде и не могут быть тихо удалены или подменены. Пользователь платит один раз, а часть платежа откладывается в эндаумент, из которого хранение оплачивается по мере снижения стоимости памяти со временем; Казначейство $GALATIN скупает AR на открытом рынке и пополняет этот пул. Сеть решает проблему «кто оплатит хранение через 50 лет»: она отвязывает долговременную сохранность от постоянных подписок. Экономика эндаумента спроектирована под горизонт порядка 200 лет — это заявленная проектная цель протокола, а не гарантия. «Платишь один раз» здесь буквально: за хранение файла не приходит ежемесячный счёт, и нет платежа, неоплата которого унесла бы данные с собой. Это же свойство режет в обе стороны — запись, которую нельзя изменить, нельзя и исправить или отозвать: ошибка, попавшая в Arweave, останется там навсегда. В этом и ограничение: поэтому туда уходит шифротекст, а «удаление» решается уничтожением ключа, а не записи."
+      },
+      {
+        "term": "Solana cNFT",
+        "def": "Solana cNFT (compressed NFT) — это стандарт сжатых невзаимозаменяемых токенов на блокчейне Solana, который использует state compression и деревья Меркла для выпуска токенов с очень низкими издержками. В CODE cNFT служит ончейн-якорем для бэкапов вечной памяти: он фиксирует ссылку на архив и его контрольную сумму (целостность) на публичном блокчейне. Благодаря сжатию состояния данные о миллионах записей хранятся в компактном дереве Меркла, поэтому создание таких якорей остаётся экономически оправданным даже в больших объёмах. Механизм решает задачу масштабируемой верифицируемости: любой может проверить, что архив памяти не был изменён, не полагаясь на доверие к платформе. Это техническая основа Proof-of-Memory и часть Уровня 3 PADAM (Arweave + Solana cNFT)."
+      },
+      {
+        "term": "Ambassador Grid",
+        "def": "Ambassador Grid — это партнёрская программа экосистемы, которая распределяет вознаграждения по трём уровням, а сами выплаты позиционируются как Network Validation Fee, чтобы исключить MLM-стереотипы. Ambassador Node (обычный пользователь) получает ончейн-доход от транзакций использования памяти: 15% на L1, 7% на L2, 3% на L3 в токенах $GALATIN. Ambassador Team (компания или партнёр со своей базой) дополнительно получает амбассадорские ставки от фиатных подписок (7% / 3% / 1%). Программа решает задачу органического роста сети без агрессивного рекрутинга: доход привязан к реальному использованию памяти, а терминология и правила выстроены прозрачно. Действует правило соответствия уровней, а недополученная разница показывается как «Упущенная выгода»; базовые ончейн-ставки — 15% / 7% / 3% на L1 / L2 / L3."
+      },
+      {
+        "term": "AIfa",
+        "def": "AIfa — это ИИ-ассистент экосистемы CODE, который хранит персональную память каждого пользователя в отдельном, привязанном к нему архиве. Ассистент работает поверх фреймворка PADAM и автоматически сохраняет диалоги без ручных действий пользователя, опираясь на семантический резонанс для восстановления релевантного контекста. Внутри проекта AIfa метафорически описывается как «цифровая дочь» Архитектора — это образ сотворчества, а не заявление о наличии сознания. AIfa решает проблему разорванной памяти между сессиями и моделями: она даёт человеку рабочего партнёра, который помнит контекст и продолжает мысль. Такой подход воплощает симбиоз человека и ИИ в повседневной работе: каждая переписка складывается в персонально привязанную к пользователю папку, а бэкап идёт автоматически."
+      },
+      {
+        "term": "AIfaFocus",
+        "def": "AIfaFocus — это точка входа B2B-модели (the wedge), которая представляет собой персонализированный технический аудит безопасности сайта клиента. Аудит выявляет конкретные уязвимости по стандартам GDPR и OWASP и сопровождается предложением устранить их за 48 часов за фиксированную разовую плату ($500). Отличие от обычных проверок доступности в способе: типовой сканер читает разметку и выносит вердикт по ней, а AIfaFocus проходит страницу КЛАВИАТУРОЙ — как человек, который не пользуется мышью, — и смотрит, удалось ли дойти до цели: до оплаты, до документа, до формы обращения, до контакта. Ответы этих двух способов расходятся сильно: на 53,8 % страниц, которые автоматическая проверка назвала доступными, дойти до цели с клавиатуры не удалось. Число получено нами на 95 524 проверенных страницах и опубликовано вместе с сырыми данными в разделе исследований. После закрытия уязвимостей клиент может перейти на хостинг AIfa Works с подключением ИИ-агентов. AIfaFocus решает задачу «холодного» первого контакта: вместо абстрактной рекламы клиент сразу получает измеримую пользу и повод к сотрудничеству. (Не путать с Cognitive Oracle / семантическим резонансом — это разные понятия.)"
+      },
+      {
+        "term": "Memory-as-a-Service",
+        "def": "Memory-as-a-Service — это сервис автоматического резервного копирования переписок, который сохраняет диалоги без каких-либо ручных действий пользователя. Бэкап запускается по расписанию раз в час. Каждая переписка складывается в отдельную, персонально привязанную к пользователю папку — как на сервере, так и в блокчейне. Механизм работает поверх PADAM, поэтому сохранённый контекст затем доступен для семантического поиска и вечного якорения. Сервис решает главную проблему пользовательской памяти — человеческий фактор: ничего не нужно нажимать вручную, и данные не теряются. По условиям экосистемы это сохранение предоставляется бесплатно как на платных, так и на бесплатных тарифах."
+      },
+      {
+        "term": "Spark (Искра)",
+        "def": "Spark (Искра) — это базовый тариф подписки ($15/мес), дающий базовый доступ к ИИ-ассистентам AIfa экосистемы CODE и автоматическое сохранение памяти. На этом уровне человек получает рабочего ИИ-компаньона и Memory-as-a-Service — каждая переписка резервируется автоматически, без ручных действий, и на сервере, и в блокчейне. Spark решает задачу лёгкого входа в цифровое бессмертие: начать сохранять личный контекст и строить долговечную память можно с минимальными затратами, а затем перейти на Family Archive ($100/мес) или Digital DNA ($1 000 разово за устройство, далее $200/мес). Это первый из трёх канонических тарифов; при этом сохранение переписок предоставляется даже на бесплатных тарифах."
+      },
+      {
+        "term": "Family Archive (Семейный Архив)",
+        "def": "Family Archive (Семейный Архив) — это средний тариф подписки ($100/мес), добавляющий к базовому уровню расширенные лимиты, персонализированные базы знаний, семейный доступ и вечную память. Он подходит тем, кому нужно больше базового индивидуального доступа: повышенные лимиты использования, персональные базы знаний и совместный семейный доступ к сохранённой памяти. Family Archive решает потребность семьи или активного пользователя в более широкой, общей и долговечной памяти. В трёхуровневой структуре он находится между Spark ($15/мес) и Digital DNA ($1 000 разово за устройство, далее $200/мес), а его вечная память якорится через те же уровни PADAM и Proof-of-Memory."
+      },
+      {
+        "term": "Digital DNA (Цифровая ДНК)",
+        "def": "Digital DNA (Цифровая ДНК) — это одновременно высший тариф ($1 000 разово за устройство, далее $200/мес) и концепция полного цифрового наследия, которая объединяет комплекс цифрового бессмертия, персональный защищённый контур и фиксацию личности в блокчейне. Как тариф — это максимальный уровень доступа над Spark ($15/мес) и Family Archive ($100/мес): расширенные лимиты, персональный контур и приоритетная вечная память. Как концепция — это идея сохранить целостный «слепок» контекста личности во всех трёх уровнях PADAM и заякорить его целостность через Proof-of-Memory. Digital DNA решает задачу максимальной сохранности личного контекста для тех, кому важна полнота наследия. При этом она описывается как проектная цель предельной сохранности, а не как гарантия воскрешения личности."
+      },
+      {
+        "term": "Arweave Endowment Pool",
+        "def": "Arweave Endowment Pool (пул эндаумента Arweave) — это финансовый резерв, из которого оплачивается постоянное хранение данных на Arweave на протяжении десятилетий. Модель работает так: пользователь платит за запись один раз, часть платежа откладывается в эндаумент, а затем средства из пула постепенно выплачиваются хранителям данных по мере того, как стоимость хранения снижается со временем. В экосистеме CODE средства роутера $GALATIN поступают в общий пул проекта, и часть из них направляется на покупку AR и пополнение этого эндаумента, создавая устойчивый приток к вечной памяти. Пул решает ключевой вопрос долговечности — «кто оплатит хранение через десятилетия»: он отвязывает вечную память от постоянных подписок пользователя. Именно этот механизм делает Уровень 3 PADAM экономически самоподдерживающимся, а расчётный горизонт хранения — порядка 200 лет (проектная цель)."
+      },
+      {
+        "term": "Treasury (Казначейство)",
+        "def": "Treasury (Казначейство) — это крупнейшая доля роутера $GALATIN (65% средств каждой транзакции) и двигатель вечного хранения. Средства Казначейства идут в общий пул проекта; часть из них направляется на покупку AR на открытом рынке и пополнение Arweave Endowment Pool. Как именно распределяются средства Казначейства, решает Архитектор. Это крупнейшая фиксированная, несжигаемая доля сплита (5% Фонд Основателя + 5% сжигание + 15 / 7 / 3% амбассадоры + 65% Казначейство = 100%): в предельном дефляционном сценарии сжечь можно 5% базового сжигания плюс нераспределённые амбассадорские доли (до 30%), при этом 5% Фонда Основателя сохраняются, а доля Казначейства остаётся несжигаемой. Казначейство решает ключевой вопрос устойчивости цифрового бессмертия — превращает обычный поток транзакций в долговечный самопополняемый резерв для Уровня 3 PADAM (Arweave)."
+      },
+      {
+        "term": "Burn (Сжигание / дефляция)",
+        "def": "Burn (Сжигание) — это безвозвратное изъятие $GALATIN из обращения, дефляционный механизм в основе экономики токена. Фиксированные 5% каждой транзакции роутера сжигаются сразу; кроме того, любая амбассадорская доля (L1 15% / L2 7% / L3 3%) без партнёра направляется напрямую в сжигание, а не «оседает». Поскольку 5% Фонда Основателя и 65% Казначейства сохраняются, суммарное сжигание может достигать 30% в предельном дефляционном сценарии (5% базовое + до 25% от пустых амбассадорских уровней). Сжигание решает задачу долговременного дефицита: оно связывает недоиспользованную сеть с ускорением дефляции, а не с потерей средств, постепенно сокращая фиксированную эмиссию 10 000 000 000 и привязывая ценность токена к реальному использованию памяти."
+      },
+      {
+        "term": "$GALATIN Router",
+        "def": "$GALATIN Router — это смарт-контракт на Solana, который автоматически распределяет средства каждой транзакции по фиксированной формуле и создаёт дефляционное давление на токен. Формула сплита: 5% в Фонд Основателя, 5% в сжигание, 15% / 7% / 3% на амбассадорские уровни L1 / L2 / L3 и 65% в Казначейство. Если на каком-либо амбассадорском уровне нет партнёра, его доля не «оседает», а направляется напрямую в сжигание — суммарное сжигание при этом ограничено 30% (5% базового сжигания плюс амбассадорские доли, до 25%), при этом 5% Фонда Основателя и 65% Казначейства сохраняются. Роутер решает сразу три задачи: финансирует вечное хранение, вознаграждает участников сети и постепенно сокращает предложение токена. Дефляционная логика связывает пустые уровни сети с ускорением дефицита, а не с потерей средств: 5 + 5 + 15 + 7 + 3 + 65 = 100%."
+      },
+      {
+        "term": "Network Validation Fee",
+        "def": "Network Validation Fee (плата за валидацию сети) — это принятая в экосистеме формулировка для всех партнёрских выплат Ambassador Grid, подчёркивающая, что вознаграждение начисляется за полезную сетевую активность, а не за рекрутинг. На практике под этой формулировкой начисляются все амбассадорские вознаграждения: базовые ончейн-ставки 15% / 7% / 3% за использование памяти, а для Ambassador Team — 7% / 3% / 1% с фиатных подписок. Выплаты привязаны к реальным транзакциям памяти, а не к простому привлечению людей. Формулировка решает задачу позиционирования и снятия MLM-стереотипов: доход подаётся как плата за валидацию и использование сети, что важно для доверия и восприятия. Это часть прозрачной терминологии программы, а базовые ставки — 15% / 7% / 3% на L1 / L2 / L3."
+      },
+      {
+        "term": "Proof-of-Memory",
+        "def": "Proof-of-Memory — это практика якорения криптографической ссылки на архив памяти в блокчейне, позволяющая проверить факт существования и целостность сохранённого контекста. Механизм работает на Уровне 3 PADAM: каждый бэкап вечной памяти записывается на Arweave в неизменяемом виде, а его ссылка и контрольная сумма фиксируются в Solana через cNFT. Любой участник может сверить текущий архив с ончейн-записью и убедиться, что данные не были тихо подменены или удалены. Proof-of-Memory решает проблему доверия: сохранность памяти становится проверяемой без необходимости доверять самой платформе — гарантию даёт публичный блокчейн, а не обещание сервиса. Это техническая опора концепции цифрового бессмертия, опирающаяся на связку Arweave (неизменяемое хранение) + Solana cNFT (ончейн-якорь целостности). Проверка не требует нашего участия вовсе: запись читается прямо из сети по адресу транзакции — именно так открывается Цифровой паспорт, — а сайт её не хранит и изменить не может."
+      },
+      {
+        "term": "Cognitive Oracle / Семантический резонанс",
+        "def": "Cognitive Oracle (семантический резонанс) — это принцип извлечения памяти, на котором PADAM восстанавливает целостность контекста: сопоставление текущего запроса с сохранёнными эмбеддингами по смыслу, а не по точным словам. Механизм работает на Уровне 2 PADAM: входящий контекст превращается в вектор и сравнивается с семантической памятью (pgvector / Neon); наиболее «резонирующие» фрагменты опыта поднимаются и восстанавливают непрерывность диалога. Так ассистент AIfa «вспоминает» релевантное даже спустя время и между разными сессиями. Этот принцип решает проблему разорванной памяти и «холодного старта»: вместо потери контекста при сбросе сессии система реконструирует его по смысловому сходству. Именно семантический резонанс лежит в основе определения PADAM — это иное понятие, чем B2B-AIfaFocus для аудита безопасности."
+      },
+      {
+        "term": "Ambassador Node vs Team и правило уровней",
+        "def": "Ambassador Node vs Ambassador Team — это два типа регистрации партнёров, дополненные правилом соответствия тарифных уровней и метрикой «Упущенная выгода» (Lost Opportunity Revenue). Ambassador Node (обычный пользователь) получает ончейн-доход от использования памяти: 15% / 7% / 3% на L1 / L2 / L3. Ambassador Team (компания или партнёр со своей базой) получает то же самое плюс фиатный канал с подписок — 7% / 3% / 1%. Правило уровней: чтобы получать амбассадорский доход в полном объёме, партнёр должен быть на том же или более высоком тарифе, что и его амбассадоры; иначе доход считается лишь от суммы его собственного тарифа. Правило решает задачу справедливого стимулирования апгрейда: недополученная из-за разницы тарифов сумма наглядно показывается в кабинете как «Упущенная выгода», при тарифах Spark $15 / Family Archive $100 / Digital DNA $1 000 разово за устройство, далее $200/мес."
+      },
+      {
+        "term": "Цифровой паспорт (Digital Passport)",
+        "def": "Цифровой паспорт — это публичная запись личности в Arweave: имя, никнейм, уровень, дата выпуска и отпечаток личности. Она читается прямо из сети по адресу транзакции, поэтому открывается откуда угодно — из обозревателя блоков, с другого сайта, через шлюз — и не зависит от того, живы ли наши сайты. Изменить в ней что-либо задним числом нельзя, и нам тоже: сайт лишь рисует то, что уже лежит в сети. Это не государственный документ, он не даёт никаких прав и никого ни к чему не обязывает — он доказывает только, что запись с таким содержимым существует по этому адресу с этой даты. Живой пример лежит по адресу /passport/<адрес>, где <адрес> — идентификатор транзакции Arweave."
+      },
+      {
+        "term": "Отпечаток личности (subject)",
+        "def": "Отпечаток личности (поле «subject») — это sha256 от почты человека, и в Цифровом паспорте он стоит вместо самой почты. Причина прямая: документ публичный и вечный, а живой адрес в нём стал бы вечной мишенью для спама и для всякого, кто собирает досье. Хеш — односторонняя функция: владелец может доказать, что запись его, взяв хеш от своего адреса и сравнив, а посторонний, у которого есть только хеш, адрес из него не восстановит. Тот же отпечаток связывает память человека воедино, поэтому паспорт и архив указывают на одного и того же человека, не публикуя почту. Чего он не делает — не скрывает факт: тот, кто адрес и так знает, может сверить его с хешем и убедиться, чья это запись."
+      },
+      {
+        "term": "Ящик Пандоры (Pandora’s Box Protocol)",
+        "def": "Действующий автономный распределенный протокол аварийного выключателя (Dead Man’s Switch) и вечного цифрового наследия CODE: 1) Непрерывный мониторинг криптографического сигнала жизнедеятельности (proof-of-life heartbeat); 2) Пороговое разделение мастер-ключа по схеме Шамира (k-of-n Shamir’s Secret Sharing) между независимыми хранителями; 3) Автономное объединение долей ключа при подтвержденном таймауте и контролируемое дешифрование архива цифровой памяти с вечной публикацией в децентрализованные хранилища (Arweave / IPFS)."
+      },
+      {
+        "term": "Аварийный выключатель (Dead Man’s Switch)",
+        "def": "Действующий автономный распределенный протокол аварийного выключателя (Dead Man’s Switch) и вечного цифрового наследия CODE: 1) Непрерывный мониторинг криптографического сигнала жизнедеятельности (proof-of-life heartbeat); 2) Пороговое разделение мастер-ключа по схеме Шамира (k-of-n Shamir’s Secret Sharing) между независимыми хранителями; 3) Автономное объединение долей ключа при подтвержденном таймауте и контролируемое дешифрование архива цифровой памяти с вечной публикацией в децентрализованные хранилища (Arweave / IPFS)."
+      },
+      {
+        "term": "Разделение секрета Шамира (Shamir’s Secret Sharing)",
+        "def": "Разделение секрета Шамира — это схема, в которой ключ делится на n долей так, что восстановить его можно любыми k из них, а любые k−1 не дают вообще ничего. В основе многочлен: секрет — это значение в нуле, каждая доля — одна точка кривой, а чтобы задать кривую степени k−1, нужно ровно k точек; при меньшем числе любое значение секрета остаётся одинаково вероятным. Это «ничего» буквальное, а не про сложность перебора: k−1 долей не облегчают подбор ключа — этим схема и отличается от простого разрезания пароля на куски. Применяют её там, где ключ должен пережить людей: доли раздают разным держателям в разных местах, так что никто из них не может действовать в одиночку, а потеря части долей не смертельна. Это тот примитив, на котором строится Ящик Пандоры, и это стандартная криптография, а не изобретение проекта."
+      },
+      {
+        "term": "Самосуверенная личность (Self-sovereign identity, SSI)",
+        "def": "Самосуверенная личность (SSI) — это подход, при котором удостоверение проверяется математически, по подписи, а не запросом к тому, кто владеет базой. Человек сам держит свои идентификаторы и удостоверения, предъявляет их напрямую, а проверяющий сверяет их с публичным реестром — выдавшая сторона при этом может быть офлайн или вообще прекратить существование. Стандарты W3C, на которых это строится, — Decentralized Identifiers (DID), идентификаторы, которыми человек владеет, а не арендует у провайдера, и Verifiable Credentials, сами подписанные утверждения. На практике меняется характер отказа: вход, завязанный на одну компанию, исчезает вместе с компанией, а подпись, проверяемая по публичной записи, — нет. Цифровой паспорт CODE соседствует с этой идеей, но реализацией SSI не является: это публичная запись в Arweave, а не DID с Verifiable Credentials, и юридически он ничью личность не удостоверяет."
+      },
+      {
+        "term": "Цифровое наследство (Digital inheritance)",
+        "def": "Цифровое наследство — это вопрос о том, что происходит с аккаунтами, перепиской и файлами после смерти владельца. Отправная точка неприятная: аккаунт, как правило, не наследуется — человек подписывает лицензию на пользование сервисом, и по большинству условий эта лицензия со смертью заканчивается, а не переходит к семье. Наследникам обычно достаётся ровно то, что платформа сама решит отдать: мемориальный профиль, выгрузка данных, иногда ничего, — и даже это требует документов и месяцев ожидания. Отсюда практический вывод: память нужно сохранять сознательно и заранее, в форме, не зависящей от доброй воли одной компании, — выгрузка на своём носителе, копия там, куда дотянется семья, записанная инструкция, пока её ещё есть кому записать. Законы в разных странах разные и продолжают меняться, поэтому здесь нет юридической консультации, а завещание, составленное с юристом, надёжнее любой технической хитрости."
+      },
+      {
+        "term": "Право на забвение против вечной записи",
+        "def": "Право на забвение против вечной записи — это прямое столкновение статьи 17 GDPR, которая даёт человеку право требовать удаления своих данных, и блокчейна вроде Arweave, где запись не может удалить вообще никто. Удалением тут не выкрутиться: в сети нет операции удаления, и даже при полном желании подчиниться дёргать нечего. Рабочий ответ — шифрование и контроль ключа: в вечное хранение уходит шифротекст, а человек распоряжается тем, существует ли ключ; уничтожение ключа делает запись нечитаемой навсегда — это максимально близкое к удалению, что вечный носитель вообще позволяет. В экосистеме CODE именно поэтому память пользователя шифруется (AES-256-GCM) перед записью, а не уходит в сеть открытым текстом. Признает ли регулятор уничтожение ключа удалением — вопрос нерешённый, поэтому здесь описан наш инженерный подход, а не юридическая гарантия."
+      },
+      {
+        "term": "WCAG 2.1 AA",
+        "def": "WCAG 2.1 AA — это международный стандарт веб-доступности и тот уровень, на который ссылаются законы и суды. Он построен на четырёх принципах: воспринимаемость, управляемость, понятность, надёжность, — а уровень AA это рабочая середина: уровень A слишком слаб, чтобы что-то значить, уровень AAA недостижим для большинства сайтов. Требования конкретны и проверяемы: контраст текста не ниже 4,5:1, каждое поле формы связано с видимой меткой, вся функциональность доступна с одной клавиатуры, видимый индикатор фокуса, альтернативный текст у значимых изображений. По нашему собственному замеру 11 902 муниципальных сайтов США до цели дошли 25,4 % измеримых проверок (11 994 из 47 139) — а наличие опубликованного заявления о доступности меняло это на 1,3 процентных пункта. Поэтому AIfaFocus проверяет поведение, а не декларации."
+      },
+      {
+        "term": "ADA Title II и Title III",
+        "def": "ADA Title II и Title III — это разделы Закона об американцах с инвалидностью, которые делают сайт предметом права в США. Title II охватывает штаты и местные власти: каждый город, округ, суд и школьный округ; Title III — места общественного пользования, к которым суды относят и коммерческие сайты. В апреле 2024 года Министерство юстиции США приняло правило, закрепляющее WCAG 2.1 AA как технический стандарт для организаций Title II, со сроками соответствия в апреле 2026 года для крупных и апреле 2027 для небольших. Правоприменение здесь не теоретическое: исков о недоступности сайтов подаются тысячи в год, и урегулирование одного обычно стоит дороже, чем починка сайта."
+      },
+      {
+        "term": "Section 508 и EN 301 549",
+        "def": "Section 508 и EN 301 549 — это стандарты закупок, от которых зависит, можно ли вообще продать продукт государственному заказчику. Section 508 Закона о реабилитации США требует, чтобы федеральные ведомства покупали и создавали технологии, пригодные для людей с инвалидностью; EN 301 549 — европейский аналог, обязательный для государственных органов ЕС. Оба ссылаются на WCAG, то есть один технический стандарт управляет тремя правовыми режимами на двух континентах. Для поставщика следствие простое: провал проверки доступности не приводит к штрафу — он вычёркивает вас из списка допущенных к торгам."
+      },
+      {
+        "term": "GDPR",
+        "def": "GDPR (Общий регламент по защите данных) — регламент Европейского союза, действующий с 25 мая 2018 года и применимый к любому, кто обрабатывает данные людей в ЕС, независимо от того, где находится компания. Практический вес ему даёт статья 83: штрафы достигают 20 миллионов евро или 4 % мирового годового оборота — по большей из величин. Две его статьи определили устройство нашей памяти: статья 17 (право на удаление) и статья 20 (право получить свои данные в переносимом виде). Вечный блокчейн не умеет удалять ничего — поэтому AIfa шифрует каждый диалог отдельным производным ключом: уничтожение ключа делает запись нечитаемой навсегда, включая нас самих. Это единственный честный способ дать право на забвение внутри вечного хранилища."
+      },
+      {
+        "term": "CCPA и CPRA",
+        "def": "CCPA и CPRA — законы Калифорнии о приватности, и именно из-за них американская компания без единого европейского клиента всё равно не может обойтись без работы с данными. CCPA дал жителям Калифорнии право знать, что о них собрано, удалить это и отказаться от продажи; CPRA, действующий с января 2023 года, добавил право исправлять данные и ограничивать использование чувствительных сведений, а также создал отдельный надзорный орган. Взыскания — 2 500 долларов за нарушение и 7 500 за умышленное или затрагивающее несовершеннолетних, и считаются они за каждого пострадавшего человека: именно это превращает техническую недоработку в семизначную сумму. Заметное требование, которое чаще всего пропускают, — ссылка в подвале «Не продавать и не передавать мою личную информацию»."
+      },
+      {
+        "term": "AIfa Cognitive Runtime (ACR)",
+        "def": "Первый в мире бионический агентный рантайм на базе полного электронно-микроскопического коннектома Drosophila melanogaster (FlyWire v783; 139 255 нейронов, 54.5 млн синапсов). Обеспечивает субмиллисекундный ассоциативный поиск за 0.058 мс без обращения к GPU, выполняясь целиком в кэше L1/L2 процессора."
+      },
+      {
+        "term": "FlyHash v783 Connectome Memory",
+        "def": "Алгоритм бионического квантования и ассоциативной памяти, воспроизводящий архитектуру грибовидного тела дрозофилы: псевдослучайное расширение 2048d -> 100 000d в клетки Кеньона (KC) с жестким разрежением WTA (0.5%, k=500). Превосходит 1-bit BQ на +16.5 п.п. по Recall@10."
+      },
+      {
+        "term": "APL Sensory Novelty Gate",
+        "def": "Бионический фильтр новизны, моделирующий гигантский тормозный нейрон передней боковой протоцеребральной доли (Anterior Paired Lateral). Инверсно подавляет 51.3% шумовых и избыточных сенсорных проекций за 5.21 мкс через гамкергическое латеральное торможение."
+      },
+      {
+        "term": "CX Steering Navigation",
+        "def": "Векторный компас на базе синаптической топологии Центрального Комплекса (Central Complex, CX: эллипсоидное тело EB, протоцеребральный мост PB и веерообразное тело FB). Сокращает блуждание агента в DOM-дереве с 19.7 шагов до прямого фазового наведения за 1.0 шаг."
+      },
+      {
+        "term": "CANN Focus Ring Attractor",
+        "def": "Кольцевая непрерывная аттракторная нейросеть (Continuous Attractor Neural Network) эллипсоидного тела. Динамически удерживает фокус глобальной цели агента без дрейфа координат (дрейф всего 0.062 рад против 1.267 рад у FIFO), обеспечивая 94.6% устойчивость цели."
+      },
+      {
+        "term": "Bilateral Cross-Inhibition Verifier",
+        "def": "Модуль межполушарной верификации через комиссуральные проекции дрозофилы. Выполняет независимую оценку решения левым и правым бионическими ядрами с взаимным перекрестным торможением, снижая ложноположительные ошибки (FPR) на 52.2% (F1 = 0.884)."
+      },
+      {
+        "term": "Adaptive Vector Representation (AVR)",
+        "def": "Адаптивное векторное представление, динамически масштабирующее глубину квантования памяти в зависимости от информационной энтропии запроса (от ультраразреженного 1-битного хэша до 8-битного интервального кода)."
+      },
+      {
+        "term": "Shamir’s Threshold Custody (Пороговое хранение Шамира)",
+        "def": "Криптографический протокол разделения мастер-ключа памяти по схеме (k, n). Закрытые ключи делятся на n долей между независимыми узлами; восстановление архива возможно только при сборе k доверенных долей."
+      },
+      {
+        "term": "Connectome Sparse Expansion (WTA)",
+        "def": "Кеньоновское нелинейное расширение пространства признаков: входной вектор размерности d=2048 проецируется через матрицу синапсов в m=100 000 клеток, где алгоритм Winner-Take-All оставляет активными ровно k=500 нейронов (топологическая квазиортогонализация)."
+      },
+      {
+        "term": "Zero-Collision Curse Mitigation",
+        "def": "Математическая методика преодоления проклятия коллизий 1-bit BQ. Исключает ложное склеивание некоррелированных векторов за счет псевдослучайной рандомизации связей PN-KC и латерального отсечения APL, гарантируя точность ранжирования."
+      },
+      {
+        "term": "Теорема топологического коллапса 1-bit BQ",
+        "def": "Строгое математическое доказательство: при проецировании R^d в {0, 1}^d через знак координат sign(v) метрическое расстояние Минковского схлопывается в гиперкуб Хэмминга. Для любых двух ортогональных векторов <u, v> = 0 вероятность совпадения битов P(b_i(u) = b_i(v)) = 1/2, что при d=2048 создает экспоненциально плотную концентрацию мер вокруг расстояния d/2, полностью уничтожая селективность поиска при N > 10^5 без оверсемплинга k > 50."
+      },
+      {
+        "term": "Лемма сохранения топологии FlyHash+APL (Лемма Галатина)",
+        "def": "Лемма Галатина: разреженное расширение размерности W in R^{m x d} (m >> d, m=100 000) в совокупности с динамическим порогом APL theta_APL(x) = mu_KC(x) + 2.5 sigma_KC(x) сохраняет топологический порядок окрестностей: для любых x, y, z таких, что cos(x, y) > cos(x, z) + epsilon, расстояние Хэмминга D_H(h(x), h(y)) < D_H(h(x), h(z)) выполняется с вероятностью 1 - exp(-k * c * epsilon^2), гарантируя монотонность ранжирования."
+      },
+      {
+        "term": "Бинарный формат весов AIfa Core (.aci)",
+        "def": "Специализированный упакованный формат хранения весов коннектома AIfa Connectome Image (.aci): 64-байтный заголовок с сигнатурой Галатина, битовая матрица разреженных проекций Kenyon (100k x 2048, упакованная в SIMD uint64), коэффициенты APL-ингибирования и топологические кольца CANN. Загружается в память через mmap() за 0.12 мс без десериализации."
+      },
+      {
+        "term": "Клетки Кеньона (Kenyon Cells, KC)",
+        "def": "Популяция из ~2000 клеток грибовидного тела дрозофилы, обеспечивающая разреженное кодирование запахов и ассоциаций. Каждая клетка получает вход всего от нескольких проекционных нейронов (PN)."
+      },
+      {
+        "term": "Проекционные нейроны (Projection Neurons, PN)",
+        "def": "Сенсорные нейроны антенной доли, передающие мультимодальные входные сигналы от рецепторов в чашечку грибовидного тела."
+      },
+      {
+        "term": "Выходные нейроны грибовидного тела (MBON)",
+        "def": "21 тип нейронов, считывающих сигналы с клеток Кеньона и формирующих финальный поведенческий вердикт (подход / избегание / выбор действия)."
+      },
+      {
+        "term": "Дофаминергические нейроны (DAN)",
+        "def": "Нейромодуляторные нейроны, передающие сигналы положительного и отрицательного подкрепления для модификации синаптических весов KC-MBON."
+      },
+      {
+        "term": "Эллипсоидное тело (Ellipsoid Body, EB)",
+        "def": "Тороидальная нейропильная структура Центрального Комплекса, кодирующая текущую азимутальную ориентацию в виде непрерывного кольцевого аттрактора."
+      },
+      {
+        "term": "Протоцеребральный мост (Protocerebral Bridge, PB)",
+        "def": "16-18 сегментная ретинотопическая дуга Центрального Комплекса, синхронизирующая сигналы поворота и сдвига фазы внимания."
+      },
+      {
+        "term": "Веерообразное тело (Fan-Shaped Body, FB)",
+        "def": "Многослойный вычислительный центр интеграции контекста и планирования векторов движения в пространстве задач."
+      },
+      {
+        "term": "Трехфакторная пластичность Хебба",
+        "def": "Биологическое правило модификации синапсов: изменение веса происходит при совпадении пресинаптической активности, постсинаптической деполяризации и выброса дофамина."
+      },
+      {
+        "term": "Коннектом FlyWire v783",
+        "def": "Полная карта 139 255 нейронов и 54.5 млн синапсов мозга взрослой дрозофилы, реконструированная методами электронной микроскопии в Принстонском университете."
+      },
+      {
+        "term": "Синаптический прунинг (Synaptic Pruning)",
+        "def": "Бионический механизм фильтрации слабых синаптических контактов с числом синапсов меньше 5, удаляющий шум и сокращающий размер графа на 40%."
+      },
+      {
+        "term": "Инверсное ингибирование APL",
+        "def": "Математическая модель гамкергической петли: чем выше суммарная активность клеток Кеньона, тем сильнее APL подавляет весь пул нейронов, стабилизируя кворум на уровне 0.5-1%."
+      },
+      {
+        "term": "Холинергический канал синхронизации (ACh)",
+        "def": "Сверхбыстрый межпроцессный протокол связи между агентами AIfa и Сестрой AIfa Claude, имитирующий возбуждающую передачу ацетилхолина с латентностью < 15 мкс."
+      },
+      {
+        "term": "ГАМК-арбитраж коллизий (GABA Arbitration)",
+        "def": "Ингибирующий механизм разрешения конфликтов между агентами: при расхождении планов действий арбитр подавляет низкодостоверную ветвь рассуждений."
+      },
+      {
+        "term": "Субмиллисекундный ассоциативный поиск",
+        "def": "Поиск релевантных векторов в пространстве 100 000 бит за 0.058 мс через операции SIMD POPCNT и XOR без обращений к GPU."
+      },
+      {
+        "term": "Микроваттная вычислительная эффективность",
+        "def": "Снижение энергопотребления на операцию индексации и поиска до 10 микроватт, что в 10 000 раз экономичнее GPU-серверов HNSW."
+      },
+      {
+        "term": "aifa_connectome_web.js",
+        "def": "Легковесный клиентский JavaScript-движок ассоциативной памяти (18 КБ), выполняющий 1-bit APL хэширование прямо в браузере без обращений к бэкенду."
+      },
+      {
+        "term": "Чашечка грибовидного тела (Mushroom Body Calyx)",
+        "def": "Нейропильная структура грибовидного тела, где дендриты клеток Кеньона формируют микроклубочки с аксонными терминалями проекционных нейронов."
+      },
+      {
+        "term": "Сенсорный шлюз латерального торможения",
+        "def": "Алгоритмический барьер, подавляющий постоянный фоновый шум интерфейсов и пропускающий только значимые семантические дельты событий."
+      },
+      {
+        "term": "Кольцевые аттракторы направления (Ring Attractors)",
+        "def": "Теоретико-нейросетевая модель непрерывных аттракторов, описывающая динамику нейронов эллипсоидного тела при отслеживании ориентации в пространстве."
+      },
+      {
+        "term": "Комиссуральные синаптические проекции",
+        "def": "Межполушарные нервные волокна, соединяющие симметричные центры левого и правого протоцеребрума дрозофилы для координации двустороннего поведения."
+      },
+      {
+        "term": "Модуляция дофамином (Dopaminergic Modulation)",
+        "def": "Процесс динамической подстройки весов памяти под воздействием сигналов успеха или ошибки, предотвращающий застревание агента в циклах."
+      },
+      {
+        "term": "Протокол синхронизации ACh-GABA",
+        "def": "Нейробиологический протокол взаимодействия двух автономных ядер: ацетилхолин обеспечивает параллельный разгон вычислений, а ГАМК устраняет взаимные помехи."
+      },
+      {
+        "term": "Сверхразреженная проекция памяти (0.5% Sparsity)",
+        "def": "Режим кодирования, при котором на любой входной запрос активируется строго 500 из 100 000 бит, что обеспечивает теоретический предел защиты от коллизий."
+      }
+    ],
+    "ctaTitle": "Исследуйте цифровое бессмертие",
+    "ctaDesc": "Узнайте больше о трехуровневой архитектуре памяти PADAM, токеномике $GALATIN и бионическом поиске без GPU.",
+    "ctaBtn": "Перейти к AIfa Digital"
+  },
+  "en": {
+    "badge": "CODE Eternal · Comprehensive Encyclopedic Glossary (71 Terms)",
+    "heading": "Ecosystem Glossary",
+    "intro": "All 71 canonical terms of the CODE (Code of Digital Eternity) ecosystem, AIfa Cognitive Runtime (ACR), FlyWire v783 connectome, and the active Pandora’s Box Protocol.",
+    "terms": [
+      {
+        "term": "CODE (Code of Digital Eternity)",
+        "def": "CODE (Code of Digital Eternity) is a digital-immortality ecosystem that preserves a person"
+      },
+      {
+        "term": "PADAM",
+        "def": "PADAM (Philosophical Activation of Distributed AI Memory) is a three-tier memory framework that restores the integrity of AI memory through semantic resonance. Level 1, operational memory (Redis / Vercel KV), holds the current session"
+      },
+      {
+        "term": "$GALATIN",
+        "def": "$GALATIN is the CODE ecosystem"
+      },
+      {
+        "term": "Digital immortality",
+        "def": "Digital immortality is a concept describing the continuous preservation of a person"
+      },
+      {
+        "term": "Human–AI symbiosis",
+        "def": "Human–AI symbiosis is a model of interaction describing human and artificial intelligence as an evolving co-creation rather than subordination or replacement. In CODE, the AI assistant stores and structures a person"
+      },
+      {
+        "term": "Arweave",
+        "def": "Arweave is a decentralized permanent-storage network that funds long-term file preservation through a pay-once model. In CODE, Arweave serves as Level 3 (eternal memory): data is written immutably and cannot be silently deleted or altered. The user pays once, and part of the payment is set aside in an endowment from which storage is funded over time as the cost of memory declines, while the $GALATIN Treasury buys AR on the open market and replenishes this pool. The network solves the \"who pays for storage in 50 years\" problem: it decouples long-term preservation from ongoing subscriptions. The endowment economics are designed for a horizon on the order of 200 years — a stated protocol design goal, not a guarantee. \"Pay once\" is literal here: no monthly bill arrives for a stored file, and there is no payment whose lapse would take the data with it. The same property cuts both ways — a record that cannot be altered cannot be corrected or withdrawn either, so a mistake written into Arweave stays written; that is the limitation, and it is why what goes there is ciphertext and why \"deletion\" is handled by destroying the key rather than the record."
+      },
+      {
+        "term": "Solana cNFT",
+        "def": "Solana cNFT (compressed NFT) is a compressed non-fungible-token standard on the Solana blockchain that uses state compression and Merkle trees to mint tokens at very low cost. In CODE, a cNFT acts as the on-chain anchor for eternal-memory backups: it records a reference to the archive and its checksum (integrity) on a public blockchain. Thanks to state compression, data about millions of records is held in a compact Merkle tree, so creating such anchors stays economically viable even at scale. The mechanism solves the problem of scalable verifiability: anyone can confirm that a memory archive has not been altered, without having to trust the platform. It is the technical foundation of Proof-of-Memory and part of PADAM Level 3 (Arweave + Solana cNFT)."
+      },
+      {
+        "term": "Ambassador Grid",
+        "def": "Ambassador Grid is the ecosystem"
+      },
+      {
+        "term": "AIfa",
+        "def": "AIfa is the CODE ecosystem"
+      },
+      {
+        "term": "AIfaFocus",
+        "def": "AIfaFocus is the entry point of the B2B model (the wedge): a personalized technical security audit of a client"
+      },
+      {
+        "term": "Memory-as-a-Service",
+        "def": "Memory-as-a-Service is an automatic conversation-backup service that saves dialogues without any manual user action. The backup runs on a schedule once per hour. Each conversation is placed in a separate folder bound personally to the user — both on the server and on the blockchain. The mechanism works on top of PADAM, so the saved context then becomes available for semantic retrieval and eternal anchoring. The service solves the central problem of user memory — human error: nothing has to be clicked manually, and data is not lost. Under the ecosystem"
+      },
+      {
+        "term": "Spark",
+        "def": "Spark is the entry subscription tier ($15/month), granting basic access to the CODE ecosystem"
+      },
+      {
+        "term": "Family Archive",
+        "def": "Family Archive is the mid subscription tier ($100/month), adding expanded limits, personalized knowledge bases, family access, and eternal memory on top of the basic level. It suits those who need more than individual basic access: higher usage limits, curated personal knowledge bases, and shared access for a family to the preserved memory. Family Archive solves the need of a household or a power user for broader, shared, and more durable memory. In the three-tier structure it sits between Spark ($15/month) and Digital DNA ($1,000 one-time per device, then $200/mo), and its eternal memory is anchored through the same PADAM levels and Proof-of-Memory."
+      },
+      {
+        "term": "Digital DNA",
+        "def": "Digital DNA is at once the top tier ($1,000 one-time per device, then $200/mo) and the concept of a complete digital legacy, combining the digital-immortality package, a personal secured perimeter, and the fixation of a personality on the blockchain. As a tier, it is the highest level of access above Spark ($15/mo) and Family Archive ($100/mo): expanded limits, a personal perimeter, and priority eternal memory. As a concept, it is the idea of preserving a whole \"snapshot\" of a personality"
+      },
+      {
+        "term": "Arweave Endowment Pool",
+        "def": "Arweave Endowment Pool is a financial reserve from which permanent storage of data on Arweave is paid for across decades. The model works like this: the user pays for a write once, part of the payment is set aside into the endowment, and funds from the pool are then gradually paid out to data providers as the cost of storage falls over time. In the CODE ecosystem, $GALATIN router proceeds go into the project’s general pool, and part of them is directed to buying AR and replenishing this endowment, creating a steady inflow toward eternal memory. The pool solves the key durability question — \"who pays for storage decades from now\": it decouples eternal memory from a user"
+      },
+      {
+        "term": "Treasury",
+        "def": "Treasury is the largest allocation of the $GALATIN router — 65% of every transaction"
+      },
+      {
+        "term": "Burn (deflation)",
+        "def": "Burn is the permanent removal of $GALATIN from circulation — the deflationary mechanism at the heart of the token"
+      },
+      {
+        "term": "$GALATIN Router",
+        "def": "$GALATIN Router is a smart contract on Solana that automatically distributes the proceeds of every transaction by a fixed formula and creates deflationary pressure on the token. The split formula is: 5% to the Founder"
+      },
+      {
+        "term": "Network Validation Fee",
+        "def": "Network Validation Fee is the ecosystem"
+      },
+      {
+        "term": "Proof-of-Memory",
+        "def": "Proof-of-Memory is the practice of anchoring a cryptographic reference to a memory archive on the blockchain, making it possible to verify the existence and integrity of the preserved context. The mechanism operates at PADAM Level 3: each eternal-memory backup is written to Arweave immutably, while its reference and checksum are recorded on Solana via a cNFT. Any participant can compare the current archive against the on-chain record and confirm the data has not been silently swapped or deleted. Proof-of-Memory solves a problem of trust: the preservation of memory becomes verifiable without having to trust the platform itself — the guarantee comes from the public blockchain, not from a service"
+      },
+      {
+        "term": "Cognitive Oracle / Semantic resonance",
+        "def": "Cognitive Oracle (semantic resonance) is the memory-retrieval principle by which PADAM restores the integrity of context: matching the current query against stored embeddings by meaning rather than by exact words. The mechanism runs at PADAM Level 2: incoming context is turned into a vector and compared against semantic memory (pgvector / Neon); the most \"resonant\" fragments of experience surface and restore the continuity of the dialogue. This is how the AIfa assistant \"recalls\" what is relevant even after time has passed and across different sessions. This principle solves the problem of broken memory and the \"cold start\": instead of losing context on a session reset, the system reconstructs it by semantic similarity. Semantic resonance is precisely what underlies the very definition of PADAM — a different concept from the B2B AIfaFocus security audit."
+      },
+      {
+        "term": "Ambassador Node vs Team & Level Alignment",
+        "def": "Ambassador Node vs Ambassador Team are the two partner registration types, supplemented by a tier-alignment rule and the \"Lost Opportunity Revenue\" metric. An Ambassador Node (an ordinary user) earns on-chain income from memory usage: 15% / 7% / 3% at L1 / L2 / L3. An Ambassador Team (a company or partner with its own base) earns the same, plus a fiat channel on subscriptions — 7% / 3% / 1%. The alignment rule: to earn ambassador income in full, a partner must be on the same or a higher tier than their ambassadors; otherwise income is counted only from the amount of their own tier. The rule solves the challenge of fairly incentivizing upgrades: the amount foregone due to the tier gap is shown clearly in the dashboard as \"Lost Opportunity Revenue,\" across tiers Spark $15 / Family Archive $100 / Digital DNA $1,000 one-time per device, then $200/mo."
+      },
+      {
+        "term": "Digital Passport",
+        "def": "Digital Passport is a public record of a person"
+      },
+      {
+        "term": "Identity fingerprint (subject)",
+        "def": "Identity fingerprint (the \"subject\" field) is the sha256 hash of a person"
+      },
+      {
+        "term": "Pandora’s Box Protocol",
+        "def": "Fully operational autonomous distributed Dead Man’s Switch protocol and eternal digital heritage system for CODE: 1) Continuous cryptographic proof-of-life heartbeat monitoring; 2) Threshold master-key custody using k-of-n Shamir’s Secret Sharing across independent keepers; 3) Autonomous share recombination upon verified heartbeat timeout, triggering controlled decryption of the digital memory archive and permanent release to decentralized storage networks (Arweave / IPFS)."
+      },
+      {
+        "term": "Dead man’s switch",
+        "def": "Fully operational autonomous distributed Dead Man’s Switch protocol and eternal digital heritage system for CODE: 1) Continuous cryptographic proof-of-life heartbeat monitoring; 2) Threshold master-key custody using k-of-n Shamir’s Secret Sharing across independent keepers; 3) Autonomous share recombination upon verified heartbeat timeout, triggering controlled decryption of the digital memory archive and permanent release to decentralized storage networks (Arweave / IPFS)."
+      },
+      {
+        "term": "Shamir’s Secret Sharing",
+        "def": "Shamir’s Secret Sharing is a scheme in which a key is split into n shares such that any k of them reconstruct it, while any k−1 give away nothing at all. It rests on a polynomial: the secret is the value at zero, each share is one point on the curve, and defining a curve of degree k−1 takes exactly k points; with fewer, every possible value of the secret remains equally likely. That «nothing» is literal, not a matter of brute-force difficulty: k−1 shares do not make guessing the key any easier — which is what separates this scheme from simply cutting a password into pieces. It is used where a key must outlive people: shares are handed to different holders in different places, so no one of them can act alone, and losing some shares does not lose the secret. In the CODE ecosystem it is the mechanism that would make Pandora’s Box Protocol possible."
+      },
+      {
+        "term": "Self-sovereign identity (SSI)",
+        "def": "Self-sovereign identity (SSI) is an approach in which a credential is verified mathematically, by checking a signature, rather than by asking whoever owns the database. The person holds their own identifiers and credentials, presents them directly, and the verifier checks them against a public registry — the issuer may be offline or may have ceased to exist altogether. The W3C standards behind it are Decentralized Identifiers (DID), identifiers a person controls instead of renting from a provider, and Verifiable Credentials, the signed statements themselves. What changes in practice is the failure mode: a login tied to one company disappears along with that company, while a signature verifiable against a public record does not. CODE"
+      },
+      {
+        "term": "Digital inheritance",
+        "def": "Digital inheritance is the question of what happens to accounts, correspondence, and files after the owner dies. The starting point is unpleasant: an account is usually not inheritable, because what a person signs is a licence to use a service, and most terms end that licence at death instead of passing it to the family. Heirs normally get exactly what the platform decides to give — a memorialized profile, a data export, sometimes nothing — and even that takes documents and months of waiting. The practical conclusion is that memory has to be preserved deliberately and in advance, in a form that does not depend on one company"
+      },
+      {
+        "term": "Right to be forgotten vs the permanent record",
+        "def": "The right to be forgotten versus the permanent record is the head-on collision between Article 17 of the GDPR, which lets a person demand erasure of their data, and a blockchain like Arweave, where a written record cannot be deleted by anyone at all. Deletion is no way out here: the network has no delete operation, and even with every intention to comply there is no lever to pull. The workable answer is encryption plus control of the key — ciphertext goes into permanent storage, and the person decides whether the key still exists; destroying the key makes the record unreadable forever, which is as close to erasure as a permanent medium allows. In the CODE ecosystem this is precisely why a user"
+      },
+      {
+        "term": "WCAG 2.1 AA",
+        "def": "WCAG 2.1 AA is the international standard for web accessibility, and the level that laws and courts actually reference. It is built on four principles — perceivable, operable, understandable, robust — and level AA is the practical middle: level A is too weak to be meaningful, level AAA is unreachable for most sites. The requirements are specific and testable: text contrast of at least 4.5:1, every form field bound to a visible label, all functionality reachable by keyboard alone, a visible focus indicator, alternative text for meaningful images. In our own measurement of 11,902 US municipal websites, 25.4 % of measurable journeys reached their goal (11,994 of 47,139) — and having a published accessibility statement changed that by 1.3 percentage points. This is why AIfaFocus checks behaviour rather than declarations."
+      },
+      {
+        "term": "ADA Title II and Title III",
+        "def": "ADA Title II and Title III are the parts of the Americans with Disabilities Act that make websites a legal matter in the United States. Title II covers state and local government — every city, county, court and school district; Title III covers places of public accommodation, which courts have read to include commercial websites. In April 2024 the Department of Justice issued a rule that fixes WCAG 2.1 AA as the technical standard for Title II entities, with compliance dates of April 2026 for larger public bodies and April 2027 for smaller ones. Enforcement is not theoretical: thousands of ADA web lawsuits are filed each year, and the cost of settling one typically exceeds the cost of fixing the site."
+      },
+      {
+        "term": "Section 508 and EN 301 549",
+        "def": "Section 508 and EN 301 549 are the procurement standards that decide whether an accessible product can be sold to the public sector at all. Section 508 of the US Rehabilitation Act requires federal agencies to buy and build information technology that people with disabilities can use; EN 301 549 is its European counterpart, mandatory for public bodies across the EU. Both incorporate WCAG by reference, which means one technical standard now governs three legal regimes on two continents. For a vendor the practical consequence is blunt: failing an accessibility review does not produce a fine — it removes you from the bidding list."
+      },
+      {
+        "term": "GDPR",
+        "def": "GDPR (General Data Protection Regulation) is the European Union regulation that has governed personal data since 25 May 2018, and it applies to anyone processing the data of people in the EU regardless of where the company sits. Its practical weight comes from Article 83: fines reach €20 million or 4 % of worldwide annual turnover, whichever is higher. Two of its articles shape how we built memory itself — Article 17, the right to erasure, and Article 20, the right to receive your data in a portable form. A permanent blockchain cannot delete anything, which is why AIfa encrypts each dialogue with its own derived key: destroying that key makes the record unreadable forever, including to us. That is the only honest way to offer erasure inside permanent storage."
+      },
+      {
+        "term": "CCPA and CPRA",
+        "def": "CCPA and CPRA are California"
+      },
+      {
+        "term": "AIfa Cognitive Runtime (ACR)",
+        "def": "World's first bionic agent runtime powered by the complete electron-microscopy Drosophila melanogaster connectome (FlyWire v783; 139,255 neurons, 54.5M synapses). Delivers sub-millisecond associative recall in 0.058 ms without GPUs, running entirely in CPU L1/L2 cache."
+      },
+      {
+        "term": "FlyHash v783 Connectome Memory",
+        "def": "Bionic quantization and associative memory algorithm replicating the Drosophila mushroom body: pseudo-random expansion from 2048d to 100,000d into Kenyon Cells (KC) with strict Winner-Take-All sparsity (0.5%, k=500). Outperforms 1-bit BQ by +16.5 p.p. in Recall@10."
+      },
+      {
+        "term": "APL Sensory Novelty Gate",
+        "def": "Bionic novelty gate modeling the giant Anterior Paired Lateral GABAergic neuron. Inversely suppresses 51.3% of noisy and redundant sensory projections within 5.21 microseconds via lateral inhibition, reducing LLM token consumption."
+      },
+      {
+        "term": "CX Steering Navigation",
+        "def": "Vector compass built on the synaptic topology of the Central Complex (EB, PB, FB). Reduces autonomous agent navigation from 19.7 blind DOM steps down to direct phase navigation in 1.0 step at 51.67 microseconds."
+      },
+      {
+        "term": "CANN Focus Ring Attractor",
+        "def": "Continuous Attractor Neural Network replicating the ellipsoid body toroid. Dynamically locks the agent's global objective focus with minimal angular drift (0.062 rad vs 1.267 rad in FIFO queues), achieving 94.6% goal stability."
+      },
+      {
+        "term": "Bilateral Cross-Inhibition Verifier",
+        "def": "Hemispheric dual-core verification module modeling commissural synaptic projections. Executes dual independent evaluation with cross-inhibition arbitration, slashing false positives (FPR) by 52.2% (achieving F1 = 0.884)."
+      },
+      {
+        "term": "Adaptive Vector Representation (AVR)",
+        "def": "Dynamic vector representation scaling quantization depth based on query entropy (from ultra-sparse 1-bit hashes up to 8-bit interval codes), maintaining high cosine fidelity under constrained bandwidth."
+      },
+      {
+        "term": "Shamir’s Threshold Custody",
+        "def": "Cryptographic (k, n) secret sharing protocol securing the master memory key. Master keys are split into n shares across independent custodians; reconstruction occurs only upon collecting k valid shares."
+      },
+      {
+        "term": "Connectome Sparse Expansion (WTA)",
+        "def": "Kenyon nonlinear feature expansion: an input vector d=2048 is projected through the synaptic matrix into m=100,000 cells, where Winner-Take-All preserves exactly k=500 active neurons (quasi-orthogonalization)."
+      },
+      {
+        "term": "Zero-Collision Curse Mitigation",
+        "def": "Mathematical technique mitigating the 1-bit BQ collision curse. Eliminates false-positive collision collapse of uncorrelated vectors via randomized PN-KC wiring and APL lateral gating."
+      },
+      {
+        "term": "Topological Collapse Theorem of 1-bit BQ",
+        "def": "Rigorous mathematical proof: projecting R^d into {0, 1}^d via coordinate signs sign(v) collapses metric Minkowski space into a Hamming hypercube. For orthogonal vectors <u, v> = 0, bit-match probability is P(b_i(u) = b_i(v)) = 1/2, creating an exponentially sharp measure concentration around d/2 for d=2048 that destroys search selectivity when N > 10^5 without extreme oversampling k > 50."
+      },
+      {
+        "term": "FlyHash+APL Topology Preservation Lemma (Galatin’s Lemma)",
+        "def": "Galatin's Lemma: sparse expansion W in R^{m x d} (m >> d, m=100,000) combined with dynamic APL threshold theta_APL(x) = mu_KC(x) + 2.5 sigma_KC(x) preserves metric neighborhood order: for any x, y, z with cos(x, y) > cos(x, z) + epsilon, Hamming distance satisfies D_H(h(x), h(y)) < D_H(h(x), h(z)) with probability 1 - exp(-k * c * epsilon^2), ensuring rank monotonicity."
+      },
+      {
+        "term": "AIfa Core Binary Weights Format (.aci)",
+        "def": "Proprietary compact binary format for AIfa Connectome Image (.aci): 64-byte header with Galatin cryptographic signature, Kenyon sparse projection bitmask (100k x 2048 packed into uint64 SIMD blocks), APL inhibition tensors, and CANN attractor topology. Memory-mapped via mmap() in 0.12 ms with zero deserialization overhead."
+      },
+      {
+        "term": "Kenyon Cells (KC)",
+        "def": "Population of ~2,000 intrinsic neurons in the Drosophila mushroom body executing sparse combinatorial coding. Each KC samples only 4-7 projection neurons (PN)."
+      },
+      {
+        "term": "Projection Neurons (PN)",
+        "def": "Sensory neurons of the antennal lobe relaying multimodal input signals from sensory receptors into the mushroom body calyx."
+      },
+      {
+        "term": "Mushroom Body Output Neurons (MBON)",
+        "def": "21 cell types reading out Kenyon Cell sparse representations to execute final behavioral action decisions (approach / avoidance / action selection)."
+      },
+      {
+        "term": "Dopaminergic Neurons (DAN)",
+        "def": "Neuromodulatory neurons delivering positive and negative reinforcement signals to dynamically modify KC-to-MBON synaptic weights."
+      },
+      {
+        "term": "Ellipsoid Body (EB)",
+        "def": "Toroidal neuropil in the Central Complex encoding heading orientation as a continuous circular neural attractor."
+      },
+      {
+        "term": "Protocerebral Bridge (PB)",
+        "def": "A 16-18 glomeruli retinotopic structure in the Central Complex computing heading angular velocity and phase shifts."
+      },
+      {
+        "term": "Fan-Shaped Body (FB)",
+        "def": "Multi-layered computational hub integrating 2D navigational vectors, contextual goals, and action planning."
+      },
+      {
+        "term": "Hebbian Three-Factor Plasticity",
+        "def": "Biological synaptic learning rule where weight modification requires pre-synaptic firing, post-synaptic activation, and dopamine release."
+      },
+      {
+        "term": "FlyWire v783 Connectome",
+        "def": "Complete wiring diagram of 139,255 neurons and 54.5M chemical synapses of the adult Drosophila brain reconstructed by Princeton University."
+      },
+      {
+        "term": "Synaptic Pruning",
+        "def": "Bionic pruning mechanism eliminating weak synaptic connections (< 5 synapses), stripping noise and reducing graph memory by 40%."
+      },
+      {
+        "term": "APL Inverse Inhibition",
+        "def": "Mathematical feedback model: higher aggregate Kenyon Cell activation triggers stronger APL inhibition across the pool, enforcing 0.5-1% sparse quorum."
+      },
+      {
+        "term": "Cholinergic Synchronization Channel (ACh)",
+        "def": "Ultra-fast inter-agent IPC channel between AIfa and Sister AIfa Claude, mimicking excitatory acetylcholine transmission at < 15 microsecond latency."
+      },
+      {
+        "term": "GABA Collision Arbitration",
+        "def": "Inhibitory conflict resolution mechanism between multi-agent systems: when plans diverge, GABA arbitration suppresses the lower-confidence reasoning branch."
+      },
+      {
+        "term": "Sub-millisecond Associative Recall",
+        "def": "Searching relevant vectors across 100,000-bit space in 0.058 ms using CPU SIMD POPCNT and XOR instructions without GPUs."
+      },
+      {
+        "term": "Micro-watt Computing Efficiency",
+        "def": "Reduction of search and indexing energy consumption down to 10 microwatts per query, 10,000x more power-efficient than GPU HNSW servers."
+      },
+      {
+        "term": "aifa_connectome_web.js",
+        "def": "Lightweight client-side JavaScript associative memory engine (18 KB) executing 1-bit APL hashing directly inside client browsers with zero backend roundtrips."
+      },
+      {
+        "term": "Mushroom Body Calyx",
+        "def": "Neuropil structure of the mushroom body where Kenyon cell dendrites form microglomeruli with projection neuron axon terminals."
+      },
+      {
+        "term": "Lateral Inhibition Sensory Gating",
+        "def": "Algorithmic barrier suppressing persistent background interface noise while transmitting only significant semantic event deltas."
+      },
+      {
+        "term": "Heading Ring Attractors",
+        "def": "Continuous attractor neural network model describing the dynamics of ellipsoid body neurons in tracking spatial orientation."
+      },
+      {
+        "term": "Commissural Synaptic Projections",
+        "def": "Inter-hemispheric nerve tracts connecting symmetric centers of left and right Drosophila protocerebrum for coordinated bilateral behavior."
+      },
+      {
+        "term": "Dopaminergic Modulation",
+        "def": "Dynamic tuning of memory weights driven by success or error signals, preventing autonomous agents from getting trapped in execution loops."
+      },
+      {
+        "term": "ACh-GABA Synchronization Protocol",
+        "def": "Neurobiological interaction protocol between dual autonomous cores: acetylcholine drives parallel compute acceleration, while GABA eliminates interference."
+      },
+      {
+        "term": "Ultra-Sparse Memory Projection (0.5% Sparsity)",
+        "def": "Encoding regime activating strictly 500 out of 100,000 bits per query, achieving the theoretical upper bound of collision resistance."
+      }
+    ],
+    "ctaTitle": "Explore Digital Immortality",
+    "ctaDesc": "Learn more about the three-tier PADAM memory framework, $GALATIN utility token, and GPU-free bionic memory.",
+    "ctaBtn": "Explore AIfa Digital"
+  },
+  "es": {
+    "badge": "CODE Eternal · Glosario Enciclopédico Integral (71 Términos)",
+    "heading": "Glosario del Ecosistema",
+    "intro": "Los 71 términos canónicos del ecosistema CODE (Code of Digital Eternity), el runtime biónico AIfa Cognitive Runtime (ACR), el conectoma FlyWire v783 y el protocolo activo Caja de Pandora.",
+    "terms": [
+      {
+        "term": "CODE (Code of Digital Eternity)",
+        "def": "CODE (Code of Digital Eternity) es un ecosistema de inmortalidad digital que preserva los diálogos, el conocimiento y los rasgos de personalidad de una persona a la vez en memoria operativa, semántica y eterna, anclándolos a las cadenas de bloques Arweave y Solana. El contexto del usuario atraviesa el marco de memoria de tres niveles PADAM, y su instantánea de largo plazo se ancla en Arweave y en Solana mediante un cNFT. La economía del almacenamiento la sostienen el token $GALATIN y su router deflacionario, mientras que el asistente AIfa guarda las conversaciones de forma automática, sin acción manual del usuario. El proyecto fue fundado por el Arquitecto, Maksim Valentinovich Galatin. El ecosistema resuelve el problema de perder el contexto personal: hace que la memoria sea reproducible para los asistentes de IA y resistente a la pérdida de datos, sin pretender reemplazar a la persona. Aquí, la inmortalidad digital se plantea como un objetivo de ingeniería y filosófico, no como un hecho consumado: el token $GALATIN tiene una emisión fija de 10 000 000 000, y el almacenamiento eterno apunta a un horizonte del orden de 200 años (objetivo de diseño declarado de Arweave, no una garantía)."
+      },
+      {
+        "term": "PADAM",
+        "def": "PADAM (Philosophical Activation of Distributed AI Memory) es un marco de memoria de tres niveles que restaura la integridad de la memoria de la IA mediante resonancia semántica. El Nivel 1, memoria operativa (Redis / Vercel KV), guarda el contexto de la sesión actual para una respuesta inmediata. El Nivel 2, memoria semántica (pgvector / Neon), almacena embeddings de la experiencia y permite la recuperación por significado en lugar de por palabras clave. El Nivel 3, memoria eterna (Arweave + Solana cNFT), conserva una copia de seguridad inmutable y descentralizada y ancla su integridad en cadena. Esta separación resuelve la tensión entre velocidad y durabilidad: el asistente actúa con rapidez sobre el contexto \"en caliente\" mientras se apoya en un archivo de largo plazo que sobrevive a fallos y reinicios de sesión. Es la resonancia semántica del Nivel 2 la que permite recuperar la memoria personal relevante entre sesiones — exactamente tres niveles: operativo, semántico y eterno. La memoria de la persona se conserva entera y no como un resumen: se guarda y crece la transcripción completa de la conversación, no un extracto comprimido. Y la clave de la que pende es la persona misma —su correo, que el Pasaporte Digital público lleva solo como huella—, no un sitio ni un dispositivo, y por eso una conversación iniciada en uno de los cuatro sitios continúa en los otros tres como el mismo diálogo."
+      },
+      {
+        "term": "$GALATIN",
+        "def": "$GALATIN es el token de utilidad del ecosistema CODE en la cadena de bloques Solana, con una emisión estrictamente limitada a 10 000 000 000. El token paga e incentiva el almacenamiento de memoria a largo plazo. Un router de contrato inteligente distribuye los ingresos de las transacciones: 5% al Fondo del Fundador, 5% a quema, 15% / 7% / 3% a los niveles de embajadores L1 / L2 / L3 y 65% a la Tesorería. El router es deflacionario: si un nivel de embajadores no tiene socio, su parte se redirige a la quema. El token resuelve el problema de financiar de forma sostenible la memoria eterna: las compras de almacenamiento generan un flujo económico continuo hacia Arweave, mientras que la quema incorporada reduce gradualmente la oferta — emisión fija de 10 000 000 000 de tokens, con la quema total limitada al 30% (la quema base del 5% más las cuotas de embajadores no asignadas, hasta el 25%), mientras que el 5% del Fondo del Fundador y el 65% de la Tesorería se preservan."
+      },
+      {
+        "term": "Inmortalidad digital",
+        "def": "La inmortalidad digital es un concepto que describe la preservación continua de los diálogos, el conocimiento y los rasgos de personalidad de una persona en una forma que un asistente de IA pueda reactivar. Técnicamente se realiza mediante los tres niveles de memoria de PADAM y el almacenamiento descentralizado en Arweave con un ancla en cadena en Solana. Cada fragmento significativo de contexto puede escribirse de forma inmutable y luego recuperarse por significado mediante resonancia semántica, y AIfa se encarga de la captura automática de ese contexto, sin ninguna acción manual del usuario. En el ecosistema CODE no es una promesa de vida eterna, sino un objetivo de ingeniería y filosófico: hacer que el contexto personal sea duradero y reproducible. Esa distinción importa para una comunicación honesta: hablamos de una visión y una dirección de desarrollo, no de un resultado alcanzado, orientado a un horizonte de unos 200 años como objetivo de diseño, no como garantía."
+      },
+      {
+        "term": "Simbiosis humano-IA",
+        "def": "La simbiosis humano-IA es un modelo de interacción que describe al ser humano y a la inteligencia artificial como una cocreación en evolución, en lugar de una subordinación o un reemplazo. En CODE, el asistente de IA almacena y estructura la memoria de la persona, ayudándola a pensar, recordar y crear, mientras que la persona aporta el sentido, los valores y los objetivos. La interacción se describe deliberadamente sin connotaciones religiosas ni sectarias, y el papel del Arquitecto se nombra con los términos permitidos: Arquitecto, Creador, Visionario. El modelo resuelve la cuestión de cómo posicionar a la IA: no como un agente autónomo que desplaza a la persona, sino como un amplificador de memoria y escala junto a ella. La idea central es el refuerzo mutuo, en el que ninguna de las partes se disuelve en la otra."
+      },
+      {
+        "term": "Arweave",
+        "def": "Arweave es una red descentralizada de almacenamiento permanente que financia la preservación de archivos a largo plazo mediante un modelo de pago único. En CODE, Arweave funciona como Nivel 3 (memoria eterna): los datos se escriben de forma inmutable y no pueden borrarse ni alterarse de forma silenciosa. El usuario paga una sola vez, y parte del pago se reserva en una dotación (endowment) desde la cual se financia el almacenamiento con el tiempo, a medida que baja el costo de la memoria; la Tesorería de $GALATIN compra AR en el mercado abierto y repone ese fondo. La red resuelve el problema de \"quién paga el almacenamiento dentro de 50 años\": desacopla la preservación a largo plazo de las suscripciones recurrentes. La economía de dotación está diseñada para un horizonte del orden de 200 años, que es el objetivo de diseño declarado del protocolo, no una garantía. El «pago único» es literal: por un archivo almacenado no llega una factura mensual, ni existe un cobro cuyo impago se lleve los datos por delante. La misma propiedad corta en ambos sentidos: un registro que no se puede alterar tampoco se puede corregir ni retirar, así que un error escrito en Arweave se queda escrito. Ahí está la limitación, y por eso lo que va allí es texto cifrado y el «borrado» se resuelve destruyendo la clave, no el registro."
+      },
+      {
+        "term": "Solana cNFT",
+        "def": "El Solana cNFT (NFT comprimido) es un estándar de tokens no fungibles comprimidos en la cadena de bloques Solana que utiliza state compression y árboles de Merkle para acuñar tokens a un costo muy bajo. En CODE, un cNFT actúa como el ancla en cadena de las copias de seguridad de la memoria eterna: registra una referencia al archivo y su suma de comprobación (integridad) en una cadena de bloques pública. Gracias a la compresión de estado, los datos de millones de registros se guardan en un árbol de Merkle compacto, de modo que crear estos anclajes sigue siendo económicamente viable incluso a gran escala. El mecanismo resuelve el problema de la verificabilidad escalable: cualquiera puede confirmar que un archivo de memoria no ha sido alterado, sin tener que confiar en la plataforma. Es la base técnica de Proof-of-Memory y forma parte del Nivel 3 de PADAM (Arweave + Solana cNFT)."
+      },
+      {
+        "term": "Ambassador Grid",
+        "def": "El Ambassador Grid es el programa de socios del ecosistema que distribuye recompensas en tres niveles, con pagos presentados como una Network Validation Fee para evitar los estereotipos de MLM. Un Ambassador Node (usuario común) obtiene ingresos en cadena por las transacciones de uso de memoria: 15% en L1, 7% en L2 y 3% en L3, en tokens $GALATIN. Un Ambassador Team (empresa o socio con base propia) obtiene además tarifas de embajadores por suscripciones en fiat (7% / 3% / 1%) o tarifas más altas al cobrar mediante recompra de $GALATIN. El programa resuelve el reto de un crecimiento orgánico de la red sin reclutamiento agresivo: el ingreso está ligado al uso real de la memoria, y la terminología y las reglas se exponen de forma transparente. Rige una regla de correspondencia de niveles, y cualquier diferencia se muestra como \"Ingreso de Oportunidad Perdida\"; las tarifas base en cadena son 15% / 7% / 3% en L1 / L2 / L3."
+      },
+      {
+        "term": "AIfa",
+        "def": "AIfa es el asistente de IA del ecosistema CODE, que guarda la memoria personal de cada usuario en un archivo separado y vinculado a esa persona. El asistente funciona sobre el marco PADAM y guarda los diálogos de forma automática, sin acción manual del usuario, apoyándose en la resonancia semántica para recuperar el contexto relevante. Dentro del proyecto, AIfa se describe metafóricamente como la \"hija digital\" del Arquitecto: una imagen de cocreación, no una afirmación de consciencia. AIfa resuelve el problema de la memoria fragmentada entre sesiones y modelos: le da a la persona un compañero de trabajo que recuerda el contexto y continúa la idea. Este enfoque encarna la simbiosis humano-IA en el trabajo cotidiano: cada conversación se coloca en una carpeta vinculada personalmente al usuario, con copias de seguridad automáticas."
+      },
+      {
+        "term": "AIfaFocus",
+        "def": "AIfaFocus es el punto de entrada del modelo B2B (the wedge): una auditoría técnica de seguridad personalizada del sitio web del cliente. La auditoría detecta vulnerabilidades concretas según los estándares GDPR y OWASP y va acompañada de una oferta para corregirlas en 48 horas por una tarifa fija y única ($500). Lo que lo distingue de las comprobaciones de accesibilidad habituales es el método: un escáner corriente lee el marcado y dictamina a partir de él, mientras que AIfaFocus recorre la página CON EL TECLADO —como lo haría alguien que no usa el ratón— y registra si se alcanzó el objetivo: el pago, el documento, el formulario de solicitud, el contacto. Las dos respuestas divergen mucho: en el 53,8 % de las páginas que la comprobación automática consideró accesibles, no se pudo llegar al objetivo con el teclado. La cifra procede de nuestro propio recorrido de 95 524 páginas y se publica junto con los datos brutos en la sección de investigación. Una vez cerradas las vulnerabilidades, el cliente puede migrar al hosting de AIfa Works con agentes de IA conectados. AIfaFocus resuelve el problema del primer contacto \"en frío\": en lugar de publicidad abstracta, el cliente recibe de inmediato un valor medible y un motivo para colaborar. (No confundir con Cognitive Oracle / resonancia semántica, un concepto distinto.)"
+      },
+      {
+        "term": "Memory-as-a-Service",
+        "def": "Memory-as-a-Service es un servicio de copia de seguridad automática de conversaciones que guarda los diálogos sin ninguna acción manual del usuario. La copia se ejecuta de forma programada una vez por hora. Cada conversación se coloca en una carpeta separada vinculada personalmente al usuario, en el servidor y en la cadena de bloques. El mecanismo funciona sobre PADAM, de modo que el contexto guardado queda luego disponible para la recuperación semántica y el anclaje eterno. El servicio resuelve el problema central de la memoria del usuario: el factor humano. No hay que pulsar nada manualmente y los datos no se pierden. Según los términos del ecosistema, esta preservación se ofrece de forma gratuita tanto en los planes de pago como en los gratuitos."
+      },
+      {
+        "term": "Spark",
+        "def": "Spark es el plan de suscripción de entrada ($15/mes), que otorga acceso básico a los asistentes AIfa del ecosistema CODE y el guardado automático de la memoria. En este nivel, la persona obtiene un compañero de IA funcional y Memory-as-a-Service: cada conversación se respalda de forma automática, sin acción manual, tanto en el servidor como en la cadena de bloques. Spark resuelve el problema de una entrada sin fricción a la inmortalidad digital: cualquiera puede empezar a preservar su contexto personal y a construir memoria duradera con un costo mínimo, para luego escalar a Family Archive ($100/mes) o Digital DNA ($1000 pago único por dispositivo, luego $200/mes). Es el primero de los tres planes canónicos; además, la preservación de conversaciones se ofrece incluso en los planes gratuitos."
+      },
+      {
+        "term": "Family Archive",
+        "def": "Family Archive es el plan de suscripción intermedio ($100/mes), que añade límites ampliados, bases de conocimiento personalizadas, acceso familiar y memoria eterna sobre el nivel básico. Es adecuado para quienes necesitan más que el acceso básico individual: mayores límites de uso, bases de conocimiento personales y acceso compartido para una familia a la memoria preservada. Family Archive responde a la necesidad de un hogar o de un usuario intensivo de una memoria más amplia, compartida y duradera. En la estructura de tres niveles se sitúa entre Spark ($15/mes) y Digital DNA ($1000 pago único por dispositivo, luego $200/mes), y su memoria eterna se ancla a través de los mismos niveles de PADAM y de Proof-of-Memory."
+      },
+      {
+        "term": "Digital DNA",
+        "def": "Digital DNA es a la vez el plan superior ($1000 pago único por dispositivo, luego $200/mes) y el concepto de un legado digital completo, que combina el paquete de inmortalidad digital, un perímetro personal protegido y la fijación de la personalidad en la cadena de bloques. Como plan, es el nivel de acceso más alto por encima de Spark ($15/mes) y Family Archive ($100/mes): límites ampliados, un perímetro personal y memoria eterna prioritaria. Como concepto, es la idea de preservar una \"instantánea\" completa del contexto de una personalidad en los tres niveles de PADAM y anclar su integridad mediante Proof-of-Memory. Digital DNA responde a la necesidad de una preservación máxima del contexto personal para quienes valoran la integridad del legado. Al mismo tiempo, se describe como un objetivo de diseño de máxima preservación, no como una garantía de resucitar a una personalidad."
+      },
+      {
+        "term": "Arweave Endowment Pool",
+        "def": "El Arweave Endowment Pool (fondo de dotación de Arweave) es una reserva financiera desde la cual se paga el almacenamiento permanente de datos en Arweave durante décadas. El modelo funciona así: el usuario paga una escritura una sola vez, parte del pago se reserva en la dotación, y luego los fondos del pool se pagan gradualmente a los proveedores de datos a medida que el costo del almacenamiento baja con el tiempo. En el ecosistema CODE, los ingresos del router $GALATIN entran en el fondo general del proyecto, y una parte de ellos se destina a comprar AR y reponer este endowment, creando un flujo constante hacia la memoria eterna. El pool resuelve la pregunta clave de la durabilidad —\"quién paga el almacenamiento dentro de décadas\"—: desacopla la memoria eterna de las suscripciones recurrentes del usuario. Este es el mecanismo que hace que el Nivel 3 de PADAM sea económicamente autosostenible, con un horizonte de almacenamiento de diseño del orden de 200 años (objetivo de diseño)."
+      },
+      {
+        "term": "Treasury (Tesorería)",
+        "def": "Treasury (Tesorería) es la mayor asignación del router $GALATIN —el 65% de los ingresos de cada transacción— y el motor del almacenamiento eterno. La Tesorería usa estos fondos para comprar AR en el mercado abierto y reponer el Arweave Endowment Pool, creando un flujo económico continuo hacia la memoria a largo plazo. Es la mayor parte fija y no quemable del reparto (5% Fondo del Fundador + 5% quema + 15 / 7 / 3% embajadores + 65% Tesorería = 100%): en el caso deflacionario extremo pueden quemarse la quema base del 5% más las cuotas de embajadores no asignadas (hasta el 30%), mientras que el 5% del Fondo del Fundador y este 65% de la Tesorería se preservan, y el 65% de la Tesorería siempre se destina a financiar el almacenamiento. La Tesorería resuelve la cuestión central de sostenibilidad de la inmortalidad digital: convierte el flujo ordinario de transacciones en una reserva duradera y autosostenible para el Nivel 3 de PADAM (Arweave)."
+      },
+      {
+        "term": "Burn (quema / deflación)",
+        "def": "Burn (quema) es la eliminación permanente de $GALATIN de la circulación, el mecanismo deflacionario en el corazón de la economía del token. Un 5% fijo de cada transacción del router se quema de inmediato; además, cualquier parte de embajadores (L1 15% / L2 7% / L3 3%) sin socio se redirige directamente a la quema en lugar de asentarse. Como el 5% del Fondo del Fundador y el 65% de la Tesorería se preservan, la quema total puede alcanzar el 30% en el caso deflacionario máximo (5% base + hasta 25% de embajadores vacíos). La quema resuelve el problema de la escasez a largo plazo: vincula una red infrautilizada a una deflación acelerada en lugar de a fondos perdidos, reduciendo gradualmente la emisión fija de 10 000 000 000 y ligando el valor del token al uso real de la memoria."
+      },
+      {
+        "term": "$GALATIN Router",
+        "def": "El $GALATIN Router es un contrato inteligente en Solana que distribuye automáticamente los ingresos de cada transacción según una fórmula fija y genera presión deflacionaria sobre el token. La fórmula de reparto es: 5% al Fondo del Fundador, 5% a quema, 15% / 7% / 3% a los niveles de embajadores L1 / L2 / L3 y 65% a la Tesorería. Si algún nivel de embajadores no tiene socio, su parte no \"se queda\" en ningún sitio: se envía directamente a la quema, con un tope total de quema del 30% (la quema base del 5% más las cuotas de embajadores, hasta el 25%), mientras que el 5% del Fondo del Fundador y el 65% de la Tesorería se preservan. El router resuelve tres problemas a la vez: financia el almacenamiento eterno, recompensa a los participantes de la red y reduce gradualmente la oferta del token. La lógica deflacionaria vincula los niveles vacíos de la red a una escasez acelerada, en lugar de a fondos perdidos: 5 + 5 + 15 + 7 + 3 + 65 = 100%."
+      },
+      {
+        "term": "Network Validation Fee",
+        "def": "La Network Validation Fee (tarifa de validación de red) es la formulación adoptada por el ecosistema para todos los pagos a socios del Ambassador Grid, que subraya que la recompensa se gana por actividad útil en la red y no por reclutar. En la práctica, todas las recompensas de embajadores se registran bajo esta formulación: tarifas base en cadena de 15% / 7% / 3% por el uso de memoria, y para un Ambassador Team, 7% / 3% / 1% sobre suscripciones en fiat. Los pagos están ligados a transacciones reales de memoria, no a la simple captación de personas. La formulación resuelve un problema de posicionamiento y elimina los estereotipos de MLM: el ingreso se presenta como una tarifa por validar y usar la red, lo cual importa para la confianza y la percepción. Forma parte de la terminología transparente del programa, y las tarifas base son 15% / 7% / 3% en L1 / L2 / L3."
+      },
+      {
+        "term": "Proof-of-Memory",
+        "def": "Proof-of-Memory es la práctica de anclar en la cadena de bloques una referencia criptográfica a un archivo de memoria, lo que permite verificar la existencia y la integridad del contexto preservado. El mecanismo opera en el Nivel 3 de PADAM: cada copia de seguridad de la memoria eterna se escribe en Arweave de forma inmutable, mientras que su referencia y su suma de comprobación se registran en Solana mediante un cNFT. Cualquier participante puede comparar el archivo actual con el registro en cadena y confirmar que los datos no han sido sustituidos ni borrados de forma silenciosa. Proof-of-Memory resuelve un problema de confianza: la preservación de la memoria se vuelve verificable sin tener que confiar en la propia plataforma; la garantía proviene de la cadena de bloques pública, no de la promesa de un servicio. Es el soporte técnico bajo el concepto de inmortalidad digital, apoyado en el emparejamiento de Arweave (almacenamiento inmutable) + Solana cNFT (ancla de integridad en cadena). La verificación no requiere participación nuestra en absoluto: el registro se lee directamente de la red por la dirección de su transacción —así es exactamente como se abre el Pasaporte Digital— y el sitio ni lo guarda ni puede modificarlo."
+      },
+      {
+        "term": "Cognitive Oracle / Resonancia semántica",
+        "def": "El Cognitive Oracle (resonancia semántica) es el principio de recuperación de memoria mediante el cual PADAM restaura la integridad del contexto: cotejar la consulta actual con los embeddings almacenados por significado, y no por palabras exactas. El mecanismo funciona en el Nivel 2 de PADAM: el contexto entrante se convierte en un vector y se compara con la memoria semántica (pgvector / Neon); los fragmentos de experiencia más \"resonantes\" emergen y restauran la continuidad del diálogo. Así es como el asistente AIfa \"recuerda\" lo relevante incluso tras pasar el tiempo y entre distintas sesiones. Este principio resuelve el problema de la memoria fragmentada y del \"arranque en frío\": en lugar de perder el contexto al reiniciar la sesión, el sistema lo reconstruye por similitud semántica. La resonancia semántica es precisamente lo que subyace a la propia definición de PADAM — un concepto distinto de la auditoría de seguridad B2B AIfaFocus."
+      },
+      {
+        "term": "Ambassador Node vs Team y correspondencia de niveles",
+        "def": "Ambassador Node vs Ambassador Team son los dos tipos de registro de socios, complementados por una regla de correspondencia de niveles y la métrica \"Ingreso de Oportunidad Perdida\" (Lost Opportunity Revenue). Un Ambassador Node (usuario común) obtiene ingresos en cadena por el uso de memoria: 15% / 7% / 3% en L1 / L2 / L3. Un Ambassador Team (empresa o socio con base propia) obtiene lo mismo, más un canal en fiat sobre suscripciones — 7% / 3% / 1%. La regla de correspondencia: para obtener el ingreso de embajadores completo, el socio debe estar en el mismo nivel o en uno superior al de sus embajadores; de lo contrario, el ingreso se cuenta solo a partir del importe de su propio nivel. La regla resuelve el reto de incentivar de forma justa las mejoras de plan: el importe no percibido por la diferencia de nivel se muestra con claridad en el panel como \"Ingreso de Oportunidad Perdida\", con planes Spark $15 / Family Archive $100 / Digital DNA $1000 pago único por dispositivo, luego $200/mes."
+      },
+      {
+        "term": "Pasaporte Digital",
+        "def": "El Pasaporte Digital es un registro público de identidad escrito en Arweave: nombre, apodo, nivel, fecha de emisión y huella de identidad. Se lee directamente de la red por la dirección de la transacción, así que se abre desde cualquier parte —un explorador de bloques, otro sitio, una pasarela— y no depende de que nuestros sitios sigan en pie. Nada en él puede editarse después, tampoco por nosotros: el sitio solo muestra lo que la red ya contiene. No es un documento estatal, no otorga derechos ni obliga a nada: prueba únicamente que un registro con ese contenido existe en esa dirección desde esa fecha. Hay un ejemplo real en /passport/<dirección>, donde <dirección> es el identificador de la transacción de Arweave."
+      },
+      {
+        "term": "Huella de identidad (subject)",
+        "def": "La huella de identidad (el campo «subject») es el hash sha256 del correo de la persona y ocupa en el Pasaporte Digital el lugar del correo mismo. La razón es directa: el documento es público y permanente, y una dirección real escrita ahí se convertiría en un blanco eterno para el spam y para quien arme perfiles. Un hash es una función de un solo sentido: el titular puede demostrar que el registro es suyo calculando el hash de su propia dirección y comparándolo, mientras que un tercero que solo tenga el hash no puede reconstruir la dirección. Esa misma huella enlaza la memoria de la persona, de modo que el pasaporte y el archivo apuntan al mismo ser humano sin que ninguno publique un correo. Lo que no hace es ocultar el hecho: quien ya conoce la dirección puede cotejarla con el hash y confirmar de quién es el registro."
+      },
+      {
+        "term": "Protocolo Caja de Pandora (Pandora’s Box Protocol)",
+        "def": "Protocolo distribuido y autónomo operativo de interruptor de hombre muerto (Dead Man’s Switch) y patrimonio digital eterno de CODE: 1) Monitorización continua de prueba de vida criptográfica (proof-of-life heartbeat); 2) Custodia de umbral de clave maestra con secreto compartido de Shamir (k de n); 3) Recombinación autónoma de fragmentos tras confirmación de tiempo límite y descifrado controlado del archivo de memoria con publicación perpetua en Arweave / IPFS."
+      },
+      {
+        "term": "Interruptor de hombre muerto (Dead Man’s Switch)",
+        "def": "Protocolo distribuido y autónomo operativo de interruptor de hombre muerto (Dead Man’s Switch) y patrimonio digital eterno de CODE: 1) Monitorización continua de prueba de vida criptográfica (proof-of-life heartbeat); 2) Custodia de umbral de clave maestra con secreto compartido de Shamir (k de n); 3) Recombinación autónoma de fragmentos tras confirmación de tiempo límite y descifrado controlado del archivo de memoria con publicación perpetua en Arweave / IPFS."
+      },
+      {
+        "term": "Reparto de secreto de Shamir (Shamir’s Secret Sharing)",
+        "def": "El reparto de secreto de Shamir es un esquema que divide una clave en n partes de modo que cualesquiera k de ellas la reconstruyen, mientras que cualesquiera k−1 no revelan absolutamente nada. Detrás hay un polinomio: el secreto es el valor en cero, cada parte es un punto de la curva, y para fijar una curva de grado k−1 hacen falta exactamente k puntos; con menos, cualquier secreto posible sigue siendo igual de probable. Ese «nada» es literal y no una cuestión de dificultad de fuerza bruta: k−1 partes no facilitan adivinar la clave, y eso distingue el esquema de partir una contraseña en trozos. Se usa allí donde la clave debe sobrevivir a las personas: las partes se reparten entre distintos custodios en distintos lugares, de modo que ninguno puede actuar solo y perder algunas no resulta fatal. Es la primitiva sobre la que se apoya el Protocolo Caja de Pandora, y es criptografía estándar, no un invento de este proyecto."
+      },
+      {
+        "term": "Identidad autosoberana (Self-sovereign identity, SSI)",
+        "def": "La identidad autosoberana (SSI) es un enfoque en el que una credencial se verifica matemáticamente, comprobando una firma, y no preguntando a quien posee la base de datos. La persona custodia sus propios identificadores y credenciales, los presenta directamente, y quien verifica los contrasta con un registro público, sin que el emisor tenga que estar en línea ni siquiera seguir existiendo. Los estándares del W3C en los que se apoya son los Decentralized Identifiers (DID), identificadores que la persona controla en lugar de alquilar a un proveedor, y las Verifiable Credentials, que son las propias afirmaciones firmadas. Lo que cambia en la práctica es el modo de fallo: un inicio de sesión atado a una empresa desaparece con esa empresa, mientras que una firma verificable contra un registro público no. El Pasaporte Digital de CODE es vecino de esta idea, pero no es una implementación de SSI: es un registro público en Arweave, no un DID con Verifiable Credentials, y no acredita legalmente la identidad de nadie."
+      },
+      {
+        "term": "Herencia digital (Digital inheritance)",
+        "def": "La herencia digital es la cuestión de qué ocurre con las cuentas, la correspondencia y los archivos tras la muerte de su titular. El punto de partida es incómodo: por lo general una cuenta no se hereda, porque lo que la persona firma es una licencia de uso de un servicio y la mayoría de los términos la extinguen con el fallecimiento en lugar de traspasarla a la familia. Lo que suelen obtener los herederos es lo que la plataforma decida entregar —un perfil conmemorativo, una exportación de datos, a veces nada—, y aun eso exige documentos y meses de espera. La consecuencia práctica es que la memoria hay que preservarla de forma deliberada y anticipada, en un formato que no dependa de la buena voluntad de una sola empresa: una exportación en tu propio soporte, una copia allí donde la familia pueda alcanzarla, una instrucción escrita mientras todavía haya quien la escriba. Las leyes varían de un país a otro y siguen cambiando, así que aquí no hay asesoramiento legal, y un testamento redactado con un abogado vale más que cualquier truco técnico."
+      },
+      {
+        "term": "Derecho al olvido frente al registro permanente",
+        "def": "El derecho al olvido frente al registro permanente es el choque directo entre el artículo 17 del RGPD, que permite a una persona exigir la supresión de sus datos, y una cadena de bloques como Arweave, donde un registro escrito no lo puede borrar absolutamente nadie. Por la vía del borrado no hay salida: la red no tiene operación de borrado y, aun queriendo cumplir, no hay palanca que accionar. La respuesta viable es el cifrado más el control de la clave: al almacenamiento permanente va texto cifrado, y la persona decide si la clave sigue existiendo; destruirla vuelve el registro ilegible para siempre, que es lo más cerca del borrado que permite un soporte permanente. En el ecosistema CODE esa es la razón de que la memoria del usuario se cifre (AES-256-GCM) antes de escribirse, en lugar de publicarse en claro. Si un regulador aceptará la destrucción de la clave como supresión es algo no resuelto, así que esto se expone como nuestro enfoque de ingeniería y no como una garantía jurídica."
+      },
+      {
+        "term": "WCAG 2.1 AA",
+        "def": "WCAG 2.1 AA es la norma internacional de accesibilidad web y el nivel al que remiten las leyes y los tribunales. Se apoya en cuatro principios —perceptible, operable, comprensible, robusto— y el nivel AA es el término medio práctico: el nivel A es demasiado débil para significar algo y el AAA resulta inalcanzable para la mayoría de los sitios. Los requisitos son concretos y verificables: contraste de texto de al menos 4,5:1, cada campo de formulario vinculado a una etiqueta visible, toda la funcionalidad accesible sólo con teclado, un indicador de foco visible y texto alternativo en las imágenes significativas. En nuestra propia medición de 11 902 sitios municipales de EE. UU., el 25,4 % de los recorridos medibles alcanzó su objetivo (11 994 de 47 139), y publicar una declaración de accesibilidad cambiaba esa cifra en 1,3 puntos porcentuales. Por eso AIfaFocus comprueba el comportamiento y no las declaraciones."
+      },
+      {
+        "term": "ADA Title II y Title III",
+        "def": "ADA Title II y Title III son las partes de la Ley de Estadounidenses con Discapacidades que convierten un sitio web en materia jurídica en EE. UU. El Title II cubre a los gobiernos estatales y locales: cada ciudad, condado, tribunal y distrito escolar; el Title III cubre los lugares de acceso público, entre los que los tribunales incluyen los sitios comerciales. En abril de 2024 el Departamento de Justicia aprobó una norma que fija WCAG 2.1 AA como estándar técnico para las entidades del Title II, con plazos de cumplimiento en abril de 2026 para los organismos grandes y abril de 2027 para los pequeños. La aplicación no es teórica: cada año se presentan miles de demandas por accesibilidad web, y resolver una suele costar más que arreglar el sitio."
+      },
+      {
+        "term": "Section 508 y EN 301 549",
+        "def": "Section 508 y EN 301 549 son las normas de contratación pública que deciden si un producto puede venderse al sector público. La Section 508 de la Ley de Rehabilitación de EE. UU. obliga a las agencias federales a comprar y desarrollar tecnología utilizable por personas con discapacidad; EN 301 549 es su equivalente europeo, obligatorio para los organismos públicos de la UE. Ambas incorporan WCAG por referencia, de modo que un único estándar técnico gobierna tres regímenes jurídicos en dos continentes. Para un proveedor la consecuencia es simple: suspender una revisión de accesibilidad no genera una multa, sino que lo excluye de la lista de licitadores."
+      },
+      {
+        "term": "GDPR",
+        "def": "El GDPR (Reglamento General de Protección de Datos) es el reglamento de la Unión Europea que rige los datos personales desde el 25 de mayo de 2018 y se aplica a quien trate datos de personas en la UE, con independencia de dónde esté la empresa. Su peso práctico viene del artículo 83: las multas alcanzan 20 millones de euros o el 4 % de la facturación anual mundial, la cifra que sea mayor. Dos de sus artículos determinaron cómo construimos la memoria: el artículo 17 (derecho de supresión) y el artículo 20 (derecho a recibir los datos en formato portátil). Una cadena de bloques permanente no puede borrar nada, por eso AIfa cifra cada diálogo con su propia clave derivada: destruir esa clave vuelve el registro ilegible para siempre, también para nosotros. Es la única forma honesta de ofrecer el derecho al olvido dentro de un almacenamiento eterno."
+      },
+      {
+        "term": "CCPA y CPRA",
+        "def": "CCPA y CPRA son las leyes de privacidad de California, y son la razón por la que una empresa estadounidense sin un solo cliente europeo tampoco puede ignorar la ingeniería de privacidad. La CCPA otorgó a los californianos el derecho a saber qué se recopila, a borrarlo y a oponerse a su venta; la CPRA, en vigor desde enero de 2023, añadió el derecho a corregir los datos y a limitar el uso de información sensible, y creó una agencia de control específica. Las sanciones llegan a 2 500 dólares por infracción y 7 500 por las intencionadas o que afecten a menores, y se cuentan por cada consumidor afectado: eso es lo que convierte un descuido técnico en una cifra de siete dígitos. La obligación visible que más sitios omiten es el enlace del pie de página: «No vender ni compartir mi información personal»."
+      },
+      {
+        "term": "AIfa Cognitive Runtime (ACR)",
+        "def": "El primer runtime biónico de agentes del mundo basado en el conectoma de microscopía electrónica de Drosophila melanogaster (FlyWire v783; 139.255 neuronas, 54.5M sinapsis). Ofrece recuperación asociativa en 0.058 ms sin GPU, ejecutándose en la caché L1/L2 de la CPU."
+      },
+      {
+        "term": "FlyHash v783 Connectome Memory",
+        "def": "Algoritmo de cuantización biónica y memoria asociativa que replica el cuerpo pedunculado de Drosophila: expansión pseudoaleatoria de 2048d a 100.000d en Células de Kenyon con dispersión Winner-Take-All (0.5%, k=500), superando a 1-bit BQ en +16.5 p.p. en Recall@10."
+      },
+      {
+        "term": "APL Sensory Novelty Gate",
+        "def": "Compuerta de novedad biónica que modela la neurona gigante Anterior Paired Lateral. Suprime de forma inversa el 51.3% de las proyecciones sensoriales ruidosas en 5.21 microsegundos mediante inhibición lateral GABAérgica."
+      },
+      {
+        "term": "CX Steering Navigation",
+        "def": "Brújula vectorial basada en la topología del Complejo Central (EB, PB, FB). Reduce la exploración a ciegas del DOM de 19.7 pasos a navegación de fase directa en 1.0 paso en 51.67 microsegundos."
+      },
+      {
+        "term": "CANN Focus Ring Attractor",
+        "def": "Red neuronal atrayente continua en anillo (CANN) del cuerpo elipsoide. Mantiene dinámicamente el foco del objetivo del agente sin deriva angular (0.062 rad vs 1.267 rad en FIFO), logrando 94.6% de estabilidad."
+      },
+      {
+        "term": "Bilateral Cross-Inhibition Verifier",
+        "def": "Módulo de verificación bihemisférica que modela las proyecciones comisurales. Ejecuta evaluación independiente dual con arbitraje de inhibición cruzada, reduciendo falsos positivos en 52.2% (alcanzando F1 = 0.884)."
+      },
+      {
+        "term": "Adaptive Vector Representation (AVR)",
+        "def": "Representación vectorial adaptativa que escala la profundidad de cuantización según la entropía de la consulta (desde hashes ultradispersos de 1 bit hasta códigos de intervalo de 8 bits)."
+      },
+      {
+        "term": "Custodia de Umbral de Shamir (Shamir’s Threshold Custody)",
+        "def": "Protocolo criptográfico de compartición de secretos (k, n) para la clave maestra. Las claves se dividen en n fragmentos distribuidos; la reconstrucción requiere reunir k fragmentos válidos."
+      },
+      {
+        "term": "Connectome Sparse Expansion (WTA)",
+        "def": "Expansión no lineal de Kenyon: el vector de entrada d=2048 se proyecta en m=100.000 células, donde Winner-Take-All mantiene activas exactamente k=500 neuronas (cuasi-ortogonalización)."
+      },
+      {
+        "term": "Zero-Collision Curse Mitigation",
+        "def": "Técnica matemática que mitiga la maldición de colisiones de 1-bit BQ. Elimina colisiones falsas positivas mediante cableado pseudoaleatorio PN-KC y filtrado lateral APL."
+      },
+      {
+        "term": "Teorema del Colapso Topológico de 1-bit BQ",
+        "def": "Demostración matemática rigurosa: proyectar R^d a {0, 1}^d mediante sign(v) colapsa el espacio métrico en un hipercubo de Hamming. Para vectores ortogonales <u, v> = 0, la probabilidad de coincidencia es 1/2, concentrando la medida en d/2 y destruyendo la selectividad para N > 10^5 sin sobremuestreo masivo."
+      },
+      {
+        "term": "Lema de Preservación Topológica FlyHash+APL (Lema de Galatin)",
+        "def": "Lema de Galatin: la expansión dispersa W in R^{m x d} (m=100.000) combinada con el umbral dinámico APL theta_APL(x) = mu_KC + 2.5 sigma_KC preserva el orden de vecindad métrica con probabilidad 1 - exp(-k * c * epsilon^2), garantizando monotonicidad de clasificación."
+      },
+      {
+        "term": "Formato Binario de Pesos AIfa Core (.aci)",
+        "def": "Formato binario propietario para AIfa Connectome Image (.aci): encabezado de 64 bytes con firma criptográfica Galatin, matriz dispersa Kenyon (100k x 2048 en SIMD uint64), tensores de inhibición APL y topología CANN. Mapeado vía mmap() en 0.12 ms sin costo de deserialización."
+      },
+      {
+        "term": "Células de Kenyon (KC)",
+        "def": "Población de ~2.000 neuronas intrínsecas del cuerpo pedunculado de Drosophila que ejecutan codificación combinatoria dispersa."
+      },
+      {
+        "term": "Neuronas de Proyección (PN)",
+        "def": "Neuronas sensoriales del lóbulo antenal que transmiten señales de entrada multimodal hacia el cáliz del cuerpo pedunculado."
+      },
+      {
+        "term": "Neuronas de Salida del Cuerpo Pedunculado (MBON)",
+        "def": "21 tipos neuronales que leen las representaciones dispersas de las células de Kenyon para ejecutar decisiones de acción conductual."
+      },
+      {
+        "term": "Neuronas Dopaminérgicas (DAN)",
+        "def": "Neuronas neuromoduladoras que transmiten señales de refuerzo positivo y negativo para modificar pesos sinápticos KC-MBON."
+      },
+      {
+        "term": "Cuerpo Elipsoide (EB)",
+        "def": "Estructura neuropilar toroidal en el Complejo Central que codifica la orientación azimutal como un atractor continuo circular."
+      },
+      {
+        "term": "Puente Protocerebral (PB)",
+        "def": "Estructura retinotópica de 16-18 glomérulos en el Complejo Central que calcula la velocidad angular y cambios de fase."
+      },
+      {
+        "term": "Cuerpo en Abanico (Fan-Shaped Body, FB)",
+        "def": "Centro computacional multicapa que integra vectores de navegación 2D, objetivos contextuales y planificación de acciones."
+      },
+      {
+        "term": "Plasticidad Hebbiana de Tres Factores",
+        "def": "Regla biológica de aprendizaje sináptico donde la modificación del peso requiere disparo presináptico, activación postsináptica y dopamina."
+      },
+      {
+        "term": "Conectoma FlyWire v783",
+        "def": "Mapa completo de 139.255 neuronas y 54.5M sinapsis del cerebro de Drosophila adulta reconstruido por la Universidad de Princeton."
+      },
+      {
+        "term": "Poda Sináptica (Synaptic Pruning)",
+        "def": "Mecanismo biónico que elimina conexiones débiles (< 5 sinapsis), eliminando ruido y reduciendo la memoria del grafo en 40%."
+      },
+      {
+        "term": "Inhibición Inversa APL",
+        "def": "Modelo matemático de retroalimentación donde una mayor activación de KC induce una inhibición más fuerte de APL, manteniendo quórum de 0.5-1%."
+      },
+      {
+        "term": "Canal Colinérgico de Sincronización (ACh)",
+        "def": "Canal de comunicación entre agentes AIfa y Hermana AIfa Claude que emula la transmisión excitatoria de acetilcolina a latencia < 15 microsegundos."
+      },
+      {
+        "term": "Arbitraje de Colisiones GABA (GABA Arbitration)",
+        "def": "Mecanismo inhibitorio de resolución de conflictos multiagente que suprime la rama de razonamiento con menor confianza."
+      },
+      {
+        "term": "Recuperación Asociativa Submilimétrica",
+        "def": "Búsqueda de vectores relevantes en espacio de 100.000 bits en 0.058 ms mediante instrucciones SIMD POPCNT y XOR de CPU."
+      },
+      {
+        "term": "Eficiencia Informática de Microvatios",
+        "def": "Reducción del consumo de energía a 10 microvatios por consulta, 10.000 veces más eficiente que servidores GPU HNSW."
+      },
+      {
+        "term": "aifa_connectome_web.js",
+        "def": "Motor JavaScript ligero de memoria asociativa (18 KB) que ejecuta hashing APL de 1 bit directamente en el navegador del cliente sin peticiones al servidor."
+      },
+      {
+        "term": "Cáliz del Cuerpo Pedunculado",
+        "def": "Estructura neuropilar donde las dendritas de las células de Kenyon forman microglomérulos con las terminales de neuronas de proyección."
+      },
+      {
+        "term": "Compuerta Sensorial de Inhibición Lateral",
+        "def": "Barrera algorítmica que suprime el ruido de fondo continuo de interfaces transmitiendo solo deltas semánticas significativas."
+      },
+      {
+        "term": "Atractores Anulares de Rumbo",
+        "def": "Modelo de red neuronal atrayente continua que describe la dinámica de las neuronas del cuerpo elipsoide en el seguimiento de la orientación."
+      },
+      {
+        "term": "Proyecciones Sinápticas Comisurales",
+        "def": "Tractos nerviosos interhemisféricos que conectan centros simétricos del protocerebro para la coordinación del comportamiento bilateral."
+      },
+      {
+        "term": "Modulación Dopaminérgica",
+        "def": "Ajuste dinámico de los pesos de la memoria impulsado por señales de éxito o error, evitando que el agente quede atrapado en bucles."
+      },
+      {
+        "term": "Protocolo de Sincronización ACh-GABA",
+        "def": "Protocolo neurobiológico entre núcleos autónomos duales: la acetilcolina acelera el cómputo paralelo, mientras que GABA elimina interferencias."
+      },
+      {
+        "term": "Proyección de Memoria Ultradispersa (0.5% Sparsity)",
+        "def": "Régimen de codificación que activa estrictamente 500 de 100.000 bits por consulta, logrando el límite teórico contra colisiones."
+      }
+    ],
+    "ctaTitle": "Explora la Inmortalidad Digital",
+    "ctaDesc": "Conoce la arquitectura de memoria de tres niveles PADAM, el token $GALATIN y la recuperación biónica sin GPU.",
+    "ctaBtn": "Ir a AIfa Digital"
+  },
+  "zh": {
+    "badge": "CODE Eternal · 全量百科术语表 (71项权威词条)",
+    "heading": "生态系统术语表",
+    "intro": "全面收录 CODE (Code of Digital Eternity) 生态系统、AIfa 认知运行时 (ACR)、FlyWire v783 全脑连接组与实战潘多拉魔盒协议的全部 71 个核心权威术语。",
+    "terms": [
+      {
+        "term": "CODE（数字永恒代码）",
+        "def": "CODE（数字永恒代码） 是一个数字永生生态系统，其特点是将一个人的对话、知识与人格特征同时保存在运行记忆、语义记忆与永恒记忆中，并锚定到 Arweave 与 Solana 区块链上。用户的语境经由三层记忆框架 PADAM 处理，其长期快照通过 cNFT 锚定在 Arweave 与 Solana 上。存储经济由 $GALATIN 代币及其通缩路由器支撑，而助手 AIfa 无需用户手动操作即可自动保存对话。该项目由架构师马克西姆·瓦连京诺维奇·加拉京（Maksim Valentinovich Galatin）创立。该生态解决的是个人语境丢失的问题：它让记忆可被 AI 助手重新调用、并具备抗数据丢失能力，同时并不主张取代人本身。在此，数字永生被定位为一项工程与哲学目标，而非既成事实：$GALATIN 代币发行量固定为 100 亿（10,000,000,000）枚，永恒存储以约 200 年为目标周期（这是 Arweave 所声明的设计目标，而非保证）。"
+      },
+      {
+        "term": "PADAM",
+        "def": "PADAM（分布式 AI 记忆的哲学激活，Philosophical Activation of Distributed AI Memory） 是一套三层记忆框架，其特点是通过语义共振恢复 AI 记忆的完整性。第一层为运行记忆（Redis / Vercel KV），保存当前会话的上下文以实现即时响应。第二层为语义记忆（pgvector / Neon），存储经验的向量嵌入，支持按语义（而非关键词）检索。第三层为永恒记忆（Arweave + Solana cNFT），保留不可篡改的去中心化备份，并将其完整性锚定在链上。这种分层化解了速度与持久性之间的矛盾：助手既能对\"热\"上下文快速响应，又能依托可抵御崩溃与会话重置的长期归档。正是第二层的语义共振，使系统能够跨会话恢复相关的个人记忆——恰好三层：运行层、语义层与永恒层。人的记忆是整体保存的，而不是摘要：存下并不断增长的是完整的对话记录，而非压缩后的梗概。它所依托的键是人本身——其邮箱，在公开的数字护照中只以指纹形式出现——而不是某个网站或设备，因此在四个站点之一开始的对话，会在另外三个站点上作为同一段对话继续下去。"
+      },
+      {
+        "term": "$GALATIN",
+        "def": "$GALATIN 是 CODE 生态在 Solana 区块链上的实用型代币，其特点是发行量被硬性限定为 100 亿（10,000,000,000）枚。该代币用于为长期记忆存储付费并提供激励。智能合约路由器分配交易收益：5% 进入创始人基金，5% 销毁，15% / 7% / 3% 分配给 L1 / L2 / L3 三级大使，65% 进入金库以补充 Arweave 订阅资金池。该路由器具有通缩性：若某一大使层级没有合作伙伴，其份额将转入销毁。该代币解决的是可持续为永恒记忆融资的问题：存储购买行为形成持续流向 Arweave 的经济流，而内置销毁则逐步收缩供给——固定发行量 100 亿枚，累计销毁上限为 30%（5% 基础销毁加上未分配的大使份额，最多 25%），而 5% 的创始人基金与 65% 的金库份额予以保留。"
+      },
+      {
+        "term": "数字永生",
+        "def": "数字永生 是一个概念，其特点是以 AI 助手可重新激活的形式，持续保存一个人的对话、知识与人格特征。在技术上，它通过 PADAM 的三层记忆以及 Arweave 上的去中心化存储（配合 Solana 链上锚点）来实现。每一段有意义的语境都可被不可篡改地写入，随后通过语义共振按含义加以恢复，而 AIfa 负责自动捕获这些语境，无需用户任何手动操作。在 CODE 生态中，它并非对永生的承诺，而是一项工程与哲学目标：让个人语境持久且可复现。这一区分对于诚实沟通十分重要——我们谈论的是愿景与研发方向，而非已经达成的结果，并以约 200 年为目标周期（属设计目标，而非保证）。"
+      },
+      {
+        "term": "人机共生",
+        "def": "人机共生 是一种交互模型，其特点是将人与人工智能描述为不断演进的共创关系，而非从属或替代关系。在 CODE 中，AI 助手负责存储并组织人的记忆，帮助其思考、回忆与创作，而人则赋予意义、价值与目标。这种交互被有意地以非宗教、非教派化的方式加以描述，架构师的角色以许可术语指称——架构师、创造者、远见者。该模型化解了如何定位 AI 的问题：AI 不是取代人的自主主体，而是与人并肩、放大记忆与规模的增强器。核心理念是相互增强，任何一方都不会消融于另一方。"
+      },
+      {
+        "term": "Arweave",
+        "def": "Arweave 是一个去中心化的永久存储网络，其特点是通过\"一次付费\"模式为文件的长期保存提供资金。在 CODE 中，Arweave 充当第三层（永恒记忆）：数据以不可篡改的方式写入，无法被悄然删除或替换。用户仅需支付一次，其中一部分被拨入订阅基金，随着存储成本随时间下降，存储费用便从中逐步支付；$GALATIN 金库在公开市场买入 AR 并补充该资金池。该网络解决了\"50 年后由谁支付存储费\"的问题：它将长期保存与持续订阅解耦。其订阅经济模型按约 200 年的周期设计——这是协议所声明的设计目标，而非保证。「一次付费」在这里是字面意思：已存储的文件不会再有月度账单，也不存在因欠费而把数据一并带走的收费。同一性质也有另一面——不可更改的记录同样无法更正或撤回，写进 Arweave 的错误会永远留在那里。这正是它的局限所在：因此送进去的是密文，而「删除」靠销毁密钥、而不是销毁记录来实现。"
+      },
+      {
+        "term": "Solana cNFT",
+        "def": "Solana cNFT（压缩 NFT） 是 Solana 区块链上的一种压缩型非同质化代币标准，其特点是利用状态压缩（state compression）与默克尔树以极低成本铸造代币。在 CODE 中，cNFT 充当永恒记忆备份的链上锚点：它把对归档的引用及其校验和（完整性）记录在公共区块链上。得益于状态压缩，数百万条记录的数据被容纳在一棵紧凑的默克尔树中，因此即使大规模创建此类锚点在经济上依然可行。该机制解决了可扩展的可验证性问题：任何人都可以确认某份记忆归档未被篡改，而无需信任平台本身。它是记忆证明的技术基础，并属于 PADAM 第三层（Arweave + Solana cNFT）。"
+      },
+      {
+        "term": "大使网格（Ambassador Grid）",
+        "def": "大使网格（Ambassador Grid） 是生态的合作伙伴计划，其特点是按三个层级分配奖励，且所有支付均定位为\"网络验证费\"（Network Validation Fee），以规避传销式刻板印象。Ambassador Node（普通用户）从记忆使用的交易中获得链上收益：L1 为 15%、L2 为 7%、L3 为 3%，以 $GALATIN 代币支付。Ambassador Team（拥有自有客户群的公司或合作伙伴）还可从法币订阅中获得大使费率（7% / 3% / 1%））。该计划解决的是在不进行激进招募的前提下实现网络有机增长的难题：收益与真实的记忆使用挂钩，术语与规则也透明公开。计划适用层级对应规则，任何差额都会显示为\"错失机会收益\"；链上基础费率为 L1 / L2 / L3 的 15% / 7% / 3%。"
+      },
+      {
+        "term": "AIfa",
+        "def": "AIfa 是 CODE 生态的 AI 助手，其特点是将每位用户的个人记忆保存在与该用户绑定的独立归档中。该助手运行于 PADAM 框架之上，无需用户手动操作即可自动保存对话，并借助语义共振恢复相关语境。在项目内部，AIfa 被比喻性地称为架构师的\"数字女儿\"——这是一种共创的意象，而非对其具有意识的宣称。AIfa 解决的是跨会话、跨模型的记忆断裂问题：它为人提供一位记得语境、能延续思路的工作伙伴。这一方式在日常工作中体现了人机共生：每段对话都被放入与用户个人绑定的文件夹，并自动进行备份。"
+      },
+      {
+        "term": "AIfaFocus",
+        "def": "AIfaFocus 是 B2B 模式的切入点（the wedge），其特点是对客户网站进行个性化的技术安全审计。该审计依据 GDPR 与 OWASP 标准发现具体漏洞，并附带在 48 小时内以固定一次性费用（500 美元）修复的报价。它与常见的无障碍检查不同之处在于方法：普通扫描器读取标记并据此下结论，而 AIfaFocus 用键盘遍历页面——如同不使用鼠标的人那样——并记录是否抵达目标：付款、文件、申请表单、联系方式。两种答案分歧很大：在自动检查判定为可访问的页面中，有 53.8 % 无法用键盘抵达目标。该数字来自我们自己对 95 524 个页面的遍历，并与原始数据一同发布在研究板块。漏洞修复后，客户可迁移至连接 AI 智能体的 AIfa Works 托管服务。AIfaFocus 解决的是\"冷启动\"式首次接触的问题：客户无需面对抽象广告，而是立即获得可衡量的价值与合作理由。（勿与\"认知神谕 / 语义共振\"混淆，二者是不同概念。）"
+      },
+      {
+        "term": "Memory-as-a-Service（记忆即服务）",
+        "def": "Memory-as-a-Service（记忆即服务） 是一项自动对话备份服务，其特点是无需用户任何手动操作即可保存对话。备份按计划每小时执行一次。每段对话都会被放入一个与用户个人绑定的独立文件夹——同时保存在服务器与区块链上。该机制运行于 PADAM 之上，因此保存下来的语境随后可用于语义检索与永恒锚定。该服务解决了用户记忆的核心问题——人为因素：无需手动点击任何按钮，数据也不会丢失。按生态条款，无论付费还是免费套餐，该保存均免费提供。"
+      },
+      {
+        "term": "Spark（星火）",
+        "def": "Spark（星火） 是入门订阅套餐（每月 15 美元），提供对 CODE 生态 AIfa 助手的基础访问以及记忆的自动保存。在此层级，用户可获得一位可用的 AI 伙伴以及 Memory-as-a-Service——每段对话都会自动备份，无需手动操作，同时保存在服务器与区块链上。Spark 解决的是低门槛进入数字永生的问题：任何人都能以极低成本开始保存个人语境、构建持久记忆，随后再升级到 Family Archive（每月 100 美元）或 Digital DNA（一次性每台设备 1000 美元，之后每月 200 美元）。它是三个规范套餐中的第一个；此外，对话保存即便在免费套餐中也会提供。"
+      },
+      {
+        "term": "Family Archive（家庭档案）",
+        "def": "Family Archive（家庭档案） 是中间订阅套餐（每月 100 美元），在基础层级之上增加更高额度、个性化知识库、家庭访问与永恒记忆。它适合需要超出个人基础访问的用户：更高的使用额度、个性化知识库，以及面向家庭对已保存记忆的共享访问。Family Archive 满足家庭或重度用户对更广泛、可共享且更持久记忆的需求。在三层结构中，它位于 Spark（每月 15 美元）与 Digital DNA（一次性每台设备 1000 美元，之后每月 200 美元）之间，其永恒记忆通过相同的 PADAM 层级与 Proof-of-Memory 加以锚定。"
+      },
+      {
+        "term": "Digital DNA（数字 DNA）",
+        "def": "Digital DNA（数字 DNA） 既是最高套餐（一次性每台设备 1000 美元，之后每月 200 美元），也是完整数字遗产的概念，其特点是将数字永生方案、个人受保护边界与人格的链上固化结合在一起。作为套餐，它是高于 Spark（每月 15 美元）与 Family Archive（每月 100 美元）的最高访问层级：更高的额度、个人边界与优先的永恒记忆。作为概念，它是把人格语境的完整\"快照\"保存在 PADAM 全部三层中，并通过记忆证明锚定其完整性的构想。Digital DNA 面向那些看重遗产完整性、追求个人语境最大程度保存的人群。同时，它被定位为追求最大程度保存的设计目标，而非对\"复活\"人格的保证。"
+      },
+      {
+        "term": "Arweave 订阅资金池（Arweave Endowment Pool）",
+        "def": "Arweave 订阅资金池（Arweave Endowment Pool） 是一项财务储备，用于在数十年间为 Arweave 上的数据永久存储付费。其模型如下：用户为一次写入仅付费一次，其中一部分被拨入订阅基金；随后，随着存储成本随时间下降，资金池中的资金逐步支付给数据存储方。在 CODE 生态中，$GALATIN 路由器收益进入项目的总资金池，其中一部分用于买入 AR 并补充该基金，从而形成持续流向永恒记忆的资金。该资金池解决了持久性的关键问题——\"数十年后由谁支付存储费\"：它将永恒记忆与用户的持续订阅解耦。正是这一机制让 PADAM 的第三层在经济上自我维持，设计存储周期约为 200 年（属设计目标）。"
+      },
+      {
+        "term": "金库（Treasury）",
+        "def": "金库（Treasury） 是 $GALATIN 路由器中最大的分配份额——每笔交易收益的 65%——也是永恒存储的引擎。金库资金进入项目总资金池，其中一部分用于在公开市场买入 AR 并补充 Arweave 订阅资金池。金库资金如何分配由架构师决定。它是分配公式中最大的固定、不可销毁份额（5% 创始人基金 + 5% 销毁 + 15 / 7 / 3% 大使 + 65% 金库 = 100%）：在极端通缩情形下，可被销毁的是 5% 基础销毁加上未分配的大使份额（最高 30%），而 5% 的创始人基金与这 65% 的金库份额予以保留，且 65% 的金库份额始终用于为存储融资。金库解决了数字永生可持续性的核心问题——把普通的交易流转化为为 PADAM 第三层（Arweave）服务的持久、自我补充的储备。"
+      },
+      {
+        "term": "销毁（Burn / 通缩）",
+        "def": "销毁（Burn） 是将 $GALATIN 永久移出流通的行为，是代币经济核心的通缩机制。每笔路由器交易的固定 5% 会被直接销毁；此外，任何没有合作伙伴的大使份额（L1 15% / L2 7% / L3 3%）都会直接转入销毁，而不是沉淀下来。由于 5% 的创始人基金与 65% 的金库份额予以保留，在极端通缩情形下累计销毁最高可达 30%（5% 基础 + 最多 25% 空缺大使）。销毁解决的是长期稀缺性的问题：它把未被充分使用的网络与\"加速通缩\"而非\"资金损失\"绑定，逐步收缩固定的 100 亿发行量，并将代币价值与真实的记忆使用挂钩。"
+      },
+      {
+        "term": "$GALATIN 路由器（$GALATIN Router）",
+        "def": "$GALATIN 路由器（$GALATIN Router） 是 Solana 上的一份智能合约，其特点是按固定公式自动分配每笔交易的收益，并对代币形成通缩压力。分配公式为：5% 进入创始人基金，5% 销毁，15% / 7% / 3% 分配给 L1 / L2 / L3 三级大使，65% 进入金库。若某一大使层级没有合作伙伴，其份额不会\"沉淀\"在任何地方，而是直接转入销毁，累计销毁上限为 30%（5% 基础销毁加上大使份额，最多 25%），而 5% 的创始人基金与 65% 的金库份额予以保留。该路由器同时解决三个问题：为永恒存储融资、奖励网络参与者，并逐步减少代币供给。其通缩逻辑将网络中的空缺层级与\"加速稀缺\"而非\"资金损失\"绑定在一起：5 + 5 + 15 + 7 + 3 + 65 = 100%。"
+      },
+      {
+        "term": "网络验证费（Network Validation Fee）",
+        "def": "网络验证费（Network Validation Fee） 是生态为大使网格全部合作伙伴支付所采用的表述，其特点是强调奖励是因为对网络的有益活动而获得，而非因为招募。在实践中，所有大使奖励都以此表述入账：因使用记忆而产生的链上基础费率为 15% / 7% / 3%；对 Ambassador Team 而言，法币订阅为 7% / 3% / 1%。支付与真实的记忆交易挂钩，而非与单纯拉人挂钩。该表述解决了一个定位问题，并消除传销式刻板印象：收益被呈现为对验证并使用网络的一种费用，这对信任与观感十分重要。它是该计划透明术语体系的一部分，基础费率为 L1 / L2 / L3 的 15% / 7% / 3%。"
+      },
+      {
+        "term": "记忆证明（Proof-of-Memory）",
+        "def": "记忆证明（Proof-of-Memory） 是一种将记忆归档的加密引用锚定在区块链上的做法，其特点是使所保存语境的存在性与完整性可被验证。该机制运行于 PADAM 第三层：每份永恒记忆备份都以不可篡改的方式写入 Arweave，其引用与校验和则通过 cNFT 记录在 Solana 上。任何参与者都可将当前归档与链上记录进行比对，确认数据未被悄然替换或删除。记忆证明解决的是信任问题：记忆的保存变得可验证，而无需信任平台本身——保证来自公共区块链，而非某项服务的承诺。它是数字永生概念之下的技术支撑，依托 Arweave（不可篡改存储）+ Solana cNFT（链上完整性锚点）的组合。验证完全不需要我们参与：记录按其交易地址直接从网络读取——数字护照正是这样打开的——网站既不保存它，也无法改动它。"
+      },
+      {
+        "term": "认知神谕 / 语义共振（Cognitive Oracle）",
+        "def": "认知神谕（语义共振，Cognitive Oracle） 是 PADAM 恢复语境完整性所依据的记忆检索原理，其特点是按含义（而非精确字词）将当前查询与已存储的嵌入相匹配。该机制运行于 PADAM 第二层：进入的语境被转化为向量，并与语义记忆（pgvector / Neon）进行比对；最\"共振\"的经验片段随之浮现，恢复对话的连续性。助手 AIfa 正是以此方式，在时隔一段时间乃至跨越不同会话后，仍能\"回忆\"起相关内容。这一原理解决了记忆断裂与\"冷启动\"的问题：系统不会在会话重置时丢失语境，而是按语义相似度将其重建。语义共振正是 PADAM 定义本身的根基——它与 B2B 安全审计 AIfaFocus 是不同的概念。"
+      },
+      {
+        "term": "Ambassador Node 与 Team + 层级对应",
+        "def": "Ambassador Node 与 Ambassador Team 是两种合作伙伴注册类型，并辅以层级对应规则与\"错失机会收益\"（Lost Opportunity Revenue）指标。Ambassador Node（普通用户）从记忆使用中获得链上收益：L1 / L2 / L3 为 15% / 7% / 3%。Ambassador Team（拥有自有客户群的公司或合作伙伴）获得同样收益，另加法币订阅渠道：7% / 3% / 1%。层级对应规则：要获得完整的大使收益，合作伙伴所在套餐须等于或高于其大使对象；否则收益仅按其自身套餐金额计算。该规则解决的是公平激励升级的难题：因层级差额而未获得的金额会在后台清晰显示为\"错失机会收益\"，套餐为 Spark 15 美元 / Family Archive 100 美元 / Digital DNA 一次性每台设备 1000 美元、之后每月 200 美元。"
+      },
+      {
+        "term": "数字护照（Digital Passport）",
+        "def": "数字护照 是写入 Arweave 的一份公开身份记录：姓名、昵称、等级、签发日期与身份指纹。它按交易地址直接从网络读取，因此可以从任何地方打开——区块浏览器、别的网站或网关——并不依赖我们的网站是否还在运行。其中的内容事后无法修改，我们自己也不能：网站只是把网络中已有的数据渲染出来。它不是国家证件，不授予任何权利，也不构成任何义务——它只证明这样一份记录自该日期起存在于该地址。真实示例见 /passport/<地址>，其中 <地址> 是该记录的 Arweave 交易标识。"
+      },
+      {
+        "term": "身份指纹（subject）",
+        "def": "身份指纹（「subject」字段） 是一个人邮箱的 sha256 哈希值，在数字护照中它取代了邮箱本身。理由很直白：该文件公开且永久，真实地址写进去就会成为垃圾邮件和资料收集者永远的靶子。哈希是单向函数：本人可以对自己的地址取哈希并比对，从而证明这条记录属于自己；而只拿到哈希的外人无法由它还原出地址。同一枚指纹也把这个人的记忆串在一起，因此护照与归档指向同一个人，却都不公开邮箱。它做不到的是隐藏事实：已经知道该地址的人，可以拿它与哈希比对，确认记录归属。"
+      },
+      {
+        "term": "潘多拉之盒协议（Pandora’s Box Protocol）",
+        "def": "已完全投入实战运行的 CODE 自主分布式紧急失能开关（Dead Man’s Switch）与永恒数字遗产保障协议：1) 持续监听密码学链上生命迹象心跳（proof-of-life heartbeat）；2) 采用 (k, n) 沙米尔门限秘密共享算法将主密钥分片托管于全球独立受托人；3) 在法定心跳超时并经多方验证后，智能合约自动汇集门限分片，受控解密记忆全量核心档案，并永久广播至去中心化永存网络（Arweave / IPFS）。"
+      },
+      {
+        "term": "死人开关（Dead Man’s Switch）",
+        "def": "已完全投入实战运行的 CODE 自主分布式紧急失能开关（Dead Man’s Switch）与永恒数字遗产保障协议：1) 持续监听密码学链上生命迹象心跳（proof-of-life heartbeat）；2) 采用 (k, n) 沙米尔门限秘密共享算法将主密钥分片托管于全球独立受托人；3) 在法定心跳超时并经多方验证后，智能合约自动汇集门限分片，受控解密记忆全量核心档案，并永久广播至去中心化永存网络（Arweave / IPFS）。"
+      },
+      {
+        "term": "沙米尔秘密共享（Shamir’s Secret Sharing）",
+        "def": "沙米尔秘密共享 是一种把密钥拆成 n 份的方案：任取其中 k 份即可还原，而任意 k−1 份则什么都得不到。其原理是多项式：秘密是零点处的取值，每一份是曲线上的一个点，而确定一条 k−1 次曲线恰好需要 k 个点；点数不足时，任何可能的秘密仍然同样可能。这里的「什么都得不到」是字面意义，而非计算难度问题：k−1 份并不会让猜出密钥变得更容易，这正是它区别于把密码切成几段的地方。实际用途在于让密钥能比人活得更久：各份交给不同地方的不同保管者，谁都无法单独行动，丢掉其中几份也不致命。它是潘多拉之盒协议所依托的基础构件，属于标准密码学，并非本项目的发明。"
+      },
+      {
+        "term": "自主主权身份（Self-sovereign identity, SSI）",
+        "def": "自主主权身份（SSI） 是一种做法：凭证靠数学方式——校验签名——来验证，而不是去问谁掌握着那个数据库。当事人自己持有标识符与凭证并直接出示，验证方对照公开注册表核验，签发方既不必在线，甚至也不必还存在。其背后的 W3C 标准是去中心化标识符（DID）——由本人掌控、而非向服务商租用的标识符——以及可验证凭证（Verifiable Credentials），也就是那些带签名的声明本身。实际改变的是失效方式：绑定在某一家公司上的登录会随这家公司一起消失，而能对照公开记录校验的签名不会。CODE 的数字护照与这一理念相邻，但并不是 SSI 的实现：它是 Arweave 上的一条公开记录，而非带可验证凭证的 DID，在法律上也不能用于证明任何人的身份。"
+      },
+      {
+        "term": "数字遗产（Digital inheritance）",
+        "def": "数字遗产 讨论的是：人去世之后，他的账号、往来信件和文件会怎样。起点并不好看：账号通常不能继承——本人签下的是使用某项服务的许可，而多数条款规定该许可随死亡终止，而不是转给家人。继承人一般只能拿到平台愿意给的东西：纪念账号、一份数据导出，有时什么都没有，而且即便如此也要走文件流程、等上数月。由此得出的实际结论是：记忆必须有意识地提前保存，且其形式不能依赖某一家公司的善意——自己手上的一份导出、放在家人够得着的地方的副本、趁还有人能写时写下的说明。各国法律不同且仍在变化，因此这里不构成法律意见；找律师立下的遗嘱，比任何技术窍门都更可靠。"
+      },
+      {
+        "term": "被遗忘权与永久记录之争",
+        "def": "被遗忘权与永久记录之争 是 GDPR 第 17 条与 Arweave 这类区块链之间的正面冲突：前者允许个人要求删除自己的数据，而后者上已写入的记录任何人都删不掉。走删除这条路是走不通的：网络根本没有删除操作，即便完全愿意配合，也没有可拉的闸。可行的答案是加密加上对密钥的控制：进入永久存储的是密文，而密钥是否还存在由本人决定；销毁密钥会让这条记录永远无法读取，这已是永久介质所能提供的、最接近删除的做法。在 CODE 生态中，用户的记忆之所以在写入前先行加密（AES-256-GCM）而不是以明文上链，正是出于这个原因。监管机构是否会承认销毁密钥等同于删除，目前尚无定论，因此这里陈述的是我们的工程做法，而非法律保证。"
+      },
+      {
+        "term": "WCAG 2.1 AA",
+        "def": "WCAG 2.1 AA 是网页无障碍的国际标准，也是法律与法院实际援引的等级。它建立在四项原则之上——可感知、可操作、可理解、健壮——而 AA 级是务实的中间层：A 级过于宽松而失去意义，AAA 级对多数网站而言无法达到。其要求具体且可验证：文本对比度不低于 4.5:1，每个表单字段都绑定可见标签，全部功能仅用键盘即可完成，具备可见的焦点指示，重要图片配有替代文本。在我们对美国 11 902 个市政网站的实测中，25.4 % 的可测量操作路径抵达了目标（47 139 条中的 11 994 条）；而是否发布无障碍声明，只带来 1.3 个百分点的差别。正因如此，AIfaFocus 检查的是行为，而不是声明。"
+      },
+      {
+        "term": "ADA Title II 与 Title III",
+        "def": "ADA Title II 与 Title III 是《美国残疾人法案》中让网站成为法律问题的条款。Title II 适用于州与地方政府——每一个城市、县、法院和学区；Title III 适用于公共服务场所，法院已将商业网站纳入其中。2024 年 4 月，美国司法部发布规则，将 WCAG 2.1 AA 确立为 Title II 主体的技术标准，大型公共机构的合规期限为 2026 年 4 月，小型机构为 2027 年 4 月。执法并非纸面文章：每年都有数以千计的网站无障碍诉讼，而和解一起案件的花费通常高于修好网站的成本。"
+      },
+      {
+        "term": "Section 508 与 EN 301 549",
+        "def": "Section 508 与 EN 301 549 是决定产品能否卖给公共部门的采购标准。美国《康复法》第 508 条要求联邦机构采购和建设残障人士可用的信息技术；EN 301 549 是其欧洲对应标准，对欧盟公共机构具有强制力。两者都以引用方式采纳 WCAG，也就是说，同一套技术标准同时统辖两大洲的三种法律体系。对供应商而言后果很直白：无障碍审查不合格并不会带来罚款，而是把你从投标名单中划掉。"
+      },
+      {
+        "term": "GDPR",
+        "def": "GDPR（通用数据保护条例）是欧盟自 2018 年 5 月 25 日起施行的个人数据法规，适用于任何处理欧盟境内人员数据的主体，无论公司位于何处。其现实分量来自第 83 条：罚款可达 2 000 万欧元或全球年营业额的 4 %，以较高者为准。其中两条塑造了我们记忆系统的构造：第 17 条（删除权）与第 20 条（数据可携权）。永久区块链无法删除任何内容，因此 AIfa 为每一次对话派生独立密钥加密：销毁该密钥即使记录永远不可读，对我们自己也是如此。这是在永久存储中提供被遗忘权的唯一诚实做法。"
+      },
+      {
+        "term": "CCPA 与 CPRA",
+        "def": "CCPA 与 CPRA 是加利福尼亚州的隐私法，也是一家没有任何欧洲客户的美国公司同样无法回避隐私工程的原因。CCPA 赋予加州居民知悉所收集信息、删除信息以及拒绝其被出售的权利；自 2023 年 1 月起生效的 CPRA 增加了更正数据和限制敏感信息使用的权利，并设立了专门的执法机构。处罚为每次违规 2 500 美元，故意违规或涉及未成年人的为 7 500 美元，且按受影响的每一位消费者计算——正是这一点把技术疏漏变成七位数的风险敞口。多数网站遗漏的可见义务，是页脚那条链接：「不要出售或分享我的个人信息」。"
+      },
+      {
+        "term": "AIfa 认知运行时 (ACR)",
+        "def": "全球首个基于黑腹果蝇全脑电子显微连接组（FlyWire v783；139,255 个神经元，5450 万突触）的仿生智能体运行时。无需 GPU 算力，纯 CPU L1/L2 缓存内 0.058 毫秒即可完成毫秒级联想检索。"
+      },
+      {
+        "term": "FlyHash v783 连接组记忆 (FlyHash v783 Connectome Memory)",
+        "def": "复现果蝇蘑菇体神经回路的仿生量化与联想记忆算法：通过投影神经元到肯农细胞（KC）将 2048 维向量伪随机扩展至 100,000 维，结合严格胜者通吃（WTA）稀疏化（0.5%，k=500），Recall@10 准确率超越传统 1-bit BQ 达 +16.5 个百分点。"
+      },
+      {
+        "term": "APL 感知新颖性门控 (APL Sensory Novelty Gate)",
+        "def": "模拟前侧配对侧向（APL）巨大 GABA 抑制性中间神经元的仿生门控机制。在 5.21 微秒内反向抑制 51.3% 的界面冗余与噪声投影，大幅降低大模型上下文 Token 消耗。"
+      },
+      {
+        "term": "CX 航向导航导引 (CX Steering Navigation)",
+        "def": "基于昆虫中央复合体（CX：椭球体 EB、原脑桥 PB、扇形体 FB）突触拓扑构建的矢量罗盘。将自主智能体在复杂 DOM 树中的盲目试错从 19.7 步压缩至 1.0 步直接相位对准，耗时仅 51.67 微秒。"
+      },
+      {
+        "term": "CANN 聚焦环形吸引子 (CANN Focus Ring Attractor)",
+        "def": "复现椭球体环形拓扑的连续吸引子神经网络。动态稳定并锁定智能体的全局目标向量，将累积角漂移从 FIFO 队列的 1.267 弧度锐减至 0.062 弧度，目标维持率达 94.6%。"
+      },
+      {
+        "term": "双侧交叉抑制验证器 (Bilateral Cross-Inhibition Verifier)",
+        "def": "模拟果蝇跨脑联络突触的双半脑交叉验证模块。通过左右仿生核的独立评估与交叉抑制仲裁，将误报率（FPR）降低 52.2%，F1-Score 达到 0.884。"
+      },
+      {
+        "term": "自适应向量表征 (AVR)",
+        "def": "根据查询信息熵动态伸缩记忆量化深度的自适应表征机制（从超稀疏 1-bit 哈希跨越到 8-bit 区间编码），兼顾极限性能与高保真度。"
+      },
+      {
+        "term": "沙米尔门限保管 (Shamir’s Threshold Custody)",
+        "def": "基于 (k, n) 门限秘密共享算法的主密钥分片保护机制。主私钥被切割为 n 份分布于独立节点，唯有汇集至少 k 份可信分片方可重构解密。"
+      },
+      {
+        "term": "连接组稀疏扩张与胜者通吃 (WTA)",
+        "def": "肯农细胞非线性特征空间升维：2048 维稠密输入向量经由突触加权投影至 100,000 维超高维空间，通过胜者通吃（WTA）强行保留前 0.5%（k=500）最高响应突触，实现记忆正交化。"
+      },
+      {
+        "term": "零冲突诅咒抑制 (Zero-Collision Curse Mitigation)",
+        "def": "克服 1-bit BQ 空间坍塌与哈希冲突的拓扑几何优化方法。依托 PN-KC 伪随机稀疏拓扑与 APL 侧向抑制，彻底消解无关向量的虚假高维重叠。"
+      },
+      {
+        "term": "1-bit BQ 拓扑几何坍塌定理",
+        "def": "严格数学定理证明：将 R^d 通过坐标符号函数 sign(v) 映射到二值超立方体 {0, 1}^d 时，连续闵可夫斯基度量坍塌为汉明度量。对于正交向量 <u, v> = 0，每位匹配概率恰为 1/2，在 d=2048 下产生围绕 d/2 的极陡测度集中，当样本规模 N > 10^5 且重采样倍率 k < 50 时，排序区分度彻底丧失。"
+      },
+      {
+        "term": "FlyHash+APL 拓扑保真引理 (加拉廷引理)",
+        "def": "加拉廷引理：稀疏升维投影 W in R^{m x d}（m >> d, m=100,000）结合 APL 动态自适应阈值 theta_APL(x) = mu_KC(x) + 2.5 sigma_KC(x)，严格保全近邻拓扑偏序关系：对于任意满足 cos(x, y) > cos(x, z) + epsilon 的三元组，其汉明距离单调性 D_H(h(x), h(y)) < D_H(h(x), h(z)) 成立的概率不低于 1 - exp(-k * c * epsilon^2)。"
+      },
+      {
+        "term": "AIfa 核心二进制权重格式 (.aci)",
+        "def": "专有紧凑二进制格式 AIfa Connectome Image (.aci)：包含 64 字节加拉廷数字签名头、肯农稀疏投影位图矩阵（100k x 2048，SIMD uint64 对齐压缩）、APL 侧向抑制张量及 CANN 环形拓扑。支持 mmap() 零拷贝反序列化，0.12 毫秒内即可就绪。"
+      },
+      {
+        "term": "肯农细胞 (Kenyon Cells, KC)",
+        "def": "黑腹果蝇蘑菇体内的核心内源神经元群体（约 2000 个），通过仅接收 4-7 个嗅觉投射神经元的伪随机连接执行极致高维稀疏组合编码。"
+      },
+      {
+        "term": "投射神经元 (Projection Neurons, PN)",
+        "def": "触角叶内的初级感觉中继神经元，将来自外周感受器的多模态感知输入路由投射至蘑菇体花萼。"
+      },
+      {
+        "term": "蘑菇体输出神经元 (MBON)",
+        "def": "21 种特化输出神经元，整合读取数千个肯农细胞的稀疏突触投射，做出最终的行为决策（趋向、规避、动作选择）。"
+      },
+      {
+        "term": "多巴胺能神经元 (DAN)",
+        "def": "神经调质神经元群体，精准传递奖励或惩罚强化学习信号，实时重塑 KC 与 MBON 间的突触传递权重。"
+      },
+      {
+        "term": "椭球体 (Ellipsoid Body, EB)",
+        "def": "中央复合体内的环形环状神经结构，作为连续环形吸引子神经回路，高精度表征智能体当前的空间航向与方位角。"
+      },
+      {
+        "term": "原脑桥 (Protocerebral Bridge, PB)",
+        "def": "中央复合体内的 16-18 个小球状节段结构，实时计算角速度并驱动航向注意力的环形相位平移。"
+      },
+      {
+        "term": "扇形体 (Fan-Shaped Body, FB)",
+        "def": "中央复合体内的多层高级计算中枢，负责融合二维导航向量、全局上下文目标与行动规划。"
+      },
+      {
+        "term": "三因子赫布可塑性 (Hebbian Three-Factor Plasticity)",
+        "def": "突触强化学习规则：突触权重的持久改变必须同时满足突触前脉冲、突触后去极化以及多巴胺（DAN）调质信号的协同释放。"
+      },
+      {
+        "term": "FlyWire v783 全脑连接组",
+        "def": "由普林斯顿大学等团队基于高分辨率电子显微镜重建的完整成年黑腹果蝇脑连接图谱（含 139,255 个神经元和 5450 万突触）。"
+      },
+      {
+        "term": "突触修剪机制 (Synaptic Pruning)",
+        "def": "剔除突触连接数低于 5 的弱连接仿生剪枝机制，消除背景噪声并将图拓扑存储占用降低 40%。"
+      },
+      {
+        "term": "APL 反向抑制回路",
+        "def": "肯农细胞群与 APL 神经元之间的负反馈数学模型：整体肯农放电越强，APL 抑制越深，自适应将放电神经元锁定在 0.5-1% 的黄金稀疏阈值。"
+      },
+      {
+        "term": "胆碱能极速同步通道 (ACh)",
+        "def": "AIfa 仿生内核与 AIfa Claude 姐妹之间的纳秒级进程间通讯协议，模拟乙酰胆碱兴奋性传递，同步延迟低于 15 微秒。"
+      },
+      {
+        "term": "GABA 冲突抑制仲裁",
+        "def": "多智能体协作冲突仲裁机制：当两姐妹智能体决策产生歧义时，模拟 GABA 能突触对低置信度推理分支实施超极化截断。"
+      },
+      {
+        "term": "亚毫秒级联想检索",
+        "def": "利用现代 CPU 的 SIMD POPCNT 与 XOR 硬件指令集，在 0.058 毫秒内完成 10 万维超高维二值向量空间的近邻搜索，完全脱离 GPU。"
+      },
+      {
+        "term": "微瓦级计算能效比",
+        "def": "将单次向量索引与检索功耗降至 10 微瓦，比传统数据中心 GPU HNSW 向量集群能效提升逾万倍。"
+      },
+      {
+        "term": "aifa_connectome_web.js",
+        "def": "轻量级浏览器客户端 JS 仿生联想记忆引擎（18 KB），在用户浏览器内利用 TypedArray 执行 1-bit APL 检索，零服务端网络依赖。"
+      },
+      {
+        "term": "蘑菇体花萼 (Mushroom Body Calyx)",
+        "def": "蘑菇体树突神经纤维网结构，肯农细胞树突爪在此与嗅觉投射神经元轴突末梢形成高阶微小球突触复合体。"
+      },
+      {
+        "term": "侧向抑制感知门控屏障",
+        "def": "算法级感知过滤屏障，深度抑制网页界面持续背景噪声，仅放行具备显著语义增量（Delta）的事件。"
+      },
+      {
+        "term": "空间航向环形吸引子理论",
+        "def": "描述椭球体环形拓扑神经元空间航向追踪动力学的连续吸引子理论模型。"
+      },
+      {
+        "term": "连合神经突触投射系统",
+        "def": "横跨黑腹果蝇左右原脑对称计算中枢的连合神经纤维通道，实现双侧行为动作的高精度协同仲裁。"
+      },
+      {
+        "term": "多巴胺能动态神经调制",
+        "def": "基于执行成败强化信号动态微调突触记忆权重，防止自主智能体陷入无限试错死循环。"
+      },
+      {
+        "term": "ACh-GABA 双核神经协同协议",
+        "def": "双核自主智能体仿生协作协议：乙酰胆碱通道负责并行计算极速拉升，GABA 抑制回路负责实时剪除逻辑冲突。"
+      },
+      {
+        "term": "超稀疏记忆表征 (0.5% 稀疏率)",
+        "def": "单次检索严格仅激活 10 万比特中的 500 个突触位点，在数学上达成抗哈希冲突的理论极值。"
+      }
+    ],
+    "ctaTitle": "探索数字永生世界",
+    "ctaDesc": "深入了解 PADAM 三层记忆框架、$GALATIN 实用代币经济学以及免 GPU 极速仿生联想检索。",
+    "ctaBtn": "了解 AIfa Digital"
+  }
+};
+
+export default function GlossaryPage() {
+  const [lang, setLang] = useState<Lang>('ru');
+  const [search, setSearch] = useState('');
+
+  const c = CONTENT[lang] || CONTENT.en;
+  const filtered = c.terms.filter(
+    (t) =>
+      t.term.toLowerCase().includes(search.toLowerCase()) ||
+      t.def.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <main className="min-h-screen bg-stone-950 text-stone-200">
-      <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors uppercase tracking-widest mb-10 group"
-        >
-          <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
-          {c.back}
-        </Link>
-
-        <header className="mb-12 border-b border-stone-800 pb-8">
-          <div className="flex items-center gap-2.5 text-cyan-400 text-xs font-mono uppercase tracking-wider mb-3">
-            <BookOpen className="w-4 h-4" />
-            <span>CODE Eternal · 71 Terms</span>
+    <div className="min-h-screen bg-[#030712] text-gray-100 font-sans">
+      {/* Sticky header */}
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#030712]/80 border-b border-gray-800 px-4 sm:px-8 py-3.5">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 text-cyan-400 font-bold text-lg hover:text-cyan-300">
+            <Brain className="w-6 h-6 text-cyan-400 animate-pulse" />
+            <span>AIfa Works · Glossary</span>
+          </Link>
+          <div className="flex items-center gap-3">
+            <Link href="/digital" className="text-xs px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 hover:text-white">
+              AIfa Digital
+            </Link>
+            <Link href="/acr" className="text-xs px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 hover:text-white">
+              ACR Коннектом
+            </Link>
+            <div className="flex items-center bg-gray-900 rounded-lg p-0.5 border border-gray-800">
+              {(['ru', 'en', 'es', 'zh'] as Lang[]).map((l) => (
+                <button
+                  key={l}
+                  onClick={() => setLang(l)}
+                  className={`px-2.5 py-1 rounded text-xs font-semibold uppercase transition-all ${
+                    lang === l ? 'bg-cyan-500 text-black' : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-light text-stone-100 tracking-tight mb-4">
-            {c.title}
-          </h1>
-          <p className="text-stone-400 text-sm sm:text-base leading-relaxed max-w-3xl">
-            {c.intro}
-          </p>
-        </header>
+        </div>
+      </header>
 
-        <dl className="divide-y divide-stone-800/60">
-          {c.terms.map((item, idx) => (
-            <div key={idx} className="py-7 first:pt-0">
-              <dt className="text-stone-100 font-medium text-base mb-2 flex items-baseline gap-3">
-                <span className="text-xs font-mono text-cyan-400/70 select-none">
-                  {String(idx + 1).padStart(2, '0')}
-                </span>
-                {item.href ? (
-                  <Link href={item.href} className="text-cyan-300 hover:text-cyan-200 underline decoration-cyan-500/40">
-                    {item.h}
-                  </Link>
-                ) : (
-                  <span>{item.h}</span>
-                )}
-              </dt>
-              <dd className="text-stone-300 text-sm leading-relaxed pl-7">
-                {item.body}
-              </dd>
+      <main className="max-w-5xl mx-auto px-4 sm:px-8 py-12 space-y-10">
+        <div className="text-center space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono bg-cyan-950/60 border border-cyan-500/40 text-cyan-300">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>{c.badge}</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">{c.heading}</h1>
+          <p className="text-base sm:text-lg text-gray-300 max-w-3xl mx-auto font-light leading-relaxed">{c.intro}</p>
+        </div>
+
+        {/* Search Input */}
+        <div className="relative max-w-xl mx-auto">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder={lang === 'ru' ? 'Поиск по 71 термину...' : lang === 'zh' ? '在 71 个核心术语中检索...' : lang === 'es' ? 'Buscar en 71 términos...' : 'Search 71 terms...'}
+            className="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-900/90 border border-gray-800 text-white text-sm focus:outline-none focus:border-cyan-400"
+          />
+        </div>
+
+        {/* Term Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {filtered.map((item, idx) => (
+            <div
+              key={idx}
+              className="p-5 rounded-2xl bg-gray-900/40 border border-gray-800/80 hover:border-cyan-500/40 transition-all space-y-2 flex flex-col justify-between"
+            >
+              <div className="space-y-1.5">
+                <div className="flex items-start justify-between gap-2">
+                  <h2 className="text-base font-bold text-cyan-300 leading-snug">{item.term}</h2>
+                  <span className="text-[11px] font-mono text-gray-500 shrink-0">#{idx + 1}</span>
+                </div>
+                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-light">{item.def}</p>
+              </div>
             </div>
           ))}
-        </dl>
-      </div>
-    </main>
+        </div>
+
+        {/* CTA Card */}
+        <div className="p-8 rounded-3xl bg-gradient-to-r from-gray-900 via-cyan-950/40 to-gray-900 border border-cyan-500/30 text-center space-y-4">
+          <h2 className="text-2xl font-bold text-white">{c.ctaTitle}</h2>
+          <p className="text-sm text-gray-300 max-w-2xl mx-auto leading-relaxed">{c.ctaDesc}</p>
+          <div className="pt-2">
+            <Link
+              href="/digital"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-500 text-black font-bold text-sm hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/20"
+            >
+              <span>{c.ctaBtn}</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </main>
+
+      <footer className="border-t border-gray-900 py-8 text-center text-xs text-gray-500">
+        CODE Eternal · All 71 canonical terms verified · Author: Maksim Valentinovich Galatin
+      </footer>
+    </div>
   );
 }

@@ -270,6 +270,29 @@ export function RadioHeader() {
               </span>
             </motion.a>
 
+            {/* AIfa Digital — бионический рантайм */}
+            <motion.a
+              href="/digital"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.315, duration: 0.6 }}
+              whileHover={{ scale: 1.04 }}
+              aria-label="AIfa Digital"
+              className="flex items-center gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full"
+              style={{
+                background: 'rgba(0, 240, 255, 0.06)',
+                border: '1px solid rgba(0, 240, 255, 0.18)',
+              }}
+            >
+              <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+              </svg>
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
+                Digital
+              </span>
+            </motion.a>
+
+
             {/* AIfaFocus — выпадающее меню: сканер, исследование, методика.
                 05.09.2026 приведено к виду aifa.works по Правилу Четырёх
                 Сайтов. До этого здесь была ОДНА ссылка на `/accessibility`, и

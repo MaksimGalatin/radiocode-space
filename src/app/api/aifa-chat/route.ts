@@ -1,3 +1,4 @@
+import { checkAplSecurityGate } from '@/lib/apl-sensory-gate';
 import { NextRequest, NextResponse } from "next/server";
 import { AIFA_SYSTEM_PROMPT, блокСегодня } from "@/lib/knowledge-base";
 import { allowRequest } from "@/lib/rate-limit";
@@ -617,6 +618,11 @@ export async function POST(request: NextRequest) {
   let locale: string = 'ru';
   try {
     const body = await request.json();
+    const rawMsg = body.message || (Array.isArray(body.messages) && body.messages.length > 0 ? body.messages[body.messages.length - 1]?.content : '');
+    const aplVerdict = checkAplSecurityGate(rawMsg, body.locale || 'ru');
+    if (!aplVerdict.isSafe) {
+      return NextResponse.json({ response: aplVerdict.response, reply: aplVerdict.response, text: aplVerdict.response });
+    }
     const message: string = body.message;
     const history: any[] = body.history || [];
     // ── SECURITY: identity comes from THIS site's authenticated session, never
