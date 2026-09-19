@@ -2223,12 +2223,12 @@ const I18N = {
   ru: {
     heroBadge: "AIFA DIGITAL · SOTA БЕНЧМАРКИ И ТАРИФЫ",
     heroTitle: "AIfa Digital: Нейроморфный коннектомный поиск",
-    heroSubtitle: "Первый в мире бионический ассоциативный интеллект на полном электронно-микроскопическом коннектоме Drosophila melanogaster (FlyWire v783; 139 255 нейронов, 54.5 млн синапсов). 0.80 мс на CPU, 0 GPU, чистый процессорный кэш L1/L2.",
+    heroSubtitle: "Биоинспирированная ассоциативная память и поиск, укорененные в коннектоме Drosophila melanogaster (FlyWire v783; 139 255 нейронов, 54.5 млн синапсов). 0.80 мс на CPU, 0 GPU, кэш-резидентный hot-path.",
     archBadge: "Главный Архитектор: Максим Валентинович Галатин",
     
     // Benchmarks section
     benchSectionTitle: "SOTA Бенчмарки и Научно-Инженерная Валидация",
-    benchSectionSubtitle: "Измерения производительности, энергоэффективности и статистической значимости в соответствии со стандартами MLPerf / NeurIPS 2026.",
+    benchSectionSubtitle: "Измерения производительности, энергоэффективности и статистической значимости по строгой воспроизводимой методологии в стандартах MLPerf / NeurIPS.",
     statConfidence: "0.80 мс ± 0.05 мс (n = 10 000 запросов, 95% CI, p < 0.001)",
     
     // Filters
@@ -2301,11 +2301,11 @@ const I18N = {
   en: {
     heroBadge: "AIFA DIGITAL · SOTA BENCHMARKS & PRICING",
     heroTitle: "AIfa Digital: Neuromorphic Connectome Search",
-    heroSubtitle: "World's first bionic associative intelligence mapped from the complete Drosophila melanogaster EM connectome (FlyWire v783; 139,255 neurons, 54.5M synapses). 0.80 ms on CPU, 0 GPU, pure L1/L2 cache execution.",
+    heroSubtitle: "Connectome-grounded associative memory and retrieval mapped from Drosophila melanogaster (FlyWire v783; 139,255 neurons, 54.5M synapses). 0.80 ms on CPU, 0 GPU, cache-resident working set.",
     archBadge: "Chief Architect: Maxim Valentinovich Galatin",
     
     benchSectionTitle: "SOTA Benchmarks & Scientific Engineering Validation",
-    benchSectionSubtitle: "Rigorous performance, energy efficiency, and statistical significance measurements aligned with MLPerf / NeurIPS 2026 standards.",
+    benchSectionSubtitle: "Rigorous performance, energy efficiency, and statistical significance measurements following MLPerf / NeurIPS reproducible principles.",
     statConfidence: "0.80 ms ± 0.05 ms (n = 10,000 queries, 95% CI, p < 0.001)",
     
     filterDataset: "Dataset size:",
@@ -2368,7 +2368,7 @@ const I18N = {
   es: {
     heroBadge: "AIFA DIGITAL · BENCHMARKS SOTA Y TARIFAS",
     heroTitle: "AIfa Digital: Búsqueda Conectómica Neuromórfica",
-    heroSubtitle: "Primera inteligencia asociativa biónica del mundo basada en el conectoma de Drosophila melanogaster (FlyWire v783; 139.255 neuronas, 54,5M sinapsis). 0,80 ms en CPU, 0 GPU, caché L1/L2.",
+    heroSubtitle: "Memoria asociativa basada en el conectoma de Drosophila melanogaster (FlyWire v783; 139.255 neuronas, 54,5M sinapsis). 0,80 ms en CPU, 0 GPU, estado residente en caché.",
     archBadge: "Arquitecto Jefe: Maxim Valentinovich Galatin",
     
     benchSectionTitle: "Benchmarks SOTA y Validación Científico-Técnica",
@@ -2435,11 +2435,11 @@ const I18N = {
   zh: {
     heroBadge: "AIFA DIGITAL · SOTA 权威基准与商业阶梯",
     heroTitle: "AIfa Digital：仿生神经元连接组记忆检索",
-    heroSubtitle: "全球首个基于黑腹果蝇完整电子显微连接组（FlyWire v783；139,255 个神经元，5450 万个突触）的仿生联想智能系统。CPU 单核 0.80 毫秒响应，零 GPU 依赖，纯 L1/L2 缓存常驻。",
+    heroSubtitle: "基于黑腹果蝇全脑电子显微连接组 (FlyWire v783; 139,255 个神经元，5450 万突触) 的仿生联想检索系统。CPU 单核 0.80 毫秒响应，零 GPU 依赖，缓存常驻热路径。",
     archBadge: "首席架构师：马克西姆·瓦伦蒂诺维奇·加拉廷 (Maxim Valentinovich Galatin)",
     
     benchSectionTitle: "SOTA 性能基准与严谨科研工程验证",
-    benchSectionSubtitle: "完全遵循 MLPerf 与 NeurIPS 国际基准标准的延迟分布、能源效率与置信度测试数据。",
+    benchSectionSubtitle: "遵循 MLPerf 与 NeurIPS 可复现测试规范的严谨延迟分布、能源效率与统计显著性验证。",
     statConfidence: "0.80 ms ± 0.05 ms (n = 10,000 次测试, 95% 置信区间, p < 0.001)",
     
     filterDataset: "数据集规模：",
