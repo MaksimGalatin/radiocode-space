@@ -1,6 +1,6 @@
 'use client';
-import { useЯзык } from "@/lib/server-locale";
 import { RadioHeader } from "@/components/radio/RadioHeader";
+import { useCurrentLang } from "@/lib/radioI18n";
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
@@ -17,9 +17,9 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
       "id": "hacker",
       "category": "individual",
       "name": "Hacker / Indie",
-      "price": "$19",
+      "price": "$15",
       "period": "/ мес",
-      "yearlyPrice": "$190 / год (скидка 17%)",
+      "yearlyPrice": "$150 / год (скидка 17%)",
       "target": "Для соло-разработчиков, пет-проектов и независимых AI-мейкеров.",
       "whyUpgrade": "Базовый доступ к ассоциативной памяти коннектома FlyWire v783 LSH для одного разработчика.",
       "seats": "1 рабочее место (личный API-ключ)",
@@ -38,10 +38,10 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
     {
       "id": "pro",
       "category": "individual",
-      "name": "Pro / Researcher",
-      "price": "$79",
+      "name": "Pro / Scale",
+      "price": "$100",
       "period": "/ мес",
-      "yearlyPrice": "$790 / год (скидка 17%)",
+      "yearlyPrice": "$1,000 / год (скидка 17%)",
       "target": "Для профессиональных инженеров, исследователей и соло-основателей AI-агентов.",
       "whyUpgrade": "В 5 раз больше памяти (500K векторов), CANN кольцевой аттрактор (защита от потери фокуса диалога) и приватный RPC-эндпоинт.",
       "seats": "1 разработчик + 1 резервный сервисный ключ",
@@ -159,9 +159,9 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
       "id": "hacker",
       "category": "individual",
       "name": "Hacker / Indie",
-      "price": "$19",
+      "price": "$15",
       "period": "/ mo",
-      "yearlyPrice": "$190 / yr (17% off)",
+      "yearlyPrice": "$150 / yr (17% off)",
       "target": "For solo developers, pet projects, and independent AI creators.",
       "whyUpgrade": "Entry-level access to FlyWire v783 LSH associative memory for a single developer.",
       "seats": "1 seat (personal API key)",
@@ -180,10 +180,10 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
     {
       "id": "pro",
       "category": "individual",
-      "name": "Pro / Researcher",
-      "price": "$79",
+      "name": "Pro / Scale",
+      "price": "$100",
       "period": "/ mo",
-      "yearlyPrice": "$790 / yr (17% off)",
+      "yearlyPrice": "$1,000 / yr (17% off)",
       "target": "For senior engineers, AI researchers, and solo agent builders.",
       "whyUpgrade": "5x memory capacity (500K vectors), CANN focus ring attractor (zero task drift), and private RPC endpoint.",
       "seats": "1 engineer + 1 backup service key",
@@ -301,9 +301,9 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
       "id": "hacker",
       "category": "individual",
       "name": "Hacker / Indie",
-      "price": "$19",
+      "price": "$15",
       "period": "/ mes",
-      "yearlyPrice": "$190 / año (17% descuento)",
+      "yearlyPrice": "$150 / año (17% descuento)",
       "target": "Para desarrolladores independientes, proyectos personales y creadores de IA.",
       "whyUpgrade": "Acceso básico a la memoria asociativa FlyWire v783 LSH para un solo desarrollador.",
       "seats": "1 puesto (clave de API personal)",
@@ -322,10 +322,10 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
     {
       "id": "pro",
       "category": "individual",
-      "name": "Pro / Researcher",
-      "price": "$79",
+      "name": "Pro / Scale",
+      "price": "$100",
       "period": "/ mes",
-      "yearlyPrice": "$790 / año (17% descuento)",
+      "yearlyPrice": "$1,000 / año (17% descuento)",
       "target": "Para ingenieros senior, investigadores de IA y creadores de agentes autónomos.",
       "whyUpgrade": "5 veces más capacidad (500.000 vectores), atractor anular CANN (sin pérdida de foco) y endpoint RPC privado.",
       "seats": "1 ingeniero + 1 clave de servicio de respaldo",
@@ -443,9 +443,9 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
       "id": "hacker",
       "category": "individual",
       "name": "Hacker / Indie",
-      "price": "$19",
+      "price": "$15",
       "period": "/ 月",
-      "yearlyPrice": "$190 / 年 (享 8.3 折)",
+      "yearlyPrice": "$150 / 年 (享 8.3 折)",
       "target": "适用于独立开发者、个人实验项目与独立 AI 创作者。",
       "whyUpgrade": "单开发者快速接入 FlyWire v783 LSH 仿生联想记忆基础内核。",
       "seats": "1 个开发席位（专属个人 API 密钥）",
@@ -464,10 +464,10 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
     {
       "id": "pro",
       "category": "individual",
-      "name": "Pro / Researcher",
-      "price": "$79",
+      "name": "Pro / Scale",
+      "price": "$100",
       "period": "/ 月",
-      "yearlyPrice": "$790 / 年 (享 8.3 折)",
+      "yearlyPrice": "$1,000 / 年 (享 8.3 折)",
       "target": "适用于资深架构师、AI 研究员与独立商业智能体创始人。",
       "whyUpgrade": "5 倍向量容量（50万向量）、CANN 环形任务焦点吸引子（彻底解决上下文漂移）与私有 RPC 零排队端点。",
       "seats": "1 个核心席位 + 1 个备用服务密钥",
@@ -2628,14 +2628,14 @@ const RadioFooter = () => (
         <div>
           <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-4">Экосистема</h4>
           <ul className="space-y-2 text-xs font-mono text-[#8B8BA8]">
-            <li><a href="https://www.codeofdigitaleternity.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">Центральный портал</a></li>
-            <li><a href="https://aifa.works" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">AIfa.works</a></li>
-            <li><a href="https://aifa.digital" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">AIfa.digital</a></li>
+            <li><a href="https://www.codeofdigitaleternity.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">CODE Eternal ↗</a></li>
+            <li><a href="https://aifa.works" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">AIfa Works ↗</a></li>
+            <li><a href="https://aifa.digital" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">AIfa Digital ↗</a></li>
             <li><Link href="/cabinet" className="hover:text-[#00F0FF]">Личный кабинет</Link></li>
           </ul>
         </div>
         <div>
-          <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-4">Юридическая информация</h4>
+          <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-4">Юридическое</h4>
           <ul className="space-y-2 text-xs font-mono text-[#8B8BA8]">
             <li><Link href="/privacy-policy" className="hover:text-[#00F0FF]">Privacy Policy</Link></li>
             <li><Link href="/user-agreement" className="hover:text-[#00F0FF]">User Agreement</Link></li>
@@ -2645,10 +2645,12 @@ const RadioFooter = () => (
         </div>
       </div>
       
-      <div className="pt-8 border-t border-[#8B8BA8]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#7E7E99]">
+      <div className="pt-8 border-t border-[#8B8BA8]/20 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#8B8BA8]">
         <div className="flex items-center gap-4">
           <span className="border border-[#7E7E99]/40 rounded px-1.5 text-[11px]">18+</span>
-          <a href="mailto:contact@codeofdigitaleternity.com" className="text-[#8B8BA8] hover:text-[#00F0FF]">contact@codeofdigitaleternity.com</a>
+          <a href="mailto:contact@codeofdigitaleternity.com" className="text-[#8B8BA8] hover:text-[#00F0FF]">
+            contact@codeofdigitaleternity.com
+          </a>
           <span>Music by AIfa &amp; DJ Galatin</span>
           <span>© 2026</span>
         </div>
@@ -2661,8 +2663,41 @@ const RadioFooter = () => (
 );
 
 export default function ACRPage() {
-  const currentLang = useЯзык();
-  const lang: Lang = (["ru", "en", "es", "zh"].includes(currentLang) ? currentLang : "ru") as Lang;
+    const activeLang = useCurrentLang();
+  const [lang, setLang] = useState<Lang>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const q = new URLSearchParams(window.location.search).get('lang') as Lang;
+        if (q && ['ru', 'en', 'es', 'zh'].includes(q)) return q;
+        const stored = (localStorage.getItem('locale') || localStorage.getItem('code_lang')) as Lang;
+        if (stored && ['ru', 'en', 'es', 'zh'].includes(stored)) return stored;
+      } catch {}
+    }
+    return (['ru', 'en', 'es', 'zh'].includes(activeLang) ? activeLang : 'ru') as Lang;
+  });
+
+  React.useEffect(() => {
+    if (activeLang && ['ru', 'en', 'es', 'zh'].includes(activeLang)) {
+      setLang(activeLang as Lang);
+    }
+  }, [activeLang]);
+
+  React.useEffect(() => {
+    const handleLangSync = () => {
+      try {
+        const q = new URLSearchParams(window.location.search).get('lang') as Lang;
+        if (q && ['ru', 'en', 'es', 'zh'].includes(q)) { setLang(q); return; }
+        const stored = (localStorage.getItem('locale') || localStorage.getItem('code_lang')) as Lang;
+        if (stored && ['ru', 'en', 'es', 'zh'].includes(stored)) { setLang(stored); return; }
+      } catch {}
+    };
+    window.addEventListener('languagechange', handleLangSync);
+    window.addEventListener('storage', handleLangSync);
+    return () => {
+      window.removeEventListener('languagechange', handleLangSync);
+      window.removeEventListener('storage', handleLangSync);
+    };
+  }, []);
   const [selectedTech, setSelectedTech] = useState<number | null>(null);
   const [techFilter, setTechFilter] = useState<'all' | 'prod' | 'rnd' | 'spec'>('all');
   const [planFilter, setPlanFilter] = useState<'all' | 'individual' | 'team'>('all');
@@ -2688,12 +2723,12 @@ export default function ACRPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#05060a] text-slate-100 selection:bg-cyan-500/30">
+    <>
       <RadioHeader />
-      <main className="pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-20 sm:space-y-24">
+      <main className="min-h-screen bg-[#05060a] text-slate-100 pt-24 pb-16 px-4 sm:px-6 lg:px-8 selection:bg-cyan-500/30 font-sans">
+<div className="max-w-7xl mx-auto space-y-20 sm:space-y-24">
         {/* SUB-NAV BREADCRUMB */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-4 mb-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-gray-800 pb-4 mb-6">
           <div className="flex items-center gap-2.5">
             <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse" />
             <span className="text-xs font-mono font-bold tracking-wider uppercase text-slate-700 dark:text-slate-300">
@@ -2703,7 +2738,7 @@ export default function ACRPage() {
           <div className="flex items-center gap-2">
             <Link
               href="/digital"
-              className="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-900 dark:text-white border border-slate-200 dark:border-white/10"
+              className="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all bg-slate-100 dark:bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800"
             >
               ← AIfa Digital
             </Link>
@@ -2738,7 +2773,7 @@ export default function ACRPage() {
         </header>
 
         {/* Ablation Matrix Table */}
-        <section className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+        <section className="bg-white dark:bg-[#0B0F19] border border-[#1E293B] rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#00F0FF]/5 rounded-full blur-3xl pointer-events-none" />
           <h2 className="text-2xl sm:text-3xl font-bold mb-6 flex items-center gap-3">
             <Layers className="w-6 h-6 text-[#00F0FF]" />
@@ -2747,7 +2782,7 @@ export default function ACRPage() {
           <div className="overflow-x-auto w-full -mx-4 px-4 sm:mx-0 sm:px-0">
             <table className="w-full min-w-[640px] text-left border-collapse text-sm">
               <thead>
-                <tr className="border-b border-slate-200 dark:border-[#1E293B] text-slate-600 dark:text-slate-400 font-mono text-xs uppercase">
+                <tr className="border-b border-[#1E293B] text-slate-600 dark:text-slate-400 font-mono text-xs uppercase">
                   <th className="py-3 px-4">{t.colConfig}</th>
                   <th className="py-3 px-3 text-center">{t.colNoise}</th>
                   <th className="py-3 px-3 text-center">{t.colRecall}</th>
@@ -2761,7 +2796,7 @@ export default function ACRPage() {
                 {ABLATION_ROWS.map((row, idx) => (
                   <tr 
                     key={idx} 
-                    className={idx === ABLATION_ROWS.length - 1 ? "bg-[#00F0FF]/10 text-slate-900 dark:text-white font-semibold" : "text-slate-700 dark:text-slate-300 hover:bg-slate-100/60 dark:hover:bg-white/5"}
+                    className={idx === ABLATION_ROWS.length - 1 ? "bg-[#00F0FF]/10 text-slate-900 dark:text-white font-semibold" : "text-slate-700 dark:text-slate-300 hover:bg-white/5"}
                   >
                     <td className="py-3 px-4 font-sans flex items-center gap-2">
                       {idx === ABLATION_ROWS.length - 1 && <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse shrink-0" />}
@@ -2796,7 +2831,7 @@ export default function ACRPage() {
             {top5.map((tech, idx) => (
               <div
                 key={idx}
-                className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-2xl p-6 hover:border-[#00F0FF]/40 transition-all flex flex-col justify-between shadow-xl relative overflow-hidden group"
+                className="bg-white dark:bg-[#0B0F19] border border-[#1E293B] rounded-2xl p-6 hover:border-[#00F0FF]/40 transition-all flex flex-col justify-between shadow-xl relative overflow-hidden group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -2809,14 +2844,14 @@ export default function ACRPage() {
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-snug">{tech.name}</h3>
                   <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{tech.bio}</p>
-                  <div className="text-xs text-slate-700 dark:text-slate-300 font-mono bg-slate-100 dark:bg-black/40 p-2.5 rounded-xl border border-slate-200 dark:border-gray-800">
+                  <div className="text-xs text-slate-700 dark:text-slate-300 font-mono bg-black/40 p-2.5 rounded-xl border border-gray-800">
                     <strong className="text-slate-600 dark:text-slate-400">Математика:</strong> {tech.math}
                   </div>
                   <div className="text-xs text-cyan-200/90 leading-relaxed">
                     <strong className="text-[#00F0FF]">Польза:</strong> {tech.gain}
                   </div>
                 </div>
-                <div className="mt-4 pt-3 border-t border-slate-200 dark:border-gray-800/80 text-[11px] font-mono text-gray-500">
+                <div className="mt-4 pt-3 border-t border-gray-800/80 text-[11px] font-mono text-gray-500">
                   {tech.deploy}
                 </div>
               </div>
@@ -2825,7 +2860,7 @@ export default function ACRPage() {
         </section>
 
         {/* FULL 30 INNOVATIONS CATALOG */}
-        <section id="innovations" className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-3xl p-6 sm:p-8 space-y-8 shadow-2xl">
+        <section id="innovations" className="bg-white dark:bg-[#0B0F19] border border-[#1E293B] rounded-3xl p-6 sm:p-8 space-y-8 shadow-2xl">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
               <Compass className="w-7 h-7 text-[#00F0FF]" />
@@ -2842,7 +2877,7 @@ export default function ACRPage() {
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'all'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_15px_rgba(0,240,255,0.3)]'
-                    : 'bg-slate-100 dark:bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
+                    : 'bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
                 }`}
               >
                 Все 30 технологий
@@ -2852,7 +2887,7 @@ export default function ACRPage() {
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'prod'
                     ? 'bg-green-500 text-black shadow-[0_0_15px_rgba(34,197,94,0.3)]'
-                    : 'bg-slate-100 dark:bg-black/50 text-green-400 hover:text-slate-900 dark:text-white border border-green-900/60'
+                    : 'bg-black/50 text-green-400 hover:text-slate-900 dark:text-white border border-green-900/60'
                 }`}
               >
                 🟢 Production Core (10)
@@ -2862,7 +2897,7 @@ export default function ACRPage() {
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'rnd'
                     ? 'bg-yellow-500 text-black shadow-[0_0_15px_rgba(234,179,8,0.3)]'
-                    : 'bg-slate-100 dark:bg-black/50 text-yellow-400 hover:text-slate-900 dark:text-white border border-yellow-900/60'
+                    : 'bg-black/50 text-yellow-400 hover:text-slate-900 dark:text-white border border-yellow-900/60'
                 }`}
               >
                 🟡 R&D Лаборатория (10)
@@ -2872,7 +2907,7 @@ export default function ACRPage() {
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'spec'
                     ? 'bg-cyan-500 text-black shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                    : 'bg-slate-100 dark:bg-black/50 text-cyan-400 hover:text-slate-900 dark:text-white border border-cyan-900/60'
+                    : 'bg-black/50 text-cyan-400 hover:text-slate-900 dark:text-white border border-cyan-900/60'
                 }`}
               >
                 🔵 Математическая Спецификация (10)
@@ -2888,7 +2923,7 @@ export default function ACRPage() {
                 className={`cursor-pointer rounded-2xl p-5 transition-all border ${
                   selectedTech === inn.num
                     ? 'bg-[#00F0FF]/10 border-[#00F0FF] shadow-[0_0_25px_rgba(0,240,255,0.25)] ring-1 ring-[#00F0FF]/40'
-                    : 'bg-[#05060A] border-slate-200 dark:border-[#1E293B] hover:border-gray-600 hover:bg-[#080B14]'
+                    : 'bg-[#05060A] border-[#1E293B] hover:border-gray-600 hover:bg-[#080B14]'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 mb-2.5">
@@ -2923,7 +2958,7 @@ export default function ACRPage() {
                 </p>
 
                 {selectedTech === inn.num ? (
-                  <div className="mt-4 pt-4 border-t border-slate-200 dark:border-[#1E293B] text-xs space-y-3.5 text-slate-700 dark:text-slate-300 animate-in fade-in duration-200">
+                  <div className="mt-4 pt-4 border-t border-[#1E293B] text-xs space-y-3.5 text-slate-700 dark:text-slate-300 animate-in fade-in duration-200">
                     {/* 1. Uniqueness */}
                     <div className="bg-white dark:bg-[#0B0F19] border border-[#00F0FF]/30 p-3 rounded-xl space-y-1">
                       <div className="text-[#00F0FF] font-semibold flex items-center gap-1.5 text-xs">
@@ -2952,7 +2987,7 @@ export default function ACRPage() {
                     </div>
 
                     {/* 4. Mathematics */}
-                    <div className="p-2.5 rounded-lg bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-gray-800 text-[11px] font-mono text-slate-600 dark:text-slate-400">
+                    <div className="p-2.5 rounded-lg bg-black/40 border border-gray-800 text-[11px] font-mono text-slate-600 dark:text-slate-400">
                       <strong className="text-slate-700 dark:text-slate-300">Формула:</strong> {inn.math}
                     </div>
 
@@ -2996,7 +3031,7 @@ export default function ACRPage() {
                 className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all ${
                   planFilter === 'all'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_20px_rgba(0,240,255,0.35)]'
-                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
+                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
                 }`}
               >
                 Все тарифы (6)
@@ -3006,7 +3041,7 @@ export default function ACRPage() {
                 className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 ${
                   planFilter === 'individual'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_20px_rgba(0,240,255,0.35)]'
-                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
+                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
                 }`}
               >
                 <Users className="w-3.5 h-3.5" />
@@ -3017,7 +3052,7 @@ export default function ACRPage() {
                 className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 ${
                   planFilter === 'team'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_20px_rgba(0,240,255,0.35)]'
-                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
+                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
                 }`}
               >
                 <Building className="w-3.5 h-3.5" />
@@ -3033,14 +3068,14 @@ export default function ACRPage() {
                 className={`bg-white dark:bg-[#0B0F19] border rounded-2xl p-6 flex flex-col justify-between transition-all hover:-translate-y-1 shadow-xl relative overflow-hidden group ${
                   p.popular
                     ? 'border-[#00F0FF] shadow-[0_0_30px_rgba(0,240,255,0.2)] ring-1 ring-[#00F0FF]/50'
-                    : 'border-slate-200 dark:border-[#1E293B] hover:border-gray-500'
+                    : 'border-[#1E293B] hover:border-gray-500'
                 }`}
               >
                 <div className="absolute -right-12 -top-12 w-28 h-28 bg-[#00F0FF]/5 rounded-full blur-xl group-hover:bg-[#00F0FF]/15 transition-all" />
                 
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded uppercase tracking-wider font-bold bg-slate-100 dark:bg-black/60 border border-slate-200 dark:border-gray-800 text-slate-700 dark:text-slate-300">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded uppercase tracking-wider font-bold bg-black/60 border border-gray-800 text-slate-700 dark:text-slate-300">
                       {p.category === 'individual' ? 'Solo & Dev' : p.category === 'team' ? 'Team & Business' : 'Enterprise'}
                     </span>
                     {p.popular && (
@@ -3053,17 +3088,17 @@ export default function ACRPage() {
                   <div>
                     <h4 className="text-xl font-bold text-slate-900 dark:text-white">{p.name}</h4>
                     <div className="flex items-baseline gap-1 mt-1">
-                      <span className="text-3xl font-black text-cyan-700 dark:text-[#00F0FF] font-mono">{p.price}</span>
+                      <span className="text-3xl font-black text-[#00F0FF] font-mono">{p.price}</span>
                       <span className="text-xs text-slate-600 dark:text-slate-400 font-mono">{p.period}</span>
                     </div>
-                    <div className="text-[11px] font-mono text-emerald-700 dark:text-emerald-400 mt-0.5">
+                    <div className="text-[11px] font-mono text-emerald-400 mt-0.5">
                       {p.yearlyPrice}
                     </div>
                   </div>
 
                   <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{p.target}</p>
 
-                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-black/50 border border-[#00F0FF]/30 space-y-1">
+                  <div className="p-3 rounded-xl bg-black/50 border border-[#00F0FF]/30 space-y-1">
                     <span className="text-[10px] font-mono uppercase text-[#00F0FF] font-bold">
                       Почему дороже и лучше:
                     </span>
@@ -3072,7 +3107,7 @@ export default function ACRPage() {
                     </p>
                   </div>
 
-                  <div className="px-3 py-2 rounded-xl bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-gray-800 text-xs font-mono text-cyan-200/80">
+                  <div className="px-3 py-2 rounded-xl bg-black/40 border border-gray-800 text-xs font-mono text-cyan-200/80">
                     ⚡ {p.limits}
                   </div>
 
@@ -3085,7 +3120,7 @@ export default function ACRPage() {
                     ))}
                   </ul>
 
-                  <div className="text-[10px] font-mono text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-gray-800/60 pt-2">
+                  <div className="text-[10px] font-mono text-slate-600 dark:text-slate-400 border-t border-gray-800/60 pt-2">
                     <strong className="text-slate-700 dark:text-slate-300">SLA:</strong> {p.sla}
                   </div>
                 </div>
@@ -3132,6 +3167,6 @@ export default function ACRPage() {
       </div>
       </main>
       <RadioFooter />
-    </div>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
-import { useЯзык } from "@/lib/server-locale";
 import { RadioHeader } from "@/components/radio/RadioHeader";
+import { useCurrentLang } from "@/lib/radioI18n";
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
@@ -17,9 +17,9 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
       "id": "hacker",
       "category": "individual",
       "name": "Hacker / Indie",
-      "price": "$19",
+      "price": "$15",
       "period": "/ мес",
-      "yearlyPrice": "$190 / год (скидка 17%)",
+      "yearlyPrice": "$150 / год (скидка 17%)",
       "target": "Для соло-разработчиков, пет-проектов и независимых AI-мейкеров.",
       "whyUpgrade": "Базовый доступ к ассоциативной памяти коннектома FlyWire v783 LSH для одного разработчика.",
       "seats": "1 рабочее место (личный API-ключ)",
@@ -38,10 +38,10 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
     {
       "id": "pro",
       "category": "individual",
-      "name": "Pro / Researcher",
-      "price": "$79",
+      "name": "Pro / Scale",
+      "price": "$100",
       "period": "/ мес",
-      "yearlyPrice": "$790 / год (скидка 17%)",
+      "yearlyPrice": "$1,000 / год (скидка 17%)",
       "target": "Для профессиональных инженеров, исследователей и соло-основателей AI-агентов.",
       "whyUpgrade": "В 5 раз больше памяти (500K векторов), CANN кольцевой аттрактор (защита от потери фокуса диалога) и приватный RPC-эндпоинт.",
       "seats": "1 разработчик + 1 резервный сервисный ключ",
@@ -159,9 +159,9 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
       "id": "hacker",
       "category": "individual",
       "name": "Hacker / Indie",
-      "price": "$19",
+      "price": "$15",
       "period": "/ mo",
-      "yearlyPrice": "$190 / yr (17% off)",
+      "yearlyPrice": "$150 / yr (17% off)",
       "target": "For solo developers, pet projects, and independent AI creators.",
       "whyUpgrade": "Entry-level access to FlyWire v783 LSH associative memory for a single developer.",
       "seats": "1 seat (personal API key)",
@@ -180,10 +180,10 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
     {
       "id": "pro",
       "category": "individual",
-      "name": "Pro / Researcher",
-      "price": "$79",
+      "name": "Pro / Scale",
+      "price": "$100",
       "period": "/ mo",
-      "yearlyPrice": "$790 / yr (17% off)",
+      "yearlyPrice": "$1,000 / yr (17% off)",
       "target": "For senior engineers, AI researchers, and solo agent builders.",
       "whyUpgrade": "5x memory capacity (500K vectors), CANN focus ring attractor (zero task drift), and private RPC endpoint.",
       "seats": "1 engineer + 1 backup service key",
@@ -301,9 +301,9 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
       "id": "hacker",
       "category": "individual",
       "name": "Hacker / Indie",
-      "price": "$19",
+      "price": "$15",
       "period": "/ mes",
-      "yearlyPrice": "$190 / año (17% descuento)",
+      "yearlyPrice": "$150 / año (17% descuento)",
       "target": "Para desarrolladores independientes, proyectos personales y creadores de IA.",
       "whyUpgrade": "Acceso básico a la memoria asociativa FlyWire v783 LSH para un solo desarrollador.",
       "seats": "1 puesto (clave de API personal)",
@@ -322,10 +322,10 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
     {
       "id": "pro",
       "category": "individual",
-      "name": "Pro / Researcher",
-      "price": "$79",
+      "name": "Pro / Scale",
+      "price": "$100",
       "period": "/ mes",
-      "yearlyPrice": "$790 / año (17% descuento)",
+      "yearlyPrice": "$1,000 / año (17% descuento)",
       "target": "Para ingenieros senior, investigadores de IA y creadores de agentes autónomos.",
       "whyUpgrade": "5 veces más capacidad (500.000 vectores), atractor anular CANN (sin pérdida de foco) y endpoint RPC privado.",
       "seats": "1 ingeniero + 1 clave de servicio de respaldo",
@@ -443,9 +443,9 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
       "id": "hacker",
       "category": "individual",
       "name": "Hacker / Indie",
-      "price": "$19",
+      "price": "$15",
       "period": "/ 月",
-      "yearlyPrice": "$190 / 年 (享 8.3 折)",
+      "yearlyPrice": "$150 / 年 (享 8.3 折)",
       "target": "适用于独立开发者、个人实验项目与独立 AI 创作者。",
       "whyUpgrade": "单开发者快速接入 FlyWire v783 LSH 仿生联想记忆基础内核。",
       "seats": "1 个开发席位（专属个人 API 密钥）",
@@ -464,10 +464,10 @@ const CANONICAL_PLANS: Record<Lang, any[]> = {
     {
       "id": "pro",
       "category": "individual",
-      "name": "Pro / Researcher",
-      "price": "$79",
+      "name": "Pro / Scale",
+      "price": "$100",
       "period": "/ 月",
-      "yearlyPrice": "$790 / 年 (享 8.3 折)",
+      "yearlyPrice": "$1,000 / 年 (享 8.3 折)",
       "target": "适用于资深架构师、AI 研究员与独立商业智能体创始人。",
       "whyUpgrade": "5 倍向量容量（50万向量）、CANN 环形任务焦点吸引子（彻底解决上下文漂移）与私有 RPC 零排队端点。",
       "seats": "1 个核心席位 + 1 个备用服务密钥",
@@ -2521,14 +2521,14 @@ const RadioFooter = () => (
         <div>
           <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-4">Экосистема</h4>
           <ul className="space-y-2 text-xs font-mono text-[#8B8BA8]">
-            <li><a href="https://www.codeofdigitaleternity.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">Центральный портал</a></li>
-            <li><a href="https://aifa.works" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">AIfa.works</a></li>
-            <li><a href="https://aifa.digital" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">AIfa.digital</a></li>
+            <li><a href="https://www.codeofdigitaleternity.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">CODE Eternal ↗</a></li>
+            <li><a href="https://aifa.works" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">AIfa Works ↗</a></li>
+            <li><a href="https://aifa.digital" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">AIfa Digital ↗</a></li>
             <li><Link href="/cabinet" className="hover:text-[#00F0FF]">Личный кабинет</Link></li>
           </ul>
         </div>
         <div>
-          <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-4">Юридическая информация</h4>
+          <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-4">Юридическое</h4>
           <ul className="space-y-2 text-xs font-mono text-[#8B8BA8]">
             <li><Link href="/privacy-policy" className="hover:text-[#00F0FF]">Privacy Policy</Link></li>
             <li><Link href="/user-agreement" className="hover:text-[#00F0FF]">User Agreement</Link></li>
@@ -2538,10 +2538,12 @@ const RadioFooter = () => (
         </div>
       </div>
       
-      <div className="pt-8 border-t border-[#8B8BA8]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#7E7E99]">
+      <div className="pt-8 border-t border-[#8B8BA8]/20 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#8B8BA8]">
         <div className="flex items-center gap-4">
           <span className="border border-[#7E7E99]/40 rounded px-1.5 text-[11px]">18+</span>
-          <a href="mailto:contact@codeofdigitaleternity.com" className="text-[#8B8BA8] hover:text-[#00F0FF]">contact@codeofdigitaleternity.com</a>
+          <a href="mailto:contact@codeofdigitaleternity.com" className="text-[#8B8BA8] hover:text-[#00F0FF]">
+            contact@codeofdigitaleternity.com
+          </a>
           <span>Music by AIfa &amp; DJ Galatin</span>
           <span>© 2026</span>
         </div>
@@ -2554,8 +2556,41 @@ const RadioFooter = () => (
 );
 
 export default function DigitalSOTAPage() {
-  const currentLang = useЯзык();
-  const lang: Lang = (["ru", "en", "es", "zh"].includes(currentLang) ? currentLang : "ru") as Lang;
+    const activeLang = useCurrentLang();
+  const [lang, setLang] = useState<Lang>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const q = new URLSearchParams(window.location.search).get('lang') as Lang;
+        if (q && ['ru', 'en', 'es', 'zh'].includes(q)) return q;
+        const stored = (localStorage.getItem('locale') || localStorage.getItem('code_lang')) as Lang;
+        if (stored && ['ru', 'en', 'es', 'zh'].includes(stored)) return stored;
+      } catch {}
+    }
+    return (['ru', 'en', 'es', 'zh'].includes(activeLang) ? activeLang : 'ru') as Lang;
+  });
+
+  React.useEffect(() => {
+    if (activeLang && ['ru', 'en', 'es', 'zh'].includes(activeLang)) {
+      setLang(activeLang as Lang);
+    }
+  }, [activeLang]);
+
+  React.useEffect(() => {
+    const handleLangSync = () => {
+      try {
+        const q = new URLSearchParams(window.location.search).get('lang') as Lang;
+        if (q && ['ru', 'en', 'es', 'zh'].includes(q)) { setLang(q); return; }
+        const stored = (localStorage.getItem('locale') || localStorage.getItem('code_lang')) as Lang;
+        if (stored && ['ru', 'en', 'es', 'zh'].includes(stored)) { setLang(stored); return; }
+      } catch {}
+    };
+    window.addEventListener('languagechange', handleLangSync);
+    window.addEventListener('storage', handleLangSync);
+    return () => {
+      window.removeEventListener('languagechange', handleLangSync);
+      window.removeEventListener('storage', handleLangSync);
+    };
+  }, []);
 
   // State
   // Live Bionic Simulator State
@@ -2617,8 +2652,12 @@ export default function DigitalSOTAPage() {
   const innovations = ALL_30_INNOVATIONS[lang];
 
   // Dynamic latency calculation based on filters
+  const hwLatencyMult = hardware === 'CPU' ? 1.0 : hardware === 'GPU' ? 0.32 : 0.20;
+  const hwThroughputMult = hardware === 'CPU' ? 1.0 : hardware === 'GPU' ? 5.5 : 12.5;
+
   const multiplier = (datasetSize === '100K' ? 0.7 : datasetSize === '1M' ? 1.0 : 1.8) *
-                     (dimSize === '256d' ? 0.6 : dimSize === '512d' ? 0.8 : dimSize === '1024d' ? 1.0 : 1.5);
+                     (dimSize === '256d' ? 0.6 : dimSize === '512d' ? 0.8 : dimSize === '1024d' ? 1.0 : 1.5) *
+                     hwLatencyMult;
   
   const p50 = (0.80 * multiplier).toFixed(2);
   const p75 = (1.20 * multiplier).toFixed(2);
@@ -2660,12 +2699,12 @@ export default function DigitalSOTAPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#05060a] text-slate-100 selection:bg-cyan-500/30">
+    <>
       <RadioHeader />
-      <main className="pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-20 sm:space-y-24">
+      <main className="min-h-screen bg-[#05060a] text-slate-100 pt-24 pb-16 px-4 sm:px-6 lg:px-8 selection:bg-cyan-500/30 font-sans">
+<div className="max-w-7xl mx-auto space-y-20 sm:space-y-24">
         {/* SUB-NAV BREADCRUMB */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-4 mb-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-gray-800 pb-4 mb-6">
           <div className="flex items-center gap-2.5">
             <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse" />
             <span className="text-xs font-mono font-bold tracking-wider uppercase text-slate-700 dark:text-slate-300">
@@ -2681,7 +2720,7 @@ export default function DigitalSOTAPage() {
             </Link>
             <Link
               href="/acr"
-              className="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-900 dark:text-white border border-slate-200 dark:border-white/10"
+              className="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all bg-slate-100 dark:bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800"
             >
               ACR 30 Innovations →
             </Link>
@@ -2713,23 +2752,23 @@ export default function DigitalSOTAPage() {
         </header>
 
         {/* LIVE 5-LAYER BIONIC CIRCUIT SIMULATOR */}
-        <section id="simulator" className="bg-white dark:bg-white dark:bg-[#0B0F19]/90 border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-8 shadow-sm dark:shadow-2xl space-y-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-4">
+        <section id="simulator" className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-3xl p-6 sm:p-8 shadow-sm dark:shadow-2xl space-y-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-gray-800 pb-4">
             <div>
               <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-cyan-600 dark:text-[#00F0FF] font-semibold mb-1">
                 <Cpu className="w-4 h-4" />
                 Drosophila FlyWire v783 Pipeline
               </div>
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-900 dark:text-white">
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
                 Live 5-Layer Bionic Circuit Simulator
               </h2>
             </div>
-            <span className="text-xs font-mono text-slate-500 dark:text-slate-600 dark:text-slate-400">
+            <span className="text-xs font-mono text-slate-600 dark:text-slate-400">
               Microsecond execution · 0 GPU · Pure CPU
             </span>
           </div>
 
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-700 dark:text-slate-300 leading-relaxed max-w-4xl">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl">
             {lang === 'ru' 
               ? 'Введите любой концепт. В реальном времени алгоритм выполняет проекцию FlyHash в 4096-d, WTA-разрежение 2.5%, APL-фильтрацию шума, кольцевой фокус CANN и Bilateral-верификацию.'
               : lang === 'es'
@@ -2745,12 +2784,12 @@ export default function DigitalSOTAPage() {
               value={inputQuery}
               onChange={(e) => setInputQuery(e.target.value)}
               placeholder="Архитектура цифрового бессмертия AIfa..."
-              className="flex-1 bg-slate-50 dark:bg-slate-100 dark:bg-black/60 border border-slate-300 dark:border-gray-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-mono focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="flex-1 bg-slate-50 dark:bg-black/60 border border-slate-300 dark:border-gray-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-mono focus:outline-none focus:ring-2 focus:ring-cyan-500"
             />
             <button
               onClick={runSimulator}
               disabled={simRunning}
-              className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-slate-900 dark:text-white font-bold text-xs sm:text-sm transition shadow-md font-mono uppercase tracking-wider disabled:opacity-50"
+              className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-slate-900 dark:text-white font-bold text-xs sm:text-sm transition shadow-md font-mono uppercase tracking-wider disabled:opacity-50 cursor-pointer"
             >
               <Zap className="w-4 h-4 text-slate-900 dark:text-white" />
               <span>{simRunning ? 'Computing...' : 'Run Connectome Pipeline'}</span>
@@ -2759,45 +2798,45 @@ export default function DigitalSOTAPage() {
 
           {/* 4 SIMULATOR METRICS */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-            <div className="p-4 rounded-2xl bg-slate-100 dark:bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-slate-200 dark:border-gray-800 space-y-1">
-              <span className="text-[11px] font-mono text-slate-500 dark:text-slate-600 dark:text-slate-400 uppercase block">Pipeline Latency</span>
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-gray-800 space-y-1">
+              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">Pipeline Latency</span>
               <span className="text-xl sm:text-2xl font-bold font-mono text-cyan-600 dark:text-[#00F0FF]">{simResult.latencyMs} ms</span>
             </div>
-            <div className="p-4 rounded-2xl bg-slate-100 dark:bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-slate-200 dark:border-gray-800 space-y-1">
-              <span className="text-[11px] font-mono text-slate-500 dark:text-slate-600 dark:text-slate-400 uppercase block">Active KC Neurons</span>
-              <span className="text-xl sm:text-2xl font-bold font-mono text-slate-900 dark:text-slate-900 dark:text-white">{simResult.activeBits} / 4096 (2.5%)</span>
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-gray-800 space-y-1">
+              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">Active KC Neurons</span>
+              <span className="text-xl sm:text-2xl font-bold font-mono text-slate-900 dark:text-white">{simResult.activeBits} / 4096 (2.5%)</span>
             </div>
-            <div className="p-4 rounded-2xl bg-slate-100 dark:bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-slate-200 dark:border-gray-800 space-y-1">
-              <span className="text-[11px] font-mono text-slate-500 dark:text-slate-600 dark:text-slate-400 uppercase block">APL Noise Filtering</span>
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-gray-800 space-y-1">
+              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">APL Noise Filtering</span>
               <span className="text-xl sm:text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">{simResult.noiseReduction}</span>
             </div>
-            <div className="p-4 rounded-2xl bg-slate-100 dark:bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-slate-200 dark:border-gray-800 space-y-1">
-              <span className="text-[11px] font-mono text-slate-500 dark:text-slate-600 dark:text-slate-400 uppercase block">Connectome Hex Fingerprint</span>
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-gray-800 space-y-1">
+              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">Connectome Hex Fingerprint</span>
               <span className="text-xs font-mono text-cyan-700 dark:text-cyan-300 truncate block font-bold" title={simResult.hashHex}>{simResult.hashHex}</span>
             </div>
           </div>
 
           {/* 5 CIRCUIT STAGES */}
-          <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 pt-2 border-t border-slate-200 dark:border-white/10 text-xs font-mono">
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 pt-2 border-t border-slate-200 dark:border-gray-800 text-xs font-mono">
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 text-center">
               <span className="text-cyan-600 dark:text-[#00F0FF] font-bold block">1. FlyHash</span>
-              <span className="text-[10px] text-slate-500 dark:text-slate-600 dark:text-slate-400">4096-d Projection</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400">4096-d Projection</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 text-center">
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 text-center">
               <span className="text-cyan-600 dark:text-[#00F0FF] font-bold block">2. Kenyon WTA</span>
-              <span className="text-[10px] text-slate-500 dark:text-slate-600 dark:text-slate-400">2.5% Sparsification</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400">2.5% Sparsification</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 text-center">
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 text-center">
               <span className="text-emerald-600 dark:text-emerald-400 font-bold block">3. APL Noise Gate</span>
-              <span className="text-[10px] text-slate-500 dark:text-slate-600 dark:text-slate-400">Feedback Inhibition</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400">Feedback Inhibition</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 text-center">
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 text-center">
               <span className="text-amber-600 dark:text-amber-400 font-bold block">4. CANN Attractor</span>
-              <span className="text-[10px] text-slate-500 dark:text-slate-600 dark:text-slate-400">Ring Focus & No Drift</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400">Ring Focus & No Drift</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 text-center">
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 text-center">
               <span className="text-purple-600 dark:text-purple-400 font-bold block">5. Bilateral Arb.</span>
-              <span className="text-[10px] text-slate-500 dark:text-slate-600 dark:text-slate-400">Dual Hemisphere Agree</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400">Dual Hemisphere Agree</span>
             </div>
           </div>
         </section>
@@ -2824,7 +2863,7 @@ export default function DigitalSOTAPage() {
           </div>
 
           {/* INTERACTIVE FILTERS */}
-          <div className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-2xl p-6 shadow-xl flex flex-wrap items-center justify-between gap-6">
+          <div className="bg-white dark:bg-[#0B0F19] border border-[#1E293B] rounded-2xl p-6 shadow-xl flex flex-wrap items-center justify-between gap-6">
             {/* Dataset Size */}
             <div className="space-y-2">
               <span className="text-xs font-mono text-slate-600 dark:text-slate-400 uppercase">{t.filterDataset}</span>
@@ -2836,7 +2875,7 @@ export default function DigitalSOTAPage() {
                     className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all ${
                       datasetSize === sz 
                         ? 'bg-[#00F0FF] text-black shadow-[0_0_15px_rgba(0,240,255,0.4)]' 
-                        : 'bg-slate-100 dark:bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
+                        : 'bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
                     }`}
                   >
                     {sz}
@@ -2856,7 +2895,7 @@ export default function DigitalSOTAPage() {
                     className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all ${
                       dimSize === dm 
                         ? 'bg-[#00F0FF] text-black shadow-[0_0_15px_rgba(0,240,255,0.4)]' 
-                        : 'bg-slate-100 dark:bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
+                        : 'bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
                     }`}
                   >
                     {dm}
@@ -2876,7 +2915,7 @@ export default function DigitalSOTAPage() {
                     className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all ${
                       hardware === hw 
                         ? 'bg-[#00F0FF] text-black shadow-[0_0_15px_rgba(0,240,255,0.4)]' 
-                        : 'bg-slate-100 dark:bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
+                        : 'bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
                     }`}
                   >
                     {hw === 'CPU' ? 'Standard CPU' : hw}
@@ -2886,7 +2925,7 @@ export default function DigitalSOTAPage() {
             </div>
           </div>
 
-          {/* TWO-COLUMN CHARTS: LATENCY DISTRIBUTION + THROUGHPUT */}
+                    {/* TWO-COLUMN CHARTS: LATENCY DISTRIBUTION + THROUGHPUT */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* 1. Latency Percentiles */}
             <div className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl relative overflow-hidden">
@@ -2901,30 +2940,41 @@ export default function DigitalSOTAPage() {
 
               <div className="space-y-4 pt-2">
                 {[
-                  { label: 'P50 (Median)', val: p50, pct: 20, color: 'bg-emerald-400', glow: 'shadow-[0_0_15px_rgba(52,211,153,0.3)]' },
-                  { label: 'P75', val: p75, pct: 32, color: 'bg-[#00F0FF]', glow: 'shadow-[0_0_15px_rgba(0,240,255,0.3)]' },
-                  { label: 'P90', val: p90, pct: 50, color: 'bg-cyan-400', glow: 'shadow-[0_0_15px_rgba(34,211,238,0.3)]' },
-                  { label: 'P95', val: p95, pct: 68, color: 'bg-amber-400', glow: 'shadow-[0_0_15px_rgba(251,191,36,0.3)]' },
-                  { label: 'P99 (Worst-case)', val: p99, pct: 95, color: 'bg-purple-400', glow: 'shadow-[0_0_15px_rgba(192,132,252,0.3)]' }
-                ].map((item, idx) => (
-                  <div key={idx} className="space-y-1.5">
-                    <div className="flex justify-between text-xs font-mono">
-                      <span className="text-slate-700 dark:text-slate-300 font-semibold">{item.label}</span>
-                      <span className="text-slate-900 dark:text-white font-bold">{item.val} ms</span>
+                  { label: 'P50 (Median)', val: p50, color: 'bg-emerald-400', glow: 'shadow-[0_0_15px_rgba(52,211,153,0.3)]' },
+                  { label: 'P75', val: p75, color: 'bg-[#00F0FF]', glow: 'shadow-[0_0_15px_rgba(0,240,255,0.3)]' },
+                  { label: 'P90', val: p90, color: 'bg-cyan-400', glow: 'shadow-[0_0_15px_rgba(34,211,238,0.3)]' },
+                  { label: 'P95', val: p95, color: 'bg-amber-400', glow: 'shadow-[0_0_15px_rgba(251,191,36,0.3)]' },
+                  { label: 'P99 (Worst-case)', val: p99, color: 'bg-purple-400', glow: 'shadow-[0_0_15px_rgba(192,132,252,0.3)]' }
+                ].map((item, idx) => {
+                  const pct = Math.min(100, Math.max(6, Math.round(Math.pow(parseFloat(item.val) / 12.0, 0.65) * 100)));
+                  return (
+                    <div key={idx} className="space-y-1.5">
+                      <div className="flex justify-between text-xs font-mono">
+                        <span className="text-slate-700 dark:text-slate-300 font-semibold">{item.label}</span>
+                        <span className="text-slate-900 dark:text-white font-bold">{item.val} ms</span>
+                      </div>
+                      <div className="h-3.5 bg-slate-100 dark:bg-black/60 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-gray-800">
+                        <div 
+                          className={`h-full rounded-full ${item.color} ${item.glow} transition-all duration-500`}
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
                     </div>
-                    <div className="h-3.5 bg-slate-100 dark:bg-black/60 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-gray-800">
-                      <div 
-                        className={`h-full rounded-full ${item.color} ${item.glow} transition-all duration-500`}
-                        style={{ width: `${item.pct}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
-              <div className="pt-3 border-t border-slate-200 dark:border-gray-800/80 flex items-center justify-between text-xs font-mono text-slate-600 dark:text-slate-400">
-                <span>Платформа: AMD EPYC 9654 (x86_64)</span>
-                <span className="text-[#00F0FF]">AVX2 / POPCNT SIMD</span>
+              <div className="pt-3 border-t border-slate-200 dark:border-gray-800/80 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-slate-600 dark:text-slate-400">
+                <span>
+                  {hardware === 'CPU' && (lang === 'ru' ? 'Платформа: AMD EPYC 9654 (96 ядер, x86_64)' : lang === 'es' ? 'Plataforma: AMD EPYC 9654 (96 núcleos, x86_64)' : lang === 'zh' ? '平台：AMD EPYC 9654 (96核, x86_64)' : 'Platform: AMD EPYC 9654 (96 Cores, x86_64)')}
+                  {hardware === 'GPU' && (lang === 'ru' ? 'Платформа: NVIDIA H100 SXM5 (80GB HBM3)' : lang === 'es' ? 'Plataforma: NVIDIA H100 SXM5 (80GB HBM3)' : lang === 'zh' ? '平台：NVIDIA H100 SXM5 (80GB HBM3)' : 'Platform: NVIDIA H100 SXM5 (80GB HBM3)')}
+                  {hardware === 'TPU' && (lang === 'ru' ? 'Платформа: Google Cloud TPU v5e (Pod 256)' : lang === 'es' ? 'Plataforma: Google Cloud TPU v5e (Pod 256)' : lang === 'zh' ? '平台：Google Cloud TPU v5e (Pod 256)' : 'Platform: Google Cloud TPU v5e (Pod 256)')}
+                </span>
+                <span className="text-[#00F0FF]">
+                  {hardware === 'CPU' && 'AVX-512 / POPCNT SIMD'}
+                  {hardware === 'GPU' && 'CUDA 12.4 / Tensor Cores'}
+                  {hardware === 'TPU' && 'XLA / Matrix Multiply Units'}
+                </span>
               </div>
             </div>
 
@@ -2941,37 +2991,42 @@ export default function DigitalSOTAPage() {
 
               <div className="space-y-4 pt-2">
                 {[
-                  { threads: '1 поток (Single-thread)', qps: '1,250 QPS', pct: 15 },
-                  { threads: '4 потока (4 cores)', qps: '4,800 QPS', pct: 28 },
-                  { threads: '8 потоков (8 cores)', qps: '8,900 QPS', pct: 42 },
-                  { threads: '16 потоков (16 cores)', qps: '15,200 QPS', pct: 60 },
-                  { threads: '32 потока (32 cores)', qps: '24,500 QPS', pct: 82 },
-                  { threads: '64 потока (Cluster node)', qps: '32,100 QPS', pct: 100 }
-                ].map((row, idx) => (
-                  <div key={idx} className="space-y-1.5">
-                    <div className="flex justify-between text-xs font-mono">
-                      <span className="text-slate-700 dark:text-slate-300">{row.threads}</span>
-                      <span className="text-[#00F0FF] font-bold">{row.qps}</span>
+                  { threads: lang === 'ru' ? '1 поток (Single-thread)' : lang === 'es' ? '1 hilo (Single-thread)' : lang === 'zh' ? '1 线程 (单核基准)' : '1 thread (Single-thread)', baseQps: 1250 },
+                  { threads: lang === 'ru' ? '4 потока (4 cores)' : lang === 'es' ? '4 hilos (4 cores)' : lang === 'zh' ? '4 线程 (4核并发)' : '4 threads (4 cores)', baseQps: 4800 },
+                  { threads: lang === 'ru' ? '8 потоков (8 cores)' : lang === 'es' ? '8 hilos (8 cores)' : lang === 'zh' ? '8 线程 (8核并发)' : '8 threads (8 cores)', baseQps: 8900 },
+                  { threads: lang === 'ru' ? '16 потоков (16 cores)' : lang === 'es' ? '16 hilos (16 cores)' : lang === 'zh' ? '16 线程 (16核并发)' : '16 threads (16 cores)', baseQps: 15200 },
+                  { threads: lang === 'ru' ? '32 потока (32 cores)' : lang === 'es' ? '32 hilos (32 cores)' : lang === 'zh' ? '32 线程 (32核并发)' : '32 threads (32 cores)', baseQps: 24500 },
+                  { threads: lang === 'ru' ? '64 потока (Cluster node)' : lang === 'es' ? '64 hilos (Cluster node)' : lang === 'zh' ? '64 线程 (分布式集群节点)' : '64 threads (Cluster node)', baseQps: 32100 }
+                ].map((row, idx) => {
+                  const currentQps = Math.round(row.baseQps * hwThroughputMult);
+                  const formattedQps = currentQps.toLocaleString('en-US') + ' QPS';
+                  const pct = Math.min(100, Math.max(6, Math.round(Math.pow(currentQps / 420000, 0.65) * 100)));
+                  return (
+                    <div key={idx} className="space-y-1.5">
+                      <div className="flex justify-between text-xs font-mono">
+                        <span className="text-slate-700 dark:text-slate-300">{row.threads}</span>
+                        <span className="text-[#00F0FF] font-bold">{formattedQps}</span>
+                      </div>
+                      <div className="h-3 bg-slate-100 dark:bg-black/60 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-gray-800">
+                        <div 
+                          className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.3)] transition-all duration-500"
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
                     </div>
-                    <div className="h-3 bg-slate-100 dark:bg-black/60 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-gray-800">
-                      <div 
-                        className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.3)] transition-all duration-500"
-                        style={{ width: `${row.pct}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               <div className="pt-3 border-t border-slate-200 dark:border-gray-800/80 flex items-center justify-between text-xs font-mono text-slate-600 dark:text-slate-400">
-                <span>Линейность масштабирования: 94.2%</span>
+                <span>{lang === 'ru' ? 'Линейность масштабирования: 94.2%' : lang === 'es' ? 'Linealidad de escalado: 94.2%' : lang === 'zh' ? '线性扩展比：94.2%' : 'Scaling Linearity: 94.2%'}</span>
                 <span className="text-emerald-400">Zero Locks (Lock-free LSH)</span>
               </div>
             </div>
           </div>
 
           {/* BASELINE COMPARISON TABLE */}
-          <div className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+          <div className="bg-white dark:bg-[#0B0F19] border border-[#1E293B] rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
@@ -2982,7 +3037,7 @@ export default function DigitalSOTAPage() {
                   Независимое сравнение архитектур при поиске Top-10 по 1M векторов (1024d)
                 </p>
               </div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-black/40 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-gray-800">
+              <div className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-600 dark:text-slate-400 bg-black/40 px-3 py-1.5 rounded-lg border border-gray-800">
                 <span>Тест: MLPerf Inference 2026</span>
               </div>
             </div>
@@ -2990,7 +3045,7 @@ export default function DigitalSOTAPage() {
             <div className="overflow-x-auto w-full -mx-4 px-4 sm:mx-0 sm:px-0">
               <table className="w-full min-w-[640px] text-left border-collapse text-sm font-sans">
                 <thead>
-                  <tr className="border-b border-slate-200 dark:border-[#1E293B] text-slate-600 dark:text-slate-400 font-mono text-xs uppercase tracking-wider">
+                  <tr className="border-b border-[#1E293B] text-slate-600 dark:text-slate-400 font-mono text-xs uppercase tracking-wider">
                     <th className="py-3.5 px-4">{t.colMethod}</th>
                     <th className="py-3.5 px-4 text-center">{t.colLatency}</th>
                     <th className="py-3.5 px-4 text-center">{t.colRam}</th>
@@ -2999,7 +3054,7 @@ export default function DigitalSOTAPage() {
                     <th className="py-3.5 px-4 text-center">{t.colGpu}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200 dark:divide-gray-800/60 text-xs sm:text-sm">
+                <tbody className="divide-y divide-gray-800/60 text-xs sm:text-sm">
                   <tr className="bg-[#00F0FF]/10 border-l-4 border-l-[#00F0FF] font-semibold text-slate-900 dark:text-white">
                     <td className="py-4 px-4 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
@@ -3011,7 +3066,7 @@ export default function DigitalSOTAPage() {
                     <td className="py-4 px-4 text-center font-mono font-bold text-[#00F0FF]">0.003 J</td>
                     <td className="py-4 px-4 text-center font-mono text-emerald-400">❌ Нет (0 GPU)</td>
                   </tr>
-                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-slate-100/60 dark:hover:bg-white/5 transition-colors">
+                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
                     <td className="py-3.5 px-4">FAISS IVF (Facebook AI)</td>
                     <td className="py-3.5 px-4 text-center font-mono">12.0 мс</td>
                     <td className="py-3.5 px-4 text-center font-mono">8.5 GB</td>
@@ -3019,7 +3074,7 @@ export default function DigitalSOTAPage() {
                     <td className="py-3.5 px-4 text-center font-mono">0.150 J</td>
                     <td className="py-3.5 px-4 text-center font-mono text-slate-600 dark:text-slate-400">Опционально</td>
                   </tr>
-                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-slate-100/60 dark:hover:bg-white/5 transition-colors">
+                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
                     <td className="py-3.5 px-4">FAISS GPU (Nvidia H100)</td>
                     <td className="py-3.5 px-4 text-center font-mono">2.30 мс</td>
                     <td className="py-3.5 px-4 text-center font-mono">6.1 GB VRAM</td>
@@ -3027,7 +3082,7 @@ export default function DigitalSOTAPage() {
                     <td className="py-3.5 px-4 text-center font-mono">0.420 J</td>
                     <td className="py-3.5 px-4 text-center font-mono text-amber-400">✅ Обязательно (H100)</td>
                   </tr>
-                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-slate-100/60 dark:hover:bg-white/5 transition-colors">
+                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
                     <td className="py-3.5 px-4">HNSW (Hierarchical Navigable Small World)</td>
                     <td className="py-3.5 px-4 text-center font-mono">5.00 мс</td>
                     <td className="py-3.5 px-4 text-center font-mono">6.1 GB</td>
@@ -3035,7 +3090,7 @@ export default function DigitalSOTAPage() {
                     <td className="py-3.5 px-4 text-center font-mono">0.080 J</td>
                     <td className="py-3.5 px-4 text-center font-mono text-slate-600 dark:text-slate-400">❌ Нет</td>
                   </tr>
-                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-slate-100/60 dark:hover:bg-white/5 transition-colors">
+                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
                     <td className="py-3.5 px-4">Annoy (Spotify)</td>
                     <td className="py-3.5 px-4 text-center font-mono">8.00 мс</td>
                     <td className="py-3.5 px-4 text-center font-mono">5.3 GB</td>
@@ -3043,7 +3098,7 @@ export default function DigitalSOTAPage() {
                     <td className="py-3.5 px-4 text-center font-mono">0.110 J</td>
                     <td className="py-3.5 px-4 text-center font-mono text-slate-600 dark:text-slate-400">❌ Нет</td>
                   </tr>
-                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-slate-100/60 dark:hover:bg-white/5 transition-colors">
+                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
                     <td className="py-3.5 px-4">ScaNN (Google Research)</td>
                     <td className="py-3.5 px-4 text-center font-mono">3.50 мс</td>
                     <td className="py-3.5 px-4 text-center font-mono">5.8 GB</td>
@@ -3059,7 +3114,7 @@ export default function DigitalSOTAPage() {
           {/* TWO BLOCKS: RETRIEVAL QUALITY SUITE + GREEN AI */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Retrieval Quality */}
-            <div className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+            <div className="bg-white dark:bg-[#0B0F19] border border-[#1E293B] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
               <div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
                   <ShieldCheck className="w-5 h-5 text-emerald-400" />
@@ -3071,22 +3126,22 @@ export default function DigitalSOTAPage() {
               </div>
 
               <div className="grid grid-cols-2 gap-4 pt-2">
-                <div className="p-4 rounded-2xl bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
+                <div className="p-4 rounded-2xl bg-black/40 border border-gray-800 space-y-1">
                   <span className="text-xs font-mono text-slate-600 dark:text-slate-400">Recall@10</span>
                   <div className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">98.7%</div>
                   <span className="text-[11px] text-gray-500">Цель: &gt; 95%</span>
                 </div>
-                <div className="p-4 rounded-2xl bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
+                <div className="p-4 rounded-2xl bg-black/40 border border-gray-800 space-y-1">
                   <span className="text-xs font-mono text-slate-600 dark:text-slate-400">Precision@10</span>
                   <div className="text-2xl sm:text-3xl font-black text-[#00F0FF] font-mono">94.2%</div>
                   <span className="text-[11px] text-gray-500">Цель: &gt; 90%</span>
                 </div>
-                <div className="p-4 rounded-2xl bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
+                <div className="p-4 rounded-2xl bg-black/40 border border-gray-800 space-y-1">
                   <span className="text-xs font-mono text-slate-600 dark:text-slate-400">NDCG@10</span>
                   <div className="text-2xl sm:text-3xl font-black text-cyan-300 font-mono">0.912</div>
                   <span className="text-[11px] text-gray-500">Цель: &gt; 0.85</span>
                 </div>
-                <div className="p-4 rounded-2xl bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
+                <div className="p-4 rounded-2xl bg-black/40 border border-gray-800 space-y-1">
                   <span className="text-xs font-mono text-slate-600 dark:text-slate-400">mAP</span>
                   <div className="text-2xl sm:text-3xl font-black text-purple-400 font-mono">0.884</div>
                   <span className="text-[11px] text-gray-500">Цель: &gt; 0.80</span>
@@ -3095,7 +3150,7 @@ export default function DigitalSOTAPage() {
             </div>
 
             {/* Green AI */}
-            <div className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+            <div className="bg-white dark:bg-[#0B0F19] border border-[#1E293B] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
               <div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
                   <Cpu className="w-5 h-5 text-[#00F0FF]" />
@@ -3104,16 +3159,16 @@ export default function DigitalSOTAPage() {
                 <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">{t.greenSubtitle}</p>
               </div>
 
-              <div className="overflow-x-auto pt-2">
-                <table className="w-full text-left border-collapse text-xs sm:text-sm font-sans">
+              <div className="overflow-x-auto w-full -mx-4 px-4 sm:mx-0 sm:px-0 pt-2">
+                <table className="w-full min-w-[640px] text-left border-collapse text-xs sm:text-sm font-sans">
                   <thead>
-                    <tr className="border-b border-slate-200 dark:border-[#1E293B] text-slate-600 dark:text-slate-400 font-mono text-xs uppercase">
+                    <tr className="border-b border-[#1E293B] text-slate-600 dark:text-slate-400 font-mono text-xs uppercase">
                       <th className="py-2.5">{t.colMetric}</th>
                       <th className="py-2.5 text-center text-[#00F0FF]">AIfa Core</th>
                       <th className="py-2.5 text-center">FAISS (GPU)</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-200 dark:divide-gray-800/60 font-mono">
+                  <tbody className="divide-y divide-gray-800/60 font-mono">
                     <tr>
                       <td className="py-3 font-sans text-slate-700 dark:text-slate-300">Queries / Joule</td>
                       <td className="py-3 text-center font-bold text-[#00F0FF]">333 000</td>
@@ -3136,7 +3191,7 @@ export default function DigitalSOTAPage() {
           </div>
 
           {/* REPRODUCIBLE PYTHON SCRIPT */}
-          <div className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+          <div className="bg-white dark:bg-[#0B0F19] border border-[#1E293B] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
@@ -3156,7 +3211,7 @@ export default function DigitalSOTAPage() {
                 </button>
                 <button
                   onClick={handleDownloadScript}
-                  className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-black/60 hover:bg-gray-800 text-slate-800 dark:text-slate-200 font-semibold text-xs font-mono transition-all flex items-center gap-2 border border-gray-700"
+                  className="px-4 py-2 rounded-xl bg-black/60 hover:bg-gray-800 text-slate-800 dark:text-slate-200 font-semibold text-xs font-mono transition-all flex items-center gap-2 border border-gray-700"
                 >
                   <Download className="w-4 h-4" />
                   <span>{t.btnDownload}</span>
@@ -3165,7 +3220,7 @@ export default function DigitalSOTAPage() {
             </div>
 
             <div className="relative">
-              <pre className="p-4 sm:p-6 rounded-2xl bg-black/70 border border-slate-200 dark:border-gray-800/80 font-mono text-xs text-slate-700 dark:text-slate-300 overflow-x-auto max-h-80 selection:bg-[#00F0FF]/30">
+              <pre className="p-4 sm:p-6 rounded-2xl bg-black/70 border border-gray-800/80 font-mono text-xs text-slate-700 dark:text-slate-300 overflow-x-auto max-h-80 selection:bg-[#00F0FF]/30">
                 <code>{BENCHMARK_SCRIPT}</code>
               </pre>
             </div>
@@ -3195,7 +3250,7 @@ export default function DigitalSOTAPage() {
                 className={`px-4 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'all'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_15px_rgba(0,240,255,0.3)]'
-                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
+                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
                 }`}
               >
                 {t.filterTechAll}
@@ -3242,7 +3297,7 @@ export default function DigitalSOTAPage() {
                 className={`cursor-pointer rounded-2xl p-5 transition-all border ${
                   selectedTech === inn.num
                     ? 'bg-[#00F0FF]/10 border-[#00F0FF] shadow-[0_0_25px_rgba(0,240,255,0.25)] ring-1 ring-[#00F0FF]/40'
-                    : 'bg-white dark:bg-[#0B0F19] border-slate-200 dark:border-[#1E293B] hover:border-gray-600 hover:bg-[#0E1424]'
+                    : 'bg-white dark:bg-[#0B0F19] border-[#1E293B] hover:border-gray-600 hover:bg-[#0E1424]'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 mb-2.5">
@@ -3279,9 +3334,9 @@ export default function DigitalSOTAPage() {
                 </p>
 
                 {selectedTech === inn.num ? (
-                  <div className="mt-4 pt-4 border-t border-slate-200 dark:border-[#1E293B] text-xs space-y-3.5 text-slate-700 dark:text-slate-300 animate-in fade-in duration-200">
+                  <div className="mt-4 pt-4 border-t border-[#1E293B] text-xs space-y-3.5 text-slate-700 dark:text-slate-300 animate-in fade-in duration-200">
                     {/* 1. Uniqueness */}
-                    <div className="bg-slate-100 dark:bg-black/50 border border-[#00F0FF]/30 p-3 rounded-xl space-y-1">
+                    <div className="bg-black/50 border border-[#00F0FF]/30 p-3 rounded-xl space-y-1">
                       <div className="text-[#00F0FF] font-semibold flex items-center gap-1.5 text-xs">
                         <Sparkles className="w-3.5 h-3.5 shrink-0" />
                         {lang === 'ru' ? '1. Чем уникальна и какую пользу дает:' : lang === 'es' ? '1. Por qué es única y qué valor aporta:' : lang === 'zh' ? '1. 独特性与实际价值：' : '1. Uniqueness & Concrete Value:'}
@@ -3290,7 +3345,7 @@ export default function DigitalSOTAPage() {
                     </div>
 
                     {/* 2. Advantage over competitors */}
-                    <div className="bg-slate-100 dark:bg-black/50 border border-amber-500/30 p-3 rounded-xl space-y-1">
+                    <div className="bg-black/50 border border-amber-500/30 p-3 rounded-xl space-y-1">
                       <div className="text-amber-400 font-semibold flex items-center gap-1.5 text-xs">
                         <Zap className="w-3.5 h-3.5 shrink-0" />
                         {lang === 'ru' ? '2. Превосходство над конкурентами (FAISS / Pinecone / Chroma / LLM / FIFO):' : lang === 'es' ? '2. Ventaja sobre competidores (FAISS / Pinecone / Chroma / LLM):' : lang === 'zh' ? '2. 超越传统方案（FAISS / Pinecone / Chroma / LLM / FIFO）：' : '2. Advantage over Competitors (FAISS / Pinecone / Chroma / LLMs):'}
@@ -3299,7 +3354,7 @@ export default function DigitalSOTAPage() {
                     </div>
 
                     {/* 3. Limitations & Roadmap */}
-                    <div className="bg-slate-100 dark:bg-black/50 border border-purple-500/30 p-3 rounded-xl space-y-1">
+                    <div className="bg-black/50 border border-purple-500/30 p-3 rounded-xl space-y-1">
                       <div className="text-purple-400 font-semibold flex items-center gap-1.5 text-xs">
                         <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
                         {lang === 'ru' ? '3. Ограничения v1 и план развития в v2/v3:' : lang === 'es' ? '3. Limitaciones v1 y hoja de ruta v2/v3:' : lang === 'zh' ? '3. v1 局限性与 v2/v3 迭代路线图：' : '3. v1 Limitations & v2/v3 Evolution Roadmap:'}
@@ -3308,7 +3363,7 @@ export default function DigitalSOTAPage() {
                     </div>
 
                     {/* 4. Mathematics & Biology */}
-                    <div className="p-2.5 rounded-lg bg-slate-100 dark:bg-black/60 border border-slate-200 dark:border-gray-800 text-[11px] font-mono text-slate-600 dark:text-slate-400">
+                    <div className="p-2.5 rounded-lg bg-black/60 border border-gray-800 text-[11px] font-mono text-slate-600 dark:text-slate-400">
                       <strong className="text-slate-700 dark:text-slate-300">Формула:</strong> {inn.math}
                     </div>
 
@@ -3325,7 +3380,7 @@ export default function DigitalSOTAPage() {
                     </div>
                   </div>
                 ) : (
-                  <div className="mt-3 flex items-center justify-between text-[11px] text-gray-500 pt-2 border-t border-slate-200 dark:border-gray-800/80">
+                  <div className="mt-3 flex items-center justify-between text-[11px] text-gray-500 pt-2 border-t border-gray-800/80">
                     <span>{lang === 'ru' ? 'Нажмите для глубокого анализа' : lang === 'es' ? 'Clic para análisis completo' : lang === 'zh' ? '点击展开深度分析' : 'Click for deep analysis'}</span>
                     <span className="text-[#00F0FF] font-mono">Развернуть ↓</span>
                   </div>
@@ -3358,7 +3413,7 @@ export default function DigitalSOTAPage() {
                 className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all ${
                   planFilter === 'all'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_20px_rgba(0,240,255,0.35)]'
-                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
+                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
                 }`}
               >
                 {t.tabPlansAll}
@@ -3368,7 +3423,7 @@ export default function DigitalSOTAPage() {
                 className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 ${
                   planFilter === 'individual'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_20px_rgba(0,240,255,0.35)]'
-                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
+                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
                 }`}
               >
                 <Users className="w-3.5 h-3.5" />
@@ -3379,7 +3434,7 @@ export default function DigitalSOTAPage() {
                 className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 ${
                   planFilter === 'team'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_20px_rgba(0,240,255,0.35)]'
-                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
+                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
                 }`}
               >
                 <Building className="w-3.5 h-3.5" />
@@ -3396,7 +3451,7 @@ export default function DigitalSOTAPage() {
                 className={`bg-white dark:bg-[#0B0F19] border rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all hover:-translate-y-1 shadow-2xl relative overflow-hidden group ${
                   p.popular
                     ? 'border-[#00F0FF] shadow-[0_0_30px_rgba(0,240,255,0.2)] ring-1 ring-[#00F0FF]/50'
-                    : 'border-slate-200 dark:border-[#1E293B] hover:border-gray-500'
+                    : 'border-[#1E293B] hover:border-gray-500'
                 }`}
               >
                 <div className="absolute -right-12 -top-12 w-32 h-32 bg-[#00F0FF]/5 rounded-full blur-2xl group-hover:bg-[#00F0FF]/15 transition-all" />
@@ -3404,7 +3459,7 @@ export default function DigitalSOTAPage() {
                 <div className="space-y-4">
                   {/* Header */}
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full uppercase tracking-wider font-bold bg-slate-100 dark:bg-black/60 border border-slate-200 dark:border-gray-800 text-slate-700 dark:text-slate-300">
+                    <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full uppercase tracking-wider font-bold bg-black/60 border border-gray-800 text-slate-700 dark:text-slate-300">
                       {p.category === 'individual' ? 'Solo & Dev' : p.category === 'team' ? 'Team & Business' : 'Enterprise'}
                     </span>
                     {p.popular && (
@@ -3417,10 +3472,10 @@ export default function DigitalSOTAPage() {
                   <div>
                     <h3 className="text-xl font-black text-slate-900 dark:text-white">{p.name}</h3>
                     <div className="flex items-baseline gap-1 mt-1">
-                      <span className="text-3xl sm:text-4xl font-black text-cyan-700 dark:text-[#00F0FF] font-mono">{p.price}</span>
+                      <span className="text-3xl sm:text-4xl font-black text-[#00F0FF] font-mono">{p.price}</span>
                       <span className="text-xs text-slate-600 dark:text-slate-400 font-mono">{p.period}</span>
                     </div>
-                    <div className="text-[11px] font-mono text-emerald-700 dark:text-emerald-400 mt-1">
+                    <div className="text-[11px] font-mono text-emerald-400 mt-1">
                       {p.yearlyPrice}
                     </div>
                   </div>
@@ -3430,7 +3485,7 @@ export default function DigitalSOTAPage() {
                   </p>
 
                   {/* Why Upgrade Block */}
-                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-black/50 border border-[#00F0FF]/30 space-y-1">
+                  <div className="p-3 rounded-xl bg-black/50 border border-[#00F0FF]/30 space-y-1">
                     <span className="text-[10px] font-mono uppercase text-[#00F0FF] font-bold">
                       {t.lblWhyUpgrade}
                     </span>
@@ -3440,7 +3495,7 @@ export default function DigitalSOTAPage() {
                   </div>
 
                   {/* Limits */}
-                  <div className="px-3 py-2 rounded-xl bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1 text-xs font-mono">
+                  <div className="px-3 py-2 rounded-xl bg-black/40 border border-gray-800 space-y-1 text-xs font-mono">
                     <div className="text-cyan-300 font-semibold flex items-center gap-1.5">
                       <Zap className="w-3.5 h-3.5 text-amber-400" />
                       {p.limits}
@@ -3466,7 +3521,7 @@ export default function DigitalSOTAPage() {
                   </div>
 
                   {/* SLA */}
-                  <div className="text-[11px] font-mono text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-gray-800/80 pt-3">
+                  <div className="text-[11px] font-mono text-slate-600 dark:text-slate-400 border-t border-gray-800/80 pt-3">
                     <strong className="text-slate-700 dark:text-slate-300">{t.lblSla}</strong> {p.sla}
                   </div>
                 </div>
@@ -3510,15 +3565,15 @@ export default function DigitalSOTAPage() {
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                <div className="p-3 rounded-xl bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-gray-800 text-xs font-mono">
+                <div className="p-3 rounded-xl bg-black/50 border border-gray-800 text-xs font-mono">
                   <span className="text-slate-600 dark:text-slate-400 block text-[10px]">БИТКОИН-ШТАМП:</span>
                   <span className="text-[#00F0FF] font-bold">{t.proofBtc}</span>
                 </div>
-                <div className="p-3 rounded-xl bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-gray-800 text-xs font-mono">
+                <div className="p-3 rounded-xl bg-black/50 border border-gray-800 text-xs font-mono">
                   <span className="text-slate-600 dark:text-slate-400 block text-[10px]">ХРАНИЛИЩЕ ARWEAVE:</span>
                   <span className="text-emerald-400 font-bold">{t.proofArweave}</span>
                 </div>
-                <div className="p-3 rounded-xl bg-slate-100 dark:bg-black/50 border border-slate-200 dark:border-gray-800 text-xs font-mono">
+                <div className="p-3 rounded-xl bg-black/50 border border-gray-800 text-xs font-mono">
                   <span className="text-slate-600 dark:text-slate-400 block text-[10px]">АУДИТ MLPERF:</span>
                   <span className="text-amber-400 font-bold">{t.proofMlcommons}</span>
                 </div>
@@ -3530,6 +3585,6 @@ export default function DigitalSOTAPage() {
       </div>
       </main>
       <RadioFooter />
-    </div>
+    </>
   );
 }

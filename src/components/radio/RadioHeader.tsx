@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { LiveClock } from '@/components/radio/LiveClock';
 import { SignalStrength } from '@/components/radio/SignalStrength';
 import { RADIO_LANGS, useCurrentLang, useSetLang, useRadioT } from '@/lib/radioI18n';
+import CabinetAuthButton from '@/components/radio/CabinetAuthButton';
 
 export function RadioHeader() {
   const rt = useRadioT();
@@ -398,28 +399,8 @@ export function RadioHeader() {
               </span>
             </motion.a>
 
-            {/* Personal cabinet (unified account across the ecosystem) */}
-            <motion.a
-              href="/cabinet"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.35, duration: 0.6 }}
-              whileHover={{ scale: 1.04 }}
-              aria-label={rt('cabinetAria')}
-              className="flex items-center gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full"
-              style={{
-                background: 'rgba(0, 240, 255, 0.06)',
-                border: '1px solid rgba(0, 240, 255, 0.18)',
-              }}
-            >
-              <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="8" r="3.2" />
-                <path d="M5.5 20a6.5 6.5 0 0 1 13 0" />
-              </svg>
-              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
-                {rt('cabinet')}
-              </span>
-            </motion.a>
+            {/* Personal cabinet auth button (unified account across the ecosystem) */}
+            <CabinetAuthButton lang={lang} />
 
             {/* Language switcher (shared with the cabinet) */}
             <div className="relative">
@@ -589,13 +570,4 @@ export function RadioHeader() {
       </nav>
     </motion.header>
   );
-            {/* AIfa Digital */}
-            <Link
-              href="/digital"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-500/30 bg-cyan-950/20 hover:bg-cyan-950/40 text-cyan-300 transition-colors text-xs font-semibold tracking-wide"
-              title="AIfa Digital"
-            >
-              <span className="hidden sm:inline">AIfa Digital</span>
-              <span className="sm:hidden">Digital</span>
-            </Link>
 }
