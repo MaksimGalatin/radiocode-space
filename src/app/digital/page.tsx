@@ -2153,9 +2153,17 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
   ]
 };
 
-const BENCHMARK_SCRIPT = `# benchmark.py — Официальный воспроизводимый бенчмарк AIfa Digital
-# Архитектура: BionicRuntime на коннектоме Drosophila FlyWire v783
-# Запуск: python benchmark.py
+const BENCHMARK_SCRIPT = `# ==============================================================================
+# AIfa Bionic Connectome Benchmark (AIfa-BioBench v1.0)
+# Copyright (c) 2026 CODE Eternal Ecosystem & Maksim Galatin
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at:
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Reproducible SOTA Benchmark: FlyHash 4096-d + Kenyon WTA 2.5% + CANN vs FAISS
+# Pure CPU / 0 GPU · Sub-millisecond vector indexing & popcount hamming distance
+# ==============================================================================
 
 import time
 import numpy as np
@@ -2257,11 +2265,11 @@ const I18N = {
     colFaissGpu: "FAISS (Nvidia H100)",
     
     // Python script
-    codeTitle: "Воспроизводимый бенчмарк-скрипт (benchmark.py)",
+    codeTitle: "Воспроизводимый бенчмарк-скрипт (aifa_biobench.py)",
     codeSubtitle: "Запустите локально на своем ноутбуке или сервере и проверьте результат за 30 секунд",
-    btnCopy: "Скопировать benchmark.py",
+    btnCopy: "Скопировать aifa_biobench.py",
     btnCopied: "Скопировано в буфер!",
-    btnDownload: "Скачать benchmark.py",
+    btnDownload: "Скачать aifa_biobench.py",
     
     // 30 tech
     techCatalogTitle: "Полный каталог 30 технологий коннектома FlyWire v783",
@@ -2327,11 +2335,11 @@ const I18N = {
     colFaissCpu: "FAISS (CPU)",
     colFaissGpu: "FAISS (Nvidia H100)",
     
-    codeTitle: "Reproducible Python Benchmark Script (benchmark.py)",
+    codeTitle: "Reproducible Python Benchmark Script (aifa_biobench.py)",
     codeSubtitle: "Run locally on your laptop or cloud server and verify the metrics in 30 seconds",
-    btnCopy: "Copy benchmark.py",
+    btnCopy: "Copy aifa_biobench.py",
     btnCopied: "Copied to clipboard!",
-    btnDownload: "Download benchmark.py",
+    btnDownload: "Download aifa_biobench.py",
     
     techCatalogTitle: "Complete Catalog of 30 FlyWire v783 Connectome Innovations",
     techCatalogSubtitle: "Honest status: 10 technologies in Production Core, 10 in R&D Lab, 10 in Mathematical Specification",
@@ -2394,11 +2402,11 @@ const I18N = {
     colFaissCpu: "FAISS (CPU)",
     colFaissGpu: "FAISS (Nvidia H100)",
     
-    codeTitle: "Script de Benchmark Reproducible (benchmark.py)",
+    codeTitle: "Script de Benchmark Reproducible (aifa_biobench.py)",
     codeSubtitle: "Ejecútelo localmente en su máquina y verifique los resultados en 30 segundos",
-    btnCopy: "Copiar benchmark.py",
+    btnCopy: "Copiar aifa_biobench.py",
     btnCopied: "¡Copiado al portapapeles!",
-    btnDownload: "Descargar benchmark.py",
+    btnDownload: "Descargar aifa_biobench.py",
     
     techCatalogTitle: "Catálogo Completo de 30 Innovaciones Conectómicas",
     techCatalogSubtitle: "Estado honesto: 10 tecnologías en Production Core, 10 en Laboratorio R&D, 10 en Especificación Matemática",
@@ -2461,11 +2469,11 @@ const I18N = {
     colFaissCpu: "FAISS (CPU)",
     colFaissGpu: "FAISS (Nvidia H100)",
     
-    codeTitle: "开源可复现 Python 基准测试脚本 (benchmark.py)",
+    codeTitle: "开源可复现 Python 基准测试脚本 (aifa_biobench.py)",
     codeSubtitle: "在您的个人电脑或服务器上直接运行，30 秒内实测验证所有核心指标",
-    btnCopy: "一键复制 benchmark.py",
+    btnCopy: "一键复制 aifa_biobench.py",
     btnCopied: "已成功复制到剪贴板！",
-    btnDownload: "下载 benchmark.py 脚本",
+    btnDownload: "下载 aifa_biobench.py 脚本",
     
     techCatalogTitle: "FlyWire v783 大脑连接组 30 项核心创新技术总览",
     techCatalogSubtitle: "恪守科研诚信的真实状态划分：10项生产内核部署，10项实验室验证，10项数学理论规范",
@@ -2676,7 +2684,7 @@ export default function DigitalSOTAPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'benchmark.py';
+    a.download = 'aifa_biobench.py';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -3159,30 +3167,30 @@ export default function DigitalSOTAPage() {
                 <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">{t.greenSubtitle}</p>
               </div>
 
-              <div className="overflow-x-auto w-full -mx-4 px-4 sm:mx-0 sm:px-0 pt-2">
-                <table className="w-full min-w-[640px] text-left border-collapse text-xs sm:text-sm font-sans">
+              <div className="w-full overflow-hidden pt-2">
+                <table className="w-full text-left border-collapse text-xs sm:text-sm font-sans">
                   <thead>
                     <tr className="border-b border-[#1E293B] text-slate-600 dark:text-slate-400 font-mono text-xs uppercase">
-                      <th className="py-2.5">{t.colMetric}</th>
-                      <th className="py-2.5 text-center text-[#00F0FF]">AIfa Core</th>
-                      <th className="py-2.5 text-center">FAISS (GPU)</th>
+                      <th className="py-2.5 text-left w-5/12">{t.colMetric}</th>
+                      <th className="py-2.5 text-center text-[#00F0FF] w-4/12">AIfa Core</th>
+                      <th className="py-2.5 text-right sm:text-center text-slate-600 dark:text-slate-400 w-3/12">FAISS (GPU)</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-800/60 font-mono">
                     <tr>
                       <td className="py-3 font-sans text-slate-700 dark:text-slate-300">Queries / Joule</td>
                       <td className="py-3 text-center font-bold text-[#00F0FF]">333 000</td>
-                      <td className="py-3 text-center text-slate-600 dark:text-slate-400">2 400</td>
+                      <td className="py-3 text-right sm:text-center text-slate-600 dark:text-slate-400">2 400</td>
                     </tr>
                     <tr>
                       <td className="py-3 font-sans text-slate-700 dark:text-slate-300">Watts / Query</td>
                       <td className="py-3 text-center font-bold text-[#00F0FF]">0.003 W</td>
-                      <td className="py-3 text-center text-slate-600 dark:text-slate-400">0.420 W</td>
+                      <td className="py-3 text-right sm:text-center text-slate-600 dark:text-slate-400">0.420 W</td>
                     </tr>
                     <tr>
                       <td className="py-3 font-sans text-slate-700 dark:text-slate-300">Carbon / Query</td>
                       <td className="py-3 text-center font-bold text-[#00F0FF]">0.0002 g</td>
-                      <td className="py-3 text-center text-slate-600 dark:text-slate-400">0.0280 g</td>
+                      <td className="py-3 text-right sm:text-center text-slate-600 dark:text-slate-400">0.0280 g</td>
                     </tr>
                   </tbody>
                 </table>
