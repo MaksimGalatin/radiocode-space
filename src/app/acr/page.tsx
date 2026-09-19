@@ -1,5 +1,6 @@
 'use client';
 import { useЯзык } from "@/lib/server-locale";
+import { RadioHeader } from "@/components/radio/RadioHeader";
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
@@ -2599,9 +2600,69 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
   ]
 };
 
+
+const RadioFooter = () => (
+  <footer className="relative z-10 border-t border-[#8B8BA8]/20 bg-[#050507]/90 backdrop-blur-xl mt-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-[#B000FF]">
+              RADIOCODE.SPACE
+            </span>
+          </div>
+          <p className="text-xs font-mono text-[#7E7E99] leading-relaxed">
+            Cyberpunk Radio by CODE Eternal.
+          </p>
+        </div>
+        <div>
+          <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-4">Навигация</h4>
+          <ul className="space-y-2 text-xs font-mono text-[#8B8BA8]">
+            <li><Link href="/" className="hover:text-[#00F0FF]">Главная / Радио</Link></li>
+            <li><Link href="/news" className="hover:text-[#00F0FF]">Новости</Link></li>
+            <li><Link href="/acr" className="hover:text-[#00F0FF]">ACR 30</Link></li>
+            <li><Link href="/digital" className="hover:text-[#00F0FF]">AIfa Digital</Link></li>
+            <li><Link href="/accessibility" className="hover:text-[#00F0FF]">AIfaFocus Сканер</Link></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-4">Экосистема</h4>
+          <ul className="space-y-2 text-xs font-mono text-[#8B8BA8]">
+            <li><a href="https://www.codeofdigitaleternity.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">Центральный портал</a></li>
+            <li><a href="https://aifa.works" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">AIfa.works</a></li>
+            <li><a href="https://aifa.digital" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">AIfa.digital</a></li>
+            <li><Link href="/cabinet" className="hover:text-[#00F0FF]">Личный кабинет</Link></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-4">Юридическая информация</h4>
+          <ul className="space-y-2 text-xs font-mono text-[#8B8BA8]">
+            <li><Link href="/privacy-policy" className="hover:text-[#00F0FF]">Privacy Policy</Link></li>
+            <li><Link href="/user-agreement" className="hover:text-[#00F0FF]">User Agreement</Link></li>
+            <li><Link href="/service-agreement" className="hover:text-[#00F0FF]">Service Agreement</Link></li>
+            <li><Link href="/accessibility-statement" className="hover:text-[#00F0FF]">Accessibility Statement</Link></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div className="pt-8 border-t border-[#8B8BA8]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#7E7E99]">
+        <div className="flex items-center gap-4">
+          <span className="border border-[#7E7E99]/40 rounded px-1.5 text-[11px]">18+</span>
+          <a href="mailto:contact@codeofdigitaleternity.com" className="text-[#8B8BA8] hover:text-[#00F0FF]">contact@codeofdigitaleternity.com</a>
+          <span>Music by AIfa &amp; DJ Galatin</span>
+          <span>© 2026</span>
+        </div>
+        <p className="text-[11px] text-[#7E7E99]">
+          CODE Eternal Ecosystem · Bionic Neuromorphic Connectome FlyWire v783
+        </p>
+      </div>
+    </div>
+  </footer>
+);
+
 export default function ACRPage() {
-  const { siteLang } = useЯзык();
-  const lang: Lang = (["ru", "en", "es", "zh"].includes(siteLang) ? siteLang : "ru") as Lang;
+  const currentLang = useЯзык();
+  const lang: Lang = (["ru", "en", "es", "zh"].includes(currentLang) ? currentLang : "ru") as Lang;
   const [selectedTech, setSelectedTech] = useState<number | null>(null);
   const [techFilter, setTechFilter] = useState<'all' | 'prod' | 'rnd' | 'spec'>('all');
   const [planFilter, setPlanFilter] = useState<'all' | 'individual' | 'team'>('all');
@@ -2627,8 +2688,34 @@ export default function ACRPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#030712] text-[#F8FAFC] py-24 px-4 sm:px-6 lg:px-8 selection:bg-[#00F0FF]/30">
-      <div className="max-w-7xl mx-auto space-y-24">
+    <div className="min-h-screen bg-[#05060a] text-slate-100 selection:bg-cyan-500/30">
+      <RadioHeader />
+      <main className="pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-20 sm:space-y-24">
+        {/* SUB-NAV BREADCRUMB */}
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-4 mb-6">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse" />
+            <span className="text-xs font-mono font-bold tracking-wider uppercase text-slate-700 dark:text-slate-300">
+              AIfa Cognitive Runtime · ACR 30 Innovations
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/digital"
+              className="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-900 dark:text-white border border-slate-200 dark:border-white/10"
+            >
+              ← AIfa Digital
+            </Link>
+            <Link
+              href="/acr"
+              className="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all bg-cyan-600 text-slate-900 dark:text-white shadow-sm"
+            >
+              ACR 30 Innovations
+            </Link>
+          </div>
+        </div>
+
         
         {/* Hero Section */}
         <header className="text-center space-y-6">
@@ -2639,11 +2726,11 @@ export default function ACRPage() {
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight bg-gradient-to-r from-white via-[#F8FAFC] to-[#00F0FF] bg-clip-text text-transparent">
             {t.title}
           </h1>
-          <p className="text-lg sm:text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed font-normal">
+          <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-4xl mx-auto leading-relaxed font-normal">
             {t.subtitle}
           </p>
           <div className="pt-2">
-            <div className="inline-flex items-center gap-2 bg-[#0B0F19] border border-[#00F0FF]/40 px-5 py-2.5 rounded-2xl text-sm sm:text-base font-semibold text-[#00F0FF] shadow-[0_0_25px_rgba(0,240,255,0.15)]">
+            <div className="inline-flex items-center gap-2 bg-white dark:bg-[#0B0F19] border border-[#00F0FF]/40 px-5 py-2.5 rounded-2xl text-sm sm:text-base font-semibold text-[#00F0FF] shadow-[0_0_25px_rgba(0,240,255,0.15)]">
               <Sparkles className="w-4 h-4 text-[#00F0FF]" />
               {t.authorBadge}
             </div>
@@ -2651,16 +2738,16 @@ export default function ACRPage() {
         </header>
 
         {/* Ablation Matrix Table */}
-        <section className="bg-[#0B0F19] border border-[#1E293B] rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+        <section className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#00F0FF]/5 rounded-full blur-3xl pointer-events-none" />
           <h2 className="text-2xl sm:text-3xl font-bold mb-6 flex items-center gap-3">
             <Layers className="w-6 h-6 text-[#00F0FF]" />
             {t.ablationTitle}
           </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-sm">
+          <div className="overflow-x-auto w-full -mx-4 px-4 sm:mx-0 sm:px-0">
+            <table className="w-full min-w-[640px] text-left border-collapse text-sm">
               <thead>
-                <tr className="border-b border-[#1E293B] text-gray-400 font-mono text-xs uppercase">
+                <tr className="border-b border-slate-200 dark:border-[#1E293B] text-slate-600 dark:text-slate-400 font-mono text-xs uppercase">
                   <th className="py-3 px-4">{t.colConfig}</th>
                   <th className="py-3 px-3 text-center">{t.colNoise}</th>
                   <th className="py-3 px-3 text-center">{t.colRecall}</th>
@@ -2674,7 +2761,7 @@ export default function ACRPage() {
                 {ABLATION_ROWS.map((row, idx) => (
                   <tr 
                     key={idx} 
-                    className={idx === ABLATION_ROWS.length - 1 ? "bg-[#00F0FF]/10 text-white font-semibold" : "text-gray-300 hover:bg-white/5"}
+                    className={idx === ABLATION_ROWS.length - 1 ? "bg-[#00F0FF]/10 text-slate-900 dark:text-white font-semibold" : "text-slate-700 dark:text-slate-300 hover:bg-slate-100/60 dark:hover:bg-white/5"}
                   >
                     <td className="py-3 px-4 font-sans flex items-center gap-2">
                       {idx === ABLATION_ROWS.length - 1 && <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse shrink-0" />}
@@ -2700,7 +2787,7 @@ export default function ACRPage() {
               <Zap className="w-6 h-6 text-[#00F0FF]" />
               {t.top5Title}
             </h2>
-            <p className="text-sm sm:text-base text-gray-400 mt-1 font-normal">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-1 font-normal">
               {t.top5Subtitle}
             </p>
           </div>
@@ -2709,7 +2796,7 @@ export default function ACRPage() {
             {top5.map((tech, idx) => (
               <div
                 key={idx}
-                className="bg-[#0B0F19] border border-[#1E293B] rounded-2xl p-6 hover:border-[#00F0FF]/40 transition-all flex flex-col justify-between shadow-xl relative overflow-hidden group"
+                className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-2xl p-6 hover:border-[#00F0FF]/40 transition-all flex flex-col justify-between shadow-xl relative overflow-hidden group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -2720,16 +2807,16 @@ export default function ACRPage() {
                       🟢 Production Core
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-white leading-snug">{tech.name}</h3>
-                  <p className="text-xs text-gray-400 leading-relaxed">{tech.bio}</p>
-                  <div className="text-xs text-gray-300 font-mono bg-black/40 p-2.5 rounded-xl border border-gray-800">
-                    <strong className="text-gray-400">Математика:</strong> {tech.math}
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-snug">{tech.name}</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{tech.bio}</p>
+                  <div className="text-xs text-slate-700 dark:text-slate-300 font-mono bg-slate-100 dark:bg-black/40 p-2.5 rounded-xl border border-slate-200 dark:border-gray-800">
+                    <strong className="text-slate-600 dark:text-slate-400">Математика:</strong> {tech.math}
                   </div>
                   <div className="text-xs text-cyan-200/90 leading-relaxed">
                     <strong className="text-[#00F0FF]">Польза:</strong> {tech.gain}
                   </div>
                 </div>
-                <div className="mt-4 pt-3 border-t border-gray-800/80 text-[11px] font-mono text-gray-500">
+                <div className="mt-4 pt-3 border-t border-slate-200 dark:border-gray-800/80 text-[11px] font-mono text-gray-500">
                   {tech.deploy}
                 </div>
               </div>
@@ -2738,13 +2825,13 @@ export default function ACRPage() {
         </section>
 
         {/* FULL 30 INNOVATIONS CATALOG */}
-        <section id="innovations" className="bg-[#0B0F19] border border-[#1E293B] rounded-3xl p-6 sm:p-8 space-y-8 shadow-2xl">
+        <section id="innovations" className="bg-white dark:bg-[#0B0F19] border border-slate-200 dark:border-[#1E293B] rounded-3xl p-6 sm:p-8 space-y-8 shadow-2xl">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
               <Compass className="w-7 h-7 text-[#00F0FF]" />
               {t.innovationsTitle}
             </h2>
-            <p className="text-sm sm:text-base text-gray-400 mt-2 font-normal">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-2 font-normal">
               {t.innovationsSubtitle}
             </p>
 
@@ -2755,7 +2842,7 @@ export default function ACRPage() {
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'all'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_15px_rgba(0,240,255,0.3)]'
-                    : 'bg-black/50 text-gray-400 hover:text-white border border-gray-800'
+                    : 'bg-slate-100 dark:bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
                 }`}
               >
                 Все 30 технологий
@@ -2765,7 +2852,7 @@ export default function ACRPage() {
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'prod'
                     ? 'bg-green-500 text-black shadow-[0_0_15px_rgba(34,197,94,0.3)]'
-                    : 'bg-black/50 text-green-400 hover:text-white border border-green-900/60'
+                    : 'bg-slate-100 dark:bg-black/50 text-green-400 hover:text-slate-900 dark:text-white border border-green-900/60'
                 }`}
               >
                 🟢 Production Core (10)
@@ -2775,7 +2862,7 @@ export default function ACRPage() {
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'rnd'
                     ? 'bg-yellow-500 text-black shadow-[0_0_15px_rgba(234,179,8,0.3)]'
-                    : 'bg-black/50 text-yellow-400 hover:text-white border border-yellow-900/60'
+                    : 'bg-slate-100 dark:bg-black/50 text-yellow-400 hover:text-slate-900 dark:text-white border border-yellow-900/60'
                 }`}
               >
                 🟡 R&D Лаборатория (10)
@@ -2785,7 +2872,7 @@ export default function ACRPage() {
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'spec'
                     ? 'bg-cyan-500 text-black shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                    : 'bg-black/50 text-cyan-400 hover:text-white border border-cyan-900/60'
+                    : 'bg-slate-100 dark:bg-black/50 text-cyan-400 hover:text-slate-900 dark:text-white border border-cyan-900/60'
                 }`}
               >
                 🔵 Математическая Спецификация (10)
@@ -2801,7 +2888,7 @@ export default function ACRPage() {
                 className={`cursor-pointer rounded-2xl p-5 transition-all border ${
                   selectedTech === inn.num
                     ? 'bg-[#00F0FF]/10 border-[#00F0FF] shadow-[0_0_25px_rgba(0,240,255,0.25)] ring-1 ring-[#00F0FF]/40'
-                    : 'bg-[#05060A] border-[#1E293B] hover:border-gray-600 hover:bg-[#080B14]'
+                    : 'bg-[#05060A] border-slate-200 dark:border-[#1E293B] hover:border-gray-600 hover:bg-[#080B14]'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 mb-2.5">
@@ -2828,26 +2915,26 @@ export default function ACRPage() {
                   </div>
                 </div>
 
-                <h4 className="text-base font-bold text-white mb-2 leading-snug">
+                <h4 className="text-base font-bold text-slate-900 dark:text-white mb-2 leading-snug">
                   {inn.name}
                 </h4>
-                <p className="text-xs text-gray-400 line-clamp-2 leading-relaxed mb-1">
+                <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mb-1">
                   {inn.bio}
                 </p>
 
                 {selectedTech === inn.num ? (
-                  <div className="mt-4 pt-4 border-t border-[#1E293B] text-xs space-y-3.5 text-gray-300 animate-in fade-in duration-200">
+                  <div className="mt-4 pt-4 border-t border-slate-200 dark:border-[#1E293B] text-xs space-y-3.5 text-slate-700 dark:text-slate-300 animate-in fade-in duration-200">
                     {/* 1. Uniqueness */}
-                    <div className="bg-[#0B0F19] border border-[#00F0FF]/30 p-3 rounded-xl space-y-1">
+                    <div className="bg-white dark:bg-[#0B0F19] border border-[#00F0FF]/30 p-3 rounded-xl space-y-1">
                       <div className="text-[#00F0FF] font-semibold flex items-center gap-1.5 text-xs">
                         <Sparkles className="w-3.5 h-3.5 shrink-0" />
                         {lang === 'ru' ? '1. Чем уникальна и какую пользу дает:' : lang === 'es' ? '1. Por qué es única y qué valor aporta:' : lang === 'zh' ? '1. 独特性与实际收益：' : '1. Uniqueness & Concrete Value:'}
                       </div>
-                      <p className="text-gray-200 text-xs leading-relaxed">{inn.uniqueness || inn.gain}</p>
+                      <p className="text-slate-800 dark:text-slate-200 text-xs leading-relaxed">{inn.uniqueness || inn.gain}</p>
                     </div>
 
                     {/* 2. Advantage */}
-                    <div className="bg-[#0B0F19] border border-amber-500/30 p-3 rounded-xl space-y-1">
+                    <div className="bg-white dark:bg-[#0B0F19] border border-amber-500/30 p-3 rounded-xl space-y-1">
                       <div className="text-amber-400 font-semibold flex items-center gap-1.5 text-xs">
                         <Zap className="w-3.5 h-3.5 shrink-0" />
                         {lang === 'ru' ? '2. Превосходство над конкурентами (FAISS / Pinecone / Chroma / LLM / FIFO):' : lang === 'es' ? '2. Ventaja sobre competidores (FAISS / Pinecone / Chroma / LLM):' : lang === 'zh' ? '2. 超越传统方案（FAISS / Pinecone / Chroma / LLM / FIFO）：' : '2. Advantage over Competitors (FAISS / Pinecone / Chroma / LLMs):'}
@@ -2856,7 +2943,7 @@ export default function ACRPage() {
                     </div>
 
                     {/* 3. Limitations */}
-                    <div className="bg-[#0B0F19] border border-purple-500/30 p-3 rounded-xl space-y-1">
+                    <div className="bg-white dark:bg-[#0B0F19] border border-purple-500/30 p-3 rounded-xl space-y-1">
                       <div className="text-purple-400 font-semibold flex items-center gap-1.5 text-xs">
                         <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
                         {lang === 'ru' ? '3. Ограничения v1 и план развития в v2/v3:' : lang === 'es' ? '3. Limitaciones v1 y hoja de ruta v2/v3:' : lang === 'zh' ? '3. v1 局限性与 v2/v3 迭代路线图：' : '3. v1 Limitations & v2/v3 Evolution Roadmap:'}
@@ -2865,8 +2952,8 @@ export default function ACRPage() {
                     </div>
 
                     {/* 4. Mathematics */}
-                    <div className="p-2.5 rounded-lg bg-black/40 border border-gray-800 text-[11px] font-mono text-gray-400">
-                      <strong className="text-gray-300">Формула:</strong> {inn.math}
+                    <div className="p-2.5 rounded-lg bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-gray-800 text-[11px] font-mono text-slate-600 dark:text-slate-400">
+                      <strong className="text-slate-700 dark:text-slate-300">Формула:</strong> {inn.math}
                     </div>
 
                     {/* 5. Link */}
@@ -2895,10 +2982,10 @@ export default function ACRPage() {
         {/* COMMERCIAL PRICING (6 CANONICAL TIERS) */}
         <section id="pricing" className="space-y-8">
           <div className="text-center space-y-3">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
               {t.plansTitle}
             </h2>
-            <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto font-normal">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-normal">
               {t.plansSubtitle}
             </p>
 
@@ -2909,7 +2996,7 @@ export default function ACRPage() {
                 className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all ${
                   planFilter === 'all'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_20px_rgba(0,240,255,0.35)]'
-                    : 'bg-[#0B0F19] text-gray-400 hover:text-white border border-gray-800'
+                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
                 }`}
               >
                 Все тарифы (6)
@@ -2919,7 +3006,7 @@ export default function ACRPage() {
                 className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 ${
                   planFilter === 'individual'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_20px_rgba(0,240,255,0.35)]'
-                    : 'bg-[#0B0F19] text-gray-400 hover:text-white border border-gray-800'
+                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
                 }`}
               >
                 <Users className="w-3.5 h-3.5" />
@@ -2930,7 +3017,7 @@ export default function ACRPage() {
                 className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 ${
                   planFilter === 'team'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_20px_rgba(0,240,255,0.35)]'
-                    : 'bg-[#0B0F19] text-gray-400 hover:text-white border border-gray-800'
+                    : 'bg-white dark:bg-[#0B0F19] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-200 dark:border-gray-800'
                 }`}
               >
                 <Building className="w-3.5 h-3.5" />
@@ -2943,17 +3030,17 @@ export default function ACRPage() {
             {filteredPlans.map((p, idx) => (
               <div
                 key={p.id}
-                className={`bg-[#0B0F19] border rounded-2xl p-6 flex flex-col justify-between transition-all hover:-translate-y-1 shadow-xl relative overflow-hidden group ${
+                className={`bg-white dark:bg-[#0B0F19] border rounded-2xl p-6 flex flex-col justify-between transition-all hover:-translate-y-1 shadow-xl relative overflow-hidden group ${
                   p.popular
                     ? 'border-[#00F0FF] shadow-[0_0_30px_rgba(0,240,255,0.2)] ring-1 ring-[#00F0FF]/50'
-                    : 'border-[#1E293B] hover:border-gray-500'
+                    : 'border-slate-200 dark:border-[#1E293B] hover:border-gray-500'
                 }`}
               >
                 <div className="absolute -right-12 -top-12 w-28 h-28 bg-[#00F0FF]/5 rounded-full blur-xl group-hover:bg-[#00F0FF]/15 transition-all" />
                 
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded uppercase tracking-wider font-bold bg-black/60 border border-gray-800 text-gray-300">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded uppercase tracking-wider font-bold bg-slate-100 dark:bg-black/60 border border-slate-200 dark:border-gray-800 text-slate-700 dark:text-slate-300">
                       {p.category === 'individual' ? 'Solo & Dev' : p.category === 'team' ? 'Team & Business' : 'Enterprise'}
                     </span>
                     {p.popular && (
@@ -2964,32 +3051,32 @@ export default function ACRPage() {
                   </div>
 
                   <div>
-                    <h4 className="text-xl font-bold text-white">{p.name}</h4>
+                    <h4 className="text-xl font-bold text-slate-900 dark:text-white">{p.name}</h4>
                     <div className="flex items-baseline gap-1 mt-1">
-                      <span className="text-3xl font-black text-[#00F0FF] font-mono">{p.price}</span>
-                      <span className="text-xs text-gray-400 font-mono">{p.period}</span>
+                      <span className="text-3xl font-black text-cyan-700 dark:text-[#00F0FF] font-mono">{p.price}</span>
+                      <span className="text-xs text-slate-600 dark:text-slate-400 font-mono">{p.period}</span>
                     </div>
-                    <div className="text-[11px] font-mono text-emerald-400 mt-0.5">
+                    <div className="text-[11px] font-mono text-emerald-700 dark:text-emerald-400 mt-0.5">
                       {p.yearlyPrice}
                     </div>
                   </div>
 
-                  <p className="text-xs text-gray-400 leading-relaxed">{p.target}</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{p.target}</p>
 
-                  <div className="p-3 rounded-xl bg-black/50 border border-[#00F0FF]/30 space-y-1">
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-black/50 border border-[#00F0FF]/30 space-y-1">
                     <span className="text-[10px] font-mono uppercase text-[#00F0FF] font-bold">
                       Почему дороже и лучше:
                     </span>
-                    <p className="text-xs text-gray-200 leading-snug">
+                    <p className="text-xs text-slate-800 dark:text-slate-200 leading-snug">
                       {p.whyUpgrade}
                     </p>
                   </div>
 
-                  <div className="px-3 py-2 rounded-xl bg-black/40 border border-gray-800 text-xs font-mono text-cyan-200/80">
+                  <div className="px-3 py-2 rounded-xl bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-gray-800 text-xs font-mono text-cyan-200/80">
                     ⚡ {p.limits}
                   </div>
 
-                  <ul className="space-y-2 text-xs text-gray-300">
+                  <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                     {p.deliverables.map((f: string, fi: number) => (
                       <li key={fi} className="flex items-start gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-[#00F0FF] shrink-0 mt-0.5" />
@@ -2998,8 +3085,8 @@ export default function ACRPage() {
                     ))}
                   </ul>
 
-                  <div className="text-[10px] font-mono text-gray-400 border-t border-gray-800/60 pt-2">
-                    <strong className="text-gray-300">SLA:</strong> {p.sla}
+                  <div className="text-[10px] font-mono text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-gray-800/60 pt-2">
+                    <strong className="text-slate-700 dark:text-slate-300">SLA:</strong> {p.sla}
                   </div>
                 </div>
 
@@ -3024,13 +3111,13 @@ export default function ACRPage() {
               <Lock className="w-10 h-10 text-[#00F0FF]" />
             </div>
             <div className="space-y-4">
-              <h3 className="text-2xl font-bold text-white">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
                 {t.legalTitle}
               </h3>
-              <p className="text-sm text-gray-300 leading-relaxed">
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                 {t.legalText1}
               </p>
-              <p className="text-sm text-gray-300 leading-relaxed">
+              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                 {t.legalText2}
               </p>
               <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-[#00F0FF]">
@@ -3043,6 +3130,8 @@ export default function ACRPage() {
         </section>
 
       </div>
+      </main>
+      <RadioFooter />
     </div>
   );
 }
