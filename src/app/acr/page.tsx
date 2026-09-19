@@ -2983,10 +2983,10 @@ export default function ACRPage() {
         <section id="pricing" className="space-y-8">
           <div className="text-center space-y-3">
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
-              {t.plansTitle}
+              {t.commercialTitle}
             </h2>
             <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-normal">
-              {t.plansSubtitle}
+              {t.commercialSubtitle}
             </p>
 
             {/* Filter Tabs */}
@@ -3112,13 +3112,13 @@ export default function ACRPage() {
             </div>
             <div className="space-y-4">
               <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-                {t.legalTitle}
+                {t.ipTitle}
               </h3>
               <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                {t.legalText1}
+                {t.ipSole}
               </p>
               <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                {t.legalText2}
+                {t.ipDual}
               </p>
               <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-[#00F0FF]">
                 <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4" /> Бернская конвенция</span>
