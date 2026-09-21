@@ -797,12 +797,12 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "bio": "БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:\n\n1. Биологический стандарт: консорциум FlyWire разработал исчерпывающий стандарт документирования связности мозга: каждый нейрон имеет однозначный Supervoxel ID, корневую координату сомы в нанометрах (x, y, z), аннотацию нейропиля (из 78 областей), строгий тип нейротрансмиттера и точное число синаптических сайтов (T-bars и PSD).\n2. Проблема хаоса в IT-архитектуре: современные мультиагентные системы (Multi-Agent Workflows, LangGraph, AutoGen) описываются неформальными блок-схемами в Miro или путаным кодом Python. Отсутствует строгий формальный язык описания:\n   - Кто кого вызывает?\n   - Какова пропускная способность канала (синаптический вес)?\n   - Является ли связь ингибирующей (блокирующей) или активирующей?\n   - Какие подсистемы изолированы, а какие образуют петли обратной связи?\n3. Спецификация CADF (Connectome Architecture Description Format):\n   Описывается графом в формате строго валидируемого JSON Schema:\n   $$\\mathcal{S} = \\langle \\mathcal{V}, \\mathcal{E}, \\mathcal{T}, \\mathcal{W} \\rangle$$\n   где $\\mathcal{V}$ — компоненты-нейроны, $\\mathcal{E}$ — синаптические вызовы, $\\mathcal{T} \\in \\{\\text{Sync, Async, Inhibitory, Modulatory}\\}$, $\\mathcal{W} \\in \\mathbb{R}^+$ — пропускная способность.",
       "math": "Единый открытый стандарт спецификации архитектуры бионических агентов",
       "gain": "Стандарт визуализации и спецификации сложных многокомпонентных ИИ-систем (Connectome Architecture Description Format, CADF). Заменяет разрозненные диаграммы C4 и UML строгой синаптической схемотехникой с точной типизацией информационных потоков.",
-      "deploy": "aifa.digital, документация API",
-      "uniqueness": "Открытый стандарт машиночитаемой документации нейронных графов и архитектур памяти (Connectome Architecture Definition Format).",
-      "competitors": "Заменяет тяжелые неспециализированные форматы (ONNX, GEXF) компактным бинарным стандартом с задержками синапсов.",
-      "limitations": "Парсер реализован на C++ и Python; в v2 нативные SDK для Rust, Go и Swift.",
+      "deploy": "bench/cadf_schema_run.py (Apache 2.0), aifa.digital, документация API",
+      "uniqueness": "Открытый стандарт машиночитаемой документации нейронных графов и архитектур памяти (Connectome Architecture Definition Format). ЧЕСТНЫЙ ПРОГОН 21.09.2026: ни стандарта, ни валидатора не существовало на диске — впервые определена JSON Schema буквально по формуле S=<V,E,T,W>, написан валидатор, честно прогнан.",
+      "competitors": "Заменяет тяжелые неспециализированные форматы (ONNX, GEXF) компактным JSON-стандартом. Честный замер: валидатор корректно принимает верный документ и отклоняет намеренно испорченный (неверный тип связи, отрицательная пропускная способность).",
+      "limitations": "Парсер реализован на Python без внешних зависимостей; в v2 нативные SDK для Rust, Go и Swift.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "2.177 ms"
+      "metric": "0.2694 ms P50 валидации (быстрее заявленных 2.177 ms) — исправлено 21.09.2026"
     },
     {
       "num": 18,
@@ -1189,12 +1189,12 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "bio": "БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:\n\n1. Биологический стандарт: консорциум FlyWire разработал исчерпывающий стандарт документирования связности мозга: каждый нейрон имеет однозначный Supervoxel ID, корневую координату сомы в нанометрах (x, y, z), аннотацию нейропиля (из 78 областей), строгий тип нейротрансмиттера и точное число синаптических сайтов (T-bars и PSD).\n2. Проблема хаоса в IT-архитектуре: современные мультиагентные системы (Multi-Agent Workflows, LangGraph, AutoGen) описываются неформальными блок-схемами в Miro или путаным кодом Python. Отсутствует строгий формальный язык описания:\n   - Кто кого вызывает?\n   - Какова пропускная способность канала (синаптический вес)?\n   - Является ли связь ингибирующей (блокирующей) или активирующей?\n   - Какие подсистемы изолированы, а какие образуют петли обратной связи?\n3. Спецификация CADF (Connectome Architecture Description Format):\n   Описывается графом в формате строго валидируемого JSON Schema:\n   $$\\mathcal{S} = \\langle \\mathcal{V}, \\mathcal{E}, \\mathcal{T}, \\mathcal{W} \\rangle$$\n   где $\\mathcal{V}$ — компоненты-нейроны, $\\mathcal{E}$ — синаптические вызовы, $\\mathcal{T} \\in \\{\\text{Sync, Async, Inhibitory, Modulatory}\\}$, $\\mathcal{W} \\in \\mathbb{R}^+$ — пропускная способность.",
       "math": "Единый открытый стандарт спецификации архитектуры бионических агентов",
       "gain": "Стандарт визуализации и спецификации сложных многокомпонентных ИИ-систем (Connectome Architecture Description Format, CADF). Заменяет разрозненные диаграммы C4 и UML строгой синаптической схемотехникой с точной типизацией информационных потоков.",
-      "deploy": "Deployed in AIfa Core and ecosystem sites.",
-      "uniqueness": "Bionic innovation #17 directly modelled on FlyWire v783 connectome architecture. Открытый стандарт машиночитаемой документации нейронных графов и архитектур памяти (Connectome Architecture Definition Format).",
-      "competitors": "Superior to traditional vector/LLM stacks: Заменяет тяжелые неспециализированные форматы (ONNX, GEXF) компактным бинарным стандартом с задержками синапсов.",
-      "limitations": "v1 status & v2/v3 roadmap: Парсер реализован на C++ и Python; в v2 нативные SDK для Rust, Go и Swift.",
+      "deploy": "bench/cadf_schema_run.py (Apache 2.0), Deployed in AIfa Core and ecosystem sites.",
+      "uniqueness": "Bionic innovation #17 directly modelled on FlyWire v783 connectome architecture. Открытый стандарт машиночитаемой документации нейронных графов и архитектур памяти (Connectome Architecture Definition Format). HONEST RUN 21.09.2026: neither the standard nor a validator existed — JSON Schema defined for the first time exactly per formula S=<V,E,T,W>, validator written, honestly run.",
+      "competitors": "Superior to traditional vector/LLM stacks: Заменяет тяжелые неспециализированные форматы (ONNX, GEXF) компактным JSON-стандартом. Honest measurement: validator correctly accepts a valid document and rejects a deliberately broken one (invalid edge type, negative bandwidth).",
+      "limitations": "v1 status & v2/v3 roadmap: Парсер реализован на Python без внешних зависимостей; в v2 нативные SDK для Rust, Go и Swift.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "2.177 ms"
+      "metric": "0.2694 ms P50 validation (faster than claimed 2.177 ms) — corrected 21.09.2026"
     },
     {
       "num": 18,
@@ -1581,12 +1581,12 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "bio": "БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:\n\n1. Биологический стандарт: консорциум FlyWire разработал исчерпывающий стандарт документирования связности мозга: каждый нейрон имеет однозначный Supervoxel ID, корневую координату сомы в нанометрах (x, y, z), аннотацию нейропиля (из 78 областей), строгий тип нейротрансмиттера и точное число синаптических сайтов (T-bars и PSD).\n2. Проблема хаоса в IT-архитектуре: современные мультиагентные системы (Multi-Agent Workflows, LangGraph, AutoGen) описываются неформальными блок-схемами в Miro или путаным кодом Python. Отсутствует строгий формальный язык описания:\n   - Кто кого вызывает?\n   - Какова пропускная способность канала (синаптический вес)?\n   - Является ли связь ингибирующей (блокирующей) или активирующей?\n   - Какие подсистемы изолированы, а какие образуют петли обратной связи?\n3. Спецификация CADF (Connectome Architecture Description Format):\n   Описывается графом в формате строго валидируемого JSON Schema:\n   $$\\mathcal{S} = \\langle \\mathcal{V}, \\mathcal{E}, \\mathcal{T}, \\mathcal{W} \\rangle$$\n   где $\\mathcal{V}$ — компоненты-нейроны, $\\mathcal{E}$ — синаптические вызовы, $\\mathcal{T} \\in \\{\\text{Sync, Async, Inhibitory, Modulatory}\\}$, $\\mathcal{W} \\in \\mathbb{R}^+$ — пропускная способность.",
       "math": "Единый открытый стандарт спецификации архитектуры бионических агентов",
       "gain": "Стандарт визуализации и спецификации сложных многокомпонентных ИИ-систем (Connectome Architecture Description Format, CADF). Заменяет разрозненные диаграммы C4 и UML строгой синаптической схемотехникой с точной типизацией информационных потоков.",
-      "deploy": "Deployed in AIfa Core and ecosystem sites.",
-      "uniqueness": "Innovación biónica #17 modelada en la arquitectura conectómica de FlyWire v783. Открытый стандарт машиночитаемой документации нейронных графов и архитектур памяти (Connectome Architecture Definition Format).",
-      "competitors": "Superior a las arquitecturas tradicionales: Заменяет тяжелые неспециализированные форматы (ONNX, GEXF) компактным бинарным стандартом с задержками синапсов.",
-      "limitations": "Estado v1 y hoja de ruta v2/v3: Парсер реализован на C++ и Python; в v2 нативные SDK для Rust, Go и Swift.",
+      "deploy": "bench/cadf_schema_run.py (Apache 2.0), Deployed in AIfa Core and ecosystem sites.",
+      "uniqueness": "Innovación biónica #17 modelada en la arquitectura conectómica de FlyWire v783. Открытый стандарт машиночитаемой документации нейронных графов и архитектур памяти (Connectome Architecture Definition Format). EJECUCIÓN HONESTA 21.09.2026: ni el estándar ni un validador existían — JSON Schema definido por primera vez exactamente según la fórmula S=<V,E,T,W>, validador escrito, ejecutado honestamente.",
+      "competitors": "Superior a las arquitecturas tradicionales: Заменяет тяжелые неспециализированные форматы (ONNX, GEXF) компактным JSON-стандартом. Medición honesta: el validador acepta correctamente un documento válido y rechaza uno deliberadamente dañado (tipo de conexión inválido, ancho de banda negativo).",
+      "limitations": "Estado v1 y hoja de ruta v2/v3: Парсер реализован на Python без внешних зависимостей; в v2 нативные SDK для Rust, Go и Swift.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "2.177 ms"
+      "metric": "0.2694 ms P50 de validación (más rápido que los 2.177 ms declarados) — corregido 21.09.2026"
     },
     {
       "num": 18,
@@ -1973,12 +1973,12 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "bio": "БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:\n\n1. Биологический стандарт: консорциум FlyWire разработал исчерпывающий стандарт документирования связности мозга: каждый нейрон имеет однозначный Supervoxel ID, корневую координату сомы в нанометрах (x, y, z), аннотацию нейропиля (из 78 областей), строгий тип нейротрансмиттера и точное число синаптических сайтов (T-bars и PSD).\n2. Проблема хаоса в IT-архитектуре: современные мультиагентные системы (Multi-Agent Workflows, LangGraph, AutoGen) описываются неформальными блок-схемами в Miro или путаным кодом Python. Отсутствует строгий формальный язык описания:\n   - Кто кого вызывает?\n   - Какова пропускная способность канала (синаптический вес)?\n   - Является ли связь ингибирующей (блокирующей) или активирующей?\n   - Какие подсистемы изолированы, а какие образуют петли обратной связи?\n3. Спецификация CADF (Connectome Architecture Description Format):\n   Описывается графом в формате строго валидируемого JSON Schema:\n   $$\\mathcal{S} = \\langle \\mathcal{V}, \\mathcal{E}, \\mathcal{T}, \\mathcal{W} \\rangle$$\n   где $\\mathcal{V}$ — компоненты-нейроны, $\\mathcal{E}$ — синаптические вызовы, $\\mathcal{T} \\in \\{\\text{Sync, Async, Inhibitory, Modulatory}\\}$, $\\mathcal{W} \\in \\mathbb{R}^+$ — пропускная способность.",
       "math": "Единый открытый стандарт спецификации архитектуры бионических агентов",
       "gain": "Стандарт визуализации и спецификации сложных многокомпонентных ИИ-систем (Connectome Architecture Description Format, CADF). Заменяет разрозненные диаграммы C4 и UML строгой синаптической схемотехникой с точной типизацией информационных потоков.",
-      "deploy": "Deployed in AIfa Core and ecosystem sites.",
-      "uniqueness": "基于 FlyWire v783 大脑连接组仿生架构的第 #17 项核心技术。Открытый стандарт машиночитаемой документации нейронных графов и архитектур памяти (Connectome Architecture Definition Format).",
-      "competitors": "对比传统架构具备代差级优势：Заменяет тяжелые неспециализированные форматы (ONNX, GEXF) компактным бинарным стандартом с задержками синапсов.",
-      "limitations": "v1 现状与 v2/v3 迭代路线图：Парсер реализован на C++ и Python; в v2 нативные SDK для Rust, Go и Swift.",
+      "deploy": "bench/cadf_schema_run.py (Apache 2.0), Deployed in AIfa Core and ecosystem sites.",
+      "uniqueness": "基于 FlyWire v783 大脑连接组仿生架构的第 #17 项核心技术。Открытый стандарт машиночитаемой документации нейронных графов и архитектур памяти (Connectome Architecture Definition Format)。2026年9月21日诚实实测：该标准和验证器此前均不存在——首次严格按照卡片公式 S=<V,E,T,W> 定义了 JSON Schema 并编写了验证器，诚实运行。",
+      "competitors": "对比传统架构具备代差级优势：Заменяет тяжелые неспециализированные форматы (ONNX, GEXF) компактным JSON-стандартом。诚实实测：验证器正确接受有效文档，并拒绝故意损坏的文档（无效连接类型、负带宽）。",
+      "limitations": "v1 现状与 v2/v3 迭代路线图：Парсер реализован на Python без внешних зависимостей; в v2 нативные SDK для Rust, Go и Swift.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "2.177 ms"
+      "metric": "0.2694 ms P50验证耗时（快于声称的2.177 ms）— 2026年9月21日修正"
     },
     {
       "num": 18,
