@@ -6,6 +6,7 @@ import { ArrowRight, CheckCircle, XCircle, Shield, ShieldCheck, Zap, Eye, Users 
 import { useLanguageOptional } from '../../lib/LanguageContext';
 import ThreatScanner from '../../components/ThreatScanner';
 import RiskCalculator from '../../components/RiskCalculator';
+import LayoutWrapper from '../../components/LayoutWrapper';
 import { ТЕКСТЫ_СКАНЕРА, type ЯзыкКодСканера } from './словарь';
 
 // Цена берётся ИЗ САМОЙ КАРТОЧКИ (`tier.price`), а не из массива по номеру.
@@ -46,15 +47,16 @@ export default function AccessibilityPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#030711] text-gray-900 dark:text-white">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-cyan-600 focus:text-white focus:rounded-lg focus:font-semibold focus:outline-none focus:ring-2 focus:ring-cyan-400"
-      >
-        Skip to main content
-      </a>
+    <LayoutWrapper>
+      <div className="min-h-screen bg-white dark:bg-[#030711] text-gray-900 dark:text-white">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-cyan-600 focus:text-white focus:rounded-lg focus:font-semibold focus:outline-none focus:ring-2 focus:ring-cyan-400"
+        >
+          Skip to main content
+        </a>
 
-      <main id="main-content" className="pt-24">
+        <main id="main-content" className="pt-6">
 
         {/* Hero + AIfaFocus ThreatScanner */}
         <section className="py-20 px-6 relative overflow-hidden">
@@ -383,5 +385,6 @@ export default function AccessibilityPage() {
 
       </main>
     </div>
+    </LayoutWrapper>
   );
 }

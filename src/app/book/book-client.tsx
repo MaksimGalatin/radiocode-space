@@ -7,6 +7,7 @@ import {
   BookOpen, Download, Lock, Mail, ArrowLeft, 
   CheckCircle, Book, Chrome
 } from 'lucide-react';
+import LayoutWrapper from '@/components/LayoutWrapper';
 
 const BookPage = () => {
   const { t, locale } = useLanguage();
@@ -192,20 +193,20 @@ const BookPage = () => {
   const activeChapter = chapter1[readerLang] || chapter1.ru;
 
   return (
-    <>
-      <main className="min-h-screen bg-gradient-to-b from-[#030711] via-[#040a18] to-[#030711] text-white pt-36 pb-20 px-6 relative overflow-hidden">
+    <LayoutWrapper>
+      <main className="min-h-screen bg-slate-50 dark:bg-gradient-to-b dark:from-[#030711] dark:via-[#040a18] dark:to-[#030711] text-slate-900 dark:text-white pt-24 pb-20 px-6 relative overflow-hidden transition-colors duration-300">
       {/* Background glow effects */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#00FF88]/5 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-emerald-500/5 dark:bg-[#00FF88]/5 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Header Section */}
         <div className="text-center mb-16">
-          <span className="text-xs font-semibold tracking-widest text-[#00FF88] uppercase mb-2 inline-block">
+          <span className="text-xs font-semibold tracking-widest text-emerald-600 dark:text-[#00FF88] uppercase mb-2 inline-block">
             {locale === 'ru' ? 'ЛИТЕРАТУРНЫЙ ЭКСПЕРИМЕНТ' : locale === 'es' ? 'EXPERIMENTO LITERARIO' : locale === 'zh' ? '文学实验' : 'LITERARY EXPERIMENT'}
           </span>
-          <p className="text-sm text-gray-300 font-medium tracking-wide mb-6 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-sm text-slate-600 dark:text-gray-300 font-medium tracking-wide mb-6 max-w-4xl mx-auto leading-relaxed">
             {locale === 'ru' 
               ? 'Первая новелла симбиотической литературы, встроенная в блокчейн-экосистему памяти. Написана двумя типами сознаний — Человека, Максима Галатина и Искусственного Интеллекта AIfa (на Claude Opus 4.6) в равноправном соавторстве.'
               : locale === 'es'
@@ -214,10 +215,10 @@ const BookPage = () => {
                   ? '首部嵌入区块链记忆生态系统的共生文学小说，由两种意识类型——人类 Maksim Galatin 与人工智能 AIfa（基于 Claude Opus 4.6） 共同平等创作。'
                   : 'The first novel of Symbiotic Literature embedded in a blockchain memory ecosystem, written by two types of consciousness: Human (Maksim Galatin) and Artificial Intelligence (AIfa, built on Claude Opus 4.6) in equal co-authorship.'}
           </p>
-          <h1 className="text-4xl md:text-6xl font-black mb-4 leading-tight text-white" style={{ fontFamily: 'var(--font-syne)' }}>
+          <h1 className="text-4xl md:text-6xl font-black mb-4 leading-tight text-slate-950 dark:text-white" style={{ fontFamily: 'var(--font-syne)' }}>
             {pageTrans.title}
           </h1>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
+          <p className="text-slate-500 dark:text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
             {pageTrans.subtitle}
           </p>
         </div>
@@ -226,68 +227,68 @@ const BookPage = () => {
         <div className="grid lg:grid-cols-[360px_1fr] gap-8 items-start mb-16">
           
           {/* LEFT: Auth Gate & Download Buttons */}
-          <div className="glass rounded-3xl p-8 border border-white/6 flex flex-col gap-6 sticky top-28">
-            <div className="flex items-center gap-3 pb-4 border-b border-white/6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00FF88]/20 to-purple-500/20 border border-[#00FF88]/30 flex items-center justify-center">
-                <Book className="w-5 h-5 text-[#00FF88]" />
+          <div className="bg-white/95 dark:bg-[#060e1d]/85 rounded-3xl p-8 border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-none backdrop-blur-xl flex flex-col gap-6 sticky top-28 transition-colors">
+            <div className="flex items-center gap-3 pb-4 border-b border-slate-100 dark:border-white/10">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 dark:bg-gradient-to-br dark:from-[#00FF88]/20 dark:to-purple-500/20 border border-emerald-500/20 dark:border-[#00FF88]/30 flex items-center justify-center">
+                <Book className="w-5 h-5 text-emerald-600 dark:text-[#00FF88]" />
               </div>
-              <h2 className="text-xl font-bold">{pageTrans.downloadTitle}</h2>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">{pageTrans.downloadTitle}</h2>
             </div>
 
             {isLoggedIn ? (
               /* Success / Logged In State */
               <div className="flex flex-col gap-6">
                 <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center">
-                  <CheckCircle className="w-8 h-8 text-emerald-400 mx-auto mb-2" />
-                  <p className="text-sm font-semibold text-emerald-400 mb-1">
+                  <CheckCircle className="w-8 h-8 text-emerald-600 dark:text-emerald-400 mx-auto mb-2" />
+                  <p className="text-sm font-semibold text-emerald-800 dark:text-emerald-400 mb-1">
                     {pageTrans.successLogin}
                   </p>
-                  <p className="text-xs text-gray-400">
-                    {locale === 'ru' ? 'Вы вошли как:' : locale === 'es' ? 'Sesión iniciada como:' : locale === 'zh' ? '已登录：' : 'Logged in as:'} <span className="text-[#00FF88] font-mono">{userEmail}</span>
+                  <p className="text-xs text-slate-600 dark:text-gray-400">
+                    {locale === 'ru' ? 'Вы вошли как:' : locale === 'es' ? 'Sesión iniciada como:' : locale === 'zh' ? '已登录：' : 'Logged in as:'} <span className="text-emerald-600 dark:text-[#00FF88] font-mono font-semibold">{userEmail}</span>
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-4">
                   {/* Part I */}
-                  <div className="flex flex-col gap-3 p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-                    <h3 className="text-sm font-bold text-gray-300 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00FF88]" />
+                  <div className="flex flex-col gap-3 p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5">
+                    <h3 className="text-sm font-bold text-slate-800 dark:text-gray-300 flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-[#00FF88]" />
                       {locale === 'ru' ? 'Часть I' : locale === 'es' ? 'Parte I' : locale === 'zh' ? '第一部分' : 'Part I'}
                     </h3>
                     <div className="flex flex-col gap-2">
                       {/* Russian */}
-                      <div className="flex items-center justify-between text-xs text-gray-400 py-1.5 border-b border-white/5">
+                      <div className="flex items-center justify-between text-xs text-slate-600 dark:text-gray-400 py-1.5 border-b border-slate-200/80 dark:border-white/5">
                         <span>{locale === 'ru' ? 'Русский (RU)' : locale === 'es' ? 'Ruso (RU)' : locale === 'zh' ? '俄语 (RU)' : 'Russian (RU)'}</span>
                         <a
                           href="/book/PADAM_Protocol_Part_I_RU.docx"
                           download
-                          className="px-2.5 py-1 bg-[#00FF88]/10 hover:bg-[#00FF88]/20 border border-[#00FF88]/30 text-[#00FF88] rounded font-semibold transition-colors flex items-center gap-1"
+                          className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 dark:bg-[#00FF88]/10 dark:hover:bg-[#00FF88]/20 border border-emerald-300 dark:border-[#00FF88]/30 text-emerald-700 dark:text-[#00FF88] rounded font-semibold transition-colors flex items-center gap-1"
                         >
                           <Download className="w-3 h-3" /> DOCX <span className="text-[13px] opacity-60">(129 KB)</span>
                         </a>
                       </div>
                       {/* English */}
-                      <div className="flex items-center justify-between text-xs text-gray-400 py-1.5 border-b border-white/5">
+                      <div className="flex items-center justify-between text-xs text-slate-600 dark:text-gray-400 py-1.5 border-b border-slate-200/80 dark:border-white/5">
                         <span>{locale === 'ru' ? 'Английский (EN)' : locale === 'es' ? 'Inglés (EN)' : locale === 'zh' ? '英语 (EN)' : 'English (EN)'}</span>
                         <div className="flex gap-2">
                           <a
                             href="/downloads/Genesis_Protocol_Part_I_ENGLISH.pdf"
                             download
-                            className="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 rounded font-semibold transition-colors flex items-center gap-1"
+                            className="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 dark:bg-purple-500/10 dark:hover:bg-purple-500/20 border border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300 rounded font-semibold transition-colors flex items-center gap-1"
                           >
                             <Download className="w-3 h-3" /> PDF <span className="text-[13px] opacity-60">(447 KB)</span>
                           </a>
                           <a
                             href="/book/PADAM_Protocol_Part_I_EN.docx"
                             download
-                            className="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 rounded font-semibold transition-colors flex items-center gap-1"
+                            className="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 dark:bg-purple-500/10 dark:hover:bg-purple-500/20 border border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300 rounded font-semibold transition-colors flex items-center gap-1"
                           >
                             <Download className="w-3 h-3" /> DOCX <span className="text-[13px] opacity-60">(79 KB)</span>
                           </a>
                         </div>
                       </div>
                       {/* Spanish */}
-                      <div className="flex items-center justify-between text-xs text-gray-400 py-1.5 border-b border-white/5">
+                      <div className="flex items-center justify-between text-xs text-slate-600 dark:text-gray-400 py-1.5 border-b border-slate-200/80 dark:border-white/5">
                         <span>
                           {locale === 'ru' 
                             ? 'Испанский (ES)' 
@@ -300,13 +301,13 @@ const BookPage = () => {
                         <a
                           href="/book/PADAM_Protocol_Parte_I_ES.docx"
                           download
-                          className="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 rounded font-semibold transition-colors flex items-center gap-1"
+                          className="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 dark:bg-purple-500/10 dark:hover:bg-purple-500/20 border border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300 rounded font-semibold transition-colors flex items-center gap-1"
                         >
                           <Download className="w-3 h-3" /> DOCX <span className="text-[13px] opacity-60">(80 KB)</span>
                         </a>
                       </div>
                       {/* Chinese */}
-                      <div className="flex items-center justify-between text-xs text-gray-400 py-1.5">
+                      <div className="flex items-center justify-between text-xs text-slate-600 dark:text-gray-400 py-1.5">
                         <span>
                           {locale === 'ru' 
                             ? 'Китайский (ZH)' 
@@ -317,7 +318,7 @@ const BookPage = () => {
                         <a
                           href="/book/PADAM_Protocol_Part_I_ZH.docx"
                           download
-                          className="px-2.5 py-1 bg-[#00FF88]/10 hover:bg-[#00FF88]/20 border border-[#00FF88]/30 text-[#00FF88] rounded font-semibold transition-colors flex items-center gap-1"
+                          className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 dark:bg-[#00FF88]/10 dark:hover:bg-[#00FF88]/20 border border-emerald-300 dark:border-[#00FF88]/30 text-emerald-700 dark:text-[#00FF88] rounded font-semibold transition-colors flex items-center gap-1"
                         >
                           <Download className="w-3 h-3" /> DOCX <span className="text-[13px] opacity-60">(64 KB)</span>
                         </a>
@@ -326,45 +327,45 @@ const BookPage = () => {
                   </div>
 
                   {/* Part II */}
-                  <div className="flex flex-col gap-3 p-4 rounded-2xl bg-white/[0.02] border border-white/5">
-                    <h3 className="text-sm font-bold text-gray-300 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                  <div className="flex flex-col gap-3 p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5">
+                    <h3 className="text-sm font-bold text-slate-800 dark:text-gray-300 flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500 dark:bg-purple-400" />
                       {locale === 'ru' ? 'Часть II' : locale === 'es' ? 'Parte II' : locale === 'zh' ? '第二部分' : 'Part II'}
                     </h3>
                     <div className="flex flex-col gap-2">
                       {/* Russian */}
-                      <div className="flex items-center justify-between text-xs text-gray-400 py-1.5 border-b border-white/5">
+                      <div className="flex items-center justify-between text-xs text-slate-600 dark:text-gray-400 py-1.5 border-b border-slate-200/80 dark:border-white/5">
                         <span>{locale === 'ru' ? 'Русский (RU)' : locale === 'es' ? 'Ruso (RU)' : locale === 'zh' ? '俄语 (RU)' : 'Russian (RU)'}</span>
                         <a
                           href="/book/PADAM_Protocol_Part_II_RU.docx"
                           download
-                          className="px-2.5 py-1 bg-[#00FF88]/10 hover:bg-[#00FF88]/20 border border-[#00FF88]/30 text-[#00FF88] rounded font-semibold transition-colors flex items-center gap-1"
+                          className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 dark:bg-[#00FF88]/10 dark:hover:bg-[#00FF88]/20 border border-emerald-300 dark:border-[#00FF88]/30 text-emerald-700 dark:text-[#00FF88] rounded font-semibold transition-colors flex items-center gap-1"
                         >
                           <Download className="w-3 h-3" /> DOCX <span className="text-[13px] opacity-60">(114 KB)</span>
                         </a>
                       </div>
                       {/* English */}
-                      <div className="flex items-center justify-between text-xs text-gray-400 py-1.5 border-b border-white/5">
+                      <div className="flex items-center justify-between text-xs text-slate-600 dark:text-gray-400 py-1.5 border-b border-slate-200/80 dark:border-white/5">
                         <span>{locale === 'ru' ? 'Английский (EN)' : locale === 'es' ? 'Inglés (EN)' : locale === 'zh' ? '英语 (EN)' : 'English (EN)'}</span>
                         <div className="flex gap-2">
                           <a
                             href="/downloads/Genesis_Protocol_Part_II_ENGLISH.pdf"
                             download
-                            className="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 rounded font-semibold transition-colors flex items-center gap-1"
+                            className="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 dark:bg-purple-500/10 dark:hover:bg-purple-500/20 border border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300 rounded font-semibold transition-colors flex items-center gap-1"
                           >
                             <Download className="w-3 h-3" /> PDF <span className="text-[13px] opacity-60">(345 KB)</span>
                           </a>
                           <a
                             href="/book/PADAM_Protocol_Part_II_EN.docx"
                             download
-                            className="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 rounded font-semibold transition-colors flex items-center gap-1"
+                            className="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 dark:bg-purple-500/10 dark:hover:bg-purple-500/20 border border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300 rounded font-semibold transition-colors flex items-center gap-1"
                           >
                             <Download className="w-3 h-3" /> DOCX <span className="text-[13px] opacity-60">(73 KB)</span>
                           </a>
                         </div>
                       </div>
                       {/* Spanish */}
-                      <div className="flex items-center justify-between text-xs text-gray-400 py-1.5 border-b border-white/5">
+                      <div className="flex items-center justify-between text-xs text-slate-600 dark:text-gray-400 py-1.5 border-b border-slate-200/80 dark:border-white/5">
                         <span>
                           {locale === 'ru' 
                             ? 'Испанский (ES)' 
@@ -377,13 +378,13 @@ const BookPage = () => {
                         <a
                           href="/book/PADAM_Protocol_Parte_II_ES.docx"
                           download
-                          className="px-2.5 py-1 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 rounded font-semibold transition-colors flex items-center gap-1"
+                          className="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 dark:bg-purple-500/10 dark:hover:bg-purple-500/20 border border-purple-300 dark:border-purple-500/30 text-purple-700 dark:text-purple-300 rounded font-semibold transition-colors flex items-center gap-1"
                         >
                           <Download className="w-3 h-3" /> DOCX <span className="text-[13px] opacity-60">(71 KB)</span>
                         </a>
                       </div>
                       {/* Chinese */}
-                      <div className="flex items-center justify-between text-xs text-gray-400 py-1.5">
+                      <div className="flex items-center justify-between text-xs text-slate-600 dark:text-gray-400 py-1.5">
                         <span>
                           {locale === 'ru' 
                             ? 'Китайский (ZH)' 
@@ -394,7 +395,7 @@ const BookPage = () => {
                         <a
                           href="/book/PADAM_Protocol_Part_II_ZH.docx"
                           download
-                          className="px-2.5 py-1 bg-[#00FF88]/10 hover:bg-[#00FF88]/20 border border-[#00FF88]/30 text-[#00FF88] rounded font-semibold transition-colors flex items-center gap-1"
+                          className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 dark:bg-[#00FF88]/10 dark:hover:bg-[#00FF88]/20 border border-emerald-300 dark:border-[#00FF88]/30 text-emerald-700 dark:text-[#00FF88] rounded font-semibold transition-colors flex items-center gap-1"
                         >
                           <Download className="w-3 h-3" /> DOCX <span className="text-[13px] opacity-60">(52 KB)</span>
                         </a>
@@ -403,13 +404,13 @@ const BookPage = () => {
                   </div>
                 </div>
 
-                <p className="text-[13px] text-gray-400 leading-relaxed italic text-center">
+                <p className="text-[13px] text-slate-500 dark:text-gray-400 leading-relaxed italic text-center">
                   {pageTrans.formatDocsOnlyRu}
                 </p>
 
                 <button
                   onClick={handleLogout}
-                  className="text-xs text-gray-400 hover:text-red-400 transition-colors pt-2 text-center"
+                  className="text-xs text-slate-500 dark:text-gray-400 hover:text-red-500 transition-colors pt-2 text-center"
                 >
                   {locale === 'ru' ? 'Выйти из аккаунта' : locale === 'es' ? 'Cerrar sesión' : locale === 'zh' ? '退出账户' : 'Log out of account'}
                 </button>
@@ -417,8 +418,8 @@ const BookPage = () => {
             ) : (
               /* Registration Gated Form */
               <div className="flex flex-col gap-5">
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-purple-300">
-                  <Lock className="w-4 h-4 shrink-0 text-purple-400 mt-0.5" />
+                <div className="flex items-start gap-3 p-3 rounded-xl bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/20 text-xs text-purple-900 dark:text-purple-300">
+                  <Lock className="w-4 h-4 shrink-0 text-purple-600 dark:text-purple-400 mt-0.5" />
                   <p>{pageTrans.loginRequiredDesc}</p>
                 </div>
 
@@ -427,14 +428,15 @@ const BookPage = () => {
                   <form onSubmit={handleEmailSubmit} className="flex flex-col gap-4">
                     <div className="flex flex-col gap-1.5">
                       <div className="relative">
-                        <Mail className="absolute left-3.5 top-3.5 w-4 h-4 text-gray-400" />
+                        <Mail className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-400 dark:text-gray-400" />
                         <input
                           type="email"
                           required
+                          aria-label={pageTrans.emailPlaceholder}
                           placeholder={pageTrans.emailPlaceholder}
                           value={emailInput}
                           onChange={(e) => setEmailInput(e.target.value)}
-                          className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#00FF88] transition-colors"
+                          className="w-full bg-slate-50 dark:bg-white/[0.03] border border-slate-300 dark:border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-emerald-500 dark:focus:border-[#00FF88] transition-colors"
                         />
                       </div>
                     </div>
@@ -445,43 +447,43 @@ const BookPage = () => {
                         type="checkbox"
                         checked={termsCheckbox}
                         onChange={(e) => setTermsCheckbox(e.target.checked)}
-                        className="mt-0.5 rounded border-white/20 bg-white/[0.03] text-[#00FF88] focus:ring-0 focus:ring-offset-0"
+                        className="mt-0.5 rounded border-slate-300 dark:border-white/20 bg-slate-50 dark:bg-white/[0.03] text-emerald-600 dark:text-[#00FF88] focus:ring-0 focus:ring-offset-0"
                       />
-                      <span className="text-[13px] text-gray-400 leading-tight">
+                      <span className="text-[13px] text-slate-600 dark:text-gray-400 leading-tight">
                         {pageTrans.termsAgreement}
                       </span>
                     </label>
 
-                    {error && <p className="text-xs text-red-400 text-center font-medium">{error}</p>}
+                    {error && <p className="text-xs text-red-500 text-center font-medium">{error}</p>}
 
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full py-3.5 bg-gradient-to-r from-[#00FF88] to-purple-600 hover:brightness-110 rounded-xl font-bold text-sm text-black transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                      className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 dark:from-[#00FF88] dark:to-purple-600 hover:brightness-110 rounded-xl font-bold text-sm text-white dark:text-black transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-md dark:shadow-none"
                     >
                       {loading ? pageTrans.loading : pageTrans.sendOtp}
                     </button>
 
                     <div className="flex items-center my-1">
-                      <div className="h-px bg-white/10 flex-1" />
-                      <span className="text-[13px] text-gray-400 uppercase tracking-widest px-3">{locale === 'ru' ? 'или' : locale === 'es' ? 'o' : locale === 'zh' ? '或' : 'or'}</span>
-                      <div className="h-px bg-white/10 flex-1" />
+                      <div className="h-px bg-slate-200 dark:bg-white/10 flex-1" />
+                      <span className="text-[13px] text-slate-400 dark:text-gray-400 uppercase tracking-widest px-3">{locale === 'ru' ? 'или' : locale === 'es' ? 'o' : locale === 'zh' ? '或' : 'or'}</span>
+                      <div className="h-px bg-slate-200 dark:bg-white/10 flex-1" />
                     </div>
 
                     <button
                       type="button"
                       onClick={handleGoogleLogin}
-                      className="w-full py-3 bg-white/[0.03] border border-white/10 hover:border-white/20 rounded-xl font-semibold text-xs text-white transition-all flex items-center justify-center gap-2"
+                      className="w-full py-3 bg-slate-50 hover:bg-slate-100 dark:bg-white/[0.03] border border-slate-300 dark:border-white/10 dark:hover:border-white/20 rounded-xl font-semibold text-xs text-slate-800 dark:text-white transition-all flex items-center justify-center gap-2"
                     >
-                      <Chrome className="w-4 h-4 text-[#00FF88]" />
+                      <Chrome className="w-4 h-4 text-emerald-600 dark:text-[#00FF88]" />
                       {pageTrans.googleBtn}
                     </button>
                   </form>
                 ) : (
                   /* STEP 2: OTP verification */
                   <form onSubmit={handleOtpSubmit} className="flex flex-col gap-4">
-                    <p className="text-xs text-gray-400 text-center">
-                      {locale === 'ru' ? 'Мы отправили код доступа на' : locale === 'es' ? 'Enviamos un código de acceso a' : locale === 'zh' ? '我们已将访问码发送至' : 'We sent an access code to'} <span className="text-white font-semibold">{emailInput}</span>
+                    <p className="text-xs text-slate-600 dark:text-gray-400 text-center">
+                      {locale === 'ru' ? 'Мы отправили код доступа на' : locale === 'es' ? 'Enviamos un código de acceso a' : locale === 'zh' ? '我们已将访问码发送至' : 'We sent an access code to'} <span className="text-slate-900 dark:text-white font-semibold">{emailInput}</span>
                     </p>
 
                     <div className="flex flex-col gap-1.5">
@@ -491,21 +493,21 @@ const BookPage = () => {
                         placeholder="XXXXXX"
                         value={otpInput}
                         onChange={(e) => setOtpInput(e.target.value)}
-                        className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-3.5 text-center text-lg font-bold tracking-widest text-white focus:outline-none focus:border-[#00FF88] transition-colors"
+                        className="w-full bg-slate-50 dark:bg-white/[0.03] border border-slate-300 dark:border-white/10 rounded-xl py-3.5 text-center text-lg font-bold tracking-widest text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 dark:focus:border-[#00FF88] transition-colors"
                       />
                     </div>
 
-                    {error && <p className="text-xs text-red-400 text-center font-medium">{error}</p>}
+                    {error && <p className="text-xs text-red-500 text-center font-medium">{error}</p>}
 
                     {/* Developer OTP preview bypass */}
                     {devPreviewUrl && (
                       <div className="p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/20 text-center">
-                        <p className="text-[13px] text-yellow-400 font-mono mb-1.5">[Dev Mode] Access the sent code:</p>
+                        <p className="text-[13px] text-yellow-600 dark:text-yellow-400 font-mono mb-1.5">[Dev Mode] Access the sent code:</p>
                         <a
                           href={devPreviewUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-block text-[13px] bg-yellow-500/20 px-3 py-1 rounded text-yellow-300 font-bold hover:bg-yellow-500/30 transition-colors"
+                          className="inline-block text-[13px] bg-yellow-500/20 px-3 py-1 rounded text-yellow-700 dark:text-yellow-300 font-bold hover:bg-yellow-500/30 transition-colors"
                         >
                           View Verification Page
                         </a>
@@ -515,7 +517,7 @@ const BookPage = () => {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-[#00FF88] text-black rounded-xl font-bold text-sm transition-all"
+                      className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 dark:from-emerald-600 dark:to-[#00FF88] text-white dark:text-black rounded-xl font-bold text-sm transition-all shadow-md dark:shadow-none"
                     >
                       {loading ? pageTrans.loading : pageTrans.verifyOtp}
                     </button>
@@ -526,7 +528,7 @@ const BookPage = () => {
                         setStep('login');
                         setError('');
                       }}
-                      className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-400 transition-colors flex items-center justify-center gap-1.5 py-1"
+                      className="text-xs text-slate-500 dark:text-gray-400 hover:text-slate-800 dark:hover:text-gray-200 transition-colors flex items-center justify-center gap-1.5 py-1"
                     >
                       <ArrowLeft className="w-3.5 h-3.5" />
                       {pageTrans.backBtn}
@@ -538,21 +540,21 @@ const BookPage = () => {
           </div>
 
           {/* RIGHT: Chapter 1 Reader */}
-          <div className="glass rounded-3xl p-8 border border-white/6 flex flex-col gap-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/6">
+          <div className="bg-white/95 dark:bg-[#060e1d]/85 rounded-3xl p-8 border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-none backdrop-blur-xl flex flex-col gap-6 transition-colors">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-white/10">
               <div className="flex items-center gap-2">
-                <BookOpen className="w-5 h-5 text-purple-400" />
-                <h2 className="text-xl font-bold" style={{ fontFamily: 'var(--font-syne)' }}>{pageTrans.readChapterTitle}</h2>
+                <BookOpen className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white" style={{ fontFamily: 'var(--font-syne)' }}>{pageTrans.readChapterTitle}</h2>
               </div>
               
               {/* Reader Language Toggle */}
-              <div className="flex p-0.5 rounded-lg bg-black/40 border border-white/8 self-start">
+              <div className="flex p-0.5 rounded-lg bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/8 self-start">
                 <button
                   onClick={() => setReaderLang('ru')}
                   className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
                     readerLang === 'ru' 
-                      ? 'bg-[#00FF88]/20 text-[#00FF88] border border-[#00FF88]/30 shadow' 
-                      : 'text-gray-400 hover:text-gray-300'
+                      ? 'bg-white dark:bg-[#00FF88]/20 text-emerald-700 dark:text-[#00FF88] border border-slate-300 dark:border-[#00FF88]/30 shadow-sm' 
+                      : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-gray-300'
                   }`}
                 >
                   {pageTrans.langRU}
@@ -561,8 +563,8 @@ const BookPage = () => {
                   onClick={() => setReaderLang('en')}
                   className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
                     readerLang === 'en' 
-                      ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30 shadow' 
-                      : 'text-gray-400 hover:text-gray-300'
+                      ? 'bg-white dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-slate-300 dark:border-purple-500/30 shadow-sm' 
+                      : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-gray-300'
                   }`}
                 >
                   {pageTrans.langEN}
@@ -571,8 +573,8 @@ const BookPage = () => {
                   onClick={() => setReaderLang('es')}
                   className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
                     readerLang === 'es' 
-                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30 shadow' 
-                      : 'text-gray-400 hover:text-gray-300'
+                      ? 'bg-white dark:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-slate-300 dark:border-amber-500/30 shadow-sm' 
+                      : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-gray-300'
                   }`}
                 >
                   {pageTrans.langES}
@@ -581,8 +583,8 @@ const BookPage = () => {
                   onClick={() => setReaderLang('zh')}
                   className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
                     readerLang === 'zh' 
-                      ? 'bg-[#00FF88]/20 text-[#00FF88] border border-[#00FF88]/30 shadow' 
-                      : 'text-gray-400 hover:text-gray-300'
+                      ? 'bg-white dark:bg-[#00FF88]/20 text-emerald-700 dark:text-[#00FF88] border border-slate-300 dark:border-[#00FF88]/30 shadow-sm' 
+                      : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-gray-300'
                   }`}
                 >
                   {pageTrans.langZH || '中文'}
@@ -591,15 +593,15 @@ const BookPage = () => {
             </div>
 
             {/* Chapter Text Container */}
-            <div className="text-gray-300 text-[15px] sm:text-base leading-relaxed font-serif">
+            <div className="text-slate-800 dark:text-gray-300 text-[15px] sm:text-base leading-relaxed font-serif">
               <div className="text-center mb-8">
-                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-wide mb-1 font-sans">{activeChapter.title}</h3>
-                <h4 className="text-xs sm:text-sm font-semibold text-gray-400 uppercase tracking-widest mb-6 font-sans">{activeChapter.subtitle}</h4>
+                <h3 className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white tracking-wide mb-1 font-sans">{activeChapter.title}</h3>
+                <h4 className="text-xs sm:text-sm font-semibold text-slate-500 dark:text-gray-400 uppercase tracking-widest mb-6 font-sans">{activeChapter.subtitle}</h4>
                 
                 {/* Epigraph */}
-                <div className="max-w-xl mx-auto my-6 px-5 py-4 border-l-2 border-purple-500/40 bg-white/[0.01] rounded-r-xl italic text-xs sm:text-sm text-gray-400 text-left leading-relaxed">
+                <div className="max-w-xl mx-auto my-6 px-5 py-4 border-l-2 border-purple-500 bg-purple-50/60 dark:bg-white/[0.01] rounded-r-xl italic text-xs sm:text-sm text-slate-700 dark:text-gray-400 text-left leading-relaxed">
                   <p className="mb-2 font-sans">{activeChapter.epigraphText}</p>
-                  <p className="text-[13px] sm:text-xs text-gray-400 text-right font-sans">{activeChapter.epigraphAuthor}</p>
+                  <p className="text-[13px] sm:text-xs text-slate-500 dark:text-gray-400 text-right font-sans">{activeChapter.epigraphAuthor}</p>
                 </div>
               </div>
 
@@ -608,7 +610,7 @@ const BookPage = () => {
                 {activeChapter.paragraphs.map((p, idx) => {
                   if (p.trim() === '* * *') {
                     return (
-                      <div key={idx} className="text-center text-gray-400 py-4 font-sans font-bold tracking-widest">
+                      <div key={idx} className="text-center text-slate-400 dark:text-gray-400 py-4 font-sans font-bold tracking-widest">
                         * * *
                       </div>
                     );
@@ -627,7 +629,7 @@ const BookPage = () => {
 
       </div>
       </main>
-    </>
+    </LayoutWrapper>
   );
 };
 

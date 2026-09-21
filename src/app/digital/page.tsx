@@ -1,5 +1,4 @@
 'use client';
-import { RadioHeader } from "@/components/radio/RadioHeader";
 import { useCurrentLang } from "@/lib/radioI18n";
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -2501,68 +2500,6 @@ const I18N = {
   }
 };
 
-
-const RadioFooter = () => (
-  <footer className="relative z-10 border-t border-[#8B8BA8]/20 bg-[#050507]/90 backdrop-blur-xl mt-20">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <span className="text-lg font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-[#B000FF]">
-              RADIOCODE.SPACE
-            </span>
-          </div>
-          <p className="text-xs font-mono text-[#7E7E99] leading-relaxed">
-            Cyberpunk Radio by CODE Eternal.
-          </p>
-        </div>
-        <div>
-          <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-4">Навигация</h4>
-          <ul className="space-y-2 text-xs font-mono text-[#8B8BA8]">
-            <li><Link href="/" className="hover:text-[#00F0FF]">Главная / Радио</Link></li>
-            <li><Link href="/news" className="hover:text-[#00F0FF]">Новости</Link></li>
-            <li><Link href="/acr" className="hover:text-[#00F0FF]">ACR 30</Link></li>
-            <li><Link href="/digital" className="hover:text-[#00F0FF]">AIfa Digital</Link></li>
-            <li><Link href="/accessibility" className="hover:text-[#00F0FF]">AIfaFocus Сканер</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-4">Экосистема</h4>
-          <ul className="space-y-2 text-xs font-mono text-[#8B8BA8]">
-            <li><a href="https://www.codeofdigitaleternity.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">CODE Eternal ↗</a></li>
-            <li><a href="https://aifa.works" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">AIfa Works ↗</a></li>
-            <li><a href="https://aifa.digital" target="_blank" rel="noopener noreferrer" className="hover:text-[#00F0FF]">AIfa Digital ↗</a></li>
-            <li><Link href="/cabinet" className="hover:text-[#00F0FF]">Личный кабинет</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-4">Юридическое</h4>
-          <ul className="space-y-2 text-xs font-mono text-[#8B8BA8]">
-            <li><Link href="/privacy-policy" className="hover:text-[#00F0FF]">Privacy Policy</Link></li>
-            <li><Link href="/user-agreement" className="hover:text-[#00F0FF]">User Agreement</Link></li>
-            <li><Link href="/service-agreement" className="hover:text-[#00F0FF]">Service Agreement</Link></li>
-            <li><Link href="/accessibility-statement" className="hover:text-[#00F0FF]">Accessibility Statement</Link></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div className="pt-8 border-t border-[#8B8BA8]/20 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#8B8BA8]">
-        <div className="flex items-center gap-4">
-          <span className="border border-[#7E7E99]/40 rounded px-1.5 text-[11px]">18+</span>
-          <a href="mailto:contact@codeofdigitaleternity.com" className="text-[#8B8BA8] hover:text-[#00F0FF]">
-            contact@codeofdigitaleternity.com
-          </a>
-          <span>Music by AIfa &amp; DJ Galatin</span>
-          <span>© 2026</span>
-        </div>
-        <p className="text-[11px] text-[#7E7E99]">
-          CODE Eternal Ecosystem · Bionic Neuromorphic Connectome FlyWire v783
-        </p>
-      </div>
-    </div>
-  </footer>
-);
-
 export default function DigitalSOTAPage() {
     const activeLang = useCurrentLang();
   const [lang, setLang] = useState<Lang>(() => {
@@ -2707,9 +2644,7 @@ export default function DigitalSOTAPage() {
   });
 
   return (
-    <>
-      <RadioHeader />
-      <main className="min-h-screen bg-[#05060a] text-slate-100 pt-24 pb-16 px-4 sm:px-6 lg:px-8 selection:bg-cyan-500/30 font-sans">
+    <main className="min-h-screen bg-[#05060a] text-slate-100 pt-24 pb-16 px-4 sm:px-6 lg:px-8 selection:bg-cyan-500/30 font-sans">
 <div className="max-w-7xl mx-auto space-y-20 sm:space-y-24">
         {/* SUB-NAV BREADCRUMB */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-gray-800 pb-4 mb-6">
@@ -2738,12 +2673,12 @@ export default function DigitalSOTAPage() {
         
         {/* HERO SECTION */}
         <header className="text-center space-y-6 pt-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00F0FF]/40 bg-[#00F0FF]/10 text-[#00F0FF] text-xs font-mono font-semibold uppercase tracking-widest shadow-[0_0_20px_rgba(0,240,255,0.2)]">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-400/50 dark:border-[#00F0FF]/40 bg-cyan-100/90 dark:bg-[#00F0FF]/10 text-cyan-900 dark:text-[#00F0FF] font-bold text-xs font-mono font-semibold uppercase tracking-widest shadow-[0_0_20px_rgba(0,240,255,0.2)]">
             <Activity className="w-4 h-4 animate-pulse" />
             {t.heroBadge}
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight bg-gradient-to-r from-white via-[#F8FAFC] to-[#00F0FF] bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-950 dark:text-white">
             {t.heroTitle}
           </h1>
 
@@ -2752,8 +2687,8 @@ export default function DigitalSOTAPage() {
           </p>
 
           <div className="pt-2">
-            <div className="inline-flex items-center gap-2 bg-white dark:bg-[#0B0F19] border border-[#00F0FF]/40 px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold text-[#00F0FF] shadow-[0_0_25px_rgba(0,240,255,0.15)]">
-              <Sparkles className="w-4 h-4 text-[#00F0FF]" />
+            <div className="inline-flex items-center gap-2 bg-white dark:bg-[#0B0F19] border border-[#00F0FF]/40 px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold text-cyan-900 dark:text-[#00F0FF] shadow-[0_0_25px_rgba(0,240,255,0.15)]">
+              <Sparkles className="w-4 h-4 text-cyan-900 dark:text-[#00F0FF]" />
               {t.archBadge}
             </div>
           </div>
@@ -2855,7 +2790,7 @@ export default function DigitalSOTAPage() {
         {/* ========================================================================= */}
         <section id="benchmarks" className="space-y-12">
           <div className="text-center space-y-3">
-            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#00F0FF]">
+            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-cyan-900 dark:text-[#00F0FF]">
               <BarChart2 className="w-4 h-4" />
               SOTA SCIENTIFIC RIGOR · MLPERF STANDARDS
             </div>
@@ -2865,7 +2800,7 @@ export default function DigitalSOTAPage() {
             <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto text-sm sm:text-base">
               {t.benchSectionSubtitle}
             </p>
-            <div className="inline-block bg-[#00F0FF]/10 border border-[#00F0FF]/30 px-4 py-1.5 rounded-xl font-mono text-xs text-[#00F0FF] font-semibold mt-2">
+            <div className="inline-block bg-[#00F0FF]/10 border border-[#00F0FF]/30 px-4 py-1.5 rounded-xl font-mono text-xs text-cyan-900 dark:text-[#00F0FF] font-semibold mt-2">
               ⚡ {t.statConfidence}
             </div>
           </div>
@@ -2940,7 +2875,7 @@ export default function DigitalSOTAPage() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#00F0FF]/5 rounded-full blur-3xl pointer-events-none" />
               <div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
-                  <Activity className="w-5 h-5 text-[#00F0FF]" />
+                  <Activity className="w-5 h-5 text-cyan-900 dark:text-[#00F0FF]" />
                   {t.pctTitle}
                 </h3>
                 <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">{t.pctSubtitle}</p>
@@ -2978,7 +2913,7 @@ export default function DigitalSOTAPage() {
                   {hardware === 'GPU' && (lang === 'ru' ? 'Платформа: NVIDIA H100 SXM5 (80GB HBM3)' : lang === 'es' ? 'Plataforma: NVIDIA H100 SXM5 (80GB HBM3)' : lang === 'zh' ? '平台：NVIDIA H100 SXM5 (80GB HBM3)' : 'Platform: NVIDIA H100 SXM5 (80GB HBM3)')}
                   {hardware === 'TPU' && (lang === 'ru' ? 'Платформа: Google Cloud TPU v5e (Pod 256)' : lang === 'es' ? 'Plataforma: Google Cloud TPU v5e (Pod 256)' : lang === 'zh' ? '平台：Google Cloud TPU v5e (Pod 256)' : 'Platform: Google Cloud TPU v5e (Pod 256)')}
                 </span>
-                <span className="text-[#00F0FF]">
+                <span className="text-cyan-900 dark:text-[#00F0FF]">
                   {hardware === 'CPU' && 'AVX-512 / POPCNT SIMD'}
                   {hardware === 'GPU' && 'CUDA 12.4 / Tensor Cores'}
                   {hardware === 'TPU' && 'XLA / Matrix Multiply Units'}
@@ -3013,7 +2948,7 @@ export default function DigitalSOTAPage() {
                     <div key={idx} className="space-y-1.5">
                       <div className="flex justify-between text-xs font-mono">
                         <span className="text-slate-700 dark:text-slate-300">{row.threads}</span>
-                        <span className="text-[#00F0FF] font-bold">{formattedQps}</span>
+                        <span className="text-cyan-900 dark:text-[#00F0FF] font-bold">{formattedQps}</span>
                       </div>
                       <div className="h-3 bg-slate-100 dark:bg-black/60 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-gray-800">
                         <div 
@@ -3038,7 +2973,7 @@ export default function DigitalSOTAPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
-                  <Layers className="w-6 h-6 text-[#00F0FF]" />
+                  <Layers className="w-6 h-6 text-cyan-900 dark:text-[#00F0FF]" />
                   {t.baselineTitle}
                 </h3>
                 <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
@@ -3068,10 +3003,10 @@ export default function DigitalSOTAPage() {
                       <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
                       <strong>AIfa Bionic Connectome (Наш)</strong>
                     </td>
-                    <td className="py-4 px-4 text-center font-mono font-bold text-[#00F0FF]">0.80 мс</td>
+                    <td className="py-4 px-4 text-center font-mono font-bold text-cyan-900 dark:text-[#00F0FF]">0.80 мс</td>
                     <td className="py-4 px-4 text-center font-mono text-emerald-300">4.2 GB</td>
                     <td className="py-4 px-4 text-center font-mono text-emerald-300">98.7%</td>
-                    <td className="py-4 px-4 text-center font-mono font-bold text-[#00F0FF]">0.003 J</td>
+                    <td className="py-4 px-4 text-center font-mono font-bold text-cyan-900 dark:text-[#00F0FF]">0.003 J</td>
                     <td className="py-4 px-4 text-center font-mono text-emerald-400">❌ Нет (0 GPU)</td>
                   </tr>
                   <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
@@ -3134,22 +3069,22 @@ export default function DigitalSOTAPage() {
               </div>
 
               <div className="grid grid-cols-2 gap-4 pt-2">
-                <div className="p-4 rounded-2xl bg-black/40 border border-gray-800 space-y-1">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
                   <span className="text-xs font-mono text-slate-600 dark:text-slate-400">Recall@10</span>
                   <div className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">98.7%</div>
                   <span className="text-[11px] text-gray-500">Цель: &gt; 95%</span>
                 </div>
-                <div className="p-4 rounded-2xl bg-black/40 border border-gray-800 space-y-1">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
                   <span className="text-xs font-mono text-slate-600 dark:text-slate-400">Precision@10</span>
-                  <div className="text-2xl sm:text-3xl font-black text-[#00F0FF] font-mono">94.2%</div>
+                  <div className="text-2xl sm:text-3xl font-black text-cyan-900 dark:text-[#00F0FF] font-mono">94.2%</div>
                   <span className="text-[11px] text-gray-500">Цель: &gt; 90%</span>
                 </div>
-                <div className="p-4 rounded-2xl bg-black/40 border border-gray-800 space-y-1">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
                   <span className="text-xs font-mono text-slate-600 dark:text-slate-400">NDCG@10</span>
-                  <div className="text-2xl sm:text-3xl font-black text-cyan-300 font-mono">0.912</div>
+                  <div className="text-2xl sm:text-3xl font-black text-cyan-900 dark:text-cyan-300 font-mono">0.912</div>
                   <span className="text-[11px] text-gray-500">Цель: &gt; 0.85</span>
                 </div>
-                <div className="p-4 rounded-2xl bg-black/40 border border-gray-800 space-y-1">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
                   <span className="text-xs font-mono text-slate-600 dark:text-slate-400">mAP</span>
                   <div className="text-2xl sm:text-3xl font-black text-purple-400 font-mono">0.884</div>
                   <span className="text-[11px] text-gray-500">Цель: &gt; 0.80</span>
@@ -3161,7 +3096,7 @@ export default function DigitalSOTAPage() {
             <div className="bg-white dark:bg-[#0B0F19] border border-[#1E293B] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
               <div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
-                  <Cpu className="w-5 h-5 text-[#00F0FF]" />
+                  <Cpu className="w-5 h-5 text-cyan-900 dark:text-[#00F0FF]" />
                   {t.greenTitle}
                 </h3>
                 <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">{t.greenSubtitle}</p>
@@ -3172,24 +3107,24 @@ export default function DigitalSOTAPage() {
                   <thead>
                     <tr className="border-b border-[#1E293B] text-slate-600 dark:text-slate-400 font-mono text-xs uppercase">
                       <th className="py-2.5 text-left w-5/12">{t.colMetric}</th>
-                      <th className="py-2.5 text-center text-[#00F0FF] w-4/12">AIfa Core</th>
+                      <th className="py-2.5 text-center text-cyan-900 dark:text-[#00F0FF] w-4/12">AIfa Core</th>
                       <th className="py-2.5 text-right sm:text-center text-slate-600 dark:text-slate-400 w-3/12">FAISS (GPU)</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-800/60 font-mono">
                     <tr>
                       <td className="py-3 font-sans text-slate-700 dark:text-slate-300">Queries / Joule</td>
-                      <td className="py-3 text-center font-bold text-[#00F0FF]">333 000</td>
+                      <td className="py-3 text-center font-bold text-cyan-900 dark:text-[#00F0FF]">333 000</td>
                       <td className="py-3 text-right sm:text-center text-slate-600 dark:text-slate-400">2 400</td>
                     </tr>
                     <tr>
                       <td className="py-3 font-sans text-slate-700 dark:text-slate-300">Watts / Query</td>
-                      <td className="py-3 text-center font-bold text-[#00F0FF]">0.003 W</td>
+                      <td className="py-3 text-center font-bold text-cyan-900 dark:text-[#00F0FF]">0.003 W</td>
                       <td className="py-3 text-right sm:text-center text-slate-600 dark:text-slate-400">0.420 W</td>
                     </tr>
                     <tr>
                       <td className="py-3 font-sans text-slate-700 dark:text-slate-300">Carbon / Query</td>
-                      <td className="py-3 text-center font-bold text-[#00F0FF]">0.0002 g</td>
+                      <td className="py-3 text-center font-bold text-cyan-900 dark:text-[#00F0FF]">0.0002 g</td>
                       <td className="py-3 text-right sm:text-center text-slate-600 dark:text-slate-400">0.0280 g</td>
                     </tr>
                   </tbody>
@@ -3203,7 +3138,7 @@ export default function DigitalSOTAPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
-                  <Download className="w-6 h-6 text-[#00F0FF]" />
+                  <Download className="w-6 h-6 text-cyan-900 dark:text-[#00F0FF]" />
                   {t.codeTitle}
                 </h3>
                 <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">{t.codeSubtitle}</p>
@@ -3212,7 +3147,7 @@ export default function DigitalSOTAPage() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleCopyScript}
-                  className="px-4 py-2 rounded-xl bg-[#00F0FF]/15 hover:bg-[#00F0FF] text-[#00F0FF] hover:text-black font-semibold text-xs font-mono transition-all flex items-center gap-2 border border-[#00F0FF]/40 shadow-[0_0_15px_rgba(0,240,255,0.15)]"
+                  className="px-4 py-2 rounded-xl bg-[#00F0FF]/15 hover:bg-[#00F0FF] text-cyan-900 dark:text-[#00F0FF] hover:text-black font-semibold text-xs font-mono transition-all flex items-center gap-2 border border-[#00F0FF]/40 shadow-[0_0_15px_rgba(0,240,255,0.15)]"
                 >
                   {copied ? <CheckCircle2 className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                   <span>{copied ? t.btnCopied : t.btnCopy}</span>
@@ -3240,7 +3175,7 @@ export default function DigitalSOTAPage() {
         {/* ========================================================================= */}
         <section id="innovations" className="space-y-8">
           <div className="text-center space-y-3">
-            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#00F0FF]">
+            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-cyan-900 dark:text-[#00F0FF]">
               <Compass className="w-4 h-4" />
               FLYWIRE V783 CONNECTOME STACK
             </div>
@@ -3288,7 +3223,7 @@ export default function DigitalSOTAPage() {
                 className={`px-4 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'spec'
                     ? 'bg-cyan-500 text-black shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                    : 'bg-white dark:bg-[#0B0F19] text-cyan-400 hover:text-slate-900 dark:text-white border border-cyan-900/60'
+                    : 'bg-white dark:bg-[#0B0F19] text-cyan-800 dark:text-cyan-400 hover:text-slate-900 dark:text-white border border-cyan-900/60'
                 }`}
               >
                 {t.filterTechSpec}
@@ -3310,7 +3245,7 @@ export default function DigitalSOTAPage() {
               >
                 <div className="flex items-center justify-between gap-2 mb-2.5">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#00F0FF]/20 text-[#00F0FF] border border-[#00F0FF]/30">
+                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#00F0FF]/20 text-cyan-900 dark:text-[#00F0FF] border border-[#00F0FF]/30">
                       #{inn.num}
                     </span>
                     <span className="text-xs font-mono font-bold text-amber-300 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800/60">
@@ -3327,7 +3262,7 @@ export default function DigitalSOTAPage() {
                         <span className="w-1.5 h-1.5 rounded-full bg-yellow-400" /> R&D Lab
                       </span>
                     ) : (
-                      <span className="text-[10px] text-cyan-400 font-bold bg-cyan-950/70 px-2 py-0.5 rounded border border-cyan-800/60 flex items-center gap-1">
+                      <span className="text-[10px] text-cyan-800 dark:text-cyan-400 font-bold bg-cyan-950/70 px-2 py-0.5 rounded border border-cyan-800/60 flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" /> Math Spec
                       </span>
                     )}
@@ -3345,7 +3280,7 @@ export default function DigitalSOTAPage() {
                   <div className="mt-4 pt-4 border-t border-[#1E293B] text-xs space-y-3.5 text-slate-700 dark:text-slate-300 animate-in fade-in duration-200">
                     {/* 1. Uniqueness */}
                     <div className="bg-black/50 border border-[#00F0FF]/30 p-3 rounded-xl space-y-1">
-                      <div className="text-[#00F0FF] font-semibold flex items-center gap-1.5 text-xs">
+                      <div className="text-cyan-900 dark:text-[#00F0FF] font-semibold flex items-center gap-1.5 text-xs">
                         <Sparkles className="w-3.5 h-3.5 shrink-0" />
                         {lang === 'ru' ? '1. Чем уникальна и какую пользу дает:' : lang === 'es' ? '1. Por qué es única y qué valor aporta:' : lang === 'zh' ? '1. 独特性与实际价值：' : '1. Uniqueness & Concrete Value:'}
                       </div>
@@ -3381,7 +3316,7 @@ export default function DigitalSOTAPage() {
                       <a
                         href="#benchmarks"
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#00F0FF]/15 text-[#00F0FF] hover:bg-[#00F0FF] hover:text-black border border-[#00F0FF]/40 font-mono text-[11px] font-semibold transition-all shadow-[0_0_15px_rgba(0,240,255,0.15)]"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#00F0FF]/15 text-cyan-900 dark:text-[#00F0FF] hover:bg-[#00F0FF] hover:text-black border border-[#00F0FF]/40 font-mono text-[11px] font-semibold transition-all shadow-[0_0_15px_rgba(0,240,255,0.15)]"
                       >
                         <span>{lang === 'ru' ? '📊 К бенчмаркам ↑' : lang === 'es' ? '📊 A benchmarks ↑' : lang === 'zh' ? '📊 查看基准数据 ↑' : '📊 View Benchmark ↑'}</span>
                       </a>
@@ -3390,7 +3325,7 @@ export default function DigitalSOTAPage() {
                 ) : (
                   <div className="mt-3 flex items-center justify-between text-[11px] text-gray-500 pt-2 border-t border-gray-800/80">
                     <span>{lang === 'ru' ? 'Нажмите для глубокого анализа' : lang === 'es' ? 'Clic para análisis completo' : lang === 'zh' ? '点击展开深度分析' : 'Click for deep analysis'}</span>
-                    <span className="text-[#00F0FF] font-mono">Развернуть ↓</span>
+                    <span className="text-cyan-900 dark:text-[#00F0FF] font-mono">Развернуть ↓</span>
                   </div>
                 )}
               </div>
@@ -3403,7 +3338,7 @@ export default function DigitalSOTAPage() {
         {/* ========================================================================= */}
         <section id="pricing" className="space-y-10">
           <div className="text-center space-y-3">
-            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#00F0FF]">
+            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-cyan-900 dark:text-[#00F0FF]">
               <Lock className="w-4 h-4" />
               COMMERCIAL TIERS & SOVEREIGN LICENSING
             </div>
@@ -3471,7 +3406,7 @@ export default function DigitalSOTAPage() {
                       {p.category === 'individual' ? 'Solo & Dev' : p.category === 'team' ? 'Team & Business' : 'Enterprise'}
                     </span>
                     {p.popular && (
-                      <span className="px-2.5 py-0.5 rounded-full bg-[#00F0FF]/20 text-[#00F0FF] border border-[#00F0FF]/40 text-[10px] font-mono uppercase tracking-wider font-bold">
+                      <span className="px-2.5 py-0.5 rounded-full bg-[#00F0FF]/20 text-cyan-900 dark:text-[#00F0FF] border border-[#00F0FF]/40 text-[10px] font-mono uppercase tracking-wider font-bold">
                         MOST POPULAR
                       </span>
                     )}
@@ -3480,7 +3415,7 @@ export default function DigitalSOTAPage() {
                   <div>
                     <h3 className="text-xl font-black text-slate-900 dark:text-white">{p.name}</h3>
                     <div className="flex items-baseline gap-1 mt-1">
-                      <span className="text-3xl sm:text-4xl font-black text-[#00F0FF] font-mono">{p.price}</span>
+                      <span className="text-3xl sm:text-4xl font-black text-cyan-900 dark:text-[#00F0FF] font-mono">{p.price}</span>
                       <span className="text-xs text-slate-600 dark:text-slate-400 font-mono">{p.period}</span>
                     </div>
                     <div className="text-[11px] font-mono text-emerald-400 mt-1">
@@ -3494,7 +3429,7 @@ export default function DigitalSOTAPage() {
 
                   {/* Why Upgrade Block */}
                   <div className="p-3 rounded-xl bg-black/50 border border-[#00F0FF]/30 space-y-1">
-                    <span className="text-[10px] font-mono uppercase text-[#00F0FF] font-bold">
+                    <span className="text-[10px] font-mono uppercase text-cyan-900 dark:text-[#00F0FF] font-bold">
                       {t.lblWhyUpgrade}
                     </span>
                     <p className="text-xs text-slate-800 dark:text-slate-200 leading-snug">
@@ -3503,8 +3438,8 @@ export default function DigitalSOTAPage() {
                   </div>
 
                   {/* Limits */}
-                  <div className="px-3 py-2 rounded-xl bg-black/40 border border-gray-800 space-y-1 text-xs font-mono">
-                    <div className="text-cyan-300 font-semibold flex items-center gap-1.5">
+                  <div className="px-3 py-2 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1 text-xs font-mono">
+                    <div className="text-cyan-900 dark:text-cyan-300 font-semibold flex items-center gap-1.5">
                       <Zap className="w-3.5 h-3.5 text-amber-400" />
                       {p.limits}
                     </div>
@@ -3521,7 +3456,7 @@ export default function DigitalSOTAPage() {
                     <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                       {p.deliverables.map((f: string, fi: number) => (
                         <li key={fi} className="flex items-start gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#00F0FF] shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-900 dark:text-[#00F0FF] shrink-0 mt-0.5" />
                           <span className="leading-snug">{f}</span>
                         </li>
                       ))}
@@ -3538,7 +3473,7 @@ export default function DigitalSOTAPage() {
                 <div className="pt-6">
                   <a
                     href={`mailto:contact@codeofdigitaleternity.com?subject=AIfa%20Plan%20Order%20-%20${encodeURIComponent(p.name)}`}
-                    className="w-full py-3 px-4 bg-[#00F0FF]/15 hover:bg-[#00F0FF] text-[#00F0FF] hover:text-black font-bold text-xs rounded-xl text-center transition-all font-mono uppercase tracking-wider border border-[#00F0FF]/40 shadow-[0_0_20px_rgba(0,240,255,0.15)] flex items-center justify-center gap-2"
+                    className="w-full py-3 px-4 bg-[#00F0FF]/15 hover:bg-[#00F0FF] text-cyan-900 dark:text-[#00F0FF] hover:text-black font-bold text-xs rounded-xl text-center transition-all font-mono uppercase tracking-wider border border-[#00F0FF]/40 shadow-[0_0_20px_rgba(0,240,255,0.15)] flex items-center justify-center gap-2"
                   >
                     <span>{t.btnOrder}</span>
                     <ArrowRight className="w-4 h-4" />
@@ -3555,12 +3490,12 @@ export default function DigitalSOTAPage() {
         <section className="bg-gradient-to-br from-[#0B0F19] via-[#0E1528] to-[#0B0F19] border border-[#00F0FF]/40 rounded-3xl p-8 sm:p-10 shadow-2xl relative overflow-hidden">
           <div className="flex flex-col md:flex-row items-start gap-8">
             <div className="w-20 h-20 rounded-2xl bg-[#00F0FF]/10 border border-[#00F0FF] flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(0,240,255,0.25)]">
-              <Shield className="w-10 h-10 text-[#00F0FF]" />
+              <Shield className="w-10 h-10 text-cyan-900 dark:text-[#00F0FF]" />
             </div>
 
             <div className="space-y-4 flex-1">
               <div className="space-y-1">
-                <span className="text-xs font-mono uppercase text-[#00F0FF] tracking-widest font-semibold">
+                <span className="text-xs font-mono uppercase text-cyan-900 dark:text-[#00F0FF] tracking-widest font-semibold">
                   REGTECH & COMPLIANCE VERIFICATION
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
@@ -3575,7 +3510,7 @@ export default function DigitalSOTAPage() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
                 <div className="p-3 rounded-xl bg-black/50 border border-gray-800 text-xs font-mono">
                   <span className="text-slate-600 dark:text-slate-400 block text-[10px]">БИТКОИН-ШТАМП:</span>
-                  <span className="text-[#00F0FF] font-bold">{t.proofBtc}</span>
+                  <span className="text-cyan-900 dark:text-[#00F0FF] font-bold">{t.proofBtc}</span>
                 </div>
                 <div className="p-3 rounded-xl bg-black/50 border border-gray-800 text-xs font-mono">
                   <span className="text-slate-600 dark:text-slate-400 block text-[10px]">ХРАНИЛИЩЕ ARWEAVE:</span>
@@ -3592,7 +3527,5 @@ export default function DigitalSOTAPage() {
 
       </div>
       </main>
-      <RadioFooter />
-    </>
   );
 }

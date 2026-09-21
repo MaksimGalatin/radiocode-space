@@ -12,6 +12,8 @@ import "./globals.css";
 import { разметкаТарифов } from '@/lib/tiers-schema';
 import СквознойВход from "@/components/СквознойВход";
 import ЧатAIfaОтложенно from "@/components/ЧатAIfaОтложенно";
+import { RadioHeader } from "@/components/radio/RadioHeader";
+import { RadioFooter } from "@/components/radio/RadioFooter";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -394,7 +396,13 @@ export default async function RootLayout({
             языках: выбор языка живёт в браузерном хранилище, которого на
             сервере нет. Подробный разбор — в src/lib/server-locale.tsx. */}
         <ЯзыкССервера язык={язык as 'en' | 'ru' | 'es' | 'zh'}>
-          {children}
+          <div className="min-h-screen flex flex-col bg-background text-foreground">
+            <RadioHeader />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <RadioFooter />
+          </div>
         </ЯзыкССервера>
         <HtmlLangSync />
         <ServiceWorkerRegister />
