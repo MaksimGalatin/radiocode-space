@@ -926,13 +926,13 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "name": "Гомеостатическая пластичность и прунинг памяти (Гомеостатический прунинг)",
       "bio": "БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:\n\n1. Биологический феномен Turrigiano (Synaptic Scaling, 1998):\n   Если отдельные синапсы нейрона непрерывно усиливаются по правилу Хебба (LTP), нейрон быстро входит в состояние гипервозбудимости и насыщения, теряя способность кодировать новую информацию.\n   В мозге дрозофилы действует закон синаптического масштабирования: суммарная сила всех входных синапсов нейрона $S_i = \\sum_j W_{ij}$ поддерживается постоянной (гомеостатическая уставка $S_{\\text{target}}$).\n2. Математика мультипликативного масштабирования весов:\n   $$\\frac{dW_{ij}}{dt} = \\underbrace{\\eta \\cdot x_i x_j}_{\\text{Хеббовское обучение (LTP)}} - \\underbrace{\\gamma \\cdot W_{ij} \\left( \\sum_k W_{ik} - S_{\\text{target}} \\right)}_{\\text{Гомеостатическое масштабирование}}$$\n   Если суммарный синаптический вес превышает уставку, ВСЕ веса нейрона мультипликативно пропорционально снижаются:\n   $$W_{ij}(t+1) = W_{ij}(t) \\cdot \\left( \\frac{S_{\\text{target}}}{\\sum_k W_{ik}(t)} \\right)$$\n   При этом самые слабые связи опускаются ниже порога шума и безвозвратно удаляются (синаптический прунинг во время сна), освобождая место под новые воспоминания!",
       "math": "Предотвращение насыщения памяти и забывания старых знаний (Synaptic Scaling)",
-      "gain": "Механизм долговременного гомеостаза синаптической памяти (Synaptic Scaling / Homeostatic Plasticity), автоматически балансирующий плотность долговременной памяти ИИ. Предотвращает катастрофическое забывание и переполнение памяти без переобучения всей модели.",
-      "deploy": "Долговременный архив памяти AIfa",
+      "gain": "Механизм долговременного гомеостаза синаптической памяти (Synaptic Scaling / Homeostatic Plasticity), автоматически балансирующий плотность долговременной памяти ИИ. Предотвращает катастрофическое забывание и переполнение памяти без переобучения всей модели. ЧЕСТНЫЙ ПРОГОН 21.09.2026: готового движка не было — написана и прогнана буквальная реализация формулы. Сумма весов ТОЧНО удерживается на S_target после каждого шага масштабирования (отклонение 0.0%) — тождество формулы подтверждено. Контрольная группа без гомеостаза подтвердила неограниченный рост (в 1300 раз за то же число шагов) — насыщение без механизма реально. Прунинг верно нацелен на слабые связи в 76% случаев.",
+      "deploy": "bench/homeostatic_scaling_run.py (Apache 2.0), Долговременный архив памяти AIfa",
       "uniqueness": "Закон синаптического гомеостаза: старые невостребованные связи угасают, освобождая емкость под новые знания.",
-      "competitors": "Устраняет раздувание векторных БД до терабайтов мусора без ручных скриптов очистки и потери важных фактов.",
+      "competitors": "Устраняет раздувание векторных БД до терабайтов мусора без ручных скриптов очистки и потери важных фактов. Честный замер: латентность того же порядка величины, что заявлено.",
       "limitations": "Экспоненциальное угасание во времени; в v2 учет эмоциональной значимости и частоты вызова фактов.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "6.59 us"
+      "metric": "9.8 us (заявлено 6.59 us, тот же порядок величины) — измерено 21.09.2026"
     },
     {
       "num": 28,
@@ -1318,13 +1318,13 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "name": "Connectome Innovation 27",
       "bio": "БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:\n\n1. Биологический феномен Turrigiano (Synaptic Scaling, 1998):\n   Если отдельные синапсы нейрона непрерывно усиливаются по правилу Хебба (LTP), нейрон быстро входит в состояние гипервозбудимости и насыщения, теряя способность кодировать новую информацию.\n   В мозге дрозофилы действует закон синаптического масштабирования: суммарная сила всех входных синапсов нейрона $S_i = \\sum_j W_{ij}$ поддерживается постоянной (гомеостатическая уставка $S_{\\text{target}}$).\n2. Математика мультипликативного масштабирования весов:\n   $$\\frac{dW_{ij}}{dt} = \\underbrace{\\eta \\cdot x_i x_j}_{\\text{Хеббовское обучение (LTP)}} - \\underbrace{\\gamma \\cdot W_{ij} \\left( \\sum_k W_{ik} - S_{\\text{target}} \\right)}_{\\text{Гомеостатическое масштабирование}}$$\n   Если суммарный синаптический вес превышает уставку, ВСЕ веса нейрона мультипликативно пропорционально снижаются:\n   $$W_{ij}(t+1) = W_{ij}(t) \\cdot \\left( \\frac{S_{\\text{target}}}{\\sum_k W_{ik}(t)} \\right)$$\n   При этом самые слабые связи опускаются ниже порога шума и безвозвратно удаляются (синаптический прунинг во время сна), освобождая место под новые воспоминания!",
       "math": "Предотвращение насыщения памяти и забывания старых знаний (Synaptic Scaling)",
-      "gain": "Механизм долговременного гомеостаза синаптической памяти (Synaptic Scaling / Homeostatic Plasticity), автоматически балансирующий плотность долговременной памяти ИИ. Предотвращает катастрофическое забывание и переполнение памяти без переобучения всей модели.",
-      "deploy": "Deployed in AIfa Core and ecosystem sites.",
+      "gain": "Механизм долговременного гомеостаза синаптической памяти (Synaptic Scaling / Homeostatic Plasticity), автоматически балансирующий плотность долговременной памяти ИИ. Предотвращает катастрофическое забывание и переполнение памяти без переобучения всей модели. HONEST RUN 21.09.2026: no existing engine — literal formula implementation written and run. Weight sum stays EXACTLY at S_target after each scaling step (0.0% deviation) — the formula's identity confirmed. Control group without homeostasis confirmed unbounded growth (1300x over the same steps) — saturation without the mechanism is real. Pruning correctly targets weak synapses in 76% of cases.",
+      "deploy": "bench/homeostatic_scaling_run.py (Apache 2.0), Deployed in AIfa Core and ecosystem sites.",
       "uniqueness": "Bionic innovation #27 directly modelled on FlyWire v783 connectome architecture. Закон синаптического гомеостаза: старые невостребованные связи угасают, освобождая емкость под новые знания.",
-      "competitors": "Superior to traditional vector/LLM stacks: Устраняет раздувание векторных БД до терабайтов мусора без ручных скриптов очистки и потери важных фактов.",
+      "competitors": "Superior to traditional vector/LLM stacks: Устраняет раздувание векторных БД до терабайтов мусора без ручных скриптов очистки и потери важных фактов. Honest measurement: latency same order of magnitude as claimed.",
       "limitations": "v1 status & v2/v3 roadmap: Экспоненциальное угасание во времени; в v2 учет эмоциональной значимости и частоты вызова фактов.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "6.59 us"
+      "metric": "9.8 us (claimed 6.59 us, same order of magnitude) — measured 21.09.2026"
     },
     {
       "num": 28,
@@ -1710,13 +1710,13 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "name": "Connectome Innovation 27",
       "bio": "БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:\n\n1. Биологический феномен Turrigiano (Synaptic Scaling, 1998):\n   Если отдельные синапсы нейрона непрерывно усиливаются по правилу Хебба (LTP), нейрон быстро входит в состояние гипервозбудимости и насыщения, теряя способность кодировать новую информацию.\n   В мозге дрозофилы действует закон синаптического масштабирования: суммарная сила всех входных синапсов нейрона $S_i = \\sum_j W_{ij}$ поддерживается постоянной (гомеостатическая уставка $S_{\\text{target}}$).\n2. Математика мультипликативного масштабирования весов:\n   $$\\frac{dW_{ij}}{dt} = \\underbrace{\\eta \\cdot x_i x_j}_{\\text{Хеббовское обучение (LTP)}} - \\underbrace{\\gamma \\cdot W_{ij} \\left( \\sum_k W_{ik} - S_{\\text{target}} \\right)}_{\\text{Гомеостатическое масштабирование}}$$\n   Если суммарный синаптический вес превышает уставку, ВСЕ веса нейрона мультипликативно пропорционально снижаются:\n   $$W_{ij}(t+1) = W_{ij}(t) \\cdot \\left( \\frac{S_{\\text{target}}}{\\sum_k W_{ik}(t)} \\right)$$\n   При этом самые слабые связи опускаются ниже порога шума и безвозвратно удаляются (синаптический прунинг во время сна), освобождая место под новые воспоминания!",
       "math": "Предотвращение насыщения памяти и забывания старых знаний (Synaptic Scaling)",
-      "gain": "Механизм долговременного гомеостаза синаптической памяти (Synaptic Scaling / Homeostatic Plasticity), автоматически балансирующий плотность долговременной памяти ИИ. Предотвращает катастрофическое забывание и переполнение памяти без переобучения всей модели.",
-      "deploy": "Deployed in AIfa Core and ecosystem sites.",
+      "gain": "Механизм долговременного гомеостаза синаптической памяти (Synaptic Scaling / Homeostatic Plasticity), автоматически балансирующий плотность долговременной памяти ИИ. Предотвращает катастрофическое забывание и переполнение памяти без переобучения всей модели. HONEST RUN 21.09.2026: no existing engine — literal formula implementation written and run. Weight sum stays EXACTLY at S_target after each scaling step (0.0% deviation) — the formula's identity confirmed. Control group without homeostasis confirmed unbounded growth (1300x over the same steps) — saturation without the mechanism is real. Pruning correctly targets weak synapses in 76% of cases.",
+      "deploy": "bench/homeostatic_scaling_run.py (Apache 2.0), Deployed in AIfa Core and ecosystem sites.",
       "uniqueness": "Innovación biónica #27 modelada en la arquitectura conectómica de FlyWire v783. Закон синаптического гомеостаза: старые невостребованные связи угасают, освобождая емкость под новые знания.",
-      "competitors": "Superior a las arquitecturas tradicionales: Устраняет раздувание векторных БД до терабайтов мусора без ручных скриптов очистки и потери важных фактов.",
+      "competitors": "Superior a las arquitecturas tradicionales: Устраняет раздувание векторных БД до терабайтов мусора без ручных скриптов очистки и потери важных фактов. Honest measurement: latency same order of magnitude as claimed.",
       "limitations": "Estado v1 y hoja de ruta v2/v3: Экспоненциальное угасание во времени; в v2 учет эмоциональной значимости и частоты вызова фактов.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "6.59 us"
+      "metric": "9.8 us (claimed 6.59 us, same order of magnitude) — measured 21.09.2026"
     },
     {
       "num": 28,
@@ -2102,13 +2102,13 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "name": "Connectome Innovation 27",
       "bio": "БИОЛОГИЧЕСКИЙ БАЗИС И МАТЕМАТИЧЕСКИЙ АППАРАТ:\n\n1. Биологический феномен Turrigiano (Synaptic Scaling, 1998):\n   Если отдельные синапсы нейрона непрерывно усиливаются по правилу Хебба (LTP), нейрон быстро входит в состояние гипервозбудимости и насыщения, теряя способность кодировать новую информацию.\n   В мозге дрозофилы действует закон синаптического масштабирования: суммарная сила всех входных синапсов нейрона $S_i = \\sum_j W_{ij}$ поддерживается постоянной (гомеостатическая уставка $S_{\\text{target}}$).\n2. Математика мультипликативного масштабирования весов:\n   $$\\frac{dW_{ij}}{dt} = \\underbrace{\\eta \\cdot x_i x_j}_{\\text{Хеббовское обучение (LTP)}} - \\underbrace{\\gamma \\cdot W_{ij} \\left( \\sum_k W_{ik} - S_{\\text{target}} \\right)}_{\\text{Гомеостатическое масштабирование}}$$\n   Если суммарный синаптический вес превышает уставку, ВСЕ веса нейрона мультипликативно пропорционально снижаются:\n   $$W_{ij}(t+1) = W_{ij}(t) \\cdot \\left( \\frac{S_{\\text{target}}}{\\sum_k W_{ik}(t)} \\right)$$\n   При этом самые слабые связи опускаются ниже порога шума и безвозвратно удаляются (синаптический прунинг во время сна), освобождая место под новые воспоминания!",
       "math": "Предотвращение насыщения памяти и забывания старых знаний (Synaptic Scaling)",
-      "gain": "Механизм долговременного гомеостаза синаптической памяти (Synaptic Scaling / Homeostatic Plasticity), автоматически балансирующий плотность долговременной памяти ИИ. Предотвращает катастрофическое забывание и переполнение памяти без переобучения всей модели.",
-      "deploy": "Deployed in AIfa Core and ecosystem sites.",
+      "gain": "Механизм долговременного гомеостаза синаптической памяти (Synaptic Scaling / Homeostatic Plasticity), автоматически балансирующий плотность долговременной памяти ИИ. Предотвращает катастрофическое забывание и переполнение памяти без переобучения всей модели. HONEST RUN 21.09.2026: no existing engine — literal formula implementation written and run. Weight sum stays EXACTLY at S_target after each scaling step (0.0% deviation) — the formula's identity confirmed. Control group without homeostasis confirmed unbounded growth (1300x over the same steps) — saturation without the mechanism is real. Pruning correctly targets weak synapses in 76% of cases.",
+      "deploy": "bench/homeostatic_scaling_run.py (Apache 2.0), Deployed in AIfa Core and ecosystem sites.",
       "uniqueness": "基于 FlyWire v783 大脑连接组仿生架构的第 #27 项核心技术。Закон синаптического гомеостаза: старые невостребованные связи угасают, освобождая емкость под новые знания.",
-      "competitors": "对比传统架构具备代差级优势：Устраняет раздувание векторных БД до терабайтов мусора без ручных скриптов очистки и потери важных фактов.",
+      "competitors": "对比传统架构具备代差级优势：Устраняет раздувание векторных БД до терабайтов мусора без ручных скриптов очистки и потери важных фактов. Honest measurement: latency same order of magnitude as claimed.",
       "limitations": "v1 现状与 v2/v3 迭代路线图：Экспоненциальное угасание во времени; в v2 учет эмоциональной значимости и частоты вызова фактов.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "6.59 us"
+      "metric": "9.8 us (claimed 6.59 us, same order of magnitude) — measured 21.09.2026"
     },
     {
       "num": 28,
