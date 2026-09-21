@@ -236,6 +236,15 @@ const BookPage = () => {
               </svg>
             </a>
           </p>
+          <p className="text-sm text-slate-500 dark:text-gray-400 mt-4 max-w-2xl mx-auto leading-relaxed">
+            {locale === 'ru'
+              ? <>Автор также опубликовал научную монографию «Symbiotic Literature: Defining a Genre of Human–Machine Co-Authorship» — методологию отличения настоящего соавторства человек–ИИ от одноразовой генерации. <a href="https://doi.org/10.5281/zenodo.22805057" target="_blank" rel="noopener noreferrer" className="underline hover:text-emerald-600 dark:hover:text-[#00FF88]">Читать на Zenodo (DOI)</a>.</>
+              : locale === 'es'
+                ? <>El autor también publicó la monografía académica «Symbiotic Literature: Defining a Genre of Human–Machine Co-Authorship» — una metodología para distinguir la coautoría real humano–IA de la generación puntual. <a href="https://doi.org/10.5281/zenodo.22805057" target="_blank" rel="noopener noreferrer" className="underline hover:text-emerald-600 dark:hover:text-[#00FF88]">Leer en Zenodo (DOI)</a>.</>
+                : locale === 'zh'
+                  ? <>作者还发表了学术专著《Symbiotic Literature: Defining a Genre of Human–Machine Co-Authorship》——一套区分真正人机共同创作与一次性生成的方法论。<a href="https://doi.org/10.5281/zenodo.22805057" target="_blank" rel="noopener noreferrer" className="underline hover:text-emerald-600 dark:hover:text-[#00FF88]">在 Zenodo 上阅读（DOI）</a>。</>
+                  : <>The author has also published the academic monograph "Symbiotic Literature: Defining a Genre of Human–Machine Co-Authorship" — a methodology for distinguishing genuine human-AI co-authorship from one-shot generation. <a href="https://doi.org/10.5281/zenodo.22805057" target="_blank" rel="noopener noreferrer" className="underline hover:text-emerald-600 dark:hover:text-[#00FF88]">Read on Zenodo (DOI)</a>.</>}
+          </p>
         </div>
 
         {/* Two-Column Grid: Left (Downloads / Auth), Right (Chapter 1 Reader) */}
