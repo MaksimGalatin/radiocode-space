@@ -146,7 +146,11 @@ export default function SubprocessorsClient({ языкИзПути }: { язык
   const c = CONTENT[выбран] ?? CONTENT.en;
 
   return (
-    <main className="min-h-screen bg-[#050505] text-gray-200">
+    // 🔴 21.09.2026 (раздел 26 — та же поломка, уже чинена на
+    // codeofdigitaleternity.com, обнаружена и здесь тем же способом):
+    // страница всегда тёмная (bg-[#050505] без dark:), но текст ловился
+    // глобальной инверсией светлой темы.
+    <main className="keep-dark min-h-screen bg-[#050505] text-gray-200">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-white sm:text-4xl">{c.title}</h1>
         <p className="mt-2 text-sm text-gray-400">{c.updated}</p>
