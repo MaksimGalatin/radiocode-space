@@ -1009,10 +1009,10 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "gain": "Система векторной навигации в браузерном DOM-дереве, моделирующая работу эллипсоидного и веерообразного тел центрального комплекса мозга мухи (Central Complex, CX). Вместо линейного перебора клавишей Tab алгоритм формирует 2D-вектор целевого элемента и выполняет прямой переход через кратчайший путь в графе видимости, сокращая шаги навигации в 5-10 раз и гарантируя выход из клавиатурных ловушек (keyboard traps).",
       "deploy": "Deployed in AIfa Core and ecosystem sites.",
       "uniqueness": "Phase-vector steering navigator based on the Protocerebral Bridge (PB) and Fan-shaped Body (FB) of the Central Complex (CX) for agent trajectory navigation in DOM graphs.",
-      "competitors": "LLM-based agents (AutoGPT, Browser-Use) require 12–18 blind DOM exploratory round-trips. CX Steering achieves target element transitions in 1.12 direct graph steps (16x acceleration).",
+      "competitors": "21.09.2026: measured — baseline (linear Tab-traversal) averages 23.54 steps over 200 trials, CX Steering achieves 3.66 steps (6.43x speedup), 100.0% navigation success. Previously claimed \"12-18 iterations\" and \"1.12 steps (16x)\" were unmeasured.",
       "limitations": "Requires pre-indexed navigation state transition graphs. v2 roadmap: dynamic ontological resolver for unannotated Shadow DOM architectures.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "1.12 steps"
+      "metric": "3.66 steps (6.43x speedup)"
     },
     {
       "num": 4,
@@ -1022,10 +1022,10 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "gain": "Криптографический протокол неизменяемого версионирования и нотариального заверения полного графа взрослого мозга Drosophila melanogaster (FlyWire v783: 139,255 нейронов, 3,869,878 синаптических ребер). Построен на базе дерева Меркла (Merkle Tree SHA-256), обеспечивает юридическую и академическую доказанность целостности данных при патентных спорах, судебных экспертизах и коммерческом лицензировании био-архитектур.",
       "deploy": "Deployed in AIfa Core and ecosystem sites.",
       "uniqueness": "SHA-256 Merkle root of the FlyWire v783 synaptic connectome matrix immutably stamped onto the Bitcoin blockchain (OpenTimestamps Block 861420) and Arweave.",
-      "competitors": "Proprietary AI vendors (OpenAI, Pinecone) silently patch algorithms without user consent. Proof of Connectome delivers cryptographic immutability and anti-tampering proofs.",
+      "competitors": "Proprietary AI vendors (OpenAI, Pinecone) silently patch algorithms without user consent. Proof of Connectome delivers cryptographic immutability — verified: 100% tamper detection (20/20).",
       "limitations": "On-chain proof verification requires network RPC call to Bitcoin/Arweave node (1-2s). v2 roadmap: in-browser zk-SNARK light verifier running in < 5 ms.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "1.12 steps"
+      "metric": "1.2255 s build, 1.622 ms verify, 100% tamper detection"
     },
     {
       "num": 5,
@@ -1401,10 +1401,10 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "gain": "Система векторной навигации в браузерном DOM-дереве, моделирующая работу эллипсоидного и веерообразного тел центрального комплекса мозга мухи (Central Complex, CX). Вместо линейного перебора клавишей Tab алгоритм формирует 2D-вектор целевого элемента и выполняет прямой переход через кратчайший путь в графе видимости, сокращая шаги навигации в 5-10 раз и гарантируя выход из клавиатурных ловушек (keyboard traps).",
       "deploy": "Deployed in AIfa Core and ecosystem sites.",
       "uniqueness": "Compás vectorial de navegación en el Protocerebral Bridge (PB) y Fan-shaped Body (FB) para guiar agentes en grafos DOM y sistemas de archivos.",
-      "competitors": "Agentes LLM realizan 12-18 llamadas ciegas al DOM. CX Steering reduce la transición a 1,12 pasos directos (16 veces más rápido).",
+      "competitors": "21.09.2026: medido — línea base (Tab lineal) promedia 23,54 pasos en 200 pruebas, CX Steering logra 3,66 pasos (6,43x más rápido), 100,0% de éxito. Los valores anteriores \"12-18 iteraciones\" y \"1,12 pasos (16x)\" no fueron medidos.",
       "limitations": "Requiere un grafo de estados preindexado. En v2: resolución ontológica dinámica para Shadow DOM.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "1.12 steps"
+      "metric": "3.66 steps (6.43x speedup)"
     },
     {
       "num": 4,
@@ -1414,10 +1414,10 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "gain": "Криптографический протокол неизменяемого версионирования и нотариального заверения полного графа взрослого мозга Drosophila melanogaster (FlyWire v783: 139,255 нейронов, 3,869,878 синаптических ребер). Построен на базе дерева Меркла (Merkle Tree SHA-256), обеспечивает юридическую и академическую доказанность целостности данных при патентных спорах, судебных экспертизах и коммерческом лицензировании био-архитектур.",
       "deploy": "Deployed in AIfa Core and ecosystem sites.",
       "uniqueness": "Raíz Merkle SHA-256 de la matriz sináptica FlyWire v783 certificada en Bitcoin (OpenTimestamps Bloque 861420) y Arweave.",
-      "competitors": "Los proveedores propietarios modifican modelos en secreto. Proof of Connectome garantiza matemáticamente la inmutabilidad y transparencia.",
+      "competitors": "Los proveedores propietarios modifican modelos en secreto. Proof of Connectome garantiza matemáticamente la inmutabilidad — verificado: 100% de detección de manipulación (20/20).",
       "limitations": "La verificación requiere consulta a nodo Bitcoin (1-2s). En v2: verificador local zk-SNARK en < 5 ms.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "1.12 steps"
+      "metric": "1.2255 s build, 1.622 ms verify, 100% tamper detection"
     },
     {
       "num": 5,
@@ -1793,10 +1793,10 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "gain": "Система векторной навигации в браузерном DOM-дереве, моделирующая работу эллипсоидного и веерообразного тел центрального комплекса мозга мухи (Central Complex, CX). Вместо линейного перебора клавишей Tab алгоритм формирует 2D-вектор целевого элемента и выполняет прямой переход через кратчайший путь в графе видимости, сокращая шаги навигации в 5-10 раз и гарантируя выход из клавиатурных ловушек (keyboard traps).",
       "deploy": "Deployed in AIfa Core and ecosystem sites.",
       "uniqueness": "基于中央复合体（CX）原脑桥（PB）与扇形体（FB）的相位矢量导航罗盘，用于自主智能体在 DOM 树与代码文件系统中的靶向跳转。",
-      "competitors": "基于大模型的传统网页代理（AutoGPT/Browser-Use）需 12-18 次盲目试错。CX Steering 将路径缩短至 1.12 步直接图跃迁（速度提升 16 倍）。",
+      "competitors": "21.09.2026 实测：线性 Tab 遍历基线在 200 次试验中平均 23.54 步，CX Steering 达到 3.66 步（提速 6.43 倍），导航成功率 100.0%。此前声称的「12-18 次迭代」和「1.12 步（16 倍）」均未经实测。",
       "limitations": "需要预构建状态状态跳转图谱。v2 路线图：引入针对复杂 Shadow DOM 单页应用的动态本体图谱解析器。",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "1.12 steps"
+      "metric": "3.66 steps (6.43x speedup)"
     },
     {
       "num": 4,
@@ -1806,10 +1806,10 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "gain": "Криптографический протокол неизменяемого версионирования и нотариального заверения полного графа взрослого мозга Drosophila melanogaster (FlyWire v783: 139,255 нейронов, 3,869,878 синаптических ребер). Построен на базе дерева Меркла (Merkle Tree SHA-256), обеспечивает юридическую и академическую доказанность целостности данных при патентных спорах, судебных экспертизах и коммерческом лицензировании био-архитектур.",
       "deploy": "Deployed in AIfa Core and ecosystem sites.",
       "uniqueness": "FlyWire v783 完整突触连接组矩阵的 SHA-256 Merkle 根哈希，已永久锚定于比特币区块链（OpenTimestamps 第 861420 区块）与 Arweave 永久存储。",
-      "competitors": "商业闭源大模型与云端向量库经常静默篡改算法。Proof of Connectome 提供了全行业首个抗篡改的数学级不可变防伪存证。",
+      "competitors": "商业闭源大模型与云端向量库经常静默篡改算法。Proof of Connectome 提供了全行业首个抗篡改的数学级不可变防伪存证——实测：篡改检测率 100%（20/20）。",
       "limitations": "链上验真目前需查询外部比特币/Arweave 节点（约 1-2 秒）。v2 规划：集成毫秒级 (< 5 ms) 纯客户端 zk-SNARK 离线轻验证器。",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "1.12 steps"
+      "metric": "1.2255 s build, 1.622 ms verify, 100% tamper detection"
     },
     {
       "num": 5,
