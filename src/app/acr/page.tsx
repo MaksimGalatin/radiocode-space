@@ -2925,7 +2925,7 @@ export default function ACRPage() {
                 className={`cursor-pointer rounded-2xl p-5 transition-all border ${
                   selectedTech === inn.num
                     ? 'bg-[#00F0FF]/10 border-[#00F0FF] shadow-[0_0_25px_rgba(0,240,255,0.25)] ring-1 ring-[#00F0FF]/40'
-                    : 'bg-[#05060A] border-[#1E293B] hover:border-gray-600 hover:bg-[#080B14]'
+                    : 'bg-white dark:bg-[#05060A] border-slate-200 dark:border-[#1E293B] hover:border-cyan-500/40 hover:bg-slate-50 dark:hover:bg-[#080B14]'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 mb-2.5">
@@ -2976,7 +2976,7 @@ export default function ACRPage() {
                         <Zap className="w-3.5 h-3.5 shrink-0" />
                         {lang === 'ru' ? '2. Превосходство над конкурентами (FAISS / Pinecone / Chroma / LLM / FIFO):' : lang === 'es' ? '2. Ventaja sobre competidores (FAISS / Pinecone / Chroma / LLM):' : lang === 'zh' ? '2. 超越传统方案（FAISS / Pinecone / Chroma / LLM / FIFO）：' : '2. Advantage over Competitors (FAISS / Pinecone / Chroma / LLMs):'}
                       </div>
-                      <p className="text-amber-200/90 text-xs leading-relaxed">{inn.competitors}</p>
+                      <p className="text-amber-950 dark:text-amber-200/90 text-xs leading-relaxed">{inn.competitors}</p>
                     </div>
 
                     {/* 3. Limitations */}
@@ -2985,7 +2985,7 @@ export default function ACRPage() {
                         <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
                         {lang === 'ru' ? '3. Ограничения v1 и план развития в v2/v3:' : lang === 'es' ? '3. Limitaciones v1 y hoja de ruta v2/v3:' : lang === 'zh' ? '3. v1 局限性与 v2/v3 迭代路线图：' : '3. v1 Limitations & v2/v3 Evolution Roadmap:'}
                       </div>
-                      <p className="text-purple-200/90 text-xs leading-relaxed">{inn.limitations}</p>
+                      <p className="text-purple-950 dark:text-purple-200/90 text-xs leading-relaxed">{inn.limitations}</p>
                     </div>
 
                     {/* 4. Mathematics */}
@@ -3100,7 +3100,7 @@ export default function ACRPage() {
 
                   <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{p.target}</p>
 
-                  <div className="p-3 rounded-xl bg-black/50 border border-[#00F0FF]/30 space-y-1">
+                  <div className="p-3 rounded-xl bg-cyan-50/80 dark:bg-black/50 border border-cyan-200 dark:border-[#00F0FF]/30 space-y-1">
                     <span className="text-[10px] font-mono uppercase text-cyan-900 dark:text-[#00F0FF] font-bold">
                       Почему дороже и лучше:
                     </span>

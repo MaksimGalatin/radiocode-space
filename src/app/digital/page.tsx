@@ -3279,7 +3279,7 @@ export default function DigitalSOTAPage() {
                 {selectedTech === inn.num ? (
                   <div className="mt-4 pt-4 border-t border-[#1E293B] text-xs space-y-3.5 text-slate-700 dark:text-slate-300 animate-in fade-in duration-200">
                     {/* 1. Uniqueness */}
-                    <div className="bg-black/50 border border-[#00F0FF]/30 p-3 rounded-xl space-y-1">
+                    <div className="bg-cyan-50/80 dark:bg-black/50 border border-cyan-200 dark:border-[#00F0FF]/30 p-3 rounded-xl space-y-1">
                       <div className="text-cyan-900 dark:text-[#00F0FF] font-semibold flex items-center gap-1.5 text-xs">
                         <Sparkles className="w-3.5 h-3.5 shrink-0" />
                         {lang === 'ru' ? '1. Чем уникальна и какую пользу дает:' : lang === 'es' ? '1. Por qué es única y qué valor aporta:' : lang === 'zh' ? '1. 独特性与实际价值：' : '1. Uniqueness & Concrete Value:'}
@@ -3288,25 +3288,25 @@ export default function DigitalSOTAPage() {
                     </div>
 
                     {/* 2. Advantage over competitors */}
-                    <div className="bg-black/50 border border-amber-500/30 p-3 rounded-xl space-y-1">
+                    <div className="bg-amber-50/80 dark:bg-black/50 border border-amber-200 dark:border-amber-500/30 p-3 rounded-xl space-y-1">
                       <div className="text-amber-400 font-semibold flex items-center gap-1.5 text-xs">
                         <Zap className="w-3.5 h-3.5 shrink-0" />
                         {lang === 'ru' ? '2. Превосходство над конкурентами (FAISS / Pinecone / Chroma / LLM / FIFO):' : lang === 'es' ? '2. Ventaja sobre competidores (FAISS / Pinecone / Chroma / LLM):' : lang === 'zh' ? '2. 超越传统方案（FAISS / Pinecone / Chroma / LLM / FIFO）：' : '2. Advantage over Competitors (FAISS / Pinecone / Chroma / LLMs):'}
                       </div>
-                      <p className="text-amber-200/90 text-xs leading-relaxed">{inn.competitors}</p>
+                      <p className="text-amber-950 dark:text-amber-200/90 text-xs leading-relaxed">{inn.competitors}</p>
                     </div>
 
                     {/* 3. Limitations & Roadmap */}
-                    <div className="bg-black/50 border border-purple-500/30 p-3 rounded-xl space-y-1">
+                    <div className="bg-purple-50/80 dark:bg-black/50 border border-purple-200 dark:border-purple-500/30 p-3 rounded-xl space-y-1">
                       <div className="text-purple-400 font-semibold flex items-center gap-1.5 text-xs">
                         <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
                         {lang === 'ru' ? '3. Ограничения v1 и план развития в v2/v3:' : lang === 'es' ? '3. Limitaciones v1 y hoja de ruta v2/v3:' : lang === 'zh' ? '3. v1 局限性与 v2/v3 迭代路线图：' : '3. v1 Limitations & v2/v3 Evolution Roadmap:'}
                       </div>
-                      <p className="text-purple-200/90 text-xs leading-relaxed">{inn.limitations}</p>
+                      <p className="text-purple-950 dark:text-purple-200/90 text-xs leading-relaxed">{inn.limitations}</p>
                     </div>
 
                     {/* 4. Mathematics & Biology */}
-                    <div className="p-2.5 rounded-lg bg-black/60 border border-gray-800 text-[11px] font-mono text-slate-600 dark:text-slate-400">
+                    <div className="p-2.5 rounded-lg bg-slate-100 dark:bg-black/60 border border-slate-200 dark:border-gray-800 text-[11px] font-mono text-slate-600 dark:text-slate-400">
                       <strong className="text-slate-700 dark:text-slate-300">Формула:</strong> {inn.math}
                     </div>
 
@@ -3428,7 +3428,7 @@ export default function DigitalSOTAPage() {
                   </p>
 
                   {/* Why Upgrade Block */}
-                  <div className="p-3 rounded-xl bg-black/50 border border-[#00F0FF]/30 space-y-1">
+                  <div className="p-3 rounded-xl bg-cyan-50/80 dark:bg-black/50 border border-cyan-200 dark:border-[#00F0FF]/30 space-y-1">
                     <span className="text-[10px] font-mono uppercase text-cyan-900 dark:text-[#00F0FF] font-bold">
                       {t.lblWhyUpgrade}
                     </span>
@@ -3487,7 +3487,7 @@ export default function DigitalSOTAPage() {
         {/* ========================================================================= */}
         {/* CRYPTOGRAPHIC AUDIT & REGTECH COMPLIANCE */}
         {/* ========================================================================= */}
-        <section className="bg-gradient-to-br from-[#0B0F19] via-[#0E1528] to-[#0B0F19] border border-[#00F0FF]/40 rounded-3xl p-8 sm:p-10 shadow-2xl relative overflow-hidden">
+        <section className="bg-gradient-to-br from-white via-cyan-50/40 to-slate-50 dark:from-[#0B0F19] dark:via-[#0E1528] dark:to-[#0B0F19] border border-cyan-300/60 dark:border-[#00F0FF]/40 rounded-3xl p-8 sm:p-10 shadow-2xl relative overflow-hidden">
           <div className="flex flex-col md:flex-row items-start gap-8">
             <div className="w-20 h-20 rounded-2xl bg-[#00F0FF]/10 border border-[#00F0FF] flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(0,240,255,0.25)]">
               <Shield className="w-10 h-10 text-cyan-900 dark:text-[#00F0FF]" />
@@ -3508,15 +3508,15 @@ export default function DigitalSOTAPage() {
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                <div className="p-3 rounded-xl bg-black/50 border border-gray-800 text-xs font-mono">
+                <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-gray-800 text-xs font-mono">
                   <span className="text-slate-600 dark:text-slate-400 block text-[10px]">БИТКОИН-ШТАМП:</span>
                   <span className="text-cyan-900 dark:text-[#00F0FF] font-bold">{t.proofBtc}</span>
                 </div>
-                <div className="p-3 rounded-xl bg-black/50 border border-gray-800 text-xs font-mono">
+                <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-gray-800 text-xs font-mono">
                   <span className="text-slate-600 dark:text-slate-400 block text-[10px]">ХРАНИЛИЩЕ ARWEAVE:</span>
                   <span className="text-emerald-400 font-bold">{t.proofArweave}</span>
                 </div>
-                <div className="p-3 rounded-xl bg-black/50 border border-gray-800 text-xs font-mono">
+                <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-gray-800 text-xs font-mono">
                   <span className="text-slate-600 dark:text-slate-400 block text-[10px]">АУДИТ MLPERF:</span>
                   <span className="text-amber-400 font-bold">{t.proofMlcommons}</span>
                 </div>
