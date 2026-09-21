@@ -1,0 +1,33 @@
+{
+  "configuration": {
+    "n_records_synthetic": 10000,
+    "seed": 42,
+    "platform": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "engine_source": "написано с нуля 21.09.2026 (стандартный алгоритм дерева Меркла SHA-256, реализован буквально по описанию карточки); проверка на синтетических записях, реальный файл датасета найден и измерен отдельно (см. important_caveat) — числа в нём разошлись с заявленными на карточке"
+  },
+  "honest_measurement": {
+    "leaf_hashing_time_ms": 34.2008,
+    "tree_build_time_ms": 9.1531,
+    "merkle_root": "d2691abcd738136bbe60ecb35ee3bc3da510bb36f6c48a54fd4b2b58ca75194a",
+    "tree_depth": 15,
+    "all_inclusion_proofs_verified": true,
+    "n_inclusion_proofs_tested": 100,
+    "verify_latency_p50_us": 20.5,
+    "tamper_detection_works": true
+  },
+  "important_caveat": {
+    "claimed_dataset_file": "КЛАВИАТУРА_8_СТРАНИЦ_A.jsonl",
+    "claimed_record_count": 918043,
+    "claimed_unique_orgs": 78412,
+    "file_found_on_disk": true,
+    "file_path": "E:/Aifa/БАЗЫ ЛИДОВ+++++++++++++/США ВСЕ САЙТЫ - БОЛЬШОЕ ИССЛЕДОВАНИЕ/_КЛАВИАТУРА/КЛАВИАТУРА_8_СТРАНИЦ_A.jsonl",
+    "measured_record_count": 1425997,
+    "measured_unique_orgs": 108140,
+    "discrepancy_note": "Живой замер (wc -l и построчный разбор JSON, 21.09.2026) показал 1 425 997 записей и 108 140 уникальных организаций — БОЛЬШЕ заявленных на карточке 918 043 записей (в ~1.55 раза) и 78 412 организаций (в ~1.38 раза). Заявленное число устарело против живого файла; правка карточки — задача для Архитектора (не удаление или молчаливая замена, а прямое слово: обновить ли карточку и на какое именно число)."
+  },
+  "claimed_metric_check": {
+    "claimed": "100.0%",
+    "measured_meaning": "доля успешно верифицированных доказательств включения (Merkle inclusion proofs) на синтетическом наборе",
+    "measured_value_pct": 100.0
+  }
+}
