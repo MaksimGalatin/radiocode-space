@@ -2587,28 +2587,21 @@ export default function DigitalSOTAPage() {
   const [techFilter, setTechFilter] = useState<'all' | 'prod' | 'rnd' | 'spec'>('all');
   const [planFilter, setPlanFilter] = useState<'all' | 'individual' | 'team'>('all');
 
-  // Interactive filters for benchmarks
-  const [datasetSize, setDatasetSize] = useState<'100K' | '1M' | '10M'>('1M');
-  const [dimSize, setDimSize] = useState<'256d' | '512d' | '1024d' | '4096d'>('1024d');
-  const [hardware, setHardware] = useState<'CPU' | 'GPU' | 'TPU'>('CPU');
-
   const t = I18N[lang];
   const plans = CANONICAL_PLANS[lang];
   const innovations = ALL_30_INNOVATIONS[lang];
 
-  // Dynamic latency calculation based on filters
-  const hwLatencyMult = hardware === 'CPU' ? 1.0 : hardware === 'GPU' ? 0.32 : 0.20;
-  const hwThroughputMult = hardware === 'CPU' ? 1.0 : hardware === 'GPU' ? 5.5 : 12.5;
-
-  const multiplier = (datasetSize === '100K' ? 0.7 : datasetSize === '1M' ? 1.0 : 1.8) *
-                     (dimSize === '256d' ? 0.6 : dimSize === '512d' ? 0.8 : dimSize === '1024d' ? 1.0 : 1.5) *
-                     hwLatencyMult;
-  
-  const p50 = (0.80 * multiplier).toFixed(2);
-  const p75 = (1.20 * multiplier).toFixed(2);
-  const p90 = (1.85 * multiplier).toFixed(2);
-  const p95 = (2.50 * multiplier).toFixed(2);
-  const p99 = (4.10 * multiplier).toFixed(2);
+  // 21.09.2026: убран калькулятор вымышленных множителей (был расчёт от
+  // недоказанного числа 0.80 мс на CPU/GPU/TPU/100K/1M/10M/256d..4096d,
+  // где ни одна комбинация кроме CPU/50000/1024d никогда не измерялась) —
+  // тот же класс поломки уже исправлен на aifa.works и codeofdigitaleternity.com,
+  // перенесено сюда. Статичные значения из настоящего прогона, среднее по
+  // 3 прогонам, N=50 000, D=1024, Intel Core i7-14700, independent-протокол:
+  const p50 = '58.48';
+  const p75 = '59.38';
+  const p90 = '61.21';
+  const p95 = '62.98';
+  const p99 = '66.55';
 
   const handleCopyScript = () => {
     navigator.clipboard.writeText(BENCHMARK_SCRIPT);
@@ -2792,7 +2785,7 @@ export default function DigitalSOTAPage() {
           <div className="text-center space-y-3">
             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-cyan-900 dark:text-[#00F0FF]">
               <BarChart2 className="w-4 h-4" />
-              SOTA SCIENTIFIC RIGOR · MLPERF STANDARDS
+              REPRODUCIBLE SYSTEMS BENCHMARKING · PROTOCOLS A / B / ARENA
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               {t.benchSectionTitle}
@@ -2805,67 +2798,27 @@ export default function DigitalSOTAPage() {
             </div>
           </div>
 
-          {/* INTERACTIVE FILTERS */}
-          <div className="bg-white dark:bg-[#0B0F19] border border-[#1E293B] rounded-2xl p-6 shadow-xl flex flex-wrap items-center justify-between gap-6">
-            {/* Dataset Size */}
-            <div className="space-y-2">
+          {/* Fixed test parameters: 21.09.2026 — интерактивные фильтры
+              (Dataset Size / Dimensions / Hardware) убраны. Они меняли
+              множители, которые никогда не были откалиброваны настоящими
+              прогонами на других N/d/железе — только один набор параметров
+              ниже реально измерен. */}
+          <div className="bg-white dark:bg-[#0B0F19] border border-[#1E293B] rounded-2xl p-6 shadow-xl flex flex-wrap items-center gap-6">
+            <div className="space-y-1">
               <span className="text-xs font-mono text-slate-600 dark:text-slate-400 uppercase">{t.filterDataset}</span>
-              <div className="flex gap-2">
-                {(['100K', '1M', '10M'] as const).map(sz => (
-                  <button
-                    key={sz}
-                    onClick={() => setDatasetSize(sz)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all ${
-                      datasetSize === sz 
-                        ? 'bg-[#00F0FF] text-black shadow-[0_0_15px_rgba(0,240,255,0.4)]' 
-                        : 'bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
-                    }`}
-                  >
-                    {sz}
-                  </button>
-                ))}
-              </div>
+              <div className="text-sm font-mono font-semibold text-cyan-900 dark:text-[#00F0FF]">50,000 vectors</div>
             </div>
-
-            {/* Dimensions */}
-            <div className="space-y-2">
+            <div className="space-y-1">
               <span className="text-xs font-mono text-slate-600 dark:text-slate-400 uppercase">{t.filterDim}</span>
-              <div className="flex gap-2">
-                {(['256d', '512d', '1024d', '4096d'] as const).map(dm => (
-                  <button
-                    key={dm}
-                    onClick={() => setDimSize(dm)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all ${
-                      dimSize === dm 
-                        ? 'bg-[#00F0FF] text-black shadow-[0_0_15px_rgba(0,240,255,0.4)]' 
-                        : 'bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
-                    }`}
-                  >
-                    {dm}
-                  </button>
-                ))}
-              </div>
+              <div className="text-sm font-mono font-semibold text-cyan-900 dark:text-[#00F0FF]">1024d</div>
             </div>
-
-            {/* Hardware */}
-            <div className="space-y-2">
+            <div className="space-y-1">
               <span className="text-xs font-mono text-slate-600 dark:text-slate-400 uppercase">{t.filterHardware}</span>
-              <div className="flex gap-2">
-                {(['CPU', 'GPU', 'TPU'] as const).map(hw => (
-                  <button
-                    key={hw}
-                    onClick={() => setHardware(hw)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all ${
-                      hardware === hw 
-                        ? 'bg-[#00F0FF] text-black shadow-[0_0_15px_rgba(0,240,255,0.4)]' 
-                        : 'bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
-                    }`}
-                  >
-                    {hw === 'CPU' ? 'Standard CPU' : hw}
-                  </button>
-                ))}
-              </div>
+              <div className="text-sm font-mono font-semibold text-cyan-900 dark:text-[#00F0FF]">Standard CPU (i7-14700, only tested platform)</div>
             </div>
+            <span className="text-[11px] font-mono text-slate-500 dark:text-slate-500">
+              {lang === 'ru' ? 'Единственная реально измеренная конфигурация; сравнение на других размерах не проводилось' : lang === 'es' ? 'Única configuración realmente medida; no se ha probado en otros tamaños' : lang === 'zh' ? '唯一实测配置；尚未在其他规模下测试' : 'Only configuration actually measured; not yet tested at other sizes'}
+            </span>
           </div>
 
                     {/* TWO-COLUMN CHARTS: LATENCY DISTRIBUTION + THROUGHPUT */}
@@ -2909,14 +2862,10 @@ export default function DigitalSOTAPage() {
 
               <div className="pt-3 border-t border-slate-200 dark:border-gray-800/80 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-slate-600 dark:text-slate-400">
                 <span>
-                  {hardware === 'CPU' && (lang === 'ru' ? 'Платформа: AMD EPYC 9654 (96 ядер, x86_64)' : lang === 'es' ? 'Plataforma: AMD EPYC 9654 (96 núcleos, x86_64)' : lang === 'zh' ? '平台：AMD EPYC 9654 (96核, x86_64)' : 'Platform: AMD EPYC 9654 (96 Cores, x86_64)')}
-                  {hardware === 'GPU' && (lang === 'ru' ? 'Платформа: NVIDIA H100 SXM5 (80GB HBM3)' : lang === 'es' ? 'Plataforma: NVIDIA H100 SXM5 (80GB HBM3)' : lang === 'zh' ? '平台：NVIDIA H100 SXM5 (80GB HBM3)' : 'Platform: NVIDIA H100 SXM5 (80GB HBM3)')}
-                  {hardware === 'TPU' && (lang === 'ru' ? 'Платформа: Google Cloud TPU v5e (Pod 256)' : lang === 'es' ? 'Plataforma: Google Cloud TPU v5e (Pod 256)' : lang === 'zh' ? '平台：Google Cloud TPU v5e (Pod 256)' : 'Platform: Google Cloud TPU v5e (Pod 256)')}
+                  {lang === 'ru' ? 'Платформа: Intel Core i7-14700 (20 физ. ядер: 8P+12E, 28 потоков)' : lang === 'es' ? 'Plataforma: Intel Core i7-14700 (20 núcleos físicos: 8P+12E, 28 hilos)' : lang === 'zh' ? '平台：Intel Core i7-14700（20 个物理核心：8P+12E，28 线程）' : 'Platform: Intel Core i7-14700 (20 Physical Cores: 8P+12E, 28 Threads)'}
                 </span>
                 <span className="text-cyan-900 dark:text-[#00F0FF]">
-                  {hardware === 'CPU' && 'AVX-512 / POPCNT SIMD'}
-                  {hardware === 'GPU' && 'CUDA 12.4 / Tensor Cores'}
-                  {hardware === 'TPU' && 'XLA / Matrix Multiply Units'}
+                  AVX2 / POPCNT SIMD
                 </span>
               </div>
             </div>
@@ -2933,37 +2882,22 @@ export default function DigitalSOTAPage() {
               </div>
 
               <div className="space-y-4 pt-2">
-                {[
-                  { threads: lang === 'ru' ? '1 поток (Single-thread)' : lang === 'es' ? '1 hilo (Single-thread)' : lang === 'zh' ? '1 线程 (单核基准)' : '1 thread (Single-thread)', baseQps: 1250 },
-                  { threads: lang === 'ru' ? '4 потока (4 cores)' : lang === 'es' ? '4 hilos (4 cores)' : lang === 'zh' ? '4 线程 (4核并发)' : '4 threads (4 cores)', baseQps: 4800 },
-                  { threads: lang === 'ru' ? '8 потоков (8 cores)' : lang === 'es' ? '8 hilos (8 cores)' : lang === 'zh' ? '8 线程 (8核并发)' : '8 threads (8 cores)', baseQps: 8900 },
-                  { threads: lang === 'ru' ? '16 потоков (16 cores)' : lang === 'es' ? '16 hilos (16 cores)' : lang === 'zh' ? '16 线程 (16核并发)' : '16 threads (16 cores)', baseQps: 15200 },
-                  { threads: lang === 'ru' ? '32 потока (32 cores)' : lang === 'es' ? '32 hilos (32 cores)' : lang === 'zh' ? '32 线程 (32核并发)' : '32 threads (32 cores)', baseQps: 24500 },
-                  { threads: lang === 'ru' ? '64 потока (Cluster node)' : lang === 'es' ? '64 hilos (Cluster node)' : lang === 'zh' ? '64 线程 (分布式集群节点)' : '64 threads (Cluster node)', baseQps: 32100 }
-                ].map((row, idx) => {
-                  const currentQps = Math.round(row.baseQps * hwThroughputMult);
-                  const formattedQps = currentQps.toLocaleString('en-US') + ' QPS';
-                  const pct = Math.min(100, Math.max(6, Math.round(Math.pow(currentQps / 420000, 0.65) * 100)));
-                  return (
-                    <div key={idx} className="space-y-1.5">
-                      <div className="flex justify-between text-xs font-mono">
-                        <span className="text-slate-700 dark:text-slate-300">{row.threads}</span>
-                        <span className="text-cyan-900 dark:text-[#00F0FF] font-bold">{formattedQps}</span>
-                      </div>
-                      <div className="h-3 bg-slate-100 dark:bg-black/60 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-gray-800">
-                        <div 
-                          className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.3)] transition-all duration-500"
-                          style={{ width: `${pct}%` }}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+                <div className="space-y-1.5">
+                  <div className="flex justify-between text-xs font-mono">
+                    <span className="text-slate-700 dark:text-slate-300">{lang === 'ru' ? '1 поток (единственный измеренный режим)' : lang === 'es' ? '1 hilo (único modo medido)' : lang === 'zh' ? '单线程（唯一已实测模式）' : '1 thread (only measured mode)'}</span>
+                    <span className="text-cyan-900 dark:text-[#00F0FF] font-bold">17 QPS</span>
+                  </div>
+                  <div className="h-3 bg-slate-100 dark:bg-black/60 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-gray-800">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.3)]"
+                      style={{ width: '17%' }}
+                    />
+                  </div>
+                </div>
               </div>
 
-              <div className="pt-3 border-t border-slate-200 dark:border-gray-800/80 flex items-center justify-between text-xs font-mono text-slate-600 dark:text-slate-400">
-                <span>{lang === 'ru' ? 'Линейность масштабирования: 94.2%' : lang === 'es' ? 'Linealidad de escalado: 94.2%' : lang === 'zh' ? '线性扩展比：94.2%' : 'Scaling Linearity: 94.2%'}</span>
-                <span className="text-emerald-400">Zero Locks (Lock-free LSH)</span>
+              <div className="pt-3 border-t border-slate-200 dark:border-gray-800/80 text-xs font-mono text-amber-600 dark:text-amber-400">
+                {lang === 'ru' ? '21.09.2026: график многопоточного масштабирования (4/8/16/32/64 потока) убран — эти цифры и "линейность 94.2%" никогда не измерялись, скрипт бенчмарка однопоточный.' : lang === 'es' ? '21-09-2026: se eliminó el gráfico de escalado multi-hilo (4/8/16/32/64) — esas cifras y la "linealidad 94.2%" nunca se midieron; el script es de un solo hilo.' : lang === 'zh' ? '2026-09-21：多线程扩展图（4/8/16/32/64 线程）已移除——这些数字和"94.2% 线性度"从未被实测，基准脚本为单线程。' : '2026-09-21: the multi-thread scaling chart (4/8/16/32/64 threads) was removed — those numbers and the "94.2% linearity" figure were never measured; the benchmark script is single-threaded.'}
               </div>
             </div>
           </div>
@@ -2981,7 +2915,7 @@ export default function DigitalSOTAPage() {
                 </p>
               </div>
               <div className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-600 dark:text-slate-400 bg-black/40 px-3 py-1.5 rounded-lg border border-gray-800">
-                <span>Тест: MLPerf Inference 2026</span>
+                <span>Тест: AIfa BioBench v3.0 · Inspired by systems benchmarking and ANN-Benchmarks (Not an official MLPerf submission)</span>
               </div>
             </div>
 
@@ -3001,56 +2935,37 @@ export default function DigitalSOTAPage() {
                   <tr className="bg-[#00F0FF]/10 border-l-4 border-l-[#00F0FF] font-semibold text-slate-900 dark:text-white">
                     <td className="py-4 px-4 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
-                      <strong>AIfa Bionic Connectome (Наш)</strong>
+                      <strong>AIfa FlyHash Bionic (Наш)</strong>
                     </td>
-                    <td className="py-4 px-4 text-center font-mono font-bold text-cyan-900 dark:text-[#00F0FF]">0.80 мс</td>
-                    <td className="py-4 px-4 text-center font-mono text-emerald-300">4.2 GB</td>
-                    <td className="py-4 px-4 text-center font-mono text-emerald-300">98.7%</td>
-                    <td className="py-4 px-4 text-center font-mono font-bold text-cyan-900 dark:text-[#00F0FF]">0.003 J</td>
+                    <td className="py-4 px-4 text-center font-mono font-bold text-cyan-900 dark:text-[#00F0FF]">46.5 мс</td>
+                    <td className="py-4 px-4 text-center font-mono text-emerald-300">215.5 MB</td>
+                    <td className="py-4 px-4 text-center font-mono text-amber-500">39.55%</td>
+                    <td className="py-4 px-4 text-center font-mono text-slate-500">не измерено</td>
                     <td className="py-4 px-4 text-center font-mono text-emerald-400">❌ Нет (0 GPU)</td>
                   </tr>
                   <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
-                    <td className="py-3.5 px-4">FAISS IVF (Facebook AI)</td>
-                    <td className="py-3.5 px-4 text-center font-mono">12.0 мс</td>
-                    <td className="py-3.5 px-4 text-center font-mono">8.5 GB</td>
-                    <td className="py-3.5 px-4 text-center font-mono">99.1%</td>
-                    <td className="py-3.5 px-4 text-center font-mono">0.150 J</td>
-                    <td className="py-3.5 px-4 text-center font-mono text-slate-600 dark:text-slate-400">Опционально</td>
-                  </tr>
-                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
-                    <td className="py-3.5 px-4">FAISS GPU (Nvidia H100)</td>
-                    <td className="py-3.5 px-4 text-center font-mono">2.30 мс</td>
-                    <td className="py-3.5 px-4 text-center font-mono">6.1 GB VRAM</td>
-                    <td className="py-3.5 px-4 text-center font-mono">99.3%</td>
-                    <td className="py-3.5 px-4 text-center font-mono">0.420 J</td>
-                    <td className="py-3.5 px-4 text-center font-mono text-amber-400">✅ Обязательно (H100)</td>
-                  </tr>
-                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
-                    <td className="py-3.5 px-4">HNSW (Hierarchical Navigable Small World)</td>
-                    <td className="py-3.5 px-4 text-center font-mono">5.00 мс</td>
-                    <td className="py-3.5 px-4 text-center font-mono">6.1 GB</td>
-                    <td className="py-3.5 px-4 text-center font-mono">98.9%</td>
-                    <td className="py-3.5 px-4 text-center font-mono">0.080 J</td>
+                    <td className="py-3.5 px-4">FAISS IndexFlatL2 (exact brute-force)</td>
+                    <td className="py-3.5 px-4 text-center font-mono">9.7 мс</td>
+                    <td className="py-3.5 px-4 text-center font-mono">195.3 MB</td>
+                    <td className="py-3.5 px-4 text-center font-mono text-emerald-400">100.00%</td>
+                    <td className="py-3.5 px-4 text-center font-mono text-slate-500">не измерено</td>
                     <td className="py-3.5 px-4 text-center font-mono text-slate-600 dark:text-slate-400">❌ Нет</td>
-                  </tr>
-                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
-                    <td className="py-3.5 px-4">Annoy (Spotify)</td>
-                    <td className="py-3.5 px-4 text-center font-mono">8.00 мс</td>
-                    <td className="py-3.5 px-4 text-center font-mono">5.3 GB</td>
-                    <td className="py-3.5 px-4 text-center font-mono">97.5%</td>
-                    <td className="py-3.5 px-4 text-center font-mono">0.110 J</td>
-                    <td className="py-3.5 px-4 text-center font-mono text-slate-600 dark:text-slate-400">❌ Нет</td>
-                  </tr>
-                  <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
-                    <td className="py-3.5 px-4">ScaNN (Google Research)</td>
-                    <td className="py-3.5 px-4 text-center font-mono">3.50 мс</td>
-                    <td className="py-3.5 px-4 text-center font-mono">5.8 GB</td>
-                    <td className="py-3.5 px-4 text-center font-mono">99.2%</td>
-                    <td className="py-3.5 px-4 text-center font-mono">0.050 J</td>
-                    <td className="py-3.5 px-4 text-center font-mono text-slate-600 dark:text-slate-400">Опционально</td>
                   </tr>
                 </tbody>
               </table>
+              <p className="text-[11px] font-mono text-amber-600 dark:text-amber-400 mt-2 font-semibold">
+                21.09.2026: честный итог этой дуэли — на N=50 000 обычный точный поиск FAISS
+                (без индекса, brute-force) оказался в 4.6 раза БЫСТРЕЕ нашего FlyHash-поиска и
+                даёт 100% recall против наших 39.55%. Раньше здесь стояла таблица с HNSW, Annoy,
+                ScaNN, FAISS IVF и FAISS GPU — эти строки убраны, потому что мы их не запускали
+                на своём железе и цифры были не измерены. Ниша FlyHash — не скорость точного
+                поиска, а компактность индекса и работа без GPU; сравнение по этим осям ещё не
+                проведено честно и будет добавлено отдельно.
+              </p>
+              <p className="text-[11px] font-mono text-slate-400 italic mt-2">
+                * Оба замера — на Intel Core i7-14700, N=50 000, D=1024, independent-протокол
+                (запросы не являются копиями индексируемых векторов), pool=250.
+              </p>
             </div>
           </div>
 
@@ -3071,23 +2986,23 @@ export default function DigitalSOTAPage() {
               <div className="grid grid-cols-2 gap-4 pt-2">
                 <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
                   <span className="text-xs font-mono text-slate-600 dark:text-slate-400">Recall@10</span>
-                  <div className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">98.7%</div>
-                  <span className="text-[11px] text-gray-500">Цель: &gt; 95%</span>
+                  <div className="text-2xl sm:text-3xl font-black text-amber-500 font-mono">39.55%</div>
+                  <span className="text-[11px] text-gray-500 dark:text-gray-400">21.09.2026, N=50000, pool=250</span>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
                   <span className="text-xs font-mono text-slate-600 dark:text-slate-400">Precision@10</span>
-                  <div className="text-2xl sm:text-3xl font-black text-cyan-900 dark:text-[#00F0FF] font-mono">94.2%</div>
-                  <span className="text-[11px] text-gray-500">Цель: &gt; 90%</span>
+                  <div className="text-2xl sm:text-3xl font-black text-amber-500 font-mono">39.55%</div>
+                  <span className="text-[11px] text-gray-500 dark:text-gray-400">21.09.2026, N=50000, pool=250</span>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
                   <span className="text-xs font-mono text-slate-600 dark:text-slate-400">NDCG@10</span>
-                  <div className="text-2xl sm:text-3xl font-black text-cyan-900 dark:text-cyan-300 font-mono">0.912</div>
-                  <span className="text-[11px] text-gray-500">Цель: &gt; 0.85</span>
+                  <div className="text-2xl sm:text-3xl font-black text-cyan-900 dark:text-cyan-300 font-mono">0.545</div>
+                  <span className="text-[11px] text-gray-500 dark:text-gray-400">21.09.2026, N=50000, pool=250</span>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
                   <span className="text-xs font-mono text-slate-600 dark:text-slate-400">mAP</span>
-                  <div className="text-2xl sm:text-3xl font-black text-purple-400 font-mono">0.884</div>
-                  <span className="text-[11px] text-gray-500">Цель: &gt; 0.80</span>
+                  <div className="text-2xl sm:text-3xl font-black text-purple-400 font-mono">0.396</div>
+                  <span className="text-[11px] text-gray-500 dark:text-gray-400">21.09.2026, N=50000, pool=250</span>
                 </div>
               </div>
             </div>
