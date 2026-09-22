@@ -37,7 +37,18 @@ export async function POST(req: NextRequest) {
     const gainedToday = dRes.rows[0]?.gained ?? 0;
     const willAward = gainedToday < DAILY_CAP;
     let xp = 0, leveledUp = false, galatin: number | null = null;
-    let cappedGalatin = false;
+    // Сколько GALATIN действительно выдано за этот ход и упёрлись ли в потолок.
+    //
+    // РАЗДЕЛ 26 (класс, а не случай): здесь стояло `galatinBonus: leveledUp &&
+    // galatin !== null ? LEVELUP_BONUS : 0` — фиксированная награда за факт
+    // левел-апа, а не сумма реально зачисленного. При перескоке через
+    // НЕСКОЛЬКО уровней сразу, если суточный потолок обрывал цикл на втором
+    // уровне (galatin к тому моменту уже не null от первого), кабинет
+    // показывал полный LEVELUP_BONUS, хотя реально дошла только часть. На
+    // central-сайте это уже было исправлено суммированием `выдано += разрешено`
+    // (найдено сплошным перебором 22.09.2026: 3 из 4 сайтов несли этот баг,
+    // central был единственным исключением).
+    let выдано = 0, cappedGalatin = false;
     if (willAward) {
       await pool.query(`UPDATE xp_daily SET gained = gained + $2 WHERE email=$1 AND day=CURRENT_DATE`, [email, PER_TURN]);
       const uRes = await pool.query(
@@ -58,6 +69,7 @@ export async function POST(req: NextRequest) {
           const разрешено = await отложитьGalatin(pool, email, LEVELUP_BONUS);
           if (разрешено <= 0) { cappedGalatin = true; break; }
           galatin = await creditGalatin(pool, email, разрешено, 'levelup', `L${L}`);
+          выдано += разрешено;
         }
       }
       // quest progress: chat turns (daily + weekly)
@@ -71,8 +83,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       ok: true, xp, awarded: willAward ? PER_TURN : 0,
       level: levelInfo(xp).level, inLevel: levelInfo(xp).inLevel, need: levelInfo(xp).need, leveledUp,
-      galatinBonus: leveledUp && galatin !== null ? LEVELUP_BONUS : 0,
+      // Показываем то, что ВЫДАНО, а не то, что полагалось: иначе кабинет
+      // рисовал бы награду, которой на балансе нет.
+      galatinBonus: выдано,
       cappedToday: !willAward,
+      cappedGalatin,
     });
   } catch (e) { console.error('[xp/post]', e); return NextResponse.json({ error: 'db_error' }, { status: 500 }); }
 }
