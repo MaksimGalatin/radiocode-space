@@ -1,4 +1,5 @@
 // Knowledge Base extracted from CODE Eternal documents
+// Канон: правки сюда, зеркала на code-eternal и radiocode-space синхронизируются автоматически post-commit хуком (22.09.2026).
 // This serves as the context for AIfa's AI assistant
 
 export const KNOWLEDGE_BASE = {
