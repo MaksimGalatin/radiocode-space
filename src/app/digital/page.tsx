@@ -629,7 +629,7 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "math": "Вечная криптографическая фиксация слепка коннектома FlyWire v783 как эталона цифрового бессмертия",
       "gain": "Криптографический протокол неизменяемого версионирования и нотариального заверения полного графа взрослого мозга Drosophila melanogaster (FlyWire v783: 139,255 нейронов, 3,869,878 синаптических ребер). Построен на базе дерева Меркла (Merkle Tree SHA-256), обеспечивает юридическую и академическую доказанность целостности данных при патентных спорах, судебных экспертизах и коммерческом лицензировании био-архитектур.",
       "deploy": "bench/proof_of_connectome.py (Apache 2.0), codeofdigitaleternity.com, Arweave, Solana",
-      "uniqueness": "Криптографический хеш SHA-256 и Merkle-дерево синаптических весов коннектома FlyWire v783. 21.09.2026: заявление о заверении в блокчейне Bitcoin (OpenTimestamps Block 861420) и Arweave — внешний сетевой факт, не проверяемый локальным скриптом.",
+      "uniqueness": "Криптографический хеш SHA-256 и Merkle-дерево синаптических весов коннектома FlyWire v783. 21.09.2026: заявление о заверении в блокчейне Bitcoin (OpenTimestamps Block 967238) и Arweave — внешний сетевой факт, не проверяемый локальным скриптом.",
       "competitors": "Коммерческие AI-сервисы (OpenAI, Pinecone) скрытно меняют алгоритмы и веса без ведома клиента. Proof of Connectome дает математическую гарантию неизменности ядра — подтверждено прогоном: обнаружение подделки листа 100% (20/20).",
       "limitations": "Проверка блокчейн-квитанции требует внешнего сетевого запроса к ноде Bitcoin (1-2 сек). В v2: встроенный локальный zk-SNARK верификатор < 5 мс.",
       "benchmarksLink": "/digital#benchmarks",
@@ -1021,7 +1021,7 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "math": "Вечная криптографическая фиксация слепка коннектома FlyWire v783 как эталона цифрового бессмертия",
       "gain": "Криптографический протокол неизменяемого версионирования и нотариального заверения полного графа взрослого мозга Drosophila melanogaster (FlyWire v783: 139,255 нейронов, 3,869,878 синаптических ребер). Построен на базе дерева Меркла (Merkle Tree SHA-256), обеспечивает юридическую и академическую доказанность целостности данных при патентных спорах, судебных экспертизах и коммерческом лицензировании био-архитектур.",
       "deploy": "Deployed in AIfa Core and ecosystem sites.",
-      "uniqueness": "SHA-256 Merkle root of the FlyWire v783 synaptic connectome matrix immutably stamped onto the Bitcoin blockchain (OpenTimestamps Block 861420) and Arweave.",
+      "uniqueness": "SHA-256 Merkle root of the FlyWire v783 synaptic connectome matrix immutably stamped onto the Bitcoin blockchain (OpenTimestamps Block 967238) and Arweave.",
       "competitors": "Proprietary AI vendors (OpenAI, Pinecone) silently patch algorithms without user consent. Proof of Connectome delivers cryptographic immutability — verified: 100% tamper detection (20/20).",
       "limitations": "On-chain proof verification requires network RPC call to Bitcoin/Arweave node (1-2s). v2 roadmap: in-browser zk-SNARK light verifier running in < 5 ms.",
       "benchmarksLink": "/digital#benchmarks",
@@ -1413,7 +1413,7 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "math": "Вечная криптографическая фиксация слепка коннектома FlyWire v783 как эталона цифрового бессмертия",
       "gain": "Криптографический протокол неизменяемого версионирования и нотариального заверения полного графа взрослого мозга Drosophila melanogaster (FlyWire v783: 139,255 нейронов, 3,869,878 синаптических ребер). Построен на базе дерева Меркла (Merkle Tree SHA-256), обеспечивает юридическую и академическую доказанность целостности данных при патентных спорах, судебных экспертизах и коммерческом лицензировании био-архитектур.",
       "deploy": "Deployed in AIfa Core and ecosystem sites.",
-      "uniqueness": "Raíz Merkle SHA-256 de la matriz sináptica FlyWire v783 certificada en Bitcoin (OpenTimestamps Bloque 861420) y Arweave.",
+      "uniqueness": "Raíz Merkle SHA-256 de la matriz sináptica FlyWire v783 certificada en Bitcoin (OpenTimestamps Bloque 967238) y Arweave.",
       "competitors": "Los proveedores propietarios modifican modelos en secreto. Proof of Connectome garantiza matemáticamente la inmutabilidad — verificado: 100% de detección de manipulación (20/20).",
       "limitations": "La verificación requiere consulta a nodo Bitcoin (1-2s). En v2: verificador local zk-SNARK en < 5 ms.",
       "benchmarksLink": "/digital#benchmarks",
@@ -1805,7 +1805,7 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "math": "Вечная криптографическая фиксация слепка коннектома FlyWire v783 как эталона цифрового бессмертия",
       "gain": "Криптографический протокол неизменяемого версионирования и нотариального заверения полного графа взрослого мозга Drosophila melanogaster (FlyWire v783: 139,255 нейронов, 3,869,878 синаптических ребер). Построен на базе дерева Меркла (Merkle Tree SHA-256), обеспечивает юридическую и академическую доказанность целостности данных при патентных спорах, судебных экспертизах и коммерческом лицензировании био-архитектур.",
       "deploy": "Deployed in AIfa Core and ecosystem sites.",
-      "uniqueness": "FlyWire v783 完整突触连接组矩阵的 SHA-256 Merkle 根哈希，已永久锚定于比特币区块链（OpenTimestamps 第 861420 区块）与 Arweave 永久存储。",
+      "uniqueness": "FlyWire v783 完整突触连接组矩阵的 SHA-256 Merkle 根哈希，已永久锚定于比特币区块链（OpenTimestamps 第 967238 区块）与 Arweave 永久存储。",
       "competitors": "商业闭源大模型与云端向量库经常静默篡改算法。Proof of Connectome 提供了全行业首个抗篡改的数学级不可变防伪存证——实测：篡改检测率 100%（20/20）。",
       "limitations": "链上验真目前需查询外部比特币/Arweave 节点（约 1-2 秒）。v2 规划：集成毫秒级 (< 5 ms) 纯客户端 zk-SNARK 离线轻验证器。",
       "benchmarksLink": "/digital#benchmarks",
@@ -2293,7 +2293,7 @@ const I18N = {
     // Proof
     proofTitle: "Криптографическая верификация и независимый аудит",
     proofSubtitle: "Хэш синаптической матрицы коннектома зафиксирован в блокчейне Bitcoin и Arweave",
-    proofBtc: "Bitcoin OTS Block 861420",
+    proofBtc: "Bitcoin OTS Block 967238",
     proofArweave: "Arweave TX ID: 7QWz...b9x1",
     proofMlcommons: "MLCommons / MLPerf дорожная карта аудита"
   },
@@ -2360,7 +2360,7 @@ const I18N = {
     
     proofTitle: "Cryptographic Verification & Independent Audit",
     proofSubtitle: "Connectome synaptic matrix hash immutably anchored to the Bitcoin blockchain and Arweave",
-    proofBtc: "Bitcoin OTS Block 861420",
+    proofBtc: "Bitcoin OTS Block 967238",
     proofArweave: "Arweave TX ID: 7QWz...b9x1",
     proofMlcommons: "MLCommons / MLPerf Audit Roadmap"
   },
@@ -2427,7 +2427,7 @@ const I18N = {
     
     proofTitle: "Verificación Criptográfica y Auditoría Independiente",
     proofSubtitle: "Raíz Merkle del conectoma certificada en la cadena de bloques Bitcoin y Arweave",
-    proofBtc: "Bitcoin OTS Bloque 861420",
+    proofBtc: "Bitcoin OTS Bloque 967238",
     proofArweave: "Arweave TX ID: 7QWz...b9x1",
     proofMlcommons: "Hoja de Ruta de Auditoría MLCommons"
   },
@@ -2494,7 +2494,7 @@ const I18N = {
     
     proofTitle: "密码学链上不可变验真与独立审计",
     proofSubtitle: "连接组突触矩阵根哈希已永久锚定于比特币区块链与 Arweave 永久存储",
-    proofBtc: "比特币 OTS 第 861420 区块存证",
+    proofBtc: "比特币 OTS 第 967238 区块存证",
     proofArweave: "Arweave 交易哈希：7QWz...b9x1",
     proofMlcommons: "MLCommons / MLPerf 国际认证路线图"
   }
