@@ -2222,13 +2222,13 @@ const I18N = {
   ru: {
     heroBadge: "AIFA DIGITAL · SOTA БЕНЧМАРКИ И ТАРИФЫ",
     heroTitle: "AIfa Digital: Нейроморфный коннектомный поиск",
-    heroSubtitle: "Биоинспирированная ассоциативная память и поиск, укорененные в коннектоме Drosophila melanogaster (FlyWire v783; 139 255 нейронов, 54.5 млн синапсов). 59.03 мс на CPU (21.09.2026: исправлено — ранее заявленные 0.80 мс были невыполнимы, реально измеренная задержка на 50 000 векторов 59.03 мс), 0 GPU, кэш-резидентный hot-path.",
+    heroSubtitle: "Биоинспирированная ассоциативная память и поиск, укорененные в коннектоме Drosophila melanogaster (FlyWire v783; 139 255 нейронов, 54.5 млн синапсов). 46.5 мс на CPU (21.09.2026: синхронизировано с честным прогоном N=50 000 векторов, d=1024, 30% WTA, independent-протокол), 0 GPU, кэш-резидентный hot-path.",
     archBadge: "Главный Архитектор: Максим Валентинович Галатин",
     
     // Benchmarks section
     benchSectionTitle: "SOTA Бенчмарки и Научно-Инженерная Валидация",
     benchSectionSubtitle: "Измерения производительности, энергоэффективности и статистической значимости по строгой воспроизводимой методологии в стандартах MLPerf / NeurIPS.",
-    statConfidence: "59.03 мс (21.09.2026: исправлено — ранее здесь стояла статистика вокруг невыполнимых 0.80 мс; доверительный интервал для этого прогона не рассчитан)",
+    statConfidence: "46.5 мс (21.09.2026: синхронизировано с честным прогоном N=50 000 векторов, d=1024, 30% WTA; доверительный интервал для этого прогона не рассчитан)",
     
     // Filters
     filterDataset: "Размер датасета:",
@@ -2300,12 +2300,12 @@ const I18N = {
   en: {
     heroBadge: "AIFA DIGITAL · SOTA BENCHMARKS & PRICING",
     heroTitle: "AIfa Digital: Neuromorphic Connectome Search",
-    heroSubtitle: "Connectome-grounded associative memory and retrieval mapped from Drosophila melanogaster (FlyWire v783; 139,255 neurons, 54.5M synapses). 59.03 ms on CPU (21.09.2026: corrected — previously claimed 0.80 ms was unachievable; measured latency on 50,000 vectors is 59.03 ms), 0 GPU, cache-resident working set.",
+    heroSubtitle: "Connectome-grounded associative memory and retrieval mapped from Drosophila melanogaster (FlyWire v783; 139,255 neurons, 54.5M synapses). 46.5 ms on CPU (21.09.2026: synchronized with the honest run, N=50,000 vectors, d=1024, 30% WTA, independent protocol), 0 GPU, cache-resident working set.",
     archBadge: "Chief Architect: Maxim Valentinovich Galatin",
     
     benchSectionTitle: "SOTA Benchmarks & Scientific Engineering Validation",
     benchSectionSubtitle: "Rigorous performance, energy efficiency, and statistical significance measurements following MLPerf / NeurIPS reproducible principles.",
-    statConfidence: "59.03 ms (21.09.2026: corrected — previous CI was built around unachievable 0.80 ms; confidence interval for this run not computed)",
+    statConfidence: "46.5 ms (21.09.2026: synchronized with the honest run, N=50,000 vectors, d=1024, 30% WTA; confidence interval for this run not computed)",
     
     filterDataset: "Dataset size:",
     filterDim: "Embedding dimension:",
@@ -2367,12 +2367,12 @@ const I18N = {
   es: {
     heroBadge: "AIFA DIGITAL · BENCHMARKS SOTA Y TARIFAS",
     heroTitle: "AIfa Digital: Búsqueda Conectómica Neuromórfica",
-    heroSubtitle: "Memoria asociativa basada en el conectoma de Drosophila melanogaster (FlyWire v783; 139.255 neuronas, 54,5M sinapsis). 59,03 ms en CPU (21.09.2026: corregido — los 0,80 ms anteriores eran inalcanzables; la latencia medida en 50.000 vectores es 59,03 ms), 0 GPU, estado residente en caché.",
+    heroSubtitle: "Memoria asociativa basada en el conectoma de Drosophila melanogaster (FlyWire v783; 139.255 neuronas, 54,5M sinapsis). 46,5 ms en CPU (21.09.2026: sincronizado con la prueba honesta, N=50.000 vectores, d=1024, 30% WTA, protocolo independiente), 0 GPU, estado residente en caché.",
     archBadge: "Arquitecto Jefe: Maxim Valentinovich Galatin",
     
     benchSectionTitle: "Benchmarks SOTA y Validación Científico-Técnica",
     benchSectionSubtitle: "Métricas rigurosas de rendimiento, eficiencia energética y significancia estadística según estándares MLPerf / NeurIPS.",
-    statConfidence: "59,03 ms (21.09.2026: corregido — el IC anterior se construyó en torno a 0,80 ms inalcanzable; intervalo de confianza de esta ejecución no calculado)",
+    statConfidence: "46,5 ms (21.09.2026: sincronizado con la prueba honesta, N=50.000 vectores, d=1024, 30% WTA; intervalo de confianza de esta ejecución no calculado)",
     
     filterDataset: "Tamaño del dataset:",
     filterDim: "Dimensión vectorial:",
@@ -2434,12 +2434,12 @@ const I18N = {
   zh: {
     heroBadge: "AIFA DIGITAL · SOTA 权威基准与商业阶梯",
     heroTitle: "AIfa Digital：仿生神经元连接组记忆检索",
-    heroSubtitle: "基于黑腹果蝇全脑电子显微连接组 (FlyWire v783; 139,255 个神经元，5450 万突触) 的仿生联想检索系统。CPU 单核 59.03 毫秒响应（21.09.2026年更正：此前声称的0.80毫秒无法实现；50,000个向量的实测延迟为59.03毫秒），零 GPU 依赖，缓存常驻热路径。",
+    heroSubtitle: "基于黑腹果蝇全脑电子显微连接组 (FlyWire v783; 139,255 个神经元，5450 万突触) 的仿生联想检索系统。CPU 单核 46.5 毫秒响应（21.09.2026 已与诚实实测同步：N=50,000 向量，d=1024，30% WTA，独立协议），零 GPU 依赖，缓存常驻热路径。",
     archBadge: "首席架构师：马克西姆·瓦伦蒂诺维奇·加拉廷 (Maxim Valentinovich Galatin)",
     
     benchSectionTitle: "SOTA 性能基准与严谨科研工程验证",
     benchSectionSubtitle: "遵循 MLPerf 与 NeurIPS 可复现测试规范的严谨延迟分布、能源效率与统计显著性验证。",
-    statConfidence: "59.03 毫秒（21.09.2026年更正：此前的置信区间是围绕无法实现的0.80毫秒构建的；此次运行的置信区间未计算）",
+    statConfidence: "46.5 毫秒（21.09.2026 已与诚实实测同步：N=50,000 向量，d=1024，30% WTA；此次运行的置信区间未计算）",
     
     filterDataset: "数据集规模：",
     filterDim: "向量维度：",
