@@ -16,6 +16,7 @@ import os from 'os';
 import { sanitizeEmail, parseChunkContent } from './chat-logger';
 import { embedText, isEmbeddingConfigured } from './embeddings';
 import { isVectorStoreConfigured, searchMemory, recentMemory, fullMemory, memoryMap } from './vector-store';
+import { найтиПовтор, запомнитьВопрос } from './novelty-detector';
 
 /**
  * 🔴 МЕТКА ВРЕМЕНИ ИЗ БАЗЫ — НЕ СТРОКА.
@@ -190,6 +191,14 @@ export async function buildSemanticMemory(
     if (!queryEmbedding) return null;
 
     const userKey = sanitizeEmail(userEmail);
+
+    // ДЕТЕКТОР НОВИЗНЫ (novelty-detector.ts) — перенесён с central 22.09.2026,
+    // тот же паттерн, что в mozg.ts::найтиВМозге. Проверяем, не задавал ли
+    // этот же собеседник почти тот же вопрос недавно, ПРЕЖДЕ чем идти в
+    // векторную базу — если да, переиспользуем уже найденный блок памяти.
+    const повтор = найтиПовтор(userKey, queryEmbedding);
+    if (повтор !== null) return повтор || null;
+
     const hits = await searchMemory(userKey, queryEmbedding, SEMANTIC_TOP_K);
     const relevant = hits.filter((h) => h.score >= SEMANTIC_MIN_SCORE);
     if (relevant.length === 0) return null;
@@ -201,7 +210,9 @@ export async function buildSemanticMemory(
       const text = compress(h.content).slice(0, SEMANTIC_SNIPPET_CHARS);
       return `• ${who}${when}${site}: ${text}`;
     });
-    return lines.join('\n');
+    const результат = lines.join('\n');
+    запомнитьВопрос(userKey, queryEmbedding, результат);
+    return результат;
   } catch (e) {
     console.warn('[Semantic Memory] search failed:', e);
     return null;
