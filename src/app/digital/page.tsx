@@ -2152,6 +2152,294 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
   ]
 };
 
+// Строки разметки на 4 языках (23.09.2026)
+const JX: Record<Lang, Record<string, string>> = {
+  "ru": {
+    "commTitle": "Коммерческий сервис доступности сайтов (ADA / WCAG)",
+    "commA": "Ищете аудит сайта по стандарту ",
+    "commB": " для муниципалитетов или коммерческих порталов? Перейдите в сканер доступности AIfaFocus.",
+    "commBtn": "Перейти к сканеру доступности →",
+    "all30": "Все 30 технологий",
+    "rnd10": "🟡 R&D Лаборатория (10)",
+    "math10": "🔵 Математическая Спецификация (10)",
+    "formula": "Формула:",
+    "contour": "Контур:",
+    "expand": "Развернуть ↓",
+    "protoA": "43,2 мс (P50, 23.09.2026); запрос — зашумлённая копия вектора базы (σ = 0,08), не независимый поиск.",
+    "protoB": "43,9 мс (P50, 23.09.2026); запросы независимы от индекса — представительный поиск. Точный FAISS: 100% за 8,8 мс.",
+    "suitesH": "Наборы замеров:",
+    "suitesT": " поиск 50 000 × 1024, дуэль методов, перебор «когтей», испытание агента на настоящих движках, тест отказов, статистика коннектома FlyWire v783.",
+    "cpuH": "CPU, без GPU:",
+    "cpuT": " запуск на любом компьютере с Python и NumPy; поиск в браузере — на JavaScript (не WebAssembly).",
+    "apacheH": "Открытая лицензия Apache 2.0:",
+    "apacheT": " свободное использование в научных публикациях, сравнениях и исследованиях.",
+    "sdk": "Поставка: Linux (.so) / Windows (.dll) / C++ SDK с аудитом Меркла — по договору.",
+    "distH": "Индивидуальная дистилляция:",
+    "distT": " обучение и калибровка проекционных матриц под домен заказчика.",
+    "cryptoH": "Криптографический аудит:",
+    "cryptoT": " отпечатки файлов и дерево Меркла с биткоин-штампом OpenTimestamps.",
+    "codevH": "Совместная разработка:",
+    "codevT": " выделенный архитектор решений, прямой контакт с Главным Архитектором и гарантийный SLA.",
+    "berne": "Бернская конвенция",
+    "liveTitle": "Живой бенчмарк: числа последнего прогона",
+    "scriptBadge": "Скрипт бенчмарка: ",
+    "coreBadge": "Ядро AIfa Core: закрытый код (EULA)",
+    "computing": "⚡ ВЫЧИСЛЕНИЕ...",
+    "runV3": "🚀 ПОКАЗАТЬ ЗАМЕР",
+    "qpsNote": "запросов в секунду (один поток, 23.09.2026)",
+    "passport": "АРХИТЕКТУРНЫЙ ПАСПОРТ И ПРАВОВОЙ СТАТУС ACR",
+    "distillH": "🧬 1. Нейроморфная дистилляция",
+    "distillT": "Биология дрозофилы открыта (FlyWire, Nature 2024, CC BY 4.0). Наша работа — алгоритмы по её мотивам (разреженная проекция, торможение APL) на Python/NumPy и открытый бенчмарк.",
+    "zeroH": "⚡ 2. Без тяжёлых зависимостей (чистый CPU)",
+    "zeroT": "Основной замер не требует C++ библиотек: `python bench/aifa_biobench.py` на чистом Python + NumPy. FAISS нужен только для сравнения.",
+    "honestH": "🎯 3. Протокол A (50 000 векторов)",
+    "honestT": "Протокол A: 50 000 векторов (1024d) против точного перебора L2 — Recall@10 = 39,55%, P50 = 43,9 мс на CPU (23.09.2026; 21.09.2026 — 59,0 мс). Прежние 98,72% и «P50 < 1,0 мс» не подтверждены. Протокол B — испытание агента на настоящих движках: 95,0% с памятью посещённых ссылок против 5,8% у закреплённой цели.",
+    "scriptLbl": "Скрипт: ",
+    "coreLbl": " | Ядро AIfa Core: ",
+    "testLbl": "Тест: AIfa BioBench · по образцу ANN-Benchmarks (не официальная заявка MLPerf)",
+    "ours": "AIfa FlyHash (наш)",
+    "ms": "мс",
+    "notMeasured": "не измерено",
+    "noGpu": "❌ Нет (0 GPU)",
+    "no": "❌ Нет",
+    "duel": "23.09.2026: итог дуэли — на 50 000 векторов обычный точный поиск FAISS (без индекса) в 5,0 раза быстрее нашего FlyHash (8,8 мс против 43,9 мс) и даёт 100% точности против 39,55%. Прежняя таблица с HNSW, Annoy, ScaNN, FAISS IVF и FAISS GPU убрана: мы их не запускали. Ниша FlyHash — компактность и работа без GPU; сравнение по этим осям ещё не проведено.",
+    "both": "* Оба замера — Intel Core i7-14700, N = 50 000, D = 1024, независимые запросы, pool = 250. Скрипт для локального повтора — в блоке кода ниже.",
+    "rowA": "Gaussian-1024D (протокол A; прежние «1M векторов» и коммит 9f7b399 не существовали)",
+    "rowB": "Gaussian-1024D (точный L2; прежние 98,72% не подтвердились)",
+    "ragStd": "Точность поиска для агентных систем и корпоративного RAG",
+    "liveRun": "Показ замера AIfa-BioBench прямо в браузере",
+    "run50k": "🚀 ПОКАЗАТЬ ЗАМЕР (50 000 ВЕКТОРОВ)",
+    "protoTitle": "ПРОТОКОЛ НЕЗАВИСИМОГО ВОСПРОИЗВЕДЕНИЯ",
+    "fileLbl": "Файл: ",
+    "licLbl": "Лицензия: ",
+    "anyone": "Любой инженер может скопировать скрипт ниже и запустить замер у себя за несколько минут. Протокол сравнивает Recall@10 с точным перебором L2 на 50 000 векторов (1024d), запросы независимы от индекса:",
+    "step1": "# 1. Сохраните скрипт из блока кода ниже как aifa_biobench.py",
+    "step2": "# 2. Запуск (независимые запросы: 50 000 векторов, 1024d)",
+    "copyLbl": "Копирайт: ",
+    "chiefLbl": "Главный Архитектор, инженер и создатель: ",
+    "chiefName": "Галатин Максим Валентинович",
+    "proofText": "Отпечатки файлов коннектома — контрольные суммы Zenodo; реестр доказательств заверен биткоин-штампом (блок 965 040). Штамп самого коннектома ставится заново: прежний оказался пустым.",
+    "btcLbl": "БИТКОИН-ШТАМП:",
+    "arwLbl": "ХРАНИЛИЩЕ ARWEAVE:",
+    "auditLbl": "ВНЕШНИЙ АУДИТ:",
+    "demoQuery": "Архитектура цифрового бессмертия AIfa",
+    "liveStep": "Показаны числа последнего прогона aifa_biobench.py (23.09.2026), в браузере не пересчитываются"
+  },
+  "en": {
+    "commTitle": "Commercial website accessibility service (ADA / WCAG)",
+    "commA": "Looking for a website audit against ",
+    "commB": " for municipalities or commercial portals? Go to the AIfaFocus accessibility scanner.",
+    "commBtn": "Go to the accessibility scanner →",
+    "all30": "All 30 technologies",
+    "rnd10": "🟡 R&D Lab (10)",
+    "math10": "🔵 Mathematical Specification (10)",
+    "formula": "Formula:",
+    "contour": "Deployment:",
+    "expand": "Expand ↓",
+    "protoA": "43.2 ms (P50, 23.09.2026); the query is a noisy copy of a database vector (σ = 0.08), not an independent search.",
+    "protoB": "43.9 ms (P50, 23.09.2026); queries are independent of the index — a representative search. Exact FAISS: 100% in 8.8 ms.",
+    "suitesH": "Measurement suites:",
+    "suitesT": " retrieval 50,000 × 1024, method duel, claw sweep, agent test on real engines, dropout test, FlyWire v783 connectome statistics.",
+    "cpuH": "CPU, no GPU:",
+    "cpuT": " runs on any computer with Python and NumPy; in-browser search is JavaScript (not WebAssembly).",
+    "apacheH": "Open Apache 2.0 licence:",
+    "apacheT": " free use in scientific publications, comparisons and research.",
+    "sdk": "Delivery: Linux (.so) / Windows (.dll) / C++ SDK with Merkle audit — under contract.",
+    "distH": "Custom distillation:",
+    "distT": " training and calibration of projection matrices for the customer's domain.",
+    "cryptoH": "Cryptographic audit:",
+    "cryptoT": " file fingerprints and a Merkle tree with an OpenTimestamps Bitcoin timestamp.",
+    "codevH": "Dedicated R&D co-development:",
+    "codevT": " a dedicated solutions architect, direct contact with the Chief Architect and a guaranteed SLA.",
+    "berne": "Berne Convention",
+    "liveTitle": "Live benchmark: numbers from the latest run",
+    "scriptBadge": "Benchmark script: ",
+    "coreBadge": "AIfa Core: proprietary code (EULA)",
+    "computing": "⚡ COMPUTING...",
+    "runV3": "🚀 SHOW MEASUREMENT",
+    "qpsNote": "queries per second (single thread, 23.09.2026)",
+    "passport": "ACR ARCHITECTURE PASSPORT AND LEGAL STATUS",
+    "distillH": "🧬 1. Neuromorphic distillation",
+    "distillT": "Drosophila biology is open (FlyWire, Nature 2024, CC BY 4.0). Our work is algorithms inspired by it (sparse projection, APL inhibition) in Python/NumPy and an open benchmark.",
+    "zeroH": "⚡ 2. No heavy dependencies (pure CPU)",
+    "zeroT": "The main measurement needs no C++ libraries: `python bench/aifa_biobench.py` with plain Python + NumPy. FAISS is needed only for the comparison.",
+    "honestH": "🎯 3. Protocol A (50,000 vectors)",
+    "honestT": "Protocol A: 50,000 vectors (1024d) against exact L2 brute force — Recall@10 = 39.55%, P50 = 43.9 ms on CPU (23.09.2026; 59.0 ms on 21.09.2026). The earlier 98.72% and 'P50 < 1.0 ms' were not confirmed. Protocol B — agent test on real engines: 95.0% with visited-link memory vs 5.8% with a pinned goal.",
+    "scriptLbl": "Script: ",
+    "coreLbl": " | AIfa Core: ",
+    "testLbl": "Test: AIfa BioBench · modelled on ANN-Benchmarks (not an official MLPerf submission)",
+    "ours": "AIfa FlyHash (ours)",
+    "ms": "ms",
+    "notMeasured": "not measured",
+    "noGpu": "❌ No (0 GPU)",
+    "no": "❌ No",
+    "duel": "23.09.2026: result of this duel — on 50,000 vectors plain exact FAISS search (no index) is 5.0× faster than our FlyHash (8.8 ms vs 43.9 ms) and gives 100% recall vs 39.55%. The earlier table with HNSW, Annoy, ScaNN, FAISS IVF and FAISS GPU was removed: we did not run them. FlyHash's niche is compactness and no-GPU operation; a comparison on those axes has not been run yet.",
+    "both": "* Both measurements — Intel Core i7-14700, N = 50,000, D = 1024, independent queries, pool = 250. The script to reproduce locally is in the code block below.",
+    "rowA": "Gaussian-1024D (protocol A; the earlier '1M vectors' and commit 9f7b399 did not exist)",
+    "rowB": "Gaussian-1024D (exact L2; the earlier 98.72% was not confirmed)",
+    "ragStd": "Retrieval accuracy for agent systems and enterprise RAG",
+    "liveRun": "The AIfa-BioBench measurement shown right in the browser",
+    "run50k": "🚀 SHOW MEASUREMENT (50K VECTORS)",
+    "protoTitle": "INDEPENDENT REPRODUCTION PROTOCOL",
+    "fileLbl": "File: ",
+    "licLbl": "Licence: ",
+    "anyone": "Any engineer can copy the script below and run the measurement locally in a few minutes. The protocol compares Recall@10 against exact L2 brute force on 50,000 vectors (1024d), with queries independent of the index:",
+    "step1": "# 1. Save the script from the code block below as aifa_biobench.py",
+    "step2": "# 2. Run (independent queries: 50,000 vectors, 1024d)",
+    "copyLbl": "Copyright: ",
+    "chiefLbl": "Chief Architect, engineer and creator: ",
+    "chiefName": "Maksim Valentinovich Galatin",
+    "proofText": "The connectome files are fingerprinted by Zenodo checksums; the evidence registry is anchored with a Bitcoin timestamp (block 965040). The stamp of the connectome itself is being re-issued: the earlier one held no attestation.",
+    "btcLbl": "BITCOIN TIMESTAMP:",
+    "arwLbl": "ARWEAVE STORAGE:",
+    "auditLbl": "EXTERNAL AUDIT:",
+    "demoQuery": "AIfa digital immortality architecture",
+    "liveStep": "Showing numbers from the latest aifa_biobench.py run (23.09.2026); they are not recomputed in the browser"
+  },
+  "es": {
+    "commTitle": "Servicio comercial de accesibilidad web (ADA / WCAG)",
+    "commA": "¿Busca una auditoría web según ",
+    "commB": " para municipios o portales comerciales? Vaya al escáner de accesibilidad AIfaFocus.",
+    "commBtn": "Ir al escáner de accesibilidad →",
+    "all30": "Las 30 tecnologías",
+    "rnd10": "🟡 Laboratorio de I+D (10)",
+    "math10": "🔵 Especificación matemática (10)",
+    "formula": "Fórmula:",
+    "contour": "Despliegue:",
+    "expand": "Desplegar ↓",
+    "protoA": "43,2 ms (P50, 23.09.2026); la consulta es una copia con ruido de un vector de la base (σ = 0,08), no una búsqueda independiente.",
+    "protoB": "43,9 ms (P50, 23.09.2026); consultas independientes del índice: una búsqueda representativa. FAISS exacto: 100% en 8,8 ms.",
+    "suitesH": "Conjuntos de mediciones:",
+    "suitesT": " búsqueda 50.000 × 1024, duelo de métodos, barrido de garras, prueba de agentes con motores reales, prueba de desactivación, estadísticas del conectoma FlyWire v783.",
+    "cpuH": "CPU, sin GPU:",
+    "cpuT": " funciona en cualquier ordenador con Python y NumPy; la búsqueda en el navegador es JavaScript (no WebAssembly).",
+    "apacheH": "Licencia abierta Apache 2.0:",
+    "apacheT": " uso libre en publicaciones científicas, comparaciones e investigación.",
+    "sdk": "Entrega: Linux (.so) / Windows (.dll) / SDK de C++ con auditoría Merkle, bajo contrato.",
+    "distH": "Destilación a medida:",
+    "distT": " entrenamiento y calibración de matrices de proyección para el dominio del cliente.",
+    "cryptoH": "Auditoría criptográfica:",
+    "cryptoT": " huellas de archivos y árbol de Merkle con sello Bitcoin de OpenTimestamps.",
+    "codevH": "Codesarrollo de I+D dedicado:",
+    "codevT": " un arquitecto de soluciones dedicado, contacto directo con el Arquitecto Jefe y un SLA garantizado.",
+    "berne": "Convenio de Berna",
+    "liveTitle": "Benchmark en vivo: cifras de la última ejecución",
+    "scriptBadge": "Script del benchmark: ",
+    "coreBadge": "AIfa Core: código propietario (EULA)",
+    "computing": "⚡ CALCULANDO...",
+    "runV3": "🚀 MOSTRAR MEDICIÓN",
+    "qpsNote": "consultas por segundo (un hilo, 23.09.2026)",
+    "passport": "PASAPORTE DE ARQUITECTURA Y ESTADO LEGAL DE ACR",
+    "distillH": "🧬 1. Destilación neuromórfica",
+    "distillT": "La biología de Drosophila es abierta (FlyWire, Nature 2024, CC BY 4.0). Nuestro trabajo son algoritmos inspirados en ella (proyección dispersa, inhibición APL) en Python/NumPy y un benchmark abierto.",
+    "zeroH": "⚡ 2. Sin dependencias pesadas (solo CPU)",
+    "zeroT": "La medición principal no requiere bibliotecas de C++: `python bench/aifa_biobench.py` con Python + NumPy. FAISS solo hace falta para la comparación.",
+    "honestH": "🎯 3. Protocolo A (50.000 vectores)",
+    "honestT": "Protocolo A: 50.000 vectores (1024d) frente a fuerza bruta L2 exacta — Recall@10 = 39,55%, P50 = 43,9 ms en CPU (23.09.2026; 59,0 ms el 21.09.2026). Los anteriores 98,72% y «P50 < 1,0 ms» no se confirmaron. Protocolo B — prueba de agentes con motores reales: 95,0% con memoria de enlaces visitados frente a 5,8% con objetivo fijado.",
+    "scriptLbl": "Script: ",
+    "coreLbl": " | AIfa Core: ",
+    "testLbl": "Prueba: AIfa BioBench · según el modelo de ANN-Benchmarks (no es un envío oficial a MLPerf)",
+    "ours": "AIfa FlyHash (nuestro)",
+    "ms": "ms",
+    "notMeasured": "no medido",
+    "noGpu": "❌ No (0 GPU)",
+    "no": "❌ No",
+    "duel": "23.09.2026: resultado del duelo — con 50.000 vectores la búsqueda exacta simple de FAISS (sin índice) es 5,0× más rápida que nuestro FlyHash (8,8 ms frente a 43,9 ms) y da un 100% de recall frente al 39,55%. La tabla anterior con HNSW, Annoy, ScaNN, FAISS IVF y FAISS GPU se retiró: no los ejecutamos. El nicho de FlyHash es la compacidad y funcionar sin GPU; aún no se ha comparado en esos ejes.",
+    "both": "* Ambas mediciones: Intel Core i7-14700, N = 50.000, D = 1024, consultas independientes, pool = 250. El script para repetirlo en local está en el bloque de código de abajo.",
+    "rowA": "Gaussian-1024D (protocolo A; los anteriores «1M de vectores» y el commit 9f7b399 no existían)",
+    "rowB": "Gaussian-1024D (L2 exacto; el anterior 98,72% no se confirmó)",
+    "ragStd": "Precisión de búsqueda para sistemas de agentes y RAG empresarial",
+    "liveRun": "La medición de AIfa-BioBench mostrada en el navegador",
+    "run50k": "🚀 MOSTRAR MEDICIÓN (50.000 VECTORES)",
+    "protoTitle": "PROTOCOLO DE REPRODUCCIÓN INDEPENDIENTE",
+    "fileLbl": "Archivo: ",
+    "licLbl": "Licencia: ",
+    "anyone": "Cualquier ingeniero puede copiar el script de abajo y ejecutar la medición en su equipo en pocos minutos. El protocolo compara Recall@10 con fuerza bruta L2 exacta sobre 50.000 vectores (1024d), con consultas independientes del índice:",
+    "step1": "# 1. Guarde el script del bloque de código de abajo como aifa_biobench.py",
+    "step2": "# 2. Ejecutar (consultas independientes: 50.000 vectores, 1024d)",
+    "copyLbl": "Copyright: ",
+    "chiefLbl": "Arquitecto Jefe, ingeniero y creador: ",
+    "chiefName": "Maksim Valentinovich Galatin",
+    "proofText": "Las huellas de los archivos del conectoma son las sumas de control de Zenodo; el registro de evidencias está anclado con un sello Bitcoin (bloque 965040). El sello del propio conectoma se vuelve a emitir: el anterior no contenía atestación.",
+    "btcLbl": "SELLO BITCOIN:",
+    "arwLbl": "ALMACENAMIENTO ARWEAVE:",
+    "auditLbl": "AUDITORÍA EXTERNA:",
+    "demoQuery": "Arquitectura de inmortalidad digital de AIfa",
+    "liveStep": "Se muestran las cifras de la última ejecución de aifa_biobench.py (23.09.2026); no se recalculan en el navegador"
+  },
+  "zh": {
+    "commTitle": "商业网站无障碍服务（ADA / WCAG）",
+    "commA": "需要按照 ",
+    "commB": " 为市政机构或商业门户做网站审计？请前往 AIfaFocus 无障碍扫描器。",
+    "commBtn": "前往无障碍扫描器 →",
+    "all30": "全部 30 项技术",
+    "rnd10": "🟡 研发实验室（10）",
+    "math10": "🔵 数学规范（10）",
+    "formula": "公式：",
+    "contour": "部署：",
+    "expand": "展开 ↓",
+    "protoA": "43.2 毫秒（P50，2026-09-23）；查询为库中向量的加噪副本（σ = 0.08），并非独立检索。",
+    "protoB": "43.9 毫秒（P50，2026-09-23）；查询独立于索引——具有代表性的检索。FAISS 精确检索：8.8 毫秒达到 100%。",
+    "suitesH": "测量套件：",
+    "suitesT": " 50,000 × 1024 检索、方法对决、“爪”数量扫描、真实引擎智能体测试、关闭测试、FlyWire v783 连接组统计。",
+    "cpuH": "CPU，无需 GPU：",
+    "cpuT": " 任何装有 Python 和 NumPy 的电脑均可运行；浏览器内检索使用 JavaScript（非 WebAssembly）。",
+    "apacheH": "开源 Apache 2.0 许可：",
+    "apacheT": " 可自由用于科研论文、对比评测和研究。",
+    "sdk": "交付：Linux（.so）/ Windows（.dll）/ 带 Merkle 审计的 C++ SDK——按合同提供。",
+    "distH": "定制蒸馏：",
+    "distT": " 针对客户领域训练和校准投影矩阵。",
+    "cryptoH": "密码学审计：",
+    "cryptoT": " 文件指纹与 Merkle 树，并加盖 OpenTimestamps 比特币时间戳。",
+    "codevH": "专属研发共建：",
+    "codevT": " 专属解决方案架构师、与首席架构师直接沟通，并提供 SLA 保障。",
+    "berne": "伯尔尼公约",
+    "liveTitle": "实时基准：最近一次运行的数字",
+    "scriptBadge": "基准脚本：",
+    "coreBadge": "AIfa Core：闭源代码（EULA）",
+    "computing": "⚡ 计算中...",
+    "runV3": "🚀 显示测量结果",
+    "qpsNote": "每秒查询数（单线程，2026-09-23）",
+    "passport": "ACR 架构档案与法律状态",
+    "distillH": "🧬 1. 神经形态蒸馏",
+    "distillT": "果蝇生物学数据是公开的（FlyWire，Nature 2024，CC BY 4.0）。我们的工作是受其启发的算法（稀疏投影、APL 抑制，基于 Python/NumPy）以及开放的基准测试。",
+    "zeroH": "⚡ 2. 无重型依赖（纯 CPU）",
+    "zeroT": "主测量无需 C++ 库：用纯 Python + NumPy 运行 `python bench/aifa_biobench.py`。只有对比时才需要 FAISS。",
+    "honestH": "🎯 3. 协议 A（50,000 个向量）",
+    "honestT": "协议 A：50,000 个 1024 维向量对比精确 L2 暴力检索——Recall@10 = 39.55%，CPU 上 P50 = 43.9 毫秒（2026-09-23；2026-09-21 为 59.0 毫秒）。此前的 98.72% 和“P50 < 1.0 毫秒”未得到证实。协议 B——真实引擎智能体测试：带已访问链接记忆 95.0%，固定目标 5.8%。",
+    "scriptLbl": "脚本：",
+    "coreLbl": " | AIfa Core：",
+    "testLbl": "测试：AIfa BioBench · 参照 ANN-Benchmarks（非 MLPerf 官方提交）",
+    "ours": "AIfa FlyHash（我们的）",
+    "ms": "毫秒",
+    "notMeasured": "未测量",
+    "noGpu": "❌ 否（0 GPU）",
+    "no": "❌ 否",
+    "duel": "2026-09-23 对决结果——在 50,000 个向量上，普通的 FAISS 精确检索（无索引）比我们的 FlyHash 快 5.0 倍（8.8 毫秒对 43.9 毫秒），召回率 100% 对 39.55%。原先含 HNSW、Annoy、ScaNN、FAISS IVF 和 FAISS GPU 的表格已撤下：我们并未运行它们。FlyHash 的定位是紧凑和无需 GPU；在这些维度上的对比尚未进行。",
+    "both": "* 两次测量均在 Intel Core i7-14700 上进行，N = 50,000，D = 1024，独立查询，pool = 250。本地复现脚本见下方代码块。",
+    "rowA": "Gaussian-1024D（协议 A；此前的“100 万向量”和提交 9f7b399 并不存在）",
+    "rowB": "Gaussian-1024D（精确 L2；此前的 98.72% 未得到证实）",
+    "ragStd": "面向智能体系统与企业 RAG 的检索精度",
+    "liveRun": "在浏览器中直接展示 AIfa-BioBench 测量结果",
+    "run50k": "🚀 显示测量结果（50,000 个向量）",
+    "protoTitle": "独立复现协议",
+    "fileLbl": "文件：",
+    "licLbl": "许可：",
+    "anyone": "任何工程师都可以复制下方脚本，在几分钟内本地运行测量。该协议在 50,000 个 1024 维向量上将 Recall@10 与精确 L2 暴力检索对比，查询独立于索引：",
+    "step1": "# 1. 将下方代码块中的脚本保存为 aifa_biobench.py",
+    "step2": "# 2. 运行（独立查询：50,000 个向量，1024 维）",
+    "copyLbl": "版权：",
+    "chiefLbl": "首席架构师、工程师与创作者：",
+    "chiefName": "马克西姆·瓦伦蒂诺维奇·加拉廷",
+    "proofText": "连接组文件以 Zenodo 校验和作为指纹；证据登记册已加盖比特币时间戳（第 965040 区块）。连接组本身的时间戳正在重新签发：此前的不含任何证明。",
+    "btcLbl": "比特币时间戳：",
+    "arwLbl": "ARWEAVE 存储：",
+    "auditLbl": "外部审计：",
+    "demoQuery": "AIfa 数字永生架构",
+    "liveStep": "显示 aifa_biobench.py 最近一次运行（2026-09-23）的数字，浏览器中不重新计算"
+  }
+};
+
 // Перепроверенные результаты бенчмарка (21.09 и 23.09.2026); тексты на 4 языках
 const VB: Record<Lang, Record<string, string>> = {
   "ru": {
@@ -2868,10 +3156,10 @@ const I18N = {
     
     // Proof
     proofTitle: "Криптографическая верификация и независимый аудит",
-    proofSubtitle: "Хэш синаптической матрицы коннектома зафиксирован в блокчейне Bitcoin и Arweave",
+    proofSubtitle: "Отпечатки файлов коннектома и реестр доказательств",
     proofBtc: "Bitcoin OTS: реестр — блок 965040",
-    proofArweave: "Arweave TX ID: 7QWz...b9x1",
-    proofMlcommons: "MLCommons Agentic v6.1 and RAG Roadmap"
+    proofArweave: "не опубликовано",
+    proofMlcommons: "не проводился"
   },
   en: {
     heroBadge: "AIFA COGNITIVE RUNTIME · SOTA BENCHMARKS & PRICING",
@@ -2941,10 +3229,10 @@ const I18N = {
     btnOrder: "Order Plan / Request Invoice",
     
     proofTitle: "Cryptographic Verification & Independent Audit",
-    proofSubtitle: "Connectome synaptic matrix hash immutably anchored to the Bitcoin blockchain and Arweave",
+    proofSubtitle: "Connectome file fingerprints and the evidence registry",
     proofBtc: "Bitcoin OTS: registry — block 965040",
-    proofArweave: "Arweave TX ID: 7QWz...b9x1",
-    proofMlcommons: "MLCommons Agentic v6.1 and RAG Roadmap"
+    proofArweave: "not published",
+    proofMlcommons: "not performed"
   },
   es: {
     heroBadge: "AIFA COGNITIVE RUNTIME · BENCHMARKS SOTA Y TARIFAS",
@@ -3014,10 +3302,10 @@ const I18N = {
     btnOrder: "Solicitar Plan / Factura Comercial",
     
     proofTitle: "Verificación Criptográfica y Auditoría Independiente",
-    proofSubtitle: "Raíz Merkle del conectoma certificada en la cadena de bloques Bitcoin y Arweave",
+    proofSubtitle: "Huellas de los archivos del conectoma y registro de evidencias",
     proofBtc: "Bitcoin OTS: registro — bloque 965040",
-    proofArweave: "Arweave TX ID: 7QWz...b9x1",
-    proofMlcommons: "Hoja de Ruta de Auditoría MLCommons"
+    proofArweave: "no publicado",
+    proofMlcommons: "no realizada"
   },
   zh: {
     heroBadge: "AIFA COGNITIVE RUNTIME · SOTA 权威基准与商业阶梯",
@@ -3087,10 +3375,10 @@ const I18N = {
     btnOrder: "立即采购 / 申请对公账单",
     
     proofTitle: "密码学链上不可变验真与独立审计",
-    proofSubtitle: "连接组突触矩阵根哈希已永久锚定于比特币区块链与 Arweave 永久存储",
+    proofSubtitle: "连接组文件指纹与证据登记册",
     proofBtc: "比特币 OTS：登记册 — 第 965040 区块",
-    proofArweave: "Arweave 交易哈希：7QWz...b9x1",
-    proofMlcommons: "MLCommons Agentic v6.1 and RAG 路线图"
+    proofArweave: "未发布",
+    proofMlcommons: "未进行"
   }
 };
 
@@ -3133,7 +3421,7 @@ export default function DigitalSOTAPage() {
 
   // State
   // Live Bionic Simulator State
-  const [inputQuery, setInputQuery] = useState("Архитектура цифрового бессмертия AIfa");
+  const [inputQuery, setInputQuery] = useState(JX[lang].demoQuery);
   const [simRunning, setSimRunning] = useState(false);
   const [activeStage, setActiveStage] = useState<number>(5);
   const [simResult, setSimResult] = useState<{
@@ -3162,7 +3450,7 @@ export default function DigitalSOTAPage() {
     setTimeout(() => {
       clearInterval(interval);
       let hash = 0x811c9dc5;
-      const queryStr = inputQuery || "Архитектура цифрового бессмертия AIfa";
+      const queryStr = inputQuery || JX[lang].demoQuery;
       for (let i = 0; i < queryStr.length; i++) {
         hash = (hash * 31 + queryStr.charCodeAt(i)) >>> 0;
       }
@@ -3216,7 +3504,7 @@ export default function DigitalSOTAPage() {
   const runLiveBenchmark = () => {
     setLiveBenchRunning(true);
     setLiveBenchProgress(100);
-    setLiveBenchStepText('Показаны реально измеренные числа последнего прогона aifa_biobench.py (не пересчитывается в браузере)');
+    setLiveBenchStepText(JX[lang].liveStep);
     setLiveBenchMetrics({
       vectors: 50000,
       dim: 1024,
@@ -3394,12 +3682,12 @@ export default function DigitalSOTAPage() {
                 AIfa Bionic Connectome Benchmark (AIfa-BioBench v3.0 Ultra Edition)
               </div>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
-                Интерактивный Живой Бенчмарк & 5-Слойный Нейроморфный Симулятор
+                {JX[lang].liveTitle}
               </h2>
             </div>
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono shrink-0">
-              <span className="bg-slate-100 dark:bg-black/60 border border-slate-200 dark:border-gray-800 px-3 py-1.5 rounded-xl text-slate-700 dark:text-gray-300">Скрипт бенчмарка: <strong className="text-cyan-700 dark:text-cyan-400">aifa_biobench.py (Apache 2.0)</strong></span>
-              <span className="bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 px-3 py-1.5 rounded-xl text-emerald-800 dark:text-emerald-300 font-bold">Ядро AIfa Core: Proprietary EULA (Закрытый код)</span>
+              <span className="bg-slate-100 dark:bg-black/60 border border-slate-200 dark:border-gray-800 px-3 py-1.5 rounded-xl text-slate-700 dark:text-gray-300">{JX[lang].scriptBadge}<strong className="text-cyan-700 dark:text-cyan-400">aifa_biobench.py (Apache 2.0)</strong></span>
+              <span className="bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 px-3 py-1.5 rounded-xl text-emerald-800 dark:text-emerald-300 font-bold">{JX[lang].coreBadge}</span>
             </div>
           </div>
 
@@ -3416,7 +3704,7 @@ export default function DigitalSOTAPage() {
                 type="text"
                 value={inputQuery}
                 onChange={(e) => setInputQuery(e.target.value)}
-                placeholder="Архитектура цифрового бессмертия AIfa..."
+                placeholder={JX[lang].demoQuery + "..."}
                 className="w-full lg:flex-1 bg-slate-50 dark:bg-black/70 border border-slate-300 dark:border-gray-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-mono focus:outline-none focus:ring-2 focus:ring-cyan-500"
               />
               <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 w-full lg:w-auto">
@@ -3426,7 +3714,7 @@ export default function DigitalSOTAPage() {
                   className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-[#00F0FF] text-black font-black text-xs sm:text-sm transition-all shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:scale-105 active:scale-95 font-mono uppercase tracking-wider disabled:opacity-50 cursor-pointer"
                 >
                   <BarChart2 className="w-4 h-4 text-black" />
-                  <span>{liveBenchRunning ? '⚡ ВЫЧИСЛЕНИЕ...' : '🚀 ЗАПУСТИТЬ ЛИВ-БЕНЧМАРК V3.0'}</span>
+                  <span>{liveBenchRunning ? JX[lang].computing : JX[lang].runV3}</span>
                 </button>
                 <button
                   onClick={runSimulator}
@@ -3477,9 +3765,9 @@ export default function DigitalSOTAPage() {
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/60 border border-slate-200 dark:border-cyan-500/40 space-y-1">
               <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">Throughput (QPS)</span>
               <span className="text-xl sm:text-2xl font-black font-mono text-slate-900 dark:text-white">
-                {liveBenchMetrics ? liveBenchMetrics.qps.toLocaleString() : '17'}
+                {liveBenchMetrics ? liveBenchMetrics.qps.toLocaleString() : '22.5'}
               </span>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 block">queries / second (21.09.2026: скрипт однопоточный)</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 block">{JX[lang].qpsNote}</span>
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/60 border border-slate-200 dark:border-amber-500/40 space-y-1">
@@ -3519,7 +3807,7 @@ export default function DigitalSOTAPage() {
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-cyan-900 dark:text-[#00F0FF]" />
                 <span className="text-sm font-mono font-bold text-cyan-900 dark:text-[#00F0FF]">
-                  АРХИТЕКТУРНЫЙ ПАСПОРТ И ПРАВОВОЙ СТАТУС ACR (AIfa-BioBench v3.0)
+                  {JX[lang].passport}
                 </span>
               </div>
               <span className="bg-cyan-950/90 border border-cyan-700 px-3 py-1 rounded-lg text-cyan-900 dark:text-cyan-300 text-xs font-mono font-bold">
@@ -3530,34 +3818,34 @@ export default function DigitalSOTAPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans">
               <div className="bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 p-3.5 rounded-xl space-y-1">
                 <div className="text-cyan-900 dark:text-[#00F0FF] font-bold flex items-center gap-1.5 font-mono">
-                  <span>🧬 1. Нейроморфная Дистилляция</span>
+                  <span>{JX[lang].distillH}</span>
                 </div>
                 <p className="text-slate-700 dark:text-gray-300 font-normal text-[11px] leading-relaxed">
-                  Биология Drosophila открыта (FlyWire, Nature 2024, CC-BY-4.0). Наша ИС — алгоритмическая дистилляция в CPU-рантайм 6-дендритного проецирования и $k$-WTA APL-ингибирования, микросекундная C/Python реализация и открытый бенчмарк.
+                  {JX[lang].distillT}
                 </p>
               </div>
 
               <div className="bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 p-3.5 rounded-xl space-y-1">
                 <div className="text-emerald-400 font-bold flex items-center gap-1.5 font-mono">
-                  <span>⚡ 2. Zero-Dependency (Чистый CPU)</span>
+                  <span>{JX[lang].zeroH}</span>
                 </div>
                 <p className="text-slate-700 dark:text-gray-300 font-normal text-[11px] leading-relaxed">
-                  Не требует тяжелых C++ библиотек (`faiss-cpu`, `torch`, `cmake`). Запускается мгновенно на любом ПК через `python aifa_biobench.py` с чистым Python + NumPy.
+                  {JX[lang].zeroT}
                 </p>
               </div>
 
               <div className="bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 p-3.5 rounded-xl space-y-1">
                 <div className="text-amber-400 font-bold flex items-center gap-1.5 font-mono">
-                  <span>🎯 3. Честный Протокол A (ANN 50K)</span>
+                  <span>{JX[lang].honestH}</span>
                 </div>
                 <p className="text-slate-700 dark:text-gray-300 font-normal text-[11px] leading-relaxed">
-                  Protocol A: 50 000 векторов (1024d) vs Brute-Force L2. Recall@10 = 39.55%, P50 = 43.9 мс на CPU (23.09.2026; 21.09.2026 — 59.0 мс; ранее здесь стояли вымышленные 98.72% и «P50 &lt; 1.0 мс», не подтверждённые файлом результатов). (Protocol B — испытание агента на настоящих движках: 95,0% успеха с памятью посещённых ссылок против 5,8% у закреплённой цели, 23.09.2026.)
+                  {JX[lang].honestT}
                 </p>
               </div>
             </div>
 
             <div className="pt-3 border-t border-gray-800/80 flex flex-wrap items-center justify-between text-[11px] font-mono text-gray-400 gap-2">
-              <span>Inspired by FlyWire FAFB v783 (Nature 2024). Biology is open science. The distilled runtime is proprietary IP. Скрипт: <strong className="text-cyan-800 dark:text-cyan-400">Apache 2.0 Open-Source</strong> | Ядро AIfa Core: <strong className="text-amber-400">Proprietary EULA &amp; Trade Secret</strong> | <strong>Copyright (c) 2026 CODE Eternal Ecosystem &amp; Maksim Galatin</strong></span>
+              <span>Inspired by FlyWire FAFB v783 (Nature 2024). Biology is open science. The distilled runtime is proprietary IP. {JX[lang].scriptLbl}<strong className="text-cyan-800 dark:text-cyan-400">Apache 2.0 Open-Source</strong>{JX[lang].coreLbl}<strong className="text-amber-400">Proprietary EULA &amp; Trade Secret</strong> | <strong>Copyright (c) 2026 CODE Eternal Ecosystem &amp; Maksim Galatin</strong></span>
               <span className="text-cyan-900 dark:text-[#00F0FF]">{t.archBadge}</span>
             </div>
           </div>
@@ -3701,7 +3989,7 @@ export default function DigitalSOTAPage() {
                 </p>
               </div>
               <div className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-600 dark:text-slate-400 bg-black/40 px-3 py-1.5 rounded-lg border border-gray-800">
-                <span>Тест: AIfa BioBench v3.0 · Inspired by systems benchmarking and ANN-Benchmarks (Not an official MLPerf submission)</span>
+                <span>{JX[lang].testLbl}</span>
               </div>
             </div>
 
@@ -3721,37 +4009,29 @@ export default function DigitalSOTAPage() {
                   <tr className="bg-[#00F0FF]/10 border-l-4 border-l-[#00F0FF] font-semibold text-slate-900 dark:text-white">
                     <td className="py-4 px-4 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
-                      <strong>AIfa FlyHash Bionic (Наш)</strong>
+                      <strong>{JX[lang].ours}</strong>
                     </td>
-                    <td className="py-4 px-4 text-center font-mono font-bold text-cyan-900 dark:text-[#00F0FF]">43.9 мс</td>
+                    <td className="py-4 px-4 text-center font-mono font-bold text-cyan-900 dark:text-[#00F0FF]">43.9 {JX[lang].ms}</td>
                     <td className="py-4 px-4 text-center font-mono text-emerald-300">215.5 MB</td>
                     <td className="py-4 px-4 text-center font-mono text-amber-500">39.55%</td>
-                    <td className="py-4 px-4 text-center font-mono text-slate-500">не измерено</td>
-                    <td className="py-4 px-4 text-center font-mono text-emerald-400">❌ Нет (0 GPU)</td>
+                    <td className="py-4 px-4 text-center font-mono text-slate-500">{JX[lang].notMeasured}</td>
+                    <td className="py-4 px-4 text-center font-mono text-emerald-400">{JX[lang].noGpu}</td>
                   </tr>
                   <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
                     <td className="py-3.5 px-4">FAISS IndexFlatL2 (exact brute-force)</td>
-                    <td className="py-3.5 px-4 text-center font-mono">8.8 мс</td>
+                    <td className="py-3.5 px-4 text-center font-mono">8.8 {JX[lang].ms}</td>
                     <td className="py-3.5 px-4 text-center font-mono">195.3 MB</td>
                     <td className="py-3.5 px-4 text-center font-mono text-emerald-400">100.00%</td>
-                    <td className="py-3.5 px-4 text-center font-mono text-slate-500">не измерено</td>
-                    <td className="py-3.5 px-4 text-center font-mono text-slate-600 dark:text-slate-400">❌ Нет</td>
+                    <td className="py-3.5 px-4 text-center font-mono text-slate-500">{JX[lang].notMeasured}</td>
+                    <td className="py-3.5 px-4 text-center font-mono text-slate-600 dark:text-slate-400">{JX[lang].no}</td>
                   </tr>
                 </tbody>
               </table>
             <p className="text-[11px] font-mono text-amber-600 dark:text-amber-400 mt-2 font-semibold">
-              21.09.2026: честный итог этой дуэли — на N=50 000 обычный точный поиск FAISS
-              (без индекса, brute-force) оказался в 4.6 раза БЫСТРЕЕ нашего FlyHash-поиска и
-              даёт 100% recall против наших 39.55%. Раньше здесь стояла таблица с HNSW, Annoy,
-              ScaNN, FAISS IVF и FAISS GPU — эти строки убраны, потому что мы их не запускали
-              на своём железе и цифры были не измерены. Ниша FlyHash — не скорость точного
-              поиска, а компактность индекса и работа без GPU; сравнение по этим осям ещё не
-              проведено честно и будет добавлено отдельно.
+              {JX[lang].duel}
             </p>
             <p className="text-[11px] font-mono text-slate-400 italic mt-2">
-              * Оба замера — на Intel Core i7-14700, N=50 000, D=1024, independent-протокол
-              (запросы не являются копиями индексируемых векторов), pool=250. Воспроизвести
-              локально: скрипт опубликован в блоке кода ниже на этой странице.
+              {JX[lang].both}
             </p>
             </div>
 
@@ -3781,7 +4061,7 @@ export default function DigitalSOTAPage() {
                   <tbody className="divide-y divide-gray-800/40 text-slate-300">
                     <tr>
                       <td className="py-2.5 px-3 font-bold text-cyan-900 dark:text-[#00F0FF]">P50 = 43.9 ms (23.09) · 59.0 ms (21.09)</td>
-                      <td className="py-2.5 px-3">Gaussian-1024D (Protocol A, 21.09.2026: исправлено — ранее здесь стояли невыполнимая конфигурация 1M векторов и несуществующий коммит 9f7b399)</td>
+                      <td className="py-2.5 px-3">{JX[lang].rowA}</td>
                       <td className="py-2.5 px-3">50,000</td>
                       <td className="py-2.5 px-3">200 Q</td>
                       <td className="py-2.5 px-3">Intel Core i7-14700</td>
@@ -3791,7 +4071,7 @@ export default function DigitalSOTAPage() {
                     </tr>
                     <tr>
                       <td className="py-2.5 px-3 font-bold text-emerald-400">Recall@10 = 39.55%</td>
-                      <td className="py-2.5 px-3">Gaussian-1024D (Exact L2 GT, 21.09.2026: исправлено — ранее здесь стояло вымышленное 98.72%, противоречившее честно измеренному 39.55% на этой же странице)</td>
+                      <td className="py-2.5 px-3">{JX[lang].rowB}</td>
                       <td className="py-2.5 px-3">50,000</td>
                       <td className="py-2.5 px-3">200 Q</td>
                       <td className="py-2.5 px-3">Intel Core i7-14700</td>
@@ -3835,7 +4115,7 @@ export default function DigitalSOTAPage() {
                   {t.qualityTitle}
                 </h3>
                 <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
-                  Стандарты точности поиска для агентных систем и Enterprise RAG
+                  {JX[lang].ragStd}
                 </p>
               </div>
 
@@ -3920,7 +4200,7 @@ export default function DigitalSOTAPage() {
                     LIVE IN-BROWSER BENCHMARK ENGINE (V3.0)
                   </span>
                   <h4 className="text-lg sm:text-xl font-bold text-slate-950 dark:text-white mt-1">
-                    Интерактивный запуск бенчмарка AIfa-BioBench v3.0 прямо в браузере
+                    {JX[lang].liveRun}
                   </h4>
                 </div>
                 <button
@@ -3928,7 +4208,7 @@ export default function DigitalSOTAPage() {
                   disabled={liveBenchRunning}
                   className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-[#00F0FF] text-black font-black text-xs sm:text-sm font-mono uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(0,240,255,0.35)] hover:scale-105 active:scale-95 disabled:opacity-50 cursor-pointer shrink-0"
                 >
-                  {liveBenchRunning ? '⚡ ВЫЧИСЛЕНИЕ...' : '🚀 ЗАПУСТИТЬ ЛИВ-БЕНЧМАРК (50K VECTORS)'}
+                  {liveBenchRunning ? JX[lang].computing : JX[lang].run50k}
                 </button>
               </div>
 
@@ -4110,24 +4390,24 @@ export default function DigitalSOTAPage() {
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#00F0FF] animate-pulse" />
                   <span className="text-sm font-bold text-cyan-900 dark:text-[#00F0FF]">
-                    ПРОТОКОЛ НЕЗАВИСИМОЙ ВОСПРОИЗВОДИМОСТИ (INDEPENDENT REPRODUCTION)
+                    {JX[lang].protoTitle}
                   </span>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 text-[11px]">
-                  <span className="bg-slate-100 dark:bg-black border border-slate-200 dark:border-gray-700 px-2.5 py-1 rounded-lg text-slate-800 dark:text-gray-300 font-semibold">Файл: <strong className="text-cyan-800 dark:text-cyan-400">aifa_biobench.py</strong></span>
-                  <span className="bg-slate-100 dark:bg-black border border-slate-200 dark:border-gray-700 px-2.5 py-1 rounded-lg text-slate-800 dark:text-gray-300 font-semibold">Лицензия: <strong className="text-amber-600 dark:text-amber-400">Apache 2.0 Open-Source</strong></span>
+                  <span className="bg-slate-100 dark:bg-black border border-slate-200 dark:border-gray-700 px-2.5 py-1 rounded-lg text-slate-800 dark:text-gray-300 font-semibold">{JX[lang].fileLbl}<strong className="text-cyan-800 dark:text-cyan-400">aifa_biobench.py</strong></span>
+                  <span className="bg-slate-100 dark:bg-black border border-slate-200 dark:border-gray-700 px-2.5 py-1 rounded-lg text-slate-800 dark:text-gray-300 font-semibold">{JX[lang].licLbl}<strong className="text-amber-600 dark:text-amber-400">Apache 2.0 Open-Source</strong></span>
                   <span className="bg-cyan-50 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-800 px-2.5 py-1 rounded-lg text-cyan-900 dark:text-cyan-300 font-bold">Protocol A Verified</span>
                 </div>
               </div>
 
               <p className="text-slate-800 dark:text-gray-300 font-normal font-sans text-xs leading-relaxed">
-                Любой независимый инженер может скопировать скрипт ниже на этой странице и запустить бенчмарк локально за 3 минуты. Протокол замеряет честный Recall@10 против точного Brute-Force L2 Ground Truth на 50 000 векторов (1024d), independent-протокол (запросы независимы от индекса, не near-duplicate):
+                {JX[lang].anyone}
               </p>
 
               <div className="keep-dark p-4 bg-slate-900 dark:bg-black/90 rounded-2xl border border-slate-800 text-cyan-300 space-y-1.5 select-all text-xs shadow-inner">
-                <div className="text-slate-400"># 1. Сохраните скрипт из блока кода ниже как aifa_biobench.py</div>
+                <div className="text-slate-400">{JX[lang].step1}</div>
                 <div>pip install numpy</div>
-                <div className="text-slate-400 pt-1"># 2. Запуск воспроизводимого бенчмарка (Protocol B independent: 50K vectors, 1024d)</div>
+                <div className="text-slate-400 pt-1">{JX[lang].step2}</div>
                 <div className="text-[#00F0FF] font-bold">python aifa_biobench.py --vectors 50000 --dim 1024 --topk 10 --protocol independent</div>
               </div>
 
@@ -4143,8 +4423,8 @@ export default function DigitalSOTAPage() {
               </div>
 
               <div className="pt-2 border-t border-slate-200 dark:border-gray-800 flex flex-wrap items-center justify-between text-[11px] text-slate-600 dark:text-gray-400 gap-2">
-                <span>Копирайт: <strong>Copyright (c) 2026 CODE Eternal Ecosystem &amp; Maksim Galatin</strong></span>
-                <span className="text-cyan-900 dark:text-[#00F0FF]">Главный Архитектор, инженер и создатель: <strong>Галатин Максим Валентинович</strong></span>
+                <span>{JX[lang].copyLbl}<strong>Copyright (c) 2026 CODE Eternal Ecosystem &amp; Maksim Galatin</strong></span>
+                <span className="text-cyan-900 dark:text-[#00F0FF]">{JX[lang].chiefLbl}<strong>{JX[lang].chiefName}</strong></span>
               </div>
             </div>
 
@@ -4189,33 +4469,33 @@ export default function DigitalSOTAPage() {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 font-mono text-xs">
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
                 <span className="text-[10px] font-bold text-gray-400 block">E0 • CONCEPT</span>
-                <span className="text-xs font-semibold text-slate-700 dark:text-gray-300 font-normal">{lang === 'ru' ? 'Гипотеза' : 'Concept'}</span>
-                <p className="text-[10px] text-gray-500 dark:text-gray-400">{lang === 'ru' ? 'Биологический концепт' : 'Biological hypothesis'}</p>
+                <span className="text-xs font-semibold text-slate-700 dark:text-gray-300 font-normal">{lang === 'ru' ? 'Гипотеза' : lang === 'es' ? 'Hipótesis' : lang === 'zh' ? '假设' : 'Concept'}</span>
+                <p className="text-[10px] text-gray-500 dark:text-gray-400">{lang === 'ru' ? 'Биологический концепт' : lang === 'es' ? 'Hipótesis biológica' : lang === 'zh' ? '生物学假设' : 'Biological hypothesis'}</p>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
                 <span className="text-[10px] font-bold text-blue-700 dark:text-blue-400 block">E1 • MATH MODEL</span>
-                <span className="text-xs font-semibold text-slate-800 dark:text-blue-200">{lang === 'ru' ? 'Матмодель' : 'Formal Model'}</span>
-                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Асимптотика / формулы' : 'Analytical complexity'}</p>
+                <span className="text-xs font-semibold text-slate-800 dark:text-blue-200">{lang === 'ru' ? 'Матмодель' : lang === 'es' ? 'Modelo formal' : lang === 'zh' ? '形式模型' : 'Formal Model'}</span>
+                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Асимптотика / формулы' : lang === 'es' ? 'Complejidad analítica' : lang === 'zh' ? '解析复杂度' : 'Analytical complexity'}</p>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-cyan-800/60 space-y-1">
                 <span className="text-[10px] font-bold text-cyan-800 dark:text-cyan-400 block">E2 • PROTOTYPE</span>
-                <span className="text-xs font-semibold text-slate-800 dark:text-cyan-200">{lang === 'ru' ? 'Прототип ПО' : 'Software Proto'}</span>
-                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Симулятор / партиционер' : 'Simulator / partitioner'}</p>
+                <span className="text-xs font-semibold text-slate-800 dark:text-cyan-200">{lang === 'ru' ? 'Прототип ПО' : lang === 'es' ? 'Prototipo de software' : lang === 'zh' ? '软件原型' : 'Software Proto'}</span>
+                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Симулятор / партиционер' : lang === 'es' ? 'Simulador / particionador' : lang === 'zh' ? '模拟器 / 划分器' : 'Simulator / partitioner'}</p>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-emerald-800/60 space-y-1">
                 <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 block">E3 • BENCHMARK</span>
-                <span className="text-xs font-semibold text-slate-800 dark:text-emerald-200">{lang === 'ru' ? 'Бенчмарк ПО' : 'Software Bench'}</span>
-                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Воспроизводимый тест CPU' : 'Reproducible CPU test'}</p>
+                <span className="text-xs font-semibold text-slate-800 dark:text-emerald-200">{lang === 'ru' ? 'Бенчмарк ПО' : lang === 'es' ? 'Benchmark de software' : lang === 'zh' ? '软件基准' : 'Software Bench'}</span>
+                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Воспроизводимый тест CPU' : lang === 'es' ? 'Prueba reproducible en CPU' : lang === 'zh' ? '可复现的 CPU 测试' : 'Reproducible CPU test'}</p>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-yellow-800/60 space-y-1">
                 <span className="text-[10px] font-bold text-amber-700 dark:text-yellow-400 block">E4 • EXT. REPL.</span>
-                <span className="text-xs font-semibold text-slate-800 dark:text-yellow-200">{lang === 'ru' ? 'Репликация' : 'External Audit'}</span>
-                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Аппаратный стенд' : 'Independent hardware'}</p>
+                <span className="text-xs font-semibold text-slate-800 dark:text-yellow-200">{lang === 'ru' ? 'Репликация' : lang === 'es' ? 'Auditoría externa' : lang === 'zh' ? '外部审计' : 'External Audit'}</span>
+                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Аппаратный стенд' : lang === 'es' ? 'Hardware independiente' : lang === 'zh' ? '独立硬件' : 'Independent hardware'}</p>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-purple-800/60 space-y-1">
                 <span className="text-[10px] font-bold text-purple-700 dark:text-purple-400 block">E5 • PRODUCTION</span>
-                <span className="text-xs font-semibold text-slate-800 dark:text-purple-200">{lang === 'ru' ? 'Боевой прод' : 'In-Situ Field'}</span>
-                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Промышленный кластер' : 'Production cluster'}</p>
+                <span className="text-xs font-semibold text-slate-800 dark:text-purple-200">{lang === 'ru' ? 'Боевой прод' : lang === 'es' ? 'Producción real' : lang === 'zh' ? '生产环境' : 'In-Situ Field'}</span>
+                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Промышленный кластер' : lang === 'es' ? 'Clúster de producción' : lang === 'zh' ? '生产集群' : 'Production cluster'}</p>
               </div>
             </div>
 
@@ -4224,10 +4504,10 @@ export default function DigitalSOTAPage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <span className="text-xs font-mono font-bold text-cyan-900 dark:text-[#00F0FF] uppercase tracking-wider block">
-                    {lang === 'ru' ? 'Расширенный стек коннектома • Исследовательские прототипы #06–#10' : 'Extended Connectome Stack • Research Prototypes #06 to #10'}
+                    {lang === 'ru' ? 'Расширенный стек коннектома • Исследовательские прототипы #06–#10' : lang === 'es' ? 'Pila extendida del conectoma • Prototipos de investigación #06–#10' : lang === 'zh' ? '扩展连接组栈 • 研究原型 #06–#10' : 'Extended Connectome Stack • Research Prototypes #06 to #10'}
                   </span>
                   <h3 className="text-xl sm:text-2xl font-extrabold text-slate-950 dark:text-white mt-1">
-                    {lang === 'ru' ? 'Числа из открытых скриптов — замеры 23.09.2026' : 'Numbers from open scripts — measured 23.09.2026'}
+                    {lang === 'ru' ? 'Числа из открытых скриптов — замеры 23.09.2026' : lang === 'es' ? 'Cifras de scripts abiertos — medidas el 23.09.2026' : lang === 'zh' ? '数字来自公开脚本 — 2026-09-23 实测' : 'Numbers from open scripts — measured 23.09.2026'}
                   </h3>
                 </div>
                 <div className="flex items-center gap-2">
@@ -4511,12 +4791,12 @@ export default function DigitalSOTAPage() {
 
                     {/* 4. Mathematics & Biology */}
                     <div className="p-2.5 rounded-lg bg-slate-100 dark:bg-black/60 border border-slate-200 dark:border-gray-800 text-[11px] font-mono text-slate-600 dark:text-slate-400">
-                      <strong className="text-slate-700 dark:text-slate-300">Формула:</strong> {inn.math}
+                      <strong className="text-slate-700 dark:text-slate-300">{JX[lang].formula}</strong> {inn.math}
                     </div>
 
                     {/* 5. Direct Link */}
                     <div className="pt-1 flex items-center justify-between">
-                      <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Контур: {inn.deploy}</span>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{JX[lang].contour} {inn.deploy}</span>
                       <a
                         href="#benchmarks"
                         onClick={(e) => e.stopPropagation()}
@@ -4529,7 +4809,7 @@ export default function DigitalSOTAPage() {
                 ) : (
                   <div className="mt-3 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200 dark:border-gray-800/80">
                     <span>{lang === 'ru' ? 'Нажмите для глубокого анализа' : lang === 'es' ? 'Clic para análisis completo' : lang === 'zh' ? '点击展开深度分析' : 'Click for deep analysis'}</span>
-                    <span className="text-cyan-900 dark:text-[#00F0FF] font-mono">Развернуть ↓</span>
+                    <span className="text-cyan-900 dark:text-[#00F0FF] font-mono">{JX[lang].expand}</span>
                   </div>
                 )}
               </div>
@@ -4608,7 +4888,7 @@ export default function DigitalSOTAPage() {
                     </span>
                     <div className="text-xl font-mono font-black text-slate-900 dark:text-white">39.55% <span className="text-xs font-normal text-slate-500 dark:text-slate-400">Recall@10</span></div>
                     <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-tight">
-                      59 мс латентность, запросы независимы от индекса — репрезентативный ANN-поиск.
+                      {JX[lang].protoB}
                     </p>
                   </div>
                 </div>
@@ -4620,15 +4900,15 @@ export default function DigitalSOTAPage() {
                   <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-cyan-900 dark:text-[#00F0FF] shrink-0 mt-0.5" />
-                      <span><strong>5 эталонных сюит:</strong> Binary Retrieval Arena, Dendritic Sweeps (d=2..16), Agent E2E Loop, Robustness Degradation Curve, FlyHash.</span>
+                      <span><strong>{JX[lang].suitesH}</strong>{JX[lang].suitesT}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-cyan-900 dark:text-[#00F0FF] shrink-0 mt-0.5" />
-                      <span><strong>100% CPU-Native & Zero-GPU:</strong> Запуск на любом стандартном компьютере (AVX2/NEON) и в браузере через WebAssembly.</span>
+                      <span><strong>{JX[lang].cpuH}</strong>{JX[lang].cpuT}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-cyan-900 dark:text-[#00F0FF] shrink-0 mt-0.5" />
-                      <span><strong>Открытая лицензия Apache 2.0:</strong> Свободное использование в научных публикациях, сравнениях и R&D.</span>
+                      <span><strong>{JX[lang].apacheH}</strong>{JX[lang].apacheT}</span>
                     </li>
                   </ul>
                 </div>
@@ -4700,7 +4980,7 @@ export default function DigitalSOTAPage() {
                     </span>
                     <div className="text-xl font-mono font-black text-slate-900 dark:text-white">100% Air-Gapped</div>
                     <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-tight">
-                      Linux ELF (.so) / Windows Native (.dll) / C++ SDK с Merkle-аудитом.
+                      {JX[lang].sdk}
                     </p>
                   </div>
                 </div>
@@ -4712,15 +4992,15 @@ export default function DigitalSOTAPage() {
                   <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5" />
-                      <span><strong>Индивидуальная дистилляция:</strong> Обучение и калибровка специализированных проекционных матриц под домен заказчика.</span>
+                      <span><strong>{JX[lang].distH}</strong>{JX[lang].distT}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5" />
-                      <span><strong>Криптографический аудит:</strong> Хеш топологии синапсов с фиксацией в Bitcoin через OpenTimestamps (Zero-Tampering Proof).</span>
+                      <span><strong>{JX[lang].cryptoH}</strong>{JX[lang].cryptoT}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5" />
-                      <span><strong>Dedicated R&D Co-Development:</strong> Выделенный архитектор решений, прямой контакт с Главным Архитектором и гарантийный SLA.</span>
+                      <span><strong>{JX[lang].codevH}</strong>{JX[lang].codevT}</span>
                     </li>
                   </ul>
                 </div>
@@ -4782,20 +5062,20 @@ export default function DigitalSOTAPage() {
               </div>
 
               <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                {t.proofSubtitle}. Ни одна закрытая облачная корпорация не предоставляет математического доказательства неизменности весов и кода. AIfa Cognitive Runtime сертифицирован блокчейн-штампами, гарантируя защиту от скрытой модификации алгоритмов.
+                {JX[lang].proofText}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
                 <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-gray-800 text-xs font-mono">
-                  <span className="text-slate-500 dark:text-slate-400 block text-[10px]">БИТКОИН-ШТАМП:</span>
+                  <span className="text-slate-500 dark:text-slate-400 block text-[10px]">{JX[lang].btcLbl}</span>
                   <span className="text-cyan-800 dark:text-[#00F0FF] font-bold">{t.proofBtc}</span>
                 </div>
                 <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-gray-800 text-xs font-mono">
-                  <span className="text-slate-500 dark:text-slate-400 block text-[10px]">ХРАНИЛИЩЕ ARWEAVE:</span>
+                  <span className="text-slate-500 dark:text-slate-400 block text-[10px]">{JX[lang].arwLbl}</span>
                   <span className="text-emerald-700 dark:text-emerald-400 font-bold">{t.proofArweave}</span>
                 </div>
                 <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-gray-800 text-xs font-mono">
-                  <span className="text-slate-500 dark:text-slate-400 block text-[10px]">АУДИТ MLPERF:</span>
+                  <span className="text-slate-500 dark:text-slate-400 block text-[10px]">{JX[lang].auditLbl}</span>
                   <span className="text-amber-700 dark:text-amber-400 font-bold">{t.proofMlcommons}</span>
                 </div>
               </div>
