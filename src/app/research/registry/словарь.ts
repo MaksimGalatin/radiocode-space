@@ -92,7 +92,7 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
   ru: {
     метка: 'Открытые данные',
     заголовок: 'Реестр против реальности: каждый восьмой адрес указывает в пустоту',
-    подпись: (дата) => `Проверка DNS, снято ${дата}. Данные и инструмент открыты.`,
+    подпись: (дата) => `Проверка DNS, снято ${дата} (третий замер, третий отдельный день). Данные и инструмент открыты.`,
 
     сутьЗаголовок: 'Что измерено',
     суть1: (мёртвых, всего, доля) =>
@@ -171,7 +171,7 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
   en: {
     метка: 'Open data',
     заголовок: 'Registry vs reality: one address in eight points at nothing',
-    подпись: (дата) => `DNS check, taken ${дата}. Data and tooling are open.`,
+    подпись: (дата) => `DNS check, taken ${дата} (third measurement, on a third separate day). Data and tooling are open.`,
 
     сутьЗаголовок: 'What was measured',
     суть1: (мёртвых, всего, доля) =>
@@ -250,7 +250,7 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
   es: {
     метка: 'Datos abiertos',
     заголовок: 'El registro frente a la realidad: una de cada ocho direcciones apunta a la nada',
-    подпись: (дата) => `Comprobación de DNS, tomada el ${дата}. Datos y herramientas abiertos.`,
+    подпись: (дата) => `Comprobación de DNS, tomada el ${дата} (tercera medición, en un tercer día distinto). Datos y herramientas abiertos.`,
 
     сутьЗаголовок: 'Qué se midió',
     суть1: (мёртвых, всего, доля) =>
@@ -329,7 +329,7 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
   zh: {
     метка: '开放数据',
     заголовок: '登记册与现实：每八个地址就有一个指向虚无',
-    подпись: (дата) => `DNS 检查，采集于 ${дата}。数据与工具均已公开。`,
+    подпись: (дата) => `DNS 检查，采集于 ${дата}（第三次测量，第三个不同的日子）。数据与工具均已公开。`,
 
     сутьЗаголовок: '测量了什么',
     суть1: (мёртвых, всего, доля) =>
