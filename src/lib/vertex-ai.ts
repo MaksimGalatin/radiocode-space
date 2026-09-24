@@ -189,6 +189,11 @@ export async function vertexChatCompletion(
  * она. Поставь лимиты». Платится грантом Google for Startups ($2000 до
  * 23.09.2027) на биллинге 01DAF7-8B0717-3B1694.
  *
+ * ИМЕНА ПЕРЕМЕННЫХ — ЛАТИНИЦЕЙ. Vercel не принимает кириллицу в имени переменной
+ * («Only letters, digits, and underscores», 24.09.2026), поэтому рабочие имена —
+ * VERTEX_CHAT_ENABLED, VERTEX_DAILY_USD_CAP, VERTEX_CHAT_MODELS; русские
+ * оставлены синонимами для окружений, которые их принимают.
+ *
  * ПОЧЕМУ НЕ ОБЩИЙ РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ. Его читает и `lib/embeddings.ts`:
  * включение общего флага открыло бы платные эмбеддинги — тот самый путь, что
  * 18.08.2026 дал 84 221 обращение к платной модели за один час. Здесь
@@ -205,12 +210,12 @@ export async function vertexChatCompletion(
  * переменной `VERTEX_ЛЕСТНИЦА_ЧАТА` без правки кода.
  */
 export const ЛЕСТНИЦА_VERTEX_ЧАТА: string[] = (
-  process.env.VERTEX_ЛЕСТНИЦА_ЧАТА ||
+  process.env.VERTEX_CHAT_MODELS || process.env.VERTEX_ЛЕСТНИЦА_ЧАТА ||
   'google/gemini-3.1-pro-preview,google/gemini-2.5-pro,google/gemini-2.5-flash'
 ).split(',').map((м) => м.trim()).filter(Boolean);
 
 export async function vertexЧатОткрыт(): Promise<boolean> {
-  const свой = (process.env.VERTEX_ЧАТ_РАЗРЕШЁН || '').toLowerCase();
+  const свой = (process.env.VERTEX_CHAT_ENABLED || process.env.VERTEX_ЧАТ_РАЗРЕШЁН || '').toLowerCase();
   if (!(свой === '1' || свой === 'true') && !платныеРазрешены()) return false;
   if (!isVertexConfigured()) return false;
 
@@ -269,7 +274,7 @@ async function учестьСтоимостьVertex(модель: string, usage:
 }
 
 async function потолокДолларовVertexНеИсчерпан(): Promise<boolean> {
-  const потолок = Number(process.env.VERTEX_ПОТОЛОК_USD_В_СУТКИ || '100');
+  const потолок = Number(process.env.VERTEX_DAILY_USD_CAP || process.env.VERTEX_ПОТОЛОК_USD_В_СУТКИ || '100');
   // Ноль и мусор закрывают путь: ошибка настройки стоит молчания модели, а не денег.
   if (!Number.isFinite(потолок) || потолок <= 0) return false;
   try {
