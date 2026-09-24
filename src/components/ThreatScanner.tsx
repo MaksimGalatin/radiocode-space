@@ -763,7 +763,7 @@ export default function ThreatScanner() {
   // ── Render ───────────────────────────────────────────────────────────────────
   return (
     <>
-      <div className="w-full max-w-2xl mx-auto rounded-2xl border border-white/10 bg-[#0a0f1a] overflow-hidden shadow-[0_0_60px_rgba(6,182,212,0.06)]">
+      <div className="keep-dark w-full max-w-2xl mx-auto rounded-2xl border border-white/10 bg-[#0a0f1a] overflow-hidden shadow-[0_0_60px_rgba(6,182,212,0.06)]">
 
       {/* Terminal header bar */}
       <div className="flex items-center gap-2 px-4 py-3 bg-white/[0.03] border-b border-white/8">

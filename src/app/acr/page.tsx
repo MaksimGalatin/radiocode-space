@@ -4111,27 +4111,27 @@ export default function ACRPage() {
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
               <span className="text-[10px] font-bold text-gray-400 block">E0 • CONCEPT</span>
               <span className="text-xs font-semibold text-slate-700 dark:text-gray-300 font-normal">{lang === 'ru' ? 'Гипотеза' : lang === 'es' ? 'Hipótesis' : lang === 'zh' ? '假设' : 'Concept'}</span>
-              <p className="text-[10px] text-gray-500">{lang === 'ru' ? 'Биологический концепт' : lang === 'es' ? 'Hipótesis biológica' : lang === 'zh' ? '生物学假设' : 'Biological hypothesis'}</p>
+              <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Биологический концепт' : lang === 'es' ? 'Hipótesis biológica' : lang === 'zh' ? '生物学假设' : 'Biological hypothesis'}</p>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
-              <span className="text-[10px] font-bold text-blue-400 block">E1 • MATH MODEL</span>
-              <span className="text-xs font-semibold text-blue-200">{lang === 'ru' ? 'Матмодель' : lang === 'es' ? 'Modelo formal' : lang === 'zh' ? '形式模型' : 'Formal Model'}</span>
-              <p className="text-[10px] text-gray-500">{lang === 'ru' ? 'Асимптотика / формулы' : lang === 'es' ? 'Complejidad analítica' : lang === 'zh' ? '解析复杂度' : 'Analytical complexity'}</p>
+              <span className="text-[10px] font-bold text-blue-700 dark:text-blue-400 block">E1 • MATH MODEL</span>
+              <span className="text-xs font-semibold text-slate-800 dark:text-blue-200">{lang === 'ru' ? 'Матмодель' : lang === 'es' ? 'Modelo formal' : lang === 'zh' ? '形式模型' : 'Formal Model'}</span>
+              <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Асимптотика / формулы' : lang === 'es' ? 'Complejidad analítica' : lang === 'zh' ? '解析复杂度' : 'Analytical complexity'}</p>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-cyan-800/60 space-y-1">
               <span className="text-[10px] font-bold text-cyan-800 dark:text-cyan-400 block">E2 • PROTOTYPE</span>
-              <span className="text-xs font-semibold text-cyan-200">{lang === 'ru' ? 'Прототип ПО' : lang === 'es' ? 'Prototipo de software' : lang === 'zh' ? '软件原型' : 'Software Proto'}</span>
-              <p className="text-[10px] text-gray-500">{lang === 'ru' ? 'Симулятор / партиционер' : lang === 'es' ? 'Simulador / particionador' : lang === 'zh' ? '模拟器 / 划分器' : 'Simulator / partitioner'}</p>
+              <span className="text-xs font-semibold text-slate-800 dark:text-cyan-200">{lang === 'ru' ? 'Прототип ПО' : lang === 'es' ? 'Prototipo de software' : lang === 'zh' ? '软件原型' : 'Software Proto'}</span>
+              <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Симулятор / партиционер' : lang === 'es' ? 'Simulador / particionador' : lang === 'zh' ? '模拟器 / 划分器' : 'Simulator / partitioner'}</p>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-emerald-800/60 space-y-1">
-              <span className="text-[10px] font-bold text-emerald-400 block">E3 • BENCHMARK</span>
-              <span className="text-xs font-semibold text-emerald-200">{lang === 'ru' ? 'Бенчмарк ПО' : lang === 'es' ? 'Benchmark de software' : lang === 'zh' ? '软件基准' : 'Software Bench'}</span>
-              <p className="text-[10px] text-gray-500">{lang === 'ru' ? 'Воспроизводимый тест CPU' : lang === 'es' ? 'Prueba reproducible en CPU' : lang === 'zh' ? '可复现的 CPU 测试' : 'Reproducible CPU test'}</p>
+              <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 block">E3 • BENCHMARK</span>
+              <span className="text-xs font-semibold text-slate-800 dark:text-emerald-200">{lang === 'ru' ? 'Бенчмарк ПО' : lang === 'es' ? 'Benchmark de software' : lang === 'zh' ? '软件基准' : 'Software Bench'}</span>
+              <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Воспроизводимый тест CPU' : lang === 'es' ? 'Prueba reproducible en CPU' : lang === 'zh' ? '可复现的 CPU 测试' : 'Reproducible CPU test'}</p>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-yellow-800/60 space-y-1">
-              <span className="text-[10px] font-bold text-yellow-400 block">E4 • EXT. REPL.</span>
-              <span className="text-xs font-semibold text-yellow-200">{lang === 'ru' ? 'Репликация' : lang === 'es' ? 'Auditoría externa' : lang === 'zh' ? '外部审计' : 'External Audit'}</span>
-              <p className="text-[10px] text-gray-500">{lang === 'ru' ? 'Аппаратный стенд' : lang === 'es' ? 'Hardware independiente' : lang === 'zh' ? '独立硬件' : 'Independent hardware'}</p>
+              <span className="text-[10px] font-bold text-amber-700 dark:text-yellow-400 block">E4 • EXT. REPL.</span>
+              <span className="text-xs font-semibold text-slate-800 dark:text-yellow-200">{lang === 'ru' ? 'Репликация' : lang === 'es' ? 'Auditoría externa' : lang === 'zh' ? '外部审计' : 'External Audit'}</span>
+              <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Аппаратный стенд' : lang === 'es' ? 'Hardware independiente' : lang === 'zh' ? '独立硬件' : 'Independent hardware'}</p>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-purple-800/60 space-y-1">
               <span className="text-[10px] font-bold text-purple-400 block">E5 • PRODUCTION</span>
@@ -4282,7 +4282,7 @@ export default function ACRPage() {
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'all'
                     ? 'bg-[#00F0FF] text-black shadow-[0_0_15px_rgba(0,240,255,0.3)]'
-                    : 'bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-gray-800'
+                    : 'bg-slate-100 dark:bg-black/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white border border-slate-300 dark:border-gray-800'
                 }`}
               >
                 {JX[lang].all30}
@@ -4292,7 +4292,7 @@ export default function ACRPage() {
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'prod'
                     ? 'bg-green-500 text-black shadow-[0_0_15px_rgba(34,197,94,0.3)]'
-                    : 'bg-black/50 text-green-400 hover:text-slate-900 dark:text-white border border-green-900/60'
+                    : 'bg-slate-100 dark:bg-black/50 text-green-700 dark:text-green-400 hover:text-slate-900 dark:text-white border border-green-300 dark:border-green-900/60'
                 }`}
               >
                 🟢 Production Core (10)
@@ -4302,7 +4302,7 @@ export default function ACRPage() {
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'rnd'
                     ? 'bg-yellow-500 text-black shadow-[0_0_15px_rgba(234,179,8,0.3)]'
-                    : 'bg-black/50 text-yellow-400 hover:text-slate-900 dark:text-white border border-yellow-900/60'
+                    : 'bg-slate-100 dark:bg-black/50 text-amber-700 dark:text-yellow-400 hover:text-slate-900 dark:text-white border border-amber-300 dark:border-yellow-900/60'
                 }`}
               >
                 {JX[lang].rnd10}
@@ -4312,7 +4312,7 @@ export default function ACRPage() {
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'spec'
                     ? 'bg-cyan-500 text-black shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                    : 'bg-black/50 text-cyan-800 dark:text-cyan-400 hover:text-slate-900 dark:text-white border border-cyan-900/60'
+                    : 'bg-slate-100 dark:bg-black/50 text-cyan-800 dark:text-cyan-400 hover:text-slate-900 dark:text-white border border-cyan-300 dark:border-cyan-900/60'
                 }`}
               >
                 {JX[lang].math10}
@@ -4348,7 +4348,7 @@ export default function ACRPage() {
                         <span className="w-1.5 h-1.5 rounded-full bg-yellow-400" /> R&D Lab
                       </span>
                     ) : (
-                      <span className="text-[10px] text-cyan-800 dark:text-cyan-400 font-bold bg-cyan-950/70 px-2 py-0.5 rounded border border-cyan-800/60 flex items-center gap-1">
+                      <span className="text-[10px] text-cyan-800 dark:text-cyan-400 font-bold bg-cyan-100 dark:bg-cyan-950/70 px-2 py-0.5 rounded border border-cyan-300 dark:border-cyan-800/60 flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" /> Math Spec
                       </span>
                     )}
@@ -4609,7 +4609,7 @@ export default function ACRPage() {
               <div className="pt-6 space-y-3">
                 <a
                   href="mailto:contact@codeofdigitaleternity.com?subject=ACR%20Enterprise%20Core%20Licensing%20Inquiry"
-                  className="w-full py-3 px-4 bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs rounded-xl text-center transition-all font-mono uppercase tracking-wider shadow-[0_0_20px_rgba(168,85,247,0.3)] flex items-center justify-center gap-2"
+                  className="keep-dark w-full py-3 px-4 bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs rounded-xl text-center transition-all font-mono uppercase tracking-wider shadow-[0_0_20px_rgba(168,85,247,0.3)] flex items-center justify-center gap-2"
                 >
                   <Building className="w-4 h-4" />
                   <span>{lang === 'ru' ? 'Запросить Enterprise лицензию & R&D пилот' : lang === 'es' ? 'Solicitar licencia Enterprise y piloto R&D' : lang === 'zh' ? '申请企业级内核授权与联合研发试点' : 'Request Enterprise Licensing & R&D Pilot'}</span>

@@ -3648,7 +3648,7 @@ export default function DigitalSOTAPage() {
               </div>
               <div className="pt-2 border-t border-slate-200 dark:border-gray-800 text-cyan-700 dark:text-[#00F0FF] font-bold flex flex-wrap items-center justify-center gap-4">
                 <span>{t.heroMetrics}</span>
-                <p className="w-full text-center text-[10px] text-slate-500 dark:text-slate-400 font-sans tracking-normal mt-0.5 opacity-80">
+                <p className="w-full text-center text-[10px] text-slate-600 dark:text-slate-300 font-sans tracking-normal mt-0.5 opacity-80">
                   {t.heroLatencyNote || "Latency excludes embedding generation, network I/O, and external model inference."}
                 </p>
               </div>
@@ -3719,9 +3719,9 @@ export default function DigitalSOTAPage() {
                 <button
                   onClick={runSimulator}
                   disabled={simRunning}
-                  className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-900 dark:bg-black hover:bg-slate-800 border border-[#00F0FF]/40 text-cyan-900 dark:text-[#00F0FF] font-bold text-xs sm:text-sm transition shadow-md font-mono uppercase tracking-wider disabled:opacity-50 cursor-pointer"
+                  className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 keep-dark rounded-xl bg-slate-900 dark:bg-black hover:bg-slate-800 border border-[#00F0FF]/40 text-cyan-300 dark:text-[#00F0FF] font-bold text-xs sm:text-sm transition shadow-md font-mono uppercase tracking-wider disabled:opacity-50 cursor-pointer"
                 >
-                  <Zap className="w-4 h-4 text-cyan-900 dark:text-[#00F0FF]" />
+                  <Zap className="w-4 h-4 text-cyan-300 dark:text-[#00F0FF]" />
                   <span>{simRunning ? 'Computing...' : '⚡ RUN SIMULATOR'}</span>
                 </button>
               </div>
@@ -3810,7 +3810,7 @@ export default function DigitalSOTAPage() {
                   {JX[lang].passport}
                 </span>
               </div>
-              <span className="bg-cyan-950/90 border border-cyan-700 px-3 py-1 rounded-lg text-cyan-900 dark:text-cyan-300 text-xs font-mono font-bold">
+              <span className="bg-cyan-100 dark:bg-cyan-950/90 border border-cyan-300 dark:border-cyan-700 px-3 py-1 rounded-lg text-cyan-900 dark:text-cyan-300 text-xs font-mono font-bold">
                 Open-Science Substrate · Proprietary Runtime
               </span>
             </div>
@@ -3988,7 +3988,7 @@ export default function DigitalSOTAPage() {
                   {lang === 'ru' ? 'Поиск Top-10 по 50 000 векторов (1024d), замер 23.09.2026' : lang === 'es' ? 'Búsqueda Top-10 sobre 50.000 vectores (1024d), medido el 23.09.2026' : lang === 'zh' ? '在 50,000 个向量（1024 维）上检索 Top-10，2026-09-23 实测' : 'Top-10 search over 50,000 vectors (1024d), measured 23.09.2026'}
                 </p>
               </div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-600 dark:text-slate-400 bg-black/40 px-3 py-1.5 rounded-lg border border-gray-800">
+              <div className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-700 dark:text-slate-400 bg-slate-100 dark:bg-black/40 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-gray-800">
                 <span>{JX[lang].testLbl}</span>
               </div>
             </div>
@@ -4746,7 +4746,7 @@ export default function DigitalSOTAPage() {
                         <span className="w-1.5 h-1.5 rounded-full bg-yellow-400" /> R&D Lab
                       </span>
                     ) : (
-                      <span className="text-[10px] text-cyan-800 dark:text-cyan-400 font-bold bg-cyan-950/70 px-2 py-0.5 rounded border border-cyan-800/60 flex items-center gap-1">
+                      <span className="text-[10px] text-cyan-800 dark:text-cyan-400 font-bold bg-cyan-100 dark:bg-cyan-950/70 px-2 py-0.5 rounded border border-cyan-300 dark:border-cyan-800/60 flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" /> Math Spec
                       </span>
                     )}
@@ -5009,7 +5009,7 @@ export default function DigitalSOTAPage() {
               <div className="pt-6 space-y-3">
                 <a
                   href="mailto:contact@codeofdigitaleternity.com?subject=ACR%20Enterprise%20Core%20Licensing%20Inquiry"
-                  className="w-full py-3 px-4 bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs rounded-xl text-center transition-all font-mono uppercase tracking-wider shadow-[0_0_20px_rgba(168,85,247,0.3)] flex items-center justify-center gap-2"
+                  className="keep-dark w-full py-3 px-4 bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs rounded-xl text-center transition-all font-mono uppercase tracking-wider shadow-[0_0_20px_rgba(168,85,247,0.3)] flex items-center justify-center gap-2"
                 >
                   <Building className="w-4 h-4" />
                   <span>{lang === 'ru' ? 'Запросить Enterprise лицензию & R&D пилот' : lang === 'es' ? 'Solicitar licencia Enterprise y piloto R&D' : lang === 'zh' ? '申请企业级内核授权与联合研发试点' : 'Request Enterprise Licensing & R&D Pilot'}</span>
