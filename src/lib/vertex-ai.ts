@@ -95,9 +95,13 @@ export async function getGCPToken(saKeyJson: string): Promise<string | null> {
 export async function vertexChatCompletion(
   messages: Array<{ role: string; content: string }>,
   maxTokens: number = 8192,
-  temperature: number = 0.8
+  temperature: number = 0.8,
+  /** Какую модель звать — нужно лестнице топовых моделей чата (24.09.2026). */
+  modelOverride?: string
 ): Promise<string | null> {
   if (!isVertexConfigured()) return null;
+  // Суточный потолок в долларах — до вызова, чтобы превышение не стоило ни цента.
+  if (!(await потолокДолларовVertexНеИсчерпан())) return null;
 
   try {
     const saKey = process.env.GOOGLE_SERVICE_ACCOUNT_KEY || process.env.GCP_SERVICE_ACCOUNT_KEY;
@@ -105,8 +109,7 @@ export async function vertexChatCompletion(
 
     const credentials = JSON.parse(saKey);
     const projectId = credentials.project_id;
-    const location = process.env.GCP_LOCATION || 'us-central1';
-    const model = process.env.VERTEX_MODEL || 'google/gemini-2.5-flash';
+    const model = modelOverride || process.env.VERTEX_MODEL || 'google/gemini-2.5-flash';
 
     const accessToken = await getGCPToken(saKey);
     if (!accessToken) {
@@ -114,7 +117,11 @@ export async function vertexChatCompletion(
       return null;
     }
 
-    const url = `https://${location}-aiplatform.googleapis.com/v1beta1/projects/${projectId}/locations/${location}/endpoints/openapi/chat/completions`;
+    // Модели Gemini 3 живут только в регионе global: замер 24.09.2026 — в
+    // us-central1 gemini-3.1-pro-preview отвечает 404, в global — «ok».
+    const location = /gemini-3/.test(model) ? 'global' : (process.env.GCP_LOCATION || 'us-central1');
+    const хост = location === 'global' ? 'aiplatform.googleapis.com' : `${location}-aiplatform.googleapis.com`;
+    const url = `https://${хост}/v1beta1/projects/${projectId}/locations/${location}/endpoints/openapi/chat/completions`;
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -163,10 +170,129 @@ export async function vertexChatCompletion(
       }
     } catch { /* учёт не важнее самого ответа */ }
 
+    // Стоимость вызова в микродолларах по цене модели — для суточного потолка.
+    try { await учестьСтоимостьVertex(model, data?.usage); } catch { /* учёт не мешает ответу */ }
+
     const content = data.choices?.[0]?.message?.content;
     return typeof content === 'string' && content ? content : null;
   } catch (e) {
     console.warn('[Vertex AI] Request error:', e);
     return null;
+  }
+}
+
+/**
+ * ОТДЕЛЬНЫЙ ВЫКЛЮЧАТЕЛЬ VERTEX ДЛЯ ЧАТА — 24.09.2026.
+ *
+ * Поручение Архитектора: «Мозг Айфы должен быть подключён через Вертекс к
+ * ТОПовой Гугл модели — когда заканчиваются бесплатные лимиты должна отвечать
+ * она. Поставь лимиты». Платится грантом Google for Startups ($2000 до
+ * 23.09.2027) на биллинге 01DAF7-8B0717-3B1694.
+ *
+ * ПОЧЕМУ НЕ ОБЩИЙ РАЗРЕШЕНЫ_ПЛАТНЫЕ_МОДЕЛИ. Его читает и `lib/embeddings.ts`:
+ * включение общего флага открыло бы платные эмбеддинги — тот самый путь, что
+ * 18.08.2026 дал 84 221 обращение к платной модели за один час. Здесь
+ * открывается ТОЛЬКО чат, отдельной переменной `VERTEX_ЧАТ_РАЗРЕШЁН=1`.
+ *
+ * ТРИ ЧИСЛА (раздел 24 Конституции):
+ *   частота — ступень зовётся, только когда ВСЕ бесплатные ступени молчат;
+ *   потолок — `VERTEX_ПОТОЛОК_USD_В_СУТКИ`, по умолчанию $100 за скользящие
+ *             сутки (см. `потолокДолларовVertexНеИсчерпан` ниже);
+ *   цена    — по прайсу Google для модели из лестницы ниже.
+ *
+ * ЛЕСТНИЦА МОДЕЛЕЙ — замер `GET /v1beta/models` 24.09.2026: старшая Pro у
+ * Google — `gemini-3.1-pro-preview`, стабильная — `gemini-2.5-pro`. Меняется
+ * переменной `VERTEX_ЛЕСТНИЦА_ЧАТА` без правки кода.
+ */
+export const ЛЕСТНИЦА_VERTEX_ЧАТА: string[] = (
+  process.env.VERTEX_ЛЕСТНИЦА_ЧАТА ||
+  'google/gemini-3.1-pro-preview,google/gemini-2.5-pro,google/gemini-2.5-flash'
+).split(',').map((м) => м.trim()).filter(Boolean);
+
+export async function vertexЧатОткрыт(): Promise<boolean> {
+  const свой = (process.env.VERTEX_ЧАТ_РАЗРЕШЁН || '').toLowerCase();
+  if (!(свой === '1' || свой === 'true') && !платныеРазрешены()) return false;
+  if (!isVertexConfigured()) return false;
+
+  return await потолокДолларовVertexНеИсчерпан();
+}
+
+/** Первая модель лестницы, которая ответила; null — если не ответила ни одна. */
+export async function vertexЧатПоЛестнице(
+  messages: Array<{ role: string; content: string }>,
+  maxTokens: number = 8192,
+  temperature: number = 0.8
+): Promise<string | null> {
+  for (const модель of ЛЕСТНИЦА_VERTEX_ЧАТА) {
+    const ответ = await vertexChatCompletion(messages, maxTokens, temperature, модель);
+    if (ответ) return ответ;
+    console.warn(`[Vertex] ${модель} не ответила — пробую следующую`);
+  }
+  return null;
+}
+
+/**
+ * СУТОЧНЫЙ ПОТОЛОК VERTEX В ДОЛЛАРАХ — 24.09.2026, слово Архитектора: «поставь
+ * 100 в сутки — вдруг будет скачок пользователей… Эти 100 нужны для защиты на
+ * старте». Меняется переменной `VERTEX_ПОТОЛОК_USD_В_СУТКИ` без правки кода.
+ *
+ * Бюджеты Google только пишут письма и не останавливают расход, суточных
+ * бюджетов у Google нет вовсе. Настоящая остановка — здесь: когда сумма за
+ * скользящие 24 часа дошла до потолка, `vertexChatCompletion` возвращает null
+ * ДО вызова, и разговор уходит к следующей ступени.
+ *
+ * ЦЕНЫ — из Cloud Billing Catalog API, сервис Vertex AI (C7E2-9256-1C43),
+ * замер 24.09.2026, доллары за токен. Берутся цены ДЛИННОГО контекста (выше
+ * 200 тыс. токенов) — они самые высокие, поэтому наш счёт скорее завышает
+ * расход, чем занижает: потолок срабатывает раньше, а не позже.
+ */
+const ЦЕНЫ_VERTEX: Array<[RegExp, number, number]> = [
+  [/gemini-3(\.\d)?-pro/, 0.000004, 0.000018],   // 3.0/3.1 Pro: ввод $4, вывод $18 за 1M (long)
+  [/gemini-2\.5-pro/, 0.0000025, 0.000015],       // 2.5 Pro: $2,50 / $15 (long)
+  [/gemini-2\.5-flash-lite/, 0.0000001, 0.0000004], // 2.5 Flash-Lite: $0,10 / $0,40
+  [/gemini-2\.5-flash/, 0.0000003, 0.0000025],    // 2.5 Flash GA: $0,30 / $2,50
+];
+/** Неизвестная модель считается по самой дорогой цене — ошибка в сторону осторожности. */
+const ЦЕНА_ПО_УМОЛЧАНИЮ: [number, number] = [0.000004, 0.000018];
+
+async function учестьСтоимостьVertex(модель: string, usage: any): Promise<void> {
+  const вход = Number(usage?.prompt_tokens || 0);
+  const всего = Number(usage?.total_tokens || 0);
+  // В выход входят и «мысли» модели: берём всё, что не вход.
+  const выход = Math.max(Number(usage?.completion_tokens || 0), всего - вход, 0);
+  const цена = ЦЕНЫ_VERTEX.find(([шаблон]) => шаблон.test(модель));
+  const [цВход, цВыход] = цена ? [цена[1], цена[2]] : ЦЕНА_ПО_УМОЛЧАНИЮ;
+  const микро = Math.ceil((вход * цВход + выход * цВыход) * 1e6);
+  if (микро <= 0) return;
+  const { record } = await import('./cost-guard');
+  await record('vertex-usd-micro', микро, 1);
+}
+
+async function потолокДолларовVertexНеИсчерпан(): Promise<boolean> {
+  const потолок = Number(process.env.VERTEX_ПОТОЛОК_USD_В_СУТКИ || '100');
+  // Ноль и мусор закрывают путь: ошибка настройки стоит молчания модели, а не денег.
+  if (!Number.isFinite(потолок) || потолок <= 0) return false;
+  try {
+    const строка = process.env.SUBMISSIONS_DB_URL || process.env.DATABASE_URL;
+    if (!строка) return true;
+    const { Pool } = await import('@neondatabase/serverless');
+    const pool = new Pool({ connectionString: строка });
+    try {
+      const r = await pool.query(
+        `SELECT COALESCE(SUM(units), 0)::bigint AS u FROM api_spend_hourly
+          WHERE service = 'vertex-usd-micro' AND hour_utc >= now() - interval '24 hours'`
+      );
+      const доллары = Number(r.rows?.[0]?.u || 0) / 1e6;
+      if (доллары >= потолок) {
+        console.warn(`[Vertex] СУТОЧНЫЙ ПОТОЛОК: $${доллары.toFixed(2)} из $${потолок} — платные вызовы остановлены`);
+        return false;
+      }
+      return true;
+    } finally {
+      try { await pool.end(); } catch { /* ignore */ }
+    }
+  } catch (e) {
+    console.warn('[Vertex] потолок проверить не удалось, считаю не достигнутым:', String(e).slice(0, 160));
+    return true;
   }
 }

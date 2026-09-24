@@ -490,9 +490,11 @@ async function ответБесплатнымИлиГрантом(
     // 🔴 12.09.2026: платный Vertex звался БЕЗ проверки разрешения — на всех
     // четырёх сайтах. Спасал выключенный на стороне Google API (403), а не
     // наш предохранитель. Раздел 13: платный путь закрывается физически.
-    const { vertexChatCompletion, isVertexConfigured } = await import("@/lib/vertex-ai");
-    if (платныеРазрешены() && isVertexConfigured()) {
-      const ответ = await vertexChatCompletion(formattedMessages, 2048, 0.8);
+    // 24.09.2026: свой выключатель VERTEX_ЧАТ_РАЗРЕШЁН, суточный потолок и
+    // лестница топовых моделей — см. `vertexЧатОткрыт` в lib/vertex-ai.ts.
+    const { vertexЧатОткрыт, vertexЧатПоЛестнице } = await import("@/lib/vertex-ai");
+    if (await vertexЧатОткрыт()) {
+      const ответ = await vertexЧатПоЛестнице(formattedMessages, 2048, 0.8);
       if (ответ) {
         // 🔴 УЧЁТ РАСХОДА — добавлено 24.08.2026. Чат радио сторожу
         // `cost-guard` не докладывал. Раздел 24: что не считается, то не
