@@ -26,7 +26,7 @@ import { ЖИВЫЕ_ДОМЕНЫ } from '../data/данные';
 const ТЕКСТ: React.CSSProperties = {
   fontSize: 16,
   lineHeight: 1.75,
-  color: '#cbd5e1',
+  color: 'var(--dx-text, #cbd5e1)',
   marginBottom: 18,
 };
 
@@ -35,14 +35,14 @@ const ЗАГ2: React.CSSProperties = {
   fontWeight: 700,
   marginTop: 44,
   marginBottom: 16,
-  color: '#f1f5f9',
+  color: 'var(--dx-head, #f1f5f9)',
 };
 
 const ЯЧЕЙКА: React.CSSProperties = {
   padding: '9px 12px',
   borderBottom: '1px solid rgba(148,163,184,0.12)',
   fontSize: 14,
-  color: '#cbd5e1',
+  color: 'var(--dx-text, #cbd5e1)',
   verticalAlign: 'top',
 };
 
@@ -51,7 +51,7 @@ const ШАПКА: React.CSSProperties = {
   padding: '9px 12px',
   borderBottom: '1px solid rgba(148,163,184,0.3)',
   fontSize: 13,
-  color: '#94a3b8',
+  color: 'var(--dx-mut, #94a3b8)',
   fontWeight: 600,
 };
 
@@ -73,11 +73,11 @@ export default function RegistryClient({ языкИзПути }: { языкИз�
   const Д = ЖИВЫЕ_ДОМЕНЫ;
 
   const карточки = [
-    { n: разряды(Д.доменовВсего), п: т.числаДоменов, цвет: '#94a3b8' },
-    { n: разряды(Д.живых), п: т.числаЖивых, цвет: '#34d399' },
-    { n: разряды(Д.мёртвых), п: т.числаМёртвых, цвет: '#f87171' },
-    { n: разряды(Д.записейВсего), п: т.числаЗаписей, цвет: '#94a3b8' },
-    { n: разряды(Д.записейУМёртвых), п: т.числаЗаписейМёртвых, цвет: '#f87171' },
+    { n: разряды(Д.доменовВсего), п: т.числаДоменов, цвет: 'var(--dx-mut, #94a3b8)' },
+    { n: разряды(Д.живых), п: т.числаЖивых, цвет: 'var(--dx-green2, #34d399)' },
+    { n: разряды(Д.мёртвых), п: т.числаМёртвых, цвет: 'var(--dx-red, #f87171)' },
+    { n: разряды(Д.записейВсего), п: т.числаЗаписей, цвет: 'var(--dx-mut, #94a3b8)' },
+    { n: разряды(Д.записейУМёртвых), п: т.числаЗаписейМёртвых, цвет: 'var(--dx-red, #f87171)' },
   ];
 
   return (
@@ -202,7 +202,7 @@ export default function RegistryClient({ языкИзПути }: { языкИз�
           {/* ── автор и раскрытие ── */}
           <h2 style={ЗАГ2}>{т.авторЗаголовок}</h2>
           <p style={ТЕКСТ}>{т.автор1}</p>
-          <p style={{ ...ТЕКСТ, fontSize: 14, color: '#94a3b8' }}>{т.конфликт}</p>
+          <p style={{ ...ТЕКСТ, fontSize: 14, color: 'var(--dx-mut, #94a3b8)' }}>{т.конфликт}</p>
 
           <div className="mt-10 pt-6 border-t border-gray-200 dark:border-gray-700">
             <Link

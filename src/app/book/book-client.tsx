@@ -236,7 +236,7 @@ const BookPage = () => {
               </svg>
             </a>
           </p>
-          <p className="text-sm text-slate-500 dark:text-gray-400 mt-4 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm text-slate-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto leading-relaxed">
             {locale === 'ru'
               ? <>Автор также опубликовал научную монографию «Symbiotic Literature: Defining a Genre of Human–Machine Co-Authorship» — методологию отличения настоящего соавторства человек–ИИ от одноразовой генерации. <a href="https://doi.org/10.5281/zenodo.22805057" target="_blank" rel="noopener noreferrer" className="underline hover:text-emerald-600 dark:hover:text-[#00FF88]">Читать на Zenodo (DOI)</a>.</>
               : locale === 'es'

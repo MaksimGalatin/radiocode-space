@@ -210,7 +210,7 @@ export function RadioHeader() {
               >
                 RADIOCODE
               </span>
-              <span className="text-[13px] tracking-[0.3em] text-[#8B8BA8] font-medium mt-0.5">
+              <span className="text-[13px] tracking-[0.3em] text-[#A5A5BD] font-medium mt-0.5">
                 .SPACE
               </span>
             </div>
@@ -240,7 +240,7 @@ export function RadioHeader() {
                 <path d="M4 5h11a2 2 0 0 1 2 2v11a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2V5z" />
                 <path d="M7.5 9h6M7.5 12.5h6M7.5 16h4" />
               </svg>
-              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF] hidden sm:inline uppercase">
                 {rt('newsLink')}
               </span>
             </motion.a>
@@ -266,7 +266,7 @@ export function RadioHeader() {
                 <path d="m14.83 14.83 4.24 4.24" />
                 <path d="m9.17 14.83-4.24 4.24" />
               </svg>
-              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF] hidden sm:inline uppercase">
                 ACR
               </span>
             </motion.a>
@@ -288,7 +288,7 @@ export function RadioHeader() {
               <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
               </svg>
-              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF] hidden sm:inline uppercase">
                 Digital
               </span>
             </motion.a>
@@ -332,7 +332,7 @@ export function RadioHeader() {
                   <circle cx="11" cy="11" r="7" />
                   <path d="M20 20l-3.5-3.5" />
                 </svg>
-                <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
+                <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF] hidden sm:inline uppercase">
                   AIfaFocus
                 </span>
               </motion.a>

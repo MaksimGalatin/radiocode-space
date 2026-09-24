@@ -3748,18 +3748,18 @@ export default function DigitalSOTAPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/60 border border-slate-200 dark:border-emerald-500/40 space-y-1">
               <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">Measured Recall@10</span>
-              <span className="text-xl sm:text-2xl font-black font-mono text-emerald-600 dark:text-emerald-400">
+              <span className="text-xl sm:text-2xl font-black font-mono text-emerald-700 dark:text-emerald-400">
                 {liveBenchMetrics ? `${liveBenchMetrics.recall10}%` : '39.55%'}
               </span>
-              <span className="text-[10px] text-emerald-600 dark:text-emerald-300/70 block">vs Exact L2 Ground Truth</span>
+              <span className="text-[10px] text-emerald-700 dark:text-emerald-300/70 block">vs Exact L2 Ground Truth</span>
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/60 border border-slate-200 dark:border-cyan-500/40 space-y-1">
               <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">P50 Search Latency</span>
-              <span className="text-xl sm:text-2xl font-black font-mono text-cyan-600 dark:text-[#00F0FF]">
+              <span className="text-xl sm:text-2xl font-black font-mono text-cyan-700 dark:text-[#00F0FF]">
                 {simResult.latencyMs ? `${simResult.latencyMs} ms` : '44 ms'}
               </span>
-              <span className="text-[10px] text-cyan-600 dark:text-cyan-300/70 block">N=50,000, independent protocol</span>
+              <span className="text-[10px] text-cyan-700 dark:text-cyan-300/70 block">N=50,000, independent protocol</span>
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/60 border border-slate-200 dark:border-cyan-500/40 space-y-1">
@@ -3773,30 +3773,30 @@ export default function DigitalSOTAPage() {
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/60 border border-slate-200 dark:border-amber-500/40 space-y-1">
               <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">Connectome Fingerprint</span>
               <span className="text-xs font-mono text-cyan-700 dark:text-cyan-300 truncate block font-bold" title={simResult.hashHex}>{simResult.hashHex}</span>
-              <span className="text-[10px] text-amber-600 dark:text-amber-300/70 block">Active KC: 102/4096 (2.5%)</span>
+              <span className="text-[10px] text-amber-700 dark:text-amber-300/70 block">Active KC: 102/4096 (2.5%)</span>
             </div>
           </div>
 
           {/* 5 CIRCUIT STAGES */}
           <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 pt-2 border-t border-slate-200 dark:border-gray-800 text-xs font-mono">
             <div className={`p-2.5 rounded-xl transition-all border text-center ${activeStage >= 1 ? 'bg-cyan-500/15 border-cyan-400 text-cyan-900 dark:text-cyan-300 shadow-[0_0_15px_rgba(0,240,255,0.2)]' : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-gray-800'}`}>
-              <span className="text-cyan-600 dark:text-[#00F0FF] font-bold block">1. FlyHash</span>
+              <span className="text-cyan-700 dark:text-[#00F0FF] font-bold block">1. FlyHash</span>
               <span className="text-[10px] text-slate-600 dark:text-slate-400">4096-d Projection</span>
             </div>
             <div className={`p-2.5 rounded-xl transition-all border text-center ${activeStage >= 2 ? 'bg-cyan-500/15 border-cyan-400 text-cyan-900 dark:text-cyan-300 shadow-[0_0_15px_rgba(0,240,255,0.2)]' : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-gray-800'}`}>
-              <span className="text-cyan-600 dark:text-[#00F0FF] font-bold block">2. Kenyon WTA</span>
+              <span className="text-cyan-700 dark:text-[#00F0FF] font-bold block">2. Kenyon WTA</span>
               <span className="text-[10px] text-slate-600 dark:text-slate-400">2.5% Sparsification</span>
             </div>
-            <div className={`p-2.5 rounded-xl transition-all border text-center ${activeStage >= 3 ? 'bg-emerald-500/15 border-emerald-400 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]' : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-gray-800'}`}>
-              <span className="text-emerald-600 dark:text-emerald-400 font-bold block">3. APL Noise Gate</span>
+            <div className={`p-2.5 rounded-xl transition-all border text-center ${activeStage >= 3 ? 'bg-emerald-500/15 border-emerald-400 text-emerald-800 dark:text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]' : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-gray-800'}`}>
+              <span className="text-emerald-700 dark:text-emerald-400 font-bold block">3. APL Noise Gate</span>
               <span className="text-[10px] text-slate-600 dark:text-slate-400">Feedback Inhibition</span>
             </div>
             <div className={`p-2.5 rounded-xl transition-all border text-center ${activeStage >= 4 ? 'bg-amber-500/15 border-amber-400 text-amber-300 shadow-[0_0_15px_rgba(251,191,36,0.2)]' : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-gray-800'}`}>
-              <span className="text-amber-600 dark:text-amber-400 font-bold block">4. CANN Attractor</span>
+              <span className="text-amber-700 dark:text-amber-400 font-bold block">4. CANN Attractor</span>
               <span className="text-[10px] text-slate-600 dark:text-slate-400">Ring Focus & No Drift</span>
             </div>
             <div className={`p-2.5 rounded-xl transition-all border text-center ${activeStage >= 5 ? 'bg-purple-500/15 border-purple-400 text-purple-300 shadow-[0_0_15px_rgba(192,132,252,0.2)]' : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-gray-800'}`}>
-              <span className="text-purple-600 dark:text-purple-400 font-bold block">5. Bilateral Arb.</span>
+              <span className="text-purple-700 dark:text-purple-400 font-bold block">5. Bilateral Arb.</span>
               <span className="text-[10px] text-slate-600 dark:text-slate-400">Dual Hemisphere Agree</span>
             </div>
           </div>
@@ -3970,7 +3970,7 @@ export default function DigitalSOTAPage() {
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-slate-200 dark:border-gray-800/80 text-xs font-mono text-amber-600 dark:text-amber-400">
+              <div className="pt-3 border-t border-slate-200 dark:border-gray-800/80 text-xs font-mono text-amber-700 dark:text-amber-400">
                 {lang === 'ru' ? '21.09.2026: график многопоточного масштабирования (4/8/16/32/64 потока) убран — эти цифры и "линейность 94.2%" никогда не измерялись, скрипт бенчмарка однопоточный.' : lang === 'es' ? '21-09-2026: se eliminó el gráfico de escalado multi-hilo (4/8/16/32/64) — esas cifras y la "linealidad 94.2%" nunca se midieron; el script es de un solo hilo.' : lang === 'zh' ? '2026-09-21：多线程扩展图（4/8/16/32/64 线程）已移除——这些数字和"94.2% 线性度"从未被实测，基准脚本为单线程。' : '2026-09-21: the multi-thread scaling chart (4/8/16/32/64 threads) was removed — those numbers and the "94.2% linearity" figure were never measured; the benchmark script is single-threaded.'}
               </div>
             </div>
@@ -4012,7 +4012,7 @@ export default function DigitalSOTAPage() {
                       <strong>{JX[lang].ours}</strong>
                     </td>
                     <td className="py-4 px-4 text-center font-mono font-bold text-cyan-900 dark:text-[#00F0FF]">43.9 {JX[lang].ms}</td>
-                    <td className="py-4 px-4 text-center font-mono text-emerald-300">215.5 MB</td>
+                    <td className="py-4 px-4 text-center font-mono text-emerald-800 dark:text-emerald-300">215.5 MB</td>
                     <td className="py-4 px-4 text-center font-mono text-amber-500">39.55%</td>
                     <td className="py-4 px-4 text-center font-mono text-slate-500">{JX[lang].notMeasured}</td>
                     <td className="py-4 px-4 text-center font-mono text-emerald-400">{JX[lang].noGpu}</td>
@@ -4027,7 +4027,7 @@ export default function DigitalSOTAPage() {
                   </tr>
                 </tbody>
               </table>
-            <p className="text-[11px] font-mono text-amber-600 dark:text-amber-400 mt-2 font-semibold">
+            <p className="text-[11px] font-mono text-amber-700 dark:text-amber-400 mt-2 font-semibold">
               {JX[lang].duel}
             </p>
             <p className="text-[11px] font-mono text-slate-400 italic mt-2">
@@ -4038,7 +4038,7 @@ export default function DigitalSOTAPage() {
             {/* BENCHMARK PROVENANCE & REPRODUCIBILITY TABLE */}
             <div className="mt-6 pt-6 border-t border-slate-200 dark:border-gray-800 space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <h4 className="text-sm font-bold font-mono text-cyan-600 dark:text-[#00F0FF] uppercase tracking-wider flex items-center gap-2">
+                <h4 className="text-sm font-bold font-mono text-cyan-700 dark:text-[#00F0FF] uppercase tracking-wider flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4" />
                   Benchmark Provenance &amp; Verification Matrix (Audit Trail)
                 </h4>
@@ -4183,7 +4183,7 @@ export default function DigitalSOTAPage() {
                 </button>
                 <button
                   onClick={handleDownloadScript}
-                  className="px-4 py-2 rounded-xl bg-black/60 hover:bg-gray-800 text-slate-800 dark:text-slate-200 font-semibold text-xs font-mono transition-all flex items-center gap-2 border border-gray-700"
+                  className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-black/60 hover:bg-slate-200 dark:hover:bg-gray-800 text-slate-800 dark:text-slate-200 font-semibold text-xs font-mono transition-all flex items-center gap-2 border border-slate-300 dark:border-gray-700"
                 >
                   <Download className="w-4 h-4" />
                   <span>{t.btnDownload}</span>
@@ -4233,7 +4233,7 @@ export default function DigitalSOTAPage() {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 animate-in fade-in duration-300">
                   <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/70 border border-emerald-500/40 space-y-1">
                     <span className="text-[11px] font-mono text-slate-600 dark:text-gray-400 uppercase block">Measured Recall@10</span>
-                    <span className="text-2xl sm:text-3xl font-black font-mono text-emerald-600 dark:text-emerald-400">{liveBenchMetrics.recall10}%</span>
+                    <span className="text-2xl sm:text-3xl font-black font-mono text-emerald-700 dark:text-emerald-400">{liveBenchMetrics.recall10}%</span>
                     <span className="text-[10px] text-emerald-700 dark:text-emerald-200/70 block">vs Exact L2 Ground Truth</span>
                   </div>
                   <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/70 border border-cyan-500/40 space-y-1">
@@ -4248,7 +4248,7 @@ export default function DigitalSOTAPage() {
                   </div>
                   <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/70 border border-amber-500/40 space-y-1">
                     <span className="text-[11px] font-mono text-slate-600 dark:text-gray-400 uppercase block">Index RAM Footprint</span>
-                    <span className="text-2xl sm:text-3xl font-black font-mono text-amber-600 dark:text-amber-400">{liveBenchMetrics.ramMb} MB</span>
+                    <span className="text-2xl sm:text-3xl font-black font-mono text-amber-700 dark:text-amber-400">{liveBenchMetrics.ramMb} MB</span>
                     <span className="text-[10px] text-amber-700 dark:text-amber-200/70 block">50,000 vectors (1024d)</span>
                   </div>
                 </div>
@@ -4395,7 +4395,7 @@ export default function DigitalSOTAPage() {
                 </div>
                 <div className="flex flex-wrap items-center gap-2 text-[11px]">
                   <span className="bg-slate-100 dark:bg-black border border-slate-200 dark:border-gray-700 px-2.5 py-1 rounded-lg text-slate-800 dark:text-gray-300 font-semibold">{JX[lang].fileLbl}<strong className="text-cyan-800 dark:text-cyan-400">aifa_biobench.py</strong></span>
-                  <span className="bg-slate-100 dark:bg-black border border-slate-200 dark:border-gray-700 px-2.5 py-1 rounded-lg text-slate-800 dark:text-gray-300 font-semibold">{JX[lang].licLbl}<strong className="text-amber-600 dark:text-amber-400">Apache 2.0 Open-Source</strong></span>
+                  <span className="bg-slate-100 dark:bg-black border border-slate-200 dark:border-gray-700 px-2.5 py-1 rounded-lg text-slate-800 dark:text-gray-300 font-semibold">{JX[lang].licLbl}<strong className="text-amber-700 dark:text-amber-400">Apache 2.0 Open-Source</strong></span>
                   <span className="bg-cyan-50 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-800 px-2.5 py-1 rounded-lg text-cyan-900 dark:text-cyan-300 font-bold">Protocol A Verified</span>
                 </div>
               </div>
@@ -4475,27 +4475,27 @@ export default function DigitalSOTAPage() {
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
                 <span className="text-[10px] font-bold text-blue-700 dark:text-blue-400 block">E1 • MATH MODEL</span>
                 <span className="text-xs font-semibold text-slate-800 dark:text-blue-200">{lang === 'ru' ? 'Матмодель' : lang === 'es' ? 'Modelo formal' : lang === 'zh' ? '形式模型' : 'Formal Model'}</span>
-                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Асимптотика / формулы' : lang === 'es' ? 'Complejidad analítica' : lang === 'zh' ? '解析复杂度' : 'Analytical complexity'}</p>
+                <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Асимптотика / формулы' : lang === 'es' ? 'Complejidad analítica' : lang === 'zh' ? '解析复杂度' : 'Analytical complexity'}</p>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-cyan-800/60 space-y-1">
                 <span className="text-[10px] font-bold text-cyan-800 dark:text-cyan-400 block">E2 • PROTOTYPE</span>
                 <span className="text-xs font-semibold text-slate-800 dark:text-cyan-200">{lang === 'ru' ? 'Прототип ПО' : lang === 'es' ? 'Prototipo de software' : lang === 'zh' ? '软件原型' : 'Software Proto'}</span>
-                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Симулятор / партиционер' : lang === 'es' ? 'Simulador / particionador' : lang === 'zh' ? '模拟器 / 划分器' : 'Simulator / partitioner'}</p>
+                <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Симулятор / партиционер' : lang === 'es' ? 'Simulador / particionador' : lang === 'zh' ? '模拟器 / 划分器' : 'Simulator / partitioner'}</p>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-emerald-800/60 space-y-1">
                 <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 block">E3 • BENCHMARK</span>
                 <span className="text-xs font-semibold text-slate-800 dark:text-emerald-200">{lang === 'ru' ? 'Бенчмарк ПО' : lang === 'es' ? 'Benchmark de software' : lang === 'zh' ? '软件基准' : 'Software Bench'}</span>
-                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Воспроизводимый тест CPU' : lang === 'es' ? 'Prueba reproducible en CPU' : lang === 'zh' ? '可复现的 CPU 测试' : 'Reproducible CPU test'}</p>
+                <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Воспроизводимый тест CPU' : lang === 'es' ? 'Prueba reproducible en CPU' : lang === 'zh' ? '可复现的 CPU 测试' : 'Reproducible CPU test'}</p>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-yellow-800/60 space-y-1">
                 <span className="text-[10px] font-bold text-amber-700 dark:text-yellow-400 block">E4 • EXT. REPL.</span>
                 <span className="text-xs font-semibold text-slate-800 dark:text-yellow-200">{lang === 'ru' ? 'Репликация' : lang === 'es' ? 'Auditoría externa' : lang === 'zh' ? '外部审计' : 'External Audit'}</span>
-                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Аппаратный стенд' : lang === 'es' ? 'Hardware independiente' : lang === 'zh' ? '独立硬件' : 'Independent hardware'}</p>
+                <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Аппаратный стенд' : lang === 'es' ? 'Hardware independiente' : lang === 'zh' ? '独立硬件' : 'Independent hardware'}</p>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-purple-800/60 space-y-1">
                 <span className="text-[10px] font-bold text-purple-700 dark:text-purple-400 block">E5 • PRODUCTION</span>
                 <span className="text-xs font-semibold text-slate-800 dark:text-purple-200">{lang === 'ru' ? 'Боевой прод' : lang === 'es' ? 'Producción real' : lang === 'zh' ? '生产环境' : 'In-Situ Field'}</span>
-                <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Промышленный кластер' : lang === 'es' ? 'Clúster de producción' : lang === 'zh' ? '生产集群' : 'Production cluster'}</p>
+                <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Промышленный кластер' : lang === 'es' ? 'Clúster de producción' : lang === 'zh' ? '生产集群' : 'Production cluster'}</p>
               </div>
             </div>
 
@@ -4687,7 +4687,7 @@ export default function DigitalSOTAPage() {
                 className={`px-4 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'prod'
                     ? 'bg-green-500 text-black shadow-[0_0_15px_rgba(34,197,94,0.3)]'
-                    : 'bg-white dark:bg-[#0B0F19] text-green-400 hover:text-slate-900 dark:text-white border border-green-900/60'
+                    : 'bg-white dark:bg-[#0B0F19] text-green-700 dark:text-green-400 hover:text-slate-900 dark:text-white border border-green-300 dark:border-green-900/60'
                 }`}
               >
                 {t.filterTechProd}
@@ -4697,7 +4697,7 @@ export default function DigitalSOTAPage() {
                 className={`px-4 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all ${
                   techFilter === 'rnd'
                     ? 'bg-yellow-500 text-black shadow-[0_0_15px_rgba(234,179,8,0.3)]'
-                    : 'bg-white dark:bg-[#0B0F19] text-yellow-400 hover:text-slate-900 dark:text-white border border-yellow-900/60'
+                    : 'bg-white dark:bg-[#0B0F19] text-amber-700 dark:text-yellow-400 hover:text-slate-900 dark:text-white border border-amber-300 dark:border-yellow-900/60'
                 }`}
               >
                 {t.filterTechRnd}
@@ -4991,15 +4991,15 @@ export default function DigitalSOTAPage() {
                   </span>
                   <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-purple-700 dark:text-purple-400 shrink-0 mt-0.5" />
                       <span><strong>{JX[lang].distH}</strong>{JX[lang].distT}</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-purple-700 dark:text-purple-400 shrink-0 mt-0.5" />
                       <span><strong>{JX[lang].cryptoH}</strong>{JX[lang].cryptoT}</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-purple-700 dark:text-purple-400 shrink-0 mt-0.5" />
                       <span><strong>{JX[lang].codevH}</strong>{JX[lang].codevT}</span>
                     </li>
                   </ul>

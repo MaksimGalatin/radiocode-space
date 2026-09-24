@@ -3810,7 +3810,7 @@ export default function ACRPage() {
             {t.subtitle}
           </p>
           <div className="pt-2 flex flex-col items-center gap-3">
-            <div className="inline-flex items-center gap-2 bg-slate-50 dark:bg-[#0B0F19] border border-cyan-500/40 px-5 py-2 rounded-2xl text-xs sm:text-sm font-semibold text-cyan-600 dark:text-[#00F0FF] shadow-sm">
+            <div className="inline-flex items-center gap-2 bg-slate-50 dark:bg-[#0B0F19] border border-cyan-500/40 px-5 py-2 rounded-2xl text-xs sm:text-sm font-semibold text-cyan-700 dark:text-[#00F0FF] shadow-sm">
               <Sparkles className="w-4 h-4 text-cyan-500" />
               {t.authorBadge}
             </div>
@@ -3878,9 +3878,9 @@ export default function ACRPage() {
           {/* EMPIRICAL STATISTICAL RIGOR & HARDWARE PROFILING FOOTNOTE */}
           <div className="pt-4 mt-4 border-t border-slate-200 dark:border-gray-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono text-slate-600 dark:text-slate-400">
             <div>
-              <span className="text-cyan-600 dark:text-[#00F0FF] font-bold">{t.ablationProtocol}</span>
+              <span className="text-cyan-700 dark:text-[#00F0FF] font-bold">{t.ablationProtocol}</span>
             </div>
-            <span className="text-emerald-600 dark:text-emerald-400 font-semibold shrink-0">
+            <span className="text-emerald-700 dark:text-emerald-400 font-semibold shrink-0">
               Script: bench/acr_agent_real_benchmark.py
             </span>
           </div>
@@ -4111,27 +4111,27 @@ export default function ACRPage() {
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
               <span className="text-[10px] font-bold text-gray-400 block">E0 • CONCEPT</span>
               <span className="text-xs font-semibold text-slate-700 dark:text-gray-300 font-normal">{lang === 'ru' ? 'Гипотеза' : lang === 'es' ? 'Hipótesis' : lang === 'zh' ? '假设' : 'Concept'}</span>
-              <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Биологический концепт' : lang === 'es' ? 'Hipótesis biológica' : lang === 'zh' ? '生物学假设' : 'Biological hypothesis'}</p>
+              <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Биологический концепт' : lang === 'es' ? 'Hipótesis biológica' : lang === 'zh' ? '生物学假设' : 'Biological hypothesis'}</p>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
               <span className="text-[10px] font-bold text-blue-700 dark:text-blue-400 block">E1 • MATH MODEL</span>
               <span className="text-xs font-semibold text-slate-800 dark:text-blue-200">{lang === 'ru' ? 'Матмодель' : lang === 'es' ? 'Modelo formal' : lang === 'zh' ? '形式模型' : 'Formal Model'}</span>
-              <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Асимптотика / формулы' : lang === 'es' ? 'Complejidad analítica' : lang === 'zh' ? '解析复杂度' : 'Analytical complexity'}</p>
+              <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Асимптотика / формулы' : lang === 'es' ? 'Complejidad analítica' : lang === 'zh' ? '解析复杂度' : 'Analytical complexity'}</p>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-cyan-800/60 space-y-1">
               <span className="text-[10px] font-bold text-cyan-800 dark:text-cyan-400 block">E2 • PROTOTYPE</span>
               <span className="text-xs font-semibold text-slate-800 dark:text-cyan-200">{lang === 'ru' ? 'Прототип ПО' : lang === 'es' ? 'Prototipo de software' : lang === 'zh' ? '软件原型' : 'Software Proto'}</span>
-              <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Симулятор / партиционер' : lang === 'es' ? 'Simulador / particionador' : lang === 'zh' ? '模拟器 / 划分器' : 'Simulator / partitioner'}</p>
+              <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Симулятор / партиционер' : lang === 'es' ? 'Simulador / particionador' : lang === 'zh' ? '模拟器 / 划分器' : 'Simulator / partitioner'}</p>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-emerald-800/60 space-y-1">
               <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 block">E3 • BENCHMARK</span>
               <span className="text-xs font-semibold text-slate-800 dark:text-emerald-200">{lang === 'ru' ? 'Бенчмарк ПО' : lang === 'es' ? 'Benchmark de software' : lang === 'zh' ? '软件基准' : 'Software Bench'}</span>
-              <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Воспроизводимый тест CPU' : lang === 'es' ? 'Prueba reproducible en CPU' : lang === 'zh' ? '可复现的 CPU 测试' : 'Reproducible CPU test'}</p>
+              <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Воспроизводимый тест CPU' : lang === 'es' ? 'Prueba reproducible en CPU' : lang === 'zh' ? '可复现的 CPU 测试' : 'Reproducible CPU test'}</p>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-yellow-800/60 space-y-1">
               <span className="text-[10px] font-bold text-amber-700 dark:text-yellow-400 block">E4 • EXT. REPL.</span>
               <span className="text-xs font-semibold text-slate-800 dark:text-yellow-200">{lang === 'ru' ? 'Репликация' : lang === 'es' ? 'Auditoría externa' : lang === 'zh' ? '外部审计' : 'External Audit'}</span>
-              <p className="text-[10px] text-slate-500 dark:text-gray-500">{lang === 'ru' ? 'Аппаратный стенд' : lang === 'es' ? 'Hardware independiente' : lang === 'zh' ? '独立硬件' : 'Independent hardware'}</p>
+              <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Аппаратный стенд' : lang === 'es' ? 'Hardware independiente' : lang === 'zh' ? '独立硬件' : 'Independent hardware'}</p>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-purple-800/60 space-y-1">
               <span className="text-[10px] font-bold text-purple-400 block">E5 • PRODUCTION</span>
@@ -4141,7 +4141,7 @@ export default function ACRPage() {
           </div>
 
           {/* Status Disclaimer Banner */}
-          <div className="p-3.5 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-xs font-mono text-cyan-200/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="p-3.5 rounded-xl bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-500/30 text-xs font-mono text-cyan-900 dark:text-cyan-200/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
               <ShieldCheck className="w-4 h-4 text-cyan-900 dark:text-[#00F0FF] shrink-0" />
               <span>
@@ -4258,7 +4258,7 @@ export default function ACRPage() {
               ))}
             </div>
             <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 text-[11px] text-slate-600 dark:text-slate-400 space-y-1.5 leading-relaxed">
-              <div><strong className="text-amber-600 dark:text-amber-400 uppercase">{PR[lang].en1}</strong> {PR[lang].en2}</div>
+              <div><strong className="text-amber-700 dark:text-amber-400 uppercase">{PR[lang].en1}</strong> {PR[lang].en2}</div>
               <div className="pt-1"><strong className="text-cyan-800 dark:text-cyan-400 uppercase">{PR[lang].st1}</strong> {PR[lang].st2}</div>
             </div>
           </div>
