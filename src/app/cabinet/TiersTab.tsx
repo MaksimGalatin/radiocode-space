@@ -197,6 +197,8 @@ export default function TiersTab(props: { tier: number; toast: (m: string) => vo
       </div>
       <div style={{ fontSize: 15, color: TOKENS.mut, textAlign: "center" }}>{t("tiersPayNote")}</div>
 
+      <MemoryExtra tier={props.tier} li={li} toast={props.toast} />
+
       <Card>
         <SectionTitle icon="🧾" title={t("payHistory")} />
         {orders === null ? <Skeleton h={60} /> : orders.length === 0 ? <EmptyState text={t("payEmpty")} /> : (
@@ -220,5 +222,68 @@ export default function TiersTab(props: { tier: number; toast: (m: string) => vo
         )}
       </Card>
     </div>
+  );
+}
+
+
+/**
+ * ДОКУПКА ВЕЧНОЙ ПАМЯТИ СВЕРХ ТАРИФА (24.09.2026, слово Архитектора: «затем
+ * уже загружать по цене токена Arweave +10% нашей сервисной комиссии»).
+ * Цены живые: /api/memory/extra спрашивает узел оплаты, тот — сеть Arweave и
+ * курс AR на эту минуту. Покупка — только на платном тарифе: без тарифа в
+ * блокчейн не пишем вовсе.
+ */
+const ДОКУПКА_ТЕКСТ: Record<string, [string, string, string, string]> = {
+  title: ["Докупить вечную память", "Buy more permanent memory", "Comprar más memoria permanente", "购买更多永久记忆"],
+  sub: ["Когда месячный объём тарифа исчерпан, запись продолжается из докупленного. Цена — живая цена сети Arweave плюс 10 % сервисной комиссии. Докупленный объём не сгорает.",
+        "When your plan's monthly volume runs out, writing continues from purchased volume. Price: the live Arweave network price plus a 10% service fee. Purchased volume never expires.",
+        "Cuando se agota el volumen mensual del plan, la escritura continúa con el volumen comprado. Precio: el precio en vivo de la red Arweave más un 10 % de comisión de servicio. El volumen comprado no caduca.",
+        "当套餐的月度容量用完后，将继续使用已购买的容量写入。价格：Arweave 网络实时价格加 10% 服务费。已购买的容量永不过期。"],
+  pages: ["≈ {n} страниц", "≈ {n} pages", "≈ {n} páginas", "约 {n} 页"],
+  need: ["Докупка доступна на любом платном тарифе.", "Extra volume is available on any paid plan.", "El volumen extra está disponible en cualquier plan de pago.", "任何付费套餐均可购买额外容量。"],
+  none: ["Цена сейчас недоступна — попробуйте через минуту.", "Price unavailable right now — try again in a minute.", "Precio no disponible ahora: inténtalo en un minuto.", "暂时无法获取价格，请一分钟后重试。"],
+  rate: ["Курс AR сейчас: ${r}", "AR rate now: ${r}", "Cotización de AR ahora: ${r}", "当前 AR 汇率：${r}"],
+};
+const СТРАНИЦ_НА_МБ = 233;   // 1 800 знаков русского текста в шифротексте ≈ 4,4 КБ
+
+function MemoryExtra(props: { tier: number; li: number; toast: (m: string) => void }) {
+  const T = (k: string) => ДОКУПКА_ТЕКСТ[k][props.li];
+  const [q, setQ] = useState<any>(undefined);
+  const [busy, setBusy] = useState(0);
+  useEffect(() => {
+    fetch("/api/memory/extra", { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(setQ).catch(() => setQ(null));
+  }, []);
+  const buy = async (mb: number) => {
+    setBusy(mb);
+    try {
+      const r = await fetch("/api/memory/extra", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ mb }) });
+      const d = await r.json().catch(() => ({}));
+      if (r.ok && d.invoice_url) { window.location.href = d.invoice_url; return; }
+      props.toast(d.error === "paid_tier_required" ? T("need") : T("none"));
+    } catch { props.toast(T("none")); }
+    setBusy(0);
+  };
+  const число = (n: number) => n.toLocaleString(["ru-RU", "en-US", "es-ES", "zh-CN"][props.li]);
+  return (
+    <Card>
+      <SectionTitle icon="♾️" title={T("title")} sub={T("sub")} />
+      {q === undefined ? <Skeleton h={60} /> : !q?.пакеты ? <div style={{ fontSize: 15, color: TOKENS.mut }}>{T("none")}</div> : (
+        <>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 12 }}>
+            {q.пакеты.map((p: any) => (
+              <button key={p.mb} className="cab-btn" disabled={busy !== 0 || props.tier < 1} onClick={() => buy(p.mb)}
+                style={{ background: "transparent", border: `1px solid ${TOKENS.cyan}`, color: TOKENS.text, padding: "14px 10px", lineHeight: 1.4 }}>
+                <div style={{ fontSize: 17, fontWeight: 700 }}>{p.mb >= 1024 ? "1 GB" : `${p.mb} MB`} · ${p.usd.toFixed(2)}</div>
+                <div style={{ fontSize: 14, color: TOKENS.sub }}>{T("pages").replace("{n}", число(Math.round(p.mb * СТРАНИЦ_НА_МБ / 100) * 100))}</div>
+                {busy === p.mb && <div style={{ fontSize: 14 }}>…</div>}
+              </button>
+            ))}
+          </div>
+          <div style={{ fontSize: 14, color: TOKENS.mut, marginTop: 10 }}>
+            {props.tier < 1 ? T("need") + " " : ""}{T("rate").replace("{r}", Number(q.курс).toFixed(2))}
+          </div>
+        </>
+      )}
+    </Card>
   );
 }
