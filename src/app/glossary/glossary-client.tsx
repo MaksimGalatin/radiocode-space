@@ -1266,7 +1266,7 @@ export default function GlossaryPage() {
           {filtered.map((item, idx) => (
             <div
               key={idx}
-              className="p-5 rounded-2xl bg-gray-900/40 border border-gray-800/80 hover:border-cyan-500/40 transition-all space-y-2 flex flex-col justify-between"
+              className="keep-dark p-5 rounded-2xl bg-gray-900/40 border border-gray-800/80 hover:border-cyan-500/40 transition-all space-y-2 flex flex-col justify-between"
             >
               <div className="space-y-1.5">
                 <div className="flex items-start justify-between gap-2">

@@ -3789,7 +3789,7 @@ export default function ACRPage() {
             </Link>
             <Link
               href="/acr"
-              className="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all bg-cyan-600 text-slate-900 dark:text-white shadow-sm"
+              className="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all bg-cyan-600 dark:bg-cyan-700 text-slate-900 dark:text-white shadow-sm"
             >
               ACR 30 Innovations
             </Link>
@@ -3941,9 +3941,9 @@ export default function ACRPage() {
                   <h3 className="text-xl sm:text-2xl font-black text-slate-950 dark:text-white mt-1">{VB[lang].bbTitle}</h3>
                 </div>
                 <div className="flex flex-wrap gap-2 text-xs font-mono">
-                  <span className="bg-cyan-950/80 border border-cyan-700 px-3 py-1 rounded-lg text-cyan-300">{VB[lang].bb1}</span>
-                  <span className="bg-purple-950/80 border border-purple-700 px-3 py-1 rounded-lg text-purple-300">{VB[lang].bb2}</span>
-                  <span className="bg-emerald-950/80 border border-emerald-700 px-3 py-1 rounded-lg text-emerald-300">Apache 2.0</span>
+                  <span className="bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-300 dark:border-cyan-700 px-3 py-1 rounded-lg text-cyan-800 dark:text-cyan-300">{VB[lang].bb1}</span>
+                  <span className="bg-purple-100 dark:bg-purple-950/80 border border-purple-300 dark:border-purple-700 px-3 py-1 rounded-lg text-purple-800 dark:text-purple-300">{VB[lang].bb2}</span>
+                  <span className="bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-700 px-3 py-1 rounded-lg text-emerald-800 dark:text-emerald-300">Apache 2.0</span>
                 </div>
               </div>
 
@@ -4033,7 +4033,7 @@ export default function ACRPage() {
                         <tr><td className="py-1.5 px-2">0%</td><td className="py-1.5 px-2 text-center">58.9%</td><td className="py-1.5 px-2 text-center">86.1%</td><td className="py-1.5 px-2 text-right">0.13°</td></tr>
                         <tr><td className="py-1.5 px-2">10%</td><td className="py-1.5 px-2 text-center">52.3%</td><td className="py-1.5 px-2 text-center">84.5%</td><td className="py-1.5 px-2 text-right">7.0°</td></tr>
                         <tr><td className="py-1.5 px-2">30%</td><td className="py-1.5 px-2 text-center">39.6%</td><td className="py-1.5 px-2 text-center">82.2%</td><td className="py-1.5 px-2 text-right">15.2°</td></tr>
-                        <tr className="font-bold"><td className="py-1.5 px-2">50%</td><td className="py-1.5 px-2 text-center text-rose-500">25.4%</td><td className="py-1.5 px-2 text-center">78.2%</td><td className="py-1.5 px-2 text-right">14.6°</td></tr>
+                        <tr className="font-bold"><td className="py-1.5 px-2">50%</td><td className="py-1.5 px-2 text-center text-rose-700 dark:text-rose-500">25.4%</td><td className="py-1.5 px-2 text-center">78.2%</td><td className="py-1.5 px-2 text-right">14.6°</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -4203,11 +4203,11 @@ export default function ACRPage() {
                       )}
                     </div>
                     {Number(tech.num) <= 5 ? (
-                      <span className="text-[10px] text-green-400 font-bold bg-green-950/60 px-2 py-0.5 rounded border border-green-800/60">
+                      <span className="text-[10px] text-green-800 dark:text-green-400 font-bold bg-green-100 dark:bg-green-950/60 px-2 py-0.5 rounded border border-green-300 dark:border-green-800/60">
                         🟢 L0–L4 Core Candidate
                       </span>
                     ) : (
-                      <span className="text-[10px] text-amber-400 font-bold bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800/60">
+                      <span className="text-[10px] text-amber-800 dark:text-amber-400 font-bold bg-amber-100 dark:bg-amber-950/60 px-2 py-0.5 rounded border border-amber-300 dark:border-amber-800/60">
                         🧪 Research Prototype
                       </span>
                     )}
@@ -4220,7 +4220,7 @@ export default function ACRPage() {
                     </strong> 
                     {tech.math}
                   </div>
-                  <div className="text-xs text-cyan-200/90 leading-relaxed">
+                  <div className="text-xs text-cyan-800 dark:text-cyan-200/90 leading-relaxed">
                     <strong className="text-cyan-900 dark:text-[#00F0FF]">
                       {lang === 'ru' ? 'Польза / Метрика: ' : lang === 'es' ? 'Beneficio / Métrica: ' : lang === 'zh' ? '效用 / 指标: ' : 'Benefit / Metric: '}
                     </strong> 
@@ -4334,17 +4334,17 @@ export default function ACRPage() {
                 <div className="flex items-center justify-between gap-2 mb-2.5">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#00F0FF]/20 text-cyan-900 dark:text-[#00F0FF] border border-[#00F0FF]/30">#{inn.num}</span>
-                    <span className="text-xs font-mono font-bold text-amber-300 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800/60">
+                    <span className="text-xs font-mono font-bold text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 px-2 py-0.5 rounded border border-amber-300 dark:border-amber-800/60">
                       {inn.metric}
                     </span>
                   </div>
                   <div>
                     {inn.num <= 10 ? (
-                      <span className="text-[10px] text-green-400 font-bold bg-green-950/70 px-2 py-0.5 rounded border border-green-800/60 flex items-center gap-1">
+                      <span className="text-[10px] text-green-800 dark:text-green-400 font-bold bg-green-100 dark:bg-green-950/70 px-2 py-0.5 rounded border border-green-300 dark:border-green-800/60 flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" /> Production Core
                       </span>
                     ) : inn.num <= 20 ? (
-                      <span className="text-[10px] text-yellow-400 font-bold bg-yellow-950/70 px-2 py-0.5 rounded border border-yellow-800/60 flex items-center gap-1">
+                      <span className="text-[10px] text-yellow-800 dark:text-yellow-400 font-bold bg-yellow-100 dark:bg-yellow-950/70 px-2 py-0.5 rounded border border-yellow-300 dark:border-yellow-800/60 flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-yellow-400" /> R&D Lab
                       </span>
                     ) : (

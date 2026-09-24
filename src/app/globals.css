@@ -1401,3 +1401,17 @@ html:not(.dark) [role="menuitem"]:hover {
   background-color: #f1f5f9 !important;
   color: #0891b2 !important;
 }
+
+/* ------------------------------------------------------------------
+   24.09.2026 — КЛАСС «мелкий серый текст на тёмном фоне».
+   Сплошной замер (E:/Aifa/_агент/сплошной_контраст.mjs, телефон 390,
+   тёмная тема): text-gray-500 (#6a7282) и text-slate-500 (#62748e) на
+   почти чёрном дают 3.95–4.18 при норме 4.5 — глоссарий, /acr, /digital,
+   /accessibility. Чиним класс, а не каждое место: в тёмной теме и в
+   тёмных островках (keep-dark) эти два серых светлее. Светлая тема не
+   меняется. Итог на #0a0a0a: #8a94a2 → 6.4, #8190a5 → 6.0.
+   ------------------------------------------------------------------ */
+.dark .text-gray-500, .dark .dark\:text-gray-500,
+.keep-dark .text-gray-500, .keep-dark .dark\:text-gray-500 { color: #8a94a2; }
+.dark .text-slate-500, .dark .dark\:text-slate-500,
+.keep-dark .text-slate-500, .keep-dark .dark\:text-slate-500 { color: #8190a5; }
