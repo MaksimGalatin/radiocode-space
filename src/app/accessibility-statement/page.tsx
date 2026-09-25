@@ -125,7 +125,7 @@ export default function AccessibilityStatementPage() {
           <p className="mb-2">
             <a
               href={`mailto:${з.обратнаяСвязьПочта}`}
-              className="underline font-semibold text-cyan-700 dark:text-cyan-300"
+              className="underline font-semibold text-cyan-700 dark:text-cyan-300 [overflow-wrap:anywhere]"
             >
               {з.обратнаяСвязьПочта}
             </a>
