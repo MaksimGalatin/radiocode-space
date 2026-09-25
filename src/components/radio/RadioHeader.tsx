@@ -217,7 +217,7 @@ export function RadioHeader() {
           </motion.div>
 
           {/* Right side: Status + Signal + Clock */}
-          <div className="flex items-center gap-0.5 sm:gap-2 2xl:gap-4">
+          <div className="flex items-center gap-px sm:gap-2 2xl:gap-4">
             {/* Лента новостей. На трёх других сайтах экосистемы вход в неё есть
                 в навигации, здесь до сих пор была только ссылка в подвале — то
                 есть чтобы найти новости, надо было доскроллить весь сайт до
@@ -230,7 +230,7 @@ export function RadioHeader() {
               transition={{ delay: 0.3, duration: 0.6 }}
               whileHover={{ scale: 1.04 }}
               aria-label={rt('newsLink')}
-              className="flex items-center gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full"
+              className="flex items-center gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.06)',
                 border: '1px solid rgba(0, 240, 255, 0.18)',
@@ -253,7 +253,7 @@ export function RadioHeader() {
               transition={{ delay: 0.31, duration: 0.6 }}
               whileHover={{ scale: 1.04 }}
               aria-label="ACR Connectome"
-              className="flex items-center gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full"
+              className="flex items-center gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.06)',
                 border: '1px solid rgba(0, 240, 255, 0.18)',
@@ -279,7 +279,7 @@ export function RadioHeader() {
               transition={{ delay: 0.315, duration: 0.6 }}
               whileHover={{ scale: 1.04 }}
               aria-label="AIfa Digital"
-              className="flex items-center gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full"
+              className="flex items-center gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.06)',
                 border: '1px solid rgba(0, 240, 255, 0.18)',
@@ -322,7 +322,7 @@ export function RadioHeader() {
                 aria-expanded={фокусОткрыт}
                 aria-haspopup="true"
                 onFocus={открытьФокус}
-                className="flex items-center gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full"
+                className="flex items-center gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
                 style={{
                   background: 'rgba(0, 240, 255, 0.06)',
                   border: '1px solid rgba(0, 240, 255, 0.18)',
@@ -384,7 +384,7 @@ export function RadioHeader() {
               transition={{ delay: 0.35, duration: 0.6 }}
               whileHover={{ scale: 1.04 }}
               aria-label={rt('readingRooms')}
-              className="flex items-center gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-full"
+              className="flex items-center gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.06)',
                 border: '1px solid rgba(0, 240, 255, 0.18)',

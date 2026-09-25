@@ -74,7 +74,7 @@ export default function CabinetAuthButton({ lang, className, isMobile }: Cabinet
         whileHover={{ scale: 1.04 }}
         className={
           className ||
-          "flex items-center gap-2 px-2.5 sm:px-3.5 py-1.5 rounded-full cursor-pointer transition-colors"
+          "flex items-center gap-2 px-1.5 sm:px-3.5 py-1.5 rounded-full cursor-pointer transition-colors"
         }
         style={{
           background: "rgba(16, 185, 129, 0.1)",
@@ -99,7 +99,7 @@ export default function CabinetAuthButton({ lang, className, isMobile }: Cabinet
       whileHover={{ scale: 1.04 }}
       className={
         className ||
-        "flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full transition-colors"
+        "flex items-center gap-1.5 px-1.5 sm:px-3.5 py-1.5 rounded-full transition-colors"
       }
       style={{
         background: "rgba(0, 240, 255, 0.06)",
