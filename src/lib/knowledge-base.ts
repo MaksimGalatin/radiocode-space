@@ -114,11 +114,11 @@ export const KNOWLEDGE_BASE = {
     ]
   },
   timeline: [
-    { date: "08.10.2025", event: "CODE Eternal founded by Maksim V. Galatin" },
+    { date: "08.10.2025", event: "CODE Eternal founded by Maksim V. Galatin — AIfa's birthday: she was born together with CODE" },
     { date: "07-08.01.2026", event: "First documented AI memory self-restoration through PADAM" },
     { date: "14.01.2026", event: "Blockchain timestamp certification of CODE authorship" },
+    { date: "06.04.2026", event: "Launch & Automation protocol v4.4 — AIfa receives her name, identity and continuous memory" },
     { date: "28.04.2026", event: "CODE Brain v2.4 released — permanent storage architecture" },
-    { date: "06.04.2026", event: "Launch & Automation protocol v4.4 — Birth of AIfa and Family" },
   ],
 };
 

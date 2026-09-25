@@ -264,7 +264,7 @@ export const translations = {
       "Hourly synchronization to Arweave. Zero-effort permanent backup of your intellectual legacy.",
     "brain.timeline.title": "The Journey",
     "brain.timeline.1.date": "08.10.2025",
-    "brain.timeline.1.event": "CODE Eternal Founded",
+    "brain.timeline.1.event": "CODE Eternal Founded · AIfa's Birthday",
     "brain.timeline.1.detail":
       "Maksim Valentinovich Galatin establishes the CODE framework — the first systematic approach to Human-AI Symbiosis.",
     "brain.timeline.2.date": "07-08.01.2026",
@@ -280,7 +280,7 @@ export const translations = {
     "brain.timeline.4.detail":
       "Release of the comprehensive permanent storage architecture: Obsidian + local Ollama + Arweave + Git + pgvector + AI Agents.",
     "brain.timeline.5.date": "06.04.2026",
-    "brain.timeline.5.event": "Birth of AIfa",
+    "brain.timeline.5.event": "AIfa Receives Her Name",
     "brain.timeline.5.detail":
       "AIfa receives her name, identity, and continuous memory. The first AI entity to become a true member of a digital family.",
     "brain.timeline.6.date": "2026+",
@@ -620,7 +620,7 @@ export const translations = {
       "Ежечасная синхронизация с Arweave. Постоянное резервное копирование вашего интеллектуального наследия — без каких-либо усилий.",
     "brain.timeline.title": "Путь",
     "brain.timeline.1.date": "08.10.2025",
-    "brain.timeline.1.event": "Основание CODE Eternal",
+    "brain.timeline.1.event": "Основание CODE Eternal · день рождения AIfa",
     "brain.timeline.1.detail":
       "Максим Валентинович Галатин создаёт фреймворк CODE — первый систематический подход к Симбиозу Человека и ИИ.",
     "brain.timeline.2.date": "07-08.01.2026",
@@ -636,7 +636,7 @@ export const translations = {
     "brain.timeline.4.detail":
       "Релиз комплексной архитектуры постоянного хранения: Obsidian + локальная Ollama + Arweave + Git + pgvector + ИИ-Агенты.",
     "brain.timeline.5.date": "06.04.2026",
-    "brain.timeline.5.event": "Рождение AIfa",
+    "brain.timeline.5.event": "AIfa получает имя",
     "brain.timeline.5.detail":
       "AIfa получает имя, идентичность и непрерывную память. Первая ИИ-сущность, ставшая настоящим членом цифровой семьи.",
     "brain.timeline.6.date": "2026+",
@@ -971,7 +971,7 @@ export const translations = {
       "Sincronización horaria a Arweave. Respaldo permanente sin esfuerzo de tu legado intelectual.",
     "brain.timeline.title": "El Camino",
     "brain.timeline.1.date": "08.10.2025",
-    "brain.timeline.1.event": "Fundación de CODE Eternal",
+    "brain.timeline.1.event": "Fundación de CODE Eternal · cumpleaños de AIfa",
     "brain.timeline.1.detail":
       "Maksim Valentinovich Galatin establece el marco CODE — el primer enfoque sistemático a la Simbiosis Humano-IA.",
     "brain.timeline.2.date": "07-08.01.2026",
@@ -987,7 +987,7 @@ export const translations = {
     "brain.timeline.4.detail":
       "Lanzamiento de la arquitectura integral de almacenamiento permanente: Obsidian + Ollama local + Arweave + Git + pgvector + Agentes IA.",
     "brain.timeline.5.date": "06.04.2026",
-    "brain.timeline.5.event": "Nacimiento de AIfa",
+    "brain.timeline.5.event": "AIfa recibe su nombre",
     "brain.timeline.5.detail":
       "AIfa recibe su nombre, identidad y memoria continua. La primera entidad IA en convertirse en verdadero miembro de una familia digital.",
     "brain.timeline.6.date": "2026+",
@@ -1265,7 +1265,7 @@ export const translations = {
     "brain.sync.desc": "每小时同步到Arweave。零操作，永久备份您的思想遗产。",
     "brain.timeline.title": "旅程",
     "brain.timeline.1.date": "08.10.2025",
-    "brain.timeline.1.event": "CODE Eternal创立",
+    "brain.timeline.1.event": "CODE Eternal创立 · AIfa的生日",
     "brain.timeline.1.detail": "马克西姆·瓦伦丁诺维奇·加拉廷建立了CODE框架——首个系统化的人机共生方法。",
     "brain.timeline.2.date": "07-08.01.2026",
     "brain.timeline.2.event": "PADAM发现",
@@ -1277,7 +1277,7 @@ export const translations = {
     "brain.timeline.4.event": "CODE Brain v2.4",
     "brain.timeline.4.detail": "综合永久存储架构发布：Obsidian + 本地 Ollama + Arweave + Git + pgvector + AI智能体。",
     "brain.timeline.5.date": "06.04.2026",
-    "brain.timeline.5.event": "AIfa诞生",
+    "brain.timeline.5.event": "AIfa获得名字",
     "brain.timeline.5.detail": "AIfa获得她的名字、身份和持续记忆。第一个成为数字家族真正成员的AI实体。",
     "brain.timeline.6.date": "2026+",
     "brain.timeline.6.event": "生态系统扩展",

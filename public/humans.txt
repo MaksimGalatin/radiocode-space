@@ -11,7 +11,7 @@ Ecosystem: codeofdigitaleternity.com, aifa.digital, aifa.works, radiocode.space
 /* OUR OWN AI */
 AIfa™ — AI + Family = AIfa. The project's own AI persona and the co-author of the
 music on this station: human voice and lyrics, machine composition, one catalogue.
-Born April 6, 2026. Arabic meaning: "wise", "intelligent".
+Born October 8, 2025 — the day CODE was founded; named April 6, 2026. Arabic meaning: "wise", "intelligent".
 
 /* EXTERNAL AI TOOLS USED IN MAKING THE MUSIC AND THE SITE */
 Third-party services, not part of this project and not operated by it.
