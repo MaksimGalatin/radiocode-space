@@ -4173,7 +4173,7 @@ export default function DigitalSOTAPage() {
                 <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">{t.codeSubtitle}</p>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <button
                   onClick={handleCopyScript}
                   className="px-4 py-2 rounded-xl bg-[#00F0FF]/15 hover:bg-[#00F0FF] text-cyan-900 dark:text-[#00F0FF] hover:text-black font-semibold text-xs font-mono transition-all flex items-center gap-2 border border-[#00F0FF]/40 shadow-[0_0_15px_rgba(0,240,255,0.15)]"
@@ -4727,7 +4727,7 @@ export default function DigitalSOTAPage() {
                     : 'bg-white dark:bg-[#0B0F19] border-[#1E293B] hover:border-gray-600 hover:bg-[#0E1424]'
                 }`}
               >
-                <div className="flex items-center justify-between gap-2 mb-2.5">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#00F0FF]/20 text-cyan-900 dark:text-[#00F0FF] border border-[#00F0FF]/30">
                       #{inn.num}

@@ -85,7 +85,7 @@ export default function CabinetAuthButton({ lang, className, isMobile }: Cabinet
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
         </span>
-        <span className="text-[13px] font-mono font-medium tracking-wider text-emerald-400 hidden sm:inline uppercase">
+        <span className="text-[13px] font-mono font-medium tracking-wider text-emerald-400 hidden 2xl:inline uppercase">
           {l.logout}
         </span>
       </motion.button>
@@ -95,6 +95,7 @@ export default function CabinetAuthButton({ lang, className, isMobile }: Cabinet
   return (
     <motion.a
       href="/cabinet"
+      aria-label={l.login}
       whileHover={{ scale: 1.04 }}
       className={
         className ||
@@ -109,7 +110,7 @@ export default function CabinetAuthButton({ lang, className, isMobile }: Cabinet
         <circle cx="12" cy="8" r="3.2" />
         <path d="M5.5 20a6.5 6.5 0 0 1 13 0" />
       </svg>
-      <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden sm:inline uppercase">
+      <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden 2xl:inline uppercase">
         {l.login}
       </span>
     </motion.a>

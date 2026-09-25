@@ -4331,7 +4331,7 @@ export default function ACRPage() {
                     : 'bg-white dark:bg-[#05060A] border-slate-200 dark:border-[#1E293B] hover:border-cyan-500/40 hover:bg-slate-50 dark:hover:bg-[#080B14]'
                 }`}
               >
-                <div className="flex items-center justify-between gap-2 mb-2.5">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#00F0FF]/20 text-cyan-900 dark:text-[#00F0FF] border border-[#00F0FF]/30">#{inn.num}</span>
                     <span className="text-xs font-mono font-bold text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 px-2 py-0.5 rounded border border-amber-300 dark:border-amber-800/60">

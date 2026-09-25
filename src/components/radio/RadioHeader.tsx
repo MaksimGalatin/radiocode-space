@@ -163,7 +163,7 @@ export function RadioHeader() {
       <nav
         role="navigation"
         aria-label="Главная навигация"
-        className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8"
+        className="max-w-7xl 2xl:max-w-[1880px] mx-auto px-2 sm:px-6 lg:px-8"
       >
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
@@ -217,7 +217,7 @@ export function RadioHeader() {
           </motion.div>
 
           {/* Right side: Status + Signal + Clock */}
-          <div className="flex items-center gap-0.5 sm:gap-4">
+          <div className="flex items-center gap-0.5 sm:gap-2 2xl:gap-4">
             {/* Лента новостей. На трёх других сайтах экосистемы вход в неё есть
                 в навигации, здесь до сих пор была только ссылка в подвале — то
                 есть чтобы найти новости, надо было доскроллить весь сайт до
@@ -240,7 +240,7 @@ export function RadioHeader() {
                 <path d="M4 5h11a2 2 0 0 1 2 2v11a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2V5z" />
                 <path d="M7.5 9h6M7.5 12.5h6M7.5 16h4" />
               </svg>
-              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF] hidden sm:inline uppercase">
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF] hidden 2xl:inline uppercase">
                 {rt('newsLink')}
               </span>
             </motion.a>
@@ -266,7 +266,7 @@ export function RadioHeader() {
                 <path d="m14.83 14.83 4.24 4.24" />
                 <path d="m9.17 14.83-4.24 4.24" />
               </svg>
-              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF] hidden sm:inline uppercase">
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF] hidden 2xl:inline uppercase">
                 ACR
               </span>
             </motion.a>
@@ -288,7 +288,7 @@ export function RadioHeader() {
               <svg viewBox="0 0 24 24" className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="#00F0FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
               </svg>
-              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF] hidden sm:inline uppercase">
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF] hidden 2xl:inline uppercase">
                 Digital
               </span>
             </motion.a>
@@ -332,7 +332,7 @@ export function RadioHeader() {
                   <circle cx="11" cy="11" r="7" />
                   <path d="M20 20l-3.5-3.5" />
                 </svg>
-                <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF] hidden sm:inline uppercase">
+                <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF] hidden 2xl:inline uppercase">
                   AIfaFocus
                 </span>
               </motion.a>
@@ -394,12 +394,18 @@ export function RadioHeader() {
                 <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H5.5A1.5 1.5 0 0 1 4 15.5z" />
                 <path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H14a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h4.5a1.5 1.5 0 0 0 1.5-1.5z" />
               </svg>
-              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden lg:inline uppercase">
+              <span className="text-[13px] font-mono font-medium tracking-wider text-[#00F0FF]/90 hidden 2xl:inline uppercase">
                 {rt('readingRooms')}
               </span>
             </motion.a>
 
             {/* Personal cabinet auth button (unified account across the ecosystem) */}
+            {/* 25.09.2026, замер Chromium 768–1920: ряд шапки требовал ~1 440 px при
+                месте ~1 060 (контейнер 1 280). На 768 за краем были кабинет,
+                языки и «В ЭФИРЕ»; на 1 440 — VBR и часы. Пороги сдвинуты так,
+                чтобы каждый элемент появлялся там, где помещается: подписи
+                кнопок — с 2xl (ниже значки с aria-label), языки и эфир — с md,
+                CODE ETERNAL — с lg, VBR/сигнал/часы — с 1 900 px. */}
             <CabinetAuthButton lang={lang} />
 
             {/* Language switcher (shared with the cabinet) */}
@@ -413,7 +419,7 @@ export function RadioHeader() {
                 onClick={() => setЯзыкОткрыт((о) => !о)}
                 aria-label="Language"
                 aria-expanded={языкОткрыт}
-                className="sm:hidden flex items-center gap-0.5 px-2 py-1 rounded-full text-[13px] font-mono font-medium tracking-wider cursor-pointer"
+                className="md:hidden flex items-center gap-0.5 px-2 py-1 rounded-full text-[13px] font-mono font-medium tracking-wider cursor-pointer"
                 style={{
                   background: 'rgba(255,255,255,0.04)',
                   border: '1px solid rgba(255,255,255,0.08)',
@@ -431,7 +437,7 @@ export function RadioHeader() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
                     transition={{ duration: 0.16 }}
-                    className="sm:hidden absolute right-0 top-full mt-2 rounded-xl overflow-hidden z-50"
+                    className="md:hidden absolute right-0 top-full mt-2 rounded-xl overflow-hidden z-50"
                     style={{
                       background: 'rgba(6, 10, 18, 0.96)',
                       border: '1px solid rgba(0, 240, 255, 0.18)',
@@ -462,7 +468,7 @@ export function RadioHeader() {
               </AnimatePresence>
 
               <div
-                className="hidden sm:flex items-center gap-0.5 px-1 py-1 rounded-full"
+                className="hidden md:flex items-center gap-0.5 px-1 py-1 rounded-full"
                 style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
               >
                 {RADIO_LANGS.map((l) => (
@@ -493,7 +499,7 @@ export function RadioHeader() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
               whileHover={{ scale: 1.04 }}
-              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(176, 0, 255, 0.06)',
                 border: '1px solid rgba(176, 0, 255, 0.15)',
@@ -513,7 +519,7 @@ export function RadioHeader() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full"
+              className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(255, 0, 60, 0.08)',
                 border: '1px solid rgba(255, 0, 60, 0.15)',
@@ -544,7 +550,7 @@ export function RadioHeader() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
-              className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              className="hidden min-[1900px]:flex items-center gap-1.5 px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.05)',
                 border: '1px solid rgba(0, 240, 255, 0.1)',
@@ -557,12 +563,12 @@ export function RadioHeader() {
             </motion.div>
 
             {/* Signal Strength */}
-            <div className="hidden xl:block">
+            <div className="hidden min-[1900px]:block">
               <SignalStrength />
             </div>
 
             {/* Live Clock */}
-            <div className="hidden xl:block">
+            <div className="hidden min-[1900px]:block">
               <LiveClock />
             </div>
           </div>

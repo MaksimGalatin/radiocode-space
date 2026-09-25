@@ -251,7 +251,7 @@ export default function CabinetPage() {
       try {
         g.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: cb, ux_mode: "popup" });
         el.innerHTML = "";
-        g.accounts.id.renderButton(el, { theme: "filled_black", size: "large", type: "standard", text: "signin_with", shape: "pill", logo_alignment: "left", width: 360, locale: lang });
+        g.accounts.id.renderButton(el, { theme: "filled_black", size: "large", type: "standard", text: "signin_with", shape: "pill", logo_alignment: "left", /* 25.09.2026: было 360 — на телефоне 320 px кнопка (iframe 380) вылезала из колонки 199 px; теперь по ширине контейнера, 200–360 */ width: Math.min(360, Math.max(200, Math.floor(el.clientWidth || 360))), locale: lang });
       } catch { return false; }
       return true;
     }

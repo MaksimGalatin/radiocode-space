@@ -90,7 +90,7 @@ export default function ContactClient() {
 
         <a
           href={`mailto:${ПОЧТА}`}
-          className="mb-3 block rounded-xl border border-cyan-400/30 bg-cyan-400/5 px-6 py-5 text-lg font-medium text-cyan-400 transition-colors hover:bg-cyan-400/10"
+          className="mb-3 block rounded-xl border border-cyan-400/30 bg-cyan-400/5 px-6 py-5 text-lg font-medium text-cyan-400 transition-colors hover:bg-cyan-400/10 [overflow-wrap:anywhere]"
         >
           {ПОЧТА}
         </a>
