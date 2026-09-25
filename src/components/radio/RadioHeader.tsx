@@ -531,7 +531,10 @@ export function RadioHeader() {
                   style={{ boxShadow: '0 0 8px rgba(255, 0, 60, 0.6)' }}
                 />
               </div>
-              <span className="text-[13px] font-semibold tracking-[0.15em] text-[#FF003C]">
+              {/* Цвет текста #FF1A4D, а не #FF003C: на розоватой плашке
+                  #FF003C давал 4,49 — ниже порога WCAG 4,5 (axe, 25.09.2026,
+                  768 и 1 440 px, обе темы). Точка-индикатор остаётся #FF003C. */}
+              <span className="text-[13px] font-semibold tracking-[0.15em] text-[#FF1A4D]">
                 {rt('onAir')}
               </span>
             </motion.div>

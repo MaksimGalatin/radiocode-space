@@ -218,7 +218,7 @@ const BookPage = () => {
           <h1 className="text-4xl md:text-6xl font-black mb-4 leading-tight text-slate-950 dark:text-white" style={{ fontFamily: 'var(--font-syne)' }}>
             {pageTrans.title}
           </h1>
-          <p className="text-slate-500 dark:text-gray-400 text-lg md:text-xl max-w-2xl mx-auto flex items-center justify-center gap-2 flex-wrap">
+          <p className="text-slate-600 dark:text-gray-400 text-lg md:text-xl max-w-2xl mx-auto flex items-center justify-center gap-2 flex-wrap">
             {pageTrans.subtitle}
             <a
               href="https://orcid.org/0009-0002-0187-8547"
