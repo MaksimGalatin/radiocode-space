@@ -64,7 +64,7 @@ export function RadioFooter() {
               <span className="text-xs text-[#7E7E99]">|</span>
               <span className="text-xs text-[#8B8BA8]">CODE Eternal</span>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 max-w-full [overflow-wrap:anywhere]">
               <a
                 href="/privacy-policy"
                 className="text-[13px] font-mono tracking-wider text-[#8B8BA8] hover:text-[#00F0FF] transition-colors"

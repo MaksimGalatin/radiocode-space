@@ -227,9 +227,9 @@ export default function AmbassadorPage() {
           <h2 style={h2}>{t.incomeTitle}</h2>
           <div style={{ display: 'grid', gap: 12 }}>
             {t.income.map((it: string[], i: number) => (
-              <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+              <div key={i} style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'flex-start' }}>
                 <div style={{ fontWeight: 800, color: '#e2e8f0', minWidth: 170 }}>{it[0]}</div>
-                <div style={{ fontSize: 14, lineHeight: 1.55 }}>{it[1]}</div>
+                <div style={{ fontSize: 14, lineHeight: 1.55, flex: '1 1 220px', minWidth: 0, overflowWrap: 'anywhere' }}>{it[1]}</div>
               </div>
             ))}
           </div>

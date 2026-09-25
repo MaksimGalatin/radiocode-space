@@ -1210,12 +1210,12 @@ export default function GlossaryPage() {
     <div className="min-h-screen bg-[#030712] text-gray-100 font-sans">
       {/* Sticky header */}
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#030712]/80 border-b border-gray-800 px-4 sm:px-8 py-3.5">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
           <Link href="/" className="flex items-center gap-2 text-cyan-400 font-bold text-lg hover:text-cyan-300">
             <Brain className="w-6 h-6 text-cyan-400 animate-pulse" />
             <span>AIfa Works · Glossary</span>
           </Link>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <Link href="/digital" className="text-xs px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 hover:text-white">
               AIfa Digital
             </Link>

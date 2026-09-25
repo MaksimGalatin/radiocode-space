@@ -22,7 +22,7 @@ export function renderTextWithMarkdown(text: string) {
     const token = match[0];
     if (token.startsWith('**') && token.endsWith('**')) {
       parts.push(
-        <strong key={matchIndex} className="font-semibold text-gray-900 dark:text-zinc-100">
+        <strong key={matchIndex} className="[overflow-wrap:anywhere] font-semibold text-gray-900 dark:text-zinc-100">
           {token.slice(2, -2)}
         </strong>
       );
@@ -38,7 +38,7 @@ export function renderTextWithMarkdown(text: string) {
         // 4.5 — недобор на каждом упоминании команды или адреса (28 штук в
         // одной статье). cyan-800 на том же фоне — 5.83. Размер поднят с
         // 12px (text-xs) до 13px: моноширинный шрифт и так мельче обычного.
-        <code key={matchIndex} className="px-1.5 py-0.5 bg-gray-200 dark:bg-white/10 text-cyan-800 dark:text-cyan-300 font-mono text-[13px] rounded border border-gray-300 dark:border-white/5">
+        <code key={matchIndex} className="[overflow-wrap:anywhere] px-1.5 py-0.5 bg-gray-200 dark:bg-white/10 text-cyan-800 dark:text-cyan-300 font-mono text-[13px] rounded border border-gray-300 dark:border-white/5">
           {token.slice(1, -1)}
         </code>
       );
@@ -54,7 +54,7 @@ export function renderTextWithMarkdown(text: string) {
           rel="noopener noreferrer"
           /* Ссылки в тексте статьи: cyan-600 на белом — 3.62 при норме 4.5.
              cyan-700 даёт 5.28 на белом и 5.05 на светло-сером фоне статьи. */
-          className="text-cyan-700 dark:text-cyan-400 underline underline-offset-2 cursor-pointer"
+          className="text-cyan-700 dark:text-cyan-400 underline underline-offset-2 [overflow-wrap:anywhere] cursor-pointer"
         >
           {label}
         </a>
@@ -315,7 +315,7 @@ export function renderMarkdownToReact(content: string) {
         return (
           <ul key={idx} className="list-disc list-outside ml-6 space-y-2 mb-4 text-gray-700 dark:text-gray-300 dark:text-zinc-300 text-sm md:text-base font-normal">
             {block.lines.map((line, lIdx) => (
-              <li key={lIdx} className="leading-relaxed">
+              <li key={lIdx} className="leading-relaxed [overflow-wrap:anywhere]">
                 {renderTextWithMarkdown(line)}
               </li>
             ))}
@@ -325,7 +325,7 @@ export function renderMarkdownToReact(content: string) {
         return (
           <ol key={idx} className="list-decimal list-outside ml-6 space-y-2 mb-4 text-gray-700 dark:text-gray-300 dark:text-zinc-300 text-sm md:text-base font-normal">
             {block.lines.map((line, lIdx) => (
-              <li key={lIdx} className="leading-relaxed">
+              <li key={lIdx} className="leading-relaxed [overflow-wrap:anywhere]">
                 {renderTextWithMarkdown(line)}
               </li>
             ))}
@@ -393,7 +393,7 @@ export function renderMarkdownToReact(content: string) {
       case 'p':
       default:
         return (
-          <p key={idx} className="text-gray-700 dark:text-gray-300 dark:text-zinc-300 text-sm md:text-base font-normal leading-relaxed mb-4 whitespace-pre-line">
+          <p key={idx} className="text-gray-700 dark:text-gray-300 dark:text-zinc-300 text-sm md:text-base font-normal leading-relaxed mb-4 whitespace-pre-line [overflow-wrap:anywhere]">
             {renderTextWithMarkdown(block.lines.join('\n'))}
           </p>
         );

@@ -3967,7 +3967,7 @@ export default function ACRPage() {
                       </tbody>
                     </table>
                   </div>
-                  <div className="text-[10px] font-mono text-gray-400">results/binary_arena_results.json</div>
+                  <div className="text-[10px] font-mono text-gray-400 [overflow-wrap:anywhere]">results/binary_arena_results.json</div>
                 </div>
 
                 {/* 2. ПЕРЕБОР ЧИСЛА «КОГТЕЙ» — results/dendritic_sweep.json */}
@@ -3990,7 +3990,7 @@ export default function ACRPage() {
                       </tbody>
                     </table>
                   </div>
-                  <div className="text-[10px] font-mono text-gray-400">results/dendritic_sweep.json</div>
+                  <div className="text-[10px] font-mono text-gray-400 [overflow-wrap:anywhere]">results/dendritic_sweep.json</div>
                 </div>
 
                 {/* 3. НАСТОЯЩЕЕ ИСПЫТАНИЕ АГЕНТА — results/acr_agent_real_benchmark_distr_0.35.json */}
@@ -4014,7 +4014,7 @@ export default function ACRPage() {
                       </tbody>
                     </table>
                   </div>
-                  <div className="text-[10px] font-mono text-gray-400">results/acr_agent_real_benchmark_distr_0.35.json</div>
+                  <div className="text-[10px] font-mono text-gray-400 [overflow-wrap:anywhere]">results/acr_agent_real_benchmark_distr_0.35.json</div>
                 </div>
 
                 {/* 4. НАСТОЯЩАЯ УСТОЙЧИВОСТЬ — results/robustness_real.json */}
@@ -4037,7 +4037,7 @@ export default function ACRPage() {
                       </tbody>
                     </table>
                   </div>
-                  <div className="text-[10px] font-mono text-gray-400">results/robustness_real.json</div>
+                  <div className="text-[10px] font-mono text-gray-400 [overflow-wrap:anywhere]">results/robustness_real.json</div>
                 </div>
               </div>
 
