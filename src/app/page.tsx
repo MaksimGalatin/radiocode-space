@@ -117,6 +117,15 @@ function SectionDivider() {
   );
 }
 
+// «6 станции вещают» — ошибка согласования (25.09.2026). Русскому нужно
+// склонение по числу: 1 станция вещает, 2–4 станции вещают, 5+ станций.
+function станцииВещают(n: number): string {
+  const n10 = n % 10, n100 = n % 100;
+  if (n10 === 1 && n100 !== 11) return 'станция вещает в пустоте';
+  if (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) return 'станции вещают в пустоте';
+  return 'станций вещают в пустоте';
+}
+
 export default function Home() {
   const rt = useRadioT();
   const языкПодвала = useЯзык();
@@ -276,7 +285,7 @@ export default function Home() {
                 {rt('frequencies')}
               </h2>
               <p className="text-sm text-[#8B8BA8]">
-                {stations.length} {rt('broadcasting')}
+                {stations.length} {языкПодвала === 'ru' ? станцииВещают(stations.length) : rt('broadcasting')}
               </p>
             </div>
             {/* Keyboard shortcuts */}
