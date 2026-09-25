@@ -302,7 +302,7 @@ export function renderMarkdownToReact(content: string) {
         const тег = 'h' + (уровниТегов[idx] || 2);
         return React.createElement(
           тег,
-          { key: idx, className: ОФОРМЛЕНИЕ[block.type] },
+          { key: idx, className: ОФОРМЛЕНИЕ[block.type] + ' [overflow-wrap:anywhere] hyphens-auto' },
           renderTextWithMarkdown(block.lines[0]),
         );
       }
