@@ -1429,3 +1429,8 @@ html:not(.dark) {
   --dx-violet: #6d28d9;
   --dx-red: #b91c1c;
 }
+
+/* Ссылки на --dx-* из CSS: без них сборщик (Tailwind v4 / LightningCSS)
+ * выбрасывает блок как «неиспользуемые переменные» — замер 24.09.2026 на
+ * aifa.digital: в собранном CSS --dx-text 0 раз. Класс нигде не ставится. */
+.dx-keep-vars { color: var(--dx-text); border-color: var(--dx-mut); outline-color: var(--dx-link); caret-color: var(--dx-head); text-decoration-color: var(--dx-amber); column-rule-color: var(--dx-green); background-color: var(--dx-green2); fill: var(--dx-violet); stroke: var(--dx-red); }

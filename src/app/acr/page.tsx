@@ -3870,7 +3870,7 @@ export default function ACRPage() {
                 ))}
               </tbody>
             </table>
-            <p className="text-[11px] text-slate-500 italic mt-2.5">
+            <p className="text-[11px] text-slate-600 dark:text-slate-500 italic mt-2.5">
               {t.ablationNote}
             </p>
           </div>
@@ -3892,7 +3892,7 @@ export default function ACRPage() {
               {VB[lang].latTitle}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
-              {[['t1', 'text-cyan-600 dark:text-[#00F0FF]'], ['t2', 'text-emerald-600 dark:text-emerald-400'], ['t3', 'text-amber-600 dark:text-amber-400'], ['t4', 'text-purple-600 dark:text-purple-400']].map(([k, c]) => (
+              {[['t1', 'text-cyan-700 dark:text-[#00F0FF]'], ['t2', 'text-emerald-700 dark:text-emerald-400'], ['t3', 'text-amber-700 dark:text-amber-400'], ['t4', 'text-purple-700 dark:text-purple-400']].map(([k, c]) => (
                 <div key={k} className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
                   <span className="text-[10px] font-mono text-slate-500 uppercase block">{(VB[lang] as any)[k]}</span>
                   <span className={`text-base font-bold font-mono ${c}`}>{(VB[lang] as any)[k + 'v']}</span>
@@ -4124,7 +4124,7 @@ export default function ACRPage() {
               <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Симулятор / партиционер' : lang === 'es' ? 'Simulador / particionador' : lang === 'zh' ? '模拟器 / 划分器' : 'Simulator / partitioner'}</p>
             </div>
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-emerald-800/60 space-y-1">
-              <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 block">E3 • BENCHMARK</span>
+              <span className="text-[10px] font-bold text-emerald-800 dark:text-emerald-400 block">E3 • BENCHMARK</span>
               <span className="text-xs font-semibold text-slate-800 dark:text-emerald-200">{lang === 'ru' ? 'Бенчмарк ПО' : lang === 'es' ? 'Benchmark de software' : lang === 'zh' ? '软件基准' : 'Software Bench'}</span>
               <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Воспроизводимый тест CPU' : lang === 'es' ? 'Prueba reproducible en CPU' : lang === 'zh' ? '可复现的 CPU 测试' : 'Reproducible CPU test'}</p>
             </div>
@@ -4247,7 +4247,7 @@ export default function ACRPage() {
               <span className="px-3 py-1 rounded-xl text-[11px] font-mono text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-black/60 border border-slate-200 dark:border-gray-800 break-words">{PR[lang].prRun}</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {[['pa', 'text-cyan-800 dark:text-cyan-400', 'bg-cyan-50/70 border-cyan-200 dark:border-cyan-500/30'], ['pb', 'text-emerald-600 dark:text-emerald-400', 'bg-emerald-50/70 border-emerald-200 dark:border-emerald-500/30'], ['pc', 'text-purple-600 dark:text-purple-400', 'bg-purple-50/70 border-purple-200 dark:border-purple-500/30']].map(([k, c, b]) => (
+              {[['pa', 'text-cyan-800 dark:text-cyan-400', 'bg-cyan-50/70 border-cyan-200 dark:border-cyan-500/30'], ['pb', 'text-emerald-700 dark:text-emerald-400', 'bg-emerald-50/70 border-emerald-200 dark:border-emerald-500/30'], ['pc', 'text-purple-700 dark:text-purple-400', 'bg-purple-50/70 border-purple-200 dark:border-purple-500/30']].map(([k, c, b]) => (
                 <div key={k} className={`p-4 rounded-2xl dark:bg-black/50 border space-y-2 ${b}`}>
                   <span className={`text-[10px] font-bold uppercase block ${c}`}>{(PR[lang] as any)[k]}</span>
                   <h4 className="text-sm font-bold text-slate-900 dark:text-white">{(PR[lang] as any)[k + 'T']}</h4>

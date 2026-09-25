@@ -197,7 +197,7 @@ export default function RiskCalculator() {
     // Розовый-400 светлее и на тёмной подложке даёт запас, оставаясь тем же
     // тревожным цветом. Именно эта метка и должна бросаться в глаза: она
     // сообщает клиенту, что его риск высок.
-    if (riskPercent >= 70) return 'text-rose-400 border-rose-500/20 bg-rose-500/10';
+    if (riskPercent >= 70) return 'text-rose-700 dark:text-rose-400 border-rose-500/20 bg-rose-500/10';
     if (riskPercent >= 35) return 'text-amber-500 border-amber-500/20 bg-amber-500/10';
     return 'text-emerald-500 border-emerald-500/20 bg-emerald-500/10';
   };
@@ -325,10 +325,10 @@ export default function RiskCalculator() {
             {/* Fine exposure */}
             <div className="space-y-1 text-left border-t border-white/6 pt-4">
               <div className="flex items-center gap-1 text-[13px] uppercase tracking-widest text-gray-500 dark:text-gray-400 font-semibold">
-                <DollarSign className="w-3 h-3 text-rose-400" />
+                <DollarSign className="w-3 h-3 text-rose-700 dark:text-rose-400" />
                 <span>{t.fineLabel}</span>
               </div>
-              <div className="text-3xl font-black text-rose-400 tracking-tight">{maxFine}</div>
+              <div className="text-3xl font-black text-rose-700 dark:text-rose-400 tracking-tight">{maxFine}</div>
               {/*
                 Пояснение под суммой обязательно и не сворачивается. Число без
                 указания, откуда оно и что означает, — это не оценка риска, а
@@ -350,7 +350,7 @@ export default function RiskCalculator() {
             {riskPercent >= 70 && (
               <div className="flex items-start gap-2 p-3 rounded-xl bg-rose-500/5 border border-rose-500/10 text-left">
                 <AlertOctagon className="w-4 h-4 text-rose-500 shrink-0 mt-0.5 animate-pulse" />
-                <p className="text-[13px] text-rose-200/80 leading-relaxed font-medium">
+                <p className="text-[13px] text-rose-900 dark:text-rose-200/80 leading-relaxed font-medium">
                   {t.trafficAlert}
                 </p>
               </div>
