@@ -205,7 +205,7 @@ export default async function NewsArticlePage(
         </Link>
 
         <article>
-          <h1 className="text-3xl md:text-4xl font-black tracking-tight mb-6 leading-tight">{title}</h1>
+          <h1 className="text-3xl md:text-4xl font-black tracking-tight mb-6 leading-tight [overflow-wrap:anywhere] hyphens-auto">{title}</h1>
 
           <div className="flex flex-wrap items-center gap-4 text-[13px] font-mono text-[#8B8BA8] mb-3">
             <span className="flex items-center gap-1">

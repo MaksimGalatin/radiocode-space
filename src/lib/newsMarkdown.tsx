@@ -232,7 +232,20 @@ export function parseMarkdownToBlocks(markdown: string): Block[] {
 }
 
 export function renderMarkdownToReact(content: string) {
-  const blocks = parseMarkdownToBlocks(content);
+  /**
+   * СЛУЖЕБНЫЕ МЕТКИ НЕ ПОКАЗЫВАЮТСЯ ЧИТАТЕЛЮ (25.09.2026).
+   *
+   * В текстах статей стоят строки вида `[//]: # (GALATIN-STATUS-2026-09-01)` —
+   * комментарии Markdown, по которым скрипты находят вставленный блок. Наш
+   * разборщик их не узнавал и печатал как обычный абзац: читатель видел
+   * «[//]: # (…)» прямо в тексте статьи на всех четырёх сайтах. Данные не
+   * трогаем — метка нужна скриптам; пропускаем её только при показе.
+   */
+  const безМеток = content
+    .split('\n')
+    .filter((строка) => !/^\s*\[\/\/\]:\s*#\s*\(.*\)\s*$/.test(строка))
+    .join('\n');
+  const blocks = parseMarkdownToBlocks(безМеток);
 
   /**
    * РОВНАЯ ЛЕСТНИЦА ЗАГОЛОВКОВ.
