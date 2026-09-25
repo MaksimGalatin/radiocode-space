@@ -334,7 +334,7 @@ export default function AccessibilityPage() {
                     ))}
                   </ul>
                   <Link
-                    href="/#contact"
+                    href="/contact"
                     className="keep-dark btn-neon w-full py-2.5 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-xl font-semibold text-sm text-white text-center block"
                   >
                     {a.getStarted}
@@ -368,7 +368,7 @@ export default function AccessibilityPage() {
             <p className="text-gray-600 dark:text-gray-300 mb-8">{a.ctaDesc}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/#contact"
+                href="/contact"
                 className="keep-dark btn-neon px-8 py-4 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-xl font-bold text-base text-white inline-flex items-center justify-center gap-2"
               >
                 {a.ctaBook} <ArrowRight className="w-5 h-5" aria-hidden="true" />

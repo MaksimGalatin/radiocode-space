@@ -193,7 +193,7 @@ export default function TierDetails({ тариф, цена, надписи, ру
 
           {поЗапросу ? (
             <a
-              href="/#contact"
+              href="/contact"
               className="keep-dark btn-neon w-full py-3 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-xl font-semibold text-white text-center flex items-center justify-center gap-2"
             >
               {надписи.tierAskQuote}
