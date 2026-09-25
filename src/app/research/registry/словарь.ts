@@ -6,7 +6,7 @@
  * сайта в момент обращения: сервер мог лежать, отдавать таймаут, рвать
  * соединение.
  *
- * Здесь измеряется ДРУГОЕ и более сильное: у 1 441 доменов из 11 902
+ * Здесь измеряется ДРУГОЕ и более сильное: у 1 361 домена реестра CISA из 11 663
  * **вообще нет записи в DNS**. Не «сайт не открылся», а «имени не
  * существует». Домен не продлили, и он растворился.
  *
@@ -62,6 +62,7 @@ export type ТекстыРеестра = {
   числаМёртвых: string;
   числаЗаписей: string;
   числаЗаписейМёртвых: string;
+  числаВнеРеестра: string;
 
   следствиеЗаголовок: string;
   следствие1: string;
@@ -91,7 +92,7 @@ export type ТекстыРеестра = {
 export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыРеестра> = {
   ru: {
     метка: 'Открытые данные',
-    заголовок: 'Реестр против реальности: каждый восьмой адрес указывает в пустоту',
+    заголовок: 'Реестр против реальности: больше чем каждый девятый адрес указывает в пустоту',
     подпись: (дата) => `Проверка DNS, снято ${дата} (третий замер, третий отдельный день). Данные и инструмент открыты.`,
 
     сутьЗаголовок: 'Что измерено',
@@ -127,17 +128,18 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
       'DNS-запросы бесплатны и не создают нагрузки на проверяемые сайты: ни один запрос не отправлен на сам сервер.',
 
     числаЗаголовок: 'Числа',
-    числаДоменов: 'доменов в выборке',
+    числаДоменов: 'доменов реестра CISA в выборке',
     числаЖивых: 'существуют',
     числаМёртвых: 'не существуют',
     числаЗаписей: 'записей обхода всего',
     числаЗаписейМёртвых: 'записей приходится на мёртвые домены',
+    числаВнеРеестра: 'адресов журнала нет в реестре CISA — они не считаются: в основном городские сайты на других адресах и имена, которые наш сборщик составил по названиям мест',
 
     следствиеЗаголовок: 'Что из этого следует',
     следствие1:
       'Первое: доля доступных сайтов зависит от того, что считать знаменателем. Если считать от всех адресов реестра, до цели доходит меньше, чем если считать от существующих сайтов. Мы приводим оба числа и говорим, чем они отличаются, — иначе получилось бы либо приукрашивание, либо завышение барьера.',
     следствие2:
-      'Второе, и оно важнее доступности: федеральный реестр не поддерживается в актуальном состоянии. Каждый восьмой адрес в нём ведёт в никуда, и никто этого не заметил.',
+      'Второе, и оно важнее доступности: федеральный реестр не поддерживается в актуальном состоянии. Больше чем каждый девятый адрес в нём ведёт в никуда, и никто этого не заметил.',
     следствие3:
       'Третье, и оно тревожное: освободившийся домен может зарегистрировать кто угодно. Адрес, который люди считают государственным и который указан в федеральном реестре, способен однажды открыться — и показать что угодно.',
 
@@ -158,8 +160,8 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
       'Инструмент, которым получены эти числа, лежит в открытом виде и запускается без ключей и без оплаты.',
 
     файлЗаголовок: 'Сырые данные',
-    файлПояснение: 'Полный список из 1 441 доменов, CSV: имя домена и число записей обхода на каждый. Открывается в Excel двойным щелчком. Дата в имени файла стоит намеренно: проверка DNS — снимок момента, домен может ожить.',
-    файлСсылка: 'Скачать список (CSV, 1 441 строк)',
+    файлПояснение: 'Полный список из 1 361 домена реестра CISA, CSV: имя домена и число записей обхода на каждый. Открывается в Excel двойным щелчком. Дата в имени файла стоит намеренно: проверка DNS — снимок момента, домен может ожить.',
+    файлСсылка: 'Скачать список (CSV, 1 361 строка)',
     файлReadme: 'Пояснение к файлу: метод, ограничения, как проверить строку самому',
     авторЗаголовок: 'Автор и раскрытие',
     автор1: 'Максим Валентинович Галатин.',
@@ -170,7 +172,7 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
 
   en: {
     метка: 'Open data',
-    заголовок: 'Registry vs reality: one address in eight points at nothing',
+    заголовок: 'Registry vs reality: more than one address in nine points at nothing',
     подпись: (дата) => `DNS check, taken ${дата} (third measurement, on a third separate day). Data and tooling are open.`,
 
     сутьЗаголовок: 'What was measured',
@@ -206,11 +208,12 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
       'DNS queries are free and place no load on the sites under study: not a single request was sent to the servers themselves.',
 
     числаЗаголовок: 'Numbers',
-    числаДоменов: 'domains in the sample',
+    числаДоменов: 'CISA-registry domains in the sample',
     числаЖивых: 'exist',
     числаМёртвых: 'do not exist',
     числаЗаписей: 'crawl records in total',
     числаЗаписейМёртвых: 'records belong to dead domains',
+    числаВнеРеестра: 'log hosts are not in the CISA registry and are left out: mostly city sites at other addresses and names our crawler built from place names',
 
     следствиеЗаголовок: 'What follows from this',
     следствие1:
@@ -237,8 +240,8 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
       'The tool that produced these numbers is open and runs with no keys and no payment.',
 
     файлЗаголовок: 'Raw data',
-    файлПояснение: 'The complete list of 1,441 domains as CSV: domain name and how many crawl records belong to each. Opens in Excel with a double click. The date in the filename is deliberate: a DNS check is a snapshot, and a domain may come back.',
-    файлСсылка: 'Download the list (CSV, 1,441 rows)',
+    файлПояснение: 'The complete list of 1,361 CISA-registry domains as CSV: domain name and how many crawl records belong to each. Opens in Excel with a double click. The date in the filename is deliberate: a DNS check is a snapshot, and a domain may come back.',
+    файлСсылка: 'Download the list (CSV, 1,361 rows)',
     файлReadme: 'File notes: method, limitations, how to verify a row yourself',
     авторЗаголовок: 'Author and disclosure',
     автор1: 'Maksim Valentinovich Galatin.',
@@ -249,7 +252,7 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
 
   es: {
     метка: 'Datos abiertos',
-    заголовок: 'El registro frente a la realidad: una de cada ocho direcciones apunta a la nada',
+    заголовок: 'El registro frente a la realidad: más de una de cada nueve direcciones apunta a la nada',
     подпись: (дата) => `Comprobación de DNS, tomada el ${дата} (tercera medición, en un tercer día distinto). Datos y herramientas abiertos.`,
 
     сутьЗаголовок: 'Qué se midió',
@@ -285,17 +288,18 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
       'Las consultas DNS son gratuitas y no generan carga sobre los sitios estudiados: no se envió ni una sola petición a los propios servidores.',
 
     числаЗаголовок: 'Cifras',
-    числаДоменов: 'dominios en la muestra',
+    числаДоменов: 'dominios del registro CISA en la muestra',
     числаЖивых: 'existen',
     числаМёртвых: 'no existen',
     числаЗаписей: 'registros de rastreo en total',
     числаЗаписейМёртвых: 'registros corresponden a dominios muertos',
+    числаВнеРеестра: 'hosts del registro no están en el registro CISA y no se cuentan: sobre todo sitios municipales en otras direcciones y nombres que nuestro rastreador construyó a partir de nombres de lugares',
 
     следствиеЗаголовок: 'Qué se deduce de esto',
     следствие1:
       'Primero: la proporción de sitios accesibles depende de qué se tome como denominador. Contando sobre todas las direcciones del registro, menos recorridos llegan a su objetivo que contando solo sobre los sitios que existen. Publicamos ambas cifras y explicamos la diferencia; de lo contrario, o se embellece el resultado o se exagera la barrera.',
     следствие2:
-      'Segundo, y más importante que la accesibilidad: el registro federal no se mantiene actualizado. Una de cada ocho direcciones no lleva a ninguna parte y nadie lo advirtió.',
+      'Segundo, y más importante que la accesibilidad: el registro federal no se mantiene actualizado. Más de una de cada nueve direcciones no lleva a ninguna parte y nadie lo advirtió.',
     следствие3:
       'Tercero, y es inquietante: un dominio liberado puede registrarlo cualquiera. Una dirección que la gente toma por gubernamental, listada en un registro federal, puede volver a la vida un día y mostrar cualquier cosa.',
 
@@ -316,8 +320,8 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
       'La herramienta que produjo estas cifras es abierta y se ejecuta sin claves y sin pago.',
 
     файлЗаголовок: 'Datos en bruto',
-    файлПояснение: 'La lista completa de 1.441 dominios en CSV: nombre del dominio y número de registros de rastreo de cada uno. Se abre en Excel con doble clic. La fecha en el nombre del archivo es intencionada: una comprobación de DNS es una instantánea y un dominio puede revivir.',
-    файлСсылка: 'Descargar la lista (CSV, 1.441 filas)',
+    файлПояснение: 'La lista completa de 1.361 dominios del registro CISA en CSV: nombre del dominio y número de registros de rastreo de cada uno. Se abre en Excel con doble clic. La fecha en el nombre del archivo es intencionada: una comprobación de DNS es una instantánea y un dominio puede revivir.',
+    файлСсылка: 'Descargar la lista (CSV, 1.361 filas)',
     файлReadme: 'Notas del archivo: método, limitaciones, cómo verificar una fila usted mismo',
     авторЗаголовок: 'Autor y divulgación',
     автор1: 'Maksim Valentinovich Galatin.',
@@ -328,7 +332,7 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
 
   zh: {
     метка: '开放数据',
-    заголовок: '登记册与现实：每八个地址就有一个指向虚无',
+    заголовок: '登记册与现实：每九个地址中就有一个以上指向虚无',
     подпись: (дата) => `DNS 检查，采集于 ${дата}（第三次测量，第三个不同的日子）。数据与工具均已公开。`,
 
     сутьЗаголовок: '测量了什么',
@@ -360,17 +364,18 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
     метод4: 'DNS 查询免费，且不会给被研究的网站带来负载：没有向服务器本身发送任何一个请求。',
 
     числаЗаголовок: '数字',
-    числаДоменов: '抽样中的域名',
+    числаДоменов: '抽样中的 CISA 登记册域名',
     числаЖивых: '存在',
     числаМёртвых: '不存在',
     числаЗаписей: '抓取记录总数',
     числаЗаписейМёртвых: '条记录属于已死域名',
+    числаВнеРеестра: '个日志主机不在 CISA 登记册中，不计入统计：主要是其他地址上的城市网站，以及我们的爬虫根据地名拼出的名称',
 
     следствиеЗаголовок: '由此得出什么',
     следствие1:
       '第一：可访问网站的比例取决于以什么作分母。以登记册中全部地址为分母时，抵达目标的比例低于以实际存在的网站为分母时。我们同时公布两个数字并说明其差别——否则要么美化结果，要么夸大障碍。',
     следствие2:
-      '第二，而且比无障碍本身更重要：联邦登记册没有保持更新。每八个地址就有一个通向虚无，却无人察觉。',
+      '第二，而且比无障碍本身更重要：联邦登记册没有保持更新。每九个地址中就有一个以上通向虚无，却无人察觉。',
     следствие3:
       '第三，这一点令人不安：过期域名任何人都可以注册。一个被人们视为政府所有、且列在联邦登记册中的地址，某天可能重新「复活」——并显示任何内容。',
 
@@ -388,8 +393,8 @@ export const ТЕКСТЫ_РЕЕСТРА: Record<ЯзыкКод, ТекстыР�
     проверить2: '产出这些数字的工具是公开的，运行时不需要密钥，也不需要付费。',
 
     файлЗаголовок: '原始数据',
-    файлПояснение: '完整的 1,441 个域名列表，CSV 格式：域名及其对应的抓取记录数。双击即可在 Excel 中打开。文件名中的日期是有意为之：DNS 检查只是某一刻的快照，域名可能恢复。',
-    файлСсылка: '下载列表（CSV，1,441 行）',
+    файлПояснение: '完整的 1,361 个 CISA 登记册域名列表，CSV 格式：域名及其对应的抓取记录数。双击即可在 Excel 中打开。文件名中的日期是有意为之：DNS 检查只是某一刻的快照，域名可能恢复。',
+    файлСсылка: '下载列表（CSV，1,361 行）',
     файлReadme: '文件说明：方法、局限，以及如何自行核验其中一行',
     авторЗаголовок: '作者与披露',
     автор1: 'Maksim Valentinovich Galatin（马克西姆·瓦连京诺维奇·加拉京）。',

@@ -171,8 +171,8 @@ export const Ч = {
   // числились мёртвыми. Здесь числа отстали на одну правку, потому
   // что правился словарь РЕЕСТРА, а эти лежат в блоке `Ч` страницы
   // данных. Найдено сверкой боевого сайта с источником.
-  мёртвыхДоменов: '1 441',
-  долявМёртвых: '12,1',
+  мёртвыхДоменов: '1 361',
+  долявМёртвых: '11,7',
   неответивших: '2 537',
   открылось: '23 324',
   неДошёл: '17 285',
@@ -212,9 +212,11 @@ export const Ч = {
   // Свежая проверка DNS 30.08.2026 22:16: 82 секунды, 24 потока, бесплатно.
   // Из 9 976 доменов журнала 1 348 не резолвятся вовсе.
   доменовВсегоDNS: '11 902',
-  доменовМёртвых: '1 441',
-  доляДоменовМёртвых: '12,1',
-  записейУМёртвых: '11 526',
+  // 25.09.2026: мёртвые считаются по реестру CISA — 11 663 его доменов в журнале.
+  доменовРеестраDNS: '11 663',
+  доменовМёртвых: '1 361',
+  доляДоменовМёртвых: '11,7',
+  записейУМёртвых: '10 886',
   // ПЕРЕСЧИТАНО 31.08.2026 по свежей DNS-проверке всех 11 902 доменов.
   // Из записей на мёртвых доменах у 9 125 стоит вердикт «неизмеряемо или
   // недоступно» вместо «домена нет» — это 9,6 % журнала (было 11,4 %).
@@ -223,12 +225,12 @@ export const Ч = {
   // недоступен; вердикт лишь менее точен, чем мог бы быть. Главный довод
   // исследования — «формальный доступ, но барьер» — приходится на мёртвые
   // домены всего СЕМЬ раз из 21 305, то есть 0,03 %.
-  записейСНевернымВердиктом: '9 125',
-  доляНеверногоВердикта: '9,6',
+  записейСНевернымВердиктом: '7 454',
+  доляНеверногоВердикта: '7,8',
   // ТРИ записи с вердиктом ДОСТУПНО у мёртвых доменов: человек открывал
   // страницу глазами, значит домен жил и умер ПОСЛЕ обхода. Было девять
   // при меньшей выборке — пересчитано 31.08.2026.
-  умерлиПослеОбхода: '3',
+  умерлиПослеОбхода: '0',
   снимковДоля: '87,1',
   // Два числа порознь, а не склеенной строкой: прежде здесь стояло
   // «83 212 из 95 524», и русское «из» подставлялось во ВСЕ четыре
@@ -587,14 +589,22 @@ export const ЖИВЫЕ_ДОМЕНЫ = {
   //     доменов из 1 443 — число, выдавшее ошибку инструмента, а не
   //     находку.
   //
-  // История списка: 1650 -> 1498 -> 1443 -> 1441.
-  доменовВсего: 11902,
-  живых: 10461,
-  мёртвых: 1441,
-  доляМёртвых: 12.1,
-  записейВсего: 95524,
-  записейУМёртвых: 11526,
-  записейЖивых: 83998,
+  // История списка: 1650 -> 1498 -> 1443 -> 1441 -> 1361 (реестр).
+  //
+  // ПОПРАВКА 25.09.2026: счёт шёл по ВСЕМ 11 902 хостам журнала, а 239 из
+  // них нет в реестре CISA (снимки 27.08 и 31.08). Среди мёртвых 78 имён
+  // составил наш сборщик по названиям мест (houston.gov, neworleans.gov,
+  // urbanhonolulucdp.gov), ещё 2 строки со скобками — не имена вовсе.
+  // Теперь всё о мёртвых доменах — только по реестру: 1 361 из 11 663.
+  // Инструмент: E:/Aifa/_агент/поправка_мёртвые_домены_реестр.py
+  доменовВсего: 11663,
+  живых: 10302,
+  мёртвых: 1361,
+  внеРеестра: 239,
+  доляМёртвых: 11.7,
+  записейВсего: 93595,
+  записейУМёртвых: 10886,
+  записейЖивых: 82709,
   снято: '2026-09-08 10:40',
 };
 
@@ -920,7 +930,7 @@ export const ВЕРСИИ_ДАННЫХ: ВерсияДанных[] = [
     записей: 1441,
     опубликовано: true,
     текст: {
-    ru: "Третий замер мёртвых доменов, в третий отдельный день: 1 441 вместо 1 498. Пятьдесят пять доменов, которые мы числили мёртвыми, ответили при повторной проверке, ещё два отозвались только с третьей попытки. Число снова уменьшилось не в нашу пользу — доля падает с 12,6 до 12,1 %, — и мы снова оставляем именно так: правило трёх замеров дороже красивой цифры. Контрольные суммы сходятся: 1 441 живых плюс 10 461 мёртвых равно 11 902.",
+    ru: "Третий замер мёртвых доменов, в третий отдельный день: 1 441 вместо 1 498. Пятьдесят пять доменов, которые мы числили мёртвыми, ответили при повторной проверке, ещё два отозвались только с третьей попытки. Число снова уменьшилось не в нашу пользу — доля падает с 12,6 до 12,1 %, — и мы снова оставляем именно так: правило трёх замеров дороже красивой цифры. Контрольные суммы сходятся: 1 441 мёртвых плюс 10 461 живых равно 11 902.",
     en: "Third measurement of dead domains, on a third separate day: 1,441 instead of 1,498. Fifty-five domains we had counted as dead answered on re-check, and two more responded only on the third attempt. The count went down against our own interest again — the share falls from 12.6 % to 12.1 % — and again we keep it that way: the three-measurement rule is worth more than a neat figure. The control sums add up: 1,441 plus 10,461 equals 11,902.",
     es: "Tercera medición de dominios muertos, en un tercer día distinto: 1 441 en lugar de 1 498. Cincuenta y cinco dominios que dábamos por muertos respondieron en la reverificación, y otros dos solo contestaron al tercer intento. El recuento volvió a bajar en contra de nuestro interés —la proporción cae del 12,6 % al 12,1 %— y de nuevo lo dejamos así: la regla de las tres mediciones vale más que una cifra bonita. Las sumas de control cuadran: 1 441 más 10 461 son 11 902.",
     zh: "第三次测量失效域名，选在第三个不同的日子：1 441 个，而非 1 498 个。此前被我们判定失效的 55 个域名在复核时作出了响应，另有 2 个直到第三次尝试才回应。计数再一次朝着对我们不利的方向下降——占比从 12.6 % 降至 12.1 %——我们仍旧照实保留：三次测量的规则比一个漂亮的数字更重要。校验和相符：1 441 加 10 461 等于 11 902。",
@@ -935,6 +945,18 @@ export const ВЕРСИИ_ДАННЫХ: ВерсияДанных[] = [
     en: "Two datasets that had sat unpublished are now out. The US organisations registry — 289,420 records across all 51 territories. The government-site audit with the axe-core engine — 85,497 page checks. Before release, 210,730 phone numbers and 20,859 e-mail addresses were removed from the registry; five thousand of those addresses were personal mailboxes of living people. A further 15 addresses were cleared from the website field, where the source OpenStreetMap data had them entered by mistake. In the audit, addresses that ended up inside CSS selectors together with mailto links are hidden. None of these fields takes part in accessibility measurement: we measure sites, we do not phone them.",
     es: "Se publican dos conjuntos que hasta ahora permanecían inéditos. El registro de organizaciones de EE. UU.: 289 420 registros en los 51 territorios. La auditoría de sitios gubernamentales con el motor axe-core: 85 497 comprobaciones de páginas. Antes de publicar se eliminaron del registro 210 730 teléfonos y 20 859 correos, cinco mil de los cuales eran buzones personales de personas reales; otras 15 direcciones se limpiaron del campo del sitio, donde los datos de OpenStreetMap las tenían por error. En la auditoría se ocultan las direcciones que quedaron dentro de selectores CSS junto a enlaces mailto. Ninguno de esos campos interviene en la medición: medimos sitios, no llamamos por teléfono.",
     zh: "两份此前一直未公开的数据集现已发布。美国机构登记册——覆盖全部 51 个行政区的 289 420 条记录。使用 axe-core 引擎的政府网站审计——85 497 次页面检查。发布前，登记册中移除了 210 730 个电话与 20 859 个邮箱地址，其中五千个是真实个人的私人邮箱；另有 15 个地址从网站字段中清除——在 OpenStreetMap 原始数据里它们被误填于此。审计数据中，随 mailto 链接进入 CSS 选择器的地址已隐藏。这些字段均不参与无障碍测量：我们测量网站，而不是打电话。",
+    },
+  },
+  {
+    дата: '2026-09-25',
+    записей: 1361,
+    опубликовано: true,
+    файл: 'dead-domains-registry-2026-09-08.csv',
+    текст: {
+    ru: "Поправка: мёртвые домены теперь считаются только по реестру CISA — 1 361 из 11 663, это 11,7 %, а не 12,1 %. Прежний счёт шёл по всем 11 902 адресам нашего журнала, а 239 из них в реестре нет (сверка с двумя снимками реестра, 27 и 31 августа). Среди «мёртвых» оказалось 78 имён, которые наш собственный сборщик составил по названиям мест (houston.gov, neworleans.gov, urbanhonolulucdp.gov), и две строки со скобками, вообще не являющиеся именами. Реестр в них не виноват — это наша ошибка, и доля снова падает против нашего интереса. Список 1 361 домена и отдельный список 80 выбывших с причиной выложены файлами; прежние файлы оставлены без изменений.",
+    en: "Correction: dead domains are now counted against the CISA registry only — 1,361 out of 11,663, that is 11.7 %, not 12.1 %. The earlier count ran over all 11,902 hosts in our crawl log, and 239 of them are not in the registry (checked against two registry snapshots, 27 and 31 August). The \"dead\" set held 78 names that our own crawler had built from place names (houston.gov, neworleans.gov, urbanhonolulucdp.gov) and two rows with brackets that are not names at all. The registry is not to blame for them — the error was ours, and the share falls against our own interest again. The list of 1,361 domains and a separate list of the 80 removed, each with its reason, are published as files; older files are kept unchanged.",
+    es: "Corrección: los dominios muertos se cuentan ahora solo frente al registro CISA — 1 361 de 11 663, es decir, el 11,7 %, no el 12,1 %. El recuento anterior abarcaba los 11 902 hosts de nuestro registro de rastreo, y 239 de ellos no figuran en el registro oficial (cotejado con dos instantáneas, del 27 y el 31 de agosto). Entre los «muertos» había 78 nombres que nuestro propio rastreador construyó a partir de nombres de lugares (houston.gov, neworleans.gov, urbanhonolulucdp.gov) y dos filas con paréntesis que ni siquiera son nombres. El registro no tiene la culpa: el error fue nuestro, y la proporción vuelve a bajar en contra de nuestro interés. Se publican la lista de 1 361 dominios y una lista aparte de los 80 retirados, cada uno con su motivo; los archivos anteriores se conservan sin cambios.",
+    zh: "更正：失效域名现在只按 CISA 登记册计算——11 663 个中有 1 361 个，即 11.7 %，而非 12.1 %。此前的计数覆盖了我们遍历日志中的全部 11 902 个主机，其中 239 个并不在登记册中（已与 8 月 27 日和 31 日两份登记册快照核对）。所谓「失效」的集合里，有 78 个名称是我们自己的爬虫根据地名拼出来的（houston.gov、neworleans.gov、urbanhonolulucdp.gov），另有两行带括号，根本不是名称。这不是登记册的问题，而是我们的错误，占比再一次朝着对我们不利的方向下降。1 361 个域名的列表，以及单独列出的 80 个被移除项（各附原因）均已作为文件发布；旧文件原样保留。",
     },
   },
 ];

@@ -364,7 +364,7 @@ const ru: ТекстыДанных = {
   почемуТак: 'Это согласуется с гипотезой, что более сложные операции создают больше препятствий для клавиатуры; причинную связь мы не проверяли. Календарь и вакансии — обычные списки, их отдаёт готовый модуль. Оплата — сложная форма, часто во встроенном окне стороннего платёжного сервиса, и outline: none там встречается чаще всего: 32,9 % против 14,1 % у календаря.',
   выводЧинить: 'Вывод для того, кто чинит: начинать надо не с главной страницы, а с оплаты и документов. Там и барьер выше, и цена барьера для человека несравнимо больше: пропущенный срок оплаты налога — это пеня, а не неудобство.',
 
-  мёртвые: 'Каждый восьмой адрес в реестре мёртв',
+  мёртвые: 'Больше чем каждый девятый адрес в реестре мёртв',
   мёртвыеВступление: (н) => `Из 11 659 сайтов реестра ${н} не ответили скрипту. Мы разобрали их вручную — проверка завершена, и главное в ней не про доступность, а про качество самих государственных данных.`,
   мёртваяПричина: {
     nodns: 'Домена нет в DNS — он просто мёртв',
@@ -374,7 +374,7 @@ const ru: ТекстыДанных = {
     retry: 'Ответил при повторе',
     policy: 'Закрыт по политике (401/403)',
   },
-  мёртвыеВывод: (н, д) => `${н} доменов официального реестра CISA не существуют в DNS. Это ${д} % всего реестра — каждый восьмой адрес. Города при этом живы: albanyky.gov, abilene.gov, arlington.gov — это существующие муниципалитеты, чьи официальные домены не отвечают. Каждый пример подтверждён повторным замером в другой день: домен остаётся в списке, только если молчал во ВСЕХ замерах. Одного ответа в любой день довольно, чтобы домен выбыл, — так проверка отличает мёртвый адрес от временного сбоя связи.`,
+  мёртвыеВывод: (н, д) => `${н} доменов официального реестра CISA не существуют в DNS. Это ${д} % доменов реестра в нашем журнале — больше чем каждый девятый адрес. Города при этом живы: albanyky.gov, cityofforrestcityar.gov, durantok.gov — это существующие муниципалитеты, чьи официальные домены не отвечают. Каждый пример подтверждён повторным замером в другой день: домен остаётся в списке, только если молчал во ВСЕХ замерах. Одного ответа в любой день довольно, чтобы домен выбыл, — так проверка отличает мёртвый адрес от временного сбоя связи.`,
 
   дваСпособаЗаголовок: 'Два способа счёта — и оба здесь',
   дваСпособа: (в, б1, ж, б2, р, нм) => `Из выборки не отвечает ни один DNS-сервер у части доменов: сайта нет вовсе. Такие адреса можно считать двумя способами, и мы показываем оба.
@@ -447,8 +447,8 @@ const ru: ТекстыДанных = {
   скипТекст: 'Нашли 15.09.2026 и исправляем прямо здесь, не дожидаясь, пока это найдёт кто-то другой. Наш обходчик считал цель страницы достигнутой, если у элемента под фокусом ключевое слово встречалось в тексте ИЛИ в адресе ссылки. Первая ссылка на хорошо сделанном сайте — служебная «Skip to main content»; в ней есть слово main, а ведёт она на якорь #main или #content. Для страниц, у которых ключевые слова включают main или navigation, она принималась за цель на первом же нажатии Tab. Ссылка «пропустить навигацию» — настоящее средство доступности, и человек с клавиатуры ею пользуется. Но она не ведёт ни к контактам, ни к оплате, ни к часам работы — а именно это утверждает вердикт «доступно для человека». Замер по опубликованному журналу: из 95 524 записей 6 184 (6,5 %) засчитаны по такой ссылке — 5 064 с вердиктом «доступно» и 1 120 с «частичным барьером». При строгом счёте, где служебная ссылка целью не считается: «доступно» 11 994 → 6 930, «формальный доступ, но барьер» 21 305 → 27 489, «частичный барьер» 13 972 → 12 852. Доля барьера среди измеримых страниц: 74,6 % → 85,3 % (40 341 из 47 271). Поправка идёт ПРОТИВ измеренных сайтов, а не в их пользу: опубликованное число было к ним мягче, чем следовало. Оба числа названы здесь, чтобы любое из них можно было воспроизвести: сырой журнал хранит текст элемента под фокусом, и переобход для проверки не нужен.',
 
   ограничение8: (д, м, в, з, н, дн, у) =>
-    `8. Каждый седьмой адрес из реестра не существует, и это влияет на ` +
-    `число выше. Свежая проверка DNS: из ${в} доменов журнала ${м} ` +
+    `8. Больше чем каждый девятый адрес из реестра не существует, и это влияет на ` +
+    `число выше. Свежая проверка DNS: из ${в} доменов реестра в журнале ${м} ` +
     `(${д} %) не резолвятся вовсе — сайта нет, и мерить его доступность ` +
     `нечем. На них приходится ${з} записей. У ${н} из них (${дн} % ` +
     `журнала) стоит вердикт «неизмеряемо или недоступно», а не «домена ` +
@@ -458,9 +458,9 @@ const ru: ТекстыДанных = {
     `качестве федерального реестра. Мы называем это прямо, потому что ` +
     `исправление сдвинуло бы главное число в НАШУ пользу: без мёртвых ` +
     `доменов доля барьеров растёт. Числа на странице приведены БЕЗ ` +
-    `этого исправления. Отдельно: у ${у} записей вердикт «доступно», ` +
-    `а домен сегодня уже не отвечает — человек открывал страницу ` +
-    `глазами, значит сайт умер после обхода.`,
+    `этого исправления. Записей с вердиктом «доступно» у этих доменов — ${у}: ` +
+    `ни один из них не работал и в день обхода, ` +
+    `так что умерших уже после обхода среди них нет.`,
   когоЗаголовок: 'Кого это касается на самом деле',
   когоЛид: 'Работу по доступности принято считать помощью людям с инвалидностью. По числам это описание неполное.',
   когоЧисла: (п, д) => `Слепых в США около миллиона, людей с потерей зрения около семи. С возрастной дальнозоркостью — ${п}. Она развивается более чем у ${д} % людей к сорока годам: это не болезнь и не инвалидность, а то, что происходит со всеми. К 2030 году частота потери зрения в США удвоится вместе со старением населения.`,
@@ -645,7 +645,7 @@ const en: ТекстыДанных = {
   почемуТак: 'This is consistent with the hypothesis that more interactive workflows create greater keyboard barriers; we did not test causation. Calendars and job listings are ordinary lists served by a ready module. Payment is a complex form, often inside an embedded third-party payment window, and outline: none is most common there: 32.9 % against 14.1 % on calendars.',
   выводЧинить: 'The takeaway for whoever is fixing this: start not with the home page but with payments and documents. The barrier is higher there, and the cost of that barrier to a person is incomparably greater: a missed tax deadline is a penalty, not an inconvenience.',
 
-  мёртвые: 'Every eighth address in the registry is dead',
+  мёртвые: 'More than one address in nine in the registry is dead',
   мёртвыеВступление: (н) => `Out of 11,659 registry sites, ${н} did not answer the script. We went through them by hand — that check is complete, and its main finding is not about accessibility but about the quality of government data itself.`,
   мёртваяПричина: {
     nodns: 'Domain absent from DNS — simply dead',
@@ -655,7 +655,7 @@ const en: ТекстыДанных = {
     retry: 'Answered on retry',
     policy: 'Closed by policy (401/403)',
   },
-  мёртвыеВывод: (н, д) => `${н} domains from the official CISA registry do not exist in DNS. That is ${д} % of the whole registry — every eighth address. The towns themselves are alive: albanyky.gov, abilene.gov, arlington.gov are existing municipalities whose official domains do not answer. Every example is confirmed by a repeat measurement on a different day: a domain stays on the list only if it stayed silent in EVERY measurement. A single answer on any day is enough for it to drop out — that is how the check tells a dead address from a momentary network failure.`,
+  мёртвыеВывод: (н, д) => `${н} domains from the official CISA registry do not exist in DNS. That is ${д} % of the registry domains in our log — more than one address in nine. The towns themselves are alive: albanyky.gov, cityofforrestcityar.gov, durantok.gov are existing municipalities whose official domains do not answer. Every example is confirmed by a repeat measurement on a different day: a domain stays on the list only if it stayed silent in EVERY measurement. A single answer on any day is enough for it to drop out — that is how the check tells a dead address from a momentary network failure.`,
 
   дваСпособаЗаголовок: 'Two ways to count — both shown here',
   дваСпособа: (в, б1, ж, б2, р, нм) => `For part of the sample no DNS server answers at all: the site does not exist. Such addresses can be counted two ways, and we show both.
@@ -728,7 +728,7 @@ Only ${нм} records carrying the verdict “formal access, human barrier” fal
   скипТекст: 'Found on 15 September 2026 and corrected here, rather than waiting for someone else to find it. Our traversal counted the page goal as reached when the focused element matched a keyword either in its text or in its href. The first link on a well-built site is the utility «Skip to main content»: it contains the word main and points at the anchor #main or #content. On pages whose keywords include main or navigation it was therefore accepted as the goal at the very first Tab press. A skip link is a genuine accessibility feature and keyboard users really do use it. But it does not take you to the contact details, the payment page or the opening hours — which is what the verdict «reachable by a person» claims. Measured on the published log: of 95,524 records, 6,184 (6.5 %) had the goal credited to such a link — 5,064 with the verdict «reachable» and 1,120 with «partial barrier». Recomputed strictly, with the utility link not counted as the goal: «reachable» 11,994 → 6,930, «formally accessible but barrier» 21,305 → 27,489, «partial barrier» 13,972 → 12,852. Barrier share among measurable pages: 74.6 % → 85.3 % (40,341 of 47,271). The correction moves AGAINST the sites we measured, not in their favour: the published figure was kinder to them than it should have been. Both numbers are given here so that either can be reproduced: the raw log stores the text of the focused element, so no re-traversal is needed to check this.',
 
   ограничение8: (д, м, в, з, н, дн, у) =>
-    `8. One address in seven from the registry does not exist, and this ` +
+    `8. More than one address in nine from the registry does not exist, and this ` +
     `affects the figure above. A fresh DNS check: of ${в} domains in the ` +
     `log, ${м} (${д} %) do not resolve at all — there is no site, and ` +
     `there is nothing to measure. They account for ${з} records. Of ` +
@@ -740,9 +740,9 @@ Only ${нм} records carrying the verdict “formal access, human barrier” fal
     `federal registry. We state this plainly because correcting it would ` +
     `move the headline figure IN OUR FAVOUR: without dead domains the ` +
     `share of barriers rises. The figures on this page are given WITHOUT ` +
-    `that correction. Separately: ${у} records carry the verdict ` +
-    `"accessible" while the domain no longer answers today — a human ` +
-    `opened that page, so the site died after the traversal.`,
+    `that correction. Records with the verdict "accessible" on these ` +
+    `domains: ${у} — none of them was alive on the day of the traversal ` +
+    `either, so none died after it.`,
   когоЗаголовок: 'Who this actually affects',
   когоЛид: 'Accessibility work is usually described as helping people with disabilities. By the numbers, that description is incomplete.',
   когоЧисла: (п, д) => `About a million people in the US are blind and about seven million have vision loss. ${п} have age-related farsightedness. More than ${д} % of people develop it by the age of forty: it is not a disease and not a disability, it is what happens to everyone. By 2030 the rate of vision loss in the US will double along with the ageing population.`,
@@ -927,7 +927,7 @@ const es: ТекстыДанных = {
   почемуТак: 'Esto es coherente con la hipótesis de que los flujos más interactivos generan más barreras para el teclado; no comprobamos la causalidad. El calendario y el empleo son listas corrientes que sirve un módulo ya hecho. El pago es un formulario complejo, a menudo dentro de una ventana incrustada de un servicio de pago externo, y outline: none aparece allí con más frecuencia: 32,9 % frente al 14,1 % del calendario.',
   выводЧинить: 'La conclusión para quien lo repara: no hay que empezar por la página principal, sino por los pagos y los documentos. Allí la barrera es mayor y su coste para la persona es incomparablemente más alto: un plazo de impuestos incumplido es una multa, no una molestia.',
 
-  мёртвые: 'Una de cada ocho direcciones del registro está muerta',
+  мёртвые: 'Más de una de cada nueve direcciones del registro está muerta',
   мёртвыеВступление: (н) => `De los 11 659 sitios del registro, ${н} no respondieron al script. Los revisamos a mano — esa comprobación está terminada, y lo esencial en ella no es la accesibilidad, sino la calidad de los propios datos públicos.`,
   мёртваяПричина: {
     nodns: 'El dominio no está en el DNS: simplemente está muerto',
@@ -937,7 +937,7 @@ const es: ТекстыДанных = {
     retry: 'Respondió al reintentar',
     policy: 'Cerrado por política (401/403)',
   },
-  мёртвыеВывод: (н, д) => `${н} dominios del registro oficial de CISA no existen en el DNS. Es el ${д} % de todo el registro: una de cada ocho direcciones. Las ciudades, en cambio, siguen vivas: albanyky.gov, abilene.gov, arlington.gov son municipios existentes cuyos dominios oficiales no responden. Cada ejemplo está confirmado por una medición repetida en otro día: un dominio permanece en la lista solo si guardó silencio en TODAS las mediciones. Una sola respuesta cualquier día basta para que salga: así la comprobación distingue una dirección muerta de un fallo puntual de red.`,
+  мёртвыеВывод: (н, д) => `${н} dominios del registro oficial de CISA no existen en el DNS. Es el ${д} % de los dominios del registro en nuestro log: más de una de cada nueve direcciones. Las ciudades, en cambio, siguen vivas: albanyky.gov, cityofforrestcityar.gov, durantok.gov son municipios existentes cuyos dominios oficiales no responden. Cada ejemplo está confirmado por una medición repetida en otro día: un dominio permanece en la lista solo si guardó silencio en TODAS las mediciones. Una sola respuesta cualquier día basta para que salga: así la comprobación distingue una dirección muerta de un fallo puntual de red.`,
 
   дваСпособаЗаголовок: 'Dos formas de contar — ambas aquí',
   дваСпособа: (в, б1, ж, б2, р, нм) => `En parte de la muestra ningún servidor DNS responde: el sitio no existe. Estas direcciones pueden contarse de dos maneras, y mostramos ambas.
@@ -1010,7 +1010,7 @@ Solo ${нм} registros con el veredicto «acceso formal, barrera humana» corres
   скипТекст: 'Encontrado el 15 de septiembre de 2026 y corregido aquí mismo, sin esperar a que lo encuentre otra persona. Nuestro recorrido daba el objetivo por alcanzado si el elemento enfocado contenía la palabra clave en su texto O en su enlace. El primer enlace de un sitio bien hecho es el de servicio «Skip to main content»: contiene la palabra main y apunta al ancla #main o #content. En las páginas cuyas palabras clave incluyen main o navigation, se aceptaba como objetivo en la primera pulsación de Tab. El enlace de salto es una función real de accesibilidad y quien usa el teclado se sirve de él. Pero no lleva ni a los contactos, ni al pago, ni al horario, que es lo que afirma el veredicto «accesible para una persona». Medición sobre el historial publicado: de 95 524 registros, 6 184 (6,5 %) obtuvieron el objetivo por ese enlace: 5 064 con veredicto «accesible» y 1 120 con «barrera parcial». Con el recuento estricto, sin contar el enlace de servicio como objetivo: «accesible» 11 994 → 6 930, «acceso formal pero barrera» 21 305 → 27 489, «barrera parcial» 13 972 → 12 852. Proporción de barrera entre las páginas medibles: 74,6 % → 85,3 % (40 341 de 47 271). La corrección va EN CONTRA de los sitios medidos, no a su favor: la cifra publicada era más benévola de lo debido. Ambas cifras se indican aquí para que cualquiera pueda reproducir una u otra: el historial en bruto guarda el texto del elemento enfocado, así que no hace falta repetir el recorrido para comprobarlo.',
 
   ограничение8: (д, м, в, з, н, дн, у) =>
-    `8. Una de cada siete direcciones del registro no existe, y eso ` +
+    `8. Más de una de cada nueve direcciones del registro no existe, y eso ` +
     `afecta a la cifra anterior. Comprobaci\u00f3n de DNS reciente: de ` +
     `${в} dominios del registro, ${м} (${д} %) no resuelven en absoluto: ` +
     `no hay sitio y no hay nada que medir. Les corresponden ${з} ` +
@@ -1023,10 +1023,10 @@ Solo ${нм} registros con el veredicto «acceso formal, barrera humana» corres
     `federal. Lo decimos abiertamente porque corregirlo mover\u00eda la ` +
     `cifra principal A NUESTRO FAVOR: sin dominios muertos, la ` +
     `proporci\u00f3n de barreras aumenta. Las cifras de esta p\u00e1gina ` +
-    `se dan SIN esa correcci\u00f3n. Aparte: ${у} registros llevan el ` +
-    `veredicto \u00abaccesible\u00bb mientras que el dominio ya no ` +
-    `responde hoy: una persona abri\u00f3 esa p\u00e1gina, de modo que ` +
-    `el sitio muri\u00f3 despu\u00e9s del recorrido.`,
+    `se dan SIN esa correcci\u00f3n. Registros con el veredicto ` +
+    `\u00abaccesible\u00bb en estos dominios: ${у}; ninguno funcionaba ` +
+    `tampoco el d\u00eda del recorrido, as\u00ed que ninguno ` +
+    `muri\u00f3 despu\u00e9s de \u00e9l.`,
   когоЗаголовок: 'A quién afecta realmente',
   когоЛид: 'El trabajo sobre accesibilidad suele describirse como ayuda a las personas con discapacidad. Según los números, esa descripción es incompleta.',
   когоЧисла: (п, д) => `En EE. UU. hay cerca de un millón de personas ciegas y unos siete millones con pérdida de visión. ${п} tienen presbicia. Más del ${д} % de las personas la desarrollan a los cuarenta años: no es una enfermedad ni una discapacidad, es lo que le ocurre a todo el mundo. Para 2030 la tasa de pérdida de visión en EE. UU. se duplicará junto con el envejecimiento de la población.`,
@@ -1209,7 +1209,7 @@ const zh: ТекстыДанных = {
   почемуТак: '这与「交互性更强的流程会造成更多键盘障碍」这一假设一致；我们并未检验因果关系。日历和招聘是普通列表，由现成模块输出。缴费是复杂表单，往往嵌在第三方支付服务的内嵌窗口中，outline: none 在那里出现得最频繁：32.9 %，而日历只有 14.1 %。',
   выводЧинить: '给修复者的结论：不要从首页开始，而要从缴费和文件页面开始。那里障碍更高，而障碍对人的代价也高得多——错过纳税期限意味着罚款，而不是不便。',
 
-  мёртвые: '登记册中每八个地址就有一个是死的',
+  мёртвые: '登记册中每九个地址中就有一个以上是死的',
   мёртвыеВступление: (н) => `在登记册的 11,659 个网站中，有 ${н} 个没有响应脚本。我们逐一人工核查——这项检查已经完成，而其中最重要的发现不在于无障碍，而在于政府数据本身的质量。`,
   мёртваяПричина: {
     nodns: '域名在 DNS 中不存在——已彻底死亡',
@@ -1219,7 +1219,7 @@ const zh: ТекстыДанных = {
     retry: '重试时有响应',
     policy: '按策略关闭（401/403）',
   },
-  мёртвыеВывод: (н, д) => `CISA 官方登记册中有 ${н} 个域名在 DNS 中并不存在，占整个登记册的 ${д} %——每八个地址就有一个。而这些城市本身仍在：albanyky.gov、abilene.gov、arlington.gov 都是现存的市政当局，只是官方域名没有响应。每个例子都经过另一天的重复测量确认：只有在所有测量中都保持沉默的域名才会留在名单上。任何一天只要回应过一次就会被剔除——检查正是以此把真正失效的地址与一时的网络故障区分开。`,
+  мёртвыеВывод: (н, д) => `CISA 官方登记册中有 ${н} 个域名在 DNS 中并不存在，占我们日志中登记册域名的 ${д} %——每九个地址中就有一个以上。而这些城市本身仍在：albanyky.gov、cityofforrestcityar.gov、durantok.gov 都是现存的市政当局，只是官方域名没有响应。每个例子都经过另一天的重复测量确认：只有在所有测量中都保持沉默的域名才会留在名单上。任何一天只要回应过一次就会被剔除——检查正是以此把真正失效的地址与一时的网络故障区分开。`,
 
   дваСпособаЗаголовок: '两种统计方式——两者并列',
   дваСпособа: (в, б1, ж, б2, р, нм) => `样本中有部分域名无法解析：没有任何 DNS 服务器应答，网站根本不存在。这类地址有两种统计方式，我们两种都列出。
@@ -1292,7 +1292,7 @@ const zh: ТекстыДанных = {
   скипТекст: '此问题于 2026 年 9 月 15 日发现，并在此直接更正，而不是等别人来发现。我们的遍历程序判定页面目标达成的条件是：获得焦点的元素在其文本或链接地址中包含关键词。制作良好的网站第一个链接通常是功能性的「Skip to main content」，其中含有 main 一词，并指向 #main 或 #content 锚点。因此在关键词包含 main 或 navigation 的页面上，它在第一次按 Tab 时就被当作目标。跳转链接是真正的无障碍功能，键盘用户确实会使用它。但它并不能带你到联系方式、付款页面或营业时间——而这正是「人可以到达」这一判定所声称的内容。在已发布的日志上测量：95,524 条记录中有 6,184 条（6.5 %）的目标是由这种链接判定的——其中 5,064 条判定为「可到达」，1,120 条为「部分障碍」。按严格口径重新计算，不把功能性链接算作目标：「可到达」11,994 → 6,930，「形式上可访问但有障碍」21,305 → 27,489，「部分障碍」13,972 → 12,852。可测量页面中的障碍比例：74.6 % → 85.3 %（47,271 中的 40,341）。这一更正对被测网站更不利，而不是更有利：已发布的数字对它们过于宽容。两个数字都列在此处，任何人都可以复现其中之一：原始日志保存了获得焦点元素的文本，无需重新遍历即可核实。',
 
   ограничение8: (д, м, в, з, н, дн, у) =>
-    `8. 登记册中每七个地址就有一个并不存在，这会影响上面的数字。` +
+    `8. 登记册中每九个地址中就有一个以上并不存在，这会影响上面的数字。` +
     `最新的 DNS 检查：日志中的 ${в} 个域名里，有 ${м} 个（${д} %）` +
     `完全无法解析——站点不存在，也就无从测量。它们对应 ${з} 条记录。` +
     `其中 ${н} 条（占日志的 ${дн} %）标记为「无法测量或不可用」，` +
@@ -1300,8 +1300,8 @@ const zh: ТекстыДанных = {
     `人无法遍历的站点，和根本不存在的站点。前者说明政府网站的质量，` +
     `后者说明联邦登记册的质量。我们把这一点明说出来，因为纠正它会让` +
     `主要数字朝对我们有利的方向移动：去掉失效域名后，障碍的比例会上升。` +
-    `本页数字未作此项纠正。另外：有 ${у} 条记录标记为「可访问」，` +
-    `而其域名今天已不再响应——曾有人亲眼打开过该页面，说明站点是在遍历之后失效的。`,
+    `本页数字未作此项纠正。这些域名中标记为「可访问」的记录为 ${у} 条，` +
+    `它们在遍历当天也都没有运行，因此其中没有在遍历之后才失效的站点。`,
   когоЗаголовок: '这究竟关乎谁',
   когоЛид: '无障碍工作通常被描述为帮助残障人士。若看数字，这一描述并不完整。',
   когоЧисла: (п, д) => `美国约有一百万盲人，约七百万人有视力损失。而患有老视的有 ${п}。超过 ${д} % 的人在四十岁前出现该症状：这不是疾病，也不是残障，而是每个人都会经历的过程。到 2030 年，随着人口老龄化，美国视力损失的发生率将翻倍。`,

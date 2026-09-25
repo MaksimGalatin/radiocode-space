@@ -78,6 +78,8 @@ export default function RegistryClient({ языкИзПути }: { языкИз�
     { n: разряды(Д.мёртвых), п: т.числаМёртвых, цвет: 'var(--dx-red, #f87171)' },
     { n: разряды(Д.записейВсего), п: т.числаЗаписей, цвет: 'var(--dx-mut, #94a3b8)' },
     { n: разряды(Д.записейУМёртвых), п: т.числаЗаписейМёртвых, цвет: 'var(--dx-red, #f87171)' },
+    // 25.09.2026: адреса журнала вне реестра CISA — показаны, но не считаются.
+    { n: разряды(Д.внеРеестра), п: т.числаВнеРеестра, цвет: 'var(--dx-mut, #94a3b8)' },
   ];
 
   return (
@@ -186,7 +188,7 @@ export default function RegistryClient({ языкИзПути }: { языкИз�
           <p style={ТЕКСТ}>{т.файлПояснение}</p>
           <div className="flex flex-col gap-2 mb-4">
             <a
-              href="https://aifa.works/data/dead-domains-2026-09-01.csv"
+              href="https://aifa.works/data/dead-domains-registry-2026-09-08.csv"
               className="text-cyan-700 dark:text-cyan-400 hover:underline text-sm"
             >
               {т.файлСсылка} →
