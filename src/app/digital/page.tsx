@@ -3890,7 +3890,7 @@ export default function DigitalSOTAPage() {
               <span className="text-xs font-mono text-slate-600 dark:text-slate-400 uppercase">{t.filterHardware}</span>
               <div className="text-sm font-mono font-semibold text-cyan-900 dark:text-[#00F0FF]">Standard CPU (i7-14700, only tested platform)</div>
             </div>
-            <span className="text-[11px] font-mono text-slate-500 dark:text-slate-500">
+            <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
               {lang === 'ru' ? 'Единственная реально измеренная конфигурация; сравнение на других размерах не проводилось' : lang === 'es' ? 'Única configuración realmente medida; no se ha probado en otros tamaños' : lang === 'zh' ? '唯一实测配置；尚未在其他规模下测试' : 'Only configuration actually measured; not yet tested at other sizes'}
             </span>
           </div>
@@ -4015,7 +4015,7 @@ export default function DigitalSOTAPage() {
                     <td className="py-4 px-4 text-center font-mono text-emerald-800 dark:text-emerald-300">215.5 MB</td>
                     <td className="py-4 px-4 text-center font-mono text-amber-700 dark:text-amber-500">39.55%</td>
                     <td className="py-4 px-4 text-center font-mono text-slate-500">{JX[lang].notMeasured}</td>
-                    <td className="py-4 px-4 text-center font-mono text-emerald-400">{JX[lang].noGpu}</td>
+                    <td className="py-4 px-4 text-center font-mono text-emerald-800 dark:text-emerald-400">{JX[lang].noGpu}</td>
                   </tr>
                   <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
                     <td className="py-3.5 px-4">FAISS IndexFlatL2 (exact brute-force)</td>
