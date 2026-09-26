@@ -410,9 +410,9 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
     "title": "Cancelación de suscripción más difícil que el registro",
-    "description": "Cancelar una suscripción requiere más pasos, llamadas telefónicas u obstáculos que el proceso de registro original. La Regla de clic para cancelar de la FTC requiere que la cancelación sea tan fácil como la inscripción.",
+    "description": "Cancelar una suscripción requiere más pasos, llamadas telefónicas u obstáculos que darse de alta. La ley federal ROSCA exige mecanismos sencillos para detener los cargos recurrentes, y California exige la cancelación en línea mediante un enlace o botón visible para las suscripciones contratadas en línea. La Regla de clic para cancelar de la FTC de 2024 fue anulada por el Octavo Circuito el 8 de julio de 2025.",
     "severity": "serious",
-    "reference": "16 CFR § 425 (FTC Click-to-Cancel Rule 2024)"
+    "reference": "15 U.S.C. § 8403(3) (ROSCA); Cal. Bus. & Prof. Code § 17602(d)"
   },
   {
     "id": 36,
@@ -18067,402 +18067,402 @@ export const threatMatrixEs: ComplianceCheck[] = [
   {
     "id": 1801,
     "code": "TXSBB-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Operaciones de intermediario de datos no registrado",
-    "description": "El sitio vende datos a terceros sin registrarse en el Registro de Intermediarios de Texas.",
+    "title": "Corredor de datos no registrado en Texas",
+    "description": "Una empresa que recopila, trata o transfiere datos personales que no obtuvo directamente de las personas parece operar en Texas como corredor de datos sin registrarse ante la Secretaría de Estado de Texas (tasa de 300 $). Sanción: al menos 100 $ por día más las tasas impagadas, hasta 10.000 $ en 12 meses. Lo confirma el registro público, no el sitio web.",
     "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "reference": "Tex. Bus. & Com. Code § 510.005"
   },
   {
     "id": 1802,
     "code": "TXSBB-002",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Operaciones de intermediario de datos no registrado — Fallos de Auditoría y Registro",
-    "description": "El sitio vende datos a terceros sin registrarse en el Registro de Intermediarios de Texas. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Sin aviso visible de corredor de datos en el sitio web (Texas)",
+    "description": "El sitio web o la aplicación de un corredor de datos no publica un aviso visible de que la entidad es un corredor de datos, redactado con claridad, no engañoso, fácilmente accesible para el público, incluidas las personas con discapacidad, y con el texto establecido por la Secretaría de Estado de Texas. Sanción: al menos 100 $ por día, hasta 10.000 $ en 12 meses.",
     "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "reference": "Tex. Bus. & Com. Code § 510.004(1)–(3)"
   },
   {
     "id": 1803,
     "code": "TXSBB-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Operaciones de intermediario de datos no registrado — Defectos de Diseño de Interfaz",
-    "description": "El sitio vende datos a terceros sin registrarse en el Registro de Intermediarios de Texas. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
-    "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "title": "Aviso de corredor de datos sin instrucciones sobre derechos de privacidad (Texas)",
+    "description": "El aviso de corredor de datos del sitio web o la aplicación no informa a los consumidores de cómo ejercer sus derechos conforme a la Ley de Privacidad y Seguridad de Datos de Texas (capítulo 541), requisito vigente desde el 1 de septiembre de 2025.",
+    "severity": "moderate",
+    "reference": "Tex. Bus. & Com. Code § 510.004(4)"
   },
   {
     "id": 1804,
     "code": "TXSBB-004",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Operaciones de intermediario de datos no registrado — Fortalezas Criptográficas Débiles",
-    "description": "El sitio vende datos a terceros sin registrarse en el Registro de Intermediarios de Texas. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
+    "title": "Sin programa integral de seguridad de la información (corredor de datos, Texas)",
+    "description": "Un corredor de datos que opera en Texas muestra indicios de protección débil de los datos (por ejemplo, datos expuestos o falta de salvaguardas básicas), lo que sugiere que carece del programa integral y escrito de seguridad de la información, con salvaguardas administrativas, técnicas y físicas, que Texas exige a los corredores de datos. Lo confirma una auditoría.",
     "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "reference": "Tex. Bus. & Com. Code § 510.007"
   },
   {
     "id": 1805,
     "code": "TXSBB-005",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Operaciones de intermediario de datos no registrado — Fallos en Escaneos de Vulnerabilidad",
-    "description": "El sitio vende datos a terceros sin registrarse en el Registro de Intermediarios de Texas. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
+    "title": "Corredor de datos no registrado ante la Agencia de Protección de la Privacidad de California",
+    "description": "Una empresa que cumple la definición de corredor de datos parece no haberse registrado ante la Agencia de Protección de la Privacidad de California antes del 31 de enero del año siguiente. Multa administrativa: 200 $ por cada día sin registro más las tasas impagadas y los costes. Lo confirma el registro de la agencia, no el sitio web.",
     "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "reference": "Cal. Civ. Code § 1798.99.82"
   },
   {
     "id": 1806,
     "code": "TXSBB-006",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Operaciones de intermediario de datos no registrado — Integridad del Registro de Consentimiento",
-    "description": "El sitio vende datos a terceros sin registrarse en el Registro de Intermediarios de Texas. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "title": "Política de privacidad de corredor de datos sin métricas de solicitudes (California)",
+    "description": "La política de privacidad de un corredor de datos no revela, antes del 1 de julio de cada año, cuántas solicitudes de supresión, acceso, exclusión y relacionadas recibió, atendió y denegó el año anterior, con la mediana y la media de los plazos de respuesta y los motivos de las denegaciones.",
+    "severity": "moderate",
+    "reference": "Cal. Civ. Code § 1798.99.85"
   },
   {
     "id": 1807,
     "code": "TXSBB-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Operaciones de intermediario de datos no registrado — Visibilidad de Enlaces de Exclusión",
-    "description": "El sitio vende datos a terceros sin registrarse en el Registro de Intermediarios de Texas. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
+    "title": "Corredor de datos que no tramita las solicitudes de supresión del DROP de California",
+    "description": "Desde el 1 de agosto de 2026, un corredor de datos registrado debe acceder al menos cada 45 días al mecanismo accesible de supresión de la Agencia de Protección de la Privacidad de California y suprimir los datos personales de quienes lo soliciten. Indicios como que los datos de una persona sigan publicados sugieren que no lo hace. Multa: 200 $ por cada solicitud de supresión y día de incumplimiento.",
     "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "reference": "Cal. Civ. Code § 1798.99.86(c)"
   },
   {
     "id": 1808,
     "code": "TXSBB-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Operaciones de intermediario de datos no registrado — Divulgaciones del Aviso de Privacidad",
-    "description": "El sitio vende datos a terceros sin registrarse en el Registro de Intermediarios de Texas. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
-    "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "title": "Corredor de datos no registrado en Vermont",
+    "description": "Un corredor de datos parece no haberse registrado anualmente ante la Secretaría de Estado de Vermont antes del 31 de enero (tasa de 100 $), indicando sus métodos de exclusión, las actividades de las que no cabe excluirse, la acreditación de compradores y las brechas de seguridad del año anterior. Lo confirma el registro estatal, no el sitio web.",
+    "severity": "moderate",
+    "reference": "9 V.S.A. § 2446 (Vermont)"
   },
   {
     "id": 1809,
     "code": "TXSBB-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Operaciones de intermediario de datos no registrado — Verificación del Control de Auditoría",
-    "description": "El sitio vende datos a terceros sin registrarse en el Registro de Intermediarios de Texas. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
+    "title": "Sin programa escrito de seguridad de la información (corredor de datos, Vermont)",
+    "description": "Indicios de protección débil de los datos sugieren que el corredor de datos carece del programa integral y escrito de seguridad de la información que exige Vermont, con un empleado designado para mantenerlo y la identificación de los riesgos internos y externos previsibles para la información de identificación personal. Lo confirma una auditoría.",
     "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "reference": "9 V.S.A. § 2447 (Vermont)"
   },
   {
     "id": 1810,
     "code": "TXSBB-010",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Operaciones de intermediario de datos no registrado — Credenciales Administrativas Inseguras",
-    "description": "El sitio vende datos a terceros sin registrarse en el Registro de Intermediarios de Texas. Las consolas de administración permiten el acceso sin forzar claves MFA.",
-    "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "title": "Sin página destacada con instrucciones sobre derechos de privacidad (corredor de datos, Texas)",
+    "description": "El sitio web del corredor de datos no tiene una página que muestre de forma destacada instrucciones específicas sobre cómo ejercer los derechos de la Ley de Privacidad y Seguridad de Datos de Texas; desde el 1 de septiembre de 2025, el enlace a esa página debe figurar en el registro del corredor ante la Secretaría de Estado.",
+    "severity": "moderate",
+    "reference": "Tex. Bus. & Com. Code § 510.005(b)(2-a)"
   },
   {
     "id": 1811,
     "code": "WAHMHD-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "HIPAA / Medical",
-    "title": "Geovallado ilegal alrededor de instalaciones médicas",
-    "description": "La aplicación utiliza geovallado en centros médicos para rastrear a los usuarios sin consentimiento.",
+    "title": "Geovallas alrededor de centros de atención médica presencial (Washington)",
+    "description": "Tecnologías de seguimiento de ubicación o de publicidad en el sitio sugieren el uso de una geovalla —un límite virtual de 2.000 pies o menos— alrededor de una entidad que presta atención médica presencial para identificar o seguir a quienes buscan atención, recopilar sus datos de salud o enviarles mensajes o anuncios sobre salud. Washington lo declara ilegal; lo confirma una auditoría de las campañas por ubicación.",
     "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "reference": "RCW 19.373.080 (Washington My Health My Data Act)"
   },
   {
     "id": 1812,
     "code": "WAHMHD-002",
     "evidenceKind": "observable",
     "category": "HIPAA / Medical",
-    "title": "Geovallado ilegal alrededor de instalaciones médicas — Fallos de Auditoría y Registro",
-    "description": "La aplicación utiliza geovallado en centros médicos para rastrear a los usuarios sin consentimiento. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
-    "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "title": "Sin enlace en la página de inicio a la política de datos de salud (Washington)",
+    "description": "Una empresa que recopila datos de salud de consumidores no publica de forma destacada en su página de inicio un enlace a una política de privacidad específica de datos de salud, como exige la ley My Health My Data de Washington a las entidades reguladas y pequeñas empresas.",
+    "severity": "serious",
+    "reference": "RCW 19.373.020(1)(b) (Washington My Health My Data Act)"
   },
   {
     "id": 1813,
     "code": "WAHMHD-003",
     "evidenceKind": "observable",
     "category": "HIPAA / Medical",
-    "title": "Geovallado ilegal alrededor de instalaciones médicas — Defectos de Diseño de Interfaz",
-    "description": "La aplicación utiliza geovallado en centros médicos para rastrear a los usuarios sin consentimiento. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
-    "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "title": "Política de datos de salud sin la información obligatoria (Washington)",
+    "description": "La política de privacidad de datos de salud no revela de forma clara y visible las categorías de datos de salud recopilados y su finalidad, sus fuentes, las categorías compartidas, las categorías de terceros y las filiales concretas que los reciben, ni cómo pueden los consumidores ejercer sus derechos.",
+    "severity": "serious",
+    "reference": "RCW 19.373.020(1)(a) (Washington My Health My Data Act)"
   },
   {
     "id": 1814,
     "code": "WAHMHD-004",
     "evidenceKind": "observable",
     "category": "HIPAA / Medical",
-    "title": "Geovallado ilegal alrededor de instalaciones médicas — Fortalezas Criptográficas Débiles",
-    "description": "La aplicación utiliza geovallado en centros médicos para rastrear a los usuarios sin consentimiento. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
-    "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "title": "Un solo consentimiento para recopilar y compartir datos de salud (Washington)",
+    "description": "El sitio obtiene un único consentimiento que cubre tanto la recopilación como la comunicación de datos de salud, aunque Washington exige para compartirlos un consentimiento separado y distinto del de recopilación, salvo que compartirlos sea necesario para el servicio solicitado por el consumidor.",
+    "severity": "serious",
+    "reference": "RCW 19.373.030(1)(b) (Washington My Health My Data Act)"
   },
   {
     "id": 1815,
     "code": "WAHMHD-005",
     "evidenceKind": "observable",
     "category": "HIPAA / Medical",
-    "title": "Geovallado ilegal alrededor de instalaciones médicas — Fallos en Escaneos de Vulnerabilidad",
-    "description": "La aplicación utiliza geovallado en centros médicos para rastrear a los usuarios sin consentimiento. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
-    "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "title": "Solicitud de consentimiento sobre datos de salud sin los datos exigidos (Washington)",
+    "description": "La solicitud de consentimiento para recopilar o compartir datos de salud no indica de forma clara y visible las categorías de datos, la finalidad y los usos concretos, las categorías de destinatarios ni cómo puede el consumidor retirar su consentimiento.",
+    "severity": "moderate",
+    "reference": "RCW 19.373.030(1)(c) (Washington My Health My Data Act)"
   },
   {
     "id": 1816,
     "code": "WAHMHD-006",
     "evidenceKind": "observable",
     "category": "HIPAA / Medical",
-    "title": "Geovallado ilegal alrededor de instalaciones médicas — Integridad del Registro de Consentimiento",
-    "description": "La aplicación utiliza geovallado en centros médicos para rastrear a los usuarios sin consentimiento. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "title": "Sin vía para ejercer los derechos sobre datos de salud (Washington)",
+    "description": "La política de privacidad de datos de salud no describe un medio seguro y fiable para solicitar confirmar, acceder o suprimir los datos de salud o retirar el consentimiento, adaptado a la forma en que los consumidores suelen relacionarse con la empresa.",
+    "severity": "moderate",
+    "reference": "RCW 19.373.040(1)(d) (Washington My Health My Data Act)"
   },
   {
     "id": 1817,
     "code": "WAHMHD-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "HIPAA / Medical",
-    "title": "Geovallado ilegal alrededor de instalaciones médicas — Visibilidad de Enlaces de Exclusión",
-    "description": "La aplicación utiliza geovallado en centros médicos para rastrear a los usuarios sin consentimiento. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
+    "title": "Venta de datos de salud sin autorización firmada (Washington)",
+    "description": "Indicios de venta u oferta de venta de datos de salud (por ejemplo, avisos de venta de datos o socios publicitarios que reciben señales de salud) sin una autorización válida en lenguaje sencillo, firmada por el consumidor, separada del consentimiento de recopilación y que caduque al año. Lo confirma una auditoría de las ventas de datos.",
     "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "reference": "RCW 19.373.070 (Washington My Health My Data Act)"
   },
   {
     "id": 1818,
     "code": "WAHMHD-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "HIPAA / Medical",
-    "title": "Geovallado ilegal alrededor de instalaciones médicas — Divulgaciones del Aviso de Privacidad",
-    "description": "La aplicación utiliza geovallado en centros médicos para rastrear a los usuarios sin consentimiento. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
-    "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "title": "Seguridad y control de acceso débiles para datos de salud (Washington)",
+    "description": "Debilidades de seguridad visibles sugieren que el acceso a los datos de salud no se limita al personal y encargados que lo necesitan y que las salvaguardas administrativas, técnicas y físicas no alcanzan el estándar razonable del sector. Lo confirma una auditoría.",
+    "severity": "serious",
+    "reference": "RCW 19.373.050 (Washington My Health My Data Act)"
   },
   {
     "id": 1819,
     "code": "WAHMHD-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "HIPAA / Medical",
-    "title": "Geovallado ilegal alrededor de instalaciones médicas — Verificación del Control de Auditoría",
-    "description": "La aplicación utiliza geovallado en centros médicos para rastrear a los usuarios sin consentimiento. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
+    "title": "Geovallas cerca de centros de salud mental, reproductiva o sexual (Connecticut)",
+    "description": "Tecnologías de seguimiento de ubicación o de publicidad sugieren una geovalla a menos de 1.750 pies de un centro de salud mental, reproductiva o sexual para identificar, seguir, recopilar datos o enviar notificaciones a los consumidores sobre sus datos de salud. Prohibido en Connecticut; lo aplica el Fiscal General. Lo confirma una auditoría.",
     "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "reference": "Conn. Gen. Stat. § 42-526(a)(1)(C) (Connecticut)"
   },
   {
     "id": 1820,
     "code": "WAHMHD-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "HIPAA / Medical",
-    "title": "Geovallado ilegal alrededor de instalaciones médicas — Credenciales Administrativas Inseguras",
-    "description": "La aplicación utiliza geovallado en centros médicos para rastrear a los usuarios sin consentimiento. Las consolas de administración permiten el acceso sin forzar claves MFA.",
+    "title": "Venta de datos de salud sin consentimiento (Connecticut)",
+    "description": "Indicios de venta u oferta de venta de datos de salud de consumidores —por ejemplo, audiencias basadas en salud ofrecidas a anunciantes— sin obtener antes el consentimiento del consumidor, lo que Connecticut prohíbe. Lo confirma una auditoría de las ventas de datos.",
     "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "reference": "Conn. Gen. Stat. § 42-526(a)(1)(D) (Connecticut)"
   },
   {
     "id": 1821,
     "code": "NYDFS-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de certificación de ciberseguridad financiera",
-    "description": "El portal financiero opera sin las declaraciones anuales de cumplimiento de ciberseguridad requeridas por la DFS de NY.",
+    "title": "Sin presentación anual de cumplimiento de ciberseguridad ante NY DFS",
+    "description": "Una empresa de servicios financieros supervisada por el DFS de Nueva York no muestra indicios de presentar, antes del 15 de abril de cada año, una certificación escrita de cumplimiento sustancial de la Parte 500 del año anterior o un reconocimiento escrito de incumplimiento con un calendario de corrección. Se confirma ante el regulador, no desde el sitio web.",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.17(b) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1822,
     "code": "NYDFS-002",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de certificación de ciberseguridad financiera — Fallos de Auditoría y Registro",
-    "description": "El portal financiero opera sin las declaraciones anuales de cumplimiento de ciberseguridad requeridas por la DFS de NY. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Información no pública sin cifrar en tránsito (NY DFS)",
+    "description": "Páginas o formularios de una empresa supervisada por el DFS que tratan información no pública se sirven por HTTP sin cifrar, con contenido mixto o con TLS obsoleto, aunque la Parte 500 exige cifrado conforme a los estándares del sector para la información no pública en tránsito por redes externas.",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.15(a) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1823,
     "code": "NYDFS-003",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de certificación de ciberseguridad financiera — Defectos de Diseño de Interfaz",
-    "description": "El portal financiero opera sin las declaraciones anuales de cumplimiento de ciberseguridad requeridas por la DFS de NY. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
+    "title": "Sin autenticación multifactor para acceder a los sistemas (NY DFS)",
+    "description": "Portales de inicio de sesión expuestos a Internet de una empresa supervisada por el DFS sugieren acceso solo con contraseña, aunque la Parte 500 exige autenticación multifactor para cualquier persona que acceda a sus sistemas de información (para pequeñas empresas con exención limitada: al menos para acceso remoto, aplicaciones en la nube con información no pública y cuentas privilegiadas). Lo confirma una auditoría.",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.12(a) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1824,
     "code": "NYDFS-004",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de certificación de ciberseguridad financiera — Fortalezas Criptográficas Débiles",
-    "description": "El portal financiero opera sin las declaraciones anuales de cumplimiento de ciberseguridad requeridas por la DFS de NY. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
+    "title": "Sin prueba de penetración anual (NY DFS)",
+    "description": "Debilidades antiguas y fáciles de detectar sugieren que la empresa no somete sus sistemas de información, al menos una vez al año, a pruebas de penetración desde dentro y fuera de sus límites a cargo de una parte cualificada, como exige la Parte 500. Lo confirma una auditoría.",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.5(a)(1) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1825,
     "code": "NYDFS-005",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de certificación de ciberseguridad financiera — Fallos en Escaneos de Vulnerabilidad",
-    "description": "El portal financiero opera sin las declaraciones anuales de cumplimiento de ciberseguridad requeridas por la DFS de NY. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
+    "title": "Vulnerabilidades conocidas sin corregir (NY DFS)",
+    "description": "El sitio web público de una empresa supervisada por el DFS usa software o bibliotecas en versiones con vulnerabilidades conocidas públicamente, aunque la Parte 500 exige corregir las vulnerabilidades a tiempo, priorizándolas según su riesgo.",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.5(c) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1826,
     "code": "NYDFS-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de certificación de ciberseguridad financiera — Integridad del Registro de Consentimiento",
-    "description": "El portal financiero opera sin las declaraciones anuales de cumplimiento de ciberseguridad requeridas por la DFS de NY. Los registros no almacenan las elecciones en un repositorio inmutable.",
+    "title": "Incidente de ciberseguridad no notificado al DFS en 72 horas",
+    "description": "Indicios públicos de un incidente de ciberseguridad (por ejemplo, desfiguración, exposición de datos o aviso de ransomware) sin constancia de que la empresa notificara electrónicamente al superintendente en las 72 horas siguientes a determinar el incidente, como exige la Parte 500. Se confirma ante el regulador.",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.17(a) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1827,
     "code": "NYDFS-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de certificación de ciberseguridad financiera — Visibilidad de Enlaces de Exclusión",
-    "description": "El portal financiero opera sin las declaraciones anuales de cumplimiento de ciberseguridad requeridas por la DFS de NY. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
-    "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "title": "Sin inventario completo de activos (NY DFS)",
+    "description": "Subdominios olvidados, sistemas de prueba o servicios obsoletos visibles desde Internet sugieren que la empresa carece del inventario completo, exacto y documentado de sus sistemas de información —con propietario, ubicación, clasificación y fecha de fin de soporte— que exige la Parte 500. Lo confirma una auditoría.",
+    "severity": "moderate",
+    "reference": "23 NYCRR § 500.13(a) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1828,
     "code": "NYDFS-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de certificación de ciberseguridad financiera — Divulgaciones del Aviso de Privacidad",
-    "description": "El portal financiero opera sin las declaraciones anuales de cumplimiento de ciberseguridad requeridas por la DFS de NY. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
+    "title": "Protocolos de control remoto abiertos (NY DFS)",
+    "description": "Servicios de control remoto de los dispositivos de la empresa (por ejemplo, escritorio remoto o VNC) parecen accesibles desde Internet, aunque la Parte 500 exige desactivar o configurar de forma segura todos los protocolos que permiten el control remoto de dispositivos. Se ve con un escaneo de red, no desde el sitio web; lo confirma una auditoría.",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.7(a)(5) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1829,
     "code": "NYDFS-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de certificación de ciberseguridad financiera — Verificación del Control de Auditoría",
-    "description": "El portal financiero opera sin las declaraciones anuales de cumplimiento de ciberseguridad requeridas por la DFS de NY. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "title": "Sin formación anual en ciberseguridad (NY DFS)",
+    "description": "Indicios de exposición a ingeniería social (por ejemplo, correos y cargos del personal publicados sin salvaguardas, o incidentes de phishing) sugieren que la empresa no imparte, al menos una vez al año, formación de concienciación en ciberseguridad, incluida la ingeniería social, a todo el personal, como exige la Parte 500. Lo confirma una auditoría.",
+    "severity": "moderate",
+    "reference": "23 NYCRR § 500.14(a)(3) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1830,
     "code": "NYDFS-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de certificación de ciberseguridad financiera — Credenciales Administrativas Inseguras",
-    "description": "El portal financiero opera sin las declaraciones anuales de cumplimiento de ciberseguridad requeridas por la DFS de NY. Las consolas de administración permiten el acceso sin forzar claves MFA.",
-    "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "title": "Sin política de contraseñas conforme a estándares del sector (NY DFS)",
+    "description": "Formularios de inicio de sesión sin indicios de requisitos de contraseña ni protección frente a contraseñas comunes sugieren que la empresa carece de la política escrita de contraseñas conforme a los estándares del sector que la Parte 500 exige siempre que se usen contraseñas. Lo confirma una auditoría.",
+    "severity": "moderate",
+    "reference": "23 NYCRR § 500.7(b) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1831,
     "code": "PSD2-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
     "title": "Autenticación reforzada de clientes (SCA) no conforme",
-    "description": "El portal de pago acepta tarjetas de crédito sin exigir la verificación multifactor requerida por la PSD2.",
+    "description": "Un proveedor de servicios de pago parece no aplicar la autenticación reforzada de clientes —dos elementos independientes de conocimiento, posesión o inherencia— cuando el ordenante accede en línea a su cuenta de pago o inicia un pago electrónico, o no vincula dinámicamente los pagos remotos al importe y al beneficiario. La obligación corresponde al proveedor de servicios de pago; lo confirma un pago de prueba o una auditoría.",
     "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "reference": "Directive (EU) 2015/2366 Art. 97(1)–(2) (PSD2)"
   },
   {
     "id": 1832,
     "code": "PSD2-002",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Autenticación reforzada de clientes (SCA) no conforme — Fallos de Auditoría y Registro",
-    "description": "El portal de pago acepta tarjetas de crédito sin exigir la verificación multifactor requerida por la PSD2. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "Recargo por pagar con tarjeta de consumidor (UE)",
+    "description": "El proceso de pago añade una tarifa por pagar con una tarjeta de débito o crédito de consumidor cuyas tasas de intercambio regula el Reglamento (UE) 2015/751, o por transferencias y adeudos domiciliados SEPA, aunque la PSD2 prohíbe al beneficiario exigir esos recargos.",
+    "severity": "serious",
+    "reference": "Directive (EU) 2015/2366 Art. 62(4) (PSD2)"
   },
   {
     "id": 1833,
     "code": "PSD2-003",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Autenticación reforzada de clientes (SCA) no conforme — Defectos de Diseño de Interfaz",
-    "description": "El portal de pago acepta tarjetas de crédito sin exigir la verificación multifactor requerida por la PSD2. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "Tarifa por medio de pago superior al coste del comerciante (UE)",
+    "description": "El sitio cobra a los consumidores una tarifa por usar un medio de pago concreto (por ejemplo, un monedero electrónico o una tarjeta comercial) que parece superar el coste que soporta el comerciante por ese medio, lo que prohíbe el Derecho de consumo de la UE.",
+    "severity": "moderate",
+    "reference": "Directive 2011/83/EU Art. 19 (Consumer Rights Directive)"
   },
   {
     "id": 1834,
     "code": "PSD2-004",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Autenticación reforzada de clientes (SCA) no conforme — Fortalezas Criptográficas Débiles",
-    "description": "El portal de pago acepta tarjetas de crédito sin exigir la verificación multifactor requerida por la PSD2. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "Conversión de divisa ofrecida sin comisiones ni tipo de cambio (UE)",
+    "description": "En el pago, el beneficiario ofrece cobrar en otra divisa (conversión dinámica de divisas) sin revelar antes todas las comisiones y el tipo de cambio aplicable, aunque la PSD2 exige esa información y el acuerdo del ordenante sobre esa base.",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2015/2366 Art. 59(2) (PSD2)"
   },
   {
     "id": 1835,
     "code": "PSD2-005",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Autenticación reforzada de clientes (SCA) no conforme — Fallos en Escaneos de Vulnerabilidad",
-    "description": "El portal de pago acepta tarjetas de crédito sin exigir la verificación multifactor requerida por la PSD2. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "Servicio de pago sin plazo de ejecución, comisiones ni tipo de cambio (UE)",
+    "description": "El sitio web de un proveedor de servicios de pago (por ejemplo, un servicio de envío de dinero) no facilita antes de un pago único el plazo máximo de ejecución, todas las comisiones desglosadas y el tipo de cambio real o de referencia, como exige la PSD2.",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2015/2366 Art. 45(1) (PSD2)"
   },
   {
     "id": 1836,
     "code": "PSD2-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Autenticación reforzada de clientes (SCA) no conforme — Integridad del Registro de Consentimiento",
-    "description": "El portal de pago acepta tarjetas de crédito sin exigir la verificación multifactor requerida por la PSD2. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "El ordenante no ve importe ni beneficiario al autenticar (UE)",
+    "description": "El paso de autenticación de un pago remoto no muestra al ordenante el importe ni el beneficiario, o el código de autenticación no es específico de ellos, como exigen las normas técnicas de la UE sobre vinculación dinámica. Lo confirma un pago de prueba.",
+    "severity": "serious",
+    "reference": "Commission Delegated Regulation (EU) 2018/389 Art. 5 (SCA RTS)"
   },
   {
     "id": 1837,
     "code": "PSD2-007",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Autenticación reforzada de clientes (SCA) no conforme — Visibilidad de Enlaces de Exclusión",
-    "description": "El portal de pago acepta tarjetas de crédito sin exigir la verificación multifactor requerida por la PSD2. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "Credenciales de pago sin protección adecuada (UE)",
+    "description": "La página de acceso o de pago de un proveedor de servicios de pago transmite las credenciales de seguridad personalizadas de los usuarios sin protección adecuada —por ejemplo, por HTTP sin cifrar, con contenido mixto o en una página que carga scripts de terceros no verificados—, aunque la PSD2 exige medidas adecuadas para proteger su confidencialidad e integridad.",
+    "severity": "serious",
+    "reference": "Directive (EU) 2015/2366 Art. 97(3) (PSD2)"
   },
   {
     "id": 1838,
     "code": "PSD2-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Autenticación reforzada de clientes (SCA) no conforme — Divulgaciones del Aviso de Privacidad",
-    "description": "El portal de pago acepta tarjetas de crédito sin exigir la verificación multifactor requerida por la PSD2. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "Usuarios no informados de un incidente de seguridad grave (UE)",
+    "description": "Indicios públicos de un incidente operativo o de seguridad grave en un proveedor de servicios de pago sin constancia de que informara sin demora indebida a sus usuarios del incidente y de las medidas que pueden adoptar, cuando sus intereses financieros se vean o puedan verse afectados, como exige la PSD2. Lo confirma una auditoría.",
+    "severity": "serious",
+    "reference": "Directive (EU) 2015/2366 Art. 96(1) (PSD2)"
   },
   {
     "id": 1839,
     "code": "PSD2-009",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Autenticación reforzada de clientes (SCA) no conforme — Verificación del Control de Auditoría",
-    "description": "El portal de pago acepta tarjetas de crédito sin exigir la verificación multifactor requerida por la PSD2. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "Recargo por pagar con tarjeta de consumidor (Reino Unido)",
+    "description": "El proceso de pago cobra una tarifa por pagar con una tarjeta de consumidor (no comercial) o por pagos cubiertos por el reglamento SEPA, aunque en el Reino Unido el beneficiario no puede cobrar al ordenante tarifa alguna por estos medios de pago.",
+    "severity": "serious",
+    "reference": "UK Consumer Rights (Payment Surcharges) Regulations 2012 reg. 6A"
   },
   {
     "id": 1840,
     "code": "PSD2-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Autenticación reforzada de clientes (SCA) no conforme — Credenciales Administrativas Inseguras",
-    "description": "El portal de pago acepta tarjetas de crédito sin exigir la verificación multifactor requerida por la PSD2. Las consolas de administración permiten el acceso sin forzar claves MFA.",
+    "title": "No se aplica la autenticación reforzada de clientes (Reino Unido)",
+    "description": "Un proveedor de servicios de pago del Reino Unido parece no aplicar la autenticación reforzada de clientes cuando el usuario accede en línea a su cuenta de pago, inicia un pago electrónico o actúa por un canal remoto con riesgo de fraude, o no vincula dinámicamente los pagos remotos al importe y al beneficiario. Lo confirma un pago de prueba o una auditoría.",
     "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "reference": "UK Payment Services Regulations 2017 reg. 100"
   },
   {
     "id": 1841,
@@ -18569,1499 +18569,1499 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "GLBAS-001",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de controles de transmisión para datos financieros",
-    "description": "El formulario de préstamo transmite informes crediticios y SSN sin cifrado de transporte fuerte.",
+    "title": "Faltan controles de transmisión segura de datos financieros",
+    "description": "Las páginas de solicitud o de cuenta de una institución financiera no bancaria bajo la jurisdicción de la FTC (por ejemplo, un prestamista, un corredor hipotecario o un preparador de impuestos) envían información de clientes, como números de la Seguridad Social o datos crediticios, por HTTP sin cifrar, con contenido mixto o con TLS obsoleto, aunque la Safeguards Rule exige cifrar toda la información de clientes en tránsito por redes externas.",
     "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "reference": "16 CFR § 314.4(c)(3) (GLBA Safeguards Rule)"
   },
   {
     "id": 1852,
     "code": "GLBAS-002",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de controles de transmisión para datos financieros — Fallos de Auditoría y Registro",
-    "description": "El formulario de préstamo transmite informes crediticios y SSN sin cifrado de transporte fuerte. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Sin autenticación multifactor para acceder a los sistemas (GLBA)",
+    "description": "Los portales de inicio de sesión no muestran indicios de autenticación multifactor, aunque la Safeguards Rule la exige para cualquier persona que acceda a cualquier sistema de información, salvo que la persona cualificada haya aprobado por escrito controles razonablemente equivalentes o más seguros. Lo confirma una auditoría.",
     "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "reference": "16 CFR § 314.4(c)(5) (GLBA Safeguards Rule)"
   },
   {
     "id": 1853,
     "code": "GLBAS-003",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de controles de transmisión para datos financieros — Defectos de Diseño de Interfaz",
-    "description": "El formulario de préstamo transmite informes crediticios y SSN sin cifrado de transporte fuerte. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
+    "title": "Sin pruebas de penetración ni escaneos semestrales de vulnerabilidades (GLBA)",
+    "description": "Vulnerabilidades conocidas públicamente sin corregir sugieren que, a falta de supervisión continua, la institución no realiza pruebas de penetración anuales ni evaluaciones de vulnerabilidades al menos cada seis meses, como exige la Safeguards Rule a las instituciones con información de 5.000 o más consumidores. Lo confirma una auditoría.",
     "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "reference": "16 CFR § 314.4(d)(2) (GLBA Safeguards Rule)"
   },
   {
     "id": 1854,
     "code": "GLBAS-004",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de controles de transmisión para datos financieros — Fortalezas Criptográficas Débiles",
-    "description": "El formulario de préstamo transmite informes crediticios y SSN sin cifrado de transporte fuerte. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
+    "title": "Indicios de desarrollo inseguro en aplicaciones de clientes (GLBA)",
+    "description": "Las aplicaciones web que transmiten o almacenan información de clientes muestran indicios de desarrollo inseguro —por ejemplo, carpetas de control de versiones expuestas, páginas de depuración, mensajes de error detallados o listados de directorios—, aunque la Safeguards Rule exige prácticas de desarrollo seguro para las aplicaciones propias y pruebas de seguridad de las externas.",
     "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "reference": "16 CFR § 314.4(c)(4) (GLBA Safeguards Rule)"
   },
   {
     "id": 1855,
     "code": "GLBAS-005",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de controles de transmisión para datos financieros — Fallos en Escaneos de Vulnerabilidad",
-    "description": "El formulario de préstamo transmite informes crediticios y SSN sin cifrado de transporte fuerte. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
+    "title": "Brecha de 500+ consumidores no notificada a la FTC en 30 días",
+    "description": "Indicios públicos de un incidente de seguridad con información de clientes sin cifrar sin constancia de que la institución lo notificara electrónicamente a la FTC en un plazo máximo de 30 días desde su descubrimiento, como se exige cuando afecta al menos a 500 consumidores. Se confirma ante el regulador.",
     "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "reference": "16 CFR § 314.4(j)(1) (GLBA Safeguards Rule)"
   },
   {
     "id": 1856,
     "code": "GLBAS-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de controles de transmisión para datos financieros — Integridad del Registro de Consentimiento",
-    "description": "El formulario de préstamo transmite informes crediticios y SSN sin cifrado de transporte fuerte. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "title": "Información de clientes conservada más de dos años sin necesidad (GLBA)",
+    "description": "Indicios como declaraciones de conservación indefinida o cuentas inactivas desde hace tiempo con todos sus datos sugieren que la institución carece de procedimientos para eliminar de forma segura la información de clientes a más tardar dos años después de su último uso, salvo que sea necesaria o legalmente exigida, y que no revisa periódicamente su política de conservación. Lo confirma una auditoría.",
+    "severity": "moderate",
+    "reference": "16 CFR § 314.4(c)(6) (GLBA Safeguards Rule)"
   },
   {
     "id": 1857,
     "code": "GLBAS-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de controles de transmisión para datos financieros — Visibilidad de Enlaces de Exclusión",
-    "description": "El formulario de préstamo transmite informes crediticios y SSN sin cifrado de transporte fuerte. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
-    "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "title": "Sin persona cualificada para el programa de seguridad (GLBA)",
+    "description": "No hay indicios de una persona cualificada designada para supervisar, aplicar y hacer cumplir el programa de seguridad de la información —por ejemplo, ningún contacto de seguridad—, aunque la Safeguards Rule la exige (puede trabajar para un proveedor de servicios o una filial). Lo confirma una auditoría.",
+    "severity": "moderate",
+    "reference": "16 CFR § 314.4(a) (GLBA Safeguards Rule)"
   },
   {
     "id": 1858,
     "code": "GLBAS-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de controles de transmisión para datos financieros — Divulgaciones del Aviso de Privacidad",
-    "description": "El formulario de préstamo transmite informes crediticios y SSN sin cifrado de transporte fuerte. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
-    "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "title": "Sin plan escrito de respuesta a incidentes (GLBA)",
+    "description": "Indicios de una respuesta lenta o desorganizada ante un incidente de seguridad sugieren que la institución carece del plan escrito de respuesta a incidentes —con objetivos, funciones, comunicaciones, corrección y documentación— que la Safeguards Rule exige a las instituciones con información de 5.000 o más consumidores. Lo confirma una auditoría.",
+    "severity": "moderate",
+    "reference": "16 CFR § 314.4(h) (GLBA Safeguards Rule)"
   },
   {
     "id": 1859,
     "code": "GLBAS-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de controles de transmisión para datos financieros — Verificación del Control de Auditoría",
-    "description": "El formulario de préstamo transmite informes crediticios y SSN sin cifrado de transporte fuerte. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "title": "Sin formación en seguridad para el personal (GLBA)",
+    "description": "Indicios de exposición a la ingeniería social sugieren que la institución no imparte a su personal formación de concienciación en seguridad actualizada según los riesgos identificados en su evaluación de riesgos, como exige la Safeguards Rule. Lo confirma una auditoría.",
+    "severity": "moderate",
+    "reference": "16 CFR § 314.4(e)(1) (GLBA Safeguards Rule)"
   },
   {
     "id": 1860,
     "code": "GLBAS-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de controles de transmisión para datos financieros — Credenciales Administrativas Inseguras",
-    "description": "El formulario de préstamo transmite informes crediticios y SSN sin cifrado de transporte fuerte. Las consolas de administración permiten el acceso sin forzar claves MFA.",
-    "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "title": "Proveedores que reciben datos de clientes sin supervisión (GLBA)",
+    "description": "Scripts o servicios de terceros reciben datos de las páginas de solicitud o de cuenta, lo que sugiere que la institución no selecciona proveedores capaces, no los obliga por contrato a mantener salvaguardas ni los evalúa periódicamente, como exige la Safeguards Rule. Lo confirma una auditoría de contratos y evaluaciones.",
+    "severity": "moderate",
+    "reference": "16 CFR § 314.4(f) (GLBA Safeguards Rule)"
   },
   {
     "id": 1861,
     "code": "FTCDP-001",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Descuentos ficticios sobre precios originales",
-    "description": "El catálogo muestra precios originales tachados que no reflejan ventas históricas reales, engañando a los compradores.",
+    "title": "Descuentos sobre precios originales ficticios",
+    "description": "El catálogo muestra precios «originales» tachados como base de un descuento, pero no hay indicios de que el artículo se ofreciera realmente a ese precio, de forma abierta y de buena fe, con regularidad durante un periodo razonablemente prolongado; por ejemplo, una «oferta» permanente o un precio «antes» que nunca se cobró. Las Guías de la FTC consideran falsa la ganga basada en un precio anterior ficticio.",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "16 CFR § 233.1 (FTC Guides Against Deceptive Pricing)"
   },
   {
     "id": 1862,
     "code": "FTCDP-002",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Descuentos ficticios sobre precios originales — Fallos de Auditoría y Registro",
-    "description": "El catálogo muestra precios originales tachados que no reflejan ventas históricas reales, engañando a los compradores. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Comparaciones con «precio en otras tiendas» sin respaldo",
+    "description": "Las fichas de producto muestran un precio «compare con» o «valor» que sugiere que otros comercios venden el mismo artículo a ese precio, sin prueba de que existan ventas sustanciales a ese precio en la zona.",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "16 CFR § 233.2 (FTC Guides Against Deceptive Pricing)"
   },
   {
     "id": 1863,
     "code": "FTCDP-003",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Descuentos ficticios sobre precios originales — Defectos de Diseño de Interfaz",
-    "description": "El catálogo muestra precios originales tachados que no reflejan ventas históricas reales, engañando a los compradores. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
+    "title": "Precio recomendado por el fabricante usado como referencia ficticia",
+    "description": "Los descuentos se calculan sobre el precio de lista o el precio de venta recomendado por el fabricante, que no es el precio al que realmente se producen ventas sustanciales en el mercado.",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "16 CFR § 233.3 (FTC Guides Against Deceptive Pricing)"
   },
   {
     "id": 1864,
     "code": "FTCDP-004",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Descuentos ficticios sobre precios originales — Fortalezas Criptográficas Débiles",
-    "description": "El catálogo muestra precios originales tachados que no reflejan ventas históricas reales, engañando a los compradores. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
+    "title": "Precio base inflado en ofertas «gratis» o «2x1»",
+    "description": "Una oferta de artículo «gratis» o «compre uno y llévese otro» exige comprar otro producto cuyo precio se aumentó, o cuya calidad o cantidad se redujo, para cubrir el coste del artículo gratuito.",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "16 CFR § 233.4 (FTC Guides Against Deceptive Pricing)"
   },
   {
     "id": 1865,
     "code": "FTCDP-005",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Descuentos ficticios sobre precios originales — Fallos en Escaneos de Vulnerabilidad",
-    "description": "El catálogo muestra precios originales tachados que no reflejan ventas históricas reales, engañando a los compradores. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
-    "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "title": "Afirmaciones engañosas de precio «mayorista», «de fábrica» o «limitado»",
+    "description": "El sitio llama «mayoristas» o «de fábrica» a precios minoristas, anuncia ofertas «limitadas» que en realidad no lo son, o rebaja artículos defectuosos o de segunda sobre el precio del artículo perfecto sin indicarlo.",
+    "severity": "moderate",
+    "reference": "16 CFR § 233.5 (FTC Guides Against Deceptive Pricing)"
   },
   {
     "id": 1866,
     "code": "FTCDP-006",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Descuentos ficticios sobre precios originales — Integridad del Registro de Consentimiento",
-    "description": "El catálogo muestra precios originales tachados que no reflejan ventas históricas reales, engañando a los compradores. Los registros no almacenan las elecciones en un repositorio inmutable.",
+    "title": "Cargos obligatorios ocultos en entradas para eventos o alojamiento de corta estancia",
+    "description": "Un sitio de venta de entradas o de alojamiento muestra un precio sin los cargos obligatorios, o muestra el precio total con menos prominencia que el resto de la información de precios. La norma de la FTC se aplica solo a entradas para eventos en vivo y alojamiento de corta estancia.",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "16 CFR § 464.2 (FTC Rule on Unfair or Deceptive Fees)"
   },
   {
     "id": 1867,
     "code": "FTCDP-007",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Descuentos ficticios sobre precios originales — Visibilidad de Enlaces de Exclusión",
-    "description": "El catálogo muestra precios originales tachados que no reflejan ventas históricas reales, engañando a los compradores. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
+    "title": "Tergiversación de cargos de servicio, reserva o resort",
+    "description": "Un sitio de entradas o alojamiento tergiversa la naturaleza, finalidad, importe o reembolsabilidad de un cargo, o aquello que paga; por ejemplo, un «cargo por servicio» presentado como impuesto gubernamental.",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "16 CFR § 464.3 (FTC Rule on Unfair or Deceptive Fees)"
   },
   {
     "id": 1868,
     "code": "FTCDP-008",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "Descuentos ficticios sobre precios originales — Divulgaciones del Aviso de Privacidad",
-    "description": "El catálogo muestra precios originales tachados que no reflejan ventas históricas reales, engañando a los compradores. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
+    "category": "Digital Operations",
+    "title": "Reducción de precio en la UE sin el precio anterior de 30 días",
+    "description": "Un descuento anunciado a consumidores de la UE no muestra el precio anterior, es decir, el precio más bajo aplicado por el comerciante durante al menos los 30 días previos a la reducción.",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "Directive 98/6/EC (Price Indication), Art. 6a"
   },
   {
     "id": 1869,
     "code": "FTCDP-009",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Descuentos ficticios sobre precios originales — Verificación del Control de Auditoría",
-    "description": "El catálogo muestra precios originales tachados que no reflejan ventas históricas reales, engañando a los compradores. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "title": "California: «precio anterior» con más de tres meses",
+    "description": "Un precio anterior («antes») mostrado a consumidores de California no fue el precio de mercado vigente en los tres meses previos al anuncio, y no se indica claramente la fecha en que se aplicó.",
+    "severity": "moderate",
+    "reference": "Cal. Bus. & Prof. Code § 17501"
   },
   {
     "id": 1870,
     "code": "FTCDP-010",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Descuentos ficticios sobre precios originales — Credenciales Administrativas Inseguras",
-    "description": "El catálogo muestra precios originales tachados que no reflejan ventas históricas reales, engañando a los compradores. Las consolas de administración permiten el acceso sin forzar claves MFA.",
+    "title": "California: cargos obligatorios fuera del precio mostrado",
+    "description": "Un precio mostrado a consumidores de California no incluye todos los cargos obligatorios; solo pueden excluirse los impuestos gubernamentales y los gastos reales de envío.",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "Cal. Civ. Code § 1770(a)(29)"
   },
   {
     "id": 1871,
     "code": "FTCCC-001",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Flujo de cancelación de suscripción asimétrico",
-    "description": "El portal requiere que los usuarios contacten por teléfono para cancelar la facturación recurrente.",
+    "title": "La suscripción contratada en línea no puede cancelarse en línea",
+    "description": "El sitio permite aceptar en línea una suscripción de renovación automática, pero no ofrece forma de terminarla en línea: por ejemplo, exige llamar o chatear con soporte. California exige poder terminarla en línea en cualquier momento, sin pasos que la obstaculicen o retrasen, mediante un enlace o botón directo en lugar destacado (en la cuenta o en la configuración) o un correo de terminación listo para enviar que facilita la empresa.",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "Cal. Bus. & Prof. Code § 17602(d)(1)"
   },
   {
     "id": 1872,
     "code": "FTCCC-002",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Flujo de cancelación de suscripción asimétrico — Fallos de Auditoría y Registro",
-    "description": "El portal requiere que los usuarios contacten por teléfono para cancelar la facturación recurrente. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Condiciones esenciales no reveladas antes de pedir los datos de pago",
+    "description": "Una oferta en línea con opción negativa (los cargos continúan hasta que el consumidor cancela) solicita los datos de la tarjeta o de facturación antes de revelar de forma clara y visible todas las condiciones esenciales de la operación, como el precio, la frecuencia del cobro y que los cargos se repiten hasta la cancelación.",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "15 U.S.C. § 8403(1) (ROSCA)"
   },
   {
     "id": 1873,
     "code": "FTCCC-003",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Flujo de cancelación de suscripción asimétrico — Defectos de Diseño de Interfaz",
-    "description": "El portal requiere que los usuarios contacten por teléfono para cancelar la facturación recurrente. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
+    "title": "Cargo recurrente sin consentimiento expreso e informado",
+    "description": "Se inscribe al consumidor en cargos recurrentes sin un acto afirmativo y separado de aceptación —por ejemplo, con una casilla premarcada o simplemente al completar la compra—, por lo que el vendedor no obtiene el consentimiento expreso e informado que ROSCA exige antes de cargar la tarjeta o la cuenta.",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "15 U.S.C. § 8403(2) (ROSCA)"
   },
   {
     "id": 1874,
     "code": "FTCCC-004",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Flujo de cancelación de suscripción asimétrico — Fortalezas Criptográficas Débiles",
-    "description": "El portal requiere que los usuarios contacten por teléfono para cancelar la facturación recurrente. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
+    "title": "Condiciones de renovación automática no mostradas junto a la solicitud de consentimiento",
+    "description": "Las condiciones de renovación automática no se presentan de forma clara y visible antes de completar la compra ni en proximidad visual a la solicitud de consentimiento; si la oferta incluye una prueba gratuita, no se explica con claridad el precio que se cobrará al terminar.",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "Cal. Bus. & Prof. Code § 17602(a)(1)"
   },
   {
     "id": 1875,
     "code": "FTCCC-005",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Flujo de cancelación de suscripción asimétrico — Fallos en Escaneos de Vulnerabilidad",
-    "description": "El portal requiere que los usuarios contacten por teléfono para cancelar la facturación recurrente. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
-    "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "title": "Texto del contrato que socava el consentimiento a la renovación automática",
+    "description": "La oferta o el contrato incluye información que interfiere, resta, contradice o de otro modo socava la capacidad del consumidor de dar su consentimiento afirmativo a la renovación automática; por ejemplo, un texto junto a la casilla de consentimiento que minimiza o contradice las condiciones de renovación.",
+    "severity": "moderate",
+    "reference": "Cal. Bus. & Prof. Code § 17602(a)(5)"
   },
   {
     "id": 1876,
     "code": "FTCCC-006",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Flujo de cancelación de suscripción asimétrico — Integridad del Registro de Consentimiento",
-    "description": "El portal requiere que los usuarios contacten por teléfono para cancelar la facturación recurrente. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "title": "Oferta de retención sin botón visible de “click to cancel”",
+    "description": "Cuando el consumidor solicita cancelar en línea, el sitio muestra un descuento, un beneficio de permanencia o información sobre los efectos de cancelar sin mostrar a la vez un enlace o botón directo, destacado y visible de forma continua y próxima, titulado “click to cancel” (“cancelar”) o con palabras equivalentes.",
+    "severity": "moderate",
+    "reference": "Cal. Bus. & Prof. Code § 17602(e)(2)"
   },
   {
     "id": 1877,
     "code": "FTCCC-007",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "Flujo de cancelación de suscripción asimétrico — Visibilidad de Enlaces de Exclusión",
-    "description": "El portal requiere que los usuarios contacten por teléfono para cancelar la facturación recurrente. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
+    "category": "Digital Operations",
+    "title": "Falta el botón de cancelación “Verträge hier kündigen” (Alemania)",
+    "description": "Un sitio web en el que los consumidores pueden celebrar un contrato de tracto sucesivo de pago no tiene un botón de cancelación rotulado únicamente con “Verträge hier kündigen” (“cancelar contratos aquí”) o una fórmula igual de inequívoca, disponible de forma permanente, de acceso directo y fácil, que lleve directamente a una página de confirmación. Si falta, el consumidor puede rescindir en cualquier momento sin plazo de preaviso (§ 312k(6) BGB).",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "BGB § 312k(2) (Germany)"
   },
   {
     "id": 1878,
     "code": "FTCCC-008",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "Flujo de cancelación de suscripción asimétrico — Divulgaciones del Aviso de Privacidad",
-    "description": "El portal requiere que los usuarios contacten por teléfono para cancelar la facturación recurrente. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
-    "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "category": "Digital Operations",
+    "title": "Página de confirmación de cancelación incompleta (Alemania)",
+    "description": "El botón de cancelación lleva a una página que no pide ni permite indicar el tipo de rescisión (y, si es extraordinaria, su motivo), los datos que identifican al consumidor, el contrato, el momento en que debe surtir efecto y el medio para enviar la confirmación electrónica, o que carece de un botón de confirmación rotulado únicamente con “jetzt kündigen” (“cancelar ahora”) o una fórmula igual de inequívoca.",
+    "severity": "moderate",
+    "reference": "BGB § 312k(2) sentence 3 (Germany)"
   },
   {
     "id": 1879,
     "code": "FTCCC-009",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Flujo de cancelación de suscripción asimétrico — Verificación del Control de Auditoría",
-    "description": "El portal requiere que los usuarios contacten por teléfono para cancelar la facturación recurrente. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
+    "title": "Cancelar es más difícil que suscribirse (Nueva York)",
+    "description": "Los consumidores de Nueva York no pueden cancelar en cualquier momento con un mecanismo sencillo, tan fácil de usar como el empleado para dar su consentimiento y por el mismo medio, o la cancelación se obstaculiza o se retrasa de forma injustificada; por ejemplo, dando información falsa sobre cómo cancelar o tergiversando las consecuencias o costos de la cancelación.",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "N.Y. Gen. Bus. Law § 527-a(1)(d), (e)"
   },
   {
     "id": 1880,
     "code": "FTCCC-010",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "Flujo de cancelación de suscripción asimétrico — Credenciales Administrativas Inseguras",
-    "description": "El portal requiere que los usuarios contacten por teléfono para cancelar la facturación recurrente. Las consolas de administración permiten el acceso sin forzar claves MFA.",
+    "category": "Digital Operations",
+    "title": "Sin función “desistir del contrato aquí” (UE)",
+    "description": "En los contratos a distancia celebrados mediante una interfaz en línea, el sitio no ofrece una función de desistimiento etiquetada con la expresión “desistir del contrato aquí” o una formulación inequívoca equivalente, mostrada de manera destacada y disponible durante todo el plazo de desistimiento, que conduzca a una declaración de desistimiento en línea y a un paso de “confirmar desistimiento”. Aplicable en la UE desde el 19 de junio de 2026 (introducido por la Directiva (UE) 2023/2673).",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "Directive 2011/83/EU Art. 11a (Consumer Rights Directive)"
   },
   {
     "id": 1881,
     "code": "FTCFR-001",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Incentivos de reseñas compensados no divulgados",
-    "description": "Los resúmenes de calificación muestran opiniones pagadas sin indicar que los clientes recibieron recompensas.",
+    "title": "Incentivos por reseñas no revelados",
+    "description": "Las reseñas o testimonios del sitio provienen de personas que recibieron del vendedor un pago, productos gratuitos o con descuento, la posibilidad de ganar un premio u otro beneficio, y esta conexión material no se revela de forma clara y visible junto a la reseña.",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "16 CFR § 255.5(a) (FTC Endorsement Guides)"
   },
   {
     "id": 1882,
     "code": "FTCFR-002",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Incentivos de reseñas compensados no divulgados — Fallos de Auditoría y Registro",
-    "description": "Los resúmenes de calificación muestran opiniones pagadas sin indicar que los clientes recibieron recompensas. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Recompensas ofrecidas solo por reseñas positivas",
+    "description": "El sitio ofrece dinero, descuentos, cupones, regalos, participaciones en sorteos u otros incentivos a cambio de reseñas con un sentido determinado, por ejemplo un descuento por una reseña de cinco estrellas. La Norma de la FTC sobre reseñas y testimonios prohíbe los incentivos condicionados al sentido de la reseña, sea positivo o negativo.",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "16 CFR § 465.4 (FTC Consumer Reviews Rule)"
   },
   {
     "id": 1883,
     "code": "FTCFR-003",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Incentivos de reseñas compensados no divulgados — Defectos de Diseño de Interfaz",
-    "description": "Los resúmenes de calificación muestran opiniones pagadas sin indicar que los clientes recibieron recompensas. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
+    "title": "Sitio controlado por la empresa presentado como reseñas independientes",
+    "description": "Un sitio de reseñas o comparativas, una página de «premios» o una organización que la empresa controla, posee u opera se presenta como fuente de reseñas u opiniones independientes sobre una categoría de productos o servicios que incluye los suyos.",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "16 CFR § 465.6 (FTC Consumer Reviews Rule)"
   },
   {
     "id": 1884,
     "code": "FTCFR-004",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Incentivos de reseñas compensados no divulgados — Fortalezas Criptográficas Débiles",
-    "description": "Los resúmenes de calificación muestran opiniones pagadas sin indicar que los clientes recibieron recompensas. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
-    "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "title": "Testimonios de resultados excepcionales sin resultados típicos",
+    "description": "Los testimonios describen resultados sobre un atributo clave del producto —por ejemplo, peso perdido, ingresos obtenidos o ahorro— sin revelar de forma clara y visible el rendimiento que los consumidores pueden esperar en general; las Guías de la FTC sobre recomendaciones exigen esa información salvo que el anunciante pueda demostrar que tales resultados son representativos.",
+    "severity": "moderate",
+    "reference": "16 CFR § 255.2(b) (FTC Endorsement Guides)"
   },
   {
     "id": 1885,
     "code": "FTCFR-005",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Incentivos de reseñas compensados no divulgados — Fallos en Escaneos de Vulnerabilidad",
-    "description": "Los resúmenes de calificación muestran opiniones pagadas sin indicar que los clientes recibieron recompensas. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
+    "title": "Condiciones de servicio que restringen o penalizan las reseñas",
+    "description": "Las condiciones generales de venta o de servicio del sitio prohíben o restringen que los clientes publiquen reseñas, imponen una tarifa o penalización por ellas o exigen ceder los derechos de propiedad intelectual sobre la reseña. Según la Consumer Review Fairness Act, esas cláusulas son nulas y ofrecerlas es ilegal; California prohíbe además las cláusulas que renuncian al derecho del consumidor a opinar sobre el vendedor o sus productos (multa de hasta 2.500 $, luego hasta 5.000 $).",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "15 U.S.C. § 45b (Consumer Review Fairness Act); Cal. Civ. Code § 1670.8"
   },
   {
     "id": 1886,
     "code": "FTCFR-006",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "Incentivos de reseñas compensados no divulgados — Integridad del Registro de Consentimiento",
-    "description": "Los resúmenes de calificación muestran opiniones pagadas sin indicar que los clientes recibieron recompensas. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "category": "Digital Operations",
+    "title": "Sin información sobre cómo se verifican las reseñas (UE)",
+    "description": "El sitio da acceso a reseñas de consumidores sobre sus productos, pero no indica si garantiza, ni cómo, que las reseñas publicadas proceden de consumidores que realmente usaron o compraron el producto; el Derecho de la UE considera esa información sustancial, y omitirla puede ser una omisión engañosa.",
+    "severity": "moderate",
+    "reference": "Directive 2005/29/EC Art. 7(6) (Unfair Commercial Practices Directive)"
   },
   {
     "id": 1887,
     "code": "FTCFR-007",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "Incentivos de reseñas compensados no divulgados — Visibilidad de Enlaces de Exclusión",
-    "description": "Los resúmenes de calificación muestran opiniones pagadas sin indicar que los clientes recibieron recompensas. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
+    "category": "Digital Operations",
+    "title": "Afirmación de «reseñas verificadas» sin comprobación real (UE)",
+    "description": "El sitio afirma que sus reseñas proceden de consumidores que realmente usaron o compraron el producto —por ejemplo, con una etiqueta de «comprador verificado»— aunque las reseñas pueden publicarse sin comprobar compra ni uso, por ejemplo mediante un formulario abierto. Hacer esa afirmación sin medidas razonables y proporcionadas figura en la lista de la UE de prácticas prohibidas en cualquier circunstancia.",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "Directive 2005/29/EC Annex I point 23b"
   },
   {
     "id": 1888,
     "code": "FTCFR-008",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "Incentivos de reseñas compensados no divulgados — Divulgaciones del Aviso de Privacidad",
-    "description": "Los resúmenes de calificación muestran opiniones pagadas sin indicar que los clientes recibieron recompensas. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
+    "category": "Digital Operations",
+    "title": "Reseñas publicadas de forma engañosa (Reino Unido)",
+    "description": "Las reseñas de consumidores o la información derivada de ellas, como la media de estrellas, se publican de forma engañosa: por ejemplo, se omiten o retiran las negativas mientras se muestran las positivas, se da más relevancia a las positivas o se omite que la reseña fue encargada. Prohibido en cualquier circunstancia en el Reino Unido desde el 6 de abril de 2025.",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "UK DMCCA 2024 Sch. 20 para. 13(2)"
   },
   {
     "id": 1889,
     "code": "FTCFR-009",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "Incentivos de reseñas compensados no divulgados — Verificación del Control de Auditoría",
-    "description": "Los resúmenes de calificación muestran opiniones pagadas sin indicar que los clientes recibieron recompensas. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "category": "Digital Operations",
+    "title": "Plataforma sin reglas públicas de valoración o que elimina reseñas (China)",
+    "description": "Una plataforma de comercio electrónico que atiende a consumidores en China no publica sus reglas de evaluación crediticia (valoraciones), no ofrece a los consumidores una vía para valorar los bienes o servicios vendidos en ella o elimina las valoraciones de los consumidores sobre ellos.",
+    "severity": "moderate",
+    "reference": "E-Commerce Law of the PRC Art. 39 (China)"
   },
   {
     "id": 1890,
     "code": "FTCFR-010",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "Incentivos de reseñas compensados no divulgados — Credenciales Administrativas Inseguras",
-    "description": "Los resúmenes de calificación muestran opiniones pagadas sin indicar que los clientes recibieron recompensas. Las consolas de administración permiten el acceso sin forzar claves MFA.",
+    "category": "Digital Operations",
+    "title": "Reseñas incentivadas sin indicarlo (Reino Unido)",
+    "description": "La empresa envía, o encarga a otros enviar o redactar, reseñas de consumidores que ocultan que fueron incentivadas: al autor se le encargó la reseña por cualquier medio y eso no se hace evidente en la reseña ni de otro modo. Prohibido en cualquier circunstancia en el Reino Unido desde el 6 de abril de 2025.",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "UK DMCCA 2024 Sch. 20 para. 13(1)(b)"
   },
   {
     "id": 1891,
     "code": "EUDOR-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de registros de auditoría de vulnerabilidad de TI",
-    "description": "La interfaz bancaria opera sin los informes semanales de vulnerabilidades de red requeridos por DORA.",
+    "title": "Sin escaneo semanal de vulnerabilidades en sistemas críticos",
+    "description": "Una entidad financiera sujeta a DORA no muestra indicios de escaneo automatizado de vulnerabilidades, al menos semanal, de los activos TIC que respaldan funciones críticas o importantes, como exigen las normas técnicas de la UE sobre gestión del riesgo TIC. Un análisis externo solo puede sugerir la carencia (por ejemplo, software sin actualizar desde hace tiempo); la confirma una auditoría.",
     "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 10(2)(b) (ICT risk management RTS)"
   },
   {
     "id": 1892,
     "code": "EUDOR-002",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de registros de auditoría de vulnerabilidad de TI — Fallos de Auditoría y Registro",
-    "description": "La interfaz bancaria opera sin los informes semanales de vulnerabilidades de red requeridos por DORA. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Bibliotecas de terceros obsoletas con vulnerabilidades conocidas",
+    "description": "La interfaz web pública de la entidad financiera carga bibliotecas de terceros o de código abierto en versiones con vulnerabilidades conocidas públicamente. Las normas técnicas de la UE sobre riesgo TIC exigen rastrear las bibliotecas de terceros usadas por servicios que respaldan funciones críticas o importantes y priorizar los parches de las vulnerabilidades detectadas.",
     "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 10(2)(d), (f) (ICT risk management RTS)"
   },
   {
     "id": 1893,
     "code": "EUDOR-003",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de registros de auditoría de vulnerabilidad de TI — Defectos de Diseño de Interfaz",
-    "description": "La interfaz bancaria opera sin los informes semanales de vulnerabilidades de red requeridos por DORA. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
+    "title": "Conexiones sin cifrar a través de Internet pública",
+    "description": "Páginas o puntos de acceso del servicio web de la entidad financiera son accesibles por HTTP sin redirección a HTTPS, o las páginas HTTPS cargan recursos por HTTP (contenido mixto), aunque las normas técnicas de la UE sobre riesgo TIC exigen cifrar las conexiones de red que pasan por redes públicas.",
     "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 13(e) (ICT risk management RTS)"
   },
   {
     "id": 1894,
     "code": "EUDOR-004",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de registros de auditoría de vulnerabilidad de TI — Fortalezas Criptográficas Débiles",
-    "description": "La interfaz bancaria opera sin los informes semanales de vulnerabilidades de red requeridos por DORA. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
+    "title": "Certificado TLS caducado o no renovado a tiempo",
+    "description": "El certificado TLS del sitio web de la entidad financiera ha caducado o caduca en pocos días sin que haya uno renovado, aunque las normas técnicas de la UE sobre riesgo TIC exigen renovar los certificados con antelación a su vencimiento.",
     "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 7(5) (ICT risk management RTS)"
   },
   {
     "id": 1895,
     "code": "EUDOR-005",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de registros de auditoría de vulnerabilidad de TI — Fallos en Escaneos de Vulnerabilidad",
-    "description": "La interfaz bancaria opera sin los informes semanales de vulnerabilidades de red requeridos por DORA. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
+    "title": "Se siguen aceptando protocolos de cifrado obsoletos",
+    "description": "El sitio web de la entidad financiera sigue aceptando TLS 1.0 o TLS 1.1, declarados obsoletos formalmente por el RFC 8996 en 2021, aunque las normas técnicas de la UE sobre riesgo TIC exigen actualizar la tecnología criptográfica según la evolución del criptoanálisis.",
     "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 6(4) (ICT risk management RTS); RFC 8996"
   },
   {
     "id": 1896,
     "code": "EUDOR-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de registros de auditoría de vulnerabilidad de TI — Integridad del Registro de Consentimiento",
-    "description": "La interfaz bancaria opera sin los informes semanales de vulnerabilidades de red requeridos por DORA. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "title": "Sin procedimiento para comunicar vulnerabilidades a clientes y al público",
+    "description": "La entidad financiera no muestra un procedimiento de divulgación responsable de vulnerabilidades a clientes, contrapartes y al público —por ejemplo, sin avisos de seguridad—, aunque las normas técnicas de la UE sobre riesgo TIC lo exigen. Su ausencia en el sitio solo sugiere la carencia; la confirma una auditoría.",
+    "severity": "moderate",
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 10(2)(e) (ICT risk management RTS)"
   },
   {
     "id": 1897,
     "code": "EUDOR-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de registros de auditoría de vulnerabilidad de TI — Visibilidad de Enlaces de Exclusión",
-    "description": "La interfaz bancaria opera sin los informes semanales de vulnerabilidades de red requeridos por DORA. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
-    "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "title": "Vulnerabilidades detectadas sin registrar ni seguir",
+    "description": "Vulnerabilidades visibles desde fuera persisten en el tiempo, lo que sugiere que las vulnerabilidades detectadas en los sistemas TIC no se registran ni se vigila su resolución, como exigen las normas técnicas de la UE sobre riesgo TIC. Solo lo confirma una auditoría del registro de vulnerabilidades.",
+    "severity": "moderate",
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 10(2)(h) (ICT risk management RTS)"
   },
   {
     "id": 1898,
     "code": "EUDOR-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de registros de auditoría de vulnerabilidad de TI — Divulgaciones del Aviso de Privacidad",
-    "description": "La interfaz bancaria opera sin los informes semanales de vulnerabilidades de red requeridos por DORA. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
-    "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "title": "Sin registro actualizado de certificados",
+    "description": "Problemas de certificados visibles desde fuera (caducados, no coincidentes u olvidados en subdominios) sugieren que la entidad financiera no mantiene un registro actualizado de certificados y dispositivos que los almacenan para los activos TIC de funciones críticas o importantes, como exigen las normas técnicas de la UE sobre riesgo TIC. Lo confirma una auditoría.",
+    "severity": "moderate",
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 7(4) (ICT risk management RTS)"
   },
   {
     "id": 1899,
     "code": "EUDOR-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de registros de auditoría de vulnerabilidad de TI — Verificación del Control de Auditoría",
-    "description": "La interfaz bancaria opera sin los informes semanales de vulnerabilidades de red requeridos por DORA. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
+    "title": "Sin revisión anual del diseño de seguridad de la red",
+    "description": "Interfaces de administración expuestas o servicios abiertos innecesarios sugieren que la entidad financiera no revisa una vez al año la arquitectura de red y el diseño de seguridad de la red para detectar posibles vulnerabilidades, como exigen las normas técnicas de la UE sobre riesgo TIC. Lo confirma una auditoría.",
     "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 13(i) (ICT risk management RTS)"
   },
   {
     "id": 1900,
     "code": "EUDOR-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de registros de auditoría de vulnerabilidad de TI — Credenciales Administrativas Inseguras",
-    "description": "La interfaz bancaria opera sin los informes semanales de vulnerabilidades de red requeridos por DORA. Las consolas de administración permiten el acceso sin forzar claves MFA.",
-    "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "title": "Sin plan de comunicación de crisis ante incidentes TIC graves",
+    "description": "La entidad financiera no muestra mecanismos de comunicación de crisis —por ejemplo, sin página pública de estado ni canal de avisos de incidentes— para la divulgación responsable de incidentes TIC graves o vulnerabilidades a clientes, contrapartes y al público, como exige DORA dentro del marco de gestión del riesgo TIC. Lo confirma una auditoría.",
+    "severity": "moderate",
+    "reference": "Regulation (EU) 2022/2554 (DORA), Art. 14(1)"
   },
   {
     "id": 1901,
     "code": "EUCTA-001",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de detalles de propiedad real en el pie de página",
-    "description": "El pie de página carece de declaraciones que identifiquen a los beneficiarios reales y sus ID de registro.",
+    "title": "Faltan los datos del registro mercantil en el sitio web",
+    "description": "El sitio web de un prestador de servicios establecido en la UE no indica, de forma fácil, directa y permanentemente accesible, el registro mercantil en el que está inscrito ni su número de inscripción (o un medio equivalente de identificación en ese registro).",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "Directive 2000/31/EC Art. 5(1)(d) (e-Commerce Directive)"
   },
   {
     "id": 1902,
     "code": "EUCTA-002",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de detalles de propiedad real en el pie de página — Fallos de Auditoría y Registro",
-    "description": "El pie de página carece de declaraciones que identifiquen a los beneficiarios reales y sus ID de registro. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Sin nombre del prestador, dirección geográfica ni contacto directo",
+    "description": "El sitio web no mantiene permanentemente accesibles el nombre del prestador de servicios, la dirección geográfica donde está establecido ni datos de contacto —incluida una dirección de correo electrónico— que permitan comunicarse con él de forma rápida y directa; un simple formulario de contacto o un apartado postal no aportan estos datos.",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "Directive 2000/31/EC Art. 5(1)(a)–(c) (e-Commerce Directive)"
   },
   {
     "id": 1903,
     "code": "EUCTA-003",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de detalles de propiedad real en el pie de página — Defectos de Diseño de Interfaz",
-    "description": "El pie de página carece de declaraciones que identifiquen a los beneficiarios reales y sus ID de registro. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
-    "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "title": "No se muestra el número de identificación a efectos del IVA",
+    "description": "Un prestador de servicios cuya actividad está sujeta al IVA no muestra en el sitio web su número de identificación a efectos del IVA de forma fácil, directa y permanentemente accesible.",
+    "severity": "advisory",
+    "reference": "Directive 2000/31/EC Art. 5(1)(g) (e-Commerce Directive)"
   },
   {
     "id": 1904,
     "code": "EUCTA-004",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de detalles de propiedad real en el pie de página — Fortalezas Criptográficas Débiles",
-    "description": "El pie de página carece de declaraciones que identifiquen a los beneficiarios reales y sus ID de registro. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
+    "title": "No se identifica la autoridad supervisora de una actividad autorizada",
+    "description": "El sitio web ofrece una actividad sujeta a autorización —por ejemplo, servicios financieros, de seguros o de pago con licencia— pero no facilita los datos de la autoridad de supervisión competente.",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "Directive 2000/31/EC Art. 5(1)(e) (e-Commerce Directive)"
   },
   {
     "id": 1905,
     "code": "EUCTA-005",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de detalles de propiedad real en el pie de página — Fallos en Escaneos de Vulnerabilidad",
-    "description": "El pie de página carece de declaraciones que identifiquen a los beneficiarios reales y sus ID de registro. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
-    "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "title": "Aviso legal (Impressum) ausente u oculto (Alemania)",
+    "description": "Un sitio web que ofrece servicios digitales comerciales, por lo general de pago, no tiene un aviso legal (Impressum) fácilmente reconocible, directamente accesible y disponible de forma permanente; por ejemplo, no hay enlace al Impressum, solo se llega tras varios clics o está oculto tras un script.",
+    "severity": "serious",
+    "reference": "DDG § 5(1) (Germany)"
   },
   {
     "id": 1906,
     "code": "EUCTA-006",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de detalles de propiedad real en el pie de página — Integridad del Registro de Consentimiento",
-    "description": "El pie de página carece de declaraciones que identifiquen a los beneficiarios reales y sus ID de registro. Los registros no almacenan las elecciones en un repositorio inmutable.",
+    "title": "Impressum sin forma jurídica ni representante autorizado (Alemania)",
+    "description": "El aviso legal de una empresa (persona jurídica) indica nombre y dirección, pero omite la forma jurídica o la persona autorizada para representarla, como exige el § 5(1) n.º 1 de la ley alemana Digitale-Dienste-Gesetz (DDG).",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "DDG § 5(1) Nr. 1 (Germany)"
   },
   {
     "id": 1907,
     "code": "EUCTA-007",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de detalles de propiedad real en el pie de página — Visibilidad de Enlaces de Exclusión",
-    "description": "El pie de página carece de declaraciones que identifiquen a los beneficiarios reales y sus ID de registro. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
+    "title": "Sitio de empresa británica sin número de registro ni domicilio social (Reino Unido)",
+    "description": "El sitio web de una empresa registrada en el Reino Unido no indica la parte del Reino Unido en la que está registrada, su número de registro ni la dirección de su domicilio social registrado.",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "UK Company, LLP and Business (Names and Trading Disclosures) Regulations 2015 reg. 25"
   },
   {
     "id": 1908,
     "code": "EUCTA-008",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de detalles de propiedad real en el pie de página — Divulgaciones del Aviso de Privacidad",
-    "description": "El pie de página carece de declaraciones que identifiquen a los beneficiarios reales y sus ID de registro. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
+    "title": "Precios sin indicar si incluyen impuestos y envío (Reino Unido)",
+    "description": "Un servicio en línea que menciona precios no los indica de forma clara e inequívoca y, en particular, no señala si incluyen los impuestos y los gastos de envío.",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "UK Electronic Commerce (EC Directive) Regulations 2002 reg. 6(2)"
   },
   {
     "id": 1909,
     "code": "EUCTA-009",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de detalles de propiedad real en el pie de página — Verificación del Control de Auditoría",
-    "description": "El pie de página carece de declaraciones que identifiquen a los beneficiarios reales y sus ID de registro. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
+    "title": "Licencia comercial no mostrada en la página de inicio (China)",
+    "description": "Un operador de comercio electrónico que atiende a consumidores en China no muestra de forma continua, en un lugar destacado de su página de inicio, la información de su licencia comercial y de las licencias administrativas relacionadas con su actividad (o un enlace a ellas). Multa de hasta 10.000 ¥ según el art. 76(1).",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "E-Commerce Law of the PRC Art. 15 (China)"
   },
   {
     "id": 1910,
     "code": "EUCTA-010",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de detalles de propiedad real en el pie de página — Credenciales Administrativas Inseguras",
-    "description": "El pie de página carece de declaraciones que identifiquen a los beneficiarios reales y sus ID de registro. Las consolas de administración permiten el acceso sin forzar claves MFA.",
+    "title": "Profesión regulada sin los datos profesionales exigidos",
+    "description": "Un sitio web que ofrece servicios de una profesión regulada (por ejemplo, abogados, médicos, arquitectos o contables) no indica el colegio profesional en el que está inscrito el prestador, el título profesional y el Estado miembro que lo otorgó, ni una referencia a las normas profesionales aplicables y a cómo acceder a ellas.",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "Directive 2000/31/EC Art. 5(1)(f) (e-Commerce Directive)"
   },
   {
     "id": 1911,
     "code": "WCAG2-001",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Tamaño de botón inadecuado para hacer clic",
-    "description": "Los botones de navegación tienen un tamaño inferior a 24x24 píxeles CSS, bloqueando a usuarios con discapacidad.",
+    "title": "Tamaño insuficiente de los objetivos táctiles",
+    "description": "Los objetivos interactivos, como enlaces de navegación, iconos y botones, miden menos de 24 por 24 píxeles CSS sin el espaciado, el control equivalente u otras excepciones que permite WCAG 2.2 (enlaces dentro del texto, tamaños controlados por el navegador o esenciales), lo que dificulta activarlos a las personas con destreza limitada.",
     "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "reference": "WCAG 2.2 SC 2.5.8"
   },
   {
     "id": 1912,
     "code": "WCAG2-002",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Tamaño de botón inadecuado para hacer clic — Fallos de Auditoría y Registro",
-    "description": "Los botones de navegación tienen un tamaño inferior a 24x24 píxeles CSS, bloqueando a usuarios con discapacidad. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
-    "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "title": "Contenido bloqueado en una sola orientación de pantalla",
+    "description": "El sitio limita su visualización o funcionamiento solo a vertical u horizontal, sin que esa orientación sea esencial, y los usuarios con el dispositivo fijado en una orientación no pueden usarlo.",
+    "severity": "moderate",
+    "reference": "WCAG 2.1 SC 1.3.4"
   },
   {
     "id": 1913,
     "code": "WCAG2-003",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Tamaño de botón inadecuado para hacer clic — Defectos de Diseño de Interfaz",
-    "description": "Los botones de navegación tienen un tamaño inferior a 24x24 píxeles CSS, bloqueando a usuarios con discapacidad. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
-    "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "title": "Campos de datos personales sin propósito de autocompletado",
+    "description": "Los campos de formulario que recogen datos del propio usuario (nombre, correo, teléfono, dirección) no declaran su propósito de forma programática, por ejemplo con el atributo HTML autocomplete, por lo que el navegador y las ayudas técnicas no pueden rellenarlos ni etiquetarlos.",
+    "severity": "moderate",
+    "reference": "WCAG 2.1 SC 1.3.5"
   },
   {
     "id": 1914,
     "code": "WCAG2-004",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Tamaño de botón inadecuado para hacer clic — Fortalezas Criptográficas Débiles",
-    "description": "Los botones de navegación tienen un tamaño inferior a 24x24 píxeles CSS, bloqueando a usuarios con discapacidad. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
+    "title": "Bajo contraste de botones, bordes de formulario e iconos",
+    "description": "Los límites visuales de los controles (bordes de campos, botones, casillas) y los iconos significativos tienen una relación de contraste inferior a 3:1 con los colores adyacentes.",
     "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "reference": "WCAG 2.1 SC 1.4.11"
   },
   {
     "id": 1915,
     "code": "WCAG2-005",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Tamaño de botón inadecuado para hacer clic — Fallos en Escaneos de Vulnerabilidad",
-    "description": "Los botones de navegación tienen un tamaño inferior a 24x24 píxeles CSS, bloqueando a usuarios con discapacidad. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
-    "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "title": "Ventanas emergentes al pasar el cursor que no se pueden cerrar ni mantener",
+    "description": "Las descripciones, menús o ventanas que aparecen al pasar el cursor o al recibir el foco no pueden cerrarse sin mover el puntero o el foco, desaparecen cuando el puntero se desplaza sobre ellas o se ocultan antes de que el usuario termine de leer.",
+    "severity": "moderate",
+    "reference": "WCAG 2.1 SC 1.4.13"
   },
   {
     "id": 1916,
     "code": "WCAG2-006",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Tamaño de botón inadecuado para hacer clic — Integridad del Registro de Consentimiento",
-    "description": "Los botones de navegación tienen un tamaño inferior a 24x24 píxeles CSS, bloqueando a usuarios con discapacidad. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "title": "Atajos de una sola tecla que no se pueden desactivar",
+    "description": "El sitio usa atajos de teclado de una sola letra, número o símbolo que no pueden desactivarse, reasignarse ni limitarse a cuando el componente tiene el foco, lo que provoca acciones accidentales a quienes usan entrada por voz.",
+    "severity": "moderate",
+    "reference": "WCAG 2.1 SC 2.1.4"
   },
   {
     "id": 1917,
     "code": "WCAG2-007",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Tamaño de botón inadecuado para hacer clic — Visibilidad de Enlaces de Exclusión",
-    "description": "Los botones de navegación tienen un tamaño inferior a 24x24 píxeles CSS, bloqueando a usuarios con discapacidad. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
+    "title": "Indicador de foco del teclado oculto",
+    "description": "Los enlaces, botones y controles de formulario no muestran un indicador de foco visible al llegar con el teclado, a menudo porque el CSS elimina el contorno, y los usuarios de teclado no saben dónde están.",
     "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "reference": "WCAG 2.1 SC 2.4.7"
   },
   {
     "id": 1918,
     "code": "WCAG2-008",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Tamaño de botón inadecuado para hacer clic — Divulgaciones del Aviso de Privacidad",
-    "description": "Los botones de navegación tienen un tamaño inferior a 24x24 píxeles CSS, bloqueando a usuarios con discapacidad. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
-    "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "title": "Funciones que exigen gestos multitáctiles o de trayectoria",
+    "description": "Carruseles, mapas o controles deslizantes solo pueden manejarse con pellizcos, varios dedos o gestos de trayectoria, sin alternativa de un solo toque o botón.",
+    "severity": "moderate",
+    "reference": "WCAG 2.1 SC 2.5.1"
   },
   {
     "id": 1919,
     "code": "WCAG2-009",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Tamaño de botón inadecuado para hacer clic — Verificación del Control de Auditoría",
-    "description": "Los botones de navegación tienen un tamaño inferior a 24x24 píxeles CSS, bloqueando a usuarios con discapacidad. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "title": "Acciones activadas al presionar en lugar de al soltar",
+    "description": "Los botones o controles ejecutan su acción al presionar (evento de bajada) en lugar de al soltar, de modo que quien pulsa por error no puede desplazarse fuera para cancelar.",
+    "severity": "moderate",
+    "reference": "WCAG 2.1 SC 2.5.2"
   },
   {
     "id": 1920,
     "code": "WCAG2-010",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Tamaño de botón inadecuado para hacer clic — Credenciales Administrativas Inseguras",
-    "description": "Los botones de navegación tienen un tamaño inferior a 24x24 píxeles CSS, bloqueando a usuarios con discapacidad. Las consolas de administración permiten el acceso sin forzar claves MFA.",
+    "title": "La etiqueta visible no forma parte del nombre accesible",
+    "description": "El nombre accesible de un botón o enlace (por ejemplo, de aria-label) no contiene su texto visible, de modo que quien usa entrada por voz y dice lo que ve no puede activarlo.",
     "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "reference": "WCAG 2.1 SC 2.5.3"
   },
   {
     "id": 1921,
     "code": "EAAAX-001",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Controles de pago de comercio electrónico inaccesibles",
-    "description": "Los formularios de pago carecen de soporte de lectura de pantalla asistido por voz requerido por la EAA.",
+    "title": "Controles de pago inaccesibles en el comercio electrónico",
+    "description": "Las funciones de identificación, seguridad y pago de una tienda en línea —inicio de sesión, códigos de verificación, campos de tarjeta, botones de pago— no son perceptibles, operables, comprensibles y robustas (por ejemplo, campos sin etiqueta, un CAPTCHA sin alternativa accesible o una trampa de teclado en el marco de pago), aunque la Ley Europea de Accesibilidad exige que sean accesibles.",
     "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "reference": "Directive (EU) 2019/882 Annex I Section IV(g)(ii)–(iii) (European Accessibility Act)"
   },
   {
     "id": 1922,
     "code": "EAAAX-002",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Controles de pago de comercio electrónico inaccesibles — Fallos de Auditoría y Registro",
-    "description": "Los formularios de pago carecen de soporte de lectura de pantalla asistido por voz requerido por la EAA. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "No se transmite a los compradores la información de accesibilidad de los productos (UE)",
+    "description": "Las páginas de producto de una tienda en línea no ofrecen información sobre la accesibilidad de los productos o servicios vendidos, aunque la Ley Europea de Accesibilidad exige a los servicios de comercio electrónico facilitarla siempre que la proporcione el operador económico responsable (por ejemplo, el fabricante).",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2019/882 Annex I Section IV(g)(i) (European Accessibility Act)"
   },
   {
     "id": 1923,
     "code": "EAAAX-003",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Controles de pago de comercio electrónico inaccesibles — Defectos de Diseño de Interfaz",
-    "description": "Los formularios de pago carecen de soporte de lectura de pantalla asistido por voz requerido por la EAA. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "Sitio web del servicio no perceptible, operable, comprensible y robusto (UE)",
+    "description": "El sitio web o la aplicación en línea de un servicio cubierto por la Ley Europea de Accesibilidad presenta fallos de accesibilidad (por ejemplo, falta de alternativas textuales, contraste insuficiente o controles inaccesibles con teclado), aunque la Ley exige que los sitios web y servicios móviles sean accesibles de forma coherente y adecuada.",
+    "severity": "serious",
+    "reference": "Directive (EU) 2019/882 Annex I Section III(c) (European Accessibility Act)"
   },
   {
     "id": 1924,
     "code": "EAAAX-004",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Controles de pago de comercio electrónico inaccesibles — Fortalezas Criptográficas Débiles",
-    "description": "Los formularios de pago carecen de soporte de lectura de pantalla asistido por voz requerido por la EAA. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "Información del servicio con letra pequeña, bajo contraste o espaciado fijo (UE)",
+    "description": "La información sobre el funcionamiento del servicio se presenta con fuentes de tamaño o forma inadecuados, contraste insuficiente o un espaciado entre letras, líneas y párrafos que no se puede ajustar, aunque la Ley Europea de Accesibilidad exige estas cualidades de presentación.",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2019/882 Annex I Section III(b)(v) (European Accessibility Act)"
   },
   {
     "id": 1925,
     "code": "EAAAX-005",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Controles de pago de comercio electrónico inaccesibles — Fallos en Escaneos de Vulnerabilidad",
-    "description": "Los formularios de pago carecen de soporte de lectura de pantalla asistido por voz requerido por la EAA. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "Servicios de asistencia sin información de accesibilidad (UE)",
+    "description": "Los servicios de ayuda, centros de contacto o soporte técnico ofrecidos en el sitio no facilitan información sobre la accesibilidad del servicio y su compatibilidad con tecnologías de apoyo, o solo son accesibles por un único canal no accesible (por ejemplo, solo teléfono), aunque la Ley Europea de Accesibilidad lo exige cuando existen servicios de asistencia.",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2019/882 Annex I Section III(d) (European Accessibility Act)"
   },
   {
     "id": 1926,
     "code": "EAAAX-006",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Controles de pago de comercio electrónico inaccesibles — Integridad del Registro de Consentimiento",
-    "description": "Los formularios de pago carecen de soporte de lectura de pantalla asistido por voz requerido por la EAA. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "Sin información de accesibilidad en las condiciones generales (UE)",
+    "description": "Las condiciones generales (o documento equivalente) no incluyen la información que evalúa cómo cumple el servicio los requisitos de accesibilidad: una descripción general del servicio en formatos accesibles, las explicaciones necesarias para entender su funcionamiento y cómo se cumplen los requisitos del anexo I.",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2019/882 Annex V point 1 (European Accessibility Act)"
   },
   {
     "id": 1927,
     "code": "EAAAX-007",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Controles de pago de comercio electrónico inaccesibles — Visibilidad de Enlaces de Exclusión",
-    "description": "Los formularios de pago carecen de soporte de lectura de pantalla asistido por voz requerido por la EAA. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "Información de banca de consumo demasiado compleja (por encima de B2) (UE)",
+    "description": "La información que ofrece un servicio bancario de consumo tiene un nivel de complejidad superior al B2 (intermedio alto) del Marco Común Europeo de Referencia para las Lenguas, aunque la Ley Europea de Accesibilidad exige que sea comprensible dentro de ese nivel.",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2019/882 Annex I Section IV(e)(ii) (European Accessibility Act)"
   },
   {
     "id": 1928,
     "code": "EAAAX-008",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Controles de pago de comercio electrónico inaccesibles — Divulgaciones del Aviso de Privacidad",
-    "description": "Los formularios de pago carecen de soporte de lectura de pantalla asistido por voz requerido por la EAA. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "Identificación, firma o pago inaccesibles en la banca en línea (UE)",
+    "description": "Los métodos de identificación, firmas electrónicas, pasos de seguridad o servicios de pago de un servicio bancario de consumo no son perceptibles, operables, comprensibles y robustos —por ejemplo, pantallas de códigos de un solo uso con límite de tiempo y sin alternativa accesible—, aunque la Ley Europea de Accesibilidad exige que sean accesibles.",
+    "severity": "serious",
+    "reference": "Directive (EU) 2019/882 Annex I Section IV(e)(i) (European Accessibility Act)"
   },
   {
     "id": 1929,
     "code": "EAAAX-009",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Controles de pago de comercio electrónico inaccesibles — Verificación del Control de Auditoría",
-    "description": "Los formularios de pago carecen de soporte de lectura de pantalla asistido por voz requerido por la EAA. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "Servicio ofrecido en Alemania sin cumplir los requisitos de accesibilidad",
+    "description": "Un servicio cubierto por la Ley alemana de refuerzo de la accesibilidad (BFSG), como una tienda en línea o la banca de consumo, se ofrece aunque no cumple los requisitos de accesibilidad; por ejemplo, el sitio no supera comprobaciones básicas de accesibilidad. Ofrecer ese servicio es una infracción administrativa con multa de hasta 100.000 € (BFSG § 37(1) n.º 8, (2)).",
+    "severity": "serious",
+    "reference": "BFSG § 14(1) Nr. 1 (Germany)"
   },
   {
     "id": 1930,
     "code": "EAAAX-010",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Controles de pago de comercio electrónico inaccesibles — Credenciales Administrativas Inseguras",
-    "description": "Los formularios de pago carecen de soporte de lectura de pantalla asistido por voz requerido por la EAA. Las consolas de administración permiten el acceso sin forzar claves MFA.",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "Información de accesibilidad no publicada en forma accesible (Alemania)",
+    "description": "La información exigida por el anexo 3 de la Ley alemana de refuerzo de la accesibilidad (cómo cumple el servicio los requisitos de accesibilidad) no se ha elaborado o no se pone a disposición del público en forma accesible; por ejemplo, falta o solo se publica como imagen o PDF escaneado.",
+    "severity": "moderate",
+    "reference": "BFSG § 14(1) Nr. 2 (Germany)"
   },
   {
     "id": 1931,
     "code": "ONADA-001",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de canal de comentarios de accesibilidad",
-    "description": "El sitio web no cuenta con un canal dedicado para reportar barreras de accesibilidad digital según la AODA.",
+    "title": "Falta un canal de comentarios sobre accesibilidad",
+    "description": "Una organización que ofrece bienes, servicios o instalaciones en Ontario no tiene un proceso público para recibir y responder comentarios sobre cómo atiende a las personas con discapacidad, aunque las Normas Integradas de Accesibilidad exigen ese proceso y que la información sobre él esté fácilmente disponible para el público.",
     "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "reference": "O. Reg. 191/11 s. 80.50 (Ontario AODA)"
   },
   {
     "id": 1932,
     "code": "ONADA-002",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de canal de comentarios de accesibilidad — Fallos de Auditoría y Registro",
-    "description": "El sitio web no cuenta con un canal dedicado para reportar barreras de accesibilidad digital según la AODA. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Sitio web por debajo del nivel AA de WCAG 2.0 (Ontario)",
+    "description": "El sitio web público de una organización grande (50 o más empleados en Ontario) o de una organización designada del sector público incumple criterios del nivel AA de WCAG 2.0, aunque desde el 1 de enero de 2021 todos sus sitios y contenidos web deben cumplirlo (salvo subtítulos en directo 1.2.4 y audiodescripción pregrabada 1.2.5).",
     "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "reference": "O. Reg. 191/11 s. 14(4) (Ontario AODA)"
   },
   {
     "id": 1933,
     "code": "ONADA-003",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de canal de comentarios de accesibilidad — Defectos de Diseño de Interfaz",
-    "description": "El sitio web no cuenta con un canal dedicado para reportar barreras de accesibilidad digital según la AODA. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "Sin aviso de disponibilidad de formatos accesibles (Ontario)",
+    "description": "La organización no informa al público de que las personas con discapacidad pueden solicitar formatos accesibles y apoyos a la comunicación, como exigen las Normas Integradas de Accesibilidad.",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 12(3) (Ontario AODA)"
   },
   {
     "id": 1934,
     "code": "ONADA-004",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de canal de comentarios de accesibilidad — Fortalezas Criptográficas Débiles",
-    "description": "El sitio web no cuenta con un canal dedicado para reportar barreras de accesibilidad digital según la AODA. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "Proceso de comentarios sin aviso de formatos accesibles (Ontario)",
+    "description": "La organización tiene un proceso de comentarios pero no informa al público de que dispone de formatos accesibles y apoyos a la comunicación para él, aunque Ontario exige tanto la accesibilidad de los procesos de comentarios como ese aviso.",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 11(2) (Ontario AODA)"
   },
   {
     "id": 1935,
     "code": "ONADA-005",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de canal de comentarios de accesibilidad — Fallos en Escaneos de Vulnerabilidad",
-    "description": "El sitio web no cuenta con un canal dedicado para reportar barreras de accesibilidad digital según la AODA. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "Políticas de accesibilidad no disponibles públicamente (Ontario)",
+    "description": "Una organización que no es pequeña no pone a disposición del público los documentos que describen sus políticas de accesibilidad —incluida su declaración de compromiso de atender las necesidades de accesibilidad de las personas con discapacidad— o no los ofrece en formato accesible cuando se solicitan.",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 3(3) (Ontario AODA)"
   },
   {
     "id": 1936,
     "code": "ONADA-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "ADA / WCAG",
-    "title": "Falta de canal de comentarios de accesibilidad — Integridad del Registro de Consentimiento",
-    "description": "El sitio web no cuenta con un canal dedicado para reportar barreras de accesibilidad digital según la AODA. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "Sin aviso público de interrupciones temporales de servicios accesibles (Ontario)",
+    "description": "El sitio web no muestra la práctica de avisar al público de interrupciones temporales de instalaciones o servicios que suelen usar las personas con discapacidad (por ejemplo, una entrada accesible o un ascensor), con el motivo, la duración prevista y las alternativas disponibles, como exigen las normas de atención al cliente de Ontario. Lo confirma una auditoría.",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 80.48 (Ontario AODA)"
   },
   {
     "id": 1937,
     "code": "ONADA-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "ADA / WCAG",
-    "title": "Falta de canal de comentarios de accesibilidad — Visibilidad de Enlaces de Exclusión",
-    "description": "El sitio web no cuenta con un canal dedicado para reportar barreras de accesibilidad digital según la AODA. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "Formatos accesibles no facilitados a tiempo o con recargo (Ontario)",
+    "description": "Indicios de que los formatos accesibles y apoyos a la comunicación no se facilitan a petición en un plazo oportuno ni por un coste no superior al habitual —por ejemplo, un recargo por letra grande o largos retrasos—, como exige Ontario. Lo confirma una solicitud o una auditoría.",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 12(1) (Ontario AODA)"
   },
   {
     "id": 1938,
     "code": "ONADA-008",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de canal de comentarios de accesibilidad — Divulgaciones del Aviso de Privacidad",
-    "description": "El sitio web no cuenta con un canal dedicado para reportar barreras de accesibilidad digital según la AODA. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "Proceso de comentarios sin acciones ante quejas (Ontario)",
+    "description": "El proceso de comentarios publicado no especifica las medidas que adoptará la organización si recibe una queja sobre cómo ofrece bienes, servicios o instalaciones a las personas con discapacidad, como exige Ontario.",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 80.50(2) (Ontario AODA)"
   },
   {
     "id": 1939,
     "code": "ONADA-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "ADA / WCAG",
-    "title": "Falta de canal de comentarios de accesibilidad — Verificación del Control de Auditoría",
-    "description": "El sitio web no cuenta con un canal dedicado para reportar barreras de accesibilidad digital según la AODA. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "Documentos de atención al cliente no ofrecidos en formatos accesibles (Ontario)",
+    "description": "Los documentos de atención al cliente que la organización debe entregar a petición (por ejemplo, su proceso de comentarios o su política sobre animales de servicio) parecen estar disponibles solo como archivos no accesibles, lo que sugiere que no se facilitan en formato accesible ni con apoyo a la comunicación cuando se solicitan. Lo confirma una solicitud o una auditoría.",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 80.51(1) (Ontario AODA)"
   },
   {
     "id": 1940,
     "code": "ONADA-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "ADA / WCAG",
-    "title": "Falta de canal de comentarios de accesibilidad — Credenciales Administrativas Inseguras",
-    "description": "El sitio web no cuenta con un canal dedicado para reportar barreras de accesibilidad digital según la AODA. Las consolas de administración permiten el acceso sin forzar claves MFA.",
+    "title": "Informe de accesibilidad falso o engañoso (Ontario)",
+    "description": "Declaraciones públicas de pleno cumplimiento en accesibilidad contradichas por los fallos de accesibilidad del propio sitio web sugieren que el informe de accesibilidad de la organización ante el director de Ontario puede contener información falsa o engañosa, delito castigado con hasta 50.000 $ por día, o hasta 100.000 $ por día en el caso de una sociedad. Lo confirma la revisión del informe presentado.",
     "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "reference": "Accessibility for Ontarians with Disabilities Act, 2005 s. 37(1)(a), (3)"
   },
   {
     "id": 1941,
     "code": "SEC50-001",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de subtítulos en videos de capacitación",
-    "description": "Los archivos de video integrados operan sin pistas de texto sincronizadas ni soporte de subtítulos.",
+    "title": "Faltan subtítulos en vídeos pregrabados (Sección 508)",
+    "description": "Los vídeos pregrabados con sonido del sitio web público de un organismo federal (por ejemplo, vídeos de formación o de incorporación) no tienen subtítulos sincronizados, aunque la Sección 508 exige que el contenido electrónico público cumpla los niveles A y AA de WCAG 2.0, incluidos los subtítulos del audio pregrabado.",
     "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "reference": "36 CFR 1194 App. A E205.4 (Section 508); WCAG 2.0 SC 1.2.2"
   },
   {
     "id": 1942,
     "code": "SEC50-002",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de subtítulos en videos de capacitación — Fallos de Auditoría y Registro",
-    "description": "Los archivos de video integrados operan sin pistas de texto sincronizadas ni soporte de subtítulos. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Contenido federal público por debajo de WCAG 2.0 AA (Sección 508)",
+    "description": "El contenido electrónico público de un organismo federal —páginas web, documentos, formularios— incumple criterios de los niveles A o AA de WCAG 2.0, aunque las Normas 508 revisadas exigen que todo el contenido electrónico público los cumpla.",
     "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "reference": "36 CFR 1194 App. A E205.2 (Section 508)"
   },
   {
     "id": 1943,
     "code": "SEC50-003",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de subtítulos en videos de capacitación — Defectos de Diseño de Interfaz",
-    "description": "Los archivos de video integrados operan sin pistas de texto sincronizadas ni soporte de subtítulos. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
-    "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "title": "Reproductor de vídeo sin control de subtítulos junto al volumen (Sección 508)",
+    "description": "Un reproductor de vídeo incrustado ofrece control de volumen pero no un control para seleccionar subtítulos en el mismo nivel de menú que el volumen o la selección de programa, como exigen los requisitos técnicos de la Sección 508 para el software.",
+    "severity": "moderate",
+    "reference": "36 CFR 1194 App. C 503.4.1 (Section 508)"
   },
   {
     "id": 1944,
     "code": "SEC50-004",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de subtítulos en videos de capacitación — Fortalezas Criptográficas Débiles",
-    "description": "Los archivos de video integrados operan sin pistas de texto sincronizadas ni soporte de subtítulos. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
-    "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "title": "Reproductor de vídeo sin control de audiodescripción (Sección 508)",
+    "description": "Un reproductor de vídeo que ofrece selección de programa no incluye un control para seleccionar la audiodescripción en el mismo nivel de menú que el volumen o la selección de programa, como exige la Sección 508.",
+    "severity": "moderate",
+    "reference": "36 CFR 1194 App. C 503.4.2 (Section 508)"
   },
   {
     "id": 1945,
     "code": "SEC50-005",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de subtítulos en videos de capacitación — Fallos en Escaneos de Vulnerabilidad",
-    "description": "Los archivos de video integrados operan sin pistas de texto sincronizadas ni soporte de subtítulos. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
-    "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "title": "Documentación de ayuda y soporte no accesible (Sección 508)",
+    "description": "La documentación electrónica de soporte —páginas de ayuda, preguntas frecuentes, guías de usuario, autoservicio web— no cumple los niveles A y AA de WCAG 2.0, por ejemplo manuales en PDF escaneados sin texto, aunque la Sección 508 lo exige.",
+    "severity": "moderate",
+    "reference": "36 CFR 1194 App. C 602.3 (Section 508)"
   },
   {
     "id": 1946,
     "code": "SEC50-006",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de subtítulos en videos de capacitación — Integridad del Registro de Consentimiento",
-    "description": "Los archivos de video integrados operan sin pistas de texto sincronizadas ni soporte de subtítulos. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "title": "Servicios de soporte sin información sobre funciones de accesibilidad (Sección 508)",
+    "description": "Las páginas del servicio de ayuda o soporte no informan de las funciones de accesibilidad y compatibilidad de las TIC (por ejemplo, cómo usarlas con lectores de pantalla o solo con teclado), aunque la Sección 508 exige que los servicios de soporte la incluyan.",
+    "severity": "moderate",
+    "reference": "36 CFR 1194 App. C 603.2 (Section 508)"
   },
   {
     "id": 1947,
     "code": "SEC50-007",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de subtítulos en videos de capacitación — Visibilidad de Enlaces de Exclusión",
-    "description": "Los archivos de video integrados operan sin pistas de texto sincronizadas ni soporte de subtítulos. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
+    "title": "Sin modo de uso que no requiera la vista (Sección 508)",
+    "description": "La funcionalidad solo está disponible visualmente —por ejemplo, contenido dibujado en un canvas, botones que son imágenes o mapas sin alternativa textual— sin ningún modo de funcionamiento que no requiera la vista, como exigen los criterios de rendimiento funcional de la Sección 508.",
     "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "reference": "36 CFR 1194 App. C 302.1 (Section 508)"
   },
   {
     "id": 1948,
     "code": "SEC50-008",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de subtítulos en videos de capacitación — Divulgaciones del Aviso de Privacidad",
-    "description": "Los archivos de video integrados operan sin pistas de texto sincronizadas ni soporte de subtítulos. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
+    "title": "Sin modo de uso que no requiera el oído (Sección 508)",
+    "description": "La información o el funcionamiento dependen del sonido —instrucciones solo de audio, alertas sonoras o pódcasts sin transcripción— sin ningún modo de funcionamiento que no requiera oír, como exigen los criterios de rendimiento funcional de la Sección 508.",
     "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "reference": "36 CFR 1194 App. C 302.4 (Section 508)"
   },
   {
     "id": 1949,
     "code": "SEC50-009",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de subtítulos en videos de capacitación — Verificación del Control de Auditoría",
-    "description": "Los archivos de video integrados operan sin pistas de texto sincronizadas ni soporte de subtítulos. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "title": "Vídeo pregrabado sin audiodescripción (Sección 508)",
+    "description": "Los vídeos pregrabados del sitio web público de un organismo federal transmiten información visual importante que no se describe en la banda sonora ni en una pista de audiodescripción, aunque la Sección 508 exige el nivel AA de WCAG 2.0, incluida la audiodescripción del vídeo pregrabado.",
+    "severity": "moderate",
+    "reference": "36 CFR 1194 App. A E205.4 (Section 508); WCAG 2.0 SC 1.2.5"
   },
   {
     "id": 1950,
     "code": "SEC50-010",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "Falta de subtítulos en videos de capacitación — Credenciales Administrativas Inseguras",
-    "description": "Los archivos de video integrados operan sin pistas de texto sincronizadas ni soporte de subtítulos. Las consolas de administración permiten el acceso sin forzar claves MFA.",
+    "title": "Servicio federal sin acceso comparable (Sección 508)",
+    "description": "Las personas con discapacidad que buscan información o servicios en línea de un organismo federal no pueden acceder a ellos y usarlos de forma comparable a los demás —por ejemplo, un formulario de solicitud que no se puede completar con un lector de pantalla—, aunque la Sección 508 exige un acceso comparable salvo carga desproporcionada, en cuyo caso debe ofrecerse un medio alternativo.",
     "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "reference": "29 U.S.C. § 794d(a)(1)(A) (Section 508)"
   },
   {
     "id": 1951,
     "code": "EEOC-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Digital Operations",
-    "title": "Falta de auditoría de sesgo en selección automatizada",
-    "description": "La aplicación selecciona perfiles de candidatos con herramientas de IA sin realizar auditorías anuales de sesgo.",
+    "title": "Falta auditoría de sesgo del algoritmo de contratación",
+    "description": "Un empleador o agencia de empleo que contrata en la ciudad de Nueva York usa una herramienta automatizada de decisiones de empleo para evaluar candidatos o empleados sin una auditoría de sesgo realizada como máximo un año antes de su uso. Multa de hasta 500 $ por la primera infracción y de 500 a 1.500 $ por cada una posterior; cada día de uso es una infracción distinta. Lo confirma el registro de la auditoría.",
     "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "reference": "NYC Admin. Code § 20-871(a)(1) (Local Law 144)"
   },
   {
     "id": 1952,
     "code": "EEOC-002",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Falta de auditoría de sesgo en selección automatizada — Fallos de Auditoría y Registro",
-    "description": "La aplicación selecciona perfiles de candidatos con herramientas de IA sin realizar auditorías anuales de sesgo. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Resumen de la auditoría de sesgo no publicado en el sitio web (NYC)",
+    "description": "Un empleador o agencia de empleo que usa una herramienta automatizada de decisiones de empleo en la ciudad de Nueva York no ha publicado en su sitio web, antes de usarla, un resumen de los resultados de la auditoría de sesgo más reciente y la fecha de distribución de la herramienta auditada.",
     "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "reference": "NYC Admin. Code § 20-871(a)(2) (Local Law 144)"
   },
   {
     "id": 1953,
     "code": "EEOC-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Falta de auditoría de sesgo en selección automatizada — Defectos de Diseño de Interfaz",
-    "description": "La aplicación selecciona perfiles de candidatos con herramientas de IA sin realizar auditorías anuales de sesgo. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
+    "title": "Sin aviso de evaluación automatizada ni proceso alternativo (NYC)",
+    "description": "Las ofertas de empleo o el proceso de solicitud no informan a los candidatos de la ciudad de Nueva York, al menos diez días hábiles antes, de que una herramienta automatizada de decisiones de empleo los evaluará, ni les permiten solicitar un proceso de selección alternativo o un ajuste. Cada aviso omitido es una infracción distinta.",
     "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "reference": "NYC Admin. Code § 20-871(b)(1) (Local Law 144)"
   },
   {
     "id": 1954,
     "code": "EEOC-004",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Falta de auditoría de sesgo en selección automatizada — Fortalezas Criptográficas Débiles",
-    "description": "La aplicación selecciona perfiles de candidatos con herramientas de IA sin realizar auditorías anuales de sesgo. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
-    "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "title": "Sin aviso de las cualificaciones que evalúa la herramienta (NYC)",
+    "description": "No se informa a los candidatos o empleados de la ciudad de Nueva York, al menos diez días hábiles antes, de qué requisitos y características del puesto usará la herramienta automatizada de decisiones de empleo para evaluarlos.",
+    "severity": "moderate",
+    "reference": "NYC Admin. Code § 20-871(b)(2) (Local Law 144)"
   },
   {
     "id": 1955,
     "code": "EEOC-005",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Falta de auditoría de sesgo en selección automatizada — Fallos en Escaneos de Vulnerabilidad",
-    "description": "La aplicación selecciona perfiles de candidatos con herramientas de IA sin realizar auditorías anuales de sesgo. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
-    "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "title": "Sin información sobre tipo, fuente y conservación de datos de la herramienta de contratación (NYC)",
+    "description": "El sitio web no revela el tipo de datos recopilados para la herramienta automatizada de decisiones de empleo, su fuente ni la política de conservación; si no figura en el sitio, esa información debe facilitarse en un plazo de 30 días desde la solicitud escrita del candidato o empleado.",
+    "severity": "moderate",
+    "reference": "NYC Admin. Code § 20-871(b)(3) (Local Law 144)"
   },
   {
     "id": 1956,
     "code": "EEOC-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Digital Operations",
-    "title": "Falta de auditoría de sesgo en selección automatizada — Integridad del Registro de Consentimiento",
-    "description": "La aplicación selecciona perfiles de candidatos con herramientas de IA sin realizar auditorías anuales de sesgo. Los registros no almacenan las elecciones en un repositorio inmutable.",
+    "title": "Evaluación automatizada que excluye a solicitantes con discapacidad (ADA)",
+    "description": "Las pruebas o criterios de selección automatizados del proceso de contratación en línea (por ejemplo, juegos cronometrados o análisis de vídeo o voz) pueden excluir a solicitantes con discapacidad; según la ADA es discriminación salvo que los criterios estén relacionados con el puesto y respondan a una necesidad empresarial. Lo confirma el análisis de resultados.",
     "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "reference": "42 U.S.C. § 12112(b)(6) (ADA)"
   },
   {
     "id": 1957,
     "code": "EEOC-007",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Falta de auditoría de sesgo en selección automatizada — Visibilidad de Enlaces de Exclusión",
-    "description": "La aplicación selecciona perfiles de candidatos con herramientas de IA sin realizar auditorías anuales de sesgo. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
-    "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "title": "Sin forma de pedir ajustes en las evaluaciones en línea (ADA)",
+    "description": "La solicitud en línea o la evaluación automatizada no ofrecen a los solicitantes forma de pedir un ajuste razonable —por ejemplo, más tiempo o un formato alternativo—, aunque según la ADA no realizar ajustes razonables para un solicitante cualificado con discapacidad es discriminación salvo que suponga una carga excesiva.",
+    "severity": "moderate",
+    "reference": "42 U.S.C. § 12112(b)(5)(A) (ADA)"
   },
   {
     "id": 1958,
     "code": "EEOC-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Digital Operations",
-    "title": "Falta de auditoría de sesgo en selección automatizada — Divulgaciones del Aviso de Privacidad",
-    "description": "La aplicación selecciona perfiles de candidatos con herramientas de IA sin realizar auditorías anuales de sesgo. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
+    "title": "Selección automatizada con posible impacto dispar (Title VII)",
+    "description": "Una herramienta de contratación automatizada que clasifica o filtra solicitantes puede causar un impacto dispar por raza, color, religión, sexo u origen nacional; según el Title VII es una práctica laboral ilícita salvo que el empleador demuestre que está relacionada con el puesto y responde a una necesidad empresarial y no rechazó una alternativa menos discriminatoria. Lo confirma un análisis estadístico.",
     "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "reference": "42 U.S.C. § 2000e-2(k)(1)(A) (Title VII)"
   },
   {
     "id": 1959,
     "code": "EEOC-009",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Falta de auditoría de sesgo en selección automatizada — Verificación del Control de Auditoría",
-    "description": "La aplicación selecciona perfiles de candidatos con herramientas de IA sin realizar auditorías anuales de sesgo. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "title": "Aviso de privacidad a candidatos sin información sobre decisiones automatizadas (UE)",
+    "description": "El aviso de privacidad para candidatos no indica si se usan decisiones automatizadas, incluida la elaboración de perfiles, ni ofrece información significativa sobre la lógica aplicada y la importancia y consecuencias previstas para el candidato, como exige el RGPD cuando se toman tales decisiones.",
+    "severity": "moderate",
+    "reference": "GDPR Art. 13(2)(f)"
   },
   {
     "id": 1960,
     "code": "EEOC-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Digital Operations",
-    "title": "Falta de auditoría de sesgo en selección automatizada — Credenciales Administrativas Inseguras",
-    "description": "La aplicación selecciona perfiles de candidatos con herramientas de IA sin realizar auditorías anuales de sesgo. Las consolas de administración permiten el acceso sin forzar claves MFA.",
+    "title": "Rechazo de candidatos totalmente automatizado sin revisión humana (UE)",
+    "description": "Indicios de que las solicitudes se rechazan automáticamente —por ejemplo, correos de rechazo inmediatos tras una prueba automatizada— sin intervención humana y sin derecho a obtenerla, a expresar el propio punto de vista y a impugnar la decisión, como exige el RGPD para decisiones basadas únicamente en el tratamiento automatizado con efectos jurídicos o igualmente significativos. Lo confirma una auditoría.",
     "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "reference": "GDPR Art. 22(1), (3)"
   },
   {
     "id": 1961,
     "code": "BIPAX-001",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Falta de consentimiento biométrico para prueba virtual",
-    "description": "El portal cosmético despliega software de prueba virtual de escaneo facial sin consentimiento biométrico previo por escrito.",
+    "title": "Falta el consentimiento biométrico en la prueba virtual",
+    "description": "Una función de prueba virtual o similar capta la geometría facial (u otro identificador biométrico) con fines comerciales sin informar antes a la persona ni obtener su consentimiento, lo que Texas prohíbe; cada infracción conlleva una multa civil de hasta 25.000 $.",
     "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "reference": "Tex. Bus. & Com. Code § 503.001(b)"
   },
   {
     "id": 1962,
     "code": "BIPAX-002",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Falta de consentimiento biométrico para prueba virtual — Fallos de Auditoría y Registro",
-    "description": "El portal cosmético despliega software de prueba virtual de escaneo facial sin consentimiento biométrico previo por escrito. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Identificadores biométricos vendidos o comunicados a terceros (Texas)",
+    "description": "Indicios de que los identificadores biométricos captados se venden, arriendan o comunican a terceros (por ejemplo, datos faciales enviados a un socio publicitario o de analítica) fuera de las estrictas excepciones que permite Texas, como una transacción solicitada por la persona o una orden judicial policial. Hasta 25.000 $ por infracción; lo confirma una auditoría de los flujos de datos.",
     "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "reference": "Tex. Bus. & Com. Code § 503.001(c)(1)"
   },
   {
     "id": 1963,
     "code": "BIPAX-003",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Falta de consentimiento biométrico para prueba virtual — Defectos de Diseño de Interfaz",
-    "description": "El portal cosmético despliega software de prueba virtual de escaneo facial sin consentimiento biométrico previo por escrito. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "Datos biométricos conservados tras cumplir su finalidad (Texas)",
+    "description": "Declaraciones o prácticas de conservación sugieren que los identificadores biométricos se guardan indefinidamente, aunque Texas exige destruirlos en un plazo razonable y como máximo un año después de que expire la finalidad de su recogida. Hasta 25.000 $ por infracción; lo confirma una auditoría.",
+    "severity": "serious",
+    "reference": "Tex. Bus. & Com. Code § 503.001(c)(3)"
   },
   {
     "id": 1964,
     "code": "BIPAX-004",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Falta de consentimiento biométrico para prueba virtual — Fortalezas Criptográficas Débiles",
-    "description": "El portal cosmético despliega software de prueba virtual de escaneo facial sin consentimiento biométrico previo por escrito. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "Imágenes biométricas transmitidas sin diligencia razonable (Texas)",
+    "description": "Las imágenes faciales u otros datos biométricos captados por el sitio se suben por una conexión sin cifrar o se envían a scripts de terceros, aunque Texas exige almacenar, transmitir y proteger los identificadores biométricos con diligencia razonable, al menos como el resto de información confidencial.",
+    "severity": "serious",
+    "reference": "Tex. Bus. & Com. Code § 503.001(c)(2)"
   },
   {
     "id": 1965,
     "code": "BIPAX-005",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Falta de consentimiento biométrico para prueba virtual — Fallos en Escaneos de Vulnerabilidad",
-    "description": "El portal cosmético despliega software de prueba virtual de escaneo facial sin consentimiento biométrico previo por escrito. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "Inscripción biométrica sin aviso, consentimiento ni exclusión (Washington)",
+    "description": "El servicio inscribe identificadores biométricos (por ejemplo, plantillas faciales o de voz) en una base de datos con fines comerciales sin dar antes un aviso fácilmente disponible y obtener el consentimiento, o sin ofrecer un mecanismo para impedir su uso comercial posterior, como exige Washington. Lo aplica el Fiscal General conforme a la Ley de Protección al Consumidor.",
+    "severity": "serious",
+    "reference": "RCW 19.375.020(1)–(2) (Washington)"
   },
   {
     "id": 1966,
     "code": "BIPAX-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Falta de consentimiento biométrico para prueba virtual — Integridad del Registro de Consentimiento",
-    "description": "El portal cosmético despliega software de prueba virtual de escaneo facial sin consentimiento biométrico previo por escrito. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "Datos biométricos inscritos comunicados sin consentimiento (Washington)",
+    "description": "Indicios de que los identificadores biométricos inscritos se venden, arriendan o comunican a otros con fines comerciales sin el consentimiento de la persona y fuera de las excepciones que permite Washington (por ejemplo, un servicio solicitado, una transacción financiera o una orden judicial). Lo confirma una auditoría.",
+    "severity": "serious",
+    "reference": "RCW 19.375.020(3) (Washington)"
   },
   {
     "id": 1967,
     "code": "BIPAX-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Falta de consentimiento biométrico para prueba virtual — Visibilidad de Enlaces de Exclusión",
-    "description": "El portal cosmético despliega software de prueba virtual de escaneo facial sin consentimiento biométrico previo por escrito. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "Datos biométricos inscritos conservados más de lo necesario (Washington)",
+    "description": "Las declaraciones de conservación sugieren que los identificadores biométricos inscritos se guardan más tiempo del razonablemente necesario para prestar el servicio, prevenir el fraude o amenazas de seguridad, o cumplir una ley u orden judicial, como limita Washington. Lo confirma una auditoría.",
+    "severity": "moderate",
+    "reference": "RCW 19.375.020(4)(b) (Washington)"
   },
   {
     "id": 1968,
     "code": "BIPAX-008",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Falta de consentimiento biométrico para prueba virtual — Divulgaciones del Aviso de Privacidad",
-    "description": "El portal cosmético despliega software de prueba virtual de escaneo facial sin consentimiento biométrico previo por escrito. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
+    "title": "Identificación biométrica sin consentimiento explícito (UE)",
+    "description": "Las funciones de reconocimiento facial, identificación por voz o similares tratan datos biométricos para identificar de forma unívoca a personas en la UE sin consentimiento explícito (u otra excepción del artículo 9, apartado 2), por ejemplo iniciando un escaneo facial sin un paso de consentimiento específico y separado.",
     "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "reference": "GDPR Art. 9(1), (2)(a)"
   },
   {
     "id": 1969,
     "code": "BIPAX-009",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Falta de consentimiento biométrico para prueba virtual — Verificación del Control de Auditoría",
-    "description": "El portal cosmético despliega software de prueba virtual de escaneo facial sin consentimiento biométrico previo por escrito. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "Sin forma sencilla de retirar el consentimiento biométrico (UE)",
+    "description": "El consentimiento para el tratamiento facial o de voz se da con un clic, pero no hay una forma igual de sencilla de retirarlo después (por ejemplo, solo por carta o correo electrónico), aunque el RGPD exige que retirarlo sea tan fácil como darlo.",
+    "severity": "moderate",
+    "reference": "GDPR Art. 7(3)"
   },
   {
     "id": 1970,
     "code": "BIPAX-010",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Falta de consentimiento biométrico para prueba virtual — Credenciales Administrativas Inseguras",
-    "description": "El portal cosmético despliega software de prueba virtual de escaneo facial sin consentimiento biométrico previo por escrito. Las consolas de administración permiten el acceso sin forzar claves MFA.",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "Búsqueda facial basada en imágenes extraídas de Internet (Texas)",
+    "description": "El servicio capta identificadores biométricos de fotos encontradas en línea (por ejemplo, una búsqueda facial en imágenes recopiladas) y trata su disponibilidad pública como consentimiento, aunque en Texas no se considera que una persona haya sido informada ni haya consentido por el mero hecho de que su imagen esté en Internet, salvo que ella misma la publicara. Hasta 25.000 $ por infracción.",
+    "severity": "serious",
+    "reference": "Tex. Bus. & Com. Code § 503.001(b-1)"
   },
   {
     "id": 1971,
     "code": "CIPAX-001",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Transcripción de chat sin advertencia de la CIPA",
-    "description": "El chat del cliente realiza transcripción en tiempo real y registra diálogos sin advertencia de grabación.",
+    "title": "Mensajes del chat leídos por un tercero sin aviso (California)",
+    "description": "Un script de chat o transcripción de un tercero recibe en tiempo real los mensajes de los visitantes mientras se envían, sin aviso ni consentimiento de todas las partes. La norma californiana sobre escuchas prohíbe leer o conocer el contenido de una comunicación en tránsito sin el consentimiento de todas las partes, y ayudar a otro a hacerlo; los afectados pueden reclamar 5.000 $ por infracción. Si los proveedores de chat en sitios web quedan incluidos se discute en los tribunales.",
     "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "reference": "Cal. Penal Code § 631(a); § 637.2(a)"
   },
   {
     "id": 1972,
     "code": "CIPAX-002",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Transcripción de chat sin advertencia de la CIPA — Fallos de Auditoría y Registro",
-    "description": "El chat del cliente realiza transcripción en tiempo real y registra diálogos sin advertencia de grabación. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "Script de seguimiento que registra datos de direccionamiento sin consentimiento (California)",
+    "description": "Scripts de seguimiento de terceros captan direcciones IP, identificadores de dispositivo u otra información de direccionamiento y enrutamiento sin consentimiento. California prohíbe instalar o usar un pen register o trap and trace —dispositivo o proceso que registra esa información— sin orden judicial, y los afectados pueden reclamar 5.000 $ por infracción; si los rastreadores web lo son se discute en los tribunales.",
+    "severity": "serious",
+    "reference": "Cal. Penal Code § 638.51(a); § 637.2(a)"
   },
   {
     "id": 1973,
     "code": "CIPAX-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Transcripción de chat sin advertencia de la CIPA — Defectos de Diseño de Interfaz",
-    "description": "El chat del cliente realiza transcripción en tiempo real y registra diálogos sin advertencia de grabación. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "Grabación de sesiones con comunicaciones confidenciales sin consentimiento (California)",
+    "description": "Scripts de grabación de sesiones capturan lo que los visitantes escriben en chats o formularios sobre asuntos confidenciales (por ejemplo, preguntas de salud o financieras) sin el consentimiento de todas las partes. California prohíbe grabar una comunicación confidencial sin el consentimiento de todas las partes; multa de hasta 2.500 $ por infracción y demandas privadas de 5.000 $ por infracción.",
+    "severity": "serious",
+    "reference": "Cal. Penal Code § 632(a); § 637.2(a)"
   },
   {
     "id": 1974,
     "code": "CIPAX-004",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Transcripción de chat sin advertencia de la CIPA — Fortalezas Criptográficas Débiles",
-    "description": "El chat del cliente realiza transcripción en tiempo real y registra diálogos sin advertencia de grabación. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "Llamadas desde móviles grabadas sin consentimiento (California)",
+    "description": "Las funciones de llamada desde la web o del centro de llamadas sugieren que las llamadas de clientes —incluidas las de teléfonos móviles o inalámbricos— se graban sin informar a quien llama ni obtener el consentimiento de todas las partes, lo que California prohíbe. Lo confirma una llamada de prueba o una auditoría.",
+    "severity": "serious",
+    "reference": "Cal. Penal Code § 632.7(a)"
   },
   {
     "id": 1975,
     "code": "CIPAX-005",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Transcripción de chat sin advertencia de la CIPA — Fallos en Escaneos de Vulnerabilidad",
-    "description": "El chat del cliente realiza transcripción en tiempo real y registra diálogos sin advertencia de grabación. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "Comunicaciones electrónicas interceptadas sin consentimiento de todas las partes (Florida)",
+    "description": "Scripts de chat, grabación de sesiones o similares interceptan las comunicaciones electrónicas de los visitantes sin el consentimiento previo de todas las partes, que Florida exige para que la interceptación sea lícita. Quien sufra la interceptación puede reclamar los daños reales, con un mínimo de 100 $ por día o 1.000 $, lo que sea mayor. Si estas herramientas constituyen «interceptación» se discute en los tribunales.",
+    "severity": "serious",
+    "reference": "Fla. Stat. § 934.03(1)(a), (2)(d)"
   },
   {
     "id": 1976,
     "code": "CIPAX-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Transcripción de chat sin advertencia de la CIPA — Integridad del Registro de Consentimiento",
-    "description": "El chat del cliente realiza transcripción en tiempo real y registra diálogos sin advertencia de grabación. Los registros no almacenan las elecciones en un repositorio inmutable.",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "Contenido de comunicaciones interceptadas revelado o utilizado (Florida)",
+    "description": "Indicios de que el contenido de chats interceptados o sesiones grabadas se revela a otras empresas o se utiliza (por ejemplo, para publicidad) aunque la empresa sabía o tenía motivos para saber que se obtuvo por interceptación ilícita, lo que Florida prohíbe. Lo confirma una auditoría del intercambio de datos.",
+    "severity": "serious",
+    "reference": "Fla. Stat. § 934.03(1)(c)–(d)"
   },
   {
     "id": 1977,
     "code": "CIPAX-007",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Transcripción de chat sin advertencia de la CIPA — Visibilidad de Enlaces de Exclusión",
-    "description": "El chat del cliente realiza transcripción en tiempo real y registra diálogos sin advertencia de grabación. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "Comunicaciones privadas interceptadas sin consentimiento de todos los participantes (Washington)",
+    "description": "Las funciones de chat o mensajería interceptan o graban comunicaciones privadas entre personas mediante un dispositivo o proceso diseñado para grabarlas o transmitirlas, sin obtener antes el consentimiento de todos los participantes, lo que Washington declara ilícito.",
+    "severity": "serious",
+    "reference": "RCW 9.73.030(1)(a) (Washington)"
   },
   {
     "id": 1978,
     "code": "CIPAX-008",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Transcripción de chat sin advertencia de la CIPA — Divulgaciones del Aviso de Privacidad",
-    "description": "El chat del cliente realiza transcripción en tiempo real y registra diálogos sin advertencia de grabación. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "Conversaciones privadas grabadas por funciones de voz sin consentimiento (Washington)",
+    "description": "Asistentes de voz, notas de voz o funciones que usan el micrófono graban conversaciones privadas sin obtener antes el consentimiento de todas las personas que participan en ellas, lo que Washington prohíbe.",
+    "severity": "moderate",
+    "reference": "RCW 9.73.030(1)(b) (Washington)"
   },
   {
     "id": 1979,
     "code": "CIPAX-009",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Transcripción de chat sin advertencia de la CIPA — Verificación del Control de Auditoría",
-    "description": "El chat del cliente realiza transcripción en tiempo real y registra diálogos sin advertencia de grabación. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "Scripts de grabación de sesiones o chat que acceden al dispositivo antes del consentimiento (UE)",
+    "description": "Scripts de grabación de sesiones, mapas de calor o chat de terceros almacenan o leen identificadores en el dispositivo del visitante antes del consentimiento, aunque para todo lo que no sea estrictamente necesario para el servicio solicitado el Derecho de la UE exige consentimiento previo basado en información clara y completa.",
+    "severity": "serious",
+    "reference": "ePrivacy Directive Art. 5(3)"
   },
   {
     "id": 1980,
     "code": "CIPAX-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "Transcripción de chat sin advertencia de la CIPA — Credenciales Administrativas Inseguras",
-    "description": "El chat del cliente realiza transcripción en tiempo real y registra diálogos sin advertencia de grabación. Las consolas de administración permiten el acceso sin forzar claves MFA.",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "Uso del contenido de chats interceptados para otros fines (California)",
+    "description": "Indicios de que la información obtenida de chats leídos en tránsito se usa con otros fines —por ejemplo, para entrenar modelos o segmentar publicidad—, aunque la norma californiana sobre escuchas también prohíbe usar o intentar usar la información así obtenida. Lo confirma una auditoría del uso de datos del proveedor.",
+    "severity": "serious",
+    "reference": "Cal. Penal Code § 631(a)"
   },
   {
     "id": 1981,
     "code": "LKSG-001",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de canal de quejas sobre la cadena de suministro",
-    "description": "El sitio web carece de un portal accesible para que los proveedores envíen quejas sobre violaciones de derechos humanos.",
+    "title": "Falta un canal de reclamaciones de la cadena de suministro",
+    "description": "Una empresa sujeta a la Ley alemana de diligencia debida en la cadena de suministro (1.000 o más empleados en Alemania) no ofrece información pública y clara sobre cómo acceder y usar su procedimiento de reclamaciones sobre riesgos para los derechos humanos y el medio ambiente en su actividad propia o en proveedores directos. No establecer el procedimiento puede sancionarse con hasta 800.000 €.",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "LkSG § 8(1), (4) (Germany)"
   },
   {
     "id": 1982,
     "code": "LKSG-002",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de canal de quejas sobre la cadena de suministro — Fallos de Auditoría y Registro",
-    "description": "El sitio web carece de un portal accesible para que los proveedores envíen quejas sobre violaciones de derechos humanos. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
+    "title": "Reglas del procedimiento de reclamaciones no publicadas (Alemania)",
+    "description": "La empresa no ha publicado en forma de texto las reglas del procedimiento de reclamaciones de su cadena de suministro, aunque la Ley alemana de diligencia debida en la cadena de suministro exige que sean públicamente accesibles.",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "LkSG § 8(2) (Germany)"
   },
   {
     "id": 1983,
     "code": "LKSG-003",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de canal de quejas sobre la cadena de suministro — Defectos de Diseño de Interfaz",
-    "description": "El sitio web carece de un portal accesible para que los proveedores envíen quejas sobre violaciones de derechos humanos. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
-    "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "title": "Informe anual de diligencia debida no publicado en el sitio web (Alemania)",
+    "description": "La empresa no ha publicado en su sitio web, gratuitamente y dentro de los cuatro meses siguientes al cierre del ejercicio, su informe anual sobre el cumplimiento de sus obligaciones de diligencia debida en la cadena de suministro (riesgos detectados, medidas adoptadas, su evaluación y conclusiones), que debe permanecer disponible siete años. Multa de hasta 100.000 €.",
+    "severity": "serious",
+    "reference": "LkSG § 10(2) (Germany)"
   },
   {
     "id": 1984,
     "code": "LKSG-004",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de canal de quejas sobre la cadena de suministro — Fortalezas Criptográficas Débiles",
-    "description": "El sitio web carece de un portal accesible para que los proveedores envíen quejas sobre violaciones de derechos humanos. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
+    "title": "Sin declaración de política sobre la estrategia de derechos humanos (Alemania)",
+    "description": "No hay indicios de una declaración de política emitida por la dirección sobre la estrategia de derechos humanos de la empresa —con su procedimiento de diligencia debida, los riesgos prioritarios para los derechos humanos y el medio ambiente y las expectativas hacia empleados y proveedores—, que la Ley alemana de la cadena de suministro exige una vez detectado un riesgo. Lo confirma una auditoría.",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "LkSG § 6(2) (Germany)"
   },
   {
     "id": 1985,
     "code": "LKSG-005",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de canal de quejas sobre la cadena de suministro — Fallos en Escaneos de Vulnerabilidad",
-    "description": "El sitio web carece de un portal accesible para que los proveedores envíen quejas sobre violaciones de derechos humanos. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
+    "title": "Procedimiento de reclamaciones no revisado anualmente (Alemania)",
+    "description": "Un canal de reclamaciones obsoleto o que no funciona (por ejemplo, un enlace roto o una dirección sin respuesta) sugiere que la empresa no revisa la eficacia de su procedimiento de reclamaciones al menos una vez al año y cuando cambia su situación de riesgo, como exige la Ley alemana de la cadena de suministro. Multa de hasta 500.000 €; lo confirma una auditoría.",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "LkSG § 8(5) (Germany)"
   },
   {
     "id": 1986,
     "code": "LKSG-006",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de canal de quejas sobre la cadena de suministro — Integridad del Registro de Consentimiento",
-    "description": "El sitio web carece de un portal accesible para que los proveedores envíen quejas sobre violaciones de derechos humanos. Los registros no almacenan las elecciones en un repositorio inmutable.",
+    "title": "Sin enlace en la página de inicio a la información sobre esclavitud en la cadena de suministro (California)",
+    "description": "Un minorista o fabricante que opera en California con ingresos brutos mundiales superiores a 100 millones de dólares no tiene en su página de inicio un enlace visible y comprensible a la información sobre sus esfuerzos para erradicar la esclavitud y la trata de personas de su cadena de suministro directa (verificación, auditorías, certificación, responsabilidad interna y formación).",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "Cal. Civ. Code § 1714.43"
   },
   {
     "id": 1987,
     "code": "LKSG-007",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de canal de quejas sobre la cadena de suministro — Visibilidad de Enlaces de Exclusión",
-    "description": "El sitio web carece de un portal accesible para que los proveedores envíen quejas sobre violaciones de derechos humanos. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
+    "title": "Declaración sobre esclavitud moderna sin enlace desde la página de inicio (Reino Unido)",
+    "description": "Una organización comercial por encima del umbral de facturación británico que tiene sitio web no publica en él su declaración anual sobre esclavitud y trata de personas, o no coloca un enlace a ella en un lugar destacado de la página de inicio.",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "UK Modern Slavery Act 2015 s. 54(7)"
   },
   {
     "id": 1988,
     "code": "LKSG-008",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de canal de quejas sobre la cadena de suministro — Divulgaciones del Aviso de Privacidad",
-    "description": "El sitio web carece de un portal accesible para que los proveedores envíen quejas sobre violaciones de derechos humanos. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
+    "title": "Declaración sobre esclavitud moderna no aprobada ni firmada (Reino Unido)",
+    "description": "La declaración publicada de una sociedad sobre esclavitud y trata de personas no muestra la aprobación del consejo de administración (u órgano equivalente) ni la firma de un administrador, como exige la Modern Slavery Act británica (en LLP y sociedades personalistas, por los miembros o socios que indica).",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "UK Modern Slavery Act 2015 s. 54(6)"
   },
   {
     "id": 1989,
     "code": "LKSG-009",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de canal de quejas sobre la cadena de suministro — Verificación del Control de Auditoría",
-    "description": "El sitio web carece de un portal accesible para que los proveedores envíen quejas sobre violaciones de derechos humanos. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
-    "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "title": "Informe sobre trabajo forzoso no publicado en lugar destacado del sitio web (Canadá)",
+    "description": "Una entidad obligada a informar al ministro antes del 31 de mayo de cada año sobre las medidas contra el trabajo forzoso e infantil en sus cadenas de suministro no hace público el informe, incluso en un lugar destacado de su sitio web. El incumplimiento es un delito con multa de hasta 250.000 $.",
+    "severity": "serious",
+    "reference": "Fighting Against Forced Labour and Child Labour in Supply Chains Act (S.C. 2023, c. 9) s. 13(1), 19(1) (Canada)"
   },
   {
     "id": 1990,
     "code": "LKSG-010",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de canal de quejas sobre la cadena de suministro — Credenciales Administrativas Inseguras",
-    "description": "El sitio web carece de un portal accesible para que los proveedores envíen quejas sobre violaciones de derechos humanos. Las consolas de administración permiten el acceso sin forzar claves MFA.",
+    "title": "Informe sobre trabajo forzoso sin el contenido obligatorio (Canadá)",
+    "description": "El informe publicado no describe la estructura, actividades y cadenas de suministro de la entidad, sus políticas y diligencia debida sobre trabajo forzoso e infantil, las partes del negocio y de la cadena de suministro en riesgo ni las medidas adoptadas, como exige la ley canadiense sobre cadenas de suministro.",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "Fighting Against Forced Labour and Child Labour in Supply Chains Act (S.C. 2023, c. 9) s. 11(3) (Canada)"
   },
   {
     "id": 1991,
     "code": "CSRD-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de divulgaciones digitales de sostenibilidad",
-    "description": "El portal corporativo no publica las auditorías anuales de sostenibilidad en formato digital legible por máquina.",
+    "title": "Informe de gestión fuera del formato electrónico único (UE)",
+    "description": "Una empresa sujeta a la información sobre sostenibilidad de la UE publica su informe de gestión solo como PDF o página web, lo que sugiere que no está preparado en el formato electrónico único (XHTML según el Reglamento Delegado (UE) 2019/815) que exige la Directiva contable; el etiquetado de la sección de sostenibilidad solo será obligatorio cuando se adopten las normas de etiquetado. Se confirma con la presentación oficial.",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 29d(1) (as amended by CSRD)"
   },
   {
     "id": 1992,
     "code": "CSRD-002",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de divulgaciones digitales de sostenibilidad — Fallos de Auditoría y Registro",
-    "description": "El portal corporativo no publica las auditorías anuales de sostenibilidad en formato digital legible por máquina. Los registros de auditoría inadecuados no documentan los cambios de configuración.",
-    "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "title": "Empresa incluida sin información sobre sostenibilidad (UE)",
+    "description": "Una empresa que parece superar tanto un volumen de negocios neto de 450 millones de euros como una media de 1.000 empleados publica un informe de gestión sin la información de sostenibilidad necesaria para entender sus impactos en cuestiones de sostenibilidad y cómo estas afectan a su evolución, resultados y situación. Lo confirman sus datos de tamaño y el informe oficial.",
+    "severity": "serious",
+    "reference": "Directive 2013/34/EU Art. 19a(1) (as amended by Directive (EU) 2026/470)"
   },
   {
     "id": 1993,
     "code": "CSRD-003",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "Falta de divulgaciones digitales de sostenibilidad — Defectos de Diseño de Interfaz",
-    "description": "El portal corporativo no publica las auditorías anuales de sostenibilidad en formato digital legible por máquina. Las interfaces emplean elementos de diseño que limitan el acceso o las opciones de los usuarios.",
+    "title": "Información de sostenibilidad sin sección específica (UE)",
+    "description": "El informe de gestión publicado de una empresa incluida dispersa la información de sostenibilidad por el documento en lugar de presentarla en una sección específica y claramente identificable, como exige la Directiva contable.",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 19a(1) second subparagraph"
   },
   {
     "id": 1994,
     "code": "CSRD-004",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de divulgaciones digitales de sostenibilidad — Fortalezas Criptográficas Débiles",
-    "description": "El portal corporativo no publica las auditorías anuales de sostenibilidad en formato digital legible por máquina. Los algoritmos de cifrado o capas de transporte están por debajo de los estándares mínimos.",
+    "title": "Sin plan de transición hacia 1,5 °C (UE)",
+    "description": "La sección de sostenibilidad no describe los planes de la empresa —incluidas las acciones de ejecución y los planes financieros y de inversión relacionados— para que su modelo de negocio y estrategia sean compatibles con la transición a una economía sostenible, la limitación del calentamiento a 1,5 °C del Acuerdo de París y la neutralidad climática en 2050. Se confirma revisando el informe oficial.",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 19a(2)(a)(iii)"
   },
   {
     "id": 1995,
     "code": "CSRD-005",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de divulgaciones digitales de sostenibilidad — Fallos en Escaneos de Vulnerabilidad",
-    "description": "El portal corporativo no publica las auditorías anuales de sostenibilidad en formato digital legible por máquina. Los escáneres automáticos de vulnerabilidad no se ejecutan periódicamente en rutas públicas.",
+    "title": "Sin objetivos de sostenibilidad con plazos ni avances (UE)",
+    "description": "La sección de sostenibilidad no incluye objetivos con plazos —incluidos, cuando proceda, objetivos absolutos de reducción de gases de efecto invernadero al menos para 2030 y 2050—, ni sus avances, ni una declaración sobre si los objetivos ambientales se basan en pruebas científicas concluyentes. Se confirma revisando el informe oficial.",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 19a(2)(b)"
   },
   {
     "id": 1996,
     "code": "CSRD-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de divulgaciones digitales de sostenibilidad — Integridad del Registro de Consentimiento",
-    "description": "El portal corporativo no publica las auditorías anuales de sostenibilidad en formato digital legible por máquina. Los registros no almacenan las elecciones en un repositorio inmutable.",
+    "title": "Sin descripción de la diligencia debida en sostenibilidad ni de los impactos adversos (UE)",
+    "description": "La sección de sostenibilidad no describe el proceso de diligencia debida en cuestiones de sostenibilidad, los principales impactos adversos reales o potenciales vinculados a sus operaciones y a su cadena de valor, ni las medidas adoptadas para prevenirlos, mitigarlos o repararlos. Se confirma revisando el informe oficial.",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 19a(2)(f)"
   },
   {
     "id": 1997,
     "code": "CSRD-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de divulgaciones digitales de sostenibilidad — Visibilidad de Enlaces de Exclusión",
-    "description": "El portal corporativo no publica las auditorías anuales de sostenibilidad en formato digital legible por máquina. El pie de página carece de enlaces visibles para solicitar la exclusión del seguimiento.",
-    "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "title": "Grupo incluido sin información consolidada sobre sostenibilidad (UE)",
+    "description": "La matriz de un grupo que parece superar, en base consolidada, un volumen de negocios neto de 450 millones de euros y una media de 1.000 empleados publica un informe de gestión consolidado sin una sección específica sobre los impactos del grupo en la sostenibilidad y cómo esta le afecta. Lo confirman los datos del grupo y el informe oficial.",
+    "severity": "serious",
+    "reference": "Directive 2013/34/EU Art. 29a(1) (as amended by Directive (EU) 2026/470)"
   },
   {
     "id": 1998,
     "code": "CSRD-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de divulgaciones digitales de sostenibilidad — Divulgaciones del Aviso de Privacidad",
-    "description": "El portal corporativo no publica las auditorías anuales de sostenibilidad en formato digital legible por máquina. Las declaraciones de privacidad no explican con claridad los alcances del procesamiento.",
+    "title": "Sin opinión de aseguramiento limitado sobre la información de sostenibilidad (UE)",
+    "description": "El informe publicado no incluye la opinión del auditor legal, basada en un encargo de aseguramiento limitado, sobre la conformidad de la información de sostenibilidad con la Directiva y las normas de información, incluidas las divulgaciones del artículo 8 del Reglamento de taxonomía. Se confirma revisando el informe de auditoría.",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 34(1)(aa)"
   },
   {
     "id": 1999,
     "code": "CSRD-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de divulgaciones digitales de sostenibilidad — Verificación del Control de Auditoría",
-    "description": "El portal corporativo no publica las auditorías anuales de sostenibilidad en formato digital legible por máquina. Los procesos de transferencia operan sin comprobaciones automáticas de validez.",
+    "title": "Informe de gestión no publicado en 12 meses (UE)",
+    "description": "Los estados financieros y el informe de gestión debidamente aprobados, con la opinión del auditor, no parecen haberse publicado en los 12 meses siguientes a la fecha del balance —en el formato electrónico, cuando proceda—, como exige la Directiva contable. Se confirma a través del registro mercantil.",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 30(1)"
   },
   {
     "id": 2000,
     "code": "CSRD-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "Falta de divulgaciones digitales de sostenibilidad — Credenciales Administrativas Inseguras",
-    "description": "El portal corporativo no publica las auditorías anuales de sostenibilidad en formato digital legible por máquina. Las consolas de administración permiten el acceso sin forzar claves MFA.",
+    "title": "Sin descripción de los principales riesgos de sostenibilidad (UE)",
+    "description": "La sección de sostenibilidad no describe los principales riesgos para la empresa relacionados con cuestiones de sostenibilidad, sus principales dependencias de ellas ni cómo gestiona esos riesgos. Se confirma revisando el informe oficial.",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 19a(2)(g)"
   }
 ];

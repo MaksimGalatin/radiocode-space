@@ -410,9 +410,9 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
     "title": "订阅取消比注册更难",
-    "description": "取消订阅需要比原始注册过程更多的步骤、电话或障碍。FTC 的《一键取消规则》要求取消应与注册一样容易。",
+    "description": "取消订阅需要比注册更多的步骤、电话或障碍。联邦法律 ROSCA 要求提供停止定期扣费的简便方式；加州要求对在线开通的订阅提供醒目链接或按钮以在线取消。FTC 2024 年的《一键取消规则》已于 2025 年 7 月 8 日被第八巡回上诉法院撤销。",
     "severity": "serious",
-    "reference": "16 CFR § 425 (FTC Click-to-Cancel Rule 2024)"
+    "reference": "15 U.S.C. § 8403(3) (ROSCA); Cal. Bus. & Prof. Code § 17602(d)"
   },
   {
     "id": 36,
@@ -18067,402 +18067,402 @@ export const threatMatrixZh: ComplianceCheck[] = [
   {
     "id": 1801,
     "code": "TXSBB-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "未注册的数据经纪商运营",
-    "description": "该网站在未向德克萨斯州数据经纪商注册处注册的情况下，将消费者数据出售给第三方。",
+    "title": "数据经纪商未在得克萨斯州登记",
+    "description": "收集、处理或转移并非直接从个人处获取的个人数据的企业，看起来在得克萨斯州以数据经纪商身份经营，却未向得州州务卿登记（登记费 300 美元）。处罚：每天至少 100 美元外加未缴费用，12 个月内最高 10,000 美元。须以公开登记册而非网站确认。",
     "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "reference": "Tex. Bus. & Com. Code § 510.005"
   },
   {
     "id": 1802,
     "code": "TXSBB-002",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "未注册的数据经纪商运营 — 审计与记录失效",
-    "description": "该网站在未向德克萨斯州数据经纪商注册处注册的情况下，将消费者数据出售给第三方。 审计跟踪不充分，未能记录配置设置。",
+    "title": "网站未显著公示数据经纪商声明（得克萨斯州）",
+    "description": "数据经纪商的网站或应用未发布显著声明，说明该实体是数据经纪商；声明须清晰、不具误导性、公众（包括残障人士）易于获取，并包含得州州务卿规定的文字。处罚：每天至少 100 美元，12 个月内最高 10,000 美元。",
     "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "reference": "Tex. Bus. & Com. Code § 510.004(1)–(3)"
   },
   {
     "id": 1803,
     "code": "TXSBB-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "未注册的数据经纪商运营 — 界面设计缺陷",
-    "description": "该网站在未向德克萨斯州数据经纪商注册处注册的情况下，将消费者数据出售给第三方。 用户界面采用了限制访问者访问或选择的设计组件。",
-    "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "title": "数据经纪商声明未说明隐私权利行使方式（得克萨斯州）",
+    "description": "网站或应用上的数据经纪商声明未告知消费者如何行使得州《数据隐私与安全法》（第 541 章）规定的权利；该要求自 2025 年 9 月 1 日起生效。",
+    "severity": "moderate",
+    "reference": "Tex. Bus. & Com. Code § 510.004(4)"
   },
   {
     "id": 1804,
     "code": "TXSBB-004",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "未注册的数据经纪商运营 — 密码学强度不足",
-    "description": "该网站在未向德克萨斯州数据经纪商注册处注册的情况下，将消费者数据出售给第三方。 密码哈希算法或加密传输层低于基线标准。",
+    "title": "缺少全面的信息安全计划（得州数据经纪商）",
+    "description": "在得州经营的数据经纪商显示出数据保护薄弱的迹象（例如数据外泄或缺少基本防护），表明其缺少得州要求数据经纪商具备的、包含行政、技术和物理防护措施的书面全面信息安全计划。须经审计确认。",
     "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "reference": "Tex. Bus. & Com. Code § 510.007"
   },
   {
     "id": 1805,
     "code": "TXSBB-005",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "未注册的数据经纪商运营 — 漏洞扫描失效",
-    "description": "该网站在未向德克萨斯州数据经纪商注册处注册的情况下，将消费者数据出售给第三方。 自动扫描工具未能定期在公共网络路径上运行。",
+    "title": "数据经纪商未在加州隐私保护局登记",
+    "description": "符合数据经纪商定义的企业看起来未在次年 1 月 31 日前向加州隐私保护局登记。行政罚款：未登记期间每天 200 美元，外加未缴费用和相关费用。须以该局登记册而非网站确认。",
     "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "reference": "Cal. Civ. Code § 1798.99.82"
   },
   {
     "id": 1806,
     "code": "TXSBB-006",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "未注册的数据经纪商运营 — 同意日志记录完整性缺陷",
-    "description": "该网站在未向德克萨斯州数据经纪商注册处注册的情况下，将消费者数据出售给第三方。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "title": "数据经纪商隐私政策未披露请求统计（加州）",
+    "description": "数据经纪商的隐私政策未在每年 7 月 1 日前披露上一年收到、全部或部分执行及拒绝的删除、访问、退出等消费者请求数量，以及响应时间的中位数和平均数与拒绝理由。",
+    "severity": "moderate",
+    "reference": "Cal. Civ. Code § 1798.99.85"
   },
   {
     "id": 1807,
     "code": "TXSBB-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "未注册的数据经纪商运营 — 退出链接可见性问题",
-    "description": "该网站在未向德克萨斯州数据经纪商注册处注册的情况下，将消费者数据出售给第三方。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
+    "title": "数据经纪商未处理加州 DROP 删除请求",
+    "description": "自 2026 年 8 月 1 日起，已登记的数据经纪商须至少每 45 天访问加州隐私保护局的统一删除机制，并删除提出请求的消费者的个人信息。若消费者数据仍被展示等迹象表明其未履行该义务。罚款：每项删除请求每延误一天 200 美元。",
     "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "reference": "Cal. Civ. Code § 1798.99.86(c)"
   },
   {
     "id": 1808,
     "code": "TXSBB-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "未注册的数据经纪商运营 — 隐私声明披露不足",
-    "description": "该网站在未向德克萨斯州数据经纪商注册处注册的情况下，将消费者数据出售给第三方。 披露未能清楚说明个人文件处理的目的和范围。",
-    "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "title": "数据经纪商未在佛蒙特州登记",
+    "description": "数据经纪商看起来未在每年 1 月 31 日前向佛蒙特州州务卿完成年度登记（费用 100 美元），并说明退出方式、不可退出的活动、买方资质审核及上一年度的安全事件。须以州登记册而非网站确认。",
+    "severity": "moderate",
+    "reference": "9 V.S.A. § 2446 (Vermont)"
   },
   {
     "id": 1809,
     "code": "TXSBB-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "未注册的数据经纪商运营 — 审计控制验证缺失",
-    "description": "该网站在未向德克萨斯州数据经纪商注册处注册的情况下，将消费者数据出售给第三方。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
+    "title": "缺少书面信息安全计划（佛蒙特州数据经纪商）",
+    "description": "数据保护薄弱的迹象表明，数据经纪商缺少佛蒙特州要求的书面全面信息安全计划，包括指定负责维护的员工以及识别个人身份信息面临的可预见内外部风险。须经审计确认。",
     "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "reference": "9 V.S.A. § 2447 (Vermont)"
   },
   {
     "id": 1810,
     "code": "TXSBB-010",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "未注册的数据经纪商运营 — 管理员凭据安全弱点",
-    "description": "该网站在未向德克萨斯州数据经纪商注册处注册的情况下，将消费者数据出售给第三方。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
-    "severity": "serious",
-    "reference": "Texas SB 2105 (Data Broker Registry)"
+    "title": "缺少显著的隐私权利说明页面（得州数据经纪商）",
+    "description": "数据经纪商网站没有显著展示消费者如何行使得州《数据隐私与安全法》权利具体说明的页面；自 2025 年 9 月 1 日起，数据经纪商向州务卿登记时必须提供该页面的链接。",
+    "severity": "moderate",
+    "reference": "Tex. Bus. & Com. Code § 510.005(b)(2-a)"
   },
   {
     "id": 1811,
     "code": "WAHMHD-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "HIPAA / Medical",
-    "title": "医疗机构周围非法的地理围栏限制",
-    "description": "移动 Web 应用程序在医疗机构周围部署地理围栏工具以追踪访问者行为，但未获得 MHMDA 的同意。",
+    "title": "在线下医疗机构周围设置地理围栏（华盛顿州）",
+    "description": "网站上的位置追踪或广告技术表明，其可能在提供线下医疗服务的机构周围设置了地理围栏（2,000 英尺以内的虚拟边界），用以识别或追踪就医者、收集其健康数据，或向其发送与健康相关的信息或广告。华盛顿州将此列为违法行为；须经对位置投放活动的审计确认。",
     "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "reference": "RCW 19.373.080 (Washington My Health My Data Act)"
   },
   {
     "id": 1812,
     "code": "WAHMHD-002",
     "evidenceKind": "observable",
     "category": "HIPAA / Medical",
-    "title": "医疗机构周围非法的地理围栏限制 — 审计与记录失效",
-    "description": "移动 Web 应用程序在医疗机构周围部署地理围栏工具以追踪访问者行为，但未获得 MHMDA 的同意。 审计跟踪不充分，未能记录配置设置。",
-    "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "title": "首页缺少消费者健康数据隐私政策链接（华盛顿州）",
+    "description": "收集消费者健康数据的企业未在首页显著发布单独的消费者健康数据隐私政策链接，而华盛顿州《我的健康我的数据法》对受监管实体和小企业有此要求。",
+    "severity": "serious",
+    "reference": "RCW 19.373.020(1)(b) (Washington My Health My Data Act)"
   },
   {
     "id": 1813,
     "code": "WAHMHD-003",
     "evidenceKind": "observable",
     "category": "HIPAA / Medical",
-    "title": "医疗机构周围非法的地理围栏限制 — 界面设计缺陷",
-    "description": "移动 Web 应用程序在医疗机构周围部署地理围栏工具以追踪访问者行为，但未获得 MHMDA 的同意。 用户界面采用了限制访问者访问或选择的设计组件。",
-    "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "title": "健康数据隐私政策缺少法定披露内容（华盛顿州）",
+    "description": "消费者健康数据隐私政策未清晰、显著地披露所收集的健康数据类别及目的、数据来源、共享的数据类别、接收数据的第三方类别和具体关联方，以及消费者如何行使其权利。",
+    "severity": "serious",
+    "reference": "RCW 19.373.020(1)(a) (Washington My Health My Data Act)"
   },
   {
     "id": 1814,
     "code": "WAHMHD-004",
     "evidenceKind": "observable",
     "category": "HIPAA / Medical",
-    "title": "医疗机构周围非法的地理围栏限制 — 密码学强度不足",
-    "description": "移动 Web 应用程序在医疗机构周围部署地理围栏工具以追踪访问者行为，但未获得 MHMDA 的同意。 密码哈希算法或加密传输层低于基线标准。",
-    "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "title": "收集与共享健康数据共用一项同意（华盛顿州）",
+    "description": "网站以单一同意同时涵盖消费者健康数据的收集和共享，而华盛顿州要求共享须取得独立于收集同意的单独同意，除非共享是提供消费者所请求服务所必需。",
+    "severity": "serious",
+    "reference": "RCW 19.373.030(1)(b) (Washington My Health My Data Act)"
   },
   {
     "id": 1815,
     "code": "WAHMHD-005",
     "evidenceKind": "observable",
     "category": "HIPAA / Medical",
-    "title": "医疗机构周围非法的地理围栏限制 — 漏洞扫描失效",
-    "description": "移动 Web 应用程序在医疗机构周围部署地理围栏工具以追踪访问者行为，但未获得 MHMDA 的同意。 自动扫描工具未能定期在公共网络路径上运行。",
-    "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "title": "健康数据同意请求缺少法定信息（华盛顿州）",
+    "description": "收集或共享消费者健康数据的同意请求未清晰、显著地说明数据类别、目的和具体用途、接收方类别，以及消费者如何撤回同意。",
+    "severity": "moderate",
+    "reference": "RCW 19.373.030(1)(c) (Washington My Health My Data Act)"
   },
   {
     "id": 1816,
     "code": "WAHMHD-006",
     "evidenceKind": "observable",
     "category": "HIPAA / Medical",
-    "title": "医疗机构周围非法的地理围栏限制 — 同意日志记录完整性缺陷",
-    "description": "移动 Web 应用程序在医疗机构周围部署地理围栏工具以追踪访问者行为，但未获得 MHMDA 的同意。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "title": "无法提交健康数据权利请求（华盛顿州）",
+    "description": "消费者健康数据隐私政策未说明安全可靠的请求提交方式（用于确认、访问、删除健康数据或撤回同意），且该方式应符合消费者与企业的常规互动方式。",
+    "severity": "moderate",
+    "reference": "RCW 19.373.040(1)(d) (Washington My Health My Data Act)"
   },
   {
     "id": 1817,
     "code": "WAHMHD-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "HIPAA / Medical",
-    "title": "医疗机构周围非法的地理围栏限制 — 退出链接可见性问题",
-    "description": "移动 Web 应用程序在医疗机构周围部署地理围栏工具以追踪访问者行为，但未获得 MHMDA 的同意。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
+    "title": "未经签署授权出售健康数据（华盛顿州）",
+    "description": "存在出售或要约出售健康数据的迹象（例如数据出售披露，或广告技术伙伴接收健康信号），却未取得消费者签署的有效授权——须以通俗语言书写、独立于收集同意且一年后失效。须经对数据销售的审计确认。",
     "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "reference": "RCW 19.373.070 (Washington My Health My Data Act)"
   },
   {
     "id": 1818,
     "code": "WAHMHD-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "HIPAA / Medical",
-    "title": "医疗机构周围非法的地理围栏限制 — 隐私声明披露不足",
-    "description": "移动 Web 应用程序在医疗机构周围部署地理围栏工具以追踪访问者行为，但未获得 MHMDA 的同意。 披露未能清楚说明个人文件处理的目的和范围。",
-    "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "title": "健康数据的安全与访问控制薄弱（华盛顿州）",
+    "description": "可见的安全弱点表明，消费者健康数据的访问未限于确有需要的员工和处理者，且行政、技术和物理防护措施未达到行业合理注意标准。须经审计确认。",
+    "severity": "serious",
+    "reference": "RCW 19.373.050 (Washington My Health My Data Act)"
   },
   {
     "id": 1819,
     "code": "WAHMHD-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "HIPAA / Medical",
-    "title": "医疗机构周围非法的地理围栏限制 — 审计控制验证缺失",
-    "description": "移动 Web 应用程序在医疗机构周围部署地理围栏工具以追踪访问者行为，但未获得 MHMDA 的同意。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
+    "title": "在心理、生殖或性健康机构附近设置地理围栏（康涅狄格州）",
+    "description": "位置追踪或广告技术表明，可能在心理健康、生殖或性健康机构 1,750 英尺范围内设置地理围栏，用以识别、追踪消费者、收集其数据或就其健康数据向其发送通知。康涅狄格州禁止此行为，由州总检察长执法。须经审计确认。",
     "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "reference": "Conn. Gen. Stat. § 42-526(a)(1)(C) (Connecticut)"
   },
   {
     "id": 1820,
     "code": "WAHMHD-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "HIPAA / Medical",
-    "title": "医疗机构周围非法的地理围栏限制 — 管理员凭据安全弱点",
-    "description": "移动 Web 应用程序在医疗机构周围部署地理围栏工具以追踪访问者行为，但未获得 MHMDA 的同意。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
+    "title": "未经同意出售消费者健康数据（康涅狄格州）",
+    "description": "存在出售或要约出售消费者健康数据的迹象（例如向广告主提供基于健康特征的受众），却未事先取得消费者同意，康涅狄格州禁止此行为。须经对数据销售的审计确认。",
     "severity": "critical",
-    "reference": "Washington My Health My Data Act (MHMDA)"
+    "reference": "Conn. Gen. Stat. § 42-526(a)(1)(D) (Connecticut)"
   },
   {
     "id": 1821,
     "code": "NYDFS-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务网络安全认证",
-    "description": "该财务门户网站在未提交纽约 DFS 要求的年度网络安全合规性申报的情况下运营。",
+    "title": "未向纽约州金融服务部提交年度网络安全合规文件",
+    "description": "受纽约州金融服务部（DFS）监管的金融服务公司，没有迹象表明其每年 4 月 15 日前提交上一年度实质遵守第 500 部分的书面证明，或附整改时间表的不合规书面确认。须向监管机构核实，而非通过网站确认。",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.17(b) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1822,
     "code": "NYDFS-002",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少财务网络安全认证 — 审计与记录失效",
-    "description": "该财务门户网站在未提交纽约 DFS 要求的年度网络安全合规性申报的情况下运营。 审计跟踪不充分，未能记录配置设置。",
+    "title": "非公开信息在传输中未加密（纽约州 DFS）",
+    "description": "受 DFS 监管公司处理非公开信息的页面或表单通过普通 HTTP、混合内容或过时 TLS 提供，而第 500 部分要求对经外部网络传输的非公开信息采用符合行业标准的加密。",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.15(a) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1823,
     "code": "NYDFS-003",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务网络安全认证 — 界面设计缺陷",
-    "description": "该财务门户网站在未提交纽约 DFS 要求的年度网络安全合规性申报的情况下运营。 用户界面采用了限制访问者访问或选择的设计组件。",
+    "title": "访问系统未采用多因素认证（纽约州 DFS）",
+    "description": "受 DFS 监管公司暴露在互联网上的登录门户表明仅凭密码即可访问，而第 500 部分要求任何访问其信息系统的人员都使用多因素认证（适用有限豁免的小型公司至少须用于远程访问、含非公开信息的云应用及特权账户）。须经审计确认。",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.12(a) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1824,
     "code": "NYDFS-004",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务网络安全认证 — 密码学强度不足",
-    "description": "该财务门户网站在未提交纽约 DFS 要求的年度网络安全合规性申报的情况下运营。 密码哈希算法或加密传输层低于基线标准。",
+    "title": "未进行年度渗透测试（纽约州 DFS）",
+    "description": "长期存在且易被发现的弱点表明，该公司未按第 500 部分的要求，至少每年由合格方从内部和外部对其信息系统进行渗透测试。须经审计确认。",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.5(a)(1) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1825,
     "code": "NYDFS-005",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少财务网络安全认证 — 漏洞扫描失效",
-    "description": "该财务门户网站在未提交纽约 DFS 要求的年度网络安全合规性申报的情况下运营。 自动扫描工具未能定期在公共网络路径上运行。",
+    "title": "已知漏洞未修复（纽约州 DFS）",
+    "description": "受 DFS 监管公司的公开网站运行着存在公开已知漏洞版本的软件或库，而第 500 部分要求按风险优先级及时修复漏洞。",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.5(c) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1826,
     "code": "NYDFS-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务网络安全认证 — 同意日志记录完整性缺陷",
-    "description": "该财务门户网站在未提交纽约 DFS 要求的年度网络安全合规性申报的情况下运营。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
+    "title": "网络安全事件未在 72 小时内报告 DFS",
+    "description": "存在网络安全事件的公开迹象（例如页面篡改、数据暴露或勒索软件通知），却无证据表明公司在确定事件发生后 72 小时内以电子方式通知了监管负责人，而第 500 部分对此有要求。须向监管机构核实。",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.17(a) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1827,
     "code": "NYDFS-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务网络安全认证 — 退出链接可见性问题",
-    "description": "该财务门户网站在未提交纽约 DFS 要求的年度网络安全合规性申报的情况下运营。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
-    "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "title": "缺少完整的资产清单（纽约州 DFS）",
+    "description": "互联网上可见的被遗忘子域名、测试系统或过时服务表明，公司缺少第 500 部分要求的完整、准确且有记录的信息系统清单（包括所有者、位置、分类及支持终止日期）。须经审计确认。",
+    "severity": "moderate",
+    "reference": "23 NYCRR § 500.13(a) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1828,
     "code": "NYDFS-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务网络安全认证 — 隐私声明披露不足",
-    "description": "该财务门户网站在未提交纽约 DFS 要求的年度网络安全合规性申报的情况下运营。 披露未能清楚说明个人文件处理的目的和范围。",
+    "title": "远程控制协议处于开放状态（纽约州 DFS）",
+    "description": "公司设备的远程控制服务（例如远程桌面或 VNC）看起来可从互联网访问，而第 500 部分要求禁用或安全配置所有允许远程控制设备的协议。此情况通过网络扫描而非网站可见，须经审计确认。",
     "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "reference": "23 NYCRR § 500.7(a)(5) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1829,
     "code": "NYDFS-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务网络安全认证 — 审计控制验证缺失",
-    "description": "该财务门户网站在未提交纽约 DFS 要求的年度网络安全合规性申报的情况下运营。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "title": "未开展年度网络安全意识培训（纽约州 DFS）",
+    "description": "易受社会工程攻击的迹象（例如员工邮箱和职务未加防护地公开，或发生钓鱼事件）表明，公司未按第 500 部分要求，至少每年为全体人员提供包含社会工程内容的网络安全意识培训。须经审计确认。",
+    "severity": "moderate",
+    "reference": "23 NYCRR § 500.14(a)(3) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1830,
     "code": "NYDFS-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务网络安全认证 — 管理员凭据安全弱点",
-    "description": "该财务门户网站在未提交纽约 DFS 要求的年度网络安全合规性申报的情况下运营。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
-    "severity": "serious",
-    "reference": "23 NYCRR Section 500"
+    "title": "缺少符合行业标准的密码策略（纽约州 DFS）",
+    "description": "登录表单没有任何密码要求或常见密码防护的迹象，表明公司缺少第 500 部分要求的、在使用密码之处须符合行业标准的书面密码策略。须经审计确认。",
+    "severity": "moderate",
+    "reference": "23 NYCRR § 500.7(b) (NY DFS Cybersecurity Regulation)"
   },
   {
     "id": 1831,
     "code": "PSD2-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "不符合强客户身份验证 (SCA) 标准",
-    "description": "结账门户网站在未按照 PSD2 的要求强制执行多因素验证的情况下接受信用卡付款。",
+    "title": "强客户认证（SCA）不合规",
+    "description": "支付服务提供者看起来在付款人在线访问支付账户或发起电子支付时未采用强客户认证（知识、持有或固有特征中的两个独立要素），或未将远程支付与金额和收款人动态绑定。该义务由支付服务提供者承担；须经测试支付或审计确认。",
     "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "reference": "Directive (EU) 2015/2366 Art. 97(1)–(2) (PSD2)"
   },
   {
     "id": 1832,
     "code": "PSD2-002",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "不符合强客户身份验证 (SCA) 标准 — 审计与记录失效",
-    "description": "结账门户网站在未按照 PSD2 的要求强制执行多因素验证的情况下接受信用卡付款。 审计跟踪不充分，未能记录配置设置。",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "使用消费者银行卡支付被收取附加费（欧盟）",
+    "description": "结账流程对使用交换费受第 (EU) 2015/751 号条例监管的消费者借记卡或信用卡支付，或对 SEPA 转账和直接借记加收费用，而 PSD2 禁止收款人收取此类费用。",
+    "severity": "serious",
+    "reference": "Directive (EU) 2015/2366 Art. 62(4) (PSD2)"
   },
   {
     "id": 1833,
     "code": "PSD2-003",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "不符合强客户身份验证 (SCA) 标准 — 界面设计缺陷",
-    "description": "结账门户网站在未按照 PSD2 的要求强制执行多因素验证的情况下接受信用卡付款。 用户界面采用了限制访问者访问或选择的设计组件。",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "支付方式费用高于商家成本（欧盟）",
+    "description": "网站就特定支付方式（例如电子钱包或商务卡）向消费者收取的费用，看起来超出商家为该支付方式承担的成本，而欧盟消费者法禁止这种做法。",
+    "severity": "moderate",
+    "reference": "Directive 2011/83/EU Art. 19 (Consumer Rights Directive)"
   },
   {
     "id": 1834,
     "code": "PSD2-004",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "不符合强客户身份验证 (SCA) 标准 — 密码学强度不足",
-    "description": "结账门户网站在未按照 PSD2 的要求强制执行多因素验证的情况下接受信用卡付款。 密码哈希算法或加密传输层低于基线标准。",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "提供货币转换却未披露费用和汇率（欧盟）",
+    "description": "结账时收款人提供以另一种货币扣款（动态货币转换），却未事先披露全部费用及所用汇率，而 PSD2 要求作此披露并由付款人据此同意。",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2015/2366 Art. 59(2) (PSD2)"
   },
   {
     "id": 1835,
     "code": "PSD2-005",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "不符合强客户身份验证 (SCA) 标准 — 漏洞扫描失效",
-    "description": "结账门户网站在未按照 PSD2 的要求强制执行多因素验证的情况下接受信用卡付款。 自动扫描工具未能定期在公共网络路径上运行。",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "支付服务未提供执行时间、费用或汇率（欧盟）",
+    "description": "支付服务提供者的网站（例如汇款服务）未在单笔支付前提供最长执行时间、全部费用及明细，以及实际或参考汇率，而 PSD2 对此有要求。",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2015/2366 Art. 45(1) (PSD2)"
   },
   {
     "id": 1836,
     "code": "PSD2-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "不符合强客户身份验证 (SCA) 标准 — 同意日志记录完整性缺陷",
-    "description": "结账门户网站在未按照 PSD2 的要求强制执行多因素验证的情况下接受信用卡付款。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "认证时未向付款人显示金额和收款人（欧盟）",
+    "description": "远程支付的认证环节未向付款人显示金额和收款人，或认证码未与其绑定，而欧盟关于动态绑定的技术标准对此有要求。须经测试支付确认。",
+    "severity": "serious",
+    "reference": "Commission Delegated Regulation (EU) 2018/389 Art. 5 (SCA RTS)"
   },
   {
     "id": 1837,
     "code": "PSD2-007",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "不符合强客户身份验证 (SCA) 标准 — 退出链接可见性问题",
-    "description": "结账门户网站在未按照 PSD2 的要求强制执行多因素验证的情况下接受信用卡付款。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "支付凭证保护不足（欧盟）",
+    "description": "支付服务提供者的登录或支付页面在传输用户个性化安全凭证时缺乏充分保护，例如通过普通 HTTP、混合内容，或在加载未经审核的第三方脚本的页面上，而 PSD2 要求采取充分措施保护其机密性和完整性。",
+    "severity": "serious",
+    "reference": "Directive (EU) 2015/2366 Art. 97(3) (PSD2)"
   },
   {
     "id": 1838,
     "code": "PSD2-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "不符合强客户身份验证 (SCA) 标准 — 隐私声明披露不足",
-    "description": "结账门户网站在未按照 PSD2 的要求强制执行多因素验证的情况下接受信用卡付款。 披露未能清楚说明个人文件处理的目的和范围。",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "未向用户通报重大安全事件（欧盟）",
+    "description": "支付服务提供者发生重大运营或安全事件的公开迹象，却无证据表明其在用户财务利益受到或可能受到影响时，已按 PSD2 要求及时告知用户事件情况及可采取的缓解措施。须经审计确认。",
+    "severity": "serious",
+    "reference": "Directive (EU) 2015/2366 Art. 96(1) (PSD2)"
   },
   {
     "id": 1839,
     "code": "PSD2-009",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "不符合强客户身份验证 (SCA) 标准 — 审计控制验证缺失",
-    "description": "结账门户网站在未按照 PSD2 的要求强制执行多因素验证的情况下接受信用卡付款。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "title": "使用消费者银行卡支付被收取附加费（英国）",
+    "description": "结账流程对使用消费者（非商务）卡支付或受 SEPA 条例管辖的支付收取费用，而在英国收款人不得就这些支付方式向付款人收取任何费用。",
+    "severity": "serious",
+    "reference": "UK Consumer Rights (Payment Surcharges) Regulations 2012 reg. 6A"
   },
   {
     "id": 1840,
     "code": "PSD2-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "不符合强客户身份验证 (SCA) 标准 — 管理员凭据安全弱点",
-    "description": "结账门户网站在未按照 PSD2 的要求强制执行多因素验证的情况下接受信用卡付款。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
+    "title": "未采用强客户认证（英国）",
+    "description": "英国支付服务提供者看起来在用户在线访问支付账户、发起电子支付或通过存在欺诈风险的远程渠道操作时未采用强客户认证，或未将远程支付与金额和收款人动态绑定。须经测试支付或审计确认。",
     "severity": "critical",
-    "reference": "EU Payment Services Directive 2 (PSD2)"
+    "reference": "UK Payment Services Regulations 2017 reg. 100"
   },
   {
     "id": 1841,
@@ -18569,800 +18569,800 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "GLBAS-001",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少财务数据安全传输控制",
-    "description": "贷款申请表在未进行强传输层加密的情况下通过网络路径传输信用报告和 SSN。",
+    "title": "金融数据缺少安全传输控制",
+    "description": "受 FTC 管辖的非银行金融机构（例如贷款机构、抵押贷款经纪人或报税服务商）的申请或账户页面，通过普通 HTTP、混合内容或过时 TLS 传输社会安全号码、信用数据等客户信息，而《保障规则》要求对经外部网络传输的所有客户信息进行加密。",
     "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "reference": "16 CFR § 314.4(c)(3) (GLBA Safeguards Rule)"
   },
   {
     "id": 1852,
     "code": "GLBAS-002",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务数据安全传输控制 — 审计与记录失效",
-    "description": "贷款申请表在未进行强传输层加密的情况下通过网络路径传输信用报告和 SSN。 审计跟踪不充分，未能记录配置设置。",
+    "title": "访问系统未采用多因素认证（GLBA）",
+    "description": "登录门户没有多因素认证的迹象，而《保障规则》要求任何访问任何信息系统的人员都使用多因素认证，除非合格负责人书面批准了合理同等或更安全的控制措施。须经审计确认。",
     "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "reference": "16 CFR § 314.4(c)(5) (GLBA Safeguards Rule)"
   },
   {
     "id": 1853,
     "code": "GLBAS-003",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务数据安全传输控制 — 界面设计缺陷",
-    "description": "贷款申请表在未进行强传输层加密的情况下通过网络路径传输信用报告和 SSN。 用户界面采用了限制访问者访问或选择的设计组件。",
+    "title": "未进行渗透测试或半年一次的漏洞扫描（GLBA）",
+    "description": "公开已知的漏洞长期未修复，表明在缺乏持续监控的情况下，该机构未按《保障规则》对持有 5,000 名以上消费者信息的机构的要求，进行年度渗透测试及至少每六个月一次的漏洞评估。须经审计确认。",
     "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "reference": "16 CFR § 314.4(d)(2) (GLBA Safeguards Rule)"
   },
   {
     "id": 1854,
     "code": "GLBAS-004",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少财务数据安全传输控制 — 密码学强度不足",
-    "description": "贷款申请表在未进行强传输层加密的情况下通过网络路径传输信用报告和 SSN。 密码哈希算法或加密传输层低于基线标准。",
+    "title": "面向客户的应用存在不安全开发迹象（GLBA）",
+    "description": "传输或存储客户信息的网络应用显示出不安全开发的迹象，例如暴露的版本控制目录、调试页面、详细错误信息或目录列表，而《保障规则》要求自研应用采用安全开发实践，并对外部应用进行安全测试。",
     "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "reference": "16 CFR § 314.4(c)(4) (GLBA Safeguards Rule)"
   },
   {
     "id": 1855,
     "code": "GLBAS-005",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务数据安全传输控制 — 漏洞扫描失效",
-    "description": "贷款申请表在未进行强传输层加密的情况下通过网络路径传输信用报告和 SSN。 自动扫描工具未能定期在公共网络路径上运行。",
+    "title": "涉及 500 名以上消费者的泄露未在 30 日内报告 FTC",
+    "description": "存在涉及未加密客户信息的安全事件的公开迹象，却无证据表明该机构在发现后 30 日内以电子方式通知 FTC，而影响至少 500 名消费者时须如此通知。须向监管机构核实。",
     "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "reference": "16 CFR § 314.4(j)(1) (GLBA Safeguards Rule)"
   },
   {
     "id": 1856,
     "code": "GLBAS-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务数据安全传输控制 — 同意日志记录完整性缺陷",
-    "description": "贷款申请表在未进行强传输层加密的情况下通过网络路径传输信用报告和 SSN。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "title": "无必要地将客户信息保留超过两年（GLBA）",
+    "description": "诸如无限期保留的声明或长期不活跃账户仍保存完整数据等迹象表明，该机构缺少在最后一次使用后两年内安全处置客户信息的程序（确有必要或法律要求保留的除外），也未定期审查其数据保留政策。须经审计确认。",
+    "severity": "moderate",
+    "reference": "16 CFR § 314.4(c)(6) (GLBA Safeguards Rule)"
   },
   {
     "id": 1857,
     "code": "GLBAS-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务数据安全传输控制 — 退出链接可见性问题",
-    "description": "贷款申请表在未进行强传输层加密的情况下通过网络路径传输信用报告和 SSN。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
-    "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "title": "安全计划缺少合格负责人（GLBA）",
+    "description": "没有迹象表明指定了负责监督、实施和执行信息安全计划的合格负责人（例如完全没有安全联系人），而《保障规则》要求设立（可由服务提供商或关联公司人员担任）。须经审计确认。",
+    "severity": "moderate",
+    "reference": "16 CFR § 314.4(a) (GLBA Safeguards Rule)"
   },
   {
     "id": 1858,
     "code": "GLBAS-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务数据安全传输控制 — 隐私声明披露不足",
-    "description": "贷款申请表在未进行强传输层加密的情况下通过网络路径传输信用报告和 SSN。 披露未能清楚说明个人文件处理的目的和范围。",
-    "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "title": "缺少书面事件响应计划（GLBA）",
+    "description": "对安全事件响应迟缓或混乱的迹象表明，该机构缺少《保障规则》要求持有 5,000 名以上消费者信息的机构制定的书面事件响应计划（包括目标、角色、沟通、补救和记录）。须经审计确认。",
+    "severity": "moderate",
+    "reference": "16 CFR § 314.4(h) (GLBA Safeguards Rule)"
   },
   {
     "id": 1859,
     "code": "GLBAS-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务数据安全传输控制 — 审计控制验证缺失",
-    "description": "贷款申请表在未进行强传输层加密的情况下通过网络路径传输信用报告和 SSN。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "title": "未对员工开展安全意识培训（GLBA）",
+    "description": "易受社会工程攻击的迹象表明，该机构未按《保障规则》要求，为员工提供根据风险评估所识别风险而更新的安全意识培训。须经审计确认。",
+    "severity": "moderate",
+    "reference": "16 CFR § 314.4(e)(1) (GLBA Safeguards Rule)"
   },
   {
     "id": 1860,
     "code": "GLBAS-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少财务数据安全传输控制 — 管理员凭据安全弱点",
-    "description": "贷款申请表在未进行强传输层加密的情况下通过网络路径传输信用报告和 SSN。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
-    "severity": "serious",
-    "reference": "Gramm-Leach-Bliley Act (GLBA) Safeguards Rule"
+    "title": "服务提供商在无监督下接收客户数据（GLBA）",
+    "description": "第三方脚本或服务从申请或账户页面接收数据，表明该机构未按《保障规则》要求选择有能力的服务提供商、以合同约束其维持防护措施并定期评估。须经对合同和评估的审计确认。",
+    "severity": "moderate",
+    "reference": "16 CFR § 314.4(f) (GLBA Safeguards Rule)"
   },
   {
     "id": 1861,
     "code": "FTCDP-001",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "虚假的原始价格折扣",
-    "description": "商品目录中显示了划线的原始价格，但该价格并不反映实际的历史销售均价，从而欺骗了买家。",
+    "title": "基于虚构原价的折扣",
+    "description": "商品目录以划线“原价”作为折扣依据，但没有迹象表明该商品确曾在相当长的时间内以该价格公开、善意地定期出售，例如长期“促销”或从未实际收取的“原价”。FTC 指南将虚构的原价视为虚假优惠。",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "16 CFR § 233.1 (FTC Guides Against Deceptive Pricing)"
   },
   {
     "id": 1862,
     "code": "FTCDP-002",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "虚假的原始价格折扣 — 审计与记录失效",
-    "description": "商品目录中显示了划线的原始价格，但该价格并不反映实际的历史销售均价，从而欺骗了买家。 审计跟踪不充分，未能记录配置设置。",
+    "title": "无依据的“对比价”或“参考价值”",
+    "description": "商品页面显示“对比价”或“价值”价格，暗示其他零售商以该价格销售同一商品，但无证据表明该价格在当地确有相当数量的成交。",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "16 CFR § 233.2 (FTC Guides Against Deceptive Pricing)"
   },
   {
     "id": 1863,
     "code": "FTCDP-003",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "虚假的原始价格折扣 — 界面设计缺陷",
-    "description": "商品目录中显示了划线的原始价格，但该价格并不反映实际的历史销售均价，从而欺骗了买家。 用户界面采用了限制访问者访问或选择的设计组件。",
+    "title": "以制造商建议零售价作为虚构参照",
+    "description": "折扣以制造商标价或建议零售价（MSRP）为基准计算，而市场上实际并无以该价格进行的相当数量的销售。",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "16 CFR § 233.3 (FTC Guides Against Deceptive Pricing)"
   },
   {
     "id": 1864,
     "code": "FTCDP-004",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "虚假的原始价格折扣 — 密码学强度不足",
-    "description": "商品目录中显示了划线的原始价格，但该价格并不反映实际的历史销售均价，从而欺骗了买家。 密码哈希算法或加密传输层低于基线标准。",
+    "title": "“免费”或“买一送一”促销中抬高基础价格",
+    "description": "“免费”赠品或“买一送一”活动以购买另一商品为条件，而该商品的价格被抬高，或其质量、数量被降低，以抵消赠品成本。",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "16 CFR § 233.4 (FTC Guides Against Deceptive Pricing)"
   },
   {
     "id": 1865,
     "code": "FTCDP-005",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "虚假的原始价格折扣 — 漏洞扫描失效",
-    "description": "商品目录中显示了划线的原始价格，但该价格并不反映实际的历史销售均价，从而欺骗了买家。 自动扫描工具未能定期在公共网络路径上运行。",
-    "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "title": "误导性的“批发价”“出厂价”或“限时”价格宣称",
+    "description": "网站将零售价称为“批发价”或“出厂价”，宣传实际上并不限量的“限时/限量”优惠，或以完好商品的价格为基准对次品和瑕疵品打折而不作说明。",
+    "severity": "moderate",
+    "reference": "16 CFR § 233.5 (FTC Guides Against Deceptive Pricing)"
   },
   {
     "id": 1866,
     "code": "FTCDP-006",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "虚假的原始价格折扣 — 同意日志记录完整性缺陷",
-    "description": "商品目录中显示了划线的原始价格，但该价格并不反映实际的历史销售均价，从而欺骗了买家。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
+    "title": "活动门票或短租住宿隐藏强制性费用",
+    "description": "票务或住宿网站显示的价格未包含强制性费用，或总价的显著程度低于其他价格信息。FTC 该规则仅适用于现场活动门票和短期住宿。",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "16 CFR § 464.2 (FTC Rule on Unfair or Deceptive Fees)"
   },
   {
     "id": 1867,
     "code": "FTCDP-007",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "虚假的原始价格折扣 — 退出链接可见性问题",
-    "description": "商品目录中显示了划线的原始价格，但该价格并不反映实际的历史销售均价，从而欺骗了买家。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
+    "title": "歪曲服务费、预订费或度假村费",
+    "description": "票务或住宿网站歪曲某项费用的性质、用途、金额或可退还性，或该费用所对应的内容——例如将“服务费”表述为政府税费。",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "16 CFR § 464.3 (FTC Rule on Unfair or Deceptive Fees)"
   },
   {
     "id": 1868,
     "code": "FTCDP-008",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "虚假的原始价格折扣 — 隐私声明披露不足",
-    "description": "商品目录中显示了划线的原始价格，但该价格并不反映实际的历史销售均价，从而欺骗了买家。 披露未能清楚说明个人文件处理的目的和范围。",
+    "category": "Digital Operations",
+    "title": "面向欧盟消费者的降价未标示 30 天前价",
+    "description": "面向欧盟消费者宣布的折扣未显示“先前价格”，即商家在降价前至少 30 天内适用的最低价格。",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "Directive 98/6/EC (Price Indication), Art. 6a"
   },
   {
     "id": 1869,
     "code": "FTCDP-009",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "虚假的原始价格折扣 — 审计控制验证缺失",
-    "description": "商品目录中显示了划线的原始价格，但该价格并不反映实际的历史销售均价，从而欺骗了买家。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "title": "加州：“原价”超过三个月",
+    "description": "向加州消费者显示的“原价”在广告发布前三个月内并非通行市场价格，且未清楚说明该价格适用的日期。",
+    "severity": "moderate",
+    "reference": "Cal. Bus. & Prof. Code § 17501"
   },
   {
     "id": 1870,
     "code": "FTCDP-010",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "虚假的原始价格折扣 — 管理员凭据安全弱点",
-    "description": "商品目录中显示了划线的原始价格，但该价格并不反映实际的历史销售均价，从而欺骗了买家。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
+    "title": "加州：显示价格未包含强制性费用",
+    "description": "向加州消费者显示的价格未包含所有强制性费用；仅政府税费和实际运费可以不计入。",
     "severity": "serious",
-    "reference": "FTC Guides Against Deceptive Pricing 16 CFR 233"
+    "reference": "Cal. Civ. Code § 1770(a)(29)"
   },
   {
     "id": 1871,
     "code": "FTCCC-001",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "不对称的订阅退订流程",
-    "description": "会员门户网站要求用户通过电话联系客服来取消定期信用计费合同。",
+    "title": "在线开通的订阅无法在线取消",
+    "description": "网站允许消费者在线接受自动续订服务，却不提供在线终止的途径，例如要求致电或与客服聊天。加利福尼亚州法律要求消费者可随时在线终止，且不得设置阻碍或拖延的步骤：须通过显著位置的直接链接或按钮（位于账户或设置中），或由商家提供、可直接发送的终止邮件。",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "Cal. Bus. & Prof. Code § 17602(d)(1)"
   },
   {
     "id": 1872,
     "code": "FTCCC-002",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "不对称的订阅退订流程 — 审计与记录失效",
-    "description": "会员门户网站要求用户通过电话联系客服来取消定期信用计费合同。 审计跟踪不充分，未能记录配置设置。",
+    "title": "在收集付款信息前未披露重要条款",
+    "description": "带有“负选择”功能（在消费者取消前持续扣费）的在线要约，在清晰、显著地披露交易全部重要条款（如价格、扣费频率以及在取消前会持续扣费）之前，就要求填写银行卡或账单信息。",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "15 U.S.C. § 8403(1) (ROSCA)"
   },
   {
     "id": 1873,
     "code": "FTCCC-003",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "不对称的订阅退订流程 — 界面设计缺陷",
-    "description": "会员门户网站要求用户通过电话联系客服来取消定期信用计费合同。 用户界面采用了限制访问者访问或选择的设计组件。",
+    "title": "未经明确知情同意即定期扣费",
+    "description": "消费者在没有单独、主动表示同意的情况下被纳入定期扣费——例如通过预先勾选的复选框，或仅因完成购买——卖方因此未能在从银行卡或账户扣款前取得 ROSCA 要求的明确知情同意。",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "15 U.S.C. § 8403(2) (ROSCA)"
   },
   {
     "id": 1874,
     "code": "FTCCC-004",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "不对称的订阅退订流程 — 密码学强度不足",
-    "description": "会员门户网站要求用户通过电话联系客服来取消定期信用计费合同。 密码哈希算法或加密传输层低于基线标准。",
+    "title": "自动续订条款未显示在同意请求旁",
+    "description": "在完成购买前，自动续订条款未以清晰、显著的方式呈现在同意请求的视觉邻近位置；如要约包含免费试用，未清楚说明试用结束后将收取的价格。",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "Cal. Bus. & Prof. Code § 17602(a)(1)"
   },
   {
     "id": 1875,
     "code": "FTCCC-005",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "不对称的订阅退订流程 — 漏洞扫描失效",
-    "description": "会员门户网站要求用户通过电话联系客服来取消定期信用计费合同。 自动扫描工具未能定期在公共网络路径上运行。",
-    "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "title": "合同文字削弱对自动续订的同意",
+    "description": "要约或合同中含有干扰、分散、抵触或以其他方式削弱消费者对自动续订作出明确同意能力的信息，例如同意选项旁淡化或与续订条款相矛盾的文字。",
+    "severity": "moderate",
+    "reference": "Cal. Bus. & Prof. Code § 17602(a)(5)"
   },
   {
     "id": 1876,
     "code": "FTCCC-006",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "不对称的订阅退订流程 — 同意日志记录完整性缺陷",
-    "description": "会员门户网站要求用户通过电话联系客服来取消定期信用计费合同。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "title": "挽留优惠旁没有可见的“click to cancel”按钮",
+    "description": "消费者在线申请取消时，网站展示折扣、挽留福利或取消后果说明，却未同时在显著位置、持续且就近显示标有“click to cancel”（点击取消）或同义文字的直接链接或按钮。",
+    "severity": "moderate",
+    "reference": "Cal. Bus. & Prof. Code § 17602(e)(2)"
   },
   {
     "id": 1877,
     "code": "FTCCC-007",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "不对称的订阅退订流程 — 退出链接可见性问题",
-    "description": "会员门户网站要求用户通过电话联系客服来取消定期信用计费合同。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
+    "category": "Digital Operations",
+    "title": "缺少“Verträge hier kündigen”解约按钮（德国）",
+    "description": "消费者可在其上订立有偿持续性合同的网站，没有仅标注“Verträge hier kündigen”（在此解除合同）或同样明确措辞、持续可用、可直接且便捷访问并直接通往确认页面的解约按钮。缺少该按钮时，消费者可随时解约，无需遵守通知期（德国民法典第 312k 条第 6 款）。",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "BGB § 312k(2) (Germany)"
   },
   {
     "id": 1878,
     "code": "FTCCC-008",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "不对称的订阅退订流程 — 隐私声明披露不足",
-    "description": "会员门户网站要求用户通过电话联系客服来取消定期信用计费合同。 披露未能清楚说明个人文件处理的目的和范围。",
-    "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "category": "Digital Operations",
+    "title": "解约确认页面不完整（德国）",
+    "description": "解约按钮所通往的页面未要求并允许消费者填写解约类型（如为非常解约，需填写理由）、可明确识别其身份的信息、所涉合同、解约生效时间以及接收电子确认的方式，或页面上没有仅标注“jetzt kündigen”（立即解约）或同样明确措辞的确认按钮。",
+    "severity": "moderate",
+    "reference": "BGB § 312k(2) sentence 3 (Germany)"
   },
   {
     "id": 1879,
     "code": "FTCCC-009",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "不对称的订阅退订流程 — 审计控制验证缺失",
-    "description": "会员门户网站要求用户通过电话联系客服来取消定期信用计费合同。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
+    "title": "取消比订阅更难（纽约州）",
+    "description": "纽约州消费者无法随时通过与表示同意时同样简便、且经由同一渠道的机制取消，或取消受到阻碍或被不合理拖延，例如提供关于如何取消的虚假信息，或歪曲取消的后果或费用。",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "N.Y. Gen. Bus. Law § 527-a(1)(d), (e)"
   },
   {
     "id": 1880,
     "code": "FTCCC-010",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "不对称的订阅退订流程 — 管理员凭据安全弱点",
-    "description": "会员门户网站要求用户通过电话联系客服来取消定期信用计费合同。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
+    "category": "Digital Operations",
+    "title": "缺少“在此撤销合同”功能（欧盟）",
+    "description": "对于通过在线界面订立的远程合同，网站未提供标注“withdraw from contract here”（在此撤销合同）或同义明确措辞的撤销功能；该功能须在显著位置展示、在整个撤销期内持续可用，并通往在线撤销声明及“confirm withdrawal”（确认撤销）步骤。自 2026 年 6 月 19 日起在欧盟适用（由第 (EU) 2023/2673 号指令增设）。",
     "severity": "serious",
-    "reference": "FTC Click-to-Cancel Rule 16 CFR 425"
+    "reference": "Directive 2011/83/EU Art. 11a (Consumer Rights Directive)"
   },
   {
     "id": 1881,
     "code": "FTCFR-001",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "未公开的有偿点评奖励",
-    "description": "产品评分摘要中显示了有偿点评，但未明确指出客户因提供反馈而获得了促销奖励。",
+    "title": "未披露的有偿评价激励",
+    "description": "网站展示的评价或推荐来自从卖方获得报酬、免费或折扣商品、抽奖机会或其他利益的人，而这一重大关联未在评价旁清晰、显著地披露。",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "16 CFR § 255.5(a) (FTC Endorsement Guides)"
   },
   {
     "id": 1882,
     "code": "FTCFR-002",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "未公开的有偿点评奖励 — 审计与记录失效",
-    "description": "产品评分摘要中显示了有偿点评，但未明确指出客户因提供反馈而获得了促销奖励。 审计跟踪不充分，未能记录配置设置。",
+    "title": "仅为好评提供奖励",
+    "description": "网站以金钱、折扣、优惠券、礼品、抽奖资格或其他激励换取特定倾向的评价，例如五星好评即可打折。FTC《消费者评价与推荐规则》禁止以评价倾向（无论正面或负面）为条件提供激励。",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "16 CFR § 465.4 (FTC Consumer Reviews Rule)"
   },
   {
     "id": 1883,
     "code": "FTCFR-003",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "未公开的有偿点评奖励 — 界面设计缺陷",
-    "description": "产品评分摘要中显示了有偿点评，但未明确指出客户因提供反馈而获得了促销奖励。 用户界面采用了限制访问者访问或选择的设计组件。",
+    "title": "企业控制的网站被包装为独立评测",
+    "description": "由企业控制、拥有或运营的评测或比较网站、“奖项”页面或组织，被呈现为对包括该企业自身产品或服务在内的某类产品或服务提供独立评测或意见。",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "16 CFR § 465.6 (FTC Consumer Reviews Rule)"
   },
   {
     "id": 1884,
     "code": "FTCFR-004",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "未公开的有偿点评奖励 — 密码学强度不足",
-    "description": "产品评分摘要中显示了有偿点评，但未明确指出客户因提供反馈而获得了促销奖励。 密码哈希算法或加密传输层低于基线标准。",
-    "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "title": "展示非常规效果的推荐却未说明一般效果",
+    "description": "推荐内容描述产品关键属性上的效果（如减重、收入或节省金额），却未清晰、显著地披露消费者通常可预期的效果；除非广告主能证明此类效果具有代表性，FTC《推荐指南》要求作出该披露。",
+    "severity": "moderate",
+    "reference": "16 CFR § 255.2(b) (FTC Endorsement Guides)"
   },
   {
     "id": 1885,
     "code": "FTCFR-005",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "未公开的有偿点评奖励 — 漏洞扫描失效",
-    "description": "产品评分摘要中显示了有偿点评，但未明确指出客户因提供反馈而获得了促销奖励。 自动扫描工具未能定期在公共网络路径上运行。",
+    "title": "服务条款限制或惩罚评价",
+    "description": "网站的格式销售或服务条款禁止或限制客户发表评价、对评价收取费用或处以罚款，或要求客户转让评价的知识产权。根据美国《消费者评价公平法》，此类条款自始无效，提供此类条款即属违法；加州另行禁止放弃消费者就卖方或其商品发表言论权利的合同条款（罚款首次最高 2,500 美元，其后最高 5,000 美元）。",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "15 U.S.C. § 45b (Consumer Review Fairness Act); Cal. Civ. Code § 1670.8"
   },
   {
     "id": 1886,
     "code": "FTCFR-006",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "未公开的有偿点评奖励 — 同意日志记录完整性缺陷",
-    "description": "产品评分摘要中显示了有偿点评，但未明确指出客户因提供反馈而获得了促销奖励。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "category": "Digital Operations",
+    "title": "未说明评价如何核实（欧盟）",
+    "description": "网站提供消费者对其产品的评价，却未说明是否以及如何确保所发布的评价来自实际使用或购买过该产品的消费者；欧盟法律将此类信息视为重要信息，缺失可能构成误导性遗漏。",
+    "severity": "moderate",
+    "reference": "Directive 2005/29/EC Art. 7(6) (Unfair Commercial Practices Directive)"
   },
   {
     "id": 1887,
     "code": "FTCFR-007",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "未公开的有偿点评奖励 — 退出链接可见性问题",
-    "description": "产品评分摘要中显示了有偿点评，但未明确指出客户因提供反馈而获得了促销奖励。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
+    "category": "Digital Operations",
+    "title": "宣称“已验证评价”却无实际核实（欧盟）",
+    "description": "网站声称其评价来自实际使用或购买过产品的消费者（例如标注“已验证买家”），但无需核实购买或使用即可发布评价，例如通过开放表单。未采取合理、相称的核实措施而作此类声明，属于欧盟在任何情况下均禁止的行为清单。",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "Directive 2005/29/EC Annex I point 23b"
   },
   {
     "id": 1888,
     "code": "FTCFR-008",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "未公开的有偿点评奖励 — 隐私声明披露不足",
-    "description": "产品评分摘要中显示了有偿点评，但未明确指出客户因提供反馈而获得了促销奖励。 披露未能清楚说明个人文件处理的目的和范围。",
+    "category": "Digital Operations",
+    "title": "以误导方式发布评价（英国）",
+    "description": "消费者评价或由评价得出的信息（如平均星级）以误导方式发布，例如不发布或删除差评而展示好评、突出显示好评，或隐瞒评价系受委托撰写。自 2025 年 4 月 6 日起在英国任何情况下均被禁止。",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "UK DMCCA 2024 Sch. 20 para. 13(2)"
   },
   {
     "id": 1889,
     "code": "FTCFR-009",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "未公开的有偿点评奖励 — 审计控制验证缺失",
-    "description": "产品评分摘要中显示了有偿点评，但未明确指出客户因提供反馈而获得了促销奖励。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "category": "Digital Operations",
+    "title": "平台未公示信用评价规则或删除评价（中国）",
+    "description": "面向中国消费者的电子商务平台未公示信用评价规则，未为消费者提供对平台内销售的商品或者提供的服务进行评价的途径，或删除消费者对其平台内商品或服务的评价。",
+    "severity": "moderate",
+    "reference": "E-Commerce Law of the PRC Art. 39 (China)"
   },
   {
     "id": 1890,
     "code": "FTCFR-010",
     "evidenceKind": "observable",
-    "category": "FTC Enforcement",
-    "title": "未公开的有偿点评奖励 — 管理员凭据安全弱点",
-    "description": "产品评分摘要中显示了有偿点评，但未明确指出客户因提供反馈而获得了促销奖励。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
+    "category": "Digital Operations",
+    "title": "受激励的评价未予说明（英国）",
+    "description": "企业提交或委托他人提交、撰写隐瞒其受激励事实的消费者评价——评价者以任何方式受到委托，而该事实未在评价中或以其他方式显现。自 2025 年 4 月 6 日起在英国任何情况下均被禁止。",
     "severity": "serious",
-    "reference": "FTC Review Rule 16 CFR 465"
+    "reference": "UK DMCCA 2024 Sch. 20 para. 13(1)(b)"
   },
   {
     "id": 1891,
     "code": "EUDOR-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少 IT 漏洞审计记录",
-    "description": "银行 Web 接口在未记录 DORA 要求的每周网络漏洞报告的情况下运行。",
+    "title": "关键系统未每周进行漏洞扫描",
+    "description": "受 DORA 约束的金融实体没有迹象表明其对支持关键或重要功能的 ICT 资产至少每周进行一次自动化漏洞扫描，而欧盟 ICT 风险管理技术标准对此有明确要求。外部扫描只能提示这一缺口（例如长期未更新的软件），须经审计确认。",
     "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 10(2)(b) (ICT risk management RTS)"
   },
   {
     "id": 1892,
     "code": "EUDOR-002",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少 IT 漏洞审计记录 — 审计与记录失效",
-    "description": "银行 Web 接口在未记录 DORA 要求的每周网络漏洞报告的情况下运行。 审计跟踪不充分，未能记录配置设置。",
+    "title": "使用存在已知漏洞的过时第三方库",
+    "description": "金融实体的公开网页界面加载了存在公开已知漏洞版本的第三方或开源库。欧盟 ICT 风险管理技术标准要求跟踪支持关键或重要功能的服务所使用的第三方库，并优先部署已发现漏洞的补丁。",
     "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 10(2)(d), (f) (ICT risk management RTS)"
   },
   {
     "id": 1893,
     "code": "EUDOR-003",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少 IT 漏洞审计记录 — 界面设计缺陷",
-    "description": "银行 Web 接口在未记录 DORA 要求的每周网络漏洞报告的情况下运行。 用户界面采用了限制访问者访问或选择的设计组件。",
+    "title": "经公共互联网的连接未加密",
+    "description": "金融实体网络服务的页面或接口可通过普通 HTTP 访问且未重定向到 HTTPS，或 HTTPS 页面通过 HTTP 加载资源（混合内容），而欧盟 ICT 风险管理技术标准要求对经过公共网络的网络连接进行加密。",
     "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 13(e) (ICT risk management RTS)"
   },
   {
     "id": 1894,
     "code": "EUDOR-004",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少 IT 漏洞审计记录 — 密码学强度不足",
-    "description": "银行 Web 接口在未记录 DORA 要求的每周网络漏洞报告的情况下运行。 密码哈希算法或加密传输层低于基线标准。",
+    "title": "TLS 证书已过期或未及时续期",
+    "description": "金融实体网站的 TLS 证书已过期或将在数日内到期且未部署续期证书，而欧盟 ICT 风险管理技术标准要求在证书到期前及时续期。",
     "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 7(5) (ICT risk management RTS)"
   },
   {
     "id": 1895,
     "code": "EUDOR-005",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少 IT 漏洞审计记录 — 漏洞扫描失效",
-    "description": "银行 Web 接口在未记录 DORA 要求的每周网络漏洞报告的情况下运行。 自动扫描工具未能定期在公共网络路径上运行。",
+    "title": "仍接受过时的加密协议",
+    "description": "金融实体网站仍接受 TLS 1.0 或 TLS 1.1，而 RFC 8996 已于 2021 年正式弃用这两个版本；欧盟 ICT 风险管理技术标准要求根据密码分析的发展更新密码技术。",
     "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 6(4) (ICT risk management RTS); RFC 8996"
   },
   {
     "id": 1896,
     "code": "EUDOR-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少 IT 漏洞审计记录 — 同意日志记录完整性缺陷",
-    "description": "银行 Web 接口在未记录 DORA 要求的每周网络漏洞报告的情况下运行。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "title": "缺少向客户和公众披露漏洞的程序",
+    "description": "金融实体未显示向客户、交易对手和公众负责任地披露漏洞的程序（例如没有安全公告），而欧盟 ICT 风险管理技术标准要求建立此类程序。网站上缺失只能提示这一缺口，须经审计确认。",
+    "severity": "moderate",
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 10(2)(e) (ICT risk management RTS)"
   },
   {
     "id": 1897,
     "code": "EUDOR-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少 IT 漏洞审计记录 — 退出链接可见性问题",
-    "description": "银行 Web 接口在未记录 DORA 要求的每周网络漏洞报告的情况下运行。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
-    "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "title": "已发现的漏洞未记录和跟踪",
+    "description": "外部可见的漏洞长期存在，表明影响 ICT 系统的已发现漏洞未被记录、其修复情况未被监控，而欧盟 ICT 风险管理技术标准对此有要求。仅能通过审计漏洞记录确认。",
+    "severity": "moderate",
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 10(2)(h) (ICT risk management RTS)"
   },
   {
     "id": 1898,
     "code": "EUDOR-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少 IT 漏洞审计记录 — 隐私声明披露不足",
-    "description": "银行 Web 接口在未记录 DORA 要求的每周网络漏洞报告的情况下运行。 披露未能清楚说明个人文件处理的目的和范围。",
-    "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "title": "缺少最新的证书登记册",
+    "description": "外部可见的证书问题（过期、不匹配或子域名上被遗忘的证书）表明，金融实体未按欧盟 ICT 风险管理技术标准的要求，为支持关键或重要功能的 ICT 资产维护最新的证书及证书存储设备登记册。须经审计确认。",
+    "severity": "moderate",
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 7(4) (ICT risk management RTS)"
   },
   {
     "id": 1899,
     "code": "EUDOR-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少 IT 漏洞审计记录 — 审计控制验证缺失",
-    "description": "银行 Web 接口在未记录 DORA 要求的每周网络漏洞报告的情况下运行。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
+    "title": "未每年审查网络安全设计",
+    "description": "暴露在外的管理界面或不必要的开放服务表明，金融实体未按欧盟 ICT 风险管理技术标准的要求，每年审查一次网络架构和网络安全设计以发现潜在漏洞。须经审计确认。",
     "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "reference": "Commission Delegated Regulation (EU) 2024/1774 Art. 13(i) (ICT risk management RTS)"
   },
   {
     "id": 1900,
     "code": "EUDOR-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少 IT 漏洞审计记录 — 管理员凭据安全弱点",
-    "description": "银行 Web 接口在未记录 DORA 要求的每周网络漏洞报告的情况下运行。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
-    "severity": "serious",
-    "reference": "EU Digital Operational Resilience Act (DORA)"
+    "title": "缺少重大 ICT 事件的危机沟通计划",
+    "description": "金融实体未显示危机沟通安排（例如没有公开的状态页或事件通知渠道），无法向客户、交易对手和公众负责任地披露重大 ICT 相关事件或漏洞，而 DORA 要求将其纳入 ICT 风险管理框架。须经审计确认。",
+    "severity": "moderate",
+    "reference": "Regulation (EU) 2022/2554 (DORA), Art. 14(1)"
   },
   {
     "id": 1901,
     "code": "EUCTA-001",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "网站底部缺少实际受益人信息",
-    "description": "公司简介底部缺少标明注册的实际受益人及登记注册 ID 的披露说明。",
+    "title": "网站缺少商业登记信息",
+    "description": "在欧盟设立的服务提供者的网站，未以便捷、直接且永久可访问的方式提供其所登记的商业登记簿及登记号（或该登记簿中的同等识别方式）。",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "Directive 2000/31/EC Art. 5(1)(d) (e-Commerce Directive)"
   },
   {
     "id": 1902,
     "code": "EUCTA-002",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "网站底部缺少实际受益人信息 — 审计与记录失效",
-    "description": "公司简介底部缺少标明注册的实际受益人及登记注册 ID 的披露说明。 审计跟踪不充分，未能记录配置设置。",
+    "title": "缺少提供者名称、地理地址或直接联系方式",
+    "description": "网站未永久提供服务提供者的名称、其设立地的地理地址，或可迅速直接联系的联系方式（包括电子邮箱地址）；仅有联系表单或邮政信箱并不能提供这些信息。",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "Directive 2000/31/EC Art. 5(1)(a)–(c) (e-Commerce Directive)"
   },
   {
     "id": 1903,
     "code": "EUCTA-003",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "网站底部缺少实际受益人信息 — 界面设计缺陷",
-    "description": "公司简介底部缺少标明注册的实际受益人及登记注册 ID 的披露说明。 用户界面采用了限制访问者访问或选择的设计组件。",
-    "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "title": "未显示增值税识别号",
+    "description": "其活动须缴纳增值税的服务提供者，未在网站上以便捷、直接且永久可访问的方式显示其增值税识别号。",
+    "severity": "advisory",
+    "reference": "Directive 2000/31/EC Art. 5(1)(g) (e-Commerce Directive)"
   },
   {
     "id": 1904,
     "code": "EUCTA-004",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "网站底部缺少实际受益人信息 — 密码学强度不足",
-    "description": "公司简介底部缺少标明注册的实际受益人及登记注册 ID 的披露说明。 密码哈希算法或加密传输层低于基线标准。",
+    "title": "许可类业务未注明监管机构",
+    "description": "网站提供需经许可的业务（例如持牌金融、保险或支付服务），却未提供相关监管机构的详细信息。",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "Directive 2000/31/EC Art. 5(1)(e) (e-Commerce Directive)"
   },
   {
     "id": 1905,
     "code": "EUCTA-005",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "网站底部缺少实际受益人信息 — 漏洞扫描失效",
-    "description": "公司简介底部缺少标明注册的实际受益人及登记注册 ID 的披露说明。 自动扫描工具未能定期在公共网络路径上运行。",
-    "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "title": "缺少或隐藏法律声明（Impressum）（德国）",
+    "description": "提供商业性（通常为有偿）数字服务的网站，没有易于识别、可直接访问且持续可用的法律声明（Impressum），例如完全没有 Impressum 链接，需多次点击才能到达，或被隐藏在脚本之后。",
+    "severity": "serious",
+    "reference": "DDG § 5(1) (Germany)"
   },
   {
     "id": 1906,
     "code": "EUCTA-006",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "网站底部缺少实际受益人信息 — 同意日志记录完整性缺陷",
-    "description": "公司简介底部缺少标明注册的实际受益人及登记注册 ID 的披露说明。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
+    "title": "Impressum 未写明法律形式或授权代表（德国）",
+    "description": "公司（法人）的法律声明列出名称和地址，却遗漏法律形式或有权代表公司的人，而德国《数字服务法》（Digitale-Dienste-Gesetz，DDG）第 5 条第 1 款第 1 项对此有要求。",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "DDG § 5(1) Nr. 1 (Germany)"
   },
   {
     "id": 1907,
     "code": "EUCTA-007",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "网站底部缺少实际受益人信息 — 退出链接可见性问题",
-    "description": "公司简介底部缺少标明注册的实际受益人及登记注册 ID 的披露说明。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
+    "title": "英国公司网站未披露注册号或注册办事处（英国）",
+    "description": "在英国注册的公司网站未披露其注册地所属的英国地区、公司注册号及注册办事处地址。",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "UK Company, LLP and Business (Names and Trading Disclosures) Regulations 2015 reg. 25"
   },
   {
     "id": 1908,
     "code": "EUCTA-008",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "网站底部缺少实际受益人信息 — 隐私声明披露不足",
-    "description": "公司简介底部缺少标明注册的实际受益人及登记注册 ID 的披露说明。 披露未能清楚说明个人文件处理的目的和范围。",
+    "title": "价格未说明是否含税及运费（英国）",
+    "description": "提及价格的在线服务未清楚、明确地标示价格，尤其未说明价格是否包含税费和运费。",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "UK Electronic Commerce (EC Directive) Regulations 2002 reg. 6(2)"
   },
   {
     "id": 1909,
     "code": "EUCTA-009",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "网站底部缺少实际受益人信息 — 审计控制验证缺失",
-    "description": "公司简介底部缺少标明注册的实际受益人及登记注册 ID 的披露说明。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
+    "title": "首页未公示营业执照信息（中国）",
+    "description": "面向中国消费者的电子商务经营者未在其首页显著位置持续公示营业执照信息、与其经营业务有关的行政许可信息（或上述信息的链接标识）。依第七十六条第（一）项可处一万元以下罚款。",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "E-Commerce Law of the PRC Art. 15 (China)"
   },
   {
     "id": 1910,
     "code": "EUCTA-010",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "网站底部缺少实际受益人信息 — 管理员凭据安全弱点",
-    "description": "公司简介底部缺少标明注册的实际受益人及登记注册 ID 的披露说明。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
+    "title": "受监管职业未提供必要的职业信息",
+    "description": "提供受监管职业服务（例如律师、医生、建筑师或会计师）的网站，未说明提供者所注册的职业团体、职业头衔及授予该头衔的成员国，或适用的职业规则及其获取方式。",
     "severity": "moderate",
-    "reference": "EU Corporate Transparency Act / AML Rules"
+    "reference": "Directive 2000/31/EC Art. 5(1)(f) (e-Commerce Directive)"
   },
   {
     "id": 1911,
     "code": "WCAG2-001",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "按钮触控面积尺寸不足",
-    "description": "交互式导航元素的点击目标尺寸小于 24x24 CSS 像素，阻碍了行动不便的用户使用。",
+    "title": "按钮点击目标尺寸不足",
+    "description": "导航链接、图标和按钮等交互目标小于 24×24 CSS 像素，且不符合 WCAG 2.2 允许的间距、等效控件或其他例外（文本内链接、由浏览器控制或必要的尺寸），使行动不便者难以点击。",
     "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "reference": "WCAG 2.2 SC 2.5.8"
   },
   {
     "id": 1912,
     "code": "WCAG2-002",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "按钮触控面积尺寸不足 — 审计与记录失效",
-    "description": "交互式导航元素的点击目标尺寸小于 24x24 CSS 像素，阻碍了行动不便的用户使用。 审计跟踪不充分，未能记录配置设置。",
-    "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "title": "内容被锁定为单一屏幕方向",
+    "description": "网站仅允许以竖屏或横屏方式查看或操作，而该方向并非必需，导致设备固定在某一方向的用户无法使用。",
+    "severity": "moderate",
+    "reference": "WCAG 2.1 SC 1.3.4"
   },
   {
     "id": 1913,
     "code": "WCAG2-003",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "按钮触控面积尺寸不足 — 界面设计缺陷",
-    "description": "交互式导航元素的点击目标尺寸小于 24x24 CSS 像素，阻碍了行动不便的用户使用。 用户界面采用了限制访问者访问或选择的设计组件。",
-    "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "title": "个人信息字段未标明输入用途（autocomplete）",
+    "description": "收集用户本人信息（姓名、邮箱、电话、地址）的表单字段未以编程方式声明其用途（例如使用 HTML autocomplete 属性），浏览器和辅助技术无法自动填写或识别。",
+    "severity": "moderate",
+    "reference": "WCAG 2.1 SC 1.3.5"
   },
   {
     "id": 1914,
     "code": "WCAG2-004",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "按钮触控面积尺寸不足 — 密码学强度不足",
-    "description": "交互式导航元素的点击目标尺寸小于 24x24 CSS 像素，阻碍了行动不便的用户使用。 密码哈希算法或加密传输层低于基线标准。",
+    "title": "按钮、表单边框和图标对比度不足",
+    "description": "控件的可见边界（输入框边框、按钮、复选框）以及有意义的图标与相邻颜色的对比度低于 3:1。",
     "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "reference": "WCAG 2.1 SC 1.4.11"
   },
   {
     "id": 1915,
     "code": "WCAG2-005",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "按钮触控面积尺寸不足 — 漏洞扫描失效",
-    "description": "交互式导航元素的点击目标尺寸小于 24x24 CSS 像素，阻碍了行动不便的用户使用。 自动扫描工具未能定期在公共网络路径上运行。",
-    "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "title": "悬停弹出内容无法关闭或保持显示",
+    "description": "悬停或获得焦点时出现的提示、菜单或弹出框，无法在不移动指针或焦点的情况下关闭，指针移入时即消失，或在用户读完之前就消失。",
+    "severity": "moderate",
+    "reference": "WCAG 2.1 SC 1.4.13"
   },
   {
     "id": 1916,
     "code": "WCAG2-006",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "按钮触控面积尺寸不足 — 同意日志记录完整性缺陷",
-    "description": "交互式导航元素的点击目标尺寸小于 24x24 CSS 像素，阻碍了行动不便的用户使用。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "title": "无法关闭的单键快捷键",
+    "description": "网站使用由单个字母、数字或符号键构成的快捷键，且无法关闭、重新映射或仅在相关组件获得焦点时生效，导致语音输入用户误触发操作。",
+    "severity": "moderate",
+    "reference": "WCAG 2.1 SC 2.1.4"
   },
   {
     "id": 1917,
     "code": "WCAG2-007",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "按钮触控面积尺寸不足 — 退出链接可见性问题",
-    "description": "交互式导航元素的点击目标尺寸小于 24x24 CSS 像素，阻碍了行动不便的用户使用。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
+    "title": "键盘焦点指示被隐藏",
+    "description": "通过键盘移动到链接、按钮和表单控件时没有可见的焦点指示（常因 CSS 去除了轮廓线），键盘用户无法看到当前位置。",
     "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "reference": "WCAG 2.1 SC 2.4.7"
   },
   {
     "id": 1918,
     "code": "WCAG2-008",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "按钮触控面积尺寸不足 — 隐私声明披露不足",
-    "description": "交互式导航元素的点击目标尺寸小于 24x24 CSS 像素，阻碍了行动不便的用户使用。 披露未能清楚说明个人文件处理的目的和范围。",
-    "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "title": "功能仅支持多指或路径手势",
+    "description": "轮播、地图或滑块只能通过捏合、多指或滑动路径手势操作，没有单击或按钮替代方式。",
+    "severity": "moderate",
+    "reference": "WCAG 2.1 SC 2.5.1"
   },
   {
     "id": 1919,
     "code": "WCAG2-009",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "按钮触控面积尺寸不足 — 审计控制验证缺失",
-    "description": "交互式导航元素的点击目标尺寸小于 24x24 CSS 像素，阻碍了行动不便的用户使用。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "title": "按下即触发而非松开时触发",
+    "description": "按钮或控件在点击或触摸的按下事件时即执行操作，误按的用户无法通过移开来取消。",
+    "severity": "moderate",
+    "reference": "WCAG 2.1 SC 2.5.2"
   },
   {
     "id": 1920,
     "code": "WCAG2-010",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "按钮触控面积尺寸不足 — 管理员凭据安全弱点",
-    "description": "交互式导航元素的点击目标尺寸小于 24x24 CSS 像素，阻碍了行动不便的用户使用。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
+    "title": "可访问名称中不包含可见标签",
+    "description": "按钮或链接的可访问名称（例如来自 aria-label）不包含其可见文本，使用语音输入的用户说出所见文字时无法激活它。",
     "severity": "serious",
-    "reference": "WCAG 2.2 Level AA Standard"
+    "reference": "WCAG 2.1 SC 2.5.3"
   },
   {
     "id": 1921,
     "code": "EAAAX-001",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "电子商务结账控制无法访问",
-    "description": "数字商店付款表单缺少 EAA 要求的语音辅助屏幕阅读器导航支持。",
+    "title": "电子商务结账控件无障碍缺失",
+    "description": "网店的身份识别、安全和支付功能（登录、验证码、银行卡字段、支付按钮）不具备可感知、可操作、可理解和稳健性（例如字段无标签、验证码无无障碍替代方式，或支付框中存在键盘陷阱），而《欧洲无障碍法案》要求这些功能无障碍。",
     "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "reference": "Directive (EU) 2019/882 Annex I Section IV(g)(ii)–(iii) (European Accessibility Act)"
   },
   {
     "id": 1922,
     "code": "EAAAX-002",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "电子商务结账控制无法访问 — 审计与记录失效",
-    "description": "数字商店付款表单缺少 EAA 要求的语音辅助屏幕阅读器导航支持。 审计跟踪不充分，未能记录配置设置。",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "未向买家提供产品无障碍信息（欧盟）",
+    "description": "网店的产品页面未提供所售产品或服务的无障碍信息，而《欧洲无障碍法案》要求电子商务服务在责任经营者（例如制造商）提供该信息时予以提供。",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2019/882 Annex I Section IV(g)(i) (European Accessibility Act)"
   },
   {
     "id": 1923,
     "code": "EAAAX-003",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "电子商务结账控制无法访问 — 界面设计缺陷",
-    "description": "数字商店付款表单缺少 EAA 要求的语音辅助屏幕阅读器导航支持。 用户界面采用了限制访问者访问或选择的设计组件。",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "服务网站不可感知、不可操作、不可理解或不稳健（欧盟）",
+    "description": "受《欧洲无障碍法案》约束的服务的网站或相关在线应用存在无障碍缺陷（例如缺少文本替代、对比度不足或键盘无法访问控件），而该法案要求网站和移动服务以一致、适当的方式实现无障碍。",
+    "severity": "serious",
+    "reference": "Directive (EU) 2019/882 Annex I Section III(c) (European Accessibility Act)"
   },
   {
     "id": 1924,
     "code": "EAAAX-004",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "电子商务结账控制无法访问 — 密码学强度不足",
-    "description": "数字商店付款表单缺少 EAA 要求的语音辅助屏幕阅读器导航支持。 密码哈希算法或加密传输层低于基线标准。",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "服务信息字号小、对比度低或间距固定（欧盟）",
+    "description": "关于服务运作的信息使用了大小或形状不当的字体、对比度不足，或字母、行和段落间距无法调整，而《欧洲无障碍法案》要求具备这些呈现特性。",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2019/882 Annex I Section III(b)(v) (European Accessibility Act)"
   },
   {
     "id": 1925,
     "code": "EAAAX-005",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "电子商务结账控制无法访问 — 漏洞扫描失效",
-    "description": "数字商店付款表单缺少 EAA 要求的语音辅助屏幕阅读器导航支持。 自动扫描工具未能定期在公共网络路径上运行。",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "支持服务缺少无障碍信息（欧盟）",
+    "description": "网站提供的服务台、客服中心或技术支持未提供关于服务无障碍性及其与辅助技术兼容性的信息，或仅能通过单一不无障碍的渠道联系（例如仅限电话），而《欧洲无障碍法案》要求在设有支持服务时提供上述信息。",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2019/882 Annex I Section III(d) (European Accessibility Act)"
   },
   {
     "id": 1926,
     "code": "EAAAX-006",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "电子商务结账控制无法访问 — 同意日志记录完整性缺陷",
-    "description": "数字商店付款表单缺少 EAA 要求的语音辅助屏幕阅读器导航支持。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "服务条款中缺少无障碍信息（欧盟）",
+    "description": "一般条款和条件（或同等文件）未包含评估服务如何满足无障碍要求的信息，即以无障碍格式提供的服务概述、理解其运作所需的说明，以及如何满足附件一要求的描述。",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2019/882 Annex V point 1 (European Accessibility Act)"
   },
   {
     "id": 1927,
     "code": "EAAAX-007",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "电子商务结账控制无法访问 — 退出链接可见性问题",
-    "description": "数字商店付款表单缺少 EAA 要求的语音辅助屏幕阅读器导航支持。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "消费者银行信息过于复杂（高于 B2）（欧盟）",
+    "description": "消费者银行服务提供的信息复杂程度超过《欧洲语言共同参考框架》B2（中高级）水平，而《欧洲无障碍法案》要求其在该水平内易于理解。",
+    "severity": "moderate",
+    "reference": "Directive (EU) 2019/882 Annex I Section IV(e)(ii) (European Accessibility Act)"
   },
   {
     "id": 1928,
     "code": "EAAAX-008",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "电子商务结账控制无法访问 — 隐私声明披露不足",
-    "description": "数字商店付款表单缺少 EAA 要求的语音辅助屏幕阅读器导航支持。 披露未能清楚说明个人文件处理的目的和范围。",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "网上银行的身份识别、签名或支付无障碍缺失（欧盟）",
+    "description": "消费者银行服务的身份识别方式、电子签名、安全步骤或支付服务不具备可感知、可操作、可理解和稳健性（例如有时限且无无障碍替代方式的一次性验证码界面），而《欧洲无障碍法案》要求其无障碍。",
+    "severity": "serious",
+    "reference": "Directive (EU) 2019/882 Annex I Section IV(e)(i) (European Accessibility Act)"
   },
   {
     "id": 1929,
     "code": "EAAAX-009",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "电子商务结账控制无法访问 — 审计控制验证缺失",
-    "description": "数字商店付款表单缺少 EAA 要求的语音辅助屏幕阅读器导航支持。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "在德国提供未达无障碍要求的服务",
+    "description": "受德国《无障碍强化法》（BFSG）约束的服务（例如网店或消费者银行服务）在未满足无障碍要求的情况下提供，例如网站未通过基本无障碍检查。提供此类服务属行政违法，最高可处 100,000 欧元罚款（BFSG 第 37 条第 1 款第 8 项及第 2 款）。",
+    "severity": "serious",
+    "reference": "BFSG § 14(1) Nr. 1 (Germany)"
   },
   {
     "id": 1930,
     "code": "EAAAX-010",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "电子商务结账控制无法访问 — 管理员凭据安全弱点",
-    "description": "数字商店付款表单缺少 EAA 要求的语音辅助屏幕阅读器导航支持。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
-    "severity": "critical",
-    "reference": "European Accessibility Act (EAA) Directive 2019/882"
+    "title": "无障碍信息未以无障碍形式公布（德国）",
+    "description": "德国《无障碍强化法》附件 3 要求的信息（服务如何满足无障碍要求）未编制，或未以无障碍形式向公众提供，例如缺失或仅以图片或扫描版 PDF 发布。",
+    "severity": "moderate",
+    "reference": "BFSG § 14(1) Nr. 2 (Germany)"
   },
   {
     "id": 1931,
@@ -19370,698 +19370,698 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
     "title": "缺少无障碍反馈渠道",
-    "description": "针对安大略省的网站未能提供专门的合规渠道，供用户报告数字无障碍障碍。",
+    "description": "在安大略省提供商品、服务或设施的组织，没有公开的流程来接收和回应关于其如何为残障人士提供服务的反馈，而《综合无障碍标准》要求建立此类流程，并使公众可便捷获取相关信息。",
     "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "reference": "O. Reg. 191/11 s. 80.50 (Ontario AODA)"
   },
   {
     "id": 1932,
     "code": "ONADA-002",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "缺少无障碍反馈渠道 — 审计与记录失效",
-    "description": "针对安大略省的网站未能提供专门的合规渠道，供用户报告数字无障碍障碍。 审计跟踪不充分，未能记录配置设置。",
+    "title": "网站未达 WCAG 2.0 AA 级（安大略省）",
+    "description": "大型组织（在安大略省有 50 名以上员工）或指定公共部门组织的公开网站不符合 WCAG 2.0 AA 级成功标准，而自 2021 年 1 月 1 日起其所有网站和网页内容均须符合（实时字幕 1.2.4 和预录音频描述 1.2.5 除外）。",
     "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "reference": "O. Reg. 191/11 s. 14(4) (Ontario AODA)"
   },
   {
     "id": 1933,
     "code": "ONADA-003",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "缺少无障碍反馈渠道 — 界面设计缺陷",
-    "description": "针对安大略省的网站未能提供专门的合规渠道，供用户报告数字无障碍障碍。 用户界面采用了限制访问者访问或选择的设计组件。",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "未告知可提供无障碍格式（安大略省）",
+    "description": "该组织未按《综合无障碍标准》的要求，告知公众残障人士可应要求获得无障碍格式和沟通支持。",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 12(3) (Ontario AODA)"
   },
   {
     "id": 1934,
     "code": "ONADA-004",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "缺少无障碍反馈渠道 — 密码学强度不足",
-    "description": "针对安大略省的网站未能提供专门的合规渠道，供用户报告数字无障碍障碍。 密码哈希算法或加密传输层低于基线标准。",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "反馈流程未告知无障碍格式（安大略省）",
+    "description": "该组织设有反馈流程，却未告知公众该流程可提供无障碍格式和沟通支持，而安大略省既要求反馈流程无障碍，也要求作出此项告知。",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 11(2) (Ontario AODA)"
   },
   {
     "id": 1935,
     "code": "ONADA-005",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "缺少无障碍反馈渠道 — 漏洞扫描失效",
-    "description": "针对安大略省的网站未能提供专门的合规渠道，供用户报告数字无障碍障碍。 自动扫描工具未能定期在公共网络路径上运行。",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "无障碍政策未公开（安大略省）",
+    "description": "非小型组织未公开描述其无障碍政策的文件（包括及时满足残障人士无障碍需求的承诺声明），或未应要求以无障碍格式提供这些文件。",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 3(3) (Ontario AODA)"
   },
   {
     "id": 1936,
     "code": "ONADA-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "ADA / WCAG",
-    "title": "缺少无障碍反馈渠道 — 同意日志记录完整性缺陷",
-    "description": "针对安大略省的网站未能提供专门的合规渠道，供用户报告数字无障碍障碍。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "未公开通知无障碍服务的临时中断（安大略省）",
+    "description": "网站未显示有向公众通知残障人士常用设施或服务（例如无障碍入口或电梯）临时中断的做法，包括原因、预计持续时间及可用替代方案，而安大略省客户服务标准对此有要求。须经审计确认。",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 80.48 (Ontario AODA)"
   },
   {
     "id": 1937,
     "code": "ONADA-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "ADA / WCAG",
-    "title": "缺少无障碍反馈渠道 — 退出链接可见性问题",
-    "description": "针对安大略省的网站未能提供专门的合规渠道，供用户报告数字无障碍障碍。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "无障碍格式未及时提供或加收费用（安大略省）",
+    "description": "有迹象表明，无障碍格式和沟通支持未应要求及时提供，且费用高于向他人收取的常规费用（例如大字版加价或长时间拖延），而安大略省对此有要求。须经申请或审计确认。",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 12(1) (Ontario AODA)"
   },
   {
     "id": 1938,
     "code": "ONADA-008",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "缺少无障碍反馈渠道 — 隐私声明披露不足",
-    "description": "针对安大略省的网站未能提供专门的合规渠道，供用户报告数字无障碍障碍。 披露未能清楚说明个人文件处理的目的和范围。",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "反馈流程未规定投诉处理措施（安大略省）",
+    "description": "公布的反馈流程未说明组织在收到关于其如何向残障人士提供商品、服务或设施的投诉时将采取的措施，而安大略省对此有要求。",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 80.50(2) (Ontario AODA)"
   },
   {
     "id": 1939,
     "code": "ONADA-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "ADA / WCAG",
-    "title": "缺少无障碍反馈渠道 — 审计控制验证缺失",
-    "description": "针对安大略省的网站未能提供专门的合规渠道，供用户报告数字无障碍障碍。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "title": "客户服务文件未以无障碍格式提供（安大略省）",
+    "description": "组织须应要求提供的客户服务文件（例如反馈流程或服务动物政策）看起来只有无障碍性不足的文件，表明未应要求以无障碍格式或借助沟通支持提供。须经申请或审计确认。",
+    "severity": "moderate",
+    "reference": "O. Reg. 191/11 s. 80.51(1) (Ontario AODA)"
   },
   {
     "id": 1940,
     "code": "ONADA-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "ADA / WCAG",
-    "title": "缺少无障碍反馈渠道 — 管理员凭据安全弱点",
-    "description": "针对安大略省的网站未能提供专门的合规渠道，供用户报告数字无障碍障碍。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
+    "title": "无障碍报告虚假或具有误导性（安大略省）",
+    "description": "宣称完全符合无障碍要求的公开声明与网站自身的无障碍缺陷相矛盾，表明组织向安大略省主管提交的无障碍报告可能含有虚假或误导性信息，此属违法行为，每日最高罚款 50,000 加元，公司每日最高 100,000 加元。须经审查已提交的报告确认。",
     "severity": "serious",
-    "reference": "Ontario Accessibility for Ontarians (AODA)"
+    "reference": "Accessibility for Ontarians with Disabilities Act, 2005 s. 37(1)(a), (3)"
   },
   {
     "id": 1941,
     "code": "SEC50-001",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "培训视频缺少闭合字幕",
-    "description": "嵌入的入职培训视频文件运行时，没有为听力障碍用户提供同步的文本轨迹或闭合字幕支持。",
+    "title": "预录视频缺少隐藏字幕（第 508 条）",
+    "description": "联邦机构公开网站上的有声预录视频（例如培训或入职视频）没有同步字幕，而第 508 条要求面向公众的电子内容符合 WCAG 2.0 A 级和 AA 级，包括为预录音频提供字幕。",
     "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "reference": "36 CFR 1194 App. A E205.4 (Section 508); WCAG 2.0 SC 1.2.2"
   },
   {
     "id": 1942,
     "code": "SEC50-002",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "培训视频缺少闭合字幕 — 审计与记录失效",
-    "description": "嵌入的入职培训视频文件运行时，没有为听力障碍用户提供同步的文本轨迹或闭合字幕支持。 审计跟踪不充分，未能记录配置设置。",
+    "title": "联邦公开内容未达 WCAG 2.0 AA（第 508 条）",
+    "description": "联邦机构面向公众的电子内容（网页、文件、表单）不符合 WCAG 2.0 A 级或 AA 级成功标准，而修订后的 508 标准要求所有面向公众的电子内容均须符合。",
     "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "reference": "36 CFR 1194 App. A E205.2 (Section 508)"
   },
   {
     "id": 1943,
     "code": "SEC50-003",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "培训视频缺少闭合字幕 — 界面设计缺陷",
-    "description": "嵌入的入职培训视频文件运行时，没有为听力障碍用户提供同步的文本轨迹或闭合字幕支持。 用户界面采用了限制访问者访问或选择的设计组件。",
-    "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "title": "视频播放器未在音量旁提供字幕控制（第 508 条）",
+    "description": "嵌入式视频播放器提供音量控制，却未在与音量或节目选择相同的菜单层级提供字幕选择控制，而第 508 条对软件的技术要求对此有规定。",
+    "severity": "moderate",
+    "reference": "36 CFR 1194 App. C 503.4.1 (Section 508)"
   },
   {
     "id": 1944,
     "code": "SEC50-004",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "培训视频缺少闭合字幕 — 密码学强度不足",
-    "description": "嵌入的入职培训视频文件运行时，没有为听力障碍用户提供同步的文本轨迹或闭合字幕支持。 密码哈希算法或加密传输层低于基线标准。",
-    "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "title": "视频播放器缺少音频描述控制（第 508 条）",
+    "description": "提供节目选择的视频播放器未在与音量或节目选择相同的菜单层级提供音频描述选择控制，而第 508 条对此有要求。",
+    "severity": "moderate",
+    "reference": "36 CFR 1194 App. C 503.4.2 (Section 508)"
   },
   {
     "id": 1945,
     "code": "SEC50-005",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "培训视频缺少闭合字幕 — 漏洞扫描失效",
-    "description": "嵌入的入职培训视频文件运行时，没有为听力障碍用户提供同步的文本轨迹或闭合字幕支持。 自动扫描工具未能定期在公共网络路径上运行。",
-    "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "title": "帮助与支持文档无障碍缺失（第 508 条）",
+    "description": "电子支持文档（帮助页面、常见问题、用户指南、网页自助支持）不符合 WCAG 2.0 A 级和 AA 级，例如没有文本的扫描版 PDF 手册，而第 508 条对此有要求。",
+    "severity": "moderate",
+    "reference": "36 CFR 1194 App. C 602.3 (Section 508)"
   },
   {
     "id": 1946,
     "code": "SEC50-006",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "培训视频缺少闭合字幕 — 同意日志记录完整性缺陷",
-    "description": "嵌入的入职培训视频文件运行时，没有为听力障碍用户提供同步的文本轨迹或闭合字幕支持。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "title": "支持服务缺少无障碍功能信息（第 508 条）",
+    "description": "服务台或支持页面未提供 ICT 的无障碍和兼容性功能信息（例如如何配合屏幕阅读器或仅用键盘使用），而第 508 条要求支持服务包含此类信息。",
+    "severity": "moderate",
+    "reference": "36 CFR 1194 App. C 603.2 (Section 508)"
   },
   {
     "id": 1947,
     "code": "SEC50-007",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "培训视频缺少闭合字幕 — 退出链接可见性问题",
-    "description": "嵌入的入职培训视频文件运行时，没有为听力障碍用户提供同步的文本轨迹或闭合字幕支持。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
+    "title": "无法在无视觉的情况下操作（第 508 条）",
+    "description": "功能仅能通过视觉使用，例如绘制在 canvas 上的内容、纯图片按钮或没有文本替代的地图，缺少无需视觉的操作方式，而第 508 条的功能性能标准对此有要求。",
     "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "reference": "36 CFR 1194 App. C 302.1 (Section 508)"
   },
   {
     "id": 1948,
     "code": "SEC50-008",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "培训视频缺少闭合字幕 — 隐私声明披露不足",
-    "description": "嵌入的入职培训视频文件运行时，没有为听力障碍用户提供同步的文本轨迹或闭合字幕支持。 披露未能清楚说明个人文件处理的目的和范围。",
+    "title": "无法在无听觉的情况下操作（第 508 条）",
+    "description": "信息或操作依赖声音（仅有音频的说明、声音提醒或没有文字稿的播客），缺少无需听觉的操作方式，而第 508 条的功能性能标准对此有要求。",
     "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "reference": "36 CFR 1194 App. C 302.4 (Section 508)"
   },
   {
     "id": 1949,
     "code": "SEC50-009",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "培训视频缺少闭合字幕 — 审计控制验证缺失",
-    "description": "嵌入的入职培训视频文件运行时，没有为听力障碍用户提供同步的文本轨迹或闭合字幕支持。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "title": "预录视频缺少音频描述（第 508 条）",
+    "description": "联邦机构公开网站上的预录视频传达了重要的视觉信息，但既未在原声中说明，也没有音频描述音轨，而第 508 条要求符合 WCAG 2.0 AA 级，包括为预录视频提供音频描述。",
+    "severity": "moderate",
+    "reference": "36 CFR 1194 App. A E205.4 (Section 508); WCAG 2.0 SC 1.2.5"
   },
   {
     "id": 1950,
     "code": "SEC50-010",
     "evidenceKind": "observable",
     "category": "ADA / WCAG",
-    "title": "培训视频缺少闭合字幕 — 管理员凭据安全弱点",
-    "description": "嵌入的入职培训视频文件运行时，没有为听力障碍用户提供同步的文本轨迹或闭合字幕支持。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
+    "title": "联邦服务未提供同等访问（第 508 条）",
+    "description": "在线向联邦机构寻求信息或服务的残障公众无法与他人同等地访问和使用这些信息或服务（例如无法用屏幕阅读器填写的申请表），而第 508 条要求提供同等访问，若造成不当负担则须提供替代方式。",
     "severity": "serious",
-    "reference": "Rehabilitation Act Section 508"
+    "reference": "29 U.S.C. § 794d(a)(1)(A) (Section 508)"
   },
   {
     "id": 1951,
     "code": "EEOC-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Digital Operations",
-    "title": "缺少自动招聘算法偏差审计",
-    "description": "招聘应用程序使用 AI 工具对申请人档案进行排名，但未进行年度偏差审计。",
+    "title": "自动化招聘算法缺少偏见审计",
+    "description": "在纽约市招聘的雇主或职业介绍机构使用自动化雇用决策工具筛选候选人或员工，但该工具在使用前一年内未经过偏见审计。首次违规最高罚款 500 美元，其后每次 500–1,500 美元；每使用一天即构成一次单独违规。须以审计记录确认。",
     "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "reference": "NYC Admin. Code § 20-871(a)(1) (Local Law 144)"
   },
   {
     "id": 1952,
     "code": "EEOC-002",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "缺少自动招聘算法偏差审计 — 审计与记录失效",
-    "description": "招聘应用程序使用 AI 工具对申请人档案进行排名，但未进行年度偏差审计。 审计跟踪不充分，未能记录配置设置。",
+    "title": "偏见审计摘要未在网站公布（纽约市）",
+    "description": "在纽约市使用自动化雇用决策工具的雇主或职业介绍机构，未在使用前于其网站公布最近一次偏见审计结果摘要及所审计工具的分发日期。",
     "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "reference": "NYC Admin. Code § 20-871(a)(2) (Local Law 144)"
   },
   {
     "id": 1953,
     "code": "EEOC-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "缺少自动招聘算法偏差审计 — 界面设计缺陷",
-    "description": "招聘应用程序使用 AI 工具对申请人档案进行排名，但未进行年度偏差审计。 用户界面采用了限制访问者访问或选择的设计组件。",
+    "title": "未告知自动化筛选或替代流程（纽约市）",
+    "description": "职位发布或申请流程未在使用前至少十个工作日告知纽约市候选人将使用自动化雇用决策工具对其评估，也未允许其申请替代选拔流程或便利安排。每缺少一项通知即构成单独违规。",
     "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "reference": "NYC Admin. Code § 20-871(b)(1) (Local Law 144)"
   },
   {
     "id": 1954,
     "code": "EEOC-004",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "缺少自动招聘算法偏差审计 — 密码学强度不足",
-    "description": "招聘应用程序使用 AI 工具对申请人档案进行排名，但未进行年度偏差审计。 密码哈希算法或加密传输层低于基线标准。",
-    "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "title": "未告知工具评估的资格条件（纽约市）",
+    "description": "未在使用前至少十个工作日告知纽约市候选人或员工，自动化雇用决策工具将使用哪些职位资格和特征对其进行评估。",
+    "severity": "moderate",
+    "reference": "NYC Admin. Code § 20-871(b)(2) (Local Law 144)"
   },
   {
     "id": 1955,
     "code": "EEOC-005",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "缺少自动招聘算法偏差审计 — 漏洞扫描失效",
-    "description": "招聘应用程序使用 AI 工具对申请人档案进行排名，但未进行年度偏差审计。 自动扫描工具未能定期在公共网络路径上运行。",
-    "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "title": "未披露招聘工具的数据类型、来源及保留期限（纽约市）",
+    "description": "网站未披露为自动化雇用决策工具收集的数据类型、数据来源及数据保留政策；若未在网站披露，须在候选人或员工书面请求后 30 日内提供。",
+    "severity": "moderate",
+    "reference": "NYC Admin. Code § 20-871(b)(3) (Local Law 144)"
   },
   {
     "id": 1956,
     "code": "EEOC-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Digital Operations",
-    "title": "缺少自动招聘算法偏差审计 — 同意日志记录完整性缺陷",
-    "description": "招聘应用程序使用 AI 工具对申请人档案进行排名，但未进行年度偏差审计。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
+    "title": "自动化筛选排除残障申请人（ADA）",
+    "description": "在线招聘中的自动化测试或选拔标准（例如限时游戏、视频或语音分析）可能排除残障申请人；根据 ADA，除非这些标准与职位相关且符合业务需要，否则构成歧视。须经结果分析确认。",
     "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "reference": "42 U.S.C. § 12112(b)(6) (ADA)"
   },
   {
     "id": 1957,
     "code": "EEOC-007",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "缺少自动招聘算法偏差审计 — 退出链接可见性问题",
-    "description": "招聘应用程序使用 AI 工具对申请人档案进行排名，但未进行年度偏差审计。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
-    "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "title": "在线评估中无法申请便利安排（ADA）",
+    "description": "在线申请或自动化评估未向申请人提供申请合理便利（例如延长时间或替代格式）的途径，而根据 ADA，不为合格的残障申请人提供合理便利即构成歧视，除非会造成不当困难。",
+    "severity": "moderate",
+    "reference": "42 U.S.C. § 12112(b)(5)(A) (ADA)"
   },
   {
     "id": 1958,
     "code": "EEOC-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Digital Operations",
-    "title": "缺少自动招聘算法偏差审计 — 隐私声明披露不足",
-    "description": "招聘应用程序使用 AI 工具对申请人档案进行排名，但未进行年度偏差审计。 披露未能清楚说明个人文件处理的目的和范围。",
+    "title": "可能产生差别影响的自动化选拔（第七章）",
+    "description": "对申请人进行排序或筛选的自动化招聘工具，可能因种族、肤色、宗教、性别或国籍产生差别影响；根据《民权法》第七章，除非雇主证明其与职位相关且符合业务需要，并且未拒绝歧视性更小的替代方案，否则构成非法雇用行为。须经统计分析确认。",
     "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "reference": "42 U.S.C. § 2000e-2(k)(1)(A) (Title VII)"
   },
   {
     "id": 1959,
     "code": "EEOC-009",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "缺少自动招聘算法偏差审计 — 审计控制验证缺失",
-    "description": "招聘应用程序使用 AI 工具对申请人档案进行排名，但未进行年度偏差审计。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "title": "候选人隐私声明未提及自动化决策（欧盟）",
+    "description": "面向求职者的隐私声明未说明是否使用自动化决策（包括用户画像），也未提供其所涉逻辑、重要性及对候选人预期后果的有意义信息，而 GDPR 在作出此类决策时对此有要求。",
+    "severity": "moderate",
+    "reference": "GDPR Art. 13(2)(f)"
   },
   {
     "id": 1960,
     "code": "EEOC-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Digital Operations",
-    "title": "缺少自动招聘算法偏差审计 — 管理员凭据安全弱点",
-    "description": "招聘应用程序使用 AI 工具对申请人档案进行排名，但未进行年度偏差审计。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
+    "title": "完全自动化拒绝候选人且无人工复核（欧盟）",
+    "description": "有迹象表明申请被自动拒绝（例如自动化测试后立即发出拒信），没有人工参与，也未提供获得人工干预、表达意见和质疑决定的权利，而 GDPR 对仅基于自动化处理且产生法律或类似重大影响的决定有此要求。须经审计确认。",
     "severity": "serious",
-    "reference": "NY AEDT Local Law 144 / EEOC Guidelines"
+    "reference": "GDPR Art. 22(1), (3)"
   },
   {
     "id": 1961,
     "code": "BIPAX-001",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "虚拟试穿中缺少生物特征扫描同意书",
-    "description": "化妆品门户网站部署了人脸扫描虚拟试穿软件，但未事先获得书面生物特征同意书。",
+    "title": "虚拟试妆缺少生物特征采集同意",
+    "description": "虚拟试穿（试妆）或类似功能出于商业目的采集面部几何特征（或其他生物特征标识符），却未事先告知本人并取得同意，得克萨斯州禁止此行为；每次违规最高可处 25,000 美元民事罚款。",
     "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "reference": "Tex. Bus. & Com. Code § 503.001(b)"
   },
   {
     "id": 1962,
     "code": "BIPAX-002",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "虚拟试穿中缺少生物特征扫描同意书 — 审计与记录失效",
-    "description": "化妆品门户网站部署了人脸扫描虚拟试穿软件，但未事先获得书面生物特征同意书。 审计跟踪不充分，未能记录配置设置。",
+    "title": "生物特征标识符被出售或披露给他人（得克萨斯州）",
+    "description": "有迹象表明，采集的生物特征标识符在得州允许的狭窄例外（如本人请求的交易或执法搜查令）之外被出售、出租或披露给第三方（例如面部数据发送给广告或分析合作方）。每次违规最高 25,000 美元；须经数据流审计确认。",
     "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "reference": "Tex. Bus. & Com. Code § 503.001(c)(1)"
   },
   {
     "id": 1963,
     "code": "BIPAX-003",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "虚拟试穿中缺少生物特征扫描同意书 — 界面设计缺陷",
-    "description": "化妆品门户网站部署了人脸扫描虚拟试穿软件，但未事先获得书面生物特征同意书。 用户界面采用了限制访问者访问或选择的设计组件。",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "目的结束后仍保留生物特征数据（得克萨斯州）",
+    "description": "保留声明或做法表明生物特征标识符被无限期保存，而得州要求在合理时间内且不迟于收集目的届满后一年内销毁。每次违规最高 25,000 美元；须经审计确认。",
+    "severity": "serious",
+    "reference": "Tex. Bus. & Com. Code § 503.001(c)(3)"
   },
   {
     "id": 1964,
     "code": "BIPAX-004",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "虚拟试穿中缺少生物特征扫描同意书 — 密码学强度不足",
-    "description": "化妆品门户网站部署了人脸扫描虚拟试穿软件，但未事先获得书面生物特征同意书。 密码哈希算法或加密传输层低于基线标准。",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "生物特征图像传输未尽合理注意（得克萨斯州）",
+    "description": "网站采集的面部图像或其他生物特征数据通过未加密连接上传，或被发送给第三方脚本，而得州要求以合理注意存储、传输和保护生物特征标识符，保护程度不低于其他机密信息。",
+    "severity": "serious",
+    "reference": "Tex. Bus. & Com. Code § 503.001(c)(2)"
   },
   {
     "id": 1965,
     "code": "BIPAX-005",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "虚拟试穿中缺少生物特征扫描同意书 — 漏洞扫描失效",
-    "description": "化妆品门户网站部署了人脸扫描虚拟试穿软件，但未事先获得书面生物特征同意书。 自动扫描工具未能定期在公共网络路径上运行。",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "未经告知、同意或退出机制登记生物特征（华盛顿州）",
+    "description": "服务出于商业目的将生物特征标识符（例如面部或声纹模板）登记入数据库，却未事先提供易于获取的通知并取得同意，或未提供阻止其后续商业使用的机制，而华盛顿州对此有要求。由州总检察长依据《消费者保护法》执法。",
+    "severity": "serious",
+    "reference": "RCW 19.375.020(1)–(2) (Washington)"
   },
   {
     "id": 1966,
     "code": "BIPAX-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "虚拟试穿中缺少生物特征扫描同意书 — 同意日志记录完整性缺陷",
-    "description": "化妆品门户网站部署了人脸扫描虚拟试穿软件，但未事先获得书面生物特征同意书。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "已登记的生物特征未经同意被披露（华盛顿州）",
+    "description": "有迹象表明，已登记的生物特征标识符在未经本人同意且不属于华盛顿州允许的例外（例如本人请求的服务、金融交易或法院命令）的情况下，出于商业目的被出售、出租或披露给他人。须经审计确认。",
+    "severity": "serious",
+    "reference": "RCW 19.375.020(3) (Washington)"
   },
   {
     "id": 1967,
     "code": "BIPAX-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "虚拟试穿中缺少生物特征扫描同意书 — 退出链接可见性问题",
-    "description": "化妆品门户网站部署了人脸扫描虚拟试穿软件，但未事先获得书面生物特征同意书。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "已登记的生物特征保留时间超过必要（华盛顿州）",
+    "description": "保留声明表明，已登记的生物特征标识符的保存时间超过提供服务、防范欺诈或安全威胁、遵守法律或法院命令所合理必需的期限，而华盛顿州对此有限制。须经审计确认。",
+    "severity": "moderate",
+    "reference": "RCW 19.375.020(4)(b) (Washington)"
   },
   {
     "id": 1968,
     "code": "BIPAX-008",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "虚拟试穿中缺少生物特征扫描同意书 — 隐私声明披露不足",
-    "description": "化妆品门户网站部署了人脸扫描虚拟试穿软件，但未事先获得书面生物特征同意书。 披露未能清楚说明个人文件处理的目的和范围。",
+    "title": "未经明确同意进行生物特征识别（欧盟）",
+    "description": "人脸识别、声纹识别或类似功能为唯一识别欧盟境内的个人而处理生物特征数据，却未取得明确同意（或符合第 9 条第 2 款的其他例外），例如在没有单独、具体同意步骤的情况下就开始面部扫描。",
     "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "reference": "GDPR Art. 9(1), (2)(a)"
   },
   {
     "id": 1969,
     "code": "BIPAX-009",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "虚拟试穿中缺少生物特征扫描同意书 — 审计控制验证缺失",
-    "description": "化妆品门户网站部署了人脸扫描虚拟试穿软件，但未事先获得书面生物特征同意书。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "无法便捷撤回生物特征同意（欧盟）",
+    "description": "对面部或声纹处理的同意只需一次点击即可给出，但之后没有同样便捷的撤回方式（例如只能通过邮寄或电子邮件申请），而 GDPR 要求撤回同意与给予同意一样容易。",
+    "severity": "moderate",
+    "reference": "GDPR Art. 7(3)"
   },
   {
     "id": 1970,
     "code": "BIPAX-010",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "虚拟试穿中缺少生物特征扫描同意书 — 管理员凭据安全弱点",
-    "description": "化妆品门户网站部署了人脸扫描虚拟试穿软件，但未事先获得书面生物特征同意书。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
-    "severity": "critical",
-    "reference": "Illinois Biometric Information Privacy Act (BIPA)"
+    "title": "基于从互联网抓取的图像进行人脸搜索（得克萨斯州）",
+    "description": "服务从网上找到的照片中采集生物特征标识符（例如在抓取的图像中进行人脸搜索），并将其公开可得视为同意，而在得州，仅因图像存在于网上并不视为本人已被告知或已同意，除非图像是本人自行公开的。每次违规最高 25,000 美元。",
+    "severity": "serious",
+    "reference": "Tex. Bus. & Com. Code § 503.001(b-1)"
   },
   {
     "id": 1971,
     "code": "CIPAX-001",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "在线客服实时转录缺少 CIPA 警告",
-    "description": "客户端聊天脚本执行实时文本转录并记录对话，但未展示 CIPA 录音警告。",
+    "title": "聊天消息被第三方读取且未作提示（加州）",
+    "description": "第三方聊天或转录脚本在访客发送消息时实时接收其内容，既未告知也未取得各方同意。加州窃听条款禁止在未经各方同意的情况下读取或获知传输中通信的内容，也禁止协助他人这样做；个人每次违规可索赔 5,000 美元。网站聊天服务商是否适用该条款在法院存在争议。",
     "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "reference": "Cal. Penal Code § 631(a); § 637.2(a)"
   },
   {
     "id": 1972,
     "code": "CIPAX-002",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "在线客服实时转录缺少 CIPA 警告 — 审计与记录失效",
-    "description": "客户端聊天脚本执行实时文本转录并记录对话，但未展示 CIPA 录音警告。 审计跟踪不充分，未能记录配置设置。",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "追踪脚本未经同意记录寻址数据（加州）",
+    "description": "第三方追踪脚本未经同意采集访客的 IP 地址、设备标识符或其他寻址和路由信息。加州禁止在没有法院命令的情况下安装或使用笔式记录器或追踪设备（即记录此类信息的设备或程序），个人每次违规可索赔 5,000 美元；网站追踪器是否属于此类在法院存在争议。",
+    "severity": "serious",
+    "reference": "Cal. Penal Code § 638.51(a); § 637.2(a)"
   },
   {
     "id": 1973,
     "code": "CIPAX-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "在线客服实时转录缺少 CIPA 警告 — 界面设计缺陷",
-    "description": "客户端聊天脚本执行实时文本转录并记录对话，但未展示 CIPA 录音警告。 用户界面采用了限制访问者访问或选择的设计组件。",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "未经同意录制含机密通信的会话（加州）",
+    "description": "会话回放或录制脚本在未经各方同意的情况下，记录访客在聊天或表单中输入的机密内容（例如健康或财务问题）。加州禁止未经各方同意录制机密通信；每次违规最高罚款 2,500 美元，个人可就每次违规起诉索赔 5,000 美元。",
+    "severity": "serious",
+    "reference": "Cal. Penal Code § 632(a); § 637.2(a)"
   },
   {
     "id": 1974,
     "code": "CIPAX-004",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "在线客服实时转录缺少 CIPA 警告 — 密码学强度不足",
-    "description": "客户端聊天脚本执行实时文本转录并记录对话，但未展示 CIPA 录音警告。 密码哈希算法或加密传输层低于基线标准。",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "未经同意录制手机来电（加州）",
+    "description": "网站一键呼叫或呼叫中心功能表明，客户来电（包括来自手机或无绳电话的来电）在未告知来电者并取得各方同意的情况下被录音，而加州禁止此行为。须经测试呼叫或审计确认。",
+    "severity": "serious",
+    "reference": "Cal. Penal Code § 632.7(a)"
   },
   {
     "id": 1975,
     "code": "CIPAX-005",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "在线客服实时转录缺少 CIPA 警告 — 漏洞扫描失效",
-    "description": "客户端聊天脚本执行实时文本转录并记录对话，但未展示 CIPA 录音警告。 自动扫描工具未能定期在公共网络路径上运行。",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "未经各方同意拦截电子通信（佛罗里达州）",
+    "description": "聊天、会话回放或类似脚本在未取得各方事先同意的情况下拦截访客的电子通信，而佛州规定拦截须经各方事先同意方为合法。通信被拦截者可索赔实际损失，但不低于每天 100 美元或 1,000 美元（取较高者）。此类工具是否构成“拦截”在法院存在争议。",
+    "severity": "serious",
+    "reference": "Fla. Stat. § 934.03(1)(a), (2)(d)"
   },
   {
     "id": 1976,
     "code": "CIPAX-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "在线客服实时转录缺少 CIPA 警告 — 同意日志记录完整性缺陷",
-    "description": "客户端聊天脚本执行实时文本转录并记录对话，但未展示 CIPA 录音警告。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "披露或使用被拦截的通信内容（佛罗里达州）",
+    "description": "有迹象表明，被拦截的聊天或录制会话内容被披露给其他公司或被使用（例如用于广告），而企业知道或应当知道这些内容系通过非法拦截获得，佛州禁止此行为。须经数据共享审计确认。",
+    "severity": "serious",
+    "reference": "Fla. Stat. § 934.03(1)(c)–(d)"
   },
   {
     "id": 1977,
     "code": "CIPAX-007",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "在线客服实时转录缺少 CIPA 警告 — 退出链接可见性问题",
-    "description": "客户端聊天脚本执行实时文本转录并记录对话，但未展示 CIPA 录音警告。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "未经所有参与者同意拦截私人通信（华盛顿州）",
+    "description": "聊天或消息功能通过旨在录制或传输通信的设备或程序，在未事先取得所有参与者同意的情况下拦截或录制个人之间的私人通信，而华盛顿州将此列为违法。",
+    "severity": "serious",
+    "reference": "RCW 9.73.030(1)(a) (Washington)"
   },
   {
     "id": 1978,
     "code": "CIPAX-008",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "在线客服实时转录缺少 CIPA 警告 — 隐私声明披露不足",
-    "description": "客户端聊天脚本执行实时文本转录并记录对话，但未展示 CIPA 录音警告。 披露未能清楚说明个人文件处理的目的和范围。",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "语音功能未经同意录制私人对话（华盛顿州）",
+    "description": "语音助手、语音留言或使用麦克风的功能在未事先取得所有参与者同意的情况下录制私人对话，而华盛顿州禁止此行为。",
+    "severity": "moderate",
+    "reference": "RCW 9.73.030(1)(b) (Washington)"
   },
   {
     "id": 1979,
     "code": "CIPAX-009",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "在线客服实时转录缺少 CIPA 警告 — 审计控制验证缺失",
-    "description": "客户端聊天脚本执行实时文本转录并记录对话，但未展示 CIPA 录音警告。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "会话回放或聊天脚本在同意前访问设备（欧盟）",
+    "description": "会话回放、热力图或第三方聊天脚本在取得同意前就在访客设备上存储或读取标识符，而对于用户所请求服务并非严格必需的操作，欧盟法律要求基于清晰、全面的信息事先取得同意。",
+    "severity": "serious",
+    "reference": "ePrivacy Directive Art. 5(3)"
   },
   {
     "id": 1980,
     "code": "CIPAX-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "State Privacy Laws",
-    "title": "在线客服实时转录缺少 CIPA 警告 — 管理员凭据安全弱点",
-    "description": "客户端聊天脚本执行实时文本转录并记录对话，但未展示 CIPA 录音警告。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
-    "severity": "critical",
-    "reference": "California Invasion of Privacy Act (CIPA)"
+    "title": "将被拦截的聊天内容用于其他目的（加州）",
+    "description": "有迹象表明，从传输中被读取的聊天中获得的信息被用于其他目的（例如训练模型或定向广告），而加州窃听条款也禁止使用或试图使用以此方式获得的信息。须经对服务商数据使用的审计确认。",
+    "severity": "serious",
+    "reference": "Cal. Penal Code § 631(a)"
   },
   {
     "id": 1981,
     "code": "LKSG-001",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少供应链投诉举报渠道",
-    "description": "公司网站缺少公开访问渠道，供供应商提交侵犯人权的投诉举报。",
+    "title": "缺少供应链申诉渠道",
+    "description": "受德国《供应链尽职调查法》约束的公司（在德国拥有 1,000 名以上员工）未公开提供关于如何联系和使用其申诉程序的清晰信息，该程序用于报告自身业务或直接供应商中的人权和环境风险。未建立该程序最高可处 800,000 欧元罚款。",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "LkSG § 8(1), (4) (Germany)"
   },
   {
     "id": 1982,
     "code": "LKSG-002",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少供应链投诉举报渠道 — 审计与记录失效",
-    "description": "公司网站缺少公开访问渠道，供供应商提交侵犯人权的投诉举报。 审计跟踪不充分，未能记录配置设置。",
+    "title": "申诉程序规则未公开（德国）",
+    "description": "公司未以文本形式公布其供应链申诉程序的程序规则，而德国《供应链尽职调查法》要求这些规则公开可查。",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "LkSG § 8(2) (Germany)"
   },
   {
     "id": 1983,
     "code": "LKSG-003",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少供应链投诉举报渠道 — 界面设计缺陷",
-    "description": "公司网站缺少公开访问渠道，供供应商提交侵犯人权的投诉举报。 用户界面采用了限制访问者访问或选择的设计组件。",
-    "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "title": "年度尽职调查报告未在网站公布（德国）",
+    "description": "公司未在财年结束后四个月内于其网站免费公布关于履行供应链尽职调查义务的年度报告（识别的风险、采取的措施、评估与结论），且该报告须保留七年。最高罚款 100,000 欧元。",
+    "severity": "serious",
+    "reference": "LkSG § 10(2) (Germany)"
   },
   {
     "id": 1984,
     "code": "LKSG-004",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少供应链投诉举报渠道 — 密码学强度不足",
-    "description": "公司网站缺少公开访问渠道，供供应商提交侵犯人权的投诉举报。 密码哈希算法或加密传输层低于基线标准。",
+    "title": "缺少人权战略政策声明（德国）",
+    "description": "没有迹象表明公司管理层发布了关于人权战略的政策声明（说明尽职调查程序、优先人权和环境风险，以及对员工和供应商的期望），而德国《供应链尽职调查法》要求在识别风险后发布。须经审计确认。",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "LkSG § 6(2) (Germany)"
   },
   {
     "id": 1985,
     "code": "LKSG-005",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少供应链投诉举报渠道 — 漏洞扫描失效",
-    "description": "公司网站缺少公开访问渠道，供供应商提交侵犯人权的投诉举报。 自动扫描工具未能定期在公共网络路径上运行。",
+    "title": "申诉程序未每年审查（德国）",
+    "description": "过时或失效的申诉渠道（例如失效链接或无人回复的联系地址）表明，公司未按德国《供应链尽职调查法》要求，至少每年以及在风险状况变化时审查申诉程序的有效性。最高罚款 500,000 欧元；须经审计确认。",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "LkSG § 8(5) (Germany)"
   },
   {
     "id": 1986,
     "code": "LKSG-006",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少供应链投诉举报渠道 — 同意日志记录完整性缺陷",
-    "description": "公司网站缺少公开访问渠道，供供应商提交侵犯人权的投诉举报。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
+    "title": "首页缺少供应链奴役问题披露链接（加州）",
+    "description": "在加州经营、全球总收入超过 1 亿美元的零售商或制造商，未在首页设置醒目易懂的链接，指向其关于消除直接供应链中奴役和人口贩卖所作努力的披露（核查、审计、认证、内部问责及培训）。",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "Cal. Civ. Code § 1714.43"
   },
   {
     "id": 1987,
     "code": "LKSG-007",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少供应链投诉举报渠道 — 退出链接可见性问题",
-    "description": "公司网站缺少公开访问渠道，供供应商提交侵犯人权的投诉举报。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
+    "title": "现代奴役声明未在首页链接（英国）",
+    "description": "营业额超过英国门槛且拥有网站的商业组织，未在网站上发布年度奴役和人口贩卖声明，或未在首页显著位置放置该声明的链接。",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "UK Modern Slavery Act 2015 s. 54(7)"
   },
   {
     "id": 1988,
     "code": "LKSG-008",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少供应链投诉举报渠道 — 隐私声明披露不足",
-    "description": "公司网站缺少公开访问渠道，供供应商提交侵犯人权的投诉举报。 披露未能清楚说明个人文件处理的目的和范围。",
+    "title": "现代奴役声明未经批准或签署（英国）",
+    "description": "公司公布的奴役和人口贩卖声明未显示经董事会（或同等管理机构）批准并由一名董事签署，而英国《现代奴役法》对此有要求（有限责任合伙及合伙企业须由法定成员或合伙人批准或签署）。",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "UK Modern Slavery Act 2015 s. 54(6)"
   },
   {
     "id": 1989,
     "code": "LKSG-009",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少供应链投诉举报渠道 — 审计控制验证缺失",
-    "description": "公司网站缺少公开访问渠道，供供应商提交侵犯人权的投诉举报。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
-    "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "title": "强迫劳动报告未在网站显著位置公布（加拿大）",
+    "description": "须于每年 5 月 31 日前向部长报告其供应链中防止强迫劳动和童工措施的实体，未公开该报告，包括未在其网站显著位置发布。违规属刑事罪，最高罚款 250,000 加元。",
+    "severity": "serious",
+    "reference": "Fighting Against Forced Labour and Child Labour in Supply Chains Act (S.C. 2023, c. 9) s. 13(1), 19(1) (Canada)"
   },
   {
     "id": 1990,
     "code": "LKSG-010",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少供应链投诉举报渠道 — 管理员凭据安全弱点",
-    "description": "公司网站缺少公开访问渠道，供供应商提交侵犯人权的投诉举报。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
+    "title": "强迫劳动报告缺少法定内容（加拿大）",
+    "description": "公布的报告未说明实体的结构、业务和供应链，其针对强迫劳动和童工的政策与尽职调查程序，存在风险的业务和供应链环节及已采取的措施，而加拿大供应链法对此有要求。",
     "severity": "moderate",
-    "reference": "German Supply Chain Due Diligence Act (LkSG)"
+    "reference": "Fighting Against Forced Labour and Child Labour in Supply Chains Act (S.C. 2023, c. 9) s. 11(3) (Canada)"
   },
   {
     "id": 1991,
     "code": "CSRD-001",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少数字化可持续发展报告披露",
-    "description": "企业门户网站未能以机器可读的数字格式发布年度可持续发展审计报告。",
+    "title": "管理报告未采用统一电子报告格式（欧盟）",
+    "description": "须进行欧盟可持续发展报告的企业仅以 PDF 或网页形式发布管理报告，表明其未按会计指令要求采用统一电子报告格式（依据第 (EU) 2019/815 号授权条例的 XHTML）；可持续发展部分的标记须待标记规则通过后方为强制。须以官方报送确认。",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 29d(1) (as amended by CSRD)"
   },
   {
     "id": 1992,
     "code": "CSRD-002",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少数字化可持续发展报告披露 — 审计与记录失效",
-    "description": "企业门户网站未能以机器可读的数字格式发布年度可持续发展审计报告。 审计跟踪不充分，未能记录配置设置。",
-    "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "title": "适用范围内企业未进行可持续发展报告（欧盟）",
+    "description": "看起来同时超过 4.5 亿欧元净营业额和平均 1,000 名员工的企业，发布的管理报告缺少理解其对可持续发展事项的影响以及这些事项如何影响其发展、业绩和状况所需的可持续发展信息。须以企业规模数据和官方报告确认。",
+    "severity": "serious",
+    "reference": "Directive 2013/34/EU Art. 19a(1) (as amended by Directive (EU) 2026/470)"
   },
   {
     "id": 1993,
     "code": "CSRD-003",
     "evidenceKind": "observable",
     "category": "Financial / Corporate",
-    "title": "缺少数字化可持续发展报告披露 — 界面设计缺陷",
-    "description": "企业门户网站未能以机器可读的数字格式发布年度可持续发展审计报告。 用户界面采用了限制访问者访问或选择的设计组件。",
+    "title": "可持续发展信息未设专门章节（欧盟）",
+    "description": "适用范围内企业发布的管理报告将可持续发展信息分散在全文中，而非按会计指令要求以清晰可辨的专门章节呈现。",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 19a(1) second subparagraph"
   },
   {
     "id": 1994,
     "code": "CSRD-004",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少数字化可持续发展报告披露 — 密码学强度不足",
-    "description": "企业门户网站未能以机器可读的数字格式发布年度可持续发展审计报告。 密码哈希算法或加密传输层低于基线标准。",
+    "title": "缺少迈向 1.5 °C 的转型计划（欧盟）",
+    "description": "可持续发展章节未说明企业为使其商业模式和战略与向可持续经济转型、《巴黎协定》1.5 °C 温控目标及 2050 年气候中和相一致而制定的计划，包括实施行动及相关财务和投资计划。须经审查官方报告确认。",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 19a(2)(a)(iii)"
   },
   {
     "id": 1995,
     "code": "CSRD-005",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少数字化可持续发展报告披露 — 漏洞扫描失效",
-    "description": "企业门户网站未能以机器可读的数字格式发布年度可持续发展审计报告。 自动扫描工具未能定期在公共网络路径上运行。",
+    "title": "缺少有时限的可持续发展目标及进展（欧盟）",
+    "description": "可持续发展章节未提供有时限的目标（在适当情况下包括至少 2030 年和 2050 年的温室气体绝对减排目标）、目标进展，以及环境目标是否基于确凿科学证据的说明。须经审查官方报告确认。",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 19a(2)(b)"
   },
   {
     "id": 1996,
     "code": "CSRD-006",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少数字化可持续发展报告披露 — 同意日志记录完整性缺陷",
-    "description": "企业门户网站未能以机器可读的数字格式发布年度可持续发展审计报告。 自动日志系统未能将客户选择存储在不可变的存储注册表中。",
+    "title": "未说明可持续发展尽职调查及不利影响（欧盟）",
+    "description": "可持续发展章节未说明针对可持续发展事项的尽职调查程序、与自身运营及价值链相关的主要实际或潜在不利影响，以及为预防、减轻或补救这些影响所采取的行动。须经审查官方报告确认。",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 19a(2)(f)"
   },
   {
     "id": 1997,
     "code": "CSRD-007",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少数字化可持续发展报告披露 — 退出链接可见性问题",
-    "description": "企业门户网站未能以机器可读的数字格式发布年度可持续发展审计报告。 页脚缺乏显着的链接允许访问者请求排除在数据追踪之外。",
-    "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "title": "适用范围内集团未进行合并可持续发展报告（欧盟）",
+    "description": "按合并口径看起来超过 4.5 亿欧元净营业额和平均 1,000 名员工的集团，其母公司发布的合并管理报告缺少关于集团可持续发展影响以及可持续发展事项如何影响集团的专门章节。须以集团数据和官方报告确认。",
+    "severity": "serious",
+    "reference": "Directive 2013/34/EU Art. 29a(1) (as amended by Directive (EU) 2026/470)"
   },
   {
     "id": 1998,
     "code": "CSRD-008",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少数字化可持续发展报告披露 — 隐私声明披露不足",
-    "description": "企业门户网站未能以机器可读的数字格式发布年度可持续发展审计报告。 披露未能清楚说明个人文件处理的目的和范围。",
+    "title": "可持续发展报告缺少有限鉴证意见（欧盟）",
+    "description": "发布的报告中没有法定审计师基于有限鉴证业务，就可持续发展报告是否符合指令和报告准则（包括《分类法条例》第 8 条披露）出具的意见。须经审查审计报告确认。",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 34(1)(aa)"
   },
   {
     "id": 1999,
     "code": "CSRD-009",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少数字化可持续发展报告披露 — 审计控制验证缺失",
-    "description": "企业门户网站未能以机器可读的数字格式发布年度可持续发展审计报告。 数据传输过程在没有确保记录有效性的自动检查情况下运行。",
+    "title": "管理报告未在 12 个月内公布（欧盟）",
+    "description": "经正式批准的财务报表和管理报告（连同审计师意见）看起来未在资产负债表日后 12 个月内公布（适用时采用电子报告格式），而会计指令对此有要求。须通过商业登记簿确认。",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 30(1)"
   },
   {
     "id": 2000,
     "code": "CSRD-010",
-    "evidenceKind": "observable",
+    "evidenceKind": "indicative",
     "category": "Financial / Corporate",
-    "title": "缺少数字化可持续发展报告披露 — 管理员凭据安全弱点",
-    "description": "企业门户网站未能以机器可读的数字格式发布年度可持续发展审计报告。 管理控制台允许使用标准用户凭据，且未强制执行 MFA 密钥。",
+    "title": "未说明主要可持续发展风险（欧盟）",
+    "description": "可持续发展章节未说明企业与可持续发展事项相关的主要风险、对这些事项的主要依赖，以及企业如何管理这些风险。须经审查官方报告确认。",
     "severity": "moderate",
-    "reference": "EU Corporate Sustainability Reporting Directive (CSRD)"
+    "reference": "Directive 2013/34/EU Art. 19a(2)(g)"
   }
 ];
