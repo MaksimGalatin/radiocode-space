@@ -1202,7 +1202,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Salida de IA Generativa / Deepfakes Sin Marcar",
     "description": "El sitio web presenta texto, audio o video generado por IA (deepfakes) sin marcarlo en un formato legible por máquina como generado por IA, violando las reglas de transparencia de la Ley de IA de la UE.",
     "severity": "critical",
-    "reference": "AI Act Art. 52(3)"
+    "reference": "AI Act Art. 50(2)"
   },
   {
     "id": 115,
@@ -1212,7 +1212,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Falta de Divulgación sobre Interacción con Usuario de IA",
     "description": "El sitio web utiliza un sistema de IA (como un chatbot de soporte al cliente) para interactuar con personas naturales sin informarles que están interactuando con una IA, violando los mandatos de transparencia.",
     "severity": "critical",
-    "reference": "AI Act Art. 52(1)"
+    "reference": "AI Act Art. 50(1)"
   },
   {
     "id": 116,
@@ -1332,7 +1332,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Sin Declaración de Accesibilidad Publicada Bajo la European Accessibility Act",
     "description": "El sitio web de comercio electrónico o servicio digital dirigido a consumidores de la UE carece de una declaración de accesibilidad públicamente accesible que describa el estado de conformidad con EN 301 549 / WCAG 2.1 AA. La European Accessibility Act (Directiva 2019/882), exigible desde el 28 de junio de 2025, exige que las empresas del sector privado que prestan servicios cubiertos publiquen declaraciones de accesibilidad.",
     "severity": "serious",
-    "reference": "EU Directive 2019/882 (EAA), Art. 14"
+    "reference": "EU Directive 2019/882 (EAA), Art. 13(2), Annex V"
   },
   {
     "id": 128,
@@ -1342,7 +1342,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Sin security.txt ni Política de Divulgación de Vulnerabilidades (NIS2)",
     "description": "El sitio web de una entidad esencial o importante (energía, salud, transporte, infraestructura digital) carece de un archivo /.well-known/security.txt o de cualquier política de divulgación de vulnerabilidades de acceso público. La Directiva NIS2 exige que las entidades cubiertas implementen medidas de gestión de incidentes y vulnerabilidades.",
     "severity": "moderate",
-    "reference": "EU Directive 2022/2555 (NIS2), Art. 21(2)(b)"
+    "reference": "EU Directive 2022/2555 (NIS2), Art. 21(2)(b), (e)"
   },
   {
     "id": 129,
@@ -1582,7 +1582,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Falta de metadatos/marca de agua legible por máquina en contenido generado por IA (EU AI Act)",
     "description": "Los proveedores de sistemas de IA que generen o manipulen imágenes, audio o video (contenido sintético/deepfakes) deben garantizar que los resultados estén marcados en un formato legible por máquina para detectar su origen artificial según la Ley de IA de la UE.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(3)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(2)"
   },
   {
     "id": 153,
@@ -1660,9 +1660,9 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "evidenceKind": "observable",
     "category": "Digital Operations",
     "title": "Falta de divulgación del reconocimiento de emociones / categorización biométrica (EU AI Act)",
-    "description": "Los proveedores o usuarios de sistemas de reconocimiento de emociones o categorización biométrica deben informar a las personas expuestas sobre el funcionamiento del sistema, violando las obligaciones de transparencia bajo el artículo 52(2) de la Ley de IA de la UE.",
+    "description": "Los proveedores o usuarios de sistemas de reconocimiento de emociones o categorización biométrica deben informar a las personas expuestas sobre el funcionamiento del sistema, violando las obligaciones de transparencia bajo el artículo 50(3) de la Ley de IA de la UE.",
     "severity": "critical",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(2)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(3)"
   },
   {
     "id": 161,
@@ -2222,7 +2222,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Falta de transparencia del algoritmo del sistema de recomendación (EU DSA)",
     "description": "El sitio web que utiliza recomendadores algorítmicos no explica los parámetros principales utilizados en su aviso de términos.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2022/2065 (DSA), Art. 26"
+    "reference": "Regulation (EU) 2022/2065 (DSA), Art. 27"
   },
   {
     "id": 217,
@@ -2682,7 +2682,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Falta de planes de seguimiento postcomercialización para sistemas de IA (EU AI Act)",
     "description": "El proveedor de sistemas de IA regulados no publica un plan de seguimiento posterior a la comercialización ni canales de incidentes.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 61"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 72"
   },
   {
     "id": 263,
@@ -4432,7 +4432,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Exclusiones en registros de riesgo de terceros bajo DORA",
     "description": "Las aplicaciones conectan APIs de terceros sin llevar un registro consolidado de proveedores TIC y sus certificaciones, violando DORA.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2022/2554 (DORA), Art. 30"
+    "reference": "Regulation (EU) 2022/2554 (DORA), Art. 28(3)"
   },
   {
     "id": 438,
@@ -4472,7 +4472,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Falta de advertencias de análisis de sentimientos de IA",
     "description": "Los chatbots con IA analizan las emociones de los usuarios en los mensajes sin mostrar advertencias claras, violando la Ley de IA de la UE.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(2)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(3)"
   },
   {
     "id": 442,
@@ -4482,7 +4482,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Sistemas de categorización biométrica con IA prohibidos",
     "description": "Las interfaces de verificación categorizan a los usuarios mediante biometría facial de fotos subidas sin base legal, violando la Ley de IA de la UE.",
     "severity": "critical",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 5(1)(c)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 5(1)(g)"
   },
   {
     "id": 443,
@@ -4492,7 +4492,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Falta de marcas de agua en metadatos de imágenes de IA",
     "description": "Las herramientas de IA generativa que crean imágenes o textos no incrustan marcas de agua en los metadatos, violando la Ley de IA de la UE.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(3)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(2)"
   },
   {
     "id": 444,
@@ -15632,7 +15632,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Reglas de suspensión de usuarios no conformes",
     "description": "El sitio bloquea cuentas o elimina artículos de vendedores sin proporcionar una justificación por escrito.",
     "severity": "serious",
-    "reference": "EU Digital Services Act (DSA) Article 20"
+    "reference": "EU Digital Services Act (DSA) Article 17"
   },
   {
     "id": 1558,
@@ -15642,7 +15642,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Falta de declaración de motivos en el directorio público",
     "description": "El sitio modera comentarios sin publicar sus decisiones en la base de datos de la DSA de la UE.",
     "severity": "moderate",
-    "reference": "EU Digital Services Act (DSA) Article 17"
+    "reference": "EU Digital Services Act (DSA) Article 24(5)"
   },
   {
     "id": 1559,
@@ -15972,7 +15972,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Falta de divulgación de interacción con IA",
     "description": "El chatbot opera en el sitio sin informar explícitamente a los usuarios que se comunican con una IA.",
     "severity": "serious",
-    "reference": "EU AI Act Article 52(1)"
+    "reference": "EU AI Act Article 50(1)"
   },
   {
     "id": 1592,
@@ -15982,7 +15982,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Falta de divulgación de contenido generado por IA",
     "description": "Las imágenes sintéticas o noticias de IA carecen de marcas legibles por máquina que detecten su origen artificial.",
     "severity": "serious",
-    "reference": "EU AI Act Article 52(3)"
+    "reference": "EU AI Act Article 50(2)"
   },
   {
     "id": 1593,
@@ -16012,7 +16012,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Falta de divulgación en imágenes y videos deepfake",
     "description": "Se cargan videos o audios modificados realistas sin advertencias explícitas de contenido alterado.",
     "severity": "serious",
-    "reference": "EU AI Act Article 52(3)-Deepfake"
+    "reference": "EU AI Act Article 50(4)"
   },
   {
     "id": 1596,
@@ -16062,7 +16062,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Integración insegura de base de datos de IA de alto riesgo",
     "description": "El modelo de elegibilidad crediticia opera en el servidor sin registrarse en la base de datos de IA de la UE.",
     "severity": "serious",
-    "reference": "EU AI Act Article 60"
+    "reference": "EU AI Act Articles 49, 71"
   },
   {
     "id": 1601,

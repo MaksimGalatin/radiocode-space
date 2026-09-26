@@ -452,7 +452,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Free Trial Auto-Converting Without Disclosure",
     "description": "A free trial automatically converts to a paid subscription without clear, conspicuous disclosure of the conversion terms, billing date, and amount before the consumer provides payment information.",
     "severity": "moderate",
-    "reference": "FTC Act § 5; Restore Online Shoppers\\' Confidence Act (ROSCA)"
+    "reference": "FTC Act § 5; Restore Online Shoppers\' Confidence Act (ROSCA)"
   },
   {
     "id": 40,
@@ -1202,7 +1202,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Unmarked Generative AI Output / Deepfakes",
     "description": "Website presents AI-generated text, audio, or video (deepfakes) without marking it in a machine-readable format as AI-generated, violating EU AI Act transparency rules.",
     "severity": "critical",
-    "reference": "AI Act Art. 52(3)"
+    "reference": "AI Act Art. 50(2)"
   },
   {
     "id": 115,
@@ -1212,7 +1212,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Lack of Disclosure on AI User Interaction",
     "description": "The website uses an AI system (like a customer support chatbot) to interact with natural persons without informing them that they are interacting with an AI, violating transparency mandates.",
     "severity": "critical",
-    "reference": "AI Act Art. 52(1)"
+    "reference": "AI Act Art. 50(1)"
   },
   {
     "id": 116,
@@ -1332,7 +1332,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "No Accessibility Statement Published Under European Accessibility Act",
     "description": "E-commerce or digital service website targeting EU consumers lacks a publicly accessible accessibility statement describing conformance status with EN 301 549 / WCAG 2.1 AA. The European Accessibility Act (Directive 2019/882), enforceable since June 28, 2025, requires private-sector businesses providing covered services to publish accessibility declarations.",
     "severity": "serious",
-    "reference": "EU Directive 2019/882 (EAA), Art. 14"
+    "reference": "EU Directive 2019/882 (EAA), Art. 13(2), Annex V"
   },
   {
     "id": 128,
@@ -1342,7 +1342,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "No Security.txt or Vulnerability Disclosure Policy (NIS2)",
     "description": "Website of an essential or important entity (energy, health, transport, digital infrastructure) lacks a /.well-known/security.txt file or any publicly accessible vulnerability disclosure policy. NIS2 Directive requires covered entities to implement incident handling and vulnerability management measures.",
     "severity": "moderate",
-    "reference": "EU Directive 2022/2555 (NIS2), Art. 21(2)(b)"
+    "reference": "EU Directive 2022/2555 (NIS2), Art. 21(2)(b), (e)"
   },
   {
     "id": 129,
@@ -1582,7 +1582,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Missing Machine-Readable Metadata/Watermark in AI-Generated Content (EU AI Act)",
     "description": "Providers of AI systems that generate or manipulate image, audio, or video content (synthetic content/deepfakes) must ensure that the outputs are marked in a machine-readable format and detectable as artificially generated or manipulated.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(3)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(2)"
   },
   {
     "id": 153,
@@ -1660,9 +1660,9 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "evidenceKind": "observable",
     "category": "Digital Operations",
     "title": "Missing Emotion Recognition / Biometric Categorization Disclosure (EU AI Act)",
-    "description": "Providers or deployers of emotion recognition or biometric categorization systems must inform natural persons exposed thereto of the operation of the system, violating transparency obligations under EU AI Act Article 52(2).",
+    "description": "Providers or deployers of emotion recognition or biometric categorization systems must inform natural persons exposed thereto of the operation of the system, violating transparency obligations under EU AI Act Article 50(3).",
     "severity": "critical",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(2)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(3)"
   },
   {
     "id": 161,
@@ -2222,7 +2222,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Missing Recommender System Algorithmic Transparency (EU DSA)",
     "description": "Website utilizing algorithmic recommender systems (e.g., personalized feed, product suggestions) fails to explain the main parameters used in the algorithms in its terms and conditions, violating DSA.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2022/2065 (DSA), Art. 26"
+    "reference": "Regulation (EU) 2022/2065 (DSA), Art. 27"
   },
   {
     "id": 217,
@@ -2682,7 +2682,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Lack of Post-Market Monitoring Plans for AI Systems (EU AI Act)",
     "description": "Provider of regulated AI systems fails to host or link to a publicly accessible post-market monitoring plan and incident reporting path, violating EU AI Act requirements.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 61"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 72"
   },
   {
     "id": 263,
@@ -4432,7 +4432,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "DORA Third-Party Risk Registers Exclusions",
     "description": "Financial applications link to external APIs or services without preserving a consolidated register of third-party ICT providers and security certifications, violating DORA.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2022/2554 (DORA), Art. 30"
+    "reference": "Regulation (EU) 2022/2554 (DORA), Art. 28(3)"
   },
   {
     "id": 438,
@@ -4472,7 +4472,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "AI Sentiment Analysis Warnings Missing",
     "description": "AI-powered customer service chatbots use emotion-detection or sentiment analysis algorithms on user message inputs without displaying clear warnings, violating EU AI Act.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(2)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(3)"
   },
   {
     "id": 442,
@@ -4482,7 +4482,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Prohibited AI Biometric Categorization Systems",
     "description": "Online user onboarding interfaces categorize users based on biometrics derived from uploaded facial photos without explicit, statutory legal grounds, violating EU AI Act.",
     "severity": "critical",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 5(1)(c)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 5(1)(g)"
   },
   {
     "id": 443,
@@ -4492,7 +4492,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Missing AI Image & Text Metadata Watermarks",
     "description": "Gen-AI interfaces outputting images or texts fail to embed standard metadata watermarks showing the content is AI-generated, violating EU AI Act mandates.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(3)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(2)"
   },
   {
     "id": 444,
@@ -15632,7 +15632,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Non-Compliant User Suspension Rules",
     "description": "The website blocks accounts or removes seller items without providing a detailed, written justification.",
     "severity": "serious",
-    "reference": "EU Digital Services Act (DSA) Article 20"
+    "reference": "EU Digital Services Act (DSA) Article 17"
   },
   {
     "id": 1558,
@@ -15642,7 +15642,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Missing Statements of Reasons in Public Directory",
     "description": "The web host moderates third-party comments without publishing decisions in the EU DSA Database.",
     "severity": "moderate",
-    "reference": "EU Digital Services Act (DSA) Article 17"
+    "reference": "EU Digital Services Act (DSA) Article 24(5)"
   },
   {
     "id": 1559,
@@ -15972,7 +15972,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Missing AI Interaction Disclosures for Users",
     "description": "The chatbot operates on the contact page without explicitly informing visitors they are communicating with an AI system.",
     "severity": "serious",
-    "reference": "EU AI Act Article 52(1)"
+    "reference": "EU AI Act Article 50(1)"
   },
   {
     "id": 1592,
@@ -15982,7 +15982,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Missing Generative AI Content Disclosures",
     "description": "Synthetic images or AI-generated news items lack machine-readable labels detecting the artificial origin.",
     "severity": "serious",
-    "reference": "EU AI Act Article 52(3)"
+    "reference": "EU AI Act Article 50(2)"
   },
   {
     "id": 1593,
@@ -16012,7 +16012,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Deceptive Deepfake Image and Video Disclosures",
     "description": "Realistic altered video or audio files load inside media streams without explicit altered-content warnings.",
     "severity": "serious",
-    "reference": "EU AI Act Article 52(3)-Deepfake"
+    "reference": "EU AI Act Article 50(4)"
   },
   {
     "id": 1596,
@@ -16062,7 +16062,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Insecure High-Risk AI Database Integration",
     "description": "The automated credit eligibility model runs on the server without registering in the public EU AI database.",
     "severity": "serious",
-    "reference": "EU AI Act Article 60"
+    "reference": "EU AI Act Articles 49, 71"
   },
   {
     "id": 1601,

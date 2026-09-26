@@ -1202,7 +1202,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Непомеченный вывод генеративного ИИ / дипфейки",
     "description": "Сайт представляет текст, аудио или видео, сгенерированные ИИ (дипфейки), без маркировки в машиночитаемом формате как сгенерированные ИИ, нарушая правила прозрачности EU AI Act.",
     "severity": "critical",
-    "reference": "AI Act Art. 52(3)"
+    "reference": "AI Act Art. 50(2)"
   },
   {
     "id": 115,
@@ -1212,7 +1212,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие раскрытия информации о взаимодействии с ИИ",
     "description": "Сайт использует систему ИИ (например, чат-бота поддержки клиентов) для взаимодействия с физическими лицами без информирования их о том, что они взаимодействуют с ИИ, нарушая требования прозрачности.",
     "severity": "critical",
-    "reference": "AI Act Art. 52(1)"
+    "reference": "AI Act Art. 50(1)"
   },
   {
     "id": 116,
@@ -1332,7 +1332,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие опубликованного заявления о доступности в соответствии с European Accessibility Act",
     "description": "Сайт электронной коммерции или цифровой услуги, ориентированный на потребителей ЕС, не имеет общедоступного заявления о доступности, описывающего статус соответствия EN 301 549 / WCAG 2.1 AA. European Accessibility Act (Directive 2019/882), вступающий в силу с 28 июня 2025 года, требует от частных компаний, предоставляющих охватываемые услуги, публиковать декларации о доступности.",
     "severity": "serious",
-    "reference": "EU Directive 2019/882 (EAA), Art. 14"
+    "reference": "EU Directive 2019/882 (EAA), Art. 13(2), Annex V"
   },
   {
     "id": 128,
@@ -1342,7 +1342,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие security.txt или политики раскрытия уязвимостей (NIS2)",
     "description": "Сайт существенного или важного субъекта (энергетика, здравоохранение, транспорт, цифровая инфраструктура) не имеет файла /.well-known/security.txt или какой-либо общедоступной политики раскрытия уязвимостей. Директива NIS2 требует от охватываемых субъектов внедрения мер по обработке инцидентов и управлению уязвимостями.",
     "severity": "moderate",
-    "reference": "EU Directive 2022/2555 (NIS2), Art. 21(2)(b)"
+    "reference": "EU Directive 2022/2555 (NIS2), Art. 21(2)(b), (e)"
   },
   {
     "id": 129,
@@ -1582,7 +1582,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие машиночитаемых метаданных/водяного знака в ИИ-контенте (EU AI Act)",
     "description": "Поставщики ИИ-систем, генерирующих или манипулирующих изображениями, аудио- или видеоматериалами (синтетический контент/дипфейки), должны обеспечивать маркировку выходных данных в машиночитаемом формате для обнаружения их искусственного происхождения согласно Регламенту ЕС об ИИ.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(3)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(2)"
   },
   {
     "id": 153,
@@ -1660,9 +1660,9 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "evidenceKind": "observable",
     "category": "Digital Operations",
     "title": "Отсутствие раскрытия информации об распознавании эмоций / биометрической категоризации (EU AI Act)",
-    "description": "Поставщики или пользователи систем распознавания эмоций или биометрической категоризации должны информировать физических лиц, подвергающихся их воздействию, о работе системы, нарушая обязательства по прозрачности согласно статье 52(2) Регламенту ЕС об ИИ.",
+    "description": "Поставщики или пользователи систем распознавания эмоций или биометрической категоризации должны информировать физических лиц, подвергающихся их воздействию, о работе системы, нарушая обязательства по прозрачности согласно статье 50(3) Регламенту ЕС об ИИ.",
     "severity": "critical",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(2)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(3)"
   },
   {
     "id": 161,
@@ -2222,7 +2222,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие описания алгоритмов рекомендаций (EU DSA)",
     "description": "Сайт, использующий алгоритмы персональных рекомендаций, не разъясняет принципы их работы и критерии выдачи в условиях использования, нарушая DSA.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2022/2065 (DSA), Art. 26"
+    "reference": "Regulation (EU) 2022/2065 (DSA), Art. 27"
   },
   {
     "id": 217,
@@ -2682,7 +2682,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие плана пострыночного мониторинга ИИ (EU AI Act)",
     "description": "Поставщик регулируемых ИИ-систем не указывает планы мониторинга стабильности и каналы сообщения об инцидентах ИИ.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 61"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 72"
   },
   {
     "id": 263,
@@ -4432,7 +4432,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие реестров рисков третьих лиц по DORA",
     "description": "Финансовые приложения подключают сторонние API без ведения консолидированного реестра поставщиков ИКТ и их сертификатов безопасности, нарушая DORA.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2022/2554 (DORA), Art. 30"
+    "reference": "Regulation (EU) 2022/2554 (DORA), Art. 28(3)"
   },
   {
     "id": 438,
@@ -4472,7 +4472,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие предупреждений об анализе эмоций с помощью ИИ",
     "description": "Чат-боты техподдержки на базе ИИ анализируют эмоциональное состояние пользователя без показа предупреждений, нарушая закон ЕС об искусственном интеллекте.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(2)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(3)"
   },
   {
     "id": 442,
@@ -4482,7 +4482,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Запрещенные системы биометрической категоризации с помощью ИИ",
     "description": "Интерфейсы верификации распределяют пользователей по категориям на основе биометрии из загруженных фото лица без законных оснований, нарушая закон ЕС об ИИ.",
     "severity": "critical",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 5(1)(c)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 5(1)(g)"
   },
   {
     "id": 443,
@@ -4492,7 +4492,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие водяных знаков метаданных в сгенерированных ИИ медиа",
     "description": "Генеративные ИИ-сервисы, создающие изображения или тексты, не вшивают стандартные водяные знаки о генерации контента ИИ, нарушая закон ЕС об ИИ.",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(3)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(2)"
   },
   {
     "id": 444,
@@ -15632,7 +15632,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Нарушение правил блокировки пользователей",
     "description": "Сайт блокирует учетные записи или удаляет товары продавцов без предоставления письменного обоснования.",
     "severity": "serious",
-    "reference": "EU Digital Services Act (DSA) Article 20"
+    "reference": "EU Digital Services Act (DSA) Article 17"
   },
   {
     "id": 1558,
@@ -15642,7 +15642,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие публикации обоснований решений по модерации",
     "description": "Сайт модерирует комментарии третьих лиц, но не публикует отчеты в публичной базе данных ЕС (DSA Database).",
     "severity": "moderate",
-    "reference": "EU Digital Services Act (DSA) Article 17"
+    "reference": "EU Digital Services Act (DSA) Article 24(5)"
   },
   {
     "id": 1559,
@@ -15972,7 +15972,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие раскрытия факта взаимодействия с ИИ",
     "description": "Чат-бот работает на странице контактов без явного информирования пользователей о том, что они общаются с ИИ.",
     "severity": "serious",
-    "reference": "EU AI Act Article 52(1)"
+    "reference": "EU AI Act Article 50(1)"
   },
   {
     "id": 1592,
@@ -15982,7 +15982,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие маркировки генерируемого ИИ контента",
     "description": "Синтетические изображения или новости от ИИ не имеют машиночитаемой маркировки об искусственном происхождении.",
     "severity": "serious",
-    "reference": "EU AI Act Article 52(3)"
+    "reference": "EU AI Act Article 50(2)"
   },
   {
     "id": 1593,
@@ -16012,7 +16012,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие предупреждений о дипфейках",
     "description": "Реалистичные измененные видео или аудиозаписи загружаются на сайт без четких предупреждений о дипфейке.",
     "severity": "serious",
-    "reference": "EU AI Act Article 52(3)-Deepfake"
+    "reference": "EU AI Act Article 50(4)"
   },
   {
     "id": 1596,
@@ -16062,7 +16062,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие регистрации ИИ-модели высокого риска",
     "description": "Модель автоматической оценки кредитоспособности используется без регистрации в общедоступной базе ИИ ЕС.",
     "severity": "serious",
-    "reference": "EU AI Act Article 60"
+    "reference": "EU AI Act Articles 49, 71"
   },
   {
     "id": 1601,

@@ -1202,7 +1202,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "生成式AI输出/深度伪造未标记",
     "description": "网站以机器可读格式呈现AI生成文本、音频或视频（深度伪造）时未进行AI生成标记，违反欧盟AI法案透明度规则。",
     "severity": "critical",
-    "reference": "AI Act Art. 52(3)"
+    "reference": "AI Act Art. 50(2)"
   },
   {
     "id": 115,
@@ -1212,7 +1212,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "缺少AI用户交互披露",
     "description": "网站使用AI系统（如客户支持聊天机器人）与自然人交互时未告知其正在与AI交互，违反透明度要求。",
     "severity": "critical",
-    "reference": "AI Act Art. 52(1)"
+    "reference": "AI Act Art. 50(1)"
   },
   {
     "id": 116,
@@ -1332,7 +1332,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "未根据欧洲无障碍法案发布无障碍声明",
     "description": "面向欧盟消费者的电子商务或数字服务网站缺少公开可访问的无障碍声明，该声明应说明与EN 301 549 / WCAG 2.1 AA的一致性状态。欧洲无障碍法案（指令2019/882）自2025年6月28日起强制执行，要求提供覆盖服务的私营企业发布无障碍声明。",
     "severity": "serious",
-    "reference": "EU Directive 2019/882 (EAA), Art. 14"
+    "reference": "EU Directive 2019/882 (EAA), Art. 13(2), Annex V"
   },
   {
     "id": 128,
@@ -1342,7 +1342,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "缺少security.txt或漏洞披露政策（NIS2）",
     "description": "能源、卫生、交通、数字基础设施等关键或重要实体的网站缺少/.well-known/security.txt文件或任何公开可访问的漏洞披露政策。NIS2指令要求覆盖实体实施事件处理和漏洞管理措施。",
     "severity": "moderate",
-    "reference": "EU Directive 2022/2555 (NIS2), Art. 21(2)(b)"
+    "reference": "EU Directive 2022/2555 (NIS2), Art. 21(2)(b), (e)"
   },
   {
     "id": 129,
@@ -1582,7 +1582,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "AI 生成内容中缺少机器可读的元数据/水印 (EU AI Act)",
     "description": "生成或操纵图像、音频或视频内容（合成内容/深度伪造）的 AI 系统提供商必须确保输出以机器可读格式进行标记，并根据欧盟 AI 法案可被检测为人工生成或操纵。",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(3)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(2)"
   },
   {
     "id": 153,
@@ -1660,9 +1660,9 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "evidenceKind": "observable",
     "category": "Digital Operations",
     "title": "缺少情绪识别/生物识别分类披露 (EU AI Act)",
-    "description": "情绪识别系统或生物识别分类系统的提供商或部署者必须向暴露于该系统的自然人告知该系统的运行情况，违反了欧盟 AI 法案第 52(2) 条规定的透明度义务。",
+    "description": "情绪识别系统或生物识别分类系统的提供商或部署者必须向暴露于该系统的自然人告知该系统的运行情况，违反了欧盟 AI 法案第 50(3) 条规定的透明度义务。",
     "severity": "critical",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(2)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(3)"
   },
   {
     "id": 161,
@@ -2222,7 +2222,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "推荐系统算法透明度缺失 (EU DSA)",
     "description": "使用算法推荐系统（如个性化信息流、产品推荐）的网站未能在其服务条款中说明算法中使用的主要参数，违反了 DSA。",
     "severity": "serious",
-    "reference": "Regulation (EU) 2022/2065 (DSA), Art. 26"
+    "reference": "Regulation (EU) 2022/2065 (DSA), Art. 27"
   },
   {
     "id": 217,
@@ -2682,7 +2682,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "AI 系统缺少上市后监控计划 (EU AI Act)",
     "description": "受监管 AI 系统的提供商未能托管或链接到公开可访问的上市后监控计划和事件报告途径，违反了欧盟《AI 法案》要求。",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 61"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 72"
   },
   {
     "id": 263,
@@ -4432,7 +4432,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "金融 DORA 排除第三方外包风险登记",
     "description": "金融应用程序关联到外部 API 或服务，但未能保存第三方 ICT 提供商及其安全认证的统一登记册，违反了 DORA。",
     "severity": "serious",
-    "reference": "Regulation (EU) 2022/2554 (DORA), Art. 30"
+    "reference": "Regulation (EU) 2022/2554 (DORA), Art. 28(3)"
   },
   {
     "id": 438,
@@ -4472,7 +4472,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "缺少 AI 情绪情感分析提示",
     "description": "AI 智能客服机器人对用户的消息输入运行情绪检测或情感分析算法，但没有向用户显示清晰的提示警告，违反了《欧盟 AI 法案》。",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(2)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(3)"
   },
   {
     "id": 442,
@@ -4482,7 +4482,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "违规运行禁止的 AI 生物识别分类系统",
     "description": "在线用户注册界面通过用户上传的脸部照片提取生物特征并对用户进行分类，缺乏明确的法定法律依据，违反了《欧盟 AI 法案》。",
     "severity": "critical",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 5(1)(c)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 5(1)(g)"
   },
   {
     "id": 443,
@@ -4492,7 +4492,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "AI 生成内容缺少元数据水印",
     "description": "生成式 AI 接口在输出图像或文本时，未能嵌入标准的元数据水印以标明该内容由 AI 生成，违反了《欧盟 AI 法案》的指令。",
     "severity": "serious",
-    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 52(3)"
+    "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 50(2)"
   },
   {
     "id": 444,
@@ -15632,7 +15632,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "违规的用户停用规则",
     "description": "网站在不提供详细书面说明的情况下封禁帐户或下架卖家商品。",
     "severity": "serious",
-    "reference": "EU Digital Services Act (DSA) Article 20"
+    "reference": "EU Digital Services Act (DSA) Article 17"
   },
   {
     "id": 1558,
@@ -15642,7 +15642,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "公共目录中缺少原因声明",
     "description": "网站托管商审核第三方评论，但未将决定发布在欧盟 DSA 数据库中。",
     "severity": "moderate",
-    "reference": "EU Digital Services Act (DSA) Article 17"
+    "reference": "EU Digital Services Act (DSA) Article 24(5)"
   },
   {
     "id": 1559,
@@ -15972,7 +15972,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "未向用户披露其正在与人工智能交互",
     "description": "在线客服机器人运行在联系页面上，但未明确告知访问者他们正在与人工智能系统进行交流。",
     "severity": "serious",
-    "reference": "EU AI Act Article 52(1)"
+    "reference": "EU AI Act Article 50(1)"
   },
   {
     "id": 1592,
@@ -15982,7 +15982,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "生成式 AI 内容缺少标识说明",
     "description": "合成图像或 AI 生成的新闻条目缺少机器可读的标签来标识其人工生成的来源。",
     "severity": "serious",
-    "reference": "EU AI Act Article 52(3)"
+    "reference": "EU AI Act Article 50(2)"
   },
   {
     "id": 1593,
@@ -16012,7 +16012,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "具欺骗性的深度伪造 (Deepfake) 图像和视频未进行披露",
     "description": "逼真的经过修改的视频或音频文件在媒体流中加载，但未提供明确的“已修改内容”警告。",
     "severity": "serious",
-    "reference": "EU AI Act Article 52(3)-Deepfake"
+    "reference": "EU AI Act Article 50(4)"
   },
   {
     "id": 1596,
@@ -16062,7 +16062,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "高风险人工智能数据库集成不安全",
     "description": "服务器上运行自动信用资格评估模型，但未在公共欧盟 AI 数据库中进行登记注册。",
     "severity": "serious",
-    "reference": "EU AI Act Article 60"
+    "reference": "EU AI Act Articles 49, 71"
   },
   {
     "id": 1601,
