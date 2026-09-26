@@ -173,12 +173,29 @@ const MAP: Record<string, Jurisdiction> = {
   IMPR: { region: 'Европейский союз', law: 'Директива об электронной торговле 2000/31/EC, ст. 5 (сведения о продавце)', flag: '🇪🇺' },
   TRUTH: { region: 'Европейский союз', law: 'GDPR, гл. V (передача данных за пределы ЕС)', flag: '🇪🇺' },
   AIACT: { region: 'Европейский союз', law: 'Регламент об искусственном интеллекте (AI Act), ст. 50', flag: '🇪🇺' },
-  EXPO: { region: 'Общая практика', law: 'OWASP A05: небезопасная конфигурация', flag: '🌐' },
+  // Нумерация OWASP Top 10 с 2025 года: небезопасная конфигурация — A02
+  // (top10.owasp.org/2025/A02_2025-Security_Misconfiguration/). Префикс EXPO
+  // в реестре не используется — только находкой EXPO-WP-001.
+  EXPO: { region: 'Общая практика', law: 'OWASP Top 10:2025 A02: небезопасная конфигурация', flag: '🌐' },
 };
 
 
+/**
+ * Точные подписи для отдельных кодов — там, где подпись префикса к ним не
+ * подходит. Префикс OPS общий с 20 пунктами реестра (почтовые стандарты), а
+ * под DNS лежат и почта, и DNSSEC; менять подпись префикса — значит задеть
+ * чужие пункты. Поэтому правка точечная, по коду.
+ */
+const ТОЧНЫЕ: Record<string, Jurisdiction> = {
+  'OPS-ROBOTS-001': { region: 'Международный стандарт', law: 'RFC 9309 (robots.txt)', flag: '🌐' },
+  'OPS-SECTXT-001': { region: 'Международный стандарт', law: 'RFC 9116 (security.txt)', flag: '🌐' },
+  'DNS-SEC-001': { region: 'Международный стандарт', law: 'RFC 4033 (DNSSEC)', flag: '🌐' },
+};
+
 /** Определяет юрисдикцию по коду проверки. Никогда не бросает исключений. */
 export function jurisdictionOf(code: string): Jurisdiction {
+  const точная = ТОЧНЫЕ[String(code || '').toUpperCase()];
+  if (точная) return точная;
   const prefix = String(code || '').split('-')[0].toUpperCase();
   if (MAP[prefix]) return MAP[prefix];
   // Коды вида SEC-TLS-001 и OPS-ROBOTS-001 — берём первую часть.
@@ -615,6 +632,11 @@ const ПОДПИСИ: Record<string, Record<string, string>> = {
     "en": "OWASP A05: security misconfiguration",
     "es": "OWASP A05: configuración insegura",
     "zh": "OWASP A05：安全配置错误"
+  },
+  "OWASP Top 10:2025 A02: небезопасная конфигурация": {
+    "en": "OWASP Top 10:2025 A02: security misconfiguration",
+    "es": "OWASP Top 10:2025 A02: configuración insegura",
+    "zh": "OWASP Top 10:2025 A02：安全配置错误"
   },
   "PDPL (Федеральный закон 45/2021)": {
     "en": "PDPL (Federal Law 45/2021)",

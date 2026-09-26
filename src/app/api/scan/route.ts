@@ -6,6 +6,7 @@ import { localizeFindings } from '@/lib/oracle-probe-i18n';
 import { guessSector, riskForSector } from '@/lib/oracle-risk';
 import { peerComparison } from '@/lib/oracle-peers';
 import { хостБезопасен, ссылкаБезопасна } from '@/lib/ssrf-guard';
+import { probeLaw, applyProbeLaw, type ВидНормы, type ПотолокШтрафа, type ИсточникНормы } from '@/lib/probe-law';
 
 /**
  * ПЛАТНЫЙ GROK ЗАКРЫТ ПО УМОЛЧАНИЮ (16.08.2026, требование Архитектора).
@@ -331,6 +332,15 @@ export interface FoundThreat {
   fineAmount: string;
   consequence: string;
   violatingHtml?: string;
+  /**
+   * Свой закон у доказанной находки (lib/probe-law.ts, с 25.09.2026): вид
+   * нормы, штраф коротко для значка, числовой потолок для суммы и все
+   * первоисточники. У догадок модели этих полей нет.
+   */
+  lawKind?: ВидНормы;
+  fineShort?: string;
+  fineCap?: ПотолокШтрафа;
+  lawSources?: ИсточникНормы[];
 }
 
 export interface ScanResponse {
@@ -1363,7 +1373,18 @@ export async function POST(req: NextRequest) {
     // чтобы увидеть, что изменилось за неделю, а не вернуть прошлый отчёт.
     const cached = rescan ? null : await findFreshScan(contentHash, 24);
     if (cached && cached.payload) {
-      return NextResponse.json({ ...(cached.payload as object), scanId: cached.id, cached: true }, { headers });
+      // В кэше отчёт лежит в том виде, в каком был сохранён. Закон у
+      // доказанных находок ставим при выдаче: так и отчёт, сохранённый до
+      // 25.09.2026, получает настоящий закон, а база не переписывается.
+      const сохранённый = cached.payload as { allThreats?: FoundThreat[]; topIssues?: FoundThreat[] };
+      const сЗаконом = (список: FoundThreat[]) => список.map((t) => applyProbeLaw(t, activeLocale));
+      return NextResponse.json({
+        ...(cached.payload as object),
+        ...(сохранённый.allThreats ? { allThreats: сЗаконом(сохранённый.allThreats) } : {}),
+        ...(сохранённый.topIssues ? { topIssues: сЗаконом(сохранённый.topIssues) } : {}),
+        scanId: cached.id,
+        cached: true,
+      }, { headers });
     }
 
     // ── Слой Б: языковая модель ───────────────────────────────────────────────
@@ -1471,19 +1492,35 @@ export async function POST(req: NextRequest) {
     // Они получены кодом, у каждой есть точное значение из ответа сервера.
     // Пометка [ДОКАЗАНО] отличает их от того, что предположила модель, — так
     // клиент видит, где факт, а где мнение.
-    const provenThreats: FoundThreat[] = provenFindings.map((pf, i) => ({
-      id: 900000 + i,
-      code: pf.code,
-      title: pf.title,
-      description: pf.remedy,
-      severity: pf.severity,
-      category: 'Digital Operations' as Category,
-      evidence: `[${PROVEN_LABEL[activeLocale] || PROVEN_LABEL.en} · ${pf.source}] ${pf.evidence}`,
-      lawName: activeLawMeta['Digital Operations']?.lawName ?? 'Security & Privacy Baseline',
-      lawUrl: activeLawMeta['Digital Operations']?.lawUrl ?? 'https://owasp.org/www-project-secure-headers/',
-      fineAmount: activeLawMeta['Digital Operations']?.fineAmount ?? '—',
-      consequence: pf.remedy,
-    }));
+    //
+    // 🔴 ДО 25.09.2026 ВСЕМ 42 ВИДАМ НАХОДОК СТАВИЛСЯ ОДИН ОБЩИЙ ЯРЛЫК
+    // категории `Digital Operations` — пять иностранных законов и их штрафы.
+    // Экран брал из строки наибольшее число ($50M) и складывал по каждой
+    // находке. Теперь закон, ссылка на первоисточник и штраф берутся по коду
+    // находки из lib/probe-law.ts. Общий ярлык остаётся только запасным —
+    // для кода, которого в таблице нет (сейчас таких ноль из 42).
+    const provenThreats: FoundThreat[] = provenFindings.map((pf, i) => {
+      const закон = probeLaw(pf.code, activeLocale);
+      return {
+        id: 900000 + i,
+        code: pf.code,
+        title: pf.title,
+        description: pf.remedy,
+        severity: pf.severity,
+        category: 'Digital Operations' as Category,
+        evidence: `[${PROVEN_LABEL[activeLocale] || PROVEN_LABEL.en} · ${pf.source}] ${pf.evidence}`,
+        lawName: закон?.lawName ?? activeLawMeta['Digital Operations']?.lawName ?? 'Security & Privacy Baseline',
+        lawUrl: закон?.lawUrl ?? activeLawMeta['Digital Operations']?.lawUrl ?? 'https://owasp.org/www-project-secure-headers/',
+        fineAmount: закон?.fineAmount ?? activeLawMeta['Digital Operations']?.fineAmount ?? '—',
+        consequence: pf.remedy,
+        ...(закон ? {
+          lawKind: закон.lawKind,
+          fineShort: закон.fineShort,
+          fineCap: закон.fineCap,
+          lawSources: закон.lawSources,
+        } : {}),
+      };
+    });
 
     // Порядок: сначала доказанное, затем предположения — и всё по серьёзности.
     const rank: Record<string, number> = { critical: 0, serious: 1, moderate: 2, advisory: 3 };

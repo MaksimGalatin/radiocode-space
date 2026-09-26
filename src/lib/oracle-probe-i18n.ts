@@ -93,7 +93,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
     },
     "GPC-001": {
       "evidence": "С заголовком Sec-GPC сайт всё равно ставит рекламные cookie: ${gpc.map((c) => c.split('=')[0]).join(', ').slice(0, 120)}",
-      "remedy": "Уважать заголовок Sec-GPC. На 2026 год этого требуют законы двенадцати штатов США: Калифорния, Колорадо, Коннектикут, Делавэр, Мэриленд, Миннесота, Монтана, Небраска, Нью-Гэмпшир, Нью-Джерси, Орегон и Техас. Штрафы по этому основанию уже выписывались: Sephora — 1,2 млн долларов, Healthline — 1,55 млн, Disney — 2,75 млн, Ford — 375 тысяч.",
+      "remedy": "Уважать заголовок Sec-GPC. Прямо этого требуют законы как минимум семи штатов США — Калифорнии, Колорадо, Коннектикута, Делавэра, Миннесоты, Монтаны и Орегона (сверено по текстам законов 25.09.2026). Штрафы по этому основанию уже выписывались: Sephora — 1,2 млн долларов, Healthline — 1,55 млн, Disney — 2,75 млн, Ford — 375 тысяч.",
       "source": "сравнение двух запросов",
       "title": "Сигнал «не продавать мои данные» игнорируется"
     },
@@ -332,7 +332,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
     },
     "GPC-001": {
       "evidence": "With the Sec-GPC header present, the site still sets advertising cookies: ${gpc.map((c) => c.split('=')[0]).join(', ').slice(0, 120)}",
-      "remedy": "Honour the Sec-GPC header. As of 2026 the laws of twelve US states require it: California, Colorado, Connecticut, Delaware, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon and Texas. Fines have already been issued on this ground: Sephora — $1.2 million, Healthline — $1.55 million, Disney — $2.75 million, Ford — $375 thousand.",
+      "remedy": "Honour the Sec-GPC header. The laws of at least seven US states require it directly — California, Colorado, Connecticut, Delaware, Minnesota, Montana and Oregon (checked against the statute texts on 25 Sep 2026). Fines have already been issued on this ground: Sephora — $1.2 million, Healthline — $1.55 million, Disney — $2.75 million, Ford — $375 thousand.",
       "source": "comparison of two requests",
       "title": "The “do not sell my data” signal is ignored"
     },
@@ -571,7 +571,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
     },
     "GPC-001": {
       "evidence": "Con la cabecera Sec-GPC presente, el sitio sigue instalando cookies publicitarias: ${gpc.map((c) => c.split('=')[0]).join(', ').slice(0, 120)}",
-      "remedy": "Respetar la cabecera Sec-GPC. En 2026 lo exigen las leyes de doce estados de EE. UU.: California, Colorado, Connecticut, Delaware, Maryland, Minnesota, Montana, Nebraska, Nuevo Hampshire, Nueva Jersey, Oregón y Texas. Ya se han impuesto multas por este motivo: Sephora, 1,2 millones de dólares; Healthline, 1,55 millones; Disney, 2,75 millones; Ford, 375 000.",
+      "remedy": "Respetar la cabecera Sec-GPC. Lo exigen directamente las leyes de al menos siete estados de EE. UU.: California, Colorado, Connecticut, Delaware, Minnesota, Montana y Oregón (verificado con el texto de las leyes el 25.09.2026). Ya se han impuesto multas por este motivo: Sephora, 1,2 millones de dólares; Healthline, 1,55 millones; Disney, 2,75 millones; Ford, 375 000.",
       "source": "comparación de dos solicitudes",
       "title": "Se ignora la señal «no vender mis datos»"
     },
@@ -810,7 +810,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
     },
     "GPC-001": {
       "evidence": "在带 Sec-GPC 请求头的情况下，网站依然写入了广告类 cookie：${gpc.map((c) => c.split('=')[0]).join(', ').slice(0, 120)}",
-      "remedy": "尊重 Sec-GPC（全球隐私控制信号）请求头。截至 2026 年，美国十二个州的法律对此提出了要求：加利福尼亚、科罗拉多、康涅狄格、特拉华、马里兰、明尼苏达、蒙大拿、内布拉斯加、新罕布什尔、新泽西、俄勒冈和得克萨斯。已有企业据此被开出罚单：Sephora 120 万美元，Healthline 155 万美元，Disney 275 万美元，Ford 37.5 万美元。",
+      "remedy": "尊重 Sec-GPC（全球隐私控制信号）请求头。美国至少七个州的法律对此有直接要求：加利福尼亚、科罗拉多、康涅狄格、特拉华、明尼苏达、蒙大拿和俄勒冈（已于2026年9月25日对照法律原文核实）。已有企业据此被开出罚单：Sephora 120 万美元，Healthline 155 万美元，Disney 275 万美元，Ford 37.5 万美元。",
       "source": "两次请求的对比",
       "title": "「不要出售我的数据」信号被忽略"
     },

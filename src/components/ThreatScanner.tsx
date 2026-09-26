@@ -12,6 +12,7 @@ import { useLanguageOptional } from '../lib/LanguageContext';
 import { getLawMeta, CATEGORY_COLORS, type Category } from '../data/threatMatrix';
 import { ТЕКСТЫ_УГРОЗ, НАДПИСЬ_РЕЕСТРА, type ЯзыкКодСканера } from '../app/accessibility/словарь';
 import type { FoundThreat, ScanResponse } from '../app/api/scan/route';
+import { statutoryCeiling } from '../lib/probe-law';
 import "./ThreatScanner.css";
 
 type ScanState = 'idle' | 'scanning' | 'done';
@@ -41,6 +42,34 @@ function parseMaxFine(fineAmount: string): number {
     max = Math.max(max, num);
   }
   return max;
+}
+
+/**
+ * Доказанные находки со своим законом (lib/probe-law.ts) идут отдельной
+ * группой: общего закона у неё нет, и ярлык категории над ней был бы
+ * неправдой — именно так до 25.09.2026 под «нет security.txt» вставали
+ * пять иностранных законов.
+ */
+const ГРУППА_СВОЙ_ЗАКОН = '__own_law__';
+const НАДПИСЬ_СВОЙ_ЗАКОН: Record<string, string> = {
+  ru: 'ДОКАЗАНО — у каждой находки свой закон',
+  en: 'PROVEN — each finding has its own law',
+  es: 'PROBADO — cada hallazgo con su propia norma',
+  zh: '已验证 — 每项发现对应其自身法规',
+};
+
+/**
+ * Потолок по букве закона: каждый закон один раз, евро и доллары раздельно.
+ * Складывать их между собой — значит придумать курс, которого в законе нет.
+ */
+function formatCeiling(c: { EUR: number; USD: number }, locale: string): string {
+  const место = locale === 'ru' ? 'ru-RU' : locale === 'es' ? 'es-ES' : locale === 'zh' ? 'zh-CN' : 'en-US';
+  const деньги = (n: number, валюта: string) =>
+    new Intl.NumberFormat(место, { style: 'currency', currency: валюта, maximumFractionDigits: 0 }).format(n);
+  const части: string[] = [];
+  if (c.EUR > 0) части.push(деньги(c.EUR, 'EUR'));
+  if (c.USD > 0) части.push(деньги(c.USD, 'USD'));
+  return части.join(' + ');
 }
 
 function formatExposure(total: number): string {
@@ -236,11 +265,14 @@ function getFixAdvice(code: string, title: string, locale: string): { steps: str
 }
 
 function calculateGrade(score: number): { letter: string; color: string; bg: string } {
-  if (score >= 1950) return { letter: 'A+', color: 'text-emerald-400 border-emerald-400/30', bg: 'bg-emerald-500/10' };
-  if (score >= 1800) return { letter: 'A', color: 'text-teal-400 border-teal-400/30', bg: 'bg-teal-500/10' };
-  if (score >= 1600) return { letter: 'B', color: 'text-cyan-400 border-cyan-400/30', bg: 'bg-cyan-500/10' };
-  if (score >= 1400) return { letter: 'C', color: 'text-yellow-400 border-yellow-400/30', bg: 'bg-yellow-500/10' };
-  if (score >= 1000) return { letter: 'D', color: 'text-orange-400 border-orange-400/30', bg: 'bg-orange-500/10' };
+  // 🔴 ИСПРАВЛЕНО 25.09.2026 — перенос починки aifa.works от 17.09.2026: пороги
+  // стояли под старую шкалу 0–2000, а балл давно 0–100, и сайт со 100/100
+  // получал «F». Пороги разделены на 20.
+  if (score >= 98) return { letter: 'A+', color: 'text-emerald-400 border-emerald-400/30', bg: 'bg-emerald-500/10' };
+  if (score >= 90) return { letter: 'A', color: 'text-teal-400 border-teal-400/30', bg: 'bg-teal-500/10' };
+  if (score >= 80) return { letter: 'B', color: 'text-cyan-400 border-cyan-400/30', bg: 'bg-cyan-500/10' };
+  if (score >= 70) return { letter: 'C', color: 'text-yellow-400 border-yellow-400/30', bg: 'bg-yellow-500/10' };
+  if (score >= 50) return { letter: 'D', color: 'text-orange-400 border-orange-400/30', bg: 'bg-orange-500/10' };
   return { letter: 'F', color: 'text-red-400 border-red-400/30', bg: 'bg-red-500/10' };
 }
 
@@ -296,8 +328,8 @@ function ThreatCard({ threat }: ThreatCardProps) {
             </span>
           )}
         </div>
-        <span className="text-xs font-mono font-bold text-red-400 shrink-0">
-          {shortenFine(threat.fineAmount)}
+        <span className={`text-xs font-mono font-bold shrink-0 ${threat.lawKind && threat.lawKind !== 'law' ? 'text-gray-400' : 'text-red-400'}`}>
+          {threat.fineShort ?? shortenFine(threat.fineAmount)}
         </span>
       </div>
 
@@ -371,6 +403,18 @@ function ThreatCard({ threat }: ThreatCardProps) {
             {threat.lawName.split('—')[0].trim()}
             <ExternalLink className="w-2.5 h-2.5 opacity-70 shrink-0 print:hidden" aria-hidden="true" />
           </a>
+          {/* Остальные первоисточники по этой находке — каждый рабочей ссылкой. */}
+          {(threat.lawSources?.length ?? 0) > 1 && (
+            <ul className="mt-1 space-y-0.5">
+              {threat.lawSources!.slice(1).map((s) => (
+                <li key={s.url}>
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-[12px] text-cyan-400/80 hover:text-cyan-300 hover:underline underline-offset-2">
+                    {s.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         <div>
           <p className="text-[13px] text-gray-400 uppercase tracking-widest font-semibold mb-1">Consequence</p>
@@ -522,16 +566,23 @@ export default function ThreatScanner() {
   };
 
   // ── Derived values from result ───────────────────────────────────────────────
+  // Новые отчёты несут у доказанных находок их закон (lawKind) — тогда потолок
+  // считается по закону один раз (lib/probe-law.ts). У отчётов, сохранённых
+  // в браузере до 25.09.2026, этого поля нет — для них прежний расчёт.
+  const естьЗаконы = useMemo(() => Boolean(result?.allThreats?.some((t) => t.lawKind)), [result]);
+  const потолок = useMemo(() => statutoryCeiling(result?.allThreats ?? []), [result]);
   const totalExposure = useMemo(() => {
     if (!result?.allThreats) return 0;
+    if (естьЗаконы) return потолок.EUR + потолок.USD;
     return result.allThreats.reduce((sum, t) => sum + parseMaxFine(t.fineAmount), 0);
-  }, [result]);
+  }, [result, естьЗаконы, потолок]);
 
   const threatsByCategory = useMemo(() => {
     if (!result?.allThreats) return {} as Record<string, FoundThreat[]>;
     return result.allThreats.reduce((acc, t) => {
-      if (!acc[t.category]) acc[t.category] = [];
-      acc[t.category].push(t);
+      const ключ = t.lawKind ? ГРУППА_СВОЙ_ЗАКОН : t.category;
+      if (!acc[ключ]) acc[ключ] = [];
+      acc[ключ].push(t);
       return acc;
     }, {} as Record<string, FoundThreat[]>);
   }, [result]);
@@ -642,7 +693,7 @@ export default function ThreatScanner() {
 
         finalData.topIssues.forEach((issue, i) => {
           addLine(
-            `  [${(SEV_LABEL[issue.severity] ?? issue.severity.toUpperCase())}]  ${issue.code}  |  ${issue.title}  |  Penalty: ${shortenFine(issue.fineAmount)}`,
+            `  [${(SEV_LABEL[issue.severity] ?? issue.severity.toUpperCase())}]  ${issue.code}  |  ${issue.title}  |  Penalty: ${issue.fineShort ?? shortenFine(issue.fineAmount)}`,
             440 + i * 130
           );
         });
@@ -952,12 +1003,20 @@ export default function ThreatScanner() {
                         {locale === 'ru' ? 'Потолок штрафов по букве закона' : locale === 'es' ? 'Techo de multas segun la ley' : locale === 'zh' ? '法律规定的罚款上限' : 'Statutory maximum, not a forecast'}
                       </span>
                     </div>
-                    <div className="text-xl font-black text-red-400 tabular-nums">{formatExposure(totalExposure)}</div>
+                    <div className="text-xl font-black text-red-400 tabular-nums">{естьЗаконы ? formatCeiling(потолок, locale) : formatExposure(totalExposure)}</div>
                     {/* Это сумма МАКСИМАЛЬНЫХ штрафов, предусмотренных законами,
                         а не прогноз наших потерь. Подавать её как «ваш риск в
                         долларах» было бы запугиванием — подписываем честно. */}
                     <div className="text-[13px] text-gray-400">
-                      {locale === 'ru'
+                      {естьЗаконы ? (
+                        locale === 'ru'
+                          ? `каждый закон учтён один раз (${потолок.laws.join(', ')}); не учтены пункты без отдельного штрафа и нормы, где штраф задаёт страна. Не прогноз.`
+                          : locale === 'es'
+                            ? `cada ley se cuenta una vez (${потолок.laws.join(', ')}); se excluyen los puntos sin multa específica y las sanciones que fija cada país. No es una previsión.`
+                            : locale === 'zh'
+                              ? `每部法律只计一次（${потолок.laws.join('、')}）；不含无单独罚款的项目及由各国规定的罚则。非预测。`
+                              : `each law counted once (${потолок.laws.join(', ')}); items without a separate fine and nationally set penalties are excluded. Not a prediction.`
+                      ) : locale === 'ru'
                         ? `теоретический максимум по ${result.totalIssues} пунктам, не прогноз`
                         : locale === 'es'
                           ? `maximo teorico en ${result.totalIssues} puntos, no una prevision`
@@ -1194,8 +1253,9 @@ export default function ThreatScanner() {
 
                 <div className="max-h-[700px] overflow-y-auto">
                   {Object.entries(threatsByCategory).map(([cat, threats]) => {
-                    const color = CATEGORY_COLORS[cat as Category] ?? 'cyan';
-                    const law = activeLawMeta[cat as Category];
+                    const своиЗаконы = cat === ГРУППА_СВОЙ_ЗАКОН;
+                    const color = своиЗаконы ? 'emerald' : (CATEGORY_COLORS[cat as Category] ?? 'cyan');
+                    const law = своиЗаконы ? undefined : activeLawMeta[cat as Category];
                     const isOpen = openCategories.has(cat);
 
                     return (
@@ -1207,9 +1267,10 @@ export default function ThreatScanner() {
                         >
                           <div className="flex items-center gap-3 min-w-0">
                             <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded border ${CAT_BG[color]} ${CAT_TEXT[color]}`}>
-                              {cat}
+                              {своиЗаконы ? (НАДПИСЬ_СВОЙ_ЗАКОН[locale] ?? НАДПИСЬ_СВОЙ_ЗАКОН.en) : cat}
                             </span>
                             <div className="text-left min-w-0">
+                              {law && (
                               <a
                                 href={law?.lawUrl}
                                 target="_blank"
@@ -1220,6 +1281,7 @@ export default function ThreatScanner() {
                                 {law?.lawName.split('—')[0].trim()}
                                 <ExternalLink className="w-2.5 h-2.5 opacity-60 shrink-0" aria-hidden="true" />
                               </a>
+                              )}
                             </div>
                           </div>
                           <div className="flex items-center gap-2 shrink-0">
