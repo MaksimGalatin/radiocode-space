@@ -1262,7 +1262,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Absence of Consumer Appeal Rights Process",
     "description": "The privacy policy fails to explain the process for consumers to appeal a refusal to take action on a privacy rights request, violating Virginia VCDPA and Texas TDPSA.",
     "severity": "serious",
-    "reference": "Va. Code § 59.1-573 / Tex. Bus. & Com. Code § 541.104"
+    "reference": "Va. Code § 59.1-577 / Tex. Bus. & Com. Code § 541.053"
   },
   {
     "id": 121,
@@ -1272,7 +1272,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Lack of Sensitive Data Processing Opt-In",
     "description": "The website processes sensitive personal data (e.g., precise geolocation, health data, racial info) without obtaining affirmative opt-in consent from Colorado or Virginia residents.",
     "severity": "critical",
-    "reference": "Colo. Rev. Stat. § 6-1-1308 / Va. Code § 59.1-574"
+    "reference": "Colo. Rev. Stat. § 6-1-1308 / Va. Code § 59.1-578"
   },
   {
     "id": 122,
@@ -2312,7 +2312,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Missing Consent Verification for Child Sensitive Data (Virginia VCDPA)",
     "description": "Website collecting sensitive personal data of child consumers under 13 fails to obtain parental verification conforming to COPPA prior to data collection, violating VCDPA.",
     "severity": "critical",
-    "reference": "Va. Code § 59.1-574 (VCDPA)"
+    "reference": "Va. Code § 59.1-578 (VCDPA)"
   },
   {
     "id": 226,
@@ -4272,7 +4272,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Texas TDPSA Small Business Sensitive Consent",
     "description": "Small business portals collecting Texas consumer sensitive records fail to gain prior opt-in consent before selling data, violating TDPSA provisions.",
     "severity": "critical",
-    "reference": "Tex. Bus. & Com. Code § 541.055"
+    "reference": "Tex. Bus. & Com. Code § 541.107"
   },
   {
     "id": 422,
@@ -15652,7 +15652,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Inadequate Complaint Handling System",
     "description": "The website provides no digital appeal mechanism allowing users to challenge moderation rulings for 6 months.",
     "severity": "serious",
-    "reference": "EU Digital Services Act (DSA) Article 20-Appeal"
+    "reference": "EU Digital Services Act (DSA) Article 20"
   },
   {
     "id": 1560,
@@ -15662,7 +15662,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Deceptive Advertising Targeting Policies",
     "description": "The website uses sensitive personal details (religion, health, orientation) to target promotional banners.",
     "severity": "serious",
-    "reference": "EU Digital Services Act (DSA) Article 26-Target"
+    "reference": "EU Digital Services Act (DSA) Article 26"
   },
   {
     "id": 1561,
@@ -15692,7 +15692,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Restricting Third-Party Software Side-Loading",
     "description": "The web portal restricts users from running external payment integrations or browsers within the page framework.",
     "severity": "serious",
-    "reference": "EU Digital Markets Act (DMA) Article 6(3)"
+    "reference": "EU Digital Markets Act (DMA) Article 6(4)"
   },
   {
     "id": 1564,
@@ -15702,7 +15702,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Restricting Business User Data Portability",
     "description": "The website checkout dashboard blocks sellers from exporting their transaction history to external servers.",
     "severity": "serious",
-    "reference": "EU Digital Markets Act (DMA) Article 6(9)"
+    "reference": "EU Digital Markets Act (DMA) Article 6(10)"
   },
   {
     "id": 1565,
@@ -15712,7 +15712,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Unfair Advertising Performance Reporting",
     "description": "The system charges advertisers for promotional space without sharing free daily performance metrics.",
     "severity": "moderate",
-    "reference": "EU Digital Markets Act (DMA) Article 5(9)"
+    "reference": "EU Digital Markets Act (DMA) Article 6(8)"
   },
   {
     "id": 1566,
@@ -15732,7 +15732,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Deceptive Choice Screen Implementation",
     "description": "The system configures default search engines or browsers during setup without presenting unbiased options.",
     "severity": "serious",
-    "reference": "EU Digital Markets Act (DMA) Article 6(3)-Choice"
+    "reference": "EU Digital Markets Act (DMA) Article 6(3)"
   },
   {
     "id": 1568,

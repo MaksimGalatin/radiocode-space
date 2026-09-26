@@ -1262,7 +1262,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "缺少消费者上诉权利流程",
     "description": "隐私政策未说明消费者对隐私权利请求拒绝结果提出上诉的流程，违反弗吉尼亚VCDPA和得克萨斯TDPSA。",
     "severity": "serious",
-    "reference": "Va. Code § 59.1-573 / Tex. Bus. & Com. Code § 541.104"
+    "reference": "Va. Code § 59.1-577 / Tex. Bus. & Com. Code § 541.053"
   },
   {
     "id": 121,
@@ -1272,7 +1272,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "缺少敏感数据处理选择同意",
     "description": "网站在未获得科罗拉多或弗吉尼亚居民明确选择同意的情况下处理敏感个人数据（如精确地理位置、健康数据、种族信息）。",
     "severity": "critical",
-    "reference": "Colo. Rev. Stat. § 6-1-1308 / Va. Code § 59.1-574"
+    "reference": "Colo. Rev. Stat. § 6-1-1308 / Va. Code § 59.1-578"
   },
   {
     "id": 122,
@@ -2312,7 +2312,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "儿童敏感数据缺少同意验证 (Virginia VCDPA)",
     "description": "收集 13 岁以下儿童消费者敏感个人数据的网站在收集数据之前未能获得符合 COPPA 的父母验证，违反了 VCDPA。",
     "severity": "critical",
-    "reference": "Va. Code § 59.1-574 (VCDPA)"
+    "reference": "Va. Code § 59.1-578 (VCDPA)"
   },
   {
     "id": 226,
@@ -4272,7 +4272,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "德克萨斯州 TDPSA 小企业敏感数据处理同意授权",
     "description": "收集德克萨斯州消费者敏感记录的小型企业门户在出售数据前未能获得事先同意，违反了 TDPSA 规定。",
     "severity": "critical",
-    "reference": "Tex. Bus. & Com. Code § 541.055"
+    "reference": "Tex. Bus. & Com. Code § 541.107"
   },
   {
     "id": 422,
@@ -15652,7 +15652,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "投诉处理系统不完善",
     "description": "网站未提供电子申诉机制，允许用户在 6 个月内对审核裁决提出异议。",
     "severity": "serious",
-    "reference": "EU Digital Services Act (DSA) Article 20-Appeal"
+    "reference": "EU Digital Services Act (DSA) Article 20"
   },
   {
     "id": 1560,
@@ -15662,7 +15662,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "具有误导性的广告定位政策",
     "description": "该网站利用敏感的个人信息（宗教、健康、性取向）来定位推广横幅。",
     "severity": "serious",
-    "reference": "EU Digital Services Act (DSA) Article 26-Target"
+    "reference": "EU Digital Services Act (DSA) Article 26"
   },
   {
     "id": 1561,
@@ -15692,7 +15692,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "限制第三方软件侧载",
     "description": "Web 门户限制用户在页面框架内运行外部支付集成或浏览器。",
     "severity": "serious",
-    "reference": "EU Digital Markets Act (DMA) Article 6(3)"
+    "reference": "EU Digital Markets Act (DMA) Article 6(4)"
   },
   {
     "id": 1564,
@@ -15702,7 +15702,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "限制商业用户的数据可移植性",
     "description": "网站结算后台阻止卖家将交易历史记录导出到外部服务器。",
     "severity": "serious",
-    "reference": "EU Digital Markets Act (DMA) Article 6(9)"
+    "reference": "EU Digital Markets Act (DMA) Article 6(10)"
   },
   {
     "id": 1565,
@@ -15712,7 +15712,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "不公平的广告效果报告",
     "description": "系统向广告主收取推广空间费用，却不共享每日免费的效果指标。",
     "severity": "moderate",
-    "reference": "EU Digital Markets Act (DMA) Article 5(9)"
+    "reference": "EU Digital Markets Act (DMA) Article 6(8)"
   },
   {
     "id": 1566,
@@ -15732,7 +15732,7 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "title": "具欺骗性的选择屏幕实现",
     "description": "系统在设置期间配置默认搜索引擎或浏览器，而未展示无偏向的选择项。",
     "severity": "serious",
-    "reference": "EU Digital Markets Act (DMA) Article 6(3)-Choice"
+    "reference": "EU Digital Markets Act (DMA) Article 6(3)"
   },
   {
     "id": 1568,

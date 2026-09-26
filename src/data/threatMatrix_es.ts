@@ -1262,7 +1262,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Ausencia de Proceso de Derechos de Apelación del Consumidor",
     "description": "La política de privacidad no explica el proceso para que los consumidores apelen una negativa a tomar acción sobre una solicitud de derechos de privacidad, violando VCDPA de Virginia y TDPSA de Texas.",
     "severity": "serious",
-    "reference": "Va. Code § 59.1-573 / Tex. Bus. & Com. Code § 541.104"
+    "reference": "Va. Code § 59.1-577 / Tex. Bus. & Com. Code § 541.053"
   },
   {
     "id": 121,
@@ -1272,7 +1272,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Falta de Opt-In para el Procesamiento de Datos Sensibles",
     "description": "El sitio web procesa datos personales sensibles (por ejemplo, geolocalización precisa, datos de salud, información racial) sin obtener consentimiento afirmativo de opt-in de residentes de Colorado o Virginia.",
     "severity": "critical",
-    "reference": "Colo. Rev. Stat. § 6-1-1308 / Va. Code § 59.1-574"
+    "reference": "Colo. Rev. Stat. § 6-1-1308 / Va. Code § 59.1-578"
   },
   {
     "id": 122,
@@ -2312,7 +2312,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Falta de verificación de consentimiento para datos de niños (Virginia VCDPA)",
     "description": "El sitio web que recopila datos personales de niños menores de 13 años no obtiene la verificación de los padres según COPPA.",
     "severity": "critical",
-    "reference": "Va. Code § 59.1-574 (VCDPA)"
+    "reference": "Va. Code § 59.1-578 (VCDPA)"
   },
   {
     "id": 226,
@@ -4272,7 +4272,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Consentimiento de datos sensibles para pymes bajo TDPSA de Texas",
     "description": "Los portales de pymes que recopilan datos sensibles en Texas venden información sin consentimiento previo, violando las disposiciones de la TDPSA.",
     "severity": "critical",
-    "reference": "Tex. Bus. & Com. Code § 541.055"
+    "reference": "Tex. Bus. & Com. Code § 541.107"
   },
   {
     "id": 422,
@@ -15652,7 +15652,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Sistema de gestión de quejas inadecuado",
     "description": "El sitio no ofrece un mecanismo de apelación para que los usuarios impugnen decisiones de moderación.",
     "severity": "serious",
-    "reference": "EU Digital Services Act (DSA) Article 20-Appeal"
+    "reference": "EU Digital Services Act (DSA) Article 20"
   },
   {
     "id": 1560,
@@ -15662,7 +15662,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Políticas engañosas de segmentación de anuncios",
     "description": "El sitio utiliza datos personales sensibles (religión, salud) para orientar banners promocionales.",
     "severity": "serious",
-    "reference": "EU Digital Services Act (DSA) Article 26-Target"
+    "reference": "EU Digital Services Act (DSA) Article 26"
   },
   {
     "id": 1561,
@@ -15692,7 +15692,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Restricción de instalación de software de terceros",
     "description": "El portal restringe el uso de integraciones de pago o navegadores externos en su marco de página.",
     "severity": "serious",
-    "reference": "EU Digital Markets Act (DMA) Article 6(3)"
+    "reference": "EU Digital Markets Act (DMA) Article 6(4)"
   },
   {
     "id": 1564,
@@ -15702,7 +15702,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Restricción de portabilidad de datos de usuarios comerciales",
     "description": "El panel de control impide a los vendedores exportar su historial de transacciones a servidores externos.",
     "severity": "serious",
-    "reference": "EU Digital Markets Act (DMA) Article 6(9)"
+    "reference": "EU Digital Markets Act (DMA) Article 6(10)"
   },
   {
     "id": 1565,
@@ -15712,7 +15712,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Informes de rendimiento publicitario desleales",
     "description": "El sistema cobra por publicidad sin proporcionar métricas de rendimiento diarias gratuitas.",
     "severity": "moderate",
-    "reference": "EU Digital Markets Act (DMA) Article 5(9)"
+    "reference": "EU Digital Markets Act (DMA) Article 6(8)"
   },
   {
     "id": 1566,
@@ -15732,7 +15732,7 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "title": "Implementación engañosa de pantalla de elección",
     "description": "El sistema configura buscadores predeterminados sin presentar opciones imparciales durante el registro.",
     "severity": "serious",
-    "reference": "EU Digital Markets Act (DMA) Article 6(3)-Choice"
+    "reference": "EU Digital Markets Act (DMA) Article 6(3)"
   },
   {
     "id": 1568,

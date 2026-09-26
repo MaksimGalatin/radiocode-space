@@ -1262,7 +1262,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие процесса обжалования прав потребителей",
     "description": "Политика конфиденциальности не объясняет процесс обжалования отказа в принятии мер по запросу о правах на конфиденциальность, нарушая Virginia VCDPA и Texas TDPSA.",
     "severity": "serious",
-    "reference": "Va. Code § 59.1-573 / Tex. Bus. & Com. Code § 541.104"
+    "reference": "Va. Code § 59.1-577 / Tex. Bus. & Com. Code § 541.053"
   },
   {
     "id": 121,
@@ -1272,7 +1272,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие opt-in для обработки конфиденциальных данных",
     "description": "Сайт обрабатывает конфиденциальные персональные данные (например, точное геолокацию, данные о здоровье, расовую информацию) без получения явного согласия opt-in от жителей Колорадо или Вирджинии.",
     "severity": "critical",
-    "reference": "Colo. Rev. Stat. § 6-1-1308 / Va. Code § 59.1-574"
+    "reference": "Colo. Rev. Stat. § 6-1-1308 / Va. Code § 59.1-578"
   },
   {
     "id": 122,
@@ -2312,7 +2312,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Отсутствие согласия на детские конфиденциальные данные (Virginia VCDPA)",
     "description": "Сайт, собирающий конфиденциальные данные детей до 13 лет, не получает подтвержденное согласие родителей по правилам COPPA.",
     "severity": "critical",
-    "reference": "Va. Code § 59.1-574 (VCDPA)"
+    "reference": "Va. Code § 59.1-578 (VCDPA)"
   },
   {
     "id": 226,
@@ -4272,7 +4272,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Согласие на продажу конфиденциальных данных малого бизнеса по TDPSA Техаса",
     "description": "Сайты малого бизнеса, собирающие конфиденциальные данные жителей Техаса, продают их без предварительного согласия, нарушая правила TDPSA.",
     "severity": "critical",
-    "reference": "Tex. Bus. & Com. Code § 541.055"
+    "reference": "Tex. Bus. & Com. Code § 541.107"
   },
   {
     "id": 422,
@@ -15652,7 +15652,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Неадекватная система рассмотрения жалоб",
     "description": "Сайт не предоставляет цифровую систему апелляций для обжалования решений модерации в течение 6 месяцев.",
     "severity": "serious",
-    "reference": "EU Digital Services Act (DSA) Article 20-Appeal"
+    "reference": "EU Digital Services Act (DSA) Article 20"
   },
   {
     "id": 1560,
@@ -15662,7 +15662,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Недобросовестные методы таргетирования рекламы",
     "description": "Сайт использует чувствительные данные (религия, здоровье, ориентация) для таргетирования баннеров.",
     "severity": "serious",
-    "reference": "EU Digital Services Act (DSA) Article 26-Target"
+    "reference": "EU Digital Services Act (DSA) Article 26"
   },
   {
     "id": 1561,
@@ -15692,7 +15692,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Ограничение использования стороннего ПО",
     "description": "Веб-портал ограничивает запуск сторонних платежных систем или браузеров во фрейме страницы.",
     "severity": "serious",
-    "reference": "EU Digital Markets Act (DMA) Article 6(3)"
+    "reference": "EU Digital Markets Act (DMA) Article 6(4)"
   },
   {
     "id": 1564,
@@ -15702,7 +15702,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Ограничение переноса данных бизнес-пользователей",
     "description": "Кабинет продавца блокирует экспорт истории транзакций и отзывов на сторонние серверы.",
     "severity": "serious",
-    "reference": "EU Digital Markets Act (DMA) Article 6(9)"
+    "reference": "EU Digital Markets Act (DMA) Article 6(10)"
   },
   {
     "id": 1565,
@@ -15712,7 +15712,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Недобросовестные отчеты об эффективности рекламы",
     "description": "Система взимает плату за рекламу, но не предоставляет бесплатные ежедневные метрики её эффективности.",
     "severity": "moderate",
-    "reference": "EU Digital Markets Act (DMA) Article 5(9)"
+    "reference": "EU Digital Markets Act (DMA) Article 6(8)"
   },
   {
     "id": 1566,
@@ -15732,7 +15732,7 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "title": "Обманная реализация экрана выбора",
     "description": "Система устанавливает поисковые системы по умолчанию при настройке, не предлагая нейтрального выбора.",
     "severity": "serious",
-    "reference": "EU Digital Markets Act (DMA) Article 6(3)-Choice"
+    "reference": "EU Digital Markets Act (DMA) Article 6(3)"
   },
   {
     "id": 1568,
