@@ -3,62 +3,62 @@ import { ComplianceCheck, LawMeta, Category } from './threatMatrix';
 export const LAW_META_ZH: Record<Category, LawMeta> = {
   "ADA / WCAG": {
     "lawName": "ADA 第三章 / 欧洲无障碍法案 (EAA) / 安大略省 AODA",
-    "lawUrl": "https://www.ada.gov/resources/web-guidance/",
-    "fineAmount": "$75,000–$150,000 (ADA) / €100,000 (EAA) / 每天 $100,000 (AODA)",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap126-subchapIII-sec12188.htm",
+    "fineAmount": "$118,225–$236,451（ADA：首次–再次违规）/ 最高 €100,000（EAA，德国）/ 每天最高 $100,000（AODA，公司）; ADA：民事罚款仅限美国司法部长提起的诉讼（系统性歧视或具有普遍公共重要性的问题），42 U.S.C. 12188(b)(2)(C)，金额依 28 CFR 85.5（2025 年标准，2026 年未调整）；EAA 本身不规定罚款，由各欧盟成员国规定（德国：BFSG §37）；AODA s.37：须经法院定罪，且仅针对虚假无障碍报告、不执行主管或裁判所命令或恐吓行为——行政罚款按附表执行，仅在严重且反复违规时按日计算（O. Reg. 191/11 s.83）",
     "reportingConsequence": "司法部民事执法 / 国家市场监督处罚 / 安大略省部审计"
   },
   "HIPAA / Medical": {
     "lawName": "HIPAA 隐私规则 / 华盛顿州《我的健康我的数据法案》(MHMDA)",
-    "lawUrl": "https://www.hhs.gov/hipaa/for-professionals/privacy/index.html",
-    "fineAmount": "每年 $50,000–$1,500,000 / 每次 MHMDA 违规 $7,500",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap7-subchapXI-partC-sec1320d-5.htm",
+    "fineAmount": "每次违规 $145–$2,190,294，同类违规每年 $2,190,294（HIPAA）/ 每次违规最高 $7,500（MHMDA）; HIPAA：42 U.S.C. 1320d-5 与 45 CFR 160.404，金额由 HHS 于 2026 年 1 月 28 日调整——最低额取决于过错程度：从 $145（不知情）到 $73,011（故意疏忽且未纠正）；MHMDA：违规构成消费者保护法下的不公平行为（RCW 19.373.090），罚款依 RCW 19.86.140",
     "reportingConsequence": "HHS OCR 民事调查 / MHMDA 下的集体诉讼 / DOJ 起诉"
   },
   "CCPA / CPRA": {
     "lawName": "加州消费者隐私法 (CCPA/CPRA) / 加州适龄设计法典 (AB 2273)",
-    "lawUrl": "https://oag.ca.gov/privacy/ccpa",
-    "fineAmount": "每次违规 $2,500–$7,500 / 每名儿童 $7,500 (AB 2273)",
+    "lawUrl": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1798.199.90",
+    "fineAmount": "每次违规 $2,663–$7,988（CCPA）/ 每名受影响儿童 $2,500–$7,500（AB 2273，部分条款已被法院暂停）; CCPA：Civ. Code §1798.199.90——每次违规 $2,663，故意违规或涉及未成年人数据的违规 $7,988（CPPA 调整，自 2025 年 1 月 1 日起生效）；AB 2273：Civ. Code §1798.99.35——过失 $2,500，故意 $7,500，仅由总检察长起诉；部分条款已被法院暂停（第九巡回上诉法院，2026 年 3 月 12 日，NetChoice v. Bonta，第 25-2366 号），案件仍在审理",
     "reportingConsequence": "加州隐私保护局 (CPPA) 审计 / 加州总检察长民事执法"
   },
   "FTC Enforcement": {
     "lawName": "联邦贸易委员会法 — 第 5 条（欺骗性行为与暗黑模式）",
-    "lawUrl": "https://www.ftc.gov/legal-library/browse/statutes/federal-trade-commission-act",
-    "fineAmount": "每次违规最高 $50,120（每年调整）",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title15/html/USCODE-2023-title15-chap2-subchapI-sec45.htm",
+    "fineAmount": "每次违规最高 $53,088; 仅适用于违反 FTC 规则或 FTC 最终命令，或明知 FTC 已认定违法仍重复该行为（15 U.S.C. 45(l)、45(m)）；金额依 16 CFR 1.98，2025 年 1 月 17 日调整",
     "reportingConsequence": "FTC 执法令 / 同意令 / 强制消费者退款 / 审计"
   },
   "TCPA / Telecom": {
     "lawName": "电话消费者保护法 (TCPA) / CAN-SPAM 法案 / FTSA",
-    "lawUrl": "https://www.fcc.gov/general/telemarketing-and-robocalls",
-    "fineAmount": "每次通话/短信 $500–$1,500 (TCPA) / 每封 CAN-SPAM 邮件 $50,120",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title47/html/USCODE-2023-title47-chap5-subchapII-partI-sec227.htm",
+    "fineAmount": "每次通话/短信 $500–$1,500（TCPA，私人诉讼）/ 每封邮件最高 $53,088（CAN-SPAM）; TCPA：收件人可通过诉讼获得的法定赔偿——每次违规 $500，故意或明知时最高三倍（47 U.S.C. 227(b)(3)），并非政府罚款；CAN-SPAM：违规视为违反 FTC 规则（15 U.S.C. 7706(a)），金额依 16 CFR 1.98",
     "reportingConsequence": "FCC 监管行动 / 集体诉讼 / ISP 永久域名黑名单"
   },
   "GDPR": {
     "lawName": "欧盟 GDPR / 英国 GDPR / ePrivacy 指令",
-    "lawUrl": "https://gdpr-info.eu/",
-    "fineAmount": "最高 €20,000,000 / £17.5M 或全球年营业额的 4%",
+    "lawUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679#art_83",
+    "fineAmount": "最高 €20,000,000 或全球年营业额的 4%（欧盟 GDPR）/ £17,500,000 或 4%（英国 GDPR）; 以较高者为准；违反第 83(4) 条所列义务（如安全性及设计中的数据保护）为 €10,000,000 或 2%；同一处理操作只处罚一次，不超过最严重违规的金额（第 83(3) 条）",
     "reportingConsequence": "国家 DPA 调查（CNIL、ICO 等）/ 处理禁令 / 强制违规报告"
   },
   "PCI-DSS / Security": {
     "lawName": "PCI DSS v4.0 — PCI 安全标准委员会要求",
     "lawUrl": "https://www.pcisecuritystandards.org/standards/pci-dss/",
-    "fineAmount": "每月 $5,000–$100,000；商户卡处理暂停",
+    "fineAmount": "无法定罚款（合同标准）; PCI DSS 是行业标准而非法律——PCI 安全标准委员会明确表示其不负责强制执行；如有后果，由卡组织和收单银行依据商户协议决定，流传的每月罚款金额在任何原始来源中均未找到",
     "reportingConsequence": "卡网络罚款 / 强制取证审计 / 信用卡处理终止"
   },
   "State Privacy Laws": {
     "lawName": "美国州隐私法 (VA VCDPA、TX TDPSA、CO CPA) / NY DFS / NY SHIELD",
-    "lawUrl": "https://www.ncsl.org/technology-and-communication/state-laws-related-to-digital-privacy",
-    "fineAmount": "各州每次违规 $2,500–$7,500 / NY DFS 最高 $250,000",
+    "lawUrl": "https://law.lis.virginia.gov/vacode/title59.1/chapter53/section59.1-584/",
+    "fineAmount": "每次违规最高 $7,500（VA、TX）/ 最高 $20,000（CO）/ 最高 $5,000（NY SHIELD）; VA §59.1-584 与 TX Bus. & Com. Code §541.155——仅由总检察长执行，且须在 30 天纠正期之后；CO C.R.S. 6-1-112(1)(a)——按每位消费者或每笔交易分别计算，针对老年人最高 $50,000；NY SHIELD：数据安全义务 GBL §899-bb，经 §350-d 处罚；未通知数据泄露——$5,000 或每份未发送通知 $20，以较高者为准，上限 $250,000（GBL §899-aa）；NY DFS：每次违规最高 $1,000，故意欺诈 $5,000（Financial Services Law §408），银行和保险公司依其各自法律",
     "reportingConsequence": "州总检察长民事诉讼 / NY DFS 金融执法 / 集体诉讼责任"
   },
   "Financial / Corporate": {
     "lawName": "欧盟 DORA / Gramm-Leach-Bliley 法案 (GLBA) / 企业透明度法案 (CTA)",
-    "lawUrl": "https://www.ftc.gov/legal-library/browse/statutes/gramm-leach-bliley-act",
-    "fineAmount": "FinCEN BOI 每日迟报 $500 / GLBA 最高 $100,000 / DORA 每日全球营业额的 1%",
+    "lawUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022R2554#art_35",
+    "fineAmount": "每日最高为日均全球营业额的 1%，最长 6 个月（DORA）/ 法律未规定金额（GLBA）/ 美国公司已豁免（CTA）; DORA 第 35(6)–(8) 条：对不执行牵头监管机构措施的关键 ICT 第三方服务提供商处以定期罚款，而非金融机构；GLBA：由各行业监管机构执行（15 U.S.C. 6805）；以欺骗手段获取客户数据属于犯罪——依第 18 编罚款或最高 5 年监禁，12 个月内涉案超过 100,000 USD 的罚款加倍、最高 10 年（15 U.S.C. 6823）；CTA：FinCEN 于 2026 年 8 月 11 日发布的最终规则豁免美国公司的 BOI 报告，仅部分在美注册的外国公司仍需报告",
     "reportingConsequence": "FinCEN/IRS 刑事处罚 / SEC 执法 / 欧洲 ESA 监管审计"
   },
   "Digital Operations": {
     "lawName": "加拿大 PIPEDA 与第 25 号法律 / 巴西 LGPD / 澳大利亚隐私法 / 新加坡 PDPA / 欧盟 AI 法案与 DSA",
     "lawUrl": "https://laws-lois.justice.gc.ca/eng/acts/P-8.6/",
-    "fineAmount": "PIPEDA $100,000 CAD / 魁北克 $25M CAD / LGPD 收入的 2% / APPs $50M AUD / AI 法案 €35M 或收入的 7%",
+    "fineAmount": "最高 C$100,000（PIPEDA）/ C$25,000,000 或 4%（魁北克）/ 巴西营业额的 2%，上限 R$50,000,000（LGPD）/ A$50,000,000、收益的 3 倍或营业额的 30%（澳大利亚）/ 新加坡营业额的 10% 或 S$1,000,000（PDPA）/ €35,000,000 或 7%（AI 法案）; PIPEDA s.28：仅针对故意违反泄露通知与记录义务、销毁被要求的信息、报复举报人或妨碍专员——不针对安全措施薄弱本身；魁北克 P-39.1 第 91 条：刑事罚款，以较高者为准，行政罚款最高 C$10,000,000 或 2%（第 90.12 条）；LGPD 第 52(II) 条，按每次违规；澳大利亚 Privacy Act s.13G：由法院判处，仅针对严重侵犯，以较高者为准；新加坡 PDPA s.48J(3)：新加坡营业额超过 1,000 万新元时为 10%；AI 法案第 99(3) 条仅适用于被禁止的做法，其他义务最高 €15,000,000 或 3%（第 99(4) 条）",
     "reportingConsequence": "加拿大 OPC 调查 / 巴西 ANPD 审计 / 澳大利亚 OAIC 诉讼 / 欧盟 AI 办公室执法"
   }
 };

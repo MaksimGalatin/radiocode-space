@@ -3,62 +3,62 @@ import { ComplianceCheck, LawMeta, Category } from './threatMatrix';
 export const LAW_META_ES: Record<Category, LawMeta> = {
   "ADA / WCAG": {
     "lawName": "ADA Título III / Ley Europea de Accesibilidad (EAA) / AODA de Ontario",
-    "lawUrl": "https://www.ada.gov/resources/web-guidance/",
-    "fineAmount": "$75,000–$150,000 (ADA) / €100,000 (EAA) / $100,000 por día (AODA)",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap126-subchapIII-sec12188.htm",
+    "fineAmount": "$118,225–$236,451 (ADA: primera–reiterada infracción) / hasta €100,000 (EAA, Alemania) / hasta $100,000 por día (AODA, empresa); ADA: multa civil solo en una demanda del Fiscal General de EE. UU. (patrón o práctica, o asunto de importancia pública general), 42 U.S.C. 12188(b)(2)(C), montos según 28 CFR 85.5 (nivel de 2025, sin cambios en 2026); la EAA no fija multas — lo hace cada Estado de la UE (Alemania: BFSG §37); AODA s.37: por condena judicial y solo por informes de accesibilidad falsos, incumplir una orden del director o del Tribunal, o intimidación — las sanciones administrativas siguen una tabla y solo son diarias en infracciones graves y reiteradas (O. Reg. 191/11 s.83)",
     "reportingConsequence": "Aplicación civil del DOJ / Penalizaciones por vigilancia del mercado nacional / Auditorías del Ministerio de Ontario"
   },
   "HIPAA / Medical": {
     "lawName": "Regla de Privacidad HIPAA / Ley de Washington Mi Salud Mis Datos (MHMDA)",
-    "lawUrl": "https://www.hhs.gov/hipaa/for-professionals/privacy/index.html",
-    "fineAmount": "$50,000–$1,500,000 por año / $7,500 por violación MHMDA",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap7-subchapXI-partC-sec1320d-5.htm",
+    "fineAmount": "$145–$2,190,294 por infracción, $2,190,294 al año por infracciones idénticas (HIPAA) / hasta $7,500 por infracción (MHMDA); HIPAA: 42 U.S.C. 1320d-5 y 45 CFR 160.404, montos ajustados por HHS el 28.01.2026 — el mínimo depende de la culpa: desde $145 (no lo sabía) hasta $73,011 (negligencia deliberada no corregida); MHMDA: la infracción es una práctica desleal según la ley de protección al consumidor (RCW 19.373.090), multa según RCW 19.86.140",
     "reportingConsequence": "Investigación civil de HHS OCR / Demandas colectivas bajo MHMDA / Procesamiento del DOJ"
   },
   "CCPA / CPRA": {
     "lawName": "Ley de Privacidad del Consumidor de California (CCPA/CPRA) / Código de Diseño Apropiado para la Edad de California (AB 2273)",
-    "lawUrl": "https://oag.ca.gov/privacy/ccpa",
-    "fineAmount": "$2,500–$7,500 por violación / $7,500 por niño (AB 2273)",
+    "lawUrl": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1798.199.90",
+    "fineAmount": "$2,663–$7,988 por infracción (CCPA) / $2,500–$7,500 por cada menor afectado (AB 2273, parcialmente suspendida por un tribunal); CCPA: Civ. Code §1798.199.90 — $2,663 por infracción, $7,988 por infracción intencional o que involucre datos de menores (ajuste de la CPPA vigente desde el 01.01.2025); AB 2273: Civ. Code §1798.99.35 — $2,500 por negligencia, $7,500 si es intencional, solo por demanda del Fiscal General; parte de la ley está suspendida por un tribunal (Noveno Circuito, 12.03.2026, NetChoice v. Bonta, n.º 25-2366), el caso sigue abierto",
     "reportingConsequence": "Auditorías de la Agencia de Protección de Privacidad de California (CPPA) / Aplicación civil del AG de California"
   },
   "FTC Enforcement": {
     "lawName": "Ley de la Comisión Federal de Comercio — Sección 5 (Prácticas Engañosas y Patrones Oscuros)",
-    "lawUrl": "https://www.ftc.gov/legal-library/browse/statutes/federal-trade-commission-act",
-    "fineAmount": "Hasta $50,120 por violación (ajustado anualmente)",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title15/html/USCODE-2023-title15-chap2-subchapI-sec45.htm",
+    "fineAmount": "Hasta $53,088 por infracción; solo por infringir una regla de la FTC o una orden firme de la FTC, o por repetir a sabiendas una práctica que la FTC ya declaró ilegal (15 U.S.C. 45(l), 45(m)); monto según 16 CFR 1.98, ajuste del 17.01.2025",
     "reportingConsequence": "Órdenes de aplicación de la FTC / Decretos de consentimiento / Reembolsos obligatorios al consumidor / Auditorías"
   },
   "TCPA / Telecom": {
     "lawName": "Ley de Protección al Consumidor Telefónico (TCPA) / Ley CAN-SPAM / FTSA",
-    "lawUrl": "https://www.fcc.gov/general/telemarketing-and-robocalls",
-    "fineAmount": "$500–$1,500 por llamada/texto (TCPA) / $50,120 por correo electrónico CAN-SPAM",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title47/html/USCODE-2023-title47-chap5-subchapII-partI-sec227.htm",
+    "fineAmount": "$500–$1,500 por llamada o mensaje (TCPA, demanda privada) / hasta $53,088 por correo (CAN-SPAM); TCPA: indemnización que el destinatario puede reclamar judicialmente — $500 por infracción, hasta el triple si es deliberada (47 U.S.C. 227(b)(3)), no es una multa del gobierno; CAN-SPAM: la infracción se trata como infracción de una regla de la FTC (15 U.S.C. 7706(a)), monto según 16 CFR 1.98",
     "reportingConsequence": "Acción regulatoria de la FCC / Litigios de acción colectiva / Lista negra permanente de dominios por ISP"
   },
   "GDPR": {
     "lawName": "RGPD de la UE / RGPD del Reino Unido / Directiva ePrivacy",
-    "lawUrl": "https://gdpr-info.eu/",
-    "fineAmount": "Hasta €20,000,000 / £17.5M o 4% de la facturación anual global",
+    "lawUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679#art_83",
+    "fineAmount": "Hasta €20,000,000 o el 4% de la facturación anual mundial (RGPD de la UE) / £17,500,000 o el 4% (RGPD del Reino Unido); se aplica la cantidad mayor; €10,000,000 o el 2% por las infracciones del art. 83(4), como la seguridad y la protección de datos desde el diseño; una misma operación de tratamiento se sanciona una sola vez, hasta el importe de la infracción más grave (art. 83(3))",
     "reportingConsequence": "Investigación de DPA nacional (CNIL, ICO, etc.) / Prohibiciones de procesamiento / Notificación obligatoria de brechas"
   },
   "PCI-DSS / Security": {
     "lawName": "PCI DSS v4.0 — Requisitos del Consejo de Estándares de Seguridad PCI",
     "lawUrl": "https://www.pcisecuritystandards.org/standards/pci-dss/",
-    "fineAmount": "$5,000–$100,000 por mes; suspensión del procesamiento de tarjetas de comerciante",
+    "fineAmount": "Sin multa legal (norma contractual); PCI DSS es una norma del sector, no una ley — el PCI Security Standards Council declara que no hace cumplir la norma; las consecuencias, si las hay, las fijan las marcas de tarjetas y el banco adquirente según el contrato con el comercio, y las cifras de multas mensuales que circulan no aparecen en ninguna fuente primaria",
     "reportingConsequence": "Multas de la red de tarjetas / Auditorías forenses obligatorias / Terminación del procesamiento de tarjetas de crédito"
   },
   "State Privacy Laws": {
     "lawName": "Leyes de Privacidad Estatales de EE.UU. (VA VCDPA, TX TDPSA, CO CPA) / NY DFS / NY SHIELD",
-    "lawUrl": "https://www.ncsl.org/technology-and-communication/state-laws-related-to-digital-privacy",
-    "fineAmount": "$2,500–$7,500 por violación (Estados) / hasta $250,000 (NY DFS)",
+    "lawUrl": "https://law.lis.virginia.gov/vacode/title59.1/chapter53/section59.1-584/",
+    "fineAmount": "Hasta $7,500 por infracción (VA, TX) / hasta $20,000 (CO) / hasta $5,000 (NY SHIELD); VA §59.1-584 y TX Bus. & Com. Code §541.155 — solo el Fiscal General y solo tras un plazo de 30 días para subsanar; CO C.R.S. 6-1-112(1)(a) — por cada consumidor o transacción, hasta $50,000 si es contra una persona mayor; NY SHIELD: deber de seguridad GBL §899-bb mediante §350-d; no notificar una brecha — el mayor entre $5,000 o $20 por cada aviso no enviado, con un tope de $250,000 (GBL §899-aa); NY DFS: hasta $1,000 por infracción, $5,000 por fraude intencional (Financial Services Law §408), bancos y aseguradoras según sus propias leyes",
     "reportingConsequence": "Demandas civiles del AG estatal / Aplicación financiera de NY DFS / Responsabilidad por acciones colectivas"
   },
   "Financial / Corporate": {
     "lawName": "DORA de la UE / Ley Gramm-Leach-Bliley (GLBA) / Ley de Transparencia Corporativa (CTA)",
-    "lawUrl": "https://www.ftc.gov/legal-library/browse/statutes/gramm-leach-bliley-act",
-    "fineAmount": "$500/día de retraso (FinCEN BOI) / hasta $100,000 (GLBA) / 1% de facturación global diaria (DORA)",
+    "lawUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022R2554#art_35",
+    "fineAmount": "Hasta el 1% de la facturación mundial diaria media por día, durante un máximo de 6 meses (DORA) / la ley no fija importe (GLBA) / empresas de EE. UU. exentas (CTA); DORA art. 35(6)–(8): multa coercitiva a proveedores críticos de servicios TIC que no cumplen las medidas del Supervisor Principal, no a entidades financieras; GLBA: la aplican los reguladores sectoriales (15 U.S.C. 6805); obtener datos de clientes mediante engaño es delito — multa según el Título 18 o hasta 5 años, multa doble y hasta 10 años en esquemas de más de 100,000 USD en 12 meses (15 U.S.C. 6823); CTA: la norma final de FinCEN del 11.08.2026 exime a las empresas de EE. UU. del informe BOI, solo informan ciertas empresas extranjeras registradas en EE. UU.",
     "reportingConsequence": "Penalidades criminales de FinCEN/IRS / Aplicación de la SEC / Auditorías regulatorias de las ESAs europeas"
   },
   "Digital Operations": {
     "lawName": "PIPEDA de Canadá y Ley 25 / LGPD de Brasil / Ley de Privacidad de Australia / PDPA de Singapur / Ley de IA y DSA de la UE",
     "lawUrl": "https://laws-lois.justice.gc.ca/eng/acts/P-8.6/",
-    "fineAmount": "$100,000 CAD (PIPEDA) / $25M CAD (Quebec) / 2% de ingresos (LGPD) / $50M AUD (APPs) / €35M o 7% de ingresos (Ley de IA)",
+    "fineAmount": "Hasta C$100,000 (PIPEDA) / C$25,000,000 o 4% (Quebec) / 2% de la facturación en Brasil, máx. R$50,000,000 (LGPD) / A$50,000,000, 3 veces el beneficio o 30% de la facturación (Australia) / 10% de la facturación en Singapur o S$1,000,000 (PDPA) / €35,000,000 o 7% (Ley de IA); PIPEDA s.28: solo por incumplir a sabiendas los deberes de notificar y registrar brechas, destruir información solicitada, tomar represalias contra denunciantes u obstruir al Comisionado — no por una seguridad débil en sí; Quebec P-39.1 art. 91: multa penal, se aplica la mayor, sanción administrativa hasta C$10,000,000 o 2% (art. 90.12); LGPD art. 52(II) por infracción; Australia, Privacy Act s.13G: por un tribunal y solo por injerencia grave, se aplica la mayor; Singapur, PDPA s.48J(3): 10% si la facturación en Singapur supera 10 millones de SGD; Ley de IA art. 99(3) solo para prácticas prohibidas, otras obligaciones hasta €15,000,000 o 3% (art. 99(4))",
     "reportingConsequence": "Investigaciones de OPC Canadá / Auditorías de ANPD Brasil / Demandas de OAIC Australia / Aplicación de la Oficina de IA de la UE"
   }
 };

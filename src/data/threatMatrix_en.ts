@@ -3,62 +3,62 @@ import { ComplianceCheck, LawMeta, Category } from './threatMatrix';
 export const LAW_META_EN: Record<Category, LawMeta> = {
   "ADA / WCAG": {
     "lawName": "ADA Title III / European Accessibility Act (EAA) / Ontario AODA",
-    "lawUrl": "https://www.ada.gov/resources/web-guidance/",
-    "fineAmount": "$75,000–$150,000 (ADA) / €100,000 (EAA) / $100,000 per day (AODA)",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap126-subchapIII-sec12188.htm",
+    "fineAmount": "$118,225–$236,451 (ADA: first–repeat violation) / up to €100,000 (EAA, Germany) / up to $100,000 per day (AODA, corporation); ADA: civil penalty only in a lawsuit by the US Attorney General (pattern or practice, or an issue of general public importance), 42 U.S.C. 12188(b)(2)(C), amounts per 28 CFR 85.5 (2025 levels, unchanged for 2026); the EAA sets no fine itself — each EU state does (Germany: BFSG §37); AODA s.37: on conviction, and only for false accessibility reports, ignoring a director's or Tribunal order, or intimidation — administrative penalties follow a schedule and become daily only for major repeat violations (O. Reg. 191/11 s.83)",
     "reportingConsequence": "DOJ civil enforcement / National market surveillance penalties / Ministry of Ontario audits"
   },
   "HIPAA / Medical": {
     "lawName": "HIPAA Privacy Rule / Washington My Health My Data Act (MHMDA)",
-    "lawUrl": "https://www.hhs.gov/hipaa/for-professionals/privacy/index.html",
-    "fineAmount": "$50,000–$1,500,000 per year / $7,500 per MHMDA violation",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap7-subchapXI-partC-sec1320d-5.htm",
+    "fineAmount": "$145–$2,190,294 per violation, $2,190,294 per year for identical violations (HIPAA) / up to $7,500 per violation (MHMDA); HIPAA: 42 U.S.C. 1320d-5 and 45 CFR 160.404, amounts adjusted by HHS on 28.01.2026 — the minimum depends on culpability, from $145 (did not know) to $73,011 (willful neglect not corrected); MHMDA: a violation is an unfair practice under the Consumer Protection Act (RCW 19.373.090), civil penalty per RCW 19.86.140",
     "reportingConsequence": "HHS OCR civil investigation / Class-action lawsuits under MHMDA / DOJ prosecution"
   },
   "CCPA / CPRA": {
     "lawName": "California Consumer Privacy Act (CCPA/CPRA) / California Age-Appropriate Design Code (AB 2273)",
-    "lawUrl": "https://oag.ca.gov/privacy/ccpa",
-    "fineAmount": "$2,500–$7,500 per violation / $7,500 per child (AB 2273)",
+    "lawUrl": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1798.199.90",
+    "fineAmount": "$2,663–$7,988 per violation (CCPA) / $2,500–$7,500 per affected child (AB 2273, partly blocked by a court); CCPA: Civ. Code §1798.199.90 — $2,663 per violation, $7,988 per intentional violation or violation involving minors' data (CPPA adjustment in force since 01.01.2025); AB 2273: Civ. Code §1798.99.35 — $2,500 negligent, $7,500 intentional, Attorney General only; parts of the law are blocked by a court (Ninth Circuit, 12.03.2026, NetChoice v. Bonta, No. 25-2366), the case is pending",
     "reportingConsequence": "California Privacy Protection Agency (CPPA) audits / California AG civil enforcement"
   },
   "FTC Enforcement": {
     "lawName": "Federal Trade Commission Act — Section 5 (Deceptive Practices & Dark Patterns)",
-    "lawUrl": "https://www.ftc.gov/legal-library/browse/statutes/federal-trade-commission-act",
-    "fineAmount": "Up to $50,120 per violation (adjusted annually)",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title15/html/USCODE-2023-title15-chap2-subchapI-sec45.htm",
+    "fineAmount": "Up to $53,088 per violation; only for violating an FTC rule or a final FTC order, or knowingly repeating a practice the FTC has already declared unlawful (15 U.S.C. 45(l), 45(m)); amount per 16 CFR 1.98, adjusted 17.01.2025",
     "reportingConsequence": "FTC enforcement orders / Consent decrees / Mandatory consumer refunds / Audits"
   },
   "TCPA / Telecom": {
     "lawName": "Telephone Consumer Protection Act (TCPA) / CAN-SPAM Act / FTSA",
-    "lawUrl": "https://www.fcc.gov/general/telemarketing-and-robocalls",
-    "fineAmount": "$500–$1,500 per call/text (TCPA) / $50,120 per CAN-SPAM email",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title47/html/USCODE-2023-title47-chap5-subchapII-partI-sec227.htm",
+    "fineAmount": "$500–$1,500 per call or text (TCPA, private lawsuit) / up to $53,088 per email (CAN-SPAM); TCPA: statutory damages the recipient may sue for — $500 per violation, up to three times if willful or knowing (47 U.S.C. 227(b)(3)), not a government fine; CAN-SPAM: a violation is treated as a violation of an FTC rule (15 U.S.C. 7706(a)), amount per 16 CFR 1.98",
     "reportingConsequence": "FCC regulatory action / Class-action litigation / Permanent domain blacklisting by ISPs"
   },
   "GDPR": {
     "lawName": "EU GDPR / UK GDPR / ePrivacy Directive",
-    "lawUrl": "https://gdpr-info.eu/",
-    "fineAmount": "Up to €20,000,000 / £17.5M or 4% of global annual turnover",
+    "lawUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679#art_83",
+    "fineAmount": "Up to €20,000,000 or 4% of worldwide annual turnover (EU GDPR) / £17,500,000 or 4% (UK GDPR); whichever is higher; €10,000,000 or 2% for breaches listed in Art. 83(4), such as security and data protection by design; one processing operation is fined once, up to the amount for the gravest breach (Art. 83(3))",
     "reportingConsequence": "National DPA investigation (CNIL, ICO, etc.) / Processing bans / Mandatory breach reporting"
   },
   "PCI-DSS / Security": {
     "lawName": "PCI DSS v4.0 — PCI Security Standards Council Requirements",
     "lawUrl": "https://www.pcisecuritystandards.org/standards/pci-dss/",
-    "fineAmount": "$5,000–$100,000 per month; merchant card processing suspension",
+    "fineAmount": "No statutory fine (contract standard); PCI DSS is an industry standard, not a law — the PCI Security Standards Council states that it does not enforce compliance; consequences, if any, are set by the card brands and the acquiring bank under the merchant agreement, and the monthly fine figures in circulation are not found in any primary source",
     "reportingConsequence": "Card network fines / Mandatory forensic audits / Credit card processing termination"
   },
   "State Privacy Laws": {
     "lawName": "US State Privacy Acts (VA VCDPA, TX TDPSA, CO CPA) / NY DFS / NY SHIELD",
-    "lawUrl": "https://www.ncsl.org/technology-and-communication/state-laws-related-to-digital-privacy",
-    "fineAmount": "$2,500–$7,500 per violation (States) / up to $250,000 (NY DFS)",
+    "lawUrl": "https://law.lis.virginia.gov/vacode/title59.1/chapter53/section59.1-584/",
+    "fineAmount": "Up to $7,500 per violation (VA, TX) / up to $20,000 (CO) / up to $5,000 (NY SHIELD); VA §59.1-584 and TX Bus. & Com. Code §541.155 — Attorney General only, after a 30-day cure period; CO C.R.S. 6-1-112(1)(a) — counted per consumer or transaction, up to $50,000 if against an elderly person; NY SHIELD: security duty GBL §899-bb via §350-d; failure to notify of a breach — the greater of $5,000 or $20 per missed notice, capped at $250,000 (GBL §899-aa); NY DFS: up to $1,000 per violation, $5,000 for intentional fraud (Financial Services Law §408), banks and insurers under their own laws",
     "reportingConsequence": "State AG civil lawsuits / NY DFS financial enforcement / Class-action liability"
   },
   "Financial / Corporate": {
     "lawName": "EU DORA / Gramm-Leach-Bliley Act (GLBA) / Corporate Transparency Act (CTA)",
-    "lawUrl": "https://www.ftc.gov/legal-library/browse/statutes/gramm-leach-bliley-act",
-    "fineAmount": "$500/day late (FinCEN BOI) / up to $100,000 (GLBA) / 1% daily global turnover (DORA)",
+    "lawUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022R2554#art_35",
+    "fineAmount": "Up to 1% of average daily worldwide turnover per day, for up to 6 months (DORA) / no amount set in the Act (GLBA) / US companies exempt (CTA); DORA Art. 35(6)–(8): periodic penalty on critical ICT third-party service providers that ignore the Lead Overseer's measures, not on financial entities; GLBA: enforced by the functional regulators (15 U.S.C. 6805); obtaining customer data by pretexting is a crime — fine under Title 18 or up to 5 years, doubled fine and up to 10 years for schemes over 100,000 USD in 12 months (15 U.S.C. 6823); CTA: FinCEN final rule of 11.08.2026 exempts US companies from BOI reporting, only certain foreign companies registered in the US still report",
     "reportingConsequence": "FinCEN/IRS criminal penalties / SEC enforcement / European ESAs regulatory audits"
   },
   "Digital Operations": {
     "lawName": "Canada PIPEDA & Law 25 / Brazil LGPD / Australia Privacy Act / Singapore PDPA / EU AI Act & DSA",
     "lawUrl": "https://laws-lois.justice.gc.ca/eng/acts/P-8.6/",
-    "fineAmount": "$100,000 CAD (PIPEDA) / $25M CAD (Quebec) / 2% revenue (LGPD) / $50M AUD (APPs) / €35M or 7% revenue (AI Act)",
+    "fineAmount": "Up to C$100,000 (PIPEDA) / C$25,000,000 or 4% (Quebec) / 2% of Brazil revenue, max R$50,000,000 (LGPD) / A$50,000,000, 3× benefit or 30% of turnover (Australia) / 10% of Singapore turnover or S$1,000,000 (PDPA) / €35,000,000 or 7% (AI Act); PIPEDA s.28: only for knowingly breaking breach-notification or breach-record duties, destroying requested information, retaliating against whistleblowers or obstructing the Commissioner — not for weak security itself; Quebec P-39.1 s.91: penal fine, whichever is greater, administrative penalty up to C$10,000,000 or 2% (s.90.12); LGPD Art. 52(II) per violation; Australia, Privacy Act s.13G: by a court, for serious interference only, whichever is greater; Singapore, PDPA s.48J(3): 10% if Singapore turnover exceeds 10 million SGD; AI Act Art. 99(3) for banned practices only, other obligations up to €15,000,000 or 3% (Art. 99(4))",
     "reportingConsequence": "OPC Canada investigations / ANPD Brazil audits / OAIC Australia lawsuits / EU AI Office enforcement"
   }
 };

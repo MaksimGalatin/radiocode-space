@@ -3,62 +3,62 @@ import { ComplianceCheck, LawMeta, Category } from './threatMatrix';
 export const LAW_META_RU: Record<Category, LawMeta> = {
   "ADA / WCAG": {
     "lawName": "ADA Title III / Европейский акт о доступности (EAA) / Ontario AODA",
-    "lawUrl": "https://www.ada.gov/resources/web-guidance/",
-    "fineAmount": "$75,000–$150,000 (ADA) / €100,000 (EAA) / $100,000 в день (AODA)",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap126-subchapIII-sec12188.htm",
+    "fineAmount": "$118,225–$236,451 (ADA: первое–повторное нарушение) / до €100,000 (EAA, Германия) / до $100,000 в день (AODA, корпорация); ADA: штраф только по иску Генпрокурора США (систематическая дискриминация или вопрос общественной важности), 42 U.S.C. 12188(b)(2)(C), суммы по 28 CFR 85.5 (уровень 2025 года, на 2026 год не менялся); EAA сама штраф не задаёт — его устанавливает каждая страна ЕС (Германия: BFSG §37); AODA s.37: по приговору суда и только за ложный отчёт о доступности, неисполнение приказа директора или Трибунала либо запугивание — административные штрафы идут по таблице и становятся ежедневными только при тяжёлых повторных нарушениях (O. Reg. 191/11 s.83)",
     "reportingConsequence": "Гражданское правоприменение DOJ / Национальные штрафы за надзор за рынком / Аудиты Министерства Онтарио"
   },
   "HIPAA / Medical": {
     "lawName": "HIPAA Privacy Rule / Washington My Health My Data Act (MHMDA)",
-    "lawUrl": "https://www.hhs.gov/hipaa/for-professionals/privacy/index.html",
-    "fineAmount": "$50,000–$1,500,000 в год / $7,500 за нарушение MHMDA",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap7-subchapXI-partC-sec1320d-5.htm",
+    "fineAmount": "$145–$2,190,294 за нарушение, $2,190,294 в год за одинаковые нарушения (HIPAA) / до $7,500 за нарушение (MHMDA); HIPAA: 42 U.S.C. 1320d-5 и 45 CFR 160.404, суммы проиндексированы HHS 28.01.2026 — минимум зависит от вины: от $145 (не знал) до $73,011 (умышленная небрежность без исправления); MHMDA: нарушение считается недобросовестной практикой по закону о защите потребителей (RCW 19.373.090), штраф по RCW 19.86.140",
     "reportingConsequence": "Гражданское расследование HHS OCR / Коллективные иски по MHMDA / Уголовное преследование DOJ"
   },
   "CCPA / CPRA": {
     "lawName": "California Consumer Privacy Act (CCPA/CPRA) / California Age-Appropriate Design Code (AB 2273)",
-    "lawUrl": "https://oag.ca.gov/privacy/ccpa",
-    "fineAmount": "$2,500–$7,500 за нарушение / $7,500 за нарушение в отношении детей (AB 2273)",
+    "lawUrl": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1798.199.90",
+    "fineAmount": "$2,663–$7,988 за нарушение (CCPA) / $2,500–$7,500 за каждого затронутого ребёнка (AB 2273, частично остановлен судом); CCPA: Civ. Code §1798.199.90 — $2,663 за нарушение, $7,988 за умышленное нарушение или нарушение с данными несовершеннолетних (индексация CPPA, действует с 01.01.2025); AB 2273: Civ. Code §1798.99.35 — $2,500 по небрежности, $7,500 при умысле, только по иску генпрокурора; часть закона остановлена судом (9-й округ, 12.03.2026, NetChoice v. Bonta, № 25-2366), дело продолжается",
     "reportingConsequence": "Аудиты California Privacy Protection Agency (CPPA) / Гражданское правоприменение California AG"
   },
   "FTC Enforcement": {
     "lawName": "Federal Trade Commission Act — Section 5 (Deceptive Practices & Dark Patterns)",
-    "lawUrl": "https://www.ftc.gov/legal-library/browse/statutes/federal-trade-commission-act",
-    "fineAmount": "До $50,120 за нарушение (корректируется ежегодно)",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title15/html/USCODE-2023-title15-chap2-subchapI-sec45.htm",
+    "fineAmount": "До $53,088 за нарушение; только за нарушение правила FTC или окончательного предписания FTC либо за сознательное повторение практики, которую FTC уже признала незаконной (15 U.S.C. 45(l), 45(m)); сумма по 16 CFR 1.98, индексация от 17.01.2025",
     "reportingConsequence": "Приказы FTC о правоприменении / Согласия о признании / Обязательные возмещения потребителям / Аудиты"
   },
   "TCPA / Telecom": {
     "lawName": "Telephone Consumer Protection Act (TCPA) / CAN-SPAM Act / FTSA",
-    "lawUrl": "https://www.fcc.gov/general/telemarketing-and-robocalls",
-    "fineAmount": "$500–$1,500 за звонок/сообщение (TCPA) / $50,120 за email CAN-SPAM",
+    "lawUrl": "https://www.govinfo.gov/content/pkg/USCODE-2023-title47/html/USCODE-2023-title47-chap5-subchapII-partI-sec227.htm",
+    "fineAmount": "$500–$1,500 за звонок или сообщение (TCPA, частный иск) / до $53,088 за письмо (CAN-SPAM); TCPA: возмещение, которое получатель может взыскать по иску, — $500 за нарушение, до трёхкратного при умысле (47 U.S.C. 227(b)(3)), это не государственный штраф; CAN-SPAM: нарушение приравнено к нарушению правила FTC (15 U.S.C. 7706(a)), сумма по 16 CFR 1.98",
     "reportingConsequence": "Регуляторные действия FCC / Коллективные иски / Постоянная блокировка домена провайдерами"
   },
   "GDPR": {
     "lawName": "EU GDPR / UK GDPR / ePrivacy Directive",
-    "lawUrl": "https://gdpr-info.eu/",
-    "fineAmount": "До €20,000,000 / £17.5M или 4% глобального годового оборота",
+    "lawUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679#art_83",
+    "fineAmount": "До €20,000,000 или 4% мирового годового оборота (GDPR ЕС) / £17,500,000 или 4% (UK GDPR); берётся большее; €10,000,000 или 2% — за нарушения из ст. 83(4), например безопасность и защиту данных при проектировании; одна операция обработки штрафуется один раз, не больше суммы за самое тяжёлое нарушение (ст. 83(3))",
     "reportingConsequence": "Расследование национальных DPA (CNIL, ICO и др.) / Запреты на обработку / Обязательное уведомление о нарушениях"
   },
   "PCI-DSS / Security": {
     "lawName": "PCI DSS v4.0 — PCI Security Standards Council Requirements",
     "lawUrl": "https://www.pcisecuritystandards.org/standards/pci-dss/",
-    "fineAmount": "$5,000–$100,000 в месяц; приостановка обработки карт мерчанта",
+    "fineAmount": "Штрафа по закону нет (договорный стандарт); PCI DSS — отраслевой стандарт, а не закон: Совет PCI SSC прямо пишет, что соблюдение не обеспечивает; последствия, если они есть, устанавливают платёжные системы и банк-эквайер по договору с продавцом, а суммы штрафов в месяц, которые ходят по сети, ни в одном первоисточнике не найдены",
     "reportingConsequence": "Штрафы платёжных сетей / Обязательные судебно-медицинские аудиты / Прекращение обработки кредитных карт"
   },
   "State Privacy Laws": {
     "lawName": "US State Privacy Acts (VA VCDPA, TX TDPSA, CO CPA) / NY DFS / NY SHIELD",
-    "lawUrl": "https://www.ncsl.org/technology-and-communication/state-laws-related-to-digital-privacy",
-    "fineAmount": "$2,500–$7,500 за нарушение (штаты) / до $250,000 (NY DFS)",
+    "lawUrl": "https://law.lis.virginia.gov/vacode/title59.1/chapter53/section59.1-584/",
+    "fineAmount": "До $7,500 за нарушение (VA, TX) / до $20,000 (CO) / до $5,000 (NY SHIELD); VA §59.1-584 и TX Bus. & Com. Code §541.155 — только генпрокурор и только после 30-дневного срока на исправление; CO C.R.S. 6-1-112(1)(a) — отдельно по каждому потребителю или сделке, до $50,000 при нарушении против пожилого человека; NY SHIELD: обязанность защиты данных GBL §899-bb через §350-d; неуведомление об утечке — большее из $5,000 или $20 за каждое неотправленное уведомление, но не больше $250,000 (GBL §899-aa); NY DFS: до $1,000 за нарушение, $5,000 за умышленный обман (Financial Services Law §408), банкам и страховщикам — по их законам",
     "reportingConsequence": "Гражданские иски AG штатов / Финансовое правоприменение NY DFS / Ответственность по коллективным искам"
   },
   "Financial / Corporate": {
     "lawName": "EU DORA / Gramm-Leach-Bliley Act (GLBA) / Corporate Transparency Act (CTA)",
-    "lawUrl": "https://www.ftc.gov/legal-library/browse/statutes/gramm-leach-bliley-act",
-    "fineAmount": "$500/день за просрочку (FinCEN BOI) / до $100,000 (GLBA) / 1% ежедневного глобального оборота (DORA)",
+    "lawUrl": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32022R2554#art_35",
+    "fineAmount": "До 1% среднесуточного мирового оборота в день, не дольше 6 месяцев (DORA) / суммы в законе нет (GLBA) / компании США освобождены (CTA); DORA ст. 35(6)–(8): периодический штраф критическим поставщикам ИКТ-услуг, не исполняющим меры Ведущего надзорного органа, а не финансовым организациям; GLBA: применяют отраслевые регуляторы (15 U.S.C. 6805); получение данных клиента обманом — преступление: штраф по Title 18 или до 5 лет, удвоенный штраф и до 10 лет при схеме более чем на 100,000 USD за 12 месяцев (15 U.S.C. 6823); CTA: окончательное правило FinCEN от 11.08.2026 освобождает компании США от отчётности BOI, отчитываются только некоторые иностранные компании, зарегистрированные в США",
     "reportingConsequence": "Уголовные санкции FinCEN/IRS / Правоприменение SEC / Регуляторные аудиты европейских ESA"
   },
   "Digital Operations": {
     "lawName": "Canada PIPEDA & Law 25 / Brazil LGPD / Australia Privacy Act / Singapore PDPA / EU AI Act & DSA",
     "lawUrl": "https://laws-lois.justice.gc.ca/eng/acts/P-8.6/",
-    "fineAmount": "$100,000 CAD (PIPEDA) / $25M CAD (Quebec) / 2% выручки (LGPD) / $50M AUD (APPs) / €35M или 7% выручки (AI Act)",
+    "fineAmount": "До C$100,000 (PIPEDA) / C$25,000,000 или 4% (Квебек) / 2% оборота в Бразилии, не больше R$50,000,000 (LGPD) / A$50,000,000, 3× выгоды или 30% оборота (Австралия) / 10% оборота в Сингапуре или S$1,000,000 (PDPA) / €35,000,000 или 7% (AI Act); PIPEDA s.28: только за умышленное нарушение обязанностей по уведомлению и учёту утечек, уничтожение запрошенных сведений, преследование заявителя или воспрепятствование Уполномоченному — не за слабую защиту как таковую; Квебек P-39.1 ст. 91: уголовный штраф, берётся большее, административный — до C$10,000,000 или 2% (ст. 90.12); LGPD ст. 52(II) за нарушение; Австралия, Privacy Act s.13G: по суду и только за серьёзное вмешательство, берётся большее; Сингапур, PDPA s.48J(3): 10%, если оборот в Сингапуре больше 10 млн SGD; AI Act ст. 99(3) — только запрещённые практики, прочие обязанности — до €15,000,000 или 3% (ст. 99(4))",
     "reportingConsequence": "Расследования OPC Canada / Аудиты ANPD Brazil / Иски OAIC Australia / Правоприменение EU AI Office"
   }
 };
