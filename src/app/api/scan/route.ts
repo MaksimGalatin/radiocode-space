@@ -287,6 +287,37 @@ async function createChatCompletionWithFallback(
     );
   }
 
+  /**
+   * СТУПЕНЬ VERTEX — ПОСЛЕ БЕСПЛАТНОЙ GEMINI (26.09.2026, поручение Архитектора:
+   * «ВЕРТЕКС подключи после бесплатной Джемини»).
+   *
+   * Сюда доходим, только если не ответила НИ ОДНА бесплатная модель ни на одном
+   * ключе. Платит грант Google for Startups; три числа, выключатель и лестница —
+   * в `vertexСканераОткрыт` (lib/vertex-ai.ts). Первая модель — та же
+   * gemini-3.7-flash, что на вершине бесплатной лестницы: после исчерпания
+   * бесплатного лимита отчёт пишет тот же «мозг», и вердикт воспроизводим.
+   *
+   * Суточный потолок в долларах проверяется внутри `vertexChatCompletion` ДО
+   * вызова: дошли до потолка — ступень молчит, и отчёт уходит без модели, как
+   * было до неё. Любой сбой здесь тоже не роняет проверку.
+   */
+  try {
+    const { vertexСканераОткрыт, vertexChatCompletion, ЛЕСТНИЦА_VERTEX_СКАНЕРА } = await import('@/lib/vertex-ai');
+    if (vertexСканераОткрыт()) {
+      for (const модель of ЛЕСТНИЦА_VERTEX_СКАНЕРА) {
+        const текст = await vertexChatCompletion(messages, max_tokens, temperature, модель);
+        const имя = модель.replace(/^google\//, '');
+        if (текст) {
+          console.log(`[scan] вердикт вынесла ${имя} через Vertex (грант)`);
+          return { completion: { choices: [{ message: { content: текст } }] }, engine: `vertex/${имя}` };
+        }
+        console.warn(`[scan] Vertex · ${имя} не ответила — пробую следующую`);
+      }
+    }
+  } catch (err) {
+    console.warn('[scan] ступень Vertex не сработала:', String(err).slice(0, 200));
+  }
+
   if (ключГрока()) {
     try {
       const client = new OpenAI({
@@ -1247,7 +1278,10 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const hasKeys = !!(ключГрока() || process.env.GEMINI_API_KEY);
+    // Vertex (служебный ключ Google) — тоже ключ: без него сайт без GEMINI_API_KEY
+    // пропускал бы слой модели целиком, даже когда ступень Vertex открыта.
+    const hasKeys = !!(ключГрока() || process.env.GEMINI_API_KEY
+      || process.env.GOOGLE_SERVICE_ACCOUNT_KEY || process.env.GCP_SERVICE_ACCOUNT_KEY);
     const activeLocale = locale || 'en';
 
     // Build URL queue
