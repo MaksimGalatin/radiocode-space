@@ -1,3 +1,5 @@
+import { oidcВходВозможен, пропускGoogleЧерезOidc } from './google-oidc';
+
 /**
  * Доступ к Google Cloud по служебному ключу.
  *
@@ -47,7 +49,8 @@ export function платныеРазрешены(): boolean {
  * и 13.08.2026 по нему за сутки ушло $43.35 без разрешения.
  */
 export function isVertexConfigured(): boolean {
-  return !!(process.env.GOOGLE_SERVICE_ACCOUNT_KEY || process.env.GCP_SERVICE_ACCOUNT_KEY);
+  // Без ключа — вход через OIDC Vercel (26.09.2026, lib/google-oidc.ts).
+  return !!(process.env.GOOGLE_SERVICE_ACCOUNT_KEY || process.env.GCP_SERVICE_ACCOUNT_KEY) || oidcВходВозможен();
 }
 
 export async function getGCPToken(saKeyJson: string): Promise<string | null> {
@@ -105,13 +108,14 @@ export async function vertexChatCompletion(
 
   try {
     const saKey = process.env.GOOGLE_SERVICE_ACCOUNT_KEY || process.env.GCP_SERVICE_ACCOUNT_KEY;
-    if (!saKey) return null;
+    // Ключа нет — вход без ключа через OIDC Vercel (26.09.2026, lib/google-oidc.ts).
+    const oidc = saKey ? null : await пропускGoogleЧерезOidc();
+    if (!saKey && !oidc) return null;
 
-    const credentials = JSON.parse(saKey);
-    const projectId = credentials.project_id;
+    const projectId = saKey ? JSON.parse(saKey).project_id : oidc!.проект;
     const model = modelOverride || process.env.VERTEX_MODEL || 'google/gemini-2.5-flash';
 
-    const accessToken = await getGCPToken(saKey);
+    const accessToken = saKey ? await getGCPToken(saKey) : oidc!.токен;
     if (!accessToken) {
       console.warn('[Vertex AI] Could not obtain access token');
       return null;
