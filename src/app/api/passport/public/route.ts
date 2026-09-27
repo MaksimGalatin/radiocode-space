@@ -1,6 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getPool } from '@/lib/economy';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
+import crypto from 'crypto';
+
+/**
+ * НОМЕР ДОКУМЕНТА ИЗ САМОЙ ВЕЧНОЙ ЗАПИСИ (27.09.2026).
+ *
+ * Номер паспорта `CE-XXXXXXXX` — первые 8 знаков поля `subject` записи в
+ * Arweave. Считать его формулой нельзя: у паспортов до сентября отпечаток
+ * считался от почты, у новых — от псевдонима. Кабинет считал третьим способом и
+ * показывал номер, которого нет ни в цепи, ни на большой странице паспорта.
+ * Здесь номер читается из самой записи; если записи ещё нет — считается так,
+ * как его запишет выпуск (`api/passport/mint`). Не прочиталась запись — null,
+ * а не выдуманный номер.
+ */
+async function номерДокумента(tx: string | null, username: string): Promise<string | null> {
+  if (tx) {
+    if (!/^[A-Za-z0-9_-]{43}$/.test(tx)) return null;
+    for (const шлюз of ['https://arweave.net/', 'https://permagate.io/']) {
+      try {
+        const r = await fetch(шлюз + tx, { next: { revalidate: 86400 }, signal: AbortSignal.timeout(6000) });
+        if (!r.ok) continue;
+        const j = (await r.json()) as { subject?: string };
+        if (typeof j.subject === 'string' && j.subject.length >= 8) return 'CE-' + j.subject.slice(0, 8).toUpperCase();
+      } catch { /* следующий шлюз */ }
+    }
+    return null;
+  }
+  const h = crypto.createHash('sha256').update('CODE-ETERNAL-PASSPORT:' + username).digest('hex');
+  return 'CE-' + h.slice(0, 8).toUpperCase();
+}
 
 /**
  * ПУБЛИЧНАЯ ВИТРИНА ЦИФРОВОГО ПАСПОРТА.
@@ -61,6 +90,7 @@ export async function GET(req: NextRequest) {
       },
       arweaveTx: row.arweave_tx || null,
       mintedAt: row.minted_at || null,
+      documentNumber: await номерДокумента(row.arweave_tx || null, String(row.username)),
     });
   } finally {
     await pool.end();

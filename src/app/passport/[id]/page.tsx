@@ -137,20 +137,30 @@ async function достать(id: string): Promise<Паспорт | null> {
          * строку — витрина пуста, в цепи шум: право на забвение работает
          * целиком, а не наполовину.
          */
-        const закрыт = !j.identity && typeof (j as { identityEncrypted?: string }).identityEncrypted === 'string';
-        if (закрыт) {
-          const ник = (j as { username?: string }).username || '';
-          if (ник) {
-            try {
-              const в = await fetch(
-                `${БАЗА_САЙТА}/api/passport/public?username=${encodeURIComponent(ник)}`,
-                { next: { revalidate: 300 }, signal: AbortSignal.timeout(8000) });
-              if (в.ok) {
-                const д = (await в.json()) as { found?: boolean; identity?: Паспорт['identity'] };
-                if (д.found && д.identity) return { ...j, identity: д.identity };
+        /*
+         * 27.09.2026: текущие данные из базы берутся ВСЕГДА, а не только для
+         * зашифрованных записей. Слово Архитектора: «На Паспорте должны быть все
+         * данные которые вносит пользователь». У записей до 14.09 личная часть в
+         * цепи открыта, но это снимок дня выпуска: у записи Архитектора (08.08)
+         * там нет фото и старое «О себе». Непустое из базы заменяет снимок;
+         * пустое не стирает то, что уже в цепи (уровень тарифа, например, витрина
+         * не передаёт). Отозванный паспорт (витрина found:false) — как раньше.
+         */
+        const ник = (j as { username?: string }).username || j.identity?.username || '';
+        if (ник) {
+          try {
+            const в = await fetch(
+              `${БАЗА_САЙТА}/api/passport/public?username=${encodeURIComponent(ник)}`,
+              { next: { revalidate: 300 }, signal: AbortSignal.timeout(8000) });
+            if (в.ok) {
+              const д = (await в.json()) as { found?: boolean; identity?: Паспорт['identity'] };
+              if (д.found && д.identity) {
+                const свежее = Object.fromEntries(
+                  Object.entries(д.identity).filter(([, значение]) => значение !== '' && значение != null));
+                return { ...j, identity: { ...(j.identity || {}), ...свежее } };
               }
-            } catch { /* витрина недоступна — покажем то, что есть в цепи */ }
-          }
+            }
+          } catch { /* витрина недоступна — покажем то, что есть в цепи */ }
         }
         return j;
       }
