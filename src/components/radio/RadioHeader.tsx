@@ -583,7 +583,9 @@ export function RadioHeader() {
             значком без подписи. Ниже 768 px — своя строка из двух выделенных
             кнопок; значок кабинета в ряду шапки с этой ширины спрятан, чтобы
             не было двух кнопок. Строка добавляет шапке 44 px — на столько же
-            опускается страница (отступ body только для этих ширин). */}
+            опускается страница: отступ body живёт в src/app/globals.css.
+            Встроенный <style> здесь не работает — CSP сайта пускает встроенные
+            стили только с одноразовым nonce (замер 27.09.2026: отступ 0 px). */}
         <div className="md:hidden flex items-center gap-2 pb-2">
           <CabinetAuthButton lang={lang} isMobile />
           <motion.a
@@ -598,7 +600,6 @@ export function RadioHeader() {
             {lang === 'ru' ? 'Тарифы' : lang === 'es' ? 'Tarifas' : lang === 'zh' ? '价格' : 'Pricing'}
           </motion.a>
         </div>
-        <style>{'@media (max-width: 767.98px) { body { padding-top: 44px; } }'}</style>
       </nav>
     </motion.header>
   );
