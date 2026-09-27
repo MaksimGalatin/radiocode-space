@@ -576,6 +576,29 @@ export function RadioHeader() {
             </div>
           </div>
         </div>
+
+        {/* 27.09.2026, слово Архитектора: «на ВСЕХ сайтах в мобильных версиях
+            сделай видным вход в кабинет и наши Тарифы… нам нужны регистрации
+            и продажи». Мобильного меню здесь нет, а кабинет в ряду шапки был
+            значком без подписи. Ниже 768 px — своя строка из двух выделенных
+            кнопок; значок кабинета в ряду шапки с этой ширины спрятан, чтобы
+            не было двух кнопок. Строка добавляет шапке 44 px — на столько же
+            опускается страница (отступ body только для этих ширин). */}
+        <div className="md:hidden flex items-center gap-2 pb-2">
+          <CabinetAuthButton lang={lang} isMobile />
+          <motion.a
+            href="/tariffs"
+            whileHover={{ scale: 1.04 }}
+            className="flex-1 flex items-center justify-center px-3 py-2 rounded-full text-[13px] font-semibold text-white whitespace-nowrap"
+            style={{
+              background: 'linear-gradient(90deg, rgba(0, 200, 255, 0.55), rgba(139, 92, 246, 0.55))',
+              border: '1px solid rgba(0, 240, 255, 0.55)',
+            }}
+          >
+            {lang === 'ru' ? 'Тарифы' : lang === 'es' ? 'Tarifas' : lang === 'zh' ? '价格' : 'Pricing'}
+          </motion.a>
+        </div>
+        <style>{'@media (max-width: 767.98px) { body { padding-top: 44px; } }'}</style>
       </nav>
     </motion.header>
   );
