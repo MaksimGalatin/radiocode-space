@@ -6,6 +6,7 @@ import { stations } from '@/lib/stations';
 // Фиолетовый #B000FF сам по себе не проходит WCAG AA (4.14 при норме 4.5),
 // поэтому для ТЕКСТА берём осветлённый двойник — см. readableAccent.
 import { readableAccent } from '@/lib/readableAccent';
+import { StationLabel, StationGenre, StationDescription, StationRuntime, FullTrackList, TrackCount, AllTracksBy } from './StationI18n';
 
 const SITE = 'https://radiocode.space';
 
@@ -85,7 +86,7 @@ export default async function StationPage(
   };
 
   return (
-    <main className="min-h-screen bg-[#05060a] text-white">
+    <main className="min-h-screen bg-[#05060a] text-white pt-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -111,25 +112,25 @@ export default async function StationPage(
             className="text-[13px] font-semibold uppercase tracking-[0.2em]"
             style={{ color: readableAccent(station.color) }}
           >
-            {station.genre}
+            <StationGenre id={station.id} fallback={station.genre} />
           </p>
           <h1 className="mt-3 text-3xl font-bold sm:text-4xl">{station.name}</h1>
-          <p className="mt-4 max-w-2xl text-white/70">{station.description}</p>
+          <p className="mt-4 max-w-2xl text-white/70"><StationDescription id={station.id} fallback={station.description} /></p>
 
           <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm">
             <div>
-              <dt className="text-white/60">Tracks</dt>
+              <dt className="text-white/60"><StationLabel k="tracks" /></dt>
               <dd className="text-lg font-semibold">{station.tracks.length}</dd>
             </div>
             {hours > 0 && (
               <div>
-                <dt className="text-white/60">Runtime</dt>
-                <dd className="text-lg font-semibold">≈ {hours} h</dd>
+                <dt className="text-white/60"><StationLabel k="runtime" /></dt>
+                <dd className="text-lg font-semibold"><StationRuntime hours={hours} /></dd>
               </div>
             )}
             {station.bitrate && (
               <div>
-                <dt className="text-white/60">Quality</dt>
+                <dt className="text-white/60"><StationLabel k="quality" /></dt>
                 <dd className="text-lg font-semibold">{station.bitrate}</dd>
               </div>
             )}
@@ -146,13 +147,13 @@ export default async function StationPage(
                и лечение то же — осветлённый двойник: 7.53. */
             style={{ background: readableAccent(station.color) }}
           >
-            ▶ Listen now
+            <StationLabel k="listen" />
           </Link>
         </header>
 
         <section className="mt-10">
           <h2 className="mb-4 text-lg font-semibold">
-            Full track list ({station.tracks.length})
+            <FullTrackList n={station.tracks.length} />
           </h2>
           <ol className="divide-y divide-white/5 overflow-hidden rounded-xl border border-white/5">
             {station.tracks.map((track, i) => (
@@ -169,13 +170,12 @@ export default async function StationPage(
             ))}
           </ol>
           <p className="mt-3 text-[13px] text-white/60">
-            All tracks by {station.tracks[0]?.artist || 'AIfa & DJ Galatin'}. Original
-            work, free to listen on air.
+            <AllTracksBy artist={station.tracks[0]?.artist || 'AIfa & DJ Galatin'} />
           </p>
         </section>
 
         <section className="mt-12">
-          <h2 className="mb-4 text-lg font-semibold">Other stations</h2>
+          <h2 className="mb-4 text-lg font-semibold"><StationLabel k="others" /></h2>
           <div className="grid gap-3 sm:grid-cols-3">
             {others.map((s) => (
               <Link
@@ -187,10 +187,10 @@ export default async function StationPage(
                   className="text-[13px] font-semibold uppercase tracking-[0.15em]"
                   style={{ color: readableAccent(s.color) }}
                 >
-                  {s.genre}
+                  <StationGenre id={s.id} fallback={s.genre} />
                 </p>
                 <p className="mt-1.5 font-semibold">{s.name}</p>
-                <p className="mt-1 text-[13px] text-white/60">{s.tracks.length} tracks</p>
+                <p className="mt-1 text-[13px] text-white/60"><TrackCount n={s.tracks.length} /></p>
               </Link>
             ))}
           </div>

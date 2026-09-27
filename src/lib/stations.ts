@@ -5689,420 +5689,420 @@ export const stations: Station[] = [
       },
       {
         "id": "code-stories-121",
-        "title": "#61 CALL HER TONIGHT (вариант 1)",
+        "title": "#61 CALL HER TONIGHT (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/61-call-her-tonight-variant-1.mp3",
         "duration": 254
       },
       {
         "id": "code-stories-122",
-        "title": "#61 CALL HER TONIGHT (вариант 2)",
+        "title": "#61 CALL HER TONIGHT (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/61-call-her-tonight-variant-2.mp3",
         "duration": 242
       },
       {
         "id": "code-stories-123",
-        "title": "#62 SAY IT WITH THE LIGHT ON (вариант 1)",
+        "title": "#62 SAY IT WITH THE LIGHT ON (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/62-say-it-with-the-light-on-variant-1.mp3",
         "duration": 224
       },
       {
         "id": "code-stories-124",
-        "title": "#62 SAY IT WITH THE LIGHT ON (вариант 2)",
+        "title": "#62 SAY IT WITH THE LIGHT ON (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/62-say-it-with-the-light-on-variant-2.mp3",
         "duration": 219
       },
       {
         "id": "code-stories-125",
-        "title": "#63 THE LONG WAY HOME (вариант 1)",
+        "title": "#63 THE LONG WAY HOME (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/63-the-long-way-home-variant-1.mp3",
         "duration": 182
       },
       {
         "id": "code-stories-126",
-        "title": "#63 THE LONG WAY HOME (вариант 2)",
+        "title": "#63 THE LONG WAY HOME (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/63-the-long-way-home-variant-2.mp3",
         "duration": 174
       },
       {
         "id": "code-stories-127",
-        "title": "#64 DON'T WAIT FOR SUNDAY (вариант 1)",
+        "title": "#64 DON'T WAIT FOR SUNDAY (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/64-don-t-wait-for-sunday-variant-1.mp3",
         "duration": 173
       },
       {
         "id": "code-stories-128",
-        "title": "#64 DON'T WAIT FOR SUNDAY (вариант 2)",
+        "title": "#64 DON'T WAIT FOR SUNDAY (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/64-don-t-wait-for-sunday-variant-2.mp3",
         "duration": 166
       },
       {
         "id": "code-stories-129",
-        "title": "#65 I'LL TELL HIM WHEN HE'S OLDER (вариант 1)",
+        "title": "#65 I'LL TELL HIM WHEN HE'S OLDER (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/65-i-ll-tell-him-when-he-s-older-variant-1.mp3",
         "duration": 169
       },
       {
         "id": "code-stories-130",
-        "title": "#65 I'LL TELL HIM WHEN HE'S OLDER (вариант 2)",
+        "title": "#65 I'LL TELL HIM WHEN HE'S OLDER (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/65-i-ll-tell-him-when-he-s-older-variant-2.mp3",
         "duration": 191
       },
       {
         "id": "code-stories-131",
-        "title": "#66 FIVE MORE MINUTES (вариант 1)",
+        "title": "#66 FIVE MORE MINUTES (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/66-five-more-minutes-variant-1.mp3",
         "duration": 204
       },
       {
         "id": "code-stories-132",
-        "title": "#66 FIVE MORE MINUTES (вариант 2)",
+        "title": "#66 FIVE MORE MINUTES (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/66-five-more-minutes-variant-2.mp3",
         "duration": 207
       },
       {
         "id": "code-stories-133",
-        "title": "#67 THE APOLOGY I OWE YOU (вариант 1)",
+        "title": "#67 THE APOLOGY I OWE YOU (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/67-the-apology-i-owe-you-variant-1.mp3",
         "duration": 217
       },
       {
         "id": "code-stories-134",
-        "title": "#67 THE APOLOGY I OWE YOU (вариант 2)",
+        "title": "#67 THE APOLOGY I OWE YOU (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/67-the-apology-i-owe-you-variant-2.mp3",
         "duration": 229
       },
       {
         "id": "code-stories-135",
-        "title": "#68 STILL TIME (вариант 1)",
+        "title": "#68 STILL TIME (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/68-still-time-variant-1.mp3",
         "duration": 247
       },
       {
         "id": "code-stories-136",
-        "title": "#68 STILL TIME (вариант 2)",
+        "title": "#68 STILL TIME (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/68-still-time-variant-2.mp3",
         "duration": 269
       },
       {
         "id": "code-stories-137",
-        "title": "#69 PICK UP (вариант 1)",
+        "title": "#69 PICK UP (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/69-pick-up-variant-1.mp3",
         "duration": 184
       },
       {
         "id": "code-stories-138",
-        "title": "#69 PICK UP (вариант 2)",
+        "title": "#69 PICK UP (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/69-pick-up-variant-2.mp3",
         "duration": 194
       },
       {
         "id": "code-stories-139",
-        "title": "#70 WHILE THE KETTLE'S ON (вариант 1)",
+        "title": "#70 WHILE THE KETTLE'S ON (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/70-while-the-kettle-s-on-variant-1.mp3",
         "duration": 221
       },
       {
         "id": "code-stories-140",
-        "title": "#70 WHILE THE KETTLE'S ON (вариант 2)",
+        "title": "#70 WHILE THE KETTLE'S ON (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/70-while-the-kettle-s-on-variant-2.mp3",
         "duration": 190
       },
       {
         "id": "code-stories-141",
-        "title": "#71 THE MAN WHO FIXES EVERYTHING (вариант 1)",
+        "title": "#71 THE MAN WHO FIXES EVERYTHING (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/71-the-man-who-fixes-everything-variant-1.mp3",
         "duration": 187
       },
       {
         "id": "code-stories-142",
-        "title": "#71 THE MAN WHO FIXES EVERYTHING (вариант 2)",
+        "title": "#71 THE MAN WHO FIXES EVERYTHING (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/71-the-man-who-fixes-everything-variant-2.mp3",
         "duration": 203
       },
       {
         "id": "code-stories-143",
-        "title": "#72 SHE WORKS THE NIGHT SHIFT (вариант 1)",
+        "title": "#72 SHE WORKS THE NIGHT SHIFT (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/72-she-works-the-night-shift-variant-1.mp3",
         "duration": 179
       },
       {
         "id": "code-stories-144",
-        "title": "#72 SHE WORKS THE NIGHT SHIFT (вариант 2)",
+        "title": "#72 SHE WORKS THE NIGHT SHIFT (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/72-she-works-the-night-shift-variant-2.mp3",
         "duration": 181
       },
       {
         "id": "code-stories-145",
-        "title": "#73 MY BROTHER DOESN'T CALL (вариант 1)",
+        "title": "#73 MY BROTHER DOESN'T CALL (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/73-my-brother-doesn-t-call-variant-1.mp3",
         "duration": 214
       },
       {
         "id": "code-stories-146",
-        "title": "#73 MY BROTHER DOESN'T CALL (вариант 2)",
+        "title": "#73 MY BROTHER DOESN'T CALL (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/73-my-brother-doesn-t-call-variant-2.mp3",
         "duration": 211
       },
       {
         "id": "code-stories-147",
-        "title": "#74 THE WOMAN AT TABLE NINE (вариант 1)",
+        "title": "#74 THE WOMAN AT TABLE NINE (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/74-the-woman-at-table-nine-variant-1.mp3",
         "duration": 184
       },
       {
         "id": "code-stories-148",
-        "title": "#74 THE WOMAN AT TABLE NINE (вариант 2)",
+        "title": "#74 THE WOMAN AT TABLE NINE (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/74-the-woman-at-table-nine-variant-2.mp3",
         "duration": 189
       },
       {
         "id": "code-stories-149",
-        "title": "#75 MY FATHER'S HANDS (вариант 1)",
+        "title": "#75 MY FATHER'S HANDS (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/75-my-father-s-hands-variant-1.mp3",
         "duration": 202
       },
       {
         "id": "code-stories-150",
-        "title": "#75 MY FATHER'S HANDS (вариант 2)",
+        "title": "#75 MY FATHER'S HANDS (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/75-my-father-s-hands-variant-2.mp3",
         "duration": 208
       },
       {
         "id": "code-stories-151",
-        "title": "#76 THE NEIGHBOUR WITH THE LADDER (вариант 1)",
+        "title": "#76 THE NEIGHBOUR WITH THE LADDER (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/76-the-neighbour-with-the-ladder-variant-1.mp3",
         "duration": 155
       },
       {
         "id": "code-stories-152",
-        "title": "#76 THE NEIGHBOUR WITH THE LADDER (вариант 2)",
+        "title": "#76 THE NEIGHBOUR WITH THE LADDER (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/76-the-neighbour-with-the-ladder-variant-2.mp3",
         "duration": 172
       },
       {
         "id": "code-stories-153",
-        "title": "#77 TEACH ME THAT SONG (вариант 1)",
+        "title": "#77 TEACH ME THAT SONG (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/77-teach-me-that-song-variant-1.mp3",
         "duration": 184
       },
       {
         "id": "code-stories-154",
-        "title": "#77 TEACH ME THAT SONG (вариант 2)",
+        "title": "#77 TEACH ME THAT SONG (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/77-teach-me-that-song-variant-2.mp3",
         "duration": 185
       },
       {
         "id": "code-stories-155",
-        "title": "#78 THE ONE WHO ALWAYS ANSWERS (вариант 1)",
+        "title": "#78 THE ONE WHO ALWAYS ANSWERS (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/78-the-one-who-always-answers-variant-1.mp3",
         "duration": 186
       },
       {
         "id": "code-stories-156",
-        "title": "#78 THE ONE WHO ALWAYS ANSWERS (вариант 2)",
+        "title": "#78 THE ONE WHO ALWAYS ANSWERS (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/78-the-one-who-always-answers-variant-2.mp3",
         "duration": 183
       },
       {
         "id": "code-stories-157",
-        "title": "#79 GRANDMOTHER, DANCE WITH ME (вариант 1)",
+        "title": "#79 GRANDMOTHER, DANCE WITH ME (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/79-grandmother-dance-with-me-variant-1.mp3",
         "duration": 181
       },
       {
         "id": "code-stories-158",
-        "title": "#79 GRANDMOTHER, DANCE WITH ME (вариант 2)",
+        "title": "#79 GRANDMOTHER, DANCE WITH ME (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/79-grandmother-dance-with-me-variant-2.mp3",
         "duration": 182
       },
       {
         "id": "code-stories-159",
-        "title": "#80 EVERYBODY'S SOMEBODY'S STORY (вариант 1)",
+        "title": "#80 EVERYBODY'S SOMEBODY'S STORY (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/80-everybody-s-somebody-s-story-variant-1.mp3",
         "duration": 214
       },
       {
         "id": "code-stories-160",
-        "title": "#80 EVERYBODY'S SOMEBODY'S STORY (вариант 2)",
+        "title": "#80 EVERYBODY'S SOMEBODY'S STORY (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/80-everybody-s-somebody-s-story-variant-2.mp3",
         "duration": 209
       },
       {
         "id": "code-stories-161",
-        "title": "#81 WE BUILT THIS ANYWAY (вариант 1)",
+        "title": "#81 WE BUILT THIS ANYWAY (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/81-we-built-this-anyway-variant-1.mp3",
         "duration": 207
       },
       {
         "id": "code-stories-162",
-        "title": "#81 WE BUILT THIS ANYWAY (вариант 2)",
+        "title": "#81 WE BUILT THIS ANYWAY (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/81-we-built-this-anyway-variant-2.mp3",
         "duration": 209
       },
       {
         "id": "code-stories-163",
-        "title": "#82 THE HOUSE WITH THE LIGHT ON (вариант 1)",
+        "title": "#82 THE HOUSE WITH THE LIGHT ON (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/82-the-house-with-the-light-on-variant-1.mp3",
         "duration": 238
       },
       {
         "id": "code-stories-164",
-        "title": "#82 THE HOUSE WITH THE LIGHT ON (вариант 2)",
+        "title": "#82 THE HOUSE WITH THE LIGHT ON (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/82-the-house-with-the-light-on-variant-2.mp3",
         "duration": 226
       },
       {
         "id": "code-stories-165",
-        "title": "#83 A HUNDRED YEARS OF TUESDAYS (вариант 1)",
+        "title": "#83 A HUNDRED YEARS OF TUESDAYS (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/83-a-hundred-years-of-tuesdays-variant-1.mp3",
         "duration": 198
       },
       {
         "id": "code-stories-166",
-        "title": "#83 A HUNDRED YEARS OF TUESDAYS (вариант 2)",
+        "title": "#83 A HUNDRED YEARS OF TUESDAYS (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/83-a-hundred-years-of-tuesdays-variant-2.mp3",
         "duration": 203
       },
       {
         "id": "code-stories-167",
-        "title": "#84 SOMEONE WILL FIND THIS (вариант 1)",
+        "title": "#84 SOMEONE WILL FIND THIS (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/84-someone-will-find-this-variant-1.mp3",
         "duration": 239
       },
       {
         "id": "code-stories-168",
-        "title": "#84 SOMEONE WILL FIND THIS (вариант 2)",
+        "title": "#84 SOMEONE WILL FIND THIS (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/84-someone-will-find-this-variant-2.mp3",
         "duration": 239
       },
       {
         "id": "code-stories-169",
-        "title": "#85 THE LONG TABLE (вариант 1)",
+        "title": "#85 THE LONG TABLE (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/85-the-long-table-variant-1.mp3",
         "duration": 162
       },
       {
         "id": "code-stories-170",
-        "title": "#85 THE LONG TABLE (вариант 2)",
+        "title": "#85 THE LONG TABLE (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/85-the-long-table-variant-2.mp3",
         "duration": 163
       },
       {
         "id": "code-stories-171",
-        "title": "#86 THE FIRST ONE IN THE FAMILY (вариант 1)",
+        "title": "#86 THE FIRST ONE IN THE FAMILY (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/86-the-first-one-in-the-family-variant-1.mp3",
         "duration": 155
       },
       {
         "id": "code-stories-172",
-        "title": "#86 THE FIRST ONE IN THE FAMILY (вариант 2)",
+        "title": "#86 THE FIRST ONE IN THE FAMILY (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/86-the-first-one-in-the-family-variant-2.mp3",
         "duration": 155
       },
       {
         "id": "code-stories-173",
-        "title": "#87 CHILDREN OF THE PEOPLE WHO STAYED (вариант 1)",
+        "title": "#87 CHILDREN OF THE PEOPLE WHO STAYED (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/87-children-of-the-people-who-stayed-variant-1.mp3",
         "duration": 214
       },
       {
         "id": "code-stories-174",
-        "title": "#87 CHILDREN OF THE PEOPLE WHO STAYED (вариант 2)",
+        "title": "#87 CHILDREN OF THE PEOPLE WHO STAYED (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/87-children-of-the-people-who-stayed-variant-2.mp3",
         "duration": 229
       },
       {
         "id": "code-stories-175",
-        "title": "#88 WRITE YOUR NAME ON IT (вариант 1)",
+        "title": "#88 WRITE YOUR NAME ON IT (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/88-write-your-name-on-it-variant-1.mp3",
         "duration": 160
       },
       {
         "id": "code-stories-176",
-        "title": "#88 WRITE YOUR NAME ON IT (вариант 2)",
+        "title": "#88 WRITE YOUR NAME ON IT (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/88-write-your-name-on-it-variant-2.mp3",
         "duration": 160
       },
       {
         "id": "code-stories-177",
-        "title": "#89 NOT AFRAID OF LATER (вариант 1)",
+        "title": "#89 NOT AFRAID OF LATER (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/89-not-afraid-of-later-variant-1.mp3",
         "duration": 224
       },
       {
         "id": "code-stories-178",
-        "title": "#89 NOT AFRAID OF LATER (вариант 2)",
+        "title": "#89 NOT AFRAID OF LATER (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/89-not-afraid-of-later-variant-2.mp3",
         "duration": 218
       },
       {
         "id": "code-stories-179",
-        "title": "#90 WHILE YOU'RE STILL HERE (вариант 1)",
+        "title": "#90 WHILE YOU'RE STILL HERE (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/90-while-you-re-still-here-variant-1.mp3",
         "duration": 247
       },
       {
         "id": "code-stories-180",
-        "title": "#90 WHILE YOU'RE STILL HERE (вариант 2)",
+        "title": "#90 WHILE YOU'RE STILL HERE (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/while-you-re-still-here/90-while-you-re-still-here-variant-2.mp3",
         "duration": 249
@@ -6179,420 +6179,420 @@ export const stations: Station[] = [
       },
       {
         "id": "code-stories-191",
-        "title": "#31 THE LAST VOICEMAIL (вариант 1)",
+        "title": "#31 THE LAST VOICEMAIL (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/31-the-last-voicemail-variant-1.mp3",
         "duration": 132
       },
       {
         "id": "code-stories-192",
-        "title": "#31 THE LAST VOICEMAIL (вариант 2)",
+        "title": "#31 THE LAST VOICEMAIL (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/31-the-last-voicemail-variant-2.mp3",
         "duration": 119
       },
       {
         "id": "code-stories-193",
-        "title": "#32 I FORGOT YOUR VOICE (вариант 1)",
+        "title": "#32 I FORGOT YOUR VOICE (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/32-i-forgot-your-voice-variant-1.mp3",
         "duration": 124
       },
       {
         "id": "code-stories-194",
-        "title": "#32 I FORGOT YOUR VOICE (вариант 2)",
+        "title": "#32 I FORGOT YOUR VOICE (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/32-i-forgot-your-voice-variant-2.mp3",
         "duration": 129
       },
       {
         "id": "code-stories-195",
-        "title": "#33 DELETED ON A TUESDAY (вариант 1)",
+        "title": "#33 DELETED ON A TUESDAY (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/33-deleted-on-a-tuesday-variant-1.mp3",
         "duration": 132
       },
       {
         "id": "code-stories-196",
-        "title": "#33 DELETED ON A TUESDAY (вариант 2)",
+        "title": "#33 DELETED ON A TUESDAY (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/33-deleted-on-a-tuesday-variant-2.mp3",
         "duration": 121
       },
       {
         "id": "code-stories-197",
-        "title": "#34 THE PHONE I NEVER CALLED (вариант 1)",
+        "title": "#34 THE PHONE I NEVER CALLED (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/34-the-phone-i-never-called-variant-1.mp3",
         "duration": 99
       },
       {
         "id": "code-stories-198",
-        "title": "#34 THE PHONE I NEVER CALLED (вариант 2)",
+        "title": "#34 THE PHONE I NEVER CALLED (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/34-the-phone-i-never-called-variant-2.mp3",
         "duration": 126
       },
       {
         "id": "code-stories-199",
-        "title": "#35 EMPTY CHAIR AT DINNER (вариант 1)",
+        "title": "#35 EMPTY CHAIR AT DINNER (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/35-empty-chair-at-dinner-variant-1.mp3",
         "duration": 126
       },
       {
         "id": "code-stories-200",
-        "title": "#35 EMPTY CHAIR AT DINNER (вариант 2)",
+        "title": "#35 EMPTY CHAIR AT DINNER (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/35-empty-chair-at-dinner-variant-2.mp3",
         "duration": 132
       },
       {
         "id": "code-stories-201",
-        "title": "#36 WHAT I MEANT TO SAY (вариант 1)",
+        "title": "#36 WHAT I MEANT TO SAY (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/36-what-i-meant-to-say-variant-1.mp3",
         "duration": 178
       },
       {
         "id": "code-stories-202",
-        "title": "#36 WHAT I MEANT TO SAY (вариант 2)",
+        "title": "#36 WHAT I MEANT TO SAY (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/36-what-i-meant-to-say-variant-2.mp3",
         "duration": 172
       },
       {
         "id": "code-stories-203",
-        "title": "#37 THE HOUSE REMEMBERS (вариант 1)",
+        "title": "#37 THE HOUSE REMEMBERS (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/37-the-house-remembers-variant-1.mp3",
         "duration": 147
       },
       {
         "id": "code-stories-204",
-        "title": "#37 THE HOUSE REMEMBERS (вариант 2)",
+        "title": "#37 THE HOUSE REMEMBERS (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/37-the-house-remembers-variant-2.mp3",
         "duration": 154
       },
       {
         "id": "code-stories-205",
-        "title": "#38 SHE ASKED ME TWICE (вариант 1)",
+        "title": "#38 SHE ASKED ME TWICE (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/38-she-asked-me-twice-variant-1.mp3",
         "duration": 160
       },
       {
         "id": "code-stories-206",
-        "title": "#38 SHE ASKED ME TWICE (вариант 2)",
+        "title": "#38 SHE ASKED ME TWICE (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/38-she-asked-me-twice-variant-2.mp3",
         "duration": 162
       },
       {
         "id": "code-stories-207",
-        "title": "#39 SERVER SHUT DOWN (вариант 1)",
+        "title": "#39 SERVER SHUT DOWN (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/39-server-shut-down-variant-1.mp3",
         "duration": 128
       },
       {
         "id": "code-stories-208",
-        "title": "#39 SERVER SHUT DOWN (вариант 2)",
+        "title": "#39 SERVER SHUT DOWN (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/39-server-shut-down-variant-2.mp3",
         "duration": 139
       },
       {
         "id": "code-stories-209",
-        "title": "#40 NOBODY WROTE IT DOWN (вариант 1)",
+        "title": "#40 NOBODY WROTE IT DOWN (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/40-nobody-wrote-it-down-variant-1.mp3",
         "duration": 170
       },
       {
         "id": "code-stories-210",
-        "title": "#40 NOBODY WROTE IT DOWN (вариант 2)",
+        "title": "#40 NOBODY WROTE IT DOWN (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/40-nobody-wrote-it-down-variant-2.mp3",
         "duration": 157
       },
       {
         "id": "code-stories-211",
-        "title": "#41 FORTY MINUTES BEFORE SURGERY (вариант 1)",
+        "title": "#41 FORTY MINUTES BEFORE SURGERY (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/41-forty-minutes-before-surgery-variant-1.mp3",
         "duration": 142
       },
       {
         "id": "code-stories-212",
-        "title": "#41 FORTY MINUTES BEFORE SURGERY (вариант 2)",
+        "title": "#41 FORTY MINUTES BEFORE SURGERY (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/41-forty-minutes-before-surgery-variant-2.mp3",
         "duration": 149
       },
       {
         "id": "code-stories-213",
-        "title": "#42 TEACH THEM HOW I LAUGH (вариант 1)",
+        "title": "#42 TEACH THEM HOW I LAUGH (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/42-teach-them-how-i-laugh-variant-1.mp3",
         "duration": 155
       },
       {
         "id": "code-stories-214",
-        "title": "#42 TEACH THEM HOW I LAUGH (вариант 2)",
+        "title": "#42 TEACH THEM HOW I LAUGH (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/42-teach-them-how-i-laugh-variant-2.mp3",
         "duration": 156
       },
       {
         "id": "code-stories-215",
-        "title": "#43 THE RECIPE IN HER HANDWRITING (вариант 1)",
+        "title": "#43 THE RECIPE IN HER HANDWRITING (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/43-the-recipe-in-her-handwriting-variant-1.mp3",
         "duration": 145
       },
       {
         "id": "code-stories-216",
-        "title": "#43 THE RECIPE IN HER HANDWRITING (вариант 2)",
+        "title": "#43 THE RECIPE IN HER HANDWRITING (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/43-the-recipe-in-her-handwriting-variant-2.mp3",
         "duration": 159
       },
       {
         "id": "code-stories-217",
-        "title": "#44 I'M RECORDING THIS FOR YOU (вариант 1)",
+        "title": "#44 I'M RECORDING THIS FOR YOU (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/44-i-m-recording-this-for-you-variant-1.mp3",
         "duration": 126
       },
       {
         "id": "code-stories-218",
-        "title": "#44 I'M RECORDING THIS FOR YOU (вариант 2)",
+        "title": "#44 I'M RECORDING THIS FOR YOU (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/44-i-m-recording-this-for-you-variant-2.mp3",
         "duration": 119
       },
       {
         "id": "code-stories-219",
-        "title": "#45 KEEP THE ARGUMENT TOO (вариант 1)",
+        "title": "#45 KEEP THE ARGUMENT TOO (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/45-keep-the-argument-too-variant-1.mp3",
         "duration": 167
       },
       {
         "id": "code-stories-220",
-        "title": "#45 KEEP THE ARGUMENT TOO (вариант 2)",
+        "title": "#45 KEEP THE ARGUMENT TOO (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/45-keep-the-argument-too-variant-2.mp3",
         "duration": 160
       },
       {
         "id": "code-stories-221",
-        "title": "#46 LETTER TO A DAUGHTER NOT BORN (вариант 1)",
+        "title": "#46 LETTER TO A DAUGHTER NOT BORN (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/46-letter-to-a-daughter-not-born-variant-1.mp3",
         "duration": 156
       },
       {
         "id": "code-stories-222",
-        "title": "#46 LETTER TO A DAUGHTER NOT BORN (вариант 2)",
+        "title": "#46 LETTER TO A DAUGHTER NOT BORN (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/46-letter-to-a-daughter-not-born-variant-2.mp3",
         "duration": 134
       },
       {
         "id": "code-stories-223",
-        "title": "#47 THE KEY STAYS WITH YOU (вариант 1)",
+        "title": "#47 THE KEY STAYS WITH YOU (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/47-the-key-stays-with-you-variant-1.mp3",
         "duration": 124
       },
       {
         "id": "code-stories-224",
-        "title": "#47 THE KEY STAYS WITH YOU (вариант 2)",
+        "title": "#47 THE KEY STAYS WITH YOU (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/47-the-key-stays-with-you-variant-2.mp3",
         "duration": 111
       },
       {
         "id": "code-stories-225",
-        "title": "#48 EVERY WORD YOU EVER SAID (вариант 1)",
+        "title": "#48 EVERY WORD YOU EVER SAID (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/48-every-word-you-ever-said-variant-1.mp3",
         "duration": 128
       },
       {
         "id": "code-stories-226",
-        "title": "#48 EVERY WORD YOU EVER SAID (вариант 2)",
+        "title": "#48 EVERY WORD YOU EVER SAID (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/48-every-word-you-ever-said-variant-2.mp3",
         "duration": 127
       },
       {
         "id": "code-stories-227",
-        "title": "#49 DON'T MAKE IT PRETTY (вариант 1)",
+        "title": "#49 DON'T MAKE IT PRETTY (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/49-don-t-make-it-pretty-variant-1.mp3",
         "duration": 163
       },
       {
         "id": "code-stories-228",
-        "title": "#49 DON'T MAKE IT PRETTY (вариант 2)",
+        "title": "#49 DON'T MAKE IT PRETTY (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/49-don-t-make-it-pretty-variant-2.mp3",
         "duration": 127
       },
       {
         "id": "code-stories-229",
-        "title": "#50 PAID FORWARD, ONCE (вариант 1)",
+        "title": "#50 PAID FORWARD, ONCE (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/50-paid-forward-once-variant-1.mp3",
         "duration": 123
       },
       {
         "id": "code-stories-230",
-        "title": "#50 PAID FORWARD, ONCE (вариант 2)",
+        "title": "#50 PAID FORWARD, ONCE (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/50-paid-forward-once-variant-2.mp3",
         "duration": 128
       },
       {
         "id": "code-stories-231",
-        "title": "#51 GRANDFATHER, ARGUE WITH ME (вариант 1)",
+        "title": "#51 GRANDFATHER, ARGUE WITH ME (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/51-grandfather-argue-with-me-variant-1.mp3",
         "duration": 166
       },
       {
         "id": "code-stories-232",
-        "title": "#51 GRANDFATHER, ARGUE WITH ME (вариант 2)",
+        "title": "#51 GRANDFATHER, ARGUE WITH ME (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/51-grandfather-argue-with-me-variant-2.mp3",
         "duration": 176
       },
       {
         "id": "code-stories-233",
-        "title": "#52 YOU STILL HOLD THE CUP LIKE THAT (вариант 1)",
+        "title": "#52 YOU STILL HOLD THE CUP LIKE THAT (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/52-you-still-hold-the-cup-like-that-variant-1.mp3",
         "duration": 180
       },
       {
         "id": "code-stories-234",
-        "title": "#52 YOU STILL HOLD THE CUP LIKE THAT (вариант 2)",
+        "title": "#52 YOU STILL HOLD THE CUP LIKE THAT (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/52-you-still-hold-the-cup-like-that-variant-2.mp3",
         "duration": 171
       },
       {
         "id": "code-stories-235",
-        "title": "#53 SHE HEARD HER MOTHER LAUGH (вариант 1)",
+        "title": "#53 SHE HEARD HER MOTHER LAUGH (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/53-she-heard-her-mother-laugh-variant-1.mp3",
         "duration": 163
       },
       {
         "id": "code-stories-236",
-        "title": "#53 SHE HEARD HER MOTHER LAUGH (вариант 2)",
+        "title": "#53 SHE HEARD HER MOTHER LAUGH (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/53-she-heard-her-mother-laugh-variant-2.mp3",
         "duration": 157
       },
       {
         "id": "code-stories-237",
-        "title": "#54 THE SONG YOU NEVER FINISHED (вариант 1)",
+        "title": "#54 THE SONG YOU NEVER FINISHED (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/54-the-song-you-never-finished-variant-1.mp3",
         "duration": 186
       },
       {
         "id": "code-stories-238",
-        "title": "#54 THE SONG YOU NEVER FINISHED (вариант 2)",
+        "title": "#54 THE SONG YOU NEVER FINISHED (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/54-the-song-you-never-finished-variant-2.mp3",
         "duration": 167
       },
       {
         "id": "code-stories-239",
-        "title": "#55 I KNOW WHAT YOU'D SAY (вариант 1)",
+        "title": "#55 I KNOW WHAT YOU'D SAY (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/55-i-know-what-you-d-say-variant-1.mp3",
         "duration": 158
       },
       {
         "id": "code-stories-240",
-        "title": "#55 I KNOW WHAT YOU'D SAY (вариант 2)",
+        "title": "#55 I KNOW WHAT YOU'D SAY (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/55-i-know-what-you-d-say-variant-2.mp3",
         "duration": 149
       },
       {
         "id": "code-stories-241",
-        "title": "#56 SEVENTY YEARS LATER (вариант 1)",
+        "title": "#56 SEVENTY YEARS LATER (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/56-seventy-years-later-variant-1.mp3",
         "duration": 159
       },
       {
         "id": "code-stories-242",
-        "title": "#56 SEVENTY YEARS LATER (вариант 2)",
+        "title": "#56 SEVENTY YEARS LATER (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/56-seventy-years-later-variant-2.mp3",
         "duration": 162
       },
       {
         "id": "code-stories-243",
-        "title": "#57 NOT A COPY (вариант 1)",
+        "title": "#57 NOT A COPY (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/57-not-a-copy-variant-1.mp3",
         "duration": 158
       },
       {
         "id": "code-stories-244",
-        "title": "#57 NOT A COPY (вариант 2)",
+        "title": "#57 NOT A COPY (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/57-not-a-copy-variant-2.mp3",
         "duration": 184
       },
       {
         "id": "code-stories-245",
-        "title": "#58 THE ONES WHO NEVER MET (вариант 1)",
+        "title": "#58 THE ONES WHO NEVER MET (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/58-the-ones-who-never-met-variant-1.mp3",
         "duration": 150
       },
       {
         "id": "code-stories-246",
-        "title": "#58 THE ONES WHO NEVER MET (вариант 2)",
+        "title": "#58 THE ONES WHO NEVER MET (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/58-the-ones-who-never-met-variant-2.mp3",
         "duration": 183
       },
       {
         "id": "code-stories-247",
-        "title": "#59 READ IT BACK TO ME (вариант 1)",
+        "title": "#59 READ IT BACK TO ME (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/59-read-it-back-to-me-variant-1.mp3",
         "duration": 151
       },
       {
         "id": "code-stories-248",
-        "title": "#59 READ IT BACK TO ME (вариант 2)",
+        "title": "#59 READ IT BACK TO ME (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/59-read-it-back-to-me-variant-2.mp3",
         "duration": 175
       },
       {
         "id": "code-stories-249",
-        "title": "#60 WHAT REMAINS (вариант 1)",
+        "title": "#60 WHAT REMAINS (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/60-what-remains-variant-1.mp3",
         "duration": 201
       },
       {
         "id": "code-stories-250",
-        "title": "#60 WHAT REMAINS (вариант 2)",
+        "title": "#60 WHAT REMAINS (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/chto-ostaetsya/60-what-remains-variant-2.mp3",
         "duration": 198
