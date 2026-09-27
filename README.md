@@ -14,11 +14,14 @@ and the same tools work here as on the other three sites.
 
 ## 1. The radio itself
 
-* **Six stations**, original tracks written and produced inside the project.
-* **Web Audio API** — equaliser, visualisations at 60 fps, gapless playback.
-* **Crossfade tuned per station:** short (≈0.8 s) where there are vocals, long
-  (≈3 s) for instrumental music, so words of one track never land on top of
-  another's.
+* **Six stations, 1,024 tracks** (`src/lib/stations.ts`, counted on 27 September 2026), written and
+  produced inside the project.
+* **Web Audio API** — equaliser, visualisations redrawn on every animation frame, gapless playback.
+* **Crossfade tuned per station:** 0.8 s where there are vocals, 3.0 s for instrumental
+  music (`CROSSFADE_SEC_VOCAL`, `CROSSFADE_SEC` in `src/lib/audioEngine.ts`), so words of
+  one track never land on top of another's.
+* **Cabinet and pricing on phones:** below 768 px a row under the header holds
+  *Sign in to Cabinet* (or *Return to Cabinet* when signed in) and *Pricing* (27 September 2026).
 * **No streaming infrastructure.** Tracks are static files behind a CDN; the
   player does the work in the browser. That is what makes it free to run.
 
