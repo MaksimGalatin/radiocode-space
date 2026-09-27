@@ -1729,10 +1729,10 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "code": "FDBR-001",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Нераскрытие использования систем распознавания лиц (Florida FDBR)",
+    "title": "Скрытое наблюдение через системы распознавания лиц или голоса без явного согласия (Florida FDBR)",
     "description": "Сайт или связанное приложение использует активное программное обеспечение для распознавания лиц или наблюдения без предоставления четкого, заметного уведомления и получения согласия, нарушая Билль о цифровых правах Флориды.",
     "severity": "serious",
-    "reference": "Fla. Stat. § 501.71 (FDBR)"
+    "reference": "Fla. Stat. § 501.705(3) (Florida Digital Bill of Rights - Surveillance via Facial/Voice Recognition Prohibition)"
   },
   {
     "id": 168,
@@ -3029,10 +3029,10 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "code": "FTCS-003",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Нераскрытие проведения оценок рисков БД (FTC Safeguards)",
+    "title": "Отсутствие сведений о проведении периодической оценки рисков (FTC Safeguards)",
     "description": "Портал финансовых услуг не публикует в уведомлениях безопасности сведения о прохождении регулярных проверок безопасности БД.",
     "severity": "serious",
-    "reference": "16 CFR § 314.4(d)"
+    "reference": "16 CFR § 314.4(b) (GLBA Safeguards Rule - Risk Assessment)"
   },
   {
     "id": 298,
@@ -3099,20 +3099,20 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "code": "FLDB-002",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Скрытие параметров ранжирования поисковой выдачи (Florida FDBR)",
+    "title": "Нераскрытие параметров ранжирования поисковой системы и учета политической идеологии (Florida FDBR)",
     "description": "Поисковый ресурс или директория не раскрывает алгоритмы и параметры ранжирования выдачи для жителей Флориды.",
     "severity": "critical",
-    "reference": "Florida FDBR, Sec. 501.714"
+    "reference": "Fla. Stat. § 501.71(4) (Florida Digital Bill of Rights - Search Engine Ranking Transparency)"
   },
-  {
+    {
     "id": 305,
     "code": "CTDP-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Профилирование несовершеннолетних в коммерческих целях (Connecticut SB 3)",
-    "description": "Сайт составляет профили поведения несовершеннолетних из Коннектикута для таргетинга рекламы без согласия опекунов.",
+    "title": "Профилирование несовершеннолетних в коммерческих целях (Коннектикут SB 3)",
+    "description": "Сайт или онлайн-сервис, ориентированный на несовершеннолетних жителей Коннектикута, формирует профили для таргетированной рекламы, продажи данных или автоматизированных решений без согласия.",
     "severity": "critical",
-    "reference": "CTDPA SB 3, Sec. 5"
+    "reference": "CT Public Act No. 23-56 (SB 3), Sec. 9(b)(1)(A)(i)(III)"
   },
   {
     "id": 306,
@@ -3299,10 +3299,10 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "code": "PIPD-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Нераскрытие мест физического хранения данных (Canada PIPEDA)",
+    "title": "Отсутствие раскрытия трансграничной обработки данных и мест хранения (Canada PIPEDA)",
     "description": "Политика для канадских пользователей не указывает точные географические локации (провинции, страны), где размещены сервера с их данными.",
     "severity": "serious",
-    "reference": "PIPEDA Principle 4.5"
+    "reference": "PIPEDA Schedule 1, Principle 4.1.3 / Principle 4.8 (Accountability / Openness for third-party transfer and storage location)"
   },
   {
     "id": 325,
@@ -3329,10 +3329,10 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "code": "NZPR-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Хранение данных дольше необходимого срока (New Zealand Privacy Act)",
-    "description": "Сайт для жителей Новой Зеландии не декларирует и не реализует удаление личных данных сразу после достижения целей сбора согласно принципу IPP 4.",
+    "title": "Хранение персональных данных сверх необходимого срока (Закон Новой Зеландии о конфиденциальности, IPP 9)",
+    "description": "Сайт для жителей Новой Зеландии не декларирует и не реализует удаление личных данных сразу после достижения целей сбора согласно принципу IPP 9.",
     "severity": "serious",
-    "reference": "New Zealand Privacy Act 2020, IPP 4"
+    "reference": "New Zealand Privacy Act 2020, IPP 9 (Information Privacy Principle 9 - Retention of personal information)"
   },
   {
     "id": 328,
@@ -3499,10 +3499,10 @@ export const threatMatrixRu: ComplianceCheck[] = [
     "code": "FLDB-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Отсутствие ссылки на запрет продажи данных (Florida FDBR)",
+    "title": "Отсутствие четкого раскрытия продажи персональных данных и механизма отказа (Florida FDBR)",
     "description": "Сайт для жителей Флориды не имеет на главной странице заметной ссылки «Не продавать мои личные данные» (Do Not Sell My Personal Information).",
     "severity": "critical",
-    "reference": "Florida FDBR, Sec. 501.715"
+    "reference": "Fla. Stat. § 501.711(4) (Florida Digital Bill of Rights - Sale of Personal Data / Targeted Advertising Opt-Out Disclosure)"
   },
   {
     "id": 345,

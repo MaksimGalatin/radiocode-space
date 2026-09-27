@@ -1729,10 +1729,10 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "code": "FDBR-001",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Failure to Disclose Facial Recognition Surveillance (Florida FDBR)",
+    "title": "Unlawful Surveillance via Facial or Voice Recognition Without Explicit Authorization (Florida FDBR)",
     "description": "Website or associated web application utilizes active facial recognition or surveillance software without providing a clear, conspicuous front-end notice and obtaining opt-in consent as required by the Florida Digital Bill of Rights.",
     "severity": "serious",
-    "reference": "Fla. Stat. § 501.71 (FDBR)"
+    "reference": "Fla. Stat. § 501.705(3) (Florida Digital Bill of Rights - Surveillance via Facial/Voice Recognition Prohibition)"
   },
   {
     "id": 168,
@@ -3032,7 +3032,7 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "title": "Missing Risk Assessment Log Disclosures (FTC Safeguards)",
     "description": "Financial or fintech portal fails to publish or reference in its security notices that it conducts periodic risk assessments on customer data storage databases.",
     "severity": "serious",
-    "reference": "16 CFR § 314.4(d)"
+    "reference": "16 CFR § 314.4(b) (GLBA Safeguards Rule - Risk Assessment)"
   },
   {
     "id": 298,
@@ -3099,20 +3099,20 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "code": "FLDB-002",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Search Results Bias Disclosure Failure (Florida FDBR)",
+    "title": "Failure to Disclose Search Engine Ranking Parameters and Political Partisanship Weights (Florida FDBR)",
     "description": "Search engine or directory platform targeting Florida residents fails to disclose the parameters used to rank search results when algorithmic filtering is active, violating FDBR.",
     "severity": "critical",
-    "reference": "Florida FDBR, Sec. 501.714"
+    "reference": "Fla. Stat. § 501.71(4) (Florida Digital Bill of Rights - Search Engine Ranking Transparency)"
   },
   {
     "id": 305,
     "code": "CTDP-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Profiling Minors for Commercial Purposes (Connecticut SB 3)",
-    "description": "Website targeting Connecticut minors compiles personal profiles for targeted marketing or product recommendations without express written consent from the minor or guardian.",
+    "title": "Profiling Minors for Commercial or Automated Decision Purposes (Connecticut SB 3)",
+    "description": "Website targeting Connecticut minors compiles personal profiles for targeted advertising, data sales, or automated decisions with legal or significant effects without express consent.",
     "severity": "critical",
-    "reference": "CTDPA SB 3, Sec. 5"
+    "reference": "CT Public Act No. 23-56 (SB 3), Sec. 9(b)(1)(A)(i)(III)"
   },
   {
     "id": 306,
@@ -3299,10 +3299,10 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "code": "PIPD-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Missing Specific Storage Location Disclosures (Canada PIPEDA)",
+    "title": "Missing Disclosures for Third-Party / Cross-Border Data Processing and Storage (Canada PIPEDA)",
     "description": "Privacy policy targeting Canadian residents collects personal data but fails to disclose the specific geographic locations (provinces/countries) where data is stored, violating PIPEDA.",
     "severity": "serious",
-    "reference": "PIPEDA Principle 4.5"
+    "reference": "PIPEDA Schedule 1, Principle 4.1.3 / Principle 4.8 (Accountability / Openness for third-party transfer and storage location)"
   },
   {
     "id": 325,
@@ -3329,10 +3329,10 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "code": "NZPR-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Unlawful Retention of Personal Data Beyond Needed Duration (New Zealand Privacy Act)",
-    "description": "Website targeting New Zealand residents lacks automated policies or disclosures specifying that personal data will not be kept for longer than is required for lawful purposes, violating IPP 4.",
+    "title": "Unlawful Retention of Personal Data Beyond Needed Duration (New Zealand Privacy Act IPP 9)",
+    "description": "Website targeting New Zealand residents lacks automated policies or disclosures specifying that personal data will not be kept for longer than is required for lawful purposes, violating IPP 9.",
     "severity": "serious",
-    "reference": "New Zealand Privacy Act 2020, IPP 4"
+    "reference": "New Zealand Privacy Act 2020, IPP 9 (Information Privacy Principle 9 - Retention of personal information)"
   },
   {
     "id": 328,
@@ -3499,10 +3499,10 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "code": "FLDB-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Missing Personal Data Sales Clear Opt-out Link (Florida FDBR)",
+    "title": "Missing Clear and Conspicuous Opt-Out Disclosure for Personal Data Sales and Targeted Ads (Florida FDBR)",
     "description": "Website targeting Florida consumers fails to host a clear, conspicuous link titled \"Do Not Sell My Personal Information\" on its homepage, violating Florida FDBR.",
     "severity": "critical",
-    "reference": "Florida FDBR, Sec. 501.715"
+    "reference": "Fla. Stat. § 501.711(4) (Florida Digital Bill of Rights - Sale of Personal Data / Targeted Advertising Opt-Out Disclosure)"
   },
   {
     "id": 345,

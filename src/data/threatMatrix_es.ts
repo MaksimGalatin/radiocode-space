@@ -1729,10 +1729,10 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "FDBR-001",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Falta de divulgación de vigilancia de reconocimiento facial (Florida FDBR)",
+    "title": "Vigilancia ilícita mediante reconocimiento facial o de voz sin autorización explícita (Florida FDBR)",
     "description": "El sitio web o la aplicación web asociada utiliza software de vigilancia o reconocimiento facial activo sin proporcionar un aviso claro y visible en la interfaz y obtener el consentimiento según lo exige la Declaración de Derechos Digitales de Florida.",
     "severity": "serious",
-    "reference": "Fla. Stat. § 501.71 (FDBR)"
+    "reference": "Fla. Stat. § 501.705(3) (Florida Digital Bill of Rights - Surveillance via Facial/Voice Recognition Prohibition)"
   },
   {
     "id": 168,
@@ -3029,10 +3029,10 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "FTCS-003",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "Falta de divulgación del registro de evaluación de riesgos (FTC Safeguards)",
+    "title": "Falta de divulgación del registro de evaluación de riesgos (Salvaguardas FTC)",
     "description": "El portal financiero o de tecnología financiera no publica que realiza evaluaciones de riesgo periódicas en las bases de datos.",
     "severity": "serious",
-    "reference": "16 CFR § 314.4(d)"
+    "reference": "16 CFR § 314.4(b) (GLBA Safeguards Rule - Risk Assessment)"
   },
   {
     "id": 298,
@@ -3099,20 +3099,20 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "FLDB-002",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Falta de divulgación de sesgo en los resultados de búsqueda (FDBR de Florida)",
+    "title": "Falta de divulgación de los parámetros de clasificación del motor de búsqueda y sesgo político (Florida FDBR)",
     "description": "La plataforma de búsqueda que se dirige a residentes de Florida no revela los parámetros utilizados para clasificar los resultados.",
     "severity": "critical",
-    "reference": "Florida FDBR, Sec. 501.714"
+    "reference": "Fla. Stat. § 501.71(4) (Florida Digital Bill of Rights - Search Engine Ranking Transparency)"
   },
-  {
+    {
     "id": 305,
     "code": "CTDP-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Creación de perfiles de menores con fines comerciales (Connecticut SB 3)",
-    "description": "El sitio web dirigido a menores de Connecticut recopila perfiles para marketing sin el consentimiento por escrito.",
+    "title": "Perfilado de menores para fines comerciales o decisiones automatizadas (Connecticut SB 3)",
+    "description": "El sitio o servicio en línea dirigido a menores de Connecticut compila perfiles para publicidad dirigida, venta de datos o decisiones automatizadas sin consentimiento expreso.",
     "severity": "critical",
-    "reference": "CTDPA SB 3, Sec. 5"
+    "reference": "CT Public Act No. 23-56 (SB 3), Sec. 9(b)(1)(A)(i)(III)"
   },
   {
     "id": 306,
@@ -3299,10 +3299,10 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "PIPD-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Falta de divulgación de la ubicación específica del almacenamiento (PIPEDA de Canadá)",
+    "title": "Falta de divulgación sobre procesamiento transfronterizo y ubicación de datos (Canadá PIPEDA)",
     "description": "La política dirigida a residentes canadienses recopila datos pero no revela las ubicaciones geográficas específicas donde se almacenan.",
     "severity": "serious",
-    "reference": "PIPEDA Principle 4.5"
+    "reference": "PIPEDA Schedule 1, Principle 4.1.3 / Principle 4.8 (Accountability / Openness for third-party transfer and storage location)"
   },
   {
     "id": 325,
@@ -3329,10 +3329,10 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "NZPR-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Retención ilegal de datos más allá del tiempo necesario (New Zealand Privacy Act)",
-    "description": "El sitio dirigido a residentes de Nueva Zelanda carece de políticas que especifiquen que los datos no se conservarán más de lo necesario.",
+    "title": "Conservación indebida de datos personales más allá del tiempo necesario (Ley de Privacidad de Nueva Zelanda IPP 9)",
+    "description": "El sitio dirigido a residentes de Nueva Zelanda carece de políticas que especifiquen que los datos no se conservarán más de lo necesario para fines lícitos, infringiendo el IPP 9.",
     "severity": "serious",
-    "reference": "New Zealand Privacy Act 2020, IPP 4"
+    "reference": "New Zealand Privacy Act 2020, IPP 9 (Information Privacy Principle 9 - Retention of personal information)"
   },
   {
     "id": 328,
@@ -3499,10 +3499,10 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "FLDB-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Falta de enlace de exclusión para venta de datos (FDBR de Florida)",
+    "title": "Falta de divulgación clara y visible para la exclusión voluntaria de la venta de datos personales (Florida FDBR)",
     "description": "El sitio dirigido a los consumidores de Florida no proporciona un enlace visible titulado \"Do Not Sell My Personal Information\".",
     "severity": "critical",
-    "reference": "Florida FDBR, Sec. 501.715"
+    "reference": "Fla. Stat. § 501.711(4) (Florida Digital Bill of Rights - Sale of Personal Data / Targeted Advertising Opt-Out Disclosure)"
   },
   {
     "id": 345,

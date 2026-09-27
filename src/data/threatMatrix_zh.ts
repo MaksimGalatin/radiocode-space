@@ -1729,10 +1729,10 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "FDBR-001",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "未能披露人脸识别监控 (Florida FDBR)",
+    "title": "未经明确授权通过人脸或语音识别进行非法监控 (佛罗里达州 FDBR)",
     "description": "根据《佛罗里达州数字权利法案》的要求，网站或相关 Web 应用程序使用主动人脸识别或监控软件，但未提供清晰、显著的前端通知并获得选择性同意。",
     "severity": "serious",
-    "reference": "Fla. Stat. § 501.71 (FDBR)"
+    "reference": "Fla. Stat. § 501.705(3) (Florida Digital Bill of Rights - Surveillance via Facial/Voice Recognition Prohibition)"
   },
   {
     "id": 168,
@@ -3029,10 +3029,10 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "FTCS-003",
     "evidenceKind": "observable",
     "category": "FTC Enforcement",
-    "title": "缺少风险评估日志披露 (FTC Safeguards)",
+    "title": "缺少风险评估记录披露 (FTC 安全保障规则)",
     "description": "金融或金融科技门户网站未能在其安全通知中发布或提及它对客户数据存储数据库进行定期风险评估。",
     "severity": "serious",
-    "reference": "16 CFR § 314.4(d)"
+    "reference": "16 CFR § 314.4(b) (GLBA Safeguards Rule - Risk Assessment)"
   },
   {
     "id": 298,
@@ -3099,20 +3099,20 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "FLDB-002",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "未能披露搜索结果偏好参数 (Florida FDBR)",
+    "title": "未披露搜索引擎排名参数及政治偏向权重 (佛罗里达州 FDBR)",
     "description": "针对佛罗里达州居民的搜索引擎或目录平台在算法过滤处于活动状态时，未能披露用于对搜索结果进行排名的参数，违反了 FDBR。",
     "severity": "critical",
-    "reference": "Florida FDBR, Sec. 501.714"
+    "reference": "Fla. Stat. § 501.71(4) (Florida Digital Bill of Rights - Search Engine Ranking Transparency)"
   },
-  {
+    {
     "id": 305,
     "code": "CTDP-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "出于商业目的对未成年人进行画像 (Connecticut SB 3)",
-    "description": "针对康涅狄格州未成年人的网站在未获得未成年人或其监护人明确书面同意的情况下，收集个人画像用于定向营销或产品推荐。",
+    "title": "出于商业或自动化决策目的对未成年人进行画像（康涅狄格州 SB 3）",
+    "description": "针对康涅狄格州未成年人的网站或在线服务在未经明确同意的情况下，为定向广告、数据销售或具有法律效力的自动化决策编制个人画像。",
     "severity": "critical",
-    "reference": "CTDPA SB 3, Sec. 5"
+    "reference": "CT Public Act No. 23-56 (SB 3), Sec. 9(b)(1)(A)(i)(III)"
   },
   {
     "id": 306,
@@ -3299,10 +3299,10 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "PIPD-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "缺少具体存储位置披露 (Canada PIPEDA)",
+    "title": "缺少第三方及跨境数据处理与存储位置说明 (加拿大 PIPEDA)",
     "description": "针对加拿大居民的隐私政策收集了个人数据，但未能披露存储数据的具体地理位置（省/国），违反了 PIPEDA。",
     "severity": "serious",
-    "reference": "PIPEDA Principle 4.5"
+    "reference": "PIPEDA Schedule 1, Principle 4.1.3 / Principle 4.8 (Accountability / Openness for third-party transfer and storage location)"
   },
   {
     "id": 325,
@@ -3329,10 +3329,10 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "NZPR-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "超出必要期限非法保留个人数据 (New Zealand Privacy Act)",
-    "description": "针对新西兰居民的网站缺少自动化的政策或披露，以具体说明个人数据的保留时间不会长于合法目的所需的期限，违反了 IPP 4。",
+    "title": "超出必要期限违法留存个人数据（新西兰隐私法案 IPP 9）",
+    "description": "针对新西兰居民的网站缺少自动化的政策或披露，以具体说明个人数据的保留时间不会长于合法目的所需的期限，违反了 IPP 9。",
     "severity": "serious",
-    "reference": "New Zealand Privacy Act 2020, IPP 4"
+    "reference": "New Zealand Privacy Act 2020, IPP 9 (Information Privacy Principle 9 - Retention of personal information)"
   },
   {
     "id": 328,
@@ -3499,10 +3499,10 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "FLDB-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "缺少个人数据销售选择退出链接 (Florida FDBR)",
+    "title": "缺少个人数据出售与定向广告的清晰显著退出披露 (佛罗里达州 FDBR)",
     "description": "针对佛罗里达州消费者的网站未能在其首页托管名为“请勿出售我的个人信息”的清晰、显著的链接，违反了佛罗里达州 FDBR。",
     "severity": "critical",
-    "reference": "Florida FDBR, Sec. 501.715"
+    "reference": "Fla. Stat. § 501.711(4) (Florida Digital Bill of Rights - Sale of Personal Data / Targeted Advertising Opt-Out Disclosure)"
   },
   {
     "id": 345,
