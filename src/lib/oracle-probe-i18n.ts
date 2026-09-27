@@ -15,14 +15,24 @@
  * ПОЧЕМУ ПО КОДУ, А НЕ ПО ТЕКСТУ. Код находки не меняется при правке
  * формулировок. Правка русского оригинала не рассыплет словарь.
  *
- * Файл собран скриптом AIFA_РАБОТА/оракул-перевод/собрать_i18n.py и правится
- * тем же путём: правим ru.json, переводим, запускаем скрипт заново.
+ * Файл собран скриптом AIFA_РАБОТА/оракул-перевод/собрать_i18n.py, но с августа
+ * правится прямо здесь: шаблоны доказательств и нынешний localizeFinding в том
+ * скрипте отсутствуют, и его --write откатил бы их. Словарь TEXTS дополняется
+ * скриптами той же папки. После любой правки проб или словаря — две проверки
+ * разными способами: проверить_покрытие.py (текст пробы без перевода) и
+ * проверить_перевод_живьём.py (прогон localizeFinding на каждой ветке).
  */
 
 export type OracleLang = 'ru' | 'en' | 'es' | 'zh';
 
-/** Поля находки, которые видит человек и которые поэтому переводятся. */
-type Fields = Partial<Record<'title' | 'evidence' | 'source' | 'remedy', string>>;
+/**
+ * Поля находки, которые видит человек и которые поэтому переводятся.
+ *
+ * Список вместо строки — когда у проверки несколько веток текста: i-й русский
+ * вариант переводится i-м вариантом языка. Строка с ${…} — шаблон: на её место
+ * встаёт то, что проба подставила в русский текст.
+ */
+type Fields = Partial<Record<'title' | 'evidence' | 'source' | 'remedy', string | string[]>>;
 
 const TEXTS: Record<OracleLang, Record<string, Fields>> = {
   ru: {
@@ -98,7 +108,18 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "Сигнал «не продавать мои данные» игнорируется"
     },
     "GPC-002": {
-      "title": "Сайт использует рекламные механизмы, но не подтверждает отказ от продажи данных"
+      "remedy": [
+        "Показывать видимое подтверждение вида «Ваш отказ от продажи данных принят». С 1 января 2026 года это прямое требование правил Калифорнии (§ 7025(c)(6) и § 7026(g)); формулировка нормы изменена с разрешительной на обязательную. ВАЖНО: подтверждение должно быть пассивным — надпись, переключатель или значок. Экран, который ТРЕБУЕТ от человека нажатия или подтверждения почты, сам является нарушением: 5 марта 2026 года Ford получил штраф 375 703 долл. именно за то, что добавил такой шаг в процедуру отказа.",
+        "Показывать видимое подтверждение вида «Ваш отказ от продажи данных принят». С 1 января 2026 года это прямое требование правил Калифорнии (§ 7025(c)(6) и § 7026(g)); формулировка нормы изменена с разрешительной на обязательную. ВАЖНО: подтверждение должно быть пассивным — надпись, переключатель или значок. Экран, который ТРЕБУЕТ от человека нажатия или подтверждения почты, сам является нарушением: 5 марта 2026 года Ford получил штраф 375 703 долл. именно за то, что добавил такой шаг в процедуру отказа. Отдельно: наличие рекламных доменов в разметке не означает автоматически, что вы «продаёте» данные в смысле закона — но именно эти механизмы регуляторы и рассматривают в первую очередь."
+      ],
+      "source": [
+        "сравнение двух запросов",
+        "разметка страницы + запрос с заголовком Sec-GPC"
+      ],
+      "title": [
+        "Отказ от продажи данных выполняется, но посетителю об этом не сообщают",
+        "Сайт использует рекламные механизмы, но не подтверждает отказ от продажи данных"
+      ]
     },
     "IMPR-001": {
       "evidence": "Страница выглядит коммерческой (корзина, цены, кнопка покупки), но раздела с юридическими данными не найдено",
@@ -131,6 +152,8 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "Одна и та же картинка отдаётся телефону и большому экрану"
     },
     "PRIV-LOGOUT-001": {
+      "remedy": "Отдавать при выходе заголовок Clear-Site-Data: \"cache\", \"cookies\", \"storage\". Особенно важно там, где входят с чужого или общего компьютера.",
+      "source": "заголовки ответа",
       "title": "При выходе из кабинета данные в браузере не стираются"
     },
     "PRIV-PERM-001": {
@@ -152,6 +175,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "Страницу можно встроить в чужой сайт (риск подмены кликов)"
     },
     "SEC-COOKIE-001": {
+      "evidence": "${c.slice(0, 160)} — ${problems.join(', ')}",
       "remedy": "Выставлять Secure, HttpOnly и SameSite=Lax (или Strict) для служебных cookie.",
       "source": "заголовок Set-Cookie",
       "title": "Cookie «${name}» выставлена без защитных флагов"
@@ -168,6 +192,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
     },
     "SEC-CSP-002": {
       "evidence": "Директива script-src содержит 'unsafe-eval': ${scriptSrc.trim().slice(0, 200)}",
+      "remedy": "Убрать 'unsafe-eval'. Он нужен только режиму разработки; в готовом приложении код из строк не собирается.",
       "source": "заголовки ответа",
       "title": "Скриптам разрешено собирать код из строк (unsafe-eval)"
     },
@@ -178,7 +203,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "Разрешены встроенные скрипты без одноразовой метки"
     },
     "SEC-CSP-005": {
-      "remedy": "Вынести блоки <style> в обычные файлы стилей и задать style-src-elem без ",
+      "remedy": "Вынести блоки <style> в обычные файлы стилей и задать style-src-elem без 'unsafe-inline'. Инлайновые стили в атрибуте style= при этом можно оставить — для них есть отдельная директива style-src-attr. Через подставленный БЛОК оформления воруют введённое в поля (селектор по атрибуту плюс фоновая картинка отправляют значение на чужой сервер без единой строчки скрипта); атрибут на конкретном элементе такой возможности не даёт.",
       "source": "заголовки ответа",
       "title": "Разрешены встроенные блоки оформления"
     },
@@ -337,7 +362,18 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "The “do not sell my data” signal is ignored"
     },
     "GPC-002": {
-      "title": "The site uses advertising technology but does not confirm any opt-out from the sale of data"
+      "remedy": [
+        "Show a visible confirmation such as “Your opt-out of the sale of your data has been honored.” Since 1 January 2026 this is an express requirement of the California regulations (§ 7025(c)(6) and § 7026(g)); the wording of the rule was changed from permissive to mandatory. IMPORTANT: the confirmation must be passive — a notice, a toggle or an icon. A screen that REQUIRES the person to click or to confirm by email is itself a violation: on 5 March 2026 Ford was fined $375,703 precisely for adding such a step to its opt-out process.",
+        "Show a visible confirmation such as “Your opt-out of the sale of your data has been honored.” Since 1 January 2026 this is an express requirement of the California regulations (§ 7025(c)(6) and § 7026(g)); the wording of the rule was changed from permissive to mandatory. IMPORTANT: the confirmation must be passive — a notice, a toggle or an icon. A screen that REQUIRES the person to click or to confirm by email is itself a violation: on 5 March 2026 Ford was fined $375,703 precisely for adding such a step to its opt-out process. Separately: advertising domains in the markup do not automatically mean that you “sell” data in the legal sense — but these are exactly the mechanisms regulators examine first."
+      ],
+      "source": [
+        "comparison of two requests",
+        "page markup + a request with the Sec-GPC header"
+      ],
+      "title": [
+        "The opt-out from the sale of data is honoured, but the visitor is not told about it",
+        "The site uses advertising technology but does not confirm any opt-out from the sale of data"
+      ]
     },
     "IMPR-001": {
       "evidence": "The page looks commercial (basket, prices, buy button), but no section with legal details was found",
@@ -370,6 +406,8 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "The same image is served to a phone and to a large screen"
     },
     "PRIV-LOGOUT-001": {
+      "remedy": "Send the Clear-Site-Data: \"cache\", \"cookies\", \"storage\" header on logout. This matters most where people sign in from someone else’s or a shared computer.",
+      "source": "response headers",
       "title": "Logging out of the account area does not clear the data held in the browser"
     },
     "PRIV-PERM-001": {
@@ -391,6 +429,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "The page can be embedded in someone else's site (clickjacking risk)"
     },
     "SEC-COOKIE-001": {
+      "evidence": "${c.slice(0, 160)} — ${problems.join(', ')}",
       "remedy": "Set Secure, HttpOnly and SameSite=Lax (or Strict) on functional cookies.",
       "source": "Set-Cookie header",
       "title": "Cookie “${name}” is set without protective flags"
@@ -407,6 +446,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
     },
     "SEC-CSP-002": {
       "evidence": "The script-src directive contains 'unsafe-eval': ${scriptSrc.trim().slice(0, 200)}",
+      "remedy": "Remove 'unsafe-eval'. Only development mode needs it; a production build does not assemble code from strings.",
       "source": "response headers",
       "title": "Scripts are allowed to build code out of strings (unsafe-eval)"
     },
@@ -417,7 +457,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "Inline scripts are allowed without a nonce"
     },
     "SEC-CSP-005": {
-      "remedy": "Move the <style> blocks into ordinary stylesheet files and set style-src-elem without ",
+      "remedy": "Move the <style> blocks into ordinary stylesheet files and set style-src-elem without 'unsafe-inline'. Inline styles in the style= attribute can stay — they have a separate directive, style-src-attr. An injected style BLOCK can leak what people type into form fields (an attribute selector plus a background image send the value to a foreign server without a single line of script); an attribute on a specific element gives no such opportunity.",
       "source": "response headers",
       "title": "Inline style blocks are allowed"
     },
@@ -576,7 +616,18 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "Se ignora la señal «no vender mis datos»"
     },
     "GPC-002": {
-      "title": "El sitio utiliza mecanismos publicitarios, pero no confirma la exclusión de la venta de datos"
+      "remedy": [
+        "Mostrar una confirmación visible del tipo «Se ha aceptado su exclusión de la venta de datos». Desde el 1 de enero de 2026 es un requisito expreso de la normativa de California (§ 7025(c)(6) y § 7026(g)); la redacción de la norma pasó de permisiva a obligatoria. IMPORTANTE: la confirmación debe ser pasiva — un aviso, un interruptor o un icono. Una pantalla que EXIGE a la persona pulsar algo o confirmar por correo es en sí misma una infracción: el 5 de marzo de 2026 Ford recibió una multa de 375 703 dólares precisamente por añadir ese paso al procedimiento de exclusión.",
+        "Mostrar una confirmación visible del tipo «Se ha aceptado su exclusión de la venta de datos». Desde el 1 de enero de 2026 es un requisito expreso de la normativa de California (§ 7025(c)(6) y § 7026(g)); la redacción de la norma pasó de permisiva a obligatoria. IMPORTANTE: la confirmación debe ser pasiva — un aviso, un interruptor o un icono. Una pantalla que EXIGE a la persona pulsar algo o confirmar por correo es en sí misma una infracción: el 5 de marzo de 2026 Ford recibió una multa de 375 703 dólares precisamente por añadir ese paso al procedimiento de exclusión. Aparte: la presencia de dominios publicitarios en el marcado no significa automáticamente que usted «venda» datos en el sentido de la ley, pero son precisamente estos mecanismos los que los reguladores examinan primero."
+      ],
+      "source": [
+        "comparación de dos solicitudes",
+        "marcado de la página + petición con la cabecera Sec-GPC"
+      ],
+      "title": [
+        "La exclusión de la venta de datos se cumple, pero no se informa de ello al visitante",
+        "El sitio utiliza mecanismos publicitarios, pero no confirma la exclusión de la venta de datos"
+      ]
     },
     "IMPR-001": {
       "evidence": "La página parece comercial (carrito, precios, botón de compra), pero no se ha encontrado un apartado con los datos legales",
@@ -609,6 +660,8 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "Se sirve la misma imagen al móvil y a la pantalla grande"
     },
     "PRIV-LOGOUT-001": {
+      "remedy": "Enviar al cerrar sesión la cabecera Clear-Site-Data: \"cache\", \"cookies\", \"storage\". Es especialmente importante donde se entra desde un ordenador ajeno o compartido.",
+      "source": "cabeceras de la respuesta",
       "title": "Al salir del área privada no se borran los datos guardados en el navegador"
     },
     "PRIV-PERM-001": {
@@ -630,6 +683,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "La página puede incrustarse en un sitio ajeno (riesgo de clickjacking)"
     },
     "SEC-COOKIE-001": {
+      "evidence": "${c.slice(0, 160)} — ${problems.join(', ')}",
       "remedy": "Establecer Secure, HttpOnly y SameSite=Lax (o Strict) en las cookies de servicio.",
       "source": "cabecera Set-Cookie",
       "title": "La cookie «${name}» se establece sin indicadores de protección"
@@ -646,6 +700,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
     },
     "SEC-CSP-002": {
       "evidence": "La directiva script-src contiene 'unsafe-eval': ${scriptSrc.trim().slice(0, 200)}",
+      "remedy": "Quitar 'unsafe-eval'. Solo lo necesita el modo de desarrollo; una aplicación en producción no construye código a partir de cadenas.",
       "source": "cabeceras de la respuesta",
       "title": "Los scripts pueden construir código a partir de cadenas de texto (unsafe-eval)"
     },
@@ -656,7 +711,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "Se permiten scripts en línea sin marca de un solo uso"
     },
     "SEC-CSP-005": {
-      "remedy": "Sacar los bloques <style> a archivos de estilos normales y definir style-src-elem sin ",
+      "remedy": "Sacar los bloques <style> a archivos de estilos normales y definir style-src-elem sin 'unsafe-inline'. Los estilos en el atributo style= pueden quedarse: para ellos existe la directiva aparte style-src-attr. Un BLOQUE de estilos inyectado puede filtrar lo que se escribe en los campos (un selector de atributo más una imagen de fondo envían el valor a un servidor ajeno sin una sola línea de script); un atributo en un elemento concreto no da esa posibilidad.",
       "source": "cabeceras de la respuesta",
       "title": "Se permiten bloques de estilos en línea"
     },
@@ -815,7 +870,18 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "「不要出售我的数据」信号被忽略"
     },
     "GPC-002": {
-      "title": "网站使用了广告类机制，但未确认已停止出售数据"
+      "remedy": [
+        "显示可见的确认信息，例如“您拒绝出售数据的请求已被接受”。自 2026 年 1 月 1 日起，这是加利福尼亚州法规的明确要求（§ 7025(c)(6) 和 § 7026(g)）；该条款的措辞已由允许性改为强制性。重要：确认必须是被动的——一段文字、一个开关或一个图标。要求访客点击或通过邮件确认的页面本身就构成违规：2026 年 3 月 5 日，Ford 正是因为在退出流程中加入了这样的步骤而被罚款 375,703 美元。",
+        "显示可见的确认信息，例如“您拒绝出售数据的请求已被接受”。自 2026 年 1 月 1 日起，这是加利福尼亚州法规的明确要求（§ 7025(c)(6) 和 § 7026(g)）；该条款的措辞已由允许性改为强制性。重要：确认必须是被动的——一段文字、一个开关或一个图标。要求访客点击或通过邮件确认的页面本身就构成违规：2026 年 3 月 5 日，Ford 正是因为在退出流程中加入了这样的步骤而被罚款 375,703 美元。另外：页面代码中出现广告域名并不自动意味着您在法律意义上“出售”数据——但监管机构首先审查的正是这些机制。"
+      ],
+      "source": [
+        "两次请求的对比",
+        "页面代码 + 带 Sec-GPC 头的请求"
+      ],
+      "title": [
+        "已执行拒绝出售数据的请求，但未告知访客",
+        "网站使用了广告类机制，但未确认已停止出售数据"
+      ]
     },
     "IMPR-001": {
       "evidence": "页面看起来是商业性的（购物车、价格、购买按钮），但没有找到载明法律信息的版块",
@@ -848,6 +914,8 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "手机和大屏拿到的是同一张图片"
     },
     "PRIV-LOGOUT-001": {
+      "remedy": "退出登录时返回 Clear-Site-Data: \"cache\", \"cookies\", \"storage\" 响应头。在用户可能使用他人或公用电脑登录的场景中尤为重要。",
+      "source": "响应头",
       "title": "退出账户时，浏览器中的数据没有被清除"
     },
     "PRIV-PERM-001": {
@@ -869,6 +937,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "页面可被嵌入他人网站（存在点击劫持风险）"
     },
     "SEC-COOKIE-001": {
+      "evidence": "${c.slice(0, 160)} — ${problems.join(', ')}",
       "remedy": "为功能性 cookie 设置 Secure、HttpOnly 和 SameSite=Lax（或 Strict）。",
       "source": "Set-Cookie 响应头",
       "title": "Cookie「${name}」在设置时没有加保护标志"
@@ -885,6 +954,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
     },
     "SEC-CSP-002": {
       "evidence": "script-src 指令包含 'unsafe-eval'：${scriptSrc.trim().slice(0, 200)}",
+      "remedy": "删除 'unsafe-eval'。只有开发模式才需要它；正式发布的应用不会用字符串拼装代码。",
       "source": "响应头",
       "title": "脚本被允许把字符串当作代码执行（unsafe-eval）"
     },
@@ -895,7 +965,7 @@ const TEXTS: Record<OracleLang, Record<string, Fields>> = {
       "title": "允许了没有一次性标记的内联脚本"
     },
     "SEC-CSP-005": {
-      "remedy": "把 <style> 块移到普通的样式文件中，并设置 style-src-elem，不带 ",
+      "remedy": "把 <style> 块移到普通的样式文件中，并设置不含 'unsafe-inline' 的 style-src-elem。style= 属性中的内联样式可以保留——它们有单独的 style-src-attr 指令。被注入的样式块可以泄露用户在输入框中填写的内容（属性选择器加背景图片即可把值发送到外部服务器，无需任何脚本）；单个元素上的属性则没有这种可能。",
       "source": "响应头",
       "title": "允许了内联的样式块"
     },
@@ -990,30 +1060,99 @@ export function toOracleLang(locale?: string): OracleLang {
 }
 
 /**
+ * Русские куски, которые проба кладёт ВНУТРЬ подставленного значения:
+ * перечень недостающих флагов cookie, название счётчика, отменённый механизм.
+ * Шаблон переносит значение в перевод как есть, поэтому без этой замены в
+ * английском отчёте оставалось «— нет HttpOnly, нет SameSite».
+ */
+const FRAGMENTS: Array<{ ru: string; en: string; es: string; zh: string }> = [
+  { ru: 'Privacy Shield (отменён в 2020 году делом Schrems II)', en: 'Privacy Shield (invalidated in 2020 by the Schrems II ruling)', es: 'Privacy Shield (anulado en 2020 por la sentencia Schrems II)', zh: '隐私盾（Privacy Shield，2020 年被 Schrems II 案判决废止）' },
+  { ru: 'Safe Harbor как механизм передачи данных (отменён в 2015 году)', en: 'Safe Harbor as a data transfer mechanism (invalidated in 2015)', es: 'Safe Harbor como mecanismo de transferencia de datos (anulado en 2015)', zh: '作为数据传输机制的安全港（Safe Harbor，2015 年已废止）' },
+  { ru: 'Яндекс.Метрика', en: 'Yandex.Metrica', es: 'Yandex.Metrica', zh: 'Yandex.Metrica' },
+  { ru: 'нет HttpOnly', en: 'no HttpOnly', es: 'sin HttpOnly', zh: '缺少 HttpOnly' },
+  { ru: 'нет SameSite', en: 'no SameSite', es: 'sin SameSite', zh: '缺少 SameSite' },
+  { ru: 'нет Secure', en: 'no Secure', es: 'sin Secure', zh: '缺少 Secure' },
+  { ru: 'нет ответа', en: 'no response', es: 'sin respuesta', zh: '无响应' },
+];
+
+function translateFragments(value: string, lang: Exclude<OracleLang, 'ru'>): string {
+  let out = value;
+  for (const f of FRAGMENTS) out = out.split(f.ru).join(f[lang]);
+  return out;
+}
+
+const PLACEHOLDER = /\$\{[^}]*\}/g;
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const asList = (v?: string | string[]) => (v === undefined ? [] : Array.isArray(v) ? v : [v]);
+
+/**
+ * Переводит одно поле: ищет, какой из русских вариантов пришёл из пробы, и
+ * отдаёт парный вариант языка. Для шаблона вынимает подставленные значения и
+ * ставит их в перевод — по тексту выражения, а если переводчик переписал
+ * выражение (так было с «нет ответа» внутри ${…}), то по порядку.
+ * Ничего не совпало — null: пусть лучше останется честная русская строка,
+ * которую поймает проверка покрытия, чем перевод ДРУГОГО текста.
+ */
+function translateField(
+  actual: string, ruVars: string[], outVars: string[], lang: Exclude<OracleLang, 'ru'>,
+): string | null {
+  for (let i = 0; i < ruVars.length && i < outVars.length; i++) {
+    const ru = ruVars[i];
+    const target = outVars[i];
+    if (!ru.includes('${')) {
+      if (actual === ru) return target;
+      continue;
+    }
+    const names = ru.match(PLACEHOLDER) || [];
+    const re = new RegExp('^' + ru.split(PLACEHOLDER).map(escapeRe).join('([\\s\\S]*?)') + '$');
+    const m = actual.match(re);
+    if (!m) continue;
+    const byName = new Map<string, string>();
+    names.forEach((n, k) => {
+      if (!byName.has(n)) byName.set(n, translateFragments(m[k + 1] ?? '', lang));
+    });
+    let k = 0;
+    return target.replace(PLACEHOLDER, (n) => {
+      const v = byName.get(n) ?? translateFragments(m[k + 1] ?? '', lang);
+      k++;
+      return v;
+    });
+  }
+  return null;
+}
+
+/**
  * Переводит одну готовую находку.
  *
  * Если перевода нет — оставляем то, что пришло из пробы, а не пустую строку:
  * отчёт с одной непереведённой строкой хуже, чем полностью переведённый, но
- * отчёт с пустым полем хуже обоих. Поля, которых нет в словаре (например,
- * динамические доказательства с конкретным адресом), остаются как есть.
+ * отчёт с пустым полем хуже обоих.
+ *
+ * ЧТО БЫЛО НЕ ТАК (26.09.2026). Поле заменялось переводом по одному коду
+ * проверки, не глядя на текст. У проверок с подставленными значениями перевод —
+ * копия шаблона из кода, и в английском отчёте по instagram.com вышло
+ * «Cookie “${name}”» и «${noSri.length} external scripts»: настоящее значение
+ * затиралось. У GPC-002 две ветки текста, а перевод был один — вторая ветка
+ * получала чужое название. Теперь переводится именно тот текст, что пришёл.
+ * Проверка покрытия: AIFA_РАБОТА/оракул-перевод/проверить_покрытие.py.
  */
 export function localizeFinding<T extends { code?: string }>(finding: T, locale?: string): T {
   const lang = toOracleLang(locale);
   if (lang === 'ru' || !finding?.code) return finding;
-  const t = TEXTS[lang]?.[finding.code];
+  const ru = TEXTS.ru[finding.code] || {};
+  const t = TEXTS[lang]?.[finding.code] || {};
   const out: any = { ...finding };
-  if (t) {
-    for (const key of ['title', 'evidence', 'source', 'remedy'] as const) {
-      if (t[key]) out[key] = t[key];
+  for (const key of ['title', 'evidence', 'source', 'remedy'] as const) {
+    const actual = out[key];
+    if (typeof actual !== 'string' || !actual) continue;
+    const hit = translateField(actual, asList(ru[key]), asList(t[key]), lang);
+    if (hit !== null) {
+      out[key] = hit;
+    } else if (key === 'evidence') {
+      // Запасной проход по шаблонам доказательств — для веток, которых нет в
+      // словаре по коду (доказательство выбирается условием внутри пробы).
+      out[key] = localizeEvidence(actual, locale);
     }
-  }
-  // Запасной проход по шаблонам. Нужен потому, что у десяти проверок
-  // доказательство ветвится или содержит подставленные значения — перевода на
-  // код для них нет вовсе, и раньше такая находка возвращалась русской в
-  // отчёте на любом языке. Раннего выхода при отсутствии t тоже больше нет:
-  // именно он и оставлял эти десять без единого шанса на перевод.
-  if (typeof out.evidence === 'string') {
-    out.evidence = localizeEvidence(out.evidence, locale);
   }
   return out as T;
 }
