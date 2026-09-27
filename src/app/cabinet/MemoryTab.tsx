@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Card, SectionTitle, Skeleton, ErrorState, EmptyState, TOKENS } from "./ui";
 import { useCabT } from "./i18n";
+import MemorySearchCard from "./MemorySearch";
 
 // Parse the stored markdown transcript into role-tagged messages.
 function parseChat(md: string): { role: "user" | "assistant"; content: string; ts: string }[] {
@@ -472,6 +473,7 @@ export default function MemoryTab({ email }: { email: string }) {
 
   return (
     <div style={{ display: "grid", gap: 16 }} className="cab-fade">
+      <MemorySearchCard />
       <RegistryCard />
       <Card>
         <SectionTitle icon="🧠" title={t("memAuto")} sub={t("memAutoSub")} />
