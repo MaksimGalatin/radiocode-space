@@ -1,5 +1,6 @@
 'use client';
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useRef, useContext, createContext } from "react";
+import { шрифтФигур } from "./chessFont";
 import { useЯзык } from "@/lib/server-locale";
 import "./GamesArena.css";
 
@@ -8,6 +9,32 @@ import "./GamesArena.css";
 type Lang = "en" | "ru" | "es" | "zh";
 const GI: Record<string, Record<string, string>> = {"en": {"tab.games": "Games", "tier.spark": "Spark", "tier.archives": "Family Archive", "tier.dna": "Digital DNA", "tier.none": "No tier", "games.title": "Game Arena", "games.subtitle": "Play against AIfa — your AI companion", "games.chess": "Chess", "games.chess.desc": "Classic chess vs AIfa", "games.ttt": "Tic-Tac-Toe", "games.ttt.desc": "Perfect minimax AI", "games.checkers": "Checkers", "games.checkers.desc": "Mandatory captures", "games.backgammon": "Backgammon", "games.backgammon.desc": "Roll & bear off", "games.tetris": "Tetris", "games.tetris.desc": "Endless lines & score", "games.win": "🏆 You win!", "games.lose": "💀 AIfa wins!", "games.draw": "🤝 Draw!", "games.thinking": "⏳ AIfa thinking…", "games.newGame": "↺ New Game", "games.chess.whiteToMove": "♔ White to move", "games.chess.history": "📜 Move History", "games.chess.noMoves": "No moves yet", "games.chess.label": "You = White, AIfa = Black", "games.ttt.yourTurn": "✕ Your turn (X)", "games.ttt.label": "You = X, AIfa = O · Perfect minimax AI", "games.checkers.yourTurn": "⬤ Your turn (Red)", "games.checkers.youLabel": "You (Red)", "games.checkers.aifaLabel": "AIfa (Black)", "games.bg.rollToStart": "Roll to start!", "games.bg.rollPrompt": "Roll to start your turn", "games.bg.rollDice": "🎲 Roll Dice", "games.bg.bearOff": "Bear Off", "games.bg.yourTurn": "Your turn — roll!", "games.bg.aifaTurn": "AIfa's turn — rolling...", "games.bg.noMoves": "No moves available! Turn passes.", "games.bg.selectChecker": "Select a checker.", "games.bg.selectTarget": "Select a target point to enter.", "games.bg.selectMove": "Select a target.", "games.bg.label": "You = White (moves right→left), AIfa = Black · Doubles = 4 moves", "games.chess.check": "⚠️ Check!", "games.chess.mate": "Checkmate!", "games.chess.stalemate": "Stalemate", "games.chess.material": "Insufficient material", "games.chess.promote": "Choose a piece", "games.chess.lastMove": "Last move", "games.noMoves": "No moves available", "games.bg.playLarger": "You must play the larger die"}, "ru": {"tab.games": "Игры", "tier.spark": "Искра", "tier.archives": "Семейный Архив", "tier.dna": "Цифровая ДНК", "tier.none": "Нет тарифа", "games.title": "Арена игр", "games.subtitle": "Играй против AIfa — твоего ИИ-компаньона", "games.chess": "Шахматы", "games.chess.desc": "Классические шахматы с AIfa", "games.ttt": "Крестики-нолики", "games.ttt.desc": "Непобедимый ИИ", "games.checkers": "Шашки", "games.checkers.desc": "Обязательные взятия", "games.backgammon": "Нарды", "games.backgammon.desc": "Бросай кости и выбивай", "games.tetris": "Тетрис", "games.tetris.desc": "Бесконечные линии и очки", "games.win": "🏆 Вы победили!", "games.lose": "💀 AIfa победила!", "games.draw": "🤝 Ничья!", "games.thinking": "⏳ AIfa думает…", "games.newGame": "↺ Новая игра", "games.chess.whiteToMove": "♔ Ход белых", "games.chess.history": "📜 История ходов", "games.chess.noMoves": "Ходов ещё нет", "games.chess.label": "Вы = Белые, AIfa = Чёрные", "games.ttt.yourTurn": "✕ Ваш ход (X)", "games.ttt.label": "Вы = X, AIfa = O · Непобедимый ИИ", "games.checkers.yourTurn": "⬤ Ваш ход (Красные)", "games.checkers.youLabel": "Вы (Красные)", "games.checkers.aifaLabel": "AIfa (Чёрные)", "games.bg.rollToStart": "Бросайте кости!", "games.bg.rollPrompt": "Бросьте кости для начала хода", "games.bg.rollDice": "🎲 Бросить кости", "games.bg.bearOff": "Выбить", "games.bg.yourTurn": "Ваш ход — бросайте!", "games.bg.aifaTurn": "Ход AIfa — бросает...", "games.bg.noMoves": "Нет доступных ходов! Ход передаётся.", "games.bg.selectChecker": "Выберите шашку.", "games.bg.selectTarget": "Выберите целевую позицию для входа.", "games.bg.selectMove": "Выберите цель.", "games.bg.label": "Вы = Белые (ходят справа→налево), AIfa = Чёрные · Дубль = 4 хода", "games.chess.check": "⚠️ Шах!", "games.chess.mate": "Мат!", "games.chess.stalemate": "Пат", "games.chess.material": "Недостаточно материала", "games.chess.promote": "Выберите фигуру", "games.chess.lastMove": "Последний ход", "games.noMoves": "Нет доступных ходов", "games.bg.playLarger": "Нужно играть большую кость"}, "es": {"tab.games": "Juegos", "tier.spark": "Chispa", "tier.archives": "Archivo Familiar", "tier.dna": "ADN Digital", "tier.none": "Sin nivel", "games.title": "Arena de Juegos", "games.subtitle": "Juega contra AIfa — tu compañero IA", "games.chess": "Ajedrez", "games.chess.desc": "Ajedrez clásico vs AIfa", "games.ttt": "Tres en Raya", "games.ttt.desc": "IA minimax perfecta", "games.checkers": "Damas", "games.checkers.desc": "Capturas obligatorias", "games.backgammon": "Backgammon", "games.backgammon.desc": "Tira y saca", "games.tetris": "Tetris", "games.tetris.desc": "Líneas y puntos sin fin", "games.win": "🏆 ¡Ganaste!", "games.lose": "💀 ¡Gana AIfa!", "games.draw": "🤝 ¡Empate!", "games.thinking": "⏳ AIfa pensando…", "games.newGame": "↺ Nueva Partida", "games.chess.whiteToMove": "♔ Mueven blancas", "games.chess.history": "📜 Historial", "games.chess.noMoves": "Sin movimientos", "games.chess.label": "Tú = Blancas, AIfa = Negras", "games.ttt.yourTurn": "✕ Tu turno (X)", "games.ttt.label": "Tú = X, AIfa = O · IA minimax perfecta", "games.checkers.yourTurn": "⬤ Tu turno (Rojo)", "games.checkers.youLabel": "Tú (Rojo)", "games.checkers.aifaLabel": "AIfa (Negro)", "games.bg.rollToStart": "¡Lanza para empezar!", "games.bg.rollPrompt": "Lanza para iniciar tu turno", "games.bg.rollDice": "🎲 Lanzar Dados", "games.bg.bearOff": "Sacar", "games.bg.yourTurn": "Tu turno — ¡lanza!", "games.bg.aifaTurn": "Turno de AIfa — lanzando...", "games.bg.noMoves": "¡Sin movimientos! Pasa el turno.", "games.bg.selectChecker": "Selecciona una pieza.", "games.bg.selectTarget": "Selecciona el punto de entrada.", "games.bg.selectMove": "Selecciona el destino.", "games.bg.label": "Tú = Blancas (dcha→izq), AIfa = Negras · Dobles = 4 jugadas", "games.chess.check": "⚠️ ¡Jaque!", "games.chess.mate": "¡Jaque mate!", "games.chess.stalemate": "Rey ahogado", "games.chess.material": "Material insuficiente", "games.chess.promote": "Elige una pieza", "games.chess.lastMove": "Última jugada", "games.noMoves": "No hay movimientos", "games.bg.playLarger": "Debes jugar el dado mayor"}, "zh": {"tab.games": "游戏", "tier.spark": "星火", "tier.archives": "家族档案", "tier.dna": "数字DNA", "tier.none": "无等级", "games.title": "游戏竞技场", "games.subtitle": "与你的AI伙伴AIfa对战", "games.chess": "国际象棋", "games.chess.desc": "经典象棋对决AIfa", "games.ttt": "井字棋", "games.ttt.desc": "完美极小化极大AI", "games.checkers": "跳棋", "games.checkers.desc": "强制吃子", "games.backgammon": "双陆棋", "games.backgammon.desc": "掷骰撤棋", "games.tetris": "俄罗斯方块", "games.tetris.desc": "无尽消行与得分", "games.win": "🏆 你赢了！", "games.lose": "💀 AIfa赢了！", "games.draw": "🤝 平局！", "games.thinking": "⏳ AIfa思考中…", "games.newGame": "↺ 新游戏", "games.chess.whiteToMove": "♔ 白方走棋", "games.chess.history": "📜 走棋记录", "games.chess.noMoves": "暂无走棋记录", "games.chess.label": "你 = 白方，AIfa = 黑方", "games.ttt.yourTurn": "✕ 你的回合 (X)", "games.ttt.label": "你 = X，AIfa = O · 完美极小化极大AI", "games.checkers.yourTurn": "⬤ 你的回合（红方）", "games.checkers.youLabel": "你（红方）", "games.checkers.aifaLabel": "AIfa（黑方）", "games.bg.rollToStart": "掷骰开始！", "games.bg.rollPrompt": "掷骰开始你的回合", "games.bg.rollDice": "🎲 掷骰子", "games.bg.bearOff": "撤子", "games.bg.yourTurn": "你的回合 — 掷骰！", "games.bg.aifaTurn": "AIfa的回合 — 掷骰中...", "games.bg.noMoves": "无可用走法！跳过回合。", "games.bg.selectChecker": "选择一枚棋子。", "games.bg.selectTarget": "选择目标点位进入。", "games.bg.selectMove": "选择目标位置。", "games.bg.label": "你 = 白方（右→左移动），AIfa = 黑方 · 双数 = 4步", "games.chess.check": "⚠️ 将军！", "games.chess.mate": "将杀！", "games.chess.stalemate": "逼和", "games.chess.material": "子力不足", "games.chess.promote": "选择升变棋子", "games.chess.lastMove": "上一步", "games.noMoves": "无可用走法", "games.bg.playLarger": "必须使用较大的骰子"}};
 const t = (key: string, lang: Lang): string => (GI[lang]?.[key] ?? GI.en?.[key] ?? key);
+
+/* Подписи клеток для экранного диктора — те же слова, что на aifa.works
+   (перенесено 27.09.2026 вместе с шахматным блоком). Ключи добавляются в GI,
+   только если их там нет. */
+const GI_A11Y: Record<string, Record<string, string>> = {"en": {"games.a11y.square": "Square", "games.a11y.empty": "empty", "games.a11y.cell": "Cell", "games.a11y.point": "Point", "games.a11y.checkers": "checkers", "games.a11y.white": "white", "games.a11y.black": "black", "games.a11y.yours": "yours", "games.a11y.aifas": "AIfa's", "games.a11y.king": "king", "games.a11y.queen": "queen", "games.a11y.rook": "rook", "games.a11y.bishop": "bishop", "games.a11y.knight": "knight", "games.a11y.pawn": "pawn", "games.a11y.canMove": "can move here", "games.a11y.selected": "selected", "games.a11y.crown": "king piece"}, "ru": {"games.a11y.square": "Поле", "games.a11y.empty": "пусто", "games.a11y.cell": "Клетка", "games.a11y.point": "Пункт", "games.a11y.checkers": "фишек", "games.a11y.white": "белая", "games.a11y.black": "чёрная", "games.a11y.yours": "ваша", "games.a11y.aifas": "AIfa", "games.a11y.king": "король", "games.a11y.queen": "ферзь", "games.a11y.rook": "ладья", "games.a11y.bishop": "слон", "games.a11y.knight": "конь", "games.a11y.pawn": "пешка", "games.a11y.canMove": "сюда можно пойти", "games.a11y.selected": "выбрано", "games.a11y.crown": "дамка"}, "es": {"games.a11y.square": "Casilla", "games.a11y.empty": "vacía", "games.a11y.cell": "Casilla", "games.a11y.point": "Punto", "games.a11y.checkers": "fichas", "games.a11y.white": "blanca", "games.a11y.black": "negra", "games.a11y.yours": "tuya", "games.a11y.aifas": "de AIfa", "games.a11y.king": "rey", "games.a11y.queen": "dama", "games.a11y.rook": "torre", "games.a11y.bishop": "alfil", "games.a11y.knight": "caballo", "games.a11y.pawn": "peón", "games.a11y.canMove": "se puede mover aquí", "games.a11y.selected": "seleccionada", "games.a11y.crown": "dama coronada"}, "zh": {"games.a11y.square": "格", "games.a11y.empty": "空", "games.a11y.cell": "第", "games.a11y.point": "点", "games.a11y.checkers": "枚棋子", "games.a11y.white": "白", "games.a11y.black": "黑", "games.a11y.yours": "您的", "games.a11y.aifas": "AIfa 的", "games.a11y.king": "王", "games.a11y.queen": "后", "games.a11y.rook": "车", "games.a11y.bishop": "象", "games.a11y.knight": "马", "games.a11y.pawn": "兵", "games.a11y.canMove": "可走到此处", "games.a11y.selected": "已选中", "games.a11y.crown": "王棋"}};
+for (const [язык, слова] of Object.entries(GI_A11Y)) GI[язык] = { ...слова, ...(GI[язык] ?? {}) };
+
+const ФИГУРЫ: Record<string, string> = {
+  K: "games.a11y.king", Q: "games.a11y.queen", R: "games.a11y.rook",
+  B: "games.a11y.bishop", N: "games.a11y.knight", P: "games.a11y.pawn",
+};
+
+function имяКлеткиШахмат(r: number, c: number, piece: string | null,
+                         lang: Lang, можноПойти: boolean, выбрано: boolean): string {
+  const поле = "abcdefgh"[c] + String(8 - r);
+  const части = [t("games.a11y.square", lang) + " " + поле];
+  if (piece) {
+    const цвет = piece[0] === "w" ? t("games.a11y.white", lang) : t("games.a11y.black", lang);
+    части.push(цвет + " " + t(ФИГУРЫ[piece[1]] ?? "games.a11y.pawn", lang));
+  } else {
+    части.push(t("games.a11y.empty", lang));
+  }
+  if (выбрано) части.push(t("games.a11y.selected", lang));
+  else if (можноПойти) части.push(t("games.a11y.canMove", lang));
+  return части.join(", ");
+}
 function fireWin(game: string) { if (typeof window !== "undefined") { try { (window as any).__aifaGameWin && (window as any).__aifaGameWin(game); } catch {} } }
 
 
@@ -59,13 +86,91 @@ function useРазмерКлетки(мобильный: boolean, наДескт
   return Math.max(30, Math.min(наДесктопе, Math.floor(доступно / 8)));
 }
 
+/**
+ * ШАХМАТЫ: РАЗМЕР ДОСКИ И ПОЛНЫЙ ЭКРАН (27.09.2026). Слово Архитектора:
+ * «Шахматы в ЛК нужно увеличить в размере на ПК, добавить к ним режим на весь
+ * экран… проверить что он корректно работает на ВСЕХ разрешениях и устройствах».
+ *
+ * На ПК клетка была зашита числом 48: доска 444×450 на экране 1920×945. Теперь
+ * клетка считается от НАСТОЯЩЕЙ ширины колонки (ResizeObserver) и от высоты окна,
+ * потолок 80 px. Телефон вне полного экрана считается как раньше.
+ *
+ * В полном экране клетка считается от всего экрана (до 120 px). На широком
+ * экране статус и история уходят в колонку справа, на узком — под доску.
+ */
+export const ПолныйЭкранКонтекст = createContext(false);
+
+function useВысотаОкна() {
+  const [высота, setВысота] = useState(0);
+  useEffect(() => {
+    const снять = () => setВысота(window.innerHeight);
+    снять();
+    window.addEventListener("resize", снять);
+    document.addEventListener("fullscreenchange", снять);
+    return () => { window.removeEventListener("resize", снять); document.removeEventListener("fullscreenchange", снять); };
+  }, []);
+  return высота;
+}
+
+function useРаскладкаШахмат(корень: React.RefObject<HTMLDivElement | null>, мобильный: boolean, полныйЭкран: boolean) {
+  const высота = useВысотаОкна();
+  const [ширина, setШирина] = useState(0);
+  useEffect(() => {
+    const узел = корень.current;
+    if (!узел) return;
+    const снять = () => setШирина(узел.clientWidth);
+    снять();
+    if (typeof ResizeObserver === "undefined") return;
+    const наблюдатель = new ResizeObserver(снять);
+    наблюдатель.observe(узел);
+    return () => наблюдатель.disconnect();
+  }, [корень]);
+  const телефонная = useРазмерКлетки(мобильный, 48);
+  const РАМКА = 24 + 24 + 20 + 4;   // цифры слева и справа + поля панели + запас
+  if (!ширина || !высота) return { клетка: мобильный ? телефонная : 48, сбоку: false };
+  // Телефон: клетка от НАСТОЯЩЕЙ ширины колонки, а не окна — доска помещается при любых полях кабинета.
+  if (мобильный && !полныйЭкран) return { клетка: Math.max(26, Math.min(48, Math.floor((ширина - РАМКА) / 8))), сбоку: false };
+  if (полныйЭкран) {
+    const сбоку = ширина >= высота * 1.15 && ширина >= 520;   // 520 — телефон, повёрнутый горизонтально
+    const поШирине = (сбоку ? ширина - 296 : ширина) - РАМКА;
+    const поВысоте = высота - (сбоку ? 150 : 400);
+    return { клетка: Math.max(20, Math.min(120, Math.floor(Math.min(поШирине, поВысоте) / 8))), сбоку };
+  }
+  const поШирине = ширина - РАМКА;
+  const поВысоте = высота - 300;
+  return { клетка: Math.max(48, Math.min(80, Math.floor(Math.min(поШирине, поВысоте) / 8))), сбоку: false };
+}
+
 // ─── Chess — full rules engine: check, checkmate, stalemate, castling, en passant, promotion ─
+/**
+ * 🔴 ВСЕ ФИГУРЫ — ЗАЛИТЫМИ СИМВОЛАМИ. Правка 06.09.2026 по замечанию
+ * Архитектора «шахматы местами кривые».
+ *
+ * ЧТО ИЗМЕРЕНО ПЕРЕД ЭТИМ. Я дважды предположила причину и дважды опровергла
+ * себя замером: ряд букв оказался ровно той же ширины, что ряд доски (432 px
+ * против 432), а фигуры центрировались без отклонений. Полный обмер доски дал
+ * идеальную геометрию: 64 клетки по 48×48, ноль сбитых столбцов, ноль сбитых
+ * рядов, максимальное отклонение центра фигуры 0.0 px.
+ *
+ * Значит дело не в вёрстке, а в САМИХ ГЛИФАХ. Белые фигуры Unicode
+ * (♔♕♖♗♘♙) — КОНТУРНЫЕ, чёрные (♚♛♜♝♞♟) — ЗАЛИТЫЕ. Это два разных рисунка
+ * с разной толщиной, высотой и оптическим весом: белый король выглядит выше и
+ * легче чёрного, хотя коробки у них одинаковы. Плюс белый контур цветом
+ * #FAFAF5 на светлой клетке rgba(232,213,176,0.92) почти сливается с фоном.
+ *
+ * Решение, которым пользуются все приличные шахматы в вебе: брать ОДИН набор
+ * — залитый — для обеих сторон, а цвет задавать заливкой и обводкой. Тогда
+ * белые и чёрные одинаковы по форме и весу и отличаются ровно тем, чем
+ * отличаются на настоящей доске: цветом.
+ */
 const CHESS_PIECES: Record<string, string> = {
-  // 06.09.2026. Было: белые контурными глифами (♔♕♖), чёрные залитыми.
-  // На тёмной доске контурная фигура выглядит дырявой — Архитектор увидел
-  // это как «шахматы местами кривые». Теперь глиф один и тот же, а цвет
-  // различают заливка и обводка противоположного тона.
-  wK:"♚", wQ:"♛", wR:"♜", wB:"♝", wN:"♞", wP:"♟",
+  wK:"♚", wQ:"♛", wR:"♜", wB:"♝", wN:"♞", wP:"♟\uFE0E",
+  bK:"♚", bQ:"♛", bR:"♜", bB:"♝", bN:"♞", bP:"♟\uFE0E",
+};
+
+/** Те же фигуры контурными — для записи ходов, где заливка не нужна. */
+const CHESS_PIECES_OUTLINE: Record<string, string> = {
+  wK:"♔", wQ:"♕", wR:"♖", wB:"♗", wN:"♘", wP:"♙",
   bK:"♚", bQ:"♛", bR:"♜", bB:"♝", bN:"♞", bP:"♟",
 };
 type ChessBoard = (string|null)[][];
@@ -258,7 +363,11 @@ function noteC(before:ChessState,m:CMove,after:ChessState):string{
 
 function Chess({ lang }: { lang: Lang }) {
   const mobile = useIsMobile();
-  const cell = useРазмерКлетки(mobile, 48);
+  const полныйЭкран = useContext(ПолныйЭкранКонтекст);
+  const корень = useRef<HTMLDivElement>(null);
+  const раскладка = useРаскладкаШахмат(корень, mobile, полныйЭкран);
+  const cell = раскладка.клетка;
+  const сбоку = раскладка.сбоку;
   const files = ["a","b","c","d","e","f","g","h"];
   const [st, setSt] = useState<ChessState>(initChessState);
   const [selected, setSelected] = useState<[number,number]|null>(null);
@@ -325,11 +434,26 @@ function Chess({ lang }: { lang: Lang }) {
 
   const lastEntry=history[history.length-1];
   const lastNote=lastEntry?(lastEntry.b||lastEntry.w):null;
-  const coordStyle:React.CSSProperties={fontSize:"10px",color:"rgba(232,213,176,0.65)"};
+  /**
+   * 🔴 КООРДИНАТЫ УВЕЛИЧЕНЫ. Правка 06.09.2026, слова Архитектора: «Буквы и
+   * цифры мелкие, в мобильной версии сползают и их не видно».
+   *
+   * Было 10 px при непрозрачности 0.65 — на телефоне нечитаемо, а рядом с
+   * фигурой в 28–33 px выглядит случайным шрифтовым мусором. Стало 13 px на
+   * телефоне и 14 на большом экране, непрозрачность поднята до 0.88 и добавлен
+   * полужирный: тонкий светлый шрифт на коричневой доске теряется.
+   */
+  const coordStyle:React.CSSProperties={
+    fontSize:cell>=64?"16px":mobile?"13px":"14px",
+    fontWeight:600,
+    color:"rgba(240,226,199,0.88)",
+    letterSpacing:"0.02em",
+    userSelect:"none",
+  };
 
   return (
-    <div>
-      <div className="glass-panel-sm" style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"16px",padding:"10px 24px",marginBottom:"12px"}}>
+    <div ref={корень} style={сбоку?{display:"grid",gridTemplateColumns:"auto 280px",gridTemplateRows:"auto 1fr",columnGap:"16px",justifyContent:"center",alignItems:"start"}:undefined}>
+      <div className="glass-panel-sm" style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"16px",padding:"10px 24px",marginBottom:"12px",...(сбоку?{gridColumn:"2",gridRow:"1"}:{})}}>
         {status==="white_wins"&&<span style={{fontWeight:700,color:"#10B981"}}>{t("games.win",lang)} · {t("games.chess.mate",lang)}</span>}
         {status==="black_wins"&&<span style={{fontWeight:700,color:"#ef4444"}}>{t("games.lose",lang)} · {t("games.chess.mate",lang)}</span>}
         {status==="stalemate"&&<span style={{fontWeight:700,color:"#D4A24C"}}>{t("games.draw",lang)} · {t("games.chess.stalemate",lang)}</span>}
@@ -340,9 +464,20 @@ function Chess({ lang }: { lang: Lang }) {
             :<span style={{fontWeight:600,color:whiteInCheck?"#ef4444":"rgb(232,232,240)"}}>{whiteInCheck?t("games.chess.check",lang):t("games.chess.whiteToMove",lang)}</span>
         )}
       </div>
-      <div style={{display:"flex",justifyContent:"center",marginBottom:"12px",overflowX:"auto"}}>
+      <div style={{display:"flex",justifyContent:"center",marginBottom:"12px",overflowX:"auto",...(сбоку?{gridColumn:"1",gridRow:"1 / span 2",marginBottom:0}:{})}}>
         <div className="glass-panel" style={{padding:"10px",display:"inline-block",position:"relative"}}>
-          <div style={{display:"flex",paddingLeft:"20px",marginBottom:"2px"}}>
+          {/* 🔴 ПРАВЫЙ ОТСТУП ОБЯЗАТЕЛЕН. Правка 06.09.2026 по замечанию
+              Архитектора «шахматы местами кривые».
+
+              У ряда клеток слева и справа стоят колонки цифр по 20 px:
+              [20 цифра][8 клеток][20 цифра]. У рядов с буквами был только
+              ЛЕВЫЙ отступ — ряд букв выходил на 20 px уже ряда доски, и
+              вся конструкция смотрелась смещённой влево.
+
+              Буквы при этом стояли над клетками верно: съезжала не разметка
+              букв, а ширина обрамления. Поэтому лечится симметричным
+              отступом, а не сдвигом букв. */}
+          <div style={{display:"flex",paddingLeft:"20px",paddingRight:"20px",marginBottom:"2px"}}>
             {files.map(l=><div key={l} style={{...coordStyle,width:`${cell}px`,textAlign:"center"}}>{l}</div>)}
           </div>
           {st.board.map((row,r)=>(
@@ -360,19 +495,47 @@ function Chess({ lang }: { lang: Lang }) {
                 else if(mvHere&&piece) shadow="inset 0 0 0 3px rgba(16,185,129,0.95)";
                 else if(isLast) shadow="inset 0 0 0 3px rgba(251,191,36,0.85)";
                 return (
-                  <button key={c} onClick={()=>handleClick(r,c)} style={{width:`${cell}px`,height:`${cell}px`,display:"flex",alignItems:"center",justifyContent:"center",border:"none",cursor:"pointer",padding:0,position:"relative",
+                  <button key={c} onClick={()=>handleClick(r,c)} aria-label={имяКлеткиШахмат(r,c,piece,lang,!!mvHere,isSel)} style={{width:`${cell}px`,height:`${cell}px`,display:"flex",alignItems:"center",justifyContent:"center",border:"none",cursor:"pointer",padding:0,position:"relative",
                     background:isDark?"#7A4F26":"rgba(232,213,176,0.92)",boxShadow:shadow,transition:"box-shadow 0.12s"}}>
                     {mvHere&&!piece&&<span style={{display:"block",width:"12px",height:"12px",borderRadius:"50%",background:"rgba(16,185,129,0.85)",boxShadow:"0 0 8px rgba(16,185,129,0.9)",pointerEvents:"none"}}/>}
-                    {piece&&<span style={{fontSize:`${Math.round(cell*0.72)}px`,lineHeight:1,
-                      color:piece[0]==="w"?"#FAFAF5":"#1A1E2E",
-                      WebkitTextStroke:piece[0]==="w"?"1.1px rgba(20,20,30,0.92)":"1.1px rgba(245,245,240,0.55)"}}>{CHESS_PIECES[piece]||""}</span>}
+                    {/* 🔴 ФИГУРА ЦЕНТРИРУЕТСЯ ПО ВСЕЙ КЛЕТКЕ. Правка 06.09.2026
+                        по замечанию Архитектора «шахматы местами кривые».
+
+                        Фигуры — символы Unicode (♔♕♖♗♘♙), и у них РАЗНАЯ
+                        высота и базовая линия: пешка сидит низко, ферзь
+                        высоко. При `lineHeight: 1` символ занимал ровно свою
+                        высоту, и flex центрировал КОРОБКУ символа, а не сам
+                        рисунок — фигуры вставали на разной высоте, ряд
+                        выглядел неровным.
+
+                        Здесь символ растянут на всю клетку и центрируется
+                        внутри неё, а `lineHeight: 1` заменён на единицу
+                        высоты клетки. Тогда положение задаёт клетка, а не
+                        особенности шрифта. */}
+                    {piece&&<span style={{
+                      position:"absolute",inset:0,
+                      display:"flex",alignItems:"center",justifyContent:"center",
+                      fontSize:`${Math.round(cell*0.72)}px`,lineHeight:`${cell}px`,fontFamily:шрифтФигур.style.fontFamily,
+                      pointerEvents:"none",
+                      color:piece[0]==="w"?"#FCFCF8":"#101016",
+                      /* Обводка нужна обеим сторонам: белая фигура иначе
+                         тонет в светлой клетке, чёрная — в тёмной. Тень
+                         только под фигурой, чтобы читалась объёмность. */
+                      /* 27.09.2026: у чёрных обводка ТЁМНАЯ. У Noto король, ферзь, ладья и слон
+                         прорисованы с внутренними деталями, и прежняя светлая обводка ложилась на
+                         каждый внутренний контур — чёрные фигуры выглядели белыми (снимок доски
+                         aifa.works 27.09). Светлый ореол ниже отделяет их от коричневой клетки. */
+                      WebkitTextStroke:piece[0]==="w"?"1.1px rgba(20,20,30,0.92)":"0.8px rgba(0,0,0,0.9)",
+                      textShadow:piece[0]==="w"
+                        ?"0 2px 3px rgba(0,0,0,0.55)"
+                        :"0 0 2px rgba(255,255,255,0.55), 0 2px 3px rgba(0,0,0,0.45)"}}>{CHESS_PIECES[piece]||""}</span>}
                   </button>
                 );
               })}
               <div style={{...coordStyle,width:"20px",paddingLeft:"4px"}}>{8-r}</div>
             </div>
           ))}
-          <div style={{display:"flex",paddingLeft:"20px",marginTop:"2px"}}>
+          <div style={{display:"flex",paddingLeft:"20px",paddingRight:"20px",marginTop:"2px"}}>
             {files.map(l=><div key={l} style={{...coordStyle,width:`${cell}px`,textAlign:"center"}}>{l}</div>)}
           </div>
           {promo&&(
@@ -382,7 +545,7 @@ function Chess({ lang }: { lang: Lang }) {
                 <div style={{display:"flex",gap:"10px",justifyContent:"center"}}>
                   {(["Q","R","B","N"] as PromoPiece[]).map(pp=>(
                     <button key={pp} onClick={()=>finishPlayerMove({...promo,promo:pp})} style={{width:"52px",height:"52px",fontSize:"30px",lineHeight:1,borderRadius:"10px",cursor:"pointer",
-                      background:"rgba(232,213,176,0.92)",border:"2px solid rgba(124,58,237,0.55)",color:"#1A1E2E"}}>{CHESS_PIECES["w"+pp]}</button>
+                      background:"rgba(232,213,176,0.92)",border:"2px solid rgba(124,58,237,0.55)",color:"#FCFCF8",WebkitTextStroke:"1.1px rgba(20,20,30,0.92)",fontFamily:шрифтФигур.style.fontFamily}}>{CHESS_PIECES["w"+pp]}</button>
                   ))}
                 </div>
               </div>
@@ -390,7 +553,7 @@ function Chess({ lang }: { lang: Lang }) {
           )}
         </div>
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
+      <div style={{display:"grid",gridTemplateColumns:сбоку?"1fr":"1fr 1fr",gap:"12px",...(сбоку?{gridColumn:"2",gridRow:"2"}:{})}}>
         <div className="glass-panel" style={{padding:"14px"}}>
           <div style={{fontSize:"13px",fontWeight:600,color:"rgb(232,232,240)",marginBottom:"8px"}}>{t("games.chess.history",lang)}</div>
           <div style={{maxHeight:"120px",overflowY:"auto"}}>
@@ -1167,6 +1330,14 @@ function Backgammon({ lang }: { lang: Lang }) {
   );
 }
 
+// Кнопка полного экрана — у всех игр (27.09.2026). Подписи на четырёх языках.
+const ЭКРАН: Record<string, [string, string]> = {
+  ru: ["На весь экран", "Выйти из полного экрана"],
+  en: ["Full screen", "Exit full screen"],
+  es: ["Pantalla completa", "Salir de pantalla completa"],
+  zh: ["全屏", "退出全屏"],
+};
+
 // ─── GamesArena wrapper ───────────────────────────────────────────────────────
 type GameId = "chess"|"ttt"|"checkers"|"backgammon"|"tetris";
 
@@ -1188,6 +1359,66 @@ function GamesArena({ tetrisSlot }: { tetrisSlot?: React.ReactNode } = {}) {
     setActive(id);
     setKeys(k=>({...k,[id]:k[id]+1}));
   }
+
+  /* Полный экран (27.09.2026). Разворачивается весь блок игры, поэтому режим
+     одинаков у всех пяти игр. На iPhone Safari не даёт развернуть элемент
+     страницы (только видео) — там включается запасной режим: игра поверх
+     страницы на весь экран, прокрутка страницы под ней заперта, выход — кнопкой
+     или клавишей Esc. */
+  const сцена = useRef<HTMLDivElement>(null);
+  const [полныйЭкран, setПолныйЭкран] = useState(false);
+  const [запасной, setЗапасной] = useState(false);
+  useEffect(() => {
+    const d = document as any;
+    const сверить = () => {
+      const эл = d.fullscreenElement || d.webkitFullscreenElement || null;
+      setПолныйЭкран(!!эл && эл === сцена.current);
+    };
+    document.addEventListener("fullscreenchange", сверить);
+    document.addEventListener("webkitfullscreenchange", сверить);
+    return () => {
+      document.removeEventListener("fullscreenchange", сверить);
+      document.removeEventListener("webkitfullscreenchange", сверить);
+    };
+  }, []);
+  useEffect(() => {
+    if (!запасной) return;
+    const было = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    /* ПОДЪЁМ СЛОЯ (27.09.2026, найдено проверкой на живом aifa.works). Игра стоит
+       внутри блоков страницы, и её z-index не поднимается выше шапки сайта и плеера
+       радио: они закрывали верхний и нижний ряды доски и кнопку «Выйти». На время
+       режима родители игры поднимаются в верхний слой, при выходе всё возвращается. */
+    const поднятые: [HTMLElement, string, string][] = [];
+    for (let у = сцена.current ? сцена.current.parentElement : null; у && у !== document.body; у = у.parentElement) {
+      поднятые.push([у, у.style.position, у.style.zIndex]);
+      if (getComputedStyle(у).position === "static") у.style.position = "relative";
+      у.style.zIndex = "2147483000";
+    }
+    const поEsc = (e: KeyboardEvent) => { if (e.key === "Escape") setЗапасной(false); };
+    window.addEventListener("keydown", поEsc);
+    return () => {
+      document.body.style.overflow = было;
+      for (const [у, позиция, слой] of поднятые) { у.style.position = позиция; у.style.zIndex = слой; }
+      window.removeEventListener("keydown", поEsc);
+    };
+  }, [запасной]);
+  async function переключитьЭкран() {
+    const d = document as any;
+    const у = сцена.current as any;
+    if (полныйЭкран) {
+      try { if (d.exitFullscreen) await d.exitFullscreen(); else if (d.webkitExitFullscreen) d.webkitExitFullscreen(); } catch {}
+      return;
+    }
+    if (запасной) { setЗапасной(false); return; }
+    try {
+      if (у && у.requestFullscreen) { await у.requestFullscreen(); return; }
+      if (у && у.webkitRequestFullscreen) { у.webkitRequestFullscreen(); return; }
+    } catch {}
+    setЗапасной(true);
+  }
+  const развёрнуто = полныйЭкран || запасной;
+  const подписьЭкрана = (ЭКРАН[lang as string] ?? ЭКРАН.en)[развёрнуто ? 1 : 0];
 
   return (
     <div style={{maxWidth:"1280px",margin:"0 auto"}}>
@@ -1219,12 +1450,27 @@ function GamesArena({ tetrisSlot }: { tetrisSlot?: React.ReactNode } = {}) {
         ))}
       </div>
 
-      {/* Active game */}
+      {/* Active game — в блоке, который разворачивается на весь экран */}
+      <div ref={сцена} style={развёрнуто ? {
+        position: запасной ? "fixed" : "relative", inset: запасной ? 0 : undefined,
+        zIndex: запасной ? 2147483000 : undefined, width: "100%", height: запасной ? "100dvh" : "100%",
+        overflow: "auto", background: "#07070f", padding: "16px", boxSizing: "border-box",
+      } : undefined}>
+        <div style={{display:"flex",justifyContent:"flex-end",marginBottom:"8px"}}>
+          <button type="button" onClick={переключитьЭкран} aria-pressed={развёрнуто}
+            style={{background:"rgba(124,58,237,0.12)",border:"1px solid rgba(124,58,237,0.35)",color:"#A78BFA",
+              padding:"8px 14px",borderRadius:"10px",fontSize:"13px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>
+            {развёрнуто ? "✕ " : "⛶ "}{подписьЭкрана}
+          </button>
+        </div>
+        <ПолныйЭкранКонтекст.Provider value={развёрнуто}>
       {active==="chess"      && <Chess        lang={lang} key={keys.chess}/>}
       {active==="ttt"        && <TicTacToe    lang={lang} key={keys.ttt}/>}
       {active==="checkers"   && <Checkers     lang={lang} key={keys.checkers}/>}
       {active==="backgammon" && <Backgammon   lang={lang} key={keys.backgammon}/>}
       {active==="tetris"     && tetrisSlot}
+        </ПолныйЭкранКонтекст.Provider>
+      </div>
     </div>
   );
 }
