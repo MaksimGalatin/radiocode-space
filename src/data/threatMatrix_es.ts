@@ -1729,10 +1729,10 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "FDBR-001",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Vigilancia ilícita mediante reconocimiento facial o de voz sin autorización explícita (Florida FDBR)",
-    "description": "El sitio web o la aplicación web asociada utiliza software de vigilancia o reconocimiento facial activo sin proporcionar un aviso claro y visible en la interfaz y obtener el consentimiento según lo exige la Declaración de Derechos Digitales de Florida.",
+    "title": "Vigilancia ilícita mediante reconocimiento facial, de voz o grabación sin autorización expresa (Florida FDBR)",
+    "description": "Un dispositivo o plataforma digital conectada con funciones de reconocimiento facial, de voz, grabación de video o audio utiliza dichas funciones para fines de vigilancia por parte del responsable o encargado cuando el consumidor no las está utilizando activamente, sin autorización expresa previa.",
     "severity": "serious",
-    "reference": "Fla. Stat. § 501.705(3) (Florida Digital Bill of Rights - Surveillance via Facial/Voice Recognition Prohibition)"
+    "reference": "Fla. Stat. § 501.705(3) (Declaración de Derechos Digitales de Florida - Prohibición de vigilancia mediante reconocimiento facial o de voz)"
   },
   {
     "id": 168,
@@ -2679,8 +2679,8 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "EUAI-007",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Falta de planes de seguimiento postcomercialización para sistemas de IA (EU AI Act)",
-    "description": "El proveedor de sistemas de IA regulados no publica un plan de seguimiento posterior a la comercialización ni canales de incidentes.",
+    "title": "Falta de establecimiento y documentación del sistema de seguimiento posterior a la comercialización (EU AI Act)",
+    "description": "El proveedor de un sistema de IA de alto riesgo no establece ni documenta un sistema de seguimiento posterior a la comercialización proporcionado a la naturaleza de las tecnologías y los riesgos del sistema, o no mantiene un plan de seguimiento documentado en la documentación técnica conforme al Art. 72 del Reglamento de IA de la UE.",
     "severity": "serious",
     "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 72"
   },
@@ -3109,10 +3109,10 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "CTDP-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Perfilado de menores para fines comerciales o decisiones automatizadas (Connecticut SB 3)",
-    "description": "El sitio o servicio en línea dirigido a menores de Connecticut compila perfiles para publicidad dirigida, venta de datos o decisiones automatizadas sin consentimiento expreso.",
+    "title": "Elaboración de perfiles, publicidad dirigida o venta de datos de menores sin consentimiento (Connecticut SB 3)",
+    "description": "Un responsable que ofrece servicios, productos o funciones en línea a consumidores respecto de los cuales tiene conocimiento real (actual knowledge) o ignora deliberadamente (wilfully disregards) que son menores, procesa datos personales para publicidad dirigida, venta o elaboración de perfiles para decisiones automatizadas con efectos jurídicos o significativos sin consentimiento previo.",
     "severity": "critical",
-    "reference": "CT Public Act No. 23-56 (SB 3), Sec. 9(b)(1)(A)(i)(III)"
+    "reference": "CT Public Act No. 23-56 (SB 3), Sec. 9(b)(1)(A)(i) and (b)(3)"
   },
   {
     "id": 306,
@@ -3299,10 +3299,10 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "PIPD-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Falta de divulgación sobre procesamiento transfronterizo y ubicación de datos (Canadá PIPEDA)",
-    "description": "La política dirigida a residentes canadienses recopila datos pero no revela las ubicaciones geográficas específicas donde se almacenan.",
+    "title": "Falta de divulgación sobre la transferencia y procesamiento de datos por terceros (Canadá PIPEDA)",
+    "description": "Una organización que recopila datos personales los transfiere a terceros para su procesamiento, pero no mantiene la responsabilidad ni divulga en su política de privacidad que los datos se transfieren a terceros encargados y se protegen mediante salvaguardas contractuales o equivalentes requeridas por PIPEDA.",
     "severity": "serious",
-    "reference": "PIPEDA Schedule 1, Principle 4.1.3 / Principle 4.8 (Accountability / Openness for third-party transfer and storage location)"
+    "reference": "PIPEDA Anexo 1, Principio 4.1.3 / Principio 4.8 (Responsabilidad y transparencia en la transferencia y procesamiento por terceros)"
   },
   {
     "id": 325,
@@ -3499,10 +3499,10 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "FLDB-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Falta de divulgación clara y visible para la exclusión voluntaria de la venta de datos personales (Florida FDBR)",
-    "description": "El sitio dirigido a los consumidores de Florida no proporciona un enlace visible titulado \"Do Not Sell My Personal Information\".",
+    "title": "Falta de divulgación clara y visible sobre venta de datos personales y publicidad dirigida (Florida FDBR)",
+    "description": "Un responsable que cumple los umbrales de aplicación de Florida FDBR (incluyendo ingresos globales anuales superiores a 1.000 millones de dólares) y que vende datos personales a terceros o los procesa para publicidad dirigida, no divulga de manera clara y visible dicho proceso ni ofrece un mecanismo para que los consumidores opten por no participar.",
     "severity": "critical",
-    "reference": "Fla. Stat. § 501.711(4) (Florida Digital Bill of Rights - Sale of Personal Data / Targeted Advertising Opt-Out Disclosure)"
+    "reference": "Fla. Stat. § 501.711(4) (Declaración de Derechos Digitales de Florida - Divulgación de venta de datos y opción de exclusión)"
   },
   {
     "id": 345,
@@ -15939,10 +15939,10 @@ export const threatMatrixEs: ComplianceCheck[] = [
     "code": "CAAAC-008",
     "evidenceKind": "observable",
     "category": "CCPA / CPRA",
-    "title": "Términos de servicio complejos para menores",
-    "description": "Los términos están redactados con un nivel de lectura complejo, violando los estándares para menores.",
+    "title": "Falta de términos de privacidad claros, destacados y adaptados a menores (California AADC)",
+    "description": "Una empresa que ofrece un servicio, producto o función en línea al que es probable que accedan niños no proporciona la información de privacidad, términos de servicio y políticas de forma concisa, destacada y en un lenguaje claro adaptado a la edad de los menores que probablemente accedan.",
     "severity": "serious",
-    "reference": "Cal. Civ. Code § 1798.99.31(a)(8)"
+    "reference": "Cal. Civ. Code § 1798.99.31(a)(7) (Código de Diseño Adecuado para la Edad de California - Términos claros и adaptados a menores)"
   },
   {
     "id": 1589,

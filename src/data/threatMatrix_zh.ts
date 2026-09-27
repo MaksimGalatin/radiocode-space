@@ -1729,10 +1729,10 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "FDBR-001",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "未经明确授权通过人脸或语音识别进行非法监控 (佛罗里达州 FDBR)",
-    "description": "根据《佛罗里达州数字权利法案》的要求，网站或相关 Web 应用程序使用主动人脸识别或监控软件，但未提供清晰、显著的前端通知并获得选择性同意。",
+    "title": "未经明确授权通过人脸、语音识别或录制功能进行非法监控 (佛罗里达州 FDBR)",
+    "description": "具备语音识别、人脸识别、视频或音频录制等功能的设备或关联数字化平台，在消费者未主动使用该功能时，未经消费者明确授权将其用于控制者或处理者的监控目的，违反了佛罗里达州 FDBR。",
     "severity": "serious",
-    "reference": "Fla. Stat. § 501.705(3) (Florida Digital Bill of Rights - Surveillance via Facial/Voice Recognition Prohibition)"
+    "reference": "Fla. Stat. § 501.705(3) (佛罗里达州数字权利法案 - 禁止通过人脸/语音识别进行未经授权的监控)"
   },
   {
     "id": 168,
@@ -2679,8 +2679,8 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "EUAI-007",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "AI 系统缺少上市后监控计划 (EU AI Act)",
-    "description": "受监管 AI 系统的提供商未能托管或链接到公开可访问的上市后监控计划和事件报告途径，违反了欧盟《AI 法案》要求。",
+    "title": "未建立并记录高风险人工智能系统的上市后监控系统 (欧盟 AI 法案)",
+    "description": "高风险人工智能系统的提供商未能根据人工智能技术的性质和系统风险建立并记录成文的上市后监控系统，或未按照欧盟《AI 法案》第 72 条要求在技术文档中保持切实记录的上市后监控计划。",
     "severity": "serious",
     "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 72"
   },
@@ -3109,10 +3109,10 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "CTDP-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "出于商业或自动化决策目的对未成年人进行画像（康涅狄格州 SB 3）",
-    "description": "针对康涅狄格州未成年人的网站或在线服务在未经明确同意的情况下，为定向广告、数据销售或具有法律效力的自动化决策编制个人画像。",
+    "title": "未经同意对未成年人进行画像、定向广告或出售其数据 (康涅狄格州 SB 3)",
+    "description": "控制者向明知（actual knowledge）或故意忽视（wilfully disregards）为未成年人的消费者提供在线服务、产品或功能时，在未获得事先同意的情况下，将个人数据用于定向广告、出售或进行产生法律或重大影响的自动化决策画像，违反了康涅狄格州 SB 3。",
     "severity": "critical",
-    "reference": "CT Public Act No. 23-56 (SB 3), Sec. 9(b)(1)(A)(i)(III)"
+    "reference": "CT Public Act No. 23-56 (SB 3), Sec. 9(b)(1)(A)(i) and (b)(3)"
   },
   {
     "id": 306,
@@ -3299,10 +3299,10 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "PIPD-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "缺少第三方及跨境数据处理与存储位置说明 (加拿大 PIPEDA)",
-    "description": "针对加拿大居民的隐私政策收集了个人数据，但未能披露存储数据的具体地理位置（省/国），违反了 PIPEDA。",
+    "title": "缺少第三方数据处理与传输披露说明 (加拿大 PIPEDA)",
+    "description": "收集个人数据的组织将信息转移给第三方进行处理，但未能落实问责制，亦未在隐私政策中披露数据已转移给第三方处理者并通过合同或其他同等保护手段进行保障，违反了加拿大 PIPEDA。",
     "severity": "serious",
-    "reference": "PIPEDA Schedule 1, Principle 4.1.3 / Principle 4.8 (Accountability / Openness for third-party transfer and storage location)"
+    "reference": "PIPEDA 附表 1 原则 4.1.3 / 原则 4.8 (第三方传输与处理的问责与公开)"
   },
   {
     "id": 325,
@@ -3499,10 +3499,10 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "FLDB-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "缺少个人数据出售与定向广告的清晰显著退出披露 (佛罗里达州 FDBR)",
-    "description": "针对佛罗里达州消费者的网站未能在其首页托管名为“请勿出售我的个人信息”的清晰、显著的链接，违反了佛罗里达州 FDBR。",
+    "title": "缺少个人数据出售与定向广告的退出披露说明 (佛罗里达州 FDBR)",
+    "description": "符合佛罗里达州 FDBR 适用门槛（包括全球年总收入超过 10 亿美元）的控制者向第三方出售个人数据或将个人数据用于定向广告，但未能清晰、显著地披露该流程并向消费者提供选择退出的途径。",
     "severity": "critical",
-    "reference": "Fla. Stat. § 501.711(4) (Florida Digital Bill of Rights - Sale of Personal Data / Targeted Advertising Opt-Out Disclosure)"
+    "reference": "Fla. Stat. § 501.711(4) (佛罗里达州数字权利法案 - 个人数据出售与定向广告退出披露机制)"
   },
   {
     "id": 345,
@@ -15939,10 +15939,10 @@ export const threatMatrixZh: ComplianceCheck[] = [
     "code": "CAAAC-008",
     "evidenceKind": "observable",
     "category": "CCPA / CPRA",
-    "title": "复杂的服务条款说明",
-    "description": "详细说明数据使用情况的条款超出了中学生的阅读理解水平，违反了未成年人友好标准。",
+    "title": "未提供清晰、显著且适宜未成年人的隐私条款 (加州适龄设计规范)",
+    "description": "向可能被儿童访问的在线服务、产品或功能的提供企业，未能以简明、显著且适宜可能访问该服务的儿童年龄段的通俗易懂语言提供隐私信息、服务条款、政策及社区准则。",
     "severity": "serious",
-    "reference": "Cal. Civ. Code § 1798.99.31(a)(8)"
+    "reference": "Cal. Civ. Code § 1798.99.31(a)(7) (加利福尼亚州适龄设计规范 - 清晰易懂且适宜儿童的条款)"
   },
   {
     "id": 1589,

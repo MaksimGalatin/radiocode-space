@@ -1729,8 +1729,8 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "code": "FDBR-001",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Unlawful Surveillance via Facial or Voice Recognition Without Explicit Authorization (Florida FDBR)",
-    "description": "Website or associated web application utilizes active facial recognition or surveillance software without providing a clear, conspicuous front-end notice and obtaining opt-in consent as required by the Florida Digital Bill of Rights.",
+    "title": "Unlawful Surveillance via Facial, Voice, or Recording Features Without Express Authorization (Florida FDBR)",
+    "description": "A device or connected digital platform featuring voice recognition, facial recognition, video recording, audio recording, or visual surveillance features uses those features for the purpose of surveillance by the controller or processor when not in active use by the consumer, without express authorization as prohibited by Florida FDBR.",
     "severity": "serious",
     "reference": "Fla. Stat. § 501.705(3) (Florida Digital Bill of Rights - Surveillance via Facial/Voice Recognition Prohibition)"
   },
@@ -2679,8 +2679,8 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "code": "EUAI-007",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Lack of Post-Market Monitoring Plans for AI Systems (EU AI Act)",
-    "description": "Provider of regulated AI systems fails to host or link to a publicly accessible post-market monitoring plan and incident reporting path, violating EU AI Act requirements.",
+    "title": "Failure to Establish and Document Post-Market Monitoring System for High-Risk AI (EU AI Act)",
+    "description": "A provider of a high-risk AI system fails to establish and document a post-market monitoring system in a manner proportionate to the nature of the artificial intelligence technologies and the risks of the system, or fails to maintain an actively documented post-market monitoring plan as part of technical documentation required by Art. 72 of the EU AI Act.",
     "severity": "serious",
     "reference": "Regulation (EU) 2024/1689 (EU AI Act), Art. 72"
   },
@@ -3109,10 +3109,10 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "code": "CTDP-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Profiling Minors for Commercial or Automated Decision Purposes (Connecticut SB 3)",
-    "description": "Website targeting Connecticut minors compiles personal profiles for targeted advertising, data sales, or automated decisions with legal or significant effects without express consent.",
+    "title": "Profiling, Targeted Advertising, or Sale of Data of Minors Without Consent (Connecticut SB 3)",
+    "description": "A controller offering online services, products, or features to consumers whom the controller has actual knowledge, or wilfully disregards, are minors processes personal data for targeted advertising, sale, or profiling in furtherance of automated decisions with legal or significant effects without obtaining prior consent as required by Connecticut SB 3.",
     "severity": "critical",
-    "reference": "CT Public Act No. 23-56 (SB 3), Sec. 9(b)(1)(A)(i)(III)"
+    "reference": "CT Public Act No. 23-56 (SB 3), Sec. 9(b)(1)(A)(i) and (b)(3)"
   },
   {
     "id": 306,
@@ -3299,10 +3299,10 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "code": "PIPD-003",
     "evidenceKind": "observable",
     "category": "Digital Operations",
-    "title": "Missing Disclosures for Third-Party / Cross-Border Data Processing and Storage (Canada PIPEDA)",
-    "description": "Privacy policy targeting Canadian residents collects personal data but fails to disclose the specific geographic locations (provinces/countries) where data is stored, violating PIPEDA.",
+    "title": "Missing Disclosures for Third-Party Data Transfer and Processing (Canada PIPEDA)",
+    "description": "An organization collecting personal data transfers information to third parties for processing but fails to remain accountable or disclose in its privacy policy that data is transferred to third-party processors and protected through comparable contractual or other safeguards as required by PIPEDA.",
     "severity": "serious",
-    "reference": "PIPEDA Schedule 1, Principle 4.1.3 / Principle 4.8 (Accountability / Openness for third-party transfer and storage location)"
+    "reference": "PIPEDA Schedule 1, Principle 4.1.3 / Principle 4.8 (Accountability / Openness for third-party transfer and processing)"
   },
   {
     "id": 325,
@@ -3499,8 +3499,8 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "code": "FLDB-003",
     "evidenceKind": "observable",
     "category": "State Privacy Laws",
-    "title": "Missing Clear and Conspicuous Opt-Out Disclosure for Personal Data Sales and Targeted Ads (Florida FDBR)",
-    "description": "Website targeting Florida consumers fails to host a clear, conspicuous link titled \"Do Not Sell My Personal Information\" on its homepage, violating Florida FDBR.",
+    "title": "Missing Opt-Out Disclosure for Personal Data Sales and Targeted Ads (Florida FDBR)",
+    "description": "A controller meeting Florida FDBR applicability thresholds (including annual global gross revenues exceeding $1 billion) that sells personal data to third parties or processes personal data for targeted advertising fails to clearly and conspicuously disclose that process and provide a manner for consumers to opt out.",
     "severity": "critical",
     "reference": "Fla. Stat. § 501.711(4) (Florida Digital Bill of Rights - Sale of Personal Data / Targeted Advertising Opt-Out Disclosure)"
   },
@@ -15939,10 +15939,10 @@ export const threatMatrixEn: ComplianceCheck[] = [
     "code": "CAAAC-008",
     "evidenceKind": "observable",
     "category": "CCPA / CPRA",
-    "title": "Complex Terms of Service Explanations",
-    "description": "The terms detailing data usage are written above a high school reading level, violating minor-friendly standards.",
+    "title": "Failure to Provide Clear, Prominent, and Child-Friendly Privacy Terms (California AADC)",
+    "description": "A business that provides an online service, product, or feature likely to be accessed by children fails to provide privacy information, terms of service, policies, and community standards concisely, prominently, and using clear language suited to the age of children likely to access the service.",
     "severity": "serious",
-    "reference": "Cal. Civ. Code § 1798.99.31(a)(8)"
+    "reference": "Cal. Civ. Code § 1798.99.31(a)(7) (California Age-Appropriate Design Code - Clear and Child-Friendly Terms)"
   },
   {
     "id": 1589,
