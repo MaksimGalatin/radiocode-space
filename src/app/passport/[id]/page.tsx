@@ -320,9 +320,14 @@ export default async function СтраницаПаспорта({ params }: { par
             <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="23" cy="23" r="22" stroke={цвет} strokeOpacity="0.28" strokeWidth="1" />
               <circle cx="23" cy="23" r="16.5" stroke={цвет} strokeOpacity="0.15" strokeWidth="0.6" />
-              <polygon
-                points="23,9 26.4,18.9 37,18.9 28.3,24.9 31.7,34.8 23,28.8 14.3,34.8 17.7,24.9 9,18.9 19.6,18.9"
-                fill={цвет} fillOpacity="0.13" stroke={цвет} strokeOpacity="0.38" strokeWidth="0.6" />
+              {/* Знак CODE Eternal — две фигуры, вектор с logo-mark.png (28.09.2026, вместо звезды). */}
+              <svg x="8" y="8" width="30" height="30" viewBox="0 0 640 640" opacity="0.8" aria-label="CODE Eternal">
+                <circle cx="185" cy="178" r="70" fill={цвет} />
+                <circle cx="455" cy="178" r="70" fill={цвет} />
+                <path
+                  d="M86.25,533 V414.5 A98.25,98.25 0 0 1 282.75,414.5 V470 A37.5,37.5 0 0 0 357.75,470 V414.5 A98,98 0 0 1 553.75,414.5 V533"
+                  stroke={цвет} strokeWidth="47.5" fill="none" />
+              </svg>
             </svg>
           </div>
 
