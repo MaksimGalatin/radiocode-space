@@ -211,7 +211,7 @@ export default function Home() {
             строки, которая их соединит. */}
         {t('nav.skipToContent', языкПодвала)}
       </a>
-      <div id="main-content" className="relative z-10 flex-1 pb-32">
+      <div className="relative z-10 flex-1 pb-32">
         {/* Hero with Visualizer */}
         <HeroSection />
 

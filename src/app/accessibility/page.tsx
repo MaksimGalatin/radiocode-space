@@ -56,7 +56,7 @@ export default function AccessibilityPage() {
           Skip to main content
         </a>
 
-        <div id="main-content" className="pt-6">
+        <div className="pt-6">
 
         {/* Hero + AIfaFocus ThreatScanner */}
         <section className="py-20 px-6 relative overflow-hidden">
