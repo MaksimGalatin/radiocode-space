@@ -50,7 +50,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-[#050507] text-[#E8E8F0] pt-16 pb-24 flex items-center">
+    <div className="min-h-screen bg-[#050507] text-[#E8E8F0] pt-16 pb-24 flex items-center">
       <div className="max-w-3xl mx-auto px-6 text-center">
         <p className="text-[13px] font-mono tracking-[0.3em] text-[#00F0FF] mb-4">404</p>
         <h1 className="text-2xl md:text-3xl font-black tracking-tight mb-4">
@@ -91,6 +91,6 @@ export default function NotFound() {
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

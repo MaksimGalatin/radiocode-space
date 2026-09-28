@@ -211,7 +211,7 @@ export default function Home() {
             строки, которая их соединит. */}
         {t('nav.skipToContent', языкПодвала)}
       </a>
-      <main id="main-content" className="relative z-10 flex-1 pb-32">
+      <div id="main-content" className="relative z-10 flex-1 pb-32">
         {/* Hero with Visualizer */}
         <HeroSection />
 
@@ -484,7 +484,7 @@ export default function Home() {
           /accessibility этого же домена, компонент AccessibilityPricing
           цел и используется там. Убрана только вставка на главной. */}
 
-      </main>
+      </div>
 
       {/* Playlist panel */}
       <PlaylistPanel />

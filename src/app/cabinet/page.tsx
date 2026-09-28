@@ -354,7 +354,7 @@ export default function CabinetPage() {
   const authLabel: React.CSSProperties = { display: "block", fontSize: 14, fontWeight: 700, letterSpacing: 0.5, color: TOKENS.sub, marginBottom: 7 };
 
   return (
-    <main className="cab-root" style={{ maxWidth: "min(1720px, 94vw)", margin: "0 auto", padding: "96px 20px 60px" }}>
+    <div className="cab-root" style={{ maxWidth: "min(1720px, 94vw)", margin: "0 auto", padding: "96px 20px 60px" }}>
       {/* Оформление кабинета переехало в cabinet.css */}
       <CabinetBackground />
       <Toast msg={toast} />
@@ -595,6 +595,6 @@ export default function CabinetPage() {
         {tab === "shield" && <ShieldTab />}
         {tab === "admin" && isOwner && <AdminTab toast={toastMsg} />}
       </>)}
-    </main>
+    </div>
   );
 }

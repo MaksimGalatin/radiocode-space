@@ -136,7 +136,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
   const журнал = ЖУРНАЛ_ПО_ЯЗЫКАМ[язык] ?? Ф.журнал;
 
   return (
-    <main style={{ minHeight: '100vh', background: '#05070d', color: '#e2e8f0', padding: '96px 24px 60px' }}>
+    <div style={{ minHeight: '100vh', background: '#05070d', color: '#e2e8f0', padding: '96px 24px 60px' }}>
       <article style={{ maxWidth: 900, margin: '0 auto' }}>
 
         <div style={{ display: 'inline-block', padding: '6px 14px', borderRadius: 999, border: '1px solid rgba(6,182,212,0.4)', color: '#22d3ee', fontSize: 13, marginBottom: 18 }}>
@@ -964,6 +964,6 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
         </div>
 
       </article>
-    </main>
+    </div>
   );
 }

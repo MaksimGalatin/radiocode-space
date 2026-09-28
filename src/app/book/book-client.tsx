@@ -194,7 +194,7 @@ const BookPage = () => {
 
   return (
     <LayoutWrapper>
-      <main className="min-h-screen bg-slate-50 dark:bg-gradient-to-b dark:from-[#030711] dark:via-[#040a18] dark:to-[#030711] text-slate-900 dark:text-white pt-24 pb-20 px-6 relative overflow-hidden transition-colors duration-300">
+      <div className="min-h-screen bg-slate-50 dark:bg-gradient-to-b dark:from-[#030711] dark:via-[#040a18] dark:to-[#030711] text-slate-900 dark:text-white pt-24 pb-20 px-6 relative overflow-hidden transition-colors duration-300">
       {/* Background glow effects */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-emerald-500/5 dark:bg-[#00FF88]/5 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[160px] pointer-events-none" />
@@ -652,7 +652,7 @@ const BookPage = () => {
         </div>
 
       </div>
-      </main>
+      </div>
     </LayoutWrapper>
   );
 };

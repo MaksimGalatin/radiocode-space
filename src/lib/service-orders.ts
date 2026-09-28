@@ -1,0 +1,342 @@
+/**
+ * МОДУЛЬ АВТОРИЗАЦИИ СЕРВИСНЫХ ЗАКАЗОВ (service_orders)
+ *
+ * Реализует требования A1 и A2 по заданию AIfa от 28.09.2026:
+ * 1. Право на глубокую проверку (> 3 страниц, до 25):
+ *    - isCron (CRON_SECRET)
+ *    - уровеньТарифа >= 99 (владелец)
+ *    - оплаченный заказ из `service_orders` (slug: lite-audit, fix-pack, quick-audit, starter-fix и выше, monitoring):
+ *      * хост из `website` совпадает с хостом проверяемого адреса
+ *      * paid_at не старше 30 дней (для monitoring — пока a11y_monitoring.paid_until > now())
+ *      * не больше 3 глубоких проверок на заказ за 30 дней (учёт в `service_order_usage`)
+ * 2. Право на полный пакет исправлений ($99):
+ *    - isCron
+ *    - уровеньТарифа >= 99
+ *    - оплаченный заказ из `service_orders` (slug: fix-pack, quick-audit, starter-fix и выше) с тем же хостом сайта.
+ *    - без оплаты отдаётся превью (2 карточки + N заголовков + кнопка $99).
+ */
+
+let tablesInitialized = false;
+
+export function extractHost(raw: string): string {
+  if (!raw) return '';
+  const trimmed = raw.trim().toLowerCase();
+  try {
+    const withProto = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+    const u = new URL(withProto);
+    return u.hostname.replace(/^www\./, '');
+  } catch {
+    return trimmed
+      .replace(/^(https?:\/\/)?(www\.)?/, '')
+      .split('/')[0]
+      .split(':')[0]
+      .trim();
+  }
+}
+
+/**
+ * Точное сопоставление хоста для подписок мониторинга (C3)
+ * example.com НЕ активирует e.com
+ * e.com активирует e.com и www.e.com
+ */
+export function isMonitoringHostMatch(registeredWebsiteOrHost: string, targetHostOrUrl: string): boolean {
+  const regHost = extractHost(registeredWebsiteOrHost);
+  const targetHost = extractHost(targetHostOrUrl);
+  return Boolean(regHost && targetHost && regHost === targetHost);
+}
+
+async function getSql() {
+  const url = process.env.SUBMISSIONS_DB_URL || process.env.DATABASE_URL || process.env.DATABASE_URL_VECTOR;
+  if (!url) return null;
+  const { neon } = await import('@neondatabase/serverless');
+  return neon(url);
+}
+
+export async function ensureServiceOrdersTables(): Promise<void> {
+  if (tablesInitialized) return;
+  const sql = await getSql();
+  if (!sql) return;
+  try {
+    await sql`
+      CREATE TABLE IF NOT EXISTS service_orders (
+        order_id TEXT PRIMARY KEY,
+        status TEXT NOT NULL,
+        slug TEXT NOT NULL,
+        website TEXT NOT NULL,
+        email TEXT,
+        paid_at TIMESTAMPTZ,
+        created_at TIMESTAMPTZ DEFAULT now()
+      )
+    `;
+    await sql`
+      CREATE TABLE IF NOT EXISTS service_order_usage (
+        id BIGSERIAL PRIMARY KEY,
+        order_id TEXT NOT NULL,
+        host TEXT NOT NULL,
+        created_at TIMESTAMPTZ DEFAULT now()
+      )
+    `;
+    await sql`
+      CREATE INDEX IF NOT EXISTS service_order_usage_idx
+        ON service_order_usage (order_id, created_at DESC)
+    `;
+    tablesInitialized = true;
+  } catch (e) {
+    console.error('[service-orders] ensureTables error:', e);
+  }
+}
+
+export interface DeepScanPermissionResult {
+  canDeepScan: boolean;
+  reason: 'cron' | 'owner' | 'paid_order' | 'no_order' | 'not_paid' | 'host_mismatch' | 'expired' | 'limit_reached' | 'no_db';
+  order?: {
+    orderId: string;
+    slug: string;
+    website: string;
+    paidAt: string | null;
+  };
+  usageCount?: number;
+}
+
+/**
+ * Проверка права на глубокое сканирование (до 25 страниц)
+ */
+export async function checkDeepScanPermission(params: {
+  orderId?: string | null;
+  targetHost: string;
+  isCron?: boolean;
+  userTier?: number;
+}): Promise<DeepScanPermissionResult> {
+  if (params.isCron) {
+    return { canDeepScan: true, reason: 'cron' };
+  }
+  if (params.userTier !== undefined && params.userTier >= 99) {
+    return { canDeepScan: true, reason: 'owner' };
+  }
+
+  const orderId = (params.orderId || '').trim();
+  if (!orderId) {
+    return { canDeepScan: false, reason: 'no_order' };
+  }
+
+  const sql = await getSql();
+  if (!sql) {
+    return { canDeepScan: false, reason: 'no_db' };
+  }
+
+  await ensureServiceOrdersTables();
+
+  try {
+    const orders = await sql`
+      SELECT order_id, status, slug, website, email, paid_at
+      FROM service_orders
+      WHERE order_id = ${orderId}
+      LIMIT 1
+    `;
+
+    if (!orders || orders.length === 0) {
+      return { canDeepScan: false, reason: 'not_paid' };
+    }
+
+    const order = orders[0] as {
+      order_id: string;
+      status: string;
+      slug: string;
+      website: string;
+      email?: string;
+      paid_at?: string | null;
+    };
+
+    if (order.status !== 'paid') {
+      return { canDeepScan: false, reason: 'not_paid' };
+    }
+
+    // Проверка хоста
+    const orderHost = extractHost(order.website);
+    const targetHost = extractHost(params.targetHost);
+    if (!orderHost || !targetHost || orderHost !== targetHost) {
+      return { canDeepScan: false, reason: 'host_mismatch' };
+    }
+
+    // Проверка срока
+    const isMonitoring = order.slug === 'monitoring';
+    if (isMonitoring) {
+      // Для мониторинга — пока a11y_monitoring.paid_until > now()
+      let monitoringActive = false;
+      try {
+        const monRows = await sql`
+          SELECT 1 FROM a11y_monitoring
+          WHERE (
+            LOWER(host) = LOWER(${targetHost})
+            OR (host IS NULL AND LOWER(website) IN (
+              ${targetHost},
+              ${'www.' + targetHost},
+              ${'https://' + targetHost},
+              ${'https://www.' + targetHost},
+              ${'http://' + targetHost},
+              ${'http://' + targetHost + '/'},
+              ${'https://' + targetHost + '/'},
+              ${'https://www.' + targetHost + '/'}
+            ))
+          )
+          AND paid_until > now()
+          LIMIT 1
+        `;
+        if (monRows && monRows.length > 0) monitoringActive = true;
+      } catch {}
+
+      if (!monitoringActive && order.paid_at) {
+        // Fallback если ещё не создана запись в a11y_monitoring — смотрим 30 дней
+        const paidDate = new Date(order.paid_at);
+        const days = (Date.now() - paidDate.getTime()) / (1000 * 60 * 60 * 24);
+        if (days > 30) {
+          return { canDeepScan: false, reason: 'expired' };
+        }
+      } else if (!monitoringActive) {
+        return { canDeepScan: false, reason: 'expired' };
+      }
+    } else {
+      if (!order.paid_at) {
+        return { canDeepScan: false, reason: 'expired' };
+      }
+      const paidDate = new Date(order.paid_at);
+      const days = (Date.now() - paidDate.getTime()) / (1000 * 60 * 60 * 24);
+      if (days > 30) {
+        return { canDeepScan: false, reason: 'expired' };
+      }
+    }
+
+    // Проверка лимита: не больше 3 глубоких проверок на заказ за 30 дней
+    const usageRows = await sql`
+      SELECT count(*)::int AS cnt
+      FROM service_order_usage
+      WHERE order_id = ${orderId}
+        AND created_at > now() - interval '30 days'
+    `;
+    const count = Number((usageRows?.[0] as { cnt?: number })?.cnt ?? 0);
+    if (count >= 3) {
+      return { canDeepScan: false, reason: 'limit_reached', usageCount: count };
+    }
+
+    return {
+      canDeepScan: true,
+      reason: 'paid_order',
+      order: {
+        orderId: order.order_id,
+        slug: order.slug,
+        website: order.website,
+        paidAt: order.paid_at ? String(order.paid_at) : null,
+      },
+      usageCount: count,
+    };
+  } catch (err) {
+    console.error('[service-orders] checkDeepScanPermission error:', err);
+    return { canDeepScan: false, reason: 'no_db' };
+  }
+}
+
+/**
+ * Фиксация выполнения глубокого сканирования по оплаченному заказу
+ */
+export async function recordDeepScanUsage(orderId: string, host: string): Promise<void> {
+  if (!orderId) return;
+  const sql = await getSql();
+  if (!sql) return;
+  try {
+    await ensureServiceOrdersTables();
+    await sql`
+      INSERT INTO service_order_usage (order_id, host)
+      VALUES (${orderId.trim()}, ${extractHost(host)})
+    `;
+  } catch (e) {
+    console.error('[service-orders] recordDeepScanUsage error:', e);
+  }
+}
+
+export interface FixpackPermissionResult {
+  hasFullAccess: boolean;
+  reason: 'cron' | 'owner' | 'paid_order' | 'no_order' | 'not_paid' | 'host_mismatch' | 'slug_not_eligible' | 'no_db';
+}
+
+/**
+ * Проверка права на получение ПОЛНОГО пакета исправлений ($99)
+ * Полный пакет: только владельцу (99), по cron-секрету или по оплаченному заказу
+ * service_orders (slug fix-pack, quick-audit, starter-fix и выше) с тем же хостом сайта.
+ */
+export async function checkFixpackPermission(params: {
+  orderId?: string | null;
+  targetHost: string;
+  isCron?: boolean;
+  userTier?: number;
+}): Promise<FixpackPermissionResult> {
+  if (params.isCron) {
+    return { hasFullAccess: true, reason: 'cron' };
+  }
+  if (params.userTier !== undefined && params.userTier >= 99) {
+    return { hasFullAccess: true, reason: 'owner' };
+  }
+
+  const orderId = (params.orderId || '').trim();
+  if (!orderId) {
+    return { hasFullAccess: false, reason: 'no_order' };
+  }
+
+  const sql = await getSql();
+  if (!sql) {
+    return { hasFullAccess: false, reason: 'no_db' };
+  }
+
+  await ensureServiceOrdersTables();
+
+  try {
+    const orders = await sql`
+      SELECT order_id, status, slug, website
+      FROM service_orders
+      WHERE order_id = ${orderId}
+      LIMIT 1
+    `;
+
+    if (!orders || orders.length === 0) {
+      return { hasFullAccess: false, reason: 'not_paid' };
+    }
+
+    const order = orders[0] as {
+      order_id: string;
+      status: string;
+      slug: string;
+      website: string;
+    };
+
+    if (order.status !== 'paid') {
+      return { hasFullAccess: false, reason: 'not_paid' };
+    }
+
+    // Разрешённые тарифы, включающие пакет исправлений:
+    // slug fix-pack, quick-audit, starter-fix и выше
+    const ELIGIBLE_SLUGS = [
+      'fix-pack',
+      'quick-audit',
+      'starter-fix',
+      'deep-audit',
+      'standard-audit',
+      'full-audit',
+      'custom-fix',
+      'enterprise-audit',
+    ];
+    if (!ELIGIBLE_SLUGS.includes(order.slug.toLowerCase())) {
+      return { hasFullAccess: false, reason: 'slug_not_eligible' };
+    }
+
+    // Совпадение хоста
+    const orderHost = extractHost(order.website);
+    const targetHost = extractHost(params.targetHost);
+    if (!orderHost || !targetHost || orderHost !== targetHost) {
+      return { hasFullAccess: false, reason: 'host_mismatch' };
+    }
+
+    return { hasFullAccess: true, reason: 'paid_order' };
+  } catch (err) {
+    console.error('[service-orders] checkFixpackPermission error:', err);
+    return { hasFullAccess: false, reason: 'no_db' };
+  }
+}

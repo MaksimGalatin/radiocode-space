@@ -27,7 +27,7 @@ export default function TariffsClient() {
   const т = ТЕКСТЫ[lang] || ТЕКСТЫ.en;
 
   return (
-    <main className="min-h-screen bg-[#05060a] text-white">
+    <div className="min-h-screen bg-[#05060a] text-white">
       <div className="mx-auto w-full max-w-5xl px-5 py-12">
 
         <span className="mb-5 inline-block rounded-full border border-cyan-500/40 px-3.5 py-1.5 text-[13px] text-cyan-700 dark:text-cyan-400">
@@ -243,6 +243,6 @@ export default function TariffsClient() {
         </div>
 
       </div>
-    </main>
+    </div>
   );
 }

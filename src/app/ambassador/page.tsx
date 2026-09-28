@@ -203,7 +203,7 @@ export default function AmbassadorPage() {
   const card: React.CSSProperties = { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(6,182,212,0.25)', borderRadius: 16, padding: '20px 22px' };
   const h2: React.CSSProperties = { fontSize: 22, fontWeight: 800, margin: '0 0 14px', color: '#e2e8f0' };
   return (
-    <main style={{ minHeight: '100vh', background: 'radial-gradient(1200px 600px at 50% -10%, #0b2a3a 0%, #05060a 55%)', color: '#cbd5e1', padding: '40px 18px 80px' }}>
+    <div style={{ minHeight: '100vh', background: 'radial-gradient(1200px 600px at 50% -10%, #0b2a3a 0%, #05060a 55%)', color: '#cbd5e1', padding: '40px 18px 80px' }}>
       <div style={{ maxWidth: 880, margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 26 }}>
           {(['ru', 'en', 'es'] as Lang[]).map((l) => (
@@ -268,6 +268,6 @@ export default function AmbassadorPage() {
           <a href="/cabinet" style={{ padding: '13px 30px', borderRadius: 12, fontWeight: 800, background: 'linear-gradient(90deg,#06B6D4,#6366F1)', color: '#fff', textDecoration: 'none' }}>{t.ctaCabinet} →</a>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

@@ -203,7 +203,7 @@ export default function EuropeClient({ языкИзПути }: { языкИзП�
   const ч = ЧИСЛО[язык];
 
   return (
-    <main className="min-h-screen bg-[#050505] text-gray-200">
+    <div className="min-h-screen bg-[#050505] text-gray-200">
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
         <p className="text-xs font-semibold tracking-[0.2em] text-cyan-400">{t.метка}</p>
         <h1 className="mt-3 text-3xl font-bold text-white sm:text-4xl">{t.заголовок}</h1>
@@ -306,6 +306,6 @@ export default function EuropeClient({ языкИзПути }: { языкИзП�
           </p>
         </section>
       </div>
-    </main>
+    </div>
   );
 }

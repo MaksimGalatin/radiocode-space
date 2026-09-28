@@ -123,7 +123,7 @@ export default async function NewsIndexPage() {
   });
 
   return (
-    <main className="min-h-screen bg-[#050507] text-[#E8E8F0] pt-16 pb-24">
+    <div className="min-h-screen bg-[#050507] text-[#E8E8F0] pt-16 pb-24">
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-10">
           <Link
@@ -219,6 +219,6 @@ export default async function NewsIndexPage() {
           </div>
         )}
       </div>
-    </main>
+    </div>
   );
 }

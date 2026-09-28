@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   ScanLine, Shield, AlertTriangle, CheckCircle2, Loader2,
   ExternalLink, ChevronDown, RotateCcw, DollarSign, Printer,
-  FileText, ShieldCheck
+  FileText, ShieldCheck, Copy, Check, Download, Zap, ArrowRight, Sparkles
 } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguageOptional } from '../lib/LanguageContext';
@@ -13,6 +13,7 @@ import { getLawMeta, CATEGORY_COLORS, type Category } from '../data/threatMatrix
 import { ТЕКСТЫ_УГРОЗ, НАДПИСЬ_РЕЕСТРА, type ЯзыкКодСканера } from '../app/accessibility/словарь';
 import type { FoundThreat, ScanResponse } from '../app/api/scan/route';
 import { statutoryCeiling } from '../lib/probe-law';
+import { generateAIfaFocusPatch } from '../lib/aifafocus-patch';
 import "./ThreatScanner.css";
 
 type ScanState = 'idle' | 'scanning' | 'done';
@@ -264,10 +265,17 @@ function getFixAdvice(code: string, title: string, locale: string): { steps: str
   };
 }
 
+// 🔴 ИСПРАВЛЕНО 17.09.2026 — ОБЪЕКТИВНАЯ ОШИБКА, класс «единица измерения не
+// пересчитана при смене шкалы» (раздел 11 Конституции: единица должна быть
+// объявлена и совпадать по всей цепочке). Пороги ниже были рассчитаны под
+// СТАРУЮ шкалу очков 0–2000 (1950/2000=97.5% и т.д.), а вызывается функция
+// с `result.score`, который везде рядом в UI показан как `{result.score}/100`
+// — то есть уже НОРМАЛИЗОВАННЫЙ балл 0–100. Итог: собственный сайт со
+// score=100/100 и 0 нарушений получал бейдж «F», прямо на глазах у
+// посетителя сканера. Найдено при живой пересъёмке отчёта для демо-видео.
+// Пороги пересчитаны пропорционально (разделены на 20): 1950→97.5≈98,
+// 1800→90, 1600→80, 1400→70, 1000→50.
 function calculateGrade(score: number): { letter: string; color: string; bg: string } {
-  // 🔴 ИСПРАВЛЕНО 25.09.2026 — перенос починки aifa.works от 17.09.2026: пороги
-  // стояли под старую шкалу 0–2000, а балл давно 0–100, и сайт со 100/100
-  // получал «F». Пороги разделены на 20.
   if (score >= 98) return { letter: 'A+', color: 'text-emerald-400 border-emerald-400/30', bg: 'bg-emerald-500/10' };
   if (score >= 90) return { letter: 'A', color: 'text-teal-400 border-teal-400/30', bg: 'bg-teal-500/10' };
   if (score >= 80) return { letter: 'B', color: 'text-cyan-400 border-cyan-400/30', bg: 'bg-cyan-500/10' };
@@ -506,6 +514,19 @@ export default function ThreatScanner() {
   const [consent, setConsent] = useState(false);
   const [leadState, setLeadState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
+  const [activePatchTab, setActivePatchTab] = useState<'css' | 'js' | 'embed' | 'guide'>('css');
+  const [copiedPatch, setCopiedPatch] = useState<string | null>(null);
+
+  const generatedPatch = useMemo(() => {
+    if (!result || !result.allThreats || result.allThreats.length === 0) return null;
+    const domainName = (url || '').replace(/^https?:\/\//i, '').split('/')[0].split('?')[0] || 'target-site.com';
+    return generateAIfaFocusPatch({
+      domain: domainName,
+      locale,
+      threats: result.allThreats,
+    });
+  }, [result, url, locale]);
+
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!consent) return;
@@ -521,6 +542,10 @@ export default function ThreatScanner() {
           score: result?.score || 0,
           source: 'accessibility-audit',
           threats: result?.allThreats || [],
+          scanId: (result as any)?.scanId || '',
+          provenCount: (result as any)?.provenCount || 0,
+          totalIssues: result?.totalIssues || (result?.allThreats?.length || 0),
+          locale,
         }),
       });
 
@@ -630,19 +655,66 @@ export default function ThreatScanner() {
     // требуют запуска браузера, а сканер делает обычный запрос страницы.
     // Показывать несуществующую работу нельзя: это ровно то, за что мы сами
     // выставляем клиентам замечания.
-    const checks = [
-      'Запрашиваем страницу и снимаем заголовки ответа',
-      'Проверяем шифрование канала и срок HSTS',
-      'Разбираем политику безопасности содержимого (CSP)',
-      'Смотрим защиту от встраивания в чужой сайт',
-      'Читаем флаги cookie: Secure, HttpOnly, SameSite',
-      'Ищем счётчики слежки и менеджер согласия',
-      'Проверяем ссылку на политику конфиденциальности',
-      'Ищем незащищённые ресурсы на защищённой странице',
-      'Пробуем robots.txt, security.txt и открытые служебные файлы',
-      'Разбираем разметку: alt, подписи полей, заголовки, ориентиры',
-      'Сверяем находки с реестром из 2000 проверок',
-    ];
+    // ЯЗЫК ЛОГА СЛЕДУЕТ ЗА ЯЗЫКОМ СТРАНИЦЫ.
+    //
+    // Найдено 11.09.2026: при выбранном английском интерфейс был английским,
+    // а терминал сканера писал по-русски. Человек из США видел строки на
+    // чужом языке в продукте, который ему продают. Ошибка, не вкусовщина.
+    const ШАГИ_ПРОВЕРКИ: Record<string, string[]> = {
+      ru: [
+        'Запрашиваем страницу и снимаем заголовки ответа',
+        'Проверяем шифрование канала и срок HSTS',
+        'Разбираем политику безопасности содержимого (CSP)',
+        'Смотрим защиту от встраивания в чужой сайт',
+        'Читаем флаги cookie: Secure, HttpOnly, SameSite',
+        'Ищем счётчики слежки и менеджер согласия',
+        'Проверяем ссылку на политику конфиденциальности',
+        'Ищем незащищённые ресурсы на защищённой странице',
+        'Пробуем robots.txt, security.txt и открытые служебные файлы',
+        'Разбираем разметку: alt, подписи полей, заголовки, ориентиры',
+        'Сверяем находки с реестром из 2000 проверок',
+      ],
+      en: [
+        'Requesting the page and reading response headers',
+        'Checking channel encryption and HSTS lifetime',
+        'Parsing the Content Security Policy',
+        'Looking at clickjacking protection',
+        'Reading cookie flags: Secure, HttpOnly, SameSite',
+        'Looking for trackers and a consent manager',
+        'Checking the privacy policy link',
+        'Looking for insecure resources on a secure page',
+        'Trying robots.txt, security.txt and open service files',
+        'Parsing markup: alt text, field labels, headings, landmarks',
+        'Matching findings against a registry of 2000 checks',
+      ],
+      es: [
+        'Solicitando la página y leyendo las cabeceras de respuesta',
+        'Comprobando el cifrado del canal y la vigencia de HSTS',
+        'Analizando la política de seguridad de contenido (CSP)',
+        'Revisando la protección contra incrustación en otros sitios',
+        'Leyendo las marcas de cookies: Secure, HttpOnly, SameSite',
+        'Buscando rastreadores y gestor de consentimiento',
+        'Comprobando el enlace a la política de privacidad',
+        'Buscando recursos inseguros en una página segura',
+        'Probando robots.txt, security.txt y archivos de servicio abiertos',
+        'Analizando el marcado: alt, etiquetas de campos, encabezados, puntos de referencia',
+        'Contrastando los hallazgos con un registro de 2000 comprobaciones',
+      ],
+      zh: [
+        '请求页面并读取响应头',
+        '检查通道加密与 HSTS 有效期',
+        '解析内容安全策略 (CSP)',
+        '查看点击劫持防护',
+        '读取 Cookie 标志：Secure、HttpOnly、SameSite',
+        '查找跟踪器与同意管理工具',
+        '检查隐私政策链接',
+        '在安全页面上查找不安全资源',
+        '尝试 robots.txt、security.txt 与开放的服务文件',
+        '解析标记：alt、字段标签、标题、地标',
+        '将发现与 2000 项检查的清单进行比对',
+      ],
+    };
+    const checks = ШАГИ_ПРОВЕРКИ[locale] ?? ШАГИ_ПРОВЕРКИ.en;
     checks.forEach((c, i) => addLine(`  [SCAN]   ${c}`, 450 + i * 180));
 
     const animDone = 450 + checks.length * 180 + 200;
@@ -675,7 +747,7 @@ export default function ThreatScanner() {
       addLine(`> ─────────────────────────────────────────────────`, 0);
       // Анализ ведёт AIfa. Раньше здесь стояло имя чужой модели — человек
       // читал, что его сайт разбирает кто-то посторонний.
-      addLine(`> AIFA АНАЛИЗИРУЕТ…`, 80);
+      addLine(`> ${locale === 'ru' ? 'AIFA АНАЛИЗИРУЕТ…' : locale === 'es' ? 'AIFA ESTÁ ANALIZANDO…' : locale === 'zh' ? 'AIFA 正在分析…' : 'AIFA IS ANALYSING…'}`, 80);
 
       try {
         const finalData = await apiPromise;
@@ -1063,16 +1135,31 @@ export default function ThreatScanner() {
                     </button>
                   </motion.div>
 
-                  {/* Print to PDF */}
+                  {/* Download PDF — opens the server-rendered printable report in a new tab.
+                      The report page has a print stylesheet so the user can Ctrl+P → Save as PDF.
+                      If scanId is not yet available (scan not saved to DB), fall back to window.print(). */}
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <button
-                      onClick={() => window.print()}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 border border-white/15 rounded-lg text-xs font-semibold text-gray-300 hover:border-white/30 hover:text-white transition-all cursor-pointer"
-                      title={ts.downloadPdf}
-                    >
-                      <Printer className="w-3.5 h-3.5" aria-hidden="true" />
-                      {ts.downloadPdf}
-                    </button>
+                    {result.scanId ? (
+                      <a
+                        href={`/api/scan/report?id=${result.scanId}&download=1`}
+                        rel="noopener"
+                        download={`aifa-report-${result.scanId}.html`}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 border border-white/15 rounded-lg text-xs font-semibold text-gray-300 hover:border-white/30 hover:text-white transition-all cursor-pointer"
+                        title={ts.downloadPdf}
+                      >
+                        <Printer className="w-3.5 h-3.5" aria-hidden="true" />
+                        {ts.downloadPdf}
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => window.print()}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 border border-white/15 rounded-lg text-xs font-semibold text-gray-300 hover:border-white/30 hover:text-white transition-all cursor-pointer"
+                        title={ts.downloadPdf}
+                      >
+                        <Printer className="w-3.5 h-3.5" aria-hidden="true" />
+                        {ts.downloadPdf}
+                      </button>
+                    )}
                   </motion.div>
 
                   {/* Печатный отчёт по номеру проверки.
@@ -1084,19 +1171,19 @@ export default function ThreatScanner() {
                   {result.scanId && (
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                       <a
-                        href={`/api/scan/report?id=${result.scanId}`}
+                        href={`/api/scan/report?id=${result.scanId}&print=1`}
                         target="_blank"
                         rel="noopener"
-                        className="inline-flex items-center gap-1.5 px-4 py-2 border border-cyan-400/40 bg-cyan-400/10 rounded-lg text-xs font-semibold text-cyan-300 hover:border-cyan-400/70 hover:text-cyan-200 transition-all cursor-pointer"
+                        className="inline-flex items-center gap-2 px-4 py-2 border border-cyan-400/60 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-lg text-xs font-bold text-white hover:border-cyan-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all cursor-pointer shadow-[0_0_12px_rgba(6,182,212,0.2)]"
                       >
-                        <FileText className="w-3.5 h-3.5" aria-hidden="true" />
+                        <FileText className="w-3.5 h-3.5 text-cyan-400" aria-hidden="true" />
                         {locale === 'ru'
-                          ? 'Отчёт для аудитора'
+                          ? '📄 Официальный PDF-отчёт'
                           : locale === 'es'
-                            ? 'Informe para el auditor'
+                            ? '📄 Informe Oficial PDF'
                             : locale === 'zh'
-                              ? '审计报告'
-                              : 'Auditor report'}
+                              ? '📄 官方 PDF 审计报告'
+                              : '📄 Official PDF Audit Report'}
                       </a>
                     </motion.div>
                   )}
@@ -1235,6 +1322,227 @@ export default function ThreatScanner() {
                 )}
               </div>
             </div>
+
+            {/* ── 1-Click Accessibility Patch (CSS / JS) ─────────────────────────── */}
+            {result && result.allThreats && result.allThreats.length > 0 && generatedPatch && (
+              <div className="border-t border-cyan-500/20 bg-gradient-to-b from-cyan-950/20 via-black/40 to-black/60 p-5 sm:p-6 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
+
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-2">
+                      <Zap className="w-3.5 h-3.5" aria-hidden="true" />
+                      {locale === 'ru' ? 'Временная мера' : locale === 'es' ? 'Medida temporal' : locale === 'zh' ? '临时措施' : 'Temporary measure'}
+                    </div>
+                    <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                      {locale === 'ru' 
+                        ? '⚡ 1-Click патч клавиатурного доступа (CSS / JS)' 
+                        : locale === 'es'
+                        ? '⚡ Parche 1-Clic de acceso por teclado (CSS / JS)'
+                        : locale === 'zh'
+                        ? '⚡ 一键键盘访问补丁 (CSS / JS)'
+                        : '⚡ 1-Click Keyboard Access Patch (CSS / JS)'}
+                    </h3>
+                    <p className="text-xs text-gray-400 mt-1 max-w-xl leading-relaxed">
+                      {locale === 'ru'
+                        ? 'Делает видимым фокус клавиатуры (:focus-visible), добавляет ссылку «Перейти к основному содержимому» и закрывает открытое окно по Escape, если у окна есть кнопка «Закрыть». Это временная мера: найденные нарушения в коде сайта патч не устраняет и соответствия WCAG, ADA или EAA не даёт.'
+                        : locale === 'es'
+                        ? 'Hace visible el foco del teclado (:focus-visible), añade un enlace para saltar al contenido principal y cierra el diálogo abierto con Escape si tiene un botón «Cerrar». Es una medida temporal: no corrige las infracciones encontradas en el código del sitio ni aporta conformidad con WCAG, ADA o EAA.'
+                        : locale === 'zh'
+                        ? '让键盘焦点可见 (:focus-visible)，添加“跳转到主要内容”链接；已打开的对话框若有“关闭”按钮，按 Esc 即可关闭。这只是临时措施：补丁不会修复网站代码中发现的问题，也不能使网站符合 WCAG、ADA 或 EAA。'
+                        : 'Makes keyboard focus visible (:focus-visible), adds a "Skip to main content" link and closes an open dialog on Escape if it has a Close button. It is a temporary measure: it does not fix the findings in your site\'s code and does not make the site conform to WCAG, the ADA or the EAA.'}
+                    </p>
+
+                    <div className="flex flex-wrap items-center gap-2 text-[11px] text-gray-400 mt-2 font-mono">
+                      <span className="text-cyan-400">
+                        CSS: {(generatedPatch.summary.cssBytes / 1024).toFixed(1)} КБ ({generatedPatch.summary.cssBytes} B)
+                      </span>
+                      <span>•</span>
+                      <span className="text-purple-400">
+                        JS: {(generatedPatch.summary.jsBytes / 1024).toFixed(1)} КБ ({generatedPatch.summary.jsBytes} B)
+                      </span>
+                      <span>•</span>
+                      <span>
+                        {locale === 'ru'
+                          ? `Всего: ${(generatedPatch.summary.totalBytes / 1024).toFixed(1)} КБ (${generatedPatch.summary.techniquesCount} приёмов)`
+                          : locale === 'es'
+                          ? `Total: ${(generatedPatch.summary.totalBytes / 1024).toFixed(1)} KB (${generatedPatch.summary.techniquesCount} técnicas)`
+                          : locale === 'zh'
+                          ? `总大小：${(generatedPatch.summary.totalBytes / 1024).toFixed(1)} KB（${generatedPatch.summary.techniquesCount} 种技术）`
+                          : `Total: ${(generatedPatch.summary.totalBytes / 1024).toFixed(1)} KB (${generatedPatch.summary.techniquesCount} techniques)`}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2 shrink-0">
+                    <a
+                      href={`/api/scan/patch?id=${result.scanId || ''}&type=css`}
+                      download
+                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-xs font-semibold text-cyan-300 hover:bg-cyan-500/20 hover:text-white transition-all cursor-pointer"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      .CSS
+                    </a>
+                    <a
+                      href={`/api/scan/patch?id=${result.scanId || ''}&type=js`}
+                      download
+                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-purple-500/10 border border-purple-500/30 text-xs font-semibold text-purple-300 hover:bg-purple-500/20 hover:text-white transition-all cursor-pointer"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      .JS
+                    </a>
+                    <a
+                      href={`/api/scan/fixpack?id=${result.scanId || ''}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-xs font-semibold text-emerald-300 hover:bg-emerald-500/20 hover:text-white transition-all cursor-pointer"
+                    >
+                      <span>📦</span>
+                      <span>
+                        {locale === 'ru'
+                          ? 'Превью пакета исправлений'
+                          : locale === 'es'
+                          ? 'Vista previa del paquete de correcciones'
+                          : locale === 'zh'
+                          ? '修复包预览'
+                          : 'Fixpack Preview'}
+                      </span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Patch Tabs */}
+                <div className="flex items-center gap-2 border-b border-white/10 mb-3 overflow-x-auto">
+                  <button
+                    type="button"
+                    onClick={() => setActivePatchTab('css')}
+                    className={`px-3 py-2 text-xs font-bold border-b-2 transition-colors whitespace-nowrap ${activePatchTab === 'css' ? 'border-cyan-400 text-cyan-400' : 'border-transparent text-gray-400 hover:text-gray-200'}`}
+                  >
+                    CSS ({locale === 'ru' ? 'Фокус и стили' : locale === 'es' ? 'Foco y estilos' : locale === 'zh' ? '焦点与样式' : 'Focus & Styles'})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActivePatchTab('js')}
+                    className={`px-3 py-2 text-xs font-bold border-b-2 transition-colors whitespace-nowrap ${activePatchTab === 'js' ? 'border-cyan-400 text-cyan-400' : 'border-transparent text-gray-400 hover:text-gray-200'}`}
+                  >
+                    JS ({locale === 'ru' ? 'Инжектор skip-link' : locale === 'es' ? 'Inyector de salto' : locale === 'zh' ? '跳转注入器' : 'Skip-link injector'})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActivePatchTab('embed')}
+                    className={`px-3 py-2 text-xs font-bold border-b-2 transition-colors whitespace-nowrap ${activePatchTab === 'embed' ? 'border-cyan-400 text-cyan-400' : 'border-transparent text-gray-400 hover:text-gray-200'}`}
+                  >
+                    HTML Embed ({locale === 'ru' ? 'Всё в одном' : locale === 'es' ? 'Todo en uno' : locale === 'zh' ? '整合代码' : 'All-in-one'})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActivePatchTab('guide')}
+                    className={`px-3 py-2 text-xs font-bold border-b-2 transition-colors whitespace-nowrap ${activePatchTab === 'guide' ? 'border-cyan-400 text-cyan-400' : 'border-transparent text-gray-400 hover:text-gray-200'}`}
+                  >
+                    {locale === 'ru' ? 'Инструкция по установке' : locale === 'es' ? 'Guía de instalación' : locale === 'zh' ? '部署指南' : 'Install Guide'}
+                  </button>
+                </div>
+
+                {/* Tab Content */}
+                {activePatchTab === 'guide' ? (
+                  <div className="bg-black/60 rounded-xl p-4 border border-white/10 text-xs text-gray-300 space-y-3">
+                    <div>
+                      <b className="text-white block mb-1">WordPress / WooCommerce:</b>
+                      <span className="text-gray-400">
+                        {locale === 'ru' 
+                          ? 'Вставьте CSS в раздел «Внешний вид → Настроить → Дополнительные стили», а JS добавьте в footer.php перед </body> или через плагин «Insert Headers and Footers».'
+                          : locale === 'es'
+                          ? 'Pegue el CSS en «Apariencia → Personalizar → CSS adicional» y agregue el JS a footer.php antes de </body> o mediante un plugin de encabezados y pies de página.'
+                          : locale === 'zh'
+                          ? '将 CSS 粘贴至“外观 → 自定义 → 额外 CSS”，并将 JS 片段添加至 footer.php 的 </body> 标签前或通过插件注入。'
+                          : 'Paste the CSS into "Appearance → Customize → Additional CSS", and add JS snippet to footer.php before </body> or via a header/footer injection plugin.'}
+                      </span>
+                    </div>
+                    <div>
+                      <b className="text-white block mb-1">Shopify:</b>
+                      <span className="text-gray-400">
+                        {locale === 'ru'
+                          ? 'Вставьте HTML Embed в theme.liquid перед тегом </head>.'
+                          : locale === 'es'
+                          ? 'Pegue el fragmento HTML Embed en theme.liquid antes de la etiqueta </head>.'
+                          : locale === 'zh'
+                          ? '将 HTML Embed 代码片段粘贴到 theme.liquid 中的 </head> 标签前。'
+                          : 'Paste the HTML Embed snippet into theme.liquid before the </head> tag.'}
+                      </span>
+                    </div>
+                    <div>
+                      <b className="text-white block mb-1">Webflow / Custom HTML:</b>
+                      <span className="text-gray-400">
+                        {locale === 'ru'
+                          ? 'Вставьте код во вкладку «Custom Code → Footer Code» в настройках проекта.'
+                          : locale === 'es'
+                          ? 'Pegue el código en la pestaña «Custom Code → Footer Code» en la configuración del proyecto.'
+                          : locale === 'zh'
+                          ? '将代码粘贴到项目设置中的“Custom Code → Footer Code”区域。'
+                          : 'Paste code into "Project Settings → Custom Code → Footer Code".'}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <pre className="bg-black/80 text-cyan-300 font-mono text-xs p-4 rounded-xl border border-white/10 overflow-x-auto max-h-56 leading-relaxed select-all">
+                      {activePatchTab === 'css' ? generatedPatch.css : activePatchTab === 'js' ? generatedPatch.js : generatedPatch.embedHtml}
+                    </pre>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const textToCopy = activePatchTab === 'css' ? generatedPatch.css : activePatchTab === 'js' ? generatedPatch.js : generatedPatch.embedHtml;
+                        navigator.clipboard.writeText(textToCopy);
+                        setCopiedPatch(activePatchTab);
+                        setTimeout(() => setCopiedPatch(null), 2500);
+                      }}
+                      className="absolute top-3 right-3 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-semibold text-white transition-all flex items-center gap-1.5 shadow-lg"
+                    >
+                      {copiedPatch === activePatchTab ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <span className="text-emerald-300">
+                            {locale === 'ru' ? 'Скопировано!' : locale === 'es' ? '¡Copiado!' : locale === 'zh' ? '已复制！' : 'Copied!'}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5" />
+                          <span>
+                            {locale === 'ru' ? 'Копировать' : locale === 'es' ? 'Copiar' : locale === 'zh' ? '复制' : 'Copy'}
+                          </span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                )}
+
+                {/* Commercial Upsell Banner */}
+                <div className="mt-4 p-3.5 rounded-xl border border-purple-500/30 bg-gradient-to-r from-purple-950/40 to-cyan-950/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  <div className="text-xs text-gray-300 leading-relaxed">
+                    <b className="text-purple-300">
+                      {locale === 'ru' ? '🛡️ Нужно исправить причины?' : locale === 'es' ? '🛡️ ¿Hay que corregir las causas?' : locale === 'zh' ? '🛡️ 需要修复根本原因？' : '🛡️ Need the causes fixed?'}
+                    </b>{' '}
+                    <span className="text-gray-400">
+                      {locale === 'ru'
+                        ? 'Патч помогает клавиатуре, но нарушения остаются в шаблонах сайта. Исправим их в коде и перепроверим:'
+                        : locale === 'es'
+                        ? 'El parche ayuda al teclado, pero las infracciones siguen en las plantillas del sitio. Las corregimos en el código y volvemos a verificar:'
+                        : locale === 'zh'
+                        ? '补丁有助于键盘用户，但问题仍在网站模板中。我们在代码中修复并重新检测：'
+                        : 'The patch helps keyboard users, but the violations remain in your templates. We fix them in the code and re-scan:'}
+                    </span>
+                  </div>
+                  <Link
+                    href="/compliance-audit"
+                    className="shrink-0 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold text-xs hover:shadow-[0_0_15px_rgba(168,85,247,0.4)] transition-all flex items-center gap-1"
+                  >
+                    <span>{locale === 'ru' ? 'Заказать исправление' : locale === 'es' ? 'Solicitar corrección' : locale === 'zh' ? '预约修复' : 'Order the fix'}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            )}
 
             {/* ── Dossier — grouped by category ─────────────────────────────────── */}
             {Object.keys(threatsByCategory).length > 0 && (

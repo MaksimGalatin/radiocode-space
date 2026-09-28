@@ -84,7 +84,7 @@ export default function RegistryClient({ языкИзПути }: { языкИз�
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#030711] text-gray-900 dark:text-white">
-      <main id="main-content" className="pt-24 pb-24 px-6">
+      <div id="main-content" className="pt-24 pb-24 px-6">
         <div className="max-w-3xl mx-auto">
 
           <div className="text-sm uppercase tracking-wider text-cyan-700 dark:text-cyan-400 mb-3">
@@ -216,7 +216,7 @@ export default function RegistryClient({ языкИзПути }: { языкИз�
           </div>
 
         </div>
-      </main>
+      </div>
     </div>
   );
 }

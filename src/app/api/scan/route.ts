@@ -8,6 +8,7 @@ import { peerComparison } from '@/lib/oracle-peers';
 import { хостБезопасен, ссылкаБезопасна } from '@/lib/ssrf-guard';
 import { имеетДоступноеИмя } from '@/lib/accessible-name';
 import { probeLaw, applyProbeLaw, type ВидНормы, type ПотолокШтрафа, type ИсточникНормы } from '@/lib/probe-law';
+import { runA11yPageScan, type A11yPageFinding } from '@/lib/a11y-scanner';
 
 /**
  * ПЛАТНЫЙ GROK ЗАКРЫТ ПО УМОЛЧАНИЮ (16.08.2026, требование Архитектора).
@@ -364,6 +365,10 @@ export interface FoundThreat {
   fineAmount: string;
   consequence: string;
   violatingHtml?: string;
+  pageUrl?: string;
+  selector?: string;
+  outerHtml?: string;
+  proven?: boolean;
   /**
    * Свой закон у доказанной находки (lib/probe-law.ts, с 25.09.2026): вид
    * нормы, штраф коротко для значка, числовой потолок для суммы и все
@@ -399,7 +404,7 @@ interface GrokViolation {
 
 // ─── Sitemap Scraper Helper ───────────────────────────────────────────────────
 
-async function fetchSitemapUrls(rootUrl: string): Promise<string[]> {
+async function fetchSitemapUrls(rootUrl: string, maxPages = 3): Promise<string[]> {
   try {
     const parsed = new URL(rootUrl);
     const sitemapUrl = new URL('/sitemap.xml', parsed.origin).toString();
@@ -420,7 +425,7 @@ async function fetchSitemapUrls(rootUrl: string): Promise<string[]> {
       }
     });
     if (urls.length === 0) return [rootUrl];
-    
+
     // Выбор дополнительных страниц ДЕТЕРМИНИРОВАННЫЙ.
     //
     // Здесь стояло `sort(() => 0.5 - Math.random()).slice(0, 2)` — то есть при
@@ -447,11 +452,11 @@ async function fetchSitemapUrls(rootUrl: string): Promise<string[]> {
     const проверенные: string[] = [];
     for (const u of urls) {
       if (u === rootUrl || u === rootUrl + '/') continue;
-      if (проверенные.length >= 8) break;   // дальше всё равно берём две
+      if (проверенные.length >= maxPages * 2) break;
       if (await ссылкаБезопасна(u, происхождение)) проверенные.push(u);
     }
     const filtered = проверенные.sort((a, b) => a.localeCompare(b));
-    return [rootUrl, ...filtered.slice(0, 2)];
+    return [rootUrl, ...filtered.slice(0, Math.max(0, maxPages - 1))];
   } catch (err) {
     console.warn('[sitemap] Failed to fetch sitemap, using root URL:', String(err));
     return [rootUrl];
@@ -460,7 +465,7 @@ async function fetchSitemapUrls(rootUrl: string): Promise<string[]> {
 
 // ─── HTML Scraper ─────────────────────────────────────────────────────────────
 
-async function scrapePageBlueprint(url: string): Promise<string> {
+async function scrapePageBlueprint(url: string, locale = 'en'): Promise<{ blueprint: string; html: string; a11yFindings: A11yPageFinding[] }> {
   const res = await fetch(url, {
     headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
@@ -476,6 +481,7 @@ async function scrapePageBlueprint(url: string): Promise<string> {
   const hasCsp = res.headers.get('content-security-policy') ? true : false;
 
   const html = await res.text();
+  const a11yFindings = runA11yPageScan(html, url, locale);
   const $ = cheerio.load(html);
 
   const missingAltImagesHtml: string[] = [];
@@ -671,7 +677,11 @@ async function scrapePageBlueprint(url: string): Promise<string> {
     bodyText: $('body').text().replace(/\s+/g, ' ').trim().slice(0, 1200),
   };
 
-  return JSON.stringify(blueprint, null, 2);
+  return {
+    blueprint: JSON.stringify(blueprint, null, 2),
+    html,
+    a11yFindings,
+  };
 }
 
 // ─── Grok Analysis ───────────────────────────────────────────────────────────
@@ -955,6 +965,9 @@ export async function POST(req: NextRequest) {
     locale?: string;
     scanSitemap?: boolean;
     rescan?: boolean;
+    maxPages?: number;
+    deepScan?: boolean;
+    orderId?: string;
     подтверждаюПраво?: boolean;
     authorized?: boolean;
     iOwnThisDomain?: boolean;
@@ -1042,23 +1055,37 @@ export async function POST(req: NextRequest) {
   // считать по учётной записи, а не по адресу сети. Иначе двое из одной
   // конторы делят один лимит, а один человек с телефона и с ноутбука получает
   // два. По IP считаем только тех, кто не вошёл, — другого признака у них нет.
-  const { уровень: уровеньТарифа, почта: почтаСеанса } = await (async () => {
-    if (владелец) return { уровень: 99, почта: '' };
+  const { уровень: уровеньТарифа, почта: почтаСеанса, isCron } = await (async () => {
+    const authHeader = req.headers.get('authorization') || '';
+    const cronSecret = process.env.CRON_SECRET;
+    let isCron = false;
+    if (cronSecret && authHeader) {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const crypto = require('crypto') as typeof import('crypto');
+        const a = Buffer.from(authHeader, 'utf8');
+        const b = Buffer.from(`Bearer ${cronSecret}`, 'utf8');
+        if (a.length === b.length && crypto.timingSafeEqual(a, b)) isCron = true;
+      } catch {
+        if (authHeader === `Bearer ${cronSecret}`) isCron = true;
+      }
+    }
+    if (владелец || isCron) return { уровень: 99, почта: '', isCron };
     try {
       const { getFreshSessionEmail } = await import('../../../lib/user-auth');
       const почта = (await getFreshSessionEmail(req) || '').trim().toLowerCase();
-      if (!почта) return { уровень: -1, почта: '' };
+      if (!почта) return { уровень: -1, почта: '', isCron: false };
       const url = process.env.SUBMISSIONS_DB_URL;
       // Вошёл, но спросить тариф не у чего — считаем бесплатным вошедшим (0),
       // а не безлимитным. Поломка базы не должна открывать наш кошелёк.
-      if (!url) return { уровень: 0, почта };
+      if (!url) return { уровень: 0, почта, isCron: false };
       const { neon } = await import('@neondatabase/serverless');
       const sql = neon(url);
       const строки = await sql`SELECT tier FROM user_tiers WHERE LOWER(email)=LOWER(${почта})`;
       const t = Number((строки?.[0] as { tier?: unknown } | undefined)?.tier ?? 0);
-      return { уровень: Number.isFinite(t) ? t : 0, почта };
+      return { уровень: Number.isFinite(t) ? t : 0, почта, isCron: false };
     } catch {
-      return { уровень: -1, почта: '' };
+      return { уровень: -1, почта: '', isCron: false };
     }
   })();
 
@@ -1287,9 +1314,24 @@ export async function POST(req: NextRequest) {
       || process.env.GOOGLE_SERVICE_ACCOUNT_KEY || process.env.GCP_SERVICE_ACCOUNT_KEY);
     const activeLocale = locale || 'en';
 
-    // Build URL queue
-    const urlsToScan = scanSitemap ? await fetchSitemapUrls(normalized) : [normalized];
-    const urlsToScanForHash = urlsToScan;
+    // Build URL queue (поддержка аудита до 25 страниц по sitemap и внутренним ссылкам)
+    // 🔴 ОГРАНИЧЕНИЕ ОБЪЁМА ПРОВЕРКИ (Часть A1 задания AIfa от 28.09.2026):
+    // Больше 3 страниц — ТОЛЬКО для isCron, владельца (уровень 99) или оплаченного
+    // заказа из service_orders (заказы A11Y-..., slug: lite-audit, fix-pack, quick-audit, starter-fix и выше, monitoring).
+    // Валидируется: статус 'paid', совпадение хоста сайта, paid_at не старше 30 дней
+    // (для monitoring — пока a11y_monitoring.paid_until > now()), и не больше 3 глубоких проверок на заказ за 30 дней.
+    // Таблица pay_orders для этого НЕ используется.
+    const { checkDeepScanPermission, recordDeepScanUsage } = await import('../../../lib/service-orders');
+    const deepScanAuth = await checkDeepScanPermission({
+      orderId: тело?.orderId ? String(тело.orderId).trim() : null,
+      targetHost: parsed.hostname,
+      isCron,
+      userTier: уровеньТарифа,
+    });
+    const canDeepScan = deepScanAuth.canDeepScan;
+    const requestedPages = Math.max(1, Number(тело?.maxPages || (тело?.deepScan ? 25 : (scanSitemap ? 3 : 1))));
+    const maxPages = canDeepScan ? Math.min(25, requestedPages) : Math.min(3, requestedPages);
+    let candidateUrls = scanSitemap || maxPages > 1 ? await fetchSitemapUrls(normalized, maxPages) : [normalized];
 
     const { scanContentHash, findFreshScan, saveScan } = await import('../../../lib/oracle-scans');
 
@@ -1323,6 +1365,23 @@ export async function POST(req: NextRequest) {
     // качать то же самое — лишняя задержка клиенту и лишняя нагрузка на его
     // сервер, которую мы создали бы без всякой нужды.
     const probeImages = probeMain?.html ? probeImageDelivery(probeMain.html) : [];
+
+    // Дополняем очередь страниц внутренними ссылками до maxPages (до 25 страниц)
+    if (candidateUrls.length < maxPages && probeMain?.html) {
+      const { crawlInternalPages } = await import('../../../lib/oracle-deep');
+      const internalPages = await crawlInternalPages(parsed.origin, probeMain.html, maxPages);
+      for (const p of internalPages) {
+        if (candidateUrls.length >= maxPages) break;
+        if (!candidateUrls.includes(p) && (await ссылкаБезопасна(p, parsed.origin))) {
+          candidateUrls.push(p);
+        }
+      }
+    }
+    const urlsToScan = candidateUrls;
+    const urlsToScanForHash = urlsToScan;
+    if (urlsToScan.length > 3 && deepScanAuth.order?.orderId) {
+      await recordDeepScanUsage(deepScanAuth.order.orderId, parsed.hostname);
+    }
 
     // Какой менеджер согласия стоит на сайте. Нарушением это не является и в
     // отчёт как находка не идёт — это служебная пометка: по ней сразу видно,
@@ -1358,12 +1417,16 @@ export async function POST(req: NextRequest) {
     ], activeLocale);
 
     const blueprints: { url: string; blueprint: string; parsed: any }[] = [];
+    const allA11yFindings: A11yPageFinding[] = [];
 
     // Crawl all targets sequentially or in parallel
     for (const targetUrl of urlsToScan) {
       try {
-        const bp = await scrapePageBlueprint(targetUrl);
+        const { blueprint: bp, a11yFindings } = await scrapePageBlueprint(targetUrl, activeLocale);
         blueprints.push({ url: targetUrl, blueprint: bp, parsed: JSON.parse(bp) });
+        if (a11yFindings && a11yFindings.length > 0) {
+          allA11yFindings.push(...a11yFindings);
+        }
       } catch (scrapeErr: any) {
         console.warn(`[scan] scrape failed for ${targetUrl}:`, String(scrapeErr));
         if (targetUrl === normalized) {
@@ -1374,7 +1437,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    if (blueprints.length === 0 && !provenFindings.length) {
+    if (blueprints.length === 0 && !provenFindings.length && !allA11yFindings.length) {
       return NextResponse.json({ error: 'DOMAIN_UNREACHABLE' }, { status: 400, headers });
     }
 
@@ -1400,6 +1463,7 @@ export async function POST(req: NextRequest) {
     // дают отпечаток.
     const fingerprint = [
       provenFindings.map((f) => `${f.code}:${f.evidence}`).sort().join('|'),
+      allA11yFindings.map((f) => `${f.code}:${f.selector}:${f.pageUrl}`).sort().join('|'),
       blueprints.map((b) => b.blueprint).join('|'),
     ].join('||');
     const contentHash = scanContentHash(parsed.hostname, activeLocale, [
@@ -1550,6 +1614,7 @@ export async function POST(req: NextRequest) {
         lawUrl: закон?.lawUrl ?? activeLawMeta['Digital Operations']?.lawUrl ?? 'https://owasp.org/www-project-secure-headers/',
         fineAmount: закон?.fineAmount ?? activeLawMeta['Digital Operations']?.fineAmount ?? '—',
         consequence: pf.remedy,
+        proven: true,
         ...(закон ? {
           lawKind: закон.lawKind,
           fineShort: закон.fineShort,
@@ -1559,13 +1624,43 @@ export async function POST(req: NextRequest) {
       };
     });
 
+    const provenA11yThreats: FoundThreat[] = allA11yFindings.map((af, i) => {
+      const закон = probeLaw(af.code, activeLocale);
+      return {
+        id: 910000 + i,
+        code: af.code,
+        title: af.title,
+        description: af.description,
+        severity: af.severity,
+        category: 'ADA / WCAG' as Category,
+        evidence: `[${PROVEN_LABEL[activeLocale] || PROVEN_LABEL.en} · HTML DOM] ${af.evidence}`,
+        lawName: закон?.lawName ?? af.lawName ?? 'WCAG 2.1 / ADA Title III',
+        lawUrl: закон?.lawUrl ?? af.lawUrl ?? 'https://www.w3.org/WAI/WCAG21/quickref/',
+        fineAmount: закон?.fineAmount ?? af.fineAmount ?? '$75,000 / €100,000',
+        consequence: af.consequence,
+        violatingHtml: af.outerHtml,
+        pageUrl: af.pageUrl,
+        selector: af.selector,
+        outerHtml: af.outerHtml,
+        proven: true,
+        ...(закон ? {
+          lawKind: закон.lawKind,
+          fineShort: закон.fineShort,
+          fineCap: закон.fineCap,
+          lawSources: закон.lawSources,
+        } : {}),
+      };
+    });
+
+    const allProvenThreats: FoundThreat[] = [...provenThreats, ...provenA11yThreats];
+
     // Порядок: сначала доказанное, затем предположения — и всё по серьёзности.
     const rank: Record<string, number> = { critical: 0, serious: 1, moderate: 2, advisory: 3 };
     const modelThreats = Array.from(threatMap.values())
       .sort((a, b) => (rank[a.severity] ?? 9) - (rank[b.severity] ?? 9))
       .slice(0, 12);          // было 25: половина уходила шаблонным шумом
 
-    const allThreats = [...provenThreats, ...modelThreats];
+    const allThreats = [...allProvenThreats, ...modelThreats];
 
     // Оценка по весам серьёзности, а не «2000 минус число находок»: раньше сайт
     // с одной критической дырой получал 1999 из 2000 и выглядел почти идеальным.
@@ -1579,7 +1674,7 @@ export async function POST(req: NextRequest) {
     //
     // Предположения остаются в отчёте отдельным разделом «требует проверки»,
     // но их место — рядом с находками, а не внутри балла.
-    const score = scoreFromFindings(provenThreats);
+    const score = scoreFromFindings(allProvenThreats);
 
     // К каждой находке добавляем её НАСТОЯЩУЮ юрисдикцию.
     //
@@ -1605,7 +1700,7 @@ export async function POST(req: NextRequest) {
       allThreats,
       targetUrl: normalized,
       engine: engineUsed,
-      provenCount: provenThreats.length,
+      provenCount: allProvenThreats.length,
       scannedPages: blueprints.map((b) => b.url),
       scoreScale: 100,
       // Служебная пометка, не находка: какой менеджер согласия стоит на сайте и

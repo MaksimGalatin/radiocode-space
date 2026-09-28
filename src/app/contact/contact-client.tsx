@@ -80,7 +80,7 @@ export default function ContactClient() {
   const т = Т[lang] ?? Т.en;
 
   return (
-    <main className="min-h-screen px-4 py-20">
+    <div className="min-h-screen px-4 py-20">
       <div className="mx-auto max-w-2xl">
         <h1 className="mb-6 text-3xl font-bold md:text-4xl">{т.заголовок}</h1>
 
@@ -110,6 +110,6 @@ export default function ContactClient() {
 
         <p className="text-base opacity-70">{т.ответ}</p>
       </div>
-    </main>
+    </div>
   );
 }

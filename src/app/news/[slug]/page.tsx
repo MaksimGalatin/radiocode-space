@@ -194,7 +194,7 @@ export default async function NewsArticlePage(
   };
 
   return (
-    <main className="min-h-screen bg-[#050507] text-[#E8E8F0] pt-16 pb-24">
+    <div className="min-h-screen bg-[#050507] text-[#E8E8F0] pt-16 pb-24">
       <div className="max-w-3xl lg:max-w-[1400px] mx-auto px-6">
         <Link
           href="/news"
@@ -253,6 +253,6 @@ export default async function NewsArticlePage(
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <NewsArticleNav backHref="/news" />
-    </main>
+    </div>
   );
 }

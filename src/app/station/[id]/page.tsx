@@ -86,7 +86,7 @@ export default async function StationPage(
   };
 
   return (
-    <main className="min-h-screen bg-[#05060a] text-white pt-16">
+    <div className="min-h-screen bg-[#05060a] text-white pt-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -196,6 +196,6 @@ export default async function StationPage(
           </div>
         </section>
       </div>
-    </main>
+    </div>
   );
 }

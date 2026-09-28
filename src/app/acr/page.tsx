@@ -3752,7 +3752,7 @@ export default function ACRPage() {
   });
 
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-[#030712] text-slate-900 dark:text-[#F8FAFC] pt-24 pb-16 px-4 sm:px-6 lg:px-8 selection:bg-cyan-500/30">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#030712] text-slate-900 dark:text-[#F8FAFC] pt-24 pb-16 px-4 sm:px-6 lg:px-8 selection:bg-cyan-500/30">
 <div className="max-w-7xl mx-auto space-y-20 sm:space-y-24">
         {/* SUB-NAV BREADCRUMB */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-gray-800 pb-4 mb-6">
@@ -4668,6 +4668,6 @@ export default function ACRPage() {
         </section>
 
       </div>
-      </main>
+      </div>
   );
 }

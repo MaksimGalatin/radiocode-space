@@ -107,7 +107,7 @@ export default function ResearchClient() {
   ).padStart(2, '0')}.${СНИМОК.год}`;
 
   return (
-    <main style={ОБЁРТКА}>
+    <div style={ОБЁРТКА}>
       <div style={МЕТКА}>{т.метка}</div>
       <h1 style={ЗАГ1}>{т.заголовок}</h1>
       <p style={ТЕКСТ}>{т.подзаголовок(Ч.записей, Ч.доменовВсегоDNS)}</p>
@@ -169,6 +169,6 @@ export default function ResearchClient() {
           {т.услуги}
         </Link>
       </p>
-    </main>
+    </div>
   );
 }

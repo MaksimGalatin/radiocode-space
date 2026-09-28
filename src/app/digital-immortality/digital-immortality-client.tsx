@@ -651,7 +651,7 @@ export default function DigitalImmortalityClient() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
-      <main className="min-h-screen bg-gradient-to-b from-[#030711] via-[#040a18] to-[#030711] text-white pt-32 pb-20 px-6 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-b from-[#030711] via-[#040a18] to-[#030711] text-white pt-32 pb-20 px-6 relative overflow-hidden">
         {/* Background glow effects */}
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#00FF88]/5 rounded-full blur-[160px] pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[160px] pointer-events-none" />
@@ -772,7 +772,7 @@ export default function DigitalImmortalityClient() {
             </div>
           </section>
         </article>
-      </main>
+      </div>
     </>
   );
 }

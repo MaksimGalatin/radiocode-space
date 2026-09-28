@@ -1239,7 +1239,7 @@ export default function GlossaryPage() {
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-8 py-12 space-y-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-8 py-12 space-y-10">
         <div className="text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono bg-cyan-950/60 border border-cyan-500/40 text-cyan-300">
             <Sparkles className="w-3.5 h-3.5" />
@@ -1293,7 +1293,7 @@ export default function GlossaryPage() {
             </Link>
           </div>
         </div>
-      </main>
+      </div>
 
       <footer className="border-t border-gray-900 py-8 text-center text-xs text-gray-500">
         CODE Eternal · All 71 canonical terms verified · Author: Maksim Valentinovich Galatin

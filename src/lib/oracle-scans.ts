@@ -28,6 +28,12 @@ export type StoredScan = {
   totalIssues: number;
   provenCount: number;
   engine: string;
+  /**
+   * Язык, на котором был запрошен скан (сохраняется в saveScan, столбец `locale`).
+   * Печатный отчёт клиенту выходит на ЭТОМ языке — перенесено с aifa.works 28.09.2026
+   * вместе с ручками AIfaFocus v2, которые его читают.
+   */
+  locale: string;
   payload: unknown;
   createdAt: string;
 };
@@ -92,7 +98,7 @@ export async function findFreshScan(contentHash: string, maxAgeHours = 24): Prom
     if (!sql) return null;
     await ensureTable(sql);
     const r = await sql.query(
-      `SELECT id, domain, score, total_issues, proven_count, engine, payload, created_at
+      `SELECT id, domain, score, total_issues, proven_count, engine, locale, payload, created_at
          FROM oracle_scans
         WHERE content_hash = $1 AND created_at > now() - ($2 || ' hours')::interval
         ORDER BY created_at DESC LIMIT 1`,
@@ -103,7 +109,8 @@ export async function findFreshScan(contentHash: string, maxAgeHours = 24): Prom
     return {
       id: String(row.id), domain: String(row.domain), score: Number(row.score),
       totalIssues: Number(row.total_issues), provenCount: Number(row.proven_count),
-      engine: String(row.engine || ''), payload: row.payload,
+      engine: String(row.engine || ''), locale: String(row.locale || 'en'),
+      payload: row.payload,
       createdAt: String(row.created_at),
     };
   } catch { return null; }
@@ -141,7 +148,7 @@ export async function getScanById(id: string): Promise<StoredScan | null> {
     if (!sql) return null;
     await ensureTable(sql);
     const r = await sql.query(
-      `SELECT id, domain, score, total_issues, proven_count, engine, payload, created_at
+      `SELECT id, domain, score, total_issues, proven_count, engine, locale, payload, created_at
          FROM oracle_scans WHERE id = $1 LIMIT 1`,
       [id.toUpperCase()]
     );
@@ -150,7 +157,8 @@ export async function getScanById(id: string): Promise<StoredScan | null> {
     return {
       id: String(row.id), domain: String(row.domain), score: Number(row.score),
       totalIssues: Number(row.total_issues), provenCount: Number(row.proven_count),
-      engine: String(row.engine || ''), payload: row.payload,
+      engine: String(row.engine || ''), locale: String(row.locale || 'en'),
+      payload: row.payload,
       createdAt: String(row.created_at),
     };
   } catch { return null; }
@@ -184,7 +192,7 @@ export async function findPreviousScan(domain: string, before: string, notId: st
       return Number.isNaN(d.getTime()) ? before : d.toISOString();
     })();
     const r = await sql.query(
-      `SELECT id, domain, score, total_issues, proven_count, engine, payload, created_at
+      `SELECT id, domain, score, total_issues, proven_count, engine, locale, payload, created_at
          FROM oracle_scans
         WHERE domain = $1 AND created_at < $2::timestamptz AND id <> $3
         ORDER BY created_at DESC LIMIT 1`,
@@ -195,7 +203,8 @@ export async function findPreviousScan(domain: string, before: string, notId: st
     return {
       id: String(row.id), domain: String(row.domain), score: Number(row.score),
       totalIssues: Number(row.total_issues), provenCount: Number(row.proven_count),
-      engine: String(row.engine || ''), payload: row.payload,
+      engine: String(row.engine || ''), locale: String(row.locale || 'en'),
+      payload: row.payload,
       createdAt: String(row.created_at),
     };
   } catch { return null; }

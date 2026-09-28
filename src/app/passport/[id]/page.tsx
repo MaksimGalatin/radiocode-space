@@ -279,12 +279,12 @@ export default async function СтраницаПаспорта({ params }: { par
 
   if (!п) {
     return (
-      <main className="pass-page keep-dark">
+      <div className="pass-page keep-dark">
         <div className="pass-empty">
           <h1>{с.нет}</h1>
           <p>{id}</p>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -307,7 +307,7 @@ export default async function СтраницаПаспорта({ params }: { par
   const стиль = { ['--tier' as string]: цвет } as React.CSSProperties;
 
   return (
-    <main className="pass-page keep-dark">
+    <div className="pass-page keep-dark">
       <div className="passport" style={стиль}>
 
         <header className="p-header">
@@ -485,7 +485,7 @@ export default async function СтраницаПаспорта({ params }: { par
         <a href={`https://arweave.net/${id}`} rel="noopener noreferrer" target="_blank">{с.проверить} ↗</a>
       </p>
       <p className="pass-note">{с.сноска}</p>
-    </main>
+    </div>
   );
 }
 
