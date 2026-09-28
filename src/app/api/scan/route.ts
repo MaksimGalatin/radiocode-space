@@ -6,6 +6,7 @@ import { localizeFindings } from '@/lib/oracle-probe-i18n';
 import { guessSector, riskForSector } from '@/lib/oracle-risk';
 import { peerComparison } from '@/lib/oracle-peers';
 import { хостБезопасен, ссылкаБезопасна } from '@/lib/ssrf-guard';
+import { имеетДоступноеИмя } from '@/lib/accessible-name';
 import { probeLaw, applyProbeLaw, type ВидНормы, type ПотолокШтрафа, type ИсточникНормы } from '@/lib/probe-law';
 
 /**
@@ -514,7 +515,8 @@ async function scrapePageBlueprint(url: string): Promise<string> {
   let unlabeledButtons = 0;
   const unlabeledButtonsHtml: string[] = [];
   buttons.each((_, el) => {
-    if (!$(el).attr('aria-label') && !$(el).text().trim()) {
+    // Имя по accname 1.2: aria-labelledby, aria-label, текст, alt, <svg aria-label>, title (28.09.2026)
+    if (!имеетДоступноеИмя($, el)) {
       unlabeledButtons++;
       if (unlabeledButtonsHtml.length < 5) {
         unlabeledButtonsHtml.push($.html(el).slice(0, 250));
@@ -532,7 +534,8 @@ async function scrapePageBlueprint(url: string): Promise<string> {
     const textLower = text.toLowerCase();
     const href = $(el).attr('href') || '';
     
-    if (!$(el).attr('aria-label') && !text && !$(el).find('img[alt]').length) {
+    // <a> без href — не ссылка (HTML-AAM); alt="" имени не даёт; <svg aria-label> даёт (28.09.2026)
+    if ($(el).attr('href') !== undefined && !имеетДоступноеИмя($, el)) {
       emptyLinks++;
       if (emptyLinksHtml.length < 5) {
         emptyLinksHtml.push($.html(el).slice(0, 250));
