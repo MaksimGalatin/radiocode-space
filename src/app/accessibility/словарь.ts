@@ -139,7 +139,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
 
       ctaBadge2: 'Inclusive by design',
 
-      ctaBadge3: 'WCAG 2.1 AA certified',
+      ctaBadge3: 'Checked against WCAG 2.1 AA',
 
       ctaTitle: 'Ready to Fix Your Site?',
 
@@ -166,6 +166,25 @@ const ТЕКСТЫ_СКАНЕРА_en = {
       tierMoreDetails: 'Full details',
       tiers: [
 
+        { name: 'Monitoring', timeline: 'Every week', features: ['Weekly re-check of up to 25 pages', 'An email when new violations appear', 'What got fixed — visible at once', 'No widget on your site', 'Monthly, no auto-charge'],
+          slug: 'monitoring',
+          price: 25,
+          period: '/mo',
+          who: 'Your site keeps changing — new pages, banners, forms — and any update can break accessibility again. You want someone watching it every week.',
+          diff: 'Not a one-off check but ongoing watch. And not an overlay widget: nothing is installed on your site — we check the site itself from the outside. Accessibility widgets usually cost from $49 a month (UserWay) to $199 and more (AudioEye), by public prices in September 2026; here it is $25. No fixes at this level — watching and a weekly email only.',
+          includes: [
+            'An automated WCAG AA check of up to 25 pages of your site, every week',
+            'Comparison with the previous week: what was fixed, what remains, what is new',
+            'An email to you when new violations appear — with the page and the element',
+            'Every weekly report kept in the report registry and opened by its number',
+          ],
+          deliverables: [
+            'A weekly email: what changed in seven days',
+            'A link to each weekly report',
+            'The first re-check 7 days after payment; paid monthly, renewed only when you choose',
+          ],
+        },
+
         { name: 'Lite Audit', timeline: '1 day', features: ['1 month of AIfa Spark memory included ($15)', '25 pages scanned', 'Full violation list', 'Dated PDF certificate', 'Severity breakdown'],
           slug: 'lite-audit',
           price: 50,
@@ -185,22 +204,42 @@ const ТЕКСТЫ_СКАНЕРА_en = {
           ],
         },
 
-        { name: 'Quick Audit', timeline: '1 day', features: ['1 month of AIfa Spark memory included ($15)', 'Automated WCAG 2.1 AA scan', 'Top 10 issues report', 'PDF summary', 'Priority list'],
+        { name: 'Fix Pack', timeline: '2–3 days', features: ['Fixed code for every finding', 'Up to 25 pages', 'Re-check after 14 days', 'You apply it — we need no access', 'One-off payment'],
+          slug: 'fix-pack',
+          price: 99,
+          who: 'You know the site has violations, and you have a developer — or you edit the site yourself. You need ready fixed code, not general advice.',
+          diff: 'Lite Audit tells you WHAT is broken. The Fix Pack gives you ready fixed code for your templates, finding by finding. You or your developer apply it — we need no access to the site. Where a human text is needed (a button label, an image description), we mark it "write this yourself" and give an example.',
+          includes: [
+            'A WCAG AA check of up to 25 pages found through internal links',
+            'For every proven finding: where it is (the code fragment from the page), what is wrong, and the fixed fragment for your template',
+            'For low contrast: the nearest colour pair with a contrast of at least 4.5 : 1, calculated by the WCAG formula',
+            'A re-check after 14 days: what was fixed, what remains, what is new',
+          ],
+          deliverables: [
+            'The Fix Pack in your language — a printable document and a data file',
+            'The 14-day re-check report',
+            'A verification link in the report registry',
+          ],
+        },
+
+        { name: 'Quick Audit', timeline: '1 day', features: ['Fix Pack included ($99 value)', '1 month of AIfa Spark memory included ($15)', 'Automated WCAG 2.1 AA scan', 'Top 10 issues report', 'PDF summary', 'Priority list'],
           slug: 'quick-audit',
           price: 149,
           who: 'You need to know fast whether the site is a liability, and whether there is a problem at all.',
-          diff: 'The simplest level: we LOOK and report, but we fix nothing. Repairs start at the next level.',
+          diff: 'On top of the risk assessment you get ready fixed code for every finding — you or your developer apply it. We do not change the site ourselves: hands-on fixing starts at the next level.',
           includes: [
             'Automated WCAG 2.1 AA scan of every page a crawler can reach',
             'Text contrast, tap-target size and heading order verified',
             'Images without descriptions and form fields without labels identified',
             'Findings ranked by risk: what invites a lawsuit versus what is cosmetic',
             'One month of AIfa Spark memory included at no extra cost ($15 value): your AI assistant keeps every conversation and remembers your site, its issues and what was fixed',
+            'Personal Fix Pack: ready fixed code for every finding and a re-check after 14 days',
           ],
           deliverables: [
             'An 8–12 page PDF report with a screenshot of every issue',
             'The ten most dangerous violations, each with page and element named',
             'A plain-language assessment of your ADA exposure',
+            'The Fix Pack — fixed code for your templates',
           ],
         },
 
@@ -476,7 +515,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
 
       ctaBadge2: 'Инклюзивность по дизайну',
 
-      ctaBadge3: 'Сертифицировано по WCAG 2.1 AA',
+      ctaBadge3: 'Проверка по WCAG 2.1 AA',
 
       ctaTitle: 'Готовы настроить доступность вашего сайта?',
 
@@ -503,6 +542,25 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
       tierMoreDetails: 'Подробно',
       tiers: [
 
+        { name: 'Мониторинг', timeline: 'Каждую неделю', features: ['Перепроверка до 25 страниц каждую неделю', 'Письмо, если появились новые нарушения', 'Что исправлено — видно сразу', 'Без виджета на вашем сайте', 'Помесячно, без автосписаний'],
+          slug: 'monitoring',
+          price: 25,
+          period: '/мес',
+          who: 'Сайт живёт: новые страницы, баннеры, формы — и любое обновление может снова сломать доступность. Нужен тот, кто каждую неделю за этим смотрит.',
+          diff: 'Это не разовая проверка, а постоянное наблюдение. И не виджет-оверлей: на ваш сайт ничего не ставится, мы проверяем сам сайт снаружи. Виджеты доступности обычно стоят от $49 в месяц (UserWay) до $199 и выше (AudioEye) — по открытым ценам на сентябрь 2026 года; здесь $25. Исправлений на этом уровне нет — только наблюдение и еженедельное письмо.',
+          includes: [
+            'Каждую неделю — автоматическая проверка WCAG AA до 25 страниц вашего сайта',
+            'Сравнение с прошлой неделей: что исправлено, что осталось, что появилось',
+            'Письмо вам на почту, если появились новые нарушения, — со страницей и элементом',
+            'Отчёт каждой недели хранится в реестре отчётов и открывается по номеру',
+          ],
+          deliverables: [
+            'Еженедельное письмо: что изменилось за семь дней',
+            'Ссылка на отчёт каждой недели',
+            'Первая перепроверка — через 7 дней после оплаты; оплата помесячно, продлеваете, только когда сами решите',
+          ],
+        },
+
         { name: 'Лайт-Аудит', timeline: '1 день', features: ['Месяц памяти AIfa «Искра» включён ($15)', '25 страниц вместо 3', 'Полный список нарушений', 'PDF с датой проверки', 'Разбивка по тяжести'],
           slug: 'lite-audit',
           price: 50,
@@ -522,22 +580,42 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
           ],
         },
 
-        { name: 'Быстрый Аудит', timeline: '1 день', features: ['Месяц памяти AIfa «Искра» включён ($15)', 'Автоматизированное сканирование WCAG 2.1 AA', 'Отчёт о топ-10 проблемах', 'Резюме в PDF', 'Список приоритетов'],
+        { name: 'Пакет исправлений', timeline: '2–3 дня', features: ['Исправленный код под каждую находку', 'До 25 страниц', 'Повторная проверка через 14 дней', 'Вносите сами — доступ к сайту не нужен', 'Разовая оплата'],
+          slug: 'fix-pack',
+          price: 99,
+          who: 'Вы знаете, что на сайте есть нарушения, и у вас есть разработчик — или вы правите сайт сами. Нужны не общие советы, а готовый исправленный код.',
+          diff: 'Лайт-Аудит говорит, ЧТО сломано. Пакет исправлений даёт готовый исправленный код для ваших шаблонов — под каждую находку. Вносите его вы или ваш разработчик, доступ к сайту нам не нужен. Где нужен человеческий текст (подпись кнопки, описание картинки), мы помечаем: «впишите сами» — и даём пример.',
+          includes: [
+            'Проверка WCAG AA до 25 страниц, найденных по внутренним ссылкам',
+            'Для каждой доказанной находки: где она (фрагмент кода со страницы), что не так и исправленный фрагмент для шаблона',
+            'Для слабого контраста — ближайшая пара цветов с контрастом не ниже 4,5 : 1, посчитанная по формуле WCAG',
+            'Повторная проверка через 14 дней: что исправлено, что осталось, что появилось',
+          ],
+          deliverables: [
+            'Пакет исправлений на вашем языке — документ для печати и файл данных',
+            'Отчёт повторной проверки через 14 дней',
+            'Ссылка для проверки в реестре отчётов',
+          ],
+        },
+
+        { name: 'Быстрый Аудит', timeline: '1 день', features: ['Пакет исправлений включён ($99)', 'Месяц памяти AIfa «Искра» включён ($15)', 'Автоматизированное сканирование WCAG 2.1 AA', 'Отчёт о топ-10 проблемах', 'Резюме в PDF', 'Список приоритетов'],
           slug: 'quick-audit',
           price: 149,
           who: 'Нужно быстро узнать, чем грозит сайт, и есть ли вообще проблема.',
-          diff: 'Самый простой уровень: мы СМОТРИМ и рассказываем, но ничего не чиним. Исправления начинаются со следующего уровня.',
+          diff: 'К оценке риска добавлен готовый исправленный код под каждую находку — вносите его вы или ваш разработчик. Сами в сайт мы не вносим правки: работа нашими руками начинается со следующего уровня.',
           includes: [
             'Автоматическое сканирование по WCAG 2.1 AA всех страниц, доступных роботу',
             'Проверка контраста текста, размеров кликабельных областей и порядка заголовков',
             'Поиск изображений без описания и полей формы без подписи',
             'Ранжирование найденного по риску: что грозит иском, а что косметика',
             'Месяц памяти AIfa «Искра» включён в стоимость ($15): ассистент хранит каждый разговор и помнит ваш сайт, его нарушения и то, что было исправлено',
+            'Персональный пакет исправлений: готовый исправленный код под каждую находку и повторная проверка через 14 дней',
           ],
           deliverables: [
             'PDF-отчёт на 8–12 страниц со снимками экрана каждой проблемы',
             'Список десяти самых опасных нарушений с указанием страницы и элемента',
             'Оценка юридического риска по ADA простыми словами',
+            'Пакет исправлений — готовый код для ваших шаблонов',
           ],
         },
 
@@ -783,7 +861,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
 
       ctaBadge2: 'Inclusivo por diseño',
 
-      ctaBadge3: 'Certificado WCAG 2.1 AA',
+      ctaBadge3: 'Verificado según WCAG 2.1 AA',
 
       ctaTitle: '¿Listo para Arreglar Tu Sitio?',
 
@@ -810,6 +888,25 @@ const ТЕКСТЫ_СКАНЕРА_es = {
       tierMoreDetails: 'Detalles completos',
       tiers: [
 
+        { name: 'Monitoreo', timeline: 'Cada semana', features: ['Nueva revisión de hasta 25 páginas cada semana', 'Un correo si aparecen nuevas infracciones', 'Lo corregido se ve al instante', 'Sin widget en su sitio', 'Mensual, sin cobros automáticos'],
+          slug: 'monitoring',
+          price: 25,
+          period: '/mes',
+          who: 'Su sitio cambia — páginas nuevas, banners, formularios — y cualquier actualización puede volver a romper la accesibilidad. Necesita que alguien lo vigile cada semana.',
+          diff: 'No es una revisión puntual, sino vigilancia continua. Y no es un widget superpuesto: no se instala nada en su sitio, revisamos el propio sitio desde fuera. Los widgets de accesibilidad suelen costar desde $49 al mes (UserWay) hasta $199 o más (AudioEye), según precios públicos de septiembre de 2026; aquí son $25. En este nivel no hay correcciones: solo vigilancia y un correo semanal.',
+          includes: [
+            'Cada semana, una revisión automática WCAG AA de hasta 25 páginas de su sitio',
+            'Comparación con la semana anterior: qué se corrigió, qué queda, qué es nuevo',
+            'Un correo cuando aparecen nuevas infracciones, con la página y el elemento',
+            'El informe de cada semana se guarda en el registro de informes y se abre por su número',
+          ],
+          deliverables: [
+            'Un correo semanal: qué cambió en siete días',
+            'Un enlace al informe de cada semana',
+            'La primera revisión 7 días después del pago; pago mensual, se renueva solo cuando usted decide',
+          ],
+        },
+
         { name: 'Auditoría Lite', timeline: '1 día', features: ['1 mes de memoria AIfa Chispa incluido ($15)', '25 páginas en vez de 3', 'Lista completa de infracciones', 'PDF con fecha de la revisión', 'Desglose por gravedad'],
           slug: 'lite-audit',
           price: 50,
@@ -829,22 +926,42 @@ const ТЕКСТЫ_СКАНЕРА_es = {
           ],
         },
 
-        { name: 'Auditoría Rápida', timeline: '1 día', features: ['1 mes de memoria AIfa Chispa incluido ($15)', 'Escaneo automatizado WCAG 2.1 AA', 'Informe de los 10 principales problemas', 'Resumen en PDF', 'Lista de prioridades'],
+        { name: 'Paquete de Correcciones', timeline: '2–3 días', features: ['Código corregido para cada hallazgo', 'Hasta 25 páginas', 'Nueva revisión a los 14 días', 'Lo aplica usted: no necesitamos acceso', 'Pago único'],
+          slug: 'fix-pack',
+          price: 99,
+          who: 'Sabe que su sitio tiene infracciones y tiene un desarrollador — o edita el sitio usted mismo. Necesita código corregido listo, no consejos generales.',
+          diff: 'La Auditoría Lite dice QUÉ está roto. El Paquete de Correcciones le da código corregido listo para sus plantillas, hallazgo por hallazgo. Lo aplica usted o su desarrollador; no necesitamos acceso al sitio. Donde hace falta un texto humano (la etiqueta de un botón, la descripción de una imagen), lo marcamos «escríbalo usted» y damos un ejemplo.',
+          includes: [
+            'Revisión WCAG AA de hasta 25 páginas encontradas por enlaces internos',
+            'Para cada hallazgo comprobado: dónde está (el fragmento de código de la página), qué falla y el fragmento corregido para su plantilla',
+            'Para contraste bajo: el par de colores más cercano con contraste de al menos 4,5 : 1, calculado con la fórmula WCAG',
+            'Nueva revisión a los 14 días: qué se corrigió, qué queda, qué es nuevo',
+          ],
+          deliverables: [
+            'El Paquete de Correcciones en su idioma: documento imprimible y archivo de datos',
+            'El informe de la nueva revisión a los 14 días',
+            'Un enlace de verificación en el registro de informes',
+          ],
+        },
+
+        { name: 'Auditoría Rápida', timeline: '1 día', features: ['Paquete de Correcciones incluido ($99)', '1 mes de memoria AIfa Chispa incluido ($15)', 'Escaneo automatizado WCAG 2.1 AA', 'Informe de los 10 principales problemas', 'Resumen en PDF', 'Lista de prioridades'],
           slug: 'quick-audit',
           price: 149,
           who: 'Necesita saber rápido si el sitio supone un riesgo y si el problema existe siquiera.',
-          diff: 'El nivel más simple: MIRAMOS e informamos, pero no reparamos nada. Las correcciones empiezan en el siguiente nivel.',
+          diff: 'Además de la evaluación de riesgos, recibe código corregido listo para cada hallazgo: lo aplica usted o su desarrollador. No modificamos el sitio nosotros: las correcciones hechas por nosotros empiezan en el siguiente nivel.',
           includes: [
             'Escaneo automático WCAG 2.1 AA de todas las páginas accesibles al rastreador',
             'Contraste del texto, tamaño de las zonas pulsables y orden de los encabezados',
             'Imágenes sin descripción y campos de formulario sin etiqueta',
             'Hallazgos ordenados por riesgo: qué invita a una demanda y qué es cosmético',
             'Un mes de memoria AIfa Chispa incluido sin coste adicional ($15): el asistente conserva cada conversación y recuerda su sitio, sus incidencias y lo que se corrigió',
+            'Paquete de Correcciones personal: código corregido listo para cada hallazgo y nueva revisión a los 14 días',
           ],
           deliverables: [
             'Informe PDF de 8–12 páginas con una captura de pantalla por cada problema',
             'Las diez infracciones más peligrosas, con página y elemento indicados',
             'Valoración del riesgo legal ADA en lenguaje llano',
+            'El Paquete de Correcciones: código corregido para sus plantillas',
           ],
         },
 
@@ -1090,7 +1207,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
 
       ctaBadge2: '设计上的包容性',
 
-      ctaBadge3: 'WCAG 2.1 AA认证',
+      ctaBadge3: '依据 WCAG 2.1 AA 检测',
 
       ctaTitle: '准备好修复您的网站了吗？',
 
@@ -1117,6 +1234,25 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
       tierMoreDetails: '详细说明',
       tiers: [
 
+        { name: '持续监测', timeline: '每周', features: ['每周重新检测最多 25 个页面', '出现新问题时发邮件提醒', '已修复的问题一目了然', '无需在网站上安装插件', '按月付费，不自动扣款'],
+          slug: 'monitoring',
+          price: 25,
+          period: '/月',
+          who: '网站一直在变化——新页面、横幅、表单——任何一次更新都可能再次破坏无障碍。您需要有人每周帮您盯着。',
+          diff: '这不是一次性检测，而是持续监测。也不是覆盖式插件：您的网站上不安装任何东西，我们从外部检测网站本身。无障碍插件通常每月 $49 起（UserWay）到 $199 以上（AudioEye），以 2026 年 9 月公开价格为准；这里只需 $25。此级别不含修复——只有监测和每周邮件。',
+          includes: [
+            '每周对您网站最多 25 个页面进行 WCAG AA 自动检测',
+            '与上周对比：已修复、仍存在、新出现的问题',
+            '出现新问题时给您发邮件，注明页面和元素',
+            '每周报告保存在报告登记册中，可凭编号打开',
+          ],
+          deliverables: [
+            '每周邮件：七天内的变化',
+            '每周报告的链接',
+            '付款后 7 天进行首次重新检测；按月付费，仅在您决定时续费',
+          ],
+        },
+
         { name: '轻度审计', timeline: '1天', features: ['含 1 个月 AIfa「火花」记忆订阅（价值 $15）', '扫描25个页面而非3个', '完整违规清单', '带检测日期的PDF', '按严重程度分类'],
           slug: 'lite-audit',
           price: 50,
@@ -1136,22 +1272,42 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
           ],
         },
 
-        { name: '快速审计', timeline: '1天', features: ['含 1 个月 AIfa「火花」记忆订阅（价值 $15）', '自动化WCAG 2.1 AA扫描', '前10问题报告', 'PDF摘要', '优先级列表'],
+        { name: '修复包', timeline: '2–3天', features: ['每项问题都有修正后的代码', '最多 25 个页面', '14 天后重新检测', '由您自行应用——无需网站权限', '一次性付费'],
+          slug: 'fix-pack',
+          price: 99,
+          who: '您知道网站存在问题，并且有开发人员——或者您自己维护网站。您需要的是现成的修正代码，而不是泛泛的建议。',
+          diff: '轻量审计告诉您哪里有问题。修复包则针对每项问题，为您的模板提供现成的修正代码。由您或您的开发人员应用，我们无需访问网站。需要人工撰写文字的地方（按钮标签、图片描述），我们会标注“请您填写”并给出示例。',
+          includes: [
+            '对通过内部链接找到的最多 25 个页面进行 WCAG AA 检测',
+            '每项已证实的问题：所在位置（页面中的代码片段）、问题所在，以及模板的修正片段',
+            '对比度不足时：按 WCAG 公式计算出对比度不低于 4.5:1 的最接近配色',
+            '14 天后重新检测：已修复、仍存在、新出现的问题',
+          ],
+          deliverables: [
+            '您所用语言的修复包——可打印文档和数据文件',
+            '14 天后的重新检测报告',
+            '报告登记册中的验证链接',
+          ],
+        },
+
+        { name: '快速审计', timeline: '1天', features: ['含修复包（价值 $99）', '含 1 个月 AIfa「火花」记忆订阅（价值 $15）', '自动化WCAG 2.1 AA扫描', '前10问题报告', 'PDF摘要', '优先级列表'],
           slug: 'quick-audit',
           price: 149,
           who: '需要快速判断网站是否存在法律风险，以及问题是否真的存在。',
-          diff: '最基础的层级：我们只「看」并出具报告，不做任何修复。修复从下一档开始。',
+          diff: '在风险评估之外，您还会获得每项问题的现成修正代码——由您或您的开发人员应用。我们不直接改动网站：由我们动手修复从下一级别开始。',
           includes: [
             '对爬虫可访问的全部页面进行 WCAG 2.1 AA 自动扫描',
             '检查文字对比度、可点击区域尺寸与标题层级顺序',
             '找出缺少描述的图片和缺少标签的表单字段',
             '按风险排序：哪些可能招致诉讼，哪些只是外观问题',
             '免费包含 1 个月 AIfa「火花」记忆订阅（价值 $15）：助手保存每一次对话，记住您的网站、问题与已完成的修复',
+            '个人修复包：每项问题的现成修正代码，以及 14 天后的重新检测',
           ],
           deliverables: [
             '8–12 页 PDF 报告，每个问题均附截图',
             '十项最危险的违规，逐条标明所在页面与元素',
             '用通俗语言说明的 ADA 法律风险评估',
+            '修复包——适用于您模板的修正代码',
           ],
         },
 

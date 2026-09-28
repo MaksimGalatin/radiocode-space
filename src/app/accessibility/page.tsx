@@ -323,7 +323,7 @@ export default function AccessibilityPage() {
                     <div className="text-xs font-bold text-cyan-700 dark:text-cyan-400 uppercase tracking-widest mb-3">{a.mostPopular}</div>
                   )}
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">{tier.name}</h3>
-                  <div className="text-2xl font-black gradient-text mb-1">{tier.price === ЦЕНА_ПО_СМЕТЕ ? a.tierAskQuote : `$${tier.price.toLocaleString('en-US')}`}</div>
+                  <div className="text-2xl font-black gradient-text mb-1">{tier.price === ЦЕНА_ПО_СМЕТЕ ? a.tierAskQuote : `$${tier.price.toLocaleString('en-US')}${tier.period ?? ''}`}</div>
                   <div className="text-xs text-gray-500 dark:text-gray-400 mb-4">{tier.timeline}</div>
                   <ul className="space-y-2 flex-1 mb-6">
                     {tier.features.map((f) => (
