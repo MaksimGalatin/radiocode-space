@@ -15,11 +15,33 @@
  * 10. Никаких цен в интерфейсе (ценовую политику решает Архитектор)
  */
 
+import QRCode from 'qrcode';
+
 function sanitizeDomainForComment(domain: string): string {
   const sanitized = String(domain || '')
     .toLowerCase()
     .replace(/[^a-z0-9.-]/g, '');
   return sanitized || 'example.com';
+}
+
+function renderQrSvg(url: string, sizePx = 80): string {
+  try {
+    const qr = (QRCode as any).create(url, { errorCorrectionLevel: 'M' });
+    const size = qr.modules.size;
+    const data = qr.modules.data;
+    let path = '';
+    for (let r = 0; r < size; r++) {
+      for (let c = 0; c < size; c++) {
+        if (data[r * size + c]) {
+          path += `M${c},${r}h1v1h-1z `;
+        }
+      }
+    }
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${sizePx}" height="${sizePx}" shape-rendering="crispEdges" style="display:block;border-radius:4px"><rect width="${size}" height="${size}" fill="#ffffff"/><path d="${path.trim()}" fill="#030711"/></svg>`;
+  } catch (err) {
+    console.warn('[fixpack] QR generation fallback:', err);
+    return '';
+  }
 }
 
 export interface FixpackFindingInput {
@@ -73,6 +95,7 @@ export interface FixpackSummary {
   scanId: string;
   domain: string;
   locale: string;
+  scanDate?: string | Date;
   totalFindings: number;
   cardsCount: number;
   codeSnippetsCount: number;
@@ -176,6 +199,7 @@ const I18N = {
     evidence: 'Зафиксировано сканером (evidence):',
     explanation: 'Почему это исправляет проблему:',
     manualNote: 'Указание автору:',
+    officialDocTag: 'Пакет исправлений AIfaFocus для шаблонов',
     headerTitle: 'Персональный пакет исправлений для шаблонов',
     headerDesc: 'Точные фрагменты кода и предписания для устранения доказанных барьеров сайта. Без выдуманных текстов.',
     allTab: 'Все карточки',
@@ -184,6 +208,11 @@ const I18N = {
     domainLabel: 'Домен:',
     scanIdLabel: 'ID проверки:',
     printBtn: 'Печать / Сохранить в PDF',
+    savePdfBtn: 'Сохранить как PDF',
+    downloadPatchBtn: 'Скачать patch-файл',
+    reportBtn: 'Бесплатный отчёт',
+    verifyBtn: 'Реестр проверок',
+    registered: '● REGISTERED',
     printHint: 'Оптимизировано для печати на листах формата A4. Нажмите кнопку или Ctrl+P.',
     pagesCovered: 'Охват проверки:',
     pagesWord: (n: number) => `${n} ${n === 1 ? 'страница' : n < 5 ? 'страницы' : 'страниц'}`,
@@ -214,6 +243,7 @@ const I18N = {
     evidence: 'Detected by scanner (evidence):',
     explanation: 'Why this fixes the issue:',
     manualNote: 'Guidance for author:',
+    officialDocTag: 'AIfaFocus Template Fixpack',
     headerTitle: 'Personal Template Fixpack',
     headerDesc: 'Exact template code snippets and remediation instructions for proven site findings. No invented texts.',
     allTab: 'All Cards',
@@ -222,6 +252,11 @@ const I18N = {
     domainLabel: 'Domain:',
     scanIdLabel: 'Scan ID:',
     printBtn: 'Save as PDF / Print',
+    savePdfBtn: 'Save as PDF',
+    downloadPatchBtn: 'Download patch file',
+    reportBtn: 'Free Report',
+    verifyBtn: 'Verification Registry',
+    registered: '● REGISTERED',
     printHint: 'Optimized for standard A4 document printing. Press Ctrl+P or click the button.',
     pagesCovered: 'Audit Coverage:',
     pagesWord: (n: number) => `${n} page${n === 1 ? '' : 's'}`,
@@ -252,6 +287,7 @@ const I18N = {
     evidence: 'Detectado por el escáner (evidencia):',
     explanation: 'Por qué corrige el problema:',
     manualNote: 'Indicación para el autor:',
+    officialDocTag: 'Paquete de correcciones AIfaFocus',
     headerTitle: 'Paquete personal de correcciones de plantillas',
     headerDesc: 'Fragmentos de código directos y plantillas exactas para resolver las barreras detectadas. Sin textos inventados.',
     allTab: 'Todas las tarjetas',
@@ -260,6 +296,11 @@ const I18N = {
     domainLabel: 'Dominio:',
     scanIdLabel: 'ID de análisis:',
     printBtn: 'Guardar como PDF / Imprimir',
+    savePdfBtn: 'Guardar como PDF',
+    downloadPatchBtn: 'Descargar archivo patch',
+    reportBtn: 'Informe gratuito',
+    verifyBtn: 'Registro de auditorías',
+    registered: '● REGISTERED',
     printHint: 'Optimizado para impresión en formato A4. Presione Ctrl+P o use el botón superior.',
     pagesCovered: 'Cobertura de análisis:',
     pagesWord: (n: number) => `${n} página${n === 1 ? '' : 's'}`,
@@ -290,6 +331,7 @@ const I18N = {
     evidence: '扫描器捕获证据：',
     explanation: '修复原理：',
     manualNote: '作者填写说明：',
+    officialDocTag: 'AIfaFocus 模板修复包',
     headerTitle: '专属网站模板修复包',
     headerDesc: '为已验证的问题提供直接可用的模板代码片段与修复模板。严禁虚构内容。',
     allTab: '全部卡片',
@@ -298,6 +340,11 @@ const I18N = {
     domainLabel: '域名：',
     scanIdLabel: '检测编号：',
     printBtn: '保存为 PDF / 打印',
+    savePdfBtn: '保存为 PDF',
+    downloadPatchBtn: '下载 patch 文件',
+    reportBtn: '免费报告',
+    verifyBtn: '验证注册表',
+    registered: '● REGISTERED',
     printHint: '专为标准 A4 页面排版优化。按 Ctrl+P 或点击上方按钮。',
     pagesCovered: '检测覆盖范围：',
     pagesWord: (n: number) => `${n} 个页面`,
@@ -335,6 +382,7 @@ export function generateFixpack(
     comparedToPrevious?: FixpackComparison | null;
     isTestDemo?: boolean;
     isPreview?: boolean;
+    scanDate?: string | Date;
   }
 ): GeneratedFixpack {
   const safeDomain = sanitizeDomainForComment(domain);
@@ -1201,6 +1249,7 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
     scanId,
     domain: safeDomain,
     locale: lang,
+    scanDate: options?.scanDate,
     totalFindings: findings.length,
     cardsCount: visibleItems.length,
     codeSnippetsCount,
@@ -1410,6 +1459,20 @@ function renderFixpackHtml(
   `
       : '';
 
+  const verifyUrl = `https://aifa.works/audit-verify?id=${encodeURIComponent(summary.scanId)}`;
+  const qrSvg = renderQrSvg(verifyUrl, 80);
+  const scanDateFormatted = summary.scanDate
+    ? new Date(summary.scanDate).toLocaleString(
+        summary.locale === 'ru'
+          ? 'ru-RU'
+          : summary.locale === 'es'
+          ? 'es-ES'
+          : summary.locale === 'zh'
+          ? 'zh-CN'
+          : 'en-US'
+      )
+    : '';
+
   return `<!DOCTYPE html>
 <html lang="${summary.locale}">
 <head>
@@ -1417,204 +1480,182 @@ function renderFixpackHtml(
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AIfaFocus Fixpack · ${escapeHtml(summary.domain)}</title>
   <style>
-    :root {
-      --bg: #030712;
-      --card-bg: #0B1220;
-      --border: #1F2937;
-      --text: #F3F4F6;
-      --muted: #9CA3AF;
-      --accent: #00E5FF;
-      --code-bg: #050B14;
-      --snippet-badge: #10B981;
-      --manual-badge: #F59E0B;
-    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: var(--bg);
-      color: var(--text);
+      background: #f8fafc;
+      color: #111827;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      line-height: 1.6;
-      padding: 24px 16px;
+      font-size: 10pt;
+      line-height: 1.5;
+      padding: 16px;
+      margin: 0;
     }
-    .container {
-      max-width: 980px;
+    .report-sheet, .container {
+      max-width: 210mm;
       margin: 0 auto;
     }
 
-    /* Верхняя панель действий (кнопка печати, реестр) */
-    .top-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #090E17;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 18px;
+    /* Верхняя панель действий (кнопки) */
+    .noprint {
       margin-bottom: 20px;
-    }
-    .print-hint {
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .actions-buttons {
-      display: flex;
-      gap: 10px;
-    }
-    .action-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .btn-print {
-      background: var(--accent);
-      color: #030712;
-      border: 1px solid var(--accent);
-    }
-    .btn-print:hover {
-      background: #38bdf8;
-    }
-    .btn-verify {
-      background: #1F2937;
-      color: #F3F4F6;
-      border: 1px solid #374151;
-    }
-    .btn-verify:hover {
-      background: #374151;
     }
 
-    /* Шапка отчёта */
-    .header {
-      background: linear-gradient(135deg, #0B1220 0%, #111827 100%);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 20px;
-    }
-    .header h1 {
-      font-size: 24px;
-      font-weight: 800;
-      color: #FFFFFF;
-      margin-bottom: 8px;
-    }
-    .header p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
-    .meta-bar {
+    /* Шапка с гербовой карточкой и QR */
+    .cert-header {
       display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      font-size: 13px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #030711;
+      padding-bottom: 4mm;
+      margin-bottom: 5mm;
     }
-    .meta-item strong { color: #FFFFFF; }
+    .cert-header h1 {
+      font-size: 18pt;
+      margin: 0 0 2mm;
+      color: #030711;
+      letter-spacing: -0.02em;
+    }
+    .cert-header .sub {
+      color: #475569;
+      font-size: 9.5pt;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+    .seal-card {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      border: 1.5px solid #cbd5e1;
+      padding: 2.5mm 3.5mm;
+      border-radius: 8px;
+      background: #ffffff;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .seal-badge {
+      font-size: 7pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #0284c7;
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+    }
+
+    /* Ключевые метрики */
+    .grid {
+      display: flex;
+      gap: 6mm;
+      margin: 4mm 0 5mm;
+    }
+    .box {
+      flex: 1;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 3.5mm 4mm;
+      background: #ffffff;
+    }
+    .score {
+      font-size: 24pt;
+      font-weight: 800;
+      line-height: 1;
+      color: #0284c7;
+    }
+    .lbl {
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #64748b;
+      font-weight: 700;
+      margin-bottom: 1.5mm;
+    }
 
     /* Блок динамики повторной проверки */
     .comparison-box {
-      background: #090E17;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px;
-      margin-bottom: 24px;
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
     }
     .comp-header h3 {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
-      color: #FFFFFF;
+      color: #0f172a;
       margin-bottom: 4px;
     }
     .comp-sub {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 14px;
+      font-size: 12.5px;
+      color: #64748b;
+      margin-bottom: 12px;
     }
     .comp-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
     }
     .comp-col {
-      background: #0B1220;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-size: 13px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 12.5px;
     }
     .comp-col h4 {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
       margin-bottom: 8px;
       padding-bottom: 4px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid #e2e8f0;
     }
-    .comp-fixed h4 { color: #34D399; }
-    .comp-retained h4 { color: #FBBF24; }
-    .comp-new h4 { color: #F87171; }
-    .comp-col ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .comp-col li {
-      margin-bottom: 6px;
-      color: #D1D5DB;
-      font-size: 12px;
-    }
+    .comp-fixed h4 { color: #059669; }
+    .comp-retained h4 { color: #d97706; }
+    .comp-new h4 { color: #dc2626; }
+    .comp-col ul { list-style: none; padding: 0; margin: 0; }
+    .comp-col li { margin-bottom: 5px; color: #334155; font-size: 12px; }
     .initial-box {
-      font-size: 13px;
-      color: var(--muted);
-      border-left: 3px solid var(--accent);
+      font-size: 12.5px;
+      color: #475569;
+      border-left: 4px solid #06b6d4;
+      background: #ffffff;
+      padding: 12px 16px;
     }
 
     /* Табы фильтрации */
     .filter-bar {
       display: flex;
       gap: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
     .filter-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 8px 16px;
-      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      padding: 7px 14px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
       transition: all 0.2s;
     }
     .filter-btn:hover, .filter-btn.active {
-      border-color: var(--accent);
-      background: rgba(0, 229, 255, 0.1);
-      color: #FFFFFF;
+      border-color: #0284c7;
+      background: #f0f9ff;
+      color: #0369a1;
     }
 
     /* Карточки */
     .fix-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      transition: border-color 0.2s;
-    }
-    .fix-card:hover {
-      border-color: #374151;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 16px;
     }
     .card-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       flex-wrap: wrap;
       gap: 8px;
     }
@@ -1625,17 +1666,18 @@ function renderFixpackHtml(
       flex-wrap: wrap;
     }
     .code-badge {
-      background: #1F2937;
-      color: var(--accent);
-      font-family: monospace;
-      font-size: 12px;
+      background: #f1f5f9;
+      color: #0369a1;
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: 11.5px;
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 4px;
+      border: 1px solid #cbd5e1;
     }
     .standard-label {
       font-size: 12px;
-      color: var(--muted);
+      color: #64748b;
     }
     .status-badge {
       font-size: 10px;
@@ -1645,19 +1687,19 @@ function renderFixpackHtml(
       letter-spacing: 0.5px;
     }
     .status-new {
-      background: rgba(248, 113, 113, 0.15);
-      color: #F87171;
-      border: 1px solid rgba(248, 113, 113, 0.3);
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
     }
     .status-retained {
-      background: rgba(245, 158, 11, 0.15);
-      color: #FBBF24;
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
     }
     .status-hypothesis {
-      background: rgba(245, 158, 11, 0.15);
-      color: #FBBF24;
-      border: 1px solid rgba(245, 158, 11, 0.4);
+      background: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
     }
     .type-badge {
       font-size: 11px;
@@ -1667,150 +1709,160 @@ function renderFixpackHtml(
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .type-snippet { background: rgba(16, 185, 129, 0.15); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .type-manual { background: rgba(245, 158, 11, 0.15); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .type-snippet { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .type-manual { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
     .card-title {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
-      color: #FFFFFF;
-      margin-bottom: 8px;
+      color: #0f172a;
+      margin-bottom: 6px;
     }
     .issue-summary {
-      font-size: 14px;
-      color: #E5E7EB;
+      font-size: 13.5px;
+      color: #334155;
       margin-bottom: 12px;
     }
     .page-box, .evidence-box, .target-location, .selector-box, .outerhtml-box {
-      background: rgba(0,0,0,0.3);
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       padding: 8px 12px;
       border-radius: 6px;
       font-size: 12px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      color: #334155;
     }
     .box-label {
       display: block;
-      color: var(--muted);
-      font-size: 11px;
-      margin-bottom: 2px;
+      color: #64748b;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 3px;
     }
     .page-url {
-      color: #67E8F9;
-      font-family: monospace;
+      color: #0369a1;
+      font-family: ui-monospace, Consolas, monospace;
     }
     .element-selector {
-      color: #FCD34D;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: #92400e;
+      font-family: ui-monospace, Consolas, monospace;
       font-weight: 600;
     }
     .evidence-box code {
-      color: #F87171;
+      color: #b91c1c;
+      font-family: ui-monospace, Consolas, monospace;
       word-break: break-all;
     }
     .element-outerhtml {
-      background: rgba(0,0,0,0.4);
+      background: #f1f5f9;
       padding: 6px 10px;
       border-radius: 4px;
-      overflow-x: auto;
-      font-size: 11.5px;
-      color: #A7F3D0;
+      font-size: 11px;
+      color: #0f172a;
       line-height: 1.4;
       white-space: pre-wrap;
       word-break: break-all;
+      border: 1px solid #cbd5e1;
     }
     .snippet-box {
-      margin: 14px 0;
-      background: var(--code-bg);
-      border: 1px solid #1E293B;
-      border-radius: 8px;
+      margin: 12px 0;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
       overflow: hidden;
     }
     .snippet-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #090E17;
+      background: #e2e8f0;
       padding: 6px 12px;
       font-size: 11px;
-      color: var(--muted);
-      border-bottom: 1px solid #1E293B;
+      color: #1e293b;
+      font-weight: 600;
+      border-bottom: 1px solid #cbd5e1;
     }
     .copy-btn {
-      background: #1E293B;
-      border: none;
-      color: #E2E8F0;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #1e293b;
       font-size: 11px;
       padding: 3px 8px;
       border-radius: 4px;
       cursor: pointer;
     }
-    .copy-btn:hover { background: #334155; }
+    .copy-btn:hover { background: #f1f5f9; }
     pre {
       padding: 12px;
       overflow-x: auto;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 12px;
-      color: #A5F3FC;
+      font-size: 11.5px;
+      color: #0f172a;
       line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #f8fafc;
     }
     .card-footer {
-      font-size: 13px;
-      color: var(--muted);
+      font-size: 12.5px;
+      color: #475569;
       margin-top: 10px;
     }
     .explanation { margin-bottom: 6px; }
     .manual-alert {
-      background: rgba(245, 158, 11, 0.1);
-      border-left: 3px solid #F59E0B;
+      background: #fffbeb;
+      border-left: 3px solid #d97706;
       padding: 8px 12px;
       border-radius: 0 4px 4px 0;
-      color: #FDE68A;
+      color: #92400e;
       font-size: 12px;
       margin-top: 8px;
     }
 
     /* Превью-блок заблокированных карточек */
     .preview-locked-box {
-      background: linear-gradient(135deg, #090E17 0%, #111827 100%);
-      border: 2px dashed #374151;
-      border-radius: 12px;
-      padding: 24px;
-      margin-top: 24px;
-      margin-bottom: 24px;
+      background: #ffffff;
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
     }
     .locked-header {
       display: flex;
       align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 18px;
+      gap: 14px;
+      margin-bottom: 14px;
     }
     .locked-icon {
-      font-size: 32px;
+      font-size: 28px;
       line-height: 1;
     }
     .locked-info h3 {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
-      color: #F3F4F6;
+      color: #0f172a;
       margin-bottom: 4px;
     }
     .locked-info p {
-      font-size: 13px;
-      color: var(--muted);
+      font-size: 12.5px;
+      color: #475569;
       line-height: 1.5;
     }
     .locked-list {
-      background: rgba(0,0,0,0.3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 20px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 14px;
+      margin-bottom: 16px;
     }
     .locked-list h4 {
-      font-size: 12px;
-      color: var(--muted);
+      font-size: 11px;
+      color: #64748b;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .locked-list ul {
       list-style: none;
@@ -1818,49 +1870,48 @@ function renderFixpackHtml(
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
     .locked-list li {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 13px;
-      color: #E5E7EB;
+      font-size: 12.5px;
+      color: #1e293b;
     }
     .locked-code {
-      font-family: monospace;
+      font-family: ui-monospace, Consolas, monospace;
       font-size: 11px;
       font-weight: 700;
-      color: #FBBF24;
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #b45309;
+      background: #fef3c7;
+      border: 1px solid #fde68a;
       padding: 2px 6px;
       border-radius: 4px;
     }
     .locked-title {
-      color: #D1D5DB;
+      color: #334155;
     }
     .locked-cta-row {
       text-align: center;
-      padding-top: 8px;
+      padding-top: 6px;
     }
     .btn-cta-buy {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-      color: #FFFFFF;
-      font-size: 15px;
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      color: #ffffff;
+      font-size: 14px;
       font-weight: 700;
-      padding: 12px 28px;
-      border-radius: 8px;
+      padding: 10px 24px;
+      border-radius: 6px;
       text-decoration: none;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
       transition: all 0.2s;
     }
     .btn-cta-buy:hover {
-      background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
-      transform: translateY(-1px);
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     }
 
     /* ══════════════════════════════════════════════════════════════════════════
@@ -1869,188 +1920,145 @@ function renderFixpackHtml(
     @media print {
       @page {
         size: A4 portrait;
-        margin: 12mm 15mm;
+        margin: 14mm 14mm 16mm 14mm;
       }
       body {
         background: #FFFFFF !important;
         color: #111827 !important;
-        font-size: 10.5pt;
-        line-height: 1.5;
+        font-size: 10pt;
+        line-height: 1.45;
         padding: 0 !important;
       }
-      .container {
+      .report-sheet, .container {
         max-width: 100% !important;
+        margin: 0 !important;
+        width: 100% !important;
       }
-      .top-actions, .filter-bar, .copy-btn {
+      .noprint, .top-actions, .filter-bar, .copy-btn {
         display: none !important;
       }
-      .header {
-        background: #FFFFFF !important;
-        border: 2px solid #111827 !important;
-        border-radius: 0 !important;
-        color: #111827 !important;
-        padding: 16px !important;
-        margin-bottom: 16px !important;
-        page-break-after: avoid;
+      .cert-header {
+        border-bottom: 2px solid #030711 !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
       }
-      .header h1 {
-        color: #111827 !important;
-        font-size: 18pt !important;
-      }
-      .header p {
-        color: #4B5563 !important;
-      }
-      .meta-bar {
-        border-top: 1px solid #E5E7EB !important;
-        padding-top: 10px !important;
-      }
-      .meta-item strong {
-        color: #111827 !important;
+      .grid {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
       }
       .comparison-box {
-        background: #F9FAFB !important;
-        border: 1px solid #D1D5DB !important;
-        border-radius: 0 !important;
-        color: #111827 !important;
-        page-break-inside: avoid;
-        break-inside: avoid;
-        margin-bottom: 16px !important;
-      }
-      .comp-header h3 {
-        color: #111827 !important;
+        background: #F8FAFC !important;
+        border: 1px solid #CBD5E1 !important;
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+        margin-bottom: 14px !important;
       }
       .comp-col {
         background: #FFFFFF !important;
-        border: 1px solid #E5E7EB !important;
+        border: 1px solid #E2E8F0 !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
       }
-      .comp-fixed h4 { color: #059669 !important; }
-      .comp-retained h4 { color: #D97706 !important; }
-      .comp-new h4 { color: #DC2626 !important; }
-      .comp-col li { color: #1F2937 !important; }
       .fix-card {
         background: #FFFFFF !important;
-        border: 1px solid #D1D5DB !important;
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        page-break-inside: avoid;
-        break-inside: avoid;
-        padding: 14px !important;
-        margin-bottom: 16px !important;
-      }
-      .card-title {
-        color: #111827 !important;
-        font-size: 13pt !important;
-      }
-      .issue-summary {
-        color: #1F2937 !important;
-      }
-      .code-badge {
-        background: #F3F4F6 !important;
-        color: #111827 !important;
-        border: 1px solid #D1D5DB !important;
-      }
-      .status-hypothesis {
-        border: 1px solid #D97706 !important;
-        color: #B45309 !important;
-        background: #FEF3C7 !important;
-      }
-      .type-badge {
-        border: 1px solid #D1D5DB !important;
-      }
-      .type-snippet { background: #ECFDF5 !important; color: #065F46 !important; }
-      .type-manual { background: #FFFBEB !important; color: #92400E !important; }
-      .page-box, .evidence-box, .target-location, .selector-box, .outerhtml-box {
-        background: #F9FAFB !important;
-        border: 1px solid #E5E7EB !important;
-        color: #111827 !important;
-      }
-      .page-url { color: #0369A1 !important; }
-      .element-selector { color: #92400E !important; }
-      .element-outerhtml {
-        background: #F1F5F9 !important;
-        color: #0F172A !important;
         border: 1px solid #CBD5E1 !important;
+        box-shadow: none !important;
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+        padding: 14px !important;
+        margin-bottom: 14px !important;
       }
-      .evidence-box code { color: #991B1B !important; }
+      .card-head, .card-title, .issue-summary, .evidence-box, .target-location, .page-box, .selector-box, .outerhtml-box, .snippet-header, .card-footer, .manual-alert {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      h1, h2, h3, .card-title, .comp-header, .snippet-header {
+        break-after: avoid !important;
+        page-break-after: avoid !important;
+      }
+      pre {
+        color: #0F172A !important;
+        background: #F8FAFC !important;
+        white-space: pre-wrap !important;
+        word-break: break-word !important;
+      }
       .preview-locked-box {
-        background: #F9FAFB !important;
+        background: #F8FAFC !important;
         border: 2px dashed #9CA3AF !important;
-        border-radius: 0 !important;
-        page-break-inside: avoid;
-        break-inside: avoid;
-        padding: 16px !important;
-        margin-top: 20px !important;
-      }
-      .locked-info h3, .locked-info p, .locked-title {
-        color: #111827 !important;
-      }
-      .locked-code {
-        background: #FEF3C7 !important;
-        color: #92400E !important;
-        border: 1px solid #FCD34D !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        padding: 14px !important;
       }
       .btn-cta-buy {
         background: #111827 !important;
         color: #FFFFFF !important;
         box-shadow: none !important;
       }
-      .snippet-box {
-        background: #F8FAFC !important;
-        border: 1px solid #CBD5E1 !important;
-      }
-      .snippet-header {
-        background: #E2E8F0 !important;
-        color: #1E293B !important;
-        font-weight: 700 !important;
-      }
-      pre {
-        color: #0F172A !important;
-        background: #F8FAFC !important;
-        white-space: pre-wrap !important;
-      }
-      .card-footer {
-        color: #4B5563 !important;
-      }
-      .manual-alert {
-        background: #FEF3C7 !important;
-        border-left: 3px solid #D97706 !important;
-        color: #78350F !important;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="top-actions">
-      <span class="print-hint">${t.printHint}</span>
-      <div class="actions-buttons">
-        <a href="/audit-verify?id=${encodeURIComponent(summary.scanId)}" target="_blank" class="action-btn btn-verify">
-          ${t.verifyLinkText}
-        </a>
-        <button class="action-btn btn-print" onclick="window.print()">
-          🖨️ ${t.printBtn}
+  <div class="report-sheet container">
+    <!-- Interactive Top Toolbar (Screen Only) -->
+    <div class="noprint" style="background:#030711;color:#fff;padding:12px 18px;border-radius:10px;margin-bottom:20px;border:1px solid rgba(255,255,255,0.15);box-shadow:0 10px 25px rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#00E5FF;box-shadow:0 0 10px #00E5FF"></span>
+        <b style="font-size:11pt;color:#fff">${escapeHtml(t.officialDocTag)}</b>
+        <span style="font-size:9.5pt;color:#9ca3af">· ${escapeHtml(t.printHint)}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button onclick="window.print()" style="background:linear-gradient(135deg,#06b6d4,#8b5cf6);color:#fff;border:none;padding:8px 16px;border-radius:6px;font-size:9.5pt;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 0 15px rgba(6,182,212,0.4)">
+          🖨️ ${escapeHtml(t.savePdfBtn)}
         </button>
+        <a href="/api/scan/report?id=${encodeURIComponent(summary.scanId)}" target="_blank" rel="noopener" style="background:rgba(255,255,255,0.08);color:#00E5FF;border:1px solid rgba(0,229,255,0.3);padding:8px 14px;border-radius:6px;font-size:9.5pt;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+          📄 ${escapeHtml(t.reportBtn)}
+        </a>
+        <a href="/api/scan/patch?id=${encodeURIComponent(summary.scanId)}&type=css" download style="background:rgba(255,255,255,0.08);color:#00E5FF;border:1px solid rgba(0,229,255,0.3);padding:8px 14px;border-radius:6px;font-size:9.5pt;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+          ⚡ ${escapeHtml(t.downloadPatchBtn)}
+        </a>
+        <a href="${escapeHtml(verifyUrl)}" target="_blank" rel="noopener" style="background:rgba(255,255,255,0.05);color:#d1d5db;border:1px solid rgba(255,255,255,0.1);padding:8px 14px;border-radius:6px;font-size:9.5pt;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+          🛡️ ${escapeHtml(t.verifyBtn)}
+        </a>
       </div>
     </div>
 
     ${testDemoBanner}
 
-    <header class="header">
-      <h1>${t.headerTitle}</h1>
-      <p>${t.headerDesc}</p>
-      <div class="meta-bar">
-        <span class="meta-item">${t.domainLabel} <strong>${escapeHtml(summary.domain)}</strong></span>
-        <span class="meta-item">${t.scanIdLabel} <strong>${escapeHtml(summary.scanId)}</strong></span>
-        <span class="meta-item">${t.pagesCovered} <strong>${t.pagesWord(summary.scannedPagesCount)}</strong></span>
-        <span class="meta-item">${t.totalCardsLabel} <strong>${summary.cardsCount}</strong></span>
-        <span class="meta-item">${t.readySnippetsLabel} <strong style="color:#34D399">${summary.codeSnippetsCount}</strong></span>
-        <span class="meta-item">${t.manualInputsLabel} <strong style="color:#FBBF24">${summary.manualInputsCount}</strong></span>
+    <!-- Header with Seal and QR -->
+    <div class="cert-header">
+      <div style="max-width:68%">
+        <div style="font-size:8.5pt;font-weight:800;color:#0284c7;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1mm">
+          AIFAFOCUS · CODE ETERNAL COMPLIANCE INFRASTRUCTURE
+        </div>
+        <h1>${escapeHtml(t.headerTitle)}</h1>
+        <div style="font-size:9.5pt;color:#475569;margin:0 0 2mm">${escapeHtml(t.headerDesc)}</div>
+        <div class="sub">
+          ${escapeHtml(t.domainLabel)} <b style="font-size:11pt;color:#0f172a">${escapeHtml(summary.domain)}</b><br>
+          ${escapeHtml(t.scanIdLabel)} <b style="font-family:ui-monospace,Consolas,monospace">${escapeHtml(summary.scanId)}</b> · 
+          ${escapeHtml(t.pagesCovered)} <b>${t.pagesWord(summary.scannedPagesCount)}</b> · <span style="white-space:nowrap">${escapeHtml(t.totalCardsLabel)} <b>${summary.cardsCount}</b></span>${scanDateFormatted ? ` · <span>${escapeHtml(summary.locale === 'ru' ? 'Дата:' : summary.locale === 'es' ? 'Fecha:' : summary.locale === 'zh' ? '日期：' : 'Date:')} <b>${scanDateFormatted}</b></span>` : ''}
+        </div>
       </div>
-    </header>
+
+      <div class="seal-card">
+        ${qrSvg}
+        <div style="text-align:left">
+          <div class="seal-badge">FIXPACK<br>RECORD</div>
+          <div style="font-size:7pt;color:#64748b;margin-top:2px">ID: ${escapeHtml(summary.scanId.slice(0, 12))}...</div>
+          <div style="font-size:6.5pt;color:#059669;font-weight:700;margin-top:2px">${escapeHtml(t.registered)}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Metrics Grid -->
+    <div class="grid">
+      <div class="box"><div class="lbl">${escapeHtml(t.totalCardsLabel)}</div><div class="score" style="color:#0284c7">${summary.cardsCount}</div></div>
+      <div class="box"><div class="lbl">${escapeHtml(t.readySnippetsLabel)}</div><div class="score" style="color:#059669">${summary.codeSnippetsCount}</div></div>
+      <div class="box"><div class="lbl">${escapeHtml(t.manualInputsLabel)}</div><div class="score" style="color:#d97706">${summary.manualInputsCount}</div></div>
+    </div>
 
     ${comparisonHtml}
 
-    <div class="filter-bar">
+    <div class="filter-bar noprint">
       <button class="filter-btn active" onclick="filterCards('all')">${t.allTab} (${summary.cardsCount})</button>
       <button class="filter-btn" onclick="filterCards('snippet')">${t.snippetsTab} (${summary.codeSnippetsCount})</button>
       <button class="filter-btn" onclick="filterCards('manual')">${t.manualTab} (${summary.manualInputsCount})</button>
