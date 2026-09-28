@@ -279,7 +279,7 @@ export default async function СтраницаПаспорта({ params }: { par
 
   if (!п) {
     return (
-      <main className="pass-page">
+      <main className="pass-page keep-dark">
         <div className="pass-empty">
           <h1>{с.нет}</h1>
           <p>{id}</p>
@@ -307,7 +307,7 @@ export default async function СтраницаПаспорта({ params }: { par
   const стиль = { ['--tier' as string]: цвет } as React.CSSProperties;
 
   return (
-    <main className="pass-page">
+    <main className="pass-page keep-dark">
       <div className="passport" style={стиль}>
 
         <header className="p-header">
