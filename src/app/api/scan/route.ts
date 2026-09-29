@@ -1100,83 +1100,27 @@ export async function POST(req: NextRequest) {
     : уровеньТарифа === 0 ? 3
     : 1;
 
-  {
+  // ПОПЫТКИ ≠ ПРОВЕРКИ — 29.09.2026, слово Архитектора «делай как правильно».
+  //
+  // Здесь раньше стояла суточная норма проверок, и она списывалась ДО проверки адреса и
+  // подтверждения права: гость без галочки «подтверждаю право» получал отказ и терял свою
+  // единственную проверку на сутки, хотя сканер к сайту не обращался. Норма перенесена ниже —
+  // сразу за подтверждение права, туда, где начинается настоящая работа.
+  //
+  // На этом месте остаётся мягкий предел ПОПЫТОК: он не тратит проверок, а только не даёт
+  // бесплатными отказами (адрес разрешается в DNS) заваливать сервер. 60 в час с адреса.
+  if (суточныйЛимит !== Infinity) {
     const { allowRequest } = await import('../../../lib/rate-limit');
-    const { dbRateLimit, clientIp } = await import('../../../lib/rate-limit-db');
-    const ip = clientIp(req);
-    const безЛимита = суточныйЛимит === Infinity;
-    // Ключ счётчика: вошедший считается по своей почте, остальные — по адресу
-    // сети. Приставка `u:` нужна, чтобы почта и адрес не столкнулись в одном
-    // пространстве имён (адрес почтой быть не может, но ключ читают люди).
-    const ключ = почтаСеанса ? `scan:u:${почтаСеанса}` : `scan:${ip}`;
-    const вПамяти = безЛимита || allowRequest(req, 'scan', суточныйЛимит, 24 * 60 * 60_000);
-    const вБазе = безЛимита || (вПамяти && (почтаСеанса || ip !== 'unknown')
-      ? await dbRateLimit(ключ, суточныйЛимит, 24 * 60 * 60_000)
-      : true);
-    if (!вПамяти || !вБазе) {
-      // Совет по СЛЕДУЮЩЕЙ ступени, а не всегда «купите Spark».
-      const следующаяСтупень =
-        уровеньТарифа >= 3 ? {
-          ru: 'Если ста проверок в сутки мало — это партнёрский объём, напишите нам: contact@codeofdigitaleternity.com.',
-          en: 'If a hundred scans a day is not enough, that is partner volume — write to us: contact@codeofdigitaleternity.com.',
-          es: 'Si cien análisis al día no bastan, ese es volumen de socio: escríbanos a contact@codeofdigitaleternity.com.',
-          zh: '如果每天一百次仍不够，那属于合作伙伴用量，请联系我们：contact@codeofdigitaleternity.com。',
-        } : уровеньТарифа === 2 ? {
-          ru: 'Тариф Digital DNA поднимает предел до ста проверок в сутки.',
-          en: 'The Digital DNA plan raises the limit to a hundred scans a day.',
-          es: 'El plan Digital DNA eleva el límite a cien análisis al día.',
-          zh: 'Digital DNA 套餐可将上限提高到每天一百次。',
-        } : уровеньТарифа === 1 ? {
-          ru: 'Тариф Family Archive за $100 в месяц поднимает предел до тридцати проверок в сутки.',
-          en: 'The Family Archive plan at $100 a month raises the limit to thirty scans a day.',
-          es: 'El plan Family Archive de 100 $ al mes eleva el límite a treinta análisis al día.',
-          zh: '每月 100 美元的 Family Archive 套餐可将上限提高到每天三十次。',
-        } : уровеньТарифа === 0 ? {
-          ru: 'Подписка Spark за $15 в месяц поднимает предел до десяти проверок в сутки.',
-          en: 'The Spark plan at $15 a month raises the limit to ten scans a day.',
-          es: 'El plan Spark de 15 $ al mes eleva el límite a diez análisis al día.',
-          zh: '每月 15 美元的 Spark 订阅可将上限提高到每天十次。',
-        } : {
-          ru: 'Бесплатная регистрация даёт три проверки в сутки вместо одной.',
-          en: 'Free registration gives three scans a day instead of one.',
-          es: 'El registro gratuito da tres análisis al día en lugar de uno.',
-          zh: '免费注册即可获得每天三次，而不是一次。',
-        };
+    if (!allowRequest(req, 'scan-attempt', 60, 60 * 60_000)) {
       return NextResponse.json({
-        error: 'RATE_LIMITED',
-        // Человеку — по-человечески и НА ЕГО ЯЗЫКЕ. Молчаливый отказ выглядит
-        // поломкой сайта, а поломка отпугивает надёжнее любого лимита.
-        // 🔴 ТЕКСТ ВРАЛ ПОСЛЕ ВВЕДЕНИЯ СЕТКИ. Здесь стояло «их пять в сутки»
-        // на всех четырёх языках — число было вписано словом и не могло
-        // измениться вместе с лимитом. Человек на тарифе Family увидел бы
-        // «пять в сутки», исчерпав тридцать, и решил бы, что сайт сломан.
-        // Теперь число берётся из того же `суточныйЛимит`, по которому
-        // отказали, а совет назван по СЛЕДУЮЩЕЙ ступени, а не всегда Spark:
-        // предлагать Spark тому, кто уже на Digital DNA, — это оскорбление.
+        error: 'TOO_MANY_ATTEMPTS',
         userMessage: {
-          ru: `На сегодня проверки закончились — их ${суточныйЛимит} в сутки. `
-            + `Приходите завтра, и они снова будут доступны. ${следующаяСтупень.ru}`,
-          en: `Today’s scans are used up — there are ${суточныйЛимит} per day. `
-            + `Come back tomorrow and they will be available again. ${следующаяСтупень.en}`,
-          es: `Los análisis de hoy se han agotado: son ${суточныйЛимит} por día. `
-            + `Vuelve mañana y estarán disponibles de nuevo. ${следующаяСтупень.es}`,
-          zh: `今天的检测已用完 —— 每天 ${суточныйЛимит} 次。`
-            + `明天再来即可继续使用。${следующаяСтупень.zh}`,
+          ru: 'Слишком много попыток за час. Подождите немного и попробуйте снова — проверки при этом не тратятся.',
+          en: 'Too many attempts this hour. Please wait a little and try again — no scans are used up by this.',
+          es: 'Demasiados intentos en esta hora. Espere un poco y vuelva a intentarlo: esto no consume análisis.',
+          zh: '一小时内尝试次数过多。请稍候再试——这不会消耗检测次数。',
         }[язык],
-        retryAfterHours: 24,
-        // 🔴 ССЫЛКА ВЕЛА В ПУСТОТУ. Было
-        // 'https://www.codeofdigitaleternity.com/#pricing', но якоря `pricing`
-        // на главной центрального сайта НЕТ — проверено 10.08.2026 разбором
-        // выданной страницы: там есть только cookie-consent-banner,
-        // cookie-consent-text, email, main-content и message. Человек, у
-        // которого кончились бесплатные проверки, попадал на верх чужой
-        // страницы и не видел никаких тарифов — то есть ровно в тот момент,
-        // когда он готов платить, мы теряли его молча.
-        //
-        // Ставим якорь ЭТОГО же сайта: он существует (проверено разбором
-        // выданной страницы aifa.works), и человек остаётся там, где начал.
-        pricingUrl: 'https://aifa.works/#pricing',
-      }, { status: 429, headers: { ...headers, 'Retry-After': '86400' } });
+      }, { status: 429, headers: { ...headers, 'Retry-After': '3600' } });
     }
   }
 
@@ -1279,6 +1223,89 @@ export async function POST(req: NextRequest) {
               + '检测由我们的服务器发起访问，因此我们必须先行询问。',
           }[язык],
         }, { status: 403, headers });
+      }
+
+      // СУТОЧНАЯ НОРМА — ЗДЕСЬ, А НЕ В НАЧАЛЕ (29.09.2026). Адрес проверен, право подтверждено:
+      // дальше сканер обращается к чужому сайту, и только это списывает проверку. Отказы выше
+      // (опечатка в адресе, небезопасный адрес, нет подтверждения права) норму не тратят.
+      {
+        const { allowRequest } = await import('../../../lib/rate-limit');
+        const { dbRateLimit, clientIp } = await import('../../../lib/rate-limit-db');
+        const ip = clientIp(req);
+        const безЛимита = суточныйЛимит === Infinity;
+        // Ключ счётчика: вошедший считается по своей почте, остальные — по адресу
+        // сети. Приставка `u:` нужна, чтобы почта и адрес не столкнулись в одном
+        // пространстве имён (адрес почтой быть не может, но ключ читают люди).
+        const ключ = почтаСеанса ? `scan:u:${почтаСеанса}` : `scan:${ip}`;
+        const вПамяти = безЛимита || allowRequest(req, 'scan', суточныйЛимит, 24 * 60 * 60_000);
+        const вБазе = безЛимита || (вПамяти && (почтаСеанса || ip !== 'unknown')
+          ? await dbRateLimit(ключ, суточныйЛимит, 24 * 60 * 60_000)
+          : true);
+        if (!вПамяти || !вБазе) {
+          // Совет по СЛЕДУЮЩЕЙ ступени, а не всегда «купите Spark».
+          const следующаяСтупень =
+            уровеньТарифа >= 3 ? {
+              ru: 'Если ста проверок в сутки мало — это партнёрский объём, напишите нам: contact@codeofdigitaleternity.com.',
+              en: 'If a hundred scans a day is not enough, that is partner volume — write to us: contact@codeofdigitaleternity.com.',
+              es: 'Si cien análisis al día no bastan, ese es volumen de socio: escríbanos a contact@codeofdigitaleternity.com.',
+              zh: '如果每天一百次仍不够，那属于合作伙伴用量，请联系我们：contact@codeofdigitaleternity.com。',
+            } : уровеньТарифа === 2 ? {
+              ru: 'Тариф Digital DNA поднимает предел до ста проверок в сутки.',
+              en: 'The Digital DNA plan raises the limit to a hundred scans a day.',
+              es: 'El plan Digital DNA eleva el límite a cien análisis al día.',
+              zh: 'Digital DNA 套餐可将上限提高到每天一百次。',
+            } : уровеньТарифа === 1 ? {
+              ru: 'Тариф Family Archive за $100 в месяц поднимает предел до тридцати проверок в сутки.',
+              en: 'The Family Archive plan at $100 a month raises the limit to thirty scans a day.',
+              es: 'El plan Family Archive de 100 $ al mes eleva el límite a treinta análisis al día.',
+              zh: '每月 100 美元的 Family Archive 套餐可将上限提高到每天三十次。',
+            } : уровеньТарифа === 0 ? {
+              ru: 'Подписка Spark за $15 в месяц поднимает предел до десяти проверок в сутки.',
+              en: 'The Spark plan at $15 a month raises the limit to ten scans a day.',
+              es: 'El plan Spark de 15 $ al mes eleva el límite a diez análisis al día.',
+              zh: '每月 15 美元的 Spark 订阅可将上限提高到每天十次。',
+            } : {
+              ru: 'Бесплатная регистрация даёт три проверки в сутки вместо одной.',
+              en: 'Free registration gives three scans a day instead of one.',
+              es: 'El registro gratuito da tres análisis al día en lugar de uno.',
+              zh: '免费注册即可获得每天三次，而不是一次。',
+            };
+          return NextResponse.json({
+            error: 'RATE_LIMITED',
+            // Человеку — по-человечески и НА ЕГО ЯЗЫКЕ. Молчаливый отказ выглядит
+            // поломкой сайта, а поломка отпугивает надёжнее любого лимита.
+            // 🔴 ТЕКСТ ВРАЛ ПОСЛЕ ВВЕДЕНИЯ СЕТКИ. Здесь стояло «их пять в сутки»
+            // на всех четырёх языках — число было вписано словом и не могло
+            // измениться вместе с лимитом. Человек на тарифе Family увидел бы
+            // «пять в сутки», исчерпав тридцать, и решил бы, что сайт сломан.
+            // Теперь число берётся из того же `суточныйЛимит`, по которому
+            // отказали, а совет назван по СЛЕДУЮЩЕЙ ступени, а не всегда Spark:
+            // предлагать Spark тому, кто уже на Digital DNA, — это оскорбление.
+            userMessage: {
+              ru: `На сегодня проверки закончились — их ${суточныйЛимит} в сутки. `
+                + `Приходите завтра, и они снова будут доступны. ${следующаяСтупень.ru}`,
+              en: `Today’s scans are used up — there are ${суточныйЛимит} per day. `
+                + `Come back tomorrow and they will be available again. ${следующаяСтупень.en}`,
+              es: `Los análisis de hoy se han agotado: son ${суточныйЛимит} por día. `
+                + `Vuelve mañana y estarán disponibles de nuevo. ${следующаяСтупень.es}`,
+              zh: `今天的检测已用完 —— 每天 ${суточныйЛимит} 次。`
+                + `明天再来即可继续使用。${следующаяСтупень.zh}`,
+            }[язык],
+            retryAfterHours: 24,
+            // 🔴 ССЫЛКА ВЕЛА В ПУСТОТУ. Было
+            // 'https://www.codeofdigitaleternity.com/#pricing', но якоря `pricing`
+            // на главной центрального сайта НЕТ — проверено 10.08.2026 разбором
+            // выданной страницы: там есть только cookie-consent-banner,
+            // cookie-consent-text, email, main-content и message. Человек, у
+            // которого кончились бесплатные проверки, попадал на верх чужой
+            // страницы и не видел никаких тарифов — то есть ровно в тот момент,
+            // когда он готов платить, мы теряли его молча.
+            //
+            // Ставим якорь ЭТОГО же сайта: он существует (проверено разбором
+            // выданной страницы aifa.works), и человек остаётся там, где начал.
+            pricingUrl: 'https://aifa.works/#pricing',
+          }, { status: 429, headers: { ...headers, 'Retry-After': '86400' } });
+        }
       }
 
       if (уровеньТарифа < 4) {
