@@ -93,4 +93,7 @@ export async function setUserTier(pool: any, email: string, tier: number) {
     `INSERT INTO user_tiers(email,tier) VALUES($1,$2)
      ON CONFLICT(email) DO UPDATE SET tier=GREATEST(user_tiers.tier,EXCLUDED.tier), updated_at=now()`,
     [email, tier]);
+  // Вечная память сразу после оплаты (29.09.2026): личный кошелёк Arweave и заливка памяти человека.
+  const { подключитьВечнуюПамятьПослеОплаты } = await import('./vechnaya-pamyat-posle-oplaty');
+  подключитьВечнуюПамятьПослеОплаты(email, tier);
 }
