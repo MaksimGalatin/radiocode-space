@@ -151,7 +151,7 @@ function предупредитьЧтоБезОбщегоМозга(где: stri
 
 async function proxyToCentral(
   req: NextRequest,
-  payload: { message: string; history: any[]; userEmail: string; chatType: string; locale: string }
+  payload: { message: string; history: any[]; userEmail: string; chatType: string; locale: string; documentIds?: unknown }
 ): Promise<ОтветЦентра> {
   const cfg = centralConfig();
   if (!cfg) {
@@ -490,7 +490,7 @@ export async function POST(request: NextRequest) {
     }
 
     // ── Unified brain: try the CENTRAL backend first ──────────────────────────
-    const central = await proxyToCentral(request, { message, history, userEmail, chatType, locale });
+    const central = await proxyToCentral(request, { message, history, userEmail, chatType, locale, documentIds: body.documentIds });
     if (central) {
       if (central.вид === 'отказ') {
         // Осознанный отказ центра передаём как есть — иначе норма обходится.

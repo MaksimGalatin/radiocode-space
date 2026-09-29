@@ -8,6 +8,7 @@ import { Send, Trash2, Bot, User, Loader2, Mic, Volume2, VolumeX } from "lucide-
 import { t } from "@/lib/i18n";
 import { useЯзык } from "@/lib/server-locale";
 import { useVoiceChat } from "@/hooks/useVoiceChat";
+import { AifaDocButton, AifaDocChips, подсказкаКДокументу, type ПриложенныйДокумент } from "@/components/AifaDocButton";
 
 interface Message {
   id: string;
@@ -64,6 +65,9 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const lang = useЯзык();
+  // Скрепка (29.09.2026): приложенные документы остаются до ручного снятия — можно задать несколько вопросов подряд.
+  const [документы, setДокументы] = useState<ПриложенныйДокумент[]>([]);
+  const [строкаДок, setСтрокаДок] = useState("");
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -289,9 +293,12 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
   // ── Handlers ──
 
   const sendMessage = async (text: string) => {
-    if (!text.trim() || isLoading || isStreamActive) return;
+    // Файл приложен, а текста нет — отправляем подсказку «прочитай документ».
+    const текст = text.trim() || (документы.length ? подсказкаКДокументу(lang) : "");
+    if (!текст || isLoading || isStreamActive) return;
+    const пометка = документы.length ? "\n📎 " + документы.map((д) => д.name).join(", ") : "";
 
-    const userMsg: Message = { id: `msg_${Date.now()}`, role: "user", content: text.trim(), timestamp: new Date(), revealed: 0 };
+    const userMsg: Message = { id: `msg_${Date.now()}`, role: "user", content: текст + пометка, timestamp: new Date(), revealed: 0 };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setIsLoading(true);
@@ -311,7 +318,8 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
       const res = await fetch("/api/aifa-chat", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: text.trim(),
+          message: текст,
+          documentIds: документы.map((д) => д.id),
           history: messages.filter(m => m.role !== 'assistant' || m.revealed >= m.content.length)
             .map(m => ({ role: m.role, content: m.content })),
           userEmail,
@@ -341,7 +349,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
         // запись сорвётся (моргнула база), эта её подстрахует. Повтор не удвоит
         // память — appendVerbatim сверяет последнюю запись и пропускает её.
         try {
-          fetch("/api/memory/append", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chatType: типЧата, userMessage: text.trim(), assistantMessage: data.response }) })
+          fetch("/api/memory/append", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chatType: типЧата, userMessage: текст + пометка, assistantMessage: data.response }) })
             // Молчаливое .catch(()=>{}) прятало потерю переписки: человек видел
             // ответ AIfa и был уверен, что диалог сохранён. Теперь неудача
             // хотя бы кричит в консоль — её видно и в журнале ошибок.
@@ -521,7 +529,10 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
             </div>
           )}
           <form onSubmit={handleSubmit} className="border-t border-border p-2 sm:p-3 md:p-4">
+            <AifaDocChips docs={документы} lang={lang} message={строкаДок} onRemove={(id) => setДокументы((п) => п.filter((д) => д.id !== id))} />
             <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-end gap-2 md:gap-3">
+              <AifaDocButton lang={lang} disabled={isBusy} onMessage={setСтрокаДок}
+                onAttached={(д) => setДокументы((п) => [...п.filter((x) => x.id !== д.id), д].slice(-3))} />
               {voice.supportsSTT && (
               <button type="button" aria-label="voice input" onClick={() => {
                   if (voice.listening) { voice.stopListening(); return; }
@@ -541,7 +552,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
                   // Enter sends; Shift+Enter inserts a new line (grows the box down).
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
-                    if (input.trim() && !isBusy) sendMessage(input);
+                    if ((input.trim() || документы.length) && !isBusy) sendMessage(input);
                   }
                 }}
                 // 🔴 ФОКУС ПРИХОДИЛ СЮДА, А ЭКРАН ОСТАВАЛСЯ НАВЕРХУ (11.09.2026).

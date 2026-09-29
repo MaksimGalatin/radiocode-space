@@ -4,6 +4,7 @@ import { прочитатьОтветЧата, ОтказЧата, текстО�
 import React, { useState, useRef, useEffect } from "react";
 import { MessageSquare, X, Send, Loader2, Bot, Sparkles, Trash2 } from "lucide-react";
 import { useLanguageOptional } from "@/lib/LanguageContext";
+import { AifaDocButton, AifaDocChips, подсказкаКДокументу, type ПриложенныйДокумент } from "@/components/AifaDocButton";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Message {
@@ -93,6 +94,9 @@ const OracleWidget = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
+  // Скрепка (29.09.2026): приложенные документы остаются до ручного снятия — можно задать несколько вопросов подряд.
+  const [документы, setДокументы] = useState<ПриложенныйДокумент[]>([]);
+  const [строкаДок, setСтрокаДок] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -199,10 +203,12 @@ const OracleWidget = () => {
   }, [open, messages]);
 
   const sendMessage = async () => {
-    const text = input.trim();
+    // Файл приложен, а текста нет — отправляем подсказку «прочитай документ».
+    const text = input.trim() || (документы.length ? подсказкаКДокументу(locale) : "");
     if (!text || loading) return;
+    const пометка = документы.length ? "\n📎 " + документы.map((д) => д.name).join(", ") : "";
 
-    const userMsg: Message = { role: "user", content: text };
+    const userMsg: Message = { role: "user", content: text + пометка };
     const updated = [...messages, userMsg];
     setMessages(updated);
     setInput("");
@@ -225,13 +231,13 @@ const OracleWidget = () => {
       const res = await fetch("/api/aifa-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, locale, userEmail, chatType: 'oracle' }),
+        body: JSON.stringify({ message: text, locale, userEmail, chatType: 'oracle', documentIds: документы.map((д) => д.id) }),
       });
       
       const data = await прочитатьОтветЧата(res);
       if (data.success) {
         setMessages((prev) => [...prev, { role: "assistant", content: data.response }]);
-        try { fetch("/api/memory/append", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chatType: "oracle", userMessage: text, assistantMessage: data.response }) })
+        try { fetch("/api/memory/append", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chatType: "oracle", userMessage: text + пометка, assistantMessage: data.response }) })
             // Молчаливое .catch(()=>{}) прятало потерю переписки: человек видел
             // ответ AIfa и был уверен, что диалог сохранён. Теперь неудача
             // хотя бы кричит в консоль — её видно и в журнале ошибок.
@@ -390,8 +396,11 @@ const OracleWidget = () => {
               </div>
             )}
 
+            <AifaDocChips docs={документы} lang={locale} message={строкаДок} dark onRemove={(id) => setДокументы((п) => п.filter((д) => д.id !== id))} />
             {/* Input */}
             <div className="p-3 border-t border-white/5 bg-black/20 flex items-center gap-2">
+              <AifaDocButton lang={locale} disabled={loading} onMessage={setСтрокаДок} onAttached={(д) => setДокументы((п) => [...п.filter((x) => x.id !== д.id), д].slice(-3))}
+                className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/[0.06] hover:bg-white/10 text-[#00FF88] transition-all shrink-0 cursor-pointer disabled:opacity-40" />
               <input
                 ref={inputRef}
                 type="text"
@@ -404,7 +413,7 @@ const OracleWidget = () => {
               />
               <button
                 onClick={sendMessage}
-                disabled={!input.trim() || loading}
+                disabled={(!input.trim() && !документы.length) || loading}
                 aria-label={locale === 'ru' ? 'Отправить сообщение' : locale === 'es' ? 'Enviar mensaje' : locale === 'zh' ? '发送消息' : 'Send message'}
                 className="w-9 h-9 flex items-center justify-center rounded-xl bg-gradient-to-r from-[#00FF88] to-emerald-600 disabled:from-gray-800 disabled:to-gray-800 disabled:opacity-40 transition-all hover:brightness-110 cursor-pointer"
               >
