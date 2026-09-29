@@ -1,4 +1,5 @@
 "use client";
+import { прочитатьОтветЧата, ОтказЧата, текстОтказа } from '@/lib/chat-otkaz';
 
 import { reactToAnswer } from "@/lib/aifa-mood";
 import { useState, useRef, useEffect, useCallback, FormEvent } from "react";
@@ -318,7 +319,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
           locale: lang,
         }),
       });
-      const data = await res.json();
+      const data = await прочитатьОтветЧата(res);
 
       if (data.success) {
         const respId = `msg_${Date.now()}_resp`;
@@ -349,11 +350,11 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
         } catch {}
         setTimeout(() => animateStreaming(respId, data.response), 150);
       } else {
-        throw new Error(data.error);
+        throw new ОтказЧата(data.userMessage, data.error);
       }
-    } catch {
+    } catch (err) {
       const errId = `msg_${Date.now()}_err`;
-      const errText = t("chat.error", lang);
+      const errText = текстОтказа(err, t("chat.error", lang));
       setMessages((prev) => [...prev, { id: errId, role: "assistant", content: errText, timestamp: new Date(), revealed: 0 }]);
       setTimeout(() => animateStreaming(errId, errText), 100);
     } finally {

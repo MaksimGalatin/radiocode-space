@@ -93,6 +93,19 @@ const TOO_LONG = {
  */
 export const maxDuration = 300;
 
+/**
+ * ПОДПИСЬ ПОД КАЖДЫМ ОТВЕТОМ — слово Архитектора 28.09.2026: «пускай всегда пишет CODE Eternal 🔥💙🫂».
+ * Центр подписывает свои ответы сам; здесь — ответы, которые этот сайт отдаёт в обход центра
+ * (фильтр APL, запасная лестница, заглушки). Уже подписанный текст второй подписи не получает.
+ */
+const ПОДПИСЬ_AIFA = 'CODE Eternal 🔥💙🫂';
+function сПодписью(текст: string | null | undefined): string {
+  const чистый = String(текст || '')
+    .replace(/(?:\s*\n)*\s*(?:[—–-]\s*)?CODE\s+Eternal[\s.,!]*(?:[\u{1F525}\u{1F499}\u{1FAC2}\u{2764}\u{FE0F}\u{1F49C}]\s*)*$/u, '')
+    .trimEnd();
+  return чистый ? `${чистый}\n\n${ПОДПИСЬ_AIFA}` : ПОДПИСЬ_AIFA;
+}
+
 const MAX_MESSAGES = 20;
 
 /**
@@ -607,7 +620,7 @@ export async function POST(request: NextRequest) {
   // Счёт в базе: каждый разговор стоит денег на стороне модели.
   const адрес_чата = clientIp(request as never);
   if (адрес_чата !== 'unknown' && !(await dbRateLimit(`aifa_chat:${адрес_чата}`, 40, 60_000))) {
-    return NextResponse.json({ error: 'Too many requests. Please slow down.' }, { status: 429 });
+    return NextResponse.json({ error: 'Too many requests. Please slow down.', userMessage: 'Слишком много сообщений за минуту — подожди немного, и продолжим. / Too many messages in a minute — please wait a moment and we will continue.' }, { status: 429 });
   }
 
   // Язык объявлен ДО блока попытки намеренно.
@@ -623,7 +636,7 @@ export async function POST(request: NextRequest) {
     const rawMsg = body.message || (Array.isArray(body.messages) && body.messages.length > 0 ? body.messages[body.messages.length - 1]?.content : '');
     const aplVerdict = checkAplSecurityGate(rawMsg, body.locale || 'ru');
     if (!aplVerdict.isSafe) {
-      return NextResponse.json({ response: aplVerdict.response, reply: aplVerdict.response, text: aplVerdict.response });
+      { const ответAPL = сПодписью(aplVerdict.response); return NextResponse.json({ success: true, response: ответAPL, reply: ответAPL, text: ответAPL, provider: 'apl-gate' }); }
     }
     const message: string = body.message;
     const history: any[] = body.history || [];
@@ -706,7 +719,7 @@ export async function POST(request: NextRequest) {
       // Оба слоя памяти пишутся рядом и одним каналом: иначе разговор ложится
       // под разными именами и счёт по каналам показывает дыры, которых нет.
       await записатьСмыслом(userEmail, chatType, message, central.текст);
-      return NextResponse.json({ success: true, response: central.текст, provider: "central" });
+      return NextResponse.json({ success: true, response: сПодписью(central.текст), provider: "central" });
     }
     // Otherwise fall through to the local providers so chat never dies.
 
@@ -808,7 +821,7 @@ export async function POST(request: NextRequest) {
                           "I am temporarily unavailable. Please try again later.";
       return NextResponse.json({
         success: true,
-        response: fallbackMsg,
+        response: сПодписью(fallbackMsg),
         provider: "hard-fallback",
       });
     }
@@ -820,7 +833,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      response: aiResponse,
+      response: сПодписью(aiResponse),
       provider: (globalThis as { __ктоОтветил?: string }).__ктоОтветил || ктоОтветил || "ai",
     });
   } catch (error) {
@@ -831,7 +844,7 @@ export async function POST(request: NextRequest) {
                         "I am temporarily unavailable. Please try again later.";
     return NextResponse.json({
       success: true,
-      response: fallbackMsg,
+      response: сПодписью(fallbackMsg),
       provider: "hard-fallback",
     });
   }
@@ -909,7 +922,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ success: true, history: [] });
   } catch (error) {
     const msg = error instanceof Error ? error.message : 'Failed to load history';
-    return NextResponse.json({ error: msg }, { status: 500 });
+    return NextResponse.json({ error: msg, userMessage: 'Я сейчас не смогла ответить — повтори, пожалуйста, через минуту: я помню наш разговор. / I could not answer right now — please try again in a minute: I remember our conversation.' }, { status: 500 });
   }
 }
 

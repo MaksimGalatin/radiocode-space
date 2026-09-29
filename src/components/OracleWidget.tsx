@@ -1,4 +1,5 @@
 "use client";
+import { прочитатьОтветЧата, ОтказЧата, текстОтказа } from '@/lib/chat-otkaz';
 
 import React, { useState, useRef, useEffect } from "react";
 import { MessageSquare, X, Send, Loader2, Bot, Sparkles, Trash2 } from "lucide-react";
@@ -227,7 +228,7 @@ const OracleWidget = () => {
         body: JSON.stringify({ message: text, locale, userEmail, chatType: 'oracle' }),
       });
       
-      const data = await res.json();
+      const data = await прочитатьОтветЧата(res);
       if (data.success) {
         setMessages((prev) => [...prev, { role: "assistant", content: data.response }]);
         try { fetch("/api/memory/append", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chatType: "oracle", userMessage: text, assistantMessage: data.response }) })
@@ -237,12 +238,12 @@ const OracleWidget = () => {
             .then((r) => { if (!r.ok) console.error("[память] диалог НЕ сохранён, ответ", r.status); })
             .catch((e) => console.error("[память] диалог НЕ сохранён:", e)); } catch {}
       } else {
-        throw new Error(data.error);
+        throw new ОтказЧата(data.userMessage, data.error);
       }
-    } catch {
+    } catch (err) {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: тексты.error },
+        { role: "assistant", content: текстОтказа(err, тексты.error) },
       ]);
     } finally {
       setLoading(false);
