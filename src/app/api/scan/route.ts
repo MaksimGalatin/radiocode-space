@@ -185,6 +185,7 @@ function ключиGemini(): string[] {
     process.env.GEMINI_API_KEY_2,
     process.env.GEMINI_API_KEY_3,
     process.env.GEMINI_API_KEY_4,
+    process.env.GEMINI_API_KEY_5,
   ].filter((к): к is string => typeof к === 'string' && к.trim().length > 0);
 }
 

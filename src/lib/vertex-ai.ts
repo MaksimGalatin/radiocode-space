@@ -212,10 +212,14 @@ export async function vertexChatCompletion(
  * ЛЕСТНИЦА МОДЕЛЕЙ — замер `GET /v1beta/models` 24.09.2026: старшая Pro у
  * Google — `gemini-3.1-pro-preview`, стабильная — `gemini-2.5-pro`. Меняется
  * переменной `VERTEX_ЛЕСТНИЦА_ЧАТА` без правки кода.
+ *
+ * 29.09.2026 — ПОПРОЩЕ И ДЕШЕВЛЕ, слово Архитектора: «поставь модель попроще, 0,25 за сообщение
+ * это дорого». Было 3.1 Pro → 2.5 Pro → 2.5 Flash; стало 3.5 Flash-Lite ($0,30/$2,50 за млн) →
+ * 2.5 Flash ($0,30/$2,50) → 2.5 Flash-Lite ($0,10/$0,40). Ответ ~$0,02 вместо ~$0,25.
  */
 export const ЛЕСТНИЦА_VERTEX_ЧАТА: string[] = (
   process.env.VERTEX_CHAT_MODELS || process.env.VERTEX_ЛЕСТНИЦА_ЧАТА ||
-  'google/gemini-3.1-pro-preview,google/gemini-2.5-pro,google/gemini-2.5-flash'
+  'google/gemini-3.5-flash-lite,google/gemini-2.5-flash,google/gemini-2.5-flash-lite'
 ).split(',').map((м) => м.trim()).filter(Boolean);
 
 export async function vertexЧатОткрыт(): Promise<boolean> {
