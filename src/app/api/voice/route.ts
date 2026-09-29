@@ -175,7 +175,8 @@ function ключиGemini(): string[] {
     process.env.GEMINI_API_KEY_3,
     process.env.GEMINI_API_KEY_4,
     process.env.GEMINI_API_KEY_5,
-  ].filter((k): k is string => typeof k === 'string' && k.trim().length > 0);
+    // Копии одного ключа — одна попытка (29.09.2026: на центральном ключи 2 и 3 оказались копиями 1).
+  ].filter((k): k is string => typeof k === 'string' && k.trim().length > 0).filter((ключ, i, все) => все.indexOf(ключ) === i);
 }
 
 /** Служебный ключ гранта — тот же, каким ходит чат на Vertex. */

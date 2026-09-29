@@ -186,7 +186,8 @@ function ключиGemini(): string[] {
     process.env.GEMINI_API_KEY_3,
     process.env.GEMINI_API_KEY_4,
     process.env.GEMINI_API_KEY_5,
-  ].filter((к): к is string => typeof к === 'string' && к.trim().length > 0);
+    // Копии одного ключа — одна попытка (29.09.2026: на центральном ключи 2 и 3 оказались копиями 1).
+  ].filter((к): к is string => typeof к === 'string' && к.trim().length > 0).filter((ключ, i, все) => все.indexOf(ключ) === i);
 }
 
 /**
@@ -238,6 +239,11 @@ async function createChatCompletionWithFallback(
       const client = new OpenAI({
         apiKey: ключи[н],
         baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
+        // 29.09.2026: без этого клиент сам повторял запрос дважды на 503/429 с паузами, и один
+        // перегруженный ключ съедал весь срок слоя модели — до новых ключей очередь не доходила.
+        // Следующий ключ своей лестницы лучше скрытого повтора того же.
+        maxRetries: 0,
+        timeout: 20_000,
       });
       const completion = await client.chat.completions.create({
         model: имяМодели, messages, temperature, max_tokens,
