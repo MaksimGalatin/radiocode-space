@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { centralConfig, buildCentralHeaders, centralFetch } from '@/lib/central-proxy';
+import { dbRateLimit } from '@/lib/rate-limit-db';
 
 /**
  * ДОКУМЕНТЫ ЧЕЛОВЕКА — ПЕРЕСЫЛКА В ЦЕНТР (29.09.2026). Один файл на три спутника, байт в байт.
@@ -19,6 +20,13 @@ const НУЖЕН_ВХОД: Record<string, string> = {
   zh: '请先登录再添加文档：文件保存在你的账户中。',
 };
 
+const СЛИШКОМ_ЧАСТО: Record<string, string> = {
+  ru: 'Слишком много запросов подряд — подожди минуту и попробуй снова.',
+  en: 'Too many requests in a row — please wait a minute and try again.',
+  es: 'Demasiadas solicitudes seguidas: espera un minuto y vuelve a intentarlo.',
+  zh: '请求过于频繁，请等一分钟再试。',
+};
+
 async function переслать(request: NextRequest, метод: 'GET' | 'POST' | 'DELETE'): Promise<Response> {
   const я = request.nextUrl.searchParams.get('locale') || 'ru';
   let email = '';
@@ -30,6 +38,15 @@ async function переслать(request: NextRequest, метод: 'GET' | 'POS
   }
   if (!email) {
     return NextResponse.json({ success: false, error: 'auth_required', userMessage: НУЖЕН_ВХОД[я] || НУЖЕН_ВХОД.ru }, { status: 401 });
+  }
+  // ПРЕДЕЛ ЧАСТОТЫ НА ЧЕЛОВЕКА (29.09.2026): страж guard.mjs — «публичный роут без ограничения
+  // частоты». Ключ свой, «documents-relay:», чтобы не складываться со счётчиком центра: база общая.
+  // Центр держит свои пределы по методам; при сбое базы dbRateLimit пропускает.
+  if (!(await dbRateLimit(`documents-relay:${email}`, 120, 60_000))) {
+    return NextResponse.json(
+      { success: false, error: 'rate_limited', userMessage: СЛИШКОМ_ЧАСТО[я] || СЛИШКОМ_ЧАСТО.ru },
+      { status: 429, headers: { 'Retry-After': '60' } },
+    );
   }
   const центр = centralConfig();
   if (!центр) {
