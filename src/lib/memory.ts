@@ -315,6 +315,14 @@ export async function buildBrainKnowledge(queryText: string, userEmail?: string 
   if (!queryText) return null;
   if (!isEmbeddingConfigured() || !isVectorStoreConfigured()) return null;
 
+  // ТОЛЬКО АРХИТЕКТОРУ — решение Архитектора «две полки» от 27.09.2026, перенесено с центрального
+  // сайта 29.09.2026. «Публичная» часть этого индекса (__brain__) не проверялась ни разу: перебор
+  // 27.09 нашёл в ней личные диалоги с моделями, технические выгрузки и 1 747 кусков с почтами.
+  // Центральный закрыл её для посетителей в тот же день, а здесь — в запасной ветке, когда центр
+  // не ответил, — посетитель до 29.09 получал до 60 таких кусков на вопрос. Посетителю теперь
+  // открытая полка (знанияМозга → lib/brain-shelf.ts), этот индекс — только вошедшему Архитектору.
+  if (!этоАрхитектор(userEmail)) return null;
+
   try {
     const queryEmbedding = await embedText(queryText, 'RETRIEVAL_QUERY');
     if (!queryEmbedding) return null;
@@ -338,6 +346,28 @@ export async function buildBrainKnowledge(queryText: string, userEmail?: string 
   } catch (e) {
     console.warn('[Brain Knowledge] search failed:', e);
     return null;
+  }
+}
+
+/**
+ * Знания Мозга для системного контекста — по решению «две полки» (27.09.2026):
+ *   • посетитель — открытая полка: только уже опубликованное на наших сайтах (8 466 кусков
+ *     на 29.09.2026, каждый прошёл четыре проверки сборщика);
+ *   • Архитектор, вошедший под своей почтой, — весь индекс, как было.
+ * Любой отказ полки — ответ без неё, а не ошибка: чат не падает из-за поиска.
+ */
+async function знанияМозга(queryText: string, userEmail?: string | null): Promise<string> {
+  if (!queryText) return '';
+  if (этоАрхитектор(userEmail)) {
+    const мозг = await buildBrainKnowledge(queryText, userEmail);
+    return мозг ? brainPromptSection(мозг) : '';
+  }
+  try {
+    const { открытаяПолкаБлоком } = await import('./brain-shelf');
+    return await открытаяПолкаБлоком(queryText, 5);
+  } catch (e) {
+    console.warn('[открытая полка] не сработала — отвечаю без неё:', String(e).slice(0, 200));
+    return '';
   }
 }
 
@@ -544,8 +574,7 @@ export async function buildMemorySection(userEmail: string, queryText = '', clie
   const полная = userEmail ? await buildFullMemory(userEmail) : null;
   if (полная) {
     out += fullPromptSection(полная);
-    const мозг1 = await buildBrainKnowledge(queryText, userEmail);
-    if (мозг1) out += brainPromptSection(мозг1);
+    out += await знанияМозга(queryText, userEmail);
     return out;
   }
 
@@ -572,9 +601,8 @@ export async function buildMemorySection(userEmail: string, queryText = '', clie
     if (recent) out += recentPromptSection(recent);
   }
 
-  // 5. Shared project Brain knowledge (available to every conversation).
-  const brain = await buildBrainKnowledge(queryText, userEmail);
-  if (brain) out += brainPromptSection(brain);
+  // 5. Знания Мозга: посетителю — открытая полка, Архитектору — весь индекс (решение «две полки»).
+  out += await знанияМозга(queryText, userEmail);
 
   return out;
 }
