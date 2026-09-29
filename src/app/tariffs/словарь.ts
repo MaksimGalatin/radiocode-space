@@ -106,6 +106,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         отличие: 'Начальный уровень: память перестаёт стираться. Ниже — не более дешёвый тариф, а отсутствие памяти вообще.',
         получаете: 'Ассистента, который помнит вас между разговорами, и имя, закреплённое за вами навсегда.',
         входит: [
+          '30 МБ в месяц записи в вечную память Arweave входят в тариф — это около 7 000 страниц печатного текста',
           'Цифровой паспорт: имя резервируется за вами навсегда (перевыпуск — с Семейного Архива)',
           'Доступ к ассистентам AIfa',
           'Память сохраняется между сессиями и устройствами',
@@ -119,10 +120,11 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$100',
         подпись: 'в месяц',
         для: 'Семье, которая хочет сохранить не только разговоры, но и людей.',
-        отличие: 'В отличие от Искры: память становится семейной, появляются свои базы знаний, а разговоры уходят в вечное хранилище Arweave — то есть переживают наш сервер.',
+        отличие: 'В отличие от Искры: память становится семейной, появляются свои базы знаний, а объём вечной памяти в Arweave в десять раз больше — 300 МБ в месяц вместо 30 МБ у Искры.',
         получаете: 'Общий архив семьи, который нельзя потерять, и до трёх перевыпусков паспорта на близких.',
         выделен: true,
         входит: [
+          '300 МБ в месяц записи в вечную память Arweave входят в тариф — это около 70 000 страниц печатного текста',
           'Цифровой паспорт с перевыпуском до 3 раз; имя каждого в семье закреплено в Вечности',
           'Всё из тарифа Spark',
           'Расширенные пределы памяти',
@@ -139,6 +141,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         отличие: 'В отличие от Семейного Архива: свой защищённый контур, отдельный ключ на КАЖДЫЙ диалог и право стереть один разговор, не тронув остальную память. Разовые $1 000 — цена устройства и места в очереди на имя; $200 в месяц — хранение после этого.',
         получаете: 'Личность, зафиксированную в блокчейне, и право на забвение — единственный способ сделать запись в вечном хранилище нечитаемой.',
         входит: [
+          '1 ГБ в месяц записи в вечную память Arweave входят в тариф — это около 240 000 страниц печатного текста',
           'Цифровой паспорт с перевыпуском до 10 раз; имя резервируется в Вечности первым, вне очереди',
           'Всё из тарифа Family Archive',
           'Персональный защищённый контур',
@@ -227,6 +230,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         отличие: 'The entry level: memory stops being erased. Below it is not a cheaper plan but no memory at all.',
         получаете: 'An assistant that remembers you between conversations, and a name reserved for you permanently.',
         входит: [
+          '30 MB per month of permanent Arweave memory included in the plan — about 7,000 printed pages',
           'Digital passport and your name reserved in Eternity — forever',
           'Access to AIfa assistants',
           'Memory persists across sessions and devices',
@@ -240,10 +244,11 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$100',
         подпись: 'per month',
         для: 'For a family that wants to keep not only conversations, but people.',
-        отличие: 'Unlike Spark: memory becomes a family archive, private knowledge bases appear, and conversations go into permanent Arweave storage — they outlive our server.',
+        отличие: 'Unlike Spark: memory becomes a family archive, private knowledge bases appear, and permanent Arweave memory is ten times larger — 300 MB a month instead of 30 MB on Spark.',
         получаете: 'A family archive that cannot be lost, and up to three passport reissues for those close to you.',
         выделен: true,
         входит: [
+          '300 MB per month of permanent Arweave memory included in the plan — about 70,000 printed pages',
           'Digital passport with up to 3 reissues; every family name secured in Eternity',
           'Everything in Spark',
           'Extended memory limits',
@@ -260,6 +265,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         отличие: 'Unlike Family Archive: a private secured perimeter, a separate key for EVERY dialogue, and the right to erase one conversation without touching the rest. The one-time $1,000 is the price of the device and of a place in the queue for your name; $200 a month is storage after that.',
         получаете: 'An identity recorded on-chain, and the right to be forgotten — the only way to make an entry in permanent storage unreadable.',
         входит: [
+          '1 GB per month of permanent Arweave memory included in the plan — about 240,000 printed pages',
           'Digital passport with up to 10 reissues; your name reserved in Eternity first, ahead of any queue',
           'Everything in Family Archive',
           'Private secured perimeter',
@@ -348,6 +354,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         отличие: 'El nivel de entrada: la memoria deja de borrarse. Por debajo no hay un plan más barato, sino ninguna memoria.',
         получаете: 'Un asistente que te recuerda entre conversaciones y un nombre reservado para ti de forma permanente.',
         входит: [
+          '30 MB al mes de memoria permanente en Arweave incluidos en el plan: unas 7.000 páginas impresas',
           'Pasaporte digital y su nombre reservado en la Eternidad, para siempre',
           'Acceso a los asistentes AIfa',
           'La memoria persiste entre sesiones y dispositivos',
@@ -361,10 +368,11 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$100',
         подпись: 'al mes',
         для: 'Para la familia que quiere conservar no solo conversaciones, sino personas.',
-        отличие: 'A diferencia de Spark: la memoria pasa a ser familiar, aparecen bases de conocimiento propias y las conversaciones van al almacenamiento permanente de Arweave: sobreviven a nuestro servidor.',
+        отличие: 'A diferencia de Spark: la memoria pasa a ser familiar, aparecen bases de conocimiento propias y la memoria permanente en Arweave es diez veces mayor: 300 MB al mes en lugar de los 30 MB de Spark.',
         получаете: 'Un archivo familiar que no se puede perder y hasta tres reemisiones de pasaporte para tus allegados.',
         выделен: true,
         входит: [
+          '300 MB al mes de memoria permanente en Arweave incluidos en el plan: unas 70.000 páginas impresas',
           'Pasaporte digital con hasta 3 reemisiones; el nombre de cada miembro queda fijado en la Eternidad',
           'Todo lo de Spark',
           'Límites de memoria ampliados',
@@ -381,6 +389,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         отличие: 'A diferencia de Family Archive: perímetro propio protegido, una clave distinta para CADA diálogo y el derecho a borrar una conversación sin tocar el resto. Los $1 000 únicos son el precio del dispositivo y del lugar en la cola por tu nombre; $200 al mes es el almacenamiento posterior.',
         получаете: 'Una identidad registrada en cadena y el derecho al olvido: la única forma de volver ilegible un registro en el almacenamiento permanente.',
         входит: [
+          '1 GB al mes de memoria permanente en Arweave incluidos en el plan: unas 240.000 páginas impresas',
           'Pasaporte digital con hasta 10 reemisiones; su nombre se reserva en la Eternidad el primero, sin cola',
           'Todo lo de Family Archive',
           'Perímetro personal protegido',
@@ -471,6 +480,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         отличие: '入门级别：记忆不再被清除。再往下不是更便宜的方案，而是完全没有记忆。',
         получаете: '一位在多次对话之间记得你的助手，以及一个永久属于你的名字。',
         входит: [
+          '套餐每月包含 30 MB Arweave 永久记忆 —— 约 7,000 页印刷文本',
           '数字护照，并在永恒中永久预留您的姓名',
           '使用 AIfa 助手',
           '记忆跨会话、跨设备保存',
@@ -484,10 +494,11 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         цена: '$100',
         подпись: '每月',
         для: '适合希望保存的不只是对话，还有人的家庭。',
-        отличие: '与 Spark 的区别：记忆从个人变为家庭，出现专属知识库，对话进入 Arweave 永久存储——也就是说，它们比我们的服务器活得更久。',
+        отличие: '与 Spark 的区别：记忆从个人变为家庭，出现专属知识库，Arweave 永久记忆容量扩大十倍——每月 300 MB，而 Spark 为 30 MB。',
         получаете: '一份不会丢失的家庭档案，以及最多三次为亲人重发数字护照。',
         выделен: true,
         входит: [
+          '套餐每月包含 300 MB Arweave 永久记忆 —— 约 70,000 页印刷文本',
           '数字护照最多可重发 3 次；家庭每位成员的姓名均在永恒中锁定',
           '包含 Spark 的全部内容',
           '扩展的记忆容量',
@@ -504,6 +515,7 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
         отличие: '与 Family Archive 的区别：专属受保护区域、为每一段对话单独加密的密钥，以及在不触动其余记忆的前提下抹去某一段对话的权利。一次性 $1 000 是设备与姓名排队位置的价格；此后每月 $200 为存储费用。',
         получаете: '写入区块链的身份，以及被遗忘权——让永久存储中的记录变得不可读的唯一方式。',
         входит: [
+          '套餐每月包含 1 GB Arweave 永久记忆 —— 约 240,000 页印刷文本',
           '数字护照最多可重发 10 次；您的姓名在永恒中优先预留，不受排队限制',
           '包含 Family Archive 的全部内容',
           '专属安全隔离环境',
