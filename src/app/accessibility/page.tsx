@@ -53,7 +53,9 @@ export default function AccessibilityPage() {
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-cyan-600 focus:text-white focus:rounded-lg focus:font-semibold focus:outline-none focus:ring-2 focus:ring-cyan-400"
         >
-          Skip to main content
+          {/* 30.09.2026: текст был зашит по-английски и шёл так на /ru, /es, /zh (перебор
+              английский_на_чужих.mjs). Словарь — как у общей ссылки пропуска в макете. */}
+          {({ ru: 'Перейти к основному содержимому', es: 'Saltar al contenido principal', zh: '跳转到主要内容' } as Record<string, string>)[locale] ?? 'Skip to main content'}
         </a>
 
         <div className="pt-6">
