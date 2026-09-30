@@ -402,7 +402,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
         {!embedded && (
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}
           className="text-center mb-12">
-          <span className="text-xs md:text-sm font-mono text-cyan-400 tracking-[0.3em] mb-4 block">{t("chat.label", lang)}</span>
+          <span className="text-sm font-mono text-cyan-400 tracking-[0.3em] mb-4 block">{t("chat.label", lang)}</span>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             {t("chat.title1", lang)}{" "}
             <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">{t("chat.title2", lang)}</span>
@@ -503,7 +503,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
               <div className="flex flex-wrap gap-2">
                 {suggestedPrompts.map((prompt) => (
                   <button key={prompt} onClick={() => sendMessage(prompt)}
-                    className="text-xs px-3 py-1.5 rounded-full border border-border hover:border-cyan-400/30 hover:bg-cyan-400/5 text-muted-foreground hover:text-cyan-400 transition-all">
+                    className="text-sm px-3 py-1.5 rounded-full border border-border hover:border-cyan-400/30 hover:bg-cyan-400/5 text-muted-foreground hover:text-cyan-400 transition-all">
                     {prompt}
                   </button>
                 ))}
@@ -512,7 +512,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
           )}
 
           {(voice.listening || voice.error) && (
-            <div className="px-4 md:px-6 pb-2 text-xs" style={{ color: voice.error ? "#f87171" : "#22d3ee" }}>
+            <div className="px-4 md:px-6 pb-2 text-sm" style={{ color: voice.error ? "#f87171" : "#22d3ee" }}>
               {(() => { const V: Record<string, [string,string,string,string]> = {
                   denied: ["Доступ к микрофону запрещён — разреши его в настройках браузера.", "Microphone access denied — allow it in browser settings.", "Micrófono denegado — actívalo en el navegador.", "麦克风被拒绝——请在浏览器设置中允许。"],
                   "no-mic": ["Микрофон не найден.", "No microphone found.", "No hay micrófono.", "未找到麦克风。"],
