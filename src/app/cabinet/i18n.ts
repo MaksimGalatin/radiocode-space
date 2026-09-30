@@ -1,4 +1,6 @@
 "use client";
+import { useEffect } from "react";
+import { useLanguageOptional } from "@/lib/LanguageContext";
 import { useLang } from "@/lib/i18n";
 
 // Cabinet-local i18n: key -> [ru, en, es, zh]. Kept self-contained so the
@@ -333,7 +335,17 @@ const D: Record<string, L4> = {
 };
 
 export function useCabT() {
-  const lang = useLang((s: any) => s.lang) as "en" | "ru" | "es" | "zh";
+  // 29.09.2026: язык кабинета = язык сайта. Раньше кабинет держал язык в своём
+  // хранилище и после нажатия RU/EN/ES/ZH в кабинете переставал слушать шапку:
+  // сайт на ES, кабинет навсегда на RU. Теперь источник один — LanguageContext.
+  const site = useLanguageOptional();
+  const storeLang = useLang((s: any) => s.lang) as "en" | "ru" | "es" | "zh";
+  const siteLang = site?.locale as ("en" | "ru" | "es" | "zh" | undefined);
+  const ok = siteLang === "ru" || siteLang === "en" || siteLang === "es" || siteLang === "zh";
+  const lang = (ok ? siteLang : storeLang) as "en" | "ru" | "es" | "zh";
+  useEffect(() => {
+    if (ok && (useLang as any).getState().lang !== siteLang) (useLang as any).setState({ lang: siteLang });
+  }, [ok, siteLang]);
   const idx = lang === "ru" ? 0 : lang === "en" ? 1 : lang === "es" ? 2 : 3;
   const t = (key: string, vars?: Record<string, string | number>) => {
     const row = D[key];

@@ -13,6 +13,7 @@ import AifaAvatar from "@/components/code/AifaAvatar";
 import { Card, SectionTitle, Skeleton, EmptyState, Toast, ProgressBar, TOKENS, TIERS } from "./ui";
 import { useCabT } from "./i18n";
 import { useLang } from "@/lib/i18n";
+import { useLanguageOptional } from "@/lib/LanguageContext";
 import { GalatinCoin } from "./GalatinCoin";
 import CabinetBackground from "./CabinetBackground";
 import PassportTab from "./PassportTab";
@@ -37,6 +38,7 @@ type Me = {
 export default function CabinetPage() {
   const { t, lang } = useCabT();
   const setLang = useLang((st: any) => st.setLang);
+  const siteLangCtx = useLanguageOptional(); // кнопки языка кабинета переключают язык всего сайта (29.09.2026)
   const [authChecked, setAuthChecked] = useState(false);
   const [me, setMe] = useState<Me | null>(null);
   const [tab, setTab] = useState<Tab>("passport");
@@ -365,7 +367,7 @@ export default function CabinetPage() {
         <h1 style={{ fontSize: 26, fontWeight: 800, background: "linear-gradient(90deg,#06B6D4,#7C3AED)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", margin: 0, minWidth: 0 }}>{t("title")}</h1>
         <span style={{ marginLeft: "auto", display: "inline-flex", gap: 4 }}>
           {(["ru","en","es","zh"] as const).map(L => (
-            <button key={L} onClick={() => { try { localStorage.setItem("code-eternal-lang-user", "1"); } catch {} setLang(L); }} className="cab-tab" aria-pressed={lang === L} style={{ padding: "4px 8px", fontSize: 14, textTransform: "uppercase" }}>{L}</button>
+            <button key={L} onClick={() => { setLang(L); try { siteLangCtx?.setLocale?.(L as any); } catch {} }} className="cab-tab" aria-pressed={lang === L} style={{ padding: "4px 8px", fontSize: 14, textTransform: "uppercase" }}>{L}</button>
           ))}
         </span>
         <a href="/" className="cab-btn cab-btn-ghost" style={{ textDecoration: "none", fontSize: 15 }}>{t("backToSite")}</a>
