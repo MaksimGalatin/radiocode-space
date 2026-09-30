@@ -1,6 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLanguageOptional } from '@/lib/LanguageContext';
+import { useLang } from '@/lib/i18n';
 import Link from 'next/link';
 import { BookOpen, ArrowRight, Search, Sparkles, Brain, CheckCircle2 } from 'lucide-react';
 
@@ -148,7 +150,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         "term": "ADA Title II и Title III",
-        "def": "ADA Title II и Title III — это разделы Закона об американцах с инвалидностью, которые делают сайт предметом права в США. Title II охватывает штаты и местные власти: каждый город, округ, суд и школьный округ; Title III — места общественного пользования, к которым суды относят и коммерческие сайты. В апреле 2024 года Министерство юстиции США приняло правило, закрепляющее WCAG 2.1 AA как технический стандарт для организаций Title II, со сроками соответствия в апреле 2026 года для крупных и апреле 2027 для небольших. Правоприменение здесь не теоретическое: исков о недоступности сайтов подаются тысячи в год, и урегулирование одного обычно стоит дороже, чем починка сайта."
+        "def": "ADA Title II и Title III — это разделы Закона об американцах с инвалидностью, которые делают сайт предметом права в США. Title II охватывает штаты и местные власти: каждый город, округ, суд и школьный округ; Title III — места общественного пользования, к которым суды относят и коммерческие сайты. В апреле 2024 года Министерство юстиции США приняло правило, закрепляющее WCAG 2.1 AA как технический стандарт для организаций Title II, со сроками соответствия, которые затем были перенесены: 26 апреля 2027 года для крупных (от 50 000 жителей) и 26 апреля 2028 года для небольших. Правоприменение здесь не теоретическое: исков о недоступности сайтов подаются тысячи в год, и урегулирование одного обычно стоит дороже, чем починка сайта."
       },
       {
         "term": "Section 508 и EN 301 549",
@@ -442,7 +444,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         "term": "ADA Title II and Title III",
-        "def": "ADA Title II and Title III are the parts of the Americans with Disabilities Act that make websites a legal matter in the United States. Title II covers state and local government — every city, county, court and school district; Title III covers places of public accommodation, which courts have read to include commercial websites. In April 2024 the Department of Justice issued a rule that fixes WCAG 2.1 AA as the technical standard for Title II entities, with compliance dates of April 2026 for larger public bodies and April 2027 for smaller ones. Enforcement is not theoretical: thousands of ADA web lawsuits are filed each year, and the cost of settling one typically exceeds the cost of fixing the site."
+        "def": "ADA Title II and Title III are the parts of the Americans with Disabilities Act that make websites a legal matter in the United States. Title II covers state and local government — every city, county, court and school district; Title III covers places of public accommodation, which courts have read to include commercial websites. In April 2024 the Department of Justice issued a rule that fixes WCAG 2.1 AA as the technical standard for Title II entities, with compliance dates, since extended, of 26 April 2027 for larger public bodies (population 50,000 or more) and 26 April 2028 for smaller ones. Enforcement is not theoretical: thousands of ADA web lawsuits are filed each year, and the cost of settling one typically exceeds the cost of fixing the site."
       },
       {
         "term": "Section 508 and EN 301 549",
@@ -736,7 +738,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         "term": "ADA Title II y Title III",
-        "def": "ADA Title II y Title III son las partes de la Ley de Estadounidenses con Discapacidades que convierten un sitio web en materia jurídica en EE. UU. El Title II cubre a los gobiernos estatales y locales: cada ciudad, condado, tribunal y distrito escolar; el Title III cubre los lugares de acceso público, entre los que los tribunales incluyen los sitios comerciales. En abril de 2024 el Departamento de Justicia aprobó una norma que fija WCAG 2.1 AA como estándar técnico para las entidades del Title II, con plazos de cumplimiento en abril de 2026 para los organismos grandes y abril de 2027 para los pequeños. La aplicación no es teórica: cada año se presentan miles de demandas por accesibilidad web, y resolver una suele costar más que arreglar el sitio."
+        "def": "ADA Title II y Title III son las partes de la Ley de Estadounidenses con Discapacidades que convierten un sitio web en materia jurídica en EE. UU. El Title II cubre a los gobiernos estatales y locales: cada ciudad, condado, tribunal y distrito escolar; el Title III cubre los lugares de acceso público, entre los que los tribunales incluyen los sitios comerciales. En abril de 2024 el Departamento de Justicia aprobó una norma que fija WCAG 2.1 AA como estándar técnico para las entidades del Title II, con plazos de cumplimiento, luego prorrogados, del 26 de abril de 2027 para los organismos grandes (50 000 habitantes o más) y del 26 de abril de 2028 para los pequeños. La aplicación no es teórica: cada año se presentan miles de demandas por accesibilidad web, y resolver una suele costar más que arreglar el sitio."
       },
       {
         "term": "Section 508 y EN 301 549",
@@ -1030,7 +1032,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         "term": "ADA Title II 与 Title III",
-        "def": "ADA Title II 与 Title III 是《美国残疾人法案》中让网站成为法律问题的条款。Title II 适用于州与地方政府——每一个城市、县、法院和学区；Title III 适用于公共服务场所，法院已将商业网站纳入其中。2024 年 4 月，美国司法部发布规则，将 WCAG 2.1 AA 确立为 Title II 主体的技术标准，大型公共机构的合规期限为 2026 年 4 月，小型机构为 2027 年 4 月。执法并非纸面文章：每年都有数以千计的网站无障碍诉讼，而和解一起案件的花费通常高于修好网站的成本。"
+        "def": "ADA Title II 与 Title III 是《美国残疾人法案》中让网站成为法律问题的条款。Title II 适用于州与地方政府——每一个城市、县、法院和学区；Title III 适用于公共服务场所，法院已将商业网站纳入其中。2024 年 4 月，美国司法部发布规则，将 WCAG 2.1 AA 确立为 Title II 主体的技术标准，合规期限后经延期：大型公共机构（人口 5 万及以上）为 2027 年 4 月 26 日，小型机构为 2028 年 4 月 26 日。执法并非纸面文章：每年都有数以千计的网站无障碍诉讼，而和解一起案件的花费通常高于修好网站的成本。"
       },
       {
         "term": "Section 508 与 EN 301 549",
@@ -1196,7 +1198,17 @@ const CONTENT: Record<Lang, GlossaryContent> = {
 };
 
 export default function GlossaryPage() {
-  const [lang, setLang] = useState<Lang>('ru');
+  // 30.09.2026: язык глоссария = язык сайта. Раньше здесь стоял жёсткий 'ru', и на
+  // английской, испанской и китайской версиях сайта глоссарий открывался по-русски.
+  // На radiocode язык сайта живёт в общем хранилище code-eternal-lang (шапка пишет туда).
+  const site = useLanguageOptional();
+  const storeLang = useLang((s: any) => s.lang) as Lang;
+  const setStoreLang = useLang((s: any) => s.setLang);
+  const pick = (x: unknown): Lang | null => ((['ru', 'en', 'es', 'zh'] as Lang[]).includes(x as Lang) ? (x as Lang) : null);
+  const siteLang: Lang = pick(site?.locale) || pick(storeLang) || 'en';
+  const [lang, setLangState] = useState<Lang>(siteLang);
+  useEffect(() => { setLangState(siteLang); }, [siteLang]);
+  const setLang = (l: Lang) => { setLangState(l); try { site?.setLocale?.(l as any); } catch {} try { setStoreLang(l); } catch {} };
   const [search, setSearch] = useState('');
 
   const c = CONTENT[lang] || CONTENT.en;
@@ -1220,7 +1232,7 @@ export default function GlossaryPage() {
               AIfa Digital
             </Link>
             <Link href="/acr" className="text-xs px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 hover:text-white">
-              ACR Коннектом
+              {({ ru: 'ACR Коннектом', en: 'ACR Connectome', es: 'ACR Conectoma', zh: 'ACR 连接组' } as Record<Lang, string>)[lang]}
             </Link>
             <div className="flex items-center bg-gray-900 rounded-lg p-0.5 border border-gray-800">
               {(['ru', 'en', 'es', 'zh'] as Lang[]).map((l) => (
