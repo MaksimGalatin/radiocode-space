@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
-import { getUserKeyB64 } from '@/lib/user-key';
+import { getUserKeyB64, связкаКлючейЗаписей } from '@/lib/user-key';
+import { ОПИСАНИЕ_ФОРМАТА_ЗАПИСЕЙ } from '@/lib/memory-key-file';
 import { маскаПочты } from '@/lib/log-privacy';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
@@ -48,8 +49,13 @@ export async function GET(req: NextRequest) {
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   let key: string;
+  let записи: Awaited<ReturnType<typeof связкаКлючейЗаписей>>;
   try {
     key = await getUserKeyB64(email);
+    // Ключи отдельных записей — в ТОЙ ЖЕ попытке (30.09.2026). Без них записи схемы
+    // `AIFA2:` в Arweave без нас не открыть: выдать один личный ключ значило бы
+    // повторить прежнюю неправду раздела 10.4. Не достали — отказ, а не полсвязки.
+    записи = await связкаКлючейЗаписей(email);
   } catch (e) {
     // Ключ не достали (нет MEMORY_MASTER_KEY, недоступна БД, отказал KMS).
     // Отдаём отказ, а не заглушку: показать человеку «ключ», которым ничего не
@@ -70,8 +76,11 @@ export async function GET(req: NextRequest) {
       algorithm: 'AES-256-GCM',
       kdf: 'PBKDF2-HMAC-SHA256, 100000 iterations, 32-byte derived key, per-record salt',
       envelope: 'base64( salt[16] | iv[12] | tag[16] | ciphertext )',
+      recordKeyCount: записи.length,
+      recordFormat: ОПИСАНИЕ_ФОРМАТА_ЗАПИСЕЙ,
+      recordKeys: записи.map((з) => ({ id: з.id, label: з.ссылка, created: з.создан, wrappedKey: з.ключ })),
       note:
-        'This is your personal memory key. Records encrypted with it are stored on Arweave forever and cannot be rewritten or deleted. Keep your own copy: without this key nobody — including us — can decrypt them.',
+        'This is your personal memory key. Together with the record keys in this file it decrypts your records on Arweave without us — even if our service disappears. We also keep this key (sealed with our master key) so the service works without you typing anything. Records you chose to forget are not in this file: their keys were destroyed. Keep the file private: whoever holds it can read your memory.',
     },
     {
       // Ответ несёт секрет: ни браузер, ни промежуточные узлы не должны

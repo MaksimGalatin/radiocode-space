@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 import { getDbPool } from '@/lib/db-pool';
-import { getUserKeyB64 } from '@/lib/user-key';
+import { getUserKeyB64, связкаКлючейЗаписей } from '@/lib/user-key';
+import { текстФайлаКлюча, ОПИСАНИЕ_ФОРМАТА_ЗАПИСЕЙ } from '@/lib/memory-key-file';
 import { маскаПочты } from '@/lib/log-privacy';
 import { подготовитьСхему, отпечатокТокена, отпечаткиСовпали, ОКНО_ПОВТОРА_МИНУТ, экран } from '@/lib/heir';
 
@@ -103,8 +104,12 @@ export async function GET(req: NextRequest) {
     // Ключ достаём ДО того, как отметим ссылку использованной: если ключ сейчас
     // недоступен, сжечь единственную попытку было бы худшим из исходов.
     let ключ: string;
+    let записи: Awaited<ReturnType<typeof связкаКлючейЗаписей>>;
     try {
       ключ = await getUserKeyB64(владелец);
+      // Ключи отдельных записей — в той же попытке (30.09.2026): без них записи
+      // схемы `AIFA2:` наследник не откроет. Не достали — ссылка не сгорает.
+      записи = await связкаКлючейЗаписей(владелец);
     } catch (e) {
       console.error('[heir/claim] ключ недоступен для', маскаПочты(владелец), e);
       return страница('Сейчас не получилось',
@@ -141,17 +146,38 @@ export async function GET(req: NextRequest) {
           ` <span style="color:#6b7280">${экран(a.тип)} ${экран(a.когда)}</span></li>`).join('')}</ul>`
       : '<p style="color:#9ca3af">Записей в Arweave пока нет. Ключ сохрани всё равно: он понадобится для всего, что будет опубликовано позже.</p>';
 
+    // Файл связки — тот же текст, что кабинет даёт самому владельцу: личный ключ,
+    // описание шифра и ключи всех живых записей (lib/memory-key-file.ts).
+    const файл = текстФайлаКлюча(
+      {
+        key: ключ,
+        algorithm: 'AES-256-GCM',
+        kdf: 'PBKDF2-HMAC-SHA256, 100000 iterations, 32-byte derived key, per-record salt',
+        envelope: 'base64( salt[16] | iv[12] | tag[16] | ciphertext )',
+        recordFormat: ОПИСАНИЕ_ФОРМАТА_ЗАПИСЕЙ,
+        recordKeys: записи.map((з) => ({ id: з.id, label: з.ссылка, created: з.создан, wrappedKey: з.ключ })),
+      },
+      ['CODE Eternal — архив памяти, переданный наследнику', 'Владелец: ' + владелец, new Date().toISOString()],
+      ['Ссылка одноразовая: сохрани этот файл до того, как закроешь страницу.'],
+    );
+    const файлСсылка = 'data:text/plain;charset=utf-8;base64,' + Buffer.from(файл, 'utf8').toString('base64');
+
     return страница('Архив памяти передан тебе', `
 <p>Владелец: <b>${экран(владелец)}</b>. Ты указан наследником его памяти.</p>
 
 <h2 style="color:#22D3EE;font-size:17px;margin:28px 0 8px">1. Ключ вечной памяти — сохрани прямо сейчас</h2>
-<p style="color:#9ca3af;font-size:14px">Записи в Arweave вечные и публичные, но читаются только этим ключом. Ни у кого другого его нет — включая нас, если мы однажды исчезнем.</p>
+<p style="color:#9ca3af;font-size:14px">Записи в Arweave вечные и публичные, но читаются только этим ключом вместе с ключами отдельных записей ниже. С файлом ниже ты откроешь их без нас — даже если нас однажды не станет.</p>
 <div style="background:#0B0F1A;border:1px solid rgba(42,42,58,0.6);border-radius:10px;padding:14px;margin:12px 0">
   <code style="color:#22D3EE;word-break:break-all;user-select:all;font-size:14px">${экран(ключ)}</code>
 </div>
 <p style="color:#9ca3af;font-size:14px">AES-256-GCM · PBKDF2-HMAC-SHA256, 100000 итераций, ключ 32 байта, соль на запись · конверт: base64( salt[16] | iv[12] | tag[16] | ciphertext )</p>
 
-<h2 style="color:#22D3EE;font-size:17px;margin:28px 0 8px">2. Записи в Arweave (${архивы.length})</h2>
+<h2 style="color:#22D3EE;font-size:17px;margin:28px 0 8px">2. Ключи отдельных записей (${записи.length})</h2>
+<p style="color:#9ca3af;font-size:14px">С 16 августа 2026 года у каждой записи в Arweave свой ключ: так владелец мог забыть один разговор, не теряя остальной памяти. Эти ключи завёрнуты ключом выше и без него бесполезны. Скачай файл целиком — в нём ключ, ключи записей и инструкция, как их открыть.</p>
+<p><a href="${файлСсылка}" download="code-memory-key.txt" style="color:#22D3EE;font-weight:600">⬇️ Скачать файл ключа (code-memory-key.txt)</a></p>
+<textarea readonly rows="8" style="width:100%;box-sizing:border-box;background:#0B0F1A;color:#e5e7eb;border:1px solid rgba(42,42,58,0.6);border-radius:10px;padding:10px;font-family:monospace;font-size:12px">${экран(файл)}</textarea>
+
+<h2 style="color:#22D3EE;font-size:17px;margin:28px 0 8px">3. Записи в Arweave (${архивы.length})</h2>
 ${список}
 
 <h2 style="color:#22D3EE;font-size:17px;margin:28px 0 8px">Что здесь НЕ передаётся</h2>

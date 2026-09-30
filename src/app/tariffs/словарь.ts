@@ -12,7 +12,7 @@
  *
  * ЧИСЛА В ТЕКСТАХ — ИЗ КОНСТИТУЦИИ И ИЗ ЗАМЕРА, не из головы:
  *   раздел 5 — тарифы: Spark $15, Family Archive $100, Digital DNA $1000 + $200;
- *   раздел 3 — амбассадоры: 15/7/3 % ончейн; Team фиат 7/3/1 %, в токенах 8/4/2 %;
+ *   раздел 3 — амбассадоры: 15/7/3 % ончейн; Team фиат 7/3/1 % (выплата в токенах отменена, 30.09.2026);
  *   раздел 4 — AIfaFocus $500 разово;
  *   расхождение сканера и человека — замер 31.08.2026, 04:59:
  *     95 524 страницы проверено, 25 966 признаны сканером доступными,
@@ -58,7 +58,7 @@ export type ТекстыТарифов = {
   амбассадорыЗаголовок: string;
   амбассадорыВступление: string;
   столбцы: [string, string, string, string];
-  строки: [string, string, string];
+  строки: [string, string];
   амбассадорыПояснение1: string;
   амбассадорыПояснение2: string;
   /** Правовая оговорка: партнёрская программа, а не
@@ -159,10 +159,9 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     строки: [
       'Ambassador Node — обычный участник',
       'Ambassador Team — фиатные подписки',
-      'Ambassador Team — выплата в $GALATIN',
     ],
     амбассадорыПояснение1:
-      'Ambassador Team — для компаний и партнёров со своей базой. Кроме ончейн-дохода даёт двухканальную сетку от фиатных продаж: обычную и повышенную при выплате в токенах.',
+      'Ambassador Team — для компаний и партнёров со своей базой. Кроме ончейн-дохода даёт ещё 7 / 3 / 1 % с фиатных продаж подписок на трёх уровнях.',
     амбассадорыПояснение2:
       'Доход считается от уровня вашего собственного тарифа. Если ваш амбассадор на более дорогом тарифе, чем вы, разница показывается в кабинете как упущенная выгода — и открывается полностью при переходе на соответствующий уровень.',
     паспортЗаголовок: 'Цифровой Паспорт',
@@ -283,10 +282,9 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     строки: [
       'Ambassador Node — individual participant',
       'Ambassador Team — fiat subscriptions',
-      'Ambassador Team — paid in $GALATIN',
     ],
     амбассадорыПояснение1:
-      'Ambassador Team is for companies and partners with their own audience. On top of on-chain income it opens a two-channel grid on fiat sales: the standard one, and a higher rate when paid in tokens.',
+      'Ambassador Team is for companies and partners with their own audience. On top of on-chain income it adds 7 / 3 / 1 % from fiat subscription sales across three levels.',
     амбассадорыПояснение2:
       'Income is calculated from the level of your own plan. If your ambassador is on a more expensive plan than you, the difference is shown in your dashboard as lost opportunity — and unlocks in full when you move up.',
     паспортЗаголовок: 'Digital Passport',
@@ -407,10 +405,9 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     строки: [
       'Ambassador Node — participante individual',
       'Ambassador Team — suscripciones en fiat',
-      'Ambassador Team — pago en $GALATIN',
     ],
     амбассадорыПояснение1:
-      'Ambassador Team es para empresas y socios con su propia audiencia. Además del ingreso en cadena, abre una red de dos canales sobre las ventas en fiat: la estándar y una tarifa superior si se cobra en tokens.',
+      'Ambassador Team es para empresas y socios con su propia audiencia. Además del ingreso en cadena, añade un 7 / 3 / 1 % de las ventas de suscripciones en fiat en tres niveles.',
     амбассадорыПояснение2:
       'El ingreso se calcula desde el nivel de tu propio plan. Si tu embajador está en un plan más caro que el tuyo, la diferencia aparece en el panel como beneficio perdido — y se desbloquea por completo al subir de nivel.',
     паспортЗаголовок: 'Pasaporte Digital',
@@ -533,10 +530,9 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
     строки: [
       'Ambassador Node — 个人参与者',
       'Ambassador Team — 法币订阅',
-      'Ambassador Team — 以 $GALATIN 结算',
     ],
     амбассадорыПояснение1:
-      'Ambassador Team 面向拥有自有受众的公司与合作伙伴。除链上收益外，还开启法币销售的双通道：标准比例，以及以代币结算时的更高比例。',
+      'Ambassador Team 面向拥有自有受众的公司与合作伙伴。除链上收益外，还可在三个层级获得法币订阅销售额的 7% / 3% / 1%。',
     амбассадорыПояснение2:
       '收益按你自己所在方案的级别计算。若你的大使所在方案高于你，差额会在个人中心显示为「错失收益」，升级后即可全额解锁。',
     паспортЗаголовок: '数字护照',
@@ -585,5 +581,4 @@ export const ТЕКСТЫ: Record<string, ТекстыТарифов> = {
 export const ДОЛИ: [string, string, string][] = [
   ['15 %', '7 %', '3 %'],
   ['7 %', '3 %', '1 %'],
-  ['8 %', '4 %', '2 %'],
 ];

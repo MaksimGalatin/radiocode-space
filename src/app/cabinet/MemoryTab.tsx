@@ -4,6 +4,7 @@ import { Card, SectionTitle, Skeleton, ErrorState, EmptyState, TOKENS } from "./
 import { useCabT } from "./i18n";
 import MemorySearchCard from "./MemorySearch";
 import DocumentsCard from "./DocumentsCard";
+import { текстФайлаКлюча, type СвязкаКлючей } from "../../lib/memory-key-file";
 
 // Parse the stored markdown transcript into role-tagged messages.
 function parseChat(md: string): { role: "user" | "assistant"; content: string; ts: string }[] {
@@ -111,7 +112,8 @@ function ArchivesCard() {
 // при демонстрации экрана, рядом с камерой или на чужом компьютере. Секрет
 // появляется на странице только после осознанного нажатия — до этого его нет
 // даже в памяти вкладки.
-type ДанныеКлюча = { key: string; algorithm?: string; kdf?: string; envelope?: string };
+// С 30.09.2026 — вместе с ключами отдельных записей (lib/memory-key-file.ts).
+type ДанныеКлюча = СвязкаКлючей;
 
 function MemoryKeyCard({ email }: { email: string }) {
   const { t } = useCabT();
@@ -130,7 +132,10 @@ function MemoryKeyCard({ email }: { email: string }) {
       const r = await fetch("/api/account/memory-key", { cache: "no-store" });
       const d = await r.json().catch(() => ({}));
       if (!r.ok || !d?.ok || !d?.key) { setErr(t("mkErr")); return null; }
-      const свежие: ДанныеКлюча = { key: String(d.key), algorithm: d.algorithm, kdf: d.kdf, envelope: d.envelope };
+      const свежие: ДанныеКлюча = {
+        key: String(d.key), algorithm: d.algorithm, kdf: d.kdf, envelope: d.envelope,
+        recordFormat: d.recordFormat, recordKeys: Array.isArray(d.recordKeys) ? d.recordKeys : [],
+      };
       setData(свежие);
       return свежие;
     } catch { setErr(t("netErr")); return null; }
@@ -147,21 +152,14 @@ function MemoryKeyCard({ email }: { email: string }) {
     if (!k) return;
     // Файл собирается на стороне браузера: так ключ не проходит второй раз через
     // сеть и не попадает ни в какое хранилище по дороге.
-    const строки = [
-      "CODE Eternal — " + t("mkTitle"),
-      email,
-      new Date().toISOString(),
-      "",
-      "KEY (base64): " + k.key,
-      "",
-      [k.algorithm, k.kdf, k.envelope].filter(Boolean).join("\n"),
-      "",
-      t("mkP1"),
-      t("mkP2"),
-      t("mkP3"),
-      "",
-    ];
-    const url = URL.createObjectURL(new Blob([строки.join("\n")], { type: "text/plain;charset=utf-8" }));
+    // С 30.09.2026 в файле и ключи отдельных записей: без них записи в Arweave без
+    // нас не открыть. Текст собирает общая функция — та же, что у наследника.
+    const текст = текстФайлаКлюча(
+      k,
+      ["CODE Eternal — " + t("mkTitle"), email, new Date().toISOString()],
+      [t("mkP1"), t("mkP2"), t("mkP3")],
+    );
+    const url = URL.createObjectURL(new Blob([текст], { type: "text/plain;charset=utf-8" }));
     const a = document.createElement("a");
     a.href = url; a.download = "code-memory-key.txt";
     document.body.appendChild(a); a.click(); a.remove();
