@@ -102,7 +102,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
                 ["🪙 GALATIN supply", stats.galatin_supply], ["🎮 Total wins", stats.total_wins],
                 ["📨 Submissions", stats.submissions],
               ].map(([k, v]) => (
-                <div key={String(k)} style={{ background: "#13131C", border: "1px solid #2A2A3A", borderRadius: 12, padding: 14 }}>
+                <div key={String(k)} style={{ background: "var(--cab-panel-solid)", border: "1px solid var(--cab-line)", borderRadius: 12, padding: 14 }}>
                   <div style={{ fontSize: 14, color: TOKENS.mut }}>{k}</div>
                   <div style={{ fontSize: 20, fontWeight: 800, color: TOKENS.text, marginTop: 4 }}>{String(v)}</div>
                 </div>

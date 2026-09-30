@@ -126,7 +126,7 @@ export default function Tetris({ lang, onWin, onGameEnd }: { lang: string; onWin
     if (v && y >= 0 && y < ROWS && x >= 0 && x < COLS) view[y][x] = piece.c;
   }));
 
-  const btn: React.CSSProperties = { padding: "12px 0", borderRadius: 10, border: "1px solid #2A2A3A", background: "#13131C", color: TOKENS.text, fontSize: 18, cursor: "pointer", flex: 1, touchAction: "manipulation" };
+  const btn: React.CSSProperties = { padding: "12px 0", borderRadius: 10, border: "1px solid var(--cab-line)", background: "var(--cab-panel-solid)", color: TOKENS.text, fontSize: 18, cursor: "pointer", flex: 1, touchAction: "manipulation" };
 
   return (
     <div style={{ display: "flex", gap: 18, flexWrap: "wrap", justifyContent: "center" }}>

@@ -61,7 +61,7 @@ export default function ReferralsTab(props: { email: string; toast: (m: string) 
             </div>
             <div className="cab-cols3" style={{ gap: 8, marginBottom: 12 }}>
               {[{ l: 1, p: "15%", c: TOKENS.cyan }, { l: 2, p: "7%", c: TOKENS.violet }, { l: 3, p: "3%", c: TOKENS.gold }].map(x => (
-                <div key={x.l} style={{ background: "#13131C", border: "1px solid #2A2A3A", borderRadius: 10, padding: 10 }}>
+                <div key={x.l} style={{ background: "var(--cab-panel-solid)", border: "1px solid var(--cab-line)", borderRadius: 10, padding: 10 }}>
                   <div style={{ fontSize: 14, color: TOKENS.mut, fontWeight: 700 }}>LVL {x.l} · <span style={{ color: x.c }}>{x.p}</span></div>
                   <div style={{ fontSize: 16, fontWeight: 800, color: TOKENS.text, marginTop: 4 }}>{d.counts?.[x.l] || 0}</div>
                   <div style={{ fontSize: 14, color: TOKENS.green }}>${Number(d.byLevel?.[x.l] || 0).toFixed(2)}</div>

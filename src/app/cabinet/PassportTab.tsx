@@ -357,7 +357,7 @@ export default function PassportTab(props: {
           <label style={lbl}>🖼️ {t("fAvatar")}</label>
           <input ref={fileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={pickAvatar} />
           <button type="button" onClick={() => fileRef.current?.click()}
-            style={{ width: "100%", background: "#13131C", border: `1px dashed ${avatar ? TOKENS.violet : "#2A2A3A"}`, borderRadius: 10, padding: 14, textAlign: "center", cursor: "pointer", color: TOKENS.mut, fontSize: 15 }}>
+            style={{ width: "100%", background: "var(--cab-panel-solid)", border: `1px dashed ${avatar ? TOKENS.violet : "#2A2A3A"}`, borderRadius: 10, padding: 14, textAlign: "center", cursor: "pointer", color: TOKENS.mut, fontSize: 15 }}>
             {avatar ? `${t("avatarChosen")}${avatarKb ? " · " + avatarKb + " KB" : ""}` : "📤 " + t("fUpload")}
           </button>
           {avatarErr && <div style={{ fontSize: 14, color: TOKENS.red, marginTop: 4 }}>{avatarErr}</div>}
