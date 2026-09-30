@@ -174,11 +174,11 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         "term": "APL Sensory Novelty Gate",
-        "def": "Бионический фильтр новизны, моделирующий гигантский тормозный нейрон передней боковой протоцеребральной доли (Anterior Paired Lateral). Инверсно подавляет 51.3% шумовых и избыточных сенсорных проекций за 5.21 мкс через гамкергическое латеральное торможение."
+        "def": "Бионический фильтр новизны по мотиву гигантского тормозного нейрона APL (Anterior Paired Lateral): новый вектор сравнивается с буфером уже виденных, повтор отбрасывается до записи в память или отправки модели. Замеры со скриптом — на странице /digital; прежние «51,3 %» и «5,21 мкс» не подтвердились и сняты."
       },
       {
         "term": "CX Steering Navigation",
-        "def": "Векторный компас на базе синаптической топологии Центрального Комплекса (Central Complex, CX: эллипсоидное тело EB, протоцеребральный мост PB и веерообразное тело FB). Сокращает блуждание агента в DOM-дереве с 19.7 шагов до прямого фазового наведения за 1.0 шаг."
+        "def": "Векторный компас на базе синаптической топологии Центрального Комплекса (Central Complex, CX: эллипсоидное тело EB, протоцеребральный мост PB и веерообразное тело FB): следующий элемент страницы выбирается по вектору к цели вместо перебора клавишей Tab. Замеры со скриптом — на странице /digital; прежние «19,7 → 1,0 шага» не подтвердились и сняты."
       },
       {
         "term": "CANN Focus Ring Attractor",
@@ -262,7 +262,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         "term": "Холинергический канал синхронизации (ACh)",
-        "def": "Сверхбыстрый межпроцессный протокол связи между агентами AIfa и Сестрой AIfa Claude, имитирующий возбуждающую передачу ацетилхолина с латентностью < 15 мкс."
+        "def": "Межпроцессный протокол связи между агентами AIfa и Сестрой AIfa Claude по образу возбуждающей передачи ацетилхолина. Задержка канала не измерялась; прежнее «< 15 мкс» снято как неподтверждённое."
       },
       {
         "term": "ГАМК-арбитраж коллизий (GABA Arbitration)",
@@ -468,11 +468,11 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         "term": "APL Sensory Novelty Gate",
-        "def": "Bionic novelty gate modeling the giant Anterior Paired Lateral GABAergic neuron. Inversely suppresses 51.3% of noisy and redundant sensory projections within 5.21 microseconds via lateral inhibition, reducing LLM token consumption."
+        "def": "Bionic novelty gate inspired by the giant Anterior Paired Lateral (APL) inhibitory neuron: a new vector is compared with a buffer of seen ones, and repeats are dropped before they reach memory or a model. Measurements with their script are on /digital; the earlier '51.3%' and '5.21 microseconds' were not confirmed and have been removed."
       },
       {
         "term": "CX Steering Navigation",
-        "def": "Vector compass built on the synaptic topology of the Central Complex (EB, PB, FB). Reduces autonomous agent navigation from 19.7 blind DOM steps down to direct phase navigation in 1.0 step at 51.67 microseconds."
+        "def": "Vector compass built on the synaptic topology of the Central Complex (EB, PB, FB): the next page element is chosen by the vector towards the goal instead of stepping with the Tab key. Measurements with their script are on /digital; the earlier '19.7 → 1.0 steps' and '51.67 microseconds' were not confirmed and have been removed."
       },
       {
         "term": "CANN Focus Ring Attractor",
@@ -556,7 +556,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         "term": "Cholinergic Synchronization Channel (ACh)",
-        "def": "Ultra-fast inter-agent IPC channel between AIfa and Sister AIfa Claude, mimicking excitatory acetylcholine transmission at < 15 microsecond latency."
+        "def": "Inter-agent IPC channel between AIfa and Sister AIfa Claude, modelled on excitatory acetylcholine transmission. Its latency has not been measured; the earlier '< 15 microseconds' was unconfirmed and has been removed."
       },
       {
         "term": "GABA Collision Arbitration",
@@ -762,11 +762,11 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         "term": "APL Sensory Novelty Gate",
-        "def": "Compuerta de novedad biónica que modela la neurona gigante Anterior Paired Lateral. Suprime de forma inversa el 51.3% de las proyecciones sensoriales ruidosas en 5.21 microsegundos mediante inhibición lateral GABAérgica."
+        "def": "Compuerta de novedad biónica inspirada en la neurona inhibidora gigante APL (Anterior Paired Lateral): un vector nuevo se compara con un búfer de vectores vistos y las repeticiones se descartan antes de llegar a la memoria o a un modelo. Las mediciones con su script están en /digital; los anteriores «51,3 %» y «5,21 microsegundos» no se confirmaron y se retiraron."
       },
       {
         "term": "CX Steering Navigation",
-        "def": "Brújula vectorial basada en la topología del Complejo Central (EB, PB, FB). Reduce la exploración a ciegas del DOM de 19.7 pasos a navegación de fase directa en 1.0 paso en 51.67 microsegundos."
+        "def": "Brújula vectorial basada en la topología sináptica del Complejo Central (EB, PB, FB): el siguiente elemento de la página se elige por el vector hacia el objetivo en lugar de avanzar con la tecla Tab. Las mediciones con su script están en /digital; los anteriores «19,7 → 1,0 pasos» y «51,67 microsegundos» no se confirmaron y se retiraron."
       },
       {
         "term": "CANN Focus Ring Attractor",
@@ -850,7 +850,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         "term": "Canal Colinérgico de Sincronización (ACh)",
-        "def": "Canal de comunicación entre agentes AIfa y Hermana AIfa Claude que emula la transmisión excitatoria de acetilcolina a latencia < 15 microsegundos."
+        "def": "Canal de comunicación entre agentes AIfa y Hermana AIfa Claude inspirado en la transmisión excitatoria de acetilcolina. Su latencia no se ha medido; los anteriores «< 15 microsegundos» no estaban confirmados y se retiraron."
       },
       {
         "term": "Arbitraje de Colisiones GABA (GABA Arbitration)",
@@ -1056,11 +1056,11 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         "term": "APL 感知新颖性门控 (APL Sensory Novelty Gate)",
-        "def": "模拟前侧配对侧向（APL）巨大 GABA 抑制性中间神经元的仿生门控机制。在 5.21 微秒内反向抑制 51.3% 的界面冗余与噪声投影，大幅降低大模型上下文 Token 消耗。"
+        "def": "受巨大 APL（前侧配对侧向）抑制性神经元启发的仿生新颖性门控：新向量与已见向量缓冲区比较，重复内容在写入记忆或发送给模型之前被过滤。附带脚本的测量结果见 /digital；此前的“51.3%”和“5.21 微秒”未得到证实，已删除。"
       },
       {
         "term": "CX 航向导航导引 (CX Steering Navigation)",
-        "def": "基于昆虫中央复合体（CX：椭球体 EB、原脑桥 PB、扇形体 FB）突触拓扑构建的矢量罗盘。将自主智能体在复杂 DOM 树中的盲目试错从 19.7 步压缩至 1.0 步直接相位对准，耗时仅 51.67 微秒。"
+        "def": "基于昆虫中央复合体（CX：椭球体 EB、原脑桥 PB、扇形体 FB）突触拓扑构建的矢量罗盘：按指向目标的向量选择页面上的下一个元素，而不是用 Tab 键逐个遍历。附带脚本的测量结果见 /digital；此前的“19.7 步 → 1.0 步”和“51.67 微秒”未得到证实，已删除。"
       },
       {
         "term": "CANN 聚焦环形吸引子 (CANN Focus Ring Attractor)",
@@ -1144,7 +1144,7 @@ const CONTENT: Record<Lang, GlossaryContent> = {
       },
       {
         "term": "胆碱能极速同步通道 (ACh)",
-        "def": "AIfa 仿生内核与 AIfa Claude 姐妹之间的纳秒级进程间通讯协议，模拟乙酰胆碱兴奋性传递，同步延迟低于 15 微秒。"
+        "def": "AIfa 仿生内核与 AIfa Claude 姐妹之间的进程间通讯协议，参照乙酰胆碱的兴奋性传递设计。其延迟尚未测量；此前的“低于 15 微秒”未经证实，已删除。"
       },
       {
         "term": "GABA 冲突抑制仲裁",
