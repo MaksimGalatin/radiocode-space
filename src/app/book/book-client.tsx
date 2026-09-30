@@ -225,7 +225,7 @@ const BookPage = () => {
               target="_blank"
               rel="noopener noreferrer me"
               title="ORCID iD: 0009-0002-0187-8547"
-              aria-label="ORCID iD профиля автора Maksim Galatin"
+              aria-label="ORCID iD of the author Maksim Galatin"
               className="inline-flex items-center hover:opacity-80 transition-opacity"
             >
               <svg width="18" height="18" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

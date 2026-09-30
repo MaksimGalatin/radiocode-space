@@ -162,7 +162,7 @@ export function RadioHeader() {
           ссылок. Отсутствие ориентира отметил наш собственный AIfaFocus. */}
       <nav
         role="navigation"
-        aria-label="Главная навигация"
+        aria-label="Main navigation"
         className="max-w-7xl 2xl:max-w-[1880px] mx-auto px-2 sm:px-6 lg:px-8"
       >
         <div className="flex items-center justify-between h-16 sm:h-20">

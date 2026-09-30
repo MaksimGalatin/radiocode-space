@@ -15,6 +15,7 @@ import ЧатAIfaОтложенно from "@/components/ЧатAIfaОтложен�
 import { RadioHeader } from "@/components/radio/RadioHeader";
 import { RadioFooter } from "@/components/radio/RadioFooter";
 import { перевестиМетаданные } from '@/lib/meta-i18n';
+import AriaLangFix from '@/components/AriaLangFix';
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -450,6 +451,7 @@ gtag('config','G-PCP8MD0NQ9');`,
         )}
         <Analytics />
         <ЧатAIfaОтложенно />
+        <AriaLangFix />
       </body>
     </html>
   );
