@@ -221,7 +221,10 @@ export function RadioHeader() {
               центры соседних стояли в 23 px — круги по 24 px пересекались (WCAG 2.5.8, мелкие
               цели касания). С 2 px центры в 24 px на 320–412 и всех языках; ряд растёт влево,
               в запас до логотипа, ширина документа не меняется (замер своим браузером). */}
-          <div className="flex items-center gap-0.5 sm:gap-2 2xl:gap-4">
+          {/* 30.09.2026: на телефоне иконки были 22 px с зазором 2 px — мелкие цели (WCAG 2.5.8), а круг
+              24 px у «Читальни сети» касался кнопки языка. Иконки 24 px без зазора: ширина ряда та же
+              (+2×5 −2×5 px), мелких 0 на 20 замерах — E:/Aifa/_агент/сайты_мобильные/проба_запаса_радио.mjs */}
+          <div className="flex items-center gap-0 sm:gap-2 2xl:gap-4">
             {/* Лента новостей. На трёх других сайтах экосистемы вход в неё есть
                 в навигации, здесь до сих пор была только ссылка в подвале — то
                 есть чтобы найти новости, надо было доскроллить весь сайт до
@@ -234,7 +237,7 @@ export function RadioHeader() {
               transition={{ delay: 0.3, duration: 0.6 }}
               whileHover={{ scale: 1.04 }}
               aria-label={rt('newsLink')}
-              className="flex items-center gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
+              className="flex items-center justify-center min-w-6 gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.06)',
                 border: '1px solid rgba(0, 240, 255, 0.18)',
@@ -257,7 +260,7 @@ export function RadioHeader() {
               transition={{ delay: 0.31, duration: 0.6 }}
               whileHover={{ scale: 1.04 }}
               aria-label="ACR Connectome"
-              className="flex items-center gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
+              className="flex items-center justify-center min-w-6 gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.06)',
                 border: '1px solid rgba(0, 240, 255, 0.18)',
@@ -283,7 +286,7 @@ export function RadioHeader() {
               transition={{ delay: 0.315, duration: 0.6 }}
               whileHover={{ scale: 1.04 }}
               aria-label="AIfa Digital"
-              className="flex items-center gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
+              className="flex items-center justify-center min-w-6 gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.06)',
                 border: '1px solid rgba(0, 240, 255, 0.18)',
@@ -326,7 +329,7 @@ export function RadioHeader() {
                 aria-expanded={фокусОткрыт}
                 aria-haspopup="true"
                 onFocus={открытьФокус}
-                className="flex items-center gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
+                className="flex items-center justify-center min-w-6 gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
                 style={{
                   background: 'rgba(0, 240, 255, 0.06)',
                   border: '1px solid rgba(0, 240, 255, 0.18)',
@@ -388,7 +391,7 @@ export function RadioHeader() {
               transition={{ delay: 0.35, duration: 0.6 }}
               whileHover={{ scale: 1.04 }}
               aria-label={rt('readingRooms')}
-              className="flex items-center gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
+              className="flex items-center justify-center min-w-6 gap-1.5 px-1 sm:px-3 py-1.5 rounded-full"
               style={{
                 background: 'rgba(0, 240, 255, 0.06)',
                 border: '1px solid rgba(0, 240, 255, 0.18)',
