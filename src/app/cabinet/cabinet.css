@@ -166,3 +166,9 @@
 /* Координаты шахматной доски на светлой теме (30.09.2026): кремовые rgba(240,226,199,.88)
    на светлом фоне не видны. В тёмной теме токена нет — остаётся прежний цвет. */
 html:not(.dark) .cab-root { --cab-coord: #6b4f2a; }
+
+/* Поля ввода на телефоне (30.09.2026): Safari на айфоне сам увеличивает страницу при фокусе на поле
+   со шрифтом мельче 16 px — вёрстка съезжает. .cab-input был 14 px. */
+@media (max-width: 640px) {
+  .cab-root .cab-input, .cab-root input:not([type=checkbox]):not([type=radio]):not([type=range]), .cab-root textarea, .cab-root select { font-size: 16px !important; }
+}

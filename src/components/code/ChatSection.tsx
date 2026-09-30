@@ -424,7 +424,7 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
               </div>
               <div>
                 <p className="font-semibold text-sm">AIfa</p>
-                <p className="text-xs text-emerald-400 flex items-center">
+                <p className="text-sm text-emerald-400 flex items-center">
                   {t("chat.online", lang)}
                   {!isBusy && messages.length <= 1 && (
                     <span className="inline-flex gap-0.5 ml-1">
@@ -462,14 +462,14 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
                         ? "bg-cyan-400/10 border border-cyan-400/20 rounded-tr-md"
                         : `bg-card border rounded-tl-md ${isStreaming ? "border-cyan-400/30 streaming-fog" : "border-border"}`
                     }`}>
-                      <p className={`text-[12px] sm:text-[13px] md:text-sm whitespace-pre-wrap leading-relaxed ${msg.role === "assistant" && isStreaming ? "text-cyan-700 dark:text-cyan-50/90" : ""}`}>
+                      <p className={`text-sm whitespace-pre-wrap leading-relaxed ${msg.role === "assistant" && isStreaming ? "text-cyan-700 dark:text-cyan-50/90" : ""}`}>
                         {msg.role === "assistant" ? visibleText : msg.content}
                         {msg.role === "assistant" && isStreaming && (
                           <span className="inline-block w-[2px] h-[14px] bg-cyan-400 animate-pulse ml-[1px] align-middle rounded-full" />
                         )}
                       </p>
                       {!isStreaming && (
-                        <p className="text-[13px] text-muted-foreground/50 mt-2">
+                        <p className="text-sm text-muted-foreground mt-2">
                           {msg.timestamp.toLocaleString([], { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                         </p>
                       )}
@@ -579,9 +579,9 @@ export default function ChatSection({ embedded = false }: { embedded?: boolean }
                   }
                 }}
                 placeholder={t("chat.placeholder", lang)} aria-label={t("chat.placeholder", lang)} disabled={isBusy}
-                className={`flex-1 w-full min-w-0 resize-none overflow-y-auto bg-card border border-border rounded-xl px-3 py-2 sm:px-4 sm:py-3 leading-relaxed focus:outline-none chat-input-glow placeholder:text-muted-foreground/50 disabled:opacity-50 transition-all ${embedded
-                  ? "max-h-[320px] min-h-[84px] text-[12px] sm:text-[13px] md:text-sm"
-                  : "max-h-[160px] text-[12px] sm:text-[13px] md:text-sm"}`} />
+                className={`flex-1 w-full min-w-0 resize-none overflow-y-auto bg-card border border-border rounded-xl px-3 py-2 sm:px-4 sm:py-3 leading-relaxed focus:outline-none chat-input-glow placeholder:text-muted-foreground disabled:opacity-50 transition-all ${embedded
+                  ? "max-h-[320px] min-h-[84px] text-base md:text-sm"
+                  : "max-h-[160px] text-base md:text-sm"}`} />
               <motion.button type="submit" disabled={!input.trim() || isBusy} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                 aria-label="Send message"
                 className="px-4 py-3 bg-gradient-to-r from-cyan-500 to-cyan-600 text-black rounded-xl font-medium disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:from-cyan-400 hover:to-cyan-500">

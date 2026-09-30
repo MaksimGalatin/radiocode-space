@@ -26,10 +26,10 @@ type Passport = {
  *   • кнопка «Открыть паспорт» открывает большую страницу в новой вкладке.
  */
 const ПАСПОРТ_СЛОВА: Record<string, Record<string, string>> = {
-  ru: { открыть: "🪪 Открыть паспорт", подсказка: "Большой паспорт на отдельной странице — его можно показать и отправить ссылкой", выпущен: "Выпущен", невыпущен: "ещё не выпущен", несохранено: "Есть несохранённые изменения — нажмите «Сохранить паспорт», иначе их не будет на паспорте" },
-  en: { открыть: "🪪 Open passport", подсказка: "The full passport on its own page — show it or share the link", выпущен: "Issued", невыпущен: "not issued yet", несохранено: "You have unsaved changes — press “Save passport”, or they will not appear on the passport" },
-  es: { открыть: "🪪 Abrir pasaporte", подсказка: "El pasaporte completo en su propia página: muéstralo o comparte el enlace", выпущен: "Emitido", невыпущен: "aún no emitido", несохранено: "Hay cambios sin guardar: pulsa «Guardar pasaporte» o no aparecerán en el pasaporte" },
-  zh: { открыть: "🪪 打开护照", подсказка: "完整护照在单独页面上——可以展示或分享链接", выпущен: "签发", невыпущен: "尚未签发", несохранено: "有未保存的更改——请点击“保存护照”，否则护照上不会显示" },
+  ru: { открыть: "🪪 Открыть паспорт", подсказка: "Большой паспорт на отдельной странице — его можно показать и отправить ссылкой", выпущен: "Выпущен", нетТарифа: "нет", невыпущен: "ещё не выпущен", несохранено: "Есть несохранённые изменения — нажмите «Сохранить паспорт», иначе их не будет на паспорте" },
+  en: { открыть: "🪪 Open passport", подсказка: "The full passport on its own page — show it or share the link", выпущен: "Issued", нетТарифа: "None", невыпущен: "not issued yet", несохранено: "You have unsaved changes — press “Save passport”, or they will not appear on the passport" },
+  es: { открыть: "🪪 Abrir pasaporte", подсказка: "El pasaporte completo en su propia página: muéstralo o comparte el enlace", выпущен: "Emitido", нетТарифа: "ninguno", невыпущен: "aún no emitido", несохранено: "Hay cambios sin guardar: pulsa «Guardar pasaporte» o no aparecerán en el pasaporte" },
+  zh: { открыть: "🪪 打开护照", подсказка: "完整护照在单独页面上——可以展示或分享链接", выпущен: "签发", нетТарифа: "无", невыпущен: "尚未签发", несохранено: "有未保存的更改——请点击“保存护照”，否则护照上不会显示" },
 };
 
 /** Ссылка на сайт: только http(s), иначе не ссылка. */
@@ -235,7 +235,7 @@ export default function PassportTab(props: {
                 </div>
               </div>
               <div style={{ display: "flex", gap: 14, fontSize: 15, color: TOKENS.mut, flexWrap: "wrap" }}>
-                <span>🏆 Tier: <b style={{ color: tierObj ? TIER_TEXT[tierObj.id] : TOKENS.sub }}>{tierObj ? tierObj.name : "None"}</b></span>
+                <span>🏆 {t("tier")}: <b style={{ color: tierObj ? TIER_TEXT[tierObj.id] : TOKENS.sub }}>{tierObj ? tierObj.name : сл.нетТарифа}</b></span>
                 <span>📅 {сл.выпущен}: {выпущен ? new Date(выпущен).toLocaleDateString() : сл.невыпущен}</span>
               </div>
               {/* Манифест целиком (раньше обрезался на 140 знаках); длинный — прокручивается. */}

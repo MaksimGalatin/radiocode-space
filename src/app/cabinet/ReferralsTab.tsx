@@ -3,8 +3,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Card, SectionTitle, Skeleton, ErrorState, EmptyState, TOKENS, TIERS } from "./ui";
 import { useCabT } from "./i18n";
 
+// Ссылка на обучение амбассадоров на языке страницы (30.09.2026: стояла по-английски на всех языках).
+const ОБУЧЕНИЕ_АМБ: Record<string, string> = { ru: "🎓 Обучение амбассадоров →", en: "🎓 Ambassador Training →", es: "🎓 Formación de embajadores →", zh: "🎓 大使培训 →" };
+
 export default function ReferralsTab(props: { email: string; toast: (m: string) => void }) {
-  const { t } = useCabT();
+  const { t, lang } = useCabT();
   const [d, setD] = useState<any | null>(null);
   const [err, setErr] = useState(false);
   const [page, setPage] = useState(0);
@@ -52,7 +55,7 @@ export default function ReferralsTab(props: { email: string; toast: (m: string) 
     <div className="cab-cols2 cab-fade">
       <Card>
         <SectionTitle icon="👥" title={t("refTitle")} />
-        <a href="/ambassador" style={{ display: "block", textAlign: "center", padding: "11px 14px", marginBottom: 14, borderRadius: 10, fontWeight: 800, fontSize: 15, background: "linear-gradient(90deg,#06B6D4,#6366F1)", color: "#fff", textDecoration: "none" }}>🎓 Ambassador Training →</a>
+        <a href="/ambassador" style={{ display: "block", textAlign: "center", padding: "11px 14px", marginBottom: 14, borderRadius: 10, fontWeight: 800, fontSize: 15, background: "linear-gradient(90deg,#06B6D4,#6366F1)", color: "#fff", textDecoration: "none" }}>{ОБУЧЕНИЕ_АМБ[lang as string] ?? ОБУЧЕНИЕ_АМБ.en}</a>
         {!d ? <div style={{ display: "grid", gap: 10 }}><Skeleton h={54} /><Skeleton h={80} /><Skeleton h={40} /></div> : (
           <>
             <div style={{ display: "flex", gap: 24, marginBottom: 14 }}>
