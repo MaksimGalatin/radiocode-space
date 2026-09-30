@@ -57,6 +57,7 @@ export async function лестницаAIfa(formattedMessages: Array<{ role: stri
     process.env.GEMINI_API_KEY_3,
     process.env.GEMINI_API_KEY_4,
     process.env.GEMINI_API_KEY_5,
+    process.env.GEMINI_API_KEY_6,   // makcgalatin, …OOdA (29.09.2026)
     // Копии одного ключа — одна попытка (29.09.2026: на центральном ключи 2 и 3 оказались копиями 1).
   ].filter((k): k is string => typeof k === 'string' && k.trim().length > 0).filter((ключ, i, все) => все.indexOf(ключ) === i);
 
@@ -303,8 +304,11 @@ export async function лестницаAIfa(formattedMessages: Array<{ role: stri
     // падает на стороне Google. Крупнее — не значит доступнее; ставить
     // первой ту, что отдаёт 500, значит терять секунды на каждом ответе.
     // Когда 31b починят, она подхватится второй ступенью.
-    'gemma-4-26b-a4b-it',
-    'gemma-4-31b-it',
+    // 🔵 29.09.2026 — GEMMA СНЯТА ПО СЛОВУ АРХИТЕКТОРА («давай уберём»). У бесплатной Gemma 4 предел
+    // 16 тыс. токенов в минуту (AI Studio → Rate limit), а один запрос AIfa больше (скан — 39 485
+    // токенов по журналу, у чата больше). Такой запрос она не принимает ни разу — ступени только
+    // тратили время. Вернуть можно, если запросы станут меньше 16 тыс. токенов:
+    // 'gemma-4-26b-a4b-it', 'gemma-4-31b-it',
   ]),
   ];
   /**

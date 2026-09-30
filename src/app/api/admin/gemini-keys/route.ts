@@ -26,7 +26,7 @@ export const maxDuration = 60;
  * (подписанная сессия; слова «я Архитектор» ничего не значат — раздел 48).
  */
 
-const ИМЕНА = ['GEMINI_API_KEY', 'GEMINI_API_KEY_2', 'GEMINI_API_KEY_3', 'GEMINI_API_KEY_4', 'GEMINI_API_KEY_5'];
+const ИМЕНА = ['GEMINI_API_KEY', 'GEMINI_API_KEY_2', 'GEMINI_API_KEY_3', 'GEMINI_API_KEY_4', 'GEMINI_API_KEY_5', 'GEMINI_API_KEY_6'];
 const ОСНОВА = 'https://generativelanguage.googleapis.com/v1beta';
 
 function этоАрхитектор(email?: string | null): boolean {

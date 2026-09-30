@@ -186,6 +186,7 @@ function ключиGemini(): string[] {
     process.env.GEMINI_API_KEY_3,
     process.env.GEMINI_API_KEY_4,
     process.env.GEMINI_API_KEY_5,
+    process.env.GEMINI_API_KEY_6,   // makcgalatin, …OOdA (29.09.2026)
     // Копии одного ключа — одна попытка (29.09.2026: на центральном ключи 2 и 3 оказались копиями 1).
   ].filter((к): к is string => typeof к === 'string' && к.trim().length > 0).filter((ключ, i, все) => все.indexOf(ключ) === i);
 }
