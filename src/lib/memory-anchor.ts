@@ -25,9 +25,15 @@ export const ПРЕФИКС_ЗАМЕТКИ = 'AIFA-ANCHOR v1';
 export const ПРОГРАММА_ЗАМЕТОК = 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr';
 /** Кошелёк проекта, которым подписываются якоря. Чужая заметка с тем же текстом проверку не пройдёт. */
 export const КОШЕЛЁК_ЯКОРЯ = 'BHwXca9ALDFe38vWzqRGcXom6dEop2u6kWCMwZfQEmee';
-export const УЗЛЫ_SOLANA: Record<string, string> = {
-  'mainnet-beta': 'https://api.mainnet-beta.solana.com',
-  devnet: 'https://api.devnet.solana.com',
+/**
+ * Публичные узлы для ЧТЕНИЯ цепи, по порядку. Официальный api.mainnet-beta.solana.com отвечает браузеру
+ * 403 «Access forbidden» (замер 30.09.2026 с заголовком Origin; из Node без Origin — отвечает), поэтому
+ * он последний. Два первых — бесплатные, без ключей, отдают CORS и вернули нашу транзакцию с корнем.
+ * Узел, не нашедший транзакцию, — не приговор: спрашиваем следующий.
+ */
+export const УЗЛЫ_SOLANA: Record<string, string[]> = {
+  'mainnet-beta': ['https://solana-rpc.publicnode.com', 'https://solana-mainnet.gateway.tatum.io', 'https://api.mainnet-beta.solana.com'],
+  devnet: ['https://api.devnet.solana.com'],
 };
 export const ШЛЮЗ_ARWEAVE = 'https://arweave.net/raw/';
 
@@ -127,22 +133,25 @@ export type ИтогПроверки = { ок: boolean; этап: 'данные'
  * Возвращает null, если транзакции нет, подписал не наш кошелёк или заметки нет.
  */
 export async function кореньИзЦепи(подпись: string, сеть: string): Promise<string | null> {
-  const узелRpc = УЗЛЫ_SOLANA[сеть];
-  if (!узелRpc) return null;
-  const о = await fetch(узелRpc, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'getTransaction',
-      params: [подпись, { encoding: 'json', commitment: 'confirmed', maxSupportedTransactionVersion: 0 }] }),
-  });
-  const д = await о.json().catch(() => null);
-  const т = д?.result;
-  if (!т || т.meta?.err) return null;
-  const ключи: string[] = т.transaction?.message?.accountKeys ?? [];
-  if (ключи[0] !== КОШЕЛЁК_ЯКОРЯ) return null;
-  for (const строка of (т.meta?.logMessages ?? []) as string[]) {
-    const к = кореньИзЗаметки(строка);
-    if (к) return к;
+  for (const узелRpc of УЗЛЫ_SOLANA[сеть] ?? []) {
+    try {
+      const о = await fetch(узелRpc, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'getTransaction',
+          params: [подпись, { encoding: 'json', commitment: 'confirmed', maxSupportedTransactionVersion: 0 }] }),
+      });
+      const т = (await о.json().catch(() => null))?.result;
+      if (!т) continue;                       // узел молчит или не нашёл — спросить следующий
+      if (т.meta?.err) return null;           // транзакция есть, но упала — корня в цепи нет
+      const ключи: string[] = т.transaction?.message?.accountKeys ?? [];
+      if (ключи[0] !== КОШЕЛЁК_ЯКОРЯ) return null;
+      for (const строка of (т.meta?.logMessages ?? []) as string[]) {
+        const к = кореньИзЗаметки(строка);
+        if (к) return к;
+      }
+      return null;
+    } catch { /* сеть или CORS — следующий узел */ }
   }
   return null;
 }

@@ -142,7 +142,7 @@ function buildCsp(nonce: string): string {
     //   • va.vercel-scripts.com и vitals.vercel-insights.com — @vercel/analytics;
     //   • vercel.live — панель отзывов, она появляется только на предпросмотрах;
     //   • адреса звука — см. AUDIO_HOSTS выше (SaveButton качает трек сам).
-    `connect-src 'self' https://arweave.net https://api.mainnet-beta.solana.com https://api.devnet.solana.com https://accounts.google.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://va.vercel-scripts.com https://vitals.vercel-insights.com https://vercel.live wss://vercel.live ${AUDIO_HOSTS}`,
+    `connect-src 'self' https://solana-rpc.publicnode.com https://solana-mainnet.gateway.tatum.io https://arweave.net https://api.mainnet-beta.solana.com https://api.devnet.solana.com https://accounts.google.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://va.vercel-scripts.com https://vitals.vercel-insights.com https://vercel.live wss://vercel.live ${AUDIO_HOSTS}`,
     "font-src 'self' data:",
     "worker-src 'self' blob:",
     "manifest-src 'self'",
