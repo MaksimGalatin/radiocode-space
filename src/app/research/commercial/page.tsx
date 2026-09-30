@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import CommercialClient from './commercial-client';
 import { Ч } from './данные';
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 /**
  * Разделитель разрядов для метаданных. Своя функция, а не `toLocaleString`:
@@ -34,7 +35,7 @@ const тыс = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
  * процентов сайтов недоступны»: доли здесь считаются от строк журнала, и
  * подмена знаменателя в описании была бы враньём в самом заметном месте.
  */
-export const metadata: Metadata = {
+const метаданныеИсходные: Metadata = {
   title: 'US Commercial Websites: Automated Accessibility Check — Open Research',
   description:
     `An axe-core check of US commercial websites: shops, cafés, clinics, banks. ${тыс(Ч.строк)} log records across ${тыс(Ч.организаций)} organisations, ${тыс(Ч.нарушений)} rule violations, screenshots kept as evidence. Not the same instrument as the keyboard traversal — the two sets of numbers do not add up.`,
@@ -58,4 +59,10 @@ export default async function ResearchCommercialPage() {
   const h = await headers();
   const языкИзПути = h.get('x-locale') || undefined;
   return <CommercialClient языкИзПути={языкИзПути} />;
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(): Promise<Metadata> {
+  return перевестиМетаданные(метаданныеИсходные);
 }

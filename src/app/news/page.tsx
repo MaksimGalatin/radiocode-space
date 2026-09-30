@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, ChevronRight } from 'lucide-react';
 import newsDataВесь from '@/data/news.json';
 import { тольковышедшие } from '@/lib/newsSchedule';
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 /**
  * Лента новостей radiocode.space.
@@ -47,7 +48,7 @@ const ПОДПИСИ: Record<Loc, { заголовок: string; описание
   zh: { заголовок: 'CODE Eternal 新闻', описание: '数字永恒的编年史：协议、发布，以及伴随它们的公案。', назад: '← 返回电台', читать: '阅读', пусто: '暂无文章。', язык: '语言' },
 };
 
-export async function generateMetadata(): Promise<Metadata> {
+async function генерацияМетаданныхИсходная(): Promise<Metadata> {
   const loc = resolveLocale((await headers()).get('x-locale'));
   const п = ПОДПИСИ[loc];
   return {
@@ -221,4 +222,12 @@ export default async function NewsIndexPage() {
       </div>
     </div>
   );
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(
+  ...аргументы: Parameters<typeof генерацияМетаданныхИсходная>
+): Promise<Metadata> {
+  return перевестиМетаданные(await генерацияМетаданныхИсходная(...аргументы));
 }

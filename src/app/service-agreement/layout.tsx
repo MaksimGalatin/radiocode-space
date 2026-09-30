@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { LanguageProvider } from '@/lib/LanguageContext';
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 // Публичная оферта — один и тот же документ на всех четырёх сайтах экосистемы.
 // Отличаются только заголовок вкладки и адрес: этого требует разметка для
@@ -57,7 +58,7 @@ const metadata: Metadata = {
  * `metadata` не может знать язык запроса, поэтому он стал внутренним, а
  * наружу отдаётся вычисляемый.
  */
-export async function generateMetadata(): Promise<Metadata> {
+async function генерацияМетаданныхИсходная(): Promise<Metadata> {
   const { headers } = await import('next/headers');
   const сырой = (await headers()).get('x-locale') || 'en';
   const адрес = ['ru', 'es', 'zh'].includes(сырой)
@@ -82,4 +83,12 @@ export async function generateMetadata(): Promise<Metadata> {
 // остаётся побайтово одинаковым на всех четырёх сайтах.
 export default function ServiceAgreementLayout({ children }: { children: React.ReactNode }) {
   return <LanguageProvider>{children}</LanguageProvider>;
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(
+  ...аргументы: Parameters<typeof генерацияМетаданныхИсходная>
+): Promise<Metadata> {
+  return перевестиМетаданные(await генерацияМетаданныхИсходная(...аргументы));
 }

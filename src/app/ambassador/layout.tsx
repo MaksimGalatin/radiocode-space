@@ -15,6 +15,7 @@
  */
 import type { Metadata } from "next";
 import { ТАРИФЫ, ценаСтрокой } from "@/lib/pricing";
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 /**
  * Канон, зависящий от языка (16.08.2026).
@@ -37,7 +38,7 @@ async function канонПоЯзыку(база: string): Promise<{ canonical: 
   };
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+async function генерацияМетаданныхИсходная(): Promise<Metadata> {
   return {
   title: "Ambassador Program — RADIOCODE",
   description:
@@ -107,4 +108,12 @@ export default function AmbassadorLayout({
       {children}
     </>
   );
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(
+  ...аргументы: Parameters<typeof генерацияМетаданныхИсходная>
+): Promise<Metadata> {
+  return перевестиМетаданные(await генерацияМетаданныхИсходная(...аргументы));
 }

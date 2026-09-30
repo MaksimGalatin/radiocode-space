@@ -14,6 +14,7 @@ import СквознойВход from "@/components/СквознойВход";
 import ЧатAIfaОтложенно from "@/components/ЧатAIfaОтложенно";
 import { RadioHeader } from "@/components/radio/RadioHeader";
 import { RadioFooter } from "@/components/radio/RadioFooter";
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -78,7 +79,7 @@ const SEO: Record<string, { title: string; desc: string }> = {
   },
 };
 
-export async function generateMetadata(): Promise<Metadata> {
+async function генерацияМетаданныхИсходная(): Promise<Metadata> {
   const { headers } = await import('next/headers');
   const заголовки = await headers();
   const сырой = заголовки.get('x-locale') || 'en';
@@ -452,4 +453,12 @@ gtag('config','G-PCP8MD0NQ9');`,
       </body>
     </html>
   );
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(
+  ...аргументы: Parameters<typeof генерацияМетаданныхИсходная>
+): Promise<Metadata> {
+  return перевестиМетаданные(await генерацияМетаданныхИсходная(...аргументы));
 }

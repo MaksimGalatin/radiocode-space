@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { buildAlternates } from '@/lib/seo';
 import { LanguageProvider } from '@/lib/LanguageContext';
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 // 🔴 ЗАГОЛОВОК И ОПИСАНИЕ — НА ЧЕТЫРЁХ ЯЗЫКАХ.
 //
@@ -44,7 +45,7 @@ function язык(v: string | null | undefined): string {
 // Per-locale self-canonical + reciprocal hreflang (was a static English-only
 // canonical that deindexed /ru,/es,/zh). Only `alternates` becomes locale-aware;
 // title/description/keywords/openGraph/twitter are preserved verbatim.
-export async function generateMetadata(): Promise<Metadata> {
+async function генерацияМетаданныхИсходная(): Promise<Metadata> {
   const л = язык((await headers()).get('x-locale'));
   const м = МЕТА[л];
   return {
@@ -97,4 +98,12 @@ export async function generateMetadata(): Promise<Metadata> {
 // корне он затронул бы каждую страницу сайта ради одной.
 export default function AccessibilityLayout({ children }: { children: React.ReactNode }) {
   return <LanguageProvider>{children}</LanguageProvider>;
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(
+  ...аргументы: Parameters<typeof генерацияМетаданныхИсходная>
+): Promise<Metadata> {
+  return перевестиМетаданные(await генерацияМетаданныхИсходная(...аргументы));
 }

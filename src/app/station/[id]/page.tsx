@@ -7,6 +7,7 @@ import { stations } from '@/lib/stations';
 // поэтому для ТЕКСТА берём осветлённый двойник — см. readableAccent.
 import { readableAccent } from '@/lib/readableAccent';
 import { StationLabel, StationGenre, StationDescription, StationRuntime, FullTrackList, TrackCount, AllTracksBy } from './StationI18n';
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 const SITE = 'https://radiocode.space';
 
@@ -18,7 +19,7 @@ export function generateStaticParams() {
   return stations.map((s) => ({ id: s.id }));
 }
 
-export async function generateMetadata(
+async function генерацияМетаданныхИсходная(
   { params }: { params: Promise<{ id: string }> },
 ): Promise<Metadata> {
   const { id } = await params;
@@ -198,4 +199,12 @@ export default async function StationPage(
       </div>
     </div>
   );
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(
+  ...аргументы: Parameters<typeof генерацияМетаданныхИсходная>
+): Promise<Metadata> {
+  return перевестиМетаданные(await генерацияМетаданныхИсходная(...аргументы));
 }

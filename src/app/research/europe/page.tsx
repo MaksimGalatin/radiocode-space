@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import EuropeClient from './europe-client';
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 /**
  * ЕВРОПЕЙСКИЙ ОБХОД — СЕРВЕРНАЯ ОБЁРТКА.
@@ -19,7 +20,7 @@ import EuropeClient from './europe-client';
  * Метаданные остаются на сервере: поисковому роботу отдаётся одно описание,
  * не зависящее от выбора человека.
  */
-export const metadata: Metadata = {
+const метаданныеИсходные: Metadata = {
   title: 'Europe: Municipal Website Accessibility in Germany and Spain — Open Research',
   description:
     '20,833 keyboard traversals across 2,605 municipal domains in Germany and Spain. 10.0 % reachable by keyboard against 25.4 % in the U.S., both from the same denominator. Method, limitations and the dataset we withdrew.',
@@ -43,4 +44,10 @@ export default async function ResearchEuropePage() {
   const h = await headers();
   const языкИзПути = h.get('x-locale') || undefined;
   return <EuropeClient языкИзПути={языкИзПути} />;
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(): Promise<Metadata> {
+  return перевестиМетаданные(метаданныеИсходные);
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import SubprocessorsClient from './subprocessors-client';
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 /**
  * РЕЕСТР СУБОБРАБОТЧИКОВ — та же страница, что на `aifa.works`.
@@ -13,7 +14,7 @@ import SubprocessorsClient from './subprocessors-client';
  * сайте клиентский контекст стартует с английского, и без пропа испанская и
  * китайская версии отдавали бы английский текст при верном `<html lang>`.
  */
-export const metadata: Metadata = {
+const метаданныеИсходные: Metadata = {
   title: 'Sub-processor Register',
   description:
     'The complete list of providers we engage to deliver our services: what each one does, where it processes data and what it can see. Required by GDPR Article 28.',
@@ -36,4 +37,10 @@ export default async function SubprocessorsPage() {
   const h = await headers();
   const языкИзПути = h.get('x-locale') || undefined;
   return <SubprocessorsClient языкИзПути={языкИзПути} />;
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(): Promise<Metadata> {
+  return перевестиМетаданные(метаданныеИсходные);
 }

@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { LanguageProvider } from '@/lib/LanguageContext';
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 // Единое пользовательское соглашение экосистемы CODE. Один и тот же документ по
 // одному и тому же адресу на четырёх сайтах; отличаются только заголовок вкладки
@@ -29,7 +30,7 @@ async function каноническийАдрес(): Promise<string> {
     : 'https://radiocode.space/user-agreement';
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+async function генерацияМетаданныхИсходная(): Promise<Metadata> {
   return {
     title: 'User Agreement | CODE Ecosystem',
     description:
@@ -49,4 +50,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function UserAgreementLayout({ children }: { children: React.ReactNode }) {
   return <LanguageProvider>{children}</LanguageProvider>;
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(
+  ...аргументы: Parameters<typeof генерацияМетаданныхИсходная>
+): Promise<Metadata> {
+  return перевестиМетаданные(await генерацияМетаданныхИсходная(...аргументы));
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import GlossaryClient from './glossary-client';
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 /**
  * /glossary на radiocode.space.
@@ -45,7 +46,7 @@ async function канонПоЯзыку(база: string): Promise<{ canonical: 
   };
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+async function генерацияМетаданныхИсходная(): Promise<Metadata> {
   return {
   title,
   description,
@@ -283,4 +284,12 @@ export default function GlossaryPage() {
       <GlossaryClient />
     </>
   );
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(
+  ...аргументы: Parameters<typeof генерацияМетаданныхИсходная>
+): Promise<Metadata> {
+  return перевестиМетаданные(await генерацияМетаданныхИсходная(...аргументы));
 }

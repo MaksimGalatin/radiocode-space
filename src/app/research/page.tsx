@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import DataClient from './data/data-client';
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 /**
  * `/research` — ЕДИНСТВЕННАЯ ВХОДНАЯ СТРАНИЦА ИССЛЕДОВАНИЯ.
@@ -71,7 +72,7 @@ function languagesXDefault(языки: Record<string, string>): void {
   языки['x-default'] = адресЯзыкаРаздела('en');
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+async function генерацияМетаданныхИсходная(): Promise<Metadata> {
   const сырой = (await headers()).get('x-locale') || 'en';
   const яз = (ЯЗЫКИ_РАЗДЕЛА as readonly string[]).includes(сырой) ? сырой : 'en';
   const языки: Record<string, string> = {};
@@ -99,4 +100,12 @@ export default async function ResearchIndexPage() {
   const h = await headers();
   const языкИзПути = h.get('x-locale') || undefined;
   return <DataClient языкИзПути={языкИзПути} />;
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(
+  ...аргументы: Parameters<typeof генерацияМетаданныхИсходная>
+): Promise<Metadata> {
+  return перевестиМетаданные(await генерацияМетаданныхИсходная(...аргументы));
 }
