@@ -120,6 +120,14 @@ export function useLanguage() {
  * пути (`x-locale`). Строгий `useLanguage` оставлен нетронутым — его защита
  * полезна там, где страница действительно обязана жить внутри провайдера.
  */
-export function useLanguageOptional() {
-  return useContext(LanguageContext);
+export function useLanguageOptional(): Pick<LanguageContextType, 'locale' | 'setLocale'> & Partial<LanguageContextType> {
+  const ctx = useContext(LanguageContext);
+  // 30.09.2026: без провайдера здесь возвращался undefined, и все страницы, берущие
+  // язык отсюда (заявление о доступности, AIfaFocus, калькулятор, виджет оракула…),
+  // на radiocode показывались ТОЛЬКО по-английски, что бы ни выбрал человек в шапке.
+  // Язык сайта на radiocode живёт в общем хранилище code-eternal-lang — берём его.
+  const storeLang = useLang((s) => s.lang);
+  const setStoreLang = useLang((s) => s.setLang);
+  if (ctx) return ctx;
+  return { locale: storeLang, setLocale: setStoreLang };
 }
