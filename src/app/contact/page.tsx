@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import ContactClient from './contact-client';
 import { перевестиМетаданные } from '@/lib/meta-i18n';
 
@@ -43,9 +44,12 @@ const МЕТА: Record<string, { title: string; desc: string }> = {
 };
 
 async function генерацияМетаданныхИсходная(): Promise<Metadata> {
+  // 30.09.2026: перевод в МЕТА был, но выбирался всегда en — язык берём из x-locale (middleware).
+  const язык = ((await headers()).get('x-locale') || 'en').toLowerCase();
+  const м = МЕТА[язык] ?? МЕТА.en;
   return {
-    title: МЕТА.en.title,
-    description: МЕТА.en.desc,
+    title: м.title,
+    description: м.desc,
     alternates: {
       canonical: `${SITE}/contact`,
       languages: {
@@ -57,8 +61,8 @@ async function генерацияМетаданныхИсходная(): Promise
       },
     },
     openGraph: {
-      title: МЕТА.en.title,
-      description: МЕТА.en.desc,
+      title: м.title,
+      description: м.desc,
       url: `${SITE}/contact`,
       siteName: 'RadioCODE',
       type: 'website',
