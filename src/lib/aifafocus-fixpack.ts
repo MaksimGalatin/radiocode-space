@@ -431,19 +431,15 @@ export function generateFixpack(
         id: `fix-${code}-${i}`,
         code: 'A11Y-VIEWPORT-001',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 1.4.4 Resize Text (AA)',
-        title: lang === 'ru' ? 'Снятие запрета на масштабирование страницы' : 'Allow Page Zooming in Viewport',
+        title: lang === 'ru' ? 'Снятие запрета на масштабирование страницы' : lang === 'es' ? 'Permitir el zoom de la página en el viewport' : lang === 'zh' ? '允许在视口中缩放页面' : 'Allow Page Zooming in Viewport',
         issueSummary:
-          lang === 'ru'
-            ? 'Параметр maximum-scale=1 или user-scalable=no блокирует увеличение страницы пользователем.'
-            : 'The maximum-scale=1 or user-scalable=no parameter prevents users from zooming the page.',
+          lang === 'ru' ? 'Параметр maximum-scale=1 или user-scalable=no блокирует увеличение страницы пользователем.' : lang === 'es' ? 'El parámetro maximum-scale=1 o user-scalable=no impide que los usuarios amplíen la página.' : lang === 'zh' ? 'maximum-scale=1 或 user-scalable=no 参数会阻止用户缩放页面。' : 'The maximum-scale=1 or user-scalable=no parameter prevents users from zooming the page.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: `${pageLocationPrefix}<head> HTML-шаблона сайта`,
         fixedSnippet: `<!-- Замените существующий тег meta viewport в секции <head>: -->\n<meta name="viewport" content="width=device-width, initial-scale=1">`,
         explanation:
-          lang === 'ru'
-            ? 'Удаление maximum-scale и user-scalable позволяет слабовидящим пользователям увеличивать текст жестом или средствами браузера до 200% без потери функциональности.'
-            : 'Removing maximum-scale and user-scalable allows low-vision users to zoom text up to 200% as required by WCAG 1.4.4.',
+          lang === 'ru' ? 'Удаление maximum-scale и user-scalable позволяет слабовидящим пользователям увеличивать текст жестом или средствами браузера до 200% без потери функциональности.' : lang === 'es' ? 'Quitar maximum-scale y user-scalable permite a las personas con baja visión ampliar el texto hasta el 200 %, como exige WCAG 1.4.4.' : lang === 'zh' ? '移除 maximum-scale 和 user-scalable 后，低视力用户即可按 WCAG 1.4.4 的要求将文字放大到 200%。' : 'Removing maximum-scale and user-scalable allows low-vision users to zoom text up to 200% as required by WCAG 1.4.4.',
         page,
         comparisonStatus,
       });
@@ -521,19 +517,15 @@ add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src '
         id: `fix-${code}-${i}`,
         code: 'SEC-CLICK-001',
         wcagOrStandard: 'RFC 7034 (X-Frame-Options) / W3C CSP Level 3 frame-ancestors',
-        title: lang === 'ru' ? 'Защита от подмены кликов (Clickjacking)' : 'Clickjacking Protection Header',
+        title: lang === 'ru' ? 'Защита от подмены кликов (Clickjacking)' : lang === 'es' ? 'Cabecera de protección contra clickjacking' : lang === 'zh' ? '防点击劫持响应头' : 'Clickjacking Protection Header',
         issueSummary:
-          lang === 'ru'
-            ? 'Страницу разрешено открывать внутри чужого <iframe> без ограничений.'
-            : 'The page can be embedded inside unauthorized third-party <iframe> elements.',
+          lang === 'ru' ? 'Страницу разрешено открывать внутри чужого <iframe> без ограничений.' : lang === 'es' ? 'La página puede incrustarse en elementos <iframe> de terceros no autorizados.' : lang === 'zh' ? '该页面可以被嵌入未经授权的第三方 <iframe> 中。' : 'The page can be embedded inside unauthorized third-party <iframe> elements.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: 'Заголовки ответа веб-сервера (Nginx / Cloudflare / Next.js)',
         fixedSnippet: `// next.config.js\n{ key: 'X-Frame-Options', value: 'DENY' }\n\n# Nginx\nadd_header X-Frame-Options "DENY" always;`,
         explanation:
-          lang === 'ru'
-            ? 'Заголовок запрещает встраивание интерфейса в скрытые рамки на чужих вредоносных ресурсах.'
-            : 'Prevents fraudulent overlays and transparent clickjacking by refusing framing.',
+          lang === 'ru' ? 'Заголовок запрещает встраивание интерфейса в скрытые рамки на чужих вредоносных ресурсах.' : lang === 'es' ? 'Impide superposiciones fraudulentas y el clickjacking transparente al rechazar la inserción en marcos.' : lang === 'zh' ? '通过拒绝被嵌入框架，防止欺诈性覆盖层和透明点击劫持。' : 'Prevents fraudulent overlays and transparent clickjacking by refusing framing.',
         page,
         comparisonStatus,
       });
@@ -546,19 +538,15 @@ add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src '
         id: `fix-${code}-${i}`,
         code: 'SEC-MIME-001',
         wcagOrStandard: 'WHATWG Fetch / OWASP Security Headers',
-        title: lang === 'ru' ? 'Запрет угадывания MIME-типов (nosniff)' : 'MIME Sniffing Prevention Header',
+        title: lang === 'ru' ? 'Запрет угадывания MIME-типов (nosniff)' : lang === 'es' ? 'Cabecera contra el MIME sniffing' : lang === 'zh' ? '防 MIME 嗅探响应头' : 'MIME Sniffing Prevention Header',
         issueSummary:
-          lang === 'ru'
-            ? 'Браузеру не запрещено исполнять файлы неверного типа под видом скриптов или стилей.'
-            : 'Browser MIME sniffing is not disabled, posing executable payload risks.',
+          lang === 'ru' ? 'Браузеру не запрещено исполнять файлы неверного типа под видом скриптов или стилей.' : lang === 'es' ? 'El MIME sniffing del navegador no está desactivado, lo que crea riesgo de ejecutar contenido malicioso.' : lang === 'zh' ? '未禁用浏览器 MIME 嗅探，存在执行恶意载荷的风险。' : 'Browser MIME sniffing is not disabled, posing executable payload risks.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: 'Заголовки ответа веб-сервера',
         fixedSnippet: `// next.config.js\n{ key: 'X-Content-Type-Options', value: 'nosniff' }\n\n# Nginx\nadd_header X-Content-Type-Options "nosniff" always;`,
         explanation:
-          lang === 'ru'
-            ? 'Заставляет браузер строго следовать объявленному Content-Type, предотвращая подмену типов файлов.'
-            : 'Enforces strict MIME type adherence, eliminating malicious sniffing exploits.',
+          lang === 'ru' ? 'Заставляет браузер строго следовать объявленному Content-Type, предотвращая подмену типов файлов.' : lang === 'es' ? 'Obliga a respetar estrictamente el tipo MIME y elimina los ataques basados en el sniffing.' : lang === 'zh' ? '强制严格遵守 MIME 类型，杜绝利用嗅探的恶意攻击。' : 'Enforces strict MIME type adherence, eliminating malicious sniffing exploits.',
         page,
         comparisonStatus,
       });
@@ -571,19 +559,15 @@ add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src '
         id: `fix-${code}-${i}`,
         code: 'PRIV-REF-001',
         wcagOrStandard: 'W3C Referrer Policy / GDPR Art. 25 Privacy by Default',
-        title: lang === 'ru' ? 'Ограничение утечки адресов страниц (Referrer-Policy)' : 'Referrer-Policy Privacy Header',
+        title: lang === 'ru' ? 'Ограничение утечки адресов страниц (Referrer-Policy)' : lang === 'es' ? 'Cabecera de privacidad Referrer-Policy' : lang === 'zh' ? 'Referrer-Policy 隐私响应头' : 'Referrer-Policy Privacy Header',
         issueSummary:
-          lang === 'ru'
-            ? 'При переходе по внешним ссылкам сервер передает полный внутренний URL страницы.'
-            : 'Outbound navigation leaks full URL paths containing potentially sensitive query params.',
+          lang === 'ru' ? 'При переходе по внешним ссылкам сервер передает полный внутренний URL страницы.' : lang === 'es' ? 'Al salir a otros sitios se filtran rutas URL completas con parámetros de consulta potencialmente sensibles.' : lang === 'zh' ? '跳转到外部站点时会泄露完整的 URL 路径，其中可能包含敏感的查询参数。' : 'Outbound navigation leaks full URL paths containing potentially sensitive query params.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: 'Заголовки ответа веб-сервера или тег <head>',
         fixedSnippet: `// next.config.js\n{ key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' }\n\n<!-- Или внутри <head>: -->\n<meta name="referrer" content="strict-origin-when-cross-origin">`,
         explanation:
-          lang === 'ru'
-            ? 'Передает сторонним сайтам только имя домена, скрывая внутренние пути и параметры запроса.'
-            : 'Transmits only the origin domain across external boundaries, protecting private route parameters.',
+          lang === 'ru' ? 'Передает сторонним сайтам только имя домена, скрывая внутренние пути и параметры запроса.' : lang === 'es' ? 'Hacia el exterior solo se transmite el dominio de origen, lo que protege los parámetros privados de la ruta.' : lang === 'zh' ? '对外只传递来源域名，保护私密的路径参数。' : 'Transmits only the origin domain across external boundaries, protecting private route parameters.',
         page,
         comparisonStatus,
       });
@@ -596,19 +580,15 @@ add_header Content-Security-Policy-Report-Only "default-src 'self'; script-src '
         id: `fix-${code}-${i}`,
         code: 'PRIV-PERM-001',
         wcagOrStandard: 'W3C Permissions Policy / GDPR Art. 25',
-        title: lang === 'ru' ? 'Ограничение доступа к аппаратуре (Permissions-Policy)' : 'Hardware Access Restriction Header',
+        title: lang === 'ru' ? 'Ограничение доступа к аппаратуре (Permissions-Policy)' : lang === 'es' ? 'Cabecera de restricción de acceso al hardware' : lang === 'zh' ? '硬件访问限制响应头' : 'Hardware Access Restriction Header',
         issueSummary:
-          lang === 'ru'
-            ? 'Не ограничен доступ сторонних скриптов к камере, микрофону и геолокации устройства.'
-            : 'Third-party components have unrestricted access attempts to microphone, camera, and geolocation.',
+          lang === 'ru' ? 'Не ограничен доступ сторонних скриптов к камере, микрофону и геолокации устройства.' : lang === 'es' ? 'Los componentes de terceros pueden intentar acceder sin restricciones al micrófono, la cámara y la geolocalización.' : lang === 'zh' ? '第三方组件可以不受限制地尝试访问麦克风、摄像头和地理位置。' : 'Third-party components have unrestricted access attempts to microphone, camera, and geolocation.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: 'Заголовки ответа веб-сервера',
         fixedSnippet: `// next.config.js\n{ key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' }\n\n# Nginx\nadd_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;`,
         explanation:
-          lang === 'ru'
-            ? 'Блокирует несанкционированный запрос чувствительных датчиков и оборудования пользователя.'
-            : 'Enforces principle of least privilege for browser device hardware APIs.',
+          lang === 'ru' ? 'Блокирует несанкционированный запрос чувствительных датчиков и оборудования пользователя.' : lang === 'es' ? 'Aplica el principio de mínimo privilegio a las API del navegador que acceden al hardware.' : lang === 'zh' ? '对浏览器的设备硬件 API 实施最小权限原则。' : 'Enforces principle of least privilege for browser device hardware APIs.',
         page,
         comparisonStatus,
       });
@@ -692,19 +672,15 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-2.4.1',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 2.4.1 Bypass Blocks (A)',
-        title: lang === 'ru' ? 'Внедрение ссылки быстрого перехода к содержимому' : 'Add Skip-to-Content Navigation Link',
+        title: lang === 'ru' ? 'Внедрение ссылки быстрого перехода к содержимому' : lang === 'es' ? 'Añadir un enlace para saltar al contenido' : lang === 'zh' ? '添加「跳到正文」导航链接' : 'Add Skip-to-Content Navigation Link',
         issueSummary:
-          lang === 'ru'
-            ? 'Отсутствует механизм клавиатурного перехода сразу к основному содержимому в обход меню.'
-            : 'Users navigating via keyboard cannot bypass repetitive navigation headers.',
+          lang === 'ru' ? 'Отсутствует механизм клавиатурного перехода сразу к основному содержимому в обход меню.' : lang === 'es' ? 'Quien navega con el teclado no puede saltarse los menús de navegación repetidos.' : lang === 'zh' ? '使用键盘浏览的用户无法跳过重复的导航区域。' : 'Users navigating via keyboard cannot bypass repetitive navigation headers.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: `${pageLocationPrefix}Начало тега <body> и целевой контейнер контента`,
         fixedSnippet: `<!-- Вставьте ПЕРВЫМ элементом сразу после <body>: -->\n<a href="#main-content" class="skip-link">Skip to main content</a>\n\n<!-- Добавьте id и tabindex="-1" к основному блоку страницы: -->\n<main id="main-content" tabindex="-1">\n  <!-- содержимое страницы -->\n</main>\n\n/* Стили в CSS: */\n.skip-link {\n  position: absolute;\n  top: -9999px;\n  left: 50%;\n  transform: translateX(-50%);\n  background: #0B1220;\n  color: #FFFFFF;\n  padding: 12px 24px;\n  font-weight: 700;\n  text-decoration: none;\n  border: 2px solid #FFFFFF;\n  border-radius: 0 0 8px 8px;\n  z-index: 999999;\n}\n.skip-link:focus {\n  top: 0;\n  outline: 3px solid #FFFFFF;\n}`,
         explanation:
-          lang === 'ru'
-            ? 'Позволяет пользователю с клавиатуры нажать Tab и сразу перейти к чтению статьи или страницы, не пролистывая десятки ссылок шапки.'
-            : 'Enables keyboard users to bypass repetitive header navigation with a single keystroke.',
+          lang === 'ru' ? 'Позволяет пользователю с клавиатуры нажать Tab и сразу перейти к чтению статьи или страницы, не пролистывая десятки ссылок шапки.' : lang === 'es' ? 'Permite a los usuarios de teclado saltarse la navegación repetida de la cabecera con una sola pulsación.' : lang === 'zh' ? '键盘用户只需按一次键即可跳过重复的页眉导航。' : 'Enables keyboard users to bypass repetitive header navigation with a single keystroke.',
         page,
         comparisonStatus,
       });
@@ -723,19 +699,15 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-3.1.1',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 3.1.1 Language of Page (A)',
-        title: lang === 'ru' ? 'Указание языка страницы в теге <html>' : 'Declare Language on Root <html> Element',
+        title: lang === 'ru' ? 'Указание языка страницы в теге <html>' : lang === 'es' ? 'Declarar el idioma en el elemento raíz <html>' : lang === 'zh' ? '在根元素 <html> 上声明语言' : 'Declare Language on Root <html> Element',
         issueSummary:
-          lang === 'ru'
-            ? 'Тег <html> не содержит атрибута lang, скринридер не может определить язык озвучивания.'
-            : 'The <html> element lacks a lang attribute, preventing screen readers from choosing the correct phonetics.',
+          lang === 'ru' ? 'Тег <html> не содержит атрибута lang, скринридер не может определить язык озвучивания.' : lang === 'es' ? 'El elemento <html> no tiene atributo lang, y los lectores de pantalla no pueden elegir la pronunciación correcta.' : lang === 'zh' ? '<html> 元素缺少 lang 属性，读屏软件无法选择正确的发音。' : 'The <html> element lacks a lang attribute, preventing screen readers from choosing the correct phonetics.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: `${pageLocationPrefix}Корневой тег <html> в шаблоне документа`,
         fixedSnippet: `<!-- Замените открывающий тег <html>: -->\n<html lang="${lang === 'ru' ? 'ru' : lang === 'es' ? 'es' : lang === 'zh' ? 'zh' : 'en'}">`,
         explanation:
-          lang === 'ru'
-            ? 'Атрибут lang позволяет скринридерам корректно произносить слова в соответствии с языковыми правилами.'
-            : 'Identifies default document language for assistive speech synthesis engines.',
+          lang === 'ru' ? 'Атрибут lang позволяет скринридерам корректно произносить слова в соответствии с языковыми правилами.' : lang === 'es' ? 'Indica el idioma del documento a los sintetizadores de voz de las tecnologías de apoyo.' : lang === 'zh' ? '为辅助技术的语音合成引擎标明文档的默认语言。' : 'Identifies default document language for assistive speech synthesis engines.',
         page,
         comparisonStatus,
       });
@@ -755,19 +727,15 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-2.4.7',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 2.4.7 Focus Visible (AA)',
-        title: lang === 'ru' ? 'Восстановление видимого контура фокуса' : 'Restore Visible Focus Outline (:focus-visible)',
+        title: lang === 'ru' ? 'Восстановление видимого контура фокуса' : lang === 'es' ? 'Restaurar el contorno visible del foco (:focus-visible)' : lang === 'zh' ? '恢复可见的焦点轮廓（:focus-visible）' : 'Restore Visible Focus Outline (:focus-visible)',
         issueSummary:
-          lang === 'ru'
-            ? 'Стили содержат outline: none без замены на видимый индикатор фокуса.'
-            : 'Styles remove native focus outline without providing an accessible visible replacement.',
+          lang === 'ru' ? 'Стили содержат outline: none без замены на видимый индикатор фокуса.' : lang === 'es' ? 'Los estilos eliminan el contorno de foco nativo sin ofrecer un sustituto visible y accesible.' : lang === 'zh' ? '样式移除了原生焦点轮廓，却没有提供可见且无障碍的替代。' : 'Styles remove native focus outline without providing an accessible visible replacement.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: `${pageLocationPrefix}CSS-файлы стилей / глобальные стили шаблона`,
         fixedSnippet: `/* Замените outline: none или добавьте правило видимого двухцветного контура: */\n:focus-visible {\n  outline: 3px solid #0B1220 !important;\n  outline-offset: 2px !important;\n  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 7px #FFFFFF !important;\n}\n\n/* Для интерактивных элементов: */\na:focus-visible,\nbutton:focus-visible,\ninput:focus-visible,\nselect:focus-visible,\ntextarea:focus-visible {\n  outline: 3px solid #0B1220 !important;\n  outline-offset: 2px !important;\n  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 7px #FFFFFF !important;\n}`,
         explanation:
-          lang === 'ru'
-            ? 'Двухцветный контур (тёмная линия + белые кольца) гарантирует контрастность ≥ 3:1 на абсолютно любом фоне.'
-            : 'Dual-color outline guarantees >= 3:1 contrast against any background color.',
+          lang === 'ru' ? 'Двухцветный контур (тёмная линия + белые кольца) гарантирует контрастность ≥ 3:1 на абсолютно любом фоне.' : lang === 'es' ? 'Un contorno de dos colores garantiza un contraste de al menos 3:1 sobre cualquier fondo.' : lang === 'zh' ? '双色轮廓可确保在任何背景色上对比度都不低于 3:1。' : 'Dual-color outline guarantees >= 3:1 contrast against any background color.',
         page,
         comparisonStatus,
       });
@@ -785,19 +753,15 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-2.4.3',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 2.4.3 Focus Order (A)',
-        title: lang === 'ru' ? 'Устранение положительного tabindex' : 'Remove Positive tabindex Attributes',
+        title: lang === 'ru' ? 'Устранение положительного tabindex' : lang === 'es' ? 'Eliminar los atributos tabindex positivos' : lang === 'zh' ? '移除正数 tabindex 属性' : 'Remove Positive tabindex Attributes',
         issueSummary:
-          lang === 'ru'
-            ? 'Использование tabindex больше 0 ломает естественный порядок клавиатурной навигации по странице.'
-            : 'Positive tabindex (>0) disrupts logical document tab sequence.',
+          lang === 'ru' ? 'Использование tabindex больше 0 ломает естественный порядок клавиатурной навигации по странице.' : lang === 'es' ? 'Un tabindex positivo (>0) rompe el orden lógico de tabulación del documento.' : lang === 'zh' ? '正数 tabindex（>0）会打乱文档合理的 Tab 顺序。' : 'Positive tabindex (>0) disrupts logical document tab sequence.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: `${pageLocationPrefix}HTML-шаблоны компонентов со свойством tabindex`,
         fixedSnippet: `<!-- Замените положительный tabindex на 0 (или уберите атрибут, если элемент интерактивен): -->\n<!-- БЫЛО: <div tabindex="1"> или <button tabindex="5"> -->\n<!-- СТАЛО: -->\n<div tabindex="0">\n<!-- Для нативных кнопок и ссылок удалите tabindex: -->\n<button type="button">...</button>`,
         explanation:
-          lang === 'ru'
-            ? 'Порядок фокуса должен следовать естественному порядку элементов в DOM-дереве. Значение tabindex="0" включает элемент в естественный порядок, а значения > 0 создают скачки фокуса.'
-            : 'Focus order must follow natural DOM reading sequence. Values > 0 create unexpected focus jumps.',
+          lang === 'ru' ? 'Порядок фокуса должен следовать естественному порядку элементов в DOM-дереве. Значение tabindex="0" включает элемент в естественный порядок, а значения > 0 создают скачки фокуса.' : lang === 'es' ? 'El orden del foco debe seguir el orden natural de lectura del DOM. Los valores > 0 provocan saltos de foco inesperados.' : lang === 'zh' ? '焦点顺序必须遵循 DOM 的自然阅读顺序。大于 0 的值会造成意外的焦点跳转。' : 'Focus order must follow natural DOM reading sequence. Values > 0 create unexpected focus jumps.',
         page,
         comparisonStatus,
       });
@@ -820,11 +784,9 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-1.4.3',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 1.4.3 Contrast (Minimum) (AA)',
-        title: lang === 'ru' ? 'Коррекция цветового контраста текста (≥ 4.5:1)' : 'Adjust Text Color Contrast (>= 4.5:1)',
+        title: lang === 'ru' ? 'Коррекция цветового контраста текста (≥ 4.5:1)' : lang === 'es' ? 'Ajustar el contraste del color del texto (≥ 4,5:1)' : lang === 'zh' ? '调整文字颜色对比度（≥ 4.5:1）' : 'Adjust Text Color Contrast (>= 4.5:1)',
         issueSummary:
-          lang === 'ru'
-            ? 'Коэффициент контрастности текста к фону ниже нормативного порога 4.5:1.'
-            : 'Text contrast ratio is below the required 4.5:1 threshold.',
+          lang === 'ru' ? 'Коэффициент контрастности текста к фону ниже нормативного порога 4.5:1.' : lang === 'es' ? 'La relación de contraste del texto está por debajo del mínimo exigido de 4,5:1.' : lang === 'zh' ? '文字对比度低于要求的 4.5:1。' : 'Text contrast ratio is below the required 4.5:1 threshold.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: `${pageLocationPrefix}CSS-стили элемента / цветовая палитра темы`,
@@ -853,23 +815,17 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-1.3.1',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 1.3.1 Info and Relationships (A), SC 3.3.2 (A)',
-        title: lang === 'ru' ? 'Связывание полей ввода с текстовыми подписями' : 'Associate Form Inputs with Accessible Labels',
+        title: lang === 'ru' ? 'Связывание полей ввода с текстовыми подписями' : lang === 'es' ? 'Asociar los campos del formulario con etiquetas accesibles' : lang === 'zh' ? '为表单输入框关联无障碍标签' : 'Associate Form Inputs with Accessible Labels',
         issueSummary:
-          lang === 'ru'
-            ? 'Поле ввода не связано с текстовым <label>, скринридер читает его как безымянное поле.'
-            : 'Form control lacks programmatic association with an accessible label.',
+          lang === 'ru' ? 'Поле ввода не связано с текстовым <label>, скринридер читает его как безымянное поле.' : lang === 'es' ? 'El control del formulario no está asociado mediante código a una etiqueta accesible.' : lang === 'zh' ? '表单控件未在代码中关联无障碍标签。' : 'Form control lacks programmatic association with an accessible label.',
         evidenceFragment: evidence,
         fixType: 'manual_input',
         targetLocation: `${pageLocationPrefix}HTML-разметка формы / компонентов ввода`,
         fixedSnippet: `<!-- Вариант 1: Явная привязка через id и for (рекомендуется) -->\n<label for="field-id">Впишите сами: [название поля, например: Адрес электронной почты]</label>\n<input id="field-id" type="text" name="fieldname">\n\n<!-- Вариант 2: Оборачивание поля в тег <label> -->\n<label>\n  <span>Впишите сами: [название поля]</span>\n  <input type="text" name="fieldname">\n</label>`,
         explanation:
-          lang === 'ru'
-            ? 'Программная связь позволяет незрячему пользователю услышать назначение поля при переводе фокуса.'
-            : 'Explicit label associations announce the purpose of the input control when focused.',
+          lang === 'ru' ? 'Программная связь позволяет незрячему пользователю услышать назначение поля при переводе фокуса.' : lang === 'es' ? 'Una asociación explícita con la etiqueta anuncia la finalidad del campo cuando recibe el foco.' : lang === 'zh' ? '明确关联标签后，输入框获得焦点时会读出它的用途。' : 'Explicit label associations announce the purpose of the input control when focused.',
         manualGuidance:
-          lang === 'ru'
-            ? 'Впишите сами: укажите понятное человеческое название поля (что именно ожидается ввести).'
-            : 'Manual action: provide a concise, descriptive title of what value is expected.',
+          lang === 'ru' ? 'Впишите сами: укажите понятное человеческое название поля (что именно ожидается ввести).' : lang === 'es' ? 'Complételo usted: escriba un título breve y claro sobre el valor que se espera.' : lang === 'zh' ? '需您补充：写一个简短清楚的标题，说明应填写什么内容。' : 'Manual action: provide a concise, descriptive title of what value is expected.',
         page,
         comparisonStatus,
       });
@@ -889,23 +845,17 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-4.1.2',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 4.1.2 Name, Role, Value (A)',
-        title: lang === 'ru' ? 'Добавление доступного имени кнопочным элементам' : 'Add Accessible Names to Icon Buttons',
+        title: lang === 'ru' ? 'Добавление доступного имени кнопочным элементам' : lang === 'es' ? 'Añadir nombres accesibles a los botones de icono' : lang === 'zh' ? '为图标按钮添加无障碍名称' : 'Add Accessible Names to Icon Buttons',
         issueSummary:
-          lang === 'ru'
-            ? 'Кнопка содержит иконку без текстовой подписи и без атрибута aria-label.'
-            : 'Button contains only graphical icon without accessible text or aria-label.',
+          lang === 'ru' ? 'Кнопка содержит иконку без текстовой подписи и без атрибута aria-label.' : lang === 'es' ? 'El botón contiene solo un icono gráfico, sin texto accesible ni aria-label.' : lang === 'zh' ? '按钮只有图形图标，没有无障碍文字或 aria-label。' : 'Button contains only graphical icon without accessible text or aria-label.',
         evidenceFragment: evidence,
         fixType: 'manual_input',
         targetLocation: `${pageLocationPrefix}Шаблон кнопки / иконки в компонентах`,
         fixedSnippet: `<button aria-label="Впишите сами: [что делает эта кнопка, например: Закрыть диалог / Поиск]">\n  <svg aria-hidden="true" focusable="false">...</svg>\n</button>`,
         explanation:
-          lang === 'ru'
-            ? 'Атрибут aria-label дает имя элементу для скринридеров, при этом графический вид кнопки не меняется.'
-            : 'Provides an accessible accessible-name without altering visual design.',
+          lang === 'ru' ? 'Атрибут aria-label дает имя элементу для скринридеров, при этом графический вид кнопки не меняется.' : lang === 'es' ? 'Proporciona un nombre accesible sin cambiar el diseño visual.' : lang === 'zh' ? '在不改变视觉设计的前提下提供无障碍名称。' : 'Provides an accessible accessible-name without altering visual design.',
         manualGuidance:
-          lang === 'ru'
-            ? 'Впишите сами: укажите действие кнопки (например: «Поиск по сайту», «Открыть меню», «Закрыть окно»). Без выдуманных названий.'
-            : 'Manual action: state the exact action executed by the button (e.g., "Search site", "Close dialog").',
+          lang === 'ru' ? 'Впишите сами: укажите действие кнопки (например: «Поиск по сайту», «Открыть меню», «Закрыть окно»). Без выдуманных названий.' : lang === 'es' ? 'Complételo usted: indique la acción exacta que realiza el botón (por ejemplo, «Buscar en el sitio», «Cerrar diálogo»).' : lang === 'zh' ? '需您补充：写明按钮执行的具体操作（例如「搜索网站」「关闭对话框」）。' : 'Manual action: state the exact action executed by the button (e.g., "Search site", "Close dialog").',
         page,
         comparisonStatus,
       });
@@ -928,23 +878,17 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-1.1.1',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 1.1.1 Non-text Content (A)',
-        title: lang === 'ru' ? 'Добавление атрибута alt к изображениям' : 'Add Text Alternatives (alt) to Images',
+        title: lang === 'ru' ? 'Добавление атрибута alt к изображениям' : lang === 'es' ? 'Añadir texto alternativo (alt) a las imágenes' : lang === 'zh' ? '为图片添加替代文字（alt）' : 'Add Text Alternatives (alt) to Images',
         issueSummary:
-          lang === 'ru'
-            ? 'Изображение не имеет атрибута alt: скринридер читает технический путь к файлу.'
-            : 'Image element has no alt attribute, causing screen readers to verbalize raw URL paths.',
+          lang === 'ru' ? 'Изображение не имеет атрибута alt: скринридер читает технический путь к файлу.' : lang === 'es' ? 'La imagen no tiene atributo alt, y los lectores de pantalla leen en voz alta la ruta del archivo.' : lang === 'zh' ? '图片没有 alt 属性，读屏软件会直接朗读文件路径。' : 'Image element has no alt attribute, causing screen readers to verbalize raw URL paths.',
         evidenceFragment: evidence,
         fixType: 'manual_input',
         targetLocation: `${pageLocationPrefix}Теги <img> в шаблонах страниц`,
         fixedSnippet: `<!-- Для смыслового изображения: -->\n<img src="photo.jpg" alt="Впишите сами: [краткое описание того, что изображено]">\n\n<!-- Для чисто декоративного изображения (иконки, разделители): -->\n<img src="divider.svg" alt="" aria-hidden="true">`,
         explanation:
-          lang === 'ru'
-            ? 'Текстовый эквивалент передает смысл изображения незрячим пользователям.'
-            : 'Provides functional equivalence for visual media.',
+          lang === 'ru' ? 'Текстовый эквивалент передает смысл изображения незрячим пользователям.' : lang === 'es' ? 'Ofrece un equivalente funcional del contenido visual.' : lang === 'zh' ? '为视觉内容提供功能上的等效替代。' : 'Provides functional equivalence for visual media.',
         manualGuidance:
-          lang === 'ru'
-            ? 'Впишите сами: кратко опишите суть изображения или поставьте alt="" если оно чисто декоративное.'
-            : 'Manual action: provide descriptive text, or alt="" if purely decorative.',
+          lang === 'ru' ? 'Впишите сами: кратко опишите суть изображения или поставьте alt="" если оно чисто декоративное.' : lang === 'es' ? 'Complételo usted: escriba un texto descriptivo, o alt="" si la imagen es solo decorativa.' : lang === 'zh' ? '需您补充：写出描述性文字；如果图片纯属装饰，请使用 alt=""。' : 'Manual action: provide descriptive text, or alt="" if purely decorative.',
         page,
         comparisonStatus,
       });
@@ -957,23 +901,17 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-2.4.4',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 2.4.4 Link Purpose (In Context) (A)',
-        title: lang === 'ru' ? 'Добавление доступного текста ссылке' : 'Add Accessible Text to Link',
+        title: lang === 'ru' ? 'Добавление доступного текста ссылке' : lang === 'es' ? 'Añadir texto accesible al enlace' : lang === 'zh' ? '为链接添加无障碍文字' : 'Add Accessible Text to Link',
         issueSummary:
-          lang === 'ru'
-            ? 'Ссылка не содержит текста, aria-label или изображения с alt, скринридер не может определить цель перехода.'
-            : 'Link contains no text, aria-label, or image with alt.',
+          lang === 'ru' ? 'Ссылка не содержит текста, aria-label или изображения с alt, скринридер не может определить цель перехода.' : lang === 'es' ? 'El enlace no tiene texto, aria-label ni imagen con alt.' : lang === 'zh' ? '链接没有文字、aria-label 或带 alt 的图片。' : 'Link contains no text, aria-label, or image with alt.',
         evidenceFragment: evidence,
         fixType: 'manual_input',
         targetLocation: `${pageLocationPrefix}HTML-шаблон ссылки <a>`,
         fixedSnippet: `<!-- Вариант 1: Впишите понятный текст внутрь ссылки: -->\n<a href="...">Впишите сами: [название ссылки, например: Подробнее о компании]</a>\n\n<!-- Вариант 2: Для иконки без текста используйте aria-label: -->\n<a href="..." aria-label="Впишите сами: [назначение ссылки]">\n  <svg aria-hidden="true">...</svg>\n</a>`,
         explanation:
-          lang === 'ru'
-            ? 'Текст ссылки или aria-label позволяет пользователю скринридера понять назначение перехода.'
-            : 'Provides clear accessible name for link navigation.',
+          lang === 'ru' ? 'Текст ссылки или aria-label позволяет пользователю скринридера понять назначение перехода.' : lang === 'es' ? 'Da al enlace un nombre accesible claro para la navegación.' : lang === 'zh' ? '为链接提供清楚的无障碍名称，便于导航。' : 'Provides clear accessible name for link navigation.',
         manualGuidance:
-          lang === 'ru'
-            ? 'Впишите сами: кратко и понятно укажите цель перехода (куда ведет ссылка).'
-            : 'Manual action: state the exact destination of the link.',
+          lang === 'ru' ? 'Впишите сами: кратко и понятно укажите цель перехода (куда ведет ссылка).' : lang === 'es' ? 'Complételo usted: indique el destino exacto del enlace.' : lang === 'zh' ? '需您补充：写明链接的确切去向。' : 'Manual action: state the exact destination of the link.',
         page,
         comparisonStatus,
       });
@@ -986,23 +924,17 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-1.3.1',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 1.3.1 Info and Relationships (A)',
-        title: lang === 'ru' ? 'Удаление или заполнение пустого заголовка' : 'Fill or Remove Empty Heading Element',
+        title: lang === 'ru' ? 'Удаление или заполнение пустого заголовка' : lang === 'es' ? 'Rellenar o eliminar el encabezado vacío' : lang === 'zh' ? '填写或删除空标题元素' : 'Fill or Remove Empty Heading Element',
         issueSummary:
-          lang === 'ru'
-            ? 'Тег заголовка присутствует в разметке, но не содержит видимого или доступного текста.'
-            : 'Heading tag exists in markup but has no accessible text.',
+          lang === 'ru' ? 'Тег заголовка присутствует в разметке, но не содержит видимого или доступного текста.' : lang === 'es' ? 'La etiqueta de encabezado existe en el código, pero no tiene texto accesible.' : lang === 'zh' ? '代码中有标题标签，但没有无障碍文字。' : 'Heading tag exists in markup but has no accessible text.',
         evidenceFragment: evidence,
         fixType: 'manual_input',
         targetLocation: `${pageLocationPrefix}Теги заголовков (h1–h6) в шаблоне страницы`,
         fixedSnippet: `<!-- Удалите пустой тег либо впишите осмысленный заголовок: -->\n<h2>Впишите сами: [Название подраздела]</h2>`,
         explanation:
-          lang === 'ru'
-            ? 'Пустые заголовки засоряют оглавление страницы в скринридерах и мешают навигации.'
-            : 'Empty headings clutter document outlines in screen readers.',
+          lang === 'ru' ? 'Пустые заголовки засоряют оглавление страницы в скринридерах и мешают навигации.' : lang === 'es' ? 'Los encabezados vacíos ensucian el esquema del documento en los lectores de pantalla.' : lang === 'zh' ? '空标题会让读屏软件中的文档大纲变得杂乱。' : 'Empty headings clutter document outlines in screen readers.',
         manualGuidance:
-          lang === 'ru'
-            ? 'Впишите сами: укажите название раздела либо удалите пустой элемент заголовка.'
-            : 'Manual action: provide heading text or remove the tag.',
+          lang === 'ru' ? 'Впишите сами: укажите название раздела либо удалите пустой элемент заголовка.' : lang === 'es' ? 'Complételo usted: escriba el texto del encabezado o elimine la etiqueta.' : lang === 'zh' ? '需您补充：填写标题文字，或删除该标签。' : 'Manual action: provide heading text or remove the tag.',
         page,
         comparisonStatus,
       });
@@ -1015,19 +947,15 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-1.3.1',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 1.3.1 Info and Relationships (A) / G141',
-        title: lang === 'ru' ? 'Восстановление последовательной иерархии заголовков' : 'Restore Sequential Heading Hierarchy',
+        title: lang === 'ru' ? 'Восстановление последовательной иерархии заголовков' : lang === 'es' ? 'Restaurar la jerarquía consecutiva de encabezados' : lang === 'zh' ? '恢复连续的标题层级' : 'Restore Sequential Heading Hierarchy',
         issueSummary:
-          lang === 'ru'
-            ? 'Уровень заголовка пропущен (например, после h1 сразу идет h3), нарушая логику оглавления.'
-            : 'Heading level was skipped (e.g., h1 followed by h3), breaking document hierarchy.',
+          lang === 'ru' ? 'Уровень заголовка пропущен (например, после h1 сразу идет h3), нарушая логику оглавления.' : lang === 'es' ? 'Se ha saltado un nivel de encabezado (por ejemplo, h1 seguido de h3), lo que rompe la jerarquía del documento.' : lang === 'zh' ? '跳过了标题层级（例如 h1 之后直接是 h3），破坏了文档结构。' : 'Heading level was skipped (e.g., h1 followed by h3), breaking document hierarchy.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: `${pageLocationPrefix}Структура заголовков в разметке страницы`,
         fixedSnippet: `<!-- Выстройте правильную последовательность уровней заголовков: -->\n<h1>Основной заголовок страницы</h1>\n  <h2>Раздел (h2, без пропуска уровней)</h2>\n    <h3>Подраздел (h3)</h3>`,
         explanation:
-          lang === 'ru'
-            ? 'Последовательная иерархия позволяет скринридерам строить правильное дерево навигации.'
-            : 'Logical heading sequence ensures assistive technologies construct proper navigation trees.',
+          lang === 'ru' ? 'Последовательная иерархия позволяет скринридерам строить правильное дерево навигации.' : lang === 'es' ? 'Un orden lógico de encabezados permite a las tecnologías de apoyo construir una estructura de navegación correcta.' : lang === 'zh' ? '合理的标题顺序能让辅助技术构建正确的导航结构。' : 'Logical heading sequence ensures assistive technologies construct proper navigation trees.',
         page,
         comparisonStatus,
       });
@@ -1040,19 +968,15 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-4.1.1',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 4.1.1 Parsing (A)',
-        title: lang === 'ru' ? 'Устранение дубликатов атрибута id' : 'Ensure Unique id Attributes in DOM',
+        title: lang === 'ru' ? 'Устранение дубликатов атрибута id' : lang === 'es' ? 'Garantizar atributos id únicos en el DOM' : lang === 'zh' ? '确保 DOM 中的 id 属性唯一' : 'Ensure Unique id Attributes in DOM',
         issueSummary:
-          lang === 'ru'
-            ? 'Несколько элементов имеют одинаковый id, нарушая спецификацию HTML и привязку label/aria.'
-            : 'Multiple elements share the same id attribute, breaking HTML validity and label/aria associations.',
+          lang === 'ru' ? 'Несколько элементов имеют одинаковый id, нарушая спецификацию HTML и привязку label/aria.' : lang === 'es' ? 'Varios elementos comparten el mismo atributo id, lo que invalida el HTML y rompe las asociaciones de label y aria.' : lang === 'zh' ? '多个元素使用了相同的 id，导致 HTML 无效，并破坏 label 与 aria 的关联。' : 'Multiple elements share the same id attribute, breaking HTML validity and label/aria associations.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: `${pageLocationPrefix}HTML-элементы с атрибутом id`,
         fixedSnippet: `<!-- Сделайте каждый атрибут id уникальным на странице: -->\n<!-- БЫЛО: <div id="dup">...</div> <div id="dup">...</div> -->\n<!-- СТАЛО: -->\n<div id="section-header">...</div>\n<div id="section-footer">...</div>`,
         explanation:
-          lang === 'ru'
-            ? 'Атрибут id обязан быть строго уникальным в пределах документа для корректной работы браузера и скринридера.'
-            : 'Element ids must be unique across the DOM to ensure reliable referencing.',
+          lang === 'ru' ? 'Атрибут id обязан быть строго уникальным в пределах документа для корректной работы браузера и скринридера.' : lang === 'es' ? 'Los id deben ser únicos en todo el DOM para que las referencias funcionen de forma fiable.' : lang === 'zh' ? '元素 id 必须在整个 DOM 中唯一，引用才可靠。' : 'Element ids must be unique across the DOM to ensure reliable referencing.',
         page,
         comparisonStatus,
       });
@@ -1065,23 +989,17 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-2.4.2',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 2.4.2 Page Titled (A)',
-        title: lang === 'ru' ? 'Добавление информативного тега <title>' : 'Add Informative Document <title>',
+        title: lang === 'ru' ? 'Добавление информативного тега <title>' : lang === 'es' ? 'Añadir un <title> informativo al documento' : lang === 'zh' ? '为文档添加有意义的 <title>' : 'Add Informative Document <title>',
         issueSummary:
-          lang === 'ru'
-            ? 'Секция <head> не содержит тега <title> или он пуст.'
-            : 'Document <head> is missing a descriptive <title> element.',
+          lang === 'ru' ? 'Секция <head> не содержит тега <title> или он пуст.' : lang === 'es' ? 'Al <head> del documento le falta un elemento <title> descriptivo.' : lang === 'zh' ? '文档的 <head> 缺少描述性的 <title> 元素。' : 'Document <head> is missing a descriptive <title> element.',
         evidenceFragment: evidence,
         fixType: 'manual_input',
         targetLocation: `${pageLocationPrefix}Секция <head> в шаблоне документа`,
         fixedSnippet: `<head>\n  <title>Впишите сами: [Название страницы] — ${safeDomain}</title>\n</head>`,
         explanation:
-          lang === 'ru'
-            ? 'Тег title зачитывается первым при переходе на страницу и отображается во вкладках браузера.'
-            : 'Page titles allow users to identify current location and navigate browser tabs efficiently.',
+          lang === 'ru' ? 'Тег title зачитывается первым при переходе на страницу и отображается во вкладках браузера.' : lang === 'es' ? 'El título de la página permite saber dónde se está y moverse con eficacia entre las pestañas del navegador.' : lang === 'zh' ? '页面标题能让用户知道自己所在的位置，并高效地切换浏览器标签页。' : 'Page titles allow users to identify current location and navigate browser tabs efficiently.',
         manualGuidance:
-          lang === 'ru'
-            ? 'Впишите сами: укажите название страницы и название компании/сайта.'
-            : 'Manual action: provide a concise page title including site name.',
+          lang === 'ru' ? 'Впишите сами: укажите название страницы и название компании/сайта.' : lang === 'es' ? 'Complételo usted: escriba un título de página breve que incluya el nombre del sitio.' : lang === 'zh' ? '需您补充：写一个包含网站名称的简短页面标题。' : 'Manual action: provide a concise page title including site name.',
         page,
         comparisonStatus,
       });
@@ -1094,23 +1012,17 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-4.1.2',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 4.1.2 Name, Role, Value (A)',
-        title: lang === 'ru' ? 'Добавление атрибута title к тегу <iframe>' : 'Add Accessible title to <iframe> Element',
+        title: lang === 'ru' ? 'Добавление атрибута title к тегу <iframe>' : lang === 'es' ? 'Añadir un title accesible al elemento <iframe>' : lang === 'zh' ? '为 <iframe> 元素添加无障碍 title' : 'Add Accessible title to <iframe> Element',
         issueSummary:
-          lang === 'ru'
-            ? 'Тег <iframe> не имеет атрибута title, скринридер не может объяснить назначение встроенного контента.'
-            : 'The <iframe> lacks an accessible title attribute.',
+          lang === 'ru' ? 'Тег <iframe> не имеет атрибута title, скринридер не может объяснить назначение встроенного контента.' : lang === 'es' ? 'El <iframe> no tiene un atributo title accesible.' : lang === 'zh' ? '<iframe> 缺少无障碍 title 属性。' : 'The <iframe> lacks an accessible title attribute.',
         evidenceFragment: evidence,
         fixType: 'manual_input',
         targetLocation: `${pageLocationPrefix}Тег <iframe> в разметке страницы`,
         fixedSnippet: `<iframe src="..." title="Впишите сами: [назначение фрейма, например: Интерактивная карта филиалов]"></iframe>`,
         explanation:
-          lang === 'ru'
-            ? 'Атрибут title сообщает незрячим пользователям, что находится внутри встроенного фрейма.'
-            : 'Identifies frame content for screen reader users before navigating into it.',
+          lang === 'ru' ? 'Атрибут title сообщает незрячим пользователям, что находится внутри встроенного фрейма.' : lang === 'es' ? 'Indica a los usuarios de lectores de pantalla qué contiene el marco antes de entrar en él.' : lang === 'zh' ? '让读屏用户在进入框架前就知道其中的内容。' : 'Identifies frame content for screen reader users before navigating into it.',
         manualGuidance:
-          lang === 'ru'
-            ? 'Впишите сами: кратко опишите содержимое фрейма (виджет, карта, видео). Без выдуманных текстов.'
-            : 'Manual action: state the specific purpose of the embedded iframe.',
+          lang === 'ru' ? 'Впишите сами: кратко опишите содержимое фрейма (виджет, карта, видео). Без выдуманных текстов.' : lang === 'es' ? 'Complételo usted: indique la finalidad concreta del iframe incrustado.' : lang === 'zh' ? '需您补充：写明嵌入 iframe 的具体用途。' : 'Manual action: state the specific purpose of the embedded iframe.',
         page,
         comparisonStatus,
       });
@@ -1123,19 +1035,15 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-1.4.2',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 1.4.2 Audio Control (A)',
-        title: lang === 'ru' ? 'Отключение автоматического воспроизведения аудио' : 'Disable Autoplay or Mute Audio by Default',
+        title: lang === 'ru' ? 'Отключение автоматического воспроизведения аудио' : lang === 'es' ? 'Desactivar la reproducción automática o silenciar el audio por defecto' : lang === 'zh' ? '关闭自动播放，或默认静音' : 'Disable Autoplay or Mute Audio by Default',
         issueSummary:
-          lang === 'ru'
-            ? 'Медиа-элемент воспроизводит звук автоматически, заглушая голос скринридера.'
-            : 'Media starts playing audio automatically upon page load, conflicting with screen readers.',
+          lang === 'ru' ? 'Медиа-элемент воспроизводит звук автоматически, заглушая голос скринридера.' : lang === 'es' ? 'El contenido multimedia empieza a sonar al cargar la página y se superpone a los lectores de pantalla.' : lang === 'zh' ? '页面加载后媒体会自动播放声音，与读屏软件相冲突。' : 'Media starts playing audio automatically upon page load, conflicting with screen readers.',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: `${pageLocationPrefix}Теги <audio> или <video> в шаблоне`,
         fixedSnippet: `<!-- Удалите атрибут autoplay или добавьте muted: -->\n<video controls muted preload="metadata">\n  <source src="..." type="...">\n</video>`,
         explanation:
-          lang === 'ru'
-            ? 'Пользователь должен сам решать, когда запускать звук. Автовоспроизведение звука блокирует восприятие информации незрячими.'
-            : 'Users must have autonomous control over audio playback.',
+          lang === 'ru' ? 'Пользователь должен сам решать, когда запускать звук. Автовоспроизведение звука блокирует восприятие информации незрячими.' : lang === 'es' ? 'Cada persona debe poder decidir por sí misma cuándo se reproduce el audio.' : lang === 'zh' ? '用户必须能够自主控制音频播放。' : 'Users must have autonomous control over audio playback.',
         page,
         comparisonStatus,
       });
@@ -1148,19 +1056,15 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-4.1.2',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 4.1.2 Name, Role, Value (A) / WAI-ARIA 1.2',
-        title: lang === 'ru' ? 'Удаление aria-hidden с фокусируемых элементов' : 'Remove aria-hidden from Focusable Elements',
+        title: lang === 'ru' ? 'Удаление aria-hidden с фокусируемых элементов' : lang === 'es' ? 'Quitar aria-hidden de los elementos que pueden recibir el foco' : lang === 'zh' ? '从可获得焦点的元素上移除 aria-hidden' : 'Remove aria-hidden from Focusable Elements',
         issueSummary:
-          lang === 'ru'
-            ? 'Элемент доступен для фокуса с клавиатуры, но помечен aria-hidden="true", создавая невидимую ловушку.'
-            : 'Interactive focusable element is hidden from assistive tech with aria-hidden="true".',
+          lang === 'ru' ? 'Элемент доступен для фокуса с клавиатуры, но помечен aria-hidden="true", создавая невидимую ловушку.' : lang === 'es' ? 'Un elemento interactivo que recibe el foco está oculto para las tecnologías de apoyo con aria-hidden="true".' : lang === 'zh' ? '可获得焦点的交互元素被 aria-hidden="true" 对辅助技术隐藏了。' : 'Interactive focusable element is hidden from assistive tech with aria-hidden="true".',
         evidenceFragment: evidence,
         fixType: 'code_snippet',
         targetLocation: `${pageLocationPrefix}Интерактивные элементы (кнопки, ссылки, поля ввода)`,
         fixedSnippet: `<!-- Вариант 1: Если элемент интерактивен, удалите aria-hidden: -->\n<button type="button">Действие</button>\n\n<!-- Вариант 2: Если элемент чисто декоративен, исключите его из табуляции: -->\n<span aria-hidden="true" tabindex="-1">...</span>`,
         explanation:
-          lang === 'ru'
-            ? 'Фокусируемый элемент с aria-hidden="true" получает фокус при нажатии Tab, но скринридер молчит — пользователь теряется.'
-            : 'Prevents invisible focus traps where keyboard focus lands on elements silenced by aria-hidden.',
+          lang === 'ru' ? 'Фокусируемый элемент с aria-hidden="true" получает фокус при нажатии Tab, но скринридер молчит — пользователь теряется.' : lang === 'es' ? 'Evita trampas de foco invisibles, en las que el foco del teclado cae en elementos silenciados por aria-hidden.' : lang === 'zh' ? '避免隐形焦点陷阱：键盘焦点落到被 aria-hidden 屏蔽的元素上。' : 'Prevents invisible focus traps where keyboard focus lands on elements silenced by aria-hidden.',
         page,
         comparisonStatus,
       });
@@ -1173,23 +1077,17 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
         id: `fix-${code}-${i}`,
         code: 'WCAG-1.3.1',
         wcagOrStandard: 'WCAG 2.1 / 2.2 SC 1.3.1 Info and Relationships (A)',
-        title: lang === 'ru' ? 'Добавление ячеек заголовков <th> в таблицу данных' : 'Add Header Cells (<th>) to Data Table',
+        title: lang === 'ru' ? 'Добавление ячеек заголовков <th> в таблицу данных' : lang === 'es' ? 'Añadir celdas de encabezado (<th>) a la tabla de datos' : lang === 'zh' ? '为数据表添加表头单元格（<th>）' : 'Add Header Cells (<th>) to Data Table',
         issueSummary:
-          lang === 'ru'
-            ? 'Таблица содержит данные, но не имеет ни одной ячейки <th>, связывающей столбцы.'
-            : 'Data table lacks <th> header cells to associate columns with data.',
+          lang === 'ru' ? 'Таблица содержит данные, но не имеет ни одной ячейки <th>, связывающей столбцы.' : lang === 'es' ? 'La tabla de datos no tiene celdas <th> que asocien las columnas con los datos.' : lang === 'zh' ? '数据表缺少用于把列与数据对应起来的 <th> 表头单元格。' : 'Data table lacks <th> header cells to associate columns with data.',
         evidenceFragment: evidence,
         fixType: 'manual_input',
         targetLocation: `${pageLocationPrefix}Теги <table> в разметке страниц`,
         fixedSnippet: `<table>\n  <thead>\n    <tr>\n      <th scope="col">Впишите сами: [Заголовок столбца 1]</th>\n      <th scope="col">Впишите сами: [Заголовок столбца 2]</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Данные 1</td>\n      <td>Данные 2</td>\n    </tr>\n  </tbody>\n</table>`,
         explanation:
-          lang === 'ru'
-            ? 'Ячейки <th> со scope="col" позволяют скринридеру зачитывать название столбца при перемещении между ячейками данных.'
-            : 'Header cells with scope="col" announce column titles as users navigate through table cells.',
+          lang === 'ru' ? 'Ячейки <th> со scope="col" позволяют скринридеру зачитывать название столбца при перемещении между ячейками данных.' : lang === 'es' ? 'Las celdas de encabezado con scope="col" anuncian el título de la columna al recorrer las celdas de la tabla.' : lang === 'zh' ? '带 scope="col" 的表头单元格会在用户浏览表格时读出列标题。' : 'Header cells with scope="col" announce column titles as users navigate through table cells.',
         manualGuidance:
-          lang === 'ru'
-            ? 'Впишите сами: укажите понятные названия колонок таблицы. Для чисто макетных таблиц используйте role="presentation".'
-            : 'Manual action: provide descriptive column headers or role="presentation" for layout tables.',
+          lang === 'ru' ? 'Впишите сами: укажите понятные названия колонок таблицы. Для чисто макетных таблиц используйте role="presentation".' : lang === 'es' ? 'Complételo usted: escriba encabezados de columna descriptivos, o use role="presentation" en tablas de maquetación.' : lang === 'zh' ? '需您补充：填写描述性的列标题；如果是排版用的表格，请使用 role="presentation"。' : 'Manual action: provide descriptive column headers or role="presentation" for layout tables.',
         page,
         comparisonStatus,
       });
@@ -1208,13 +1106,9 @@ Canonical: https://${safeDomain}/.well-known/security.txt`,
       targetLocation: `${pageLocationPrefix}Код шаблона или настройки веб-сервера`,
       fixedSnippet: `<!-- Устраните дефект по предписанию аудита: -->\n<!-- Зафиксированное значение: ${evidence.replace(/-->/g, '')} -->\n<!-- Впишите сами: выполните необходимые изменения в коде сайта -->`,
       explanation:
-        lang === 'ru'
-          ? 'Устранение данного дефекта восстанавливает соответствие стандарту и защищает сайт от замечаний.'
-          : 'Remediating this violation restores baseline conformance.',
+        lang === 'ru' ? 'Устранение данного дефекта восстанавливает соответствие стандарту и защищает сайт от замечаний.' : lang === 'es' ? 'Corregir esta infracción restablece la conformidad básica.' : lang === 'zh' ? '修复此问题即可恢复基本合规。' : 'Remediating this violation restores baseline conformance.',
       manualGuidance:
-        lang === 'ru'
-          ? 'Впишите сами: обратитесь к веб-разработчику для корректировки указанного фрагмента разметки или конфигурации.'
-          : 'Manual action: apply configuration adjustment according to evidence.',
+        lang === 'ru' ? 'Впишите сами: обратитесь к веб-разработчику для корректировки указанного фрагмента разметки или конфигурации.' : lang === 'es' ? 'Complételo usted: ajuste la configuración según la evidencia.' : lang === 'zh' ? '需您补充：根据证据调整相应配置。' : 'Manual action: apply configuration adjustment according to evidence.',
       page,
       comparisonStatus,
     });

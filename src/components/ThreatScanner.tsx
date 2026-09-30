@@ -1199,9 +1199,7 @@ export default function ThreatScanner() {
                       onClick={() => initiateScan(true)}
                       className="inline-flex items-center gap-1.5 px-4 py-2 border border-white/15 rounded-lg text-xs font-semibold text-gray-300 hover:border-white/30 hover:text-white transition-all cursor-pointer"
                       title={
-                        locale === 'ru'
-                          ? 'Разобрать сайт заново, не дожидаясь суток'
-                          : 'Re-analyse the site now, bypassing the 24-hour cache'
+                        locale === 'ru' ? 'Разобрать сайт заново, не дожидаясь суток' : locale === 'es' ? 'Volver a analizar el sitio ahora, sin esperar a la caché de 24 horas' : locale === 'zh' ? '立即重新分析网站，无需等待 24 小时缓存' : 'Re-analyse the site now, bypassing the 24-hour cache'
                       }
                     >
                       <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
