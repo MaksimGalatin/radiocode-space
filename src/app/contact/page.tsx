@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ContactClient from './contact-client';
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 /**
  * КОНТАКТЫ НА radiocode.space. Создана 09.09.2026.
@@ -41,7 +42,7 @@ const МЕТА: Record<string, { title: string; desc: string }> = {
   },
 };
 
-export async function generateMetadata(): Promise<Metadata> {
+async function генерацияМетаданныхИсходная(): Promise<Metadata> {
   return {
     title: МЕТА.en.title,
     description: МЕТА.en.desc,
@@ -67,4 +68,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function ContactPage() {
   return <ContactClient />;
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(
+  ...аргументы: Parameters<typeof генерацияМетаданныхИсходная>
+): Promise<Metadata> {
+  return перевестиМетаданные(await генерацияМетаданныхИсходная(...аргументы));
 }

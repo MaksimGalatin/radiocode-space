@@ -18,6 +18,7 @@ import { ТИПЫ_ЛЕНТ } from '@/lib/feedLinks';
 import { headers } from 'next/headers';
 import DigitalImmortalityClient from './digital-immortality-client';
 import { ТАРИФЫ, type КодТарифа } from '@/lib/pricing';
+import { перевестиМетаданные } from '@/lib/meta-i18n';
 
 // Locale-aware canonical + hreflang. Locale comes from the x-locale request
 // header (middleware sets it from ?lang=). EN = bare /digital-immortality,
@@ -31,7 +32,7 @@ function resolveLocale(v: string | null): Loc {
   return (LOCALES as string[]).includes(v || '') ? (v as Loc) : 'en';
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+async function генерацияМетаданныхИсходная(): Promise<Metadata> {
   const loc = resolveLocale((await headers()).get('x-locale'));
   const canonical = loc === 'en' ? `${BASE}${PATH}` : `${BASE}${PATH}?lang=${loc}`;
   return {
@@ -147,4 +148,12 @@ export default function DigitalImmortalityPage() {
       <DigitalImmortalityClient />
     </>
   );
+}
+
+// 30.09.2026: заголовок вкладки и описание — на языке страницы (ru/es/zh), словарь @/lib/meta-i18n.
+// Английская версия не меняется: для en обёртка возвращает метаданные как есть.
+export async function generateMetadata(
+  ...аргументы: Parameters<typeof генерацияМетаданныхИсходная>
+): Promise<Metadata> {
+  return перевестиМетаданные(await генерацияМетаданныхИсходная(...аргументы));
 }
