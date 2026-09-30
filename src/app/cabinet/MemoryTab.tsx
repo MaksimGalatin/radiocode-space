@@ -5,6 +5,7 @@ import { useCabT } from "./i18n";
 import MemorySearchCard from "./MemorySearch";
 import DocumentsCard from "./DocumentsCard";
 import { текстФайлаКлюча, type СвязкаКлючей } from "../../lib/memory-key-file";
+import AnchorCard from "./AnchorCard";
 
 // Parse the stored markdown transcript into role-tagged messages.
 function parseChat(md: string): { role: "user" | "assistant"; content: string; ts: string }[] {
@@ -553,6 +554,8 @@ export default function MemoryTab({ email }: { email: string }) {
       </Card>
 
       <ArchivesCard />
+
+      <AnchorCard />
 
       <MemoryKeyCard email={email} />
 

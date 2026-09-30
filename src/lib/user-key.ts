@@ -10,6 +10,7 @@
  */
 import crypto from 'crypto';
 import { kmsEnabled, isKmsBlob, kmsWrap, kmsUnwrap } from './kms';
+import type { ЭлементЯкоря } from './memory-anchor';
 
 function masterKey(): Buffer {
   const b64 = process.env.MEMORY_MASTER_KEY || '';
@@ -491,5 +492,38 @@ export async function связкаКлючейЗаписей(email: string): Pro
         WHERE email=$1 AND destroyed_at IS NULL AND wrapped_key <> ''
         ORDER BY created_at, key_id`, [em]);
     return (r.rows ?? []).map((x) => ({ id: x.key_id, ссылка: x.ссылка, создан: x.created_at, ключ: x.wrapped_key }));
+  } finally { await p.end(); }
+}
+
+/**
+ * Якорь вечной памяти в Solana (30.09.2026): закреплённые единицы памяти человека с путями до корня.
+ * Таблицы пишет задача закрепления (`E:/Aifa/_агент/якорь_solana/закрепить_память.mjs`). Пока она ни
+ * разу не отработала, таблиц нет — это «ещё нечего проверять», а не поломка: отдаём пустой список.
+ * Почту в цепь задача не пишет никогда; здесь почта нужна только чтобы отдать человеку ЕГО строки.
+ */
+export async function якорьПамяти(email: string): Promise<ЭлементЯкоря[]> {
+  const em = email.trim().toLowerCase();
+  const p = await pool();
+  try {
+    const r = await p.query<{ kind: string; ref: string; destroyed: string | null; leaf: string; proof: unknown;
+      root: string; signature: string; cluster: string; anchored_at: string }>(
+      `SELECT l.kind, l.ref, l.destroyed, l.leaf, l.proof, a.root, a.signature, a.cluster, a.anchored_at::text AS anchored_at
+         FROM memory_anchor_leaves l JOIN memory_anchors a ON a.id = l.anchor_id
+        WHERE l.email = $1 AND a.signature IS NOT NULL
+        ORDER BY a.id, l.kind, l.ref`, [em]);
+    return (r.rows ?? []).map((x) => ({
+      вид: x.kind === 'forget' ? 'забвение' as const : 'запись' as const,
+      ссылка: x.ref,
+      уничтожен: x.destroyed,
+      лист: x.leaf,
+      путь: (typeof x.proof === 'string' ? JSON.parse(x.proof) : x.proof) as ЭлементЯкоря['путь'],
+      корень: x.root,
+      подпись: x.signature,
+      сеть: x.cluster,
+      закреплён: x.anchored_at,
+    }));
+  } catch (e) {
+    if ((e as { code?: string } | null)?.code === '42P01') return [];
+    throw e;
   } finally { await p.end(); }
 }
