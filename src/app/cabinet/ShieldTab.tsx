@@ -139,7 +139,7 @@ export default function ShieldTab() {
                   <div style={{ ...mono, marginTop: 4 }}>{w.instructions.dns.type} {w.instructions.dns.name}</div>
                   <div style={{ display: "flex", gap: 8, alignItems: "center", marginTop: 2 }}>
                     <div style={mono}>{w.instructions.dns.value}</div>
-                    <button className="cab-btn" onClick={() => copy(w.instructions!.dns.value, w.domain + "dns")} style={{ fontSize: 13.5, padding: "3px 8px", background: "transparent", border: "1px solid rgba(148,163,184,0.3)", color: TOKENS.sub }}>
+                    <button className="cab-btn" onClick={() => copy(w.instructions!.dns.value, w.domain + "dns")} style={{ fontSize: 14, padding: "3px 8px", background: "transparent", border: "1px solid rgba(148,163,184,0.3)", color: TOKENS.sub }}>
                       {copied === w.domain + "dns" ? t("shieldCopied") : t("shieldCopy")}
                     </button>
                   </div>
@@ -148,7 +148,7 @@ export default function ShieldTab() {
                   <div style={{ ...mono, marginTop: 4 }}>{w.instructions.file.url}</div>
                   <div style={{ display: "flex", gap: 8, alignItems: "center", marginTop: 2 }}>
                     <div style={mono}>{w.instructions.file.content}</div>
-                    <button className="cab-btn" onClick={() => copy(w.instructions!.file.content, w.domain + "file")} style={{ fontSize: 13.5, padding: "3px 8px", background: "transparent", border: "1px solid rgba(148,163,184,0.3)", color: TOKENS.sub }}>
+                    <button className="cab-btn" onClick={() => copy(w.instructions!.file.content, w.domain + "file")} style={{ fontSize: 14, padding: "3px 8px", background: "transparent", border: "1px solid rgba(148,163,184,0.3)", color: TOKENS.sub }}>
                       {copied === w.domain + "file" ? t("shieldCopied") : t("shieldCopy")}
                     </button>
                   </div>

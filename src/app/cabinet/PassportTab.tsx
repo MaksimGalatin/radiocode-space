@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { Card, TOKENS, TIERS } from "./ui";
+import { TIER_TEXT, Card, TOKENS, TIERS } from "./ui";
 import { useCabT } from "./i18n";
 
 type Passport = {
@@ -229,13 +229,13 @@ export default function PassportTab(props: {
                 {avatar
                   ? <img src={avatar} alt="" width={64} height={64} loading="lazy" style={{ width: 64, height: 64, borderRadius: "50%", objectFit: "cover", border: `2px solid ${tierObj?.color || TOKENS.violet}`, boxShadow: "0 0 24px rgba(124,58,237,0.35)" }} />
                   : <div style={{ width: 64, height: 64, borderRadius: "50%", background: "linear-gradient(135deg,#7C3AED,#06B6D4)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26 }}>{tierObj?.icon ?? "👤"}</div>}
-                <div>
-                  <div style={{ fontWeight: 800, fontSize: 17, color: TOKENS.text }}>{displayName || "Guardian"}</div>
-                  <div style={{ fontSize: 15, fontFamily: "monospace", color: TOKENS.cyan }}>{username ? "@" + username : props.email}</div>
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontWeight: 800, fontSize: 17, color: TOKENS.text, overflowWrap: "anywhere" }}>{displayName || "Guardian"}</div>
+                  <div style={{ fontSize: 15, fontFamily: "monospace", color: TOKENS.cyan, overflowWrap: "anywhere" }}>{username ? "@" + username : props.email}</div>
                 </div>
               </div>
               <div style={{ display: "flex", gap: 14, fontSize: 15, color: TOKENS.mut, flexWrap: "wrap" }}>
-                <span>🏆 Tier: <b style={{ color: tierObj?.color ?? TOKENS.sub }}>{tierObj ? tierObj.name : "None"}</b></span>
+                <span>🏆 Tier: <b style={{ color: tierObj ? TIER_TEXT[tierObj.id] : TOKENS.sub }}>{tierObj ? tierObj.name : "None"}</b></span>
                 <span>📅 {сл.выпущен}: {выпущен ? new Date(выпущен).toLocaleDateString() : сл.невыпущен}</span>
               </div>
               {/* Манифест целиком (раньше обрезался на 140 знаках); длинный — прокручивается. */}
@@ -248,9 +248,9 @@ export default function PassportTab(props: {
                   {сайтСсылка && <a className="cab-link" href={сайтСсылка} target="_blank" rel="noopener noreferrer">🌐 {сайтСсылка.replace(/^https?:\/\//, "").replace(/\/$/, "")}</a>}
                 </div>
               )}
-              <div style={{ marginTop: 16, paddingTop: 12, borderTop: "1px solid rgba(42,42,58,0.5)", fontSize: 13, color: minted ? TOKENS.green : TOKENS.mut, display: "flex", justifyContent: "space-between" }}>
+              <div style={{ marginTop: 16, paddingTop: 12, borderTop: "1px solid rgba(42,42,58,0.5)", fontSize: 14, color: minted ? TOKENS.green : TOKENS.mut, display: "flex", flexWrap: "wrap", gap: "4px 12px", justifyContent: "space-between" }}>
                 <span>{minted ? t("passEternal") + " ✓" : t("passNotMinted")}</span>
-                <span style={{ opacity: 0.6 }}>{t("passFlipHint")}</span>
+                <span>{t("passFlipHint")}</span>
               </div>
           </div>
 
@@ -272,35 +272,35 @@ export default function PassportTab(props: {
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-              <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: 3, color: TOKENS.mut }}>{t("passVerification")}</div>
+              <div style={{ fontSize: 14, fontWeight: 800, letterSpacing: 3, color: TOKENS.mut }}>{t("passVerification")}</div>
               <div style={{ fontSize: 18 }}>🛡️</div>
             </div>
 
             {/* Служебные поля документа — по два в ряд, как в паспорте */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px 16px", marginBottom: 16 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: "12px 16px", marginBottom: 16 }}>
               <div>
-                <div style={{ fontSize: 11, letterSpacing: 1.5, color: TOKENS.mut, textTransform: "uppercase" }}>Document №</div>
+                <div style={{ fontSize: 14, letterSpacing: 1.5, color: TOKENS.mut, textTransform: "uppercase" }}>Document №</div>
                 <div style={{ fontSize: 14, fontFamily: "monospace", color: TOKENS.text, fontWeight: 700 }}>{номерДокумента}</div>
               </div>
               <div>
-                <div style={{ fontSize: 11, letterSpacing: 1.5, color: TOKENS.mut, textTransform: "uppercase" }}>Tier</div>
-                <div style={{ fontSize: 14, fontWeight: 700, color: tierObj?.color ?? TOKENS.sub }}>{tierObj ? tierObj.name : "—"}</div>
+                <div style={{ fontSize: 14, letterSpacing: 1.5, color: TOKENS.mut, textTransform: "uppercase" }}>Tier</div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: tierObj ? TIER_TEXT[tierObj.id] : TOKENS.sub }}>{tierObj ? tierObj.name : "—"}</div>
               </div>
               <div>
-                <div style={{ fontSize: 11, letterSpacing: 1.5, color: TOKENS.mut, textTransform: "uppercase" }}>Holder</div>
+                <div style={{ fontSize: 14, letterSpacing: 1.5, color: TOKENS.mut, textTransform: "uppercase" }}>Holder</div>
                 <div style={{ fontSize: 14, fontFamily: "monospace", color: TOKENS.cyan, overflow: "hidden", textOverflow: "ellipsis" }}>{username ? "@" + username : "—"}</div>
               </div>
               <div>
-                <div style={{ fontSize: 11, letterSpacing: 1.5, color: TOKENS.mut, textTransform: "uppercase" }}>Status</div>
+                <div style={{ fontSize: 14, letterSpacing: 1.5, color: TOKENS.mut, textTransform: "uppercase" }}>Status</div>
                 <div style={{ fontSize: 14, fontWeight: 700, color: minted ? TOKENS.green : TOKENS.mut }}>{minted ? "VERIFIED" : "DRAFT"}</div>
               </div>
             </div>
 
-            <div style={{ fontSize: 11, letterSpacing: 1.5, color: TOKENS.mut, textTransform: "uppercase", marginBottom: 6 }}>
+            <div style={{ fontSize: 14, letterSpacing: 1.5, color: TOKENS.mut, textTransform: "uppercase", marginBottom: 6 }}>
               {minted ? "Arweave transaction" : ""}
             </div>
             {props.arweaveUrl
-              ? <a className="cab-link" href={props.arweaveUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ fontSize: 13, fontFamily: "monospace", wordBreak: "break-all", lineHeight: 1.5 }}>{props.arweaveUrl}</a>
+              ? <a className="cab-link" href={props.arweaveUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ fontSize: 14, fontFamily: "monospace", wordBreak: "break-all", lineHeight: 1.5 }}>{props.arweaveUrl}</a>
               : <div style={{ color: TOKENS.mut, fontSize: 15, textAlign: "center", padding: "18px 0" }}>🔒 {t("passNotIssued")}</div>}
             {ссылкаНаПаспорт && (
               <a className="cab-btn cab-btn-violet" href={ссылкаНаПаспорт} target="_blank" rel="noopener"
@@ -317,12 +317,12 @@ export default function PassportTab(props: {
               display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
             }}>
               <div style={{
-                fontSize: 10, fontFamily: "monospace", color: TOKENS.mut,
+                fontSize: 14, fontFamily: "monospace", color: TOKENS.mut, minWidth: 0, flex: "1 1 auto",
                 letterSpacing: 1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
               }}>
                 {машиннаяЗона}
               </div>
-              <span style={{ fontSize: 13, color: TOKENS.mut, opacity: 0.6, whiteSpace: "nowrap" }}>{t("passFlipHint")}</span>
+              <span style={{ fontSize: 14, color: TOKENS.mut, whiteSpace: "nowrap" }}>{t("passFlipHint")}</span>
             </div>
           </div>
         </div>
@@ -332,25 +332,25 @@ export default function PassportTab(props: {
               style={{ display: "inline-block", textDecoration: "none", padding: "12px 22px" }}>
               {сл.открыть}
             </a>
-            <div style={{ fontSize: 13, color: TOKENS.mut, marginTop: 8 }}>{сл.подсказка}</div>
+            <div style={{ fontSize: 14, color: TOKENS.mut, marginTop: 8 }}>{сл.подсказка}</div>
           </div>
         )}
       </div>
 
       <Card>
         <div style={{ marginBottom: 14 }}>
-          <label style={lbl}>👤 {t("fUsername")} <span style={{ opacity: .6 }}>· a-z 0-9 _ - · 3-32</span></label>
+          <label style={lbl}>👤 {t("fUsername")} <span style={{ fontWeight: 400 }}>· a-z 0-9 _ - · 3-32</span></label>
           <input className="cab-input" value={username} maxLength={32} placeholder="yourname"
             onChange={e => { setUsername(e.target.value.replace(/[^a-zA-Z0-9_-]/g, "").toLowerCase()); setUsernameErr(""); }}
             style={usernameErr ? { borderColor: TOKENS.red } : undefined} aria-invalid={!!usernameErr} />
           {usernameErr && <div style={{ fontSize: 14, color: TOKENS.red, marginTop: 4 }}>{usernameErr}</div>}
         </div>
         <div style={{ marginBottom: 14 }}>
-          <label style={lbl}>✏️ {t("fName")} <span style={{ opacity: .6 }}>· {displayName.length}/40</span></label>
+          <label style={lbl}>✏️ {t("fName")} <span style={{ fontWeight: 400 }}>· {displayName.length}/40</span></label>
           <input className="cab-input" value={displayName} maxLength={40} onChange={e => setDisplayName(e.target.value)} placeholder="Your name" />
         </div>
         <div style={{ marginBottom: 14 }}>
-          <label style={lbl}>⚡ {t("fManifesto")} <span style={{ opacity: .6 }}>· {manifesto.length}/500</span></label>
+          <label style={lbl}>⚡ {t("fManifesto")} <span style={{ fontWeight: 400 }}>· {manifesto.length}/500</span></label>
           <textarea className="cab-input" value={manifesto} maxLength={500} rows={3} onChange={e => setManifesto(e.target.value)} placeholder={t("fManifestoPh")} style={{ resize: "vertical" }} />
         </div>
         <div style={{ marginBottom: 14 }}>
@@ -362,12 +362,12 @@ export default function PassportTab(props: {
           </button>
           {avatarErr && <div style={{ fontSize: 14, color: TOKENS.red, marginTop: 4 }}>{avatarErr}</div>}
         </div>
-        <div style={{ marginBottom: 18, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+        <div style={{ marginBottom: 18, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 150px), 1fr))", gap: 10 }}>
           <div><label style={lbl}>📱 TG</label><input className="cab-input" maxLength={64} value={telegram} onChange={e => setTelegram(e.target.value)} placeholder="user" style={{ fontSize: 15, padding: "9px 10px" }} /></div>
           <div><label style={lbl}>𝕏</label><input className="cab-input" maxLength={64} value={twitter} onChange={e => setTwitter(e.target.value)} placeholder="handle" style={{ fontSize: 15, padding: "9px 10px" }} /></div>
           <div><label style={lbl}>🌐 Site</label><input className="cab-input" maxLength={120} value={website} onChange={e => setWebsite(e.target.value)} placeholder="https://" style={{ fontSize: 15, padding: "9px 10px" }} /></div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 170px), 1fr))", gap: 10 }}>
           <button className="cab-btn cab-btn-ghost" disabled={!username || !displayName || !!busy} onClick={save}>
             {busy === "save" ? t("saving") : t("saveDraft")}
           </button>

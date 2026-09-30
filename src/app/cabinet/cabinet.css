@@ -115,3 +115,54 @@
   /* Поля ввода: меньше 16px — и Safari на айфоне сам приближает страницу. */
   .cab-root input, .cab-root textarea, .cab-root select { font-size: 16px; }
 }
+
+/* ── 🔴 МОБИЛЬНАЯ ВЁРСТКА КАБИНЕТА. ПОЧИНЕНО 30.09.2026 ─────────────────────
+   Слово Архитектора: «мобильная версия ЛК — кривая». Замер прибором
+   _агент/кабинет_мобильный/прибор_кабинета.mjs (Playwright: 8 вкладок × Android
+   320–768 / iPhone / iPad / ПК × две темы × четыре языка). На телефоне страница
+   уезжала вбок: «Игры» до 662 px, «Память» 612, «Паспорт» 232, «Тарифы» 91,
+   «Амбассадоры» 88. Причина одна: у элемента сетки или флекса минимальная ширина
+   по умолчанию — ширина содержимого, и одна длинная строка (почта, номер записи,
+   таблица, три поля в ряд) распирала всю колонку. Лечится классом: */
+.cab-cols2 { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+.cab-cols3 { grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1fr); }
+.cab-cols-pass { grid-template-columns: minmax(0,40fr) minmax(0,55fr); }
+@media (max-width: 860px) { .cab-cols2, .cab-cols3, .cab-cols-pass { grid-template-columns: minmax(0,1fr); } }
+.cab-cols2 > *, .cab-cols3 > *, .cab-cols-pass > * { min-width: 0; }
+/* Неявные колонки сеток (корни вкладок, карточки) — не шире места. Трогает ТОЛЬКО
+   колонки без заданного шаблона: явные сетки на ПК остаются как были. */
+.cab-root .cab-fade, .cab-root .cab-card, .cab-root [style*="display: grid"] { grid-auto-columns: minmax(0, 1fr); }
+.cab-input { min-width: 0; }
+/* Длинные слова без пробелов (почта, номер записи, ссылка) переносятся, а не распирают */
+.cab-root .cab-card, .cab-root .cab-pass { overflow-wrap: anywhere; }
+.cab-table { font-size: 14px; }
+.cab-table th { color: var(--cab-mut); }
+/* Шапка кабинета: на телефоне кнопки языка и выхода — своей строкой, без висящего отступа */
+.cab-head { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 4px; }
+.cab-head-actions { margin-left: auto; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+/* Сводка (уровень, XP, GALATIN, тариф): на телефоне две колонки, число не вылезает из карточки */
+.cab-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 12px; margin-bottom: 22px; }
+.cab-stats > * { min-width: 0; }
+/* Лента вкладок: на ПК переносится, на телефоне — одна строка, листается пальцем */
+.cab-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; border-bottom: 1px solid var(--cab-line); padding-bottom: 12px; }
+@media (max-width: 640px) {
+  .cab-head-actions { margin-left: 0; width: 100%; }
+  .cab-head h1 { font-size: 22px !important; }
+  .cab-stats { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
+  .cab-tabs { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; margin: 0 -20px 20px; padding: 2px 20px 10px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%); }
+  .cab-tabs::-webkit-scrollbar { display: none; }
+  .cab-tabs .cab-tab { flex: 0 0 auto; scroll-snap-align: start; }
+}
+/* Цели касания: на сенсорном экране кнопка и вкладка не ниже 40 px (WCAG 2.5.8 требует
+   24; 40 — чтобы попадать пальцем, а не ногтем). Ссылки Arweave/Solana были высотой 20. */
+@media (pointer: coarse) {
+  .cab-root .cab-btn, .cab-root .cab-tab { min-height: 40px; }
+  .cab-root a[href^="https://arweave.net"], .cab-root a[href*="explorer.solana.com"] { display: inline-flex; align-items: center; min-height: 36px; padding: 0 6px; }
+}
+
+/* Координаты шахматной доски на светлой теме (30.09.2026): кремовые rgba(240,226,199,.88)
+   на светлом фоне не видны. В тёмной теме токена нет — остаётся прежний цвет. */
+html:not(.dark) .cab-root { --cab-coord: #6b4f2a; }

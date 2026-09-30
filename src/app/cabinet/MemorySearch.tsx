@@ -90,7 +90,7 @@ export default function MemorySearchCard() {
         {итог && итог.length === 0 && !сбой && <div style={{ opacity: 0.85 }}>{т("empty")}</div>}
         {итог && итог.map((н, k) => (
           <div key={k} style={{ padding: "10px 12px", borderRadius: 10, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
-            <div style={{ fontSize: 12, opacity: 0.75, marginBottom: 4 }}>
+            <div style={{ fontSize: 14, opacity: 0.75, marginBottom: 4 }}>
               {н.role === "assistant" ? "AIfa" : т("you")}{н.date ? " · " + дата(н.date) : ""}{н.channel ? " · " + н.channel : ""}{н.site ? " · " + н.site : ""}
             </div>
             <div style={{ whiteSpace: "pre-wrap", fontSize: 14, lineHeight: 1.45 }}>{н.text}</div>

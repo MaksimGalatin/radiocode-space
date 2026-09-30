@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback, useEffect, useState } from "react";
-import { Card, SectionTitle, Skeleton, EmptyState, TOKENS, TIERS } from "./ui";
+import { Card, SectionTitle, Skeleton, EmptyState, TOKENS, TIERS, TIER_TEXT } from "./ui";
 import { useCabT } from "./i18n";
 
 /**
@@ -122,6 +122,21 @@ const BENEFITS: Record<number, [string, string, string, string][]> = {
 };
 
 
+// Таблица заказов на языке страницы (30.09.2026): заголовки и статусы шлюза шли по-английски
+// на всех языках. «finished» у NOWPayments — это оплачено; раньше он светился жёлтым как неоплаченный.
+const ЗАКАЗЫ_ЗАГ: [string, string, string, string, string][] = [
+  ["Номер", "Тариф", "USD", "Статус", "Дата"], ["ID", "Tier", "USD", "Status", "Date"],
+  ["N.º", "Plan", "USD", "Estado", "Fecha"], ["编号", "套餐", "美元", "状态", "日期"],
+];
+const СТАТУС_ЗАКАЗА: Record<string, [string, string, string, string]> = {
+  paid: ["оплачен", "paid", "pagado", "已支付"], finished: ["оплачен", "paid", "pagado", "已支付"],
+  confirmed: ["подтверждён", "confirmed", "confirmado", "已确认"], sending: ["зачисляется", "sending", "enviando", "发送中"],
+  confirming: ["подтверждается", "confirming", "confirmando", "确认中"], waiting: ["ждёт оплаты", "waiting", "pendiente", "等待付款"],
+  partially_paid: ["оплачен частично", "partially paid", "pago parcial", "部分支付"], failed: ["ошибка", "failed", "fallido", "失败"],
+  expired: ["истёк", "expired", "vencido", "已过期"], refunded: ["возвращён", "refunded", "reembolsado", "已退款"],
+};
+const ОПЛАЧЕН = new Set(["paid", "finished", "confirmed"]);
+
 export default function TiersTab(props: { tier: number; toast: (m: string) => void }) {
   const { t, lang } = useCabT();
   const li = lang === "ru" ? 0 : lang === "en" ? 1 : lang === "es" ? 2 : 3;
@@ -168,26 +183,26 @@ export default function TiersTab(props: { tier: number; toast: (m: string) => vo
           const below = props.tier > tr.id;
           return (
             <div key={tr.id} className="cab-card cab-card-hover" style={{ padding: "26px 20px", textAlign: "center", borderColor: active ? tr.color : undefined, position: "relative", overflow: "hidden" }}>
-              {tr.id === 2 && <div style={{ position: "absolute", top: 0, right: 0, background: "rgba(212,162,76,0.15)", color: TOKENS.gold, fontSize: 13, fontWeight: 800, padding: "3px 10px", borderBottomLeftRadius: 10, letterSpacing: 1 }}>POPULAR</div>}
+              {tr.id === 2 && <div style={{ position: "absolute", top: 0, right: 0, background: "rgba(212,162,76,0.15)", color: TOKENS.gold, fontSize: 14, fontWeight: 800, padding: "3px 10px", borderBottomLeftRadius: 10, letterSpacing: 1 }}>POPULAR</div>}
               <div style={{ fontSize: 34 }}>{tr.icon}</div>
               <div style={{ fontSize: 17, fontWeight: 800, color: TOKENS.text, marginTop: 4 }}>{tr.name}</div>
-              <div style={{ fontSize: 28, fontWeight: 800, color: tr.color, margin: "8px 0 2px" }}>${tr.price}</div>
+              <div style={{ fontSize: 28, fontWeight: 800, color: TIER_TEXT[tr.id], margin: "8px 0 2px" }}>${tr.price}</div>
               {tr.id === 3 && <div style={{ fontSize: 14, color: TOKENS.mut, marginBottom: 10 }}>{lang === "ru" ? "разово, далее $200/мес" : lang === "es" ? "pago único, luego $200/mes" : lang === "zh" ? "一次性，之后每月 $200" : "one-time, then $200/mo"}</div>}
               {tr.id !== 3 && <div style={{ height: 12 }} />}
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 18px", textAlign: "left", display: "grid", gap: 8 }}>
                 {(BENEFITS[tr.id] || []).map((b, i) => (
                   <li key={i} style={{ fontSize: 15, color: TOKENS.sub, lineHeight: 1.45, display: "flex", gap: 7 }}>
-                    <span style={{ color: tr.color }}>✓</span>{b[li]}
+                    <span style={{ color: TIER_TEXT[tr.id] }}>✓</span>{b[li]}
                   </li>
                 ))}
               </ul>
               <button className="cab-btn" disabled={payBusy === tr.id || active || below} onClick={() => pay(tr.id)}
-                style={{ width: "100%", background: active || below ? "#2A2A3A" : tr.color }}>
+                style={{ width: "100%", background: active || below ? "#2A2A3A" : tr.color, color: active || below || tr.id === 1 ? "#fff" : "#0B0F1A" }}>
                 {below ? t("tierLower") : active ? t("tierActive") : payBusy === tr.id ? t("tierBusy") : t("tierPay", { p: tr.price })}
               </button>
               {tr.id === 3 && active && (
                 <button className="cab-btn" disabled={payBusy === 3} onClick={() => pay(3, "renewal")}
-                  style={{ width: "100%", marginTop: 8, background: "transparent", border: `1px solid ${tr.color}`, color: tr.color }}>
+                  style={{ width: "100%", marginTop: 8, background: "transparent", border: `1px solid ${tr.color}`, color: TIER_TEXT[tr.id] }}>
                   {payBusy === 3 ? "…" : lang === "ru" ? "Продлить · $200/мес" : lang === "es" ? "Renovar · $200/mes" : lang === "zh" ? "续订 · 每月 $200" : "Renew · $200/mo"}
                 </button>
               )}
@@ -204,15 +219,15 @@ export default function TiersTab(props: { tier: number; toast: (m: string) => vo
         {orders === null ? <Skeleton h={60} /> : orders.length === 0 ? <EmptyState text={t("payEmpty")} /> : (
           <div style={{ overflowX: "auto" }} tabIndex={0}>
             <table className="cab-table">
-              <caption className="sr-only">{`ID, Tier, USD, Status, Date`}</caption>
-              <thead><tr><th>ID</th><th>Tier</th><th>USD</th><th>Status</th><th>Date</th></tr></thead>
+              <caption className="sr-only">{ЗАКАЗЫ_ЗАГ[li].join(", ")}</caption>
+              <thead><tr>{ЗАКАЗЫ_ЗАГ[li].map(з => <th key={з}>{з}</th>)}</tr></thead>
               <tbody>
                 {orders.map(o => (
                   <tr key={o.order_id}>
                     <td style={{ fontFamily: "monospace", fontSize: 14 }}>{String(o.order_id).slice(0, 18)}…</td>
                     <td>{TIERS.find(x => x.id === Number(o.tier))?.name || o.tier}</td>
                     <td>${Number(o.amount)}</td>
-                    <td style={{ color: o.status === "paid" ? TOKENS.green : TOKENS.amber, fontWeight: 700 }}>{o.status}</td>
+                    <td style={{ color: ОПЛАЧЕН.has(String(o.status)) ? TOKENS.green : TOKENS.amber, fontWeight: 700 }}>{СТАТУС_ЗАКАЗА[String(o.status)]?.[li] ?? o.status}</td>
                     <td style={{ color: TOKENS.mut }}>{String(o.created_at).slice(0, 10)}</td>
                   </tr>
                 ))}

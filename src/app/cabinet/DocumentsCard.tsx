@@ -133,7 +133,7 @@ export default function DocumentsCard() {
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
                   <div style={{ minWidth: 0 }}>
                     <div style={{ fontSize: 15, color: TOKENS.text, fontWeight: 600, overflowWrap: "anywhere" }}>{тип(д.kind)} {д.name}</div>
-                    <div style={{ fontSize: 13, color: TOKENS.mut, marginTop: 2 }}>
+                    <div style={{ fontSize: 14, color: TOKENS.mut, marginTop: 2 }}>
                       {размер(д.size_bytes, l)} · {д.chars.toLocaleString(l)} {Т.знаков[l]} · {new Date(д.created_at).toLocaleString(l)}
                       {!д.stored && <> · {Т.безОригинала[l]}</>}
                     </div>

@@ -62,7 +62,7 @@ export default function ReferralsTab(props: { email: string; toast: (m: string) 
             <div className="cab-cols3" style={{ gap: 8, marginBottom: 12 }}>
               {[{ l: 1, p: "15%", c: TOKENS.cyan }, { l: 2, p: "7%", c: TOKENS.violet }, { l: 3, p: "3%", c: TOKENS.gold }].map(x => (
                 <div key={x.l} style={{ background: "#13131C", border: "1px solid #2A2A3A", borderRadius: 10, padding: 10 }}>
-                  <div style={{ fontSize: 13, color: TOKENS.mut, fontWeight: 700 }}>LVL {x.l} · <span style={{ color: x.c }}>{x.p}</span></div>
+                  <div style={{ fontSize: 14, color: TOKENS.mut, fontWeight: 700 }}>LVL {x.l} · <span style={{ color: x.c }}>{x.p}</span></div>
                   <div style={{ fontSize: 16, fontWeight: 800, color: TOKENS.text, marginTop: 4 }}>{d.counts?.[x.l] || 0}</div>
                   <div style={{ fontSize: 14, color: TOKENS.green }}>${Number(d.byLevel?.[x.l] || 0).toFixed(2)}</div>
                 </div>
@@ -84,8 +84,8 @@ export default function ReferralsTab(props: { email: string; toast: (m: string) 
                 <div style={{ fontSize: 14, color: TOKENS.mut, marginBottom: 6 }}>{t("refDownline")}:</div>
                 <div style={{ maxHeight: 200, overflowY: "auto" }}>
                   {d.list.map((x: any, i: number) => (
-                    <div key={i} style={{ display: "flex", justifyContent: "space-between", fontSize: 15, padding: "5px 0", borderTop: i ? "1px solid rgba(42,42,58,0.5)" : "none" }}>
-                      <span style={{ color: TOKENS.sub, fontFamily: "monospace" }}>{x.email}</span>
+                    <div key={i} style={{ display: "flex", flexWrap: "wrap", gap: "2px 12px", justifyContent: "space-between", fontSize: 15, padding: "5px 0", borderTop: i ? "1px solid rgba(42,42,58,0.5)" : "none" }}>
+                      <span style={{ color: TOKENS.sub, fontFamily: "monospace", minWidth: 0, overflowWrap: "anywhere" }}>{x.email}</span>
                       <span style={{ color: TOKENS.mut }}>L{x.lvl} · {TIERS.find(tt => tt.id === x.tier)?.name || "—"}</span>
                     </div>
                   ))}

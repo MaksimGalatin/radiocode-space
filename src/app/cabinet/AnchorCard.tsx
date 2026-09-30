@@ -87,7 +87,7 @@ export default function AnchorCard() {
               {items.map(э => {
                 const и = итоги[э.вид + ":" + э.ссылка];
                 return (
-                  <div key={э.вид + э.ссылка} style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center", justifyContent: "space-between", background: "#0B0F1A", border: "1px solid rgba(42,42,58,0.6)", borderRadius: 10, padding: "8px 12px" }}>
+                  <div key={э.вид + э.ссылка} style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center", justifyContent: "space-between", background: "var(--cab-ink)", border: "1px solid var(--cab-line)", borderRadius: 10, padding: "8px 12px" }}>
                     <span style={{ fontSize: 14, color: TOKENS.text, wordBreak: "break-all" }}>
                       {э.вид === "запись" ? "🔒 " + t("anRecord") : "🕊️ " + t("anForget")} · {э.ссылка.slice(0, 12)}… · {String(э.закреплён).slice(0, 10)}
                     </span>
@@ -98,9 +98,9 @@ export default function AnchorCard() {
                         </span>
                       )}
                       {э.вид === "запись" && (
-                        <a href={`https://arweave.net/${э.ссылка}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: TOKENS.mut }}>Arweave ↗</a>
+                        <a href={`https://arweave.net/${э.ссылка}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, color: TOKENS.mut }}>Arweave ↗</a>
                       )}
-                      <a href={обозреватель(э)} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: TOKENS.mut }}>Solana ↗</a>
+                      <a href={обозреватель(э)} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, color: TOKENS.mut }}>Solana ↗</a>
                     </span>
                   </div>
                 );

@@ -64,7 +64,7 @@ function ArchivesCard() {
             {rows.map((a, i) => {
               const msgs = openTx === a.txId && txText && txText.includes("### [") ? parseChat(txText) : [];
               return (
-              <div key={a.txId + i} style={{ background: "#0B0F1A", border: "1px solid rgba(42,42,58,0.6)", borderRadius: 10 }}>
+              <div key={a.txId + i} style={{ background: "var(--cab-ink)", border: "1px solid var(--cab-line)", borderRadius: 10 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, padding: "10px 14px", flexWrap: "wrap" }}>
                   <span style={{ fontSize: 15, color: TOKENS.text }}>🔒 {label(a.chatType)}</span>
                   <span style={{ fontSize: 14, color: TOKENS.mut }}>{a.size ? (a.size / 1024).toFixed(1) + " KB" : ""}{a.at ? " · " + String(a.at).slice(0, 10) : ""}</span>
@@ -72,7 +72,7 @@ function ArchivesCard() {
                     <button className="cab-btn cab-btn-ghost" disabled={txBusy === a.txId} onClick={() => readTx(a.txId)} style={{ padding: "5px 12px", fontSize: 14 }}>
                       {txBusy === a.txId ? t("memReading") : openTx === a.txId ? t("memCollapse") : "📖 " + t("memRead")}
                     </button>
-                    <a href={`https://arweave.net/${a.txId}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: TOKENS.green, fontWeight: 700, textDecoration: "none" }}>ARWEAVE ↗</a>
+                    <a href={`https://arweave.net/${a.txId}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, color: TOKENS.green, fontWeight: 700, textDecoration: "none" }}>ARWEAVE ↗</a>
                   </span>
                 </div>
                 {openTx === a.txId && (
@@ -82,7 +82,7 @@ function ArchivesCard() {
                         {msgs.map((mm, k) => (
                           <div key={k} style={{ display: "flex", flexDirection: "column", alignItems: mm.role === "user" ? "flex-end" : "flex-start" }}>
                             <div style={{ maxWidth: "85%", background: mm.role === "user" ? "rgba(124,58,237,0.15)" : "rgba(6,182,212,0.1)", border: `1px solid ${mm.role === "user" ? "rgba(124,58,237,0.3)" : "rgba(6,182,212,0.25)"}`, borderRadius: 12, padding: "8px 12px" }}>
-                              <div style={{ fontSize: 13, color: TOKENS.mut, marginBottom: 3 }}>{mm.role === "user" ? "🧑" : "🤖 AIfa"} · {mm.ts}</div>
+                              <div style={{ fontSize: 14, color: TOKENS.mut, marginBottom: 3 }}>{mm.role === "user" ? "🧑" : "🤖 AIfa"} · {mm.ts}</div>
                               <div style={{ fontSize: 15, color: TOKENS.text, whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.5 }}>{mm.content}</div>
                             </div>
                           </div>
@@ -179,7 +179,7 @@ function MemoryKeyCard({ email }: { email: string }) {
         <button className="cab-btn cab-btn-ghost" disabled={busy} onClick={скачать}>⬇️ {t("mkDownload")}</button>
       </div>
       {shown && data && (
-        <div style={{ background: "#0B0F1A", border: "1px solid rgba(42,42,58,0.6)", borderRadius: 10, padding: "10px 14px", marginBottom: 12 }}>
+        <div style={{ background: "var(--cab-ink)", border: "1px solid var(--cab-line)", borderRadius: 10, padding: "10px 14px", marginBottom: 12 }}>
           <code style={{ fontSize: 14, color: TOKENS.cyan, wordBreak: "break-all", userSelect: "all" }}>{data.key}</code>
         </div>
       )}
@@ -280,7 +280,7 @@ function HeirCard() {
         <>
           {/* Состояние идёт ПЕРЕД формой: человек сначала видит, что назначено
               сейчас, и только потом органы управления. */}
-          <div style={{ background: "#0B0F1A", border: "1px solid rgba(42,42,58,0.6)", borderRadius: 10, padding: "10px 14px", marginBottom: 12, fontSize: 15, color: TOKENS.mut, display: "grid", gap: 4 }}>
+          <div style={{ background: "var(--cab-ink)", border: "1px solid var(--cab-line)", borderRadius: 10, padding: "10px 14px", marginBottom: 12, fontSize: 15, color: TOKENS.mut, display: "grid", gap: 4 }}>
             {d.heir ? (
               <>
                 <div style={{ color: TOKENS.text }}>{t("hrCurrent")} <b style={{ color: TOKENS.cyan }}>{d.heir.heirEmail}</b> · {t("hrMonths", { n: d.heir.silenceMonths })}</div>
@@ -299,12 +299,12 @@ function HeirCard() {
           )}
 
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "flex-end", marginBottom: 12 }}>
-            <label style={{ flex: "1 1 220px", fontSize: 13, color: TOKENS.mut }}>
+            <label style={{ flex: "1 1 220px", fontSize: 14, color: TOKENS.mut }}>
               {t("hrEmail")}
               <input type="email" className="cab-input" value={heirEmail} disabled={!d.allowed || busy}
                 onChange={e => setHeirEmail(e.target.value)} placeholder="heir@example.com" style={{ width: "100%" }} />
             </label>
-            <label style={{ flex: "0 1 160px", fontSize: 13, color: TOKENS.mut }}>
+            <label style={{ flex: "0 1 160px", fontSize: 14, color: TOKENS.mut }}>
               {t("hrPeriod")}
               <select className="cab-input" value={months} disabled={!d.allowed || busy}
                 onChange={e => setMonths(Number(e.target.value))} style={{ width: "100%" }}>
@@ -419,9 +419,9 @@ function RegistryCard() {
         : (
           <>
             <div style={{ display: "flex", gap: 18, flexWrap: "wrap", marginBottom: 12 }}>
-              <div><div style={{ fontSize: 12, opacity: 0.7 }}>{t("regTotal")}</div>
+              <div><div style={{ fontSize: 14, color: TOKENS.mut }}>{t("regTotal")}</div>
                    <div style={{ fontSize: 22, fontWeight: 600 }}>{data.всего}</div></div>
-              <div><div style={{ fontSize: 12, opacity: 0.7 }}>{t("regChain")}</div>
+              <div><div style={{ fontSize: 14, color: TOKENS.mut }}>{t("regChain")}</div>
                    <div style={{ fontSize: 22, fontWeight: 600 }}>{вЦепи}</div></div>
             </div>
 
@@ -430,13 +430,13 @@ function RegistryCard() {
                 {data.записи.slice(0, 100).map((z) => (
                   <div key={z.номер} style={{
                     display: "flex", justifyContent: "space-between", gap: 12,
-                    fontSize: 13, padding: "6px 8px", borderRadius: 6,
-                    background: "rgba(255,255,255,0.03)",
+                    fontSize: 14, padding: "6px 8px", borderRadius: 6,
+                    background: "var(--cab-ink)",
                   }}>
-                    <span style={{ opacity: 0.85, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    <span style={{ color: TOKENS.sub, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", minWidth: 0, flex: "1 1 auto" }}>
                       {z.что || z.номер.slice(0, 12)}
                     </span>
-                    <span style={{ opacity: 0.6, whiteSpace: "nowrap" }}>
+                    <span style={{ color: TOKENS.mut, whiteSpace: "nowrap" }}>
                       {String(z.создана).slice(0, 10)}
                     </span>
                   </div>
@@ -444,7 +444,7 @@ function RegistryCard() {
               </div>
             )}
 
-            <div style={{ fontSize: 12, opacity: 0.75, marginTop: 10 }}>
+            <div style={{ fontSize: 14, color: TOKENS.mut, marginTop: 10 }}>
               🔑 {t("regNote")}
             </div>
           </>
@@ -482,7 +482,7 @@ export default function MemoryTab({ email }: { email: string }) {
         {/* Заливка в вечную цепь — только на платных тарифах. Человек должен
             видеть это здесь, а не узнавать потом, что его память не сохранилась
             в блокчейне (16.08.2026). */}
-        <div style={{ fontSize: 13, opacity: 0.8, marginTop: -6, marginBottom: 10 }}>
+        <div style={{ fontSize: 14, color: TOKENS.mut, marginTop: -6, marginBottom: 10 }}>
           ⛓️ {t("memChainPaidOnly")}
         </div>
         {err ? <ErrorState text={t("netErr")} onRetry={load} retryLabel={t("retry")} />
@@ -524,7 +524,7 @@ export default function MemoryTab({ email }: { email: string }) {
               }
 
               return (
-                <div style={{ background: "#0B0F1A", border: "1px solid rgba(42,42,58,0.6)", borderRadius: 12, padding: 14 }}>
+                <div style={{ background: "var(--cab-ink)", border: "1px solid var(--cab-line)", borderRadius: 12, padding: 14 }}>
                   <div style={{ fontSize: 15, color: TOKENS.cyan, fontWeight: 700, marginBottom: 10 }}>
                     🧠 {всеРеплики.length} {t("archMsgs")} · {дни[0]?.date} — {дни[дни.length - 1]?.date}
                   </div>
@@ -536,7 +536,7 @@ export default function MemoryTab({ email }: { email: string }) {
                           {g.items.map((mm, i) => (
                             <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: mm.role === "user" ? "flex-end" : "flex-start" }}>
                               <div style={{ maxWidth: "85%", background: mm.role === "user" ? "rgba(124,58,237,0.15)" : "rgba(6,182,212,0.1)", border: `1px solid ${mm.role === "user" ? "rgba(124,58,237,0.3)" : "rgba(6,182,212,0.25)"}`, borderRadius: 12, padding: "8px 12px" }}>
-                                <div style={{ fontSize: 13, color: TOKENS.mut, marginBottom: 3 }}>
+                                <div style={{ fontSize: 14, color: TOKENS.mut, marginBottom: 3 }}>
                                   {mm.role === "user" ? "🧑 " + email.split("@")[0] : "🤖 AIfa"} · {mm.ts} · {chatLabel(mm.откуда)}
                                 </div>
                                 <div style={{ fontSize: 15, color: TOKENS.text, whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.5 }}>{mm.content}</div>

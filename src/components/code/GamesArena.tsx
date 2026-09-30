@@ -7,7 +7,7 @@ import "./GamesArena.css";
 // Self-contained game labels (ported from the CODE app) so this component
 // does not depend on the site-wide translation keys.
 type Lang = "en" | "ru" | "es" | "zh";
-const GI: Record<string, Record<string, string>> = {"en": {"tab.games": "Games", "tier.spark": "Spark", "tier.archives": "Family Archive", "tier.dna": "Digital DNA", "tier.none": "No tier", "games.title": "Game Arena", "games.subtitle": "Play against AIfa — your AI companion", "games.chess": "Chess", "games.chess.desc": "Classic chess vs AIfa", "games.ttt": "Tic-Tac-Toe", "games.ttt.desc": "Perfect minimax AI", "games.checkers": "Checkers", "games.checkers.desc": "Mandatory captures", "games.backgammon": "Backgammon", "games.backgammon.desc": "Roll & bear off", "games.tetris": "Tetris", "games.tetris.desc": "Endless lines & score", "games.win": "🏆 You win!", "games.lose": "💀 AIfa wins!", "games.draw": "🤝 Draw!", "games.thinking": "⏳ AIfa thinking…", "games.newGame": "↺ New Game", "games.chess.whiteToMove": "♔ White to move", "games.chess.history": "📜 Move History", "games.chess.noMoves": "No moves yet", "games.chess.label": "You = White, AIfa = Black", "games.ttt.yourTurn": "✕ Your turn (X)", "games.ttt.label": "You = X, AIfa = O · Perfect minimax AI", "games.checkers.yourTurn": "⬤ Your turn (Red)", "games.checkers.youLabel": "You (Red)", "games.checkers.aifaLabel": "AIfa (Black)", "games.bg.rollToStart": "Roll to start!", "games.bg.rollPrompt": "Roll to start your turn", "games.bg.rollDice": "🎲 Roll Dice", "games.bg.bearOff": "Bear Off", "games.bg.yourTurn": "Your turn — roll!", "games.bg.aifaTurn": "AIfa's turn — rolling...", "games.bg.noMoves": "No moves available! Turn passes.", "games.bg.selectChecker": "Select a checker.", "games.bg.selectTarget": "Select a target point to enter.", "games.bg.selectMove": "Select a target.", "games.bg.label": "You = White (moves right→left), AIfa = Black · Doubles = 4 moves", "games.chess.check": "⚠️ Check!", "games.chess.mate": "Checkmate!", "games.chess.stalemate": "Stalemate", "games.chess.material": "Insufficient material", "games.chess.promote": "Choose a piece", "games.chess.lastMove": "Last move", "games.noMoves": "No moves available", "games.bg.playLarger": "You must play the larger die"}, "ru": {"tab.games": "Игры", "tier.spark": "Искра", "tier.archives": "Семейный Архив", "tier.dna": "Цифровая ДНК", "tier.none": "Нет тарифа", "games.title": "Арена игр", "games.subtitle": "Играй против AIfa — твоего ИИ-компаньона", "games.chess": "Шахматы", "games.chess.desc": "Классические шахматы с AIfa", "games.ttt": "Крестики-нолики", "games.ttt.desc": "Непобедимый ИИ", "games.checkers": "Шашки", "games.checkers.desc": "Обязательные взятия", "games.backgammon": "Нарды", "games.backgammon.desc": "Бросай кости и выбивай", "games.tetris": "Тетрис", "games.tetris.desc": "Бесконечные линии и очки", "games.win": "🏆 Вы победили!", "games.lose": "💀 AIfa победила!", "games.draw": "🤝 Ничья!", "games.thinking": "⏳ AIfa думает…", "games.newGame": "↺ Новая игра", "games.chess.whiteToMove": "♔ Ход белых", "games.chess.history": "📜 История ходов", "games.chess.noMoves": "Ходов ещё нет", "games.chess.label": "Вы = Белые, AIfa = Чёрные", "games.ttt.yourTurn": "✕ Ваш ход (X)", "games.ttt.label": "Вы = X, AIfa = O · Непобедимый ИИ", "games.checkers.yourTurn": "⬤ Ваш ход (Красные)", "games.checkers.youLabel": "Вы (Красные)", "games.checkers.aifaLabel": "AIfa (Чёрные)", "games.bg.rollToStart": "Бросайте кости!", "games.bg.rollPrompt": "Бросьте кости для начала хода", "games.bg.rollDice": "🎲 Бросить кости", "games.bg.bearOff": "Выбить", "games.bg.yourTurn": "Ваш ход — бросайте!", "games.bg.aifaTurn": "Ход AIfa — бросает...", "games.bg.noMoves": "Нет доступных ходов! Ход передаётся.", "games.bg.selectChecker": "Выберите шашку.", "games.bg.selectTarget": "Выберите целевую позицию для входа.", "games.bg.selectMove": "Выберите цель.", "games.bg.label": "Вы = Белые (ходят справа→налево), AIfa = Чёрные · Дубль = 4 хода", "games.chess.check": "⚠️ Шах!", "games.chess.mate": "Мат!", "games.chess.stalemate": "Пат", "games.chess.material": "Недостаточно материала", "games.chess.promote": "Выберите фигуру", "games.chess.lastMove": "Последний ход", "games.noMoves": "Нет доступных ходов", "games.bg.playLarger": "Нужно играть большую кость"}, "es": {"tab.games": "Juegos", "tier.spark": "Chispa", "tier.archives": "Archivo Familiar", "tier.dna": "ADN Digital", "tier.none": "Sin nivel", "games.title": "Arena de Juegos", "games.subtitle": "Juega contra AIfa — tu compañero IA", "games.chess": "Ajedrez", "games.chess.desc": "Ajedrez clásico vs AIfa", "games.ttt": "Tres en Raya", "games.ttt.desc": "IA minimax perfecta", "games.checkers": "Damas", "games.checkers.desc": "Capturas obligatorias", "games.backgammon": "Backgammon", "games.backgammon.desc": "Tira y saca", "games.tetris": "Tetris", "games.tetris.desc": "Líneas y puntos sin fin", "games.win": "🏆 ¡Ganaste!", "games.lose": "💀 ¡Gana AIfa!", "games.draw": "🤝 ¡Empate!", "games.thinking": "⏳ AIfa pensando…", "games.newGame": "↺ Nueva Partida", "games.chess.whiteToMove": "♔ Mueven blancas", "games.chess.history": "📜 Historial", "games.chess.noMoves": "Sin movimientos", "games.chess.label": "Tú = Blancas, AIfa = Negras", "games.ttt.yourTurn": "✕ Tu turno (X)", "games.ttt.label": "Tú = X, AIfa = O · IA minimax perfecta", "games.checkers.yourTurn": "⬤ Tu turno (Rojo)", "games.checkers.youLabel": "Tú (Rojo)", "games.checkers.aifaLabel": "AIfa (Negro)", "games.bg.rollToStart": "¡Lanza para empezar!", "games.bg.rollPrompt": "Lanza para iniciar tu turno", "games.bg.rollDice": "🎲 Lanzar Dados", "games.bg.bearOff": "Sacar", "games.bg.yourTurn": "Tu turno — ¡lanza!", "games.bg.aifaTurn": "Turno de AIfa — lanzando...", "games.bg.noMoves": "¡Sin movimientos! Pasa el turno.", "games.bg.selectChecker": "Selecciona una pieza.", "games.bg.selectTarget": "Selecciona el punto de entrada.", "games.bg.selectMove": "Selecciona el destino.", "games.bg.label": "Tú = Blancas (dcha→izq), AIfa = Negras · Dobles = 4 jugadas", "games.chess.check": "⚠️ ¡Jaque!", "games.chess.mate": "¡Jaque mate!", "games.chess.stalemate": "Rey ahogado", "games.chess.material": "Material insuficiente", "games.chess.promote": "Elige una pieza", "games.chess.lastMove": "Última jugada", "games.noMoves": "No hay movimientos", "games.bg.playLarger": "Debes jugar el dado mayor"}, "zh": {"tab.games": "游戏", "tier.spark": "星火", "tier.archives": "家族档案", "tier.dna": "数字DNA", "tier.none": "无等级", "games.title": "游戏竞技场", "games.subtitle": "与你的AI伙伴AIfa对战", "games.chess": "国际象棋", "games.chess.desc": "经典象棋对决AIfa", "games.ttt": "井字棋", "games.ttt.desc": "完美极小化极大AI", "games.checkers": "跳棋", "games.checkers.desc": "强制吃子", "games.backgammon": "双陆棋", "games.backgammon.desc": "掷骰撤棋", "games.tetris": "俄罗斯方块", "games.tetris.desc": "无尽消行与得分", "games.win": "🏆 你赢了！", "games.lose": "💀 AIfa赢了！", "games.draw": "🤝 平局！", "games.thinking": "⏳ AIfa思考中…", "games.newGame": "↺ 新游戏", "games.chess.whiteToMove": "♔ 白方走棋", "games.chess.history": "📜 走棋记录", "games.chess.noMoves": "暂无走棋记录", "games.chess.label": "你 = 白方，AIfa = 黑方", "games.ttt.yourTurn": "✕ 你的回合 (X)", "games.ttt.label": "你 = X，AIfa = O · 完美极小化极大AI", "games.checkers.yourTurn": "⬤ 你的回合（红方）", "games.checkers.youLabel": "你（红方）", "games.checkers.aifaLabel": "AIfa（黑方）", "games.bg.rollToStart": "掷骰开始！", "games.bg.rollPrompt": "掷骰开始你的回合", "games.bg.rollDice": "🎲 掷骰子", "games.bg.bearOff": "撤子", "games.bg.yourTurn": "你的回合 — 掷骰！", "games.bg.aifaTurn": "AIfa的回合 — 掷骰中...", "games.bg.noMoves": "无可用走法！跳过回合。", "games.bg.selectChecker": "选择一枚棋子。", "games.bg.selectTarget": "选择目标点位进入。", "games.bg.selectMove": "选择目标位置。", "games.bg.label": "你 = 白方（右→左移动），AIfa = 黑方 · 双数 = 4步", "games.chess.check": "⚠️ 将军！", "games.chess.mate": "将杀！", "games.chess.stalemate": "逼和", "games.chess.material": "子力不足", "games.chess.promote": "选择升变棋子", "games.chess.lastMove": "上一步", "games.noMoves": "无可用走法", "games.bg.playLarger": "必须使用较大的骰子"}};
+const GI: Record<string, Record<string, string>> = {"en": {"tab.games": "Games", "tier.spark": "Spark", "tier.archives": "Family Archive", "tier.dna": "Digital DNA", "tier.none": "No tier", "games.title": "Game Arena", "games.subtitle": "Play against AIfa — your AI companion", "games.chess": "Chess", "games.chess.desc": "Classic chess vs AIfa", "games.ttt": "Tic-Tac-Toe", "games.ttt.desc": "Perfect minimax AI", "games.checkers": "Checkers", "games.checkers.desc": "Mandatory captures", "games.backgammon": "Backgammon", "games.backgammon.desc": "Roll & bear off", "games.tetris": "Tetris", "games.tetris.desc": "Endless lines & score", "games.win": "🏆 You win!", "games.lose": "💀 AIfa wins!", "games.draw": "🤝 Draw!", "games.thinking": "⏳ AIfa thinking…", "games.newGame": "↺ New Game", "games.chess.whiteToMove": "♔ White to move", "games.chess.history": "📜 Move History", "games.chess.noMoves": "No moves yet", "games.chess.label": "You = White, AIfa = Black", "games.ttt.yourTurn": "✕ Your turn (X)", "games.ttt.label": "You = X, AIfa = O · Perfect minimax AI", "games.checkers.yourTurn": "⬤ Your turn (Red)", "games.checkers.youLabel": "You (Red)", "games.checkers.aifaLabel": "AIfa (Black)", "games.bg.rollToStart": "Roll to start!", "games.bg.rollPrompt": "Roll to start your turn", "games.bg.rollDice": "🎲 Roll Dice", "games.bg.bearOff": "Bear Off", "games.bg.yourTurn": "Your turn — roll!", "games.bg.aifaTurn": "AIfa's turn — rolling...", "games.bg.noMoves": "No moves available! Turn passes.", "games.bg.selectChecker": "Select a checker.", "games.bg.selectTarget": "Select a target point to enter.", "games.bg.selectMove": "Select a target.", "games.bg.label": "You = White (moves right→left), AIfa = Black · Doubles = 4 moves", "games.chess.check": "⚠️ Check!", "games.chess.mate": "Checkmate!", "games.chess.stalemate": "Stalemate", "games.chess.material": "Insufficient material", "games.chess.promote": "Choose a piece", "games.chess.lastMove": "Last move", "games.noMoves": "No moves available", "games.bg.playLarger": "You must play the larger die", "games.bg.off": "Off", "games.bg.bar": "Bar"}, "ru": {"tab.games": "Игры", "tier.spark": "Искра", "tier.archives": "Семейный Архив", "tier.dna": "Цифровая ДНК", "tier.none": "Нет тарифа", "games.title": "Арена игр", "games.subtitle": "Играй против AIfa — твоего ИИ-компаньона", "games.chess": "Шахматы", "games.chess.desc": "Классические шахматы с AIfa", "games.ttt": "Крестики-нолики", "games.ttt.desc": "Непобедимый ИИ", "games.checkers": "Шашки", "games.checkers.desc": "Обязательные взятия", "games.backgammon": "Нарды", "games.backgammon.desc": "Бросай кости и выбивай", "games.tetris": "Тетрис", "games.tetris.desc": "Бесконечные линии и очки", "games.win": "🏆 Вы победили!", "games.lose": "💀 AIfa победила!", "games.draw": "🤝 Ничья!", "games.thinking": "⏳ AIfa думает…", "games.newGame": "↺ Новая игра", "games.chess.whiteToMove": "♔ Ход белых", "games.chess.history": "📜 История ходов", "games.chess.noMoves": "Ходов ещё нет", "games.chess.label": "Вы = Белые, AIfa = Чёрные", "games.ttt.yourTurn": "✕ Ваш ход (X)", "games.ttt.label": "Вы = X, AIfa = O · Непобедимый ИИ", "games.checkers.yourTurn": "⬤ Ваш ход (Красные)", "games.checkers.youLabel": "Вы (Красные)", "games.checkers.aifaLabel": "AIfa (Чёрные)", "games.bg.rollToStart": "Бросайте кости!", "games.bg.rollPrompt": "Бросьте кости для начала хода", "games.bg.rollDice": "🎲 Бросить кости", "games.bg.bearOff": "Выбить", "games.bg.yourTurn": "Ваш ход — бросайте!", "games.bg.aifaTurn": "Ход AIfa — бросает...", "games.bg.noMoves": "Нет доступных ходов! Ход передаётся.", "games.bg.selectChecker": "Выберите шашку.", "games.bg.selectTarget": "Выберите целевую позицию для входа.", "games.bg.selectMove": "Выберите цель.", "games.bg.label": "Вы = Белые (ходят справа→налево), AIfa = Чёрные · Дубль = 4 хода", "games.chess.check": "⚠️ Шах!", "games.chess.mate": "Мат!", "games.chess.stalemate": "Пат", "games.chess.material": "Недостаточно материала", "games.chess.promote": "Выберите фигуру", "games.chess.lastMove": "Последний ход", "games.noMoves": "Нет доступных ходов", "games.bg.playLarger": "Нужно играть большую кость", "games.bg.off": "Выбито", "games.bg.bar": "Бар"}, "es": {"tab.games": "Juegos", "tier.spark": "Chispa", "tier.archives": "Archivo Familiar", "tier.dna": "ADN Digital", "tier.none": "Sin nivel", "games.title": "Arena de Juegos", "games.subtitle": "Juega contra AIfa — tu compañero IA", "games.chess": "Ajedrez", "games.chess.desc": "Ajedrez clásico vs AIfa", "games.ttt": "Tres en Raya", "games.ttt.desc": "IA minimax perfecta", "games.checkers": "Damas", "games.checkers.desc": "Capturas obligatorias", "games.backgammon": "Backgammon", "games.backgammon.desc": "Tira y saca", "games.tetris": "Tetris", "games.tetris.desc": "Líneas y puntos sin fin", "games.win": "🏆 ¡Ganaste!", "games.lose": "💀 ¡Gana AIfa!", "games.draw": "🤝 ¡Empate!", "games.thinking": "⏳ AIfa pensando…", "games.newGame": "↺ Nueva Partida", "games.chess.whiteToMove": "♔ Mueven blancas", "games.chess.history": "📜 Historial", "games.chess.noMoves": "Sin movimientos", "games.chess.label": "Tú = Blancas, AIfa = Negras", "games.ttt.yourTurn": "✕ Tu turno (X)", "games.ttt.label": "Tú = X, AIfa = O · IA minimax perfecta", "games.checkers.yourTurn": "⬤ Tu turno (Rojo)", "games.checkers.youLabel": "Tú (Rojo)", "games.checkers.aifaLabel": "AIfa (Negro)", "games.bg.rollToStart": "¡Lanza para empezar!", "games.bg.rollPrompt": "Lanza para iniciar tu turno", "games.bg.rollDice": "🎲 Lanzar Dados", "games.bg.bearOff": "Sacar", "games.bg.yourTurn": "Tu turno — ¡lanza!", "games.bg.aifaTurn": "Turno de AIfa — lanzando...", "games.bg.noMoves": "¡Sin movimientos! Pasa el turno.", "games.bg.selectChecker": "Selecciona una pieza.", "games.bg.selectTarget": "Selecciona el punto de entrada.", "games.bg.selectMove": "Selecciona el destino.", "games.bg.label": "Tú = Blancas (dcha→izq), AIfa = Negras · Dobles = 4 jugadas", "games.chess.check": "⚠️ ¡Jaque!", "games.chess.mate": "¡Jaque mate!", "games.chess.stalemate": "Rey ahogado", "games.chess.material": "Material insuficiente", "games.chess.promote": "Elige una pieza", "games.chess.lastMove": "Última jugada", "games.noMoves": "No hay movimientos", "games.bg.playLarger": "Debes jugar el dado mayor", "games.bg.off": "Fuera", "games.bg.bar": "Barra"}, "zh": {"tab.games": "游戏", "tier.spark": "星火", "tier.archives": "家族档案", "tier.dna": "数字DNA", "tier.none": "无等级", "games.title": "游戏竞技场", "games.subtitle": "与你的AI伙伴AIfa对战", "games.chess": "国际象棋", "games.chess.desc": "经典象棋对决AIfa", "games.ttt": "井字棋", "games.ttt.desc": "完美极小化极大AI", "games.checkers": "跳棋", "games.checkers.desc": "强制吃子", "games.backgammon": "双陆棋", "games.backgammon.desc": "掷骰撤棋", "games.tetris": "俄罗斯方块", "games.tetris.desc": "无尽消行与得分", "games.win": "🏆 你赢了！", "games.lose": "💀 AIfa赢了！", "games.draw": "🤝 平局！", "games.thinking": "⏳ AIfa思考中…", "games.newGame": "↺ 新游戏", "games.chess.whiteToMove": "♔ 白方走棋", "games.chess.history": "📜 走棋记录", "games.chess.noMoves": "暂无走棋记录", "games.chess.label": "你 = 白方，AIfa = 黑方", "games.ttt.yourTurn": "✕ 你的回合 (X)", "games.ttt.label": "你 = X，AIfa = O · 完美极小化极大AI", "games.checkers.yourTurn": "⬤ 你的回合（红方）", "games.checkers.youLabel": "你（红方）", "games.checkers.aifaLabel": "AIfa（黑方）", "games.bg.rollToStart": "掷骰开始！", "games.bg.rollPrompt": "掷骰开始你的回合", "games.bg.rollDice": "🎲 掷骰子", "games.bg.bearOff": "撤子", "games.bg.yourTurn": "你的回合 — 掷骰！", "games.bg.aifaTurn": "AIfa的回合 — 掷骰中...", "games.bg.noMoves": "无可用走法！跳过回合。", "games.bg.selectChecker": "选择一枚棋子。", "games.bg.selectTarget": "选择目标点位进入。", "games.bg.selectMove": "选择目标位置。", "games.bg.label": "你 = 白方（右→左移动），AIfa = 黑方 · 双数 = 4步", "games.chess.check": "⚠️ 将军！", "games.chess.mate": "将杀！", "games.chess.stalemate": "逼和", "games.chess.material": "子力不足", "games.chess.promote": "选择升变棋子", "games.chess.lastMove": "上一步", "games.noMoves": "无可用走法", "games.bg.playLarger": "必须使用较大的骰子", "games.bg.off": "已撤出", "games.bg.bar": "中栏"}};
 const t = (key: string, lang: Lang): string => (GI[lang]?.[key] ?? GI.en?.[key] ?? key);
 
 /* Подписи клеток для экранного диктора — те же слова, что на aifa.works
@@ -41,7 +41,7 @@ function fireWin(game: string) { if (typeof window !== "undefined") { try { (win
 function useIsMobile() {
   const [mobile, setMobile] = useState(false);
   useEffect(() => {
-    const check = () => setMobile(window.innerWidth < 640);
+    const check = () => setMobile(window.matchMedia("(max-width: 639.98px)").matches);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -75,7 +75,7 @@ const ЗАПАС = 24 + 24 + 20 + 8;   // координаты + поля пан
 function useРазмерКлетки(мобильный: boolean, наДесктопе: number) {
   const [ширина, setШирина] = useState(0);
   useEffect(() => {
-    const снять = () => setШирина(window.innerWidth);
+    const снять = () => setШирина(document.documentElement.clientWidth || window.innerWidth);
     снять();
     window.addEventListener("resize", снять);
     return () => window.removeEventListener("resize", снять);
@@ -444,9 +444,9 @@ function Chess({ lang }: { lang: Lang }) {
    * полужирный: тонкий светлый шрифт на коричневой доске теряется.
    */
   const coordStyle:React.CSSProperties={
-    fontSize:cell>=64?"16px":mobile?"13px":"14px",
+    fontSize:cell>=64?"16px":"14px",
     fontWeight:600,
-    color:"rgba(240,226,199,0.88)",
+    color:"var(--cab-coord,rgba(240,226,199,0.88))",
     letterSpacing:"0.02em",
     userSelect:"none",
   };
@@ -454,14 +454,14 @@ function Chess({ lang }: { lang: Lang }) {
   return (
     <div ref={корень} style={сбоку?{display:"grid",gridTemplateColumns:"auto 280px",gridTemplateRows:"auto 1fr",columnGap:"16px",justifyContent:"center",alignItems:"start"}:undefined}>
       <div className="glass-panel-sm" style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"16px",padding:"10px 24px",marginBottom:"12px",...(сбоку?{gridColumn:"2",gridRow:"1"}:{})}}>
-        {status==="white_wins"&&<span style={{fontWeight:700,color:"#10B981"}}>{t("games.win",lang)} · {t("games.chess.mate",lang)}</span>}
-        {status==="black_wins"&&<span style={{fontWeight:700,color:"#ef4444"}}>{t("games.lose",lang)} · {t("games.chess.mate",lang)}</span>}
-        {status==="stalemate"&&<span style={{fontWeight:700,color:"#D4A24C"}}>{t("games.draw",lang)} · {t("games.chess.stalemate",lang)}</span>}
-        {status==="material"&&<span style={{fontWeight:700,color:"#D4A24C"}}>{t("games.draw",lang)} · {t("games.chess.material",lang)}</span>}
+        {status==="white_wins"&&<span style={{fontWeight:700,color:"var(--cab-green,#10B981)"}}>{t("games.win",lang)} · {t("games.chess.mate",lang)}</span>}
+        {status==="black_wins"&&<span style={{fontWeight:700,color:"var(--cab-red,#ef4444)"}}>{t("games.lose",lang)} · {t("games.chess.mate",lang)}</span>}
+        {status==="stalemate"&&<span style={{fontWeight:700,color:"var(--cab-gold,#D4A24C)"}}>{t("games.draw",lang)} · {t("games.chess.stalemate",lang)}</span>}
+        {status==="material"&&<span style={{fontWeight:700,color:"var(--cab-gold,#D4A24C)"}}>{t("games.draw",lang)} · {t("games.chess.material",lang)}</span>}
         {status==="playing"&&(
           (thinking||!whiteTurn)
-            ?<span style={{fontWeight:600,color:"rgb(232,232,240)"}}>{t("games.thinking",lang)}</span>
-            :<span style={{fontWeight:600,color:whiteInCheck?"#ef4444":"rgb(232,232,240)"}}>{whiteInCheck?t("games.chess.check",lang):t("games.chess.whiteToMove",lang)}</span>
+            ?<span style={{fontWeight:600,color:"var(--cab-text,rgb(232,232,240))"}}>{t("games.thinking",lang)}</span>
+            :<span style={{fontWeight:600,color:whiteInCheck?"var(--cab-red,#ef4444)":"var(--cab-text,rgb(232,232,240))"}}>{whiteInCheck?t("games.chess.check",lang):t("games.chess.whiteToMove",lang)}</span>
         )}
       </div>
       <div style={{display:"flex",justifyContent:"center",marginBottom:"12px",overflowX:"auto",...(сбоку?{gridColumn:"1",gridRow:"1 / span 2",marginBottom:0}:{})}}>
@@ -541,7 +541,7 @@ function Chess({ lang }: { lang: Lang }) {
           {promo&&(
             <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(8,8,18,0.72)",zIndex:5,borderRadius:"12px"}}>
               <div className="glass-panel" style={{padding:"16px 20px",textAlign:"center"}}>
-                <div style={{fontSize:"13px",fontWeight:600,color:"rgb(232,232,240)",marginBottom:"10px"}}>{t("games.chess.promote",lang)}</div>
+                <div style={{fontSize:"14px",fontWeight:600,color:"rgb(232,232,240)",marginBottom:"10px"}}>{t("games.chess.promote",lang)}</div>
                 <div style={{display:"flex",gap:"10px",justifyContent:"center"}}>
                   {(["Q","R","B","N"] as PromoPiece[]).map(pp=>(
                     <button key={pp} onClick={()=>finishPlayerMove({...promo,promo:pp})} style={{width:"52px",height:"52px",fontSize:"30px",lineHeight:1,borderRadius:"10px",cursor:"pointer",
@@ -555,21 +555,21 @@ function Chess({ lang }: { lang: Lang }) {
       </div>
       <div style={{display:"grid",gridTemplateColumns:сбоку?"1fr":"1fr 1fr",gap:"12px",...(сбоку?{gridColumn:"2",gridRow:"2"}:{})}}>
         <div className="glass-panel" style={{padding:"14px"}}>
-          <div style={{fontSize:"13px",fontWeight:600,color:"rgb(232,232,240)",marginBottom:"8px"}}>{t("games.chess.history",lang)}</div>
+          <div style={{fontSize:"14px",fontWeight:600,color:"var(--cab-text,rgb(232,232,240))",marginBottom:"8px"}}>{t("games.chess.history",lang)}</div>
           <div style={{maxHeight:"120px",overflowY:"auto"}}>
-            {history.length===0?<div style={{fontSize:"12px",color:"rgb(107,114,128)"}}>{t("games.chess.noMoves",lang)}</div>:history.map((m,i)=>(
-              <div key={i} style={{display:"flex",gap:"10px",fontSize:"12px",marginBottom:"2px",whiteSpace:"nowrap"}}>
-                <span style={{color:"rgb(107,114,128)",fontSize:"11px",width:"22px",flexShrink:0}}>{i+1}.</span>
-                <span style={{color:"rgb(232,232,240)",minWidth:"92px"}}>{m.w}</span>
-                <span style={{color:"#67E8F9"}}>{m.b||""}</span>
+            {history.length===0?<div style={{fontSize:"14px",color:"var(--cab-sub,rgb(139,139,158))"}}>{t("games.chess.noMoves",lang)}</div>:history.map((m,i)=>(
+              <div key={i} style={{display:"flex",gap:"10px",fontSize:"14px",marginBottom:"2px",whiteSpace:"nowrap"}}>
+                <span style={{color:"var(--cab-sub,rgb(139,139,158))",fontSize:"14px",width:"22px",flexShrink:0}}>{i+1}.</span>
+                <span style={{color:"var(--cab-text,rgb(232,232,240))",minWidth:"92px"}}>{m.w}</span>
+                <span style={{color:"var(--cab-cyan,#67E8F9)"}}>{m.b||""}</span>
               </div>
             ))}
           </div>
-          {lastNote&&<div style={{marginTop:"6px",fontSize:"11px",color:"rgb(107,114,128)"}}>{t("games.chess.lastMove",lang)}: <span style={{color:"#FBBF24"}}>{lastNote}</span></div>}
+          {lastNote&&<div style={{marginTop:"6px",fontSize:"14px",color:"var(--cab-sub,rgb(139,139,158))"}}>{t("games.chess.lastMove",lang)}: <span style={{color:"var(--cab-amber,#FBBF24)"}}>{lastNote}</span></div>}
         </div>
         <div className="glass-panel" style={{padding:"14px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:"8px"}}>
-          <button onClick={reset} style={{background:"rgba(124,58,237,0.1)",border:"1px solid rgba(124,58,237,0.25)",color:"#7C3AED",padding:"10px 20px",borderRadius:"12px",fontSize:"13px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>{t("games.newGame",lang)}</button>
-          <div style={{fontSize:"11px",color:"rgb(107,114,128)"}}>{t("games.chess.label",lang)}</div>
+          <button onClick={reset} style={{background:"rgba(124,58,237,0.1)",border:"1px solid rgba(124,58,237,0.25)",color:"var(--cab-violet,#A78BFA)",padding:"10px 20px",borderRadius:"12px",fontSize:"14px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>{t("games.newGame",lang)}</button>
+          <div style={{fontSize:"14px",color:"var(--cab-sub,rgb(139,139,158))"}}>{t("games.chess.label",lang)}</div>
         </div>
       </div>
     </div>
@@ -636,10 +636,10 @@ function TicTacToe({ lang }: { lang: Lang }) {
   return (
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"16px"}}>
       <div className="glass-panel-sm" style={{padding:"10px 32px",textAlign:"center"}}>
-        {winner==="X"&&<span style={{fontWeight:700,color:"#10B981",fontSize:"16px"}}>{t("games.win",lang)}</span>}
-        {winner==="O"&&<span style={{fontWeight:700,color:"#ef4444",fontSize:"16px"}}>{t("games.lose",lang)}</span>}
-        {winner==="draw"&&<span style={{fontWeight:700,color:"#D4A24C",fontSize:"16px"}}>{t("games.draw",lang)}</span>}
-        {!winner&&<span style={{fontWeight:600,color:"rgb(232,232,240)",fontSize:"15px"}}>{xTurn?t("games.ttt.yourTurn",lang):t("games.thinking",lang)}</span>}
+        {winner==="X"&&<span style={{fontWeight:700,color:"var(--cab-green,#10B981)",fontSize:"16px"}}>{t("games.win",lang)}</span>}
+        {winner==="O"&&<span style={{fontWeight:700,color:"var(--cab-red,#ef4444)",fontSize:"16px"}}>{t("games.lose",lang)}</span>}
+        {winner==="draw"&&<span style={{fontWeight:700,color:"var(--cab-gold,#D4A24C)",fontSize:"16px"}}>{t("games.draw",lang)}</span>}
+        {!winner&&<span style={{fontWeight:600,color:"var(--cab-text,rgb(232,232,240))",fontSize:"15px"}}>{xTurn?t("games.ttt.yourTurn",lang):t("games.thinking",lang)}</span>}
       </div>
       <div className="glass-panel" style={{padding:"16px",display:"inline-block"}}>
         <div style={{display:"grid",gridTemplateColumns:`repeat(3,${cell}px)`,gridTemplateRows:`repeat(3,${cell}px)`,gap:"4px"}}>
@@ -657,8 +657,8 @@ function TicTacToe({ lang }: { lang: Lang }) {
           })}
         </div>
       </div>
-      <button onClick={reset} style={{background:"rgba(124,58,237,0.1)",border:"1px solid rgba(124,58,237,0.25)",color:"#7C3AED",padding:"10px 24px",borderRadius:"12px",fontSize:"13px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>{t("games.newGame",lang)}</button>
-      <div style={{fontSize:"11px",color:"rgb(107,114,128)"}}>{t("games.ttt.label",lang)}</div>
+      <button onClick={reset} style={{background:"rgba(124,58,237,0.1)",border:"1px solid rgba(124,58,237,0.25)",color:"var(--cab-violet,#A78BFA)",padding:"10px 24px",borderRadius:"12px",fontSize:"14px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>{t("games.newGame",lang)}</button>
+      <div style={{fontSize:"14px",color:"var(--cab-sub,rgb(139,139,158))"}}>{t("games.ttt.label",lang)}</div>
     </div>
   );
 }
@@ -815,14 +815,14 @@ function Checkers({ lang }: { lang: Lang }) {
 
   function reset(){ setBoard(initCheckers()); setSelected(null); setValidMoves([]); setChaining(null); setTurn("r"); setStatus("playing"); }
 
-  const coordStyle:React.CSSProperties={fontSize:"10px",color:"rgba(232,213,176,0.65)"};
+  const coordStyle:React.CSSProperties={fontSize:"12px",fontWeight:600,color:"var(--cab-sub,rgba(232,213,176,0.65))"};
 
   return (
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"12px"}}>
       <div className="glass-panel-sm" style={{padding:"10px 32px",textAlign:"center"}}>
-        {status==="red_wins"&&<span style={{fontWeight:700,color:"#10B981",fontSize:"16px"}}>{t("games.win",lang)}</span>}
-        {status==="black_wins"&&<span style={{fontWeight:700,color:"#ef4444",fontSize:"16px"}}>{t("games.lose",lang)}</span>}
-        {status==="playing"&&<span style={{fontWeight:600,color:"rgb(232,232,240)",fontSize:"15px"}}>{turn==="r"?t("games.checkers.yourTurn",lang):t("games.thinking",lang)}</span>}
+        {status==="red_wins"&&<span style={{fontWeight:700,color:"var(--cab-green,#10B981)",fontSize:"16px"}}>{t("games.win",lang)}</span>}
+        {status==="black_wins"&&<span style={{fontWeight:700,color:"var(--cab-red,#ef4444)",fontSize:"16px"}}>{t("games.lose",lang)}</span>}
+        {status==="playing"&&<span style={{fontWeight:600,color:"var(--cab-text,rgb(232,232,240))",fontSize:"15px"}}>{turn==="r"?t("games.checkers.yourTurn",lang):t("games.thinking",lang)}</span>}
       </div>
       <div style={{overflowX:"auto",WebkitOverflowScrolling:"touch" as any}}>
         <div className="glass-panel" style={{padding:"10px",display:"inline-block"}}>
@@ -869,12 +869,12 @@ function Checkers({ lang }: { lang: Lang }) {
         </div>
       </div>
       <div style={{display:"flex",gap:"16px",alignItems:"center"}}>
-        <div style={{fontSize:"12px",color:"rgb(107,114,128)"}}>
+        <div style={{fontSize:"14px",color:"var(--cab-sub,rgb(139,139,158))"}}>
           <span style={{display:"inline-block",width:"12px",height:"12px",borderRadius:"50%",background:"radial-gradient(circle at 35% 30%, #F87171, #DC2626)",border:"1px solid rgba(255,255,255,0.4)",marginRight:"4px",verticalAlign:"middle"}}/>{t("games.checkers.youLabel",lang)}
           &nbsp;&nbsp;
           <span style={{display:"inline-block",width:"12px",height:"12px",borderRadius:"50%",background:"radial-gradient(circle at 35% 30%, #4B5563, #1F2937)",border:"1px solid rgba(148,163,184,0.55)",marginRight:"4px",verticalAlign:"middle"}}/>{t("games.checkers.aifaLabel",lang)}
         </div>
-        <button onClick={reset} style={{background:"rgba(124,58,237,0.1)",border:"1px solid rgba(124,58,237,0.25)",color:"#7C3AED",padding:"8px 18px",borderRadius:"12px",fontSize:"13px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>{t("games.newGame",lang)}</button>
+        <button onClick={reset} style={{background:"rgba(124,58,237,0.1)",border:"1px solid rgba(124,58,237,0.25)",color:"var(--cab-violet,#A78BFA)",padding:"8px 18px",borderRadius:"12px",fontSize:"14px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>{t("games.newGame",lang)}</button>
       </div>
     </div>
   );
@@ -1254,14 +1254,14 @@ function Backgammon({ lang }: { lang: Lang }) {
   return (
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"10px"}}>
       {/* Оформление переехало в GamesArena.css */}
-      <div className="glass-panel-sm" style={{padding:"8px 24px",textAlign:"center",fontSize:"14px",fontWeight:600,color:"rgb(232,232,240)"}}>
+      <div className="glass-panel-sm" style={{padding:"8px 24px",textAlign:"center",fontSize:"14px",fontWeight:600,color:"var(--cab-text,rgb(232,232,240))"}}>
         {st.msg}
       </div>
       {/* Dice */}
       <div style={{display:"flex",gap:"10px",alignItems:"center",minHeight:`${mobile?40:48}px`}}>
         {st.dice.length>0
           ? st.dice.map((d,i)=>(<BgDie key={i} v={d} used={st.usedDice[i]} size={mobile?38:46}/>))
-          : <div style={{fontSize:"12px",color:"rgb(107,114,128)"}}>{t("games.bg.rollPrompt",lang)}</div>}
+          : <div style={{fontSize:"14px",color:"var(--cab-sub,rgb(139,139,158))"}}>{t("games.bg.rollPrompt",lang)}</div>}
       </div>
 
       {/* Board */}
@@ -1296,7 +1296,7 @@ function Backgammon({ lang }: { lang: Lang }) {
               {st.bar[0]>0&&Array.from({length:Math.min(st.bar[0],3)}).map((_,i)=>(
                 <span key={"w"+i} style={checkerStyle(true,st.selected==="bar"&&i===0)}>{i===0&&st.bar[0]>3?st.bar[0]:""}</span>
               ))}
-              <span style={{display:"block",fontSize:"8px",letterSpacing:"1px",color:"rgba(212,162,76,0.75)",fontWeight:700}}>BAR</span>
+              <span style={{display:"block",fontSize:"8px",letterSpacing:"1px",color:"rgba(212,162,76,0.75)",fontWeight:700}}>{t("games.bg.bar",lang).toUpperCase()}</span>
               {st.bar[1]>0&&Array.from({length:Math.min(st.bar[1],3)}).map((_,i)=>(
                 <span key={"b"+i} style={checkerStyle(false,false)}>{i===0&&st.bar[1]>3?st.bar[1]:""}</span>
               ))}
@@ -1313,24 +1313,28 @@ function Backgammon({ lang }: { lang: Lang }) {
 
       {/* Off + controls */}
       <div style={{display:"flex",gap:"16px",alignItems:"center",flexWrap:"wrap",justifyContent:"center"}}>
-        <div style={{fontSize:"12px",color:"rgb(107,114,128)"}}>
-          Off: <span style={{color:"#F5F5F0"}}>⬤{st.off[0]}</span> <span style={{color:"#67E8F9"}}>⬤{st.off[1]}</span>
-          &nbsp;|&nbsp;Bar: <span style={{color:"#F5F5F0"}}>⬤{st.bar[0]}</span> <span style={{color:"#67E8F9"}}>⬤{st.bar[1]}</span>
+        <div style={{fontSize:"14px",color:"var(--cab-sub,rgb(139,139,158))"}}>
+          {t("games.bg.off",lang)}: <span style={{color:"var(--cab-text,#F5F5F0)"}}><span aria-hidden="true" style={ШАШКА_Б}>⬤</span>{st.off[0]}</span> <span style={{color:"var(--cab-text,#F5F5F0)"}}><span aria-hidden="true" style={ШАШКА_Ч}>⬤</span>{st.off[1]}</span>
+          &nbsp;|&nbsp;{t("games.bg.bar",lang)}: <span style={{color:"var(--cab-text,#F5F5F0)"}}><span aria-hidden="true" style={ШАШКА_Б}>⬤</span>{st.bar[0]}</span> <span style={{color:"var(--cab-text,#F5F5F0)"}}><span aria-hidden="true" style={ШАШКА_Ч}>⬤</span>{st.bar[1]}</span>
         </div>
         {st.phase==="roll"&&st.turn==="white"&&(
-          <button onClick={roll} style={{background:"rgba(124,58,237,0.15)",border:"1px solid rgba(124,58,237,0.4)",color:"#7C3AED",padding:"8px 20px",borderRadius:"12px",fontSize:"13px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>{t("games.bg.rollDice",lang)}</button>
+          <button onClick={roll} style={{background:"rgba(124,58,237,0.15)",border:"1px solid rgba(124,58,237,0.4)",color:"var(--cab-violet,#A78BFA)",padding:"8px 20px",borderRadius:"12px",fontSize:"14px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>{t("games.bg.rollDice",lang)}</button>
         )}
         {bearOffPossible&&(
-          <button onClick={handleBearOff} style={{background:"rgba(16,185,129,0.1)",border:"1px solid rgba(16,185,129,0.3)",color:"#10B981",padding:"8px 16px",borderRadius:"12px",fontSize:"13px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>{t("games.bg.bearOff",lang)}</button>
+          <button onClick={handleBearOff} style={{background:"rgba(16,185,129,0.1)",border:"1px solid rgba(16,185,129,0.3)",color:"var(--cab-green,#10B981)",padding:"8px 16px",borderRadius:"12px",fontSize:"14px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>{t("games.bg.bearOff",lang)}</button>
         )}
-        <button onClick={()=>setSt(initBg(t("games.bg.rollToStart",lang)))} style={{background:"rgba(124,58,237,0.08)",border:"1px solid rgba(124,58,237,0.2)",color:"#7C3AED",padding:"8px 16px",borderRadius:"12px",fontSize:"13px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>{t("games.newGame",lang)}</button>
+        <button onClick={()=>setSt(initBg(t("games.bg.rollToStart",lang)))} style={{background:"rgba(124,58,237,0.08)",border:"1px solid rgba(124,58,237,0.2)",color:"var(--cab-violet,#A78BFA)",padding:"8px 16px",borderRadius:"12px",fontSize:"14px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>{t("games.newGame",lang)}</button>
       </div>
-      <div style={{fontSize:"11px",color:"rgb(107,114,128)"}}>{t("games.bg.label",lang)}</div>
+      <div style={{fontSize:"14px",color:"var(--cab-sub,rgb(139,139,158))"}}>{t("games.bg.label",lang)}</div>
     </div>
   );
 }
 
 // Кнопка полного экрана — у всех игр (27.09.2026). Подписи на четырёх языках.
+// Значок шашки в счётчике нард (30.09.2026): цвет шашки + обводка, чтобы белая была видна
+// на светлой теме; сам значок скрыт от чтения экрана, число рядом — цветом текста темы.
+const ШАШКА_Б: React.CSSProperties = { color: "#F5F5F0", WebkitTextStroke: "1px var(--cab-sub,#8B8B9E)" };
+const ШАШКА_Ч: React.CSSProperties = { color: "#67E8F9", WebkitTextStroke: "1px var(--cab-sub,#8B8B9E)" };
 const ЭКРАН: Record<string, [string, string]> = {
   ru: ["На весь экран", "Выйти из полного экрана"],
   en: ["Full screen", "Exit full screen"],
@@ -1426,25 +1430,25 @@ function GamesArena({ tetrisSlot }: { tetrisSlot?: React.ReactNode } = {}) {
       <div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"16px"}}>
         <div style={{width:"40px",height:"40px",borderRadius:"12px",background:"rgba(124,58,237,0.1)",border:"1px solid rgba(124,58,237,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"20px"}}>🎮</div>
         <div>
-          <div style={{fontSize:"18px",fontWeight:700,color:"rgb(232,232,240)"}}>{t("games.title",lang)}</div>
-          <div style={{fontSize:"12px",color:"rgb(107,114,128)"}}>{t("games.subtitle",lang)}</div>
+          <div style={{fontSize:"18px",fontWeight:700,color:"var(--cab-text,rgb(232,232,240))"}}>{t("games.title",lang)}</div>
+          <div style={{fontSize:"14px",color:"var(--cab-sub,rgb(139,139,158))"}}>{t("games.subtitle",lang)}</div>
         </div>
       </div>
 
       {/* Game selector — 2-col grid on mobile, row on desktop */}
-      <div style={{display:"grid",gridTemplateColumns:mobile?"1fr 1fr":`repeat(${games.length},1fr)`,gap:"8px",marginBottom:"16px"}}>
+      <div style={{display:"grid",gridTemplateColumns:mobile?"repeat(2,minmax(0,1fr))":`repeat(${games.length},minmax(0,1fr))`,gap:"8px",marginBottom:"16px"}}>
         {games.map(g=>(
           <button key={g.id} onClick={()=>selectGame(g.id)} style={{
-            display:"flex",alignItems:"center",gap:"8px",padding:mobile?"8px 12px":"10px 18px",borderRadius:"12px",
-            fontSize:"13px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif",transition:"all 0.15s",
-            background:active===g.id?"rgba(124,58,237,0.2)":"rgba(15,15,25,0.6)",
+            display:"flex",flexDirection:mobile?"column":"row",alignItems:mobile?"flex-start":"center",gap:mobile?"4px":"8px",overflowWrap:"anywhere",padding:mobile?"8px 12px":"10px 18px",borderRadius:"12px",minWidth:0,textAlign:"left",
+            fontSize:"14px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif",transition:"all 0.15s",
+            background:active===g.id?"rgba(124,58,237,0.2)":"var(--cab-ink,rgba(15,15,25,0.6))",
             border:active===g.id?"1px solid rgba(124,58,237,0.5)":"1px solid rgba(124,58,237,0.15)",
-            color:active===g.id?"#7C3AED":"rgb(107,114,128)"
+            color:active===g.id?"var(--cab-violet,#A78BFA)":"var(--cab-text,rgb(232,232,240))"
           }}>
             <span style={{fontSize:"16px",flexShrink:0}}>{g.icon}</span>
             <span style={{display:"flex",flexDirection:"column",alignItems:"flex-start",minWidth:0}}>
-              <span style={{whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",maxWidth:"100%"}}>{g.label}</span>
-              <span style={{fontSize:"10px",fontWeight:400,color:active===g.id?"rgba(124,58,237,0.8)":"rgba(107,114,128,0.7)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",maxWidth:"100%"}}>{g.desc}</span>
+              <span style={{maxWidth:"100%",lineHeight:1.25}}>{g.label}</span>
+              <span style={{fontSize:"14px",fontWeight:400,lineHeight:1.3,color:active===g.id?"var(--cab-violet,#A78BFA)":"var(--cab-sub,rgb(156,163,175))",maxWidth:"100%"}}>{g.desc}</span>
             </span>
           </button>
         ))}
@@ -1458,8 +1462,8 @@ function GamesArena({ tetrisSlot }: { tetrisSlot?: React.ReactNode } = {}) {
       } : undefined}>
         <div style={{display:"flex",justifyContent:"flex-end",marginBottom:"8px"}}>
           <button type="button" onClick={переключитьЭкран} aria-pressed={развёрнуто}
-            style={{background:"rgba(124,58,237,0.12)",border:"1px solid rgba(124,58,237,0.35)",color:"#A78BFA",
-              padding:"8px 14px",borderRadius:"10px",fontSize:"13px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>
+            style={{background:"rgba(124,58,237,0.12)",border:"1px solid rgba(124,58,237,0.35)",color:"var(--cab-violet,#A78BFA)",
+              padding:"8px 14px",borderRadius:"10px",fontSize:"14px",fontWeight:600,cursor:"pointer",fontFamily:"Inter,sans-serif"}}>
             {развёрнуто ? "✕ " : "⛶ "}{подписьЭкрана}
           </button>
         </div>

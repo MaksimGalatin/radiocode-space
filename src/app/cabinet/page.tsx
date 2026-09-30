@@ -10,7 +10,7 @@ import React, { useCallback, useEffect, useState, useRef} from "react";
 import GamesArena from "@/components/code/GamesArena";
 import ChatSection from "@/components/code/ChatSection";
 import AifaAvatar from "@/components/code/AifaAvatar";
-import { Card, SectionTitle, Skeleton, EmptyState, Toast, ProgressBar, TOKENS, TIERS } from "./ui";
+import { Card, SectionTitle, Skeleton, EmptyState, Toast, ProgressBar, TOKENS, TIERS, TIER_TEXT } from "./ui";
 import { useCabT } from "./i18n";
 import { useLang } from "@/lib/i18n";
 import { useLanguageOptional } from "@/lib/LanguageContext";
@@ -362,20 +362,22 @@ export default function CabinetPage() {
       <Toast msg={toast} />
 
       {/* header */}
-      <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 12, marginBottom: 4 }}>
+      <div className="cab-head">
         <span style={{ color: TOKENS.cyan2, fontSize: 22 }}>🛡️</span>
         <h1 style={{ fontSize: 26, fontWeight: 800, background: "linear-gradient(90deg,#06B6D4,#7C3AED)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", margin: 0, minWidth: 0 }}>{t("title")}</h1>
-        <span style={{ marginLeft: "auto", display: "inline-flex", gap: 4 }}>
+        <span className="cab-head-actions">
+        <span style={{ display: "inline-flex", gap: 4 }}>
           {(["ru","en","es","zh"] as const).map(L => (
             <button key={L} onClick={() => { setLang(L); try { siteLangCtx?.setLocale?.(L as any); } catch {} }} className="cab-tab" aria-pressed={lang === L} style={{ padding: "4px 8px", fontSize: 14, textTransform: "uppercase" }}>{L}</button>
           ))}
         </span>
         <a href="/" className="cab-btn cab-btn-ghost" style={{ textDecoration: "none", fontSize: 15 }}>{t("backToSite")}</a>
         {me && <button className="cab-btn cab-btn-ghost" onClick={doLogout} style={{ padding: "7px 14px", fontSize: 15, color: TOKENS.red, borderColor: "rgba(239,68,68,0.4)" }}>{t("logout")}</button>}
+        </span>
       </div>
       <div style={{ fontSize: 15, color: TOKENS.mut, marginBottom: 20 }}>
         {t("subtitle")} · {me ? (me.nickname
-          ? <><b style={{ color: TOKENS.cyan2 }} title={me.email}>@{me.nickname}</b><span style={{ fontSize: 14, opacity: 0.65 }}> · {me.email}</span></>
+          ? <><b style={{ color: TOKENS.cyan2 }} title={me.email}>@{me.nickname}</b><span style={{ fontSize: 14, color: TOKENS.mut, overflowWrap: "anywhere" }}> · {me.email}</span></>
           : me.email) : t("loginToSave")}
       </div>
 
@@ -482,16 +484,16 @@ export default function CabinetPage() {
 
       {/* ── cabinet ── */}
       {me && (<>
-        <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 22 }}>
+        <div className="cab-stats">
           {[
             { label: t("level"), val: me.level, color: TOKENS.cyan2, hint: t("statHintXp") },
             { label: "XP", val: me.xp, color: TOKENS.violet, hint: t("statHintXp") },
             { label: "GALATIN", val: me.galatin, color: TOKENS.gold, hint: t("statHintGal"), coin: true },
-            { label: t("tier"), val: tierObj ? tierObj.name : "—", color: tierObj?.color ?? TOKENS.sub, hint: t("statHintTier") },
+            { label: t("tier"), val: tierObj ? tierObj.name : "—", color: tierObj ? TIER_TEXT[tierObj.id] : TOKENS.sub, hint: t("statHintTier") },
           ].map(s => (
-            <div key={s.label} className="cab-card cab-card-hover" style={{ padding: "12px 18px", cursor: "help", flex: "1 1 120px", minWidth: 120 }} title={s.hint}>
-              <div style={{ fontSize: 14, color: TOKENS.mut, display: "flex", gap: 4, alignItems: "center" }}>{s.label} <span style={{ opacity: 0.45, fontSize: 13 }}>ⓘ</span></div>
-              <div style={{ fontSize: 18, fontWeight: 800, color: s.color, display: "flex", alignItems: "center", gap: 6 }}>
+            <div key={s.label} className="cab-card cab-card-hover" style={{ padding: "12px 14px", cursor: "help", minWidth: 0 }} title={s.hint}>
+              <div style={{ fontSize: 14, color: TOKENS.mut, display: "flex", gap: 4, alignItems: "center" }}>{s.label} <span aria-hidden="true" style={{ fontSize: 14 }}>ⓘ</span></div>
+              <div style={{ fontSize: 18, fontWeight: 800, color: s.color, display: "flex", alignItems: "center", flexWrap: "wrap", gap: 6, minWidth: 0, overflowWrap: "anywhere" }}>
                 {(s as any).coin && <GalatinCoin size={30} />}{s.val}
               </div>
             </div>
@@ -512,9 +514,9 @@ export default function CabinetPage() {
           </Card>
         )}
 
-        <div role="tablist" style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 24, borderBottom: "1px solid rgba(42,42,58,0.6)", paddingBottom: 12 }}>
+        <div role="tablist" className="cab-tabs">
           {TABS.map(tb => (
-            <button key={tb.id} role="tab" aria-selected={tab === tb.id} className="cab-tab" onClick={() => setTab(tb.id)}>{tb.icon} {tb.label}</button>
+            <button key={tb.id} role="tab" aria-selected={tab === tb.id} className="cab-tab" onClick={(e) => { setTab(tb.id); try { e.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" }); } catch {} }}>{tb.icon} {tb.label}</button>
           ))}
         </div>
 

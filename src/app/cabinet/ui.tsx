@@ -65,6 +65,10 @@ export function ProgressBar({ value, max, from = TOKENS.violet, to = TOKENS.cyan
   );
 }
 
+// Цвет ТЕКСТА тарифа — из токенов темы: сами цвета тарифов (#D4A24C, #10B981) на светлой
+// теме дают контраст 2,3–2,5 при норме 4,5 (замер axe 30.09.2026). Для фона и рамок — TIERS.color.
+export const TIER_TEXT: Record<number, string> = { 1: "var(--cab-violet)", 2: "var(--cab-gold)", 3: "var(--cab-green)" };
+
 export const TIERS = [
   { id: 1, name: "Spark", price: 15, color: "#7C3AED", rgb: "124,58,237", icon: "⚡" },
   { id: 2, name: "Family Archive", price: 100, color: "#D4A24C", rgb: "212,162,76", icon: "🏛️" },
