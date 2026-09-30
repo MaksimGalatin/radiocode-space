@@ -217,7 +217,11 @@ export function RadioHeader() {
           </motion.div>
 
           {/* Right side: Status + Signal + Clock */}
-          <div className="flex items-center gap-px sm:gap-2 2xl:gap-4">
+          {/* 30.09.2026: gap-px → gap-0.5. Значки ниже sm шириной 22 px, и при отступе 1 px
+              центры соседних стояли в 23 px — круги по 24 px пересекались (WCAG 2.5.8, мелкие
+              цели касания). С 2 px центры в 24 px на 320–412 и всех языках; ряд растёт влево,
+              в запас до логотипа, ширина документа не меняется (замер своим браузером). */}
+          <div className="flex items-center gap-0.5 sm:gap-2 2xl:gap-4">
             {/* Лента новостей. На трёх других сайтах экосистемы вход в неё есть
                 в навигации, здесь до сих пор была только ссылка в подвале — то
                 есть чтобы найти новости, надо было доскроллить весь сайт до
@@ -477,7 +481,7 @@ export function RadioHeader() {
                     onClick={() => setLang(l.code)}
                     aria-label={`Language: ${l.label}`}
                     aria-pressed={lang === l.code}
-                    className="text-[13px] font-mono font-medium tracking-wider px-1.5 py-0.5 rounded-full transition-colors cursor-pointer"
+                    className="text-[13px] font-mono font-medium tracking-wider px-1.5 py-1 rounded-full transition-colors cursor-pointer"
                     style={
                       lang === l.code
                         ? { color: '#050507', background: '#00F0FF' }
