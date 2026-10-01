@@ -3382,6 +3382,275 @@ const I18N = {
   }
 };
 
+// 30.09.2026: БЛОК БЕНЧМАРКА /digital НА ЯЗЫКЕ СТРАНИЦЫ. Около 70 подписей интерфейса были зашиты
+// по-английски и шли так на /ru, /es, /zh (перебор английский_на_чужих.mjs: 77 фраз на странице,
+// из них ~30 — листинг Python-кода, имена, лицензии, ссылки на статьи; их не трогаем). Ключ — английская
+// строка как была; нет перевода — показывается она же. Числа сверены перед переводом (раздел 53):
+// Recall@10 39.55 %, P50 44 мс, 22.5 QPS — aifa-biobench/results/rerun_2026-09-23_independent/metrics.json.
+const ТР_DIGITAL: Record<string, Record<string, string>> = {
+  ru: {
+    'Measured Recall@10': 'Измеренный Recall@10',
+    'vs Exact L2 Ground Truth': 'против точного L2-эталона',
+    'P50 Search Latency': 'Задержка поиска P50',
+    'N=50,000, independent protocol': 'N = 50 000, независимый протокол',
+    'Throughput (QPS)': 'Пропускная способность (QPS)',
+    'Connectome Fingerprint': 'Отпечаток коннектома',
+    'Active KC: 102/4096 (2.5%)': 'Активных KC: 102/4096 (2,5 %)',
+    '4096-d Projection': 'Проекция 4096-d',
+    '2.5% Sparsification': 'Разреживание 2,5 %',
+    '3. APL Noise Gate': '3. Шумовой фильтр APL',
+    'Feedback Inhibition': 'Торможение обратной связью',
+    '4. CANN Attractor': '4. Аттрактор CANN',
+    'Ring Focus & No Drift': 'Кольцо фокуса без дрейфа',
+    '5. Bilateral Arb.': '5. Двусторонний арбитраж',
+    'Dual Hemisphere Agree': 'Согласие двух полушарий',
+    'Computing...': 'Вычисляю…',
+    '⚡ RUN SIMULATOR': '⚡ ЗАПУСТИТЬ СИМУЛЯТОР',
+    'Open-Science Substrate · Proprietary Runtime': 'Открытый научный субстрат · закрытый runtime',
+    'Inspired by FlyWire FAFB v783 (Nature 2024). Biology is open science. The distilled runtime is proprietary IP.': 'По мотивам FlyWire FAFB v783 (Nature 2024). Биология — открытая наука. Дистиллированный runtime — закрытая интеллектуальная собственность.',
+    'REPRODUCIBLE SYSTEMS BENCHMARKING · PROTOCOLS A / B / ARENA': 'ВОСПРОИЗВОДИМЫЕ ЗАМЕРЫ · ПРОТОКОЛЫ A / B / ARENA',
+    'Standard CPU (i7-14700, only tested platform)': 'Обычный CPU (i7-14700, единственная проверенная платформа)',
+    'P99 (Worst-case)': 'P99 (худший случай)',
+    'FAISS IndexFlatL2 (exact brute-force)': 'FAISS IndexFlatL2 (точный полный перебор)',
+    'Benchmark Provenance & Verification Matrix (Audit Trail)': 'Происхождение замеров и матрица проверки (журнал аудита)',
+    'All experiments pinned to exact datasets, git commits, and hardware': 'Каждый эксперимент привязан к точному набору данных, коммиту git и железу',
+    'Headline Claim': 'Ключевое утверждение',
+    'Dataset / Protocol': 'Набор данных / протокол',
+    'Queries / Episodes': 'Запросы / эпизоды',
+    'Hardware Platform': 'Платформа',
+    'Threads': 'Потоки',
+    'Git Reference': 'Ссылка git',
+    'Raw Artifact': 'Сырой файл',
+    'Success 95.0% vs 5.8%': 'Успех 95,0 % против 5,8 %',
+    'Agent, real aifa_sdk engines, 35% distractors': 'Агент, настоящие движки aifa_sdk, 35 % отвлекающих',
+    'synthetic websites': 'синтетические сайты',
+    '9 agents × 360 episodes': '9 агентов × 360 эпизодов',
+    'FlyHash 25.4% vs Sign-LSH 78.2% at 50% dropout': 'FlyHash 25,4 % против Sign-LSH 78,2 % при выпадении 50 %',
+    'Robustness: real bit dropout': 'Устойчивость: настоящее выпадение битов',
+    'LIVE IN-BROWSER BENCHMARK ENGINE (V3.0)': 'ДВИЖОК ЗАМЕРА В БРАУЗЕРЕ (V3.0)',
+    'Sub-millisecond CPU': 'Меньше миллисекунды на CPU',
+    'queries / second': 'запросов в секунду',
+    'Index RAM Footprint': 'Объём индекса в памяти',
+    'Protocol A Verified': 'Протокол A проверен',
+    'E1 • MATH MODEL': 'E1 • МАТ. МОДЕЛЬ',
+    'E4 • EXT. REPL.': 'E4 • ВНЕШНИЙ ПОВТОР',
+    'Technology': 'Технология',
+    'Evidence': 'Доказательство',
+    'Trials': 'Прогоны',
+    'P50 Latency': 'Задержка P50',
+    'P99 Latency': 'Задержка P99',
+    'Efficiency / Accuracy / Invariant': 'Эффективность / точность / инвариант',
+    'Scientific Status': 'Научный статус',
+    'Tech #06: Neuromorphic Energy Model (LIF Engine)': 'Технология №06: нейроморфная модель энергии (движок LIF)',
+    '369.1× fewer operations — model estimate, not a wattmeter (96.86% activity sparsity)': 'в 369,1 раза меньше операций — оценка модели, не ваттметр (разреженность активности 96,86 %)',
+    '🧪 Research Model': '🧪 Исследовательская модель',
+    'Tech #07: AIfa BioMatch Score (BioMatch v1.0)': 'Технология №07: оценка AIfa BioMatch (BioMatch v1.0)',
+    'Real FlyWire v783 (2.7M pairs ≥5 synapses): C = 0.160, L = 4.03, KS = 0.282; BioMatch on a synthetic graph = 38.9%': 'Настоящий FlyWire v783 (2,7 млн пар ≥5 синапсов): C = 0.160, L = 4.03, KS = 0.282; BioMatch на синтетическом графе = 38,9 %',
+    '🧪 Algorithmic Metric': '🧪 Алгоритмическая метрика',
+    'Tech #08: Browser Search (pure JS, client microbenchmark)': 'Технология №08: поиск в браузере (чистый JS, клиентский микрозамер)',
+    'Pure JavaScript, 7,121 bytes (no WASM, no SIMD) · measured in V8; the Python simulation of the engine gave 331.6 μs': 'Чистый JavaScript, 7 121 байт (без WASM и SIMD) · замер в V8; Python-симуляция движка дала 331,6 мкс',
+    '🟢 Software Benchmark': '🟢 Программный замер',
+    'Tech #09: Neuromorphic Graph Compiler (prototype)': 'Технология №09: нейроморфный компилятор графов (прототип)',
+    'Cyclic core dependencies in 1,000 of 1,000 runs; sequential block partitioning (no Metis)': 'Циклические зависимости ядер в 1 000 прогонах из 1 000; последовательное разбиение на блоки (без Metis)',
+    '🧪 Partitioner Proto': '🧪 Прототип разбиения',
+    'Tech #10: Human-AI Symbiosis Index (Mathematical Metric Φ_sym)': 'Технология №10: индекс симбиоза человека и ИИ (математическая метрика Φ_sym)',
+    'Code uses a different 4-factor formula; measured Phi_sym mean = 0.155, P50 = 0.097 (1,000 turns)': 'В коде другая формула из 4 множителей; измерено: среднее Phi_sym = 0.155, P50 = 0.097 (1 000 реплик)',
+    '🧪 Mathematical Proto': '🧪 Математический прототип',
+    'Scientific validation status: internal benchmark; physical RAPL/wattmeter hardware telemetry on roadmap': 'Статус научной проверки: внутренний замер; аппаратная телеметрия RAPL/ваттметром — в планах',
+    'FLYWIRE V783 CONNECTOME STACK': 'СТЕК КОННЕКТОМА FLYWIRE V783',
+    '🟢 Production Core Internally Benchmarked': '🟢 Рабочее ядро, внутренний замер',
+    '≈44 ms CPU (50K)': '≈44 мс CPU (50K)',
+    '6-claw sparse projection PN → KC & 30% k-WTA inhibition (efficiency-tuned, not biological 5%)': 'Разреженная проекция PN → KC с 6 «когтями» и торможение k-WTA 30 % (настроено на эффективность, не биологические 5 %)',
+    'APL Inhibition': 'Торможение APL',
+    'Entropic Control': 'Энтропийный контроль',
+    'Global negative feedback preventing attention saturation': 'Глобальная отрицательная обратная связь, не дающая вниманию насытиться',
+    'CANN Attractor': 'Аттрактор CANN',
+    'Phase Memory': 'Фазовая память',
+    'Zero-drift continuous ring attractor for working memory': 'Непрерывный кольцевой аттрактор без дрейфа для рабочей памяти',
+    'Lock-Free Index': 'Индекс без блокировок',
+    'Single-thread (not yet tested at scale)': 'Один поток (в масштабе ещё не проверен)',
+    'Atomic lock-free concurrent LSH index design; multi-thread scaling not measured yet': 'Атомарный параллельный LSH-индекс без блокировок; масштабирование по потокам ещё не измерено',
+    'Bio-Quantization': 'Био-квантование',
+    'd=6 (fly value)': 'd=6 (значение мухи)',
+    'Fly value d=6; on our sweep d=7 and d=16 give higher recall (results/dendritic_sweep.json)': 'У мухи d=6; в нашем переборе d=7 и d=16 дают более высокий recall (results/dendritic_sweep.json)',
+  },
+  es: {
+    'Run live in-browser performance benchmarks or simulate the 5-layer bionic circuit (4096-d FlyHash projection, 2.5% WTA sparsification, APL noise gating, CANN attractor ring focus, and Bilateral arbitration).': 'Ejecute benchmarks de rendimiento en vivo en el navegador o simule el circuito biónico de 5 capas (proyección FlyHash de 4096 dimensiones, esparsificación WTA del 2,5 %, filtrado de ruido APL, foco en anillo del atractor CANN y arbitraje bilateral).',
+    'Measured Recall@10': 'Recall@10 medido',
+    'vs Exact L2 Ground Truth': 'frente a la referencia exacta L2',
+    'P50 Search Latency': 'Latencia de búsqueda P50',
+    'N=50,000, independent protocol': 'N = 50.000, protocolo independiente',
+    'Throughput (QPS)': 'Rendimiento (QPS)',
+    'Connectome Fingerprint': 'Huella del conectoma',
+    'Active KC: 102/4096 (2.5%)': 'KC activas: 102/4096 (2,5 %)',
+    '4096-d Projection': 'Proyección 4096-d',
+    '2.5% Sparsification': 'Esparsificación del 2,5 %',
+    '3. APL Noise Gate': '3. Filtro de ruido APL',
+    'Feedback Inhibition': 'Inhibición por retroalimentación',
+    '4. CANN Attractor': '4. Atractor CANN',
+    'Ring Focus & No Drift': 'Foco en anillo sin deriva',
+    '5. Bilateral Arb.': '5. Arbitraje bilateral',
+    'Dual Hemisphere Agree': 'Acuerdo de ambos hemisferios',
+    'Computing...': 'Calculando…',
+    '⚡ RUN SIMULATOR': '⚡ EJECUTAR SIMULADOR',
+    'Open-Science Substrate · Proprietary Runtime': 'Sustrato de ciencia abierta · runtime propietario',
+    'Inspired by FlyWire FAFB v783 (Nature 2024). Biology is open science. The distilled runtime is proprietary IP.': 'Inspirado en FlyWire FAFB v783 (Nature 2024). La biología es ciencia abierta. El runtime destilado es propiedad intelectual privada.',
+    'REPRODUCIBLE SYSTEMS BENCHMARKING · PROTOCOLS A / B / ARENA': 'BENCHMARKS REPRODUCIBLES · PROTOCOLOS A / B / ARENA',
+    'Standard CPU (i7-14700, only tested platform)': 'CPU estándar (i7-14700, única plataforma probada)',
+    'P99 (Worst-case)': 'P99 (peor caso)',
+    'FAISS IndexFlatL2 (exact brute-force)': 'FAISS IndexFlatL2 (fuerza bruta exacta)',
+    'Benchmark Provenance & Verification Matrix (Audit Trail)': 'Procedencia de los benchmarks y matriz de verificación (rastro de auditoría)',
+    'All experiments pinned to exact datasets, git commits, and hardware': 'Cada experimento está fijado a un conjunto de datos, un commit de git y un hardware exactos',
+    'Headline Claim': 'Afirmación principal',
+    'Dataset / Protocol': 'Conjunto de datos / protocolo',
+    'Queries / Episodes': 'Consultas / episodios',
+    'Hardware Platform': 'Plataforma de hardware',
+    'Threads': 'Hilos',
+    'Git Reference': 'Referencia git',
+    'Raw Artifact': 'Archivo bruto',
+    'Success 95.0% vs 5.8%': 'Éxito 95,0 % frente a 5,8 %',
+    'Agent, real aifa_sdk engines, 35% distractors': 'Agente, motores reales de aifa_sdk, 35 % de distractores',
+    'synthetic websites': 'sitios web sintéticos',
+    '9 agents × 360 episodes': '9 agentes × 360 episodios',
+    'FlyHash 25.4% vs Sign-LSH 78.2% at 50% dropout': 'FlyHash 25,4 % frente a Sign-LSH 78,2 % con un 50 % de pérdida',
+    'Robustness: real bit dropout': 'Robustez: pérdida real de bits',
+    'LIVE IN-BROWSER BENCHMARK ENGINE (V3.0)': 'MOTOR DE BENCHMARK EN EL NAVEGADOR (V3.0)',
+    'Sub-millisecond CPU': 'Submilisegundo en CPU',
+    'queries / second': 'consultas por segundo',
+    'Index RAM Footprint': 'Memoria RAM del índice',
+    'Protocol A Verified': 'Protocolo A verificado',
+    'E1 • MATH MODEL': 'E1 • MODELO MATEMÁTICO',
+    'E4 • EXT. REPL.': 'E4 • RÉPLICA EXTERNA',
+    'Technology': 'Tecnología',
+    'Evidence': 'Evidencia',
+    'Trials': 'Ensayos',
+    'P50 Latency': 'Latencia P50',
+    'P99 Latency': 'Latencia P99',
+    'Efficiency / Accuracy / Invariant': 'Eficiencia / precisión / invariante',
+    'Scientific Status': 'Estado científico',
+    'Tech #06: Neuromorphic Energy Model (LIF Engine)': 'Tecnología n.º 06: modelo energético neuromórfico (motor LIF)',
+    '369.1× fewer operations — model estimate, not a wattmeter (96.86% activity sparsity)': '369,1× menos operaciones: estimación del modelo, no un vatímetro (esparsidad de actividad del 96,86 %)',
+    '🧪 Research Model': '🧪 Modelo de investigación',
+    'Tech #07: AIfa BioMatch Score (BioMatch v1.0)': 'Tecnología n.º 07: puntuación AIfa BioMatch (BioMatch v1.0)',
+    'Real FlyWire v783 (2.7M pairs ≥5 synapses): C = 0.160, L = 4.03, KS = 0.282; BioMatch on a synthetic graph = 38.9%': 'FlyWire v783 real (2,7 M de pares con ≥5 sinapsis): C = 0.160, L = 4.03, KS = 0.282; BioMatch en un grafo sintético = 38,9 %',
+    '🧪 Algorithmic Metric': '🧪 Métrica algorítmica',
+    'Tech #08: Browser Search (pure JS, client microbenchmark)': 'Tecnología n.º 08: búsqueda en el navegador (JS puro, microbenchmark en el cliente)',
+    'Pure JavaScript, 7,121 bytes (no WASM, no SIMD) · measured in V8; the Python simulation of the engine gave 331.6 μs': 'JavaScript puro, 7.121 bytes (sin WASM ni SIMD) · medido en V8; la simulación del motor en Python dio 331,6 μs',
+    '🟢 Software Benchmark': '🟢 Benchmark de software',
+    'Tech #09: Neuromorphic Graph Compiler (prototype)': 'Tecnología n.º 09: compilador neuromórfico de grafos (prototipo)',
+    'Cyclic core dependencies in 1,000 of 1,000 runs; sequential block partitioning (no Metis)': 'Dependencias cíclicas entre núcleos en 1.000 de 1.000 ejecuciones; partición secuencial por bloques (sin Metis)',
+    '🧪 Partitioner Proto': '🧪 Prototipo de particionado',
+    'Tech #10: Human-AI Symbiosis Index (Mathematical Metric Φ_sym)': 'Tecnología n.º 10: índice de simbiosis humano-IA (métrica matemática Φ_sym)',
+    'Code uses a different 4-factor formula; measured Phi_sym mean = 0.155, P50 = 0.097 (1,000 turns)': 'El código usa otra fórmula de 4 factores; medido: Phi_sym media = 0.155, P50 = 0.097 (1.000 turnos)',
+    '🧪 Mathematical Proto': '🧪 Prototipo matemático',
+    'Scientific validation status: internal benchmark; physical RAPL/wattmeter hardware telemetry on roadmap': 'Estado de validación científica: benchmark interno; la telemetría física RAPL/vatímetro está en la hoja de ruta',
+    'FLYWIRE V783 CONNECTOME STACK': 'PILA DEL CONECTOMA FLYWIRE V783',
+    '🟢 Production Core Internally Benchmarked': '🟢 Núcleo de producción con benchmark interno',
+    '6-claw sparse projection PN → KC & 30% k-WTA inhibition (efficiency-tuned, not biological 5%)': 'Proyección dispersa PN → KC de 6 «garras» e inhibición k-WTA del 30 % (ajustada por eficiencia, no el 5 % biológico)',
+    'APL Inhibition': 'Inhibición APL',
+    'Entropic Control': 'Control entrópico',
+    'Global negative feedback preventing attention saturation': 'Retroalimentación negativa global que evita la saturación de la atención',
+    'CANN Attractor': 'Atractor CANN',
+    'Phase Memory': 'Memoria de fase',
+    'Zero-drift continuous ring attractor for working memory': 'Atractor de anillo continuo sin deriva para la memoria de trabajo',
+    'Lock-Free Index': 'Índice sin bloqueos',
+    'Single-thread (not yet tested at scale)': 'Un solo hilo (aún no probado a escala)',
+    'Atomic lock-free concurrent LSH index design; multi-thread scaling not measured yet': 'Diseño de índice LSH concurrente atómico sin bloqueos; el escalado multihilo aún no se ha medido',
+    'Bio-Quantization': 'Biocuantización',
+    'd=6 (fly value)': 'd=6 (valor de la mosca)',
+    'Fly value d=6; on our sweep d=7 and d=16 give higher recall (results/dendritic_sweep.json)': 'En la mosca d=6; en nuestro barrido d=7 y d=16 dan mayor recall (results/dendritic_sweep.json)',
+  },
+  zh: {
+    'Run live in-browser performance benchmarks or simulate the 5-layer bionic circuit (4096-d FlyHash projection, 2.5% WTA sparsification, APL noise gating, CANN attractor ring focus, and Bilateral arbitration).': '在浏览器中实时运行性能基准，或模拟 5 层仿生电路（4096 维 FlyHash 投影、2.5% WTA 稀疏化、APL 噪声门控、CANN 吸引子环形焦点和双侧仲裁）。',
+    'Measured Recall@10': '实测 Recall@10',
+    'vs Exact L2 Ground Truth': '对比精确 L2 基准',
+    'P50 Search Latency': 'P50 检索延迟',
+    'N=50,000, independent protocol': 'N = 50,000，独立协议',
+    'Throughput (QPS)': '吞吐量（QPS）',
+    'Connectome Fingerprint': '连接组指纹',
+    'Active KC: 102/4096 (2.5%)': '活跃 KC：102/4096（2.5%）',
+    '4096-d Projection': '4096 维投影',
+    '2.5% Sparsification': '2.5% 稀疏化',
+    '3. APL Noise Gate': '3. APL 噪声门控',
+    'Feedback Inhibition': '反馈抑制',
+    '4. CANN Attractor': '4. CANN 吸引子',
+    'Ring Focus & No Drift': '环形焦点，无漂移',
+    '5. Bilateral Arb.': '5. 双侧仲裁',
+    'Dual Hemisphere Agree': '双半球一致',
+    'Computing...': '计算中…',
+    '⚡ RUN SIMULATOR': '⚡ 运行模拟器',
+    'Open-Science Substrate · Proprietary Runtime': '开放科学基底 · 专有运行时',
+    'Inspired by FlyWire FAFB v783 (Nature 2024). Biology is open science. The distilled runtime is proprietary IP.': '灵感来自 FlyWire FAFB v783（Nature 2024）。生物学是开放科学。蒸馏后的运行时是专有知识产权。',
+    'REPRODUCIBLE SYSTEMS BENCHMARKING · PROTOCOLS A / B / ARENA': '可复现的系统基准测试 · 协议 A / B / ARENA',
+    'Standard CPU (i7-14700, only tested platform)': '标准 CPU（i7-14700，唯一测试过的平台）',
+    'P99 (Worst-case)': 'P99（最坏情况）',
+    'FAISS IndexFlatL2 (exact brute-force)': 'FAISS IndexFlatL2（精确暴力检索）',
+    'Benchmark Provenance & Verification Matrix (Audit Trail)': '基准来源与验证矩阵（审计记录）',
+    'All experiments pinned to exact datasets, git commits, and hardware': '每项实验都锁定到确切的数据集、git 提交和硬件',
+    'Headline Claim': '核心结论',
+    'Dataset / Protocol': '数据集 / 协议',
+    'Queries / Episodes': '查询 / 回合',
+    'Hardware Platform': '硬件平台',
+    'Threads': '线程',
+    'Git Reference': 'Git 引用',
+    'Raw Artifact': '原始文件',
+    'Success 95.0% vs 5.8%': '成功率 95.0% 对 5.8%',
+    'Agent, real aifa_sdk engines, 35% distractors': '智能体，真实 aifa_sdk 引擎，35% 干扰项',
+    'synthetic websites': '合成网站',
+    '9 agents × 360 episodes': '9 个智能体 × 360 个回合',
+    'FlyHash 25.4% vs Sign-LSH 78.2% at 50% dropout': '50% 丢失时 FlyHash 25.4% 对 Sign-LSH 78.2%',
+    'Robustness: real bit dropout': '鲁棒性：真实比特丢失',
+    'LIVE IN-BROWSER BENCHMARK ENGINE (V3.0)': '浏览器内实时基准引擎（V3.0）',
+    'Sub-millisecond CPU': 'CPU 亚毫秒级',
+    'queries / second': '次查询 / 秒',
+    'Index RAM Footprint': '索引内存占用',
+    'Protocol A Verified': '协议 A 已验证',
+    'E1 • MATH MODEL': 'E1 • 数学模型',
+    'E4 • EXT. REPL.': 'E4 • 外部复现',
+    'Technology': '技术',
+    'Evidence': '证据',
+    'Trials': '试验次数',
+    'P50 Latency': 'P50 延迟',
+    'P99 Latency': 'P99 延迟',
+    'Efficiency / Accuracy / Invariant': '效率 / 精度 / 不变量',
+    'Scientific Status': '科学状态',
+    'Tech #06: Neuromorphic Energy Model (LIF Engine)': '技术 #06：神经形态能耗模型（LIF 引擎）',
+    '369.1× fewer operations — model estimate, not a wattmeter (96.86% activity sparsity)': '运算量减少 369.1 倍——模型估算，非功率计实测（活动稀疏度 96.86%）',
+    '🧪 Research Model': '🧪 研究模型',
+    'Tech #07: AIfa BioMatch Score (BioMatch v1.0)': '技术 #07：AIfa BioMatch 评分（BioMatch v1.0）',
+    'Real FlyWire v783 (2.7M pairs ≥5 synapses): C = 0.160, L = 4.03, KS = 0.282; BioMatch on a synthetic graph = 38.9%': '真实 FlyWire v783（270 万对，≥5 个突触）：C = 0.160，L = 4.03，KS = 0.282；合成图上的 BioMatch = 38.9%',
+    '🧪 Algorithmic Metric': '🧪 算法指标',
+    'Tech #08: Browser Search (pure JS, client microbenchmark)': '技术 #08：浏览器内检索（纯 JS，客户端微基准）',
+    'Pure JavaScript, 7,121 bytes (no WASM, no SIMD) · measured in V8; the Python simulation of the engine gave 331.6 μs': '纯 JavaScript，7,121 字节（无 WASM、无 SIMD）· 在 V8 中实测；引擎的 Python 模拟结果为 331.6 微秒',
+    '🟢 Software Benchmark': '🟢 软件基准',
+    'Tech #09: Neuromorphic Graph Compiler (prototype)': '技术 #09：神经形态图编译器（原型）',
+    'Cyclic core dependencies in 1,000 of 1,000 runs; sequential block partitioning (no Metis)': '1,000 次运行中 1,000 次出现核心循环依赖；顺序分块（未使用 Metis）',
+    '🧪 Partitioner Proto': '🧪 分区原型',
+    'Tech #10: Human-AI Symbiosis Index (Mathematical Metric Φ_sym)': '技术 #10：人机共生指数（数学指标 Φ_sym）',
+    'Code uses a different 4-factor formula; measured Phi_sym mean = 0.155, P50 = 0.097 (1,000 turns)': '代码使用另一个 4 因子公式；实测 Phi_sym 均值 = 0.155，P50 = 0.097（1,000 轮）',
+    '🧪 Mathematical Proto': '🧪 数学原型',
+    'Scientific validation status: internal benchmark; physical RAPL/wattmeter hardware telemetry on roadmap': '科学验证状态：内部基准；RAPL/功率计硬件遥测已列入路线图',
+    'FLYWIRE V783 CONNECTOME STACK': 'FLYWIRE V783 连接组技术栈',
+    '🟢 Production Core Internally Benchmarked': '🟢 生产核心，已做内部基准',
+    '≈44 ms CPU (50K)': '≈44 毫秒 CPU（50K）',
+    '6-claw sparse projection PN → KC & 30% k-WTA inhibition (efficiency-tuned, not biological 5%)': '6 爪稀疏投影 PN → KC 与 30% k-WTA 抑制（为效率调优，而非生物学上的 5%）',
+    'APL Inhibition': 'APL 抑制',
+    'Entropic Control': '熵控制',
+    'Global negative feedback preventing attention saturation': '全局负反馈，防止注意力饱和',
+    'CANN Attractor': 'CANN 吸引子',
+    'Phase Memory': '相位记忆',
+    'Zero-drift continuous ring attractor for working memory': '用于工作记忆的零漂移连续环形吸引子',
+    'Lock-Free Index': '无锁索引',
+    'Single-thread (not yet tested at scale)': '单线程（尚未进行规模测试）',
+    'Atomic lock-free concurrent LSH index design; multi-thread scaling not measured yet': '原子无锁并发 LSH 索引设计；多线程扩展尚未测量',
+    'Bio-Quantization': '生物量化',
+    'd=6 (fly value)': 'd=6（果蝇数值）',
+    'Fly value d=6; on our sweep d=7 and d=16 give higher recall (results/dendritic_sweep.json)': '果蝇数值 d=6；在我们的扫描中 d=7 和 d=16 的召回率更高（results/dendritic_sweep.json）',
+  },
+};
+
+const тр = (lang: string, s: string): string => ТР_DIGITAL[lang]?.[s] ?? s;
+
 export default function DigitalSOTAPage() {
     const activeLang = useCurrentLang();
   const [lang, setLang] = useState<Lang>(() => {
@@ -3694,7 +3963,7 @@ export default function DigitalSOTAPage() {
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl">
             {lang === 'ru' 
               ? 'Запустите интерактивный расчет производительности прямо в браузере или введите концепт для 5-слойного бионического симулятора (FlyHash 4096-d, WTA-разрежение 2.5%, APL-фильтрация шума, кольцевой фокус CANN и Bilateral-верификация).'
-              : 'Run live in-browser performance benchmarks or simulate the 5-layer bionic circuit (4096-d FlyHash projection, 2.5% WTA sparsification, APL noise gating, CANN attractor ring focus, and Bilateral arbitration).'}
+              : тр(lang, 'Run live in-browser performance benchmarks or simulate the 5-layer bionic circuit (4096-d FlyHash projection, 2.5% WTA sparsification, APL noise gating, CANN attractor ring focus, and Bilateral arbitration).')}
           </p>
 
           {/* INTERACTIVE CONTROLS & DUAL BUTTONS */}
@@ -3722,7 +3991,7 @@ export default function DigitalSOTAPage() {
                   className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 keep-dark rounded-xl bg-slate-900 dark:bg-black hover:bg-slate-800 border border-[#00F0FF]/40 text-cyan-300 dark:text-[#00F0FF] font-bold text-xs sm:text-sm transition shadow-md font-mono uppercase tracking-wider disabled:opacity-50 cursor-pointer"
                 >
                   <Zap className="w-4 h-4 text-cyan-300 dark:text-[#00F0FF]" />
-                  <span>{simRunning ? 'Computing...' : '⚡ RUN SIMULATOR'}</span>
+                  <span>{simRunning ? тр(lang, 'Computing...') : тр(lang, '⚡ RUN SIMULATOR')}</span>
                 </button>
               </div>
             </div>
@@ -3747,23 +4016,23 @@ export default function DigitalSOTAPage() {
           {/* LIVE MEASURED BENCHMARK METRICS GRID */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/60 border border-slate-200 dark:border-emerald-500/40 space-y-1">
-              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">Measured Recall@10</span>
+              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">{тр(lang, 'Measured Recall@10')}</span>
               <span className="text-xl sm:text-2xl font-black font-mono text-emerald-700 dark:text-emerald-400">
                 {liveBenchMetrics ? `${liveBenchMetrics.recall10}%` : '39.55%'}
               </span>
-              <span className="text-[10px] text-emerald-700 dark:text-emerald-300/70 block">vs Exact L2 Ground Truth</span>
+              <span className="text-[10px] text-emerald-700 dark:text-emerald-300/70 block">{тр(lang, 'vs Exact L2 Ground Truth')}</span>
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/60 border border-slate-200 dark:border-cyan-500/40 space-y-1">
-              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">P50 Search Latency</span>
+              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">{тр(lang, 'P50 Search Latency')}</span>
               <span className="text-xl sm:text-2xl font-black font-mono text-cyan-700 dark:text-[#00F0FF]">
                 {simResult.latencyMs ? `${simResult.latencyMs} ms` : '44 ms'}
               </span>
-              <span className="text-[10px] text-cyan-700 dark:text-cyan-300/70 block">N=50,000, independent protocol</span>
+              <span className="text-[10px] text-cyan-700 dark:text-cyan-300/70 block">{тр(lang, 'N=50,000, independent protocol')}</span>
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/60 border border-slate-200 dark:border-cyan-500/40 space-y-1">
-              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">Throughput (QPS)</span>
+              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">{тр(lang, 'Throughput (QPS)')}</span>
               <span className="text-xl sm:text-2xl font-black font-mono text-slate-900 dark:text-white">
                 {liveBenchMetrics ? liveBenchMetrics.qps.toLocaleString() : '22.5'}
               </span>
@@ -3771,9 +4040,9 @@ export default function DigitalSOTAPage() {
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-black/60 border border-slate-200 dark:border-amber-500/40 space-y-1">
-              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">Connectome Fingerprint</span>
+              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase block">{тр(lang, 'Connectome Fingerprint')}</span>
               <span className="text-xs font-mono text-cyan-700 dark:text-cyan-300 truncate block font-bold" title={simResult.hashHex}>{simResult.hashHex}</span>
-              <span className="text-[10px] text-amber-700 dark:text-amber-300/70 block">Active KC: 102/4096 (2.5%)</span>
+              <span className="text-[10px] text-amber-700 dark:text-amber-300/70 block">{тр(lang, 'Active KC: 102/4096 (2.5%)')}</span>
             </div>
           </div>
 
@@ -3781,23 +4050,23 @@ export default function DigitalSOTAPage() {
           <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 pt-2 border-t border-slate-200 dark:border-gray-800 text-xs font-mono">
             <div className={`p-2.5 rounded-xl transition-all border text-center ${activeStage >= 1 ? 'bg-cyan-500/15 border-cyan-400 text-cyan-900 dark:text-cyan-300 shadow-[0_0_15px_rgba(0,240,255,0.2)]' : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-gray-800'}`}>
               <span className="text-cyan-700 dark:text-[#00F0FF] font-bold block">1. FlyHash</span>
-              <span className="text-[10px] text-slate-600 dark:text-slate-400">4096-d Projection</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400">{тр(lang, '4096-d Projection')}</span>
             </div>
             <div className={`p-2.5 rounded-xl transition-all border text-center ${activeStage >= 2 ? 'bg-cyan-500/15 border-cyan-400 text-cyan-900 dark:text-cyan-300 shadow-[0_0_15px_rgba(0,240,255,0.2)]' : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-gray-800'}`}>
               <span className="text-cyan-700 dark:text-[#00F0FF] font-bold block">2. Kenyon WTA</span>
-              <span className="text-[10px] text-slate-600 dark:text-slate-400">2.5% Sparsification</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400">{тр(lang, '2.5% Sparsification')}</span>
             </div>
             <div className={`p-2.5 rounded-xl transition-all border text-center ${activeStage >= 3 ? 'bg-emerald-500/15 border-emerald-400 text-emerald-800 dark:text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.2)]' : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-gray-800'}`}>
-              <span className="text-emerald-800 dark:text-emerald-400 font-bold block">3. APL Noise Gate</span>
-              <span className="text-[10px] text-slate-600 dark:text-slate-400">Feedback Inhibition</span>
+              <span className="text-emerald-800 dark:text-emerald-400 font-bold block">{тр(lang, '3. APL Noise Gate')}</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400">{тр(lang, 'Feedback Inhibition')}</span>
             </div>
             <div className={`p-2.5 rounded-xl transition-all border text-center ${activeStage >= 4 ? 'bg-amber-500/15 border-amber-400 text-amber-300 shadow-[0_0_15px_rgba(251,191,36,0.2)]' : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-gray-800'}`}>
-              <span className="text-amber-800 dark:text-amber-400 font-bold block">4. CANN Attractor</span>
-              <span className="text-[10px] text-slate-600 dark:text-slate-400">Ring Focus & No Drift</span>
+              <span className="text-amber-800 dark:text-amber-400 font-bold block">{тр(lang, '4. CANN Attractor')}</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400">{тр(lang, 'Ring Focus & No Drift')}</span>
             </div>
             <div className={`p-2.5 rounded-xl transition-all border text-center ${activeStage >= 5 ? 'bg-purple-500/15 border-purple-400 text-purple-300 shadow-[0_0_15px_rgba(192,132,252,0.2)]' : 'bg-slate-50 dark:bg-black/40 border-slate-200 dark:border-gray-800'}`}>
-              <span className="text-purple-700 dark:text-purple-400 font-bold block">5. Bilateral Arb.</span>
-              <span className="text-[10px] text-slate-600 dark:text-slate-400">Dual Hemisphere Agree</span>
+              <span className="text-purple-700 dark:text-purple-400 font-bold block">{тр(lang, '5. Bilateral Arb.')}</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400">{тр(lang, 'Dual Hemisphere Agree')}</span>
             </div>
           </div>
 
@@ -3811,7 +4080,7 @@ export default function DigitalSOTAPage() {
                 </span>
               </div>
               <span className="bg-cyan-100 dark:bg-cyan-950/90 border border-cyan-300 dark:border-cyan-700 px-3 py-1 rounded-lg text-cyan-900 dark:text-cyan-300 text-xs font-mono font-bold">
-                Open-Science Substrate · Proprietary Runtime
+                {тр(lang, 'Open-Science Substrate · Proprietary Runtime')}
               </span>
             </div>
 
@@ -3845,7 +4114,7 @@ export default function DigitalSOTAPage() {
             </div>
 
             <div className="pt-3 border-t border-gray-800/80 flex flex-wrap items-center justify-between text-[11px] font-mono text-gray-400 gap-2">
-              <span>Inspired by FlyWire FAFB v783 (Nature 2024). Biology is open science. The distilled runtime is proprietary IP. {JX[lang].scriptLbl}<strong className="text-cyan-800 dark:text-cyan-400">Apache 2.0 Open-Source</strong>{JX[lang].coreLbl}<strong className="text-amber-400">Proprietary EULA &amp; Trade Secret</strong> | <strong>Copyright (c) 2026 CODE Eternal Ecosystem &amp; Maksim Galatin</strong></span>
+              <span>{тр(lang, 'Inspired by FlyWire FAFB v783 (Nature 2024). Biology is open science. The distilled runtime is proprietary IP.')} {JX[lang].scriptLbl}<strong className="text-cyan-800 dark:text-cyan-400">Apache 2.0 Open-Source</strong>{JX[lang].coreLbl}<strong className="text-amber-400">Proprietary EULA &amp; Trade Secret</strong> | <strong>Copyright (c) 2026 CODE Eternal Ecosystem &amp; Maksim Galatin</strong></span>
               <span className="text-cyan-900 dark:text-[#00F0FF]">{t.archBadge}</span>
             </div>
           </div>
@@ -3859,7 +4128,7 @@ export default function DigitalSOTAPage() {
           <div className="text-center space-y-3">
             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-cyan-900 dark:text-[#00F0FF]">
               <BarChart2 className="w-4 h-4" />
-              REPRODUCIBLE SYSTEMS BENCHMARKING · PROTOCOLS A / B / ARENA
+              {тр(lang, 'REPRODUCIBLE SYSTEMS BENCHMARKING · PROTOCOLS A / B / ARENA')}
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               {t.benchSectionTitle}
@@ -3888,7 +4157,7 @@ export default function DigitalSOTAPage() {
             </div>
             <div className="space-y-1">
               <span className="text-xs font-mono text-slate-600 dark:text-slate-400 uppercase">{t.filterHardware}</span>
-              <div className="text-sm font-mono font-semibold text-cyan-900 dark:text-[#00F0FF]">Standard CPU (i7-14700, only tested platform)</div>
+              <div className="text-sm font-mono font-semibold text-cyan-900 dark:text-[#00F0FF]">{тр(lang, 'Standard CPU (i7-14700, only tested platform)')}</div>
             </div>
             <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
               {lang === 'ru' ? 'Единственная реально измеренная конфигурация; сравнение на других размерах не проводилось' : lang === 'es' ? 'Única configuración realmente medida; no se ha probado en otros tamaños' : lang === 'zh' ? '唯一实测配置；尚未在其他规模下测试' : 'Only configuration actually measured; not yet tested at other sizes'}
@@ -3914,7 +4183,7 @@ export default function DigitalSOTAPage() {
                   { label: 'P75', val: p75, color: 'bg-[#00F0FF]', glow: 'shadow-[0_0_15px_rgba(0,240,255,0.3)]' },
                   { label: 'P90', val: p90, color: 'bg-cyan-400', glow: 'shadow-[0_0_15px_rgba(34,211,238,0.3)]' },
                   { label: 'P95', val: p95, color: 'bg-amber-400', glow: 'shadow-[0_0_15px_rgba(251,191,36,0.3)]' },
-                  { label: 'P99 (Worst-case)', val: p99, color: 'bg-purple-400', glow: 'shadow-[0_0_15px_rgba(192,132,252,0.3)]' }
+                  { label: тр(lang, 'P99 (Worst-case)'), val: p99, color: 'bg-purple-400', glow: 'shadow-[0_0_15px_rgba(192,132,252,0.3)]' }
                 ].map((item, idx) => {
                   const pct = Math.min(100, Math.max(6, Math.round(Math.pow(parseFloat(item.val) / 12.0, 0.65) * 100)));
                   return (
@@ -4018,7 +4287,7 @@ export default function DigitalSOTAPage() {
                     <td className="py-4 px-4 text-center font-mono text-emerald-800 dark:text-emerald-400">{JX[lang].noGpu}</td>
                   </tr>
                   <tr className="text-slate-700 dark:text-slate-300 hover:bg-white/5 transition-colors">
-                    <td className="py-3.5 px-4">FAISS IndexFlatL2 (exact brute-force)</td>
+                    <td className="py-3.5 px-4">{тр(lang, 'FAISS IndexFlatL2 (exact brute-force)')}</td>
                     <td className="py-3.5 px-4 text-center font-mono">8.8 {JX[lang].ms}</td>
                     <td className="py-3.5 px-4 text-center font-mono">195.3 MB</td>
                     <td className="py-3.5 px-4 text-center font-mono text-emerald-400">100.00%</td>
@@ -4040,22 +4309,22 @@ export default function DigitalSOTAPage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <h4 className="text-sm font-bold font-mono text-cyan-700 dark:text-[#00F0FF] uppercase tracking-wider flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4" />
-                  Benchmark Provenance &amp; Verification Matrix (Audit Trail)
+                  {тр(lang, 'Benchmark Provenance & Verification Matrix (Audit Trail)')}
                 </h4>
-                <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">All experiments pinned to exact datasets, git commits, and hardware</span>
+                <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">{тр(lang, 'All experiments pinned to exact datasets, git commits, and hardware')}</span>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse text-xs font-mono">
                   <thead>
                     <tr className="border-b border-slate-300 dark:border-gray-800 text-slate-500 dark:text-slate-400 uppercase text-[10px]">
-                      <th className="py-2.5 px-3">Headline Claim</th>
-                      <th className="py-2.5 px-3">Dataset / Protocol</th>
+                      <th className="py-2.5 px-3">{тр(lang, 'Headline Claim')}</th>
+                      <th className="py-2.5 px-3">{тр(lang, 'Dataset / Protocol')}</th>
                       <th className="py-2.5 px-3">N (Vectors)</th>
-                      <th className="py-2.5 px-3">Queries / Episodes</th>
-                      <th className="py-2.5 px-3">Hardware Platform</th>
-                      <th className="py-2.5 px-3">Threads</th>
-                      <th className="py-2.5 px-3">Git Reference</th>
-                      <th className="py-2.5 px-3 text-right">Raw Artifact</th>
+                      <th className="py-2.5 px-3">{тр(lang, 'Queries / Episodes')}</th>
+                      <th className="py-2.5 px-3">{тр(lang, 'Hardware Platform')}</th>
+                      <th className="py-2.5 px-3">{тр(lang, 'Threads')}</th>
+                      <th className="py-2.5 px-3">{тр(lang, 'Git Reference')}</th>
+                      <th className="py-2.5 px-3 text-right">{тр(lang, 'Raw Artifact')}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-800/40 text-slate-300">
@@ -4080,18 +4349,18 @@ export default function DigitalSOTAPage() {
                       <td className="py-2.5 px-3 text-right font-semibold text-emerald-400">bench/results/metrics.json</td>
                     </tr>
                     <tr>
-                      <td className="py-2.5 px-3 font-bold text-amber-400">Success 95.0% vs 5.8%</td>
-                      <td className="py-2.5 px-3">Agent, real aifa_sdk engines, 35% distractors</td>
-                      <td className="py-2.5 px-3">synthetic websites</td>
-                      <td className="py-2.5 px-3">9 agents × 360 episodes</td>
+                      <td className="py-2.5 px-3 font-bold text-amber-400">{тр(lang, 'Success 95.0% vs 5.8%')}</td>
+                      <td className="py-2.5 px-3">{тр(lang, 'Agent, real aifa_sdk engines, 35% distractors')}</td>
+                      <td className="py-2.5 px-3">{тр(lang, 'synthetic websites')}</td>
+                      <td className="py-2.5 px-3">{тр(lang, '9 agents × 360 episodes')}</td>
                       <td className="py-2.5 px-3">Intel Core i7-14700</td>
                       <td className="py-2.5 px-3">1 Core</td>
                       <td className="py-2.5 px-3 text-cyan-800 dark:text-cyan-400">commit 9f7b399</td>
                       <td className="py-2.5 px-3 text-right font-semibold text-emerald-400">results/acr_agent_real_benchmark_distr_0.35.json</td>
                     </tr>
                     <tr>
-                      <td className="py-2.5 px-3 font-bold text-purple-400">FlyHash 25.4% vs Sign-LSH 78.2% at 50% dropout</td>
-                      <td className="py-2.5 px-3">Robustness: real bit dropout</td>
+                      <td className="py-2.5 px-3 font-bold text-purple-400">{тр(lang, 'FlyHash 25.4% vs Sign-LSH 78.2% at 50% dropout')}</td>
+                      <td className="py-2.5 px-3">{тр(lang, 'Robustness: real bit dropout')}</td>
                       <td className="py-2.5 px-3">20,000</td>
                       <td className="py-2.5 px-3">100 Q × 5 seeds</td>
                       <td className="py-2.5 px-3">Intel Core i7-14700</td>
@@ -4197,7 +4466,7 @@ export default function DigitalSOTAPage() {
                 <div>
                   <span className="text-xs font-mono text-cyan-900 dark:text-[#00F0FF] font-bold uppercase tracking-wider flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
-                    LIVE IN-BROWSER BENCHMARK ENGINE (V3.0)
+                    {тр(lang, 'LIVE IN-BROWSER BENCHMARK ENGINE (V3.0)')}
                   </span>
                   <h4 className="text-lg sm:text-xl font-bold text-slate-950 dark:text-white mt-1">
                     {JX[lang].liveRun}
@@ -4232,22 +4501,22 @@ export default function DigitalSOTAPage() {
               {liveBenchMetrics && (
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 animate-in fade-in duration-300">
                   <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/70 border border-emerald-500/40 space-y-1">
-                    <span className="text-[11px] font-mono text-slate-600 dark:text-gray-400 uppercase block">Measured Recall@10</span>
+                    <span className="text-[11px] font-mono text-slate-600 dark:text-gray-400 uppercase block">{тр(lang, 'Measured Recall@10')}</span>
                     <span className="text-2xl sm:text-3xl font-black font-mono text-emerald-700 dark:text-emerald-400">{liveBenchMetrics.recall10}%</span>
-                    <span className="text-[10px] text-emerald-700 dark:text-emerald-200/70 block">vs Exact L2 Ground Truth</span>
+                    <span className="text-[10px] text-emerald-700 dark:text-emerald-200/70 block">{тр(lang, 'vs Exact L2 Ground Truth')}</span>
                   </div>
                   <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/70 border border-cyan-500/40 space-y-1">
-                    <span className="text-[11px] font-mono text-slate-600 dark:text-gray-400 uppercase block">P50 Search Latency</span>
+                    <span className="text-[11px] font-mono text-slate-600 dark:text-gray-400 uppercase block">{тр(lang, 'P50 Search Latency')}</span>
                     <span className="text-2xl sm:text-3xl font-black font-mono text-cyan-900 dark:text-[#00F0FF]">{liveBenchMetrics.p50Ms} ms</span>
-                    <span className="text-[10px] text-cyan-700 dark:text-cyan-200/70 block">Sub-millisecond CPU</span>
+                    <span className="text-[10px] text-cyan-700 dark:text-cyan-200/70 block">{тр(lang, 'Sub-millisecond CPU')}</span>
                   </div>
                   <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/70 border border-cyan-500/40 space-y-1">
-                    <span className="text-[11px] font-mono text-slate-600 dark:text-gray-400 uppercase block">Throughput (QPS)</span>
+                    <span className="text-[11px] font-mono text-slate-600 dark:text-gray-400 uppercase block">{тр(lang, 'Throughput (QPS)')}</span>
                     <span className="text-2xl sm:text-3xl font-black font-mono text-cyan-900 dark:text-cyan-300">{liveBenchMetrics.qps.toLocaleString()}</span>
-                    <span className="text-[10px] text-cyan-700 dark:text-cyan-200/70 block">queries / second</span>
+                    <span className="text-[10px] text-cyan-700 dark:text-cyan-200/70 block">{тр(lang, 'queries / second')}</span>
                   </div>
                   <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/70 border border-amber-500/40 space-y-1">
-                    <span className="text-[11px] font-mono text-slate-600 dark:text-gray-400 uppercase block">Index RAM Footprint</span>
+                    <span className="text-[11px] font-mono text-slate-600 dark:text-gray-400 uppercase block">{тр(lang, 'Index RAM Footprint')}</span>
                     <span className="text-2xl sm:text-3xl font-black font-mono text-amber-700 dark:text-amber-400">{liveBenchMetrics.ramMb} MB</span>
                     <span className="text-[10px] text-amber-700 dark:text-amber-200/70 block">50,000 vectors (1024d)</span>
                   </div>
@@ -4396,7 +4665,7 @@ export default function DigitalSOTAPage() {
                 <div className="flex flex-wrap items-center gap-2 text-[11px]">
                   <span className="bg-slate-100 dark:bg-black border border-slate-200 dark:border-gray-700 px-2.5 py-1 rounded-lg text-slate-800 dark:text-gray-300 font-semibold">{JX[lang].fileLbl}<strong className="text-cyan-800 dark:text-cyan-400">aifa_biobench.py</strong></span>
                   <span className="bg-slate-100 dark:bg-black border border-slate-200 dark:border-gray-700 px-2.5 py-1 rounded-lg text-slate-800 dark:text-gray-300 font-semibold">{JX[lang].licLbl}<strong className="text-amber-700 dark:text-amber-400">Apache 2.0 Open-Source</strong></span>
-                  <span className="bg-cyan-50 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-800 px-2.5 py-1 rounded-lg text-cyan-900 dark:text-cyan-300 font-bold">Protocol A Verified</span>
+                  <span className="bg-cyan-50 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-800 px-2.5 py-1 rounded-lg text-cyan-900 dark:text-cyan-300 font-bold">{тр(lang, 'Protocol A Verified')}</span>
                 </div>
               </div>
 
@@ -4473,7 +4742,7 @@ export default function DigitalSOTAPage() {
                 <p className="text-[10px] text-gray-500 dark:text-gray-400">{lang === 'ru' ? 'Биологический концепт' : lang === 'es' ? 'Hipótesis biológica' : lang === 'zh' ? '生物学假设' : 'Biological hypothesis'}</p>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-gray-800 space-y-1">
-                <span className="text-[10px] font-bold text-blue-700 dark:text-blue-400 block">E1 • MATH MODEL</span>
+                <span className="text-[10px] font-bold text-blue-700 dark:text-blue-400 block">{тр(lang, 'E1 • MATH MODEL')}</span>
                 <span className="text-xs font-semibold text-slate-800 dark:text-blue-200">{lang === 'ru' ? 'Матмодель' : lang === 'es' ? 'Modelo formal' : lang === 'zh' ? '形式模型' : 'Formal Model'}</span>
                 <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Асимптотика / формулы' : lang === 'es' ? 'Complejidad analítica' : lang === 'zh' ? '解析复杂度' : 'Analytical complexity'}</p>
               </div>
@@ -4488,7 +4757,7 @@ export default function DigitalSOTAPage() {
                 <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Воспроизводимый тест CPU' : lang === 'es' ? 'Prueba reproducible en CPU' : lang === 'zh' ? '可复现的 CPU 测试' : 'Reproducible CPU test'}</p>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-yellow-800/60 space-y-1">
-                <span className="text-[10px] font-bold text-amber-700 dark:text-yellow-400 block">E4 • EXT. REPL.</span>
+                <span className="text-[10px] font-bold text-amber-700 dark:text-yellow-400 block">{тр(lang, 'E4 • EXT. REPL.')}</span>
                 <span className="text-xs font-semibold text-slate-800 dark:text-yellow-200">{lang === 'ru' ? 'Репликация' : lang === 'es' ? 'Auditoría externa' : lang === 'zh' ? '外部审计' : 'External Audit'}</span>
                 <p className="text-[10px] text-slate-500 dark:text-gray-400">{lang === 'ru' ? 'Аппаратный стенд' : lang === 'es' ? 'Hardware independiente' : lang === 'zh' ? '独立硬件' : 'Independent hardware'}</p>
               </div>
@@ -4521,19 +4790,19 @@ export default function DigitalSOTAPage() {
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
                     <tr className="border-b border-slate-200 dark:border-gray-800 text-slate-600 dark:text-slate-400">
-                      <th className="py-2.5 px-3">Technology</th>
-                      <th className="py-2.5 px-3 text-center">Evidence</th>
-                      <th className="py-2.5 px-3 text-center">Trials</th>
-                      <th className="py-2.5 px-3 text-center">P50 Latency</th>
-                      <th className="py-2.5 px-3 text-center">P99 Latency</th>
-                      <th className="py-2.5 px-3 text-center">Efficiency / Accuracy / Invariant</th>
-                      <th className="py-2.5 px-3 text-right">Scientific Status</th>
+                      <th className="py-2.5 px-3">{тр(lang, 'Technology')}</th>
+                      <th className="py-2.5 px-3 text-center">{тр(lang, 'Evidence')}</th>
+                      <th className="py-2.5 px-3 text-center">{тр(lang, 'Trials')}</th>
+                      <th className="py-2.5 px-3 text-center">{тр(lang, 'P50 Latency')}</th>
+                      <th className="py-2.5 px-3 text-center">{тр(lang, 'P99 Latency')}</th>
+                      <th className="py-2.5 px-3 text-center">{тр(lang, 'Efficiency / Accuracy / Invariant')}</th>
+                      <th className="py-2.5 px-3 text-right">{тр(lang, 'Scientific Status')}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-200 dark:divide-gray-800/60 text-slate-800 dark:text-slate-200">
                     <tr className="hover:bg-slate-100/60 dark:hover:bg-white/5">
                       <td className="py-3 px-3 font-semibold text-slate-900 dark:text-white">
-                        Tech #06: Neuromorphic Energy Model (LIF Engine)
+                        {тр(lang, 'Tech #06: Neuromorphic Energy Model (LIF Engine)')}
                       </td>
                       <td className="py-3 px-3 text-center">
                         <span className="px-2 py-0.5 rounded bg-cyan-50 dark:bg-cyan-950/80 text-cyan-900 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-700 text-[10px] font-bold">E2–E3</span>
@@ -4542,13 +4811,13 @@ export default function DigitalSOTAPage() {
                       <td className="py-3 px-3 text-center text-cyan-800 dark:text-cyan-400 font-bold">40.9 μs</td>
                       <td className="py-3 px-3 text-center text-slate-600 dark:text-slate-400">72.5 μs</td>
                       <td className="py-3 px-3 text-center text-emerald-700 dark:text-emerald-400 font-bold">
-                        369.1× fewer operations — model estimate, not a wattmeter (96.86% activity sparsity)
+                        {тр(lang, '369.1× fewer operations — model estimate, not a wattmeter (96.86% activity sparsity)')}
                       </td>
-                      <td className="py-3 px-3 text-right text-amber-700 dark:text-amber-400 font-semibold">🧪 Research Model</td>
+                      <td className="py-3 px-3 text-right text-amber-700 dark:text-amber-400 font-semibold">{тр(lang, '🧪 Research Model')}</td>
                     </tr>
                     <tr className="hover:bg-slate-100/60 dark:hover:bg-white/5">
                       <td className="py-3 px-3 font-semibold text-slate-900 dark:text-white">
-                        Tech #07: AIfa BioMatch Score (BioMatch v1.0)
+                        {тр(lang, 'Tech #07: AIfa BioMatch Score (BioMatch v1.0)')}
                       </td>
                       <td className="py-3 px-3 text-center">
                         <span className="px-2 py-0.5 rounded bg-cyan-50 dark:bg-cyan-950/80 text-cyan-900 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-700 text-[10px] font-bold">E2</span>
@@ -4557,13 +4826,13 @@ export default function DigitalSOTAPage() {
                       <td className="py-3 px-3 text-center text-cyan-800 dark:text-cyan-400 font-bold">1.80 ms</td>
                       <td className="py-3 px-3 text-center text-slate-600 dark:text-slate-400">5.11 ms</td>
                       <td className="py-3 px-3 text-center text-cyan-800 dark:text-cyan-400 font-bold">
-                        Real FlyWire v783 (2.7M pairs ≥5 synapses): C = 0.160, L = 4.03, KS = 0.282; BioMatch on a synthetic graph = 38.9%
+                        {тр(lang, 'Real FlyWire v783 (2.7M pairs ≥5 synapses): C = 0.160, L = 4.03, KS = 0.282; BioMatch on a synthetic graph = 38.9%')}
                       </td>
-                      <td className="py-3 px-3 text-right text-amber-700 dark:text-amber-400 font-semibold">🧪 Algorithmic Metric</td>
+                      <td className="py-3 px-3 text-right text-amber-700 dark:text-amber-400 font-semibold">{тр(lang, '🧪 Algorithmic Metric')}</td>
                     </tr>
                     <tr className="hover:bg-slate-100/60 dark:hover:bg-white/5">
                       <td className="py-3 px-3 font-semibold text-slate-900 dark:text-white">
-                        Tech #08: Browser Search (pure JS, client microbenchmark)
+                        {тр(lang, 'Tech #08: Browser Search (pure JS, client microbenchmark)')}
                       </td>
                       <td className="py-3 px-3 text-center">
                         <span className="px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700 text-[10px] font-bold">E3</span>
@@ -4572,13 +4841,13 @@ export default function DigitalSOTAPage() {
                       <td className="py-3 px-3 text-center text-purple-700 dark:text-purple-400 font-bold">2,756 μs</td>
                       <td className="py-3 px-3 text-center text-slate-600 dark:text-slate-400">4,533 μs</td>
                       <td className="py-3 px-3 text-center text-purple-700 dark:text-purple-400 font-bold">
-                        Pure JavaScript, 7,121 bytes (no WASM, no SIMD) · measured in V8; the Python simulation of the engine gave 331.6 μs
+                        {тр(lang, 'Pure JavaScript, 7,121 bytes (no WASM, no SIMD) · measured in V8; the Python simulation of the engine gave 331.6 μs')}
                       </td>
-                      <td className="py-3 px-3 text-right text-emerald-700 dark:text-emerald-400 font-semibold">🟢 Software Benchmark</td>
+                      <td className="py-3 px-3 text-right text-emerald-700 dark:text-emerald-400 font-semibold">{тр(lang, '🟢 Software Benchmark')}</td>
                     </tr>
                     <tr className="hover:bg-slate-100/60 dark:hover:bg-white/5">
                       <td className="py-3 px-3 font-semibold text-slate-900 dark:text-white">
-                        Tech #09: Neuromorphic Graph Compiler (prototype)
+                        {тр(lang, 'Tech #09: Neuromorphic Graph Compiler (prototype)')}
                       </td>
                       <td className="py-3 px-3 text-center">
                         <span className="px-2 py-0.5 rounded bg-cyan-50 dark:bg-cyan-950/80 text-cyan-900 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-700 text-[10px] font-bold">E2</span>
@@ -4587,13 +4856,13 @@ export default function DigitalSOTAPage() {
                       <td className="py-3 px-3 text-center text-amber-700 dark:text-amber-400 font-bold">1.41 ms</td>
                       <td className="py-3 px-3 text-center text-slate-600 dark:text-slate-400">4.68 ms</td>
                       <td className="py-3 px-3 text-center text-amber-700 dark:text-amber-400 font-bold">
-                        Cyclic core dependencies in 1,000 of 1,000 runs; sequential block partitioning (no Metis)
+                        {тр(lang, 'Cyclic core dependencies in 1,000 of 1,000 runs; sequential block partitioning (no Metis)')}
                       </td>
-                      <td className="py-3 px-3 text-right text-amber-700 dark:text-amber-400 font-semibold">🧪 Partitioner Proto</td>
+                      <td className="py-3 px-3 text-right text-amber-700 dark:text-amber-400 font-semibold">{тр(lang, '🧪 Partitioner Proto')}</td>
                     </tr>
                     <tr className="hover:bg-slate-100/60 dark:hover:bg-white/5">
                       <td className="py-3 px-3 font-semibold text-slate-900 dark:text-white">
-                        Tech #10: Human-AI Symbiosis Index (Mathematical Metric Φ_sym)
+                        {тр(lang, 'Tech #10: Human-AI Symbiosis Index (Mathematical Metric Φ_sym)')}
                       </td>
                       <td className="py-3 px-3 text-center">
                         <span className="px-2 py-0.5 rounded bg-cyan-50 dark:bg-cyan-950/80 text-cyan-900 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-700 text-[10px] font-bold">E2</span>
@@ -4602,16 +4871,16 @@ export default function DigitalSOTAPage() {
                       <td className="py-3 px-3 text-center text-blue-700 dark:text-blue-400 font-bold">39.7 μs</td>
                       <td className="py-3 px-3 text-center text-slate-600 dark:text-slate-400">262.0 μs</td>
                       <td className="py-3 px-3 text-center text-blue-700 dark:text-blue-400 font-bold">
-                        Code uses a different 4-factor formula; measured Phi_sym mean = 0.155, P50 = 0.097 (1,000 turns)
+                        {тр(lang, 'Code uses a different 4-factor formula; measured Phi_sym mean = 0.155, P50 = 0.097 (1,000 turns)')}
                       </td>
-                      <td className="py-3 px-3 text-right text-amber-700 dark:text-amber-400 font-semibold">🧪 Mathematical Proto</td>
+                      <td className="py-3 px-3 text-right text-amber-700 dark:text-amber-400 font-semibold">{тр(lang, '🧪 Mathematical Proto')}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
               <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/50 border border-slate-200 dark:border-gray-800 text-[11px] font-mono text-slate-600 dark:text-slate-400 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                <span>Scientific validation status: internal benchmark; physical RAPL/wattmeter hardware telemetry on roadmap</span>
+                <span>{тр(lang, 'Scientific validation status: internal benchmark; physical RAPL/wattmeter hardware telemetry on roadmap')}</span>
                 <span className="text-cyan-800 dark:text-cyan-400">Artifact: <code>benchmark_results_tech_06_10.json</code> &middot; <code>test_suite_tech_06_10.py</code></span>
               </div>
             </div>
@@ -4625,7 +4894,7 @@ export default function DigitalSOTAPage() {
           <div className="text-center space-y-3">
             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-cyan-900 dark:text-[#00F0FF]">
               <Compass className="w-4 h-4" />
-              FLYWIRE V783 CONNECTOME STACK
+              {тр(lang, 'FLYWIRE V783 CONNECTOME STACK')}
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               {t.techCatalogTitle}
@@ -4646,17 +4915,17 @@ export default function DigitalSOTAPage() {
                   </h3>
                 </div>
                 <span className="text-xs font-mono text-emerald-800 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1.5 rounded-lg border border-emerald-200 dark:border-emerald-800/60 shrink-0 self-start sm:self-auto font-semibold">
-                  🟢 Production Core Internally Benchmarked
+                  {тр(lang, '🟢 Production Core Internally Benchmarked')}
                 </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 {[
-                  { num: 1, name: 'FlyHash LSH', tag: '≈44 ms CPU (50K)', desc: '6-claw sparse projection PN → KC & 30% k-WTA inhibition (efficiency-tuned, not biological 5%)' },
-                  { num: 2, name: 'APL Inhibition', tag: 'Entropic Control', desc: 'Global negative feedback preventing attention saturation' },
-                  { num: 3, name: 'CANN Attractor', tag: 'Phase Memory', desc: 'Zero-drift continuous ring attractor for working memory' },
-                  { num: 4, name: 'Lock-Free Index', tag: 'Single-thread (not yet tested at scale)', desc: 'Atomic lock-free concurrent LSH index design; multi-thread scaling not measured yet' },
-                  { num: 5, name: 'Bio-Quantization', tag: 'd=6 (fly value)', desc: 'Fly value d=6; on our sweep d=7 and d=16 give higher recall (results/dendritic_sweep.json)' }
+                  { num: 1, name: 'FlyHash LSH', tag: тр(lang, '≈44 ms CPU (50K)'), desc: тр(lang, '6-claw sparse projection PN → KC & 30% k-WTA inhibition (efficiency-tuned, not biological 5%)') },
+                  { num: 2, name: тр(lang, 'APL Inhibition'), tag: тр(lang, 'Entropic Control'), desc: тр(lang, 'Global negative feedback preventing attention saturation') },
+                  { num: 3, name: тр(lang, 'CANN Attractor'), tag: тр(lang, 'Phase Memory'), desc: тр(lang, 'Zero-drift continuous ring attractor for working memory') },
+                  { num: 4, name: тр(lang, 'Lock-Free Index'), tag: тр(lang, 'Single-thread (not yet tested at scale)'), desc: тр(lang, 'Atomic lock-free concurrent LSH index design; multi-thread scaling not measured yet') },
+                  { num: 5, name: тр(lang, 'Bio-Quantization'), tag: тр(lang, 'd=6 (fly value)'), desc: тр(lang, 'Fly value d=6; on our sweep d=7 and d=16 give higher recall (results/dendritic_sweep.json)') }
                 ].map((item) => (
                   <div key={item.num} className="bg-slate-50 dark:bg-black/60 border border-slate-200 dark:border-cyan-500/20 rounded-2xl p-4 space-y-2 hover:border-[#00F0FF]/50 transition-all shadow-sm dark:shadow-none">
                     <div className="flex items-center justify-between">
