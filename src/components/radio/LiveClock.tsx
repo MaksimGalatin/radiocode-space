@@ -6,6 +6,9 @@ import { useRadioT } from '@/lib/radioI18n';
 
 export function LiveClock() {
   const rt = useRadioT();
+  // 30.09.2026: время на сервере и в браузере законно разное — React падал с #418 (расхождение текста
+  // при гидратации) на ВСЕХ страницах радио. suppressHydrationWarning на элементах со временем:
+  // часы досчитываются в браузере, ошибки нет. Замер до: 2–3 ошибки #418 на каждой странице.
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -48,7 +51,7 @@ export function LiveClock() {
 
       {/* Time display */}
       <div className="font-mono text-lg sm:text-xl leading-none flex items-baseline">
-        <span
+        <span suppressHydrationWarning
           className="tabular-nums"
           style={{
             color: '#E8E8ED',
@@ -58,7 +61,7 @@ export function LiveClock() {
           {hours}
         </span>
         <ColonBlink />
-        <span
+        <span suppressHydrationWarning
           className="tabular-nums"
           style={{
             color: '#E8E8ED',
@@ -68,7 +71,7 @@ export function LiveClock() {
           {minutes}
         </span>
         <ColonBlink />
-        <span
+        <span suppressHydrationWarning
           className="tabular-nums text-xs sm:text-xs"
           style={{
             color: '#8B8BA8',
@@ -79,7 +82,7 @@ export function LiveClock() {
       </div>
 
       {/* Date */}
-      <span
+      <span suppressHydrationWarning
         className="font-mono text-xs leading-none mt-1 tabular-nums"
         style={{ color: '#7E7E99' }}
       >

@@ -106,10 +106,14 @@ const calculatorTranslations = {
 
 type Jurisdiction = 'ada' | 'gdpr' | 'ccpa' | 'rf' | 'global';
 
+const ЛОКАЛЬ_ЧИСЕЛ: Record<string, string> = { ru: 'ru-RU', en: 'en-US', es: 'es-ES', zh: 'zh-CN' };
+
 export default function RiskCalculator() {
   const _ctx = useLanguageOptional();
   const locale = _ctx?.locale ?? 'en';
   const t = calculatorTranslations[locale] || calculatorTranslations.en;
+  // 30.09.2026: toLocaleString() без локали — сервер «25,000», браузер на русском «25 000»: ошибка гидратации #418.
+  // Локаль числа — по языку страницы, одинаково на сервере и в браузере.
 
   const [traffic, setTraffic] = useState<number>(25000);
   const [jurisdiction, setJurisdiction] = useState<Jurisdiction>('ada');
@@ -163,11 +167,11 @@ export default function RiskCalculator() {
     let maxFine: string;
     let fineNote: string;
     if (jurisdiction === 'gdpr' || jurisdiction === 'global') {
-      maxFine = `€${GDPR_МЕДИАНА.toLocaleString()}`;
+      maxFine = `€${GDPR_МЕДИАНА.toLocaleString(ЛОКАЛЬ_ЧИСЕЛ[locale] ?? 'en-US')}`;
       fineNote = t.fineNoteGdpr
-        .replace('{median}', GDPR_МЕДИАНА.toLocaleString())
-        .replace('{p75}', GDPR_ТРИ_ЧЕТВЕРТИ.toLocaleString())
-        .replace('{cases}', GDPR_ДЕЛ.toLocaleString());
+        .replace('{median}', GDPR_МЕДИАНА.toLocaleString(ЛОКАЛЬ_ЧИСЕЛ[locale] ?? 'en-US'))
+        .replace('{p75}', GDPR_ТРИ_ЧЕТВЕРТИ.toLocaleString(ЛОКАЛЬ_ЧИСЕЛ[locale] ?? 'en-US'))
+        .replace('{cases}', GDPR_ДЕЛ.toLocaleString(ЛОКАЛЬ_ЧИСЕЛ[locale] ?? 'en-US'));
     } else {
       maxFine = '—';
       fineNote = t.fineNoteNoRegistry;
@@ -231,7 +235,7 @@ export default function RiskCalculator() {
             <div className="space-y-2.5 text-left">
               <div className="flex justify-between items-center text-xs">
                 <span className="text-gray-400 font-semibold">{t.trafficLabel}</span>
-                <span className="font-mono font-bold text-cyan-400">{traffic.toLocaleString()}</span>
+                <span className="font-mono font-bold text-cyan-400">{traffic.toLocaleString(ЛОКАЛЬ_ЧИСЕЛ[locale] ?? 'en-US')}</span>
               </div>
               {/*
                 🔴 ЭТОТ ПОЛЗУНОК БЫЛ БЕЗ МЕТКИ — И ЕГО НАШЁЛ НАШ ЖЕ ОРАКУЛ.
@@ -255,7 +259,7 @@ export default function RiskCalculator() {
                 value={traffic}
                 onChange={(e) => setTraffic(parseInt(e.target.value))}
                 aria-label={t.trafficLabel}
-                aria-valuetext={`${traffic.toLocaleString()}`}
+                aria-valuetext={`${traffic.toLocaleString(ЛОКАЛЬ_ЧИСЕЛ[locale] ?? 'en-US')}`}
                 className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-cyan-500"
               />
               {/*
