@@ -257,6 +257,11 @@ export async function indexMessages(
     // Сначала — какие реплики уже лежат в индексе: за них вектор НЕ считаем (01.10.2026). Раньше
     // повтор отбрасывался только при записи, то есть после оплаты.
     const уже = await ужеВИндексе(userKey, messages.map((m) => hashMessage(m.role, (m.content || '').trim())));
+    // Live turns carry no timestamp; stamp them NOW so the recency view
+    // ("what did we say last / on site X") — which requires msg_ts — sees them.
+    // 01.10.2026: эта строка была только на центральном; здесь живые реплики ложились с msg_ts NULL
+    // и выпадали из ленты «недавнее» (замер: aifa.works 109 из 446, radiocode.space 76 из 76 за 30 суток).
+    const nowIso = new Date().toISOString();
     const rows: MemoryRow[] = [];
     for (const m of messages) {
       const content = (m.content || '').trim();
@@ -278,7 +283,7 @@ export async function indexMessages(
         speaker: m.speaker ?? null,
         content,
         contentHash,
-        msgTs: tsToIso(m.timestamp),
+        msgTs: tsToIso(m.timestamp) || nowIso,
         source,
         embedding,
       });
