@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
+import { getFreshSessionEmail } from '@/lib/user-auth';
 import { getPool } from '@/lib/economy';
 import { validateNickname, nicknameErrorMessage } from '@/lib/nickname';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 
-  const email = (await сессияДействительна(req) || '').trim().toLowerCase();
+  const email = (await getFreshSessionEmail(req) || '').trim().toLowerCase();
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   let nickname = '';
@@ -39,6 +39,24 @@ export async function POST(req: NextRequest) {
     );
   }
   const nick = check.nickname;
+
+  // Таблица users_auth живёт в ДВУХ базах: кабинета (SUBMISSIONS_DB_URL) и входа (DATABASE_URL_VECTOR).
+  // Регистрация пишет в обе (lib/db.ts, dbSaveUser на центральном). Здесь — то же для ника (30.09.2026):
+  // раньше смена ника на всех четырёх сайтах писала только в базу кабинета.
+  const адресБазыВхода = process.env.DATABASE_URL_VECTOR || process.env.VECTOR_DATABASE_URL || '';
+
+  // Ник, закреплённый навсегда за другим человеком, занят даже если его учётной записи больше нет: имя
+  // стоит в паспорте, а паспорт в блокчейне. Запрос тот же, что никЗанятНавсегда в lib/db.ts центрального.
+  if (адресБазыВхода) {
+    try {
+      const { neon } = await import('@neondatabase/serverless');
+      const r = await neon(адресБазыВхода)`SELECT email FROM nicknames_reserved WHERE nickname_lower = ${nick.toLowerCase()}`;
+      const строка = (r as Array<{ email?: string }>)[0];
+      if (строка && String(строка.email).toLowerCase() !== email) {
+        return NextResponse.json({ error: nicknameErrorMessage('taken', locale), code: 'taken' }, { status: 409 });
+      }
+    } catch { /* таблицы ещё нет — значит никто не закреплён */ }
+  }
 
   try {
     const pool = await getPool();
@@ -81,6 +99,16 @@ export async function POST(req: NextRequest) {
          ON CONFLICT (email) DO UPDATE SET nickname = EXCLUDED.nickname`,
         [email, nick]
       );
+      // И то же в базу ВХОДА. Неудача здесь не отменяет смену ника (кабинет записан), но идёт в журнал.
+      if (адресБазыВхода) {
+        try {
+          const { neon } = await import('@neondatabase/serverless');
+          await neon(адресБазыВхода)`INSERT INTO users_auth (email, nickname, role) VALUES (${email}, ${nick}, 'user')
+            ON CONFLICT (email) DO UPDATE SET nickname = EXCLUDED.nickname`;
+        } catch (e) {
+          console.error('[account/nickname] ник записан в кабинет, но НЕ в базу входа:', String(e).slice(0, 200));
+        }
+      }
       return NextResponse.json({ success: true, nickname: nick });
     } finally {
       await pool.end().catch(() => {});
