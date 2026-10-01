@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
+import { getFreshSessionEmail } from '@/lib/user-auth';
 import { getOrCreateUserKey, encryptForUser } from '@/lib/user-key';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
@@ -24,10 +24,11 @@ const MAX_BYTES = 600_000;
 // the server re-encrypts it with the user's managed key and stores it, so from
 // now on it reads with no wallet/password. Session-scoped.
 export async function POST(req: NextRequest) {
-  const email = await сессияДействительна(req);
+  const email = await getFreshSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
-  // у каждого экземпляра свой.
+  // Счёт в базе, а не в памяти процесса: счётчик в памяти обнуляется при
+  // каждой выкладке и у каждого экземпляра свой, поэтому объявленный
+  // предел на деле мягче во столько раз, сколько экземпляров поднято.
   const адрес_memimport = clientIp(req as never);
   if (адрес_memimport !== 'unknown' && !(await dbRateLimit(`memimport:${адрес_memimport}`, 20, 60_000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
   let b: any = {}; try { b = await req.json(); } catch {}

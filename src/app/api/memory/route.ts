@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
+import { getFreshSessionEmail } from '@/lib/user-auth';
 import { readFullTranscript, readAllChannels, ensureChunkTable } from '@/lib/memory-archive';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Слишком много запросов. Подождите немного.' }, { status: 429 });
   }
 
-  const email = await сессияДействительна(req);
+  const email = await getFreshSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   const url = process.env.SUBMISSIONS_DB_URL;
   if (!url) return NextResponse.json({ error: 'no_db' }, { status: 500 });
