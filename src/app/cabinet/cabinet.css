@@ -32,7 +32,7 @@
   .cab-btn-ghost:hover:not(:disabled) { color: #E8E8F0; border-color: rgba(34,211,238,0.4); }
   .cab-input { width:100%; background:#13131C; border:1px solid #2A2A3A; border-radius:10px; padding:11px 14px; color:#E8E8F0; font-size:14px; outline:none; box-sizing:border-box; transition: border-color .15s ease, box-shadow .15s ease; }
   .cab-input:focus { border-color: rgba(34,211,238,0.6); box-shadow: 0 0 0 3px rgba(34,211,238,0.12); }
-  .cab-input::placeholder { color:#4B4B5E; }
+  .cab-input::placeholder { color:#8a8aa3; } /* 30.09: было #4B4B5E — 2,17 на #13131C */
   .cab-tab { padding:10px 15px; border-radius:10px; border:1px solid transparent; background:transparent; color:#8B8B9E; font-size:14px; font-weight:600; cursor:pointer; transition: all .18s ease; white-space:nowrap; }
   .cab-tab:hover { color:#E8E8F0; }
   .cab-tab[aria-selected="true"] { border-color: rgba(124,58,237,0.5); background: rgba(124,58,237,0.12); color:#E8E8F0; }
@@ -81,7 +81,7 @@
   html:not(.dark) .cab-card { background: rgba(255,255,255,0.82); border: 1px solid rgba(20,20,45,0.13); box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 22px rgba(20,20,60,0.08); }
   html:not(.dark) .cab-card-hover:hover { border-color: rgba(6,182,212,0.5); box-shadow: 0 10px 44px rgba(6,182,212,0.14); }
   html:not(.dark) .cab-input { background:#ffffff; border:1px solid rgba(20,20,45,0.20); color:#1b1b2b; }
-  html:not(.dark) .cab-input::placeholder { color:#9a9ab0; }
+  html:not(.dark) .cab-input::placeholder { color:#5f5f76; } /* 30.09: было #9a9ab0 — 2,75 на белом */
   html:not(.dark) .cab-btn-ghost { border:1px solid rgba(20,20,45,0.20); color:#4f4f66; }
   html:not(.dark) .cab-btn-ghost:hover:not(:disabled) { color:#1b1b2b; border-color: rgba(6,182,212,0.5); }
   html:not(.dark) .cab-tab { color:#4f4f66; }

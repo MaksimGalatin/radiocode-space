@@ -98,9 +98,9 @@ export default function AnchorCard() {
                         </span>
                       )}
                       {э.вид === "запись" && (
-                        <a href={`https://arweave.net/${э.ссылка}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, color: TOKENS.mut }}>Arweave ↗</a>
+                        <a href={`https://arweave.net/${э.ссылка}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, color: TOKENS.mut, display: "inline-flex", alignItems: "center", minHeight: 24 }}>Arweave ↗</a>
                       )}
-                      <a href={обозреватель(э)} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, color: TOKENS.mut }}>Solana ↗</a>
+                      <a href={обозреватель(э)} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, color: TOKENS.mut, display: "inline-flex", alignItems: "center", minHeight: 24 }}>Solana ↗</a>
                     </span>
                   </div>
                 );
