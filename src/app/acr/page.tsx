@@ -1669,6 +1669,51 @@ const ABLATION_ROWS = [
   { cfg: 'Full ACR (fixed CX) + bilateral verifier', noise: '35%', recall: '93.6% ± 4.1', dom: '6.07', drift: '54.1%', fpr: '0.000', lat: '0.680 ms' },
 ];
 
+// 30.09.2026: подписи строк таблицы абляций и заголовок опорного субстрата шли по-английски на /ru, /es, /zh
+// (перебор английский_на_чужих.mjs). Порядок — как в ABLATION_ROWS; числа строк не менялись.
+const ПОДПИСИ_СТРОК: Record<string, string[]> = {
+  ru: [
+    'Наивный агент (цель выпадает из окна в 4 сообщения)',
+    'Обычный агент, цель закреплена (как в системном промпте)',
+    '+ только фильтр новизны APL',
+    '+ только кольцо фокуса CANN',
+    '+ APL + CANN',
+    '+ APL + CANN + CX (как в поставке aifa_sdk)',
+    'Обычный агент + только память посещённых ссылок',
+    '+ APL + CANN + CX исправленный (отталкивание от посещённых ссылок)',
+    'Полный ACR (исправленный CX) + двусторонний верификатор',
+  ],
+  es: [
+    'Agente ingenuo (el objetivo sale de una ventana de 4 mensajes)',
+    'Agente estándar, objetivo fijado (estilo system prompt)',
+    '+ solo filtro de novedad APL',
+    '+ solo anillo de foco CANN',
+    '+ APL + CANN',
+    '+ APL + CANN + CX (tal como se distribuye en aifa_sdk)',
+    'Agente estándar + solo memoria de enlaces visitados',
+    '+ APL + CANN + CX corregido (repulsión de enlaces visitados)',
+    'ACR completo (CX corregido) + verificador bilateral',
+  ],
+  zh: [
+    '朴素智能体（目标掉出 4 条消息的窗口）',
+    '标准智能体，目标固定（系统提示词方式）',
+    '+ 仅 APL 新奇性门控',
+    '+ 仅 CANN 焦点环',
+    '+ APL + CANN',
+    '+ APL + CANN + CX（aifa_sdk 发布版本）',
+    '标准智能体 + 仅已访问链接记忆',
+    '+ APL + CANN + CX 修正版（排斥已访问链接）',
+    '完整 ACR（修正版 CX）+ 双侧验证器',
+  ],
+};
+const ЗАГОЛОВОК_СУБСТРАТА: Record<string, string> = {
+  en: 'Reference Substrate: FlyWire FAFB v783 (139,255 neurons · 54.5M synapses)',
+  ru: 'Опорный субстрат: FlyWire FAFB v783 (139 255 нейронов · 54,5 млн синапсов)',
+  es: 'Sustrato de referencia: FlyWire FAFB v783 (139.255 neuronas · 54,5 M sinapsis)',
+  zh: '参考基底：FlyWire FAFB v783（139,255 个神经元 · 5450 万个突触）',
+};
+
+
 const TOP5_TECH: Record<Lang, any[]> = {
   "ru": [
     {
@@ -3820,7 +3865,7 @@ export default function ACRPage() {
               <div className="w-3 h-3 rounded-full bg-cyan-500 shrink-0 animate-pulse mt-0.5 sm:mt-0" />
               <div className="space-y-1">
                 <span className="font-bold text-slate-900 dark:text-white uppercase tracking-wider block">
-                  Reference Substrate: FlyWire FAFB v783 (139,255 neurons · 54.5M synapses)
+                  {ЗАГОЛОВОК_СУБСТРАТА[lang] ?? ЗАГОЛОВОК_СУБСТРАТА.en}
                 </span>
                 <p className="text-[11px] text-slate-600 dark:text-slate-400">
                   {t.referenceSubstrate || "Faithful Connectome Mode (topological integrity & SHA-256) · Distilled ACR Mode (CPU, Python/NumPy)."}
@@ -3858,7 +3903,7 @@ export default function ACRPage() {
                   >
                     <td className="py-3 px-4 font-sans flex items-center gap-2">
                       {idx === ABLATION_ROWS.length - 1 && <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse shrink-0" />}
-                      {row.cfg}
+                      {ПОДПИСИ_СТРОК[lang]?.[idx] ?? row.cfg}
                     </td>
                     <td className="py-3 px-3 text-center">{row.noise}</td>
                     <td className="py-3 px-3 text-center font-bold text-cyan-900 dark:text-[#00F0FF]">{row.recall}</td>
