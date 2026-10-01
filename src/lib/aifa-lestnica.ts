@@ -109,7 +109,9 @@ export async function лестницаAIfa(formattedMessages: Array<{ role: stri
       const response = await fetch("https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
-        body: JSON.stringify({ model, messages: formattedMessages, max_tokens: 8192, temperature: 0.8 }),
+        // 01.10.2026: было 8192. Модели 3.x тратят этот же предел на размышления, и длинный ответ
+        // обрывался на полуслове (замер на боте: 3 931 токен размышлений из 4 096). Канал бесплатный.
+        body: JSON.stringify({ model, messages: formattedMessages, max_tokens: 32768, temperature: 0.8 }),
         // 28.09.2026: без предела один ответ 503 Google держал около минуты, и пять таких
         // съели все 300 с функции — человек получил 504 и «произошла ошибка».
         signal: AbortSignal.timeout(ВЫЗОВ_GEMINI_МС),
@@ -117,6 +119,11 @@ export async function лестницаAIfa(formattedMessages: Array<{ role: stri
       if (response.ok) {
         const data = await response.json();
         const text = data.choices?.[0]?.message?.content;
+        // Оборванный по пределу длины ответ человеку не отдаём — следующая ступень (01.10.2026).
+        if (text && data.choices?.[0]?.finish_reason === 'length') {
+          console.warn(`[AI] ключ №${keyNo} · ${model}: ответ оборван по пределу длины — следующая ступень`);
+          return null;
+        }
         if (text) return text;
         /**
          * 🔴 ПУСТОЙ ОТВЕТ ПРИ КОДЕ 200 — САМЫЙ ЧАСТЫЙ ОТКАЗ, И ОН МОЛЧАЛ.

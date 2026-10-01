@@ -328,7 +328,7 @@ const U: Record<Lang, {
   open: string; openSample: string; badge: string; asks: string; gets: string; time: string; create: string;
   sample: string; sampleNote: string; noSample: string; close: string; loading: string; failed: string;
   langNote: (lg: string) => string; more: Record<string, string>; titles: Record<string, string>;
-  positions: string[]; listen: string;
+  positions: string[]; listen: string; pdf: string;
 }> = {
   ru: {
     open: 'Подробнее', openSample: 'Подробнее и образец', badge: 'Образец', asks: 'О чём спросит AIfa', gets: 'Что вы получите',
@@ -340,9 +340,10 @@ const U: Record<Lang, {
     more: {
       year: 'В полной выдаче — ещё 11 месяцев, у каждого своя иллюстрация, и 6 подробных разборов по сферам жизни.',
       chapter1: 'Это первая глава. Дальше — ещё девять: после каждой вы выбираете, что будет, а в конце приходит книга PDF со всеми главами и иллюстрациями.',
+      book: 'Это настоящая книга, которую AIfa собрала по пробной истории: десять глав, после каждой выбирали продолжение, к каждой — своя иллюстрация. Книга PDF приходит в конце истории.',
     },
-    titles: { lyrics: 'Текст песни', overview: 'Обзор года', month1: 'Первый месяц', chapter1: 'Глава 1' },
-    positions: ['Прошлое', 'Настоящее', 'Будущее'], listen: 'Слушать',
+    titles: { lyrics: 'Текст песни', overview: 'Обзор года', month1: 'Первый месяц', chapter1: 'Глава 1', song: 'Песня', poem: 'Стих', letter: 'Любовное письмо', astro: 'Астропрогноз', name: 'Тайны имени', tarot: 'Расклад Таро', voiceMsg: 'Голосовое', card: 'Живая музыкальная открытка', images: 'Иллюстрации', book: 'Книга целиком', stickers: 'Набор стикеров', daily: 'Прогноз на сегодня' },
+    positions: ['Прошлое', 'Настоящее', 'Будущее'], listen: 'Слушать', pdf: 'Открыть PDF',
   },
   en: {
     open: 'Details', openSample: 'Details and sample', badge: 'Sample', asks: 'What AIfa will ask', gets: 'What you get',
@@ -354,9 +355,10 @@ const U: Record<Lang, {
     more: {
       year: 'The full delivery has 11 more months, each with its own illustration, and 6 in-depth readings of the main areas of life.',
       chapter1: 'This is the first chapter. Nine more follow: after each one you choose what happens, and at the end you get a PDF book with every chapter and illustration.',
+      book: 'This is a real book AIfa put together from a test story: ten chapters, a choice of what happens after each one, and an illustration for every chapter. The PDF book arrives at the end of the story.',
     },
-    titles: { lyrics: 'Lyrics', overview: 'The year at a glance', month1: 'The first month', chapter1: 'Chapter 1' },
-    positions: ['Past', 'Present', 'Future'], listen: 'Listen',
+    titles: { lyrics: 'Lyrics', overview: 'The year at a glance', month1: 'The first month', chapter1: 'Chapter 1', song: 'Song', poem: 'Poem', letter: 'Love letter', astro: 'Astrology forecast', name: 'Secrets of the name', tarot: 'Tarot reading', voiceMsg: 'Voice message', card: 'Living music card', images: 'Illustrations', book: 'The whole book', stickers: 'Sticker pack', daily: 'Forecast for today' },
+    positions: ['Past', 'Present', 'Future'], listen: 'Listen', pdf: 'Open the PDF',
   },
   es: {
     open: 'Detalles', openSample: 'Detalles y muestra', badge: 'Muestra', asks: 'Qué te preguntará AIfa', gets: 'Qué recibirás',
@@ -368,9 +370,10 @@ const U: Record<Lang, {
     more: {
       year: 'La entrega completa tiene 11 meses más, cada uno con su ilustración, y 6 lecturas a fondo de las áreas principales de la vida.',
       chapter1: 'Este es el primer capítulo. Siguen nueve más: tras cada uno eliges qué pasa, y al final llega un libro PDF con todos los capítulos e ilustraciones.',
+      book: 'Es un libro real que AIfa armó a partir de una historia de prueba: diez capítulos, una elección de lo que pasa tras cada uno y una ilustración para cada capítulo. El libro PDF llega al final de la historia.',
     },
-    titles: { lyrics: 'Letra', overview: 'El año de un vistazo', month1: 'El primer mes', chapter1: 'Capítulo 1' },
-    positions: ['Pasado', 'Presente', 'Futuro'], listen: 'Escuchar',
+    titles: { lyrics: 'Letra', overview: 'El año de un vistazo', month1: 'El primer mes', chapter1: 'Capítulo 1', song: 'Canción', poem: 'Poema', letter: 'Carta de amor', astro: 'Pronóstico astrológico', name: 'Secretos del nombre', tarot: 'Lectura de tarot', voiceMsg: 'Mensaje de voz', card: 'Postal musical animada', images: 'Ilustraciones', book: 'El libro completo', stickers: 'Pack de stickers', daily: 'El pronóstico de hoy' },
+    positions: ['Pasado', 'Presente', 'Futuro'], listen: 'Escuchar', pdf: 'Abrir el PDF',
   },
   zh: {
     open: '详情', openSample: '详情与样例', badge: '样例', asks: 'AIfa 会问什么', gets: '你将得到',
@@ -382,22 +385,25 @@ const U: Record<Lang, {
     more: {
       year: '完整内容还包括另外 11 个月（每月配一幅插画）以及 6 篇人生主要领域的深入解读。',
       chapter1: '这是第一章。后面还有九章：每章结束后由你决定情节走向，最后会收到包含全部章节与插画的 PDF 书。',
+      book: '这是 AIfa 根据一次测试故事真实生成的书：十章，每章之后选择情节走向，每章配一幅插画。故事结束时会收到这本 PDF 书。',
     },
-    titles: { lyrics: '歌词', overview: '全年概览', month1: '第一个月', chapter1: '第一章' },
-    positions: ['过去', '现在', '未来'], listen: '收听',
+    titles: { lyrics: '歌词', overview: '全年概览', month1: '第一个月', chapter1: '第一章', song: '歌曲', poem: '诗歌', letter: '情书', astro: '星座运势', name: '名字的秘密', tarot: '塔罗牌解读', voiceMsg: '语音消息', card: '动态音乐贺卡', images: '插图', book: '完整的书', stickers: '贴纸包', daily: '今日运势' },
+    positions: ['过去', '现在', '未来'], listen: '收听', pdf: '打开 PDF',
   },
 };
 
 // ── Образец: формат public/creativity/samples/<id>.json ───────────────────────
 type T3 = Partial<Record<'ru' | 'en' | 'es', string>>;
-type Item =
-  | { k: 'text'; title?: string; t: T3 }
+type Item = { title?: string } & (
+  | { k: 'text'; t: T3 }
   | { k: 'image'; src: string }
   | { k: 'audio'; src: string; cover?: string }
   | { k: 'voice'; src: T3 }
   | { k: 'video'; src: string; poster?: string }
-  | { k: 'gallery'; items: string[] }
-  | { k: 'cards'; names: Partial<Record<'ru' | 'en' | 'es', string[]>> };
+  | { k: 'gallery'; items: string[]; square?: boolean }
+  | { k: 'cards'; names: Partial<Record<'ru' | 'en' | 'es', string[]>>; images?: string[] }
+  // 01.10.2026: PDF — книга сказки и детектива, PDF гороскопа и тайны имени; size — размер файла в МБ
+  | { k: 'pdf'; src: T3; size?: Partial<Record<'ru' | 'en' | 'es', number>>; cover?: string });
 interface SampleData { lang: string; more?: string; items: Item[] }
 
 /** Язык образца: язык страницы → английский → русский → испанский. */
@@ -435,14 +441,37 @@ function SampleView({ id, lang }: { id: string; lang: Lang }) {
       <p className="text-sm text-slate-600 dark:text-gray-400">{u.sampleNote}</p>
       {показанНа !== lang && <p className="text-sm text-slate-700 dark:text-gray-300 bg-cyan-500/10 border border-cyan-500/20 rounded-xl px-4 py-3">{u.langNote(показанНа)}</p>}
       {data.items.map((it, i) => {
+        const тело = частьОбразца(it, i, lang, u);
+        if (!тело) return null;
+        if (!it.title) return тело;
+        return (
+          <div key={i} className="space-y-2">
+            <h4 className="font-bold text-slate-900 dark:text-white">{u.titles[it.title] || it.title}</h4>
+            {тело}
+          </div>
+        );
+      })}
+      {data.more && u.more[data.more] && <p className="text-sm text-slate-600 dark:text-gray-400 italic">{u.more[data.more]}</p>}
+    </div>
+  );
+}
+
+/** Одна часть образца без заголовка (заголовок ставит SampleView). */
+function частьОбразца(it: Item, i: number, lang: Lang, u: (typeof U)[Lang]): React.ReactNode {
         if (it.k === 'text') {
           const [t] = выбрать(it.t, lang);
           if (!t) return null;
+          return <div key={i} className="whitespace-pre-line text-[15px] leading-relaxed text-slate-700 dark:text-gray-200 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-5">{t}</div>;
+        }
+        if (it.k === 'pdf') {
+          const [src, lg] = выбрать(it.src, lang);
+          if (!src) return null;
+          const мб = it.size?.[lg as 'ru' | 'en' | 'es'];
           return (
-            <div key={i} className="space-y-2">
-              {it.title && <h4 className="font-bold text-slate-900 dark:text-white">{u.titles[it.title] || it.title}</h4>}
-              <div className="whitespace-pre-line text-[15px] leading-relaxed text-slate-700 dark:text-gray-200 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-5">{t}</div>
-            </div>
+            <a key={i} href={src} target="_blank" rel="noopener" className="flex items-center gap-4 rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-4 text-slate-900 dark:text-white hover:bg-cyan-500/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500">
+              {it.cover && <img src={it.cover} alt="" loading="lazy" className="w-16 h-20 object-cover rounded-lg shrink-0" />}
+              <span className="font-semibold">📄 {u.pdf}{мб ? ` · ${мб} MB` : ''}</span>
+            </a>
           );
         }
         if (it.k === 'image') return <img key={i} src={it.src} alt="" loading="lazy" className="w-full rounded-2xl border border-slate-200 dark:border-white/10" />;
@@ -461,7 +490,7 @@ function SampleView({ id, lang }: { id: string; lang: Lang }) {
         );
         if (it.k === 'gallery') return (
           <ul key={i} className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-            {it.items.map((s) => <li key={s}><img src={s} alt="" loading="lazy" className="w-full aspect-video object-cover rounded-lg" /></li>)}
+            {it.items.map((s) => <li key={s}><img src={s} alt="" loading="lazy" className={it.square ? 'w-full aspect-square object-contain rounded-lg bg-slate-50 dark:bg-white/5' : 'w-full aspect-video object-cover rounded-lg'} /></li>)}
           </ul>
         );
         if (it.k === 'cards') {
@@ -470,6 +499,7 @@ function SampleView({ id, lang }: { id: string; lang: Lang }) {
             <ol key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {(names || []).map((n, j) => (
                 <li key={n} className="rounded-2xl border border-purple-500/30 bg-purple-500/10 p-4 text-center">
+                  {it.images?.[j] && <img src={it.images[j]} alt="" loading="lazy" className="w-full max-w-[220px] mx-auto mb-3 rounded-xl" />}
                   <div className="text-sm text-slate-600 dark:text-gray-400">{u.positions[j]}</div>
                   <div className="font-bold text-slate-900 dark:text-white">🃏 {n}</div>
                 </li>
@@ -478,10 +508,6 @@ function SampleView({ id, lang }: { id: string; lang: Lang }) {
           );
         }
         return null;
-      })}
-      {data.more && u.more[data.more] && <p className="text-sm text-slate-600 dark:text-gray-400 italic">{u.more[data.more]}</p>}
-    </div>
-  );
 }
 
 function ServiceDialog({ s, lang, onClose }: { s: Service; lang: Lang; onClose: () => void }) {
