@@ -4647,7 +4647,7 @@ export default function DigitalSOTAPage() {
                     'python bench/acr_agent_real_benchmark.py --seeds 30 --distractor-rate 0.35',
                     'python bench/robustness_real.py --seeds 5 --bits 512 --pool 50',
                     'python bench/connectome_real_metrics.py'].map((c) => (
-                    <div key={c} className="bg-slate-50 dark:bg-black/90 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700">{c}</div>
+                    <div key={c} className="bg-slate-50 dark:bg-black/90 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 [overflow-wrap:anywhere]">{c}</div>
                   ))}
                 </div>
               </div>
