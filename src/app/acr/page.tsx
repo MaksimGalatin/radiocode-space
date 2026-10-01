@@ -3274,7 +3274,7 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "competitors": "El detector es órdenes de magnitud más barato de lo declarado: 0,0021 μs por detector frente a 0,28 μs. La evasión de trampas para bots y captchas no se ha probado.",
       "limitations": "Un ráster 2D de tamaño fijo; se pasó por alto uno de cada cinco parpadeos en banda: hay que ajustar el umbral.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "0.002 us pure detector (claimed 0.28 us for full system) — measured 21.09.2026"
+      "metric": "0,002 µs solo el detector (se declararon 0,28 µs para el sistema completo) — medido el 21.09.2026"
     },
     {
       "num": 26,
@@ -3300,7 +3300,7 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "competitors": "La suma de pesos se mantiene exactamente en el objetivo en cualquier número de pasos; sin el mecanismo crece 1.300 veces. No se ha comparado con la limpieza de bases vectoriales.",
       "limitations": "Hay que ajustar la poda para que no afecte a los enlaces en uso; el decaimiento es solo temporal, sin tener en cuenta la importancia.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "9.8 us (claimed 6.59 us, same order of magnitude) — measured 21.09.2026"
+      "metric": "9,8 µs (se declararon 6,59 µs; mismo orden de magnitud) — medido el 21.09.2026"
     },
     {
       "num": 28,
@@ -3339,7 +3339,7 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "competitors": "Sin distracciones la deriva es casi nula (0,01°), con distracciones fuertes, de 73–94°; el anterior «Focus Drift = 0,000» solo es cierto en el primer caso. Latencia de 15,1 μs por paso (P50, 64 neuronas).",
       "limitations": "Un anillo por tema; la robustez ante distracciones exige reajustar la inhibición.",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "15.1 us (claimed 9.33 us, same order of magnitude) — measured 21.09.2026"
+      "metric": "15,1 µs (se declararon 9,33 µs; mismo orden de magnitud) — medido el 21.09.2026"
     }
   ],
   "zh": [
@@ -3666,7 +3666,7 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "competitors": "检测器比宣称的便宜几个数量级：每个检测器 0.0021 微秒，宣称 0.28 微秒。绕过机器人陷阱和验证码尚未测试。",
       "limitations": "固定尺寸的二维栅格；频段内五次闪烁漏检一次——阈值需要调整。",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "0.002 us pure detector (claimed 0.28 us for full system) — measured 21.09.2026"
+      "metric": "纯检测器 0.002 微秒（整套系统声称 0.28 微秒）——2026-09-21 实测"
     },
     {
       "num": 26,
@@ -3692,7 +3692,7 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "competitors": "无论多少步，权重和都精确保持在目标值；没有该机制时会增长 1,300 倍。尚未与向量数据库清理做对比。",
       "limitations": "需要调整修剪，使其不波及正在使用的连接；衰减只按时间，不考虑重要性。",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "9.8 us (claimed 6.59 us, same order of magnitude) — measured 21.09.2026"
+      "metric": "9.8 微秒（声称 6.59 微秒，同一数量级）——2026-09-21 实测"
     },
     {
       "num": 28,
@@ -3731,7 +3731,7 @@ const ALL_30_INNOVATIONS: Record<Lang, any[]> = {
       "competitors": "无干扰时漂移几乎为零（0.01°），强干扰下为 73–94°；此前的“Focus Drift = 0.000”只在前一种情况下成立。每步延迟 15.1 微秒（P50，64 个神经元）。",
       "limitations": "每个主题一个环；要抵御干扰需要重新调整抑制参数。",
       "benchmarksLink": "/digital#benchmarks",
-      "metric": "15.1 us (claimed 9.33 us, same order of magnitude) — measured 21.09.2026"
+      "metric": "15.1 微秒（声称 9.33 微秒，同一数量级）——2026-09-21 实测"
     }
   ]
 };
