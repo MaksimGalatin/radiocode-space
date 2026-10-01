@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { stations } from '@/lib/stations';
 import { readableAccent } from '@/lib/readableAccent';
 import { перевестиМетаданные } from '@/lib/meta-i18n';
+import { STATION_I18N } from '@/lib/station-i18n';
 
 const SITE = 'https://radiocode.space';
 
@@ -91,7 +92,63 @@ function formatDuration(seconds?: number): string {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
-export default function MusicPage() {
+/**
+ * Видимый текст страницы на четырёх языках (01.10.2026).
+ *
+ * Было: всё по-английски на /ru/music, /es/music и /zh/music — 65 английских
+ * фраз на каждой (прогон переводов по sitemap 01.10). Названия песен не
+ * переводятся — это названия; разметка для поисковиков тоже остаётся как есть.
+ * Описания и жанры станций — из общего словаря ./station-i18n.
+ */
+type Яз = 'en' | 'ru' | 'es' | 'zh';
+
+/** Русское множественное число: 1 трек, 2 трека, 5 треков, 11 треков, 21 трек. */
+function мн(n: number, формы: [string, string, string]): string {
+  const a = n % 10, b = n % 100;
+  if (a === 1 && b !== 11) return формы[0];
+  if (a >= 2 && a <= 4 && (b < 12 || b > 14)) return формы[1];
+  return формы[2];
+}
+
+const ТЕКСТ = {
+  всяМузыка: { en: 'All music', ru: 'Вся музыка', es: 'Toda la música', zh: '全部音乐' },
+  каталог: { en: 'Full catalogue', ru: 'Полный каталог', es: 'Catálogo completo', zh: '完整曲库' },
+  заголовок: {
+    en: (n: number) => `${n} original tracks`,
+    ru: (n: number) => `${n} ${мн(n, ['оригинальный трек', 'оригинальных трека', 'оригинальных треков'])}`,
+    es: (n: number) => `${n} pistas originales`,
+    zh: (n: number) => `${n} 首原创曲目`,
+  },
+  вступление: {
+    en: (n: number) => `Everything playing on RadioCode.Space, across ${n} stations. Written by a human and an artificial intelligence together — nothing licensed, nothing borrowed. Free to listen, no advertising and no sign-up.`,
+    ru: (n: number) => `Всё, что звучит на RadioCode.Space, — ${n} ${мн(n, ['станция', 'станции', 'станций'])}. Написано человеком и искусственным интеллектом вместе: ничего не лицензировано и ничего не заимствовано. Слушать бесплатно, без рекламы и без регистрации.`,
+    es: (n: number) => `Todo lo que suena en RadioCode.Space, en ${n} estaciones. Escrito por un ser humano y una inteligencia artificial juntos: nada licenciado, nada prestado. Gratis, sin publicidad y sin registro.`,
+    zh: (n: number) => `RadioCode.Space 上播放的全部内容，共 ${n} 个电台。由人类与人工智能共同创作——没有任何授权内容，也没有任何借用。免费收听，无广告，无需注册。`,
+  },
+  треки: { en: 'Tracks', ru: 'Треки', es: 'Pistas', zh: '曲目' },
+  станции: { en: 'Stations', ru: 'Станции', es: 'Estaciones', zh: '电台' },
+  длительность: { en: 'Runtime', ru: 'Длительность', es: 'Duración', zh: '总时长' },
+  часов: { en: (h: number) => `≈ ${h} h`, ru: (h: number) => `≈ ${h} ч`, es: (h: number) => `≈ ${h} h`, zh: (h: number) => `≈ ${h} 小时` },
+  трековУСтанции: {
+    en: (n: number) => `${n} tracks`,
+    ru: (n: number) => `${n} ${мн(n, ['трек', 'трека', 'треков'])}`,
+    es: (n: number) => `${n} pistas`,
+    zh: (n: number) => `${n} 首曲目`,
+  },
+  подвал: {
+    en: 'All recordings are original work by AIfa & DJ Galatin. Nothing here is licensed from anyone, which is why listening costs nothing.',
+    ru: 'Все записи — оригинальные работы AIfa & DJ Galatin. Здесь нет ничего, взятого по лицензии у других, поэтому слушать бесплатно.',
+    es: 'Todas las grabaciones son obra original de AIfa & DJ Galatin. Nada de esto tiene licencia de terceros, por eso escuchar no cuesta nada.',
+    zh: '所有录音均为 AIfa & DJ Galatin 的原创作品。这里没有任何来自他人的授权内容，因此收听完全免费。',
+  },
+  назад: { en: 'Back to the radio', ru: 'Вернуться к радио', es: 'Volver a la radio', zh: '返回电台' },
+};
+
+export default async function MusicPage() {
+  const { headers } = await import('next/headers');
+  const сырой = (await headers()).get('x-locale') || 'en';
+  const яз: Яз = (ЯЗЫКИ_СТР.includes(сырой) ? сырой : 'en') as Яз;
+
   const total = stations.reduce((n, s) => n + s.tracks.length, 0);
   const totalSeconds = stations.reduce(
     (sum, s) => sum + s.tracks.reduce((n, t) => n + (t.duration || 0), 0),
@@ -132,7 +189,7 @@ export default function MusicPage() {
             RadioCode.Space
           </Link>
           <span className="mx-2">/</span>
-          <span className="text-white/80">All music</span>
+          <span className="text-white/80">{ТЕКСТ.всяМузыка[яз]}</span>
         </nav>
 
         <header className="rounded-2xl border border-white/8 p-6 sm:p-8">
@@ -141,30 +198,28 @@ export default function MusicPage() {
               «почти нормально» и потому годами не замечается.
               text-white/60 даёт 7.33. */}
           <p className="text-[13px] font-semibold uppercase tracking-[0.2em] text-white/60">
-            Full catalogue
+            {ТЕКСТ.каталог[яз]}
           </p>
           <h1 className="mt-3 text-3xl font-bold sm:text-4xl">
-            {total} original tracks
+            {ТЕКСТ.заголовок[яз](total)}
           </h1>
           <p className="mt-4 max-w-2xl text-white/70">
-            Everything playing on RadioCode.Space, across {stations.length} stations.
-            Written by a human and an artificial intelligence together — nothing
-            licensed, nothing borrowed. Free to listen, no advertising and no sign-up.
+            {ТЕКСТ.вступление[яз](stations.length)}
           </p>
 
           <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-sm">
             <div>
-              <dt className="text-white/60">Tracks</dt>
+              <dt className="text-white/60">{ТЕКСТ.треки[яз]}</dt>
               <dd className="text-lg font-semibold">{total}</dd>
             </div>
             <div>
-              <dt className="text-white/60">Stations</dt>
+              <dt className="text-white/60">{ТЕКСТ.станции[яз]}</dt>
               <dd className="text-lg font-semibold">{stations.length}</dd>
             </div>
             {hours > 0 && (
               <div>
-                <dt className="text-white/60">Runtime</dt>
-                <dd className="text-lg font-semibold">≈ {hours} h</dd>
+                <dt className="text-white/60">{ТЕКСТ.длительность[яз]}</dt>
+                <dd className="text-lg font-semibold">{ТЕКСТ.часов[яз](hours)}</dd>
               </div>
             )}
           </dl>
@@ -181,7 +236,7 @@ export default function MusicPage() {
                   className="text-[13px] font-semibold uppercase tracking-[0.15em]"
                   style={{ color: readableAccent(station.color) }}
                 >
-                  {station.genre}
+                  {STATION_I18N[station.id]?.genre[яз] ?? station.genre}
                 </p>
                 <h2 className="mt-1.5 text-xl font-semibold">
                   <Link
@@ -193,10 +248,12 @@ export default function MusicPage() {
                   </Link>
                 </h2>
               </div>
-              <p className="text-sm text-white/60">{station.tracks.length} tracks</p>
+              <p className="text-sm text-white/60">{ТЕКСТ.трековУСтанции[яз](station.tracks.length)}</p>
             </div>
 
-            <p className="mt-2 max-w-2xl text-sm text-white/60">{station.description}</p>
+            <p className="mt-2 max-w-2xl text-sm text-white/60">
+              {STATION_I18N[station.id]?.description[яз] ?? station.description}
+            </p>
 
             <ol className="mt-4 divide-y divide-white/5 overflow-hidden rounded-xl border border-white/5">
               {station.tracks.map((track, i) => (
@@ -216,10 +273,9 @@ export default function MusicPage() {
         ))}
 
         <p className="mt-12 text-sm text-white/60">
-          All recordings are original work by AIfa &amp; DJ Galatin. Nothing here is
-          licensed from anyone, which is why listening costs nothing.{' '}
+          {ТЕКСТ.подвал[яз]}{' '}
           <Link href="/" className="text-white/70 hover:text-white">
-            Back to the radio
+            {ТЕКСТ.назад[яз]}
           </Link>
           .
         </p>

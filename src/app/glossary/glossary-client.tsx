@@ -1308,7 +1308,14 @@ export default function GlossaryPage() {
       </div>
 
       <footer className="border-t border-gray-900 py-8 text-center text-xs text-gray-500">
-        CODE Eternal · All 71 canonical terms verified · Author: Maksim Valentinovich Galatin
+        {/* 01.10.2026: подпись была по-английски на всех языках (прогон переводов по sitemap). */}
+        {lang === 'ru'
+          ? 'CODE Eternal · 71 канонический термин, все проверены · Автор: Максим Валентинович Галатин'
+          : lang === 'es'
+            ? 'CODE Eternal · 71 términos canónicos, todos verificados · Autor: Maksim Valentinovich Galatin'
+            : lang === 'zh'
+              ? 'CODE Eternal · 全部 71 个核心术语均已核实 · 作者：Maksim Valentinovich Galatin'
+              : 'CODE Eternal · All 71 canonical terms verified · Author: Maksim Valentinovich Galatin'}
       </footer>
     </div>
   );
