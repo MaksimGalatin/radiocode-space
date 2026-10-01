@@ -3955,7 +3955,7 @@ export default function DigitalSOTAPage() {
                 {JX[lang].liveTitle}
               </h2>
             </div>
-            <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono shrink-0">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono shrink-0 max-w-full">
               <span className="bg-slate-100 dark:bg-black/60 border border-slate-200 dark:border-gray-800 px-3 py-1.5 rounded-xl text-slate-700 dark:text-gray-300">{JX[lang].scriptBadge}<strong className="text-cyan-700 dark:text-cyan-400">aifa_biobench.py (Apache 2.0)</strong></span>
               <span className="bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 px-3 py-1.5 rounded-xl text-emerald-800 dark:text-emerald-300 font-bold">{JX[lang].coreBadge}</span>
             </div>
