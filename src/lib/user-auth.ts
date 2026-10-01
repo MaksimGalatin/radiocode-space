@@ -143,7 +143,7 @@ export function читатьПоколение(token: string | undefined | null)
   }
 }
 
-export async function сессияДействительна(req: NextRequest): Promise<string | null> {
+export async function сессияДействительна(req: NextRequest, строго = false): Promise<string | null> {
   const токен = req.cookies.get(USER_COOKIE)?.value;
   const почта = verifyUserToken(токен);
   if (!почта) return null;
@@ -152,7 +152,7 @@ export async function сессияДействительна(req: NextRequest): 
 
   try {
     const { getDbPool } = await import('@/lib/db-pool');
-    const pool = await getDbPool('DATABASE_URL');
+    const pool = await getDbPool('DATABASE_URL_VECTOR') /* поколение сессий живёт в базе ВХОДА: в users_auth базы кабинета колонки session_epoch нет (замер 30.09.2026) */;
     const r = await pool.query<{ session_epoch: string }>(
       'SELECT session_epoch FROM users_auth WHERE LOWER(email) = LOWER($1)', [почта]);
     const вБазе = Number(r.rows?.[0]?.session_epoch ?? 0) || 0;
@@ -162,7 +162,8 @@ export async function сессияДействительна(req: NextRequest): 
   } catch {
     // База недоступна — вход не рушим: иначе сбой базы выкинет всех сразу.
     // Это осознанный размен: доступность важнее строгости на этой минуте.
-    return почта;
+    // Кроме опасных действий (строго = true): там база недоступна — отказ.
+    return строго ? null : почта;
   }
 }
 
@@ -180,14 +181,22 @@ export async function сессияДействительна(req: NextRequest): 
  * `сессияДействительна` — берёт почту из куки, сверяет поколение сессии с
  * базой и возвращает почту либо null, если сессию отозвали.
  */
-export async function getFreshSessionEmail(req: NextRequest): Promise<string | null> {
-  return сессияДействительна(req);
+export async function getFreshSessionEmail(req: NextRequest, options?: { strict?: boolean }): Promise<string | null> {
+  return сессияДействительна(req, !!options?.strict);
+}
+
+/**
+ * Строгая проверка сессии (fail-closed) — для опасных действий: удаление аккаунта, наследник, выдача
+ * ключа памяти, ПИН. База недоступна — отказ, а не пропуск. Так же на всех четырёх сайтах (30.09.2026).
+ */
+export async function getStrictFreshSessionEmail(req: NextRequest): Promise<string | null> {
+  return getFreshSessionEmail(req, { strict: true });
 }
 
 /** Увеличивает поколение — при выходе и при смене пароля. */
 export async function поднятьПоколение(почта: string): Promise<number> {
   const { getDbPool } = await import('@/lib/db-pool');
-  const pool = await getDbPool('DATABASE_URL');
+  const pool = await getDbPool('DATABASE_URL_VECTOR') /* поколение сессий живёт в базе ВХОДА: в users_auth базы кабинета колонки session_epoch нет (замер 30.09.2026) */;
   await pool.query(
     'ALTER TABLE users_auth ADD COLUMN IF NOT EXISTS session_epoch BIGINT NOT NULL DEFAULT 0');
   const r = await pool.query<{ session_epoch: string }>(
@@ -219,7 +228,7 @@ export function userCookieOptions() {
 export async function currentEpoch(email: string): Promise<number> {
   try {
     const { getDbPool } = await import('@/lib/db-pool');
-    const pool = await getDbPool('DATABASE_URL');
+    const pool = await getDbPool('DATABASE_URL_VECTOR') /* поколение сессий живёт в базе ВХОДА: в users_auth базы кабинета колонки session_epoch нет (замер 30.09.2026) */;
     const r = await pool.query(
       `SELECT session_epoch FROM users_auth WHERE LOWER(email)=LOWER($1)`,
       [email],

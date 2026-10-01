@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
+import { getStrictFreshSessionEmail } from '@/lib/user-auth';
 import { getUserKeyB64, связкаКлючейЗаписей } from '@/lib/user-key';
 import { ОПИСАНИЕ_ФОРМАТА_ЗАПИСЕЙ } from '@/lib/memory-key-file';
 import { маскаПочты } from '@/lib/log-privacy';
@@ -45,7 +45,7 @@ export async function GET(req: NextRequest) {
   // (account/pin, account/nickname). Асинхронной проверки отзыва сессии на этом
   // сайте пока нет ни у одной ручки; заводить её только здесь смысла нет —
   // отозванный токен всё равно откроет соседние разделы кабинета.
-  const email = await сессияДействительна(req);
+  const email = await getStrictFreshSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   let key: string;

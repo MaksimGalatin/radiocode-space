@@ -28,19 +28,21 @@ type NeonSql = {
   query: (text: string, params?: unknown[]) => Promise<unknown>;
 };
 
-let cached: PoolLike | null = null;
-let cachedUrl = '';
+// Клиент на каждый адрес базы свой: проверка сессии ходит в базу входа (DATABASE_URL_VECTOR),
+// остальное — в базу кабинета. Одна ячейка пересоздавала бы клиент на каждом чередовании.
+const cachedByUrl = new Map<string, PoolLike>();
 
 /** Пул поверх HTTP-драйвера. Бросает `no_db`, если строка подключения не задана. */
 export async function getDbPool(envVar = 'SUBMISSIONS_DB_URL'): Promise<PoolLike> {
   const url = process.env[envVar] || process.env.SUBMISSIONS_DB_URL;
   if (!url) throw new Error('no_db');
-  if (cached && cachedUrl === url) return cached;
+  const готовый = cachedByUrl.get(url);
+  if (готовый) return готовый;
 
   const { neon } = await import('@neondatabase/serverless');
   const sql = neon(url) as unknown as NeonSql;
 
-  cached = {
+  const pool: PoolLike = {
     async query<T = Record<string, unknown>>(text: string, params?: unknown[]): Promise<QueryResult<T>> {
       const res = (await sql.query(text, params ?? [])) as unknown;
       // Драйвер может отдать либо массив строк, либо объект с полем rows —
@@ -50,6 +52,6 @@ export async function getDbPool(envVar = 'SUBMISSIONS_DB_URL'): Promise<PoolLike
     },
     async end() { /* HTTP-драйверу нечего закрывать — намеренная пустышка */ },
   };
-  cachedUrl = url;
-  return cached;
+  cachedByUrl.set(url, pool);
+  return pool;
 }

@@ -19,9 +19,9 @@ export async function GET(req: NextRequest) {
   const email = url.searchParams.get('email') || '';
   const ok = token && email ? await cancelDeletion(email, token) : false;
   const msg = ok
-    ? '✅ Удаление отменено. Твоя память в безопасности.<br>Deletion cancelled. Your memory is safe.'
-    : '⚠️ Ссылка недействительна или срок истёк.<br>Link invalid or expired.';
-  const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CODE Eternal</title></head>
+    ? '✅ Удаление отменено. Твоя память в безопасности.<br><span lang="en">Deletion cancelled. Your memory is safe.</span>'
+    : '⚠️ Ссылка недействительна или срок истёк.<br><span lang="en">Link invalid or expired.</span>';
+  const html = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CODE Eternal</title></head>
   <body style="background:#030712;color:#e5e7eb;font-family:sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0">
   <div style="max-width:460px;text-align:center;padding:30px;border:1px solid #1f2937;border-radius:16px;background:rgba(19,19,28,.6)">
   <div style="font-size:22px;font-weight:800;background:linear-gradient(90deg,#06B6D4,#7C3AED);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px">CODE Eternal</div>

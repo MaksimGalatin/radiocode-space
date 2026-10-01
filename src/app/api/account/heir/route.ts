@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
-import { getSessionEmail, сессияДействительна } from '@/lib/user-auth';
+import { getFreshSessionEmail, getStrictFreshSessionEmail } from '@/lib/user-auth';
 import { getDbPool } from '@/lib/db-pool';
 import { маскаПочты } from '@/lib/log-privacy';
 import {
@@ -90,7 +90,7 @@ export async function GET(req: NextRequest) {
   if (ip !== 'unknown' && !(await dbRateLimit(`account-heir:${ip}`, 120, 60_000))) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
-  const email = await сессияДействительна(req);
+  const email = await getFreshSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   try {
     return NextResponse.json(await состояние(email), {
@@ -109,7 +109,7 @@ export async function POST(req: NextRequest) {
   if (ip !== 'unknown' && !(await dbRateLimit(`account-heir-write:${ip}`, 20, 60_000))) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
-  const email = await сессияДействительна(req);
+  const email = await getStrictFreshSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   let тело: Record<string, unknown> = {};
@@ -124,7 +124,21 @@ export async function POST(req: NextRequest) {
     try {
       const u = await pool.query<{ country: unknown }>(
         `SELECT country FROM users_auth WHERE LOWER(email)=LOWER($1)`, [email]);
-      язык = языкПоСтране(u.rows[0]?.country);
+      let страна = u.rows[0]?.country;
+      // Если в базе кабинета страны нет — спрашиваем базу ВХОДА (users_auth живёт в обеих). Письмо о
+      // наследовании — не то место, где человек должен получить чужой язык из-за расхождения наших баз.
+      if (!страна) {
+        try {
+          const url = process.env.DATABASE_URL_VECTOR || process.env.VECTOR_DATABASE_URL || '';
+          if (url) {
+            const { neon } = await import('@neondatabase/serverless');
+            const r = (await neon(url)`SELECT country FROM users_auth
+                                WHERE lower(trim(email)) = lower(trim(${email}))`) as Array<{ country: unknown }>;
+            страна = r[0]?.country;
+          }
+        } catch { /* не вышло — остаётся язык по умолчанию */ }
+      }
+      язык = языкПоСтране(страна);
     } catch { /* нет страны — пишем по умолчанию, это лучше, чем не писать */ }
 
     // ── отмена ──────────────────────────────────────────────────────────────
