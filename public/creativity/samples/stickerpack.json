@@ -1,0 +1,18 @@
+{
+ "lang": "ru",
+ "items": [
+  {
+   "k": "gallery",
+   "title": "stickers",
+   "items": [
+    "/creativity/samples/stickerpack/s1.webp",
+    "/creativity/samples/stickerpack/s2.webp",
+    "/creativity/samples/stickerpack/s3.webp",
+    "/creativity/samples/stickerpack/s4.webp",
+    "/creativity/samples/stickerpack/s5.webp",
+    "/creativity/samples/stickerpack/s6.webp"
+   ],
+   "square": true
+  }
+ ]
+}
