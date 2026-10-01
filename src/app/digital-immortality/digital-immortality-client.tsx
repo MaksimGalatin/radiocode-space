@@ -1,6 +1,7 @@
 'use client';
 
-import { useLang, type Lang } from '@/lib/i18n';
+import { type Lang } from '@/lib/i18n';
+import { useЯзык } from '@/lib/server-locale';
 
 type Level = { label: string; text: string };
 type Fact = { label: string; value: string };
@@ -634,7 +635,9 @@ const articleSchema = {
 };
 
 export default function DigitalImmortalityClient() {
-  const { lang } = useLang();
+  // 01.10.2026: было useLang() — сырое хранилище, на сервере всегда «en»: /ru/digital-immortality отдавал
+  // поисковику английский текст под lang=ru (5 % кириллицы). useЯзык(): до оживления хранилища — язык с сервера.
+  const lang = useЯзык();
   const c = CONTENT[lang] ?? CONTENT.en;
 
   return (

@@ -126,8 +126,11 @@ export function useLanguageOptional(): Pick<LanguageContextType, 'locale' | 'set
   // язык отсюда (заявление о доступности, AIfaFocus, калькулятор, виджет оракула…),
   // на radiocode показывались ТОЛЬКО по-английски, что бы ни выбрал человек в шапке.
   // Язык сайта на radiocode живёт в общем хранилище code-eternal-lang — берём его.
-  const storeLang = useLang((s) => s.lang);
+  // 01.10.2026: язык — через useЯзык(), как у провайдера выше: до оживления хранилища — язык с
+  // сервера (x-locale), потом — выбор человека. Сырое хранилище на сервере всегда «en», и /ru/glossary,
+  // /es/accessibility-statement и др. отдавали поисковику английский текст под lang=ru/es/zh.
+  const язык = useЯзык();
   const setStoreLang = useLang((s) => s.setLang);
   if (ctx) return ctx;
-  return { locale: storeLang, setLocale: setStoreLang };
+  return { locale: язык, setLocale: setStoreLang };
 }
