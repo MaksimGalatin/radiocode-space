@@ -1,0 +1,12 @@
+{
+ "lang": "ru",
+ "items": [
+  {
+   "k": "video",
+   "src": "/creativity/samples/lyric_video/video.mp4",
+   "poster": "/creativity/samples/lyric_video/poster.webp",
+   "square": true,
+   "dur": 174
+  }
+ ]
+}

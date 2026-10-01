@@ -114,6 +114,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: { languages: языковые('/tariffs') },
     },
     {
+      // 30.09.2026: страница AIfa Creativity появилась на радио (раньше отдавала 404);
+      // переведена на 4 языка, как тарифы.
+      url: `${SITE}/AIfacreativity`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      alternates: { languages: языковые('/AIfacreativity') },
+    },
+    {
       // Глоссарий на 28 терминов. Страница /glossary есть на всех четырёх
       // сайтах и на всех трёх остальных стоит в карте сайта
       // (codeofdigitaleternity.com, aifa.digital, aifa.works) — здесь её не

@@ -1,0 +1,12 @@
+{
+ "lang": "ru",
+ "items": [
+  {
+   "k": "video",
+   "src": "/creativity/samples/music_card/video.mp4",
+   "poster": "/creativity/samples/music_card/poster.webp",
+   "square": true,
+   "dur": 33
+  }
+ ]
+}
