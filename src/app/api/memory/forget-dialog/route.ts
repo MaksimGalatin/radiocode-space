@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
-import { сессияДействительна } from '@/lib/user-auth';
+import { getFreshSessionEmail, getStrictFreshSessionEmail } from '@/lib/user-auth';
 import { getDbPool } from '@/lib/db-pool';
 import { диалогиЧеловека, уничтожитьДиалог } from '@/lib/user-key';
 import { маскаПочты } from '@/lib/log-privacy';
@@ -59,7 +59,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
 
-  const email = await сессияДействительна(req);
+  const email = await getFreshSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   try {
@@ -89,7 +89,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
 
-  const email = await сессияДействительна(req);
+  // Уничтожение ключа диалога необратимо — строгая проверка: база недоступна → отказ (30.09.2026).
+  const email = await getStrictFreshSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
   let тело: { ссылка?: unknown; подтверждение?: unknown };
@@ -153,7 +154,8 @@ export async function POST(req: NextRequest) {
         `memory-forget-dialog:${ссылка}:${забыто}`,
         ip,
         req.headers.get('user-agent')?.slice(0, 300) ?? '',
-        'radiocode.space',
+        // Сайт — из адреса самого запроса: где человек нажал «забыть», там и след (одинаково на 4).
+        req.nextUrl.hostname.replace(/^www\./, ''),
       ]);
   } catch {
     // След не записался — само забвение уже состоялось, врать об этом нельзя.
