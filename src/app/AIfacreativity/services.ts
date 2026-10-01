@@ -19,11 +19,12 @@
 export type L = { ru: string; en: string; es: string; zh: string };
 export type LList = { ru: string[]; en: string[]; es: string[]; zh: string[] };
 
-/** Услуги, у которых образец уже собран и прочитан целиком (30.09.2026; 01.10.2026 — ещё четыре). */
+/** Услуги, у которых образец уже собран и прочитан целиком (30.09.2026; 01.10.2026 — ещё четыре, затем ещё четыре). */
 export const SAMPLE_IDS = new Set([
   'song', 'song_vocal', 'lyric_video', 'music_card', 'voice', 'postcard', 'image', 'love_letter',
   'dream', 'year_ahead', 'tarot', 'tale', 'detective',
   'compatibility', 'name_secrets', 'astro_full', 'bundle_mystic',
+  'poem', 'stickerpack', 'bundle_romance', 'bundle',
 ]);
 
 export interface Service {
