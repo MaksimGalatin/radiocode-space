@@ -72,7 +72,7 @@ function ArchivesCard() {
                     <button className="cab-btn cab-btn-ghost" disabled={txBusy === a.txId} onClick={() => readTx(a.txId)} style={{ padding: "5px 12px", fontSize: 14 }}>
                       {txBusy === a.txId ? t("memReading") : openTx === a.txId ? t("memCollapse") : "📖 " + t("memRead")}
                     </button>
-                    <a href={`https://arweave.net/${a.txId}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, color: TOKENS.green, fontWeight: 700, textDecoration: "none" }}>ARWEAVE ↗</a>
+                    <a href={`https://arweave.net/${a.txId}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, color: TOKENS.green, fontWeight: 700, textDecoration: "none", display: "inline-flex", alignItems: "center", minHeight: 24 }}>ARWEAVE ↗</a>
                   </span>
                 </div>
                 {openTx === a.txId && (
@@ -378,6 +378,7 @@ function DangerZone({ email }: { email: string }) {
     </Card>
   );
 }
+
 
 /**
  * ЛИЧНЫЙ РЕЕСТР ЗАПИСЕЙ — только показ.

@@ -147,9 +147,11 @@ export default function PlaylistsTab({ lang = "ru" }: { lang?: string }) {
             <ol style={{ margin: "8px 0 0 0", paddingLeft: 22 }}>
               {п.tracks.map((т) => (
                 <li key={т} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-                  <span style={{ flex: 1 }}>{имяТрека(т)}</span>
+                  <span style={{ flex: 1, minWidth: 0, overflowWrap: "anywhere" }}>{имяТрека(т)}</span>
+                  {/* 30.09.2026: кнопка была 13×25 px — меньше 24 px, на телефоне не попасть (WCAG 2.5.8). */}
                   <button
                     className="cab-btn-sm"
+                    style={{ minWidth: 32, minHeight: 32, display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
                     aria-label={С("Убрать из подборки", "Remove from playlist",
                       "Quitar de la lista", "从歌单移除")}
                     onClick={() => void действие({ action: "remove", playlistId: п.id, trackId: т })}

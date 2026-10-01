@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { сессияДействительна } from '@/lib/user-auth';
+import { getFreshSessionEmail } from '@/lib/user-auth';
+import { allowRequest } from '@/lib/rate-limit';
+import { общийЛимитЗапроса } from '@/lib/rate-limit-db';
 import { getPool, creditGalatin, weekKeyUTC, todayUTC, bumpQuest } from '@/lib/economy';
-import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,20 +13,61 @@ const DAILY_REWARD_CAP = 5; // only the first 5 wins per game per day pay GALATI
 const MIN_SECONDS: Record<string, number> = { ttt: 5, checkers: 20, chess: 40, backgammon: 30, tetris: 45 };
 
 export async function POST(req: NextRequest) {
-  const email = await сессияДействительна(req);
+  const email = await getFreshSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   let body: any = {};
   try { body = await req.json(); } catch {}
   const game = String(body?.game || '').trim().toLowerCase();
   if (!(game in REWARD)) return NextResponse.json({ error: 'bad_request' }, { status: 400 });
   // Per-IP shield + per-account pacing: a human can't win faster than MIN_SECONDS.
-  // Счёт в базе: счётчик в памяти обнуляется при каждой выкладке и
-  // у каждого экземпляра свой.
-  const адрес_gwin = clientIp(req as never);
-  if (адрес_gwin !== 'unknown' && !(await dbRateLimit(`gwin:${адрес_gwin}`, 10, 60_000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  if (!allowRequest(req, 'gwin', 10, 60_000) || !(await общийЛимитЗапроса(req, 'gwin', 10, 60_000))) return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
 
   try {
     const pool = await getPool();
+
+    /**
+     * Метка партии. Без неё победа не засчитывается.
+     *
+     * Раньше эта ручка верила браузеру на слово: пришло «я выиграл в шахматы» —
+     * начислялось 30 GALATIN, и достаточно было строки в консоли. Ограничения
+     * (минимальное время, пять награждаемых побед в сутки) смягчали ущерб, но
+     * начислить токен, ни разу не открыв игру, было можно.
+     *
+     * Теперь партия открывается через /api/games/start, и здесь проверяется:
+     * метка наша, ещё не использована, выдана на ЭТУ игру, не протухла и с её
+     * выдачи прошло не меньше минимального времени на партию. Метка гасится
+     * тем же запросом, которым проверяется, — иначе два одновременных запроса
+     * с одной меткой прошли бы оба.
+     */
+    const token = String(body?.token || '').trim();
+    if (!token) {
+      await pool.end();
+      return NextResponse.json(
+        { error: 'no_session', hint: 'Откройте игру заново — партия не была начата' },
+        { status: 400 });
+    }
+    const сессия = await pool.query(
+      `UPDATE game_sessions
+          SET used_at = now()
+        WHERE token = $1
+          AND email = $2
+          AND game  = $3
+          AND used_at IS NULL
+          AND started_at > now() - interval '6 hours'
+          AND now() - started_at >= ($4 || ' seconds')::interval
+        RETURNING started_at`,
+      [token, email, game, String(MIN_SECONDS[game] || 10)]
+    );
+    if ((сессия.rowCount || 0) === 0) {
+      await pool.end();
+      // Одна и та же причина для «метки нет», «уже использована», «слишком
+      // быстро» и «протухла»: подсказывать подбирающему, какое из условий он
+      // не прошёл, незачем.
+      return NextResponse.json(
+        { error: 'bad_session', hint: 'Партия не найдена, уже засчитана или закончилась слишком быстро' },
+        { status: 400 });
+    }
+
     // pacing check: last win for this email+game
     const last = await pool.query(
       `SELECT EXTRACT(EPOCH FROM (now() - updated_at)) AS s FROM game_scores WHERE email=$1 AND game=$2`,

@@ -47,6 +47,9 @@ export default function CabinetPage() {
 
   // ── auth form state ──
   const [aMode, setAMode] = useState<"login" | "register">("login");
+  // set when the visitor arrived to see the Tiers/pricing but isn't logged in yet,
+  // so we nudge them to register (one click, incl. Google) to unlock the plans.
+  const [intentTiers, setIntentTiers] = useState(false);
   const [resetMode, setResetMode] = useState(false);
   const [aEmail, setAEmail] = useState("");
   const [aPass, setAPass] = useState("");
@@ -99,6 +102,7 @@ export default function CabinetPage() {
       const q = new URLSearchParams(window.location.search).get("tab");
       const allowed = ["passport","dailies","terminal","games","memory","playlists","tiers","referrals","shield","admin"];
       if (q && allowed.includes(q)) setTab(q as Tab);
+      if (q === "tiers") { setIntentTiers(true); setAMode("register"); }
     } catch {}
   }, []);
   // referral capture: save ?ref= and link after login
@@ -237,7 +241,6 @@ export default function CabinetPage() {
     if (!authChecked || me || !GOOGLE_CLIENT_ID) return;
     const cb = async (resp: any) => {
       const credential = resp && resp.credential; if (!credential) return;
-      // Consent gate: Google sign-in/registration требует отметить 3 галочки согласия (как и вход по почте).
       if (!allAgreed) { setAMsg(agreeFirstMsg); return; }
       setABusy(true); setAMsg("");
       try {
@@ -277,9 +280,24 @@ export default function CabinetPage() {
 
   // ── global hooks for games + chat (session-based) ──
   useEffect(() => {
+    // Метка партии. Победа без неё сервером не принимается: раньше достаточно
+    // было строки в консоли браузера, чтобы начислить себе токены, ни разу не
+    // открыв игру. Метку выдаёт сервер при начале партии и гасит при зачёте.
+    const метки: Record<string, string> = {};
+    (window as any).__aifaGameStart = async (game: string) => {
+      try {
+        const r = await fetch("/api/games/start", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ game }),
+        });
+        if (r.ok) { const d = await r.json(); if (d?.token) метки[game] = d.token; }
+      } catch {}
+    };
     (window as any).__aifaGameWin = async (game: string) => {
       try {
-        const r = await fetch("/api/games/win", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ game }) });
+        const token = метки[game] || "";
+        delete метки[game]; // метка одноразовая и на нашей стороне тоже
+        const r = await fetch("/api/games/win", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ game, token }) });
         if (r.status === 401) { setWinToast(t("winToastLogin")); setTimeout(() => setWinToast(""), 4000); return; }
         if (r.ok) {
           const d = await r.json();
@@ -301,7 +319,7 @@ export default function CabinetPage() {
         if (d.leveledUp) toastMsg(t("levelUp"));
       } catch {}
     };
-    return () => { try { delete (window as any).__aifaGameWin; delete (window as any).__aifaChatTurn; } catch {} };
+    return () => { try { delete (window as any).__aifaGameWin; delete (window as any).__aifaGameStart; delete (window as any).__aifaChatTurn; } catch {} };
   }, [t, toastMsg]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function loadLb(game: string) {
@@ -356,7 +374,7 @@ export default function CabinetPage() {
   const authLabel: React.CSSProperties = { display: "block", fontSize: 14, fontWeight: 700, letterSpacing: 0.5, color: TOKENS.sub, marginBottom: 7 };
 
   return (
-    <div className="cab-root" style={{ maxWidth: "min(1720px, 94vw)", margin: "0 auto", padding: "96px 20px 60px" }}>
+    <div data-page-main className="cab-root" style={{ maxWidth: "min(1720px, 94vw)", margin: "0 auto", padding: "96px 20px 60px" }}>
       {/* Оформление кабинета переехало в cabinet.css */}
       <CabinetBackground />
       <Toast msg={toast} />
@@ -409,8 +427,22 @@ export default function CabinetPage() {
             </>
           ) : (
             <>
+              {intentTiers && (
+                <div style={{ marginBottom: 16, padding: "12px 14px", borderRadius: 12, border: "1px solid rgba(6,182,212,0.4)", background: "rgba(6,182,212,0.08)", textAlign: "center", fontSize: 15, lineHeight: 1.5, color: "#cfe9f2" }}>
+                  🪙 {lang === "ru" ? "Чтобы увидеть тарифы и оформить подписку — зарегистрируйтесь в один клик через Google-почту."
+                    : lang === "es" ? "Para ver los planes y suscribirte — regístrate en un clic con tu correo de Google."
+                    : lang === "zh" ? "要查看资费并订阅——用你的 Google 邮箱一键注册。"
+                    : "To see the plans and subscribe — register in one click with your Google email."}
+                </div>
+              )}
               <div style={{ fontSize: 24, fontWeight: 800, color: TOKENS.text, textAlign: "center", marginBottom: 8 }}>{t("loginTitle")}</div>
               <div style={{ fontSize: 15, color: TOKENS.sub, textAlign: "center", lineHeight: 1.5, marginBottom: 22 }}>{t("loginDesc")}</div>
+              {/* Экран входа рисовался зашитыми цветами #22D3EE и #8b8b9e на
+                  обе темы. Замер светлой темы: вкладки «Вход»/«Регистрация»,
+                  ссылки на документы, «Забыли пароль» и повтор кода — 1.79 при
+                  норме 4.5, то есть кнопки читались как пустое место. Переводим
+                  на токены темы (TOKENS.cyan / TOKENS.sub): в тёмной теме они
+                  дают те же #22D3EE и #8B8B9E, в светлой — #0E7490 и #4F4F66. */}
               <div style={{ display: "flex", marginBottom: 22, borderBottom: "1px solid rgba(42,42,58,0.8)" }} role="tablist">
                 {(["login", "register"] as const).map(m => (
                   <button key={m} role="tab" aria-selected={aMode === m} onClick={() => { setAMode(m); setResetMode(false); setCodeSent(false); setAMsg(""); }}
@@ -471,8 +503,7 @@ export default function CabinetPage() {
               {GOOGLE_CLIENT_ID && (
                 <div style={{ position: "relative", marginTop: 18 }}>
                   <div id="gsi-btn" style={{ display: "flex", justifyContent: "center", opacity: allAgreed ? 1 : 0.45, pointerEvents: allAgreed ? "auto" : "none" }} />
-                  {/* Пока не отмечены 3 галочки — перехватываем клик по Google-кнопке и просим согласиться. */}
-                  {!allAgreed && <div onClick={() => setAMsg(agreeFirstMsg)} aria-hidden="true" title="" style={{ position: "absolute", inset: 0, cursor: "not-allowed", zIndex: 5 }} />}
+                  {!allAgreed && <div onClick={() => setAMsg(agreeFirstMsg)} aria-hidden="true" style={{ position: "absolute", inset: 0, cursor: "not-allowed", zIndex: 5 }} />}
                 </div>
               )}
               {GOOGLE_CLIENT_ID && <div style={{ marginTop: 10, textAlign: "center", fontSize: 14, color: TOKENS.mut, lineHeight: 1.5 }}>{t("agreeGoogleHint")}</div>}

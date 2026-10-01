@@ -154,11 +154,25 @@ export default function TiersTab(props: { tier: number; toast: (m: string) => vo
       if (sp.get("paid") === "1") { setPaidBanner(1); history.replaceState(null, "", location.pathname); }
     } catch {}
   }, []);
+  // Arriving from a tier button on another page (…?tab=tiers&pay=N) starts the real
+  // NowPayments checkout right away — but only as an upgrade (can't buy same/lower).
+  useEffect(() => {
+    try {
+      const sp = new URLSearchParams(window.location.search);
+      const p = Number(sp.get("pay"));
+      if ([1, 2, 3].includes(p) && props.tier < p) {
+        const u = new URL(window.location.href); u.searchParams.delete("pay");
+        history.replaceState(null, "", u.pathname + u.search);
+        pay(p);
+      }
+    } catch {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function pay(tierId: number, kind?: "renewal") {
     setPayBusy(tierId);
     try {
-      const r = await fetch("/api/pay/create", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ tier: tierId, kind, site: typeof window !== "undefined" ? window.location.origin : undefined }) });
+      const r = await fetch("/api/pay/create", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ tier: tierId, kind }) });
       const d = await r.json().catch(() => ({}));
       if (r.ok && d.invoice_url) { window.location.href = d.invoice_url; return; }
       props.toast(

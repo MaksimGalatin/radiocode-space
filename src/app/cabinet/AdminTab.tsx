@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Card, SectionTitle, Skeleton, TOKENS, EmptyState } from "./ui";
 import { useCabT } from "./i18n";
 
-type Sub = "stats" | "users" | "payouts" | "inbox" | "credit" | "audit" | "links";
+type Sub = "stats" | "users" | "payouts" | "inbox" | "credit" | "audit" | "errors" | "links";
 
 export default function AdminTab(props: { toast: (m: string) => void }) {
   const { t } = useCabT();
@@ -20,6 +20,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
   const [payouts, setPayouts] = useState<any[] | null>(null);
   const [inbox, setInbox] = useState<any[] | null>(null);
   const [audit, setAudit] = useState<any[] | null>(null);
+  const [errs, setErrs] = useState<any | null>(null);
   const [cEmail, setCEmail] = useState(""); const [cAmt, setCAmt] = useState(""); const [cNote, setCNote] = useState(""); const [cBusy, setCBusy] = useState(false);
 
   async function enter() {
@@ -36,6 +37,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
   const loadPayouts = useCallback(() => { fetch("/api/admin/payouts").then(r => r.ok ? r.json() : null).then(d => d && setPayouts(d.payouts)); }, []);
   const loadInbox = useCallback(() => { fetch("/api/admin/inbox").then(r => r.ok ? r.json() : null).then(d => d && setInbox(d.submissions)); }, []);
   const loadAudit = useCallback(() => { fetch("/api/admin/audit").then(r => r.ok ? r.json() : null).then(d => d && setAudit(d.log)); }, []);
+  const loadErrs = useCallback(() => { fetch("/api/admin/errors").then(r => r.ok ? r.json() : null).then(d => d && setErrs(d)); }, []);
 
   useEffect(() => {
     if (!unlocked) return;
@@ -44,7 +46,8 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
     if (sub === "payouts" && !payouts) loadPayouts();
     if (sub === "inbox" && !inbox) loadInbox();
     if (sub === "audit" && !audit) loadAudit();
-  }, [unlocked, sub, stats, users, payouts, inbox, audit, loadStats, loadUsers, loadPayouts, loadInbox, loadAudit]);
+    if (sub === "errors" && !errs) loadErrs();
+  }, [unlocked, sub, stats, users, payouts, inbox, audit, errs, loadStats, loadUsers, loadPayouts, loadInbox, loadAudit, loadErrs]);
 
   async function markPayout(id: number, status: "paid" | "rejected") {
     const r = await fetch("/api/admin/payouts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id, status }) });
@@ -76,7 +79,7 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
 
   const SUBS: [Sub, string][] = [
     ["stats", "📊 " + t("admStats")], ["users", "👥 " + t("admUsers")], ["payouts", "💸 " + t("admPayouts")],
-    ["inbox", "📥 " + t("admInbox")], ["credit", "🪙 " + t("admCredit")], ["audit", "📝 " + t("admAudit")], ["links", "📈 " + t("admLinks")],
+    ["inbox", "📥 " + t("admInbox")], ["credit", "🪙 " + t("admCredit")], ["audit", "📝 " + t("admAudit")], ["errors", "🚨 " + t("admErrors")], ["links", "📈 " + t("admLinks")],
   ];
 
   return (
@@ -236,6 +239,44 @@ export default function AdminTab(props: { toast: (m: string) => void }) {
                 </tbody>
               </table>
             </div>
+          )}
+        </Card>
+      )}
+
+      {sub === "errors" && (
+        <Card>
+          <SectionTitle icon="🚨" title="Журнал ошибок" sub="Серверные сбои по всем сайтам: что падало, где и когда." right={<button className="cab-btn cab-btn-ghost" onClick={loadErrs} style={{ padding: "6px 12px", fontSize: 15 }}>↻</button>} />
+          {!errs ? <Skeleton h={120} /> : (errs.rows?.length ?? 0) === 0 ? <EmptyState text="Ошибок нет — тишина в эфире." /> : (
+            <>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
+                {(errs.bySite || []).map((x: any) => (
+                  <span key={x.site} style={{ fontSize: 14, padding: "4px 10px", borderRadius: 999, background: "rgba(255,80,80,.10)", color: TOKENS.red }}>
+                    {x.site}: {x.count}
+                  </span>
+                ))}
+              </div>
+              {(errs.top || []).length > 0 && (
+                <div style={{ marginBottom: 12, fontSize: 15, color: TOKENS.sub }}>
+                  Чаще всего: {(errs.top || []).slice(0, 3).map((x: any) => `${x.message} (${x.count})`).join(" · ")}
+                </div>
+              )}
+              <div style={{ overflowX: "auto" }} tabIndex={0}>
+                <table className="cab-table">
+                  <caption className="sr-only">{`Сайт, Сообщение, Путь, Когда`}</caption>
+                  <thead><tr><th>Сайт</th><th>Сообщение</th><th>Путь</th><th>Когда</th></tr></thead>
+                  <tbody>
+                    {errs.rows.map((e: any) => (
+                      <tr key={e.id}>
+                        <td style={{ fontSize: 14, color: TOKENS.cyan }}>{e.site}</td>
+                        <td style={{ fontSize: 15, color: TOKENS.red, maxWidth: 360, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={e.detail || e.message}>{e.message}</td>
+                        <td style={{ fontSize: 14, fontFamily: "monospace", color: TOKENS.sub }}>{e.path || "—"}</td>
+                        <td style={{ color: TOKENS.mut, fontSize: 14 }}>{String(e.created_at).slice(0, 19).replace("T", " ")}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
           )}
         </Card>
       )}

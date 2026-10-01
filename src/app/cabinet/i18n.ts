@@ -251,6 +251,7 @@ const D: Record<string, L4> = {
   admInbox: ["Заявки", "Inbox", "Solicitudes", "收件箱"],
   admCredit: ["Начисления", "Credits", "Créditos", "手动发放"],
   admAudit: ["Аудит-лог", "Audit log", "Registro", "审计日志"],
+  admErrors: ["Ошибки", "Errors", "Errores", "错误"],
   admLinks: ["Мониторинг", "Monitoring", "Monitoreo", "监控"],
   loading: ["Загрузка…", "Loading…", "Cargando…", "加载中…"],
   retry: ["Повторить", "Retry", "Reintentar", "重试"],
