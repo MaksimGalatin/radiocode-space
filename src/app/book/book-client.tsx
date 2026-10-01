@@ -466,7 +466,8 @@ const BookPage = () => {
                     </div>
 
                     {/* Terms Agreement Checkbox */}
-                    <label className="flex items-start gap-2.5 cursor-pointer select-none">
+                    {/* подпись вместе с чекбоксом — цель касания не меньше 24 px (WCAG 2.5.8): было 16 px */}
+                    <label className="flex items-start gap-2.5 cursor-pointer select-none min-h-6 py-1">
                       <input
                         type="checkbox"
                         checked={termsCheckbox}
