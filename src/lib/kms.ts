@@ -80,7 +80,15 @@ async function awsDecrypt(b64: string): Promise<Buffer> {
 }
 
 // ── GCP KMS (REST, so no heavy SDK dependency) ──
+// Токен доступа живёт час, поэтому держим его в памяти инстанса. Раньше он
+// запрашивался заново на КАЖДУЮ операцию с ключом: это лишние обращения к
+// Google и лишние сотни миллисекунд к каждому ответу.
+let _tokenCache: { value: string; expiresAt: number } | null = null;
+
 async function gcpAccessToken(): Promise<string> {
+  const nowMs = Date.now();
+  if (_tokenCache && _tokenCache.expiresAt > nowMs) return _tokenCache.value;
+
   const raw = process.env.GCP_KMS_SERVICE_ACCOUNT_KEY || process.env.GCP_SERVICE_ACCOUNT_KEY || '';
   const sa = JSON.parse(raw.trim().startsWith('{') ? raw : Buffer.from(raw, 'base64').toString('utf8'));
   const crypto = await import('crypto');
@@ -97,6 +105,8 @@ async function gcpAccessToken(): Promise<string> {
   });
   const j = await res.json();
   if (!j.access_token) throw new Error('gcp_token_failed');
+  // минута запаса, чтобы не поймать истечение в момент запроса
+  _tokenCache = { value: j.access_token, expiresAt: Date.now() + 55 * 60_000 };
   return j.access_token;
 }
 async function gcpEncrypt(plain: Buffer): Promise<string> {

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { dbRateLimit, clientIp } from '@/lib/rate-limit-db';
-import { сессияДействительна } from '@/lib/user-auth';
+import { getFreshSessionEmail } from '@/lib/user-auth';
 import { якорьПамяти } from '@/lib/user-key';
 import { маскаПочты } from '@/lib/log-privacy';
 
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
   if (ip !== 'unknown' && !(await dbRateLimit(`memory-anchor:${ip}`, 30, 60_000))) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
-  const email = await сессияДействительна(req);
+  const email = await getFreshSessionEmail(req);
   if (!email) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   try {
     const items = await якорьПамяти(email);

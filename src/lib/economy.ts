@@ -7,10 +7,9 @@
 export type Pool = any;
 
 export async function getPool(): Promise<Pool> {
-  const url = process.env.SUBMISSIONS_DB_URL;
-  if (!url) throw new Error('no_db');
-  const { Pool } = await import('@neondatabase/serverless');
-  return new Pool({ connectionString: url });
+  // Общий HTTP-доступ вместо соединения на каждый вызов — см. db-pool.ts.
+  const { getDbPool } = await import('./db-pool');
+  return getDbPool();
 }
 
 /** Credit (or debit, negative amount) GALATIN idempotently. Returns new balance or null if duplicate. */

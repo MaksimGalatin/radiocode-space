@@ -14,20 +14,58 @@
 export const NICKNAME_MIN = 3;
 export const NICKNAME_MAX = 20;
 
-/** Обсценная лексика EN + RU-транслит: матчится подстрокой. */
+/**
+ * Запрещённые основы. Практика крупных площадок: список ведётся по КАТЕГОРИЯМ,
+ * матчится подстрокой после leet-фолдинга, а ложные срабатывания гасятся
+ * белым списком ниже (классическая «проблема Сканторпа»: в слове «cocktail»
+ * не должно находиться ругательство).
+ */
 export const BANNED: string[] = [
-  // EN
+  // ── брань и оскорбления (EN)
   'fuck', 'shit', 'cunt', 'bitch', 'nigger', 'nigga', 'faggot', 'whore',
-  'slut', 'dick', 'cock', 'pussy', 'porn', 'hitler', 'nazi',
-  // RU-транслит
-  'blyad', 'blyat', 'suka', 'pizda', 'hui', 'xui', 'xyi',
-  'ebat', 'ebal', 'yebat', 'mudak', 'gandon', 'shluha', 'dolboeb',
-  'pidor', 'pidr', 'zaeb', 'mraz', 'ubludok', 'chmo',
+  'slut', 'dick', 'cock', 'pussy', 'asshole', 'bastard', 'motherfuck',
+  'wanker', 'retard', 'twat', 'jerkoff', 'dumbass',
+  // ── брань и оскорбления (RU-транслит)
+  'blyad', 'blyat', 'suka', 'pizda', 'hui', 'xui', 'xyi', 'huy',
+  'ebat', 'ebal', 'yebat', 'eban', 'mudak', 'gandon', 'shluha', 'dolboeb',
+  'pidor', 'pidr', 'pidaras', 'zaeb', 'mraz', 'ubludok', 'chmo', 'gnida',
+  'sosi', 'zalupa', 'manda', 'poshelnah', 'nahui', 'nahuy',
+  // ── ненависть, экстремизм, символика
+  'hitler', 'nazi', 'fascist', 'holocaust', 'kkk', 'genocide', 'jihad',
+  'isis', 'alqaeda', 'terrorist', 'whitepower', 'heilhitler', 'sieg',
+  'kike', 'chink', 'spic', 'tranny',
+  // ── сексуальный контент и эксплуатация детей (нулевая терпимость)
+  'porn', 'xxx', 'hentai', 'incest', 'rape', 'pedo', 'pedophile', 'lolita',
+  'childporn', 'cp4', 'jailbait', 'bestiality', 'escort', 'prostitut',
+  // ── наркотики
+  'cocaine', 'heroin', 'meth', 'lsd', 'mdma', 'narkotik', 'drugdealer',
+  // ── самоповреждение
+  'suicide', 'killyourself', 'kys', 'selfharm', 'suicid',
+  // ── подмена личности и брендов
+  'official', 'staff', 'moderator', 'administrator', 'sysadmin',
+  'telegram', 'openai', 'anthropic', 'binance', 'metamask',
+  'galatin', 'maksimgalatin',
+];
+
+/**
+ * Белый список: обычные слова, внутри которых механически находится основа из
+ * списка выше. Без него безобидные ники вроде «cocktail» или «analysis»
+ * блокировались бы — на больших площадках это одна из самых частых жалоб.
+ */
+export const ALLOWED_EXCEPTIONS: string[] = [
+  'cocktail', 'cockpit', 'peacock', 'hancock', 'shitake', 'shiitake',
+  'analysis', 'analyst', 'classic', 'class', 'assassin', 'assist',
+  'grasshopper', 'bassist', 'compass', 'passion', 'massive',
+  'scunthorpe', 'penistone', 'lightwater', 'therapist', 'therapeutic',
+  'documentary', 'sussex', 'essex', 'middlesex',
 ];
 
 /** Зарезервированные имена: матчится ЦЕЛИКОМ (после нормализации). */
 export const RESERVED: string[] = [
-  'admin', 'root', 'aifa', 'code_official', 'support', 'moderator',
+  'admin', 'root', 'aifa', 'alfa', 'code', 'code_official', 'support',
+  'moderator', 'help', 'system', 'security', 'billing', 'payments',
+  'team', 'owner', 'founder', 'architect', 'galatin', 'codeeternal',
+  'null', 'undefined', 'anonymous', 'guest', 'user', 'test',
 ];
 
 /** Нормализация для хранения и сравнения: trim + lowercase. */
@@ -62,8 +100,12 @@ export function validateNickname(raw: string): NickCheck {
   if (!/^[a-z0-9_]{3,20}$/.test(nick)) return { ok: false, reason: 'format' };
   if (RESERVED.includes(nick)) return { ok: false, reason: 'banned' };
   const folded = foldLeet(nick);
+  // Сначала снимаем безобидные слова, внутри которых механически находится
+  // запрещённая основа, иначе честный человек не сможет взять свой ник.
+  let probe = folded;
+  for (const safe of ALLOWED_EXCEPTIONS) probe = probe.split(safe).join('');
   for (const bad of BANNED) {
-    if (folded.includes(bad)) return { ok: false, reason: 'banned' };
+    if (probe.includes(bad)) return { ok: false, reason: 'banned' };
   }
   return { ok: true, nickname: nick };
 }

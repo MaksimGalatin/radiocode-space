@@ -7,7 +7,18 @@ import crypto from 'crypto';
 
 const OWNER = 'codeofdigitaleternity@gmail.com';
 
+/**
+ * Троттлинг писем. Считаем через общий лимитер: он ходит по HTTP и помнит уже
+ * заблокированные ключи локально. Это важно именно во время инцидента — когда
+ * ошибок много, старый код открывал бы новое соединение к базе на КАЖДУЮ
+ * ошибку и добивал бы базу вместо того, чтобы просто промолчать.
+ */
 async function throttleOk(key: string): Promise<boolean> {
+  const { dbRateLimit } = await import('./rate-limit-db');
+  return dbRateLimit(key, 1, 3600_000);   // не чаще одного одинакового письма в час
+}
+
+async function throttleOkLegacy(key: string): Promise<boolean> {
   const url = process.env.SUBMISSIONS_DB_URL;
   if (!url) return true;
   try {
@@ -29,6 +40,21 @@ async function throttleOk(key: string): Promise<boolean> {
 /** Fire-and-forget critical alert to the owner's email. Never throws. */
 export async function alertOwner(subject: string, detail: string, site?: string): Promise<void> {
   try {
+    // 🔴 ЖУРНАЛ ЖДЁМ, А НЕ БРОСАЕМ ВДОГОНКУ. Здесь стояло `void import(...)` —
+    // и запись не появлялась вовсе: в бессерверной функции всё незавершённое
+    // обрывается в тот момент, когда маршрут вернул ответ. Проверено 08.08.2026:
+    // сторож оплат отработал, письмо считалось отправленным, а в error_log
+    // последняя запись была от 07.08 — то есть тревоги уходили в никуда.
+    //
+    // Журнал ведём ВСЕГДА: письмо может быть придержано ограничителем, а история
+    // сбоев обязана оставаться полной.
+    try {
+      const m = await import('./error-log');
+      // Сайт по умолчанию — СВОЙ, а не «central» (30.09.2026): иначе ошибки works, digital и радио без явного
+      // третьего аргумента ложились в общий журнал под чужим именем.
+      await m.logServerError({ site: site || process.env.SITE_ID || process.env.NEXT_PUBLIC_SITE_ID ||
+        process.env.VERCEL_PROJECT_PRODUCTION_URL || 'central', message: subject, detail });
+    } catch { /* журнал не должен мешать письму */ }
     const key = 'alert:' + crypto.createHash('sha256').update(subject).digest('hex').slice(0, 16);
     if (!(await throttleOk(key))) return;
     const apiKey = process.env.RESEND_API_KEY;
