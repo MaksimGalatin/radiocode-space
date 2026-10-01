@@ -119,10 +119,10 @@ const A: Record<Doc, Record<string, { title: string; note: string; secs: Sec[] }
       secs: [
         { t: "P1. Data We Process", b: [
           "Account: email, password hash, nickname, optional Google ID. Passport profile you choose to publish (name, avatar, links, manifesto). Cabinet activity: XP/GALATIN ledger, quests, game scores, ambassador relations, payment orders (processed by NOWPayments — we never see card details).",
-          "Chat memory: dialog transcripts encrypted with your personal key wrapped by Google Cloud KMS (HSM). Staff cannot read them in plaintext without your account context.",
+          "Chat memory: dialog transcripts are stored in our database (Neon) in readable form — this is what lets AIfa remember your whole conversation across all four sites. They are not encrypted with your personal key; they are accessible to the service itself and to the operator's administrators for support and security. Copies placed in the permanent Arweave archive (paid plans) are encrypted with your personal key, wrapped by Google Cloud KMS (HSM), and cannot be read without that key.",
           "Security data: IP addresses of sign-ins (new-IP alerts), PIN hash, deletion schedules." ] },
         { t: "P2. Processors & Transfers", b: [
-          "Infrastructure processors: Vercel (hosting), Neon (database), Google Cloud KMS (key wrapping), Resend (transactional email), NOWPayments (crypto payments), Arweave network (permanent encrypted archives). Data may be processed in the EU/US under standard contractual safeguards." ] },
+          "Infrastructure processors: Vercel (hosting), Neon (database), Google Cloud KMS (key wrapping), Resend (transactional email), NOWPayments (crypto payments), Arweave network (permanent encrypted archives). AI model providers: to generate AIfa's replies, your messages may be sent to Google (Gemini API, Vertex AI), Cloudflare (Workers AI), Amazon Web Services (Bedrock) and Ollama (cloud models); each processes them under its own terms. Data may be processed in the EU/US under standard contractual safeguards." ] },
         { t: "P3. Retention & Crypto-Shredding", b: [
           "Data is retained while the account is active. On deletion (72-hour protocol) server records across ~20 tables are purged and your personal encryption key is destroyed; on-chain ciphertext remains but is permanently unreadable (crypto-shredding). Ledger entries required for accounting/fraud prevention may be retained as required by law." ] },
         { t: "P4. Your Rights", b: [
@@ -135,10 +135,10 @@ const A: Record<Doc, Record<string, { title: string; note: string; secs: Sec[] }
       secs: [
         { t: "P1. Какие данные мы обрабатываем", b: [
           "Аккаунт: email, хэш пароля, никнейм, опционально Google ID. Публичный «паспорт», который вы сами заполняете (имя, аватар, ссылки, манифест). Активность кабинета: журнал XP/GALATIN, квесты, игровые результаты, амбассадорские связи, платёжные заказы (обрабатывает NOWPayments — данные карт мы не видим).",
-          "Память диалогов: расшифровки, зашифрованные вашим персональным ключом, обёрнутым Google Cloud KMS (HSM). Персонал не может читать их в открытом виде вне контекста вашего аккаунта.",
+          "Память диалогов: переписка хранится в нашей базе данных (Neon) в читаемом виде — именно поэтому AIfa помнит весь разговор на всех четырёх сайтах. Вашим персональным ключом она не зашифрована; доступ к ней есть у самого сервиса и у администраторов оператора — для поддержки и безопасности. Копии в постоянном архиве Arweave (платные тарифы) шифруются вашим персональным ключом, обёрнутым Google Cloud KMS (HSM), и без этого ключа нечитаемы.",
           "Данные безопасности: IP входов (алерты о новом IP), хэш PIN, расписания удаления." ] },
         { t: "P2. Процессоры и трансграничная передача", b: [
-          "Инфраструктурные процессоры: Vercel (хостинг), Neon (база данных), Google Cloud KMS (обёртка ключей), Resend (сервисные письма), NOWPayments (криптоплатежи), сеть Arweave (постоянные шифрованные архивы). Обработка возможна в ЕС/США со стандартными договорными гарантиями." ] },
+          "Инфраструктурные процессоры: Vercel (хостинг), Neon (база данных), Google Cloud KMS (обёртка ключей), Resend (сервисные письма), NOWPayments (криптоплатежи), сеть Arweave (постоянные шифрованные архивы). Поставщики моделей ИИ: чтобы AIfa могла ответить, ваши сообщения могут передаваться Google (Gemini API, Vertex AI), Cloudflare (Workers AI), Amazon Web Services (Bedrock) и Ollama (облачные модели); каждый обрабатывает их по своим условиям. Обработка возможна в ЕС/США со стандартными договорными гарантиями." ] },
         { t: "P3. Сроки хранения и crypto-shredding", b: [
           "Данные хранятся, пока аккаунт активен. При удалении (протокол 72 часа) серверные записи примерно в 20 таблицах вычищаются, персональный ключ шифрования уничтожается; шифротекст в цепи остаётся, но навсегда нечитаем (crypto-shredding). Записи, необходимые для учёта/противодействия мошенничеству, могут храниться в объёме, требуемом законом." ] },
         { t: "P4. Ваши права", b: [
@@ -149,8 +149,8 @@ const A: Record<Doc, Record<string, { title: string; note: string; secs: Sec[] }
       title: "ANEXO P — DETALLES DE TRATAMIENTO DE DATOS",
       note: "Complemento de la Política de Privacidad para el ecosistema CODE. Prevalece la versión en inglés.",
       secs: [
-        { t: "P1. Datos tratados", b: ["Cuenta (email, hash de contraseña, apodo, Google ID opcional); perfil público voluntario; actividad del gabinete (XP/GALATIN, juegos, embajadores, pedidos vía NOWPayments); memoria de diálogos cifrada con su clave personal (Google Cloud KMS/HSM); IP de acceso y hash de PIN."] },
-        { t: "P2. Encargados", b: ["Vercel, Neon, Google Cloud KMS, Resend, NOWPayments, red Arweave. Tratamiento en UE/EE. UU. con garantías contractuales."] },
+        { t: "P1. Datos tratados", b: ["Cuenta (email, hash de contraseña, apodo, Google ID opcional); perfil público voluntario; actividad del gabinete (XP/GALATIN, juegos, embajadores, pedidos vía NOWPayments); memoria de diálogos, guardada en nuestra base de datos (Neon) en forma legible para que AIfa recuerde toda la conversación — no está cifrada con su clave personal y es accesible para el propio servicio y los administradores del operador; las copias en el archivo permanente Arweave (planes de pago) sí se cifran con su clave personal (Google Cloud KMS/HSM); IP de acceso y hash de PIN."] },
+        { t: "P2. Encargados", b: ["Vercel, Neon, Google Cloud KMS, Resend, NOWPayments, red Arweave. Proveedores de modelos de IA, para generar las respuestas de AIfa: Google (Gemini API, Vertex AI), Cloudflare (Workers AI), Amazon Web Services (Bedrock) y Ollama (modelos en la nube), cada uno según sus propios términos. Tratamiento en UE/EE. UU. con garantías contractuales."] },
         { t: "P3. Conservación y crypto-shredding", b: ["Al eliminar la cuenta (protocolo 72 h) se purgan los registros del servidor y se destruye su clave; el texto cifrado en cadena queda ilegible para siempre."] },
         { t: "P4. Sus derechos", b: ["Acceso, rectificación, supresión, portabilidad y oposición desde el Gabinete o por email: codeofdigitaleternity@gmail.com (respuesta en 30 días)."] },
       ],
@@ -159,8 +159,8 @@ const A: Record<Doc, Record<string, { title: string; note: string; secs: Sec[] }
       title: "附录 P — CODE 生态系统数据处理细则",
       note: "对上述隐私政策的补充，适用于 aifa.digital。以英文版为准。",
       secs: [
-        { t: "P1. 处理的数据", b: ["账户（邮箱、密码哈希、昵称、可选 Google ID）；您自愿公开的护照资料；组合活动（XP/GALATIN、游戏、大使、经 NOWPayments 的订单）；用您的个人密钥（Google Cloud KMS/HSM 包裹）加密的对话记忆；登录 IP 与 PIN 哈希。"] },
-        { t: "P2. 处理方", b: ["Vercel、Neon、Google Cloud KMS、Resend、NOWPayments、Arweave 网络。数据可能在欧盟/美国按标准合同保障处理。"] },
+        { t: "P1. 处理的数据", b: ["账户（邮箱、密码哈希、昵称、可选 Google ID）；您自愿公开的护照资料；组合活动（XP/GALATIN、游戏、大使、经 NOWPayments 的订单）；对话记忆（以可读形式保存在我们的数据库 Neon 中，以便 AIfa 记住完整对话；未用您的个人密钥加密，服务本身及运营方管理员可访问；存入 Arweave 永久归档的副本（付费套餐）则用您的个人密钥加密，该密钥由 Google Cloud KMS/HSM 包裹）；登录 IP 与 PIN 哈希。"] },
+        { t: "P2. 处理方", b: ["Vercel、Neon、Google Cloud KMS、Resend、NOWPayments、Arweave 网络。AI 模型提供方（用于生成 AIfa 的回复）：Google（Gemini API、Vertex AI）、Cloudflare（Workers AI）、Amazon Web Services（Bedrock）、Ollama（云端模型），各自按其条款处理。数据可能在欧盟/美国按标准合同保障处理。"] },
         { t: "P3. 保存与加密粉碎", b: ["删除账户（72 小时协议）后清除服务器记录并销毁您的密钥；链上密文永久不可读。"] },
         { t: "P4. 您的权利", b: ["可通过组合面板或邮件 codeofdigitaleternity@gmail.com 行使访问、更正、删除、可携带与反对权（30 天内答复）。"] },
       ],
