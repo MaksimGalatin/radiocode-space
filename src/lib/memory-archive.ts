@@ -1,17 +1,18 @@
 /**
- * Chunked, server-readable memory archive (Variant A) — shared design with the
- * other CODE sites; the SUBMISSIONS_DB tables are common across all of them.
+ * Chunked, server-readable memory archive (Variant A).
  *
- * Full per-user transcript = an APPEND-ONLY chain of sealed chunks plus one live
- * "current" blob:
+ * The full per-user transcript is kept as an APPEND-ONLY chain of sealed chunks
+ * plus one live "current" blob:
  *   - `chat_memory`         : the live blob (email, chat_type) — small, grows.
  *   - `chat_memory_chunks`  : immutable sealed chunks (email, chat_type, idx).
  *
- * When the live blob would exceed SEAL_THRESHOLD the accumulated history is
+ * When the live blob would exceed SEAL_THRESHOLD, the accumulated history is
  * sealed into the next chunk and the live blob restarts. Nothing is ever
- * trimmed, so the WHOLE history stays server-readable and every piece stays
- * < ~91 KB ciphertext → within Arweave's free (<100 KB) tier. SEAL_THRESHOLD is
- * plaintext bytes: AES-256-GCM + base64 inflates ~1.33×, so 68 KB → ~91 KB.
+ * trimmed/discarded, so the WHOLE history stays server-readable and every piece
+ * stays < ~91 KB ciphertext → within Arweave's free (<100 KB) tier.
+ *
+ * SEAL_THRESHOLD is plaintext bytes: AES-256-GCM + base64 inflates ~1.33×, so
+ * 68 KB plaintext → ~91 KB ciphertext, safely under the 100 KB free limit.
  */
 import { decryptForUser } from './user-key';
 
@@ -62,9 +63,9 @@ export async function ensureChunkTable(pool: any): Promise<void> {
 }
 
 /**
- * The FULL decrypted transcript for one user + chat_type: every sealed chunk
- * (in order) followed by the live blob. Failures on any single piece are skipped
- * so a partial read never throws.
+ * The FULL decrypted transcript for one user + chat_type:
+ * every sealed chunk (in order) followed by the live blob. Failures on any
+ * single piece are skipped so a partial read never throws.
  */
 export async function readFullTranscript(pool: any, email: string, chatType: string): Promise<string> {
   const em = email.trim().toLowerCase();

@@ -38,10 +38,9 @@ function aeadDecrypt(key: Buffer, b64: string): Buffer {
 }
 
 async function pool() {
-  const url = process.env.SUBMISSIONS_DB_URL;
-  if (!url) throw new Error('no_db');
-  const { Pool } = await import('@neondatabase/serverless');
-  return new Pool({ connectionString: url });
+  // Общий HTTP-доступ вместо соединения на каждый вызов — см. db-pool.ts.
+  const { getDbPool } = await import('./db-pool');
+  return getDbPool();
 }
 
 /** Unwrap a stored key blob: KMS if it is a KMS blob, else local master. */
@@ -60,7 +59,7 @@ export async function getOrCreateUserKey(email: string): Promise<Buffer> {
   const em = email.trim().toLowerCase();
   const p = await pool();
   try {
-    const r = await p.query(`SELECT wrapped_key FROM user_keys WHERE email=$1`, [em]);
+    const r = await p.query<{ wrapped_key: string }>(`SELECT wrapped_key FROM user_keys WHERE email=$1`, [em]);
     if (r.rows[0]) return await unwrapStored(r.rows[0].wrapped_key);
     const raw = crypto.randomBytes(32);
     const wrapped = await wrapNew(raw);
@@ -68,7 +67,7 @@ export async function getOrCreateUserKey(email: string): Promise<Buffer> {
       `INSERT INTO user_keys(email, wrapped_key) VALUES($1,$2) ON CONFLICT(email) DO NOTHING`,
       [em, wrapped]);
     // re-read (handles the race where another request inserted first)
-    const r2 = await p.query(`SELECT wrapped_key FROM user_keys WHERE email=$1`, [em]);
+    const r2 = await p.query<{ wrapped_key: string }>(`SELECT wrapped_key FROM user_keys WHERE email=$1`, [em]);
     return await unwrapStored(r2.rows[0].wrapped_key);
   } finally { await p.end(); }
 }

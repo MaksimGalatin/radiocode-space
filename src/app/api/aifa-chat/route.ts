@@ -245,7 +245,7 @@ async function записатьДословно(
     const { appendVerbatim } = await import('@/lib/memory-write');
     const итог = await appendVerbatim(почта, chatType, вопрос, ответ);
     if (!итог.ok) {
-      console.error(`[AIfa чат] дословная запись не легла (${chatType}): ${итог.error}`);
+      console.error(`[AIfa чат] дословная запись не легла (${chatType}): ${итог.причина}`);
     }
   } catch (e) {
     console.error('[AIfa чат] дословная запись сорвалась:', e);
