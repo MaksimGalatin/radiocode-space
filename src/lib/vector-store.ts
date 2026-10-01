@@ -485,3 +485,23 @@ export async function readTurnsFromMemory(
     .filter((m) => m.content)
     .reverse();
 }
+
+/**
+ * Какие из этих отпечатков реплик уже лежат в индексе человека (01.10.2026).
+ *
+ * Точечный запрос по уникальному индексу (user_key, content_hash), а не все отпечатки человека разом:
+ * indexMessages спрашивает об этом ДО оплаты вектора, на каждом ходе разговора. Ошибка — пустое
+ * множество: лучше один раз заплатить лишнее, чем потерять реплику для поиска по смыслу.
+ */
+export async function ужеВИндексе(userKey: string, hashes: string[]): Promise<Set<string>> {
+  if (!hashes.length || !isVectorStoreConfigured()) return new Set();
+  try {
+    await ensureSchema();
+    const sql = getSql();
+    const rows = await sql`SELECT content_hash FROM chat_memory
+      WHERE user_key = ${hashUserKey(userKey)} AND content_hash = ANY(${hashes})`;
+    return new Set((rows as Array<{ content_hash: string }>).map((r) => r.content_hash));
+  } catch {
+    return new Set();
+  }
+}

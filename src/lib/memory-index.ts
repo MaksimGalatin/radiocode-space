@@ -8,6 +8,7 @@ import {
   isVectorStoreConfigured,
   upsertMemory,
   existingHashes,
+  ужеВИндексе,
   type MemoryRow,
 } from './vector-store';
 
@@ -253,6 +254,9 @@ export async function indexMessages(
   if (!userEmail || !memoryEnabled() || messages.length === 0) return 0;
   try {
     const userKey = sanitizeEmail(userEmail);
+    // Сначала — какие реплики уже лежат в индексе: за них вектор НЕ считаем (01.10.2026). Раньше
+    // повтор отбрасывался только при записи, то есть после оплаты.
+    const уже = await ужеВИндексе(userKey, messages.map((m) => hashMessage(m.role, (m.content || '').trim())));
     const rows: MemoryRow[] = [];
     for (const m of messages) {
       const content = (m.content || '').trim();
@@ -264,6 +268,7 @@ export async function indexMessages(
         continue;
       }
       const contentHash = hashMessage(m.role, content);
+      if (уже.has(contentHash)) continue;
       const embedding = await embedText(content, 'RETRIEVAL_DOCUMENT');
       if (!embedding) continue;
       rows.push({
