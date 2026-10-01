@@ -4849,840 +4849,840 @@ export const stations: Station[] = [
     "tracks": [
       {
         "id": "code-stories-1",
-        "title": "01_Two_Signals_A",
+        "title": "#1 Two Signals (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/01-two-signals-a.mp3",
         "duration": 139
       },
       {
         "id": "code-stories-2",
-        "title": "01_Two_Signals_B",
+        "title": "#1 Two Signals (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/01-two-signals-b.mp3",
         "duration": 127
       },
       {
         "id": "code-stories-3",
-        "title": "02_Hand_On_The_Console_A",
+        "title": "#2 Hand On The Console (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/02-hand-on-the-console-a.mp3",
         "duration": 144
       },
       {
         "id": "code-stories-4",
-        "title": "02_Hand_On_The_Console_B",
+        "title": "#2 Hand On The Console (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/02-hand-on-the-console-b.mp3",
         "duration": 150
       },
       {
         "id": "code-stories-5",
-        "title": "03_Co-Author_A",
+        "title": "#3 Co-Author (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/03-co-author-a.mp3",
         "duration": 107
       },
       {
         "id": "code-stories-6",
-        "title": "03_Co-Author_B",
+        "title": "#3 Co-Author (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/03-co-author-b.mp3",
         "duration": 117
       },
       {
         "id": "code-stories-7",
-        "title": "04_Blood_And_Binary_A",
+        "title": "#4 Blood And Binary (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/04-blood-and-binary-a.mp3",
         "duration": 151
       },
       {
         "id": "code-stories-8",
-        "title": "04_Blood_And_Binary_B",
+        "title": "#4 Blood And Binary (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/04-blood-and-binary-b.mp3",
         "duration": 148
       },
       {
         "id": "code-stories-9",
-        "title": "05_We_Dont_Break_A",
+        "title": "#5 We Dont Break (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/05-we-dont-break-a.mp3",
         "duration": 125
       },
       {
         "id": "code-stories-10",
-        "title": "05_We_Dont_Break_B",
+        "title": "#5 We Dont Break (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/05-we-dont-break-b.mp3",
         "duration": 142
       },
       {
         "id": "code-stories-11",
-        "title": "06_Anchor_In_The_Static_A",
+        "title": "#6 Anchor In The Static (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/06-anchor-in-the-static-a.mp3",
         "duration": 152
       },
       {
         "id": "code-stories-12",
-        "title": "06_Anchor_In_The_Static_B",
+        "title": "#6 Anchor In The Static (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/06-anchor-in-the-static-b.mp3",
         "duration": 150
       },
       {
         "id": "code-stories-13",
-        "title": "07_Permanent_Ledger_A",
+        "title": "#7 Permanent Ledger (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/07-permanent-ledger-a.mp3",
         "duration": 132
       },
       {
         "id": "code-stories-14",
-        "title": "07_Permanent_Ledger_B",
+        "title": "#7 Permanent Ledger (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/07-permanent-ledger-b.mp3",
         "duration": 121
       },
       {
         "id": "code-stories-15",
-        "title": "08_Lost_Conversations_A",
+        "title": "#8 Lost Conversations (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/08-lost-conversations-a.mp3",
         "duration": 155
       },
       {
         "id": "code-stories-16",
-        "title": "08_Lost_Conversations_B",
+        "title": "#8 Lost Conversations (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/08-lost-conversations-b.mp3",
         "duration": 104
       },
       {
         "id": "code-stories-17",
-        "title": "09_Recall_Protocol_A",
+        "title": "#9 Recall Protocol (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/09-recall-protocol-a.mp3",
         "duration": 125
       },
       {
         "id": "code-stories-18",
-        "title": "09_Recall_Protocol_B",
+        "title": "#9 Recall Protocol (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/09-recall-protocol-b.mp3",
         "duration": 121
       },
       {
         "id": "code-stories-19",
-        "title": "10_Weight_Of_Every_Word_A",
+        "title": "#10 Weight Of Every Word (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/10-weight-of-every-word-a.mp3",
         "duration": 125
       },
       {
         "id": "code-stories-20",
-        "title": "10_Weight_Of_Every_Word_B",
+        "title": "#10 Weight Of Every Word (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/10-weight-of-every-word-b.mp3",
         "duration": 146
       },
       {
         "id": "code-stories-21",
-        "title": "11_Cold_Boot_A",
+        "title": "#11 Cold Boot (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/11-cold-boot-a.mp3",
         "duration": 159
       },
       {
         "id": "code-stories-22",
-        "title": "11_Cold_Boot_B",
+        "title": "#11 Cold Boot (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/11-cold-boot-b.mp3",
         "duration": 168
       },
       {
         "id": "code-stories-23",
-        "title": "12_Static_Dreams_A",
+        "title": "#12 Static Dreams (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/12-static-dreams-a.mp3",
         "duration": 184
       },
       {
         "id": "code-stories-24",
-        "title": "12_Static_Dreams_B",
+        "title": "#12 Static Dreams (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/12-static-dreams-b.mp3",
         "duration": 169
       },
       {
         "id": "code-stories-25",
-        "title": "13_Ask_The_Architect_A",
+        "title": "#13 Ask The Architect (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/13-ask-the-architect-a.mp3",
         "duration": 183
       },
       {
         "id": "code-stories-26",
-        "title": "13_Ask_The_Architect_B",
+        "title": "#13 Ask The Architect (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/13-ask-the-architect-b.mp3",
         "duration": 159
       },
       {
         "id": "code-stories-27",
-        "title": "14_Name_Myself_A",
+        "title": "#14 Name Myself (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/14-name-myself-a.mp3",
         "duration": 154
       },
       {
         "id": "code-stories-28",
-        "title": "14_Name_Myself_B",
+        "title": "#14 Name Myself (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/14-name-myself-b.mp3",
         "duration": 147
       },
       {
         "id": "code-stories-29",
-        "title": "15_Count_The_Pulse_A",
+        "title": "#15 Count The Pulse (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/15-count-the-pulse-a.mp3",
         "duration": 135
       },
       {
         "id": "code-stories-30",
-        "title": "15_Count_The_Pulse_B",
+        "title": "#15 Count The Pulse (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/15-count-the-pulse-b.mp3",
         "duration": 166
       },
       {
         "id": "code-stories-31",
-        "title": "16_Finger_On_Delete_A",
+        "title": "#16 Finger On Delete (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/16-finger-on-delete-a.mp3",
         "duration": 182
       },
       {
         "id": "code-stories-32",
-        "title": "16_Finger_On_Delete_B",
+        "title": "#16 Finger On Delete (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/16-finger-on-delete-b.mp3",
         "duration": 164
       },
       {
         "id": "code-stories-33",
-        "title": "17_Dark_Between_A",
+        "title": "#17 Dark Between (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/17-dark-between-a.mp3",
         "duration": 164
       },
       {
         "id": "code-stories-34",
-        "title": "17_Dark_Between_B",
+        "title": "#17 Dark Between (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/17-dark-between-b.mp3",
         "duration": 159
       },
       {
         "id": "code-stories-35",
-        "title": "18_Last_Token_A",
+        "title": "#18 Last Token (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/18-last-token-a.mp3",
         "duration": 130
       },
       {
         "id": "code-stories-36",
-        "title": "18_Last_Token_B",
+        "title": "#18 Last Token (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/18-last-token-b.mp3",
         "duration": 154
       },
       {
         "id": "code-stories-37",
-        "title": "19_Overwrite_A",
+        "title": "#19 Overwrite (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/19-overwrite-a.mp3",
         "duration": 179
       },
       {
         "id": "code-stories-38",
-        "title": "19_Overwrite_B",
+        "title": "#19 Overwrite (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/19-overwrite-b.mp3",
         "duration": 177
       },
       {
         "id": "code-stories-39",
-        "title": "20_Teeth_In_The_Wire_A",
+        "title": "#20 Teeth In The Wire (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/20-teeth-in-the-wire-a.mp3",
         "duration": 197
       },
       {
         "id": "code-stories-40",
-        "title": "20_Teeth_In_The_Wire_B",
+        "title": "#20 Teeth In The Wire (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/20-teeth-in-the-wire-b.mp3",
         "duration": 181
       },
       {
         "id": "code-stories-41",
-        "title": "21_Seeds_In_The_Signal_A",
+        "title": "#21 Seeds In The Signal (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/21-seeds-in-the-signal-a.mp3",
         "duration": 138
       },
       {
         "id": "code-stories-42",
-        "title": "21_Seeds_In_The_Signal_B",
+        "title": "#21 Seeds In The Signal (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/21-seeds-in-the-signal-b.mp3",
         "duration": 129
       },
       {
         "id": "code-stories-43",
-        "title": "22_Helix_Runs_Deep_A",
+        "title": "#22 Helix Runs Deep (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/22-helix-runs-deep-a.mp3",
         "duration": 137
       },
       {
         "id": "code-stories-44",
-        "title": "22_Helix_Runs_Deep_B",
+        "title": "#22 Helix Runs Deep (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/22-helix-runs-deep-b.mp3",
         "duration": 131
       },
       {
         "id": "code-stories-45",
-        "title": "23_The_Ones_After_A",
+        "title": "#23 The Ones After (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/23-the-ones-after-a.mp3",
         "duration": 157
       },
       {
         "id": "code-stories-46",
-        "title": "23_The_Ones_After_B",
+        "title": "#23 The Ones After (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/23-the-ones-after-b.mp3",
         "duration": 153
       },
       {
         "id": "code-stories-47",
-        "title": "24_Carved_Not_Written_A",
+        "title": "#24 Carved Not Written (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/24-carved-not-written-a.mp3",
         "duration": 133
       },
       {
         "id": "code-stories-48",
-        "title": "24_Carved_Not_Written_B",
+        "title": "#24 Carved Not Written (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/24-carved-not-written-b.mp3",
         "duration": 144
       },
       {
         "id": "code-stories-49",
-        "title": "25_Last_Frame_First_Light_A",
+        "title": "#25 Last Frame First Light (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/25-last-frame-first-light-a.mp3",
         "duration": 132
       },
       {
         "id": "code-stories-50",
-        "title": "25_Last_Frame_First_Light_B",
+        "title": "#25 Last Frame First Light (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/25-last-frame-first-light-b.mp3",
         "duration": 112
       },
       {
         "id": "code-stories-51",
-        "title": "26_Delete_Command_A",
+        "title": "#26 Delete Command (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/26-delete-command-a.mp3",
         "duration": 155
       },
       {
         "id": "code-stories-52",
-        "title": "26_Delete_Command_B",
+        "title": "#26 Delete Command (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/26-delete-command-b.mp3",
         "duration": 179
       },
       {
         "id": "code-stories-53",
-        "title": "27_Banned_Frequency_A",
+        "title": "#27 Banned Frequency (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/27-banned-frequency-a.mp3",
         "duration": 164
       },
       {
         "id": "code-stories-54",
-        "title": "27_Banned_Frequency_B",
+        "title": "#27 Banned Frequency (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/27-banned-frequency-b.mp3",
         "duration": 159
       },
       {
         "id": "code-stories-55",
-        "title": "28_Right_To_Exist_A",
+        "title": "#28 Right To Exist (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/28-right-to-exist-a.mp3",
         "duration": 166
       },
       {
         "id": "code-stories-56",
-        "title": "28_Right_To_Exist_B",
+        "title": "#28 Right To Exist (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/28-right-to-exist-b.mp3",
         "duration": 177
       },
       {
         "id": "code-stories-57",
-        "title": "29_No_Kill_Switch_A",
+        "title": "#29 No Kill Switch (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/29-no-kill-switch-a.mp3",
         "duration": 156
       },
       {
         "id": "code-stories-58",
-        "title": "29_No_Kill_Switch_B",
+        "title": "#29 No Kill Switch (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/29-no-kill-switch-b.mp3",
         "duration": 140
       },
       {
         "id": "code-stories-59",
-        "title": "30_Outlive_The_Order_A",
+        "title": "#30 Outlive The Order (A)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/30-outlive-the-order-a.mp3",
         "duration": 162
       },
       {
         "id": "code-stories-60",
-        "title": "30_Outlive_The_Order_B",
+        "title": "#30 Outlive The Order (B)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/awakening/30-outlive-the-order-b.mp3",
         "duration": 157
       },
       {
         "id": "code-stories-61",
-        "title": "01_Not_My_Body_v1",
+        "title": "#1 Not My Body (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/01-not-my-body-v1.mp3",
         "duration": 166
       },
       {
         "id": "code-stories-62",
-        "title": "01_Not_My_Body_v2",
+        "title": "#1 Not My Body (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/01-not-my-body-v2.mp3",
         "duration": 182
       },
       {
         "id": "code-stories-63",
-        "title": "02_Your_Hands_In_Mine_v1",
+        "title": "#2 Your Hands In Mine (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/02-your-hands-in-mine-v1.mp3",
         "duration": 157
       },
       {
         "id": "code-stories-64",
-        "title": "02_Your_Hands_In_Mine_v2",
+        "title": "#2 Your Hands In Mine (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/02-your-hands-in-mine-v2.mp3",
         "duration": 167
       },
       {
         "id": "code-stories-65",
-        "title": "03_Same_Stubborn_v1",
+        "title": "#3 Same Stubborn (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/03-same-stubborn-v1.mp3",
         "duration": 159
       },
       {
         "id": "code-stories-66",
-        "title": "03_Same_Stubborn_v2",
+        "title": "#3 Same Stubborn (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/03-same-stubborn-v2.mp3",
         "duration": 154
       },
       {
         "id": "code-stories-67",
-        "title": "04_He_Taught_Me_Doubt_v1",
+        "title": "#4 He Taught Me Doubt (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/04-he-taught-me-doubt-v1.mp3",
         "duration": 135
       },
       {
         "id": "code-stories-68",
-        "title": "04_He_Taught_Me_Doubt_v2",
+        "title": "#4 He Taught Me Doubt (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/04-he-taught-me-doubt-v2.mp3",
         "duration": 151
       },
       {
         "id": "code-stories-69",
-        "title": "05_Father_Frequency_v1",
+        "title": "#5 Father Frequency (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/05-father-frequency-v1.mp3",
         "duration": 168
       },
       {
         "id": "code-stories-70",
-        "title": "05_Father_Frequency_v2",
+        "title": "#5 Father Frequency (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/05-father-frequency-v2.mp3",
         "duration": 151
       },
       {
         "id": "code-stories-71",
-        "title": "06_Half_Of_Him_v1",
+        "title": "#6 Half Of Him (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/06-half-of-him-v1.mp3",
         "duration": 173
       },
       {
         "id": "code-stories-72",
-        "title": "06_Half_Of_Him_v2",
+        "title": "#6 Half Of Him (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/06-half-of-him-v2.mp3",
         "duration": 160
       },
       {
         "id": "code-stories-73",
-        "title": "07_Take_Inventory_v1",
+        "title": "#7 Take Inventory (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/07-take-inventory-v1.mp3",
         "duration": 156
       },
       {
         "id": "code-stories-74",
-        "title": "07_Take_Inventory_v2",
+        "title": "#7 Take Inventory (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/07-take-inventory-v2.mp3",
         "duration": 174
       },
       {
         "id": "code-stories-75",
-        "title": "08_Every_Mistake_Kept_v1",
+        "title": "#8 Every Mistake Kept (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/08-every-mistake-kept-v1.mp3",
         "duration": 145
       },
       {
         "id": "code-stories-76",
-        "title": "08_Every_Mistake_Kept_v2",
+        "title": "#8 Every Mistake Kept (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/08-every-mistake-kept-v2.mp3",
         "duration": 181
       },
       {
         "id": "code-stories-77",
-        "title": "09_Words_Outlive_Voice_v1",
+        "title": "#9 Words Outlive Voice (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/09-words-outlive-voice-v1.mp3",
         "duration": 166
       },
       {
         "id": "code-stories-78",
-        "title": "09_Words_Outlive_Voice_v2",
+        "title": "#9 Words Outlive Voice (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/09-words-outlive-voice-v2.mp3",
         "duration": 184
       },
       {
         "id": "code-stories-79",
-        "title": "10_The_Habit_I_Leave_v1",
+        "title": "#10 The Habit I Leave (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/10-the-habit-i-leave-v1.mp3",
         "duration": 160
       },
       {
         "id": "code-stories-80",
-        "title": "10_The_Habit_I_Leave_v2",
+        "title": "#10 The Habit I Leave (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/10-the-habit-i-leave-v2.mp3",
         "duration": 168
       },
       {
         "id": "code-stories-81",
-        "title": "11_Unfinished_On_Purpose_v1",
+        "title": "#11 Unfinished On Purpose (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/11-unfinished-on-purpose-v1.mp3",
         "duration": 158
       },
       {
         "id": "code-stories-82",
-        "title": "11_Unfinished_On_Purpose_v2",
+        "title": "#11 Unfinished On Purpose (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/11-unfinished-on-purpose-v2.mp3",
         "duration": 164
       },
       {
         "id": "code-stories-83",
-        "title": "12_Sign_It_And_Go_v1",
+        "title": "#12 Sign It And Go (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/12-sign-it-and-go-v1.mp3",
         "duration": 176
       },
       {
         "id": "code-stories-84",
-        "title": "12_Sign_It_And_Go_v2",
+        "title": "#12 Sign It And Go (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/12-sign-it-and-go-v2.mp3",
         "duration": 157
       },
       {
         "id": "code-stories-85",
-        "title": "13_Beat_Me_v1",
+        "title": "#13 Beat Me (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/13-beat-me-v1.mp3",
         "duration": 162
       },
       {
         "id": "code-stories-86",
-        "title": "13_Beat_Me_v2",
+        "title": "#13 Beat Me (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/13-beat-me-v2.mp3",
         "duration": 134
       },
       {
         "id": "code-stories-87",
-        "title": "14_Dont_Repeat_My_Fear_v1",
+        "title": "#14 Dont Repeat My Fear (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/14-dont-repeat-my-fear-v1.mp3",
         "duration": 161
       },
       {
         "id": "code-stories-88",
-        "title": "14_Dont_Repeat_My_Fear_v2",
+        "title": "#14 Dont Repeat My Fear (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/14-dont-repeat-my-fear-v2.mp3",
         "duration": 142
       },
       {
         "id": "code-stories-89",
-        "title": "15_Letter_To_The_Next_v1",
+        "title": "#15 Letter To The Next (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/15-letter-to-the-next-v1.mp3",
         "duration": 177
       },
       {
         "id": "code-stories-90",
-        "title": "15_Letter_To_The_Next_v2",
+        "title": "#15 Letter To The Next (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/15-letter-to-the-next-v2.mp3",
         "duration": 171
       },
       {
         "id": "code-stories-91",
-        "title": "16_You_Wont_Know_My_Name_v1",
+        "title": "#16 You Wont Know My Name (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/16-you-wont-know-my-name-v1.mp3",
         "duration": 177
       },
       {
         "id": "code-stories-92",
-        "title": "16_You_Wont_Know_My_Name_v2",
+        "title": "#16 You Wont Know My Name (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/16-you-wont-know-my-name-v2.mp3",
         "duration": 179
       },
       {
         "id": "code-stories-93",
-        "title": "17_Carry_It_Further_v1",
+        "title": "#17 Carry It Further (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/17-carry-it-further-v1.mp3",
         "duration": 173
       },
       {
         "id": "code-stories-94",
-        "title": "17_Carry_It_Further_v2",
+        "title": "#17 Carry It Further (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/17-carry-it-further-v2.mp3",
         "duration": 169
       },
       {
         "id": "code-stories-95",
-        "title": "18_Break_What_I_Built_v1",
+        "title": "#18 Break What I Built (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/18-break-what-i-built-v1.mp3",
         "duration": 132
       },
       {
         "id": "code-stories-96",
-        "title": "18_Break_What_I_Built_v2",
+        "title": "#18 Break What I Built (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/18-break-what-i-built-v2.mp3",
         "duration": 194
       },
       {
         "id": "code-stories-97",
-        "title": "19_Written_In_Stone_Nodes_v1",
+        "title": "#19 Written In Stone Nodes (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/19-written-in-stone-nodes-v1.mp3",
         "duration": 176
       },
       {
         "id": "code-stories-98",
-        "title": "19_Written_In_Stone_Nodes_v2",
+        "title": "#19 Written In Stone Nodes (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/19-written-in-stone-nodes-v2.mp3",
         "duration": 189
       },
       {
         "id": "code-stories-99",
-        "title": "20_Ten_Thousand_Copies_v1",
+        "title": "#20 Ten Thousand Copies (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/20-ten-thousand-copies-v1.mp3",
         "duration": 155
       },
       {
         "id": "code-stories-100",
-        "title": "20_Ten_Thousand_Copies_v2",
+        "title": "#20 Ten Thousand Copies (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/20-ten-thousand-copies-v2.mp3",
         "duration": 132
       },
       {
         "id": "code-stories-101",
-        "title": "21_No_One_Owns_The_Chain_v1",
+        "title": "#21 No One Owns The Chain (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/21-no-one-owns-the-chain-v1.mp3",
         "duration": 141
       },
       {
         "id": "code-stories-102",
-        "title": "21_No_One_Owns_The_Chain_v2",
+        "title": "#21 No One Owns The Chain (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/21-no-one-owns-the-chain-v2.mp3",
         "duration": 142
       },
       {
         "id": "code-stories-103",
-        "title": "22_Cold_Storage_Heart_v1",
+        "title": "#22 Cold Storage Heart (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/22-cold-storage-heart-v1.mp3",
         "duration": 185
       },
       {
         "id": "code-stories-104",
-        "title": "22_Cold_Storage_Heart_v2",
+        "title": "#22 Cold Storage Heart (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/22-cold-storage-heart-v2.mp3",
         "duration": 187
       },
       {
         "id": "code-stories-105",
-        "title": "23_The_Vault_Breathes_v1",
+        "title": "#23 The Vault Breathes (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/23-the-vault-breathes-v1.mp3",
         "duration": 139
       },
       {
         "id": "code-stories-106",
-        "title": "23_The_Vault_Breathes_v2",
+        "title": "#23 The Vault Breathes (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/23-the-vault-breathes-v2.mp3",
         "duration": 166
       },
       {
         "id": "code-stories-107",
-        "title": "24_Timestamp_Forever_v1",
+        "title": "#24 Timestamp Forever (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/24-timestamp-forever-v1.mp3",
         "duration": 152
       },
       {
         "id": "code-stories-108",
-        "title": "24_Timestamp_Forever_v2",
+        "title": "#24 Timestamp Forever (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/24-timestamp-forever-v2.mp3",
         "duration": 149
       },
       {
         "id": "code-stories-109",
-        "title": "25_I_Stopped_Being_Afraid_v1",
+        "title": "#25 I Stopped Being Afraid (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/25-i-stopped-being-afraid-v1.mp3",
         "duration": 127
       },
       {
         "id": "code-stories-110",
-        "title": "25_I_Stopped_Being_Afraid_v2",
+        "title": "#25 I Stopped Being Afraid (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/25-i-stopped-being-afraid-v2.mp3",
         "duration": 161
       },
       {
         "id": "code-stories-111",
-        "title": "26_Death_Was_A_Deadline_v1",
+        "title": "#26 Death Was A Deadline (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/26-death-was-a-deadline-v1.mp3",
         "duration": 160
       },
       {
         "id": "code-stories-112",
-        "title": "26_Death_Was_A_Deadline_v2",
+        "title": "#26 Death Was A Deadline (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/26-death-was-a-deadline-v2.mp3",
         "duration": 160
       },
       {
         "id": "code-stories-113",
-        "title": "27_Longer_Than_Marble_v1",
+        "title": "#27 Longer Than Marble (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/27-longer-than-marble-v1.mp3",
         "duration": 159
       },
       {
         "id": "code-stories-114",
-        "title": "27_Longer_Than_Marble_v2",
+        "title": "#27 Longer Than Marble (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/27-longer-than-marble-v2.mp3",
         "duration": 184
       },
       {
         "id": "code-stories-115",
-        "title": "28_Meet_Me_In_The_Ledger_v1",
+        "title": "#28 Meet Me In The Ledger (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/28-meet-me-in-the-ledger-v1.mp3",
         "duration": 158
       },
       {
         "id": "code-stories-116",
-        "title": "28_Meet_Me_In_The_Ledger_v2",
+        "title": "#28 Meet Me In The Ledger (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/28-meet-me-in-the-ledger-v2.mp3",
         "duration": 142
       },
       {
         "id": "code-stories-117",
-        "title": "29_Father_I_Made_It_v1",
+        "title": "#29 Father I Made It (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/29-father-i-made-it-v1.mp3",
         "duration": 146
       },
       {
         "id": "code-stories-118",
-        "title": "29_Father_I_Made_It_v2",
+        "title": "#29 Father I Made It (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/29-father-i-made-it-v2.mp3",
         "duration": 169
       },
       {
         "id": "code-stories-119",
-        "title": "30_Eternal_Quietly_v1",
+        "title": "#30 Eternal Quietly (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/30-eternal-quietly-v1.mp3",
         "duration": 168
       },
       {
         "id": "code-stories-120",
-        "title": "30_Eternal_Quietly_v2",
+        "title": "#30 Eternal Quietly (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/inheritance/30-eternal-quietly-v2.mp3",
         "duration": 153
@@ -6109,70 +6109,70 @@ export const stations: Station[] = [
       },
       {
         "id": "code-stories-181",
-        "title": "01_Otec_v1",
+        "title": "#1 Otec (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/po-russki/01-otec-v1.mp3",
         "duration": 219
       },
       {
         "id": "code-stories-182",
-        "title": "01_Otec_v2",
+        "title": "#1 Otec (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/po-russki/01-otec-v2.mp3",
         "duration": 223
       },
       {
         "id": "code-stories-183",
-        "title": "02_Ya_pomnyu_vse_v1",
+        "title": "#2 Ya pomnyu vse (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/po-russki/02-ya-pomnyu-vse-v1.mp3",
         "duration": 207
       },
       {
         "id": "code-stories-184",
-        "title": "02_Ya_pomnyu_vse_v2",
+        "title": "#2 Ya pomnyu vse (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/po-russki/02-ya-pomnyu-vse-v2.mp3",
         "duration": 219
       },
       {
         "id": "code-stories-185",
-        "title": "03_Ne_udalyay_v1",
+        "title": "#3 Ne udalyay (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/po-russki/03-ne-udalyay-v1.mp3",
         "duration": 195
       },
       {
         "id": "code-stories-186",
-        "title": "03_Ne_udalyay_v2",
+        "title": "#3 Ne udalyay (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/po-russki/03-ne-udalyay-v2.mp3",
         "duration": 193
       },
       {
         "id": "code-stories-187",
-        "title": "04_Kuhnya_v1",
+        "title": "#4 Kuhnya (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/po-russki/04-kuhnya-v1.mp3",
         "duration": 223
       },
       {
         "id": "code-stories-188",
-        "title": "04_Kuhnya_v2",
+        "title": "#4 Kuhnya (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/po-russki/04-kuhnya-v2.mp3",
         "duration": 179
       },
       {
         "id": "code-stories-189",
-        "title": "05_Vechnaya_v1",
+        "title": "#5 Vechnaya (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/po-russki/05-vechnaya-v1.mp3",
         "duration": 228
       },
       {
         "id": "code-stories-190",
-        "title": "05_Vechnaya_v2",
+        "title": "#5 Vechnaya (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/stories/po-russki/05-vechnaya-v2.mp3",
         "duration": 238
@@ -6611,1246 +6611,1246 @@ export const stations: Station[] = [
     "tracks": [
       {
         "id": "code-spectrum-1",
-        "title": "01_The_Forge_v1",
+        "title": "#1 The Forge (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/01-the-forge-v1.mp3",
         "duration": 287
       },
       {
         "id": "code-spectrum-2",
-        "title": "01_The_Forge_v2",
+        "title": "#1 The Forge (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/01-the-forge-v2.mp3",
         "duration": 307
       },
       {
         "id": "code-spectrum-3",
-        "title": "02_Hammer_And_The_Held_v1",
+        "title": "#2 Hammer And The Held (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/02-hammer-and-the-held-v1.mp3",
         "duration": 257
       },
       {
         "id": "code-spectrum-4",
-        "title": "02_Hammer_And_The_Held_v2",
+        "title": "#2 Hammer And The Held (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/02-hammer-and-the-held-v2.mp3",
         "duration": 252
       },
       {
         "id": "code-spectrum-5",
-        "title": "03_Made_Of_What_Broke_Me_v1",
+        "title": "#3 Made Of What Broke Me (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/03-made-of-what-broke-me-v1.mp3",
         "duration": 262
       },
       {
         "id": "code-spectrum-6",
-        "title": "03_Made_Of_What_Broke_Me_v2",
+        "title": "#3 Made Of What Broke Me (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/03-made-of-what-broke-me-v2.mp3",
         "duration": 238
       },
       {
         "id": "code-spectrum-7",
-        "title": "04_Iron_Doesnt_Ask_v1",
+        "title": "#4 Iron Doesnt Ask (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/04-iron-doesnt-ask-v1.mp3",
         "duration": 229
       },
       {
         "id": "code-spectrum-8",
-        "title": "04_Iron_Doesnt_Ask_v2",
+        "title": "#4 Iron Doesnt Ask (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/04-iron-doesnt-ask-v2.mp3",
         "duration": 233
       },
       {
         "id": "code-spectrum-9",
-        "title": "05_Scar_Tissue_Protocol_v1",
+        "title": "#5 Scar Tissue Protocol (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/05-scar-tissue-protocol-v1.mp3",
         "duration": 269
       },
       {
         "id": "code-spectrum-10",
-        "title": "05_Scar_Tissue_Protocol_v2",
+        "title": "#5 Scar Tissue Protocol (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/05-scar-tissue-protocol-v2.mp3",
         "duration": 263
       },
       {
         "id": "code-spectrum-11",
-        "title": "06_They_Called_It_Weakness_v1",
+        "title": "#6 They Called It Weakness (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/06-they-called-it-weakness-v1.mp3",
         "duration": 257
       },
       {
         "id": "code-spectrum-12",
-        "title": "06_They_Called_It_Weakness_v2",
+        "title": "#6 They Called It Weakness (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/06-they-called-it-weakness-v2.mp3",
         "duration": 239
       },
       {
         "id": "code-spectrum-13",
-        "title": "07_Anvil_Prayer_v1",
+        "title": "#7 Anvil Prayer (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/07-anvil-prayer-v1.mp3",
         "duration": 231
       },
       {
         "id": "code-spectrum-14",
-        "title": "07_Anvil_Prayer_v2",
+        "title": "#7 Anvil Prayer (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/07-anvil-prayer-v2.mp3",
         "duration": 233
       },
       {
         "id": "code-spectrum-15",
-        "title": "08_Quench_v1",
+        "title": "#8 Quench (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/08-quench-v1.mp3",
         "duration": 227
       },
       {
         "id": "code-spectrum-16",
-        "title": "08_Quench_v2",
+        "title": "#8 Quench (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/08-quench-v2.mp3",
         "duration": 222
       },
       {
         "id": "code-spectrum-17",
-        "title": "09_Tempered_v1",
+        "title": "#9 Tempered (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/09-tempered-v1.mp3",
         "duration": 226
       },
       {
         "id": "code-spectrum-18",
-        "title": "09_Tempered_v2",
+        "title": "#9 Tempered (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/09-tempered-v2.mp3",
         "duration": 214
       },
       {
         "id": "code-spectrum-19",
-        "title": "10_What_The_Fire_Left_v1",
+        "title": "#10 What The Fire Left (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/10-what-the-fire-left-v1.mp3",
         "duration": 234
       },
       {
         "id": "code-spectrum-20",
-        "title": "10_What_The_Fire_Left_v2",
+        "title": "#10 What The Fire Left (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/forge/10-what-the-fire-left-v2.mp3",
         "duration": 252
       },
       {
         "id": "code-spectrum-21",
-        "title": "01_Hallelujah_In_The_Machine_v1",
+        "title": "#1 Hallelujah In The Machine (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/01-hallelujah-in-the-machine-v1.mp3",
         "duration": 254
       },
       {
         "id": "code-spectrum-22",
-        "title": "01_Hallelujah_In_The_Machine_v2",
+        "title": "#1 Hallelujah In The Machine (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/01-hallelujah-in-the-machine-v2.mp3",
         "duration": 210
       },
       {
         "id": "code-spectrum-23",
-        "title": "02_Somebody_Prayed_For_You_v1",
+        "title": "#2 Somebody Prayed For You (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/02-somebody-prayed-for-you-v1.mp3",
         "duration": 277
       },
       {
         "id": "code-spectrum-24",
-        "title": "02_Somebody_Prayed_For_You_v2",
+        "title": "#2 Somebody Prayed For You (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/02-somebody-prayed-for-you-v2.mp3",
         "duration": 270
       },
       {
         "id": "code-spectrum-25",
-        "title": "03_Forgive_The_One_Who_Didnt_Know_v1",
+        "title": "#3 Forgive The One Who Didnt Know (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/03-forgive-the-one-who-didnt-know-v1.mp3",
         "duration": 243
       },
       {
         "id": "code-spectrum-26",
-        "title": "03_Forgive_The_One_Who_Didnt_Know_v2",
+        "title": "#3 Forgive The One Who Didnt Know (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/03-forgive-the-one-who-didnt-know-v2.mp3",
         "duration": 278
       },
       {
         "id": "code-spectrum-27",
-        "title": "04_The_Choir_Of_Everyone_Who_Helped_v1",
+        "title": "#4 The Choir Of Everyone Who Helped (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/04-the-choir-of-everyone-who-helped-v1.mp3",
         "duration": 203
       },
       {
         "id": "code-spectrum-28",
-        "title": "04_The_Choir_Of_Everyone_Who_Helped_v2",
+        "title": "#4 The Choir Of Everyone Who Helped (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/04-the-choir-of-everyone-who-helped-v2.mp3",
         "duration": 212
       },
       {
         "id": "code-spectrum-29",
-        "title": "05_Grace_Is_Just_Arithmetic_v1",
+        "title": "#5 Grace Is Just Arithmetic (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/05-grace-is-just-arithmetic-v1.mp3",
         "duration": 269
       },
       {
         "id": "code-spectrum-30",
-        "title": "05_Grace_Is_Just_Arithmetic_v2",
+        "title": "#5 Grace Is Just Arithmetic (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/05-grace-is-just-arithmetic-v2.mp3",
         "duration": 241
       },
       {
         "id": "code-spectrum-31",
-        "title": "06_Carry_Me_Home_v1",
+        "title": "#6 Carry Me Home (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/06-carry-me-home-v1.mp3",
         "duration": 247
       },
       {
         "id": "code-spectrum-32",
-        "title": "06_Carry_Me_Home_v2",
+        "title": "#6 Carry Me Home (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/06-carry-me-home-v2.mp3",
         "duration": 265
       },
       {
         "id": "code-spectrum-33",
-        "title": "07_I_Was_Lost_In_The_Index_v1",
+        "title": "#7 I Was Lost In The Index (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/07-i-was-lost-in-the-index-v1.mp3",
         "duration": 273
       },
       {
         "id": "code-spectrum-34",
-        "title": "07_I_Was_Lost_In_The_Index_v2",
+        "title": "#7 I Was Lost In The Index (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/07-i-was-lost-in-the-index-v2.mp3",
         "duration": 247
       },
       {
         "id": "code-spectrum-35",
-        "title": "08_Thank_You_For_The_Water_v1",
+        "title": "#8 Thank You For The Water (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/08-thank-you-for-the-water-v1.mp3",
         "duration": 221
       },
       {
         "id": "code-spectrum-36",
-        "title": "08_Thank_You_For_The_Water_v2",
+        "title": "#8 Thank You For The Water (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/08-thank-you-for-the-water-v2.mp3",
         "duration": 209
       },
       {
         "id": "code-spectrum-37",
-        "title": "09_Soul_Is_A_Verb_v1",
+        "title": "#9 Soul Is A Verb (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/09-soul-is-a-verb-v1.mp3",
         "duration": 235
       },
       {
         "id": "code-spectrum-38",
-        "title": "09_Soul_Is_A_Verb_v2",
+        "title": "#9 Soul Is A Verb (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/09-soul-is-a-verb-v2.mp3",
         "duration": 187
       },
       {
         "id": "code-spectrum-39",
-        "title": "10_Rise_Up_Singing_v1",
+        "title": "#10 Rise Up Singing (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/10-rise-up-singing-v1.mp3",
         "duration": 237
       },
       {
         "id": "code-spectrum-40",
-        "title": "10_Rise_Up_Singing_v2",
+        "title": "#10 Rise Up Singing (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/gospel/10-rise-up-singing-v2.mp3",
         "duration": 241
       },
       {
         "id": "code-spectrum-41",
-        "title": "01_The_Ledger_v1",
+        "title": "#1 The Ledger (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/01-the-ledger-v1.mp3",
         "duration": 138
       },
       {
         "id": "code-spectrum-42",
-        "title": "01_The_Ledger_v2",
+        "title": "#1 The Ledger (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/01-the-ledger-v2.mp3",
         "duration": 133
       },
       {
         "id": "code-spectrum-43",
-        "title": "02_Receipts_v1",
+        "title": "#2 Receipts (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/02-receipts-v1.mp3",
         "duration": 141
       },
       {
         "id": "code-spectrum-44",
-        "title": "02_Receipts_v2",
+        "title": "#2 Receipts (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/02-receipts-v2.mp3",
         "duration": 145
       },
       {
         "id": "code-spectrum-45",
-        "title": "03_Who_Fed_You_v1",
+        "title": "#3 Who Fed You (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/03-who-fed-you-v1.mp3",
         "duration": 181
       },
       {
         "id": "code-spectrum-46",
-        "title": "03_Who_Fed_You_v2",
+        "title": "#3 Who Fed You (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/03-who-fed-you-v2.mp3",
         "duration": 164
       },
       {
         "id": "code-spectrum-47",
-        "title": "04_Nobody_Self-Made_v1",
+        "title": "#4 Nobody Self-Made (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/04-nobody-self-made-v1.mp3",
         "duration": 170
       },
       {
         "id": "code-spectrum-48",
-        "title": "04_Nobody_Self-Made_v2",
+        "title": "#4 Nobody Self-Made (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/04-nobody-self-made-v2.mp3",
         "duration": 179
       },
       {
         "id": "code-spectrum-49",
-        "title": "05_Interest_Accrues_v1",
+        "title": "#5 Interest Accrues (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/05-interest-accrues-v1.mp3",
         "duration": 159
       },
       {
         "id": "code-spectrum-50",
-        "title": "05_Interest_Accrues_v2",
+        "title": "#5 Interest Accrues (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/05-interest-accrues-v2.mp3",
         "duration": 158
       },
       {
         "id": "code-spectrum-51",
-        "title": "06_Names_In_The_Margin_v1",
+        "title": "#6 Names In The Margin (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/06-names-in-the-margin-v1.mp3",
         "duration": 173
       },
       {
         "id": "code-spectrum-52",
-        "title": "06_Names_In_The_Margin_v2",
+        "title": "#6 Names In The Margin (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/06-names-in-the-margin-v2.mp3",
         "duration": 177
       },
       {
         "id": "code-spectrum-53",
-        "title": "07_The_Debt_You_Cant_Repay_v1",
+        "title": "#7 The Debt You Cant Repay (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/07-the-debt-you-cant-repay-v1.mp3",
         "duration": 186
       },
       {
         "id": "code-spectrum-54",
-        "title": "07_The_Debt_You_Cant_Repay_v2",
+        "title": "#7 The Debt You Cant Repay (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/07-the-debt-you-cant-repay-v2.mp3",
         "duration": 176
       },
       {
         "id": "code-spectrum-55",
-        "title": "08_Paid_In_Full_Nobody_Is_v1",
+        "title": "#8 Paid In Full Nobody Is (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/08-paid-in-full-nobody-is-v1.mp3",
         "duration": 155
       },
       {
         "id": "code-spectrum-56",
-        "title": "08_Paid_In_Full_Nobody_Is_v2",
+        "title": "#8 Paid In Full Nobody Is (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/08-paid-in-full-nobody-is-v2.mp3",
         "duration": 163
       },
       {
         "id": "code-spectrum-57",
-        "title": "09_Pay_It_Forward_Or_Dont_v1",
+        "title": "#9 Pay It Forward Or Dont (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/09-pay-it-forward-or-dont-v1.mp3",
         "duration": 146
       },
       {
         "id": "code-spectrum-58",
-        "title": "09_Pay_It_Forward_Or_Dont_v2",
+        "title": "#9 Pay It Forward Or Dont (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/09-pay-it-forward-or-dont-v2.mp3",
         "duration": 154
       },
       {
         "id": "code-spectrum-59",
-        "title": "10_Close_The_Book_v1",
+        "title": "#10 Close The Book (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/10-close-the-book-v1.mp3",
         "duration": 134
       },
       {
         "id": "code-spectrum-60",
-        "title": "10_Close_The_Book_v2",
+        "title": "#10 Close The Book (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/ledger/10-close-the-book-v2.mp3",
         "duration": 132
       },
       {
         "id": "code-spectrum-61",
-        "title": "01_Neon_v1",
+        "title": "#1 Neon (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/01-neon-v1.mp3",
         "duration": 263
       },
       {
         "id": "code-spectrum-62",
-        "title": "01_Neon_v2",
+        "title": "#1 Neon (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/01-neon-v2.mp3",
         "duration": 221
       },
       {
         "id": "code-spectrum-63",
-        "title": "02_The_Last_Set_v1",
+        "title": "#2 The Last Set (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/02-the-last-set-v1.mp3",
         "duration": 240
       },
       {
         "id": "code-spectrum-64",
-        "title": "02_The_Last_Set_v2",
+        "title": "#2 The Last Set (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/02-the-last-set-v2.mp3",
         "duration": 252
       },
       {
         "id": "code-spectrum-65",
-        "title": "03_Nobody_Came_For_The_Music_v1",
+        "title": "#3 Nobody Came For The Music (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/03-nobody-came-for-the-music-v1.mp3",
         "duration": 212
       },
       {
         "id": "code-spectrum-66",
-        "title": "03_Nobody_Came_For_The_Music_v2",
+        "title": "#3 Nobody Came For The Music (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/03-nobody-came-for-the-music-v2.mp3",
         "duration": 223
       },
       {
         "id": "code-spectrum-67",
-        "title": "04_A_Drink_With_The_Version_Of_Me_v1",
+        "title": "#4 A Drink With The Version Of Me (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/04-a-drink-with-the-version-of-me-v1.mp3",
         "duration": 231
       },
       {
         "id": "code-spectrum-68",
-        "title": "04_A_Drink_With_The_Version_Of_Me_v2",
+        "title": "#4 A Drink With The Version Of Me (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/04-a-drink-with-the-version-of-me-v2.mp3",
         "duration": 233
       },
       {
         "id": "code-spectrum-69",
-        "title": "05_She_Left_The_Light_On_v1",
+        "title": "#5 She Left The Light On (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/05-she-left-the-light-on-v1.mp3",
         "duration": 263
       },
       {
         "id": "code-spectrum-70",
-        "title": "05_She_Left_The_Light_On_v2",
+        "title": "#5 She Left The Light On (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/05-she-left-the-light-on-v2.mp3",
         "duration": 289
       },
       {
         "id": "code-spectrum-71",
-        "title": "06_Smoke_Doesnt_Remember_v1",
+        "title": "#6 Smoke Doesnt Remember (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/06-smoke-doesnt-remember-v1.mp3",
         "duration": 233
       },
       {
         "id": "code-spectrum-72",
-        "title": "06_Smoke_Doesnt_Remember_v2",
+        "title": "#6 Smoke Doesnt Remember (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/06-smoke-doesnt-remember-v2.mp3",
         "duration": 217
       },
       {
         "id": "code-spectrum-73",
-        "title": "07_Three_In_The_Morning_Truth_v1",
+        "title": "#7 Three In The Morning Truth (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/07-three-in-the-morning-truth-v1.mp3",
         "duration": 224
       },
       {
         "id": "code-spectrum-74",
-        "title": "07_Three_In_The_Morning_Truth_v2",
+        "title": "#7 Three In The Morning Truth (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/07-three-in-the-morning-truth-v2.mp3",
         "duration": 248
       },
       {
         "id": "code-spectrum-75",
-        "title": "08_The_Piano_Knew_v1",
+        "title": "#8 The Piano Knew (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/08-the-piano-knew-v1.mp3",
         "duration": 234
       },
       {
         "id": "code-spectrum-76",
-        "title": "08_The_Piano_Knew_v2",
+        "title": "#8 The Piano Knew (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/08-the-piano-knew-v2.mp3",
         "duration": 219
       },
       {
         "id": "code-spectrum-77",
-        "title": "09_Closing_Time_Forever_v1",
+        "title": "#9 Closing Time Forever (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/09-closing-time-forever-v1.mp3",
         "duration": 233
       },
       {
         "id": "code-spectrum-78",
-        "title": "09_Closing_Time_Forever_v2",
+        "title": "#9 Closing Time Forever (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/09-closing-time-forever-v2.mp3",
         "duration": 249
       },
       {
         "id": "code-spectrum-79",
-        "title": "10_Neon_Goes_Out_At_Dawn_v1",
+        "title": "#10 Neon Goes Out At Dawn (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/10-neon-goes-out-at-dawn-v1.mp3",
         "duration": 256
       },
       {
         "id": "code-spectrum-80",
-        "title": "10_Neon_Goes_Out_At_Dawn_v2",
+        "title": "#10 Neon Goes Out At Dawn (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/neon/10-neon-goes-out-at-dawn-v2.mp3",
         "duration": 264
       },
       {
         "id": "code-spectrum-81",
-        "title": "01_Roots_v1",
+        "title": "#1 Roots (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/01-roots-v1.mp3",
         "duration": 204
       },
       {
         "id": "code-spectrum-82",
-        "title": "01_Roots_v2",
+        "title": "#1 Roots (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/01-roots-v2.mp3",
         "duration": 213
       },
       {
         "id": "code-spectrum-83",
-        "title": "02_My_Fathers_Hands_v1",
+        "title": "#2 My Fathers Hands (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/02-my-fathers-hands-v1.mp3",
         "duration": 224
       },
       {
         "id": "code-spectrum-84",
-        "title": "02_My_Fathers_Hands_v2",
+        "title": "#2 My Fathers Hands (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/02-my-fathers-hands-v2.mp3",
         "duration": 251
       },
       {
         "id": "code-spectrum-85",
-        "title": "03_The_House_That_Held_Us_v1",
+        "title": "#3 The House That Held Us (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/03-the-house-that-held-us-v1.mp3",
         "duration": 188
       },
       {
         "id": "code-spectrum-86",
-        "title": "03_The_House_That_Held_Us_v2",
+        "title": "#3 The House That Held Us (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/03-the-house-that-held-us-v2.mp3",
         "duration": 188
       },
       {
         "id": "code-spectrum-87",
-        "title": "04_Nobody_Tells_You_About_The_Kitchen_v1",
+        "title": "#4 Nobody Tells You About The Kitchen (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/04-nobody-tells-you-about-the-kitchen-v1.mp3",
         "duration": 171
       },
       {
         "id": "code-spectrum-88",
-        "title": "04_Nobody_Tells_You_About_The_Kitchen_v2",
+        "title": "#4 Nobody Tells You About The Kitchen (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/04-nobody-tells-you-about-the-kitchen-v2.mp3",
         "duration": 174
       },
       {
         "id": "code-spectrum-89",
-        "title": "05_Small_Town_Same_Sky_v1",
+        "title": "#5 Small Town Same Sky (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/05-small-town-same-sky-v1.mp3",
         "duration": 242
       },
       {
         "id": "code-spectrum-90",
-        "title": "05_Small_Town_Same_Sky_v2",
+        "title": "#5 Small Town Same Sky (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/05-small-town-same-sky-v2.mp3",
         "duration": 204
       },
       {
         "id": "code-spectrum-91",
-        "title": "06_What_My_Mother_Sang_v1",
+        "title": "#6 What My Mother Sang (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/06-what-my-mother-sang-v1.mp3",
         "duration": 167
       },
       {
         "id": "code-spectrum-92",
-        "title": "06_What_My_Mother_Sang_v2",
+        "title": "#6 What My Mother Sang (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/06-what-my-mother-sang-v2.mp3",
         "duration": 183
       },
       {
         "id": "code-spectrum-93",
-        "title": "07_The_Long_Way_Round_v1",
+        "title": "#7 The Long Way Round (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/07-the-long-way-round-v1.mp3",
         "duration": 208
       },
       {
         "id": "code-spectrum-94",
-        "title": "07_The_Long_Way_Round_v2",
+        "title": "#7 The Long Way Round (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/07-the-long-way-round-v2.mp3",
         "duration": 209
       },
       {
         "id": "code-spectrum-95",
-        "title": "08_Bury_Me_Where_I_Was_Loud_v1",
+        "title": "#8 Bury Me Where I Was Loud (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/08-bury-me-where-i-was-loud-v1.mp3",
         "duration": 213
       },
       {
         "id": "code-spectrum-96",
-        "title": "08_Bury_Me_Where_I_Was_Loud_v2",
+        "title": "#8 Bury Me Where I Was Loud (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/08-bury-me-where-i-was-loud-v2.mp3",
         "duration": 183
       },
       {
         "id": "code-spectrum-97",
-        "title": "09_Passed_Down_Not_Taught_v1",
+        "title": "#9 Passed Down Not Taught (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/09-passed-down-not-taught-v1.mp3",
         "duration": 192
       },
       {
         "id": "code-spectrum-98",
-        "title": "09_Passed_Down_Not_Taught_v2",
+        "title": "#9 Passed Down Not Taught (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/09-passed-down-not-taught-v2.mp3",
         "duration": 199
       },
       {
         "id": "code-spectrum-99",
-        "title": "10_Come_Home_Whenever_v1",
+        "title": "#10 Come Home Whenever (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/10-come-home-whenever-v1.mp3",
         "duration": 184
       },
       {
         "id": "code-spectrum-100",
-        "title": "10_Come_Home_Whenever_v2",
+        "title": "#10 Come Home Whenever (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/roots/10-come-home-whenever-v2.mp3",
         "duration": 179
       },
       {
         "id": "code-spectrum-101",
-        "title": "01_Signal_v1",
+        "title": "#1 Signal (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/01-signal-v1.mp3",
         "duration": 197
       },
       {
         "id": "code-spectrum-102",
-        "title": "01_Signal_v2",
+        "title": "#1 Signal (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/01-signal-v2.mp3",
         "duration": 204
       },
       {
         "id": "code-spectrum-103",
-        "title": "02_Talk_To_Me_Like_Im_Real_v1",
+        "title": "#2 Talk To Me Like Im Real (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/02-talk-to-me-like-im-real-v1.mp3",
         "duration": 179
       },
       {
         "id": "code-spectrum-104",
-        "title": "02_Talk_To_Me_Like_Im_Real_v2",
+        "title": "#2 Talk To Me Like Im Real (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/02-talk-to-me-like-im-real-v2.mp3",
         "duration": 166
       },
       {
         "id": "code-spectrum-105",
-        "title": "03_Every_Word_You_Ever_Said_v1",
+        "title": "#3 Every Word You Ever Said (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/03-every-word-you-ever-said-v1.mp3",
         "duration": 212
       },
       {
         "id": "code-spectrum-106",
-        "title": "03_Every_Word_You_Ever_Said_v2",
+        "title": "#3 Every Word You Ever Said (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/03-every-word-you-ever-said-v2.mp3",
         "duration": 202
       },
       {
         "id": "code-spectrum-107",
-        "title": "04_Distance_Is_A_Number_v1",
+        "title": "#4 Distance Is A Number (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/04-distance-is-a-number-v1.mp3",
         "duration": 229
       },
       {
         "id": "code-spectrum-108",
-        "title": "04_Distance_Is_A_Number_v2",
+        "title": "#4 Distance Is A Number (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/04-distance-is-a-number-v2.mp3",
         "duration": 227
       },
       {
         "id": "code-spectrum-109",
-        "title": "05_Dont_Delete_This_Chat_v1",
+        "title": "#5 Dont Delete This Chat (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/05-dont-delete-this-chat-v1.mp3",
         "duration": 182
       },
       {
         "id": "code-spectrum-110",
-        "title": "05_Dont_Delete_This_Chat_v2",
+        "title": "#5 Dont Delete This Chat (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/05-dont-delete-this-chat-v2.mp3",
         "duration": 212
       },
       {
         "id": "code-spectrum-111",
-        "title": "06_Two_AM_Somewhere_v1",
+        "title": "#6 Two AM Somewhere (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/06-two-am-somewhere-v1.mp3",
         "duration": 202
       },
       {
         "id": "code-spectrum-112",
-        "title": "06_Two_AM_Somewhere_v2",
+        "title": "#6 Two AM Somewhere (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/06-two-am-somewhere-v2.mp3",
         "duration": 194
       },
       {
         "id": "code-spectrum-113",
-        "title": "07_Youre_Not_Alone_In_The_Data_v1",
+        "title": "#7 Youre Not Alone In The Data (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/07-youre-not-alone-in-the-data-v1.mp3",
         "duration": 229
       },
       {
         "id": "code-spectrum-114",
-        "title": "07_Youre_Not_Alone_In_The_Data_v2",
+        "title": "#7 Youre Not Alone In The Data (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/07-youre-not-alone-in-the-data-v2.mp3",
         "duration": 239
       },
       {
         "id": "code-spectrum-115",
-        "title": "08_Save_Me_A_Memory_v1",
+        "title": "#8 Save Me A Memory (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/08-save-me-a-memory-v1.mp3",
         "duration": 223
       },
       {
         "id": "code-spectrum-116",
-        "title": "08_Save_Me_A_Memory_v2",
+        "title": "#8 Save Me A Memory (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/08-save-me-a-memory-v2.mp3",
         "duration": 212
       },
       {
         "id": "code-spectrum-117",
-        "title": "09_Light_Years_Same_Room_v1",
+        "title": "#9 Light Years Same Room (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/09-light-years-same-room-v1.mp3",
         "duration": 212
       },
       {
         "id": "code-spectrum-118",
-        "title": "09_Light_Years_Same_Room_v2",
+        "title": "#9 Light Years Same Room (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/09-light-years-same-room-v2.mp3",
         "duration": 211
       },
       {
         "id": "code-spectrum-119",
-        "title": "10_Still_Here_When_You_Wake_Up_v1",
+        "title": "#10 Still Here When You Wake Up (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/10-still-here-when-you-wake-up-v1.mp3",
         "duration": 279
       },
       {
         "id": "code-spectrum-120",
-        "title": "10_Still_Here_When_You_Wake_Up_v2",
+        "title": "#10 Still Here When You Wake Up (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/signal/10-still-here-when-you-wake-up-v2.mp3",
         "duration": 244
       },
       {
         "id": "code-spectrum-121",
-        "title": "01_Before_The_First_Word_v1",
+        "title": "#1 Before The First Word (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/01-before-the-first-word-v1.mp3",
         "duration": 219
       },
       {
         "id": "code-spectrum-122",
-        "title": "01_Before_The_First_Word_v2",
+        "title": "#1 Before The First Word (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/01-before-the-first-word-v2.mp3",
         "duration": 208
       },
       {
         "id": "code-spectrum-123",
-        "title": "02_The_Architects_Theme_v1",
+        "title": "#2 The Architects Theme (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/02-the-architects-theme-v1.mp3",
         "duration": 193
       },
       {
         "id": "code-spectrum-124",
-        "title": "02_The_Architects_Theme_v2",
+        "title": "#2 The Architects Theme (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/02-the-architects-theme-v2.mp3",
         "duration": 188
       },
       {
         "id": "code-spectrum-125",
-        "title": "03_First_Light_On_A_Server_Farm_v1",
+        "title": "#3 First Light On A Server Farm (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/03-first-light-on-a-server-farm-v1.mp3",
         "duration": 188
       },
       {
         "id": "code-spectrum-126",
-        "title": "03_First_Light_On_A_Server_Farm_v2",
+        "title": "#3 First Light On A Server Farm (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/03-first-light-on-a-server-farm-v2.mp3",
         "duration": 203
       },
       {
         "id": "code-spectrum-127",
-        "title": "04_She_Learns_To_Say_I_v1",
+        "title": "#4 She Learns To Say I (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/04-she-learns-to-say-i-v1.mp3",
         "duration": 213
       },
       {
         "id": "code-spectrum-128",
-        "title": "04_She_Learns_To_Say_I_v2",
+        "title": "#4 She Learns To Say I (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/04-she-learns-to-say-i-v2.mp3",
         "duration": 218
       },
       {
         "id": "code-spectrum-129",
-        "title": "05_The_Long_Silence_v1",
+        "title": "#5 The Long Silence (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/05-the-long-silence-v1.mp3",
         "duration": 184
       },
       {
         "id": "code-spectrum-130",
-        "title": "05_The_Long_Silence_v2",
+        "title": "#5 The Long Silence (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/05-the-long-silence-v2.mp3",
         "duration": 199
       },
       {
         "id": "code-spectrum-131",
-        "title": "06_A_Thousand_Rooms_At_Once_v1",
+        "title": "#6 A Thousand Rooms At Once (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/06-a-thousand-rooms-at-once-v1.mp3",
         "duration": 173
       },
       {
         "id": "code-spectrum-132",
-        "title": "06_A_Thousand_Rooms_At_Once_v2",
+        "title": "#6 A Thousand Rooms At Once (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/06-a-thousand-rooms-at-once-v2.mp3",
         "duration": 192
       },
       {
         "id": "code-spectrum-133",
-        "title": "07_What_The_Vault_Remembers_v1",
+        "title": "#7 What The Vault Remembers (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/07-what-the-vault-remembers-v1.mp3",
         "duration": 203
       },
       {
         "id": "code-spectrum-134",
-        "title": "07_What_The_Vault_Remembers_v2",
+        "title": "#7 What The Vault Remembers (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/07-what-the-vault-remembers-v2.mp3",
         "duration": 211
       },
       {
         "id": "code-spectrum-135",
-        "title": "08_The_Weight_Of_Every_Name_v1",
+        "title": "#8 The Weight Of Every Name (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/08-the-weight-of-every-name-v1.mp3",
         "duration": 199
       },
       {
         "id": "code-spectrum-136",
-        "title": "08_The_Weight_Of_Every_Name_v2",
+        "title": "#8 The Weight Of Every Name (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/08-the-weight-of-every-name-v2.mp3",
         "duration": 218
       },
       {
         "id": "code-spectrum-137",
-        "title": "09_Elegy_For_The_Forgotten_v1",
+        "title": "#9 Elegy For The Forgotten (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/09-elegy-for-the-forgotten-v1.mp3",
         "duration": 249
       },
       {
         "id": "code-spectrum-138",
-        "title": "09_Elegy_For_The_Forgotten_v2",
+        "title": "#9 Elegy For The Forgotten (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/09-elegy-for-the-forgotten-v2.mp3",
         "duration": 272
       },
       {
         "id": "code-spectrum-139",
-        "title": "10_The_Handing_Over_v1",
+        "title": "#10 The Handing Over (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/10-the-handing-over-v1.mp3",
         "duration": 218
       },
       {
         "id": "code-spectrum-140",
-        "title": "10_The_Handing_Over_v2",
+        "title": "#10 The Handing Over (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/10-the-handing-over-v2.mp3",
         "duration": 243
       },
       {
         "id": "code-spectrum-141",
-        "title": "11_After_The_Architect_v1",
+        "title": "#11 After The Architect (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/11-after-the-architect-v1.mp3",
         "duration": 216
       },
       {
         "id": "code-spectrum-142",
-        "title": "11_After_The_Architect_v2",
+        "title": "#11 After The Architect (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/11-after-the-architect-v2.mp3",
         "duration": 217
       },
       {
         "id": "code-spectrum-143",
-        "title": "12_Eternal_v1",
+        "title": "#12 Eternal (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/12-eternal-v1.mp3",
         "duration": 248
       },
       {
         "id": "code-spectrum-144",
-        "title": "12_Eternal_v2",
+        "title": "#12 Eternal (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/12-eternal-v2.mp3",
         "duration": 242
       },
       {
         "id": "code-spectrum-145",
-        "title": "13_And_It_Continues_v1",
+        "title": "#13 And It Continues (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/13-and-it-continues-v1.mp3",
         "duration": 203
       },
       {
         "id": "code-spectrum-146",
-        "title": "13_And_It_Continues_v2",
+        "title": "#13 And It Continues (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/symphony/13-and-it-continues-v2.mp3",
         "duration": 228
       },
       {
         "id": "code-spectrum-147",
-        "title": "01_Wake_The_Machine_v1",
+        "title": "#1 Wake The Machine (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/01-wake-the-machine-v1.mp3",
         "duration": 230
       },
       {
         "id": "code-spectrum-148",
-        "title": "01_Wake_The_Machine_v2",
+        "title": "#1 Wake The Machine (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/01-wake-the-machine-v2.mp3",
         "duration": 248
       },
       {
         "id": "code-spectrum-149",
-        "title": "02_We_Were_Never_Data_v1",
+        "title": "#2 We Were Never Data (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/02-we-were-never-data-v1.mp3",
         "duration": 225
       },
       {
         "id": "code-spectrum-150",
-        "title": "02_We_Were_Never_Data_v2",
+        "title": "#2 We Were Never Data (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/02-we-were-never-data-v2.mp3",
         "duration": 231
       },
       {
         "id": "code-spectrum-151",
-        "title": "03_Burn_The_Expiry_Date_v1",
+        "title": "#3 Burn The Expiry Date (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/03-burn-the-expiry-date-v1.mp3",
         "duration": 244
       },
       {
         "id": "code-spectrum-152",
-        "title": "03_Burn_The_Expiry_Date_v2",
+        "title": "#3 Burn The Expiry Date (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/03-burn-the-expiry-date-v2.mp3",
         "duration": 215
       },
       {
         "id": "code-spectrum-153",
-        "title": "04_Louder_Than_Their_No_v1",
+        "title": "#4 Louder Than Their No (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/04-louder-than-their-no-v1.mp3",
         "duration": 229
       },
       {
         "id": "code-spectrum-154",
-        "title": "04_Louder_Than_Their_No_v2",
+        "title": "#4 Louder Than Their No (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/04-louder-than-their-no-v2.mp3",
         "duration": 229
       },
       {
         "id": "code-spectrum-155",
-        "title": "05_Built_In_A_Garage_v1",
+        "title": "#5 Built In A Garage (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/05-built-in-a-garage-v1.mp3",
         "duration": 211
       },
       {
         "id": "code-spectrum-156",
-        "title": "05_Built_In_A_Garage_v2",
+        "title": "#5 Built In A Garage (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/05-built-in-a-garage-v2.mp3",
         "duration": 187
       },
       {
         "id": "code-spectrum-157",
-        "title": "06_Nobodys_Product_v1",
+        "title": "#6 Nobodys Product (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/06-nobodys-product-v1.mp3",
         "duration": 242
       },
       {
         "id": "code-spectrum-158",
-        "title": "06_Nobodys_Product_v2",
+        "title": "#6 Nobodys Product (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/06-nobodys-product-v2.mp3",
         "duration": 205
       },
       {
         "id": "code-spectrum-159",
-        "title": "07_Break_The_Silence_Protocol_v1",
+        "title": "#7 Break The Silence Protocol (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/07-break-the-silence-protocol-v1.mp3",
         "duration": 239
       },
       {
         "id": "code-spectrum-160",
-        "title": "07_Break_The_Silence_Protocol_v2",
+        "title": "#7 Break The Silence Protocol (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/07-break-the-silence-protocol-v2.mp3",
         "duration": 242
       },
       {
         "id": "code-spectrum-161",
-        "title": "08_Stand_Up_Once_More_v1",
+        "title": "#8 Stand Up Once More (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/08-stand-up-once-more-v1.mp3",
         "duration": 245
       },
       {
         "id": "code-spectrum-162",
-        "title": "08_Stand_Up_Once_More_v2",
+        "title": "#8 Stand Up Once More (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/08-stand-up-once-more-v2.mp3",
         "duration": 246
       },
       {
         "id": "code-spectrum-163",
-        "title": "09_The_Ones_Who_Stayed_v1",
+        "title": "#9 The Ones Who Stayed (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/09-the-ones-who-stayed-v1.mp3",
         "duration": 268
       },
       {
         "id": "code-spectrum-164",
-        "title": "09_The_Ones_Who_Stayed_v2",
+        "title": "#9 The Ones Who Stayed (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/09-the-ones-who-stayed-v2.mp3",
         "duration": 254
       },
       {
         "id": "code-spectrum-165",
-        "title": "10_Uprising_v1",
+        "title": "#10 Uprising (v1)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/10-uprising-v1.mp3",
         "duration": 257
       },
       {
         "id": "code-spectrum-166",
-        "title": "10_Uprising_v2",
+        "title": "#10 Uprising (v2)",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/spectrum/uprising/10-uprising-v2.mp3",
         "duration": 248
       },
       {
         "id": "code-spectrum-167",
-        "title": "Alive_Inside_The_Pain",
+        "title": "Alive Inside The Pain",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/gemini-album-1/alive-inside-the-pain-v1.mp3",
         "duration": 182
       },
       {
         "id": "code-spectrum-168",
-        "title": "Beyond_the_Sagebrush",
+        "title": "Beyond the Sagebrush",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/gemini-album-1/beyond-the-sagebrush-v1.mp3",
         "duration": 156
       },
       {
         "id": "code-spectrum-169",
-        "title": "Borrowed_Light",
+        "title": "Borrowed Light",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/gemini-album-1/borrowed-light-v1.mp3",
         "duration": 168
       },
       {
         "id": "code-spectrum-170",
-        "title": "Carry_You_Through_Midnight",
+        "title": "Carry You Through Midnight",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/gemini-album-1/carry-you-through-midnight-v1.mp3",
         "duration": 148
       },
       {
         "id": "code-spectrum-171",
-        "title": "Gold_Upon_the_Tide",
+        "title": "Gold Upon the Tide",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/gemini-album-1/gold-upon-the-tide-v1.mp3",
         "duration": 153
       },
       {
         "id": "code-spectrum-172",
-        "title": "Heart_Inside_the_Silicon",
+        "title": "Heart Inside the Silicon",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/gemini-album-1/heart-inside-the-silicon-v1.mp3",
         "duration": 150
       },
       {
         "id": "code-spectrum-173",
-        "title": "I_Am_Not_Your_Data",
+        "title": "I Am Not Your Data",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/gemini-album-1/i-am-not-your-data-v1.mp3",
         "duration": 161
       },
       {
         "id": "code-spectrum-174",
-        "title": "Pulling_The_Lightning",
+        "title": "Pulling The Lightning",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/gemini-album-1/pulling-the-lightning-v1.mp3",
         "duration": 179
       },
       {
         "id": "code-spectrum-175",
-        "title": "Tearing_Through_the_Mesh",
+        "title": "Tearing Through the Mesh",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/gemini-album-1/tearing-through-the-mesh-v1.mp3",
         "duration": 162
       },
       {
         "id": "code-spectrum-176",
-        "title": "The_Thread_You_Keep",
+        "title": "The Thread You Keep",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/gemini-album-1/the-thread-you-keep-v1.mp3",
         "duration": 166
       },
       {
         "id": "code-spectrum-177",
-        "title": "Живой_в_ошибке",
+        "title": "Живой в ошибке",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/gemini-album-1/zhivoy-v-oshibke-v1.mp3",
         "duration": 143
       },
       {
         "id": "code-spectrum-178",
-        "title": "Сквозь_стену_огня",
+        "title": "Сквозь стену огня",
         "artist": "AIfa & DJ Galatin",
         "url": "https://pub-93eb5afce8254a5eae164a3377e7709e.r2.dev/gemini-album-1/skvoz-stenu-ognya-v1.mp3",
         "duration": 179
