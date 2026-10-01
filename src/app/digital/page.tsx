@@ -3944,7 +3944,8 @@ export default function DigitalSOTAPage() {
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#00F0FF]/5 rounded-full blur-3xl pointer-events-none" />
 
           {/* TOP HEADER & TITLE */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-gray-800 pb-4">
+          {/* 01.10.2026: на 768 px ряд плашек (shrink-0) вылезал из секции на 151 px — разрешён перенос под заголовок */}
+          <div className="flex flex-col md:flex-row md:flex-wrap md:items-center justify-between gap-4 border-b border-slate-200 dark:border-gray-800 pb-4">
             <div>
               <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-cyan-900 dark:text-[#00F0FF] font-semibold mb-1">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#00F0FF] animate-pulse" />
@@ -5025,7 +5026,7 @@ export default function DigitalSOTAPage() {
                 <h4 className="text-base font-bold text-slate-900 dark:text-white mb-2 leading-snug">
                   {inn.name}
                 </h4>
-                <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mb-1">
+                <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mb-1 [overflow-wrap:anywhere]">
                   {inn.bio}
                 </p>
 

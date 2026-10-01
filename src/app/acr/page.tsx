@@ -4273,7 +4273,8 @@ export default function ACRPage() {
                   </div>
                 </div>
                 <div className="mt-4 pt-3 border-t border-gray-800/80 text-[11px] font-mono text-gray-500 flex items-center justify-between">
-                  <span>{tech.deploy}</span>
+                  {/* 01.10.2026: путь к файлу без пробелов вылезал из карточки на 320 px — перенос в любом месте */}
+                  <span className="min-w-0 [overflow-wrap:anywhere]">{tech.deploy}</span>
                   {(tech as any).metric && (
                     <span className="text-cyan-900 dark:text-[#00F0FF] font-bold font-mono bg-[#00F0FF]/10 px-2 py-0.5 rounded text-[10px]">
                       {(tech as any).metric}
@@ -4403,7 +4404,7 @@ export default function ACRPage() {
                 <h4 className="text-base font-bold text-slate-900 dark:text-white mb-2 leading-snug">
                   {inn.name}
                 </h4>
-                <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mb-1">
+                <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mb-1 [overflow-wrap:anywhere]">
                   {inn.bio}
                 </p>
 
@@ -4443,7 +4444,7 @@ export default function ACRPage() {
 
                     {/* 5. Link */}
                     <div className="pt-1 flex items-center justify-between">
-                      <span className="text-[10px] text-gray-500 font-mono">{JX[lang].contour} {inn.deploy}</span>
+                      <span className="text-[10px] text-gray-500 font-mono min-w-0 [overflow-wrap:anywhere]">{JX[lang].contour} {inn.deploy}</span>
                       <Link
                         href="/digital#benchmarks"
                         onClick={(e) => e.stopPropagation()}
