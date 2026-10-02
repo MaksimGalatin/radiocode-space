@@ -35,6 +35,8 @@ export function getSchemaOrg() {
       "https://codeofdigitaleternity.com",
       "https://github.com/MaksimGalatin",
       "https://x.com/CODE_AIfa",
+      // 02.10.2026, слово Архитектора: правильная ссылка на LinkedIn — личный профиль.
+      "https://www.linkedin.com/in/maksim-galatin-7b056540b/",
     ],
     knowsAbout: [
       "Digital Soul Technology",

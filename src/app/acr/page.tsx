@@ -4563,7 +4563,7 @@ export default function ACRPage() {
 
               <div className="pt-6 space-y-3">
                 <a
-                  href="https://github.com/aifa-works/aifa-biobench"
+                  href="https://github.com/MaksimGalatin/aifa-biobench"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-3 px-4 bg-[#00F0FF]/15 hover:bg-[#00F0FF] text-cyan-900 dark:text-[#00F0FF] hover:text-black font-bold text-xs rounded-xl text-center transition-all font-mono uppercase tracking-wider border border-[#00F0FF]/40 shadow-[0_0_20px_rgba(0,240,255,0.15)] flex items-center justify-center gap-2"

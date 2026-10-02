@@ -62,11 +62,8 @@ const nextConfig: NextConfig = {
         destination: "/privacy-policy",
         permanent: false,
       },
-      {
-        source: "/terms",
-        destination: "/user-agreement",
-        permanent: false,
-      },
+      // 02.10.2026: переадресация /terms → /user-agreement снята — у радио теперь свои Условия обслуживания
+      // (src/app/terms, слово Архитектора «правила дополни, сделай максимально идеальную юридическую защиту»).
     ];
   },
   // Baseline security headers (SEO/trust signal). Additive — does not affect the

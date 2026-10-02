@@ -111,6 +111,13 @@ export function RadioFooter() {
               >
                 {rt('userAgreement')}
               </a>
+              {/* 02.10.2026: свои Условия обслуживания радио (слово Архитектора «правила дополни»). */}
+              <a
+                href="/terms"
+                className="text-[13px] font-mono tracking-wider text-[#8B8BA8] hover:text-[#00F0FF] transition-colors"
+              >
+                {языкПодвала === 'ru' ? 'Условия обслуживания' : языкПодвала === 'es' ? 'Condiciones del servicio' : языкПодвала === 'zh' ? '服务条款' : 'Terms of Service'}
+              </a>
               <a
                 href="/news"
                 className="text-[13px] font-mono tracking-wider text-[#8B8BA8] hover:text-[#00F0FF] transition-colors"

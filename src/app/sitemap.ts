@@ -320,6 +320,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
       alternates: { languages: языковые('/user-agreement') },
     },
+    // 02.10.2026: свои Условия обслуживания радио.
+    {
+      url: `${SITE}/terms`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.5,
+      alternates: { languages: языковые('/terms') },
+    },
     // 🔴 СПИСКА СУБПОДРЯДЧИКОВ НЕ БЫЛО В КАРТЕ (добавлено 11.09.2026).
     //
     // Замер живым запросом 11.09.2026: /legal/subprocessors отдаёт 200, а
