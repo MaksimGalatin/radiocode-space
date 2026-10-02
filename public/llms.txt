@@ -129,6 +129,15 @@ ODbL 1.0. We do not use CC BY-NC-SA for anything.
 ## Prices
 Accessibility audit from $149; remediation of what was found from $375;
 Oracle offer — fixing the found vulnerabilities within 48 hours for $500.
+Smaller steps: Lite Audit $50 — up to 25 pages and a dated document, without
+the lawsuit-risk analysis; Fix Pack $99 one-off — corrected code for each
+proven finding on up to 25 pages and a re-check after 14 days.
+Subscriptions (added 02.10.2026), paid monthly with no auto-charge — each month
+is a new invoice: Monitoring $25/mo — a re-check of up to 25 pages every week;
+Monitoring Premium $99/mo — a re-check every three days and the FULL Fix Pack
+with every check. Both send an email after every check: what was fixed, what
+remains, what is new. Bought on /accessibility, nothing is installed on the
+client's site.
 
 ## Radio
 radiocode.space — SIX stations, 530 original tracks in 1,024 versions, free to
@@ -344,6 +353,17 @@ auth/register и auth/google, и нет ни одного входа по кош
 
 Цены фиксированные, разовые, за сайт. A1–A7 покупаются на /accessibility
 (NOWPayments, криптовалюта, без учётной записи).
+Малые ступени: Лайт-Аудит — 50 USD, до 25 страниц и документ с датой, без
+разбора судебного риска; Пакет исправлений — 99 USD разово, исправленный код
+под каждую доказанную находку до 25 страниц и повторная проверка через 14 дней.
+
+Подписки (внесено 02.10.2026). Оплата помесячно, без автосписаний: каждый месяц
+— новый счёт.
+- Мониторинг — 25 USD в месяц: перепроверка до 25 страниц каждую неделю.
+- Мониторинг Премиум — 99 USD в месяц: перепроверка каждые три дня и ПОЛНЫЙ
+  Пакет исправлений к каждой проверке.
+Обе присылают письмо после каждой проверки: что исправлено, что осталось, что
+появилось. Покупаются на /accessibility; на сайт клиента ничего не ставится.
 
 
 ## Амбассадоры, предел токенов и права на музыку (внесено 14.09.2026)
