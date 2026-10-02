@@ -20,13 +20,14 @@
  */
 
 import type { ProbeFinding } from './oracle-probe';
+import { безопасныйFetch } from './ssrf-guard';
 
 /** Ответ с сокращённым телом — чтобы не тащить в память мегабайты. */
 async function grab(url: string, timeoutMs = 10000): Promise<{ status: number; headers: Headers; body: string } | null> {
   try {
-    const r = await fetch(url, {
+    // SSRF-заслон: проверка хоста на каждом редиректе.
+    const r = await безопасныйFetch(url, {
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AIfa-Oracle-Deep/1.0; +https://aifa.works/oracle)' },
-      redirect: 'follow',
       signal: AbortSignal.timeout(timeoutMs),
     });
     const body = (await r.text()).slice(0, 300_000);

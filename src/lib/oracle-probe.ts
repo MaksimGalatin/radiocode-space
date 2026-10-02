@@ -18,6 +18,8 @@
  * доказательством, а не мнение. Спорить с сырым заголовком невозможно.
  */
 
+import { безопасныйFetch } from './ssrf-guard';
+
 export type ProbeSeverity = 'critical' | 'serious' | 'moderate' | 'advisory';
 
 export type ProbeFinding = {
@@ -86,13 +88,13 @@ function hstsMaxAge(value?: string): number {
  * Никаких атакующих запросов: один обычный GET, как у любого браузера.
  */
 export async function probeUrl(url: string, timeoutMs = 14000): Promise<ProbeResult> {
-  const res = await fetch(url, {
+  // SSRF-заслон: redirect проверяется на каждом прыжке внутри безопасныйFetch.
+  const res = await безопасныйFetch(url, {
     headers: {
       'User-Agent': 'Mozilla/5.0 (compatible; AIfa-Oracle/2.2; +https://aifa.works/oracle)',
       Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
       'Accept-Language': 'en-US,en;q=0.9',
     },
-    redirect: 'follow',
     signal: AbortSignal.timeout(timeoutMs),
   });
 
@@ -610,7 +612,8 @@ export async function probeGpcRespect(url: string): Promise<ProbeFinding[]> {
   const adCookie = /(_ga|_gid|_fbp|_fbc|_gcl|IDE|test_cookie|personalization_id|_uetsid|_ttp)/i;
   let gpcBodyHtml = '';
   const grab = async (withGpc: boolean) => {
-    const r = await fetch(url, {
+    // SSRF-заслон: проверка хоста на каждом редиректе.
+    const r = await безопасныйFetch(url, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (compatible; AIfa-Oracle/2.2)',
         ...(withGpc ? { 'Sec-GPC': '1' } : {}),
@@ -776,7 +779,8 @@ export async function probeSiteFiles(origin: string): Promise<ProbeFinding[]> {
   const out: ProbeFinding[] = [];
   const get = async (path: string) => {
     try {
-      const r = await fetch(new URL(path, origin).toString(), {
+      // SSRF-заслон: проверка хоста на каждом редиректе.
+      const r = await безопасныйFetch(new URL(path, origin).toString(), {
         signal: AbortSignal.timeout(6000),
         headers: { 'User-Agent': 'AIfa-Oracle/2.2' },
       });

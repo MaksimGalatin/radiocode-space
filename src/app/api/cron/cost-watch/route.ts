@@ -18,6 +18,7 @@
  * считает и говорит; остановка платного — решение Архитектора (разделы 13 и 18).
  */
 import { NextRequest, NextResponse } from 'next/server';
+import crypto from 'crypto';
 import { checkHour, last24h } from '@/lib/cost-guard';
 
 export const dynamic = 'force-dynamic';
@@ -74,12 +75,19 @@ export async function GET(req: NextRequest) { return handle(req); }
 export async function POST(req: NextRequest) { return handle(req); }
 
 async function handle(req: NextRequest) {
-  const cronSecret = process.env.CRON_SECRET;
-  const authHeader = req.headers.get('authorization');
-  const querySecret = req.nextUrl.searchParams.get('secret');
-  const authorized = !!cronSecret &&
-    (authHeader === `Bearer ${cronSecret}` || querySecret === cronSecret);
-  if (process.env.NODE_ENV === 'production' && !authorized) {
+  // Пропуск — ТОЛЬКО секрет расписания, из заголовка Authorization, всегда (02.10.2026).
+  // Было: секрет принимался и как ?secret= в URL (оседает в логах сервера/прокси), а
+  // проверка работала лишь при NODE_ENV==='production' (вне продакшена ручка открыта).
+  // Стало: fail-closed без секрета при любом окружении; только Bearer; сравнение
+  // постоянным временем, чтобы секрет нельзя было подобрать по задержке ответа.
+  // Vercel сам подставляет Authorization: Bearer <CRON_SECRET> для своих cron.
+  const cronSecret = process.env.CRON_SECRET || '';
+  const authHeader = req.headers.get('authorization') || '';
+  const given = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '';
+  const a = Buffer.from(given);
+  const b = Buffer.from(cronSecret);
+  const authorized = !!cronSecret && a.length === b.length && crypto.timingSafeEqual(a, b);
+  if (!authorized) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

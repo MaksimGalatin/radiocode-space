@@ -4,6 +4,19 @@ import { generateFixpack, type FixpackComparison } from '../../../../lib/aifafoc
 
 export const dynamic = 'force-dynamic';
 
+// Экранирование для вставки пользовательского ввода в HTML (02.10.2026).
+// Было: ${id} из ?id= подставлялся в 404-страницу (Content-Type: text/html)
+// без экранирования — отражённый XSS: ссылка вида ?id=<script>…</script>
+// выполняла чужой скрипт в браузере жертвы на нашем домене.
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
@@ -48,7 +61,7 @@ export async function GET(req: NextRequest) {
     return new NextResponse(
       `<!DOCTYPE html><html><body style="font-family:sans-serif;background:#030712;color:#fff;padding:40px;text-align:center;">
         <h2>404 — Проверка не найдена</h2>
-        <p style="color:#9ca3af;">Запись с номером ${id} не зарегистрирована в реестре проверок.</p>
+        <p style="color:#9ca3af;">Запись с номером ${escapeHtml(id)} не зарегистрирована в реестре проверок.</p>
         <p><a href="/" style="color:#00E5FF;">Вернуться на главную</a></p>
       </body></html>`,
       { status: 404, headers: { ...CORS_HEADERS, 'Content-Type': 'text/html; charset=utf-8' } }

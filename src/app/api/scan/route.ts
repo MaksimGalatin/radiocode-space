@@ -5,7 +5,7 @@ import { getThreatMatrix, getLawMeta, type Category } from '../../../data/threat
 import { localizeFindings } from '@/lib/oracle-probe-i18n';
 import { guessSector, riskForSector } from '@/lib/oracle-risk';
 import { peerComparison } from '@/lib/oracle-peers';
-import { хостБезопасен, ссылкаБезопасна } from '@/lib/ssrf-guard';
+import { хостБезопасен, ссылкаБезопасна, безопасныйFetch } from '@/lib/ssrf-guard';
 import { имеетДоступноеИмя } from '@/lib/accessible-name';
 import { probeLaw, applyProbeLaw, type ВидНормы, type ПотолокШтрафа, type ИсточникНормы } from '@/lib/probe-law';
 import { runA11yPageScan, type A11yPageFinding } from '@/lib/a11y-scanner';
@@ -416,7 +416,8 @@ async function fetchSitemapUrls(rootUrl: string, maxPages = 3): Promise<string[]
   try {
     const parsed = new URL(rootUrl);
     const sitemapUrl = new URL('/sitemap.xml', parsed.origin).toString();
-    const res = await fetch(sitemapUrl, {
+    // SSRF-заслон: проверка хоста на каждом редиректе.
+    const res = await безопасныйFetch(sitemapUrl, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
       },
@@ -474,7 +475,8 @@ async function fetchSitemapUrls(rootUrl: string, maxPages = 3): Promise<string[]
 // ─── HTML Scraper ─────────────────────────────────────────────────────────────
 
 async function scrapePageBlueprint(url: string, locale = 'en'): Promise<{ blueprint: string; html: string; a11yFindings: A11yPageFinding[] }> {
-  const res = await fetch(url, {
+  // SSRF-заслон: проверка хоста на каждом редиректе.
+  const res = await безопасныйFetch(url, {
     headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
       Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
