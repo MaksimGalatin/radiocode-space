@@ -10,6 +10,10 @@
  * services.ts: клик открывает окно с подробным описанием, вопросами AIfa, тем, что придёт, и
  * образцом. Образцы — НАСТОЯЩИЕ выдачи бота (public/creativity/samples), прочитанные целиком.
  *
+ * 01.10.2026 — третий заход, слово Архитектора: «РАСПИСАТЬ детально ВСЁ на странице, каждую услугу!» и
+ * «Нужно просто сделать их шире и информативнее до клика мышью». Карточки — две в ряд, с картинкой из образца,
+ * «Кому и когда», полным описанием, тем, что придёт, сроком и кнопкой сразу в услугу (?start=buy_<sku>).
+ *
  * Исправлено против прежней страницы:
  *   • бот говорит на трёх языках (en/ru/es), а не на четырёх — китайского в боте нет;
  *   • в блоке заработка — как это устроено по шагам и пример расчёта из кода бота
@@ -24,7 +28,7 @@ import {
   MessageCircle, ListChecks, Eye, Wallet, Zap, Globe, Coins, CalendarHeart, Package, TrendingUp, Link2,
   X, Clock, PlayCircle, ChevronRight, Calculator,
 } from 'lucide-react';
-import { SERVICES, CATS, SAMPLE_IDS, type Service, type L } from './services';
+import { SERVICES, CATS, SAMPLE_IDS, CARD, В_БОТЕ_СРАЗУ, type Service, type L } from './services';
 
 type Lang = 'ru' | 'en' | 'es' | 'zh';
 type Icon = React.ComponentType<{ className?: string }>;
@@ -51,6 +55,8 @@ interface Content {
 
 const BOT = 'https://t.me/AIfaCreativityBot';
 const EARN = 'https://t.me/AIfaCreativityBot?start=ambassador';
+/** Кнопка «Создать» ведёт сразу в услугу: бот понимает ?start=buy_<sku> (bot/src/bot.ts, показатьТовар). */
+const вБот = (id: string) => (В_БОТЕ_СРАЗУ.has(id) ? `${BOT}?start=buy_${id}` : BOT);
 
 const D: Record<Lang, Content> = {
   ru: {
@@ -67,14 +73,14 @@ const D: Record<Lang, Content> = {
     ],
     howH: 'Как это работает',
     steps: [
-      { t: 'Выберите, что создать', d: 'Песня, сказка, открытка, прогноз, набор подарков — в меню бота.' },
-      { t: 'Ответьте на несколько вопросов', d: 'Для кого, по какому поводу, что важно упомянуть, какое настроение. Чем точнее детали, тем личнее результат.' },
-      { t: 'Посмотрите образец', d: 'У каждой услуги есть готовый пример — видно, что вы получите, ещё до оплаты.' },
-      { t: 'Оплатите звёздами Telegram', d: 'Telegram Stars покупаются прямо в приложении. Цены — от $0.99.' },
-      { t: 'Получите результат', d: 'Тексты и картинки — за секунды, песни и видео — за несколько минут. Текстовые работы можно бесплатно переделать дважды.' },
+      { t: 'Выберите, что создать', d: 'Откройте бота @AIfaCreativityBot — в меню 22 услуги в пяти разделах: музыка и видео, книги и истории, тексты и открытки, астрология, наборы подарков. Не знаете, что выбрать, — ниже на этой странице у каждой услуги расписано, кому она подходит и что придёт, а кнопка «Создать в Telegram» открывает нужную услугу в боте сразу.' },
+      { t: 'Ответьте на несколько вопросов', d: 'AIfa спрашивает по одному вопросу: кому подарок, какой повод, что обязательно упомянуть — имена, общие воспоминания, шутки, любимые места — и какое нужно настроение. Где есть готовые варианты, отвечаете одной кнопкой, остальное пишете своими словами. Чем больше живых деталей, тем сильнее человек узнаёт в подарке себя.' },
+      { t: 'Посмотрите образец', d: 'У каждой услуги в боте есть кнопка «Посмотреть образец» — это настоящая работа AIfa по пробному заказу. Ещё до оплаты видно, какой длины будет текст, как звучат голос и музыка, как выглядят картинки и PDF-книга. Те же образцы открываются и на этой странице: кнопка «Подробнее и образец» в карточке услуги.' },
+      { t: 'Оплатите звёздами Telegram', d: 'Оплата — Telegram Stars, официальная валюта Telegram. Звёзды покупаются прямо в приложении через Apple Pay, Google Pay или банковскую карту, без регистрации на сторонних сайтах. Цены — от $0.99 (⭐60); подписка AIfa+ — $4.99 в месяц, отменяется в любой момент.' },
+      { t: 'Получите результат', d: 'Готовое приходит в тот же чат: тексты и картинки — за 15–30 секунд, песни, видео и главы историй — за несколько минут. Подарок можно сохранить, переслать близкому, распечатать PDF или добавить стикеры в Telegram. Стих, любовное письмо, гороскоп, тайну имени, толкование сна и совместимость можно бесплатно переделать дважды.' },
     ],
     catsH: 'Что можно создать',
-    catsLead: 'Нажмите на услугу — откроются подробности, вопросы AIfa и образец. Цены в долларах; в боте оплата звёздами Telegram по тому же курсу.',
+    catsLead: 'У каждой услуги — кому она подходит, что вы получите, сколько ждать и цена. «Подробнее и образец» откроет вопросы AIfa и настоящий образец, «Создать в Telegram» — сразу эту услугу в боте. Цены в долларах; в боте оплата звёздами Telegram по тому же курсу.',
     freeH: 'Бесплатно',
     free: [
       { icon: Sparkles, t: 'Мини-прогноз', d: 'Короткий прогноз по дате рождения.' },
@@ -134,14 +140,14 @@ const D: Record<Lang, Content> = {
     ],
     howH: 'How it works',
     steps: [
-      { t: 'Pick what to create', d: 'A song, a fairy tale, a card, a forecast, a gift set — all in the bot menu.' },
-      { t: 'Answer a few questions', d: 'Who it is for, the occasion, what to mention, the mood. The more precise the details, the more personal the result.' },
-      { t: 'See a sample', d: 'Every service has a ready example — you see what you get before paying.' },
-      { t: 'Pay with Telegram Stars', d: 'Stars are bought right inside the app. Prices start at $0.99.' },
-      { t: 'Get your result', d: 'Texts and images arrive in seconds, songs and videos in a few minutes. Text pieces can be redone twice for free.' },
+      { t: 'Pick what to create', d: 'Open @AIfaCreativityBot — its menu has 22 services in five sections: music and video, books and stories, texts and cards, astrology, gift sets. Not sure which to choose? Below on this page every service says who it suits and what you get, and the “Create in Telegram” button opens that very service in the bot.' },
+      { t: 'Answer a few questions', d: 'AIfa asks one question at a time: who the gift is for, the occasion, what must be mentioned — names, shared memories, jokes, favourite places — and the mood you want. Where there are ready options, you answer with one tap; everything else you write in your own words. The more living details you give, the more the person recognises themselves in the gift.' },
+      { t: 'See a sample', d: 'Every service in the bot has a “See a sample” button — a real piece of AIfa’s work from a test order. Before paying you can see how long the text will be, how the voice and music sound, what the pictures and the PDF book look like. The same samples open on this page too: the “Details and sample” button on each service card.' },
+      { t: 'Pay with Telegram Stars', d: 'You pay with Telegram Stars, Telegram’s official currency. Stars are bought right inside the app with Apple Pay, Google Pay or a bank card — no sign-up on other websites. Prices start at $0.99 (⭐60); the AIfa+ subscription is $4.99 a month and can be cancelled at any time.' },
+      { t: 'Get your result', d: 'The finished piece arrives in the same chat: texts and images in 15–30 seconds, songs, videos and story chapters in a few minutes. Keep it, forward it to someone you love, print the PDF or add the stickers to Telegram. A poem, a love letter, a horoscope, the secret of a name, a dream reading and a compatibility reading can be redone twice for free.' },
     ],
     catsH: 'What you can create',
-    catsLead: 'Tap a service to see the details, AIfa’s questions and a sample. Prices in US dollars; in the bot you pay in Telegram Stars at the same rate.',
+    catsLead: 'Each service shows who it is for, what you get, how long it takes and the price. “Details and sample” opens AIfa’s questions and a real sample; “Create in Telegram” opens that very service in the bot. Prices in US dollars; in the bot you pay in Telegram Stars at the same rate.',
     freeH: 'Free',
     free: [
       { icon: Sparkles, t: 'Mini forecast', d: 'A short forecast by birth date.' },
@@ -201,14 +207,14 @@ const D: Record<Lang, Content> = {
     ],
     howH: 'Cómo funciona',
     steps: [
-      { t: 'Elige qué crear', d: 'Una canción, un cuento, una postal, un pronóstico, un set de regalos — en el menú del bot.' },
-      { t: 'Responde unas preguntas', d: 'Para quién es, la ocasión, qué mencionar, el ambiente. Cuanto más precisos los detalles, más personal el resultado.' },
-      { t: 'Mira una muestra', d: 'Cada servicio tiene un ejemplo listo: ves lo que recibirás antes de pagar.' },
-      { t: 'Paga con Telegram Stars', d: 'Las estrellas se compran dentro de la app. Precios desde $0.99.' },
-      { t: 'Recibe tu resultado', d: 'Textos e imágenes en segundos, canciones y videos en pocos minutos. Los textos se pueden rehacer dos veces gratis.' },
+      { t: 'Elige qué crear', d: 'Abre @AIfaCreativityBot: su menú tiene 22 servicios en cinco secciones — música y video, libros e historias, textos y postales, astrología, sets de regalo. ¿No sabes cuál elegir? Más abajo en esta página cada servicio dice para quién es y qué recibes, y el botón «Crear en Telegram» abre ese mismo servicio en el bot.' },
+      { t: 'Responde unas preguntas', d: 'AIfa pregunta de una en una: para quién es el regalo, la ocasión, qué hay que mencionar — nombres, recuerdos compartidos, bromas, lugares favoritos — y el tono que quieres. Donde hay opciones listas, respondes con un toque; lo demás lo escribes con tus palabras. Cuantos más detalles vivos, más se reconoce la persona en el regalo.' },
+      { t: 'Mira una muestra', d: 'Cada servicio del bot tiene un botón «Ver un ejemplo»: un trabajo real de AIfa hecho con un pedido de prueba. Antes de pagar ves cuánto medirá el texto, cómo suenan la voz y la música, cómo son las imágenes y el libro en PDF. Las mismas muestras se abren en esta página: el botón «Detalles y muestra» de cada tarjeta.' },
+      { t: 'Paga con Telegram Stars', d: 'Pagas con Telegram Stars, la moneda oficial de Telegram. Las estrellas se compran dentro de la app con Apple Pay, Google Pay o tarjeta bancaria, sin registrarte en otros sitios. Precios desde $0.99 (⭐60); la suscripción AIfa+ cuesta $4.99 al mes y se cancela cuando quieras.' },
+      { t: 'Recibe tu resultado', d: 'Lo terminado llega al mismo chat: textos e imágenes en 15–30 segundos; canciones, videos y capítulos de historias en pocos minutos. Puedes guardarlo, reenviarlo a quien quieras, imprimir el PDF o añadir los stickers a Telegram. El poema, la carta de amor, el horóscopo, el secreto del nombre, la interpretación de sueños y la compatibilidad se pueden rehacer dos veces gratis.' },
     ],
     catsH: 'Qué puedes crear',
-    catsLead: 'Toca un servicio para ver los detalles, las preguntas de AIfa y una muestra. Precios en dólares; en el bot pagas en Telegram Stars al mismo tipo de cambio.',
+    catsLead: 'Cada servicio muestra para quién es, qué recibes, cuánto tarda y el precio. «Detalles y muestra» abre las preguntas de AIfa y una muestra real; «Crear en Telegram» abre ese mismo servicio en el bot. Precios en dólares; en el bot pagas en Telegram Stars al mismo tipo de cambio.',
     freeH: 'Gratis',
     free: [
       { icon: Sparkles, t: 'Mini pronóstico', d: 'Un pronóstico breve por fecha de nacimiento.' },
@@ -268,14 +274,14 @@ const D: Record<Lang, Content> = {
     ],
     howH: '如何使用',
     steps: [
-      { t: '选择要创作的内容', d: '歌曲、童话、贺卡、运势、礼物套装——都在机器人菜单中。' },
-      { t: '回答几个问题', d: '送给谁、什么场合、需要提到什么、想要什么氛围。细节越具体，作品越专属。' },
-      { t: '查看样例', d: '每项服务都有现成的样例，付款前就能看到你将得到什么。' },
-      { t: '用 Telegram Stars 支付', d: '可直接在应用内购买 Stars。价格从 $0.99 起。' },
-      { t: '收到作品', d: '文字和图片几秒钟即可完成，歌曲和视频只需几分钟。文字作品可免费修改两次。' },
+      { t: '选择要创作的内容', d: '打开 @AIfaCreativityBot：菜单中有 22 项服务，分为五类——音乐与视频、书籍与故事、文字与贺卡、占星、礼物套装。不知道选哪个？本页下方每项服务都写明适合谁、你将得到什么，“在 Telegram 中创作”按钮会直接在机器人中打开该服务。' },
+      { t: '回答几个问题', d: 'AIfa 一次只问一个问题：礼物送给谁、什么场合、必须提到什么——名字、共同回忆、玩笑、喜欢的地方——以及想要的基调。有现成选项的点一下即可，其余用你自己的话写。生动的细节越多，对方越能在礼物中认出自己。' },
+      { t: '查看样例', d: '机器人中每项服务都有“查看样例”按钮——这是 AIfa 为测试订单完成的真实作品。付款前就能看到文字有多长、声音和音乐听起来如何、图片和 PDF 书是什么样子。同样的样例在本页也能打开：点击服务卡片上的“详情与样例”。' },
+      { t: '用 Telegram Stars 支付', d: '使用 Telegram 官方货币 Telegram Stars 支付。可直接在应用内通过 Apple Pay、Google Pay 或银行卡购买，无需在其他网站注册。价格从 $0.99（⭐60）起；AIfa+ 订阅每月 $4.99，可随时取消。' },
+      { t: '收到作品', d: '成品发送到同一个聊天中：文字和图片 15–30 秒，歌曲、视频和故事章节几分钟。可以保存、转发给亲人、打印 PDF，或把贴纸添加到 Telegram。诗歌、情书、星座运势、名字的奥秘、解梦和契合度解读都可以免费修改两次。' },
     ],
     catsH: '可以创作什么',
-    catsLead: '点击任一服务，即可查看详情、AIfa 会问的问题和样例。价格以美元计；在机器人中按相同汇率以 Telegram Stars 支付。',
+    catsLead: '每项服务都写明适合谁、你将得到什么、需要多久以及价格。“详情与样例”会打开 AIfa 的提问和真实样例，“在 Telegram 中创作”会直接在机器人中打开该服务。价格以美元计；在机器人中按相同汇率以 Telegram Stars 支付。',
     freeH: '免费',
     free: [
       { icon: Sparkles, t: '迷你运势', d: '根据出生日期的简短运势。' },
@@ -327,7 +333,7 @@ const D: Record<Lang, Content> = {
 const U: Record<Lang, {
   open: string; openSample: string; badge: string; asks: string; gets: string; time: string; create: string;
   sample: string; sampleNote: string; noSample: string; close: string; loading: string; failed: string;
-  langNote: (lg: string) => string; more: Record<string, string>; titles: Record<string, string>;
+  langNote: (lg: string) => string; more: Record<string, string>; titles: Record<string, string>; forWho: string;
   positions: string[]; listen: string; pdf: string;
 }> = {
   ru: {
@@ -344,6 +350,7 @@ const U: Record<Lang, {
     },
     titles: { lyrics: 'Текст песни', overview: 'Обзор года', month1: 'Первый месяц', chapter1: 'Глава 1', song: 'Песня', poem: 'Стих', letter: 'Любовное письмо', astro: 'Астропрогноз', name: 'Тайны имени', tarot: 'Расклад Таро', voiceMsg: 'Голосовое', card: 'Живая музыкальная открытка', images: 'Иллюстрации', book: 'Книга целиком', stickers: 'Набор стикеров', daily: 'Прогноз на сегодня' },
     positions: ['Прошлое', 'Настоящее', 'Будущее'], listen: 'Слушать', pdf: 'Открыть PDF',
+    forWho: 'Кому и когда',
   },
   en: {
     open: 'Details', openSample: 'Details and sample', badge: 'Sample', asks: 'What AIfa will ask', gets: 'What you get',
@@ -359,6 +366,7 @@ const U: Record<Lang, {
     },
     titles: { lyrics: 'Lyrics', overview: 'The year at a glance', month1: 'The first month', chapter1: 'Chapter 1', song: 'Song', poem: 'Poem', letter: 'Love letter', astro: 'Astrology forecast', name: 'Secrets of the name', tarot: 'Tarot reading', voiceMsg: 'Voice message', card: 'Living music card', images: 'Illustrations', book: 'The whole book', stickers: 'Sticker pack', daily: 'Forecast for today' },
     positions: ['Past', 'Present', 'Future'], listen: 'Listen', pdf: 'Open the PDF',
+    forWho: 'Who and when',
   },
   es: {
     open: 'Detalles', openSample: 'Detalles y muestra', badge: 'Muestra', asks: 'Qué te preguntará AIfa', gets: 'Qué recibirás',
@@ -374,6 +382,7 @@ const U: Record<Lang, {
     },
     titles: { lyrics: 'Letra', overview: 'El año de un vistazo', month1: 'El primer mes', chapter1: 'Capítulo 1', song: 'Canción', poem: 'Poema', letter: 'Carta de amor', astro: 'Pronóstico astrológico', name: 'Secretos del nombre', tarot: 'Lectura de tarot', voiceMsg: 'Mensaje de voz', card: 'Postal musical animada', images: 'Ilustraciones', book: 'El libro completo', stickers: 'Pack de stickers', daily: 'El pronóstico de hoy' },
     positions: ['Pasado', 'Presente', 'Futuro'], listen: 'Escuchar', pdf: 'Abrir el PDF',
+    forWho: 'Para quién y cuándo',
   },
   zh: {
     open: '详情', openSample: '详情与样例', badge: '样例', asks: 'AIfa 会问什么', gets: '你将得到',
@@ -389,6 +398,7 @@ const U: Record<Lang, {
     },
     titles: { lyrics: '歌词', overview: '全年概览', month1: '第一个月', chapter1: '第一章', song: '歌曲', poem: '诗歌', letter: '情书', astro: '星座运势', name: '名字的秘密', tarot: '塔罗牌解读', voiceMsg: '语音消息', card: '动态音乐贺卡', images: '插图', book: '完整的书', stickers: '贴纸包', daily: '今日运势' },
     positions: ['过去', '现在', '未来'], listen: '收听', pdf: '打开 PDF',
+    forWho: '适合谁、何时',
   },
 };
 
@@ -434,7 +444,8 @@ function SampleView({ id, lang }: { id: string; lang: Lang }) {
   for (const it of data.items) {
     if (it.k === 'text' || it.k === 'voice') { показанНа = выбрать(it.k === 'text' ? it.t : it.src, lang)[1]; break; }
   }
-  if (!показанНа) показанНа = data.lang;
+  // пустой data.lang — образец без языка (картинка, инструментал, стикеры): приписку про язык не показываем
+  if (!показанНа) показанНа = data.lang || lang;
 
   return (
     <div className="space-y-5">
@@ -551,6 +562,7 @@ function ServiceDialog({ s, lang, onClose }: { s: Service; lang: Lang; onClose: 
           </button>
         </div>
         <div className="px-5 sm:px-8 py-6 space-y-7">
+          {CARD[s.id] && <p className="text-[15px] leading-relaxed text-slate-800 dark:text-gray-100 border-l-4 border-purple-500/60 pl-4"><b>{u.forWho}:</b> {tx(CARD[s.id].for, lang)}</p>}
           <p className="text-[15px] leading-relaxed text-slate-700 dark:text-gray-200">{tx(s.full, lang)}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="space-y-3">
@@ -567,7 +579,7 @@ function ServiceDialog({ s, lang, onClose }: { s: Service; lang: Lang; onClose: 
               <p className="text-sm text-slate-700 dark:text-gray-300 flex items-center gap-2 pt-1"><Clock className="w-4 h-4 text-cyan-700 dark:text-cyan-400 shrink-0" /><span><b>{u.time}:</b> {tx(s.time, lang)}</span></p>
             </div>
           </div>
-          <a href={BOT} target="_blank" rel="noopener noreferrer"
+          <a href={вБот(s.id)} target="_blank" rel="noopener noreferrer"
             className="flex sm:inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-cyan-500 to-purple-600 text-[#ffffff] font-bold rounded-xl hover:from-cyan-400 hover:to-purple-500 transition-all">
             <span>{u.create}</span><ArrowUpRight className="w-5 h-5" />
           </a>
@@ -655,17 +667,20 @@ export default function BotClient() {
         {/* Как это работает */}
         <section className="space-y-10">
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white text-center" style={H}>{c.howH}</h2>
-          <ol className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          {/* 01.10.2026: шаги во всю ширину и с развёрнутым объяснением — слово Архитектора «сделать их больше, растянуть» */}
+          <ol className="max-w-5xl mx-auto space-y-4">
             {c.steps.map((s, i) => {
               const I = stepIcons[i] || Star;
               return (
-                <li key={i} className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-5 space-y-3">
-                  <div className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 text-[#ffffff] text-sm font-bold flex items-center justify-center">{i + 1}</span>
-                    <I className="w-5 h-5 text-cyan-700 dark:text-cyan-400" />
+                <li key={i} className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row gap-5 sm:gap-8 hover:border-cyan-500/40 transition-colors">
+                  <div className="flex sm:flex-col items-center gap-3 shrink-0">
+                    <span className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-600 text-[#ffffff] text-2xl font-black flex items-center justify-center" style={H}>{i + 1}</span>
+                    <I className="w-6 h-6 text-cyan-700 dark:text-cyan-400" />
                   </div>
-                  <h3 className="font-bold text-slate-900 dark:text-white">{s.t}</h3>
-                  <p className="text-sm text-slate-600 dark:text-gray-400 leading-relaxed">{s.d}</p>
+                  <div className="space-y-2 min-w-0">
+                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white" style={H}>{s.t}</h3>
+                    <p className="text-base text-slate-600 dark:text-gray-300 leading-relaxed">{s.d}</p>
+                  </div>
                 </li>
               );
             })}
@@ -681,26 +696,51 @@ export default function BotClient() {
           {(Object.keys(CATS) as Service['cat'][]).map((cat) => (
             <div key={cat} className="space-y-5">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white border-l-4 border-cyan-500 pl-3" style={H}>{tx(CATS[cat], lang)}</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {SERVICES.filter((s) => s.cat === cat).map((s) => {
                   const I = ICONS[s.icon] || Star;
                   const образец = SAMPLE_IDS.has(s.id);
+                  const к = CARD[s.id];
                   return (
-                    <button key={s.id} data-id={s.id} type="button" onClick={() => открыть(s.id)} aria-haspopup="dialog"
-                      className="text-left bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl p-6 flex flex-col justify-between gap-4 hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-500/10 dark:hover:shadow-cyan-500/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 transition-all duration-300">
-                      <span className="space-y-3 block">
-                        <span className="flex items-start justify-between gap-3">
-                          <span className="p-3 bg-cyan-500/10 rounded-xl w-fit text-cyan-700 dark:text-cyan-400"><I className="w-6 h-6" /></span>
-                          {образец && <span className="text-sm px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20 inline-flex items-center gap-1"><PlayCircle className="w-3.5 h-3.5" />{u.badge}</span>}
-                        </span>
-                        <span className="block text-lg font-bold text-slate-900 dark:text-white">{tx(s.t, lang)}</span>
-                        <span className="block text-slate-600 dark:text-gray-400 text-sm leading-relaxed">{tx(s.d, lang)}</span>
-                      </span>
-                      <span className="pt-3 border-t border-slate-200 dark:border-white/5 flex items-center justify-between gap-3 flex-wrap">
-                        <span className="font-mono text-sm font-bold text-cyan-700 dark:text-cyan-400">{s.price}{s.per ? ` · ${tx(s.per, lang)}` : ''}</span>
-                        <span className="text-sm font-semibold text-slate-800 dark:text-gray-200 inline-flex items-center gap-1">{образец ? u.openSample : u.open}<ChevronRight className="w-4 h-4" /></span>
-                      </span>
-                    </button>
+                    <article key={s.id} data-id={s.id} id={`s-${s.id}`}
+                      className="scroll-mt-28 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-500/10 dark:hover:shadow-cyan-500/5 transition-all duration-300">
+                      {/* картинка из образца этой услуги; щелчок по ней открывает окно, как кнопка ниже */}
+                      <div aria-hidden="true" onClick={() => открыть(s.id)}
+                        className="relative h-44 sm:h-52 cursor-pointer bg-gradient-to-br from-cyan-500/15 via-slate-100 to-purple-600/15 dark:via-[#0b1020] flex items-center justify-center overflow-hidden">
+                        {к?.preview
+                          ? <img src={к.preview} alt="" loading="lazy" className={к.contain ? 'h-full w-full object-contain p-3' : 'h-full w-full object-cover'} />
+                          : <I className="w-16 h-16 text-cyan-700/70 dark:text-cyan-400/70" />}
+                        {образец && <span className="absolute top-3 right-3 text-sm px-2.5 py-1 rounded-full bg-white/90 dark:bg-[#0b1020]/90 text-purple-700 dark:text-purple-300 border border-purple-500/30 inline-flex items-center gap-1"><PlayCircle className="w-3.5 h-3.5" />{u.badge}</span>}
+                      </div>
+                      <div className="p-6 flex flex-col gap-4 flex-1">
+                        <div className="flex items-start gap-3">
+                          <span className="p-2.5 bg-cyan-500/10 rounded-xl text-cyan-700 dark:text-cyan-400 shrink-0"><I className="w-5 h-5" /></span>
+                          <div className="min-w-0">
+                            <h4 className="text-xl font-bold text-slate-900 dark:text-white break-words">{tx(s.t, lang)}</h4>
+                            <div className="font-mono text-base font-bold text-cyan-700 dark:text-cyan-400">{s.price}{s.per ? ` · ${tx(s.per, lang)}` : ''}</div>
+                          </div>
+                        </div>
+                        {к && <p className="text-sm leading-relaxed text-slate-800 dark:text-gray-100 border-l-4 border-purple-500/60 pl-3"><b>{u.forWho}:</b> {tx(к.for, lang)}</p>}
+                        <p className="text-sm leading-relaxed text-slate-600 dark:text-gray-300">{tx(s.full, lang)}</p>
+                        <div className="space-y-2">
+                          <div className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2"><Gift className="w-4 h-4 text-purple-600 dark:text-purple-400" />{u.gets}</div>
+                          <ul className="space-y-1.5 text-sm leading-relaxed text-slate-700 dark:text-gray-300">
+                            {(s.gets[lang] || s.gets.en).map((g, gi) => <li key={gi} className="flex gap-2"><ChevronRight className="w-4 h-4 mt-0.5 shrink-0 text-cyan-700 dark:text-cyan-400" /><span>{g}</span></li>)}
+                          </ul>
+                        </div>
+                        <p className="text-sm text-slate-700 dark:text-gray-300 flex items-center gap-2"><Clock className="w-4 h-4 text-cyan-700 dark:text-cyan-400 shrink-0" /><span><b>{u.time}:</b> {tx(s.time, lang)}</span></p>
+                        <div className="mt-auto pt-4 border-t border-slate-200 dark:border-white/10 flex flex-col sm:flex-row gap-3">
+                          <a href={вБот(s.id)} target="_blank" rel="noopener noreferrer"
+                            className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-[#ffffff] font-bold rounded-xl hover:from-cyan-400 hover:to-purple-500 transition-all">
+                            <span>{u.create}</span><ArrowUpRight className="w-4 h-4" />
+                          </a>
+                          <button type="button" onClick={() => открыть(s.id)} aria-haspopup="dialog"
+                            className="flex-1 inline-flex items-center justify-center gap-1 px-5 py-3 border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white font-semibold rounded-xl hover:border-cyan-500/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500 transition-all">
+                            <span>{образец ? u.openSample : u.open}</span><ChevronRight className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </article>
                   );
                 })}
               </div>

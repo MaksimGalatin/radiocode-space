@@ -503,3 +503,131 @@ export const SERVICES: Service[] = [
     time: l('Несколько минут', 'A few minutes', 'Unos minutos', '几分钟'),
   },
 ];
+
+/**
+ * 01.10.2026, вечер — карточки до клика. Слово Архитектора: «РАСПИСАТЬ детально ВСЁ на странице, каждую услугу!»
+ * и следом «Нужно просто сделать их шире и информативнее до клика мышью».
+ *   for     — кому и для какого повода подходит услуга (видно на карточке без клика);
+ *   preview — картинка из НАСТОЯЩЕГО образца этой же услуги (public/creativity/samples), чужих картинок нет;
+ *   contain — показывать картинку целиком (стикеры на прозрачном фоне, карта Таро), без обрезки.
+ * Услуги без картинки в образце (стих, письмо, голосовое, разборы) показывают знак услуги.
+ */
+export const CARD: Record<string, { for: L; preview?: string; contain?: boolean }> = {
+  song: { preview: '/creativity/samples/song/cover.webp', for: l(
+    'Для подарка, фона к видео, тренировки, сна или свидания — когда нужна своя музыка, которой нет ни у кого.',
+    'For a gift, a video background, a workout, sleep or a date — when you want music nobody else has.',
+    'Para un regalo, fondo de video, entrenamiento, dormir o una cita — cuando quieres música que nadie más tiene.',
+    '适合作为礼物、视频背景、健身、助眠或约会——想要一首别人没有的音乐时。') },
+  song_vocal: { for: l(
+    'Маме на день рождения, любимой на годовщину, друзьям на свадьбу — когда хочется подарить то, что будут переслушивать годами.',
+    'For mom’s birthday, an anniversary, friends’ wedding — when you want a gift people will replay for years.',
+    'Para el cumpleaños de mamá, un aniversario, la boda de unos amigos — cuando quieres un regalo que se escuche durante años.',
+    '妈妈的生日、纪念日、朋友的婚礼——想送一份会被反复聆听多年的礼物时。') },
+  lyric_video: { preview: '/creativity/samples/lyric_video/poster.webp', for: l(
+    'Когда песню хочется не только подарить, но и показать: в сторис, в семейном чате, на экране во время праздника.',
+    'When you want to not only give the song but show it: in stories, in the family chat, on screen at the party.',
+    'Cuando quieres no solo regalar la canción sino mostrarla: en historias, en el chat familiar, en pantalla durante la fiesta.',
+    '不只想送出这首歌，还想展示出来：发快拍、发家庭群、在聚会上投屏播放。') },
+  music_card: { preview: '/creativity/samples/music_card/poster.webp', for: l(
+    'Вместо обычной картинки в мессенджере — поздравление, которое звучит. Для дня рождения, праздника, «спасибо» или «скучаю».',
+    'Instead of an ordinary picture in a messenger — a greeting that plays music. For a birthday, a holiday, a “thank you” or “I miss you”.',
+    'En lugar de una imagen común — una felicitación que suena. Para un cumpleaños, una fiesta, un «gracias» o un «te extraño».',
+    '代替聊天里普通的图片——一份会响起音乐的祝福。适合生日、节日、道谢或“想你了”。') },
+  voice: { for: l(
+    'Когда не можете позвонить сами или не находите слов: поздравление, поддержка, «доброе утро» любимому человеку.',
+    'When you can’t call yourself or can’t find the words: birthday wishes, support, a “good morning” to someone you love.',
+    'Cuando no puedes llamar o no encuentras las palabras: felicitaciones, apoyo, un «buenos días» a quien quieres.',
+    '当你无法亲自打电话或找不到合适的话：生日祝福、鼓励，或对爱人说声“早安”。') },
+  tale: { preview: '/creativity/samples/tale/ch01.webp', for: l(
+    'Ребёнку 3–12 лет на ночь, в подарок на день рождения, бабушке — читать внуку. Ребёнок узнаёт себя в главном герое.',
+    'For a child aged 3–12 at bedtime, as a birthday gift, for grandma to read to her grandchild. The child recognises themselves in the hero.',
+    'Para un niño de 3 a 12 años antes de dormir, como regalo de cumpleaños, para que la abuela se lo lea al nieto. El niño se reconoce en el héroe.',
+    '适合 3–12 岁孩子的睡前故事、生日礼物，或让奶奶读给孙辈听。孩子会在主角身上认出自己。') },
+  detective: { for: l(
+    'Для любителей загадок — себе на вечер или в подарок: друг станет сыщиком в собственном деле.',
+    'For mystery lovers — an evening for yourself or a gift: a friend becomes the detective of their own case.',
+    'Para amantes del misterio — una tarde para ti o un regalo: tu amigo se convierte en el detective de su propio caso.',
+    '献给推理爱好者——给自己一个夜晚，或作为礼物：让朋友成为自己案件的侦探。') },
+  year_ahead: { preview: '/creativity/samples/year_ahead/m01.webp', for: l(
+    'На день рождения, Новый год или начало нового этапа — себе или близкому, который строит планы.',
+    'For a birthday, New Year or the start of a new chapter — for yourself or someone making plans.',
+    'Para un cumpleaños, Año Nuevo o el inicio de una nueva etapa — para ti o para alguien que hace planes.',
+    '适合生日、新年或人生新阶段的开始——送给自己或正在规划未来的人。') },
+  poem: { for: l(
+    'Прочитать вслух на юбилее, вложить в открытку, отправить утром — маме, жене, учителю, другу.',
+    'Read it aloud at a jubilee, tuck it into a card, send it in the morning — to mom, a partner, a teacher, a friend.',
+    'Para leerlo en voz alta en una celebración, ponerlo en una tarjeta o enviarlo por la mañana — a mamá, a tu pareja, a un maestro, a un amigo.',
+    '在寿宴上朗读、放进贺卡、清晨发送——献给妈妈、爱人、老师或朋友。') },
+  love_letter: { for: l(
+    'Для годовщины, признания, примирения или когда вы далеко друг от друга.',
+    'For an anniversary, a confession, making up after a quarrel or when you are far apart.',
+    'Para un aniversario, una confesión, una reconciliación o cuando estáis lejos.',
+    '适合纪念日、告白、和好，或两人相隔两地时。') },
+  postcard: { preview: '/creativity/samples/postcard/card.webp', for: l(
+    'Поздравить коллегу, родственника или клиента красиво и лично — за полминуты.',
+    'To congratulate a colleague, a relative or a client beautifully and personally — in half a minute.',
+    'Para felicitar a un colega, un familiar o un cliente de forma bonita y personal — en medio minuto.',
+    '半分钟内，用精美而有心意的方式祝贺同事、亲戚或客户。') },
+  image: { preview: '/creativity/samples/image/image.webp', for: l(
+    'Аватар, обложка, иллюстрация к посту, подарок-портрет или картинка, которая давно живёт у вас в голове.',
+    'An avatar, a cover, a post illustration, a portrait gift or a picture that has long lived in your head.',
+    'Un avatar, una portada, una ilustración para un post, un retrato de regalo o esa imagen que llevas tiempo imaginando.',
+    '头像、封面、帖子配图、肖像礼物，或你脑海中早已成形的画面。') },
+  stickerpack: { preview: '/creativity/samples/stickerpack/s2.webp', contain: true, for: l(
+    'Свои стикеры для семейного чата, пары, команды или канала: питомец, вы сами, талисман бренда.',
+    'Your own stickers for a family chat, a couple, a team or a channel: your pet, yourself, a brand mascot.',
+    'Stickers propios para el chat familiar, la pareja, el equipo o un canal: tu mascota, tú mismo, la mascota de una marca.',
+    '为家庭群、情侣、团队或频道打造专属贴纸：你的宠物、你自己或品牌吉祥物。') },
+  astro_full: { for: l(
+    'Себе — чтобы лучше понять себя, или близкому на день рождения: нужны только имя и дата рождения.',
+    'For yourself — to understand yourself better — or for someone dear on their birthday: just a name and birth date.',
+    'Para ti — para conocerte mejor — o para un ser querido en su cumpleaños: solo nombre y fecha de nacimiento.',
+    '送给自己，更好地了解自己；或在亲人生日时送给对方：只需姓名和出生日期。') },
+  name_secrets: { for: l(
+    'Будущим родителям, выбирающим имя, на именины или просто чтобы узнать, что скрыто в вашем имени.',
+    'For parents-to-be choosing a name, for a name day, or just to learn what your name holds.',
+    'Para futuros padres que eligen nombre, para un santo, o simplemente para saber qué guarda tu nombre.',
+    '适合正在为宝宝取名的准父母、命名日，或只是想知道自己名字里藏着什么。') },
+  dream: { for: l(
+    'Когда сон не отпускает с утра и хочется понять, о чём он.',
+    'When a dream stays with you all morning and you want to understand it.',
+    'Cuando un sueño no te suelta en toda la mañana y quieres entenderlo.',
+    '当一个梦整个早上挥之不去，你想弄明白它在说什么。') },
+  compatibility: { for: l(
+    'Паре, супругам, друзьям, коллегам или родителю с ребёнком — с ответом на ваш собственный вопрос.',
+    'For a couple, spouses, friends, colleagues or a parent and child — with an answer to your own question.',
+    'Para una pareja, esposos, amigos, colegas o padre e hijo — con respuesta a tu propia pregunta.',
+    '适合情侣、夫妻、朋友、同事或父母与孩子——并回答你自己的问题。') },
+  tarot: { for: l(
+    'Когда стоите перед выбором — работа, отношения, переезд — и хочется взглянуть на ситуацию со стороны.',
+    'When you face a choice — work, a relationship, a move — and want to see the situation from the outside.',
+    'Cuando estás ante una decisión — trabajo, relación, mudanza — y quieres ver la situación desde fuera.',
+    '当你面临抉择——工作、感情、搬家——想从旁观者的角度看清局面时。') },
+  aifa_plus: { for: l(
+    'Тем, кто любит начинать утро с прогноза: каждый день AIfa пишет новый текст лично под вашу дату рождения.',
+    'For those who like to start the morning with a forecast: every day AIfa writes a new text for your own birth date.',
+    'Para quien le gusta empezar la mañana con un pronóstico: cada día AIfa escribe un texto nuevo para tu fecha de nacimiento.',
+    '献给喜欢以运势开启早晨的人：AIfa 每天根据你的出生日期写一篇全新的文字。') },
+  bundle_romance: { preview: '/creativity/samples/bundle_romance/image.webp', for: l(
+    'Годовщина, 14 февраля, предложение руки и сердца — три подарка одним сюрпризом за $1.99 вместо $2.97 по отдельности.',
+    'An anniversary, Valentine’s Day, a proposal — three gifts in one surprise for $1.99 instead of $2.97 separately.',
+    'Un aniversario, San Valentín, una pedida de mano — tres regalos en una sola sorpresa por $1.99 en vez de $2.97 por separado.',
+    '纪念日、情人节、求婚——三份礼物合成一个惊喜，只需 $1.99，单买需 $2.97。') },
+  bundle_mystic: { preview: '/creativity/samples/bundle_mystic/card1.webp', contain: true, for: l(
+    'Подруге, которая любит астрологию, или себе — полный мистический портрет за $2.49 вместо $3.97 по отдельности.',
+    'For a friend who loves astrology, or for yourself — a whole mystical portrait for $2.49 instead of $3.97 separately.',
+    'Para una amiga a la que le encanta la astrología, o para ti — un retrato místico completo por $2.49 en vez de $3.97 por separado.',
+    '送给热爱占星的朋友，或送给自己——完整的神秘画像只需 $2.49，单买需 $3.97。') },
+  bundle: { preview: '/creativity/samples/bundle/img2.webp', for: l(
+    'Юбилей, свадьба, большая годовщина — когда одного подарка мало. Семь подарков вокруг одной вашей истории за $9.99 вместо ~$12.',
+    'A milestone birthday, a wedding, a big anniversary — when one gift is not enough. Seven gifts around one story of yours for $9.99 instead of ~$12.',
+    'Un cumpleaños redondo, una boda, un gran aniversario — cuando un regalo no basta. Siete regalos en torno a una historia tuya por $9.99 en vez de ~$12.',
+    '整寿生日、婚礼、重要纪念日——一份礼物不够时。围绕你的一个故事的七份礼物，只需 $9.99，单买约 $12。') },
+};
+
+/** Услуги, которые бот открывает сразу по ссылке ?start=buy_<sku> (bot/src/bot.ts, SKU_INFO; у AIfa+ своего входа нет). */
+export const В_БОТЕ_СРАЗУ = new Set([
+  'song', 'song_vocal', 'lyric_video', 'music_card', 'voice', 'tale', 'detective', 'year_ahead', 'poem', 'love_letter',
+  'postcard', 'image', 'stickerpack', 'astro_full', 'name_secrets', 'dream', 'compatibility', 'tarot',
+  'bundle_romance', 'bundle_mystic', 'bundle',
+]);

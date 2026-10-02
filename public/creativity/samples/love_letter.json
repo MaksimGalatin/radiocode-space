@@ -4,16 +4,22 @@
   {
    "k": "text",
    "t": {
-    "ru": "Анечка, любимая моя,\n\nДесять лет назад на теплом побережье Сочи я встретил тебя, и в тот же миг моя жизнь изменилась навсегда. Шум черноморского прибоя тогда казался самым красивым звуком на свете, пока я не услышал твой тихий смех. С той самой первой встречи и до сегодняшнего дня ты остаешься моим главным чудом.\n\nС тех пор каждый мой день наполнен твоим теплом и светом. Я бесконечно обожаю подмечать мелочи, которые делают тебя такой особенной: то, как ты искренне радуешься свежим веточкам лаванды, как замираешь и прикрываешь глаза, когда звучит твоя любимая джазовая пластинка, и как наш дом по субботам наполняется невероятным, уютным ароматом твоих фирменных блинов. Эти неторопливые субботние утра, когда мы никуда не спешим и просто наслаждаемся моментом, для меня дороже любых сокровищ мира.\n\nЗа эти прекрасные десять лет мы прошли рука об руку через многое, и моя любовь к тебе стала только глубже, осознаннее и крепче. Я хочу, чтобы ты всегда помнила: каждый день, проведенный рядом с тобой, — это лучший день в моей жизни. Ты мое вдохновение, мой самый надежный причал и мое огромное счастье.\n\nСпасибо тебе за твою нежность, за твой понимающий взгляд и за то, что ты просто есть рядом. Люблю тебя бесконечно."
+    "ru": "Анечка, любимая моя,\n\nДесять лет назад на теплом побережье Сочи я встретил тебя, и в тот же миг моя жизнь изменилась навсегда. Шум черноморского прибоя тогда казался самым красивым звуком на свете, пока я не услышал твой тихий смех. С той самой первой встречи и до сегодняшнего дня ты остаешься моим главным чудом.\n\nС тех пор каждый мой день наполнен твоим теплом и светом. Я бесконечно обожаю подмечать мелочи, которые делают тебя такой особенной: то, как ты искренне радуешься свежим веточкам лаванды, как замираешь и прикрываешь глаза, когда звучит твоя любимая джазовая пластинка, и как наш дом по субботам наполняется невероятным, уютным ароматом твоих фирменных блинов. Эти неторопливые субботние утра, когда мы никуда не спешим и просто наслаждаемся моментом, для меня дороже любых сокровищ мира.\n\nЗа эти прекрасные десять лет мы прошли рука об руку через многое, и моя любовь к тебе стала только глубже, осознаннее и крепче. Я хочу, чтобы ты всегда помнила: каждый день, проведенный рядом с тобой, — это лучший день в моей жизни. Ты мое вдохновение, мой самый надежный причал и мое огромное счастье.\n\nСпасибо тебе за твою нежность, за твой понимающий взгляд и за то, что ты просто есть рядом. Люблю тебя бесконечно.",
+    "en": "Dearest Anna,\n\nTen years. A whole decade since our eyes first met by the sea in Sochi, and yet it feels like just yesterday I was falling in love with your smile against the backdrop of the waves. \n\nEvery single moment with you has been a gift, but my favorite rituals are the quiet ones. I love how the scent of lavender always seems to follow you, filling our home with peace. I love the smooth, soulful notes of jazz playing softly in the background while you dance around the kitchen, and the way our Saturdays always taste like the warm pancakes you bake with so much care. You bring a gentle magic into ordinary days, turning them into memories I hold close to my heart.\n\nLooking back at the road we have walked together, I realize something so simple and profound. Every day with you is the best day of my life. Thank you for ten years of your grace, your warmth, and your endless love. I am so lucky to share this life with you, and I cannot wait for all the tomorrows still waiting for us.\n\nForever yours",
+    "es": "Mi amor, Ana.\n\nHace diez años que el mar fue testigo de nuestro encuentro en Sochi, y desde entonces mi vida cambió para siempre. Todavía recuerdo la brisa de ese día y la forma en que tu sonrisa se quedó grabada en mi alma. \n\nMe enamora todo de ti, desde tu pasión por el aroma de la lavanda y la música de jazz que llena nuestra casa, hasta esos pequeños rituales que hacen que la semana valga la pena, como los panqueques que preparas cada sábado por la mañana con tanta dedicación. Cada uno de esos detalles hace que mi mundo sea más cálido y hermoso.\n\nMirando hacia atrás, no puedo creer la década maravillosa que hemos construido juntos. Crecimos, reímos, y superamos todo de tu mano. Quiero que sepas que cada día contigo es el mejor de mi vida, sin excepción. Gracias por ser mi refugio, mi alegría y mi más grande amor. Te amo hoy y siempre."
    }
   },
   {
    "k": "voice",
    "src": {
-    "ru": "/creativity/samples/love_letter/voice.mp3"
+    "ru": "/creativity/samples/love_letter/voice.mp3",
+    "en": "/creativity/samples/love_letter/voice_en.mp3",
+    "es": "/creativity/samples/love_letter/voice_es.mp3"
    },
    "dur": {
-    "ru": 111
+    "ru": 111,
+    "en": 68,
+    "es": 51
    }
   }
  ]

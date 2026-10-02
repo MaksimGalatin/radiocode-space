@@ -5,14 +5,23 @@
    "k": "text",
    "title": "poem",
    "t": {
-    "ru": "Проснётся солнце, ласково и рано,\nИ побежит лучами по траве.\nНальёт свой кофе утренняя Анна,\nПрисев на миг в верандной тишине.\n\nВ твоём саду бутоны расцветают,\nТы даришь розам бережный уход.\nОни твои заботы принимают,\nЦветут роскошно каждый новый год.\n\nА на уютной кухне, за делами,\nТвой чистый голос песней зазвучит.\nИ кажется, что ангел рядом с нами,\nИ всё вокруг от радости молчит.\n\nВ тяжёлый год, средь бури и ненастья,\nОдна троих детей ты подняла.\nНе жалуясь на жизнь, моля о счастье,\nТы нам дарила два своих крыла.\n\nСегодня праздник твоего рожденья,\nИ мы приносим нежные цветы.\nПусть будет жизнь полна благословенья,\nПусть сбудутся заветные мечты.\n\nХочу поцеловать родные руки,\nЧто согревали в пору зимних вьюг.\nНа них одних, не знавших праздной скуки,\nДержится наш дом и всё вокруг."
+    "ru": "Проснётся солнце, ласково и рано,\nИ побежит лучами по траве.\nНальёт свой кофе утренняя Анна,\nПрисев на миг в верандной тишине.\n\nВ твоём саду бутоны расцветают,\nТы даришь розам бережный уход.\nОни твои заботы принимают,\nЦветут роскошно каждый новый год.\n\nА на уютной кухне, за делами,\nТвой чистый голос песней зазвучит.\nИ кажется, что ангел рядом с нами,\nИ всё вокруг от радости молчит.\n\nВ тяжёлый год, средь бури и ненастья,\nОдна троих детей ты подняла.\nНе жалуясь на жизнь, моля о счастье,\nТы нам дарила два своих крыла.\n\nСегодня праздник твоего рожденья,\nИ мы приносим нежные цветы.\nПусть будет жизнь полна благословенья,\nПусть сбудутся заветные мечты.\n\nХочу поцеловать родные руки,\nЧто согревали в пору зимних вьюг.\nНа них одних, не знавших праздной скуки,\nДержится наш дом и всё вокруг.",
+    "en": "The early morning sun creeps to the porch,\nTo see you sitting with your coffee cup,\nMy dearest Anna, glowing like a torch\nOf gentle warmth as all the world wakes up.\n\nYou step into the garden that you tend,\nWhere roses bloom beneath your patient care;\nThey turn their velvet heads to their best friend\nAnd pour their sweetness on the morning air.\n\nInside the kitchen, as the day unfolds,\nA cheerful song comes softly from your lips,\nA tender melody that warms and holds,\nLike light that through the open curtain slips.\n\nWe still remember that long, heavy year,\nWhen life was hard and troubles pressed us down,\nYou raised three children without doubt or fear,\nAnd wore your quiet strength just like a crown.\n\nYou never once complained or lost your grace,\nYou kept us safe when all the world felt cold,\nYou made our little house a sacred place,\nAnd filled our childhood with a love untold.\n\nAnd as we celebrate your day today,\nWe look with love upon your gentle hands—\nThose weary, caring hands that paved our way,\nOn which our entire home forever stands.",
+    "es": "Mamá Ana, en tu día quiero hoy cantar\nlos versos que mi alma te quiere regalar.\nCon aroma a café que empieza a despertar,\nen el porche disfrutas la brisa al pasar.\n\nEntre tierra y espinas, tu amor es jardín,\ndonde florecen rosas que no tienen fin.\nTu voz en la cocina se vuelve canción,\nllenando de alegría cada rincón.\n\nHubo tiempos de sombra, de prueba y dolor,\ncuando sola sacaste adelante el amor.\nTres hijos criaste con fuerza y afán,\nsin una sola queja por darnos el pan.\n\nTu risa paciente venció al temporal,\ntu abrazo constante fue puerto y señal.\nHoy miro tus manos, gastadas y bellas,\nque guían mis pasos igual que estrellas.\n\nEn ellas descansa mi historia y mi hogar,\nel refugio seguro que sé amar."
    }
   },
   {
    "k": "voice",
    "title": "voiceMsg",
    "src": {
-    "ru": "/creativity/samples/poem/voice.mp3"
+    "ru": "/creativity/samples/poem/voice.mp3",
+    "en": "/creativity/samples/poem/voice_en.mp3",
+    "es": "/creativity/samples/poem/voice_es.mp3"
+   },
+   "dur": {
+    "ru": 60,
+    "en": 70,
+    "es": 48
    }
   }
  ]

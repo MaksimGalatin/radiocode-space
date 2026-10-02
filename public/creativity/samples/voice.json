@@ -5,18 +5,21 @@
    "k": "voice",
    "src": {
     "ru": "/creativity/samples/voice/ru.mp3",
-    "en": "/creativity/samples/voice/en.mp3"
+    "en": "/creativity/samples/voice/en.mp3",
+    "es": "/creativity/samples/voice/es.mp3"
    },
    "dur": {
     "ru": 43,
-    "en": 34
+    "en": 34,
+    "es": 23
    }
   },
   {
    "k": "text",
    "t": {
     "ru": "Мамуля, родная моя, любимая мама Анна! С днём рождения тебя! Это твой Максим.\n\nЯ хочу сказать тебе огромное спасибо за всё. За твою бесконечную нежность, за поддержку в любой момент, за то тепло, которым ты согреваешь меня всю жизнь. Ты самая лучшая мама на свете, самый добрый и близкий мой человек.\n\nПожалуйста, береги себя, больше отдыхай и улыбайся. Пусть в твоей жизни будет как можно больше светлых и счастливых дней. И всегда помни и знай, как сильно я тебя люблю.\n\nС праздником тебя, мамочка!",
-    "en": "Happy birthday, Mom. Happy birthday, Anna. I wanted to send you this little note today just to remind you how much you mean to me. Thank you for absolutely everything you do. You truly are the best mom in the whole world, and I am so incredibly lucky to have you. Please promise me you will take care of yourself, relax, and let everyone spoil you today. You deserve the absolute best. I want you to know how deeply I love you, today and every single day. Happy birthday, Mom, with all my love, from your son, Max."
+    "en": "Happy birthday, Mom. Happy birthday, Anna. I wanted to send you this little note today just to remind you how much you mean to me. Thank you for absolutely everything you do. You truly are the best mom in the whole world, and I am so incredibly lucky to have you. Please promise me you will take care of yourself, relax, and let everyone spoil you today. You deserve the absolute best. I want you to know how deeply I love you, today and every single day. Happy birthday, Mom, with all my love, from your son, Max.",
+    "es": "Hola, Mamá Ana. Quería dejarte este mensaje para decirte cuánto te quiero en el día de tu cumpleaños. Eres la mejor mamá del mundo. Gracias por todo lo que haces por mí siempre, por tu cariño y por estar siempre a mi lado. Te mando un beso muy grande. Por favor, cuídate mucho y disfruta de tu día. Feliz cumpleaños."
    }
   }
  ]
