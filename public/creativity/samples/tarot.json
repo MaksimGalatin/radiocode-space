@@ -19,7 +19,12 @@
      "El Mago",
      "El Carro"
     ]
-   }
+   },
+   "images": [
+    "/creativity/samples/tarot/card1.webp",
+    "/creativity/samples/tarot/card2.webp",
+    "/creativity/samples/tarot/card3.webp"
+   ]
   },
   {
    "k": "text",

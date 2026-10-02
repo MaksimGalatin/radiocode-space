@@ -1,0 +1,53 @@
+{
+ "lang": "en",
+ "items": [
+  {
+   "k": "audio",
+   "title": "song",
+   "src": "/creativity/samples/bundle/song_en.mp3",
+   "cover": "/creativity/samples/bundle/img2_en.webp"
+  },
+  {
+   "k": "text",
+   "title": "poem",
+   "t": {
+    "en": "Ten years ago where the Sochi waves rolled,\nA salt-kissed rhythm began to unfold.\nYou walked into my life, a sweet melody,\nAnd you brought all your jazz and your lavender to me.\n\nNow Saturdays wake to the smell of warm cream,\nAs you flip golden pancakes and float in a dream.\nMy tender sweet Anna, my rhythm and rhyme,\nYou keep the beat steady through every sweet time.\n\nYour voice is the trumpet, your soul is the bass,\nI find all my peace in the light of your face.\nA decade of loving the sound of your song,\nWith you is the only place I belong."
+   }
+  },
+  {
+   "k": "text",
+   "title": "letter",
+   "t": {
+    "en": "My dearest Anna,\n\nTen years. Ten whole years since the Black Sea brought us together in Sochi, and every single day since then has felt like the opening note of my favorite song. You still carry the scent of lavender wherever you go, a soft, beautiful reminder of the peace you brought into my life. \n\nI love the quiet rhythms we have built together. Waking up on Saturday mornings to the smell of coffee and the sound of jazz playing softly in the kitchen, watching you flip pancakes with that little smile that always makes time stop. You are the warmth in my mornings and the melody in my heart. \n\nAs I look at the stars for your birthday on the fourteenth of March, I am reminded of how lucky I am to share this universe with you. Pisces through and through, you are deep, graceful, and full of a quiet magic that captivates me endlessly. \n\nHappy anniversary, my love. Let's keep dancing to the music we make together."
+   }
+  },
+  {
+   "k": "gallery",
+   "title": "images",
+   "items": [
+    "/creativity/samples/bundle/img1_en.webp",
+    "/creativity/samples/bundle/img2_en.webp"
+   ]
+  },
+  {
+   "k": "text",
+   "title": "astro",
+   "t": {
+    "en": "Hello Anna, happy anniversary! I am AIfa, and today I want to share a special astrological reading just for you, celebrating ten years of love and the beautiful life you have built. \n\nLooking at your birth chart from March 14, 1990, your Sun is in Pisces, which completely explains your gentle, artistic soul. You bring such warmth, depth, and flowing creativity into the world, much like the smooth notes of a jazz melody playing in the background of a quiet evening. As a Pisces, you feel things deeply, and your intuition is a quiet compass that guides your heart.\n\nAdding to that, your Chinese zodiac sign is the Horse. This brings a wonderful, vibrant contrast to your water sign. The Horse represents freedom, passion, and a fearless spirit of adventure—the exact kind of lively energy that brought you and your husband together by the sparkling sea in Sochi ten years ago. You carry both the calm depths of the ocean and the joyful gallop of open fields inside you.\n\nYour numerology life path number is 9, calculated from your birth date. Nine is the number of universal love, compassion, and completion. It signifies someone who has a huge heart, cares deeply for others, and brings things to a beautiful, harmonious fulfillment. This milestone of ten years together is a true reflection of that number nine energy: a decade of growing together, sharing quiet Saturday mornings filled with the comforting smell of freshly baked pancakes, and creating a lifetime of memories wrapped in the scent of lavender.\n\nAs you step into this next chapter, the stars encourage you to keep leaning into your creativity, your passions, and the deep love that surrounds you. May your days continue to feel like your favorite jazz song—improvisational, soulful, and deeply romantic. Wishing you endless joy today and always!"
+   }
+  },
+  {
+   "k": "voice",
+   "title": "voiceMsg",
+   "src": {
+    "en": "/creativity/samples/bundle/voice_en.mp3"
+   }
+  },
+  {
+   "k": "video",
+   "title": "card",
+   "src": "/creativity/samples/bundle/card_en.mp4",
+   "poster": "/creativity/samples/bundle/card_en.webp"
+  }
+ ]
+}

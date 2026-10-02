@@ -1,0 +1,12 @@
+{
+ "lang": "en",
+ "items": [
+  {
+   "k": "video",
+   "src": "/creativity/samples/lyric_video/video_en.mp4",
+   "poster": "/creativity/samples/lyric_video/poster_en.webp",
+   "square": true,
+   "dur": 165
+  }
+ ]
+}

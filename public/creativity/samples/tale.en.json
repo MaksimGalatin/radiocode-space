@@ -1,0 +1,40 @@
+{
+ "lang": "en",
+ "more": "book",
+ "items": [
+  {
+   "k": "pdf",
+   "title": "book",
+   "src": {
+    "en": "/creativity/samples/tale/book_en.pdf"
+   },
+   "size": {
+    "en": 1.4
+   },
+   "cover": "/creativity/samples/tale/ch01_en.webp"
+  },
+  {
+   "k": "text",
+   "title": "chapter1",
+   "t": {
+    "en": "Once upon a time, in a cozy little house that floated right in the middle of the sparkling Milky Way, lived a seven-year-old girl named Sonya. She had pale skin, bright blue eyes, and messy brown hair tied in two short pigtails, and she wore a cheerful yellow cotton dress with bright red sneakers that made her feel as fast as a shooting star. Sonya loved three things more than anything else in the entire universe: drawing with chalk on the cosmic porch, eating warm honey pancakes, and looking up at the dancing stars. \n\nToday was a very special day because the pancake batter was bubbling on the stove, smelling like vanilla and sweet morning dreams. Trotting into the kitchen on four white paws came Bagel, her fluffy golden dog who loved space sausages and chasing comets just as much as Sonya loved art. \n\n\"Wake up, Bagel, the syrup is ready!\" Sonya laughed, scooping a golden stack onto their favorite star-shaped plates. \n\nSuddenly, a tiny blue light winked from the kitchen window, right outside the glass. It was a lost little twinkle-star, no bigger than a firefly, spinning in circles and looking very confused. \n\n\"Oh look,\" Sonya whispered, kneeling down beside her dog. \"I think the little star forgot the way home.\""
+   }
+  },
+  {
+   "k": "gallery",
+   "title": "images",
+   "items": [
+    "/creativity/samples/tale/ch01_en.webp",
+    "/creativity/samples/tale/ch02_en.webp",
+    "/creativity/samples/tale/ch03_en.webp",
+    "/creativity/samples/tale/ch04_en.webp",
+    "/creativity/samples/tale/ch05_en.webp",
+    "/creativity/samples/tale/ch06_en.webp",
+    "/creativity/samples/tale/ch07_en.webp",
+    "/creativity/samples/tale/ch08_en.webp",
+    "/creativity/samples/tale/ch09_en.webp",
+    "/creativity/samples/tale/ch10_en.webp"
+   ]
+  }
+ ]
+}

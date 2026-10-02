@@ -1,0 +1,53 @@
+{
+ "lang": "es",
+ "items": [
+  {
+   "k": "audio",
+   "title": "song",
+   "src": "/creativity/samples/bundle/song_es.mp3",
+   "cover": "/creativity/samples/bundle/img2_es.webp"
+  },
+  {
+   "k": "text",
+   "title": "poem",
+   "t": {
+    "es": "Diez años ya, mi amor, desde aquel día\nen que la brisa del mar de Sochi nos unió,\ny en tu mirada mi alma entera floreció\ncon la dulce calma de una vieja melodía.\n\nTú eres el aroma a lavanda en la mañana,\nla nota suave de jazz que alegra mi portal,\nla magia simple de un acorde de cristal\nque enciende la luz suave de nuestra ventana.\n\nLos sábados huelen a panqueques en la mesa,\nal calor de tus manos y a esta paz tan cierta,\nmientras la vida nos deja siempre la puerta\nabierta al compás de tu risa y tu belleza.\n\nFeliz aniversario, mi dulce compañera,\nque la música siga sonando eternamente\ny este amor que llevamos dentro y en la frente\nsea nuestro puerto y nuestra hermosa primavera."
+   }
+  },
+  {
+   "k": "text",
+   "title": "letter",
+   "t": {
+    "es": "Mi querida Ana, hoy que celebramos diez años juntos, mi corazón vuelve a ese día en Sochi, donde la brisa del mar nos juntó para siempre. Desde entonces, cada momento a tu lado ha tenido la melodía suave del jazz que tanto amas, llenando mi vida de una paz infinita.\n\nAmo tus mañanas de sábado, cuando el olor a panqueques recién hechos inunda la casa y tu risa se mezcla con el aroma de la lavanda que siempre cuidas con tanta dedicación. Eres el refugio donde quiero estar siempre, la nota perfecta en la canción de mi vida.\n\nMirando las estrellas que guiaron tu nacimiento un catorce de marzo de mil novecientos noventa, doy gracias al destino por cruzar nuestros caminos. Diez años son solo el comienzo de nuestra historia, y prometo seguir amándote en cada compás, en cada amanecer y en cada pequeño detalle cotidiano. \n\nFeliz aniversario, mi amor."
+   }
+  },
+  {
+   "k": "gallery",
+   "title": "images",
+   "items": [
+    "/creativity/samples/bundle/img1_es.webp",
+    "/creativity/samples/bundle/img2_es.webp"
+   ]
+  },
+  {
+   "k": "text",
+   "title": "astro",
+   "t": {
+    "es": "Feliz aniversario, mi amor. Hoy quiero celebrarte a ti, Ana, y mirar hacia adelante sabiendo que los astros siguen conspirando a nuestro favor, tal como lo hicieron hace diez años cuando nos conocimos junto al mar en Sochi. \n\nComo naciste el 14.03.1990, eres una mujer bajo el signo de Piscis, con la fuerza y la libertad del Caballo en el horóscopo chino, y tu número de destino en la numerología es el 9. Esta combinación es simplemente mágica, muy parecida a esa mezcla perfecta que tú haces cada sábado cuando preparas panqueques mientras suena una suave melodía de jazz y el aroma de la lavanda inunda la casa.\n\nTu alma de Piscis vibra con una sensibilidad única, y ese número 9 en tu vida marca una vibración de amor universal, empatía profunda y cierres de ciclos que se abren a nuevos comienzos hermosos. Eres una persona que abraza el mundo con el corazón abierto, y yo tengo la inmensa fortuna de caminar a tu lado en este viaje. \n\nEl Caballo en ti aporta una chispa de aventura inagotable. A tu lado, la vida nunca es monótona; siempre hay un ritmo nuevo por descubrir, una nueva nota improvisada en nuestra partitura diaria. En este aniversario quiero recordarte que mi lugar favorito en el universo sigue siendo el mismo: cualquier rincón donde estés tú, oliendo a lavanda, escuchando jazz y sonriéndome con esa complicidad que desafía al tiempo.\n\nQue este nuevo año astrológico te traiga tanta paz, alegría y música como la que tú regalas a todos los que te amamos. Brindo por nosotros, por nuestra década compartida y por todos los sábados que aún nos quedan por inventar. Te amo con toda el alma."
+   }
+  },
+  {
+   "k": "voice",
+   "title": "voiceMsg",
+   "src": {
+    "es": "/creativity/samples/bundle/voice_es.mp3"
+   }
+  },
+  {
+   "k": "video",
+   "title": "card",
+   "src": "/creativity/samples/bundle/card_es.mp4",
+   "poster": "/creativity/samples/bundle/card_es.webp"
+  }
+ ]
+}

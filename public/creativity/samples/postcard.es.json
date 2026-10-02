@@ -1,0 +1,15 @@
+{
+ "lang": "es",
+ "items": [
+  {
+   "k": "image",
+   "src": "/creativity/samples/postcard/card_es.webp"
+  },
+  {
+   "k": "text",
+   "t": {
+    "es": "Querida Ana,\n\nEn este día tan especial, deseo que tu vida se llene de momentos tan brillantes y valiosos como el oro. Que cada nuevo año te traiga risas, amor y una felicidad infinita que ilumine siempre tu camino. Que pases un cumpleaños espectacular y lleno de magia. \n\nCon todo mi cariño,\nMáximo"
+   }
+  }
+ ]
+}

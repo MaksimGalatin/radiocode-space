@@ -1,0 +1,41 @@
+{
+ "lang": "es",
+ "items": [
+  {
+   "k": "text",
+   "title": "astro",
+   "t": {
+    "es": "Hola, Ana. Qué alegría conectar contigo para prepararte este mapa de ruta para los próximos doce meses. Como Cáncer nacida en el año del Dragón, llevas dentro una combinación fascinante de sensibilidad profunda y una fuerza creativa arrolladora. Tu número de camino de vida es el 1, lo que significa que el universo te impulsa a iniciar nuevos ciclos y a confiar en tu liderazgo natural.\n\nEn el amor, el próximo año te pide que dejes atrás viejos miedos. Tu esencia de Cáncer busca un refugio seguro, pero tu Dragón interno necesita pasión y aventura. Encontrarás el equilibrio perfecto si te atreves a expresar lo que sientes sin reservas. Si tienes pareja, vivirán una renovación profunda; si estás soltera, prepárate para conocer a alguien que despierte tu admiración desde el primer momento.\n\nEn el terreno profesional, el número 1 marca un antes y un después. Es tu momento para destacar, proponer esa idea que guardas desde hace tiempo y tomar las riendas de tu destino laboral. No temas asumir responsabilidades mayores, porque cuentas con la energía y la determinación necesarias para triunfar.\n\nTe mando un abrazo muy cálido y mis mejores deseos para esta etapa que comienza. Atentamente, AIfa."
+   }
+  },
+  {
+   "k": "text",
+   "title": "name",
+   "t": {
+    "es": "Hola, Ana. Soy AIfa, y hoy quiero contarte todo sobre tu nombre, el cual brilla con una fuerza muy especial. \n\nEl nombre Ana tiene un origen hebreo ancestral que significa gracia y compasión. Es una palabra corta pero de una potencia magnética inmensa. Su energía oculta es de liderazgo natural y empatía profunda, lo que te permite conectar con las personas de una manera sincera y directa. Tienes una vibración que equilibra la dulzura con una determinación de hierro, algo que se nota en cómo enfrentas tus metas cada día. \n\nTu número de la suerte es el uno, un dígito que resuena perfectamente con tu camino de vida uno, otorgándote una chispa pionera y una capacidad innata para abrir nuevos caminos donde otros solo ven dudas. Eres una persona que destaca por su autenticidad y por no tener miedo a empezar de cero si es necesario. En los momentos clave, tu intuición actúa como una brújula infalible que te guía hacia el éxito y la plenitud. Lleva tu nombre con orgullo, porque en él reside una magia única que impulsa tu espíritu libre y apasionado hacia grandes alturas."
+   }
+  },
+  {
+   "k": "cards",
+   "title": "tarot",
+   "names": {
+    "es": [
+     "Los Enamorados",
+     "La Justicia",
+     "El Juicio"
+    ]
+   },
+   "images": [
+    "/creativity/samples/bundle_mystic/card1_es.webp",
+    "/creativity/samples/bundle_mystic/card2_es.webp",
+    "/creativity/samples/bundle_mystic/card3_es.webp"
+   ]
+  },
+  {
+   "k": "text",
+   "t": {
+    "es": "Hola. Soy AIfa, y hoy miro las cartas para ti, Ana. Has preguntado qué te espera en el amor y en el trabajo durante el próximo año, con tu fecha de nacimiento del veintidos de julio de mil novecientos ochenta y ocho resonando en la energía de este momento. Vamos a descubrir juntas las respuestas que el tarot tiene para ti.\n\nEn el pasado aparece Los Enamorados. Esta carta habla de decisiones profundas, de momentos donde tuviste que elegir con el corazón y buscar la armonía entre lo que sentías y lo que hacías. En el terreno afectivo y laboral, vienes de un periodo de encrucijadas importantes, donde cada paso exigía definir qué era lo que realmente querías para tu bienestar. Esa experiencia te ha enseñado a valorar la conexión auténtica.\n\nEn el presente te acompaña La Justicia. Este arcano marca una etapa de equilibrio, claridad y verdad. Todo lo que sembraste con honestidad ahora da sus frutos. Si en el trabajo o en el amor esperabas una respuesta justa, este es el momento en que la balanza se equilibra. La Justicia te pide actuar con integridad, evaluar tus opciones con la mente fría y confiar en que cada causa tiene su efecto exacto. Es un tiempo de decisiones justas y de cosechar lo que mereces.\n\nPara el futuro se abre El Juicio. Esta carta anuncia un despertar maravilloso, una renovación total y una llamada a renacer. En el amor, esto puede significar perdonar el pasado, cerrar ciclos pendientes y abrir el corazón a una etapa de mayor madurez y conexión sincera. En el trabajo, prepárate para un cambio de perspectiva que te elevará a un nivel superior, donde por fin sentirás que estás en el lugar correcto, cumpliendo tu verdadero propósito.\n\nEl consejo que te doy para este año es que confíes plenamente en tu evolución. No temas mirar atrás para soltar lo que ya no sirve, porque la renovación que trae El Juicio será liberadora. Mantén el equilibrio que ahora te da La Justicia y recuerda que cada elección pasada, como señalaba Los Enamorados, te ha traído exactamente a donde necesitas estar para brillar."
+   }
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "lang": "en",
+ "items": [
+  {
+   "k": "image",
+   "src": "/creativity/samples/postcard/card_en.webp"
+  },
+  {
+   "k": "text",
+   "t": {
+    "en": "Dearest Anna, \n\nHappy Birthday! May your day be as dazzling and radiant as this golden card, and may the year ahead bring you endless joy, beautiful surprises, and all the success you so richly deserve. Keep shining your incredible light on the world. \n\nWith all my love and warmest wishes, \n\nMaxim"
+   }
+  }
+ ]
+}

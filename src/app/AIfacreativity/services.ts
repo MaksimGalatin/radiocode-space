@@ -598,7 +598,7 @@ export const CARD: Record<string, { for: L; preview?: string; contain?: boolean 
     'For a couple, spouses, friends, colleagues or a parent and child — with an answer to your own question.',
     'Para una pareja, esposos, amigos, colegas o padre e hijo — con respuesta a tu propia pregunta.',
     '适合情侣、夫妻、朋友、同事或父母与孩子——并回答你自己的问题。') },
-  tarot: { for: l(
+  tarot: { preview: '/creativity/samples/tarot/card1.webp', contain: true, for: l(
     'Когда стоите перед выбором — работа, отношения, переезд — и хочется взглянуть на ситуацию со стороны.',
     'When you face a choice — work, a relationship, a move — and want to see the situation from the outside.',
     'Cuando estás ante una decisión — trabajo, relación, mudanza — y quieres ver la situación desde fuera.',
@@ -631,3 +631,7 @@ export const В_БОТЕ_СРАЗУ = new Set([
   'postcard', 'image', 'stickerpack', 'astro_full', 'name_secrets', 'dream', 'compatibility', 'tarot',
   'bundle_romance', 'bundle_mystic', 'bundle',
 ]);
+
+/** Образцы, у которых есть отдельный файл на язык: <id>.<lang>.json (01.10.2026 — песни, видео, иллюстрации
+ * у каждого языка свои, из настоящего заказа на этом языке). Пишет сборщик собрать_образцы_0110_медиа.py. */
+export const SAMPLE_LANGS: Record<string, string[]> = { bundle: ['en', 'es'], bundle_mystic: ['en', 'es'], bundle_romance: ['en', 'es'], lyric_video: ['en', 'es'], postcard: ['en', 'es'], song_vocal: ['en', 'es'], tale: ['en', 'es'], year_ahead: ['en', 'es'] };

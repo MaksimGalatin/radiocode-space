@@ -1,0 +1,23 @@
+{
+ "lang": "es",
+ "items": [
+  {
+   "k": "text",
+   "title": "poem",
+   "t": {
+    "es": "Parece ayer cuando el mar de Sochi nos unió,\nentre el murmullo de olas nació nuestro andar.\nHan pasado diez años llenos de luz y amor,\ndiez años donde mi único hogar es tu mirar.\n\nTe veo feliz entre notas de jazz y lavanda,\ncon esa calma bonita que viste tu ser,\ny en los sábados tibios con olor a panqueques,\nal ver cómo haces la mañana florecer.\n\nEn los ojos alegres de nuestro Misha\nse refleja la vida hermosa que construimos los dos,\nel regalo más puro de estos diez años juntos,\ndonde siempre he sido feliz escuchando tu voz.\n\nGracias por cada instante a tu lado,\npor tu abrazo, tu amor y tu caminar.\nFeliz aniversario, mi amada Ana,\nsiempre elegiría volver contigo al mar."
+   }
+  },
+  {
+   "k": "text",
+   "title": "letter",
+   "t": {
+    "es": "Mi amor, Ana.\n\nHoy celebramos diez años desde que el destino decidió cruzar nuestros caminos junto al mar en Sochi. Todavía recuerdo el sonido de las olas y cómo tus ojos brillaban con esa luz tan tuya, llenando mi mundo de una paz que nunca antes había conocido. \n\nMiro hacia atrás y el tiempo se desvanece. Pienso en nuestras tardes envueltas en notas de jazz y en cómo el aroma a lavanda siempre logra transportarme a los momentos más felices de nuestra vida. Me enamora tu paciencia, tu forma de cuidar cada detalle y la alegría con la que llenas nuestra casa, sobre todo esos sábados por la mañana cuando preparas los panqueques que Misha espera con tanta ilusión. \n\nVerte ser madre de nuestro hijo es el regalo más hermoso que la vida me ha dado. En sus risas veo reflejado este amor maduro, cálido y sincero que hemos construido paso a paso, día tras día. Gracias por ser mi refugio, mi compañera de viaje y la melodía que siempre quiero escuchar. \n\nTe amo hoy más que ayer y menos que mañana. Feliz aniversario."
+   }
+  },
+  {
+   "k": "image",
+   "src": "/creativity/samples/bundle_romance/image_es.webp"
+  }
+ ]
+}

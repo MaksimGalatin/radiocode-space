@@ -1,0 +1,40 @@
+{
+ "lang": "es",
+ "more": "book",
+ "items": [
+  {
+   "k": "pdf",
+   "title": "book",
+   "src": {
+    "es": "/creativity/samples/tale/book_es.pdf"
+   },
+   "size": {
+    "es": 1.3
+   },
+   "cover": "/creativity/samples/tale/ch01_es.webp"
+  },
+  {
+   "k": "text",
+   "title": "chapter1",
+   "t": {
+    "es": "Hola, amiga. Siente el calor de esta historia mientras te cuento el inicio de una gran aventura espacial. El olor a panqueques recién hechos flotaba por toda la cocina, mezclándose con el dulce aroma de la vainilla. Sonia, una niña de siete años con el pelo castaño muy revuelto y unos ojos brillantes llenos de curiosidad, dio un gran salto de emoción. Llevaba puesto su jersey amarillo favorito, decorado con pequeñas estrellas brillantes que parecían cobrar vida cada vez que ella se reía. \n\nEn la mesa, su fiel perro Rosquilla movía la cola sin parar, esperando impaciente que cayera un trozo de masa. A Sonia le encantaba desayunar panqueques con forma de luna antes de salir a mirar el firmamento, pero esta mañana ocurrió algo mágico y extraño. Al morder el primer panqueque crujiente, la cocina entera comenzó a flotar suavemente. Las tazas de té bailaban en el aire y la ventana se abrió de par en par, revelando un océano negro salpicado de estrellas gigantescas y cometas de colores. \n\n—¡Rosquilla, mira! ¡Estamos volando hacia el espacio! —exclamó Sonia con una sonrisa enorme, mientras ajustaba bien en su bolsillo su inseparable y diminuto cuaderno dorado de dibujo. \n\nEl adorable perrito ladró alegremente, flotando a su lado en gravedad cero, mientras ambos salían por la ventana flotante rumbo a una nube brillante que parpadeaba como un faro en la oscuridad."
+   }
+  },
+  {
+   "k": "gallery",
+   "title": "images",
+   "items": [
+    "/creativity/samples/tale/ch01_es.webp",
+    "/creativity/samples/tale/ch02_es.webp",
+    "/creativity/samples/tale/ch03_es.webp",
+    "/creativity/samples/tale/ch04_es.webp",
+    "/creativity/samples/tale/ch05_es.webp",
+    "/creativity/samples/tale/ch06_es.webp",
+    "/creativity/samples/tale/ch07_es.webp",
+    "/creativity/samples/tale/ch08_es.webp",
+    "/creativity/samples/tale/ch09_es.webp",
+    "/creativity/samples/tale/ch10_es.webp"
+   ]
+  }
+ ]
+}

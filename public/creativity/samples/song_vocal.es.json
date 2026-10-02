@@ -1,0 +1,17 @@
+{
+ "lang": "es",
+ "items": [
+  {
+   "k": "audio",
+   "src": "/creativity/samples/song_vocal/song_es.mp3",
+   "dur": 175
+  },
+  {
+   "k": "text",
+   "title": "lyrics",
+   "t": {
+    "es": "[Verse 1]\nLa luz del alba empieza a despertar,\ntu taza de café sobre el rincón,\nel porche donde sales a mirar\nlas rosas que florecen con pasión.\n\n[Chorus]\nFeliz cumpleaños, jardinera de mi vida,\nque llenas cada espacio con amor,\ntu voz en la cocina es melodía,\nla dueña de mi eterno corazón.\n\n[Verse 2]\nTus manos cuidan todo con primor,\nla tierra cobra vida junto a ti,\ny mientras vas cantando con fervor,\nla casa se transforma en un jardín.\n\n[Chorus]\nFeliz cumpleaños, jardinera de mi vida,\nque llenas cada espacio con amor,\ntu voz en la cocina es melodía,\nla dueña de mi eterno corazón.\n\n[Bridge]\nHoy celebro tus pasos y tu risa,\nel abrazo que calma cualquier frío,\ntu mirada que llega como brisa\ny el regalo de estar junto a tu abrigo.\n\n[Chorus]\nFeliz cumpleaños, jardinera de mi vida,\nque llenas cada espacio con amor,\ntu voz en la cocina es melodía,\nla dueña de mi eterno corazón."
+   }
+  }
+ ]
+}

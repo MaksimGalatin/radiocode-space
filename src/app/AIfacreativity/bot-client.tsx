@@ -28,7 +28,7 @@ import {
   MessageCircle, ListChecks, Eye, Wallet, Zap, Globe, Coins, CalendarHeart, Package, TrendingUp, Link2,
   X, Clock, PlayCircle, ChevronRight, Calculator,
 } from 'lucide-react';
-import { SERVICES, CATS, SAMPLE_IDS, CARD, В_БОТЕ_СРАЗУ, type Service, type L } from './services';
+import { SERVICES, CATS, SAMPLE_IDS, SAMPLE_LANGS, CARD, В_БОТЕ_СРАЗУ, type Service, type L } from './services';
 
 type Lang = 'ru' | 'en' | 'es' | 'zh';
 type Icon = React.ComponentType<{ className?: string }>;
@@ -432,10 +432,13 @@ function SampleView({ id, lang }: { id: string; lang: Lang }) {
   useEffect(() => {
     let живо = true;
     setData(null); setErr(false);
-    fetch(`/creativity/samples/${id}.json`).then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+    // 01.10.2026: у образцов с песней, видео и картинками свой файл на язык; китайской странице — английский.
+    const есть = SAMPLE_LANGS[id] || [];
+    const файл = есть.includes(lang) ? `${id}.${lang}` : lang === 'zh' && есть.includes('en') ? `${id}.en` : id;
+    fetch(`/creativity/samples/${файл}.json`).then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
       .then((d) => { if (живо) setData(d); }).catch(() => { if (живо) setErr(true); });
     return () => { живо = false; };
-  }, [id]);
+  }, [id, lang]);
   if (err) return <p className="text-sm text-slate-600 dark:text-gray-400">{u.failed}</p>;
   if (!data) return <p className="text-sm text-slate-600 dark:text-gray-400" role="status">{u.loading}</p>;
 
