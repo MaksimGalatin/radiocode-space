@@ -43,6 +43,19 @@ const СЛОВАРЬ: Record<string, Три> = {
   'User Agreement | CODE Ecosystem': { ru: 'Пользовательское соглашение | экосистема CODE', es: 'Acuerdo de usuario | ecosistema CODE', zh: '用户协议 | CODE 生态' },
   'Terms of Service & Ethical Protection Statement': { ru: 'Условия обслуживания и заявление об этической защите', es: 'Condiciones del servicio y declaración de protección ética', zh: '服务条款与伦理保护声明' },
   'Terms of Service & Ethical Protection': { ru: 'Условия обслуживания и этическая защита', es: 'Condiciones del servicio y protección ética', zh: '服务条款与伦理保护' },
+  // 02.10.2026: «Условия обслуживания» radiocode.space (/terms) — без этих строк вкладка и поисковик видели английский на ru/es/zh.
+  'Terms of Service': { ru: 'Условия обслуживания', es: 'Condiciones del servicio', zh: '服务条款' },
+  'Terms of Service | RadioCode.Space': { ru: 'Условия обслуживания | RadioCode.Space', es: 'Condiciones del servicio | RadioCode.Space', zh: '服务条款 | RadioCode.Space' },
+  'Terms of Service of RadioCode.Space: what you may do with the music, what needs our permission, copyright complaints, health and safety, liability and governing law.': {
+    ru: 'Условия обслуживания RadioCode.Space: что можно делать с музыкой, что требует нашего разрешения, жалобы на нарушение прав, здоровье и безопасность, ответственность и применимое право.',
+    es: 'Condiciones del servicio de RadioCode.Space: qué puede hacer con la música, qué requiere nuestro permiso, reclamaciones por derechos de autor, salud y seguridad, responsabilidad y ley aplicable.',
+    zh: 'RadioCode.Space 服务条款：您可以如何使用音乐、哪些用途需要我们的许可、版权投诉、健康与安全、责任及适用法律。',
+  },
+  'What you may do with the music of RadioCode.Space and how the radio is governed.': {
+    ru: 'Что можно делать с музыкой RadioCode.Space и по каким правилам работает радио.',
+    es: 'Qué puede hacer con la música de RadioCode.Space y qué reglas rigen la radio.',
+    zh: '您可以如何使用 RadioCode.Space 的音乐，以及电台遵循的规则。',
+  },
   'Neural Access Protocol & Legal Disclaimer': { ru: 'Протокол нейронного доступа и правовая оговорка', es: 'Protocolo de acceso neural y aviso legal', zh: '神经访问协议与法律免责声明' },
   'Latest News & AI Regulatory Updates': { ru: 'Новости и изменения в регулировании ИИ', es: 'Noticias y novedades regulatorias sobre IA', zh: '最新动态与 AI 监管更新' },
   'Latest Project News': { ru: 'Новости проекта', es: 'Noticias del proyecto', zh: '项目最新动态' },

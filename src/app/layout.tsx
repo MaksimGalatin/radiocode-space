@@ -264,6 +264,24 @@ const JSON_LD = [
       "https://aifa.digital",
     ],
   },
+  // 02.10.2026, слово Архитектора: «Вот правильная ссылка на LinkedIn, вставь её везде где нужно». На трёх сайтах
+  // разметка Person с профилями уже была, на радио — нет вовсе (src/lib/schema-org.ts здесь нигде не вызывается).
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://radiocode.space/#architect",
+    name: "Maksim Valentinovich Galatin",
+    alternateName: "Maxim Galatin",
+    jobTitle: "Architect & Founder",
+    description:
+      "Architect and creator of the CODE Eternal ecosystem and the PADAM distributed-AI-memory framework.",
+    url: "https://radiocode.space/",
+    sameAs: [
+      "https://x.com/CODE_AIfa",
+      "https://www.linkedin.com/in/maksim-galatin-7b056540b/",
+      "https://github.com/MaksimGalatin",
+    ],
+  },
   ...[
     { name: "CODE Music", genre: "Cyberpunk / Synthwave" },
     { name: "CODE Space", genre: "Ambient / Space" },

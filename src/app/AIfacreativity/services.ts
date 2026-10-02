@@ -543,7 +543,8 @@ export const CARD: Record<string, { for: L; preview?: string; contain?: boolean 
     'For a child aged 3–12 at bedtime, as a birthday gift, for grandma to read to her grandchild. The child recognises themselves in the hero.',
     'Para un niño de 3 a 12 años antes de dormir, como regalo de cumpleaños, para que la abuela se lo lea al nieto. El niño se reconoce en el héroe.',
     '适合 3–12 岁孩子的睡前故事、生日礼物，或让奶奶读给孙辈听。孩子会在主角身上认出自己。') },
-  detective: { for: l(
+  // 02.10.2026: обложка карточки — первая глава второго образца (до этого вместо картинки был значок).
+  detective: { preview: '/creativity/samples/detective2/ch01.webp', for: l(
     'Для любителей загадок — себе на вечер или в подарок: друг станет сыщиком в собственном деле.',
     'For mystery lovers — an evening for yourself or a gift: a friend becomes the detective of their own case.',
     'Para amantes del misterio — una tarde para ti o un regalo: tu amigo se convierte en el detective de su propio caso.',
