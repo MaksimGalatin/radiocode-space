@@ -634,4 +634,4 @@ export const В_БОТЕ_СРАЗУ = new Set([
 
 /** Образцы, у которых есть отдельный файл на язык: <id>.<lang>.json (01.10.2026 — песни, видео, иллюстрации
  * у каждого языка свои, из настоящего заказа на этом языке). Пишет сборщик собрать_образцы_0110_медиа.py. */
-export const SAMPLE_LANGS: Record<string, string[]> = { bundle: ['en', 'es'], bundle_mystic: ['en', 'es'], bundle_romance: ['en', 'es'], lyric_video: ['en', 'es'], postcard: ['en', 'es'], song_vocal: ['en', 'es'], tale: ['en', 'es'], year_ahead: ['en', 'es'] };
+export const SAMPLE_LANGS: Record<string, string[]> = { bundle: ['en', 'es'], bundle_mystic: ['en', 'es'], bundle_romance: ['en', 'es'], lyric_video: ['en', 'es'], postcard: ['en', 'es'], song_vocal: ['en', 'es'], tale: ['en', 'es'], detective: ['en', 'es', 'zh'], year_ahead: ['en', 'es'] };

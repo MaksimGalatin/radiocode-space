@@ -332,7 +332,7 @@ const D: Record<Lang, Content> = {
 /** Подписи окна услуги. */
 const U: Record<Lang, {
   open: string; openSample: string; badge: string; asks: string; gets: string; time: string; create: string;
-  sample: string; sampleNote: string; noSample: string; close: string; loading: string; failed: string;
+  sample: string; sampleNote: string; translated: string; chosen: string; noSample: string; close: string; loading: string; failed: string;
   langNote: (lg: string) => string; more: Record<string, string>; titles: Record<string, string>; forWho: string;
   positions: string[]; listen: string; pdf: string;
 }> = {
@@ -340,6 +340,8 @@ const U: Record<Lang, {
     open: 'Подробнее', openSample: 'Подробнее и образец', badge: 'Образец', asks: 'О чём спросит AIfa', gets: 'Что вы получите',
     time: 'Сколько ждать', create: 'Создать в Telegram', sample: 'Образец',
     sampleNote: 'Это настоящая выдача AIfa по пробному заказу с вымышленными именами — ровно то, что приходит в Telegram.',
+    translated: 'Это перевод настоящей выдачи AIfa по пробному заказу с вымышленными именами: история создана на другом языке и переведена AIfa. В боте AIfa пишет сразу на вашем языке.',
+    chosen: 'выбор AIfa',
     noSample: 'Образец этой услуги AIfa сейчас готовит заново. А в боте у каждой услуги есть кнопка «Пример».',
     close: 'Закрыть', loading: 'Загружаем образец…', failed: 'Образец не загрузился. Обновите страницу или посмотрите его в боте.',
     langNote: (lg) => `Образец ${({ ru: 'на русском', en: 'на английском', es: 'на испанском' } as Record<string, string>)[lg] || ''}. Ваш AIfa создаст на русском, английском или испанском — как вы выберете.`,
@@ -348,7 +350,7 @@ const U: Record<Lang, {
       chapter1: 'Это первая глава. Дальше — ещё девять: после каждой вы выбираете, что будет, а в конце приходит книга PDF со всеми главами и иллюстрациями.',
       book: 'Это настоящая книга, которую AIfa собрала по пробной истории: десять глав, после каждой выбирали продолжение, к каждой — своя иллюстрация. Книга PDF приходит в конце истории.',
     },
-    titles: { lyrics: 'Текст песни', overview: 'Обзор года', month1: 'Первый месяц', chapter1: 'Глава 1', song: 'Песня', poem: 'Стих', letter: 'Любовное письмо', astro: 'Астропрогноз', name: 'Тайны имени', tarot: 'Расклад Таро', voiceMsg: 'Голосовое', card: 'Живая музыкальная открытка', images: 'Иллюстрации', book: 'Книга целиком', stickers: 'Набор стикеров', daily: 'Прогноз на сегодня' },
+    titles: { lyrics: 'Текст песни', overview: 'Обзор года', month1: 'Первый месяц', chapter1: 'Глава 1', song: 'Песня', poem: 'Стих', letter: 'Любовное письмо', astro: 'Астропрогноз', name: 'Тайны имени', tarot: 'Расклад Таро', voiceMsg: 'Голосовое', card: 'Живая музыкальная открытка', images: 'Иллюстрации', book: 'Книга целиком', stickers: 'Набор стикеров', daily: 'Прогноз на сегодня', fork: 'Развилка после 1-й главы' },
     positions: ['Прошлое', 'Настоящее', 'Будущее'], listen: 'Слушать', pdf: 'Открыть PDF',
     forWho: 'Кому и когда',
   },
@@ -356,6 +358,8 @@ const U: Record<Lang, {
     open: 'Details', openSample: 'Details and sample', badge: 'Sample', asks: 'What AIfa will ask', gets: 'What you get',
     time: 'How long', create: 'Create in Telegram', sample: 'Sample',
     sampleNote: 'This is a real AIfa delivery for a test order with made-up names — exactly what arrives in Telegram.',
+    translated: 'This is a translation of a real AIfa delivery for a test order with made-up names: the story was created in Russian and translated by AIfa. In the bot, AIfa writes in your language from the start.',
+    chosen: 'AIfa’s choice',
     noSample: 'AIfa is preparing a new sample for this service. In the bot, every service has a “Sample” button.',
     close: 'Close', loading: 'Loading the sample…', failed: 'The sample did not load. Refresh the page or see it in the bot.',
     langNote: (lg) => `This sample is in ${({ ru: 'Russian', en: 'English', es: 'Spanish' } as Record<string, string>)[lg] || ''}. AIfa will make yours in English, Russian or Spanish — your choice.`,
@@ -364,7 +368,7 @@ const U: Record<Lang, {
       chapter1: 'This is the first chapter. Nine more follow: after each one you choose what happens, and at the end you get a PDF book with every chapter and illustration.',
       book: 'This is a real book AIfa put together from a test story: ten chapters, a choice of what happens after each one, and an illustration for every chapter. The PDF book arrives at the end of the story.',
     },
-    titles: { lyrics: 'Lyrics', overview: 'The year at a glance', month1: 'The first month', chapter1: 'Chapter 1', song: 'Song', poem: 'Poem', letter: 'Love letter', astro: 'Astrology forecast', name: 'Secrets of the name', tarot: 'Tarot reading', voiceMsg: 'Voice message', card: 'Living music card', images: 'Illustrations', book: 'The whole book', stickers: 'Sticker pack', daily: 'Forecast for today' },
+    titles: { lyrics: 'Lyrics', overview: 'The year at a glance', month1: 'The first month', chapter1: 'Chapter 1', song: 'Song', poem: 'Poem', letter: 'Love letter', astro: 'Astrology forecast', name: 'Secrets of the name', tarot: 'Tarot reading', voiceMsg: 'Voice message', card: 'Living music card', images: 'Illustrations', book: 'The whole book', stickers: 'Sticker pack', daily: 'Forecast for today', fork: 'The fork after chapter 1' },
     positions: ['Past', 'Present', 'Future'], listen: 'Listen', pdf: 'Open the PDF',
     forWho: 'Who and when',
   },
@@ -372,6 +376,8 @@ const U: Record<Lang, {
     open: 'Detalles', openSample: 'Detalles y muestra', badge: 'Muestra', asks: 'Qué te preguntará AIfa', gets: 'Qué recibirás',
     time: 'Cuánto tarda', create: 'Crear en Telegram', sample: 'Muestra',
     sampleNote: 'Es una entrega real de AIfa para un pedido de prueba con nombres inventados: exactamente lo que llega a Telegram.',
+    translated: 'Es la traducción de una entrega real de AIfa para un pedido de prueba con nombres inventados: la historia se creó en ruso y la tradujo AIfa. En el bot, AIfa escribe directamente en tu idioma.',
+    chosen: 'elección de AIfa',
     noSample: 'AIfa está preparando una nueva muestra de este servicio. En el bot, cada servicio tiene un botón «Muestra».',
     close: 'Cerrar', loading: 'Cargando la muestra…', failed: 'La muestra no se cargó. Recarga la página o mírala en el bot.',
     langNote: (lg) => `Esta muestra está en ${({ ru: 'ruso', en: 'inglés', es: 'español' } as Record<string, string>)[lg] || ''}. AIfa creará la tuya en español, inglés o ruso, como elijas.`,
@@ -380,7 +386,7 @@ const U: Record<Lang, {
       chapter1: 'Este es el primer capítulo. Siguen nueve más: tras cada uno eliges qué pasa, y al final llega un libro PDF con todos los capítulos e ilustraciones.',
       book: 'Es un libro real que AIfa armó a partir de una historia de prueba: diez capítulos, una elección de lo que pasa tras cada uno y una ilustración para cada capítulo. El libro PDF llega al final de la historia.',
     },
-    titles: { lyrics: 'Letra', overview: 'El año de un vistazo', month1: 'El primer mes', chapter1: 'Capítulo 1', song: 'Canción', poem: 'Poema', letter: 'Carta de amor', astro: 'Pronóstico astrológico', name: 'Secretos del nombre', tarot: 'Lectura de tarot', voiceMsg: 'Mensaje de voz', card: 'Postal musical animada', images: 'Ilustraciones', book: 'El libro completo', stickers: 'Pack de stickers', daily: 'El pronóstico de hoy' },
+    titles: { lyrics: 'Letra', overview: 'El año de un vistazo', month1: 'El primer mes', chapter1: 'Capítulo 1', song: 'Canción', poem: 'Poema', letter: 'Carta de amor', astro: 'Pronóstico astrológico', name: 'Secretos del nombre', tarot: 'Lectura de tarot', voiceMsg: 'Mensaje de voz', card: 'Postal musical animada', images: 'Ilustraciones', book: 'El libro completo', stickers: 'Pack de stickers', daily: 'El pronóstico de hoy', fork: 'La bifurcación tras el capítulo 1' },
     positions: ['Pasado', 'Presente', 'Futuro'], listen: 'Escuchar', pdf: 'Abrir el PDF',
     forWho: 'Para quién y cuándo',
   },
@@ -388,6 +394,8 @@ const U: Record<Lang, {
     open: '详情', openSample: '详情与样例', badge: '样例', asks: 'AIfa 会问什么', gets: '你将得到',
     time: '需要多久', create: '在 Telegram 中创作', sample: '样例',
     sampleNote: '这是 AIfa 为一份使用虚构姓名的测试订单真实生成的作品——与 Telegram 中收到的完全一致。',
+    translated: '这是 AIfa 为一份使用虚构姓名的测试订单真实生成的作品的译本：故事原文为俄语，由 AIfa 翻译。在机器人中，AIfa 可直接用英语、俄语或西班牙语创作。',
+    chosen: 'AIfa 的选择',
     noSample: 'AIfa 正在为这项服务准备新的样例。在机器人中，每项服务都有“样例”按钮。',
     close: '关闭', loading: '正在加载样例…', failed: '样例未能加载。请刷新页面或在机器人中查看。',
     langNote: (lg) => `此样例为${({ ru: '俄语', en: '英语', es: '西班牙语' } as Record<string, string>)[lg] || ''}。AIfa 可按你的选择用英语、俄语或西班牙语创作。`,
@@ -396,7 +404,7 @@ const U: Record<Lang, {
       chapter1: '这是第一章。后面还有九章：每章结束后由你决定情节走向，最后会收到包含全部章节与插画的 PDF 书。',
       book: '这是 AIfa 根据一次测试故事真实生成的书：十章，每章之后选择情节走向，每章配一幅插画。故事结束时会收到这本 PDF 书。',
     },
-    titles: { lyrics: '歌词', overview: '全年概览', month1: '第一个月', chapter1: '第一章', song: '歌曲', poem: '诗歌', letter: '情书', astro: '星座运势', name: '名字的秘密', tarot: '塔罗牌解读', voiceMsg: '语音消息', card: '动态音乐贺卡', images: '插图', book: '完整的书', stickers: '贴纸包', daily: '今日运势' },
+    titles: { lyrics: '歌词', overview: '全年概览', month1: '第一个月', chapter1: '第一章', song: '歌曲', poem: '诗歌', letter: '情书', astro: '星座运势', name: '名字的秘密', tarot: '塔罗牌解读', voiceMsg: '语音消息', card: '动态音乐贺卡', images: '插图', book: '完整的书', stickers: '贴纸包', daily: '今日运势', fork: '第一章之后的岔路口' },
     positions: ['过去', '现在', '未来'], listen: '收听', pdf: '打开 PDF',
     forWho: '适合谁、何时',
   },
@@ -413,8 +421,12 @@ type Item = { title?: string } & (
   | { k: 'gallery'; items: string[]; square?: boolean }
   | { k: 'cards'; names: Partial<Record<'ru' | 'en' | 'es', string[]>>; images?: string[] }
   // 01.10.2026: PDF — книга сказки и детектива, PDF гороскопа и тайны имени; size — размер файла в МБ
-  | { k: 'pdf'; src: T3; size?: Partial<Record<'ru' | 'en' | 'es', number>>; cover?: string });
-interface SampleData { lang: string; more?: string; items: Item[] }
+  | { k: 'pdf'; src: T3; size?: Partial<Record<'ru' | 'en' | 'es', number>>; cover?: string }
+  // 02.10.2026: развилка истории — пять вариантов продолжения после главы и выбор AIfa (номер с нуля)
+  | { k: 'choices'; t: Partial<Record<string, string[]>>; chosen: number });
+// translatedFrom (02.10.2026): язык оригинала, если образец на других языках — перевод (детектив). Тогда
+// подпись «перевод настоящей выдачи», а не «настоящая выдача»: раздел 53, запрет фальсификации.
+interface SampleData { lang: string; more?: string; items: Item[]; translatedFrom?: string }
 
 /** Язык образца: язык страницы → английский → русский → испанский. */
 function выбрать<T>(t: Partial<Record<string, T>>, lang: Lang): [T | undefined, string] {
@@ -452,7 +464,7 @@ function SampleView({ id, lang }: { id: string; lang: Lang }) {
 
   return (
     <div className="space-y-5">
-      <p className="text-sm text-slate-600 dark:text-gray-400">{u.sampleNote}</p>
+      <p className="text-sm text-slate-600 dark:text-gray-400">{data.translatedFrom && показанНа !== data.translatedFrom ? u.translated : u.sampleNote}</p>
       {показанНа !== lang && <p className="text-sm text-slate-700 dark:text-gray-300 bg-cyan-500/10 border border-cyan-500/20 rounded-xl px-4 py-3">{u.langNote(показанНа)}</p>}
       {data.items.map((it, i) => {
         const тело = частьОбразца(it, i, lang, u);
@@ -486,6 +498,21 @@ function частьОбразца(it: Item, i: number, lang: Lang, u: (typeof U)
               {it.cover && <img src={it.cover} alt="" loading="lazy" className="w-16 h-20 object-cover rounded-lg shrink-0" />}
               <span className="font-semibold">📄 {u.pdf}{мб ? ` · ${мб} MB` : ''}</span>
             </a>
+          );
+        }
+        if (it.k === 'choices') {
+          const [вар] = выбрать(it.t, lang);
+          if (!вар || !вар.length) return null;
+          return (
+            <ol key={i} className="space-y-2">
+              {вар.map((в, j) => (
+                <li key={j} className={j === it.chosen
+                  ? 'rounded-xl border border-cyan-500/60 bg-cyan-500/15 px-4 py-2.5 text-sm font-semibold text-slate-900 dark:text-white'
+                  : 'rounded-xl border border-slate-200 dark:border-white/10 px-4 py-2.5 text-sm text-slate-700 dark:text-gray-300'}>
+                  {j + 1}. {в}{j === it.chosen ? <span className="ml-2 text-cyan-700 dark:text-cyan-400">✓ {u.chosen}</span> : null}
+                </li>
+              ))}
+            </ol>
           );
         }
         if (it.k === 'image') return <img key={i} src={it.src} alt="" loading="lazy" className="w-full rounded-2xl border border-slate-200 dark:border-white/10" />;
