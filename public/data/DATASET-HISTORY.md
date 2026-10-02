@@ -11,6 +11,33 @@ because they are the ones worth checking.
 
 ---
 
+## 2026-10-02
+
+* **Version 2 of the keyboard-traversal dataset** —
+  `traversal-log-v5-2026-10-02.jsonl.gz` (95,216 lines: 11,902 domains ×
+  8 page types; engines v5.3.1 and v5.4; measured 1–2 October 2026 UTC).
+  SHA-256 `3b78f28dd6e8d7f37aef2964cdabc8464bd003324c135084d38d200faa81fff4`.
+  Field description: `traversal-log-v5-SCHEMA.md`.
+
+      barrier among measured pages      8,448 of 25,252 = 33.5 %
+      faint focus ring counted as barrier  8,567 of 25,252 = 33.9 %
+
+  Version 1 (`traversal-log-2026-09-01.jsonl.gz`, 74.6 % / 85.3 %) stays
+  published unchanged. The two are not comparable figure for figure: the
+  instrument changed. Pages where the function does not exist on the site
+  are no longer counted as barriers, the skip link is no longer credited as
+  the goal, focus visibility was re-measured pixel by pixel, and hand-offs
+  to third-party services are counted separately. Page by page, of the
+  35,168 pages version 1 called a barrier, version 2 finds no such function
+  on 18,325, reachable on 7,305 and a barrier on 4,540.
+
+* Before publication, e-mail addresses (3,141) and phone numbers (5,210) of
+  officials in focus-path texts were masked as `[e-mail]` and `[phone]`, and
+  screenshot paths were reduced to file names. The categories recomputed
+  from the public file equal the figures above (Python and Node).
+
+---
+
 ## 2026-09-15
 
 * **Against ourselves.** The public README and the schema described the

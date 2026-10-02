@@ -32,6 +32,7 @@ import {
 } from './данные';
 import { числаНаЯзыке } from '../числа_на_языке';
 import { ЖУРНАЛ_ПО_ЯЗЫКАМ } from './журнал_переводы';
+import ВерсияV5 from './ВерсияV5';
 
 
 const ЯЧЕЙКА: React.CSSProperties = {
@@ -150,6 +151,9 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
         <p style={{ color: '#72839a', fontSize: 14, marginBottom: 32 }}>
           {т.подпись(датаСнимка(язык))} · {т.проверкаИдёт} · Maksim Galatin &amp; AIfa (Claude, Gemini, Grok) · CC BY 4.0
         </p>
+
+        {/* ВЕРСИЯ 2 НАБОРА — 02.10.2026: перемер прибором v5, 33,5 %. Компонент один на 4 сайта. */}
+        <ВерсияV5 язык={язык} />
 
 
         {/* ВИТРИНА ЧИСЕЛ — 01.09.2026.
