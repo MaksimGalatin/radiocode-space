@@ -99,7 +99,8 @@ export default function TierDetails({ тариф, цена, надписи, ру
       const о = await fetch(ручка, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug: тариф!.slug, email: почта, website: сайт }),
+        // 02.10.2026: язык страницы — письма мониторинга уходят на языке клиента (ru/en/es/zh).
+        body: JSON.stringify({ slug: тариф!.slug, email: почта, website: сайт, locale: (document.documentElement.lang || 'en').slice(0, 2) }),
       });
       const j = await о.json().catch(() => ({}));
       if (о.ok && j.invoice_url) {

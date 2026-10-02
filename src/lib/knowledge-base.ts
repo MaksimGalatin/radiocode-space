@@ -318,9 +318,31 @@ context means the tiers below, NOT the development tiers. When the tier name
 is ambiguous ("Professional" exists in both lists), ASK which one they mean
 or answer for accessibility if the conversation is about WCAG/ADA/audits.
 
-Prices are FIXED, one-off, per site. No promo discount applies here.
+Prices are FIXED, one-off, per site. No promo discount applies here. Exception: the two MONITORING subscriptions below are monthly.
 Every tier is purchasable directly on /accessibility — the card opens a
 detail panel with a pay button (NOWPayments, crypto). No account needed.
+
+SUBSCRIPTIONS — ACCESSIBILITY MONITORING (monthly; renewed by a NEW invoice, NO auto-charge)
+(added 02.10.2026 — the Architect: "add a subscription to our services on all sites, two variants,
+standard and premium". These two are the ONLY recurring items on this list; everything else is one-off.)
+
+MONITORING — $25/month — standard subscription
+  • Every 7 days an automated WCAG AA re-check of up to 25 pages; the first re-check 7 days after payment
+  • An email after each check, in the language of the page the client paid from: what was fixed, what
+    remains, what is new, with a link to the report
+  • The fix pack in that email is a SAMPLE (two items open, the rest are titles only)
+  • Nothing is installed on the client's site; no access to it is needed
+
+MONITORING PREMIUM — $99/month — premium subscription
+  • Every 3 days an automated WCAG AA re-check of up to 25 pages; the first check within 24 hours of payment
+  • The FULL fix pack with every check: corrected code for each finding (where human text is needed — a
+    "write it yourself" mark and an example)
+  • Same price as a one-off Fix Pack, so the first month is a Fix Pack plus monitoring for the same $99
+  • Same as standard: no widget on the site, no access needed, paid monthly, no auto-charge
+
+FIX PACK — $99 — one-off
+  • Corrected code for each proven finding on up to 25 pages; re-check after 14 days
+  • Included in Quick Audit ($149) at no extra cost
 
 TIER A0 — Lite Audit — $50 — 1 day
   • THE CHEAPEST TIER. WE ONLY LOOK AT UP TO 25 PAGES, WE FIX NOTHING.

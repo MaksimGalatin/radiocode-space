@@ -23,6 +23,14 @@ import TierDetails from './TierDetails';
 
 export const TIER_PRICES = ['$149', '$375', '$750', '$1,200', '$1,800', '$2,500', '$3,500', 'Custom'];
 export const TIER_HIGHLIGHTS = [false, false, false, true, false, false, false, false];
+// 02.10.2026, ОЧЕВИДНАЯ ОШИБКА (раздел 47): витрина брала цену и пометку «популярный» ПО НОМЕРУ из двух
+// массивов выше (8 значений), а тарифов в словаре 11. Живая главная показывала «Мониторинг — $149»
+// (на деле $25), «Быстрый Аудит — $1,200» (на деле $149), у трёх последних цены не было вовсе. Та же беда
+// на aifa.works починена 08.09.2026 — здесь так же: цена и пометка берутся из самой карточки. Массивы выше
+// оставлены как были (ничего не удаляем), витрина их больше не читает.
+export const ЦЕНА_ПО_СМЕТЕ = 0;
+/** «Самый популярный» — по slug, как на aifa.works. */
+export const ПОПУЛЯРНЫЕ = new Set(['professional']);
 
 interface Свойства {
   /** Показывать заголовок секции. На `/accessibility` он уже есть свой. */
@@ -72,18 +80,18 @@ export default function AccessibilityPricing({ сЗаголовком = true, id
                  путь идёт через кнопку внутри, которая для этого и есть. */
               onClick={() => установитьРаскрытый(idx)}
               className={`glass rounded-2xl p-6 border flex flex-col cursor-pointer transition hover:-translate-y-1 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 ${
-                TIER_HIGHLIGHTS[idx]
+                ПОПУЛЯРНЫЕ.has(tier.slug)
                   ? 'border-cyan-500/40 shadow-[0_0_30px_rgba(6,182,212,0.15)]'
                   : 'border-gray-200 dark:border-white/8'
               }`}
             >
-              {TIER_HIGHLIGHTS[idx] && (
+              {ПОПУЛЯРНЫЕ.has(tier.slug) && (
                 <div className="text-xs font-bold text-cyan-700 dark:text-cyan-400 uppercase tracking-widest mb-3">
                   {a.mostPopular}
                 </div>
               )}
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">{tier.name}</h3>
-              <div className="text-2xl font-black gradient-text mb-1">{TIER_PRICES[idx]}</div>
+              <div className="text-2xl font-black gradient-text mb-1">{tier.price === ЦЕНА_ПО_СМЕТЕ ? (a.tierAskQuote ?? 'Custom') : `$${tier.price.toLocaleString('en-US')}${tier.period ?? ''}`}</div>
               <div className="text-xs text-gray-500 dark:text-gray-400 mb-4">{tier.timeline}</div>
               <ul className="space-y-2 flex-1 mb-6">
                 {tier.features.map((f) => (
@@ -107,7 +115,7 @@ export default function AccessibilityPricing({ сЗаголовком = true, id
 
       <TierDetails
         тариф={раскрыт === null ? null : a.tiers[раскрыт]}
-        цена={раскрыт === null ? '' : TIER_PRICES[раскрыт]}
+        цена={раскрыт === null ? '' : (a.tiers[раскрыт].price === ЦЕНА_ПО_СМЕТЕ ? (a.tierAskQuote ?? 'Custom') : `$${a.tiers[раскрыт].price.toLocaleString('en-US')}${a.tiers[раскрыт].period ?? ''}`)}
         ручка="/api/pay/service"
         надписи={{
           tierWho: a.tierWho,

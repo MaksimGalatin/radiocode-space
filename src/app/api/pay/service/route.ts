@@ -44,6 +44,7 @@ export async function POST(req: NextRequest) {
         slug: String(b?.slug || ''),
         email: String(b?.email || ''),
         website: String(b?.website || ''),
+        locale: String(b?.locale || '').slice(0, 5), // 02.10.2026: язык писем мониторинга
         site: САЙТ,
       }),
       signal: AbortSignal.timeout(20000),

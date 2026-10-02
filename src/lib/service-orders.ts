@@ -5,7 +5,7 @@
  * 1. Право на глубокую проверку (> 3 страниц, до 25):
  *    - isCron (CRON_SECRET)
  *    - уровеньТарифа >= 99 (владелец)
- *    - оплаченный заказ из `service_orders` (slug: lite-audit, fix-pack, quick-audit, starter-fix и выше, monitoring):
+ *    - оплаченный заказ из `service_orders` (slug: lite-audit, fix-pack, quick-audit, starter-fix и выше, monitoring, monitoring-premium):
  *      * хост из `website` совпадает с хостом проверяемого адреса
  *      * paid_at не старше 30 дней (для monitoring — пока a11y_monitoring.paid_until > now())
  *      * не больше 3 глубоких проверок на заказ за 30 дней (учёт в `service_order_usage`)
@@ -50,6 +50,68 @@ async function getSql() {
   if (!url) return null;
   const { neon } = await import('@neondatabase/serverless');
   return neon(url);
+}
+
+/**
+ * ЕДИНАЯ СХЕМА таблицы `a11y_monitoring` — 02.10.2026.
+ *
+ * До этого таблицу создавали ДВА места с разной схемой: уведомление об оплате (aifa.digital) — с первичным
+ * ключом (email, website), без `id` и языка; задача мониторинга (aifa.works) — с `id` и языком, без уникального
+ * ключа. Кто создал бы таблицу первым, у того вторая сторона падала бы: задача не нашла бы `id`, или запись
+ * оплаты не нашла бы ключ для ON CONFLICT — и оплативший мониторинг не получил бы ни одного отчёта. Ещё одна
+ * проверка ниже читала столбец `host`, которого не было ни в одной схеме. Замер 02.10.2026: таблицы ещё нет,
+ * оплаченных подписок 0 — денег не потеряли.
+ *
+ * Теперь обе стороны зовут ЭТУ функцию. Каждая строка — «если нет, добавить»: повторный вызов безопасен,
+ * существующие строки не трогаются (раздел 19 — только добавлять).
+ */
+export const ЕДИНАЯ_СХЕМА_МОНИТОРИНГА: string[] = [
+  `CREATE TABLE IF NOT EXISTS a11y_monitoring (
+     id SERIAL PRIMARY KEY,
+     email TEXT NOT NULL,
+     website TEXT NOT NULL,
+     host TEXT,
+     paid_until TIMESTAMPTZ NOT NULL,
+     last_scan TEXT,
+     last_run TIMESTAMPTZ,
+     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+     locale VARCHAR(10) DEFAULT 'en',
+     tier TEXT NOT NULL DEFAULT 'standard',
+     order_id TEXT
+   )`,
+  `ALTER TABLE a11y_monitoring ADD COLUMN IF NOT EXISTS id SERIAL`,
+  `ALTER TABLE a11y_monitoring ADD COLUMN IF NOT EXISTS host TEXT`,
+  `ALTER TABLE a11y_monitoring ADD COLUMN IF NOT EXISTS locale VARCHAR(10) DEFAULT 'en'`,
+  `ALTER TABLE a11y_monitoring ADD COLUMN IF NOT EXISTS tier TEXT NOT NULL DEFAULT 'standard'`,
+  `ALTER TABLE a11y_monitoring ADD COLUMN IF NOT EXISTS order_id TEXT`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS a11y_monitoring_email_website ON a11y_monitoring (email, website)`,
+  `CREATE INDEX IF NOT EXISTS idx_a11y_monitoring_schedule ON a11y_monitoring (paid_until, last_run, created_at)`,
+];
+
+export async function обеспечитьСхемуМониторинга(query: (text: string) => Promise<unknown>): Promise<void> {
+  for (const q of ЕДИНАЯ_СХЕМА_МОНИТОРИНГА) {
+    try {
+      await query(q);
+    } catch (e) {
+      console.warn('[a11y_monitoring] схема:', String(e).slice(0, 160));
+    }
+  }
+}
+
+/** Подписки мониторинга: обычная ($25, раз в неделю) и премиум ($99, раз в три дня, полный пакет исправлений). */
+export const СЛАГИ_МОНИТОРИНГА = ['monitoring', 'monitoring-premium'];
+
+/** Активна ли ПРЕМИУМ-подписка мониторинга для этого хоста — даёт полный пакет исправлений к каждой проверке. */
+async function премиумМониторингАктивен(sql: NonNullable<Awaited<ReturnType<typeof getSql>>>, targetHost: string): Promise<boolean> {
+  try {
+    await обеспечитьСхемуМониторинга((q) => sql.query(q));
+    const rows = (await sql.query(
+      `SELECT website, host FROM a11y_monitoring WHERE tier = 'premium' AND paid_until > now()`
+    )) as Array<{ website?: string; host?: string | null }>;
+    return rows.some((r) => isMonitoringHostMatch(String(r.host || r.website || ''), targetHost));
+  } catch {
+    return false;
+  }
 }
 
 export async function ensureServiceOrdersTables(): Promise<void> {
@@ -159,7 +221,8 @@ export async function checkDeepScanPermission(params: {
     }
 
     // Проверка срока
-    const isMonitoring = order.slug === 'monitoring';
+    // 02.10.2026: премиум-мониторинг — те же права на глубокую проверку, что у обычного.
+    const isMonitoring = СЛАГИ_МОНИТОРИНГА.includes(order.slug);
     if (isMonitoring) {
       // Для мониторинга — пока a11y_monitoring.paid_until > now()
       let monitoringActive = false;
@@ -255,7 +318,7 @@ export async function recordDeepScanUsage(orderId: string, host: string): Promis
 
 export interface FixpackPermissionResult {
   hasFullAccess: boolean;
-  reason: 'cron' | 'owner' | 'paid_order' | 'no_order' | 'not_paid' | 'host_mismatch' | 'slug_not_eligible' | 'no_db';
+  reason: 'cron' | 'owner' | 'paid_order' | 'no_order' | 'not_paid' | 'host_mismatch' | 'slug_not_eligible' | 'expired' | 'no_db';
 }
 
 /**
@@ -313,6 +376,11 @@ export async function checkFixpackPermission(params: {
 
     // Разрешённые тарифы, включающие пакет исправлений:
     // slug fix-pack, quick-audit, starter-fix и выше
+    //
+    // 02.10.2026, ОЧЕВИДНАЯ ОШИБКА (раздел 47): «и выше» было записано именами, которых нет в прайсе
+    // (deep-audit, standard-audit, full-audit, custom-fix, enterprise-audit). Клиент тарифов professional ($750),
+    // ai-enhanced ($1 200), ecosystem ($1 800), enterprise-lite ($2 500), enterprise-pro ($3 500) получил бы
+    // только превью пакета. Прежние имена оставлены (ничего не удаляем), настоящие добавлены.
     const ELIGIBLE_SLUGS = [
       'fix-pack',
       'quick-audit',
@@ -322,6 +390,13 @@ export async function checkFixpackPermission(params: {
       'full-audit',
       'custom-fix',
       'enterprise-audit',
+      'professional',
+      'ai-enhanced',
+      'ecosystem',
+      'enterprise-lite',
+      'enterprise-pro',
+      'full-remediation',
+      'monitoring-premium',
     ];
     if (!ELIGIBLE_SLUGS.includes(order.slug.toLowerCase())) {
       return { hasFullAccess: false, reason: 'slug_not_eligible' };
@@ -332,6 +407,12 @@ export async function checkFixpackPermission(params: {
     const targetHost = extractHost(params.targetHost);
     if (!orderHost || !targetHost || orderHost !== targetHost) {
       return { hasFullAccess: false, reason: 'host_mismatch' };
+    }
+
+    // 02.10.2026: премиум-мониторинг даёт полный пакет, ПОКА подписка оплачена (a11y_monitoring.paid_until).
+    // Иначе один месяц открывал бы полный пакет для этого сайта навсегда.
+    if (order.slug.toLowerCase() === 'monitoring-premium' && !(await премиумМониторингАктивен(sql, targetHost))) {
+      return { hasFullAccess: false, reason: 'expired' };
     }
 
     return { hasFullAccess: true, reason: 'paid_order' };

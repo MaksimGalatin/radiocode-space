@@ -185,6 +185,25 @@ const ТЕКСТЫ_СКАНЕРА_en = {
           ],
         },
 
+        { name: 'Monitoring Premium', timeline: 'Every 3 days', features: ['Re-check of up to 25 pages every three days', 'The full Fix Pack with every check', 'First check within 24 hours', 'An email after every check', 'Monthly, no auto-charge'],
+          slug: 'monitoring-premium',
+          price: 99,
+          period: '/mo',
+          who: 'Your site changes often and you have a developer, or you edit the site yourself. You want not only to learn about new violations but to get ready code that closes them right away.',
+          diff: 'Standard Monitoring tells you WHAT broke and shows the Fix Pack only as a sample. Premium checks the site every three days instead of once a week and gives the FULL Fix Pack with every check: corrected code for each finding. A one-off Fix Pack costs $99; here, for the same $99, it is refreshed after every check for the whole month. As with standard monitoring, nothing is installed on your site and no access to it is needed.',
+          includes: [
+            'Every three days, an automated WCAG AA check of up to 25 pages of your site',
+            'Comparison with the previous check: what was fixed, what remains, what is new',
+            'The full Fix Pack with every check: corrected code for each finding; where human text is needed, a "write it yourself" mark and an example',
+            'An email after every check, in the language of the page you paid from',
+          ],
+          deliverables: [
+            'An email every three days: what changed and how to close it',
+            'Links to the report and to the full Fix Pack of each check',
+            'The first check within 24 hours of payment; paid monthly, renewed only when you choose',
+          ],
+        },
+
         { name: 'Lite Audit', timeline: '1 day', features: ['1 month of AIfa Spark memory included ($15)', '25 pages scanned', 'Full violation list', 'Dated PDF certificate', 'Severity breakdown'],
           slug: 'lite-audit',
           price: 50,
@@ -561,6 +580,25 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
           ],
         },
 
+        { name: 'Мониторинг Премиум', timeline: 'Каждые 3 дня', features: ['Перепроверка до 25 страниц каждые три дня', 'Полный Пакет исправлений к каждой проверке', 'Первая проверка — в течение суток', 'Письмо после каждой проверки', 'Помесячно, без автосписаний'],
+          slug: 'monitoring-premium',
+          price: 99,
+          period: '/мес',
+          who: 'Сайт меняется часто, и у вас есть разработчик — или вы правите сайт сами. Нужно не только узнавать о новых нарушениях, но и сразу получать готовый код, которым их закрыть.',
+          diff: 'Обычный Мониторинг сообщает, ЧТО сломалось, а Пакет исправлений показывает только образцом. Премиум проверяет сайт каждые три дня вместо раза в неделю и к каждой проверке даёт ПОЛНЫЙ Пакет исправлений — исправленный код под каждую находку. Разовый Пакет исправлений стоит $99; здесь за те же $99 он обновляется после каждой проверки весь месяц. Как и в обычном мониторинге, на ваш сайт ничего не ставится и доступ к нему не нужен.',
+          includes: [
+            'Каждые три дня — автоматическая проверка WCAG AA до 25 страниц вашего сайта',
+            'Сравнение с прошлой проверкой: что исправлено, что осталось, что появилось',
+            'Полный Пакет исправлений к каждой проверке: исправленный код под каждую находку; где нужен человеческий текст — пометка «впишите сами» и пример',
+            'Письмо вам на почту после каждой проверки — на языке страницы, с которой вы оплатили',
+          ],
+          deliverables: [
+            'Письмо каждые три дня: что изменилось и чем это закрыть',
+            'Ссылки на отчёт и на полный Пакет исправлений каждой проверки',
+            'Первая проверка — в течение суток после оплаты; оплата помесячно, продлеваете, только когда сами решите',
+          ],
+        },
+
         { name: 'Лайт-Аудит', timeline: '1 день', features: ['Месяц памяти AIfa «Искра» включён ($15)', '25 страниц вместо 3', 'Полный список нарушений', 'PDF с датой проверки', 'Разбивка по тяжести'],
           slug: 'lite-audit',
           price: 50,
@@ -907,6 +945,25 @@ const ТЕКСТЫ_СКАНЕРА_es = {
           ],
         },
 
+        { name: 'Monitoreo Premium', timeline: 'Cada 3 días', features: ['Revisión de hasta 25 páginas cada tres días', 'El Paquete de Correcciones completo en cada revisión', 'Primera revisión en menos de 24 horas', 'Un correo tras cada revisión', 'Mensual, sin cargos automáticos'],
+          slug: 'monitoring-premium',
+          price: 99,
+          period: '/mes',
+          who: 'Su sitio cambia a menudo y usted tiene un desarrollador, o edita el sitio usted mismo. No solo quiere enterarse de las nuevas infracciones, sino recibir de inmediato el código listo para corregirlas.',
+          diff: 'El Monitoreo estándar le dice QUÉ se rompió y muestra el Paquete de Correcciones solo como muestra. Premium revisa el sitio cada tres días en lugar de una vez por semana y entrega el Paquete de Correcciones COMPLETO en cada revisión: código corregido para cada hallazgo. Un Paquete de Correcciones suelto cuesta $99; aquí, por los mismos $99, se renueva tras cada revisión durante todo el mes. Como en el monitoreo estándar, no se instala nada en su sitio ni se necesita acceso a él.',
+          includes: [
+            'Cada tres días, una revisión automática WCAG AA de hasta 25 páginas de su sitio',
+            'Comparación con la revisión anterior: qué se corrigió, qué queda, qué es nuevo',
+            'El Paquete de Correcciones completo en cada revisión: código corregido para cada hallazgo; donde hace falta texto humano, una marca «escríbalo usted» y un ejemplo',
+            'Un correo tras cada revisión, en el idioma de la página desde la que pagó',
+          ],
+          deliverables: [
+            'Un correo cada tres días: qué cambió y cómo corregirlo',
+            'Enlaces al informe y al Paquete de Correcciones completo de cada revisión',
+            'La primera revisión en menos de 24 horas tras el pago; pago mensual, renueva solo cuando usted decida',
+          ],
+        },
+
         { name: 'Auditoría Lite', timeline: '1 día', features: ['1 mes de memoria AIfa Chispa incluido ($15)', '25 páginas en vez de 3', 'Lista completa de infracciones', 'PDF con fecha de la revisión', 'Desglose por gravedad'],
           slug: 'lite-audit',
           price: 50,
@@ -1250,6 +1307,25 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
             '每周邮件：七天内的变化',
             '每周报告的链接',
             '付款后 7 天进行首次重新检测；按月付费，仅在您决定时续费',
+          ],
+        },
+
+        { name: '持续监测 高级版', timeline: '每 3 天', features: ['每三天复查最多 25 个页面', '每次检查附完整修复包', '付款后 24 小时内首次检查', '每次检查后发送邮件', '按月付费，无自动扣款'],
+          slug: 'monitoring-premium',
+          price: 99,
+          period: '/月',
+          who: '您的网站经常变动，您有开发人员，或自己编辑网站。您不仅想知道新出现的违规，还希望立即拿到修复它们的现成代码。',
+          diff: '标准持续监测告诉您哪里出了问题，修复包只以样例形式展示。高级版每三天检查一次（而不是每周一次），每次检查都提供完整修复包——针对每项问题的修正代码。单次修复包售价 $99；在这里，同样的 $99，整个月每次检查后都会更新。与标准监测一样，无需在您的网站上安装任何东西，也不需要访问权限。',
+          includes: [
+            '每三天对您网站最多 25 个页面进行一次 WCAG AA 自动检查',
+            '与上次检查对比：已修复、仍存在、新出现的问题',
+            '每次检查附完整修复包：针对每项问题的修正代码；需要人工文字之处标注“请自行填写”并附示例',
+            '每次检查后发送邮件，使用您付款时所在页面的语言',
+          ],
+          deliverables: [
+            '每三天一封邮件：有哪些变化、如何修复',
+            '每次检查的报告链接和完整修复包链接',
+            '付款后 24 小时内首次检查；按月付费，是否续订由您决定',
           ],
         },
 
