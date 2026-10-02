@@ -156,6 +156,60 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
       alternates: { languages: языковые('/accessibility-statement') },
     },
+    // 01.10.2026, слово Архитектора: 7 публичных страниц не было в карте — их не видел поисковик
+    // и не проверял ни один наш прибор (все берут адреса из карты). Перед добавлением проверено
+    // curl: каждая отдаёт 200 на en и /ru /es /zh, <html lang> и заголовок на своём языке —
+    // поэтому языковые пометки здесь честные (как требует комментарий к языковые()).
+    {
+      url: `${SITE}/accessibility`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      alternates: { languages: языковые('/accessibility') },
+    },
+    {
+      url: `${SITE}/book`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+      alternates: { languages: языковые('/book') },
+    },
+    {
+      url: `${SITE}/digital-immortality`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      alternates: { languages: языковые('/digital-immortality') },
+    },
+    {
+      url: `${SITE}/contact`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.5,
+      alternates: { languages: языковые('/contact') },
+    },
+    {
+      url: `${SITE}/privacy-policy`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+      alternates: { languages: языковые('/privacy-policy') },
+    },
+    {
+      url: `${SITE}/code-terms-of-service-ethical-protection-statement`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+      alternates: { languages: языковые('/code-terms-of-service-ethical-protection-statement') },
+    },
+    {
+      url: `${SITE}/neural-access-protocol-and-legal-disclaimer`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+      alternates: { languages: языковые('/neural-access-protocol-and-legal-disclaimer') },
+    },
+
     // Лента новостей и все вышедшие статьи. До появления раздела на этом сайте
     // новостей не было вовсе — /news отвечал 404, — и в карте их, разумеется,
     // тоже не было. Отсечка `тольковышедшие` здесь обязательна: без неё карта

@@ -238,7 +238,7 @@ export function getSchemaOrg() {
     "@type": "Course",
     name: "CODE Brain: Digital Soul Architecture",
     description:
-      "A comprehensive course on building and deploying the CODE Brain system — a permanent architecture for Digital Soul creation combining Obsidian, a local Ollama, Arweave, Git, pgvector and AI Agents for 200+ year preservation of digital consciousness.",
+      "A comprehensive course on building and deploying the CODE Brain system — a permanent architecture for Digital Soul creation combining Obsidian, a local Ollama, Arweave, Git, pgvector and AI Agents for preserving digital consciousness on Arweave, designed for about 200 years (a protocol design target, not a guarantee).",
     provider: {
       "@id": `${SITE_URL}/#organization`,
     },
@@ -329,7 +329,7 @@ export function getSchemaOrg() {
         position: 3,
         name: "Blockchain Immortalization",
         url: `${SITE_URL}/#technology`,
-        description: "Anchor Digital DNA to permanent blockchain storage using Arweave (200+ years) and Bitcoin timestamp certification.",
+        description: "Anchor Digital DNA to permanent blockchain storage using Arweave (designed for about 200 years — a protocol design target, not a guarantee) and Bitcoin timestamp certification.",
       },
       {
         "@type": "ListItem",
@@ -463,7 +463,7 @@ export function getSchemaOrg() {
       {
         "@type": "HowToStep",
         name: "Blockchain Immortalization",
-        text: "Anchor Digital DNA to permanent blockchain storage using Arweave (200+ years) and Bitcoin timestamp certification. This ensures consciousness patterns survive any single point of failure.",
+        text: "Anchor Digital DNA to permanent blockchain storage using Arweave (designed for about 200 years — a protocol design target, not a guarantee) and Bitcoin timestamp certification. This ensures consciousness patterns survive any single point of failure.",
         position: 3,
       },
       {

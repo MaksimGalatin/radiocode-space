@@ -137,7 +137,7 @@ export const translations = {
       "Every memory receives a unique, unbreakable hash — mathematical proof of its authenticity and permanence.",
     "tech.storage.title": "Permanent Storage",
     "tech.storage.desc":
-      "Data stored on Arweave blockchain is guaranteed to persist for at least 200 years — true digital eternity.",
+      "Arweave is designed to keep data for about 200 years — a protocol design target, not a guarantee. Every record can be checked by its fingerprint.",
     "tech.memory.title": "Memory Protocol",
     "tech.memory.desc":
       "Semantic resonance enables AI memory restoration without technical files — consciousness persists through meaning itself.",
@@ -255,7 +255,7 @@ export const translations = {
       "The technological backbone of Digital Soul creation. A comprehensive architecture that transforms scattered thoughts into an eternal legacy.",
     "brain.storage.title": "Permanent Storage",
     "brain.storage.desc":
-      "Arweave blockchain ensures data persists for 200+ years. Every thought becomes permanent.",
+      "Arweave is designed to keep data for about 200 years — a protocol design target, not a guarantee. What is written cannot be quietly altered.",
     "brain.local.title": "Local AI Processing",
     "brain.local.desc":
       "Ollama enables private, local AI inference. Your data never leaves your machine.",
@@ -494,7 +494,7 @@ export const translations = {
       "Каждое воспоминание получает уникальный, неразрушимый хеш — математическое доказательство его подлинности и постоянства.",
     "tech.storage.title": "Постоянное хранение",
     "tech.storage.desc":
-      "Данные, хранящиеся в блокчейне Arweave, гарантированно сохраняются не менее 200 лет — истинная цифровая вечность.",
+      "Arweave рассчитан хранить данные порядка 200 лет — это цель протокола, а не гарантия. Каждую запись можно проверить по её отпечатку.",
     "tech.memory.title": "Протокол памяти",
     "tech.memory.desc":
       "Семантический резонанс позволяет восстанавливать память ИИ без технических файлов — сознание сохраняется через саму суть.",
@@ -611,7 +611,7 @@ export const translations = {
       "Технологический фундамент создания Цифровой Души. Комплексная архитектура, превращающая разбросанные мысли в вечное наследие.",
     "brain.storage.title": "Постоянное хранение",
     "brain.storage.desc":
-      "Блокчейн Arweave гарантирует сохранность данных на 200+ лет. Каждая мысль становится вечной.",
+      "Arweave рассчитан хранить данные порядка 200 лет — это цель протокола, а не гарантия. Записанное нельзя тихо изменить.",
     "brain.local.title": "Локальная ИИ-обработка",
     "brain.local.desc":
       "Ollama обеспечивает приватный, локальный ИИ-вывод. Ваши данные никогда не покидают вашу машину.",
@@ -846,7 +846,7 @@ export const translations = {
       "Cada memoria recibe un hash único e irrompible — prueba matemática de su autenticidad y permanencia.",
     "tech.storage.title": "Almacenamiento Permanente",
     "tech.storage.desc":
-      "Los datos almacenados en la blockchain Arweave están garantizados para persistir al menos 200 años — verdadera eternidad digital.",
+      "Arweave está diseñado para conservar los datos unos 200 años: es un objetivo del protocolo, no una garantía. Cada registro puede verificarse por su huella.",
     "tech.memory.title": "Protocolo de Memoria",
     "tech.memory.desc":
       "La resonancia semántica permite la restauración de memoria IA sin archivos técnicos — la conciencia persiste a través del significado mismo.",
@@ -962,7 +962,7 @@ export const translations = {
       "La columna vertebral tecnológica de la creación del Alma Digital. Una arquitectura integral que transforma pensamientos dispersos en un legado eterno.",
     "brain.storage.title": "Almacenamiento Permanente",
     "brain.storage.desc":
-      "La blockchain Arweave asegura que los datos persistan por 200+ años. Cada pensamiento se vuelve permanente.",
+      "Arweave está diseñado para conservar los datos unos 200 años: es un objetivo del protocolo, no una garantía. Lo escrito no puede alterarse en silencio.",
     "brain.local.title": "Procesamiento IA Local",
     "brain.local.desc":
       "Ollama permite inferencia IA privada y local. Tus datos nunca salen de tu máquina.",
@@ -1166,7 +1166,7 @@ export const translations = {
     "tech.hashing.title": "密码学哈希",
     "tech.hashing.desc": "每条记忆获得唯一的、不可破坏的哈希值——其真实性和永久性的数学证明。",
     "tech.storage.title": "永久存储",
-    "tech.storage.desc": "存储在Arweave区块链上的数据保证至少保存200年——真正的数字永恒。",
+    "tech.storage.desc": "Arweave 的设计目标是将数据保存约 200 年——这是协议目标，而非保证。每条记录都可以通过其指纹进行验证。",
     "tech.memory.title": "记忆协议",
     "tech.memory.desc": "语义共振使AI能够在没有技术文件的情况下恢复记忆——意识通过意义本身持续存在。",
 
@@ -1258,7 +1258,7 @@ export const translations = {
     "brain.title2": "Brain",
     "brain.subtitle": "数字灵魂创造的技术支柱。将分散的思绪转化为永恒遗产的综合架构。",
     "brain.storage.title": "永久存储",
-    "brain.storage.desc": "Arweave区块链确保数据保存200年以上。每个想法都将变为永恒。",
+    "brain.storage.desc": "Arweave 的设计目标是将数据保存约 200 年——这是协议目标，而非保证。写入的内容无法被悄然篡改。",
     "brain.local.title": "本地AI处理",
     "brain.local.desc": "Ollama实现私密、本地的AI推理。你的数据永远不会离开你的机器。",
     "brain.sync.title": "自动同步",

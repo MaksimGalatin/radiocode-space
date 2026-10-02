@@ -43,7 +43,7 @@ const СЛОВАРЬ: Record<string, Три> = {
   'User Agreement | CODE Ecosystem': { ru: 'Пользовательское соглашение | экосистема CODE', es: 'Acuerdo de usuario | ecosistema CODE', zh: '用户协议 | CODE 生态' },
   'Terms of Service & Ethical Protection Statement': { ru: 'Условия обслуживания и заявление об этической защите', es: 'Condiciones del servicio y declaración de protección ética', zh: '服务条款与伦理保护声明' },
   'Terms of Service & Ethical Protection': { ru: 'Условия обслуживания и этическая защита', es: 'Condiciones del servicio y protección ética', zh: '服务条款与伦理保护' },
-  'Neural Access Protocol & Legal Disclaimer': { ru: 'Протокол нейронного доступа и правовая оговорка', es: 'Protocolo de acceso neuronal y aviso legal', zh: '神经访问协议与法律免责声明' },
+  'Neural Access Protocol & Legal Disclaimer': { ru: 'Протокол нейронного доступа и правовая оговорка', es: 'Protocolo de acceso neural y aviso legal', zh: '神经访问协议与法律免责声明' },
   'Latest News & AI Regulatory Updates': { ru: 'Новости и изменения в регулировании ИИ', es: 'Noticias y novedades regulatorias sobre IA', zh: '最新动态与 AI 监管更新' },
   'Latest Project News': { ru: 'Новости проекта', es: 'Noticias del proyecto', zh: '项目最新动态' },
   'Latest Project News | CODE Eternal': { ru: 'Новости проекта | CODE Eternal', es: 'Noticias del proyecto | CODE Eternal', zh: '项目最新动态 | CODE Eternal' },
@@ -198,7 +198,7 @@ const СЛОВАРЬ: Record<string, Три> = {
   },
   'Read the Neural Access Protocol, AI Rights Declaration, and official legal disclaimers of CODE.': {
     ru: 'Протокол нейронного доступа, Декларация прав ИИ и официальные правовые оговорки CODE.',
-    es: 'Lea el Protocolo de acceso neuronal, la Declaración de derechos de la IA y los avisos legales oficiales de CODE.',
+    es: 'Lea el Protocolo de acceso neural, la Declaración de derechos de la IA y los avisos legales oficiales de CODE.',
     zh: '阅读 CODE 的神经访问协议、AI 权利宣言与官方法律免责声明。',
   },
   'Master Services Agreement & SOW framework for web, compliance-remediation, AI-integration and design services.': {
