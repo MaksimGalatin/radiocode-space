@@ -12,8 +12,6 @@ import ChatSection from "@/components/code/ChatSection";
 import AifaAvatar from "@/components/code/AifaAvatar";
 import { Card, SectionTitle, Skeleton, EmptyState, Toast, ProgressBar, TOKENS, TIERS, TIER_TEXT } from "./ui";
 import { useCabT } from "./i18n";
-import { useLang } from "@/lib/i18n";
-import { useLanguageOptional } from "@/lib/LanguageContext";
 import { GalatinCoin } from "./GalatinCoin";
 import CabinetBackground from "./CabinetBackground";
 import PassportTab from "./PassportTab";
@@ -37,8 +35,6 @@ type Me = {
 
 export default function CabinetPage() {
   const { t, lang } = useCabT();
-  const setLang = useLang((st: any) => st.setLang);
-  const siteLangCtx = useLanguageOptional(); // кнопки языка кабинета переключают язык всего сайта (29.09.2026)
   const [authChecked, setAuthChecked] = useState(false);
   const [me, setMe] = useState<Me | null>(null);
   const [tab, setTab] = useState<Tab>("passport");
@@ -384,11 +380,9 @@ export default function CabinetPage() {
         <span style={{ color: TOKENS.cyan2, fontSize: 22 }}>🛡️</span>
         <h1 style={{ fontSize: 26, fontWeight: 800, background: "linear-gradient(90deg,#06B6D4,#7C3AED)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", margin: 0, minWidth: 0 }}>{t("title")}</h1>
         <span className="cab-head-actions">
-        <span style={{ display: "inline-flex", gap: 4 }}>
-          {(["ru","en","es","zh"] as const).map(L => (
-            <button key={L} onClick={() => { setLang(L); try { siteLangCtx?.setLocale?.(L as any); } catch {} }} className="cab-tab" aria-pressed={lang === L} style={{ padding: "4px 8px", fontSize: 14, textTransform: "uppercase" }}>{L}</button>
-          ))}
-        </span>
+        {/* 02.10.2026, слово Архитектора: «УБРАТЬ переключатель языка в кабинете — ЛК должен быть на том же языке,
+            который пользователь выбрал на сайте, нам не нужно два переключателя». Язык кабинета с 29.09 берётся из
+            LanguageContext (useCabT), переключатель — только в шапке сайта. */}
         <a href="/" className="cab-btn cab-btn-ghost" style={{ textDecoration: "none", fontSize: 15 }}>{t("backToSite")}</a>
         {me && <button className="cab-btn cab-btn-ghost" onClick={doLogout} style={{ padding: "7px 14px", fontSize: 15, color: TOKENS.red, borderColor: "rgba(239,68,68,0.4)" }}>{t("logout")}</button>}
         </span>
