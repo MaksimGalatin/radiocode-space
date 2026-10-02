@@ -121,7 +121,7 @@ const Т = {
     },
     eu: {
       title: 'Евросоюз · GDPR и Акт о доступности',
-      sector: '«{sector}»: {cases} дел со штрафом. Медиана — {median}; 9 из 10 штрафов не больше {p90}; самый крупный — {max}.',
+      sector: '«{sector}»: дел со штрафом — {cases}. Медиана — {median}; 9 из 10 штрафов не больше {p90}; самый крупный — {max}.',
       cap: 'Потолок по закону — €20 млн или 4 % мирового годового оборота, если это больше (ст. 83 GDPR).',
       caution: 'Это назначенные штрафы по опубликованным делам, а не прогноз для вашей компании.',
       eaa: 'С 28 июня 2025 года действует Европейский акт о доступности: интернет-магазины, банки, транспорт и ряд других услуг. Размер штрафов устанавливает каждая страна ЕС; микропредприятия в сфере услуг освобождены.',
@@ -567,7 +567,7 @@ export default function RiskCalculator() {
             <h4 className="text-[13px] uppercase tracking-widest text-gray-500 font-semibold">{t.lawTitle}</h4>
             <div className="grid md:grid-cols-2 gap-4">
               {есть('us') && (
-                <div className="rounded-2xl border border-white/5 bg-black/20 p-5 space-y-2">
+                <div className="glass bg-white/[0.01] rounded-2xl border border-white/5 p-5 space-y-2">
                   <h5 className="text-sm font-bold text-white">{t.us.title}</h5>
                   <p className="text-[13px] text-gray-400 leading-relaxed">{t.us.private}</p>
                   <p className="text-[13px] text-gray-400 leading-relaxed">
@@ -582,7 +582,7 @@ export default function RiskCalculator() {
               )}
 
               {есть('ca') && (
-                <div className="rounded-2xl border border-white/5 bg-black/20 p-5 space-y-2">
+                <div className="glass bg-white/[0.01] rounded-2xl border border-white/5 p-5 space-y-2">
                   <h5 className="text-sm font-bold text-white">{t.ca.title}</h5>
                   <p className="text-[13px] text-gray-400 leading-relaxed">{подставить(t.ca.unruh, { min: доллары(4000, яз) })}</p>
                   <p className="text-[13px] text-gray-400 leading-relaxed">
@@ -603,7 +603,7 @@ export default function RiskCalculator() {
               )}
 
               {есть('eu') && (
-                <div className="rounded-2xl border border-white/5 bg-black/20 p-5 space-y-2">
+                <div className="glass bg-white/[0.01] rounded-2xl border border-white/5 p-5 space-y-2">
                   <h5 className="text-sm font-bold text-white">{t.eu.title}</h5>
                   <p className="text-[13px] text-gray-400 leading-relaxed">
                     {подставить(t.eu.sector, {
@@ -626,7 +626,7 @@ export default function RiskCalculator() {
               )}
 
               {есть('rf') && (
-                <div className="rounded-2xl border border-white/5 bg-black/20 p-5 space-y-2">
+                <div className="glass bg-white/[0.01] rounded-2xl border border-white/5 p-5 space-y-2">
                   <h5 className="text-sm font-bold text-white">{t.rf.title}</h5>
                   <p className="text-[13px] text-gray-400 leading-relaxed">{t.rf.pd}</p>
                   <p className="text-[13px] text-gray-400 leading-relaxed">{t.rf.leak}</p>
