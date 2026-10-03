@@ -144,7 +144,7 @@ export function RadioFooter() {
               </span>
             </div>
             <p className="mt-6 pt-4 border-t border-[#8B8BA8]/20 text-[13px] font-mono text-[#7E7E99] leading-relaxed break-words">
-              {строкаРеквизитов((языкПодвала as Язык) || 'en')}
+              <span className="block max-w-3xl">{строкаРеквизитов((языкПодвала as Язык) || 'en')}</span>
             </p>
             <p className="mt-3 text-[12px] font-mono text-[#8A8AA0] leading-relaxed break-words">
               {rt('trademarks')}

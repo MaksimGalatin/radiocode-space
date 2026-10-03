@@ -522,8 +522,8 @@ export function LegalAddendum({ doc }: { doc: Doc }) {
   return (
     <div className="mt-14 pt-10 border-t border-border">
       <h2 className="text-xl font-bold text-[#00FF88] mb-3" style={{ fontFamily: "var(--font-syne)" }}>{d.title}</h2>
-      <p className="text-muted-foreground text-sm mb-8 italic">{d.note}</p>
-      <div className="space-y-6 text-muted-foreground leading-relaxed">
+      <p className="max-w-2xl text-muted-foreground text-sm mb-8 italic">{d.note}</p>
+      <div className="max-w-2xl space-y-6 text-muted-foreground leading-relaxed">
         {secs.map((s) => (
           <section key={s.t}>
             <h3 className="text-foreground font-bold mb-2">{s.t}</h3>

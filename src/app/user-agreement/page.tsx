@@ -245,7 +245,7 @@ export default function UserAgreementPage() {
         {/* Соотношение документов. Документы у нас разные и смешивать их незачем,
             но ни один не упоминал остальных, и нигде не было сказано, ЧТО
             ГЛАВНЕЕ при расхождении — а этот вопрос задаётся первым. */}
-        <div className="mt-10 rounded-2xl border border-[#00FF88]/25 p-6">
+        <div className="mt-10 max-w-2xl rounded-2xl border border-[#00FF88]/25 p-6">
           <h2 className="text-lg font-bold text-[#00FF88] mb-4">{СВЯЗЬ.заголовок}</h2>
           <ul className="space-y-3 mb-4">
             {СВЯЗЬ.документы.map((д: any) => (
@@ -262,7 +262,7 @@ export default function UserAgreementPage() {
             правовая форма, адрес и регистрационные номера были доступны на
             коммерческом сайте постоянно и напрямую. Незаполненные поля не
             выводятся — источник один на четыре сайта: lib/requisites.ts. */}
-        <div className="mt-10 rounded-2xl border border-[#00FF88]/25 p-6">
+        <div className="mt-10 max-w-2xl rounded-2xl border border-[#00FF88]/25 p-6">
           <h2 className="text-lg font-bold text-[#00FF88] mb-3">
             {ЗАГОЛОВОК_РЕКВИЗИТОВ[String(locale)] ?? ЗАГОЛОВОК_РЕКВИЗИТОВ.en}
           </h2>
