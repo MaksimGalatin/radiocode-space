@@ -48,15 +48,54 @@ function частныйIPv4(ip: string): boolean {
   return false;
 }
 
-/** IPv6, включая запись IPv4 внутри IPv6 (::ffff:127.0.0.1). */
+/**
+ * Восемь 16-битных групп адреса IPv6; null, если запись не разобрана.
+ *
+ * 03.10.2026. Раньше IPv4 внутри IPv6 узнавался только в точечной записи
+ * (::ffff:127.0.0.1). Но адресная строка переписывает его в шестнадцатеричную:
+ * new URL('http://[::ffff:127.0.0.1]/').hostname === '[::ffff:7f00:1]'. Адрес из
+ * редиректа проходит именно через new URL — и заслон пропускал [::ffff:7f00:1] и
+ * [::ffff:a9fe:a9fe] (это 169.254.169.254) как внешние. Тест lib/ssrf-guard.проверка.mjs
+ * на aifa.works показал 9 несовпадений из 45. Теперь адрес разбирается целиком.
+ */
+function группыIPv6(адрес: string): number[] | null {
+  let н = адрес.toLowerCase().replace(/^\[|\]$/g, '').split('%')[0];
+  const хвост = н.match(/(\d+\.\d+\.\d+\.\d+)$/);
+  if (хвост) {
+    const ч = хвост[1].split('.').map(Number);
+    if (ч.some((x) => !Number.isInteger(x) || x < 0 || x > 255)) return null;
+    н = н.slice(0, -хвост[1].length) + ((ч[0] << 8) | ч[1]).toString(16) + ':' + ((ч[2] << 8) | ч[3]).toString(16);
+  }
+  const части = н.split('::');
+  if (части.length > 2) return null;
+  const голова = части[0] ? части[0].split(':') : [];
+  const конец = части.length === 2 && части[1] ? части[1].split(':') : [];
+  const недостаёт = 8 - голова.length - конец.length;
+  if (недостаёт < 0 || (части.length === 1 && недостаёт !== 0)) return null;
+  const все = [...голова, ...Array(части.length === 2 ? недостаёт : 0).fill('0'), ...конец];
+  if (все.length !== 8 || все.some((x) => !/^[0-9a-f]{1,4}$/.test(x))) return null;
+  return все.map((x) => parseInt(x, 16));
+}
+
+/** IPv6, включая IPv4 внутри IPv6 в любой записи (::ffff:127.0.0.1 и ::ffff:7f00:1). */
 function частныйIPv6(ip: string): boolean {
-  const н = ip.toLowerCase().replace(/^\[|\]$/g, '');
-  if (н === '::' || н === '::1') return true;
-  const вложенный = н.match(/::ffff:(\d+\.\d+\.\d+\.\d+)$/);
-  if (вложенный) return частныйIPv4(вложенный[1]);
-  if (/^f[cd]/.test(н)) return true;              // fc00::/7 — внутренние
-  if (/^fe[89ab]/.test(н)) return true;           // fe80::/10 — локальные для канала
-  if (/^ff/.test(н)) return true;                 // многоадресные
+  const г = группыIPv6(ip);
+  // Не разобрали запись — считаем внутренней: отказать дешевле, чем пропустить.
+  if (!г) return true;
+  const в4 = (a: number, b: number) => `${a >> 8}.${a & 255}.${b >> 8}.${b & 255}`;
+  const нули = (n: number) => г.slice(0, n).every((x) => x === 0);
+  if (нули(8)) return true;                                  // :: — «никакой адрес»
+  if (нули(7) && г[7] === 1) return true;                    // ::1 — сам сервер
+  if (нули(5) && г[5] === 0xffff) return частныйIPv4(в4(г[6], г[7])); // ::ffff:a.b.c.d
+  if (нули(6)) return частныйIPv4(в4(г[6], г[7]));           // ::a.b.c.d — старая совместимая запись
+  if (г[0] === 0x64 && г[1] === 0xff9b && г.slice(2, 6).every((x) => x === 0)) {
+    return частныйIPv4(в4(г[6], г[7]));                      // 64:ff9b::/96 — NAT64
+  }
+  if (г[0] === 0x2002) return частныйIPv4(в4(г[1], г[2]));   // 2002::/16 — 6to4
+  if ((г[0] & 0xfe00) === 0xfc00) return true;               // fc00::/7 — внутренние
+  if ((г[0] & 0xffc0) === 0xfe80) return true;               // fe80::/10 — локальные для канала
+  if ((г[0] & 0xffc0) === 0xfec0) return true;               // fec0::/10 — старые «внутри площадки»
+  if ((г[0] & 0xff00) === 0xff00) return true;               // ff00::/8 — многоадресные
   return false;
 }
 

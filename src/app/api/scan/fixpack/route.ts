@@ -232,7 +232,11 @@ export async function GET(req: NextRequest) {
     headers: {
       ...CORS_HEADERS,
       'Content-Type': 'text/html; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600',
+      // 03.10.2026: ответ зависит от входа и заказа — полный пакет или превью. С
+      // «public, max-age=3600» CDN Vercel час отдавал бы по той же ссылке ЧУЖОЙ вариант:
+      // полный платный пакет, открытый владельцем, — любому. Замер того же дня на
+      // /api/badge: ответ функции с «public, max-age» кэшируется (MISS, затем HIT).
+      'Cache-Control': fixpackAuth.hasFullAccess ? 'private, no-store' : 'private, max-age=300',
     },
   });
 }

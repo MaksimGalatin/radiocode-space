@@ -85,6 +85,16 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  // 03.10.2026: у GET выше ограничение частоты было, у POST — нет. Тело с тысячами
+  // «находок» гоняло генератор патча на нашей функции сколько угодно раз за наш счёт.
+  const { allowRequest } = await import('../../../../lib/rate-limit');
+  const { общийЛимитЗапроса } = await import('../../../../lib/rate-limit-db');
+  if (
+    !allowRequest(req, 'scan-patch-post', 30, 60_000) ||
+    !(await общийЛимитЗапроса(req, 'scan-patch-post', 30, 60_000))
+  ) {
+    return NextResponse.json({ error: 'RATE_LIMITED' }, { status: 429, headers: CORS_HEADERS });
+  }
   try {
     const body = await req.json().catch(() => ({}));
     const { domain = 'example.com', locale = 'en', threats = [] } = body;
