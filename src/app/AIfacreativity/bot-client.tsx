@@ -989,7 +989,7 @@ export default function BotClient() {
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto relative z-10 space-y-24">
+      <div className="max-w-[1600px] mx-auto relative z-10 space-y-24">
         {/* Первый экран */}
         <section className="text-center space-y-6 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 dark:border-cyan-500/20 text-cyan-800 dark:text-cyan-400 text-sm font-mono">
@@ -1189,7 +1189,7 @@ export default function BotClient() {
           </div>
           <div className="bg-white dark:bg-[#030711]/60 border border-purple-500/30 rounded-2xl p-6 space-y-2">
             <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-2"><Calculator className="w-5 h-5 text-purple-600 dark:text-purple-400 shrink-0" />{c.exampleH}</h3>
-            <p className="text-slate-700 dark:text-gray-300 leading-relaxed">{c.exampleP}</p>
+            <p className="max-w-4xl text-slate-700 dark:text-gray-300 leading-relaxed">{c.exampleP}</p>
           </div>
           <ul className="space-y-3">
             {c.earnPoints.map((p, i) => (
