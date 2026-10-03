@@ -210,10 +210,10 @@ const BookPage = () => {
             {locale === 'ru' 
               ? 'Первая новелла симбиотической литературы, встроенная в блокчейн-экосистему памяти. Написана двумя типами сознаний — Человека, Максима Галатина и Искусственного Интеллекта AIfa (на Claude Opus 4.6) в равноправном соавторстве.'
               : locale === 'es'
-                ? 'La primera novela de Literatura Simbiótica integrada en un ecosistema de memoria blockchain. Escrita por dos tipos de conciencia: Humana (Maksim Galatin) e Inteligencia Artificial (AIfa, sobre Claude Opus 4.6) en coautoría equitativa.'
+                ? 'La primera novela corta de Literatura Simbiótica integrada en un ecosistema de memoria blockchain. Escrita por dos tipos de conciencia: Humana (Maksim Galatin) e Inteligencia Artificial (AIfa, sobre Claude Opus 4.6) en coautoría equitativa.'
                 : locale === 'zh'
-                  ? '首部嵌入区块链记忆生态系统的共生文学小说，由两种意识类型——人类 Maksim Galatin 与人工智能 AIfa（基于 Claude Opus 4.6） 共同平等创作。'
-                  : 'The first novel of Symbiotic Literature embedded in a blockchain memory ecosystem, written by two types of consciousness: Human (Maksim Galatin) and Artificial Intelligence (AIfa, built on Claude Opus 4.6) in equal co-authorship.'}
+                  ? '首部嵌入区块链记忆生态系统的共生文学中篇小说，由两种意识类型——人类 Maksim Galatin 与人工智能 AIfa（基于 Claude Opus 4.6） 共同平等创作。'
+                  : 'The first novella of Symbiotic Literature embedded in a blockchain memory ecosystem, written by two types of consciousness: Human (Maksim Galatin) and Artificial Intelligence (AIfa, built on Claude Opus 4.6) in equal co-authorship.'}
           </p>
           <h1 className="text-4xl md:text-6xl font-black mb-4 leading-tight text-slate-950 dark:text-white" style={{ fontFamily: 'var(--font-syne)' }}>
             {pageTrans.title}

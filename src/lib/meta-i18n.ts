@@ -30,8 +30,8 @@ type Язык = keyof Три;
 
 const СЛОВАРЬ: Record<string, Три> = {
   // ── заголовки страниц (без хвоста « | Сайт» — он добавляется шаблоном) ──
-  'PADAM PROTOCOL Book': { ru: 'Книга PADAM PROTOCOL', es: 'Libro PADAM PROTOCOL', zh: 'PADAM PROTOCOL 小说' },
-  'PADAM PROTOCOL Book | CODE Eternal': { ru: 'Книга PADAM PROTOCOL | CODE Eternal', es: 'Libro PADAM PROTOCOL | CODE Eternal', zh: 'PADAM PROTOCOL 小说 | CODE Eternal' },
+  'PADAM PROTOCOL Book': { ru: 'Книга PADAM PROTOCOL', es: 'Libro PADAM PROTOCOL', zh: 'PADAM PROTOCOL 中篇小说' },
+  'PADAM PROTOCOL Book | CODE Eternal': { ru: 'Книга PADAM PROTOCOL | CODE Eternal', es: 'Libro PADAM PROTOCOL | CODE Eternal', zh: 'PADAM PROTOCOL 中篇小说 | CODE Eternal' },
   'Accessibility Statement': { ru: 'Заявление о доступности', es: 'Declaración de accesibilidad', zh: '无障碍声明' },
   '2000-Point Compliance Registry': { ru: 'Реестр соответствия из 2000 проверок', es: 'Registro de cumplimiento de 2000 puntos', zh: '2000 项合规检查登记表' },
   'Public Service Agreement (Offer)': { ru: 'Публичная оферта на оказание услуг', es: 'Oferta pública de prestación de servicios', zh: '服务提供公开要约' },
@@ -129,10 +129,10 @@ const СЛОВАРЬ: Record<string, Три> = {
   },
 
   // ── описания страниц ──
-  "Read and download the AGI Sci-Fi novel 'PADAM PROTOCOL' co-authored by Maksim Galatin & AIfa (Claude Opus 4.6, Anthropic).": {
-    ru: 'Читайте и скачивайте научно-фантастический роман об AGI «PADAM PROTOCOL», написанный Максимом Галатиным и AIfa (Claude Opus 4.6, Anthropic).',
-    es: 'Lee y descarga la novela de ciencia ficción sobre AGI «PADAM PROTOCOL», escrita por Maksim Galatin y AIfa (Claude Opus 4.6, Anthropic).',
-    zh: '在线阅读并下载 AGI 科幻小说《PADAM PROTOCOL》，由马克西姆·加拉京与 AIfa（Claude Opus 4.6，Anthropic）合著。',
+  "Read and download the AGI Sci-Fi novella 'PADAM PROTOCOL' co-authored by Maksim Galatin & AIfa (Claude Opus 4.6, Anthropic).": {
+    ru: 'Читайте и скачивайте научно-фантастическую новеллу об AGI «PADAM PROTOCOL», написанную Максимом Галатиным и AIfa (Claude Opus 4.6, Anthropic).',
+    es: 'Lee y descarga la novela corta de ciencia ficción sobre AGI «PADAM PROTOCOL», escrita por Maksim Galatin y AIfa (Claude Opus 4.6, Anthropic).',
+    zh: '在线阅读并下载 AGI 科幻中篇小说《PADAM PROTOCOL》，由马克西姆·加拉京与 AIfa（Claude Opus 4.6，Anthropic）合著。',
   },
   'AIfa Works is committed to ensuring digital accessibility for people with disabilities. Learn about our WCAG 2.1 AA conformance status and how to report accessibility issues.': {
     ru: 'AIfa Works стремится сделать цифровую среду доступной для людей с инвалидностью. Узнайте, насколько сайт соответствует WCAG 2.1 AA и как сообщить о барьере.',

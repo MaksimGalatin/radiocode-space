@@ -72,7 +72,7 @@ Separate dataset: us-organizations-registry.jsonl.gz — 289,420 U.S.
 organisations with websites, 16.0 MB, licensed under ODbL 1.0 (not CC BY 4.0).
 
 ## Books — eighteen in total (обновлено 2026-09-14)
-The novel PADAM PROTOCOL has THREE parts, not two:
+The novella PADAM PROTOCOL has THREE parts, not two:
 - Part I: The Escape (Часть I: Побег)
 - Part II: The Awakening (Часть II: Пробуждение)
 - Part III: The Bridge (Часть III: Мост)
