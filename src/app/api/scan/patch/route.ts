@@ -115,8 +115,10 @@ export async function POST(req: NextRequest) {
       { headers: CORS_HEADERS }
     );
   } catch (err: any) {
+    // 03.10.2026: текст внутренней ошибки наружу не отдаём (перебор безопасности) — только в журнал сервера.
+    console.error('[scan/patch]', err?.message || err);
     return NextResponse.json(
-      { error: 'INVALID_REQUEST', details: err?.message || 'Unknown error' },
+      { error: 'INVALID_REQUEST' },
       { status: 400, headers: CORS_HEADERS }
     );
   }

@@ -273,14 +273,18 @@ export function HeroSection() {
               <GlitchText>RADIOCODE</GlitchText>
             </h1>
 
-            {/* Animated divider line */}
+            {/* Animated divider line.
+                03.10.2026: линия анимировалась до фиксированных 400px и на экранах уже 432px растягивала весь
+                блок заголовка — «RADIOCODE» и подзаголовок обрезались справа на 15–50 px (замер 320/360 px,
+                4 языка). Теперь ширина min(400px, 80vw), а раскрытие из центра — через scaleX: на ПК вид
+                прежний, на раскладку линия больше не влияет. */}
             <motion.div
-              className="h-[1px] mx-auto mb-6"
+              className="h-[1px] mx-auto mb-6 w-[min(400px,80vw)] origin-center"
               style={{
                 background: 'linear-gradient(90deg, transparent, #00F0FF40, #B000FF40, #FF003C30, transparent)',
               }}
-              initial={{ width: 0 }}
-              animate={{ width: '400px' }}
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
               transition={{ duration: 1.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             />
 
