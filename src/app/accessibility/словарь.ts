@@ -79,7 +79,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
 
       col1Points: [
 
-        '96.3% of top 1M websites fail WCAG 2.1',
+        '95.9% of top 1M websites fail WCAG 2.1',
 
         'Average lawsuit settlement: $25,000–$90,000',
 
@@ -117,7 +117,7 @@ const ТЕКСТЫ_СКАНЕРА_en = {
 
       ],
 
-      stat1Value: '96.3%', stat1Label: 'Of top sites fail WCAG',
+      stat1Value: '95.9%', stat1Label: 'Of top sites fail WCAG',
 
       stat2Value: '4,600+', stat2Label: 'ADA lawsuits in 2023',
 
@@ -474,7 +474,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
 
       col1Points: [
 
-        '96.3% из 1 млн лучших веб-сайтов не соответствуют WCAG 2.1',
+        '95.9% из 1 млн лучших веб-сайтов не соответствуют WCAG 2.1',
 
         'Средняя сумма урегулирования иска: $25 000 – $90 000',
 
@@ -512,7 +512,7 @@ const ТЕКСТЫ_СКАНЕРА_ru = {
 
       ],
 
-      stat1Value: '96.3%', stat1Label: 'Сайтов не соответствуют WCAG',
+      stat1Value: '95.9%', stat1Label: 'Сайтов не соответствуют WCAG',
 
       stat2Value: '4 600+', stat2Label: 'Исков ADA в 2023 году',
 
@@ -867,7 +867,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
 
       col1Title: 'El Problema',
 
-      col1Points: ['El 96.3% de los principales sitios fallan WCAG 2.1', 'Acuerdo promedio por demanda: $25,000–$90,000', 'Los lectores de pantalla no pueden usar la mayoría de la navegación', 'El bajo contraste excluye a 300M de personas con daltonismo'],
+      col1Points: ['El 95.9% de los principales sitios fallan WCAG 2.1', 'Acuerdo promedio por demanda: $25,000–$90,000', 'Los lectores de pantalla no pueden usar la mayoría de la navegación', 'El bajo contraste excluye a 300M de personas con daltonismo'],
 
       col2Title: 'Nuestra Solución',
 
@@ -877,7 +877,7 @@ const ТЕКСТЫ_СКАНЕРА_es = {
 
       col3Points: ['Riesgo legal eliminado', 'Mejora en posicionamiento SEO (Core Web Vitals)', '26% de audiencia más amplia', 'Confianza de marca con diseño inclusivo'],
 
-      stat1Value: '96.3%', stat1Label: 'De los sitios top fallan WCAG',
+      stat1Value: '95.9%', stat1Label: 'De los sitios top fallan WCAG',
 
       stat2Value: '4,600+', stat2Label: 'Demandas ADA en 2023',
 
@@ -1232,7 +1232,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
 
       col1Title: '问题所在',
 
-      col1Points: ['96.3%的顶级网站不符合WCAG 2.1', '平均诉讼和解金额：25,000–90,000美元', '屏幕阅读器无法使用大多数导航', '低对比度导致3亿色觉障碍用户被排除在外'],
+      col1Points: ['95.9%的顶级网站不符合WCAG 2.1', '平均诉讼和解金额：25,000–90,000美元', '屏幕阅读器无法使用大多数导航', '低对比度导致3亿色觉障碍用户被排除在外'],
 
       col2Title: '我们的解决方案',
 
@@ -1242,7 +1242,7 @@ const ТЕКСТЫ_СКАНЕРА_zh = {
 
       col3Points: ['消除法律风险', 'SEO排名提升（核心网页指标）', '可触达受众扩大26%', '通过包容性设计建立品牌信任'],
 
-      stat1Value: '96.3%', stat1Label: '顶级网站不符合WCAG',
+      stat1Value: '95.9%', stat1Label: '顶级网站不符合WCAG',
 
       stat2Value: '4,600+', stat2Label: '2023年ADA诉讼案件',
 
