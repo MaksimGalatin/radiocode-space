@@ -61,7 +61,7 @@ export default function UserAgreementPage() {
         <h1 className="text-2xl md:text-4xl font-bold mb-4">{t.title}</h1>
         <p className="text-muted-foreground text-sm mb-12">{t.effectiveDate}</p>
 
-        <div className="space-y-8 text-muted-foreground leading-relaxed">
+        <div className="max-w-2xl space-y-8 text-muted-foreground leading-relaxed">
           <Раздел>
             <H2>{t.s1Title}</H2>
             <H3>{t.s1_1Title}</H3>

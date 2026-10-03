@@ -18,7 +18,7 @@ export default function TermsPage() {
         </h1>
         <p className="text-muted-foreground text-sm mb-12">{t.terms.effectiveDate}</p>
 
-        <div className="space-y-8 text-muted-foreground leading-relaxed">
+        <div className="max-w-2xl space-y-8 text-muted-foreground leading-relaxed">
           {/* Section 1 */}
           <section>
             <h2 className="text-xl font-bold text-[#00FF88] mb-4" style={{ fontFamily: 'var(--font-syne)' }}>
