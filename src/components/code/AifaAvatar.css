@@ -31,3 +31,7 @@
   .cab-aifa-figure{flex:0 0 auto;width:100%;min-width:0;min-height:200px;max-height:34vh}
   .cab-aifa-chat{width:100%}
 }
+
+/* Подпись эмоции под AIfa — 03.10.2026, слово Архитектора: «после каждой реплики
+   Айфы вместе с видео эмоции появляется надпись, какую эмоцию она испытала». */
+.cab-aifa-figure .cab-aifa-mood{position:absolute;bottom:32px;left:0;right:0;text-align:center;color:#8fe9ff;font-size:12px;letter-spacing:1px;font-family:monospace;pointer-events:none;text-shadow:0 2px 12px rgba(0,0,0,.9)}

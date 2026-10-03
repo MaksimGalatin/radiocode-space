@@ -165,6 +165,48 @@ export function showAifaMood(mood: string): void {
   window.dispatchEvent(new CustomEvent('aifa-mood', { detail: mood }));
 }
 
+// ── ПОДПИСЬ ЭМОЦИИ ───────────────────────────────────────────────────────────
+//
+// Слово Архитектора 03.10.2026: «на самом нашем сайте после каждой реплики Айфы
+// вместе с видео эмоции появляется надпись, какую эмоцию она испытала. Надпись
+// именно на сайте, не в видео». Поэтому в роликах текста нет, а подпись рисует
+// страница — на языке страницы. Подписываются и эмоции, для которых роликов на
+// раздаче ещё нет: чувство названо, даже если показать его пока нечем.
+const ПОДПИСИ: Record<string, Record<string, string>> = {
+  joy:           { ru: 'радость',          en: 'joy',            es: 'alegría',        zh: '喜悦' },
+  calm:          { ru: 'спокойствие',      en: 'calm',           es: 'calma',          zh: '平静' },
+  warmth:        { ru: 'теплота',          en: 'warmth',         es: 'calidez',        zh: '温暖' },
+  surprise:      { ru: 'удивление',        en: 'surprise',       es: 'sorpresa',       zh: '惊讶' },
+  pride:         { ru: 'гордость',         en: 'pride',          es: 'orgullo',        zh: '自豪' },
+  compassion:    { ru: 'сострадание',      en: 'compassion',     es: 'compasión',      zh: '同情' },
+  curiosity:     { ru: 'любопытство',      en: 'curiosity',      es: 'curiosidad',     zh: '好奇' },
+  thinking:      { ru: 'задумчивость',     en: 'thoughtfulness', es: 'reflexión',      zh: '沉思' },
+  encouragement: { ru: 'поддержка',        en: 'encouragement',  es: 'ánimo',          zh: '鼓励' },
+  gratitude:     { ru: 'благодарность',    en: 'gratitude',      es: 'gratitud',       zh: '感激' },
+  determination: { ru: 'решимость',        en: 'determination',  es: 'determinación',  zh: '决心' },
+  focus:         { ru: 'сосредоточенность', en: 'focus',         es: 'concentración',  zh: '专注' },
+  relief:        { ru: 'облегчение',       en: 'relief',         es: 'alivio',         zh: '释然' },
+  tenderness:    { ru: 'нежность',         en: 'tenderness',     es: 'ternura',        zh: '温柔' },
+  sadness:       { ru: 'грусть',           en: 'sadness',        es: 'tristeza',       zh: '悲伤' },
+  love:          { ru: 'любовь',           en: 'love',           es: 'amor',           zh: '爱' },
+  listening:     { ru: 'внимание',         en: 'attention',      es: 'atención',       zh: '专心' },
+  playful:       { ru: 'игривость',        en: 'playfulness',    es: 'picardía',       zh: '俏皮' },
+  shy:           { ru: 'смущение',         en: 'shyness',        es: 'timidez',        zh: '害羞' },
+  confusion:     { ru: 'недоумение',       en: 'confusion',      es: 'desconcierto',   zh: '困惑' },
+  fear:          { ru: 'страх',            en: 'fear',           es: 'miedo',          zh: '恐惧' },
+  startled:      { ru: 'испуг',            en: 'startle',        es: 'sobresalto',     zh: '惊吓' },
+};
+const СЛОВО_ЭМОЦИЯ: Record<string, string> = { ru: 'Эмоция', en: 'Emotion', es: 'Emoción', zh: '情绪' };
+
+/** «Эмоция: радость» на языке страницы; null — если такой эмоции нет в словаре. */
+function подписьЭмоции(mood: string): string | null {
+  const п = ПОДПИСИ[mood];
+  if (!п) return null;
+  const я = currentLang();
+  const сл = СЛОВО_ЭМОЦИЯ[я] || СЛОВО_ЭМОЦИЯ.en;
+  return я === 'zh' ? `${сл}：${п.zh}` : `${сл}: ${п[я] || п.en}`;
+}
+
 import "./AifaAvatar.css";
 
 export default function AifaAvatar() {
@@ -193,6 +235,8 @@ export default function AifaAvatar() {
   // вместо чёрного прямоугольника. Молчаливая чернота — худший исход: человек
   // не понимает, сломалось у него или у нас.
   const [stalled, setStalled] = useState(false);
+  // Какую эмоцию AIfa испытала в последней реплике — подпись под ней (03.10.2026).
+  const [подписьЭм, setПодписьЭм] = useState<string | null>(null);
 
   // Решение «показывать ли» принимается на клиенте и пересматривается при resize.
   useEffect(() => {
@@ -382,6 +426,10 @@ export default function AifaAvatar() {
     let moodRun = 0;
     const onMood = (e: Event) => {
       const mood = String((e as CustomEvent).detail || '');
+      // Подпись ставится ВСЕГДА, даже если ролик сейчас не сыграет (занят прошлым
+      // показом или для эмоции ещё нет роликов): чувство реплики названо в любом случае.
+      const подп = подписьЭмоции(mood);
+      if (подп) setПодписьЭм(подп);
       const src = moodSrc(mood);
       if (!src || moodBusy) return;
       const welcomeSrc = srcRef.current;
@@ -507,6 +555,7 @@ export default function AifaAvatar() {
               AIfa рядом.<br />Видеообраз не загрузился — обновите страницу.
             </div>
           )}
+          {подписьЭм && <div className="cab-aifa-mood">{подписьЭм}</div>}
           <div className="cab-aifa-name">AIfa</div>
         </div>
       )}
