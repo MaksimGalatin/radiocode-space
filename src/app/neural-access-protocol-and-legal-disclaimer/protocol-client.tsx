@@ -24,7 +24,7 @@ export default function NeuralProtocolPage() {
 
   return (
     <div className="bg-background text-foreground py-20 px-4 transition-colors duration-200">
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-3xl mx-auto">
         <h1
           className="text-2xl md:text-4xl font-bold text-foreground mb-4"
           style={{ fontFamily: 'var(--font-syne)' }}
