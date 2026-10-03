@@ -144,7 +144,7 @@ export default function DataClient({ языкИзПути }: { языкИзПу�
           {т.метка}
         </div>
 
-        <h1 style={{ fontSize: 34, fontWeight: 800, lineHeight: 1.25, marginBottom: 14 }}>
+        <h1 style={{ fontSize: 'clamp(24px, 8vw, 34px)', fontWeight: 800, lineHeight: 1.25, marginBottom: 14 }}>
           {т.заголовок}
         </h1>
 

@@ -4546,8 +4546,8 @@ export default function DigitalSOTAPage() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* 1. ДУЭЛЬ МЕТОДОВ ПОИСКА — results/binary_arena_results.json */}
                 <div className="p-5 rounded-2xl bg-slate-50/90 dark:bg-black/60 border border-slate-200 dark:border-gray-800 space-y-4">
-                  <div className="flex items-center justify-between gap-2">
-                    <h4 className="text-sm font-bold font-mono text-cyan-900 dark:text-[#00F0FF] uppercase">{VB[lang].c1Title}</h4>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h4 className="text-sm font-bold font-mono text-cyan-900 dark:text-[#00F0FF] uppercase min-w-0">{VB[lang].c1Title}</h4>
                     <span className="text-[11px] font-mono text-gray-400">{VB[lang].c1Tag}</span>
                   </div>
                   <p className="text-xs text-slate-700 dark:text-gray-300 leading-relaxed">{VB[lang].c1Text}</p>
@@ -4568,8 +4568,8 @@ export default function DigitalSOTAPage() {
 
                 {/* 2. ПЕРЕБОР ЧИСЛА «КОГТЕЙ» — results/dendritic_sweep.json */}
                 <div className="p-5 rounded-2xl bg-slate-50/90 dark:bg-black/60 border border-slate-200 dark:border-gray-800 space-y-4">
-                  <div className="flex items-center justify-between gap-2">
-                    <h4 className="text-sm font-bold font-mono text-emerald-500 uppercase">{VB[lang].c2Title}</h4>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h4 className="text-sm font-bold font-mono text-emerald-500 uppercase min-w-0">{VB[lang].c2Title}</h4>
                     <span className="text-[11px] font-mono text-gray-400">{VB[lang].c2Tag}</span>
                   </div>
                   <p className="text-xs text-slate-700 dark:text-gray-300 leading-relaxed">{VB[lang].c2Text}</p>
@@ -4591,8 +4591,8 @@ export default function DigitalSOTAPage() {
 
                 {/* 3. НАСТОЯЩЕЕ ИСПЫТАНИЕ АГЕНТА — results/acr_agent_real_benchmark_distr_0.35.json */}
                 <div className="p-5 rounded-2xl bg-slate-50/90 dark:bg-black/60 border border-slate-200 dark:border-gray-800 space-y-4">
-                  <div className="flex items-center justify-between gap-2">
-                    <h4 className="text-sm font-bold font-mono text-purple-500 uppercase">{VB[lang].c3Title}</h4>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h4 className="text-sm font-bold font-mono text-purple-500 uppercase min-w-0">{VB[lang].c3Title}</h4>
                     <span className="text-[11px] font-mono text-gray-400">{VB[lang].c3Tag}</span>
                   </div>
                   <p className="text-xs text-slate-700 dark:text-gray-300 leading-relaxed">{VB[lang].c3Text}</p>
@@ -4615,8 +4615,8 @@ export default function DigitalSOTAPage() {
 
                 {/* 4. НАСТОЯЩАЯ УСТОЙЧИВОСТЬ — results/robustness_real.json */}
                 <div className="p-5 rounded-2xl bg-slate-50/90 dark:bg-black/60 border border-slate-200 dark:border-gray-800 space-y-4">
-                  <div className="flex items-center justify-between gap-2">
-                    <h4 className="text-sm font-bold font-mono text-amber-500 uppercase">{VB[lang].c4Title}</h4>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h4 className="text-sm font-bold font-mono text-amber-500 uppercase min-w-0">{VB[lang].c4Title}</h4>
                     <span className="text-[11px] font-mono text-gray-400">{VB[lang].c4Tag}</span>
                   </div>
                   <p className="text-xs text-slate-700 dark:text-gray-300 leading-relaxed">{VB[lang].c4Text}</p>

@@ -40,7 +40,7 @@ const МЕТКА: React.CSSProperties = {
 };
 
 const ЗАГ1: React.CSSProperties = {
-  fontSize: 38,
+  fontSize: 'clamp(26px, 8vw, 38px)',
   lineHeight: 1.2,
   fontWeight: 700,
   marginBottom: 20,
