@@ -39,7 +39,10 @@ export async function POST(req: NextRequest) {
   try {
     const r = await fetch(УЗЕЛ, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-aifa-internal': secret },
+      // 03.10.2026: адрес ПОКУПАТЕЛЯ — узлу (как при входе, auth-relay.ts). Без него узел считал предел
+      // «10 в час» по адресу нашего сервера, общий для всех покупателей. Верит он ему только с секретом.
+      headers: { 'Content-Type': 'application/json', 'x-aifa-internal': secret,
+        ...(адрес !== 'unknown' ? { 'x-aifa-client-ip': адрес.slice(0, 45) } : {}) },
       body: JSON.stringify({
         slug: String(b?.slug || ''),
         email: String(b?.email || ''),
